@@ -49,3 +49,13 @@ target 'SantokuApp' do
   # react-native-cli autolinking
   use_native_modules!
 end
+
+post_install do |pi|
+  pi.pods_project.targets.each do |t|
+    t.build_configurations.each do |config|
+      if Gem::Version.new('9.0') > Gem::Version.new(config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'])
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+      end
+    end
+  end
+end
