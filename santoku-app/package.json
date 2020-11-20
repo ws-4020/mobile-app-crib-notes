@@ -3,7 +3,6 @@
   "scripts": {
     "android": "react-native run-android --appIdSuffix debug",
     "ios": "react-native run-ios",
-    "web": "expo start --web",
     "start": "react-native start",
     "test": "jest",
     "test:ci": "jest --ci --reporters=default --reporters=jest-junit --coverage",
