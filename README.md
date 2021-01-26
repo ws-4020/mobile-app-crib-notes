@@ -52,7 +52,9 @@ textlintを実行するには、`npm run textlint`を実行してください。
 
 1. `resources/_gen/assets/scss` ディレクトリを削除する
 2. Hugo Extendedをインストールする
-   - [Install Hugo | Hugo](https://gohugo.io/getting-started/installing/) を参照して、**Extended**版をインストールしてください。Homebrewなどで`extended`版をインストール出来ない場合は、[リリースページ](https://github.com/gohugoio/hugo/releases)からダウンロードできます。ファイル名が`hugo_extended_xxx`のようになっているものをダウンロードして実行してください。
+   - [Install Hugo | Hugo](https://gohugo.io/getting-started/installing/) を参照して、**Extended**版をインストールしてください
+     - Homebrewなどで`extended`版をインストール出来ない場合は、[リリースページ](https://github.com/gohugoio/hugo/releases)からダウンロードできます
+     - ファイル名が`hugo_extended_xxx`のようになっているものをダウンロードして実行してください
 3. `hugo`コマンドを実行する
 4. `hugo serve`コマンドを実行する
 5. `resources/_gen/assets/scss` ディレクトリの内容をGitにコミットする
@@ -75,7 +77,7 @@ git submodule update --init
 
 > Error: Error building site: TOCSS: failed to transform "book.scss" (text/x-scss). Check your Hugo installation; you need the extended version to build SCSS/SASS.
 
-参考: [Frequently Asked Questions | Hugo](https://gohugo.io/troubleshooting/faq/#i-get-tocss--this-feature-is-not-available-in-your-current-hugo-version)
+参考： [Frequently Asked Questions | Hugo](https://gohugo.io/troubleshooting/faq/#i-get-tocss--this-feature-is-not-available-in-your-current-hugo-version)
 
 <!-- textlint-disable -->
 

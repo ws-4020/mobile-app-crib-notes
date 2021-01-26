@@ -5,7 +5,7 @@ weight: 300
 
 ## OpenID Connect (OIDC)
 
-ステートレスな認証においてOpenID Connect (OIDC)は主流な認証方式の１つとなっています。
+ステートレスな認証においてOpenID Connect (OIDC)は主流な認証方式の1つとなっています。
 
 新しいサービスを使う時に名前やメールアドレスを登録せずにSNSのIDでログインできるのが最近のトレンドですが、それらはOpenID Connectを使って実現されています。
 
@@ -15,7 +15,7 @@ weight: 300
 ### OpenID Connectにおける認証フロー
 
 OpenID Connectでは認証のためのフローがいくつか定義されています。[ログイン画面の表示パターン]({{< relref "../how-to-display-login-page/index.md" >}})で紹介しているように、
-モバイルアプリケーションで主に利用されるOIDCの認証フローの以下２つについて説明します。
+モバイルアプリケーションで主に利用されるOIDCの認証フローの以下2つについて説明します。
 
 1. 認可コードフロー + PKCE
 2. リソースオーナー・パスワード・クレデンシャルズフロー
@@ -56,7 +56,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 
 ### 認可コードフロー + PKCE
 
-[認可コードフロー](https://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#CodeFlowAuth)では、以下の３者でやり取りします。
+[認可コードフロー](https://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#CodeFlowAuth)では、以下の3者でやり取りします。
 
 - End User
   - モバイルアプリケーションのユーザ
@@ -74,7 +74,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 ![](oidc-authorization-code-flow.drawio.png)
 
 {{<hint info >}}
-図の「11.認証(トークンの検証、ユーザ情報抽出）」においては、OPの公開鍵を用いて署名検証を実施します。RPはあらかじめ公開鍵を取得・保管しておく必要があります。
+図の「11. 認証（トークンの検証、ユーザ情報抽出）」においては、OPの公開鍵を用いて署名検証を実施します。RPはあらかじめ公開鍵を取得・保管しておく必要があります。
 {{</hint >}}
 
 {{<hint info >}}
@@ -82,7 +82,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 {{</hint >}}
 
 モバイルアプリケーションで認可コードフローを使う上ではもう1つ重要な仕様として、[PKCE](https://tools.ietf.org/html/rfc7636)と呼ばれる仕様があります。
-この仕様は、認可コード横取り攻撃(authorization code interception attack)への対策として策定されたものです。以下の記事で、わかりやすく解説されています。
+この仕様は、認可コード横取り攻撃（authorization code interception attack）への対策として策定されたものです。以下の記事で、わかりやすく解説されています。
 - [PKCE: 認可コード横取り攻撃対策のために OAuth サーバーとクライアントが実装すべきこと - Qiita](https://qiita.com/TakahikoKawasaki/items/00f333c72ed96c4da659)
 
 #### モバイルアプリケーションの役割
@@ -90,7 +90,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 モバイルアプリケーションは、上の図のRelying Partyに該当し、以下のような役割を担います。
 
 - 認証フローの開始
-  - End Userの指示に従って、OpenID Providerの認可エンドポイントにリクエストを送信する
+  - End Userの指示にしたがって、OpenID Providerの認可エンドポイントにリクエストを送信する
   - End UserがOpenID Providerにログイン済みでない場合は、OpenID Providerが返したログイン画面を表示する
   - End UserがRelying Partyに対して認可を与えていない場合は、OpenID Providerが返した認可画面を表示する
 - トークン取得・保管
@@ -109,13 +109,13 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
   - End UserはOpenID Providerに対してではなく、モバイルアプリケーションに認証情報を渡す
     - 認可コードフローの場合、End UserはOpenID Providerに対して認証情報を渡す
 - リクエスト先のエンドポイント
-  - モバイルアプリケーションからOpenID Providerの認可エンドポイントは呼ばず、トークンエンドポイントを直接呼び出す
+  - モバイルアプリケーションからOpenID Providerの認可エンドポイントは呼ばず、トークンエンドポイントを直接呼びだす
     
 
 ![](oidc-resource-owner-password-credentials-flow.drawio.png)
 
 {{<hint info >}}
-図の「4.トークンの検証」においては、OPの公開鍵を用いて署名検証を実施します。RPはあらかじめ公開鍵を取得・保管しておく必要があります。
+図の「4。トークンの検証」においては、OPの公開鍵を用いて署名検証を実施します。RPはあらかじめ公開鍵を取得・保管しておく必要があります。
 {{</hint >}}
 
 {{<hint info >}}
