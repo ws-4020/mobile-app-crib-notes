@@ -4,10 +4,10 @@
   "description": "",
   "private": true,
   "scripts": {
-    "textlint": "textlint \"*.md\" \"!(node_modules|public|themes|santoku-app)/**/*.md\" \"santoku-app/*.md\" \"santoku-app/!(node_modules)/**/*.md\" || echo",
-    "textlint:fix": "textlint --fix \"*.md\" \"!(node_modules|public|themes|santoku-app)/**/*.md\" \"santoku-app/*.md\" \"santoku-app/!(node_modules)/**/*.md\""
+    "textlint": "textlint \"*.md\" \"!(node_modules|public|themes|santoku-app|SantokuApp)/**/*.md\" \"SantokuApp/*.md\" \"SantokuApp/!(node_modules|ios|android|vendor)/**/*.md\" || echo",
+    "textlint:fix": "textlint --fix \"*.md\" \"!(node_modules|public|themes|santoku-app|SantokuApp)/**/*.md\" \"SantokuApp/*.md\" \"SantokuApp/!(node_modules|ios|android|vendor)/**/*.md\""
   },
-  "author": "",
+  "author": "TIS Inc.",
   "license": "Apache-2.0",
   "dependencies": {},
   "devDependencies": {
