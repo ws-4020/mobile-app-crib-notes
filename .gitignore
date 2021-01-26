@@ -99,3 +99,8 @@ dist/
 
 ### Hugo ###
 public
+
+### Junk ###
+junk.md
+tmp/
+_*[Ss]cratch.*
