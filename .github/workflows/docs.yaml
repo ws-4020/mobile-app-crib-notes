@@ -68,12 +68,12 @@ jobs:
 
       - name: Lint (textlint)
         run: |
-          npm run -s lint:text | ${REVIEWDOG} -tee -f eslint -name textlint -reporter github-pr-review -fail-on-error
+          npm run -s lint:text | reviewdog -tee -f eslint -name textlint -reporter github-pr-review -fail-on-error
 
       - name: Lint (markdownlint)
         # https://github.com/reviewdog/action-markdownlint/blob/master/entrypoint.sh
         run: |
-          npm run -s lint:md | ${REVIEWDOG} -tee -efm="%f:%l:%c %m" -efm="%f:%l %m" -name markdownlint -reporter github-pr-review -fail-on-error
+          npm run -s lint:md | reviewdog -tee -efm="%f:%l:%c %m" -efm="%f:%l %m" -name markdownlint -reporter github-pr-review -fail-on-error
 
   build:
     name: Build documents
@@ -81,6 +81,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
