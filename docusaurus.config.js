@@ -96,6 +96,7 @@ module.exports = {
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
         },
+        ...(process.env.NODE_ENV === 'development' ? [{label: 'SantokuApp', to: 'santoku', position: 'left'}] : []),
       ],
     },
     footer: {

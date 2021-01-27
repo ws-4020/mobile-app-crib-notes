@@ -1,0 +1,138 @@
+---
+title: ビルドタイプ
+---
+
+ビルドタイプは、主にデバッグビルドとリリースビルドで設定値を切り替えるために利用しています。
+
+ビルドタイプごとの`__DEV__`の値はReact Nativeが自動的に設定します。その他の設定値についてはGradle（`build.gradle` etc.）やXcode（`project.pbxproj` etc.）で設定しています。
+
+| Debug | DebugAdvanced | ReleaseInHouse | Release |
+| ----- | ------------- | -------------- | ------- |
+| `true` | `true` | `false` | `false` |
+
+## Android (Gradle)
+
+ビルドタイプごとの設定項目を、Androidアプリの場合にどのように設定しているかを記載します。ビルドタイプごとの設定項目については、Androidアプリのビルドの仕組みを利用しており、React Nativeの仕組みや機能は利用していません。
+
+### アプリケーションIDのサフィックス
+
+`app/build.gradle`のビルドタイプごとの設定ブロック（`buildTypes`）で、`applicationIdSuffix`として設定しています。
+
+| Debug | DebugAdvanced | ReleaseInHouse | Release |
+| ----- | ------------- | -------------- | ------- |
+| `.debug` | `.debugAdvanced` | `house` | なし（空文字） |
+
+### アイコン（Android）
+
+[ビルドタイプ用のソースセット](https://developer.android.com/studio/build/build-variants?hl=ja#sourceset-build)で、ビルドタイプごとにアイコンを設定しています。
+
+### 署名設定
+
+`app/build.gradle`のビルドタイプごとの設定ブロック（`buildTypes`）で、`signingConfig`の値を設定しています。
+
+| Debug | DebugAdvanced | ReleaseInHouse | Release |
+| ----- | ------------- | -------------- | ------- |
+| デバッグ用の署名鍵 | デバッグ用の署名鍵 | インハウス配布用の署名鍵 | Google Play配布用のアップロード鍵 |
+
+「インハウス用の署名鍵」と「Google Play配布用のアップロード鍵」はリポジトリには含まれていません。以下のとおり設定する必要があります。
+
+<!-- TODO: たぶん、ここじゃなくて環境構築手順とかに移動したほうが良い。 -->
+<details>
+<summary>ReleaseInHouseとReleaseでのビルドに必要な設定</summary>
+`ReleaseInHouse`および`Release`でのアプリケーションの署名にはリポジトリに含まれない鍵を利用するため、事前の環境設定が必要になります。
+`~/.gradle/gradle.properties`で次のように利用する鍵の設定をしてください。
+
+```properties
+SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=<path/to/in-house.keystore>
+SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD=*****
+SANTOKU_APP_IN_HOUSE_KEY_ALIAS=*****
+SANTOKU_APP_IN_HOUSE_KEY_PASSWORD=*****
+
+SANTOKU_APP_UPLOAD_KEYSTORE_FILE=<path/to/upload.keystore>
+SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD=*****
+SANTOKU_APP_UPLOAD_KEY_ALIAS=*****
+SANTOKU_APP_UPLOAD_KEY_PASSWORD=*****
+```
+
+- アップロード鍵やインハウス用共有鍵を含むキーストアファイルとパスワードなどの設定値は、別途入手してください。
+- `SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE`、`SANTOKU_APP_UPLOAD_KEYSTORE_FILE`には入手したキーストアファイルへのパスを設定します。`android/app/build.gradle`ファイルからの相対パスもしくは絶対パスを設定してください。
+
+</details>
+
+### ReactNativeの開発用機能、Flipper（Android）
+
+React Nativeの開発用機能やFlipperなど、次の方法で有効、無効を切り替えています。
+
+- [ビルドタイプ用のソースセット](https://developer.android.com/studio/build/build-variants?hl=ja#sourceset-build)
+- Gradleでの依存パッケージを`debugImplementation`として宣言
+
+たとえば、React Nativeの開発用機能や、他のアプリよりも前面に表示されるウィンドウの作成権限はデバッグ系のビルドでしか利用しません。そのため、DebugとDebugAdvancedのビルドタイプ用ソースセットで`AndroidManifest.xml`に設定しています。また、Flipper関連の依存パッケージは`debugImplementation`として宣言することで、リリースビルドには含まれないようにしています。
+
+| Debug | DebugAdvanced | ReleaseInHouse | Release |
+| ----- | ------------- | -------------- | ------- |
+| 有効 | 有効 | 無効 | 無効 |
+
+### Proguard
+
+Androidの[圧縮、難読化、最適化の有効化](https://developer.android.com/studio/build/shrink-code?hl=ja#enable)を参考に、`app/build.gradle`のビルドタイプごとの設定ブロック（`buildTypes`）で設定しています。
+
+| Debug | DebugAdvanced | ReleaseInHouse | Release |
+| ----- | ------------- | -------------- | ------- |
+| 無効 | 無効 | 有効 | 有効 |
+
+## iOS (Xcode)
+
+ビルドタイプごとの設定項目を、iOSアプリの場合にどのように設定しているかを記載します。ビルドタイプごとの設定項目については、iOSアプリのビルドの仕組みを利用しており、React Nativeの仕組みや機能は利用していません。
+
+具体的には、ビルドタイプごとに対応するConfiguration (`Debug`, `DebugAdvanced`, `ReleaseInHouse`, `Release`) を用意してそれぞれで設定値を分けることで、Androidのビルドタイプの考え方を導入しています。
+
+### Bundle Identifierのサフィックス
+
+Xcodeの「Product Bundle Identifier」（`project.pbxproj`の`PRODUCT_BUNDLE_IDENTIFIER`）の設定値をConfigurationごとに設定しています。
+
+| Debug | DebugAdvanced | ReleaseInHouse | Release |
+| ----- | ------------- | -------------- | ------- |
+| `.debug` | `.debugAdvanced` | `house` | なし（空文字） |
+
+:::info
+Debug Configurationは特別で、個人のApple IDでの自動署名を設定できるように、次の形式のBundle Identifierになっています。
+```console title="Debug ConfigurationのBundle Identifier"
+personal.jp.fintan.mobile.SantokuApp.debug.${PERSONAL_IDENTIFIER}
+```
+:::
+
+### アイコン（iOS）
+
+Xcodeでビルドタイプごとのアイコンアセットを用意し、Xcodeの「Asset Catalog App Icon Set Name」（`project.pbxproj`の`ASSETCATALOG_COMPILER_APPICON_NAME`）でビルドタイプごと異なるアイコンアセットを設定しています。
+
+### プロビジョニングプロファイルなどの設定
+
+それぞれのビルドタイプでのプロビジョニングプロファイルの設定は次のようになっています。
+
+| ビルドタイプ | プロビジョニングプロファイル |
+|-------------|---------------------------|
+| `Debug` | 個人Apple IDでの自動署名（`ios/PersonalAccount.xcconfig`で設定） |
+| `DebugAdvanced` | Apple Developer Enterprise Programの開発用プロビジョニングプロファイル |
+| `ReleaseInHouse` | Apple Developer Enterprise Programの開発用プロビジョニングプロファイル |
+| `Release` | Apple Developer Programの開発用プロビジョニングプロファイル |
+
+コード署名には、基本的には開発用プロビジョニングプロファイルを利用するように設定しています。配布用にIPAファイルを作成する場合は、App Store ConnectやDeployGateにアップロードする前に、XcodeのOrganizerなどから配布用プロビジョニングプロファイルで署名し直してください。
+
+### React Nativeの開発用機能、Flipper（iOS）
+
+ソースコード中で`#ifdef DEBUG`などの条件付コンパイルを利用して有効/無効を切り替えています。
+
+| Debug | DebugAdvanced | ReleaseInHouse | Release |
+| ----- | ------------- | -------------- | ------- |
+| 有効 | 有効 | 無効 | 無効 |
+
+### App Transport Security
+
+App Transport Security (ATS)の設定はdict形式なので、react-native-configで設定することが出来ません。そのため、次のように設定しています。
+
+- ATSの設定以外は`Info.plist`と同じ内容で、`Debug.plist`を追加
+- Debug ConfigurationとDebugAdvanced Configurationで「Info.plist File」の設定項目（`project.pbxproj`の`INFOPLIST_FILE`）に`Debug.plist`を設定
+
+| Debug | DebugAdvanced | ReleaseInHouse | Release |
+| ----- | ------------- | -------------- | ------- |
+| 有効（`localhost`を除外） | 有効（`localhost`を除外） | 有効（除外なし） | 有効（除外なし） |

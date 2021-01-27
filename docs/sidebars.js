@@ -122,4 +122,30 @@ module.exports = {
       'react-native/troubleshooting/cant-build-in-xcode',
     ],
   },
+  ...(process.env.NODE_ENV === 'development'
+    ? {
+        santoku: [
+          {
+            type: 'doc',
+            id: 'santoku/index',
+          },
+          {
+            type: 'category',
+            label: 'Development',
+            items: [
+              {
+                type: 'category',
+                label: 'ビルド設定',
+                items: [
+                  'santoku/build-variants',
+                  'santoku/build-type-configurations',
+                  'santoku/product-flavor-configurations',
+                ],
+              },
+              'santoku/dependency-management',
+            ],
+          },
+        ],
+      }
+    : {}),
 };
