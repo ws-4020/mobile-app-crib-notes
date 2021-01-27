@@ -31,6 +31,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
 
       # Cache '.npm' to speed up clean-install when package-lock.json is updated.
       # Loosened up the restore-keys a bit, as it doesn't have to match the contents of package-lock.json exactly.
