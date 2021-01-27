@@ -16,7 +16,7 @@
     },
     "textlint-rule-preset-ja-spacing": true,
     "prh": {
-      "rulePaths": ["./prh.yml"]
+      "rulePaths": ["./prh.yaml"]
     }
   }
 }
