@@ -10,7 +10,6 @@ weight: 200
 - Android: KeyStoreに保存した鍵で暗号化して、SharedPreferenceに保管する
 - iOS: Keychainに保管する
 
-
 ## ログイン資格情報のライフサイクル管理における注意点
 
 AndroidならKeyStore、iOSならKeychainを利用することを前提に、ログイン資格情報のライフサイクル管理についていくつか注意点を紹介します。

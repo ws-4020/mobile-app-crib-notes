@@ -2,6 +2,7 @@
 title: ログイン画面の表示パターン
 weight: 100
 ---
+<!-- markdownlint-disable-file MD024 -->
 
 モバイルアプリでは、ログイン画面をどのように表示するかについていくつか選択肢があり、それぞれで取りうる認証方法が変わってきます。
 
@@ -11,7 +12,6 @@ weight: 100
 |2|In-App Browserで認証サービスが用意しているログイン画面を表示する| <ul><li>[OpenID Connect（認可コードフロー）]({{< relref "../stateless-authn/index.md#認可コードフロー--pkce" >}})</li><li>OpenID Connect（ハイブリッドフロー）</li></ul>|
 |3|Default Browserで認証サービスが用意しているログイン画面を表示する| <ul><li>[OpenID Connect（認可コードフロー）]({{< relref "../stateless-authn/index.md#認可コードフロー--pkce" >}})</li><li>OpenID Connect（ハイブリッドフロー）</li></ul>|
 |~~4~~|~~WebViewに表示する~~|~~OIDC認証~~|
-
 
 {{<hint danger>}}
 OpenID Connectでログイン画面を表示する時にWebViewを使わないでください。
@@ -26,8 +26,6 @@ OpenID Connectでログイン画面を表示する時にWebViewを使わない�
 | In-App Browser  | [Chrome Custom Tabs](https://developer.chrome.com/multidevice/android/customtabs) | [ASWebAuthenticationSession](https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession) |
 | WebView         | [WebView](https://developer.android.com/reference/android/webkit/WebView) | [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview) |
 
-
-
 ## パターンごとのメリット・デメリット
 
 ログイン画面の表示方法ごとにメリット・デメリットを以下に示します。
@@ -38,8 +36,7 @@ OpenID Connectでログイン画面を表示する時にWebViewを使わない�
 
 ### 1. ログイン画面をネイティブ側に表示する
 
-
-![](authn-pattern-native.png)
+![ログイン画面をネイティブアプリ内に表示](authn-pattern-native.png)
 
 #### メリット
 
@@ -53,11 +50,9 @@ OpenID Connectでログイン画面を表示する時にWebViewを使わない�
 - Default BrowserとCookieを共有できないので、SNS認証などの場合一度Default Browserでログインしていても改めてログインが必要
 - ログイン画面を自作する必要がある
 
-
-
 ### 2. In-App Browserで認証サービスが用意しているログイン画面を表示する
 
-![](authn-pattern-inappbrowser.png)
+![In-App Browserでログイン画面を表示](authn-pattern-inappbrowser.png)
 
 #### メリット
 
@@ -69,11 +64,9 @@ OpenID Connectでログイン画面を表示する時にWebViewを使わない�
 
 - In-App Browserを変更できる要素は、ツールバーの色や閉じるボタンのアイコンなどに限られているため、完全に思い通りのUIは実現できない
 
-
 ### 3. Default Browserで認証サービスが用意しているログイン画面を表示する
 
-![](authn-pattern-defaultbrowser.png)
-
+![Default Browserでログイン画面を表示](authn-pattern-defaultbrowser.png)
 
 #### メリット
 

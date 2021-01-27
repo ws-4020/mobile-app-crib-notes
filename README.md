@@ -18,13 +18,13 @@
 
 `hugo serve`を実行してください。
 
-```
+```bash
 hugo serve
 ```
 
 ビルドに成功し、Webサーバの起動ログが表示されます。
 
-```
+```bash
 Web Server is available at //localhost:1313/ (bind address 127.0.0.1)
 ```
 
@@ -67,7 +67,7 @@ textlintを実行するには、`npm run textlint`を実行してください。
 [Hugo Book Theme](https://github.com/alex-shpak/hugo-book)をサブモジュールとしてリポジトリに含めていますが、それがうまくクローンできていない可能性があります。
 `themes/book`配下が空になっている場合などは、リポジトリのルートディレクトリで次のコマンドを実行してください。
 
-```
+```bash
 git submodule update --init
 ```
 
