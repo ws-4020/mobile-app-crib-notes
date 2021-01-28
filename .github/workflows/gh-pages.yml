@@ -15,10 +15,14 @@ on:
       - resources/**
       - themes/**
       - .gitmodules
+      - .htmltest.yaml
       - .markdownlint.js
       - .textlintrc
-      - .package.json
-      - .package-lint.json
+      - config.toml
+      - package.json
+      - package-lock.json
+      - prh.yaml
+      - README.md
       - .github/workflows/docs.yaml
     types:
       - opened

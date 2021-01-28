@@ -77,14 +77,17 @@ jobs:
           reviewdog_version: latest
 
       - name: Lint (ESLint)
+        if: always()
         run: |
           npm run -s lint:es --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=eslint -name="ESLint"
 
       - name: Lint (TypeScript)
+        if: always()
         run: |
           npm run -s lint:tsc --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name="TypeScript"
 
       - name: Test
+        if: always()
         run: |
           npm run -s test --prefix SantokuApp -- --ci --reporters=default --reporters=jest-junit --coverage
 
