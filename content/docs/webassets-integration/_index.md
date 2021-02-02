@@ -135,7 +135,7 @@ Webアプリでログアウトしても、モバイルアプリは継続して�
 
 サンプルアプリでの、認証フローの概要は以下のようになっています。
 
-![](authn-architecture-of-sample-application.png)
+![(authn-architecture-of-sample-application](authn-architecture-of-sample-application.png)
 
 
 ### WebViewで表示しているWebアプリからログアウトできないようにする方法

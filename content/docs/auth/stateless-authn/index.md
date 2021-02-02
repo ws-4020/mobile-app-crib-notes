@@ -71,7 +71,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 アプリケーションサーバでは、モバイルアプリから送られてきたIDトークンを検証することで認証します。
 この場合のRPはモバイルアプリとアプリケーションサーバになります。
 
-![](oidc-authorization-code-flow.drawio.png)
+![oidc-authorization-code-flow](oidc-authorization-code-flow.drawio.png)
 
 {{<hint info >}}
 図の「11.認証(トークンの検証、ユーザ情報抽出）」においては、OPの公開鍵を用いて署名検証を実施します。RPはあらかじめ公開鍵を取得・保管しておく必要があります。
@@ -112,7 +112,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
   - モバイルアプリケーションからOpenID Providerの認可エンドポイントは呼ばず、トークンエンドポイントを直接呼び出す
     
 
-![](oidc-resource-owner-password-credentials-flow.drawio.png)
+![oidc-resource-owner-password-credentials-flow](oidc-resource-owner-password-credentials-flow.drawio.png)
 
 {{<hint info >}}
 図の「4.トークンの検証」においては、OPの公開鍵を用いて署名検証を実施します。RPはあらかじめ公開鍵を取得・保管しておく必要があります。

@@ -7,11 +7,11 @@ weight: 200
 
 {{<hint info>}}
 本ページでは、モバイルアプリケーションが、ファーストパーティーである**アプリケーションサーバ**(バックエンドAPI)にアクセスする際の**認証**について言及しています。
-![](authn-overview.drawio.png)
+![authn-overview](authn-overview.drawio.png)
 
 ステートレスな認証では、モバイルアプリケーションとアプリケーションサーバがRelying Partyにあたります。また認証サーバ(ファーストパーティー、サードパーティーどちらでも可)を使う前提です。
 
-![](stateless-authn-overview.drawio.png)
+![stateless-authn-overview](stateless-authn-overview.drawio.png)
 
 なおステートレスな認証とあわせて言及されることの多い、認可(モバイルアプリケーションがRelying Partyとなり、**リソースサーバ**へアクセスする際の**認可**)については言及しません。
 
