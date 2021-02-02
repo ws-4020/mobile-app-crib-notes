@@ -39,7 +39,7 @@ OpenID Connectでログイン画面を表示する時にWebViewを使わない�
 ### 1. ログイン画面をネイティブ側に表示する
 
 
-![auth-pattern](authn-pattern-native.png)
+![](authn-pattern-native.png)
 
 #### メリット
 
