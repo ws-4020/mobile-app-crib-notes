@@ -102,7 +102,7 @@ jobs:
       - name: Run htmltest
         uses: docker://wjdp/htmltest:v0.14.0
         with:
-          args: htmltest --conf .htmltest.yaml
+          args: --conf .htmltest.yaml
 
       - name: Save artifacts
         uses: actions/upload-artifact@v2
