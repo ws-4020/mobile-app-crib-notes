@@ -1,31 +1,31 @@
 # Add 'iOS' label to any change within the 'ios' directory
 iOS:
-  - SantokuApp/ios/**/*
+  - santoku-app/ios/**/*
 
 # Add 'Android' label to any change within the 'android' directory
 Android:
-  - SantokuApp/android/**/*
+  - santoku-app/android/**/*
 
 # Add 'app' label to any change within the 'src' directory and to the files listed below
 app:
-  - SantokuApp/src/**/*
-  - SantokuApp/app.json
-  - SantokuApp/index.js
+  - santoku-app/src/**/*
+  - santoku-app/app.json
+  - santoku-app/index.js
 
 # Add 'build' label to any changes to the files listed below
 build:
-  - SantokuApp/.script/**/*
-  - SantokuApp/.buckconfig
-  - SantokuApp/.editorconfig
-  - SantokuApp/.eslintrc.js
-  - SantokuApp/.prettierrc.js
-  - SantokuApp/babel.config.js
-  - SantokuApp/Gemfile
-  - SantokuApp/Gemfile.lock
-  - SantokuApp/metro.config.js
-  - SantokuApp/package.json
-  - SantokuApp/package-lock.json
-  - SantokuApp/tsconfig.json
+  - santoku-app/.script/**/*
+  - santoku-app/.buckconfig
+  - santoku-app/.editorconfig
+  - santoku-app/.eslintrc.js
+  - santoku-app/.prettierrc.js
+  - santoku-app/babel.config.js
+  - santoku-app/Gemfile
+  - santoku-app/Gemfile.lock
+  - santoku-app/metro.config.js
+  - santoku-app/package.json
+  - santoku-app/package-lock.json
+  - santoku-app/tsconfig.json
   - .tool-versions
 
 # Add 'chore' label to any change within the '.github' directory and to the files listed below
@@ -34,8 +34,8 @@ chore:
   - any: ['.github/**/*', '!.github/workflows/**/*']
   - .idea/**/*
   - .run/**/*
-  - SantokuApp/.gitattributes
-  - SantokuApp/.gitignore
+  - santoku-app/.gitattributes
+  - santoku-app/.gitignore
   - .editorconfig
   - .gitattributes
   - .gitignore
@@ -53,8 +53,8 @@ doc:
   - images/**/*
   - layouts/**/*
   - resources/**/*
-  - SantokuApp/docs/**/*
-  - SantokuApp/README.md
+  - santoku-app/docs/**/*
+  - santoku-app/README.md
   - .textlintrc
   - config.toml
   - package.json
@@ -64,6 +64,6 @@ doc:
 
 # Add 'test' label to any change to files within the directories listed below
 test:
-  - SantokuApp/jest/**/*
-  - SantokuApp/jest.config.js
-  - SantokuApp/src/**/*.test.tsx
+  - santoku-app/jest/**/*
+  - santoku-app/jest.config.js
+  - santoku-app/src/**/*.test.tsx
