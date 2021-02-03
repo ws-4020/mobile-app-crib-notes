@@ -8,7 +8,7 @@ module.exports = {
     ],
     "認証": [
       'reference/auth/index',
-      'reference/auth/how-to-display-login-page/index',
+      'reference/auth/login-screens',
       'reference/auth/management-of-log-in-credentials/index',
       'reference/auth/stateless-authn/index',
       'reference/webassets-integration/index'
