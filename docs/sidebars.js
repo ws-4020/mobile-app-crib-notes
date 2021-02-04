@@ -4,7 +4,7 @@ module.exports = {
       "reference/index"
     ],
     "セキュリティ": [
-      'reference/notes-in-mobile-application-development/index'
+      'reference/security/awesome-sites'
     ],
     "認証": [
       'reference/auth/index',
