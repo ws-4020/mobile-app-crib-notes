@@ -41,10 +41,11 @@ npm run build
 `build`ディレクトリ内のファイルを`/mobile-app-crib-notes/`というコンテキストパスで表示します。Dockerでnginxを起動すると簡単です。
 
 ```bash
-NGINX_PORT=3001 docker run -v $(pwd)/nginx:/etc/nginx/templates -v $(pwd)/build:/usr/share/nginx/html/mobile-app-crib-notes/ --rm -e NGINX_PORT -p 3001:$NGINX_PORT nginx
+NGINX_PORT=3001 docker run -v $(pwd)/nginx:/etc/nginx/templates -v $(pwd)/build:/usr/share/nginx/html/mobile-app-crib-notes/ --rm -e NGINX_PORT -p 3001:3001 nginx
 ```
 
-このコマンドを実行するnpm scriptを用意しているので、次のコマンドを実行すればビルドされたHTMLファイルを表示することができます。
+このコマンドを実行するnpm scriptを用意してあります。
+次のコマンドを実行して`http://localhost:3001/mobile-app-crib-notes/`にアクセスすれば、ビルドされたHTMLファイルを表示することができます。
 
 ```bash
 npm run serve
