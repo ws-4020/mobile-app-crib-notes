@@ -10,7 +10,7 @@ module.exports = {
       'reference/auth/index',
       'reference/auth/login-screens',
       'reference/auth/management-of-log-in-credentials/index',
-      'reference/auth/stateless-authn/index',
+      'reference/auth/stateless-authn',
       'reference/webassets-integration/index'
     ],
     "プッシュ通知": ['doc1', 'doc2', 'doc3']
