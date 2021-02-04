@@ -7,7 +7,7 @@ module.exports = {
       'reference/security/awesome-sites'
     ],
     "認証": [
-      'reference/auth/index',
+      'reference/auth/authn-architecture',
       'reference/auth/login-screens',
       'reference/auth/manage-credentials',
       'reference/auth/stateless-authn',
