@@ -1,6 +1,5 @@
 ---
 title: ステートレスな認証
-weight: 300
 ---
 
 ## OpenID Connect (OIDC)
