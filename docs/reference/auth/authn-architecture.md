@@ -39,6 +39,6 @@ title: 認証のアーキテクチャ
 認証アーキテクチャとしてステートレス認証・ステートフル認証のいずれを採用するかは、プロジェクトのコンテキストを考慮して判断するのが良いです。
 例えば、すでにステートフル認証の仕組みがあるシステムにモバイルアプリのためだけにステートレス認証を導入する必然性はないと考えますし、逆も同様だと考えています。
 
-{{<hint info>}}
+:::info
 参考: [Mobile App Authentication Architectures - Mobile Security Testing Guide](https://mobile-security.gitbook.io/mobile-security-testing-guide/general-mobile-app-testing-guide/0x04e-testing-authentication-and-session-management#stateful-vs-stateless-authentication)
-{{</hint >}}
+:::
