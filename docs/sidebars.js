@@ -11,7 +11,7 @@ module.exports = {
       'reference/auth/login-screens',
       'reference/auth/manage-credentials',
       'reference/auth/stateless-authn',
-      'reference/webassets-integration/index'
+      'reference/auth/webassets-integration'
     ],
     "プッシュ通知": ['doc1', 'doc2', 'doc3']
   },
