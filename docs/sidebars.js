@@ -9,7 +9,7 @@ module.exports = {
     "認証": [
       'reference/auth/index',
       'reference/auth/login-screens',
-      'reference/auth/management-of-log-in-credentials/index',
+      'reference/auth/manage-credentials',
       'reference/auth/stateless-authn',
       'reference/webassets-integration/index'
     ],
