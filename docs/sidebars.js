@@ -38,8 +38,9 @@ module.exports = {
     "About": [
       'react-native/troubleshooting'
     ],
-    "アプリが動かない": [
-      'react-native/troubleshooting/failed-to-run-app'
+    "アプリを実行できない": [
+      'react-native/troubleshooting/unable-to-load-script',
+      'react-native/troubleshooting/debug-keystore-not-found'
     ],
   },
 };
