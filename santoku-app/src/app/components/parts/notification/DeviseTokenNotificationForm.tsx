@@ -1,6 +1,4 @@
-import { Input, Item } from 'native-base';
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
 import { Description, Section, TextButton, Title } from '../../basics';
 import FormInput from './FormInput';
 
