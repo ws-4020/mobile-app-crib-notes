@@ -30,8 +30,11 @@ module.exports = {
     "About": [
       'react-native/learn'
     ],
-    "アプリを実装する前に": [
-      'react-native/learn/getting-started'
+    "Getting Started": [
+      'react-native/learn/getting-started',
+      'react-native/learn/getting-started/setting-up-development-environment',
+      'react-native/learn/getting-started/create-project',
+      'react-native/learn/getting-started/launch-created-app',
     ]
   },
   troubleshoot: {
