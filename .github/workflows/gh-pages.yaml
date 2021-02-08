@@ -75,15 +75,16 @@ jobs:
         with:
           reviewdog_version: latest
 
-#      - name: Lint (textlint)
-#        if: always()
-#        # https://github.com/tsuyoshicho/action-textlint
-#        uses: tsuyoshicho/action-textlint@v3
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          reporter: github-pr-review
-#          # package.jsonでlint:textに設定しているのと同じ引数を渡す
-#          textlint_flags: '*.md !(node_modules|build|santoku-app)/**/*.md santoku-app/*.md santoku-app/!(node_modules|ios|android|vendor)/**/*.md'
+      - name: Lint (textlint)
+        if: always()
+        # https://github.com/tsuyoshicho/action-textlint
+        uses: tsuyoshicho/action-textlint@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          fail_on_error: true
+          # package.jsonでlint:textに設定しているのと同じ引数を渡す
+          textlint_flags: '*.md !(node_modules|build|santoku-app)/**/*.md santoku-app/*.md santoku-app/!(node_modules|ios|android|vendor)/**/*.md'
 
 #      - name: Lint (markdownlint)
 #        if: always()
