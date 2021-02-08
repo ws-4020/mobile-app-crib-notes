@@ -96,6 +96,7 @@ jobs:
         uses: reviewdog/action-eslint@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
           reporter: github-pr-review
           # package.jsonでlint:esに設定しているのと同じ引数を渡す
           eslint_flags: '--ext .jsx,.js,.tsx,.ts src'
