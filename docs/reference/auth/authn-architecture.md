@@ -41,14 +41,3 @@ title: 認証のアーキテクチャ
 :::info
 参考： [Mobile App Authentication Architectures - Mobile Security Testing Guide](https://mobile-security.gitbook.io/mobile-security-testing-guide/general-mobile-app-testing-guide/0x04e-testing-authentication-and-session-management#stateful-vs-stateless-authentication)
 :::
-
-
-空行が
-
-
-多すぎるときは
-
-
-fixできる
-
-* でも、ulを`*`で書いているのはfixできない
