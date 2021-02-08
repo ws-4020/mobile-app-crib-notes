@@ -107,6 +107,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
+          fail_on_error: true
           # package.jsonでlint:cssに設定しているのと同じ引数を渡す
           stylelint_input: 'src/**/*.css'
 
