@@ -80,10 +80,10 @@ jobs:
         run: |
           npm run -s lint:text -- -f checkstyle | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=checkstyle -name=textlint
 
-#      - name: Lint (markdownlint)
-#        if: always()
-#        run: |
-#          npm run -s lint:md | reviewdog -tee -fail-on-error -reporter=github-pr-review -efm="%f:%l:%c %m" -efm="%f:%l %m" -name=markdownlint
+      - name: Lint (markdownlint)
+        if: always()
+        run: |
+          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' | reviewdog -tee -fail-on-error -reporter=github-pr-review -efm="%t:%f:%l:%c %m" -efm="%t:%f:%l %m" -name=markdownlint
 
       - name: Lint (ESLint)
         if: always()
@@ -93,7 +93,7 @@ jobs:
       - name: Lint (TypeScript)
         if: always()
         run: |
-          npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name="TypeScript"
+          npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name=TypeScript
 
       - name: Lint (stylelint)
         if: always()
