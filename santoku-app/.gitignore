@@ -80,3 +80,6 @@ coverage/
 
 ### Local environmental variables
 ios/PersonalAccount.xcconfig
+
+### Notification
+android/app/google-services.json
