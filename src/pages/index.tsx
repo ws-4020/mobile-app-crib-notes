@@ -37,7 +37,6 @@ interface FeatureProps {
 }
 
 const obj = { };
-delete obj;
 
 function Feature({to, imageUrl, title, description}: FeatureProps) {
   const toUrl = useBaseUrl(to);
