@@ -37,7 +37,8 @@ interface FeatureProps {
 }
 
 const variable = { };
-delete variable;
+
+const n: number = '';
 
 function Feature({to, imageUrl, title, description}: FeatureProps) {
   const toUrl = useBaseUrl(to);
