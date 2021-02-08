@@ -10,7 +10,7 @@ title: プロジェクトの作成
 [React Navigation](https://reactnavigation.org/)や[React Native Elements](https://reactnativeelements.com/)などのパッケージがインストールされたプロジェクトを簡単に用意できるように。[RN Spoiler](https://github.com/ws-4020/rn-spoiler)というテンプレートを用意しています。`<YourAppName>`の部分は、好みのプロジェクト名に変更してください。
 
 ```
-npx react-native init --template https://github.com/ws-4020/rn-spoiler <YourAppName>
+npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler <YourAppName>
 ```
 
 <!-- TODO: リンク貼るよ -->
