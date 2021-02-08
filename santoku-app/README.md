@@ -51,6 +51,10 @@ CognitoのクライアントIDなど、一部の設定値は暗号化して保�
 
 Push通知にはFCMを利用しているため実際に動作させるためには[ガイド](https://rnfirebase.io/#prerequisites)に沿って設定してください。
 
+ガイドの手順にある`google-service.json`, `GoogleService-Info.plist`は[Firebase Console](https://console.firebase.google.com/)のアプリの設定から取得してください。
+
+
+
 ## トラブルシュート
 
 ### Android
@@ -121,3 +125,4 @@ Xcode Project内で、React Nativeのバンドル時にnodeコマンドを使用
 
 * https://www.iconfinder.com/icons/5481160/aquarium_fish_fishing_seafood_icon
 * https://www.iconfinder.com/icons/5370107/cooking_food_gastronomy_kitchen_tomato_vegetable_icon
+
