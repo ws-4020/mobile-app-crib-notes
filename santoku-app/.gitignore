@@ -83,3 +83,4 @@ ios/PersonalAccount.xcconfig
 
 ### Notification
 android/app/google-services.json
+ios/GoogleService-Info.plist
