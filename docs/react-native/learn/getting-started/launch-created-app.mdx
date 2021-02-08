@@ -31,16 +31,27 @@ Expo Goをインストールしたら、プロジェクトでExpoの開発サー
 npx expo start
 ```
 
-ブラウザが起動してQRコードが表示されるので、スキャンします。AndroidではExpo Goから、iOSではデフォルトのカメラアプリからQRコードをスキャンしてください。
+ターミナル上、もしくは起動したブラウザの左下に表示されたQRコードをスキャンします。AndroidではExpo Goから、iOSではOSのカメラアプリからQRコードをスキャンしてください。
 
 Androidでは、QRコードをスキャンするとアプリが表示されます。
 
 iOSでは、QRコードをスキャンするとExpo Goで表示するかどうかを確認するバナーが表示されるので、バナーをタップしてExpo Goでアプリを表示してください。
 
+:::info
+`npx expo start`では、Expoの開発者ツールとMetro Bundlerが起動します。デフォルトでは開発者ツールは`19002`ポート、Metro Bundlerは`19000`ポートでそれぞれ起動します。
+
+ブラウザがうまく起動せず開発者ツールの画面が自動的に開かれなかったとしても、`http://localhost:19002`にアクセスすれば表示することができます。
+
+なお、他のプロセスなどによってこれらのポートがすでに利用されている場合は、自動的に異なるポートが選択されて起動します。その場合でも、次のように表示されているログからURLを確認して開発者ツールにアクセスできます。
+```
+Expo DevTools is running at http://localhost:19003
+```
+:::
+
 </TabItem>
 <TabItem value="android">
 
-`npm run ios` と実行することで、Androidのエミュレータが起動しアプリが実行されます。
+`npm run android` と実行することで、Androidのエミュレータが起動しアプリが実行されます。
 
 </TabItem>
 <TabItem value="iphone">
