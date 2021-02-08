@@ -2,6 +2,8 @@
 title: ステートレスな認証
 ---
 
+<!-- markdownlint-disable-file MD024 -->
+
 ## OpenID Connect (OIDC)
 
 ステートレスな認証においてOpenID Connect (OIDC)は主流な認証方式の1つとなっています。
@@ -65,7 +67,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 アプリケーションサーバでは、モバイルアプリから送られてきたIDトークンを検証することで認証します。
 この場合のRPはモバイルアプリとアプリケーションサーバになります。
 
-![](oidc-authorization-code-flow.drawio.png)
+![認可コードフロー](oidc-authorization-code-flow.drawio.png)
 
 :::info
 図の「11. 認証（トークンの検証、ユーザ情報抽出）」においては、OPの公開鍵を用いて署名検証を実施します。RPはあらかじめ公開鍵を取得・保管しておく必要があります。

@@ -1,11 +1,13 @@
 # santoku-app
 
+<!-- markdownlint-disable-file MD024 -->
+
 ## 前提条件
 
 1. React NativeでiOS/Androidアプリケーションを開発する環境が構築できていること
-   * [Setting up the development environment · React Native](https://reactnative.dev/docs/environment-setup)
-   * 開発に利用するOSによって手順が異なるので、適切な手順を参照するように注意してください
-   * "React Native CLI Quickstart"を参照してください
+   - [Setting up the development environment · React Native](https://reactnative.dev/docs/environment-setup)
+   - 開発に利用するOSによって手順が異なるので、適切な手順を参照するように注意してください
+   - "React Native CLI Quickstart" を参照してください
 
 ## 環境構築手順
 
@@ -22,14 +24,14 @@
 
 1. Apple ID設定用のファイルを用意
 
-   ```
+   ```bash
    cp ios/PersonalAccount.xcconfig.template ios/PersonalAccount.xcconfig
    ```
 
 1. `ios/PersonalAccount.xcconfig`にApple IDの設定を追加
-   * `CODE_SIGN_STYLE` は `Automatic` に設定
-   * `PERSONAL_IDENTIFIER` は他の人と重複しない値に設定（Bundle Identifierのサフィックスとして利用されます）
-   * `DEVELOPMENT_TEAM` は、Xcodeで個人のApple IDをTEAMとして設定したときに表示される値を設定
+   - `CODE_SIGN_STYLE` は `Automatic` に設定
+   - `PERSONAL_IDENTIFIER` は他の人と重複しない値に設定（Bundle Identifierのサフィックスとして利用されます）
+   - `DEVELOPMENT_TEAM` は、Xcodeで個人のApple IDをTEAMとして設定したときに表示される値を設定
 
 ### シークレットの設定
 
@@ -38,7 +40,7 @@ CognitoのクライアントIDなど、一部の設定値は暗号化して保�
 ### iOS
 
 1. Podをインストール
-    * `npx pod-install`
+    - `npx pod-install`
 
 1. 以下コマンドで、iOSのシミュレータでアプリを起動
 
@@ -76,7 +78,7 @@ Metro Bundlerはデフォルトでは`8081`ポートを利用して起動しま�
 外部へのアクセスにプロキシを経由している場合、Gradleの設定ファイルにプロキシの設定が必要です。
 `~/.gradle/gradle.properties` に以下の設定を追記してください。([Gradle - Accessing the web through a HTTP proxy](https://docs.gradle.org/current/userguide/build_environment.html#sec:accessing_the_web_via_a_proxy))
 
-```
+```properties
 systemProp.http.proxyHost=myproxy.co.jp
 systemProp.http.proxyPort=8080
 systemProp.http.proxyUser=**** #認証プロキシサーバの場合のみ
@@ -89,7 +91,7 @@ systemProp.https.proxyPassword=**** #認証プロキシサーバの場合のみ
 
 #### エミュレータが起動しない
 
-```
+```console
 > emulator @Pixel_API_27
 PANIC: Missing emulator engine program for 'x86' CPU.
 ```
@@ -107,7 +109,7 @@ PANIC: Missing emulator engine program for 'x86' CPU.
 
 #### nodeバイナリが見つからない場合
 
-```
+```console
 Can't find 'node' binary to build React Native bundle
 ```
 
@@ -124,5 +126,5 @@ Xcode Project内で、React Nativeのバンドル時にnodeコマンドを使用
 
 アイコンには、以下のURLで配布していただいている画像を編集して利用しています。
 
-* <https://www.iconfinder.com/icons/5481160/aquarium_fish_fishing_seafood_icon>
-* <https://www.iconfinder.com/icons/5370107/cooking_food_gastronomy_kitchen_tomato_vegetable_icon>
+- <https://www.iconfinder.com/icons/5481160/aquarium_fish_fishing_seafood_icon>
+- <https://www.iconfinder.com/icons/5370107/cooking_food_gastronomy_kitchen_tomato_vegetable_icon>
