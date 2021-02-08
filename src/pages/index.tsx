@@ -39,7 +39,16 @@ const features = [
   },
 ];
 
-function Feature({to, imageUrl, title, description}) {
+interface FeatureProps {
+  to: string;
+  imageUrl: string;
+  title: string;
+  description: JSX.Element;
+}
+
+const n: number = '';
+
+function Feature({to, imageUrl, title, description}: FeatureProps) {
   const toUrl = useBaseUrl(to);
   const imgUrl = useBaseUrl(imageUrl);
   return (
