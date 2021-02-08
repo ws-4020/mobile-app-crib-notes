@@ -28,7 +28,7 @@ title: セキュリティ関連リンク
 
 [Open Web Application Security Project (OWASP)](https://owasp.org/)が公開しているドキュメントです。モバイル開発におけるセキュリティ要件がチェックリスト形式でまとめられており、数時間もあれば読み終えることができます。
 
-MASVSは2つのセキュリティ検証レベル(MASVS-L1およびMASVS-L2)とリバースエンジニアリング耐性要件(MASVS-R)を定義しています。
+MASVSは2つのセキュリティ検証レベル（MASVS-L1およびMASVS-L2）とリバースエンジニアリング耐性要件（MASVS-R）を定義しています。
 
 - MASVS-L1: 一般的なセキュリティ要件であり、すべてのモバイルアプリに推奨される
 - MASVS-L2: 機密性の高いデータを扱うアプリに推奨される
@@ -44,7 +44,7 @@ MASVSは2つのセキュリティ検証レベル(MASVS-L1およびMASVS-L2)と�
 - [チェックリスト (1.1.3)](https://github.com/OWASP/owasp-mstg/tree/1.1.3-excel/Checklists)
   - [OWASP MASVS](https://owasp.org/www-project-mobile-security-testing-guide/)と[OWASP MSTG](https://owasp.org/www-project-mobile-security-testing-guide/)のマッピング表です。
 - [チェックリスト(Framework別)](https://github.com/OWASP/owasp-mstg#about-hybrid-apps)
-  - React NativeやFlutterなどフレームワークごとにセキュリティ要件を担保しているかが明記されているチェックリストです。ただし未完成(Work In Progress)なので注意してください。
+  - React NativeやFlutterなどフレームワークごとにセキュリティ要件を担保しているかが明記されているチェックリストです。ただし未完成（Work In Progress）なので注意してください。
 
 [OWASP](https://owasp.org/www-chapter-japan/)が公開している、モバイルアプリケーションのセキュリティをテストするための包括的なマニュアルです。[OWASP MASVS](https://coky-t.gitbook.io/owasp-masvs-ja/)に記載されている要件に対応するテストケースのリストが含まれています。
 

@@ -4,7 +4,7 @@ title: ステートレスな認証
 
 ## OpenID Connect (OIDC)
 
-ステートレスな認証においてOpenID Connect (OIDC)は主流な認証方式の１つとなっています。
+ステートレスな認証においてOpenID Connect (OIDC)は主流な認証方式の1つとなっています。
 
 新しいサービスを使う時に名前やメールアドレスを登録せずにSNSのIDでログインできるのが最近のトレンドですが、それらはOpenID Connectを使って実現されています。
 
@@ -14,7 +14,7 @@ title: ステートレスな認証
 ### OpenID Connectにおける認証フロー
 
 OpenID Connectでは認証のためのフローがいくつか定義されています。[ログイン画面の表示パターン](./login-screens.md)で紹介しているように、
-モバイルアプリケーションで主に利用されるOIDCの認証フローの以下２つについて説明します。
+モバイルアプリケーションで主に利用されるOIDCの認証フローの以下2つについて説明します。
 
 1. 認可コードフロー + PKCE
 2. リソースオーナー・パスワード・クレデンシャルズフロー
@@ -55,7 +55,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 
 ### 認可コードフロー + PKCE
 
-[認可コードフロー](https://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#CodeFlowAuth)では、以下の３者でやり取りします。
+[認可コードフロー](https://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#CodeFlowAuth)では、以下の3者でやり取りします。
 
 - End User
   - モバイルアプリケーションのユーザ
@@ -73,7 +73,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 ![](oidc-authorization-code-flow.drawio.png)
 
 :::info
-図の「11.認証(トークンの検証、ユーザ情報抽出）」においては、OPの公開鍵を用いて署名検証を実施します。RPはあらかじめ公開鍵を取得・保管しておく必要があります。
+図の「11. 認証（トークンの検証、ユーザ情報抽出）」においては、OPの公開鍵を用いて署名検証を実施します。RPはあらかじめ公開鍵を取得・保管しておく必要があります。
 :::
 
 :::info
@@ -81,7 +81,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 :::
 
 モバイルアプリケーションで認可コードフローを使う上ではもう1つ重要な仕様として、[PKCE](https://tools.ietf.org/html/rfc7636)と呼ばれる仕様があります。
-この仕様は、認可コード横取り攻撃(authorization code interception attack)への対策として策定されたものです。以下の記事で、わかりやすく解説されています。
+この仕様は、認可コード横取り攻撃（authorization code interception attack）への対策として策定されたものです。以下の記事で、わかりやすく解説されています。
 - [PKCE: 認可コード横取り攻撃対策のために OAuth サーバーとクライアントが実装すべきこと - Qiita](https://qiita.com/TakahikoKawasaki/items/00f333c72ed96c4da659)
 
 #### モバイルアプリケーションの役割
@@ -114,7 +114,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 ![](oidc-resource-owner-password-credentials-flow.drawio.png)
 
 :::info
-図の「4.トークンの検証」においては、OPの公開鍵を用いて署名検証を実施します。RPはあらかじめ公開鍵を取得・保管しておく必要があります。
+図の「4. トークンの検証」においては、OPの公開鍵を用いて署名検証を実施します。RPはあらかじめ公開鍵を取得・保管しておく必要があります。
 :::
 
 :::info
