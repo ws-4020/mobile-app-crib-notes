@@ -10,7 +10,6 @@ title: ステートレスな認証
 
 以下では、OpenID Connectによる認証について簡単に紹介しています。
 
-
 ### OpenID Connectにおける認証フロー
 
 OpenID Connectでは認証のためのフローがいくつか定義されています。[ログイン画面の表示パターン](./login-screens.md)で紹介しているように、
@@ -23,7 +22,6 @@ OpenID Connectでは認証のためのフローがいくつか定義されてい
 
 なお、モバイルアプリケーションの認証にOAuth 2.0を利用するときのBest Current Practiceを定義している[RFC 8252](https://www.rfc-editor.org/rfc/rfc8252.txt)では、認可コードフロー＋PKCEを採用しています。また、OpenID FoundationはRFC 8252を実装したSDK（[AppAuth](https://appauth.io/)）を提供しています。このSDKを利用することで、アプリに比較的簡単に認可コードフロー＋PKCEでの認証を導入できます。
 
-
 :::info
 OpenID Connectでは、より安全なハイブリッドフローという認証フローも定義されています。ただ、フローが複雑で、モバイルアプリケーションのユーザ操作という観点では「認可コードフロー＋PKCE」と変わらないのでここでは割愛しています。
 ハイブリッドフローの仕様については[Authentication using the Hybrid Flow - OpenID Connect Core 1.0](https://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#HybridFlowAuth)を参照してください。
@@ -32,7 +30,6 @@ OpenID Connectでは、より安全なハイブリッドフローという認証
 :::caution
 ここでの紹介はごく簡単なものにとどめており、不正確な表現を含む可能性があります。正確な仕様についてはRFCなどで確認するようにしてください。[OpenID ファウンデーション・ジャパン](https://www.openid.or.jp/document/index.html)では、OpenID関連RFCの日本語訳やプレゼンテーション資料、その他各種文書が公開されています。
 :::
-
 
 ### OpenID Connectのトークンの種類
 
@@ -52,7 +49,6 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
   - IDトークンもしくはアクセストークンの期限が切れた後に、再発行するために使用します
   - リフレッシュトークンには比較的長めの有効期限が設定されます
 
-
 ### 認可コードフロー + PKCE
 
 [認可コードフロー](https://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#CodeFlowAuth)では、以下の3者でやり取りします。
@@ -63,7 +59,6 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
   - ユーザ認証の機能があり、Relying Partyから要求されたアイデンティティ情報を提供するエンドポイントを持つ
 - Relying Party(RP)
   - OpenID Providerが発行したトークンとアイデンティティ情報を使うサービス
-
 
 認可コードフローで、モバイルアプリからのリクエストをアプリケーションサーバで認証するフローを以下に示します。
 モバイルアプリはトークン（アクセストークンとIDトークン、場合によってはリフレッシュトークンも含む）を保管します。
@@ -82,6 +77,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 
 モバイルアプリケーションで認可コードフローを使う上ではもう1つ重要な仕様として、[PKCE](https://tools.ietf.org/html/rfc7636)と呼ばれる仕様があります。
 この仕様は、認可コード横取り攻撃（authorization code interception attack）への対策として策定されたものです。以下の記事で、わかりやすく解説されています。
+
 - [PKCE: 認可コード横取り攻撃対策のために OAuth サーバーとクライアントが実装すべきこと - Qiita](https://qiita.com/TakahikoKawasaki/items/00f333c72ed96c4da659)
 
 #### モバイルアプリケーションの役割
@@ -109,9 +105,8 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
     - 認可コードフローの場合、End UserはOpenID Providerに対して認証情報を渡す
 - リクエスト先のエンドポイント
   - モバイルアプリケーションからOpenID Providerの認可エンドポイントは呼ばず、トークンエンドポイントを直接呼びだす
-    
 
-![](oidc-resource-owner-password-credentials-flow.drawio.png)
+![リソースオーナー・パスワード・クレデンシャルズフロー](oidc-resource-owner-password-credentials-flow.drawio.png)
 
 :::info
 図の「4. トークンの検証」においては、OPの公開鍵を用いて署名検証を実施します。RPはあらかじめ公開鍵を取得・保管しておく必要があります。
@@ -138,4 +133,3 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
   - OpenID Providerからトークンを受け取り、モバイルアプリケーションの安全なストレージに保管する
 - アプリケーションサーバへのアクセス
   - IDトークンをリクエストに付与して、アプリケーションサーバにアクセスする
-
