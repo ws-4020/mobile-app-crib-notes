@@ -47,6 +47,10 @@ CognitoのクライアントIDなど、一部の設定値は暗号化して保�
     npm run android
     ```
 
+### Push通知の設定
+
+Push通知にはFCMを利用しているため実際に動作させるためには[ガイド](https://rnfirebase.io/#prerequisites)に沿って設定してください。
+
 ## トラブルシュート
 
 ### Android
