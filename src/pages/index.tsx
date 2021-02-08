@@ -36,6 +36,8 @@ interface FeatureProps {
   description: JSX.Element;
 }
 
+const variable = { };
+
 function Feature({to, imageUrl, title, description}: FeatureProps) {
   const toUrl = useBaseUrl(to);
   const imgUrl = useBaseUrl(imageUrl);
