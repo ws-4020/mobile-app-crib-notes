@@ -23,7 +23,6 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SantokuApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SantokuApp/main.m; sourceTree = "<group>"; };
 		1C0DF379F1974CCE96C0242C /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = SantokuApp/SplashScreen.storyboard; sourceTree = "<group>"; };
-		237A6AE625D0CED900EE212C /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D20E1C31428BC50E9BB67B8 /* Pods-SantokuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SantokuApp.release.xcconfig"; path = "Target Support Files/Pods-SantokuApp/Pods-SantokuApp.release.xcconfig"; sourceTree = "<group>"; };
 		8B504043A0A9F7AA4BF15050 /* Pods-SantokuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SantokuApp.debug.xcconfig"; path = "Target Support Files/Pods-SantokuApp/Pods-SantokuApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -99,7 +98,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				237A6AE625D0CED900EE212C /* GoogleService-Info.plist */,
 				B9354F4924F139A6007FB102 /* PersonalAccount.xcconfig */,
 				13B07FAE1A68108700A75B9A /* SantokuApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
