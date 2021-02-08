@@ -56,7 +56,7 @@ MASVSは2つのセキュリティ検証レベル（MASVS-L1およびMASVS-L2）�
 
 [Android オープンソース プロジェクト](https://source.android.com/?hl=ja)が公開しているガイドで、Androidアプリケーションを設計する際に読むと参考になります。
 
-一般的なセキュリティ観点は[OWASP Mobile Top 10](https://github.com/LAC-Japan/OWASP-Mobile-Top-10-2016)や[OWASP MASVS](https://coky-t.gitbook.io/owasp-masvs-ja/)、[OWASP MSTG](https://coky-t.gitbook.io/owasp-mstg-ja/)で網羅できますが、Android特有のセキュリティ観点についてはこちらを一読するのをお勧めします。次で紹介する[Androidアプリのセキュア設計・セキュアコーディングガイド](https://www.jssec.org/dl/android_securecoding/index.html)をあわせて読むと、より実装ベースで理解できます。分量は多いですが、案件の内容に合わせてピックアップして読むだけでも十分役に立ちます。
+一般的なセキュリティ観点はここまでに紹介したOWASPのドキュメントで網羅できますが、Android特有のセキュリティ観点についてはこちらを一読するのをお勧めします。次で紹介する[Androidアプリのセキュア設計・セキュアコーディングガイド](https://www.jssec.org/dl/android_securecoding/index.html)をあわせて読むと、より実装ベースで理解できます。分量は多いですが、案件の内容に合わせてピックアップして読むだけでも十分役に立ちます。
 
 
 ## Androidアプリのセキュア設計・セキュアコーディングガイド

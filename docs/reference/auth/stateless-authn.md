@@ -89,7 +89,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 モバイルアプリケーションは、上の図のRelying Partyに該当し、以下のような役割を担います。
 
 - 認証フローの開始
-  - End Userの指示に従って、OpenID Providerの認可エンドポイントにリクエストを送信する
+  - End Userの指示にしたがって、OpenID Providerの認可エンドポイントにリクエストを送信する
   - End UserがOpenID Providerにログイン済みでない場合は、OpenID Providerが返したログイン画面を表示する
   - End UserがRelying Partyに対して認可を与えていない場合は、OpenID Providerが返した認可画面を表示する
 - トークン取得・保管
@@ -108,7 +108,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
   - End UserはOpenID Providerに対してではなく、モバイルアプリケーションに認証情報を渡す
     - 認可コードフローの場合、End UserはOpenID Providerに対して認証情報を渡す
 - リクエスト先のエンドポイント
-  - モバイルアプリケーションからOpenID Providerの認可エンドポイントは呼ばず、トークンエンドポイントを直接呼び出す
+  - モバイルアプリケーションからOpenID Providerの認可エンドポイントは呼ばず、トークンエンドポイントを直接呼びだす
     
 
 ![](oidc-resource-owner-password-credentials-flow.drawio.png)
