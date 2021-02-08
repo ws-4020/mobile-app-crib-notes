@@ -83,7 +83,7 @@ jobs:
       - name: Lint (markdownlint)
         if: always()
         run: |
-          npm run -s lint:md 2>&1 | reviewdog -tee -fail-on-error -reporter=github-pr-review -efm="%f:%l:%c %m" -efm="%f:%l %m" -name=markdownlint
+          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' | reviewdog -tee -fail-on-error -reporter=github-pr-review -efm="%t:%f:%l:%c %m" -efm="%t:%f:%l %m" -name=markdownlint
 
       - name: Lint (ESLint)
         if: always()
