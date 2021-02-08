@@ -99,7 +99,7 @@ jobs:
           fail_on_error: true
           reporter: github-pr-review
           # package.jsonでlint:esに設定しているのと同じ引数を渡す
-          eslint_flags: '--max-warnings 1 --ext .jsx,.js,.tsx,.ts src'
+          eslint_flags: '--ext .jsx,.js,.tsx,.ts src'
 
       - name: Lint (TypeScript)
         if: always()
