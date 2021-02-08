@@ -36,8 +36,8 @@ interface FeatureProps {
   description: JSX.Element;
 }
 
-const this_is_variable_object = { };
-delete this_is_variable_object;
+const variable = { };
+delete variable;
 
 function Feature({to, imageUrl, title, description}: FeatureProps) {
   const toUrl = useBaseUrl(to);
