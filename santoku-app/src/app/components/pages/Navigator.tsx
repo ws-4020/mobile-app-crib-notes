@@ -7,7 +7,7 @@ import DrawerContent from './DrawerContent';
 import StatefulAuthIntegration from './webview/StatefulAuthIntegration';
 import StatelessAuth from './auth/StatelessAuth';
 import Top from './top/Top';
-import PushNotifaiction from './notification/PushNotification';
+import PushNotification from './notification/PushNotification';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 
 const TopScreenStack = createStackNavigator();
@@ -82,15 +82,15 @@ const StatelessAuthScreen: React.FC = () => {
   );
 };
 
-const PushNotifaictionStack = createStackNavigator();
+const PushNotificationStack = createStackNavigator();
 
 const PushNotificationScreen: React.FC = () => {
   const { dispatch } = useNavigation();
   return (
-    <PushNotifaictionStack.Navigator>
-      <PushNotifaictionStack.Screen
+    <PushNotificationStack.Navigator>
+      <PushNotificationStack.Screen
         name="PushNotification"
-        component={PushNotifaiction}
+        component={PushNotification}
         options={{
           title: 'プッシュ通知',
           headerStyle: { backgroundColor: '#9DC6BF' },
@@ -102,7 +102,7 @@ const PushNotificationScreen: React.FC = () => {
           ),
         }}
       />
-    </PushNotifaictionStack.Navigator>
+    </PushNotificationStack.Navigator>
   );
 };
 
