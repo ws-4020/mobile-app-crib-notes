@@ -47,18 +47,19 @@ CognitoのクライアントIDなど、一部の設定値は暗号化して保�
     npm run android
     ```
 
-### Push通知の設定
+### ダミーのPush通知設定
 
-Push通知にはFCMを利用しているため実際に動作させるためには[ガイド](https://rnfirebase.io/#prerequisites)に沿って設定してください。
- - `google-service.json` の配置
- - `GoogleService-Info.plist`を`santoku-app/ios/` 直下に配置
-
-ガイドの手順にある`google-service.json`, `GoogleService-Info.plist`は[Firebase Console](https://console.firebase.google.com/)のアプリの設定から取得してください。
+Push通知用のサンプルを手元で動作させる必要がないはダミーファイルをコピーしてアプリケーションを立ち上げられるようにしてください。
 
 
-TODO:以下は未検証(アプリは起動するけどPush通知ができるか不明)
+```bash
+cp ios/GoogleService-Info.dummy.plist ios/GoogleService-Info.plist
+```
 
-このとき、アプリのBUNDLE_IDと`GoogleService-Info.plist`のBUNDLE_IDを一致させる必要はありません。
+実際にPush通知を確認する場合はRemote通知のためにBackendとの整合性のある設定が必要です。
+Push通知の設定方法は[ガイド](../TODO/mobile/crib-notes/link)を参照してください。
+設定方法に関しては、本アプリでもご自身が作成するアプリケーションでも共通です。
+
 
 ## トラブルシュート
 
@@ -121,28 +122,6 @@ Xcode Project内で、React Nativeのバンドル時にnodeコマンドを使用
     ```bash
     export PATH=$PATH:[Nodeのインストールディレクトリ]/bin
     ```
-
-#### Push通知の設定後、iOSへの設定でヘッダーファイルが見つからない場合
-
-[iOSの認証情報でFirebaseを設定する](https://rnfirebase.io/#configure-firebase-with-ios-credentials)ときに自動リンクの手順で設定されないことがあります。
-
-以下コマンドでリンクしてください。
-
-```bash
-cd ios
-pod install --repo-update
-```
-
-#### Push通知の設定後、iOSでアプリ起動時にエラーが発生する
-
-以下の様なエラーが発生し、SplashScreenのままになる（もしくはアプリが起動後すぐに落ちてしまう）場合、`GoogleService-Inof.plist` の追加手順で `targetMembership` の設定が漏れていないか確認してください。
-漏れている場合は一度 `project.pbxproj` ファイルの変更を戻してから`GoogleService-Info.plist` を再度追加してください。
-
-```
-NSException *	"`[FIRApp configure];` (`FirebaseApp.configure()` in Swift) could not find a valid GoogleService-Info.plist in your project. Please download one from https://console.firebase.google.com/
-```
-
-
 
 
 ### アイコンについて
