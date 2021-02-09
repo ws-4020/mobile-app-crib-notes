@@ -54,6 +54,9 @@ Push通知にはFCMを利用しているため実際に動作させるために�
 ガイドの手順にある`google-service.json`, `GoogleService-Info.plist`は[Firebase Console](https://console.firebase.google.com/)のアプリの設定から取得してください。
 
 
+TODO:以下は未検証(アプリは起動するけどPush通知ができるか不明)
+
+このとき、アプリのBUNDLE_IDと`GoogleService-Info.plist`のBUNDLE_IDを一致させる必要はありません。
 
 ## トラブルシュート
 
@@ -116,6 +119,27 @@ Xcode Project内で、React Nativeのバンドル時にnodeコマンドを使用
     ```bash
     export PATH=$PATH:[Nodeのインストールディレクトリ]/bin
     ```
+
+#### Push通知の設定後、iOSへの設定でヘッダーファイルが見つからない場合
+
+[iOSの認証情報でFirebaseを設定する](https://rnfirebase.io/#configure-firebase-with-ios-credentials)ときに自動リンクの手順で設定されないことがあります。
+
+以下コマンドでリンクしてください。
+
+```bash
+cd ios
+pod install --repo-update
+```
+
+#### Push通知の設定後、iOSでアプリ起動時にエラーが発生する
+
+以下の様なエラーが発生し、SplashScreenのままになる（もしくはアプリが起動後すぐに落ちてしまう）場合、`GoogleService-Inof.plist` の追加手順で `targetMembership` の設定が漏れていないか確認してください。
+漏れている場合は一度 `project.pbxproj` ファイルの変更を戻してから`GoogleService-Info.plist` を再度追加してください。
+
+```
+NSException *	"`[FIRApp configure];` (`FirebaseApp.configure()` in Swift) could not find a valid GoogleService-Info.plist in your project. Please download one from https://console.firebase.google.com/
+```
+
 
 
 
