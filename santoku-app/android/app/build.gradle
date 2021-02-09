@@ -1,7 +1,7 @@
 apply plugin: "com.android.application"
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
-// use firebase for notification
-// apply plugin: 'com.google.gms.google-services'
+//Firebaseの通知を有効にする場合、以下のコメントアウトを有効にする
+//apply plugin: 'com.google.gms.google-services'
 
 import com.android.build.OutputFile
 
