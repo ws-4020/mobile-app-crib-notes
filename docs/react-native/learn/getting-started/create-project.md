@@ -11,7 +11,7 @@ title: プロジェクトの作成
 
 次のコマンドを実行して、新規プロジェクトを作成してください。（`<YourAppName>`の部分は、好みのプロジェクト名に変更してください）
 
-```
+```bash
 npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler <YourAppName>
 ```
 
@@ -21,7 +21,7 @@ RN Spoilerは、Expoの[expo-template-bare-typescript](https://github.com/expo/e
 :::info
 [npm](https://www.npmjs.com/)ではなく[Yarn](https://yarnpkg.com/)を利用したい場合は、`--npm`というオプションを削除してください。Yarnがインストールされている場合は、Yarnを利用してパッケージがインストールされます。
 
-```
+```bash
 npx react-native init --template https://github.com/ws-4020/rn-spoiler <YourAppName>
 ```
 
@@ -41,7 +41,7 @@ Ok to proceed? (y)
 :::caution
 npm 7で`peerDependencies`の扱いが変更された影響で、npm 7でRN Spoilerをテンプレートとしてプロジェクトを作成すると次のようなエラーが発生します。
 
-```
+```console
 npm ERR! code ERESOLVE
 npm ERR! ERESOLVE unable to resolve dependency tree
 npm ERR!
