@@ -50,6 +50,8 @@ CognitoのクライアントIDなど、一部の設定値は暗号化して保�
 ### Push通知の設定
 
 Push通知にはFCMを利用しているため実際に動作させるためには[ガイド](https://rnfirebase.io/#prerequisites)に沿って設定してください。
+ - `google-service.json` の配置
+ - `GoogleService-Info.plist`を`santoku-app/ios/` 直下に配置
 
 ガイドの手順にある`google-service.json`, `GoogleService-Info.plist`は[Firebase Console](https://console.firebase.google.com/)のアプリの設定から取得してください。
 

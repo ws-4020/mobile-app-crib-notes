@@ -6,8 +6,7 @@
  */
 
 #import "AppDelegate.h"
-// Firebaseの通知を有効にする場合、以下のコメントアウトを有効にする
-//#import <Firebase.h>
+#import <Firebase.h>
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -43,11 +42,9 @@ static void InitializeFlipper(UIApplication *application) {
 #ifdef FB_SONARKIT_ENABLED
   InitializeFlipper(application);
 #endif
-  /** Firebaseの通知を有効にする場合、以下のコメントアウトを有効にする
-  if ([FIRApp defaultApp] == nil) {// use firebase for notification
+  if ([FIRApp defaultApp] == nil) {
     [FIRApp configure];
   }
-  */
 
   self.moduleRegistryAdapter = [[UMModuleRegistryAdapter alloc] initWithModuleRegistryProvider:[[UMModuleRegistryProvider alloc] init]];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
