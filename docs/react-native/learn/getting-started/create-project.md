@@ -7,29 +7,35 @@ title: プロジェクトの作成
 <!-- TODO: リンク貼るよ -->
 [アプリを実装する前に](.)で紹介しているコードを簡単に動かすことができるように、プロジェクトを作成します。
 
-[React Navigation](https://reactnavigation.org/)や[React Native Elements](https://reactnativeelements.com/)などのパッケージがインストールされたプロジェクトを簡単に用意できるように、[RN Spoiler](https://github.com/ws-4020/rn-spoiler)というテンプレートを用意しています。`<YourAppName>`の部分は、好みのプロジェクト名に変更してください。
+このコンテンツでは[React Navigation](https://reactnavigation.org/)や[React Native Elements](https://reactnativeelements.com/)などのパッケージを利用します。これらのパッケージがインストールされたプロジェクトを簡単に用意できるよう、[RN Spoiler](https://github.com/ws-4020/rn-spoiler)というテンプレートを用意しています。
+
+次のコマンドを実行して、新規プロジェクトを作成してください。（`<YourAppName>`の部分は、好みのプロジェクト名に変更してください）
 
 ```
 npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler <YourAppName>
 ```
 
 <!-- TODO: リンク貼るよ -->
-RN Spoilerは、Expoの[expo-template-bare-typescript](https://github.com/expo/expo/tree/master/templates/expo-template-bare-typescript)をベースにしているので、[Expoとは](.)で紹介しているBare Workflowのアプリとして開発・実行できます。
+RN Spoilerは、Expoの[expo-template-bare-typescript](https://github.com/expo/expo/tree/master/templates/expo-template-bare-typescript)をベースにしているので、[Expoとは](.)で紹介しているBare Workflowのアプリとして開発できます。
 
 :::info
 [npm](https://www.npmjs.com/)ではなく[Yarn](https://yarnpkg.com/)を利用したい場合は、`--npm`というオプションを削除してください。Yarnがインストールされている場合は、Yarnを利用してパッケージがインストールされます。
+
 ```
 npx react-native init --template https://github.com/ws-4020/rn-spoiler <YourAppName>
 ```
+
 :::
 
 :::info
 Node.js 15系で初めて`npx react-native init ...`を実行すると、次のように不足しているパッケージをインストールするかと聞かれます。`react-native`をインストールしようとしていれば問題ないので、エンターキーを押して実行してください。
+
 ```console
 Need to install the following packages:
   react-native
 Ok to proceed? (y)
 ```
+
 :::
 
 :::caution
@@ -58,5 +64,5 @@ npm ERR! to accept an incorrect (and potentially broken) dependency resolution.
 
 1. `cd <YourAppName>`（`<YourAppName>`は実際に作成したときの値に変更してください）
 2. `npm install --legacy-peer-deps`
-3. （macOSの場合のみ） `npx pod-install`
+3. （macOSの場合のみ）`npx pod-install`
 :::
