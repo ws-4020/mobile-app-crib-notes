@@ -3,20 +3,24 @@ title: react-native-cliについて
 ---
 
 ## エラー内容
+
 `react-native-cli` がインストールされていると、アプリ実行時に失敗します。状況を確認し、インストールされている場合、アンインストールしてください。
 
 ## 対処方法
 
 ### インストール状況の確認
+
 インストール譲許うについて、次のコマンドで確認できます。
 
 - 確認コマンド
-  ```shell
+
+  ```bash
   npm ls -g --depth=0
   ```
 
 - 実行例
-  ```shell
+
+  ```bash
   $ npm ls -g --depth=0
   expo-cli@3.28.5
   npm@6.14.8
@@ -30,6 +34,7 @@ title: react-native-cliについて
 次のコマンドでアンインストールできます。
 
 - アンインストールコマンド
-  ```shell
+
+  ```bash
   npm uninstall -g react-native-cli
   ```
