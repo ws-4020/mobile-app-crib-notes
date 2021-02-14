@@ -1,23 +1,34 @@
 ---
 title: 高さと幅
-weight: 200
 ---
 
-# 高さと幅
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 コンポーネントの高さと幅を指定することで、画面上のコンポーネントのサイズが決まります。
 一般的な方法は、`width`と`height`に固定値を指定することです。
 React Nativeでは単位の指定がなく、すべて（密度に依存しない）ピクセルとなります。
 
-## Example
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### 画面イメージ
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-{{< figure src="/images/height-and-width.png" class="center" height="600" >}}
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-### ソースコード
+<TabItem value="image">
 
-```typescript
+![Height and width](height-and-width.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
@@ -50,3 +61,5 @@ const styles = StyleSheet.create({
 });
 ```
 
+</TabItem>
+</Tabs>
