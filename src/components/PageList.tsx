@@ -58,7 +58,7 @@ const PageOverview: React.FC<PageSummaryProps> = ({title, imageUrl, summary, ...
     <Container {...props}>
       <Title title={`${title} »`} />
       {imageUrl && <Image src={imageUrl} alt={title} />}
-      <Summary summary={summary} />
+      {summary && <Summary summary={summary} />}
     </Container>
   );
 };
