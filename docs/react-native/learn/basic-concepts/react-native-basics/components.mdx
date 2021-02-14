@@ -1,30 +1,52 @@
 ---
-title: コンポーネント
-weight: 100
+title: Components
+sidebar_label: Overview
 ---
-
-# コンポーネント
 
 ここからは、主に開発でよく使われるコアコンポーネントを紹介します。
 
-紹介ページにあるソースコードは、すべてRN-Spoilerから作成したプロジェクトの `App.tsx` ファイルに張り付けるだけで動作します。
+紹介ページにあるソースコードは、すべてRN Spoilerから作成したプロジェクトの `App.tsx` ファイルに張り付けるだけで動作します。
 手元の環境で実際に動作させてみて、動きのイメージを掴んでみてください。
 
 ## コアコンポーネント
 
-### [View](components/view.md)
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### [Text](components/text.md)
+import {PageList} from '../../../../../src/components';
+const overviews = [
+  {
+    title: 'View',
+    to: 'react-native/learn/basic-concepts/react-native-basics/components/view',
+  },
+  {
+    title: 'Text',
+    to: 'react-native/learn/basic-concepts/react-native-basics/components/text',
+  },
+  {
+    title: 'Button',
+    to: 'react-native/learn/basic-concepts/react-native-basics/components/button',
+  },
+  {
+    title: 'TouchableOpacity',
+    to: 'react-native/learn/basic-concepts/react-native-basics/components/touchable-opacity',
+  },
+  {
+    title: 'Image',
+    to: 'react-native/learn/basic-concepts/react-native-basics/components/image',
+  },
+  {
+    title: 'ScrollView',
+    to: 'react-native/learn/basic-concepts/react-native-basics/components/scroll-view',
+  },
+  {
+    title: 'Lists',
+    to: 'react-native/learn/basic-concepts/react-native-basics/components/lists',
+  },
+]
 
-### [Button](components/button.md)
+<PageList overviews={overviews} colSize={12}/>
 
-### [TouchableOpacity](components/touchable-opacity.md)
-
-### [Image](components/image.md)
-
-### [ScrollView](components/scroll-view.md)
-
-### [Lists](components/lists.md)
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 ## [React Native Elements](https://reactnativeelements.com/)
 
@@ -36,9 +58,7 @@ React Nativeのライブラリとして非常に人気が高く、表現力豊�
 
 RN Spoilerからプロジェクトを作成した場合、このライブラリがデフォルトでプロジェクトに入っています。
 
----
-
-### コラム
+:::note
 
 React Native Elements以外にもコミュニティがサポートするReact NativeのUIライブラリは多数存在します。
 例えば、[NativeBase](https://nativebase.io/)もReact Native Elementsに並んで有名なライブラリです。
@@ -50,5 +70,4 @@ React Native Elements以外にもコミュニティがサポートするReact Na
 [https://github.com/react-native-community](https://github.com/react-native-community)
 
 アプリに欲しい部品がコアコンポーネントやReact Native Elementsに見つからない場合、他のUIライブラリも探してみるといいでしょう。
-
----
+:::
