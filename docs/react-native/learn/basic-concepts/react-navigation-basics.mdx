@@ -1,9 +1,10 @@
 ---
 title: React Navigationの基本
-weight: 300
+sidebar_label: Overview
 ---
 
-# React Navigationの基本
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Webブラウザでは、URL毎にページ全体を書き換えることで画面遷移します。
 画面遷移のたびに前のURLはブラウザの履歴スタックに保持され、戻るなどの操作は履歴スタックの一番上のURLを取り出すことで実現します。
@@ -13,7 +14,7 @@ Webブラウザでは、URL毎にページ全体を書き換えることで画�
 Webブラウザのそれとは異なり、前の画面は破棄されずに残っています。
 戻る場合は、先頭の画面を取り除くなどで実現します。
 
-{{< figure src="/images/navigation_image.png" class="center" >}}
+![Navigation stack change](navigation_image.png)
 
 React Nativeにはもともと組み込みのナビゲーションAPIが含まれていました。
 しかし、最終的には削除され、サードパーティー製のライブラリを選ぶ方針に変わりました。
@@ -68,15 +69,26 @@ export const App = () => {
 };
 ```
 
-## Example
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### 画面イメージ
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-{{< figure src="/images/navigation.png" class="center" height="600" >}}
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-### ソースコード
+<TabItem value="image">
 
-```typescript jsx
+![Navigation](navigation.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import {
   NavigationContainer,
   useNavigation,
@@ -155,8 +167,5 @@ const styles = StyleSheet.create({
 });
 ```
 
-# [Stack](react-navigation-basics/stack.md)
-
-# [Modal](react-navigation-basics/modal.md)
-
-# [Tab](react-navigation-basics/tab.md)
+</TabItem>
+</Tabs>
