@@ -1,8 +1,9 @@
 ---
 title: Image
-weight: 700
 ---
-# Image
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 ネットワーク画像、静的リソース、一時的なローカル画像、カメラロールなどのローカルディスクからの画像など、さまざまな種類の画像を表示できるReactコンポーネントです。
 
@@ -13,15 +14,26 @@ weight: 700
 
 下の例では、ネットワークからの画像を表示しています。
 
-## Example
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### 画面イメージ
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-{{< figure src="/images/image.png" class="center" height="600" >}}
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-### ソースコード
+<TabItem value="image">
 
-```typescript
+![Image](image.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import React from 'react';
 import {StyleSheet, Image, View} from 'react-native';
 
@@ -46,3 +58,5 @@ const styles = StyleSheet.create({
 });
 ```
 
+</TabItem>
+</Tabs>
