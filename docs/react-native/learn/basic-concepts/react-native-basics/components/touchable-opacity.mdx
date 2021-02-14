@@ -1,8 +1,9 @@
 ---
 title: TouchableOpacity
-weight: 600
 ---
-# TouchableOpacity
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 ビューをタッチに対応させるためラップします。
 押すとラップされたビューがフェードアウトし、離すとフェードインします。
@@ -10,15 +11,26 @@ weight: 600
 
 React Nativeアプリでは、一般的にボタンとして使用されます。
 
-## Example
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### 画面イメージ
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-{{< figure src="/images/touchable-opacity.png" class="center" height="600" >}}
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-### ソースコード
+<TabItem value="image">
 
-```typescript
+![TouchableOpacity](touchable-opacity.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
@@ -53,3 +65,6 @@ const styles = StyleSheet.create({
   },
 });
 ```
+
+</TabItem>
+</Tabs>
