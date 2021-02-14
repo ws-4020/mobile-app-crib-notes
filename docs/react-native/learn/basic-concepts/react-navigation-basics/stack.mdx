@@ -1,9 +1,9 @@
 ---
 title: Stack
-weight: 100
 ---
 
-# Stack
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Stackは最も一般的に使われるナビゲーションです。
 Stackの操作として次のAPIが用意されています。
@@ -17,19 +17,30 @@ Stackの操作として次のAPIが用意されています。
 |`popToTop`|スタックの最初の画面に戻ります。|
 |`replace`|画面を置き換えます。|
 
-それぞれの操作イメージを新たしたのが次の図です。
+それぞれの操作イメージをあらわしたのが次の図です。
 
-{{< figure src="/images/stack_image.png" class="center" >}}
+![Stack operations](stack_image.png)
 
-## Example
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### 画面イメージ
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-{{< figure src="/images/stack.png" class="center" height="600" >}}
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-### ソースコード
+<TabItem value="image">
 
-```typescript
+![Stack](stack.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import {
   NavigationContainer,
   useNavigation,
@@ -165,3 +176,6 @@ const styles = StyleSheet.create({
   },
 });
 ```
+
+</TabItem>
+</Tabs>
