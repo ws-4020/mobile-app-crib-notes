@@ -1,8 +1,9 @@
 ---
 title: View
-weight: 200
 ---
-# View
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 React Nativeにおける最も基本的なコンポーネントです。
 デフォルトでは何も表示せず、その他のコンポーネントのコンテナとしてスタイルやレイアウト用途として主に用いられます。
@@ -12,15 +13,26 @@ React Nativeにおける最も基本的なコンポーネントです。
 - Android - `android.view`
 - Web - `<div>`
 
-## Example
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### 画面イメージ
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-{{< figure src="/images/view.png" class="center" height="600" >}}
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-### ソースコード
+<TabItem value="image">
 
-```typescript
+![View](view.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
@@ -48,3 +60,5 @@ const styles = StyleSheet.create({
 });
 ```
 
+</TabItem>
+</Tabs>
