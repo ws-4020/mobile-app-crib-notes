@@ -1,21 +1,33 @@
 ---
 title: Text
-weight: 300
 ---
-# Text
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 テキストを表示するためのReactコンポーネントです。
 Webと異なり、テキストは`<Text>`コンポーネントでのラップが必要です。
 
-## Example
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### 画面イメージ
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-{{< figure src="/images/text.png" class="center" height="600" >}}
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-### ソースコード
+<TabItem value="image">
 
-```typescript
+![Text](text.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
@@ -41,3 +53,5 @@ const styles = StyleSheet.create({
 });
 ```
 
+</TabItem>
+</Tabs>
