@@ -1,8 +1,9 @@
 ---
 title: FlatList
-weight: 100
 ---
-# FlatList
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 大量のデータを画面にスクロール表示する場合、`FlatList`の使用が推奨されます。
 
@@ -14,15 +15,26 @@ weight: 100
 変更された行を特定するために、データは一意のID値をもつ必要があります。
 `item.key`がデフォルトのIDとして用いられますが、`keyExtractor`に関数を渡すことで別のID値を指定できます。
 
-## Example
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### 画面イメージ
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-{{< figure src="/images/flat-list.png" class="center" height="600" >}}
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-### ソースコード
+<TabItem value="image">
 
-```typescript
+![FlatList](flat-list.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import React from 'react';
 import {FlatList, StyleSheet, Text} from 'react-native';
 
@@ -49,3 +61,6 @@ const styles = StyleSheet.create({
   },
 });
 ```
+
+</TabItem>
+</Tabs>
