@@ -1,8 +1,9 @@
 ---
 title: ScrollView
-weight: 800
 ---
-# ScrollView
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 ScrollViewはスクロール可能なコンテンツに使用されます。
 少量のコンテンツをスクロールする場合に適しています。
@@ -12,15 +13,27 @@ ScrollViewはすべての子コンポーネントを一度にレンダリング�
 そのため、アイテムが大量にある場合はパフォーマンス上の欠点があります。
 このような場合では、FlatListの使用を検討してください。
 
-## Example
 
-### 画面イメージ
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-{{< figure src="/images/scroll-view.png" class="center" height="600" >}}
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-### ソースコード
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-```typescript
+<TabItem value="image">
+
+![ScrollView](scroll-view.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 
@@ -59,3 +72,5 @@ const styles = StyleSheet.create({
 });
 ```
 
+</TabItem>
+</Tabs>
