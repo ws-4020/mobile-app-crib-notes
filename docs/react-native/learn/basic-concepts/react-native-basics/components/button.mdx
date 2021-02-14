@@ -1,21 +1,33 @@
 ---
 title: Button
-weight: 500
 ---
-# Button
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 各ネイティブプラットフォームの標準スタイルを使用したボタンを表示する場合、このコンポーネントを使用します。
 色以外のスタイルがカスタマイズ出来ないため、デザインがアプリに適していない場合、代わりに[Touchables](https://reactnative.dev/docs/handling-touches#touchables)を使用して独自のコンポーネントを作成します。
 
-## Example
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### 画面イメージ
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-{{< figure src="/images/button.png" class="center" height="600" >}}
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-### ソースコード
+<TabItem value="image">
 
-```typescript
+![Button](button.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import React, {useState} from 'react';
 import {Button, StyleSheet, View} from 'react-native';
 
@@ -42,3 +54,6 @@ const styles = StyleSheet.create({
   },
 });
 ```
+
+</TabItem>
+</Tabs>
