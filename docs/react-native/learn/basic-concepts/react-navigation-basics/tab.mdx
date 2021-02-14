@@ -1,9 +1,9 @@
 ---
 title: Tab
-weight: 300
 ---
 
-# Tab
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 モバイルアプリで採用される一般的なナビゲーションにタブがあります。
 タブは画面の下部（または上部）に配置され、ボタン押下で画面を切り替えます。
@@ -17,23 +17,23 @@ React Navigationでは、次のAPIを使用してタブナビゲーションを�
 タブナビゲータの定義はスタックのそれと似ています。次のコードはタブナビゲータの定義例です。
 定義の中で、タブの外観をカスタマイズ（アイコン表示したりバッジを追加したり）できます。
 
-```typescript
-    <NavigationContainer>
-      <RootTab.Navigator>
-        <RootTab.Screen
-          name="Settings"
-          component={SettingsScreen}
-          options={{
-            title: '設定',
-            tabBarBadge: 3,
-            tabBarIcon: ({color}) => (
-              <Ionicons name="md-settings" size={30} color={color} />
-            ),
-          }}
-        />
-        /* 省略 */
-      </RootTab.Navigator>
-    </NavigationContainer>
+```typescript jsx
+<NavigationContainer>
+  <RootTab.Navigator>
+    <RootTab.Screen
+      name="Settings"
+      component={SettingsScreen}
+      options={{
+        title: '設定',
+        tabBarBadge: 3,
+        tabBarIcon: ({color}) => (
+          <Ionicons name="md-settings" size={30} color={color} />
+        ),
+      }}
+    />
+    /* 省略 */
+  </RootTab.Navigator>
+</NavigationContainer>
 ```
 
 タブの切り替え、およびタブ配下の（ネストされた）ナビゲータの画面遷移も、スタックと同様に`navigation.navigate`を用います。
@@ -41,18 +41,28 @@ React Navigationでは、次のAPIを使用してタブナビゲーションを�
 次の図は、コード例のナビゲータ構成です。
 タブ配下にネストされたスタックナビゲータを定義しています。
 
-{{< figure src="/images/tab_image.png" class="center" >}}
+![Tab navigator](tab_image.png)
 
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-## Example
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-### 画面イメージ
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-{{< figure src="/images/tab.png" class="center" height="600" >}}
+<TabItem value="image">
 
-### ソースコード
+![Tab](tab.png)
 
-```typescript
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import {Ionicons} from '@expo/vector-icons';
 import {
   BottomTabNavigationProp,
@@ -181,3 +191,6 @@ const styles = StyleSheet.create({
   },
 });
 ```
+
+</TabItem>
+</Tabs>
