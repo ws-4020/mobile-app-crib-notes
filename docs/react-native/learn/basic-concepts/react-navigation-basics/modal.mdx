@@ -1,9 +1,9 @@
 ---
 title: Modal
-weight: 200
 ---
 
-## Modal
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 モーダルは、メインコンテンツを一時的にブロックして別のコンテンツを表示します。
 いわゆるポップアップ画面です。
@@ -16,13 +16,13 @@ weight: 200
 モーダルコンテンツは全てのメインコンテンツに優先して表示させるため、一般的にネストされたナビゲータを用いて定義します。
 次の図は、`Modal 1`をモーダルとして定義した場合のナビゲータ構成です。
 
-{{< figure src="/images/modal_image.png" class="center" >}}
+![Modal navigator structure](modal_image.png)
 
 `RootStack`は`MainStack`を子ナビゲータとして定義しています。
 
 このナビゲータ構成のコード例は次の通りです。
 
-```typescript
+```typescript jsx
 type RootParamList = {
   MainStack: NavigatorScreenParams<MainParamList>;
   Modal1: {message: string};
@@ -73,7 +73,7 @@ const Main = () => {
 `useNavigation`の型定義でネストされたナビゲータ構成を表すには、`CompositeNavigationProp`を用います。
 第一引数に現在のナビゲータの型定義を、第二引数に親ナビゲータの型定義を指定します。
 
-```typescript
+```typescript jsx
   const navigation = useNavigation<
     CompositeNavigationProp<
       StackNavigationProp<MainParamList, 'Screen1'>,
@@ -82,9 +82,7 @@ const Main = () => {
   >();
 ```
 
----
-
-### コラム
+:::note
 
 親ナビゲータが複数ある（親もネストしたナビゲータ）場合、第二引数の型定義もネストします。
 
@@ -103,14 +101,14 @@ const Main = () => {
 `useNavigation`の型定義は複雑です。
 詳細は[公式サイト](https://reactnavigation.org/docs/typescript/#combining-navigation-props)の説明を参照してください。
 
----
+:::
 
 ## Route定義
 
 `navigate`の引数で遷移先画面に渡すパラメータを指定できます。
 遷移先画面では、`route`からそのパラメータにアクセスできます。
 
-```typescript
+```typescript jsx
 type RootParamList = {
     /* 省略 */
   Modal1: {message: string};
@@ -138,15 +136,26 @@ const Modal1: React.FC = () => {
 };
 ```
 
-## Example
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### 画面イメージ
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-{{< figure src="/images/modal.png" class="center" height="600" >}}
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-### ソースコード
+<TabItem value="image">
 
-```typescript
+![Modal](modal.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import {
   CompositeNavigationProp,
   NavigationContainer,
@@ -276,3 +285,6 @@ const styles = StyleSheet.create({
   },
 });
 ```
+
+</TabItem>
+</Tabs>
