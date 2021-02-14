@@ -1,9 +1,9 @@
 ---
 title: Flexbox
-weight: 300
 ---
 
-# Flexbox
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Flexboxを使用したレイアウトの指定ができます。
 Flexboxのアルゴリズムを利用することで、多様なサイズの画面あわせて拡大または縮小するレイアウトを定義できます。
@@ -11,41 +11,26 @@ Flexboxのアルゴリズムを利用することで、多様なサイズの画�
 
 > 内部的には[Yoga](https://yogalayout.com/)ライブラリを用いてFlexboxが実装されています。
 
-## プロパティ
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-Flexコンテナのレイアウトに使用するプロパティを次に示します。
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-|プロパティ|デフォルト|オプション|説明|
-|---------|---------|---------|---------|
-|`flexDirection`|`column`|`row`, `column`, `row-reverse`, `column-reverse`|子要素の並ぶ向き|
-|`flexWrap`|`nowrap`|`nowrap`, `wrap`, `wrap-reverse`|子要素の折り返し|
-|`justifyContent`|`flex-start`|`flex-start`, `flex-end`, `center`, `space-between`, `space-around`, `space-evenly`|水平方向の揃え|
-|`alignItems`|`stretch`|`flex-start`, `flex-end`, `center`, `stretch`, `baseline`|垂直方向の揃え|
-|`alignContent`|`flex-start`|`flex-start`, `flex-end`, `center`, `stretch`, `space-between`, `space-around`|複数行にした時の揃え|
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-子要素（Flexアイテム）のレイアウトに使用するプロパティを次に示します。
+<TabItem value="image">
 
-|プロパティ|デフォルト|オプション|説明|
-|---------|---------|---------|---------|
-|`flexGrow`|0||子要素の伸びる比率|
-|`flexShrink`|1||子要素の縮む比率|
-|`flexBasis`|子要素のサイズ||子要素のベースとなる幅の指定|
-|`alignSelf`|`auto`|`auto`, `flex-start`, `flex-end`, `center`, `stretch`, `baseline`|子要素自身の垂直方向の揃え|
+![Flexbox](flexbox.png)
 
-## 参考サイト
+</TabItem>
 
-- [Yoga](https://yogalayout.com/)
-- [日本語対応！CSS Flexboxのチートシートを作ったので配布します](https://www.webcreatorbox.com/tech/css-flexbox-cheat-sheet)
+<TabItem value="source">
 
-## Example
-
-### 画面イメージ
-
-{{< figure src="/images/flexbox.png" class="center" height="600" >}}
-
-### ソースコード
-
-```typescript
+```typescript jsx title="/src/App.tsx"
 import React, {useState} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import {ButtonGroup, Slider} from 'react-native-elements';
@@ -233,3 +218,32 @@ const styles = StyleSheet.create({
   },
 });
 ```
+
+</TabItem>
+</Tabs>
+
+## プロパティ
+
+Flexコンテナのレイアウトに使用するプロパティを次に示します。
+
+|プロパティ|デフォルト|オプション|説明|
+|---------|---------|---------|---------|
+|`flexDirection`|`column`|`row`, `column`, `row-reverse`, `column-reverse`|子要素の並ぶ向き|
+|`flexWrap`|`nowrap`|`nowrap`, `wrap`, `wrap-reverse`|子要素の折り返し|
+|`justifyContent`|`flex-start`|`flex-start`, `flex-end`, `center`, `space-between`, `space-around`, `space-evenly`|水平方向の揃え|
+|`alignItems`|`stretch`|`flex-start`, `flex-end`, `center`, `stretch`, `baseline`|垂直方向の揃え|
+|`alignContent`|`flex-start`|`flex-start`, `flex-end`, `center`, `stretch`, `space-between`, `space-around`|複数行にした時の揃え|
+
+子要素（Flexアイテム）のレイアウトに使用するプロパティを次に示します。
+
+|プロパティ|デフォルト|オプション|説明|
+|---------|---------|---------|---------|
+|`flexGrow`|0||子要素の伸びる比率|
+|`flexShrink`|1||子要素の縮む比率|
+|`flexBasis`|子要素のサイズ||子要素のベースとなる幅の指定|
+|`alignSelf`|`auto`|`auto`, `flex-start`, `flex-end`, `center`, `stretch`, `baseline`|子要素自身の垂直方向の揃え|
+
+## 参考サイト
+
+- [Yoga](https://yogalayout.com/)
+- [日本語対応！CSS Flexboxのチートシートを作ったので配布します](https://www.webcreatorbox.com/tech/css-flexbox-cheat-sheet)
