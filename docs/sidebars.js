@@ -135,4 +135,26 @@ module.exports = {
         ],
       }
     : {}),
+  ...(process.env.NODE_ENV === 'development'
+    ? {
+        docusaurus: [
+          {
+            type: 'doc',
+            id: 'docusaurus/index',
+          },
+          {
+            type: 'doc',
+            id: 'docusaurus/doc1',
+          },
+          {
+            type: 'doc',
+            id: 'docusaurus/mdx',
+          },
+          {
+            // TODO: ヘッダリンクの作り方: ['docusaurus/create-link-in-header'],
+            // TODO: 目次の作り方: ['docusaurus/create-sidebar-toc'],
+          },
+        ],
+      }
+    : {}),
 };
