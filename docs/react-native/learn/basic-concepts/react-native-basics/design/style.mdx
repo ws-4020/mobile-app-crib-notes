@@ -1,24 +1,35 @@
 ---
 title: Style
-weight: 100
 ---
 
-# Style
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 `style` propには、JavaScriptのオブジェクトを設定できます。配列を渡すこともできます。
 配列の場合は最後のスタイルが優先されるため、これを用いてスタイルを上書きできます。
 
 `style` propに直接JavaScriptのオブジェクトを設定することも出来ますが、`StyleSheet.create`を用いて一か所でスタイル定義する方が複雑さに対応できます。
 
-## Example
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### 画面イメージ
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-{{< figure src="/images/style.png" class="center" height="600" >}}
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-### ソースコード
+<TabItem value="image">
 
-```typescript
+![Style](style.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Button} from 'react-native-elements';
@@ -66,3 +77,5 @@ const styles = StyleSheet.create({
 });
 ```
 
+</TabItem>
+</Tabs>
