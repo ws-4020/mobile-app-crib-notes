@@ -1,23 +1,35 @@
 ---
 title: SectionList
-weight: 200
 ---
-# SectionList
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 `SectionList`は`FlatList`と同じように表示されるコンテンツのみを描画し、さらに行区切りのセクションヘッダーを持つことができます。
 
 `props`に指定した`renderSectionHeader`および`renderItem`を用いて、`sections`に渡された項目を描画します。
 `sections`の各項目は配列型のオブジェクトである`data`をもつ必要があります。
 
-## Example
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-### 画面イメージ
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
 
-{{< figure src="/images/section-list.png" class="center" height="600" >}}
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
-### ソースコード
+<TabItem value="image">
 
-```typescript
+![SectionList](section-list.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
 import React from 'react';
 import {SectionList, StyleSheet, Text} from 'react-native';
 
@@ -62,3 +74,6 @@ const styles = StyleSheet.create({
   },
 });
 ```
+
+</TabItem>
+</Tabs>
