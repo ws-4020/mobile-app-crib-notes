@@ -7,7 +7,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 Webブラウザでは、URL毎にページ全体を書き換えることで画面遷移します。
-画面遷移のたびに前のURLはブラウザの履歴スタックに保持され、戻るなどの操作は履歴スタックの一番上のURLを取り出すことで実現します。
+画面遷移のたびに前のURLはブラウザの履歴スタックに保持され、戻るなどの操作は履歴スタックの一番上のURLを取りだすことで実現します。
 
 一方で、モバイルアプリケーションはスタック型の画面遷移を採用しています。
 画面遷移は今ある画面の上に新しい画面を積み重ねます。
@@ -54,7 +54,7 @@ const Screen1: React.FC = () => {
 
 `NavigationContainer`を使用してルートを定義します。
 ナビゲーターはネストした定義もできます（例えばTabナビゲーター内にStackナビゲーターがあるなど）。
-ナビゲーターがネストされている場合でも、必要な`NavigationContainer`は１つだけです。
+ナビゲーターがネストされている場合でも、必要な`NavigationContainer`は1つだけです。
 
 ```typescript jsx
 export const App = () => {

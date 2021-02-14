@@ -10,7 +10,7 @@ React Nativeを用いてアプリを実装するには、JavaScript、TypeScript
 
 Reactを学ぶにはJavaScriptの言語知識が必須です。 JavaScriptを触れたことがない人は、まずはJavaScriptの知識習得からお願いします。
 
-上記サイトは、JavaScriptの文法や機能を一から学べるサイトです。 「第一部: 基本文法」までの知識があれば、ひとまず充分です。
+上記サイトは、JavaScriptの文法や機能を一から学べるサイトです。「第一部：基本文法」までの知識があれば、ひとまず充分です。
 
 ## [サバイバルTypeScript](https://book.yyts.org/)
 
