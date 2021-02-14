@@ -1,19 +1,8 @@
 ---
-title: はじめに
+title: ToDoアプリの実装
+sidebar_label: Overview
+hide_table_of_contents: true
 ---
-
-# はじめに
-
-## ハンズオンの目的
-
-本ハンズオンでは、ReactでWebアプリケーションを実装できるがReact Nativeでモバイルアプリケーションを実装したことがないアプリケーション開発者を対象として、次のことについて学ぶことを目的としています。
-
-- ReactとReact Nativeの違い
-- React Nativeで作成したモバイルアプリケーションの動作確認方法
-
-また、作成したモバイルアプリケーションの配布方法やテスト手法については本ハンズオンでは触れません。
-
-## ハンズオンの内容
 
 このハンズオンで作成するTodoアプリは[Webベースのハンズオン](https://fintan-contents.github.io/spa-restapi-handson/)と同じようなアプリケーションですが、ハンズオンの目的である**ReactとReact Nativeの違い**
 を学んでもらうため、現在のバージョンではモバイル単体で動作します。
