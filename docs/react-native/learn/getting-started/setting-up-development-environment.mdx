@@ -99,6 +99,8 @@ Android SDK Platform-Toolsがインストールされていない場合、Androi
 
 つづいて、環境変数`PATH`に以下が含まれていることを次のコマンドで確認してください。
 
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
 <Tabs
   groupId="operating-systems"
   defaultValue="mac"
@@ -107,6 +109,9 @@ Android SDK Platform-Toolsがインストールされていない場合、Androi
     {label: 'Windows', value: 'win'},
   ]
 }>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
 <TabItem value="mac">
 
 ```
@@ -136,6 +141,8 @@ proxy環境下で環境構築を進める場合、一部のツールおよび、
 - 環境変数  
   環境構築および、実行時等に使用する一部ツール（npmやCocoaPods等）のproxy設定は環境変数に次のコマンドで設定してください。
 
+  <!-- textlint-disable ja-technical-writing/sentence-length -->
+
   <Tabs
     groupId="operating-systems"
     defaultValue="mac"
@@ -144,6 +151,9 @@ proxy環境下で環境構築を進める場合、一部のツールおよび、
       {label: 'Windows', value: 'win'},
     ]
   }>
+
+  <!-- textlint-enable ja-technical-writing/sentence-length -->
+
   <TabItem value="mac">
 
   `~/.bash_profile`へ、以下の内容を追記してください。
@@ -172,10 +182,13 @@ proxy環境下で環境構築を進める場合、一部のツールおよび、
   systemProp.http.proxyPort=8080
   systemProp.https.proxyHost=プロキシアドレス（※）
   systemProp.https.proxyPort=8080
-  ※ネットワークプロトコル（"http://"）は不要。
   ```
+  ※ネットワークプロトコル（`http://`）は不要。
 
   - 設定先
+
+  <!-- textlint-disable ja-technical-writing/sentence-length -->
+
   <Tabs
     groupId="operating-systems"
     defaultValue="mac"
@@ -184,6 +197,9 @@ proxy環境下で環境構築を進める場合、一部のツールおよび、
       {label: 'Windows', value: 'win'},
     ]
   }>
+
+  <!-- textlint-enable ja-technical-writing/sentence-length -->
+
   <TabItem value="mac">
 
   `~/.gradle/gradle.properties`配下に`gradle.properties`が存在するか確認してください。
