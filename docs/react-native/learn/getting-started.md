@@ -2,7 +2,7 @@
 title: Getting Started
 ---
 
-## [環境構築](getting-started/setting-up-development-environment.md)
+## [環境構築](getting-started/setting-up-development-environment.mdx)
 
 ## [プロジェクトの作成](getting-started/create-project.md)
 
