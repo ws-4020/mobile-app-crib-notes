@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
-import { Description, TextButton, Title } from '../../basics';
+import React, {useState} from 'react';
+import {StyleSheet} from 'react-native';
+import {Description, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
 
-const TopicNotificationForm: React.FC = () => {
+type Props = {
+  allowedNotification: boolean;
+};
+
+const TopicNotificationForm: React.FC<Props> = ({allowedNotification}) => {
   const [topicName, setTopicName] = useState('');
   const [topicTitle, setTopicTitle] = useState('');
   const [topicText, setTopicText] = useState('');

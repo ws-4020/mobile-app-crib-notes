@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
-import { Description, Section, TextButton, Title } from '../../basics';
+import React, {useEffect, useState} from 'react';
+import {Description, Section, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
+import {useIsMounted} from '../../../hooks/useIsMounted';
 
-const DeviseTokenNotificationForm: React.FC = () => {
+type Props = {
+  allowedNotification: boolean;
+};
+
+const DeviseTokenNotificationForm: React.FC<Props> = ({allowedNotification}) => {
   const [title, setTitle] = useState('');
   const [messageText, setMessageText] = useState('');
   const [messageValue, setMessageValue] = useState('');
+  const [deviseToken, setDeviseToken] = useState('');
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    if (allowedNotification && isMounted()) {
+      setDeviseToken('bk3RNw');
+    }
+  }, [allowedNotification, isMounted]);
 
   return (
     <>
@@ -18,7 +31,7 @@ const DeviseTokenNotificationForm: React.FC = () => {
         その後に、送信したい内容を入力して「この端末にプッシュ通知を送信」ボタンを押すと、バックエンドサーバー経由でFirebaseのプッシュ通知送信APIが呼び出され、Firebaseからこの端末にプッシュ通知が届きます。
       </Description>
       <Section>
-        <FormInput readonly={true} label="この端末のデバイストークン" value="bk3RNw" />
+        <FormInput readonly={true} label="この端末のデバイストークン" value={deviseToken} />
         <FormInput
           label="通知メッセージタイトル"
           value={title}
