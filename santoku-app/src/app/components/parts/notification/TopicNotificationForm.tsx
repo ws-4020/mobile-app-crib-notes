@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Description, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
-import messaging from '@react-native-firebase/messaging';
+import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
 
 type Props = {
   deviseToken: string;
@@ -13,7 +13,6 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
   const [topicTitle, setTopicTitle] = useState('');
   const [topicText, setTopicText] = useState('');
   const [sendTopicName, setSendTopicName] = useState('');
-  const message = messaging();
 
   return (
     <>
@@ -31,7 +30,7 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
       />
       <TextButton
         onPress={() => {
-          message.subscribeToTopic(sendTopicName);
+          pushNotificationService.subscribeToTopic(sendTopicName);
         }}
         value="この端末で購読するトピックを追加"
       />
@@ -55,7 +54,7 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
       />
       <TextButton
         onPress={() => {
-          message.sendMessage({data: {token: deviseToken}});
+          pushNotificationService.sendMessage({data: {token: deviseToken}});
         }}
         value="指定したトピックにプッシュ通知を送信する"
       />
