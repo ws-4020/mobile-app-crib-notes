@@ -55,7 +55,7 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
       />
       <TextButton
         onPress={() => {
-          message.sendMessage({data: {}});
+          message.sendMessage({data: {token: deviseToken}});
         }}
         value="指定したトピックにプッシュ通知を送信する"
       />
