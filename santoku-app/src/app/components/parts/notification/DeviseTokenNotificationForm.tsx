@@ -4,21 +4,13 @@ import FormInput from './FormInput';
 import {useIsMounted} from '../../../hooks/useIsMounted';
 
 type Props = {
-  allowedNotification: boolean;
+  deviseToken: string;
 };
 
-const DeviseTokenNotificationForm: React.FC<Props> = ({allowedNotification}) => {
+const DeviseTokenNotificationForm: React.FC<Props> = ({deviseToken}) => {
   const [title, setTitle] = useState('');
   const [messageText, setMessageText] = useState('');
   const [messageValue, setMessageValue] = useState('');
-  const [deviseToken, setDeviseToken] = useState('');
-  const isMounted = useIsMounted();
-
-  useEffect(() => {
-    if (allowedNotification && isMounted()) {
-      setDeviseToken('bk3RNw');
-    }
-  }, [allowedNotification, isMounted]);
 
   return (
     <>
