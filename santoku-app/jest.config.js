@@ -19,4 +19,7 @@ module.exports = {
       '@codler/react-native-keyboard-aware-scroll-view' +
       ')',
   ],
+  moduleNameMapper: {
+    '@react-native-firebase/*': '<rootDir>/__mock__/firebase/firebase.js',
+  },
 };
