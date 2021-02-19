@@ -6,9 +6,9 @@ title: ToDoアプリプロジェクトの説明
 
 [プロジェクトの作成](../getting-started/create-project.md)で作成したReact Nativeプロジェクトを使ってToDoアプリを実装していきます。
 
-## プロジェクト構成の説明
+## `src`ディレクトリ構成の説明
 
-最終的に出来上がるToDoアプリのプロジェクト構成は次の通りです。
+最終的に出来上がるToDoアプリの`src`ディレクトリ構成は次の通りです。
 
 ```console
 todo_app
