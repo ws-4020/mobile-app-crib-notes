@@ -25,7 +25,7 @@ todo_app
    └─services
 ```
 
-- @types: 型定義(`.d.ts` )ファイル
+- @types: 型定義（`.d.ts`）ファイル
 - assets: アプリにバンドルする画像やその他のファイル
 - components/basics: 汎用性のあるコンポーネント
 - components/parts: アプリ機能に特化したコンポーネント
