@@ -29,7 +29,7 @@ todo_app
 - assets: アプリにバンドルする画像やその他のファイル
 - components/basics: 汎用性のあるコンポーネント
 - components/parts: アプリ機能に特化したコンポーネント
-- contexts: コンテクス
+- contexts: コンテクスト
 - navigation: ナビゲーション定義
 - navigation/hooks: ナビゲーションのカスタムフック
 - screens: 画面
