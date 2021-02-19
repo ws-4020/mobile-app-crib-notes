@@ -6,7 +6,7 @@ title: XCodeでビルドが失敗する。
 
 XCodeで次のエラーが発生してビルドが失敗する。
 
-```
+```console
 'event2/event-config.h' file not found
 ```
 
