@@ -97,9 +97,10 @@ module.exports = {
         {
           type: 'category',
           label: 'ToDoアプリの実装',
-          items: ['react-native/learn/todo-app/app-hands-on/split-navigation'],
+          items: ['react-native/learn/todo-app/app-hands-on/split-navigation','react-native/learn/todo-app/app-hands-on/navigation-hook'],
         },
-      ],    },
+      ],
+    },
   ],
   troubleshoot: {
     About: ['react-native/troubleshooting'],
