@@ -46,7 +46,6 @@ export type RootStackParamList = {
 次に`AuthedStackNav`と`UnauthedStackNav`をそれぞれ別モジュールに切り出します。
 
 ```typescript jsx title="/src/navigation/AuthedStackNav.ts"
-import {NavigatorScreenParams, RouteProp, useNavigation} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {UserSetting} from 'screens';
@@ -122,8 +121,7 @@ export const UnauthedStackNav: React.FC = () => {
 修正量が多いので、次のソースコードで`RootStackNav.tsx`を上書きしてください。
 
 ```typescript jsx title="/src/navigation/RootStackNav.ts"
-import {NavigatorScreenParams, RouteProp, useNavigation} from '@react-navigation/native';
-import {createStackNavigator, StackNavigationOptions} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import {useUserContext} from 'contexts/UserContext';
 import React from 'react';
 
