@@ -27,19 +27,19 @@ title: ナビゲーションの整理
 ```typescript jsx title="/src/navigation/types.ts"
 import {NavigatorScreenParams} from '@react-navigation/native';
 
-export type UnauthedRootStackParamList = {
+export type UnauthedStackParamList = {
   Welcome: undefined;
   Login: undefined;
   Instructions: undefined;
 };
 
-export type AuthedRootStackParamList = {
+export type AuthedStackParamList = {
   UserSetting: undefined;
 };
 
 export type RootStackParamList = {
-  Authed: NavigatorScreenParams<AuthedRootStackParamList>;
-  Unauthed: NavigatorScreenParams<UnauthedRootStackParamList>;
+  Authed: NavigatorScreenParams<AuthedStackParamList>;
+  Unauthed: NavigatorScreenParams<UnauthedStackParamList>;
 };
 ```
 
@@ -50,9 +50,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {UserSetting} from 'screens';
 
-import {AuthedRootStackParamList} from './types';
+import {AuthedStackParamList} from './types';
 
-const nav = createStackNavigator<AuthedRootStackParamList>();
+const nav = createStackNavigator<AuthedStackParamList>();
 export const AuthedStackNav: React.FC = () => {
   return (
     <nav.Navigator screenOptions={{headerShown: false}}>
@@ -69,15 +69,15 @@ import React from 'react';
 import {Button} from 'react-native-elements';
 import {Instructions, Login, Welcome} from 'screens';
 
-import {UnauthedRootStackParamList} from './types';
+import {UnauthedStackParamList} from './types';
 
-const nav = createStackNavigator<UnauthedRootStackParamList>();
+const nav = createStackNavigator<UnauthedStackParamList>();
 const HeaderRight: React.FC = () => {
   const navigation = useNavigation();
   return <Button type="clear" onPress={() => navigation.navigate('Login')} title="ログイン" />;
 };
 const createScreenOptions: (props: {
-  route: RouteProp<UnauthedRootStackParamList, keyof UnauthedRootStackParamList>;
+  route: RouteProp<UnauthedStackParamList, keyof UnauthedStackParamList>;
 }) => StackNavigationOptions = ({route}) => {
   if (route.name === 'Login') {
     return {};
@@ -144,4 +144,4 @@ export const RootStackNav: React.FC = () => {
 };
 ```
 
-修正できたら実行して動作確認してください。
+修正できたら実行して、動作に問題がないかを確認してください。
