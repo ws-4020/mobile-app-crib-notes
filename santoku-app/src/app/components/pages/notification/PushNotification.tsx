@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Container, Description, KeyboardAvoidingView} from '../../basics';
 import DeviseTokenNotificationForm from '../../parts/notification/DeviseTokenNotificationForm';
 import TopicNotificationForm from '../../parts/notification/TopicNotificationForm';
-import {useIsMounted} from '../../../hooks/useIsMounted';
+import {useIsMounted} from '../../../../framework/hooks/useIsMounted';
 import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
 
 const PushNotification: React.FC = () => {
