@@ -24,9 +24,7 @@ React Native開発環境の構築手順です。環境構築を進める前に�
     v14.15.1
     ```
 
-    :::caution
     エラーが表示された場合、またはバージョンが`v9.x.x`以下の場合はインストールが必要です。
-    :::
 
   - Java Development Kit  
 
@@ -41,25 +39,27 @@ React Native開発環境の構築手順です。環境構築を進める前に�
 
     上記は`OpenJDK`をインストールしている場合に出力されるメッセージです。JDKと比較して一部メッセージ内容に相違はありますが、バージョンの確認箇所は、`openjdk version "1.8.0_275"`の`"1.8.0_275"`（バージョン）部分になります。
 
-    :::caution
     エラーが表示された場合、またはバージョンが`1.7.x`以下の場合はインストールが必要です。
-    :::
 
   - Android Studio  
 
-    Android Studioがインストールされていることを確認してください。Android Studioがインストールされている場合、Android SDKのインストール状況も確認してください。確認方法は、[Android SDK](#android-sdk)を参照してください。
+    Android Studioがインストールされていることを確認してください。
 
     :::caution
     Android Studioがインストールされていない場合、インストールが必要です。
     :::
+
+    Android Studioがインストールされている場合、Android SDKのインストール状況も確認してください。確認方法は、[Android SDK](#android-sdk)を参照してください。
 
   - react-native-cli  
 
     `react-native-cli`がインストールされていると、アプリ実行に失敗します。
 
     :::caution
-    インストールされていた場合、[react-native-cliについて](/react-native/troubleshooting/react-native-cli-uninstall)を参照してアンインストールが必要です。
+    インストールされていた場合、[react-native-cliについて](/react-native/troubleshooting/react-native-cli-uninstall)を参照してください。
     :::
+
+    上記を参照して、アンインストールしてください。
 
 - macOS
 
@@ -72,9 +72,7 @@ React Native開発環境の構築手順です。環境構築を進める前に�
     4.9.0
     ```
 
-    :::caution
     エラーが表示された場合、インストールが必要です。バージョンに関して特に指定はありません。
-    :::
 
   - CocoaPods  
 
@@ -85,9 +83,7 @@ React Native開発環境の構築手順です。環境構築を進める前に�
     1.10.1
     ```
 
-    :::caution
     エラーが表示された場合、インストールが必要です。バージョンに関して特に指定はありません。
-    :::
 
   - Xcode  
 
@@ -95,9 +91,7 @@ React Native開発環境の構築手順です。環境構築を進める前に�
 
     Xcode表示例：`Version 12.3(12C33)`
 
-    :::caution
     Xcodeがインストールされていない場合、またはバージョンが`11.x`以下の場合はインストールが必要です。
-    :::
 
 ### Android SDK
 
@@ -109,9 +103,7 @@ SDK Managerにてツールの状況を次の手順にしたがって確認して
 3. `SDK Tools`タブを選択
 4. `Android SDK Platform-Tools`がインストール状態で表示されていることを確認
 
-:::caution
 Android SDK Platform-Toolsがインストールされていない場合はインストールしてください。
-:::
 
 つづいて環境変数の`PATH`に以下のパスが含まれていることを確認してください。
 
