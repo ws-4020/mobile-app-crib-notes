@@ -94,6 +94,7 @@ module.exports = {
       items: [
         'react-native/learn/todo-app',
         'react-native/learn/todo-app/app-spec',
+        'react-native/learn/todo-app/app-project-desc',
         {
           type: 'category',
           label: 'ToDoアプリの実装',
