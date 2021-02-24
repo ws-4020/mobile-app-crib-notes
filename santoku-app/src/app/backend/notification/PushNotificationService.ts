@@ -9,7 +9,7 @@ export interface PushNotificationService {
 
 async function getToken(): Promise<string> {
   const permission = await messaging().hasPermission();
-  const authorized = permission === messaging.AuthorizationStatus.AUTHORIZED || permission === messaging.AuthorizationStatus.NOT_DETERMINED;
+  const authorized = permission === messaging.AuthorizationStatus.AUTHORIZED || permission === messaging.AuthorizationStatus.PROVISIONAL;
   if (authorized) {
     return messaging().getToken();
   }
