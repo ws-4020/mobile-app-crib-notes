@@ -6,7 +6,7 @@ title: Tab
 
 ToDo一覧画面やタスク登録画面を実装していきます。
 
-まずは[ToDoアプリの仕様](../app-spec.md)に従い、ToDo一覧画面と設定画面がタブ切替が出来るようナビゲーション構成を変更します。
+まずは[ToDoアプリの仕様](../app-spec.md)に従い、ToDo一覧画面と設定画面がタブ切替できるナビゲーション構成に変更します。
 
 修正イメージは次の通りです。
 
@@ -161,7 +161,7 @@ export const MainTabNav: React.FC = () => {
 + export * from './SettingsStackNav';
 ```
 
-最後に`AuthedStack`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置します。
+`AuthedStack`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置します。
 
 次のファイルを追加・修正してください。
 
