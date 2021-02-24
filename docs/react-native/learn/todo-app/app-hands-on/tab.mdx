@@ -194,6 +194,41 @@ export const MainTabNav: React.FC = () => {
   /* ～省略～ */  
 ```
 
+後ほどToDo一覧画面で使用する`TodoStackNav`のカスタムフックを用意します。
+
+次のファイルを追加・修正してください。
+
+- `/src/navigation/hooks/TodoStackHooks.tsx`
+- `/src/navigation/hooks/index.ts`
+
+```typescript jsx title="/src/navigation/hooks/TodoStackHooks.tsx"
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import type {CompositeNavigationProp, RouteProp} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AuthedRootStackParamList, MainTabParamList, RootStackParamList, TodoStackParamList} from 'navigation/types';
+
+type TodoStackParamListKeys = keyof TodoStackParamList;
+
+type TodoStackNavigationProp<T extends TodoStackParamListKeys> = CompositeNavigationProp<
+  StackNavigationProp<TodoStackParamList, T>,
+  CompositeNavigationProp<
+    BottomTabNavigationProp<MainTabParamList>,
+    CompositeNavigationProp<StackNavigationProp<AuthedRootStackParamList>, StackNavigationProp<RootStackParamList>>
+  >
+>;
+
+export const useTodoStackNavigation = <T extends TodoStackParamListKeys>() =>
+  useNavigation<TodoStackNavigationProp<T>>();
+export const useTodoStackRoute = <T extends TodoStackParamListKeys>() => useRoute<RouteProp<TodoStackParamList, T>>();
+```
+
+```diff title="/src/navigation/hooks/index.ts"
+  export * from './AuthedRootStackHooks';
+  export * from './UnauthedRootStackHooks';
++ export * from './TodoStackHooks';
+```
+
 修正できたら実行してください。ToDo一覧画面と設定画面のタブ切替ができたら成功です。
 
 ![Tab](tab.png)
