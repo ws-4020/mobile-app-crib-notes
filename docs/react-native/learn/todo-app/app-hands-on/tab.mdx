@@ -2,11 +2,11 @@
 title: Tab
 ---
 
-## Tabナビゲーション
+## タブ切替
 
 ToDo一覧画面やタスク登録画面を実装していきます。
 
-まずは[ToDoアプリの仕様](../app-spec.md)に従い、ToDo一覧画面と設定画面がTabで切り替えれるようナビゲーション構成を変更します。
+まずは[ToDoアプリの仕様](../app-spec.md)に従い、ToDo一覧画面と設定画面がタブ切替が出来るようナビゲーション構成を変更します。
 
 修正イメージは次の通りです。
 
@@ -14,6 +14,8 @@ ToDo一覧画面やタスク登録画面を実装していきます。
 - ToDo一覧画面と設定画面をそれぞれ配置するStackナビゲータを追加
 - Stackナビゲータを切り替えるTabナビゲータを追加
 - `AuthedStack`ナビゲータに`Main`という名前でTabナビゲータを配置するよう修正
+
+![TabNavigation](tab_navigation.png)
 
 では実装していきましょう。
 まずはToDo一覧画面を定義します。
@@ -53,11 +55,32 @@ export * from './TodoBoard';
 つぎにToDo一覧画面と設定画面をそれぞれ配置するStackナビゲータを追加し、それらを切り替えるTabナビゲータを追加します。
 次のファイルを追加・修正してください。
 
+- `/src/navigation/types.ts`
 - `/src/navigation/TodoStackNav.tsx`
 - `/src/navigation/SettingsStackNav.tsx`
 - `/src/navigation/MainTabNav.tsx`
 - `/src/navigation/index.ts.ts`
-- `/src/navigation/types.ts`
+
+```diff title="/src/navigation/types.ts"
+  /* ～省略～ */  
+  export type RootStackParamList = {
+    Authed: NavigatorScreenParams<AuthedRootStackParamList>;
+    Unauthed: NavigatorScreenParams<UnauthedRootStackParamList>;
+  };
+  
++ export type MainTabParamList = {
++   Todo: NavigatorScreenParams<TodoStackParamList>;
++   Settings: NavigatorScreenParams<SettingsStackParamList>;
++ };
++ 
++ export type TodoStackParamList = {
++   TodoBoard: undefined;
++ };
++ 
++ export type SettingsStackParamList = {
++   UserSetting: undefined;
++ };
+```
 
 ```typescript jsx title="/src/navigation/TodoStackNav.tsx"
 import {createStackNavigator} from '@react-navigation/stack';
@@ -136,27 +159,6 @@ export const MainTabNav: React.FC = () => {
 + export * from './SettingsStackNav';
 ```
 
-```diff title="/src/navigation/types.ts"
-  /* ～省略～ */  
-  export type RootStackParamList = {
-    Authed: NavigatorScreenParams<AuthedRootStackParamList>;
-    Unauthed: NavigatorScreenParams<UnauthedRootStackParamList>;
-  };
-  
-+ export type MainTabParamList = {
-+   Todo: NavigatorScreenParams<TodoStackParamList>;
-+   Settings: NavigatorScreenParams<SettingsStackParamList>;
-+ };
-+ 
-+ export type TodoStackParamList = {
-+   TodoBoard: undefined;
-+ };
-+ 
-+ export type SettingsStackParamList = {
-+   UserSetting: undefined;
-+ };
-```
-
 最後に`AuthedStack`ナビゲータに`Main`という名前でTabナビゲータを配置するよう修正します。
 
 次のファイルを追加・修正してください。
@@ -191,3 +193,7 @@ export const MainTabNav: React.FC = () => {
   };
   /* ～省略～ */  
 ```
+
+修正できたら実行してください。ToDo一覧画面と設定画面のタブ切替ができたら成功です。
+
+![Tab](tab.png)
