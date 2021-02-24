@@ -3,7 +3,7 @@ import {Description, Section, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
 
 type Props = {
-  deviseToken: string;
+  deviseToken?: string;
 };
 
 const DeviseTokenNotificationForm: React.FC<Props> = ({deviseToken}) => {

@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
+import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
 import {Description, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
-import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
 
 type Props = {
-  deviseToken: string;
+  deviseToken?: string;
 };
 
 const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
@@ -54,7 +54,9 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
       />
       <TextButton
         onPress={() => {
-          pushNotificationService.sendMessage({data: {token: deviseToken}});
+          if (deviseToken) {
+            pushNotificationService.sendMessage({data: {token: deviseToken}});
+          }
         }}
         value="指定したトピックにプッシュ通知を送信する"
       />

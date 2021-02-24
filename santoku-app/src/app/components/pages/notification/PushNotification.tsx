@@ -6,10 +6,10 @@ import {useIsMounted} from '../../../hooks/useIsMounted';
 import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
 
 const PushNotification: React.FC = () => {
-  const [deviseToken, setDeviseToken] = useState('');
+  const [deviseToken, setDeviseToken] = useState<string>();
   const isMounted = useIsMounted();
   useEffect(() => {
-    if (deviseToken === '') {
+    if (!deviseToken) {
       pushNotificationService.getToken().then((token) => {
         if (isMounted()) {
           setDeviseToken(token);
