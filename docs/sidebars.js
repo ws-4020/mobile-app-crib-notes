@@ -98,7 +98,11 @@ module.exports = {
         {
           type: 'category',
           label: 'ToDoアプリの実装',
-          items: ['react-native/learn/todo-app/app-hands-on/todo-form'],
+          items: [
+            'react-native/learn/todo-app/app-hands-on',
+            'react-native/learn/todo-app/app-hands-on/welcome',
+            'react-native/learn/todo-app/app-hands-on/todo-form'
+          ],
         },
       ],
     },
