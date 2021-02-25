@@ -10,10 +10,10 @@ ToDo一覧画面やタスク登録画面を実装していきます。
 
 修正イメージは次の通りです。
 
-- ToDo一覧（のひな型）画面（`TodoBoard`）を追加
+- ToDo一覧画面（`TodoBoard`）のひな型を追加
 - ToDo一覧画面と設定画面をそれぞれ配置するStackナビゲータ（`TodoStackNav`と`SettingsStackNav`）を追加
 - Stackナビゲータを切り替えるTabナビゲータ（`MainTabNav`）を追加
-- `AuthedStack`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置
+- `AuthedStackNav`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置
 - `TodoStackNav`のカスタムフックを用意
 
 ![TabNavigation](tab_navigation.png)
@@ -161,7 +161,7 @@ export const MainTabNav: React.FC = () => {
 + export * from './SettingsStackNav';
 ```
 
-`AuthedStack`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置します。
+`AuthedStackNav`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置します。
 
 次のファイルを追加・修正してください。
 
