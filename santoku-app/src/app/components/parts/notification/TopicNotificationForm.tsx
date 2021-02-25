@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Alert, StyleSheet} from 'react-native';
 import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
 import {Description, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
@@ -23,10 +23,16 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
   }, [topicName]);
 
   const sendTopic = useCallback(() => {
-    if (deviseToken) {
-      pushNotificationService.sendMessage({data: {token: deviseToken}});
+    if (deviseToken && sendTopicName && topicTitle && topicText) {
+      pushNotificationService.sendTopic({
+        topic: sendTopicName,
+        notification: {title: topicTitle, body: topicText},
+        data: {text: topicText},
+      });
+    } else {
+      Alert.alert('トピック名、タイトル、本文は必須です');
     }
-  }, [deviseToken]);
+  }, [deviseToken, sendTopicName, topicTitle, topicText]);
 
   return (
     <>
