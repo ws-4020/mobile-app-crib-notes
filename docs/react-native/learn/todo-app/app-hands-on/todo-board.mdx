@@ -27,7 +27,7 @@ ToDo一覧画面を実装します。
 - `/src/services/TodoService.ts`
 - `/src/services/index.ts`
 
-```typescript jsx title="/src/screens/TodoService.tsx"
+```typescript jsx title="/src/services/TodoService.tsx"
 export type Todo = {
   id: number;
   text: string;
@@ -110,7 +110,7 @@ export const TodoService = {
 };
 ```
 
-```diff title="/src/screens/index.tsx"
+```diff title="/src/services/index.tsx"
   export * from './AuthService';
 + export * from './TodoService';
 ```
