@@ -2,12 +2,85 @@
 title: タスク登録画面
 ---
 
-タスク登録画面を実装します。
+[ToDoアプリの仕様](../app-spec.md)に従い、タスク登録画面をナビゲーション構成に追加します。
 
+修正イメージは次の通りです。
+
+- タスク登録画面（`TodoForm`）のひな型を追加
+- `AuthedStackNav`ナビゲータに`TodoForm`という名前でタスク登録画面（`TodoForm`）を配置
+- ToDo一覧画面（`TodoBoard`）からタスク登録画面（`TodoForm`）への遷移処理を追加
+- タスク登録画面（`TodoForm`）を実装
+
+![TodoFormNavigation](todo_form_navigation.png)
+
+では実装していきましょう。
+まずはタスク登録画面（`TodoForm`）を定義します。
 次のファイルを追加・修正してください。
 
 - `/src/screens/todo/TodoForm.tsx`
 - `/src/screens/todo/index.tsx`
+
+```typescript jsx title="/src/screens/todo/TodoForm.tsx"
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+export const TodoForm: React.FC = () => {
+  return <View style={styles.container}>{/* Todo*/}</View>;
+};
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+```
+
+```diff title="/src/screens/todo/index.ts"
+  export * from './TodoBoard';
++ export * from './TodoForm';
+```
+
+つぎに`AuthedStackNav`ナビゲータに`TodoForm`という名前でタスク登録画面（`TodoForm`）を追加します。
+次のファイルを追加・修正してください。
+
+- `/src/navigation/types.ts`
+- `/src/navigation/AuthedStackNav.tsx`
+
+```diff title="/src/navigation/types.ts"
+  export type UnauthedRootStackParamList = {
+    Welcome: undefined;
+    Login: undefined;
+    Instructions: undefined;
+  };
+  
+  export type AuthedStackParamList = {
+    Main: undefined;
++   TodoForm: undefined;
+  };
+  /* ～省略～ */  
+```
+
+```diff title="/src/navigation/AuthedStackNav.tsx"
+  import {createStackNavigator} from '@react-navigation/stack';
+  import {MainTabNav} from 'navigation/MainTabNav';
+  import {AuthedRootStackParamList} from 'navigation/types';
+  import React from 'react';
++ import {TodoForm} from 'screens';
+  
+  const nav = createStackNavigator<AuthedRootStackParamList>();
+  export const AuthedStackNav: React.FC = () => {
+    return (
+      <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main">
+        <nav.Screen name="Main" component={MainTabNav} />
++       <nav.Screen
++         name="TodoForm"
++         component={TodoForm}
++         options={{
++           headerShown: true,
++         }}
++       />
+      </nav.Navigator>
+    );
+  };
+```
 
 ```typescript jsx title="/src/screens/todo/TodoForm.tsx"
 import {useFormik} from 'formik';
