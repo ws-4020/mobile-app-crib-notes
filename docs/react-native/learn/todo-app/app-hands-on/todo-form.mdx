@@ -14,8 +14,8 @@ title: タスク登録画面
 ![TodoFormNavigation](todo_form_navigation.png)
 
 :::info
-`TodoStackNav`ナビゲータではなく、なぜ`AuthedStackNav`ナビゲータにタスク登録画面（`TodoForm`）を追加するのかと疑問に感じたかもしれません。
-理由としては、タスク登録画面を表示する際にタブバーを非表示にしたかったからです。
+`TodoStackNav`ナビゲータではなく、なぜ`AuthedStackNav`ナビゲータにタスク登録画面（`TodoForm`）を追加するのでしょうか。
+理由としては、タスク登録画面を表示する際にタブバーを非表示にしたいからです。
 `TodoStackNav`ナビゲータにタスク登録画面を追加した場合、下部にタブバーが表示されてしまいます。
 推奨される方法は、タブスタック外側のナビゲータに画面を追加することです。
 詳細は、React Navigation公式ドキュメントの[Hiding tab bar in specific screens](https://reactnavigation.org/docs/hiding-tabbar-in-screens)を参照してください。
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 + export * from './TodoForm';
 ```
 
-つぎに`AuthedStackNav`ナビゲータに`TodoForm`という名前でタスク登録画面（`TodoForm`）を追加します。
+つぎに、`AuthedStackNav`ナビゲータに`TodoForm`という名前でタスク登録画面（`TodoForm`）を追加します。
 次のファイルを追加・修正してください。
 
 - `/src/navigation/types.ts`
@@ -251,10 +251,13 @@ const styles = StyleSheet.create({
 
 `navigation`にリスナー登録することで、ナビゲーションイベントに応じた処理を記述できます。
 ここでは`beforeRemove`イベントに対してリスナー登録しています。
-このイベントはユーザーが画面を離れるときに発生し、それを防ぐことができます。
-これを利用して、フォームに入力があり（`formik.dirty`が`true`）フォームがサブミットされていない（`formik.isSubmitting`が`false）場合において、破棄確認ダイアログを表示する処理を追加しています。
+このイベントはユーザが画面を離れるときに発生し、それを防ぐことができます。
+これを利用して、次の場合において破棄確認ダイアログを表示しています。
 
-ナビゲーションイベント、および戻るを防ぐ方法の詳細は、次のReact Navigation公式ドキュメントを参照してください。
+- フォームに入力あり（`formik.dirty`が`true`）
+- フォームがサブミットされていない（`formik.isSubmitting`が``false`）
+
+「ナビゲーションイベント」、および「戻るを防ぐ」の詳細は、次のReact Navigation公式ドキュメントを参照してください。
 
 - [Navigation events](https://reactnavigation.org/docs/navigation-events/)
 - [Preventing going back](https://reactnavigation.org/docs/preventing-going-back/)
