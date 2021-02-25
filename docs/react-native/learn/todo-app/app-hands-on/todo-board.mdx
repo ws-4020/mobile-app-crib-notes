@@ -370,6 +370,14 @@ const styles = StyleSheet.create({
 React同様に、React Naviveでも`useEffect`にて画面の初期（マウント）時の処理を記述できます。
 ここでは、`TodoService.getTodos`メソッドを呼び出してToDo一覧を取得しています。
 
+:::info
+Reactのよくある問題として、画面が破棄（アンマウント）された後のステート更新があります。
+上記コードでは、`isActive`フラグでその問題に対処しています。
+`useEffect`に指定した関数の戻り値で関数を返すと、その関数が画面の破棄（アンマウント）時に実行されます。
+そのなかで`isActive`フラグを`false`に設定しているため、画面が破棄された後に`TodoService.getTodos`メソッドの非同期応答が動作しても、ステートは更新されません。
+詳細は、React公式ドキュメントの[フックでデータの取得をどのように行うのですか？](https://ja.reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks)を参照してください。
+:::
+
 修正できたら実行してください。
 次の操作ができたら成功です。
 
