@@ -179,7 +179,7 @@ export * from './UserSetting';
 ```
 
 `UserSettings`画面にはログアウトボタンのみ用意しています。
-ログアウトボタンを押下すると、`userContext.logout()`を呼び出して認証を破棄します。
+ログアウトボタンを押下すると、`userContext.logout()`を呼び出して認証状態を解除します。
 
 次にナビゲーション定義を修正します。
 修正箇所は`/src/navigation/RootStackNav.tsx`です。
