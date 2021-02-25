@@ -8,16 +8,16 @@ title: タスク登録画面
 
 - タスク登録画面（`TodoForm`）のひな型を追加
 - `AuthedStackNav`ナビゲータに`TodoForm`という名前でタスク登録画面（`TodoForm`）を配置
-- ToDo一覧画面（`TodoBoard`）からタスク登録画面（`TodoForm`）への遷移処理を追加
+- ToDo一覧画面（`TodoBoard`）からタスク登録画面（`TodoForm`）への画面遷移を追加
 - タスク登録画面（`TodoForm`）を実装
 
 ![TodoFormNavigation](todo_form_navigation.png)
 
 :::info
-`TodoStackNav`ではなく、なぜ`AuthedStackNav`ナビゲータにタスク登録画面（`TodoForm`）を追加するのかと疑問を感じたかもしれません。
-理由としては、タスク登録画面を表示する際はタブバーを非表示にしたかったからです。
+`TodoStackNav`ナビゲータではなく、なぜ`AuthedStackNav`ナビゲータにタスク登録画面（`TodoForm`）を追加するのかと疑問に感じたかもしれません。
+理由としては、タスク登録画面を表示する際にタブバーを非表示にしたかったからです。
 `TodoStackNav`ナビゲータにタスク登録画面を追加した場合、下部にタブバーが表示されてしまいます。
-推奨される方法は、タブスタック外側のナビゲータで画面を定義することです。
+推奨される方法は、タブスタック外側のナビゲータに画面を追加することです。
 詳細は、React Navigation公式ドキュメントの[Hiding tab bar in specific screens](https://reactnavigation.org/docs/hiding-tabbar-in-screens)を参照してください。
 :::
 
@@ -225,10 +225,8 @@ const styles = StyleSheet.create({
 });
 ```
 
-`navigation`にリスナー登録することで、ナビゲーションイベントに応じた処理を記述できます。
-ここでは`beforeRemove`イベントに対してリスナー登録しています。
-このイベントはユーザーが画面を離れるときに発生し、それを防ぐことができます。
-タスク登録画面ではこれを利用して、変更途中のデータがあった場合に破棄確認ダイアログを表示します。
+タスク登録画面では変更途中のデータがあった場合、破棄確認ダイアログを表示します。
+次に示すのは、`TodoForm.tsx`でそれを実現しているコード箇所です。
 
 ```typescript jsx 
   useEffect(() => {
@@ -251,7 +249,12 @@ const styles = StyleSheet.create({
   }, [navigation, formik]);
 ```
 
-詳細は、次のReact Navigation公式ドキュメントを参照してください。
+`navigation`にリスナー登録することで、ナビゲーションイベントに応じた処理を記述できます。
+ここでは`beforeRemove`イベントに対してリスナー登録しています。
+このイベントはユーザーが画面を離れるときに発生し、それを防ぐことができます。
+これを利用して、フォームに入力があり（`formik.dirty`が`true`）フォームがサブミットされていない（`formik.isSubmitting`が`false）場合において、破棄確認ダイアログを表示する処理を追加しています。
+
+ナビゲーションイベント、および戻るを防ぐ方法の詳細は、次のReact Navigation公式ドキュメントを参照してください。
 
 - [Navigation events](https://reactnavigation.org/docs/navigation-events/)
 - [Preventing going back](https://reactnavigation.org/docs/preventing-going-back/)
@@ -264,8 +267,8 @@ const styles = StyleSheet.create({
 - タスク登録画面で変更途中のデータがあった場合、戻る操作で破棄確認ダイアログが表示される
 
 :::caution
-現時点ではタスク登録画面で登録したタスクが一覧画面に表示されません。
-次のセクションでその対応を実施します。
+現時点では登録したタスクがタスク一覧画面に表示されません。
+次セクションの[useFocusEffect](./use-focus-effect)でその不具合に対応します。
 :::
 
 ![TodoForm](todo-form.png)
