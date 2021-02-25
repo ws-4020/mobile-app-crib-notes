@@ -1,3 +1,4 @@
+import {Toast} from 'native-base';
 import React, {useCallback, useState} from 'react';
 import {Alert, StyleSheet} from 'react-native';
 import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
@@ -15,12 +16,12 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
   const [sendTopicName, setSendTopicName] = useState<string>();
 
   const subscribeToTopic = useCallback(() => {
-    if (topicName) {
-      pushNotificationService.subscribeToTopic(topicName).catch((e) => {
+    if (topicName && deviseToken) {
+      pushNotificationService.subscribeToTopic(topicName, deviseToken).catch((e) => {
         console.warn(`fail to subscribe topic [${topicName}]`, e);
       });
     }
-  }, [topicName]);
+  }, [topicName, deviseToken]);
 
   const sendTopic = useCallback(() => {
     if (deviseToken && sendTopicName && topicTitle && topicText) {

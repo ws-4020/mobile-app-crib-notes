@@ -4,10 +4,18 @@ import DeviseTokenNotificationForm from '../../parts/notification/DeviseTokenNot
 import TopicNotificationForm from '../../parts/notification/TopicNotificationForm';
 import {useIsMounted} from '../../../../framework/hooks/useIsMounted';
 import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
+import messaging from '@react-native-firebase/messaging';
+import {Alert} from 'react-native';
 
 const PushNotification: React.FC = () => {
   const [deviseToken, setDeviseToken] = useState<string>();
   const isMounted = useIsMounted();
+  useEffect(() => {
+    messaging().onMessage((message) => {
+      Alert.alert('message recieve ' + JSON.stringify(message));
+    });
+  }, []);
+
   useEffect(() => {
     if (!deviseToken) {
       pushNotificationService.getToken().then((token) => {

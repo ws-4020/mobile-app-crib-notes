@@ -5,7 +5,7 @@ import {AppConfig} from '../../AppConfig';
 
 export interface PushNotificationService {
   getToken: () => Promise<string | undefined>;
-  subscribeToTopic: (topic: string) => Promise<void>;
+  subscribeToTopic: (topic: string, token: string) => Promise<any>;
   sendMessage: (message: Message) => Promise<any>;
   sendTopic: (message: Publish) => Promise<any>;
 }
@@ -29,27 +29,26 @@ function canNotify(permission: number) {
   return permission === messaging.AuthorizationStatus.AUTHORIZED || permission === messaging.AuthorizationStatus.PROVISIONAL;
 }
 
-function subscribeToTopic(topic: string) {
-  return messaging().subscribeToTopic(topic);
+function subscribeToTopic(topic: string, token: string) {
+  return post('/subscribe', {topic, token});
 }
 
 function sendMessage(message: Message) {
-  return axios.post(`${AppConfig.BACKEND_API_URI}/messages`, JSON.stringify(message), {
-    headers : {
-      'x-functions-key': AppConfig.BACKEND_API_KEY,
-      'Content-Type': 'application/json',
-    },
-  });
+  return post('/messages', message);
 }
 
-async function sendTopic(message: Publish) {
-  console.log(AppConfig.BACKEND_API_URI);
-  return axios.post(`${AppConfig.BACKEND_API_URI}/publish`, JSON.stringify(message), {
+function sendTopic(message: Publish) {
+  return post('/publish', message);
+}
+
+function post(path: string, message: any) {
+  return axios.post(`${AppConfig.BACKEND_API_URI}/${path}`, JSON.stringify(message), {
     headers : {
       'x-functions-key': AppConfig.BACKEND_API_KEY,
       'Content-Type': 'application/json',
     },
   });
+
 }
 
 type Notification = {
