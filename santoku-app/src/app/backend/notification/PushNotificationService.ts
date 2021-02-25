@@ -2,26 +2,28 @@ import {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import messaging from '@react-native-firebase/messaging';
 
 export interface PushNotificationService {
-  getToken: () => Promise<string>;
+  getToken: () => Promise<string | undefined>;
   subscribeToTopic: (topic: string) => Promise<void>;
   sendMessage: (message: FirebaseMessagingTypes.RemoteMessage) => Promise<void>;
 }
 
-async function getToken(): Promise<string> {
+async function getToken(): Promise<string | undefined> {
   const permission = await messaging().hasPermission();
-  const authorized = permission === messaging.AuthorizationStatus.AUTHORIZED || permission === messaging.AuthorizationStatus.PROVISIONAL;
-  if (authorized) {
+  if (canNotify(permission)) {
     return messaging().getToken();
   }
-  if (await requestUserPermission()) {
+  if (permission === messaging.AuthorizationStatus.DENIED) {
+    return undefined;
+  }
+  const newPermission = await messaging().requestPermission();
+  if (canNotify(newPermission)) {
     return messaging().getToken();
   }
-  return Promise.reject('Not Authroized');
+  return undefined;
 }
 
-async function requestUserPermission() {
-  const authorizationStatus = await messaging().requestPermission();
-  return authorizationStatus === messaging.AuthorizationStatus.AUTHORIZED;
+function canNotify(permission: number) {
+  return permission === messaging.AuthorizationStatus.AUTHORIZED || permission === messaging.AuthorizationStatus.PROVISIONAL;
 }
 
 function subscribeToTopic(topic: string) {
