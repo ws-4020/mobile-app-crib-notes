@@ -13,6 +13,14 @@ title: タスク登録画面
 
 ![TodoFormNavigation](todo_form_navigation.png)
 
+:::info
+`TodoStackNav`ではなく、なぜ`AuthedStackNav`ナビゲータにタスク登録画面（`TodoForm`）を追加するのかと疑問を感じたかもしれません。
+理由としては、タスク登録画面を表示する際はタブバーを非表示にしたかったからです。
+`TodoStackNav`ナビゲータにタスク登録画面を追加した場合、下部にタブバーが表示されてしまいます。
+推奨される方法は、タブスタック外側のナビゲータで画面を定義することです。
+詳細は、React Navigation公式ドキュメントの[Hiding tab bar in specific screens](https://reactnavigation.org/docs/hiding-tabbar-in-screens)を参照してください。
+:::
+
 では実装していきましょう。
 まずはタスク登録画面（`TodoForm`）を定義します。
 次のファイルを追加・修正してください。
@@ -81,6 +89,48 @@ const styles = StyleSheet.create({
     );
   };
 ```
+
+タスク一覧画面からの画面遷移を追加します。`/src/screens/todo/TodoBoard.tsx`を修正してください。
+
+```diff title="/src/screens/todo/TodoBoard.tsx"
+  import {FilterType, TodoFilter, TodoList} from 'components/parts';
++ import {useTodoStackNavigation} from 'navigation/hooks';
+  import React, {useContext, useEffect, useState} from 'react';
+  import {Alert, StyleSheet, View} from 'react-native';
+  import {Icon, ThemeContext} from 'react-native-elements';
+  import {Todo, TodoService} from 'services';
+
+  /* ～省略～ */  
+
+  export const TodoBoard: React.FC = () => {
+    const {theme} = useContext(ThemeContext);
++   const navigation = useTodoStackNavigation<'TodoBoard'>();
+    const [todos, setTodos] = useState<Todo[]>([]);
+    const [filterType, setFilterType] = useState<FilterType>(FilterType.ALL);
+
+  /* ～省略～ */  
+
+        <Icon
+          name="plus"
+          type="font-awesome-5"
+          color={theme.colors?.primary}
+          raised
+          reverse
+          size={30}
+          containerStyle={styles.iconContainerStyle}
+          onPress={() => {
++           navigation.navigate('TodoForm');
+          }}
+        />
+      </View>
+    );
+  };
+  /* ～省略～ */  
+```
+
+タスク登録画面を実装していきます。
+
+修正量が多いので、次のソースコードで`TodoForm.tsx`を上書きしてください。
 
 ```typescript jsx title="/src/screens/todo/TodoForm.tsx"
 import {useFormik} from 'formik';
@@ -175,14 +225,47 @@ const styles = StyleSheet.create({
 });
 ```
 
-React同様に、React Naviveでも`useEffect`にて画面の初期（マウント）時の処理を記述できます。
-ここでは、`TodoService.getTodos`メソッドを呼び出してToDo一覧を取得しています。
+`navigation`にリスナー登録することで、ナビゲーションイベントに応じた処理を記述できます。
+ここでは`beforeRemove`イベントに対してリスナー登録しています。
+このイベントはユーザーが画面を離れるときに発生し、それを防ぐことができます。
+タスク登録画面ではこれを利用して、変更途中のデータがあった場合に破棄確認ダイアログを表示します。
+
+```typescript jsx 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+      if (!formik.dirty || formik.isSubmitting) {
+        return;
+      }
+      e.preventDefault();
+
+      Alert.alert('破棄確認', '入力内容が保存されていません。\n入力内容を破棄してよろしいですか？', [
+        {text: 'Cancel', style: 'cancel', onPress: () => {}},
+        {
+          text: 'OK',
+          style: 'destructive',
+          onPress: () => navigation.dispatch(e.data.action),
+        },
+      ]);
+    });
+    return unsubscribe;
+  }, [navigation, formik]);
+```
+
+詳細は、次のReact Navigation公式ドキュメントを参照してください。
+
+- [Navigation events](https://reactnavigation.org/docs/navigation-events/)
+- [Preventing going back](https://reactnavigation.org/docs/preventing-going-back/)
 
 修正できたら実行してください。
 次の操作ができたら成功です。
 
-- 画面にToDoタスクの一覧が表示できる
-- チェックボックスをクリックしてタスクの完了状態が更新できる
-- ToDoの表示対象を選択して表示を切替できる
+- タスク一覧画面からタスク登録画面に画面遷移できる
+- タスク登録画面でタスクが登録できる
+- タスク登録画面で変更途中のデータがあった場合、戻る操作で破棄確認ダイアログが表示される
+
+:::caution
+現時点ではタスク登録画面で登録したタスクが一覧画面に表示されません。
+次のセクションでその対応を実施します。
+:::
 
 ![TodoForm](todo-form.png)
