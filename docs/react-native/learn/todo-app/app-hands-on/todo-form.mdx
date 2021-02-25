@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
 タスク登録画面では変更途中のデータがあった場合、破棄確認ダイアログを表示します。
 次に示すのは、`TodoForm.tsx`でそれを実現しているコード箇所です。
 
-```typescript jsx 
+```typescript jsx
   useEffect(() => {
     const unsubscribe = navigation.addListener('beforeRemove', (e) => {
       if (!formik.dirty || formik.isSubmitting) {
