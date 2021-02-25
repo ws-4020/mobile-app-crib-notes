@@ -16,7 +16,9 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
 
   const subscribeToTopic = useCallback(() => {
     if (topicName) {
-      pushNotificationService.subscribeToTopic(topicName);
+      pushNotificationService.subscribeToTopic(topicName).catch((e) => {
+        console.warn(`fail to subscribe topic [${topicName}]`, e);
+      });
     }
   }, [topicName]);
 
