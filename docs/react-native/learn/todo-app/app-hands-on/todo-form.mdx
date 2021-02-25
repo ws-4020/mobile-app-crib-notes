@@ -11,7 +11,7 @@ title: タスク登録画面
 
 ```typescript jsx title="/src/screens/todo/TodoForm.tsx"
 import {useFormik} from 'formik';
-import {useAuthedRootStackNavigation} from 'navigation/hooks';
+import {useAuthedStackNavigation} from 'navigation/hooks';
 import React, {useCallback, useEffect} from 'react';
 import {Alert, KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
 import {Button, Input, Text} from 'react-native-elements';
@@ -19,7 +19,7 @@ import {TodoService} from 'services';
 import * as Yup from 'yup';
 
 export const TodoForm: React.FC = () => {
-  const navigation = useAuthedRootStackNavigation<'TodoForm'>();
+  const navigation = useAuthedStackNavigation<'TodoForm'>();
 
   const onAdd = useCallback<(values: {task: string}) => void>(
     async ({task}) => {
