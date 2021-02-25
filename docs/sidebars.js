@@ -94,10 +94,18 @@ module.exports = {
       items: [
         'react-native/learn/todo-app',
         'react-native/learn/todo-app/app-spec',
+        'react-native/learn/todo-app/app-project-desc',
         {
           type: 'category',
           label: 'ToDoアプリの実装',
-          items: ['react-native/learn/todo-app/app-hands-on/split-navigation','react-native/learn/todo-app/app-hands-on/navigation-hook'],
+          items: [
+            'react-native/learn/todo-app/app-hands-on',
+            'react-native/learn/todo-app/app-hands-on/welcome',
+            'react-native/learn/todo-app/app-hands-on/login',
+            'react-native/learn/todo-app/app-hands-on/keyboard-avoiding-view',
+            'react-native/learn/todo-app/app-hands-on/split-navigation',
+            'react-native/learn/todo-app/app-hands-on/navigation-hook',
+          ],
         },
       ],
     },
