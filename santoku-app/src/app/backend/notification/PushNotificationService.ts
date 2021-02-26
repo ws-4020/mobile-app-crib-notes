@@ -5,6 +5,7 @@ import {AppConfig} from '../../AppConfig';
 export interface PushNotificationService {
   getToken: () => Promise<string | undefined>;
   subscribeToTopic: (topic: string, token: string) => Promise<any>;
+  unsubscribeFromTopic: (topic: string, token: string) => Promise<any>;
   sendMessage: (message: Message) => Promise<any>;
   sendTopic: (message: Publish) => Promise<any>;
 }
@@ -30,6 +31,10 @@ function canNotify(permission: number) {
 
 function subscribeToTopic(topic: string, token: string) {
   return post('/subscribe', {topic, token});
+}
+
+function unsubscribeFromTopic(topic: string, token: string) {
+  return post('/unsubscribe', {topic, token});
 }
 
 function sendMessage(message: Message) {
@@ -58,21 +63,42 @@ type Data = {
   text: string;
 };
 
-export type Publish = {
-  topic: string;
+type BaseMessage = {
   notification: Notification;
   data: Data;
+  delay?: number;
 };
+
+export type Publish = {
+  topic: string;
+} & BaseMessage;
 
 export type Message = {
   token: string;
-  notification: Notification;
-  data: Data;
-};
+} & BaseMessage;
 
-export const pushNotificationService: PushNotificationService = {
+/**
+ * Backendにsantoku-app-backendを利用する場合のサービス
+ */
+export const santokuNotificationService: PushNotificationService = {
   getToken,
   subscribeToTopic,
+  unsubscribeFromTopic,
   sendMessage,
   sendTopic,
 };
+
+/**
+ * BackendにFCMだけがいる場合のサービス.
+ */
+export const FCMNotificationService: PushNotificationService = {
+  getToken,
+  subscribeToTopic: (topic, _) => messaging().subscribeToTopic(topic),
+  unsubscribeFromTopic: (topic, _) => messaging().unsubscribeFromTopic(topic),
+  sendMessage: (message) => messaging().sendMessage({notification: message.notification, to: message.token, data: message.data}),
+  sendTopic: (message) => messaging().sendMessage({notification: message.notification, from: message.topic, data: message.data}),
+};
+export default santokuNotificationService;
+
+/* FCMサービスを離床する場合は以下に切り替えると利用側のimportの変更は不要 */
+// export default FCMNotificationService

@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {Description, Section, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
-import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
+import pushNotificationService from '../../../backend/notification/PushNotificationService';
 
 type Props = {
   deviseToken?: string;
@@ -12,11 +12,14 @@ const DeviseTokenNotificationForm: React.FC<Props> = ({deviseToken}) => {
   const [body, setBody] = useState<string>();
   const [text, setText] = useState<string>();
 
-  const sendMessage = useCallback(() => {
-    if (deviseToken && title && body && text) {
-      pushNotificationService.sendMessage({token: deviseToken, notification: {title, body}, data: {text}});
-    }
-  }, [deviseToken, title, body, text]);
+  const sendMessage = useCallback(
+    (delay) => {
+      if (deviseToken && title && body && text) {
+        pushNotificationService.sendMessage({token: deviseToken, notification: {title, body}, data: {text}, delay});
+      }
+    },
+    [deviseToken, title, body, text],
+  );
 
   return (
     <>
@@ -48,10 +51,15 @@ const DeviseTokenNotificationForm: React.FC<Props> = ({deviseToken}) => {
           onChangeText={(value) => setText(value)}
           placeholder="データのValueを入力してください"
         />
-        <TextButton onPress={sendMessage} value="この端末にプッシュ通知を送信" />
         <TextButton
           onPress={() => {
-            return true;
+            sendMessage(0);
+          }}
+          value="この端末にプッシュ通知を送信"
+        />
+        <TextButton
+          onPress={() => {
+            sendMessage(15);
           }}
           value="この端末に15秒後にプッシュ通知を送信"
         />

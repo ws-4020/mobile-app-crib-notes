@@ -3,7 +3,7 @@ import {Container, Description, KeyboardAvoidingView} from '../../basics';
 import DeviseTokenNotificationForm from '../../parts/notification/DeviseTokenNotificationForm';
 import TopicNotificationForm from '../../parts/notification/TopicNotificationForm';
 import {useIsMounted} from '../../../../framework/hooks/useIsMounted';
-import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
+import pushNotificationService from '../../../backend/notification/PushNotificationService';
 import messaging from '@react-native-firebase/messaging';
 import {Alert} from 'react-native';
 
@@ -12,8 +12,9 @@ const PushNotification: React.FC = () => {
   const isMounted = useIsMounted();
   useEffect(() => {
     messaging().onMessage((message) => {
-      Alert.alert('message recieve ' + JSON.stringify(message));
+      Alert.alert('message recieve ' + JSON.stringify({...message.notification, data: message.data}));
     });
+    messaging().onSendError((event) => console.warn(event));
   }, []);
 
   useEffect(() => {

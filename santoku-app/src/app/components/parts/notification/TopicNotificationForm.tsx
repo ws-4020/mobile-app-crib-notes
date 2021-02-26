@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import {Alert, StyleSheet} from 'react-native';
-import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
+import pushNotificationService from '../../../backend/notification/PushNotificationService';
 import {Description, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
 
