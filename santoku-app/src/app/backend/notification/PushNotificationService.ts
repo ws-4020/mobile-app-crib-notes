@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import messaging from '@react-native-firebase/messaging';
 import axios from 'axios';
 import {AppConfig} from '../../AppConfig';
@@ -43,12 +42,11 @@ function sendTopic(message: Publish) {
 
 function post(path: string, message: any) {
   return axios.post(`${AppConfig.BACKEND_API_URI}/${path}`, JSON.stringify(message), {
-    headers : {
+    headers: {
       'x-functions-key': AppConfig.BACKEND_API_KEY,
       'Content-Type': 'application/json',
     },
   });
-
 }
 
 type Notification = {
