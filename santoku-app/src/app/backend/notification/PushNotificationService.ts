@@ -1,5 +1,6 @@
 import messaging from '@react-native-firebase/messaging';
 import axios from 'axios';
+import {Alert} from 'react-native';
 import {AppConfig} from '../../AppConfig';
 
 export interface PushNotificationService {
@@ -46,6 +47,10 @@ function sendTopic(message: Publish) {
 }
 
 function post(path: string, message: any) {
+  if (!AppConfig.BACKEND_API_KEY || !AppConfig.BACKEND_API_URI) {
+    Alert.alert('BACKEND_API_URI or BACKEND_API_KEY is not set');
+    return Promise.reject('BACKEND_API_URI or BACKEND_API_KEY is not set');
+  }
   return axios.post(`${AppConfig.BACKEND_API_URI}/${path}`, JSON.stringify(message), {
     headers: {
       'x-functions-key': AppConfig.BACKEND_API_KEY,
