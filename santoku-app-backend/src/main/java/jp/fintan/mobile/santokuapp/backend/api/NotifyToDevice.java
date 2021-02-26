@@ -25,6 +25,8 @@ import java.util.logging.Logger;
  * Azure Functions with HTTP Trigger.
  */
 public class NotifyToDevice {
+    private static final Gson gson = new Gson();
+
     /**
      * Push notification message to specified device.
      */
@@ -47,7 +49,7 @@ public class NotifyToDevice {
         // Parse request parameters
         RequestParameters params;
         try {
-            params = new Gson().fromJson(request.getBody().orElse("{}"), RequestParameters.class);
+            params = gson.fromJson(request.getBody().orElse("{}"), RequestParameters.class);
         } catch (JsonSyntaxException e) {
             return request.createResponseBuilder(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Failed to parse request body. Request body must be a JSON string.")

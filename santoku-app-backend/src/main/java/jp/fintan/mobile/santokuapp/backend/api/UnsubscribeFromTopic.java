@@ -25,6 +25,8 @@ import java.util.logging.Logger;
  * Azure Functions with HTTP Trigger.
  */
 public class UnsubscribeFromTopic {
+    private static final Gson gson = new Gson();
+
     /**
      * Unsubscribe token from topic.
      */
@@ -46,7 +48,7 @@ public class UnsubscribeFromTopic {
         // Parse request parameters
         RequestParameters params;
         try {
-            params = new Gson().fromJson(request.getBody().orElse("{}"), RequestParameters.class);
+            params = gson.fromJson(request.getBody().orElse("{}"), RequestParameters.class);
         } catch (JsonSyntaxException e) {
             return request.createResponseBuilder(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Failed to parse request body. Request body must be a JSON string.").build();
