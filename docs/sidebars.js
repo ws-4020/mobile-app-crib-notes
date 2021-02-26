@@ -91,11 +91,36 @@ module.exports = {
     {
       type: 'category',
       label: 'ToDoアプリの実装',
-      items: ['react-native/learn/todo-app', 'react-native/learn/todo-app/app-spec'],
+      items: [
+        'react-native/learn/todo-app',
+        'react-native/learn/todo-app/app-spec',
+        'react-native/learn/todo-app/app-project-desc',
+        {
+          type: 'category',
+          label: 'ToDoアプリの実装',
+          items: [
+            'react-native/learn/todo-app/app-hands-on',
+            'react-native/learn/todo-app/app-hands-on/welcome',
+            'react-native/learn/todo-app/app-hands-on/login',
+            'react-native/learn/todo-app/app-hands-on/keyboard-avoiding-view',
+            'react-native/learn/todo-app/app-hands-on/auth',
+            'react-native/learn/todo-app/app-hands-on/alert',
+            'react-native/learn/todo-app/app-hands-on/split-navigation',
+            'react-native/learn/todo-app/app-hands-on/navigation-hook',
+            'react-native/learn/todo-app/app-hands-on/tab',
+            'react-native/learn/todo-app/app-hands-on/todo-board',
+          ],
+        },
+      ],
     },
   ],
   troubleshoot: {
     About: ['react-native/troubleshooting'],
-    アプリを実行できない: ['react-native/troubleshooting/unable-to-load-script', 'react-native/troubleshooting/debug-keystore-not-found','react-native/troubleshooting/react-native-cli-uninstall'],
+    アプリを実行できない: [
+      'react-native/troubleshooting/unable-to-load-script',
+      'react-native/troubleshooting/debug-keystore-not-found',
+      'react-native/troubleshooting/react-native-cli-uninstall',
+      'react-native/troubleshooting/cant-build-in-xcode',
+    ],
   },
 };
