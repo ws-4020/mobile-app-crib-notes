@@ -19,6 +19,7 @@ import jp.fintan.mobile.santokuapp.backend.Firebase;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 /**
@@ -66,6 +67,11 @@ public class NotifyToDevice {
                     .body("'token' must not be empty.")
                     .build();
         }
+        if (params.delay < 0 || params.delay > 30) {
+            return request.createResponseBuilder(HttpStatus.BAD_REQUEST)
+                .body("'delay' must be between 0 and 30.")
+                .build();
+        }
 
         // Build message
         Message.Builder messageBuilder = Message.builder();
@@ -90,12 +96,20 @@ public class NotifyToDevice {
 
         // Send a message to the device corresponding to the provided token.
         try {
+            if (params.delay > 0) {
+                TimeUnit.SECONDS.sleep(params.delay);
+            }
             // Response is a message ID string.
             String response = FirebaseMessaging.getInstance().send(message);
             logger.info("Successfully sent message: " + response);
         } catch (FirebaseMessagingException e) {
             logger.info("Failed to send message to Firebase Cloud Messaging. " + e.getMessage());
             return Firebase.buildErrorResponseFromFirebaseMessagingException(request, e);
+        } catch (InterruptedException e) {
+            logger.info("Failed to send message to Firebase Cloud Messaging. " + e.getMessage());
+            return request.createResponseBuilder(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to send message to Firebase Cloud Messaging.")
+                    .build();
         }
 
         // return 200 OK
@@ -106,6 +120,7 @@ public class NotifyToDevice {
         String token;
         NotificationParameters notification;
         DataParameters data;
+        int delay;
     }
 
     public static class NotificationParameters {

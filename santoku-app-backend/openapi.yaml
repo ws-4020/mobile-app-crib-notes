@@ -37,6 +37,10 @@ paths:
                   properties:
                     text:
                       type: string
+                delay:
+                  type: number
+                  minimum: 0
+                  maximum: 30
               required:
                 - token
             examples:
@@ -96,6 +100,10 @@ paths:
                   properties:
                     text:
                       type: string
+                delay:
+                  type: number
+                  minimum: 0
+                  maximum: 30
               required:
                 - topic
             examples:
