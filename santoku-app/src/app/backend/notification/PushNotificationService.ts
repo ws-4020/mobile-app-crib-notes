@@ -47,8 +47,8 @@ function sendTopic(message: Publish) {
 }
 
 function post(path: string, message: any) {
-  if (!AppConfig.BACKEND_API_KEY || !AppConfig.BACKEND_API_URI) {
-    Alert.alert('BACKEND_API_URI or BACKEND_API_KEY is not set');
+  if (!AppConfig.BACKEND_API_URI || !AppConfig.BACKEND_API_KEY) {
+    Alert.alert('設定に不備があります', 'SANROKU_BACKEND_APIのURI & KEY は必須です。');
     return Promise.reject('BACKEND_API_URI or BACKEND_API_KEY is not set');
   }
   return axios.post(`${AppConfig.BACKEND_API_URI}/${path}`, JSON.stringify(message), {
