@@ -16,6 +16,7 @@
       packageNames: [
         '@react-native-community/masked-view',
         'expo',
+        'expo-keep-awake',
         'expo-splash-screen',
         'expo-updates',
         'react',
