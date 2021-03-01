@@ -7,7 +7,7 @@ title: 共通コンポーネント
 ## KeyboardAvoidingViewの共通コンポーネント化
 
 現在、`KeyboardAvoidingView`はログイン画面とタスク登録画面の二か所で使用しており、いずれも`behavior`に同様のキーボード動作を指定します。
-ここに追加や変更が生じた場合、変更箇所が複数個所にまたがるため、影響箇所が広く修正漏れなどのリスクが生じます。
+ここに追加や変更が生じた場合、変更が複数箇所にまたがり修正漏れなどのリスクが生じます。
 そこで、この箇所を共通コンポーネント化することで上記問題に対処します。
 
 今回作成するコンポーネントは汎用性があるため、[ToDoアプリプロジェクトの準備](../app-project-desc.md)に示すとおり、`components/basics`に作成します。
@@ -58,7 +58,7 @@ export * from './view';
 
 追加が出来たら`KeyboardAvoidingView`を使用している箇所を修正していきます。
 
-次のファイルを追加してください。
+次のファイルを修正してください。
 
 - `/src/screens/auth/Login.tsx`
 - `/src/screens/todo/TodoForm.tsx`
