@@ -162,18 +162,18 @@ export const TodoForm: React.FC = () => {
   });
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+    const unsubscribe = navigation.addListener('beforeRemove', (event) => {
       if (!formik.dirty || formik.isSubmitting) {
         return;
       }
-      e.preventDefault();
+      event.preventDefault();
 
       Alert.alert('破棄確認', '入力内容が保存されていません。\n入力内容を破棄してよろしいですか？', [
         {text: 'Cancel', style: 'cancel', onPress: () => {}},
         {
           text: 'OK',
           style: 'destructive',
-          onPress: () => navigation.dispatch(e.data.action),
+          onPress: () => navigation.dispatch(event.data.action),
         },
       ]);
     });
@@ -230,18 +230,18 @@ const styles = StyleSheet.create({
 
 ```typescript jsx
   useEffect(() => {
-    const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+    const unsubscribe = navigation.addListener('beforeRemove', (event) => {
       if (!formik.dirty || formik.isSubmitting) {
         return;
       }
-      e.preventDefault();
+      event.preventDefault();
 
       Alert.alert('破棄確認', '入力内容が保存されていません。\n入力内容を破棄してよろしいですか？', [
         {text: 'Cancel', style: 'cancel', onPress: () => {}},
         {
           text: 'OK',
           style: 'destructive',
-          onPress: () => navigation.dispatch(e.data.action),
+          onPress: () => navigation.dispatch(event.data.action),
         },
       ]);
     });
@@ -251,8 +251,8 @@ const styles = StyleSheet.create({
 
 `navigation`にリスナー登録することで、ナビゲーションイベントに応じた処理を記述できます。
 ここでは`beforeRemove`イベントに対してリスナー登録しています。
-このイベントはユーザが画面を離れるときに発生し、それを防ぐことができます。
-これを利用して、次の場合において破棄確認ダイアログを表示しています。
+このイベントはユーザが画面を離れるときに発生します。
+これを利用して、次の条件時においてイベントをキャンセルして（`event.preventDefault()`）破棄確認ダイアログを表示しています。
 
 - フォームに入力あり（`formik.dirty`が`true`）
 - フォームがサブミットされていない（`formik.isSubmitting`が``false`）
