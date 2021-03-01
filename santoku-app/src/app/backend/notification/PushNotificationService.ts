@@ -106,4 +106,4 @@ export const FCMNotificationService: PushNotificationService = {
 export default santokuNotificationService;
 
 /* FCMサービスを離床する場合は以下に切り替えると利用側のimportの変更は不要 */
-// export default FCMNotificationService
+// export default FCMNotificationService;
