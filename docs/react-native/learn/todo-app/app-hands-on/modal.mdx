@@ -7,7 +7,10 @@ title: Modal
 Stackナビゲータの`mode`属性を`modal`に変更（デフォルトは`card`）することで実現できます。
 
 :::note
-Androidにはモーダルアニメーションが用意されていないため、目に見えた変更はありません。
+React Navigation公式ドキュメントの[Opening a full-screen modal](https://reactnavigation.org/docs/modal/)に次の記載があります。
+> The modal prop has no effect on Android because full-screen modals don't have any different transition behavior on the platform.
+
+上記とおり、Androidのフルスクリーンモーダルには異なるトランジションが用意されていないため、`mode`属性の変更によるアニメーションの変更はありません。
 :::
 
 では実装していきましょう。
