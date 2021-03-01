@@ -33,7 +33,11 @@ title: useFocusEffect
 
 今回の場合、画面にフォーカス移った（画面が再表示された）際にもタスク一覧を取得したいです。
 このような場合のため、React Nativeでは`useFocusEffect`フックが用意されています。
-`useFocusEffect`フックは画面フォーカス時に処理を実行します。詳細はReact Navite公式ドキュメントの[useFocusEffect](https://reactnavigation.org/docs/use-focus-effect/)を参照してください。
+`useFocusEffect`フックは画面フォーカス時に処理を実行します。
+
+:::note
+詳細は、React Navigation公式ドキュメントの[useFocusEffect](https://reactnavigation.org/docs/use-focus-effect/)を参照してください。
+:::
 
 では修正していきましょう。
 `/src/screens/todo/TodoBoard.tsx`を修正してください。
@@ -77,6 +81,24 @@ title: useFocusEffect
 
   /* ～省略～ */  
 ```
+
+コールバック関数を`useCallback`でラップしている点に注意してください。
+`useFocusEffect`は、画面にフォーカスがある場合にのみ実行されるという点を除き、Reactの`useEffect`フックに似ています。
+最初のレンダリング時（画面にフォーカスがある場合）だけではなく、依存関係が変更された場合にも実行されます。
+`useCallback`でラップしないと、画面フォーカス時のすべてのレンダリングでコールバック関数が実行されてしまいます（上記処理の場合、画面がState変更されたタイミングで再レンダリングが走るため、`useCallback`でラップしないと無限に再レンダリングする羽目になります）。
+
+また、戻り値に関数を返している点にも注意してください。
+これはクリーンアップ関数と呼ばれるもので、次の場合に実行されます。
+
+- 依存関係が変更されて新しい処理がスケジュールされた
+- 画面がアンマウントされた
+- 画面がフォーカスを失った
+
+ここでは、上記場合に画面Stateを抑止する目的でクリーンアップ関数を活用しています。
+
+:::note
+詳細は、React Navite公式ドキュメントの[Running asynchronous effects](https://reactnavigation.org/docs/use-focus-effect/#running-asynchronous-effects)を参照してください。
+:::
 
 修正できたら実行してください。
 タスク登録画面で登録したタスクがToDo一覧画面に表示できたら成功です。
