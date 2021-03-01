@@ -109,6 +109,8 @@ module.exports = {
             'react-native/learn/todo-app/app-hands-on/navigation-hook',
             'react-native/learn/todo-app/app-hands-on/tab',
             'react-native/learn/todo-app/app-hands-on/todo-board',
+            'react-native/learn/todo-app/app-hands-on/basic-components',
+            'react-native/learn/todo-app/app-hands-on/logo',
           ],
         },
       ],
