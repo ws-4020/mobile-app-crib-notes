@@ -14,15 +14,15 @@ const PushNotification: React.FC = () => {
     if (deviseToken) {
       return messaging().onMessage((message) => {
         Alert.alert('message recieve ', JSON.stringify({...message.notification, data: message.data}));
-      }); 
+      });
     }
   }, [deviseToken]);
 
   useEffect(() => {
     if (deviseToken) {
-      return messaging().onSendError((event) => console.warn(event));
+      messaging().onSendError((event) => console.warn(event));
     }
-  }, [deviseToken])
+  }, [deviseToken]);
 
   useEffect(() => {
     if (!deviseToken) {
