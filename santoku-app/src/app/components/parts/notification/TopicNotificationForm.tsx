@@ -22,6 +22,14 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
     }
   }, [topicName, deviseToken]);
 
+  const unsubscribeFromTopic = useCallback(() => {
+    if (topicName && deviseToken) {
+      pushNotificationService.unsubscribeFromTopic(topicName, deviseToken).catch((e) => {
+        console.warn(`fail to unsubscribe topic [${topicName}]`, e);
+      });
+    }
+  }, [topicName, deviseToken]);
+
   const sendTopic = useCallback(() => {
     if (deviseToken && sendTopicName && topicTitle && topicText) {
       pushNotificationService.sendTopic({
@@ -43,12 +51,13 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
         以下の「この端末で購読するトピックを追加」ボタンを押すと、指定したトピック名でFirebaseに購読登録できます。その後に、「指定したトピックにプッシュ通知を送信」ボタンを押すと、そのトピックを購読している端末全てにプッシュ通知が届きます。
       </Description>
       <FormInput
-        label="追加購読するトピック名"
+        label="購読するトピック名"
         value={topicName}
         onChangeText={(value) => setTopicName(value)}
         placeholder="購読したいトピック名を入力してください"
       />
       <TextButton onPress={subscribeToTopic} value="この端末で購読するトピックを追加" />
+      <TextButton onPress={unsubscribeFromTopic} value="この端末で購読するトピックから削除" />
       <FormInput
         label="通知メッセージの送信先トピック名"
         value={sendTopicName}
