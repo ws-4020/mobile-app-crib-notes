@@ -66,8 +66,8 @@ export * from './TodoBoard';
 ```diff title="/src/navigation/types.ts"
   /* ～省略～ */  
   export type RootStackParamList = {
-    Authed: NavigatorScreenParams<AuthedRootStackParamList>;
-    Unauthed: NavigatorScreenParams<UnauthedRootStackParamList>;
+    Authed: NavigatorScreenParams<AuthedStackParamList>;
+    Unauthed: NavigatorScreenParams<UnauthedStackParamList>;
   };
   
 + export type MainTabParamList = {
@@ -175,7 +175,7 @@ export const MainTabNav: React.FC = () => {
   import React from 'react';
 - import {UserSetting} from 'screens';
   
-  const nav = createStackNavigator<AuthedRootStackParamList>();
+  const nav = createStackNavigator<AuthedStackParamList>();
   export const AuthedStackNav: React.FC = () => {
     return (
 -     <nav.Navigator screenOptions={{headerShown: false}}>
@@ -189,7 +189,7 @@ export const MainTabNav: React.FC = () => {
 
 ```diff title="/src/navigation/types.ts"
   /* ～省略～ */  
-  export type AuthedRootStackParamList = {
+  export type AuthedStackParamList = {
 -   UserSetting: undefined;
 +   Main: undefined;
   };
@@ -208,7 +208,7 @@ import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import type {CompositeNavigationProp, RouteProp} from '@react-navigation/native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AuthedRootStackParamList, MainTabParamList, RootStackParamList, TodoStackParamList} from 'navigation/types';
+import {AuthedStackParamList, MainTabParamList, RootStackParamList, TodoStackParamList} from 'navigation/types';
 
 type TodoStackParamListKeys = keyof TodoStackParamList;
 
@@ -216,7 +216,7 @@ type TodoStackNavigationProp<T extends TodoStackParamListKeys> = CompositeNaviga
   StackNavigationProp<TodoStackParamList, T>,
   CompositeNavigationProp<
     BottomTabNavigationProp<MainTabParamList>,
-    CompositeNavigationProp<StackNavigationProp<AuthedRootStackParamList>, StackNavigationProp<RootStackParamList>>
+    CompositeNavigationProp<StackNavigationProp<AuthedStackParamList>, StackNavigationProp<RootStackParamList>>
   >
 >;
 

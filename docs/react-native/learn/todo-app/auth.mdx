@@ -193,19 +193,19 @@ import React from 'react';
 import {Button} from 'react-native-elements';
 import {Instructions, Login, UserSetting, Welcome} from 'screens';
 
-type UnauthedRootStackParamList = {
+type UnauthedStackParamList = {
   Welcome: undefined;
   Login: undefined;
   Instructions: undefined;
 };
 
-const nav = createStackNavigator<UnauthedRootStackParamList>();
+const nav = createStackNavigator<UnauthedStackParamList>();
 const HeaderRight: React.FC = () => {
   const navigation = useNavigation();
   return <Button type="clear" onPress={() => navigation.navigate('Login')} title="ログイン" />;
 };
 const createScreenOptions: (props: {
-  route: RouteProp<UnauthedRootStackParamList, keyof UnauthedRootStackParamList>;
+  route: RouteProp<UnauthedStackParamList, keyof UnauthedStackParamList>;
 }) => StackNavigationOptions = ({route}) => {
   if (route.name === 'Login') {
     return {};
@@ -236,11 +236,11 @@ const UnauthedStackNav: React.FC = () => {
   );
 };
 
-type AuthedRootStackParamList = {
+type AuthedStackParamList = {
   UserSetting: undefined;
 };
 
-const authNav = createStackNavigator<AuthedRootStackParamList>();
+const authNav = createStackNavigator<AuthedStackParamList>();
 const AuthedStackNav: React.FC = () => {
   return (
     <authNav.Navigator screenOptions={{headerShown: false}}>
@@ -250,8 +250,8 @@ const AuthedStackNav: React.FC = () => {
 };
 
 type RootStackParamList = {
-  Authed: NavigatorScreenParams<AuthedRootStackParamList>;
-  Unauthed: NavigatorScreenParams<UnauthedRootStackParamList>;
+  Authed: NavigatorScreenParams<AuthedStackParamList>;
+  Unauthed: NavigatorScreenParams<UnauthedStackParamList>;
 };
 
 const rootNav = createStackNavigator<RootStackParamList>();

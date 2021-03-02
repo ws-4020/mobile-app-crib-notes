@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 - `/src/navigation/AuthedStackNav.tsx`
 
 ```diff title="/src/navigation/types.ts"
-  export type UnauthedRootStackParamList = {
+  export type UnauthedStackParamList = {
     Welcome: undefined;
     Login: undefined;
     Instructions: undefined;
@@ -69,11 +69,11 @@ const styles = StyleSheet.create({
 ```diff title="/src/navigation/AuthedStackNav.tsx"
   import {createStackNavigator} from '@react-navigation/stack';
   import {MainTabNav} from 'navigation/MainTabNav';
-  import {AuthedRootStackParamList} from 'navigation/types';
+  import {AuthedStackParamList} from 'navigation/types';
   import React from 'react';
 + import {TodoForm} from 'screens';
   
-  const nav = createStackNavigator<AuthedRootStackParamList>();
+  const nav = createStackNavigator<AuthedStackParamList>();
   export const AuthedStackNav: React.FC = () => {
     return (
       <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main">
