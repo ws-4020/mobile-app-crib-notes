@@ -19,9 +19,36 @@ title: 認証制御
 
 次のファイルを追加してください。
 
-- `/src/contexts/UserContext.tsx`
 - `/src/services/AuthService.ts`
 - `/src/services/index.ts`
+- `/src/contexts/UserContext.tsx`
+
+```typescript jsx title="/src/services/AuthService.ts"
+const refreshCsrfToken = async () => {};
+
+const signup = async (userName: string, password: string) => {
+  return Promise.resolve();
+};
+
+const login = async (userName: string, password: string) => {
+  return Promise.resolve();
+};
+
+const logout = async () => {
+  return Promise.resolve();
+};
+
+export const AuthService = {
+  signup,
+  login,
+  logout,
+  refreshCsrfToken,
+};
+```
+
+```typescript jsx title="/src/services/index.ts"
+export * from './AuthService';
+```
 
 ```typescript jsx title="/src/contexts/UserContext.tsx"
 import React, {useContext, useState} from 'react';
@@ -69,33 +96,6 @@ export const UserContextProvider: React.FC = ({children}) => {
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
 };
-```
-
-```typescript jsx title="/src/services/AuthService.ts"
-const refreshCsrfToken = async () => {};
-
-const signup = async (userName: string, password: string) => {
-  return Promise.resolve();
-};
-
-const login = async (userName: string, password: string) => {
-  return Promise.resolve();
-};
-
-const logout = async () => {
-  return Promise.resolve();
-};
-
-export const AuthService = {
-  signup,
-  login,
-  logout,
-  refreshCsrfToken,
-};
-```
-
-```typescript jsx title="/src/services/index.ts"
-export * from './AuthService';
 ```
 
 ## 認証フロー
