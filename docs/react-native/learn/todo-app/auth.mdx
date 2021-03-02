@@ -137,8 +137,8 @@ ToDoアプリでもこれに従い、認証制御を組み込んでいきます�
 次のファイルを追加・修正してください。
 
 - `/src/screens/settings/UserSetting.tsx`
-- `/src/screens/settings/index.tsx`
-- `/src/screens/index.tsx`
+- `/src/screens/settings/index.ts`
+- `/src/screens/index.ts`
 
 ```typescript jsx title="/src/screens/settings/UserSetting.tsx"
 import {useUserContext} from 'contexts/UserContext';
@@ -167,11 +167,11 @@ const styles = StyleSheet.create({
 });
 ```
 
-```typescript jsx title="/src/screens/settings/index.tsx"
+```typescript jsx title="/src/screens/settings/index.ts"
 export * from './UserSetting';
 ```
 
-```diff title="/src/screens/index.tsx"
+```diff title="/src/screens/index.ts"
   export * from './auth';
   export * from './home';
   export * from './instructions';
