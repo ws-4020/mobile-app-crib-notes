@@ -52,13 +52,6 @@ const PushNotification: React.FC = () => {
   }, [deviseToken]);
 
   useEffect(() => {
-    return messaging().setBackgroundMessageHandler((message) => {
-      console.log(message);
-      return Promise.resolve();
-    });
-  }, []);
-
-  useEffect(() => {
     if (!deviseToken) {
       pushNotificationService.getToken().then((token) => {
         if (isMounted()) {
