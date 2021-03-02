@@ -6,7 +6,6 @@ import {useIsMounted} from '../../../../framework/hooks/useIsMounted';
 import pushNotificationService from '../../../backend/notification/PushNotificationService';
 import messaging, {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import {Alert} from 'react-native';
-import {Root} from 'native-base';
 
 const PushNotification: React.FC = () => {
   const [deviseToken, setDeviseToken] = useState<string>();
@@ -64,7 +63,6 @@ const PushNotification: React.FC = () => {
   return (
     <Container refreshing={false}>
       <KeyboardAvoidingView>
-        <Root />
         <Description>指定した端末へプッシュ通知を送信する例と、指定したトピックを購読している端末へプッシュ通知を送信する例を示します。</Description>
         <DeviseTokenNotificationForm deviseToken={deviseToken} />
         <TopicNotificationForm deviseToken={deviseToken} />
