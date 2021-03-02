@@ -27,7 +27,7 @@ type AuthStackNavigationProp<T extends AuthedStackParamListKeys> = CompositeNavi
   StackNavigationProp<RootStackParamList>
 >;
 
-export const useAuthedRootStackNavigation = <T extends AuthedStackParamListKeys>() =>
+export const useAuthedStackNavigation = <T extends AuthedStackParamListKeys>() =>
   useNavigation<AuthStackNavigationProp<T>>();
 export const useAuthedRootStackRoute = <T extends AuthedStackParamListKeys>() =>
   useRoute<RouteProp<AuthedStackParamList, T>>();
