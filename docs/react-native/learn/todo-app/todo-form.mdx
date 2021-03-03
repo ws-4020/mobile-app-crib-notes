@@ -69,9 +69,10 @@ const styles = StyleSheet.create({
 ```diff title="/src/navigation/AuthedStackNav.tsx"
   import {createStackNavigator} from '@react-navigation/stack';
   import {MainTabNav} from 'navigation/MainTabNav';
-  import {AuthedStackParamList} from 'navigation/types';
   import React from 'react';
 + import {TodoForm} from 'screens';
+  
+  import {AuthedStackParamList} from './types';
   
   const nav = createStackNavigator<AuthedStackParamList>();
   export const AuthedStackNav: React.FC = () => {
