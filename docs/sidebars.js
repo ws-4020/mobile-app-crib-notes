@@ -9,7 +9,12 @@ module.exports = {
       'reference/auth/stateless-authn',
       'reference/auth/webassets-integration',
     ],
-    プッシュ通知: ['doc1', 'doc2', 'doc3'],
+    プッシュ通知: [
+      'reference/notification/overview',
+      'reference/notification/infrastructure',
+      'reference/notification/configuration',
+      'reference/notification/backend'
+    ],
   },
   guide: {
     About: ['react-native/guide'],
