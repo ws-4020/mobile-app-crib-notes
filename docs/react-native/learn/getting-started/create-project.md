@@ -16,7 +16,7 @@ npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler#han
 ```
 
 <!-- TODO: リンク貼るよ -->
-RN Spoilerは、Expoの[expo-template-bare-typescript](https://github.com/expo/expo/tree/master/templates/expo-template-bare-typescript)をベースにしているので、このあとの[アプリの実行](./launch-created-app.mdx)で紹介しているExpo Goというアプリで動作させることができます。
+RN Spoilerは、Expoの[expo-template-bare-typescript](https://github.com/expo/expo/tree/master/templates/expo-template-bare-typescript)をベースにしているので、このあとの[アプリの実行](./launch-created-app.mdx)で紹介しているExpo Goで動作します。
 
 :::info
 [npm](https://www.npmjs.com/)ではなく[Yarn](https://yarnpkg.com/)を利用したい場合は、`--npm`というオプションを削除してください。Yarnがインストールされている場合は、Yarnを利用してパッケージがインストールされます。
