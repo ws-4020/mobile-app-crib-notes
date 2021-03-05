@@ -5,7 +5,7 @@ title: プロジェクトの作成
 ## React Nativeプロジェクトの作成
 
 <!-- TODO: リンク貼るよ -->
-[アプリを実装する前に](.)で紹介しているコードを簡単に動かすことができるように、プロジェクトを作成します。
+[アプリを実装する前に](../basic-concepts)で紹介しているコードを簡単に動かすことができるように、プロジェクトを作成します。
 
 このコンテンツでは[React Navigation](https://reactnavigation.org/)や[React Native Elements](https://reactnativeelements.com/)などのパッケージを利用します。これらのパッケージがインストールされたプロジェクトを簡単に用意できるよう、[RN Spoiler](https://github.com/ws-4020/rn-spoiler)というテンプレートを用意しています。
 
