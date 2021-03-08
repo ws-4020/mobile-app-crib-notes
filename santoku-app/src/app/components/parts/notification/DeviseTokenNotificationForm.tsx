@@ -53,7 +53,7 @@ const DeviseTokenNotificationForm: React.FC<Props> = ({deviseToken}) => {
           placeholder="通知メッセージの本文を入力してください"
         />
         <FormInput
-          label="(任意) データとしてアプリが受け取る値 (文字列)"
+          label="データとしてアプリが受け取る値 (文字列)"
           value={text}
           onChangeText={(value) => setText(value)}
           placeholder="データを入力してください"
