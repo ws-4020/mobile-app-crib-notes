@@ -59,7 +59,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 * `dependencies`: パッチバージョン (`~1.1.0`)
 * `devDependencies`: マイナーバージョン (`^1.1.0`)
 
-`dependencies`は、パッチバージョンまでは[RenovateのlockFileMaintenance](https://docs.renovatebot.com/configuration-options/#lockfilemaintenance)でまとめて更新されますが、マイナーバージョンの更新はプルリクエストが作成されます。依存パッケージのメンテナンスを容易にするために、`devDependencies`はマイナーバージョンまではlockFileMaintenanceでまとめて更新されるようにしています。
+`dependencies`は、パッチバージョンまでは[RenovateのlockFileMaintenance](https://docs.renovatebot.com/configuration-options/#lockfilemaintenance)でまとめて更新されますが、マイナーバージョンの更新はプルリクエストが作成されます。依存パッケージのメンテナンスを容易にするため、`devDependencies`はマイナーバージョンまではlockFileMaintenanceでまとめて更新します。
 
 ### `@types`のバージョンについて
 

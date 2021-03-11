@@ -88,7 +88,7 @@ Androidの[圧縮、難読化、最適化の有効化](https://developer.android
 
 ### Bundle Identifierのサフィックス
 
-Xcodeの「Product Bundle Identifier」（`project.pbxproj`の`PRODUCT_BUNDLE_IDENTIFIER`）の設定値をConfigurationごとに設定しています。
+Xcodeの「Product Bundle Identifier」の設定値をConfigurationごとに設定しています。`project.pbxproj`では、`PRODUCT_BUNDLE_IDENTIFIER`という設定項目です。
 
 | Debug | DebugAdvanced | ReleaseInHouse | Release |
 | ----- | ------------- | -------------- | ------- |
@@ -96,14 +96,16 @@ Xcodeの「Product Bundle Identifier」（`project.pbxproj`の`PRODUCT_BUNDLE_ID
 
 :::info
 Debug Configurationは特別で、個人のApple IDでの自動署名を設定できるように、次の形式のBundle Identifierになっています。
+
 ```console title="Debug ConfigurationのBundle Identifier"
 personal.jp.fintan.mobile.SantokuApp.debug.${PERSONAL_IDENTIFIER}
 ```
+
 :::
 
 ### アイコン（iOS）
 
-Xcodeでビルドタイプごとのアイコンアセットを用意し、Xcodeの「Asset Catalog App Icon Set Name」（`project.pbxproj`の`ASSETCATALOG_COMPILER_APPICON_NAME`）でビルドタイプごと異なるアイコンアセットを設定しています。
+Xcodeでビルドタイプごとのアイコンアセットを用意し、Xcodeの「Asset Catalog App Icon Set Name」でビルドタイプごと異なるアイコンアセットを設定しています。`project.pbxproj`では、`ASSETCATALOG_COMPILER_APPICON_NAME`という設定項目です。
 
 ### プロビジョニングプロファイルなどの設定
 
@@ -116,7 +118,7 @@ Xcodeでビルドタイプごとのアイコンアセットを用意し、Xcode�
 | `ReleaseInHouse` | Apple Developer Enterprise Programの開発用プロビジョニングプロファイル |
 | `Release` | Apple Developer Programの開発用プロビジョニングプロファイル |
 
-コード署名には、基本的には開発用プロビジョニングプロファイルを利用するように設定しています。配布用にIPAファイルを作成する場合は、App Store ConnectやDeployGateにアップロードする前に、XcodeのOrganizerなどから配布用プロビジョニングプロファイルで署名し直してください。
+コード署名には、基本的には開発用プロビジョニングプロファイルを利用するように設定しています。配布用にIPAファイルを作成する場合は、XcodeのOrganizerなどで配布用プロビジョニングプロファイルを選択して署名してください。
 
 ### React Nativeの開発用機能、Flipper（iOS）
 
@@ -131,7 +133,8 @@ Xcodeでビルドタイプごとのアイコンアセットを用意し、Xcode�
 App Transport Security (ATS)の設定はdict形式なので、react-native-configで設定することが出来ません。そのため、次のように設定しています。
 
 - ATSの設定以外は`Info.plist`と同じ内容で、`Debug.plist`を追加
-- Debug ConfigurationとDebugAdvanced Configurationで「Info.plist File」の設定項目（`project.pbxproj`の`INFOPLIST_FILE`）に`Debug.plist`を設定
+- Debug ConfigurationとDebugAdvanced Configurationで「Info.plist File」の設定項目に`Debug.plist`を設定
+  - `project.pbxproj`では`INFOPLIST_FILE`という設定項目
 
 | Debug | DebugAdvanced | ReleaseInHouse | Release |
 | ----- | ------------- | -------------- | ------- |
