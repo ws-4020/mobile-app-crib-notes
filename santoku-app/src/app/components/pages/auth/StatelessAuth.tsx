@@ -1,8 +1,10 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import {Content, Spinner} from 'native-base';
+import * as LocalAuthentication from 'expo-local-authentication';
 import {useStatelessLoginContext} from '../../../context/StatelessLoginContext';
 import {Container, Title, Text, TextButton, Section, Description, translateToViewData} from '../../basics';
 import WithStatelessLoginContext from '../../parts/WithStatelessLoginContext';
+import {Alert} from 'react-native';
 
 class AuthnStateViewData {
   accessTokenExpirationDate?: string;
@@ -19,6 +21,13 @@ const StatelessAuthInner: React.FC = () => {
 
   const signIn = useCallback(async () => {
     setLoading(true);
+    const success = await LocalAuthentication.authenticateAsync({
+      promptMessage: '認証してください',
+      cancelLabel: 'cancel',
+    }).catch((error) => console.log(error));
+    if (success) {
+      Alert.alert(success ? 'デバイス認証済み' : '認証できていません');
+    }
     await loginContextSignIn();
     setHasJustSignOut(false);
     setLoading(false);
