@@ -48,6 +48,9 @@ const DrawerContent: React.FC<Props> = (props) => {
         <MenuItem {...props} to="StatelessAuth">
           ステートレスな認証
         </MenuItem>
+        <MenuItem {...props} to="BackendAuth">
+          IDトークンを使用したバックエンド認証
+        </MenuItem>
         <MenuItem {...props} to="PushNotification">
           プッシュ通知
         </MenuItem>
