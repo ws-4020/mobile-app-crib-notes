@@ -6,11 +6,12 @@ title: クライアントアプリの実装
 
 クライアントアプリからFirebaseのAPIを呼びだすためには、Firebase SDKを利用します。
 Firebase SDKはAndroid, iOS, Web向けのものが提供されています。
+
 今回のサンプルコードではReact Nativeを利用しているため、react-native-firebaseというライブラリを利用して間接的にFirebase SDKを利用する例について解説します。
 
 ### Firebase SDKの導入と認証情報ファイルの配置
 
-次に、Firebase SDKをAndroid/iOSのそれぞれのビルド時の依存関係に追加し、
+まず、Firebase SDKをAndroid/iOSのそれぞれのビルド時の依存関係に追加し、
 Firebaseへのアクセスに必要な認証情報ファイルを適切なフォルダに設置します。
 それぞれのOS向けの手順は以下のとおりです。
 
@@ -42,7 +43,7 @@ Firebaseへのアクセスに必要な認証情報ファイルを適切なフォ
 1. Firebaseのコンソール画面からGoogleService-Info.plistをダウンロード
 2. GoogleService-Info.plistファイルを`ios/{projectName}/GoogleService-Info.plist`として配置
 3. `ios/Podfile`ファイルに以下のように利用したいFirebaseサービスのpodを追記
-    - 今回はFirebase Cloud Messagingを利用するために必要なものだけを追記していますが、Firebaseの他のサービスも利用する場合はその分も追加してください。
+    - 今回はFirebase Cloud Messagingを利用するために必要なものだけを追記していますが、Firebaseの他のサービスも利用する場合はその分も追加してください
 
     ```pod title="ios/Podfile" {2}
     # add the Firebase pod for Firebase Cloud Messaging
@@ -59,7 +60,7 @@ Firebaseへのアクセスに必要な認証情報ファイルを適切なフォ
 
 5. `ios/{projectName}/AppDelegate.m`ファイルのdidFinishLaunchingWithOptions内に以下のように追記
 
-    ```objectivec title="ios/{projectName}/AppDelegate.m" {4-6}
+    ```objectivec title="ios/{projectName}/AppDelegate.m" {3-5}
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
       // Add me --- \/
       if ([FIRApp defaultApp] == nil) {
@@ -83,32 +84,36 @@ Firebaseへのアクセスに必要な認証情報ファイルを適切なフォ
 npmまたはyarnでインストール可能です。
 今回はFirebase Cloud Messagingを利用するために必要なものだけを追加していますが、Firebaseの他のサービスも利用する場合はその分も追加してください。
 
+#### npmの場合
+
 ```bash
-### Using npm
 npm install --save @react-native-firebase/app
 npm install --save @react-native-firebase/messaging
+```
 
-### Using Yarn
+#### yarnの場合
+
+```bash
 yarn add @react-native-firebase/app
 yarn add @react-native-firebase/messaging
 ```
 
-以上でプッシュ通知の開発に必要な初期設定は完了です。
+以上でリモート通知機能の開発に必要な初期設定は完了です。
 
-## プッシュ通知機能の開発
+## リモート通知機能の開発
 
 本ガイドでは、クライアントアプリに以下の機能を組み込む時の流れについて説明します。
 
-- プッシュ通知の宛先指定に必要な登録トークンの取得
+- リモート通知の宛先指定に必要な登録トークンの取得
 - アプリがアクティブな時にメッセージを受信した場合の処理
 - アプリがアクティブでない時にメッセージを受信した場合の処理
 - トピックの購読
 - トピックの購読解除
 
-### プッシュ通知の宛先指定に必要な登録トークンの取得
+### リモート通知の宛先指定に必要な登録トークンの取得
 
 Device Registration Token（登録トークン）とは、端末・アプリを一意に特定できる、Firebase SDKによって生成されるトークンです。
-プッシュ通知を特定の端末へ配信する際には、この登録トークンを用いて宛先を指定します。
+リモート通知を特定の端末へ配信する際には、この登録トークンを用いて宛先を指定します。
 
 クライアントアプリ側で登録トークンを取得するコードは以下のとおりです。
 
@@ -121,7 +126,7 @@ const PushNotification: React.FC = () => {
   const [deviceToken, setDeviceToken] = useState<string>();
 
   const getToken => async () => {
-    // プッシュ通知がOS設定でこのアプリに許可されているか確認
+    // リモート通知がOS設定でこのアプリに許可されているか確認
     const permission = await messaging().hasPermission();
     // 許可されている場合はトークンを返す
     if (permission === messaging.AuthorizationStatus.AUTHORIZED || permission === messaging.AuthorizationStatus.PROVISIONAL) {
@@ -162,8 +167,8 @@ export default PushNotification;
 登録トークンをアプリ上で取得するためには、アプリが端末のOSからプッシュ通知の許可を与えられている必要があります。この許可は、Androidの場合はデフォルトで許可されていますが、iOSではデフォルトで拒否されています。
 そのためこのサンプルコードでは、このアプリに対してプッシュ通知の承認が得られていない場合は、ユーザにプッシュ通知の許可を求めるダイアログを表示する処理も含めています。
 
-実際にプッシュ通知を送信する際には、特定の端末に送りたいというよりも、特定のユーザに送りたいケースが多いでしょう。
-そのため、バックエンドサーバが特定のユーザへプッシュ通知を送るためには、どのユーザの端末がどの登録トークンを持つのかを知っておく必要があります。
+実際にリモート通知を送信する際には、特定の端末に送りたいというよりも、特定のユーザに送りたいケースが多いでしょう。
+そのため、バックエンドサーバが特定のユーザへリモート通知を送るためには、どのユーザの端末がどの登録トークンを持つのかを知っておく必要があります。
 
 今回のサンプルコードではそこまでは実装しませんでしたが、
 このようにクライアント側で取得した登録トークンは、適宜APIなどを通じてバックエンドサーバへ共有しておく必要があるでしょう。
@@ -179,17 +184,17 @@ export default PushNotification;
 
 ### アプリがアクティブな時にメッセージを受信した場合の処理
 
-プッシュ通知が端末に届いた時、アプリがアクティブでなければOSの通知領域にメッセージが表示されます。
-しかし対象アプリの起動中にプッシュ通知が届いた場合は、OSの通知領域にはメッセージは表示されません。
-アプリの起動中にプッシュ通知が届いた場合にも何か表示などの処理を行いたい場合は、その処理をアプリに組み込んでおく必要があります。
+リモート通知が端末に届いた時、アプリがアクティブでなければOSの通知領域にメッセージが表示されます。
+しかし対象アプリの起動中にリモート通知が届いた場合は、OSの通知領域にはメッセージは表示されません。
+アプリの起動中にリモート通知が届いた場合にも何か表示などの処理を行いたい場合は、その処理をアプリに組み込んでおく必要があります。
 
-アプリの起動中にプッシュ通知が届いた際にアプリ上でアラートダイアログを表示するサンプルコードは以下のとおりです。
+アプリの起動中にリモート通知が届いた際にアプリ上でアラートダイアログを表示するサンプルコードは以下のとおりです。
 
 ```typescript jsx
 useEffect(() => {
   return messaging().onMessage((message) => {
     Alert.alert(
-      'アプリの起動中にプッシュ通知を受信しました',
+      'アプリの起動中にリモート通知を受信しました',
       JSON.stringify({
         notification: message.notification,
         data: message.data
@@ -199,10 +204,10 @@ useEffect(() => {
 }, []);
 ```
 
-アプリの起動中にプッシュ通知が届いた場合、`messaging().onMessage()`に渡した処理が呼び出されます。
+アプリの起動中にリモート通知が届いた場合、`messaging().onMessage()`に渡した処理が呼び出されます。
 今回のサンプルコードでは、アラートダイアログ上に受信したメッセージの内容を表示しています。
 
-プッシュ通知のメッセージ内には、OSの通知領域に表示する内容が格納されたnotification部と、アプリに対して任意のデータを受け渡せるdata部が含まれています。
+リモート通知のメッセージ内には、OSの通知領域に表示する内容が格納されたnotification部と、アプリに対して任意のデータを受け渡せるdata部が含まれています。
 data部を上手く使えば、単にユーザに何かを通知するだけでなく、アプリに様々な処理を行わせることができるでしょう。
 
 ### アプリがアクティブでない時にメッセージを受信した場合の処理
@@ -210,11 +215,11 @@ data部を上手く使えば、単にユーザに何かを通知するだけで�
 アプリがアクティブでない時にメッセージを受信した場合、メッセージ内のnotification部に含まれるtitle, body, imageなどの内容がOSの通知領域に表示されます。通知領域に表示されたメッセージをタップすると、デフォルトではアプリが起動します。
 notification部の内容がOSの通知領域に表示されることで十分であれば、アプリ側で特に何かを実装する必要はありません。
 
-:::info
-notification部が空でdata部のみを含むメッセージを受信した場合、OSの通知領域には何も表示されません。
+:::note
+notification部が空でdata部のみを含むメッセージを受信した場合、OSの通知領域には何も表示されません。これを利用すると、ユーザにリモート通知を受信したことを意識させることなくアプリ上で任意のデータを受け取ることができます。
 :::
 
-一方で、data部に含まれるデータは、アプリ側で受信時の処理を定義しておかないと何も起こりません。非アクティブ時にプッシュ通知を受信した場合にそのデータを受け取るサンプルコードは以下のとおりです。
+一方で、data部に含まれるデータは、アプリ側で受信時の処理を定義しておかないと何も起こりません。非アクティブ時にリモート通知を受信した場合にそのデータを受け取るサンプルコードは以下のとおりです。
 
 ```typescript jsx
 const [loading, setLoading] = useState(true);
@@ -228,7 +233,7 @@ useEffect(() => {
   // アプリ起動後、アプリが非アクティブな時にメッセージを受信した場合の処理を登録
   messaging().onNotificationOpenedApp((remoteMessage) => {
     Alert.alert(
-      'アプリが非アクティブな間にプッシュ通知を受信しました',
+      'アプリが非アクティブな間にリモート通知を受信しました',
       JSON.stringify({
         notification: remoteMessage.notification,
         data: remoteMessage.data
@@ -240,7 +245,7 @@ useEffect(() => {
   messaging().getInitialNotification().then((remoteMessage) => {
     if (remoteMessage) {
       Alert.alert(
-        'アプリが起動されていない間にプッシュ通知を受信しました',
+        'アプリが起動されていない間にリモート通知を受信しました',
         JSON.stringify({
           notification: remoteMessage.notification,
           data: remoteMessage.data
@@ -265,21 +270,24 @@ useEffect(() => {
 setBackgroundMessageHandlerで設定した処理がどのように実行されるかはAndroid/iOSで異なります。iOS端末の場合、バックグラウンド処理にもかかわらずReact Componentがマウントされ、意図しないタイミングでReact Hooksなどが呼び出されてしまう可能性があります。
 
 これを回避するため、コード上で現在バックグラウンド処理中かどうかを判定する方法も提供されています。詳細は以下をご確認ください。
+
 [Background Application State](https://rnfirebase.io/messaging/usage#background-application-state)
 :::
 
 ### トピックの購読
 
-Firebase Cloud Messagingでは、特定の端末に対してプッシュ通知を送信するだけでなく、特定のトピックを購読している端末に対してプッシュ通知を送信する機能も提供されています。
+Firebase Cloud Messagingでは、特定の端末に対してリモート通知を送信するだけでなく、特定のトピックを購読している端末に対してリモート通知を送信する機能も提供されています。
 
 トピックの購読は、クライアントアプリ側、バックエンドサーバ側のどちらからでも行えます。クライアントアプリ側で特定のトピックを購読するサンプルコードは以下のとおりです。
 
 ```typescript
 import messaging from '@react-native-firebase/messaging';
 
-messaging()
-  .subscribeToTopic('weather')
-  .then(() => console.log('Subscribed to topic!'));
+const onSubscribe = () => {
+  messaging()
+    .subscribeToTopic('weather')
+    .then(() => console.log('Subscribed to topic!'));
+}
 ```
 
 注意点として、登録トークンが再インストール等で再生成された場合、トピックの購読状況は引き継がれず、何も購読していない状態に戻ります。
@@ -295,9 +303,11 @@ messaging()
 ```typescript
 import messaging from '@react-native-firebase/messaging';
 
-messaging()
-  .unsubscribeFromTopic('weather')
-  .then(() => console.log('Unsubscribed fom the topic!'));
+const onUnsubscribe = () => {
+  messaging()
+    .unsubscribeFromTopic('weather')
+    .then(() => console.log('Unsubscribed from the topic!'));
+}
 ```
 
 登録トークンが再インストール等で再生成された場合、古い登録トークンのトピック購読状況は自動的に解除されるため、あらためて購読解除する必要はありません。
