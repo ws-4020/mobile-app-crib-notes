@@ -2,12 +2,13 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {Content, Spinner} from 'native-base';
 import {Container, TextButton, Section, Description} from '../../basics';
 import {useBackendAuthContext} from '../../../context/BackendAuthContext';
-import {StackActions, useNavigation} from '@react-navigation/native';
+import {StackActions, useFocusEffect, useNavigation} from '@react-navigation/native';
 
 export const BackendAuthSignIn: React.FC = () => {
   const authContext = useBackendAuthContext();
   const navigation = useNavigation();
   const [loading, setLoading] = useState<boolean>(false);
+
   const signIn = useCallback(async () => {
     setLoading(true);
     await authContext.signIn();
@@ -24,6 +25,34 @@ export const BackendAuthSignIn: React.FC = () => {
     });
     return unsubscribe;
   }, [navigation, authContext]);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (loading || !authContext.isLoggedIn) {
+        return;
+      }
+      const signInIfPingNG = async () => {
+        setLoading(true);
+        try {
+          const isValid = await authContext.checkSessionIsValid();
+          console.log(isValid);
+
+          if (authContext.isLoggedIn && isValid) {
+            navigation.dispatch(StackActions.pop());
+            return;
+          }
+
+          await authContext.signIn();
+          navigation.dispatch(StackActions.pop());
+        } catch (e) {
+          // Handle error
+        }
+        setLoading(false);
+      };
+
+      signInIfPingNG();
+    }, [navigation, authContext, loading, setLoading]),
+  );
 
   return (
     <Container>

@@ -23,13 +23,17 @@ const WithBackendAuthContext: React.FC<Props> = ({children}) => {
     setAuthnState(NotAuthenticated);
   }, [authnState]);
 
-  const ping = useCallback(async () => Promise.resolve(), []);
+  const checkSessionIsValid = useCallback(async () => {
+    return new Promise<boolean>((resolve) => {
+      setTimeout(() => resolve(true), 3000);
+    });
+  }, []);
 
   const authContext: BackendAuthContext = {
     authState: authnState,
     signIn,
     signOut,
-    ping,
+    checkSessionIsValid,
     isLoggedIn: authnState.isAuthenticated(),
   };
 

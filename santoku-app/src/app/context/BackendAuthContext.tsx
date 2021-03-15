@@ -5,7 +5,7 @@ export interface BackendAuthContext {
   readonly authState: AuthenticationState;
   signIn: () => Promise<void>;
   signOut: () => Promise<void>;
-  ping: () => Promise<void>;
+  checkSessionIsValid: () => Promise<boolean>;
   isLoggedIn: boolean;
 }
 
@@ -21,7 +21,7 @@ const warningObject = {
   signOut: () => {
     throw new Error(warningMessage);
   },
-  ping: () => {
+  checkSessionIsValid: () => {
     throw new Error(warningMessage);
   },
   isLoggedIn: false,
