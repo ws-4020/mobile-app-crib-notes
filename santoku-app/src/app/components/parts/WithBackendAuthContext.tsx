@@ -15,12 +15,10 @@ const WithBackendAuthContext: React.FC<Props> = ({children}) => {
   const [authnState, setAuthnState] = useState<AuthenticationState>(NotAuthenticated);
 
   const signIn = useCallback(async () => {
-    // TODO::エラーハンドリングは未実装
     setAuthnState(await backendAuth.signIn());
   }, []);
 
   const signOut = useCallback(async () => {
-    // TODO::エラーハンドリングは未実装
     await backendAuth.signOut(authnState);
     setAuthnState(NotAuthenticated);
   }, [authnState]);

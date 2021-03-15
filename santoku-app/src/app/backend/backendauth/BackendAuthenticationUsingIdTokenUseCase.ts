@@ -2,7 +2,7 @@ import {AuthenticationState} from '../authn/AuthenticationState';
 import {OidcAuthCodeFlowAuthenticationUseCase} from '../authn/oidc/OidcAuthCodeFlowAuthenticationUseCase';
 import {OidcAuthenticated, OidcRefreshableAuthenticated} from '../authn/oidc/OidcAuthenticationState';
 import {log} from '../../../framework/logging';
-import {BackendAuthService} from '../../service/BackendAuthService';
+import {BackendAuthService} from './BackendAuthService';
 
 const oidc = OidcAuthCodeFlowAuthenticationUseCase.INSTANCE;
 
@@ -11,15 +11,21 @@ function translateTo<T>(domain: any): T {
   return {...domain};
 }
 
-class AuthnStateData {
-  accessTokenExpirationDate?: string;
-  accessToken?: string;
-  idToken?: string;
-  refreshToken?: string;
+interface AuthnStateData {
+  idToken: string;
+  refreshToken: string;
 }
 
 class BackendAuthenticationUsingIDTokenUseCase {
   static INSTANCE = new BackendAuthenticationUsingIDTokenUseCase();
+
+  async siginInBackend(idToken: string): Promise<void> {
+    await BackendAuthService.signIn(idToken);
+  }
+
+  async siginOutBackend(): Promise<void> {
+    await BackendAuthService.signOut();
+  }
 
   async signIn(): Promise<AuthenticationState> {
     const storedAuthState = await oidc.loadStoredState();
@@ -27,14 +33,12 @@ class BackendAuthenticationUsingIDTokenUseCase {
       // 端末認証
       const authState = await oidc.refresh(storedAuthState);
       const authnStateData = translateTo<AuthnStateData>(authState);
-      await BackendAuthService.login('userName', 'password');
-      await BackendAuthService.refreshCsrfToken();
+      await this.siginInBackend(authnStateData.idToken);
       return authState;
     } else {
       const authState = await oidc.signIn();
       const authnStateData = translateTo<AuthnStateData>(authState);
-      await BackendAuthService.logout();
-      await BackendAuthService.refreshCsrfToken();
+      await this.siginInBackend(authnStateData.idToken);
       return authState;
     }
   }
@@ -45,6 +49,7 @@ class BackendAuthenticationUsingIDTokenUseCase {
       if (authnState instanceof OidcAuthenticated) {
         await oidc.signOut(authnState);
       }
+      await this.siginOutBackend();
     } catch (e) {
       // TODO エラー処理
       log.error(() => 'Exception occurred while signing out. exception: %o', e);
