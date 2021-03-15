@@ -35,7 +35,6 @@ export const BackendAuthSignIn: React.FC = () => {
         setLoading(true);
         try {
           const isValid = await authContext.checkSessionIsValid();
-          console.log(isValid);
 
           if (authContext.isLoggedIn && isValid) {
             navigation.dispatch(StackActions.pop());
