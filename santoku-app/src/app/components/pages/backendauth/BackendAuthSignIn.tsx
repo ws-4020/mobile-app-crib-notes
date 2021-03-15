@@ -10,7 +10,7 @@ export const BackendAuthSignIn: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const signIn = useCallback(async () => {
     setLoading(true);
-    await authContext.login('aaa', '');
+    await authContext.signIn();
     setLoading(false);
     navigation.dispatch(StackActions.pop());
   }, [setLoading, authContext, navigation]);

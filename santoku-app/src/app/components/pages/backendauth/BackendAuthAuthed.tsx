@@ -8,7 +8,7 @@ export const BackendAuthAuthed: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const signOut = useCallback(async () => {
     setLoading(true);
-    await authContext.logout();
+    await authContext.signOut();
     setLoading(false);
   }, [authContext]);
 

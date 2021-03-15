@@ -1,11 +1,12 @@
 import {NavigatorScreenParams, useNavigation} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {BackendAuthContextProvider, useBackendAuthContext} from '../../../context/BackendAuthContext';
+import {useBackendAuthContext} from '../../../context/BackendAuthContext';
 import React, {useCallback, useEffect} from 'react';
 import {AppState, AppStateStatus} from 'react-native';
 import {BackendAuthAuthed} from './BackendAuthAuthed';
 import {BackendAuthUnauthed} from './BackendAuthUnauthed';
 import {BackendAuthSignIn} from './BackendAuthSignIn';
+import WithBackendAuthContext from '../../parts/WithBackendAuthContext';
 
 type MainStackParamList = {
   BackendAuthAuthed: undefined;
@@ -34,19 +35,17 @@ type RootStackParamList = {
 const rootNav = createStackNavigator<RootStackParamList>();
 const BackendAuthRootStackNav: React.FC = () => {
   return (
-    <BackendAuthContextProvider>
-      <rootNav.Navigator screenOptions={{headerShown: false}} mode="modal">
-        <rootNav.Screen name="BackendAuthMain" component={BackendAuthMainStackNav} />
-        <rootNav.Screen
-          name="BackendAuthSignIn"
-          component={BackendAuthSignIn}
-          options={{
-            headerShown: false,
-            headerTransparent: true,
-          }}
-        />
-      </rootNav.Navigator>
-    </BackendAuthContextProvider>
+    <rootNav.Navigator screenOptions={{headerShown: false}} mode="modal">
+      <rootNav.Screen name="BackendAuthMain" component={BackendAuthMainStackNav} />
+      <rootNav.Screen
+        name="BackendAuthSignIn"
+        component={BackendAuthSignIn}
+        options={{
+          headerShown: false,
+          headerTransparent: true,
+        }}
+      />
+    </rootNav.Navigator>
   );
 };
 
@@ -71,9 +70,9 @@ const BackendAuth: React.FC = () => {
   }, [handleAppStateChange]);
 
   return (
-    <BackendAuthContextProvider>
+    <WithBackendAuthContext>
       <BackendAuthRootStackNav />
-    </BackendAuthContextProvider>
+    </WithBackendAuthContext>
   );
 };
 
