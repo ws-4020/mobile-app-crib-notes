@@ -13,7 +13,8 @@ module.exports = {
       'reference/notification/overview',
       'reference/notification/infrastructure',
       'reference/notification/configuration',
-      'reference/notification/backend'
+      'reference/notification/backend',
+      'reference/notification/client',
     ],
   },
   guide: {
