@@ -1,10 +1,8 @@
 import React, {useContext, useState} from 'react';
 import {AuthenticationState, NotAuthenticated} from '../backend/authn/AuthenticationState';
-import {OidcAuthCodeFlowAuthenticationUseCase} from '../backend/authn/oidc/OidcAuthCodeFlowAuthenticationUseCase';
-import {OidcAuthenticated} from '../backend/authn/oidc/OidcAuthenticationState';
-import {BackendAuthService} from '../service/BackendAuthService';
+import {BackendAuthenticationUsingIDTokenUseCase} from '../backend/backendauth/BackendAuthenticationUsingIdTokenUseCase';
 
-const oidc = OidcAuthCodeFlowAuthenticationUseCase.INSTANCE;
+const backendAuth = BackendAuthenticationUsingIDTokenUseCase.INSTANCE;
 
 export class AccountConflictError {}
 
@@ -28,19 +26,13 @@ export const BackendAuthContextProvider: React.FC = ({children}) => {
   const contextValue: ContextValueType = {
     login: async () => {
       // TODO::エラーハンドリングは未実装
-      setAuthnState(await oidc.signIn());
-      await BackendAuthService.login('userName', 'password');
-      await BackendAuthService.refreshCsrfToken();
+      setAuthnState(await backendAuth.signIn());
       setLoginUserName('userName');
     },
     logout: async () => {
       // TODO::エラーハンドリングは未実装
-      if (authnState instanceof OidcAuthenticated) {
-        await oidc.signOut(authnState);
-      }
+      await backendAuth.signOut(authnState);
       setAuthnState(NotAuthenticated);
-      await BackendAuthService.logout();
-      await BackendAuthService.refreshCsrfToken();
       setLoginUserName('');
     },
     loginUserName,
