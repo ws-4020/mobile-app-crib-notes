@@ -1,10 +1,9 @@
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {useState, useCallback} from 'react';
 import {Content, Spinner} from 'native-base';
 import * as LocalAuthentication from 'expo-local-authentication';
 import {useStatelessLoginContext} from '../../../context/StatelessLoginContext';
 import {Container, Title, Text, TextButton, Section, Description, translateToViewData} from '../../basics';
 import WithStatelessLoginContext from '../../parts/WithStatelessLoginContext';
-import {Alert} from 'react-native';
 
 class AuthnStateViewData {
   accessTokenExpirationDate?: string;
@@ -18,15 +17,17 @@ const StatelessAuthInner: React.FC = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [hasJustSignOut, setHasJustSignOut] = useState<boolean>(false);
+  const [testMessage, setTestMessage] = useState<string>('');
 
   const signIn = useCallback(async () => {
     setLoading(true);
-    const success = await LocalAuthentication.authenticateAsync({
-      promptMessage: '認証してください',
+    setTestMessage('');
+    const {success} = await LocalAuthentication.authenticateAsync({
+      promptMessage: 'デバイス認証してください',
       cancelLabel: 'cancel',
-    }).catch((error) => console.log(error));
+    });
     if (success) {
-      Alert.alert(success ? 'デバイス認証済み' : '認証できていません');
+      setTestMessage(' (デバイス認証済み)');
     }
     await loginContextSignIn();
     setHasJustSignOut(false);
@@ -92,7 +93,7 @@ const StatelessAuthInner: React.FC = () => {
                   すぐにアプリに戻ってきてサインインが完了します。
                 </Description>
               )}
-              <TextButton onPress={signIn} value={'サインイン'} />
+              <TextButton onPress={signIn} value={'サインイン' + testMessage} />
             </>
           )}
         </Content>
