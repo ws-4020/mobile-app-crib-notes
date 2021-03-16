@@ -93,7 +93,7 @@ const BackendAuthScreen: React.FC = () => {
         name="BackendAuth"
         component={BackendAuth}
         options={{
-          title: 'IDトークンを使用したバックエンド認証',
+          title: 'バックエンド認証 with IDトークン',
           headerStyle: {backgroundColor: '#9DC6BF'},
           headerTitleStyle: {fontWeight: 'bold'},
           headerLeft: () => (

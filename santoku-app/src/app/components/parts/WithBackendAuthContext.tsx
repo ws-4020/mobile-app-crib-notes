@@ -2,7 +2,8 @@ import React, {useCallback, useState} from 'react';
 import {AuthenticationState, NotAuthenticated} from '../../backend/authn/AuthenticationState';
 import type {BackendAuthContext} from '../../context/BackendAuthContext';
 import {BackendAuthProvider} from '../../context/BackendAuthContext';
-import {BackendAuthenticationUsingIDTokenUseCase} from '../../backend/backendauth/BackendAuthenticationUsingIdTokenUseCase';
+import {BackendAuthenticationUsingIDTokenUseCase} from '../../backend/authn/backend/BackendAuthenticationUsingIdTokenUseCase';
+import {BackendAuthenticationState} from 'src/app/backend/authn/backend/BackendAuthenticationState';
 
 const backendAuth = BackendAuthenticationUsingIDTokenUseCase.INSTANCE;
 
@@ -30,7 +31,7 @@ const WithBackendAuthContext: React.FC<Props> = ({children}) => {
   }, []);
 
   const authContext: BackendAuthContext = {
-    authState: authnState,
+    authnState,
     signIn,
     signOut,
     checkSessionIsValid,

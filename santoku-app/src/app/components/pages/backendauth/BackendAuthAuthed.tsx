@@ -6,6 +6,7 @@ import {Container, Description, Section, TextButton} from '../../basics';
 export const BackendAuthAuthed: React.FC = () => {
   const authContext = useBackendAuthContext();
   const [loading, setLoading] = useState<boolean>(false);
+
   const signOut = useCallback(async () => {
     setLoading(true);
     await authContext.signOut();

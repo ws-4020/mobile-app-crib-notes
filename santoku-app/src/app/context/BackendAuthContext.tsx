@@ -1,8 +1,8 @@
 import {createContext, useContext} from 'react';
-import type {AuthenticationState} from '../backend/authn/AuthenticationState';
+import {AuthenticationState} from '../backend/authn/AuthenticationState';
 
 export interface BackendAuthContext {
-  readonly authState: AuthenticationState;
+  readonly authnState: AuthenticationState;
   signIn: () => Promise<void>;
   signOut: () => Promise<void>;
   checkSessionIsValid: () => Promise<boolean>;
@@ -12,7 +12,7 @@ export interface BackendAuthContext {
 const warningMessage = 'You probably forgot to put <BackendAuthProvider>.';
 
 const warningObject = {
-  get authState(): AuthenticationState {
+  get authnState(): AuthenticationState {
     throw new Error(warningMessage);
   },
   signIn: () => {

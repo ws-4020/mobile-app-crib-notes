@@ -55,6 +55,7 @@ const BackendAuth: React.FC = () => {
   const handleAppStateChange = useCallback(
     (nextAppState: AppStateStatus) => {
       if (nextAppState !== 'active') {
+        // activeじゃなくなる場合はサインイン画面をポップアップ表示
         navigation.navigate('BackendAuthSignIn');
       }
     },
