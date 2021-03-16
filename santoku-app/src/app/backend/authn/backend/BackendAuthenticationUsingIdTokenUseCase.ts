@@ -5,6 +5,8 @@ import {log} from '../../../../framework/logging';
 import {BackendAuthnService} from '../../BackendAuthnService';
 import {Cookie} from '@react-native-community/cookies';
 import {BackendAuthenticationState} from './BackendAuthenticationState';
+import * as LocalAuthentication from 'expo-local-authentication';
+import { SimpleConsoleLogger } from 'src/framework/logging/SimpleConsoleLogger';
 
 const oidc = OidcAuthCodeFlowAuthenticationUseCase.INSTANCE;
 
@@ -26,8 +28,15 @@ class BackendAuthenticationUsingIDTokenUseCase {
 
     try {
       const storedAuthState = await oidc.loadStoredState();
-      if (!storedAuthState.isAuthenticated() && storedAuthState instanceof OidcRefreshableAuthenticated) {
+      if (storedAuthState.isAuthenticated() && storedAuthState instanceof OidcRefreshableAuthenticated) {
         // 端末認証
+        const {success} = await LocalAuthentication.authenticateAsync({
+          promptMessage: 'デバイス認証してください',
+          cancelLabel: 'cancel',
+        });
+        if (!success) {
+          return new BackendAuthenticationState(null, null);
+        }
         authState = (await oidc.refresh(storedAuthState)) as OidcAuthenticated;
         sessionId = await this.siginInBackend(authState.idToken);
         return new BackendAuthenticationState(authState, sessionId);

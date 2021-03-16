@@ -26,7 +26,7 @@ const WithBackendAuthContext: React.FC<Props> = ({children}) => {
 
   const checkSessionIsValid = useCallback(async () => {
     return new Promise<boolean>((resolve) => {
-      setTimeout(() => resolve(true), 3000);
+      setTimeout(() => resolve(false), 3000);
     });
   }, []);
 
