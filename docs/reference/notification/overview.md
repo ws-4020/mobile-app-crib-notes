@@ -64,7 +64,7 @@ title: 概要
 
 AndroidやiOSといった主要なモバイル端末のOSでは、OSの開発元の会社によってプッシュ通知を配信するサービスが提供されています。
 Androidであれば[Firebase Cloud Messaging (FCM)](https://firebase.google.com/docs/cloud-messaging?hl=ja)がその役割を内包しています。
-iOSであれば[Apple Push Notification service (APNs) ](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server)が該当します。
+iOSであれば[Apple Push Notification service (APNs)](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server)が該当します。
 開発者はそれぞれのサービスのAPIを呼びだすことでリモート通知を送信できます。
 
 AndroidならFCM、iOSならAPNsのAPIを直接呼びだすことで、各OS特有の細かいオプションも含めた全ての機能を利用できます。

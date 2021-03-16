@@ -14,10 +14,12 @@ title: 各サービスの初期設定
 2. 左側のメニューから「Certificates, IDs & Profiles」を選択
 3. 左側のメニューから「Identifiers」内の「App IDs」を選択し、右上にある＋ボタンを押す
     - App IDを発行する権限がない場合は、メニューにApp IDsが表示されません。その場合は権限を持つユーザに作成を依頼してください
-4. Name, TeamID, App ID Suffixを入力
+4. Name, Bundle IDを入力
+5. App Servicesセクション内のPush Notificationにチェックを入れて保存
 
-アプリIDが既に発行済みの場合も、App Services内のPush Notificationにチェックが入っているか改めて確認し、
-チェックが入っていなければ入れておきましょう。
+:::note
+既存のアプリIDを利用する場合は、そのアプリIDの設定を開き、App ServiceセクションでPush Notificationが許可されているか確認しておきましょう。
+:::
 
 ### APNs Auth Keyの発行
 
