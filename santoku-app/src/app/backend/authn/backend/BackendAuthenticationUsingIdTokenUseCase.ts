@@ -1,4 +1,4 @@
-import {AuthenticationState} from '../AuthenticationState';
+import {AuthenticationState, NotAuthenticated} from '../AuthenticationState';
 import {OidcAuthCodeFlowAuthenticationUseCase} from '../oidc/OidcAuthCodeFlowAuthenticationUseCase';
 import {OidcAuthenticated, OidcRefreshableAuthenticated} from '../oidc/OidcAuthenticationState';
 import {log} from '../../../../framework/logging';
@@ -6,7 +6,6 @@ import {BackendAuthnService} from '../../BackendAuthnService';
 import {Cookie} from '@react-native-community/cookies';
 import {BackendAuthenticationState} from './BackendAuthenticationState';
 import * as LocalAuthentication from 'expo-local-authentication';
-import { SimpleConsoleLogger } from 'src/framework/logging/SimpleConsoleLogger';
 
 const oidc = OidcAuthCodeFlowAuthenticationUseCase.INSTANCE;
 
@@ -65,6 +64,15 @@ class BackendAuthenticationUsingIDTokenUseCase {
     } catch (e) {
       log.error(() => 'Exception occurred while signing out. exception: %o', e);
     }
+  }
+
+  async loadStoredState(): Promise<AuthenticationState> {
+    try {
+      return oidc.loadStoredState();
+    } catch (e) {
+      log.error(() => 'Exception occurred while loading OIDC tokens from storage. exception: %o', e);
+    }
+    return NotAuthenticated;
   }
 }
 

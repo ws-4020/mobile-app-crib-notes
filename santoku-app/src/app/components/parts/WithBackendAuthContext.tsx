@@ -1,9 +1,11 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {AuthenticationState, NotAuthenticated} from '../../backend/authn/AuthenticationState';
 import type {BackendAuthContext} from '../../context/BackendAuthContext';
 import {BackendAuthProvider} from '../../context/BackendAuthContext';
 import {BackendAuthenticationUsingIDTokenUseCase} from '../../backend/authn/backend/BackendAuthenticationUsingIdTokenUseCase';
-import {BackendAuthenticationState} from 'src/app/backend/authn/backend/BackendAuthenticationState';
+import {Spinner} from 'native-base';
+import {BackendAuthenticationState} from '../../backend/authn/backend/BackendAuthenticationState';
+import {OidcAuthenticated} from '../../backend/authn/oidc/OidcAuthenticationState';
 
 const backendAuth = BackendAuthenticationUsingIDTokenUseCase.INSTANCE;
 
@@ -14,6 +16,7 @@ type Props = {
 
 const WithBackendAuthContext: React.FC<Props> = ({children}) => {
   const [authnState, setAuthnState] = useState<AuthenticationState>(NotAuthenticated);
+  const [initialized, setInitialized] = useState<boolean>(false);
 
   const signIn = useCallback(async () => {
     setAuthnState(await backendAuth.signIn());
@@ -30,6 +33,21 @@ const WithBackendAuthContext: React.FC<Props> = ({children}) => {
     });
   }, []);
 
+  useEffect(() => {
+    backendAuth
+      .loadStoredState()
+      .then((result) => {
+        if (result instanceof OidcAuthenticated) {
+          setAuthnState(new BackendAuthenticationState(result, null));
+        }
+      })
+      .finally(() => setInitialized(true));
+
+    return () => {
+      setInitialized(false);
+    };
+  }, []);
+
   const authContext: BackendAuthContext = {
     authnState,
     signIn,
@@ -37,6 +55,10 @@ const WithBackendAuthContext: React.FC<Props> = ({children}) => {
     checkSessionIsValid,
     isLoggedIn: authnState.isAuthenticated(),
   };
+
+  if (initialized === false) {
+    return <Spinner />;
+  }
 
   return <BackendAuthProvider value={authContext}>{children}</BackendAuthProvider>;
 };
