@@ -56,9 +56,10 @@ const WithBackendAuthContext: React.FC<Props> = ({children}) => {
     isLoggedIn: authnState.isAuthenticated(),
   };
 
-  if (initialized === false) {
-    return <Spinner />;
-  }
+  // FIX-ME 下記をつけると初回動かない
+  // if (initialized === false) {
+  //   return <Spinner />;
+  // }
 
   return <BackendAuthProvider value={authContext}>{children}</BackendAuthProvider>;
 };
