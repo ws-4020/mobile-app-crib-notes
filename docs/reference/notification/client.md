@@ -198,8 +198,8 @@ useEffect(() => {
       'アプリの起動中にリモート通知を受信しました',
       JSON.stringify({
         notification: message.notification,
-        data: message.data
-      })
+        data: message.data,
+      }),
     );
   });
 }, []);
