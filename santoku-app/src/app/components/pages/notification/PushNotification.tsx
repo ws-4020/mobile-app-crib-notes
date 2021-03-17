@@ -26,7 +26,6 @@ const PushNotification: React.FC = () => {
       );
     });
     // アプリを起動する前に受信していたメッセージがあったか確認
-    // (確認が終わるまではロード中表示にしておく)
     messaging()
       .getInitialNotification()
       .then((remoteMessage) => {
