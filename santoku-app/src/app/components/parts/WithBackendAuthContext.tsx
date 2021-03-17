@@ -38,7 +38,7 @@ const WithBackendAuthContext: React.FC<Props> = ({children}) => {
       .loadStoredState()
       .then((result) => {
         if (result instanceof OidcAuthenticated) {
-          setAuthnState(new BackendAuthenticationState(result, null));
+          setAuthnState(new BackendAuthenticationState(result));
         }
       })
       .finally(() => setInitialized(true));
