@@ -22,8 +22,7 @@ class BackendAuthenticationUsingIDTokenUseCase {
   }
 
   async signIn(): Promise<BackendAuthenticationState> {
-    let authState: OidcAuthenticated | null = null;
-    let sessionId: Cookie | null = null;
+    let sessionId: Cookie;
 
     try {
       const storedAuthState = await oidc.loadStoredState();
@@ -34,19 +33,19 @@ class BackendAuthenticationUsingIDTokenUseCase {
           cancelLabel: 'cancel',
         });
         if (!success) {
-          return new BackendAuthenticationState(null, null);
+          return new BackendAuthenticationState(NotAuthenticated);
         }
-        authState = (await oidc.refresh(storedAuthState)) as OidcAuthenticated;
+        const authState = (await oidc.refresh(storedAuthState)) as OidcAuthenticated;
         sessionId = await this.siginInBackend(authState.idToken);
         return new BackendAuthenticationState(authState, sessionId);
       } else {
-        authState = (await oidc.signIn()) as OidcAuthenticated;
+        const authState = (await oidc.signIn()) as OidcAuthenticated;
         sessionId = await this.siginInBackend(authState.idToken);
         return new BackendAuthenticationState(authState, sessionId);
       }
     } catch (e) {
       log.error(() => 'Exception occurred while signing in. exception: %o', e);
-      return new BackendAuthenticationState(authState, sessionId);
+      return new BackendAuthenticationState(NotAuthenticated);
     }
   }
 
@@ -54,7 +53,7 @@ class BackendAuthenticationUsingIDTokenUseCase {
     try {
       if (authnState instanceof BackendAuthenticationState) {
         const clientauthnState = authnState.getclientAuthenticationState();
-        if (clientauthnState !== null) {
+        if (clientauthnState instanceof OidcAuthenticated) {
           // OIDC認証破棄
           await oidc.signOut(clientauthnState);
         }
