@@ -24,7 +24,8 @@ title: 各サービスの初期設定
 ### APNs Auth Keyの発行
 
 iOS端末にリモート通知を送信するためには、APNs Auth Keyと呼ばれる、APNsを利用するための鍵ファイルが必要になります。
-まずはこのAPNs Auth Keyを発行しましょう。
+APNs Auth Keyは、Apple Developer Programのアカウント内に最大2つまでしか作成できません。
+既に発行済みのAPNs Auth Keyがあるかアカウント管理者の方に確認し、無ければ以下の手順でAPNs Auth Keyを発行してもらいましょう。
 
 1. [Apple Developer Member Center](https://developer.apple.com/membercenter/index.action)に、Apple Developer Programに登録したApple IDでログイン
     - Apple Developer Programに登録していないApple IDではAPNs Auth Keyは発行できません。
