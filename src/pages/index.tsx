@@ -20,12 +20,6 @@ const genericOverview = [
 
 const reactNativeOverview = [
   {
-    title: 'Use React Native',
-    to: 'react-native/guide',
-    imageUrl: 'img/undraw_docusaurus_tree.svg',
-    summary: <>開発ガイド</>,
-  },
-  {
     title: 'Learn React Native',
     to: 'react-native/learn',
     imageUrl: 'img/undraw_docusaurus_react.svg',
