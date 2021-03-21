@@ -81,6 +81,11 @@ project.ext.react = [
     enableHermes: false,
 ]
 
+project.ext.envConfigFiles = [
+    production : ".env.production",
+    development: ".env.development",
+]
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/expo-constants/scripts/get-app-config-android.gradle"
@@ -133,10 +138,12 @@ android {
 
     defaultConfig {
         applicationId "jp.fintan.mobile.SantokuApp"
+        applicationIdSuffix project.env.get("APP_ID_FLAVOR_SUFFIX")
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 4
         versionName "0.1.0"
+        resValue "string", "build_config_package", "jp.fintan.mobile.santokuapp"
     }
     splits {
         abi {
@@ -193,6 +200,16 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+
+    flavorDimensions "environment"
+    productFlavors {
+        development {
+            dimension "environment"
+        }
+        production {
+            dimension "environment"
         }
     }
 

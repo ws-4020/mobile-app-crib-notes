@@ -1,8 +1,8 @@
 {
   "main": "index.js",
   "scripts": {
-    "android": "react-native run-android --appId jp.fintan.mobile.SantokuApp --appIdSuffix debug",
-    "ios": "react-native run-ios",
+    "android": "react-native run-android --appId jp.fintan.mobile.SantokuApp --variant developmentDebug --appIdSuffix dev.debug",
+    "ios": "react-native run-ios --scheme Development --configuration Debug",
     "web": "expo start --web",
     "start": "react-native start",
     "test": "jest --detectOpenHandles --runInBand",
@@ -29,6 +29,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "0.63.4",
+    "react-native-config": "~1.4.0",
     "react-native-elements": "~3.3.0",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-reanimated": "~2.0.0",
