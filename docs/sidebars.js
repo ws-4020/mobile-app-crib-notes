@@ -10,12 +10,13 @@ module.exports = {
       'reference/auth/webassets-integration',
       'reference/auth/authn-with-backend-using-OIDC-and-device-authn',
     ],
-    プッシュ通知: ['doc1', 'doc2', 'doc3'],
-  },
-  guide: {
-    About: ['react-native/guide'],
-    環境構築: ['react-native/guide/environment-setup'],
-    画面遷移: ['react-native/guide/screen-transitions'],
+    プッシュ通知: [
+      'reference/notification/overview',
+      'reference/notification/infrastructure',
+      'reference/notification/configuration',
+      'reference/notification/backend',
+      'reference/notification/client',
+    ],
   },
   learn: [
     {
