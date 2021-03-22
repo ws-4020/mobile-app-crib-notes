@@ -12,7 +12,7 @@ Firebase SDKはAndroid, iOS, Web向けのものが提供されています。
 
 ### React Native Firebaseのインストール
 
-まず、react-native-firebaseをインストールします。
+まず、React Native Firebaseをインストールします。
 npmまたはyarnでインストール可能です。
 今回はFirebase Cloud Messagingを利用するために必要なものだけを追加していますが、Firebaseの他のサービスも利用する場合はその分も追加してください。
 
