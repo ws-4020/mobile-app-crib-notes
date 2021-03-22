@@ -13,7 +13,7 @@ Firebase Admin SDKは、Node.js、Java、Python、Go、C#の言語向けのも�
 
 Mavenを使用してアプリケーションをビルドしている場合は、pom.xmlに以下の依存関係を追加します。
 
-```maven title="pom.xml"
+```xml title="pom.xml"
 <dependency>
   <groupId>com.google.firebase</groupId>
   <artifactId>firebase-admin</artifactId>
@@ -23,7 +23,7 @@ Mavenを使用してアプリケーションをビルドしている場合は、
 
 Gradleを使用してアプリケーションをビルドしている場合は、build.gradleに以下の依存関係を追加します。
 
-```gradle title="build.gradle"
+```groovy title="build.gradle"
 dependencies {
   implementation 'com.google.firebase:firebase-admin:7.1.0'
 }
@@ -245,7 +245,7 @@ try {
 }
 ```
 
-許容されるトピック名は```[a-zA-Z0-9-_.~%]{1,900}```の範囲になります。
+許容されるトピック名は`[a-zA-Z0-9-_.~%]{1,900}`の範囲になります。
 存在しないトピック名を指定した場合は、自動的にそのトピックが作成されます。
 
 ### 指定したトピックの購読解除
