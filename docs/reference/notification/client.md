@@ -42,24 +42,14 @@ Firebaseへのアクセスに必要な認証情報ファイルを適切なフォ
 #### iOSの場合
 
 1. Firebaseのコンソール画面からGoogleService-Info.plistをダウンロード
-2. GoogleService-Info.plistファイルを`ios/{projectName}/GoogleService-Info.plist`として配置
-3. `ios/Podfile`ファイルに以下のように利用したいFirebaseサービスのpodを追記
-    - 今回はFirebase Cloud Messagingを利用するために必要なものだけを追記していますが、Firebaseの他のサービスも利用する場合はその分も追加してください
-
-    ```pod title="ios/Podfile" {2}
-    # add the Firebase pod for Firebase Cloud Messaging
-    pod 'Firebase/Messaging'
-    # add pods for any other desired Firebase products
-    # https://firebase.google.com/docs/ios/setup#available-pods
-    ```
-
-4. `ios/{projectName}/AppDelegate.m`ファイルの先頭のimport箇所に以下のように追記
+1. GoogleService-Info.plistファイルを`ios/{projectName}/GoogleService-Info.plist`として配置
+1. `ios/{projectName}/AppDelegate.m`ファイルの先頭のimport箇所に以下のように追記
 
     ```objectivec title="ios/{projectName}/AppDelegate.m" {1}
     #import <Firebase.h>
     ```
 
-5. `ios/{projectName}/AppDelegate.m`ファイルのdidFinishLaunchingWithOptions内に以下のように追記
+1. `ios/{projectName}/AppDelegate.m`ファイルのdidFinishLaunchingWithOptions内に以下のように追記
 
     ```objectivec title="ios/{projectName}/AppDelegate.m" {3-5}
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -72,7 +62,7 @@ Firebaseへのアクセスに必要な認証情報ファイルを適切なフォ
     }
     ```
 
-6. pod installを再実行
+1. pod installを再実行
 
     ```bash
     cd ios/
