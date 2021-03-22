@@ -1,13 +1,11 @@
-import Link from '@docusaurus/Link';
-import {DocusaurusContext} from '@docusaurus/types';
-import useBaseUrl from '@docusaurus/useBaseUrl';
+import { DocusaurusContext } from '@docusaurus/types';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import clsx from 'clsx';
 import React from 'react';
-
-import {PageList} from '../components';
+import { PageList } from '../components';
 import styles from './styles.module.css';
+
 
 const genericOverview = [
   {
@@ -42,13 +40,13 @@ function Home() {
         <div className="container">
           <h1 className="hero__title">{siteConfig?.title || ''}</h1>
           <p className="hero__subtitle">{siteConfig?.tagline || ''}</p>
-          <div className={styles.buttons}>
+          {/* <div className={styles.buttons}>
             <Link
               className={clsx('button button--secondary button--lg', styles.getStarted)}
               to={useBaseUrl('react-native/learn')}>
               Get Started
             </Link>
-          </div>
+          </div> */}
         </div>
       </header>
       <main>
