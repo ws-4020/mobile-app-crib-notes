@@ -4,7 +4,7 @@ title: バックエンドの実装
 
 ## FirebaseのAPIを呼びだすための初期設定
 
-バックエンド側からFirebaseのAPIを呼びだす際には、Firebase Admin SDKを利用します。
+バックエンド側からFirebaseのAPIを呼びだす際には、[Firebase Admin SDK](https://firebase.google.com/docs/admin/setup?hl=ja)を利用します。
 Firebase Admin SDKは、Node.js、Java、Python、Go、C#の言語向けのものが提供されています。
 今回はFirebase Admin SDK for Javaを使用する前提で解説します。
 他の言語を使用する際には、それぞれの言語向けのSDKのドキュメントを参照してください。
