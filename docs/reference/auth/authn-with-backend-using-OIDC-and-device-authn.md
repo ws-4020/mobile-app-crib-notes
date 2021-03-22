@@ -91,7 +91,12 @@ IDトークンはバックエンドサービスとの認証のみに使用する
 
 :::caution
 逆を言えば、IDトークンは（リライング・パーティ内でない）他システムとの連携で用いるのは不適切です。
-他システム連携によるアクセス許可は別の方式を採用してください。
+他システム連携によるアクセス制御は別の方式を採用してください。
+:::
+
+:::info
+IDトークンの妥当性検証については、[Amazon CognitoのIDトークンを利用したREST APIの認証例](https://fintan.jp)に詳細な記載があります。
+
 :::
 
 OpenID Connect認証と組合わせた認証シーケンスを次に示します。
@@ -127,3 +132,7 @@ OpenID Connect認証と組合わせた認証シーケンスを次に示します
 - [RFC 8252](https://www.rfc-editor.org/rfc/rfc8252.txt)に従うことで、認証方式の安全性を担保できる。また、[RFC 8252](https://www.rfc-editor.org/rfc/rfc8252.txt)を実装したSDK（[AppAuth](https://appauth.io/)）を用いることで品質と生産性向上を期待できる
 - 少ないコストで既存システムの認証方式を改修でき、ソフトウェア資産を流用できる
 - 端末認証と組合わせることで、リスクに対処しながら利便性を向上できる
+
+## 参考情報
+
+- [サンプル実装](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/santoku-app)
