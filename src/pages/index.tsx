@@ -1,9 +1,9 @@
-import { DocusaurusContext } from '@docusaurus/types';
+import {DocusaurusContext} from '@docusaurus/types';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import clsx from 'clsx';
 import React from 'react';
-import { PageList } from '../components';
+import {PageList} from '../components';
 import styles from './styles.module.css';
 
 
