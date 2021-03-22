@@ -161,6 +161,10 @@ module.exports = {
       {
         redirects: [
           {
+            from: '/docs/auth/overview', // string | string[]
+            to: '/reference/auth/overview', // string
+          },
+          {
             from: '/docs/notes-in-mobile-application-development', // string | string[]
             to: '/reference/security/awesome-sites', // string
           },
