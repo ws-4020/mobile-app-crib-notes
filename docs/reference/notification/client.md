@@ -10,17 +10,37 @@ Firebase SDKはAndroid, iOS, Web向けのものが提供されています。
 サンプルアプリとして公開している[santoku-app](https://github.com/Fintan-contents/mobile-app-crib-notes/tree/master/santoku-app)ではReact Nativeを利用しています。
 そのため、本ガイドではreact-native-firebaseというライブラリを利用して間接的にFirebase SDKを利用する例について解説します。
 
+### react-native-firebaseのインストール
+
+まず、react-native-firebaseをインストールします。
+npmまたはyarnでインストール可能です。
+今回はFirebase Cloud Messagingを利用するために必要なものだけを追加していますが、Firebaseの他のサービスも利用する場合はその分も追加してください。
+
+#### npmの場合
+
+```bash
+npm install --save @react-native-firebase/app
+npm install --save @react-native-firebase/messaging
+```
+
+#### yarnの場合
+
+```bash
+yarn add @react-native-firebase/app
+yarn add @react-native-firebase/messaging
+```
+
 ### Firebase SDKの導入と認証情報ファイルの配置
 
-まず、Firebase SDKをAndroid/iOSのそれぞれのビルド時の依存関係に追加し、
+次に、Firebase SDKをAndroid/iOSのそれぞれのビルド時の依存関係に追加し、
 Firebaseへのアクセスに必要な認証情報ファイルを適切なフォルダに設置します。
 それぞれのOS向けの手順は以下のとおりです。
 
 #### Androidの場合
 
 1. Firebaseのコンソール画面からgoogle-services.jsonをダウンロード
-2. google-services.jsonを、React Nativeプロジェクトフォルダ内の`android/app/google-services.json` として配置
-3. `android/build.gradle`ファイルに以下のように追記
+1. google-services.jsonを、React Nativeプロジェクトフォルダ内の`android/app/google-services.json` として配置
+1. `android/build.gradle`ファイルに以下のように追記
 
     ```gradle title="android/build.gradle" {4}
     buildscript {
@@ -32,7 +52,7 @@ Firebaseへのアクセスに必要な認証情報ファイルを適切なフォ
     }
     ```
 
-4. `android/app/build.gradle`ファイルに以下のように追記
+1. `android/app/build.gradle`ファイルに以下のように追記
 
     ```gradle title="android/app/build.gradle" {2}
     apply plugin: 'com.android.application'
@@ -69,25 +89,6 @@ Firebaseへのアクセスに必要な認証情報ファイルを適切なフォ
     pod install --repo-update
     ```
 
-### react-native-firebaseのインストール
-
-次に、react-native-firebaseをインストールします。
-npmまたはyarnでインストール可能です。
-今回はFirebase Cloud Messagingを利用するために必要なものだけを追加していますが、Firebaseの他のサービスも利用する場合はその分も追加してください。
-
-#### npmの場合
-
-```bash
-npm install --save @react-native-firebase/app
-npm install --save @react-native-firebase/messaging
-```
-
-#### yarnの場合
-
-```bash
-yarn add @react-native-firebase/app
-yarn add @react-native-firebase/messaging
-```
 
 以上でリモート通知機能の開発に必要な初期設定は完了です。
 
