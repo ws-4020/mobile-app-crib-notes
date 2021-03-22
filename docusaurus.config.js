@@ -190,6 +190,10 @@ module.exports = {
             to: '/reference/auth/stateless-authn', // string
           },
           {
+            from: '/docs/auth/authn-with-backend-using-OIDC-and-device-authn', // string | string[]
+            to: '/reference/auth/authn-with-backend-using-OIDC-and-device-authn', // string
+          },
+          {
             from: '/docs', // string | string[]
             to: '/reference', // string
           },

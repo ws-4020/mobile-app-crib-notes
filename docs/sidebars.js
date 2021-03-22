@@ -8,6 +8,7 @@ module.exports = {
       'reference/auth/manage-credentials',
       'reference/auth/stateless-authn',
       'reference/auth/webassets-integration',
+      'reference/auth/authn-with-backend-using-OIDC-and-device-authn',
     ],
     プッシュ通知: ['doc1', 'doc2', 'doc3'],
   },
