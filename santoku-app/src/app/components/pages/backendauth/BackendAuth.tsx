@@ -126,10 +126,11 @@ const BackendUnauthed: React.FC<BackendUnauthedProps> = (props) => {
     <Content>
       <Section>
         <Description>
-          リフレッシュトークンと生体認証を使った認証情報の再入力省略の例を示します。 以下のボタンをタップすると、まだAWS
-          Cognitoの認証が完了していない場合はAWS Cognitoの認証画面に遷移し、認証を求められます。
+           OpenID Connect認証で得たIDトークンを用いて、バックエンドサービスとセッションを確立する例を示します。
+          以前取得したリフレッシュトークンが端末内に存在する場合は、そのリフレッシュトークンを用いてIDトークンを再取得します。
+          以下のボタンをタップすると、まだAWS Cognitoの認証が完了していない場合はAWS Cognitoの認証画面に遷移し、認証を求められます。
           IDとパスワードはそれぞれ「guest」「P@ssw0rd」を入力してください。
-          以前取得したリフレッシュトークンが端末内に存在する場合は、代わりに端末認証（指紋認証、Face IDなど）が求められます。
+          リフレッシュトークンを用いてIDトークンを再取得する場合、端末所持者の本人確認として端末認証（指紋認証、Face IDなど）が求められます。
         </Description>
         <TextButton onPress={onSignIn} value={'サインイン'} />
         <Description>
