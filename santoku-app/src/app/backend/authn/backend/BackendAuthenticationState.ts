@@ -1,29 +1,28 @@
-import {Cookie} from '@react-native-community/cookies';
 import {AuthenticationState} from '../AuthenticationState';
 
 class BackendAuthenticationState implements AuthenticationState {
-  readonly clientAuthenticationState: AuthenticationState;
-  readonly sessionId?: Cookie;
+  readonly oidcAuthenticationState: AuthenticationState;
+  readonly backendSessionCreated: boolean;
 
-  constructor(clientAuthenticationState: AuthenticationState, sessionId?: Cookie) {
-    this.clientAuthenticationState = clientAuthenticationState;
-    this.sessionId = sessionId;
+  constructor(oidcAuthenticationState: AuthenticationState, backendSessionCreated: boolean) {
+    this.oidcAuthenticationState = oidcAuthenticationState;
+    this.backendSessionCreated = backendSessionCreated;
   }
 
-  public getclientAuthenticationState(): AuthenticationState {
-    return this.clientAuthenticationState;
+  public getOidcAuthenticationState(): AuthenticationState {
+    return this.oidcAuthenticationState;
   }
 
-  public getSessionId(): Cookie | undefined {
-    return this.sessionId;
+  public isOidcAuthenticated(): boolean {
+    return this.oidcAuthenticationState.isAuthenticated();
   }
 
-  public isClientAuthenticated(): boolean {
-    return this.clientAuthenticationState.isAuthenticated();
+  public isBackendAuthenticated(): boolean {
+    return this.backendSessionCreated;
   }
 
   public isAuthenticated(): boolean {
-    return this.sessionId !== null;
+    return this.isOidcAuthenticated() && this.isBackendAuthenticated();
   }
 }
 

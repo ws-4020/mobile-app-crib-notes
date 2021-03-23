@@ -1,6 +1,5 @@
 import React, {useState, useCallback} from 'react';
 import {Content, Spinner} from 'native-base';
-import * as LocalAuthentication from 'expo-local-authentication';
 import {useStatelessLoginContext} from '../../../context/StatelessLoginContext';
 import {Container, Title, Text, TextButton, Section, Description, translateToViewData} from '../../basics';
 import WithStatelessLoginContext from '../../parts/WithStatelessLoginContext';
