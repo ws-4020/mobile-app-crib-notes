@@ -72,6 +72,6 @@ OpenID Connect認証と組合わせた認証シーケンスを次に示します
 
 本認証方式で期待される効果は次の通りです。
 
-- [RFC 8252](https://www.rfc-editor.org/rfc/rfc8252.txt)に従うことで、認証方式の安全性を担保できる。また、[RFC 8252](https://www.rfc-editor.org/rfc/rfc8252.txt)を実装したSDK（[AppAuth](https://appauth.io/)）を用いることで品質と生産性向上を期待できる
+- [RFC 8252](https://www.rfc-editor.org/rfc/rfc8252.txt)を実装したSDK（[AppAuth](https://appauth.io/)）を用いることで品質と生産性向上を期待できる
 - 少ないコストで既存システムの認証方式を改修でき、ソフトウェア資産を流用できる
 - 端末認証と組合わせることで、リスクに対処しながら利便性を向上できる
