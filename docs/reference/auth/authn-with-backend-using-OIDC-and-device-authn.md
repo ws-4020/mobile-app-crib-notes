@@ -17,8 +17,12 @@ title: OpenID Connectと端末認証を用いたモバイルアプリケーシ�
 
 ### RFC 8252に従ったOpenID Connect認証
 
-[OpenID Connectにおける認証フロー](./stateless-authn.md#openid-connectにおける認証フロー)の紹介にあるとおり、[RFC 8252](https://www.rfc-editor.org/rfc/rfc8252.txt)ではモバイルアプリケーションの認証にOAuth 2.0を利用するときのBest Current Practiceを定義しています。
+[RFC 8252](https://www.rfc-editor.org/rfc/rfc8252.txt)では、モバイルアプリケーションの認証にOAuth 2.0を利用するときのBest Current Practiceを定義しています。
 これに従うことで、充分に検証された手法で認証出来ます。
+
+:::info
+[RFC 8252](https://www.rfc-editor.org/rfc/rfc8252.txt)については、[OpenID Connectにおける認証フロー](./stateless-authn.md#openid-connectにおける認証フロー)でも紹介しております。
+:::
 
 ### IDトークンによるバックエンドサービスとのセッション確立
 
