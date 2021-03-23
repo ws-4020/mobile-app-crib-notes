@@ -135,7 +135,7 @@ const Drawer = createDrawerNavigator();
 
 const Navigator: React.FC = () => {
   return (
-    <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+    <Drawer.Navigator drawerContent={DrawerContent}>
       <Drawer.Screen name="TopDrawer" component={TopScreen} />
       <Drawer.Screen name="AuthIntegrationWithWebApps" component={AuthIntegrationWithWebAppsStackScreen} />
       <Drawer.Screen name="StatelessAuth" component={StatelessAuthScreen} />

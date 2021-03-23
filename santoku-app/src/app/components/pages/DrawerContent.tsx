@@ -2,6 +2,7 @@ import React from 'react';
 // ReactNativeを使用したコンポーネントの呼び出し
 import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
 import {Container, Content, ListItem} from 'native-base';
+import {DrawerContentComponentProps, DrawerContentOptions} from '@react-navigation/drawer';
 
 type MenuProps = {
   to: string;
@@ -20,12 +21,7 @@ const MenuItem: React.FC<MenuProps> = (props) => {
   );
 };
 
-type Props = {
-  to: string;
-  navigation: any;
-};
-
-const DrawerContent: React.FC<Props> = (props) => {
+const DrawerContent: React.FC<DrawerContentComponentProps<DrawerContentOptions>> = (props) => {
   return (
     <Container style={styles.containerBackgroundStyle}>
       <SafeAreaView style={styles.headerStyle}>
