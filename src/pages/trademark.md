@@ -7,7 +7,7 @@ title: 商標について
 
 ### 各社の商標または登録商標
 
-- 「Apple」「iCloud」「Safari」「Keychain」「iOS」「iPhone」「macOS」は、米国およびその他の国で登録された Apple Inc. の商標です。  
+- 「Apple」「iCloud」「Safari」「Keychain」「iOS」「iPhone」「macOS」は、米国およびその他の国で登録されたApple Inc.　の商標です。  
   ※iPhone商標は、アイホン株式会社のライセンスに基づき使用されています。  
   ※iOS商標は、 Cisco Systems, Inc. のライセンスに基づき使用されています。
 - 「Google Chrome」「Android」「Flutter」「Firebase」は、 Google LLCの登録商標です。
