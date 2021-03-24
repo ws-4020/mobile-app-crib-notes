@@ -18,40 +18,41 @@ type Props = {
 
 const WithBackendAuthContext: React.FC<Props> = ({children}) => {
   const backendNotAuthenticated = new BackendAuthenticationState(NotAuthenticated, false);
-  const [authnState, setAuthnState] = useState<BackendAuthenticationState>(backendNotAuthenticated);
+  const [backendAuthnState, setBackendAuthnState] = useState<BackendAuthenticationState>(backendNotAuthenticated);
   const [initialized, setInitialized] = useState<boolean>(false);
 
   const signIn = useCallback(async () => {
-    const backendAuthnState = await backendAuth.signIn();
-    setAuthnState(backendAuthnState);
+    const newBackendAuthnState = await backendAuth.signIn();
+    setBackendAuthnState(newBackendAuthnState);
   }, []);
 
   const signOut = useCallback(async () => {
-    await backendAuth.signOut(authnState);
-    setAuthnState(new BackendAuthenticationState(NotAuthenticated, false));
-  }, [authnState]);
+    await backendAuth.signOut(backendAuthnState);
+    setBackendAuthnState(new BackendAuthenticationState(NotAuthenticated, false));
+  }, [backendAuthnState]);
 
   const refreshSession = useCallback(async () => {
-    if (authnState instanceof OidcRefreshableAuthenticated) {
-      const backendAuthnState = await backendAuth.refreshSessionAsync(authnState);
-      setAuthnState(backendAuthnState);
+    const oidcAuthnState = backendAuthnState.getOidcAuthenticationState();
+    if (oidcAuthnState.isAuthenticated()) {
+      const newBackendAuthnState = await backendAuth.refreshSessionAsync(oidcAuthnState as OidcRefreshableAuthenticated);
+      setBackendAuthnState(newBackendAuthnState);
     } else {
-      setAuthnState(new BackendAuthenticationState(NotAuthenticated, false));
+      setBackendAuthnState(new BackendAuthenticationState(NotAuthenticated, false));
     }
-  }, [authnState]);
+  }, [backendAuthnState]);
 
   const authContext: BackendAuthContext = {
-    authnState,
+    authnState: backendAuthnState,
     signIn,
     signOut,
     refreshSession,
-    isLoggedIn: authnState.isAuthenticated(),
+    isLoggedIn: backendAuthnState.isAuthenticated(),
   };
 
   useEffect(() => {
     oidc
       .loadStoredState()
-      .then((oidcAuthnState) => setAuthnState(new BackendAuthenticationState(oidcAuthnState, false)))
+      .then((oidcAuthnState) => setBackendAuthnState(new BackendAuthenticationState(oidcAuthnState, false)))
       .finally(() => setInitialized(true));
     return () => {
       setInitialized(false);
