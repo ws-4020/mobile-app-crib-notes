@@ -126,7 +126,7 @@ const BackendUnauthed: React.FC<BackendUnauthedProps> = (props) => {
     <Content>
       <Section>
         <Description>
-           OpenID Connect認証で得たIDトークンを用いて、バックエンドサービスとセッションを確立する例を示します。
+          OpenID Connect認証で得たIDトークンを用いて、バックエンドサービスとセッションを確立する例を示します。
           以前取得したリフレッシュトークンが端末内に存在する場合は、そのリフレッシュトークンを用いてIDトークンを再取得します。
           以下のボタンをタップすると、まだAWS Cognitoの認証が完了していない場合はAWS Cognitoの認証画面に遷移し、認証を求められます。
           IDとパスワードはそれぞれ「guest」「P@ssw0rd」を入力してください。
