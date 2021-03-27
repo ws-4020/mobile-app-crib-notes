@@ -22,9 +22,27 @@ Config.WEB_APP_URI;
 
 react-native-configの設定値は、モジュールの`build.gradle`や`AndroidManifest.xml`でも参照できます。プロダクトフレーバーごとの設定の一部は、この機能を利用してそれらのファイルで設定しています。
 
+Gradleでビルドするときにビルドバリアントとして認識できるように、フレーバー設定を追加しています。
+
+```groovy title="android/app/build.gradle"
+android {
+// ~~~ Snip ~~~
+    flavorDimensions "environment"
+    productFlavors {
+        development {
+            dimension "environment"
+        }
+        production {
+            dimension "environment"
+        }
+    }
+// ~~~ Snip ~~~
+}
+```
+
 [react-native-configのドキュメント](https://github.com/luggit/react-native-config#android-1)で説明されている通り、フレーバーに対応する設定ファイルを次のように設定しています。
 
-```groovy
+```groovy title="android/app/build.gradle"
 project.ext.envConfigFiles = [
     production: ".env.production",
     development: ".env.development",

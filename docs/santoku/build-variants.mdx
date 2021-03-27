@@ -163,7 +163,7 @@ Android向けのビルドには、Google Playのアップロード鍵を保存�
 起動時に`variants`と`appIdSuffix`の2つのオプションを渡すと、ビルドタイプとプロダクトフレーバーを指定してAndroidアプリを起動できます。
 
 ```bash
-npm run android -- --variants "<flavor><Type>" --appIdSuffix "<flavorSuffix><typeSuffix>"
+npm run android -- --appId jp.fintan.mobile.SantokuApp --variants "<flavor><Type>" --appIdSuffix "<flavorSuffix><typeSuffix>"
 ```
 
 例えばビルドタイプDebug、プロダクトフレーバーDevelopmentでアプリを実行するには次のようにしてください。
@@ -172,11 +172,22 @@ npm run android -- --variants "<flavor><Type>" --appIdSuffix "<flavorSuffix><typ
 npm run android -- --variant "developmentDebug" --appIdSuffix "dev.debug"
 ```
 
-ビルドタイプをReleaseに変更するには、次のようにします。
+プロダクトフレーバーをProductionとし、ビルドタイプをReleaseとするには、次のようにします。
 
 ```bash
-npm run android -- --variant "developmentRelease" --appIdSuffix "dev"
+npm run android -- --variant "productionRelease" --appIdSuffix ""
 ```
+
+:::note
+AndroidのアプリケーションIDとパッケージ名が異なるので、`appId`オプションを渡しています。`appId`を渡さない場合、次のようなエラーが発生します。
+
+```console
+Starting: Intent { cmp=jp.fintan.mobile.santokuapp.dev.debug/jp.fintan.mobile.santokuapp.MainActivity }
+Error type 3
+Error: Activity class {jp.fintan.mobile.santokuapp.dev.debug/jp.fintan.mobile.santokuapp.MainActivity} does not exist.
+```
+
+:::
 
 </TabItem>
 
