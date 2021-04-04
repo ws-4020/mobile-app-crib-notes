@@ -125,4 +125,14 @@ module.exports = {
       'react-native/troubleshooting/cant-build-in-xcode',
     ],
   },
+  ...(process.env.NODE_ENV === 'development'
+    ? {
+        santoku: [
+          {
+            type: 'doc',
+            id: 'react-native/santoku',
+          },
+        ],
+      }
+    : {}),
 };
