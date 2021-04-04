@@ -1,4 +1,5 @@
 module.exports = {
+  root: true,
   // universe/native: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
   // react-hooks: https://ja.reactjs.org/docs/hooks-rules.html
   extends: ['universe/native', 'plugin:react-hooks/recommended'],
