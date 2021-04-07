@@ -19,9 +19,10 @@ module.exports = {
       'reference/notification/client',
     ],
   },
-  deliverly: {
-    このドキュメントについて: ['deliverly/index'],
-    アプリのビルド: ['deliverly/build/index'],
+  distribution: {
+    アプリの配布: ['distribution/index'],
+    シチュエーション: ['distribution/situation/index'],
+    アプリのビルド: ['distribution/build/index'],
   },
   learn: [
     {
