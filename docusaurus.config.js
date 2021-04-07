@@ -90,7 +90,7 @@ module.exports = {
         },
         ...(process.env.NODE_ENV === 'development' ? [{label: 'Docusaurus', to: 'docusaurus', position: 'left'}] : []),
         {
-          label: 'Other',
+          label: 'Topics',
           items: [
             {
               label: 'Deliverly',
