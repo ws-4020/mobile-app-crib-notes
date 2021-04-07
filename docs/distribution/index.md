@@ -1,6 +1,7 @@
 ---
-title: アプリケーションのインストール
+title: アプリケーションの配布
 slug: /distribution
+sidebar_label: Overview
 ---
 
 ## 目的

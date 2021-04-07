@@ -20,8 +20,15 @@ module.exports = {
     ],
   },
   distribution: {
-    アプリの配布: ['distribution/index'],
-    シチュエーション: ['distribution/situation/index'],
+    アプリケーションの配布: ['distribution/index'],
+    シチュエーション: [
+      'distribution/situation/index',
+      'distribution/situation/local',
+      'distribution/situation/demo',
+      'distribution/situation/develop_test',
+      'distribution/situation/client_test',
+      'distribution/situation/field_test',
+    ],
     アプリのビルド: ['distribution/build/index'],
   },
   learn: [
