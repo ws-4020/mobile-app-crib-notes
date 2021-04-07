@@ -21,6 +21,7 @@ module.exports = {
   },
   deliverly: {
     このドキュメントについて: ['deliverly/index'],
+    アプリのビルド: ['deliverly/build/index'],
   },
   learn: [
     {
