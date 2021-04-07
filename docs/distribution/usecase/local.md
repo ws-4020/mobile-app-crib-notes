@@ -8,13 +8,13 @@ sidebar_label: ローカル環境
 iOSアプリの場合利用するライセンスが異なるため、まずは[iOSのライセンス](../resource#ios)を参照してください。
 
 
-### TestFlight(ADP)
+### TestFlight
 
 desc
 
 link to build
 
-### InHouse(ADEP)
+### InHouse
 
 desc
 

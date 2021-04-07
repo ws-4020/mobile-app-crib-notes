@@ -1,0 +1,22 @@
+---
+title: iOSアプリのビルド
+sidebar_label: はじめに
+---
+
+
+iOSではアプリケーションで利用する機能や配布先によって利用すべきライセンスが異なります。
+
+- Apple Developer Program(ADP)
+- Apple Developer Enterprise Program(ADEP)
+- Apple Developer (Personal Team)
+
+TODO: 条件分岐のやつ
+
+TODO: ADEPの契約上の制約（と新規取得はほぼほぼできない）
+
+
+#### AdHocを利用する場合の考慮
+
+TODO: デバイス登録の上限の件
+
+

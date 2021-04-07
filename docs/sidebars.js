@@ -21,15 +21,39 @@ module.exports = {
   },
   distribution: {
     アプリケーションの配布: ['distribution/index'],
-    シチュエーション: [
-      'distribution/situation/index',
-      'distribution/situation/local',
-      'distribution/situation/demo',
-      'distribution/situation/develop_test',
-      'distribution/situation/client_test',
-      'distribution/situation/field_test',
+    ユースケース: [
+      'distribution/usecase/index',
+      'distribution/usecase/local',
+      'distribution/usecase/demo',
+      'distribution/usecase/develop_test',
+      'distribution/usecase/client_test',
+      'distribution/usecase/field_test',
     ],
-    アプリのビルド: ['distribution/build/index'],
+    アプリのビルド: [
+      {
+        type: 'doc',
+        id: 'distribution/build/index',
+      },
+      {
+        type: 'category',
+        label: 'iOSアプリ',
+        items: [
+          'distribution/build/ios/personal_team',
+          'distribution/build/ios/adp_local',
+          'distribution/build/ios/adep_in_house',
+          'distribution/build/ios/adp_testflight',
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Androidアプリ',
+        items: [
+          'distribution/build/android/local',
+          'distribution/build/android/apk_dist',
+          'distribution/build/android/google_play_test',
+        ],
+      },
+    ],
   },
   learn: [
     {
