@@ -1,6 +1,6 @@
 ---
-title: アプリケーションの配布
-slug: /distribution
+title: アプリケーションのビルド
+sidebar_label: ビルド
 ---
 
 ## 目的
@@ -10,10 +10,10 @@ slug: /distribution
 
 ## 前提条件
 
-- iOSとAndroid向けのモバイルアプリの配布方法をガイドします
-- モバイルアプリのリリース（Storeでの公開）は対象外です
-- ライセンスや配布に必要なリソースの管理方法は対象外です
-- Continuous Deployment(CD)はガイドしていません
+- このドキュメントで紹介しないもの
+  - Google PlayやApp Storeでの公開手順
+  - Continuous Delivery (CD)
+  - ライセンスや、配布に必要なリソースの管理方法
 
 ## 構成
 

@@ -90,6 +90,16 @@ module.exports = {
         },
         ...(process.env.NODE_ENV === 'development' ? [{label: 'Docusaurus', to: 'docusaurus', position: 'left'}] : []),
         {
+          label: 'Other',
+          items: [
+            {
+              label: 'Deliverly',
+              to: 'deliverly',
+              position: 'left',
+            },
+          ],
+        },
+        {
           href: `https://github.com/${organization}/mobile-app-crib-notes`,
           position: 'right',
           className: 'header-github-link',

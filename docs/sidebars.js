@@ -19,6 +19,9 @@ module.exports = {
       'reference/notification/client',
     ],
   },
+  deliverly: {
+    このドキュメントについて: ['deliverly/index'],
+  },
   learn: [
     {
       type: 'doc',
