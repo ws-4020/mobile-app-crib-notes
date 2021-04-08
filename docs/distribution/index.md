@@ -20,11 +20,10 @@ sidebar_label: Overview
 
 
 - [ユースケース](distribution/usecase)
-  - モバイルアプリケーション開発でよく利用されると想定されるシチュエーション
+  - モバイルアプリケーション開発でよく利用されると想定されるシチュエーションから配布方法を紹介
 - 前提知識
-  - iOSのライセンス
-  - iOSの制約
+  - [iOSのライセンス](lisence)
 - モバイルアプリケーション配布ガイド
   - [ビルド方法](distribution/build/index)
-    - iOS
-    - Android
+    - [iOS](build/ios/index)
+    - [Android](build/android/index)
