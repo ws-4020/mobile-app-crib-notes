@@ -7,29 +7,24 @@ sidebar_label: ローカル環境
 
 iOSアプリの場合利用するライセンスが異なるため、まずは[iOSのライセンス](../resource#ios)を参照してください。
 
+### 開発中にデバイスで動作確認したい（iOSのAppの高度な機能を含むアプリの場合）
+iOSでプッシュ通知などのAppの高度な機能を使用するアプリの場合は、ADP・ADEPライセンスの証明書、プロビジョニングプロファイル、デバイスが必要です。USB経由でデバイスにインストールするのが最も簡単ですが、デバイスをADPライセンスで登録する必要があります。ADPに登録できるiPhoneは全社で100台という厳しい制限があるのでできればUSB経由ではなくTestFlightまたはIn-Houseでの配布をおすすめします。
 
-### TestFlight
-
-desc
-
-link to build
-
-### InHouse
-
-desc
-
-link to build
+Appの高度な機能を含まない場合は、個人のApple IDに紐づく証明書、プロビジョニングプロファイル、デバイスを使用できます。
+こちらもiOSのAppの高度な機能を含むアプリの場合と同様にTestFlightまたはIn-Houseでも配布できます。
 
 
-### USBでデバイスを接続してインストール
+- TestFlight
+- InHouse
+- ADP/ADEP
+- 個人のApple ID
 
-desc
+### 開発中にデバイスで動作確認したい（Androidの場合）
 
-link to build
+AndroidはiOSのようにAppの高度な機能を考慮する必要はありません。 USB経由でデバイスにインストールするのが最も簡単ですが、USB接続は禁止されている場合はAPKファイル配布か内部テスト版をご利用ください。APKファイルの配布は自前で配布が必要ですが、内部テストであればGoogle Play Console経由で配布できるので簡単です。
 
-:::caution
-ADP,ADEPを利用してデバイスに直接インストールする場合[](../resource#ライセンスを共有する場合の考慮)
-:::
 
-## Android
+- デバイスにUSB経由でインストール
+- 内部テスト版で配布
+- APKファイルを配布
 
