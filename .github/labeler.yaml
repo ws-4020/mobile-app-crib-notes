@@ -9,7 +9,6 @@ Android:
 # Add 'app' label to any change within the 'src' directory and to the files listed below
 app:
   - SantokuApp/src/**/*
-  - SantokuApp/app.json
   - SantokuApp/index.js
 
 # Add 'build' label to any changes to the files listed below
