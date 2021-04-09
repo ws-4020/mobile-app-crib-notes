@@ -58,8 +58,8 @@
 
 ## Podfile.lockの更新
 
-iOS向けのネイティブモジュールを含むライブラリを依存関係に追加した場合、`pod install`を実行して`Podfile.lock`を更新する必要があります。[pod-install](https://github.com/expo/expo-cli/tree/master/packages/pod-install)を使って、更新する手順 (`npx pod-install`) が一般的です。しかし、このリポジトリではCocoaPodsのインストールに[Bundler](https://bundler.io/)を利用しているので[pod-install](https://github.com/expo/expo-cli/tree/master/packages/pod-install)は利用できません。
+iOS向けのネイティブモジュールを含むライブラリを依存関係に追加した場合、`pod install`を実行して`Podfile.lock`を更新する必要があります。[pod-install](https://github.com/expo/expo-cli/tree/master/packages/pod-install)を使って更新する手順 (`npx pod-install`) が一般的ですが、pod-installはこのリポジトリでCocoaPodsのインストールに利用している[Bundler](https://bundler.io/)に対応していません。そのため、`npx pod-install`は実行しないでください。
 
-npmスクリプトとして`pod-install`というコマンドを用意しているので、`npm run pod-install`を実行してください。
+代わりに、npmスクリプトとして`pod-install`というコマンドを用意しているので、`npm run pod-install`を実行してください。
 
 > Note: [Support Gemfile for pod-install](https://github.com/expo/expo-cli/issues/2206) という要望は上がっているのですが、対応されていません。
