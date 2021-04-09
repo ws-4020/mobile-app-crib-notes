@@ -15,27 +15,15 @@ sidebar_label: 高度なアプリをローカル
 
 ## 作業の流れ
 
- 　開発用証明書の秘密鍵をキーチェーンに登録する
-　　↓
-　　↓　　 Mac端末に開発用デバイスを接続しXcodeで認識させる
-　　↓　　　↓
-　Xcodeにて開発用プロビジョニングプロファイルをアプリに紐付ける
-　　↓
-　デバイスにアプリをインストール・起動
-
-
-
 - 開発用証明書の秘密鍵をキーチェーンに登録する
   - アプリ管理者から提供してもらった開発用証明書の秘密鍵をMac端末のキーチェンに登録します
 - Mac端末に開発用デバイスを接続しXcodeで認識させる
 - Xcodeにて開発用プロビジョニングプロファイルをアプリに紐付ける
   - アプリ管理者からもらった開発用プロビジョニングプロファイルを紐付けます
-Xcodeの左側からアプリのフォルダを選択 > Signing & Capabilitiesで、該当するビルド設定（プロジェクトのビルド設定のDebugAdvancedかRelease）を選択
-自動署名をオフにする（Signing > Automatically manage signingのチェックを外す）
-Provisioning Profileのプルダウン選択 > Import Profileを選択
-アプリ管理者からもらった開発用プロビジョニングプロファイルを指定する
-```
-
+    - Xcodeの左側からアプリのフォルダを選択 > Signing & Capabilitiesで、該当するビルド設定（プロジェクトのビルド設定のDebugAdvancedかRelease）を選択
+    - 自動署名をオフにする（Signing > Automatically manage signingのチェックを外す）
+    - Provisioning Profileのプルダウン選択 > Import Profileを選択
+    - アプリ管理者からもらった開発用プロビジョニングプロファイルを指定する
 
 - デバイスにアプリをインストール・起動
   - 初めてアプリを起動する際には、デバイスでアプリを信頼する必要があります

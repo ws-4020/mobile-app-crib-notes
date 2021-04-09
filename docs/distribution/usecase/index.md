@@ -5,7 +5,7 @@ slug: /distribution/usecase
 
 モバイルアプリケーション開発時によくあるユースケースについて、利用するライセンスや手順を紹介します。
 
-- 開発中のアプリを開発者のデバイスで動作確認したい
+- [開発中のアプリを開発者のデバイスで動作確認したい](usecase/local)
   - [iOSの場合](usecase/local#ios)
   - [Androidの場合](usecase/local#android)
 - [（開発チームが開発用端末を操作して）お客様にデモを見せたい](usecase/demo)

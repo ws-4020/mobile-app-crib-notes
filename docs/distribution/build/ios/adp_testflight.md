@@ -1,6 +1,6 @@
 ---
 title: ADPライセンスのTestFlight
-sidebar_label: iOS(TestFlight)
+sidebar_label: TestFlight（ADP）
 ---
 
 

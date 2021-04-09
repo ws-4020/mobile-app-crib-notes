@@ -1,6 +1,6 @@
 ---
-title: ADEPライセンスのInHouseで配布
-sidebar_label: iOS(InHouse)
+title: ADEPライセンスのIn-Houseで配布
+sidebar_label: In-House(ADEP)
 ---
 
 ADEPライセンスはライセンス契約している社内に閉じた配布とする必要があります。
@@ -18,7 +18,6 @@ ADEPのIn-Houseには以下のような制限事項があります。
 
 
 手順概要
-
 
 1. リソース作成、アプリへの紐付け
 2. Xcodeでのリリースビルドしてipaファイルを生成
