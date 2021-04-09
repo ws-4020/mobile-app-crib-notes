@@ -45,8 +45,6 @@ ADPのApp Store Connectでは[TestFlight](https://developer.apple.com/jp/testfli
    - 秘密鍵をアプリをビルドする端末に登録
    - p12ファイルをダブルクリック
 - パスワードの入力を求められるのでライセンス管理者から教えてもらったパスワードを入力
-
-
  - Xcodeでアプリを開く
  - XcodeでADPに紐づくApple IDでサインインする
  - Xcodeの左側からアプリのフォルダを選択 > Signing & Capabilitiesで、リリース用のビルド設定を選択

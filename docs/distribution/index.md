@@ -20,10 +20,10 @@ sidebar_label: Overview
 
 <!-- Getting Startedの帯のやつにしたい -->
 
-- [ユースケース](distribution/usecase)
-  - モバイルアプリケーション開発でよく利用されると想定されるシチュエーションから配布方法を紹介
 - 前提知識
   - [配布に利用するリソース](resource)
+- [ユースケース](distribution/usecase)
+  - モバイルアプリケーション開発でよく利用されると想定されるシチュエーションから配布方法を紹介
 - モバイルアプリケーション配布ガイド
   - [ビルド方法](distribution/build/index)
     - [iOS](build/ios/overview)
