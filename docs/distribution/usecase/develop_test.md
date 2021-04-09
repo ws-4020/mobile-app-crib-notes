@@ -2,22 +2,24 @@
 title: 社内や業務委託先でのテスト
 ---
 
-iOS: ADEPライセンスでのIn-House配布か、ADPでのTestFlight(内部テスター)の２つが適切です。 両者はデバイス登録台数制限と配布方法が異なります。プロジェクトの要件に応じて選択してください。
+## iOS
+
+ADEPライセンスでのIn-House配布か、ADPでのTestFlight(内部テスター)の２つが適切です。
+両者はデバイス登録台数制限と配布方法が異なります。プロジェクトの要件に応じて選択してください。
 
 |  |ADPのTestFlight(内部テスター)|ADEPのIn-House配布|
 |:-|:---------------------------|:----------------|
 |テスター登録|Apple IDをADPライセンスに登録する必要がある|不要|
-テスター人数制限	100人まで	なし
-デバイス台数制限	1人につき30台まで	なし
-配布方法	TestFlight経由	自前のHTTPSサーバー経由
+|テスター人数制限|100人まで|なし|
+|デバイス台数制限|1人につき30台まで|なし|
+|配布方法 | TestFlight経由|自前のHTTPSサーバー経由|
 
-Android: APKファイルを自前で配布するか、内部テストまたはクローズドテストが使えます。内部テストまたはクローズドテストの場合はGoogle Play Consoleがアプリを配布してくれるので、配布の仕組みを自前で用意する必要がありません。
+ - [ADPのTestFlight(内部テスター)で配布](distribution/build/ios/adp_testflight)
+ - [ADEPのIn-House配布](distribution/build/ios/adep_in_house)
 
-iOS
- - ADPのTestFlight(内部テスター)で配布
- - ADEPのIn-House配布
+## Android
 
-Android
- - 内部テスト版で配布
- - クローズドテスト版で配布
- - APKファイルを配布
+APKファイルを自前で配布するか、内部テストまたはクローズドテストが使えます。内部テストまたはクローズドテストの場合はGoogle Play Consoleがアプリを配布してくれるので、配布の仕組みを自前で用意する必要がありません。
+
+ - [Google Play](distribution/build/android/google_play_test)でテスト配布
+ - [APKファイルを配布](distribution/build/android/apd_dist)

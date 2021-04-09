@@ -48,7 +48,7 @@ module.exports = {
         type: 'category',
         label: 'Androidアプリ',
         items: [
-          'distribution/build/android/local',
+          'distribution/build/android/overview',
           'distribution/build/android/apk_dist',
           'distribution/build/android/google_play_test',
         ],
