@@ -1,4 +1,7 @@
+// Configuration Options | Renovate docs
+// https://docs.renovatebot.com/configuration-options/
 {
+  addLabels: ['dependencies'],
   commitMessagePrefix: '⬆️: ',
   extends: ['config:base', ':preserveSemverRanges'],
   timezone: 'Asia/Tokyo',
