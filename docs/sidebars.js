@@ -165,9 +165,7 @@ module.exports = {
     {
       type: 'category',
       label: '応用編',
-      items: [
-        'react-native/learn/advance/react-navigation-param',
-      ],
+      items: ['react-native/learn/advance/react-navigation-param'],
     },
   ],
   troubleshoot: {
@@ -207,6 +205,10 @@ module.exports = {
                   'react-native/santoku/development/build-type-configurations',
                   'react-native/santoku/development/product-flavor-configurations',
                 ],
+              },
+              {
+                type: 'doc',
+                id: 'react-native/santoku/development/dependency-management',
               },
             ],
           },
