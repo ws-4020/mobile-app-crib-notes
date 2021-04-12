@@ -38,22 +38,21 @@ ADPのApp Store Connectでは[TestFlight](https://developer.apple.com/jp/testfli
 
 ※参考: [Distribute an app using TestFlight (iOS, tvOS, watchOS) - Xcode Help](https://help.apple.com/xcode/mac/current/#/dev2539d985f)
 
-
-
 - 配布用証明書(Apple Distribution)の秘密鍵(p12ファイル)を準備
 - App Developer Webサイトにてプロビジョニングプロファイルの作成（手順は配布用プロビジョニングプロファイルの作成参照)
    - 秘密鍵をアプリをビルドする端末に登録
    - p12ファイルをダブルクリック
 - パスワードの入力を求められるのでライセンス管理者から教えてもらったパスワードを入力
- - Xcodeでアプリを開く
- - XcodeでADPに紐づくApple IDでサインインする
- - Xcodeの左側からアプリのフォルダを選択 > Signing & Capabilitiesで、リリース用のビルド設定を選択
- - 自動署名をオフにする（Signing > Automatically manage signingのチェックを外す）
- - Xcodeで作成したプロビジョニングプロファイルを紐づける（Provisioning Profileのプルダウン選択 > Import Profileを選択）
- - リリースビルド用のConfigurationが紐付けられたSchemaを選択し、ビルド先を Any iOS Device に設定
-   ※こうすることでヘッダーメニューの Product > Archive が活性になります。
- - ヘッダーメニューから Product > Archive を選択
- - Archive が終わったら以下のような画面が表示される
+   - Xcodeでアプリを開く
+   - XcodeでADPに紐づくApple IDでサインインする
+   - Xcodeの左側からアプリのフォルダを選択 > Signing & Capabilitiesで、リリース用のビルド設定を選択
+   - 自動署名をオフにする（Signing > Automatically manage signingのチェックを外す）
+   - Xcodeで作成したプロビジョニングプロファイルを紐づける（Provisioning Profileのプルダウン選択 > Import Profileを選択）
+   - リリースビルド用のConfigurationが紐付けられたSchemaを選択し、ビルド先を Any iOS Device に設定
+
+     ※こうすることでヘッダーメニューの Product > Archive が活性になります。
+   - ヘッダーメニューから Product > Archive を選択
+   - Archive が終わったら以下のような画面が表示される
 
 
 2. ビルドしたアプリをApp Store Connectにアップロード

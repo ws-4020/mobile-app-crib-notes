@@ -14,12 +14,12 @@ ADEPライセンスでのIn-House配布か、ADPでのTestFlight(内部テスタ
 |デバイス台数制限|1人につき30台まで|なし|
 |配布方法 | TestFlight経由|自前のHTTPSサーバー経由|
 
- - [ADPのTestFlight(内部テスター)で配布](distribution/build/ios/adp_testflight)
- - [ADEPのIn-House配布](distribution/build/ios/adep_in_house)
+ - [ADPのTestFlight(内部テスター)で配布](../build/ios/adp_testflight.md)
+ - [ADEPのIn-House配布](../build/ios/adep_in_house.md)
 
 ## Android
 
 APKファイルを自前で配布するか、内部テストまたはクローズドテストが使えます。内部テストまたはクローズドテストの場合はGoogle Play Consoleがアプリを配布してくれるので、配布の仕組みを自前で用意する必要がありません。
 
- - [Google Play](distribution/build/android/google_play_test)でテスト配布
- - [APKファイルを配布](distribution/build/android/apd_dist)
+ - [Google Play](../build/android/google_play_test.md)でテスト配布
+ - [APKファイルを配布](../build/android/apk_dist.md)

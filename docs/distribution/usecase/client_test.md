@@ -6,7 +6,7 @@ title: お客様の実機でテスト
 
 TestFlight(外部テスター)の場合、テスターであるお客様をApp Store Connectのユーザに登録することなく、パブリックリンクを介してお客様のデバイスにアプリを配信できます。もしお客様自身でADP・ADEPライセンスを契約している場合は、そのライセンスを使ってアプリをお客様に配信することもできます。この場合は、IPAファイルをビルドする時に、お客様の証明書、プロビジョニングプロファイルなどが必要です。
 
- - ADPの[TestFlight(外部テスター)](/distribution/build/ios/adp_testflight)で配布
+ - ADPの[TestFlight(外部テスター)](../build/ios/adp_testflight.md)で配布
  - お客様のADPのTestFlight(内部テスター、外部テスター)で配布
  - お客様のADEPのIn-Houseで配布
 
@@ -19,5 +19,5 @@ TestFlight(外部テスター)の場合、テスターであるお客様をApp S
 配布する範囲を制限したい場合は内部テストやクローズテストで配布してください。
 
 
- - [内部テスト版](/distribution/build/android/google_play_test)で配布
- - [クローズドテスト版](/distribution/build/android/google_play_test)で配布
+ - [内部テスト版](../build/android/google_play_test.md)で配布
+ - [クローズドテスト版](../build/android/google_play_test.md)で配布

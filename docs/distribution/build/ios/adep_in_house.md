@@ -29,23 +29,22 @@ ADEPのIn-Houseには以下のような制限事項があります。
 
 1. リソース作成、アプリへの紐付け
 
-
- - 配布用証明書(iOS Distribution)の秘密鍵(p12ファイル)の提供をライセンス管理者に依頼
- - 秘密鍵をアプリをビルドする端末に登録
- - App Developer Webサイトにてプロビジョニングプロファイルの作成(自分のアプリのAppIDと配布用証明書を紐付ける)
- - Xcodeにてアプリを開き、上記で作成したプロビジョニングプロファイルを紐づける
+   - 配布用証明書(iOS Distribution)の秘密鍵(p12ファイル)の提供をライセンス管理者に依頼
+   - 秘密鍵をアプリをビルドする端末に登録
+   - App Developer Webサイトにてプロビジョニングプロファイルの作成(自分のアプリのAppIDと配布用証明書を紐付ける)
+   - Xcodeにてアプリを開き、上記で作成したプロビジョニングプロファイルを紐づける
 
 2. Xcodeでのリリースビルドしてipaファイルを生成する
 
- - ここの手順 ADPと同じはずなんやが...
- - アーカイブが終わったら以下のような画面が表示されるので、右上の Distribute App を選択
- - 配布方法はEnterpriseを選択
- - Include manifest for over-the-air installation にチェックを入れる
- -  over-the-airで配布する場合、アプリのipaファイル、小さいロゴ、大きいロゴのアドレスを指定
-   - URLのプロトコルはhttpsですhttpは使えません
-     - ここで指定する値は、manifest.plist.生成時のインプットです。仮の情報を入力して、あとからmanifest.plistを編集することもできます
- -  証明書とプロビジョニングプロファイルを選択
- - Exportを選択しIPAファイルを取得
+   - ここの手順 ADPと同じはずなんやが...
+   - アーカイブが終わったら以下のような画面が表示されるので、右上の Distribute App を選択
+   - 配布方法はEnterpriseを選択
+   - Include manifest for over-the-air installation にチェックを入れる
+   -  over-the-airで配布する場合、アプリのipaファイル、小さいロゴ、大きいロゴのアドレスを指定
+      - URLのプロトコルはhttpsですhttpは使えません
+        - ここで指定する値は、manifest.plist.生成時のインプットです。仮の情報を入力して、あとからmanifest.plistを編集することもできます
+   -  証明書とプロビジョニングプロファイルを選択
+   - Exportを選択しIPAファイルを取得
 
 3. マニフェストファイルなどをHTTPSサーバーに配置
 

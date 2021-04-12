@@ -14,7 +14,7 @@ ADP・ADEPのTeamに紐付いたデバイスは会社全体で台数制限があ
 ## 事前準備
 - Mac端末を持っている
 - 開発用デバイスをアプリ管理者から借りている
-- [プロジェクトのビルド設定](./build_setting)がされたアプリのソースコードをMac端末にダウンロードしてる
+- [プロジェクトのビルド設定](./build_setting.md)がされたアプリのソースコードをMac端末にダウンロードしてる
 - アプリがiOSシミュレーターで動作する
 
 ## 手順
@@ -61,11 +61,11 @@ ADP・ADEPのTeamに紐付いたデバイスは会社全体で台数制限があ
 
 - ビルド設定値ファイルのテンプレート(アプリのルートフォルダ直下の`PersonalAccount.xcconfig.template`)を編集してApple IDの追加
    - `CODE_SIGN_STYLE` は `Automatic` に設定
-   - `PERSONAL_IDENTIFIER` は他の人と重複しない値に設定（Bundle Identiferのサフィックスとして利用されます）
+   - `PERSONAL_IDENTIFIER` は他の人と重複しない値に設定（Bundle Identifierのサフィックスとして利用されます）
    - `DEVELOPMENT_TEAM` は、個人のApple IDのDEVELOPMENT_TEAM(※)を設定
       - **(※) 個人のApple IDのDEVELOPMENT_TEAMの確認方法**  
         - 別途Xcodeでサンプルアプリを作成する
-        - ConfigurationにてCODE_SIGN_STYLEをAuto Signiningに指定し、個人のApple IDでビルドの設定を行う
+        - ConfigurationにてCODE_SIGN_STYLEをAuto Signingに指定し、個人のApple IDでビルドの設定を行う
         - 設定終了後、サンプルアプリのproject.pbxproj中のDEVELOPMENT_TEAMを確認する → これが個人のApple IDのDEVELOPMENT_TEAM
 
 #### トラブルシュート

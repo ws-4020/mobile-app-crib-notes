@@ -10,7 +10,7 @@ Androidの場合、オープンテストならGoogle Playで早期アクセス�
 
 
 iOS
- - ADPの[TestFlight(外部テスター)](distribution/build/ios/adp_testflight)で配布
+ - ADPの[TestFlight(外部テスター)](../build/ios/adp_testflight.md)で配布
 
 Android
- - [オープンテスト](distribution/build/android/google_play_test)で配布
+ - [オープンテスト](../build/android/google_play_test.md)で配布

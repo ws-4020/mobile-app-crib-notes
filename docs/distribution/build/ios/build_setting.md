@@ -20,11 +20,11 @@ AppleはADP・ADEPライセンス利用に関して以下のようなルール�
 
 そのため、Appの高度な機能を使うアプリの開発には少なくとも次の3つのビルド設定が必要になります。
 1. 開発用 - Appの高度な機能を使わない（または無効にした）ビルド
-  - 個人のApple IDを使う
+   - 個人のApple IDを使う
 2. 開発用 - Appの高度な機能を有効にしたビルド
-  - ADP・ADEPライセンスを使う
+   - ADP・ADEPライセンスを使う
 3. 配布用
-  - ADP・ADEPライセンスを使う
+   - ADP・ADEPライセンスを使う
 
 
 ## ビルド設定で設定するもの
@@ -289,7 +289,7 @@ DEVELOPMENT_TEAM=8G25F9MZKD
 //  PersonalAccount.xcconfig
 //  SampleApp
 //
-//  Created by Takuto Inoue on 2020/09/10.
+//  Created by <Account Name> on 2020/09/10.
 //
 
 // Configuration settings file format documentation can be found at:

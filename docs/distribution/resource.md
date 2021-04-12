@@ -19,7 +19,7 @@ iOSのアプリを開発するときには次の3つのライセンスのいず�
 
 
 
-### Provisionig Profileの作成
+### Provisioning Profileの作成
 
   - [Apple Developer Webサイト](https://developer.apple.com/account/)にログインし、`Profiles`を開いて`Profiles ⊕`クリック
   - 配布用途にあわせて、選択してください。
@@ -45,7 +45,7 @@ Google Play App Signingはこの鍵の管理を代行してくれるサービス
 アップロード用秘密鍵の場合、紛失してもGoogleに連絡すれば再登録できます。
 
 
- - 参考
+- 参考
   - Google Play アプリ署名を使用する - Play Console ヘルプ
   - Google Play App Signingで安全なAndroidの鍵管理 | Developers.IO
 
