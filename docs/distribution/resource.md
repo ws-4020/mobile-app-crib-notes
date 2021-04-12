@@ -7,7 +7,17 @@ sidebar_label: リソース
 
 ## iOS
 
-Todo:持ってくる情報少ないのでPickup
+### ライセンス
+
+iOSのアプリを開発するときには次の3つのライセンスのいずれかを選択します。
+
+ - [Apple ID 個人デベロッパアカウント](#)
+ - Apple Developer Program
+ - Apple Developer Enterprise Program
+
+アプリケーションの配布を説明する中では、Apple Developer ProgramをADP、Apple Developer Enterprise ProgramをADEPと省略することがあります。
+
+
 
 ### Provisionig Profileの作成
 

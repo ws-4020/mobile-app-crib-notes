@@ -21,7 +21,7 @@ sidebar_label: Overview
 <!-- Getting Startedの帯のやつにしたい -->
 
 - 前提知識
-  - [配布に利用するリソース](resource)
+  - [配布に利用するリソース](distribution/resource)
 - [ユースケース](distribution/usecase)
   - モバイルアプリケーション開発でよく利用されると想定されるシチュエーションから配布方法を紹介
 - モバイルアプリケーション配布ガイド
