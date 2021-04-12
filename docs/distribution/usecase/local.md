@@ -24,5 +24,5 @@ AndroidはiOSのようにAppの高度な機能を考慮する必要はありま�
 
 
 - [内部テスト版で配布](../build/android/google_play_test.md)
-- [APKファイルを配布](distribution/build/android/apk_dist)
+- [APKファイルを配布](../build/android/apk_dist.md)
    - デバイスにUSB経由でインストール
