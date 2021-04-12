@@ -1,5 +1,5 @@
 ---
-title: ToDoアプリの実装
+title: ToDo管理の実装
 sidebar_label: Overview
 hide_table_of_contents: true
 ---
