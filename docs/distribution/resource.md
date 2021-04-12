@@ -17,8 +17,6 @@ iOSのアプリを開発するときには次の3つのライセンスのいず�
 
 アプリケーションの配布を説明する中では、Apple Developer ProgramをADP、Apple Developer Enterprise ProgramをADEPと省略することがあります。
 
-
-
 ### Provisioning Profileの作成
 
   - [Apple Developer Webサイト](https://developer.apple.com/account/)にログインし、`Profiles`を開いて`Profiles ⊕`クリック
@@ -31,10 +29,9 @@ iOSのアプリを開発するときには次の3つのライセンスのいず�
   - プロビジョニングプロファイル名を入力して`Generate`をクリック
   - 作成したプロビジョニングプロファイルをMac端末にダウンロード
 
-
 ## Android
 
-リリースに必要な秘密鍵の管理について（Google Play App Signing について）
+リリースに必要な秘密鍵の管理について（Google Play App Signingについて）
 
 Androidのアプリをリリースするには署名が必要で、それにはリリース用秘密鍵が必要です。
 この鍵は開発者が管理する必要があり、紛失してしまうとアプリの更新ができなくなります。
@@ -44,8 +41,6 @@ Google Play App Signingはこの鍵の管理を代行してくれるサービス
 アップロード用秘密鍵はPlay ConsoleにAPKファイルをアップロードするための署名に必要な鍵です。
 アップロード用秘密鍵の場合、紛失してもGoogleに連絡すれば再登録できます。
 
-
 - 参考
-  - Google Play アプリ署名を使用する - Play Console ヘルプ
+  - Google Playアプリ署名を使用する - Play Consoleヘルプ
   - Google Play App Signingで安全なAndroidの鍵管理 | Developers.IO
-

@@ -6,7 +6,7 @@ sidebar_label: 個人アカウントを利用
 
 シミュレーターではなく開発用デバイスでアプリを起動するには本手順が必要です。
 
-Appの高度な機能の検証、リリースビルドしたアプリの検証の場合を除き、**基本的にPersonal Team(個人アカウント)に紐づいたプロビジョニングプロファイルやデバイスを使ってください。**
+Appの高度な機能の検証、リリースビルドしたアプリの検証の場合を除き、**基本的にPersonal Team（個人アカウント）に紐づいたプロビジョニングプロファイルやデバイスを使ってください。**
 
 ADP・ADEPのTeamに紐付いたデバイスは会社全体で台数制限があり、不用意にデバイス登録台数を増やさないようにするためです。
 
@@ -38,7 +38,7 @@ ADP・ADEPのTeamに紐付いたデバイスは会社全体で台数制限があ
 
 ### 個人アカウントのApple IDの登録
 
-- ヘッダー > Xcode > Preferences > Apple ID を開き、左下`+`をクリック
+- ヘッダー > Xcode > Preferences > Apple IDを開き、左下`+`をクリック
 - Apple IDを選択し`Continue`をクリック
 - Apple IDとパスワードを入力
 - 登録したApple IDが表示されればOK
@@ -46,7 +46,7 @@ ADP・ADEPのTeamに紐付いたデバイスは会社全体で台数制限があ
 
 ### 個人アカウントの証明書の作成
 
-- ヘッダー > Xcode > Preferences > Apple ID を開き、TeamでPersonal Teamで個人を選択し、Manage Certificatesをクリック
+- ヘッダー > Xcode > Preferences > Apple IDを開き、TeamでPersonal Teamで個人を選択し、Manage Certificatesをクリック
 - 左下の+をクリックしApple Developmentをクリックし、自分の開発用端末の証明書を作成する
 - 自分の開発端末の証明書が表示されているのを確認し、Doneをクリック
 
@@ -54,12 +54,12 @@ ADP・ADEPのTeamに紐付いたデバイスは会社全体で台数制限があ
 
 - Xcodeを開いた状態で、iOS端末を自分の開発用端末にUSBで接続
 - 接続時にパスコードなどを入力
-- Xcode左上部(再生ボタン、停止ボタンの左)をクリックすると、先ほど接続したデバイスが表示されるのでデバイスを選択
+- Xcode左上部（再生ボタン、停止ボタンの左）をクリックすると、先ほど接続したデバイスが表示されるのでデバイスを選択
 
 
 ### Xcodeでの個人アカウントの紐付け
 
-- ビルド設定値ファイルのテンプレート(アプリのルートフォルダ直下の`PersonalAccount.xcconfig.template`)を編集してApple IDの追加
+- ビルド設定値ファイルのテンプレート（アプリのルートフォルダ直下の`PersonalAccount.xcconfig.template`）を編集してApple IDの追加
    - `CODE_SIGN_STYLE` は `Automatic` に設定
    - `PERSONAL_IDENTIFIER` は他の人と重複しない値に設定（Bundle Identifierのサフィックスとして利用されます）
    - `DEVELOPMENT_TEAM` は、個人のApple IDのDEVELOPMENT_TEAM(※)を設定
@@ -82,10 +82,10 @@ No "iOS Development" signing certificate matching team ID "D9MUZCM4X6" with a pr
 
 - 最初Xcodeからビルドして実機でアプリを起動しようとすると以下エラーになります。
 - 実機にはアプリはインストールされていますが、タップして起動しようとすると、以下のようなメッセージが出て起動できません。
-- そこで実機の設定 > 一般 > プロファイルとデバイス管理 をクリック
+- そこで実機の設定 > 一般 > プロファイルとデバイス管理をクリック
 - デベロッパAPPで、Xcodeで登録しているApple IDを選択
 - 青文字の「XXXを信頼する」をクリック（スクショでは文字が見切れていてわかりにくいですが、青文字の部分です）
 - 以下で信頼を選択
 - 以下のようになります。このあと、実機でアプリをタップすると起動できるようになっています
 
-Todo：信頼の手順はIn-Houseも同じはず
+ToDo：信頼の手順はIn-Houseも同じはず

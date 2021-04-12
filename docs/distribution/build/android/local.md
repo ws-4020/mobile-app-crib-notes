@@ -17,21 +17,21 @@ APKファイルを作成するコマンドは `./gradlew bundleRelease` では�
 ## USBでデバイスを端末に接続してAPKファイルをダウンロードする  
 
 
-Androidのヘルプ: [パソコンと Android デバイス間でファイルを転送する](https://support.google.com/android/answer/9064445?hl=ja)を参考にしてください。
+Androidのヘルプ：[パソコンと Android デバイス間でファイルを転送する](https://support.google.com/android/answer/9064445?hl=ja)を参考にしてください。
 
 ただしUSBでデバイスを接続する時に「ファイル転送モード」にする必要があります。以下に手順を示します。
 
 
 ### デバイス接続時に「ファイル転送モード」を選択する方法
 
-1. Android システム ・ このシステムを USBで充電中 をタップ
-1. その他のオプションを表示します をタップ
-1. USBの使用 > ファイル転送/Android Auto を選択
+1. Androidシステム ・ このシステムをUSBで充電中をタップ
+1. その他のオプションを表示しますをタップ
+1. USBの使用 > ファイル転送/Android Autoを選択
 
 
 ## USBでデバイスを端末に接続してadbコマンドでインストールする
 
 
-Androidデベロッパー公式サイト: [Android Debug Bridge（adb） > アプリをインストールする](https://developer.android.com/studio/command-line/adb?hl=ja#move)を参考にしてください。
+Androidデベロッパー公式サイト：[Android Debug Bridge（adb） > アプリをインストールする](https://developer.android.com/studio/command-line/adb?hl=ja#move)を参考にしてください。
 
 APKファイルの場所に移動してadb installすればインストールできます。

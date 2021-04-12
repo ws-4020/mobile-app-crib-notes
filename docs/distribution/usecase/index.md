@@ -34,4 +34,3 @@ slug: /distribution/usecase
 |社内や業務委託先でテストをしたい|X|YES|YES|YES|X|
 |お客様に実機でテストをしてもらいたい|X|X|YES|YES|X|
 |フィールドテストをしたい|X|X|X|X|YES|
-

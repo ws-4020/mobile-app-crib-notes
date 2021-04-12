@@ -8,9 +8,10 @@ iOSの場合、TestFlight(外部テスター)ならパブリックリンクで�
 
 Androidの場合、オープンテストならGoogle Playで早期アクセス版アプリとして誰でもインストールできる状態になります。
 
-
 iOS
+
  - ADPの[TestFlight(外部テスター)](../build/ios/adp_testflight.md)で配布
 
 Android
+
  - [オープンテスト](../build/android/google_play_test.md)で配布

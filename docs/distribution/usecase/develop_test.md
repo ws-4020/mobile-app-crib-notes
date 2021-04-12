@@ -4,15 +4,15 @@ title: 社内や業務委託先でのテスト
 
 ## iOS
 
-ADEPライセンスでのIn-House配布か、ADPでのTestFlight(内部テスター)の２つが適切です。
+ADEPライセンスでのIn-House配布か、ADPでのTestFlight（内部テスター）の2つが適切です。
 両者はデバイス登録台数制限と配布方法が異なります。プロジェクトの要件に応じて選択してください。
 
-|  |ADPのTestFlight(内部テスター)|ADEPのIn-House配布|
+|  |ADPのTestFlight（内部テスター）|ADEPのIn-House配布|
 |:-|:---------------------------|:----------------|
 |テスター登録|Apple IDをADPライセンスに登録する必要がある|不要|
 |テスター人数制限|100人まで|なし|
 |デバイス台数制限|1人につき30台まで|なし|
-|配布方法 | TestFlight経由|自前のHTTPSサーバー経由|
+|配布方法 | TestFlight経由|自前のHTTPSサーバ経由|
 
  - [ADPのTestFlight(内部テスター)で配布](../build/ios/adp_testflight.md)
  - [ADEPのIn-House配布](../build/ios/adep_in_house.md)

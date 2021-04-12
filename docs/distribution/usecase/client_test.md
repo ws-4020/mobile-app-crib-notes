@@ -10,14 +10,12 @@ TestFlight(外部テスター)の場合、テスターであるお客様をApp S
  - お客様のADPのTestFlight(内部テスター、外部テスター)で配布
  - お客様のADEPのIn-Houseで配布
 
-
 ## Android
 
 お客様のGoogleアカウントに登録しているメールアドレスをテスターとして登録する必要があります。
 
 オープンテストであればGoogle Play経由でアプリを配信できるのでお客様のメールアドレスの登録は不要ですが、Google Playで早期アクセス版アプリとして誰でもインストールできます。
 配布する範囲を制限したい場合は内部テストやクローズテストで配布してください。
-
 
  - [内部テスト版](../build/android/google_play_test.md)で配布
  - [クローズドテスト版](../build/android/google_play_test.md)で配布

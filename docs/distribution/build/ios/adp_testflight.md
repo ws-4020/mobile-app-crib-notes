@@ -4,7 +4,7 @@ sidebar_label: TestFlight（ADP）
 ---
 
 
-ADPのApp Store Connectでは[TestFlight](https://developer.apple.com/jp/testflight/)を使ってテストのためにアプリを配信することができます。テスト内容や目的に応じて使い分けることができる2つの配信方法が用意されています。
+ADPのApp Store Connectでは[TestFlight](https://developer.apple.com/jp/testflight/)を使ってテストのためにアプリを配信できます。テスト内容や目的に応じて使い分けることができる2つの配信方法が用意されています。
 
 
 ||内部テスター|外部テスター|
@@ -25,8 +25,8 @@ ADPのApp Store Connectでは[TestFlight](https://developer.apple.com/jp/testfli
 
 1. アプリをリリースビルド
 2. ビルドしたアプリをApp Store Connectにアップロード
-  a. Xcodeでアップロード
-  b. Xcode以外でアップロード
+   a. Xcodeでアップロード
+   b. Xcode以外でアップロード
 3. TestFlight（内部テスター）の設定
 4. TestFlight（外部テスター）の設定
 
@@ -36,10 +36,10 @@ ADPのApp Store Connectでは[TestFlight](https://developer.apple.com/jp/testfli
 1. アプリのリリースビルド
 
 
-※参考: [Distribute an app using TestFlight (iOS, tvOS, watchOS) - Xcode Help](https://help.apple.com/xcode/mac/current/#/dev2539d985f)
+※参考：[Distribute an app using TestFlight (iOS, tvOS, watchOS) - Xcode Help](https://help.apple.com/xcode/mac/current/#/dev2539d985f)
 
-- 配布用証明書(Apple Distribution)の秘密鍵(p12ファイル)を準備
-- App Developer Webサイトにてプロビジョニングプロファイルの作成（手順は配布用プロビジョニングプロファイルの作成参照)
+- 配布用証明書（Apple Distribution）の秘密鍵（p12ファイル）を準備
+- App Developer Webサイトにてプロビジョニングプロファイルの作成（手順は配布用プロビジョニングプロファイルの作成参照）
    - 秘密鍵をアプリをビルドする端末に登録
    - p12ファイルをダブルクリック
 - パスワードの入力を求められるのでライセンス管理者から教えてもらったパスワードを入力
@@ -48,24 +48,24 @@ ADPのApp Store Connectでは[TestFlight](https://developer.apple.com/jp/testfli
    - Xcodeの左側からアプリのフォルダを選択 > Signing & Capabilitiesで、リリース用のビルド設定を選択
    - 自動署名をオフにする（Signing > Automatically manage signingのチェックを外す）
    - Xcodeで作成したプロビジョニングプロファイルを紐づける（Provisioning Profileのプルダウン選択 > Import Profileを選択）
-   - リリースビルド用のConfigurationが紐付けられたSchemaを選択し、ビルド先を Any iOS Device に設定
+   - リリースビルド用のConfigurationが紐付けられたSchemaを選択し、ビルド先をAny iOS Deviceに設定
 
-     ※こうすることでヘッダーメニューの Product > Archive が活性になります。
-   - ヘッダーメニューから Product > Archive を選択
-   - Archive が終わったら以下のような画面が表示される
+     ※こうすることでヘッダーメニューのProduct > Archiveが活性になります。
+   - ヘッダーメニューからProduct > Archiveを選択
+   - Archiveが終わったら以下のような画面が表示される
 
 
 2. ビルドしたアプリをApp Store Connectにアップロード
 
-※参考: [Xcode Help: Develop and distribute an enterprise app](https://help.apple.com/xcode/mac/current/#/devba5e7054d)
-※参考: App Store Connect ヘルプのアップロードツール
+※参考：[Xcode Help: Develop and distribute an enterprise app](https://help.apple.com/xcode/mac/current/#/devba5e7054d)
+※参考：App Store Connectヘルプのアップロードツール
 
 
 a. Xcodeでアップロード
 ここではXcodeでアップロードする手順を示します。
 
 - XcodeでArchiveした後に表示されるウインドウにてDistribute Appを選択
-  (TODO: なんかショートカットキーあったはず)
+  (TODO: なんかショートカットキーあったはず）
 - App Store Connectを選択し、Nextを選択
 - Uploadを選択し、Nextを選択
 - デフォルトのままNextを選択
@@ -73,37 +73,37 @@ a. Xcodeでアップロード
    - アプリビルド時に紐付けたプロビジョニングプロファイルに紐づくDistribution certificateを選択
 - App Store Connectに予め登録しているアプリをアップロード先として選択
 - Nextを選択
-- 今まで入力した内容が一覧で表示されるので、間違いがないか確認して Uploadを選択
-- 上記手順が正しく行われていれば、App Store Connectでアプリを表示して TestFlightのタブを選択すると、iOSのビルドにアプリが追加されていることが確認できる
+- 今まで入力した内容が一覧で表示されるので、間違いがないか確認してUploadを選択
+- 上記手順が正しく行われていれば、App Store Connectでアプリを表示してTestFlightのタブを選択すると、iOSのビルドにアプリが追加されていることが確認できる
 
 
 b. Xcode以外でアップロード
 Xcode以外でアップロードする場合は、事前にXcodeにてArchiveしたアプリのバイナリをエクスポートする必要があります。
 
-- Xcodeでビルドした後、Distribute Appを選択
-- App Store Connectを選択し、Next を選択
-- Exportを選択し、Next を選択
+- Xcodeでビルドした後、Distribute Appを選択
+- App Store Connectを選択し、Nextを選択
+- Exportを選択し、Nextを選択
 - Distribution certificate
   - アプリビルド時に紐付けたプロビジョニングプロファイルに紐づくDistribution certificateを選択
 - App Store Connectに予め登録しているアプリをアップロード先として選択
 - Nextを選択
-- 今まで入力した内容が一覧で表示されるので、間違いがないか確認して Export を選択
-- 保存先を指定し、Export を選択
+- 今まで入力した内容が一覧で表示されるので、間違いがないか確認してExportを選択
+- 保存先を指定し、Exportを選択
 
 
 アプリのバイナリをエクスポートした後は、
 [App Store Connect ヘルプのアップロードツール](https://help.apple.com/app-store-connect/#/devb1c185036)の以下の手順を参考にしてください。
 
- - altool を使用する App バイナリファイルのアップロード
- - Transporter を使用した App のバイナリファイルのアップロード
+ - altoolを使用するAppバイナリファイルのアップロード
+ - Transporterを使用したAppのバイナリファイルのアップロード
 
 
  3. TestFlight（内部テスター）の設定
 
 実施する概要を記載して詳細は公式でいい
 
-※参考: [内部テスターの追加 - App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev839fb66e9)
-※参考: [ベータ版ビルドの輸出コンプライアンスを提出する - App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev22b9b2174)
+※参考：[内部テスターの追加 - App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev839fb66e9)
+※参考：[ベータ版ビルドの輸出コンプライアンスを提出する - App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev22b9b2174)
 
 
 
@@ -111,6 +111,6 @@ Xcode以外でアップロードする場合は、事前にXcodeにてArchiveし
 
 実施する概要を記載して詳細は公式でいい
 
-※参考: [外部テスターの招待 - App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev859139543)
+※参考：[外部テスターの招待 - App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev859139543)
 
 

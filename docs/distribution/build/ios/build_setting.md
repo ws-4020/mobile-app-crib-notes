@@ -15,7 +15,7 @@ AppleはADP・ADEPライセンス利用に関して以下のようなルール�
 - Appの高度な機能を使わないアプリの開発では個人のApple IDを使う
 - Appの高度な機能を使うアプリの開発では、アプリのビルド設定で、Appの高度な機能を無効にするビルドと有効にするビルドに分ける
   - 無効時のビルドでは、個人のApple IDを使う
-  - 有効時のビルドでは、ライセンスを使う(ADP・ADEPにデバイスを登録し、そのデバイスでアプリの動作検証を実施する)
+  - 有効時のビルドでは、ライセンスを使う（ADP・ADEPにデバイスを登録し、そのデバイスでアプリの動作検証を実施する）
 - 配布時はADP・ADEPライセンスを使う
 
 そのため、Appの高度な機能を使うアプリの開発には少なくとも次の3つのビルド設定が必要になります。
@@ -29,7 +29,7 @@ AppleはADP・ADEPライセンス利用に関して以下のようなルール�
 
 ## ビルド設定で設定するもの
 
-iOSアプリのビルド設定では大きく分けて以下３つを設定できます。
+iOSアプリのビルド設定では大きく分けて以下3つを設定できます。
 
 #### Configuration
 
@@ -49,7 +49,7 @@ Xcodeでビルドするときに、どのConfigurationを選択するかをあ�
 
 ## ビルド設定の例
 
-「なぜビルド設定をするのか」で説明した３パターンごとにビルド設定を切り替えられるようにするための、具体的な例を示します。
+「なぜビルド設定をするのか」で説明した3パターンごとにビルド設定を切り替えられるようにするための、具体的な例を示します。
 Debug（No. 1）の設定では、開発者ごとに設定値が異なるため、開発者一人ひとりが簡単にビルド設定できるようにするため、ビルド設定値のテンプレートを作成します。
 
 あくまでも例なので、ビルド設定の名前や細かい設定などはプロジェクトごとに適宜変更してください。
@@ -57,11 +57,11 @@ Debug（No. 1）の設定では、開発者ごとに設定値が異なるため�
 |No.|ビルド設定名|用途|準備するリソース|ビルド設定|備考|
 |-|-|-|-|-|-|
 |1|Debug|開発者が通常の開発時に使う|特になし|ビルド設定ファイルのテンプレートを用意|Appの高度な機能を使うアプリの場合、このビルド設定はAppの高度な機能の検証には使えないので、その場合はNo. 2のビルド設定を使います。また本ビルド設定ではAppの高度な機能を無効にする必要があります。|
-|2|DebugAdvanced|開発者がAppの高度な機能を検証する時に使う |ADP・ADEPチーム 開発用|リソースをビルド設定ファイルに紐付け|Appの高度な機能を使わない場合は本ビルド設定は不要です。|
-|3|Release|配布するアプリをビルドする時に使う|ADP・ADEPチーム 配布用|リソースをビルド設定ファイルに紐付け|||
+|2|DebugAdvanced|開発者がAppの高度な機能を検証する時に使う |ADP・ADEPチーム開発用|リソースをビルド設定ファイルに紐付け|Appの高度な機能を使わない場合は本ビルド設定は不要です。|
+|3|Release|配布するアプリをビルドする時に使う|ADP・ADEPチーム配布用|リソースをビルド設定ファイルに紐付け|||
 
 
-このような例の場合は、以下３つのConfigurationを作成し、それぞれに対応するSchemaを作成します。
+このような例の場合は、以下3つのConfigurationを作成し、それぞれに対応するSchemaを作成します。
 - Debug: Appの高度な機能を無効にしたビルド設定
   - 個人Apple IDのリソースを紐付け
   - CapabilityからAppの高度な機能を除外
@@ -85,7 +85,7 @@ Debug（No. 1）の設定では、開発者ごとに設定値が異なるため�
   - 開発用証明書の秘密鍵をMac端末のキーチェンに登録します
     - Mac端末にダウンロードした証明書をダブルクリックするとキーチェーンアクセスが起動するので追加をクリックしてください
 - Configurationの設定
-  - １つのビルド設定ごとに１つのConfigurationの設定が必要です。ここではXcodeにて`Debug`、`DebugAdvanced`、`Release`の３つのConfigurationを設定します。
+  - 1つのビルド設定ごとに1つのConfigurationの設定が必要です。ここではXcodeにて`Debug`、`DebugAdvanced`、`Release`の3つのConfigurationを設定します。
 - Schemaの設定
   - XcodeでConfigurationを簡単に切り替えられるようにするために、それぞれのSchemaを作成します  
 - ビルド設定値ファイルの作成、プロジェクトのビルド設定をリポジトリに反映
@@ -98,12 +98,12 @@ Debug（No. 1）の設定では、開発者ごとに設定値が異なるため�
 
 プロビジョニングプロファイル設定
 
-- Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常のTARGET(TestsやtvOSなどついていないTARGET)を指定 > Signing & Capabilities > All
-- Automatically manage signing のチェックを外す
+- Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常のTARGET（TestsやtvOSなどついていないTARGET）を指定 > Signing & Capabilities > All
+- Automatically manage signingのチェックを外す
 
 
 - Provisioning Profileのプルダウン > Import Profile… を選択
-- 開発用プロビジョニングプロファイル(Apple Development)を指定
+- 開発用プロビジョニングプロファイル（Apple Development）を指定
 
 - Bundle Identifierにアプリ管理者から教えてもらったApp IDを指定
 
@@ -124,16 +124,16 @@ No "iOS Development" signing certificate matching team ID "D9MUZCM4X6" with a pr
 
 - Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info > Configurations > Debugを選択し、+ -の+'を選択 >Duplicate “Debug” Configuration`を選択
 - 名前に「DebugAdvanced」を指定する
-- Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常のTARGET(TestsやtvOSなどついていないTARGET)を指定 > Signing & Capabilities > DebugAdvanced　を確認し Signingにプロビジョニングプロファイルが設定されていればOK
+- Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常のTARGET（TestsやtvOSなどついていないTARGET）を指定 > Signing & Capabilities > DebugAdvancedを確認しSigningにプロビジョニングプロファイルが設定されていればOK
 
 
 ####  Configuration: Debug設定
 
-  - Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常のTARGET(TestsやtvOSなどついていないTARGET)を指定 > Signing & Capabilities > Debug　にて以下設定を行う
-    - Automatically manage signing のチェックをつける
-    - TeamはPersonal Team(個人アカウント)を選択
-    - Bundle Identifierは personal.${Allで設定したBundle Identifier}.{組織内の誰とも被らないID}を設定
-      - 例: Allがjp.fintan.mobile.SantokuAppならDebugはpersonal.jp.fintan.mobile.SantokuApp.117117
+  - Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常のTARGET（TestsやtvOSなどついていないTARGET）を指定 > Signing & Capabilities > Debugにて以下設定を行う
+    - Automatically manage signingのチェックをつける
+    - TeamはPersonal Team（個人アカウント）を選択
+    - Bundle Identifierはpersonal.${Allで設定したBundle Identifier}.{組織内の誰とも被らないID}を設定
+      - 例：Allがjp.fintan.mobile.SantokuAppならDebugはpersonal.jp.fintan.mobile.SantokuApp.117117
     - CapabilityからPush Notificationを外す
       - ※このときentitlementsファイルを作るかプロンプトで聞かれますがその時は「はい」を選択してください
   - 最終的には右図のようになる
@@ -155,7 +155,7 @@ Appの高度な機能を使うアプリの場合は、開発者が通常使う�
 
 
 
-- Schemaの一覧はXcode左上 再生ボタンと停止ボタンの右側をクリックすると見れる。本設定を終えると以下のようになる
+- Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリックすると見れる。本設定を終えると以下のようになる
   - <<アプリ名>>
     - リリースビルド
     - ConfigurationはRelease
@@ -166,7 +166,7 @@ Appの高度な機能を使うアプリの場合は、開発者が通常使う�
     - Appの高度な機能を有効にしたアプリのデバッグ
     - ConfigurationはDebugAdvanced
 
-- Schemaの一覧はXcode左上 再生ボタンと停止ボタンの右側をクリック > Edit Scheme... を選択
+- Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリック > Edit Scheme... を選択
 - 右図のようにダイアログが開く 
 
 
@@ -191,14 +191,14 @@ Appの高度な機能を使うアプリの場合は、開発者が通常使う�
 
 ### ビルド設定ファイルの作成
 
-- Xcode 右メニューからプロジェクトフォルダにて右クリック > New File... を選択
-- Configuration Settings File を選択 > Next を選択
+- Xcode右メニューからプロジェクトフォルダにて右クリック > New File... を選択
+- Configuration Settings Fileを選択 > Nextを選択
 
   - ファイル名をPersonalAccountを指定
-  - プロジェクト直下(ここではiosフォルダ)配下のアプリ名のフォルダを選択
+  - プロジェクト直下（ここではiosフォルダ）配下のアプリ名のフォルダを選択
   - Targetsに<<アプリ名>>のTargetを指定
   - Createを選択
-  - 以下のようなファイルが生成される　Todo: 画像見るか実ファイル作成する
+  - 以下のようなファイルが生成されるToDo: 画像見るか実ファイル作成する
 
   - ファイルに以下を追記
 
@@ -209,7 +209,7 @@ Appの高度な機能を使うアプリの場合は、開発者が通常使う�
   - DEVELOPMENT_TEAM
     - 個人アカウントのDEVELOPMENT_TEAM　※
 
-例:
+例：
 ```
 CODE_SIGN_STYLE=Automatic 
 PERSONAL_IDENTIFIER=305751
@@ -218,7 +218,7 @@ DEVELOPMENT_TEAM=8G25F9MZKD
 
 
 - ConfigurationのDebugにて上記で作成した設定ファイルを読み込むようにする
-  - Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info > Configurations > Debugを選択し、アプリ名の右プルダウンを選択 先ほど作成した設定ファイルを指定する
+  - Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info > Configurations > Debugを選択し、アプリ名の右プルダウンを選択先ほど作成した設定ファイルを指定する
 
 **※すでに別の設定ファイルが指定されてる場合**
 - 既に指定されている設定ファイルに、以下のようなinclude文を追加する
@@ -238,7 +238,7 @@ DEVELOPMENT_TEAM=8G25F9MZKD
 
 #### ビルド設定値ファイルの値を、ビルドファイルで読み込むようにする
 
-- `<<アプリ名>>.xcodeproj/project.pbxproj` のDebug Configurationの部分について、以下３つの項目はビルド設定値ファイルから値を読み込むようにする
+- `<<アプリ名>>.xcodeproj/project.pbxproj` のDebug Configurationの部分について、以下3つの項目はビルド設定値ファイルから値を読み込むようにする
   - CODE_SIGN_STYLE
   - DEVELOPMENT_TEAM
   - PRODUCT_BUNDLE_IDENTIFIER
