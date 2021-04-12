@@ -23,6 +23,6 @@ Appの高度な機能を含まない場合は、個人のApple IDに紐づく証
 AndroidはiOSのようにAppの高度な機能を考慮する必要はありません。 USB経由でデバイスにインストールするのが最も簡単ですが、USB接続は禁止されている場合はAPKファイル配布か内部テスト版をご利用ください。APKファイルの配布は自前で配布が必要ですが、内部テストであればGoogle Play Console経由で配布できるので簡単です。
 
 
-- [内部テスト版で配布](distribution/build/android/google_play_test)
+- [内部テスト版で配布](../build/android/google_play_test.md)
 - [APKファイルを配布](distribution/build/android/apk_dist)
    - デバイスにUSB経由でインストール
