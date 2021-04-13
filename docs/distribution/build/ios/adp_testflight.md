@@ -29,8 +29,8 @@ ADPのApp Store Connectでは[TestFlight](https://developer.apple.com/jp/testfli
 4. TestFlight（外部テスター）の設定
 
 ## 1.アプリのリリースビルド
-<!-- textlint-disable -->
- - [`Distribute an app using TestFlight (iOS, tvOS, watchOS) - Xcode Help`](https://help.apple.com/xcode/mac/current/#/dev2539d985f)<!-- textlint-enable -->
+
+ - [TestFlightを使用してアプリを配布する（Xcode Help）](https://help.apple.com/xcode/mac/current/#/dev2539d985f)
 
 - 配布用証明書（Apple Distribution）の秘密鍵（p12ファイル）を準備
 - App Developer Webサイトにてプロビジョニングプロファイルの作成
