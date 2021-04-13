@@ -125,12 +125,14 @@ No "iOS Development" signing certificate matching team ID "D9MUZCM4X6" with a pr
 - Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info > Configurations > Debugを選択
 - `+` `-` の `+` を選択 >Duplicate “Debug” Configuration`を選択
 - 名前に「DebugAdvanced」を指定する
-- Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定 > Signing & Capabilities > DebugAdvancedを確認しSigningにプロビジョニングプロファイルが設定されていればOK
+- Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定
+- Signing & Capabilities > DebugAdvancedを確認しSigningにプロビジョニングプロファイルが設定されていればOK
 
 
 ####  Configuration: Debug設定
 
-  - Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定 > Signing & Capabilities > Debugにて以下設定
+  - Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定
+  - Signing & Capabilities > Debugにて以下設定
     - Automatically manage signingのチェックをつける
     - TeamはPersonal Team（個人アカウント）を選択
     - Bundle Identifierはpersonal.${Allで設定したBundle Identifier}.{組織内の誰とも被らないID}を設定
@@ -210,16 +212,16 @@ Appの高度な機能を使うアプリの場合は、開発者が通常使う�
   - DEVELOPMENT_TEAM
     - 個人アカウントのDEVELOPMENT_TEAM　※
 
-例：
+以下に例を示します。
 ```
 CODE_SIGN_STYLE=Automatic 
-PERSONAL_IDENTIFIER=305751
-DEVELOPMENT_TEAM=8G25F9MZKD
+PERSONAL_IDENTIFIER=809890
+DEVELOPMENT_TEAM=8G25XXXX
 ```
 
-
 - ConfigurationのDebugにて上記で作成した設定ファイルを読み込むようにする
-  - Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info > Configurations > Debugを選択し、アプリ名の右プルダウンを選択先ほど作成した設定ファイルを指定する
+  - Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info
+  - Configurations > Debugを選択し、アプリ名の右プルダウンを選択先ほど作成した設定ファイルを指定する
 
 **※すでに別の設定ファイルが指定されてる場合**既に指定されている設定ファイルに、以下のようなinclude文を追加する。
 
@@ -229,7 +231,7 @@ DEVELOPMENT_TEAM=8G25F9MZKD
 
 #### ビルドファイルの余計な差分を元に戻す
 
-ビルドファイル`<<アプリ名>>.xcodeproj/project.pbxproj`で、Debug Configurationの部分以外の、下記項目名の差分は変更前に戻してください。変更前のファイルに元の値があれば、元の値を指定して、項目がなければ、項目ごと削除してください。
+ビルドファイル`<<アプリ名>>.xcodeproj/project.pbxproj`でDebug Configurationの部分以外の下記項目名の差分は変更前に戻してください。変更前のファイルに元の値があれば値を戻し、項目がなければ項目ごと削除してください。
   - DevelopmentTeam
   - PROVISIONING_PROFILE_SPECIFIER
   - DEVELOPMENT_TEAM

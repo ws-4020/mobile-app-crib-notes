@@ -46,7 +46,7 @@ ADP・ADEPのTeamに紐付いたデバイスは会社全体で台数制限があ
 
 ### 個人アカウントの証明書の作成
 
-- ヘッダー > Xcode > Preferences > Apple IDを開き、Teamの個人 IDを選択し、Manage Certificatesをクリック
+- ヘッダー > Xcode > Preferences > Apple IDを開き、Teamの個人IDを選択し、Manage Certificatesをクリック
 - 左下の+をクリックしApple Developmentをクリックし、自分の開発用端末の証明書を作成する
 - 自分の開発端末の証明書が表示されているのを確認し、Doneをクリック
 
