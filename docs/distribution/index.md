@@ -21,7 +21,7 @@ sidebar_label: Overview
 <!-- Getting Startedの帯のやつにしたい -->
 
 - 前提知識
-  - [配布に利用するリソース](./resource.md)
+  - [iOSのライセンス](./ios_lisence.md)
 - [ユースケース](./usecase/index.md)
   - モバイルアプリケーション開発でよく利用されると想定されるシチュエーションから配布方法を紹介
 - モバイルアプリケーション配布ガイド

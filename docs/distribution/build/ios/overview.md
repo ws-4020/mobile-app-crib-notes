@@ -4,28 +4,8 @@ sidebar_label: はじめに
 ---
 
 
-iOSではアプリケーションで利用する機能や配布先によって利用すべきライセンスが異なります。
-ここではライセンスの選択について簡単に説明します。
-
-## ライセンスの種類
-
-ライセンスには次の3つの種類があります。
-ユースケースによって選択するものが異なります。
-
-- Apple ID 個人デベロッパアカウント(Personal Team) *link
-- Apple Developer Program(ADP) *link
-- Apple Developer Enterprise Program(ADEP) *link
-
-
-
-ライセンスは「AppStoreでの公開」と「高度な機能」の利用有無から選択してください。
-
-あのフローチャートのやつ
-
-
-:::note
-ADEPライセンスの取得は困難になっていますが、配布方法はADPで代替できるものがあるのでユースケースを参照してください。
-:::
+iOSではアプリケーションをビルド、配布するために必要なリソースがあります。
+リソースの作成方法は[iOSのライセンス](../../ios_lisence.md)によって違うため、一度ライセンスのページを確認してください。
 
 
 
@@ -39,9 +19,7 @@ ADP・ADEPに登録できるiPhoneは契約毎に100台という厳しい制限�
 ### 証明書
 
 
-### プロビジョニングプロファイル
-
-#### プロビジョニングプロファイルの作成
+### Provisioning Profileの作成
 
   - [Apple Developer Webサイト](https://developer.apple.com/account/)にログインし、`Profiles`を開いて`Profiles ⊕`クリック
   - 配布用途にあわせて、選択してください。
