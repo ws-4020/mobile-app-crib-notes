@@ -19,7 +19,7 @@ ADP・ADEPのTeamに紐付いたデバイスは会社全体で台数制限があ
 
 ## 手順
 
-デバイスにアプリをインストールし起動する以外は、すべてXcodeにて作業を行います。
+デバイスにアプリをインストールし起動する以外は、すべてXcodeにて作業します。
 個人アカウントの証明書が作成できている場合は[開発デバイスの登録](#開発デバイスの登録)から進めてください。
 
 - 個人アカウントのApple IDの登録
@@ -46,13 +46,13 @@ ADP・ADEPのTeamに紐付いたデバイスは会社全体で台数制限があ
 
 ### 個人アカウントの証明書の作成
 
-- ヘッダー > Xcode > Preferences > Apple IDを開き、TeamでPersonal Teamで個人を選択し、Manage Certificatesをクリック
+- ヘッダー > Xcode > Preferences > Apple IDを開き、Teamの個人 IDを選択し、Manage Certificatesをクリック
 - 左下の+をクリックしApple Developmentをクリックし、自分の開発用端末の証明書を作成する
 - 自分の開発端末の証明書が表示されているのを確認し、Doneをクリック
 
 ### 開発デバイスの登録
 
-- Xcodeを開いた状態で、iOS端末を自分の開発用端末にUSBで接続
+- Xcodeを起動した状態で、iOS端末を自分の開発用端末にUSB接続する
 - 接続時にパスコードなどを入力
 - Xcode左上部（再生ボタン、停止ボタンの左）をクリックすると、先ほど接続したデバイスが表示されるのでデバイスを選択
 
@@ -65,7 +65,7 @@ ADP・ADEPのTeamに紐付いたデバイスは会社全体で台数制限があ
    - `DEVELOPMENT_TEAM` は、個人のApple IDのDEVELOPMENT_TEAM(※)を設定
       - **(※) 個人のApple IDのDEVELOPMENT_TEAMの確認方法**  
         - 別途Xcodeでサンプルアプリを作成する
-        - ConfigurationにてCODE_SIGN_STYLEをAuto Signingに指定し、個人のApple IDでビルドの設定を行う
+        - ConfigurationにてCODE_SIGN_STYLEをAuto Signingに指定し、個人のApple IDでビルドを設定する
         - 設定終了後、サンプルアプリのproject.pbxproj中のDEVELOPMENT_TEAMを確認する → これが個人のApple IDのDEVELOPMENT_TEAM
 
 #### トラブルシュート
@@ -80,12 +80,12 @@ No "iOS Development" signing certificate matching team ID "D9MUZCM4X6" with a pr
 
 ### 開発用デバイスへのアプリインストール・起動
 
-- 最初Xcodeからビルドして実機でアプリを起動しようとすると以下エラーになります。
-- 実機にはアプリはインストールされていますが、タップして起動しようとすると、以下のようなメッセージが出て起動できません。
+- 最初Xcodeからビルドして実機でアプリを起動しようとすると以下エラーになります
+- 実機にはアプリはインストールされていますが、タップして起動しようとすると、以下のようなメッセージが出て起動できません
 - そこで実機の設定 > 一般 > プロファイルとデバイス管理をクリック
 - デベロッパAPPで、Xcodeで登録しているApple IDを選択
 - 青文字の「XXXを信頼する」をクリック（スクショでは文字が見切れていてわかりにくいですが、青文字の部分です）
 - 以下で信頼を選択
 - 以下のようになります。このあと、実機でアプリをタップすると起動できるようになっています
 
-ToDo：信頼の手順はIn-Houseも同じはず
+ToDo：信頼の手順はIn-Houseも同じはず。

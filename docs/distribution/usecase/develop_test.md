@@ -19,7 +19,8 @@ ADEPライセンスでのIn-House配布か、ADPでのTestFlight（内部テス�
 
 ## Android
 
-APKファイルを自前で配布するか、内部テストまたはクローズドテストが使えます。内部テストまたはクローズドテストの場合はGoogle Play Consoleがアプリを配布してくれるので、配布の仕組みを自前で用意する必要がありません。
+APKファイルを自前で配布するか、内部テストまたはクローズドテストが使えます。
+内部テストやクローズドテストはGoogle Play Consoleがアプリを配布してくれるので、配布の仕組みを自前で用意する必要がありません。
 
  - [Google Play](../build/android/google_play_test.md)でテスト配布
  - [APKファイルを配布](../build/android/apk_dist.md)

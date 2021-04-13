@@ -2,8 +2,7 @@
 title: プロジェクトのビルド設定
 ---
 
-開発者が個別にアプリの開発に着手する前に、開発者のうちの誰かがプロジェクトのビルド設定の担当者となり、プロジェクトのビルド設定を行います。
-
+アプリケーションの開発を始める前に、開発者のうちの誰かがプロジェクトのビルド設定の担当者となり、プロジェクトのビルド設定します。
 
 ## なぜビルド設定をするのか
 
@@ -11,19 +10,20 @@ AppleはADP・ADEPライセンス利用に関して以下のようなルール�
 - 組織単位（ライセンス契約単位）で、デバイス登録台数は種類（iPhone、iPadなど）ごとに100台まで
 - Appの高度な機能を使ったアプリの場合、ライセンス利用が必須
 
-ライセンス運用では、複数プロジェクトでiOSアプリ開発を行っても、組織単位のデバイス登録台数上限を超えないよう、不要なデバイス登録を避けるルールを定めるケースもあります。
+ライセンス運用では、複数プロジェクトでiOSアプリ開発をしても、組織単位のデバイス登録台数上限を超えないよう、不要なデバイス登録を避けるルールを定めるケースもあります。
 - Appの高度な機能を使わないアプリの開発では個人のApple IDを使う
-- Appの高度な機能を使うアプリの開発では、アプリのビルド設定で、Appの高度な機能を無効にするビルドと有効にするビルドに分ける
+- Appの高度な機能を使うアプリの開発では、アプリのビルド設定で、Appの高度な機能を有効にするかどうかでビルドを分ける
   - 無効時のビルドでは、個人のApple IDを使う
   - 有効時のビルドでは、ライセンスを使う（ADP・ADEPにデバイスを登録し、そのデバイスでアプリの動作検証を実施する）
 - 配布時はADP・ADEPライセンスを使う
 
 そのため、Appの高度な機能を使うアプリの開発には少なくとも次の3つのビルド設定が必要になります。
-1. 開発用 - Appの高度な機能を使わない（または無効にした）ビルド
+
+ - 開発用 - Appの高度な機能を使わない（または無効にした）ビルド
    - 個人のApple IDを使う
-2. 開発用 - Appの高度な機能を有効にしたビルド
+ - 開発用 - Appの高度な機能を有効にしたビルド
    - ADP・ADEPライセンスを使う
-3. 配布用
+ - 配布用
    - ADP・ADEPライセンスを使う
 
 
@@ -85,51 +85,52 @@ Debug（No. 1）の設定では、開発者ごとに設定値が異なるため�
   - 開発用証明書の秘密鍵をMac端末のキーチェンに登録します
     - Mac端末にダウンロードした証明書をダブルクリックするとキーチェーンアクセスが起動するので追加をクリックしてください
 - Configurationの設定
-  - 1つのビルド設定ごとに1つのConfigurationの設定が必要です。ここではXcodeにて`Debug`、`DebugAdvanced`、`Release`の3つのConfigurationを設定します。
+  - 1つのビルド設定ごとに1つのConfigurationの設定が必要です。ここではXcodeで`Debug`、`DebugAdvanced`、`Release`の3つのConfigurationを設定します。
 - Schemaの設定
-  - XcodeでConfigurationを簡単に切り替えられるようにするために、それぞれのSchemaを作成します  
+  - XcodeでConfigurationを簡単に切り替えられるよう、それぞれのSchemaを作成します  
 - ビルド設定値ファイルの作成、プロジェクトのビルド設定をリポジトリに反映
-  - Debug用の設定値の一部は開発者依存です。  ここでは開発者依存の値を設定値ファイルに切り出しテンプレート化します。そうすることで、開発者は、設定値ファイルを修正するだけでビルド設定が可能になります。
+  - Debug用の設定値の一部は開発者依存です。ここでは開発者依存の値を設定値ファイルに切り出しテンプレート化します。そうすることで、開発者は、設定値ファイルを修正するだけでビルド設定が可能になります
 
 
 ### Configuration
 
 #### Configuration: Allの設定
 
-プロビジョニングプロファイル設定
+プロビジョニングプロファイル設定。
 
-- Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常のTARGET（TestsやtvOSなどついていないTARGET）を指定 > Signing & Capabilities > All
+- Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定 > Signing & Capabilities > All
 - Automatically manage signingのチェックを外す
-
 
 - Provisioning Profileのプルダウン > Import Profile… を選択
 - 開発用プロビジョニングプロファイル（Apple Development）を指定
 
 - Bundle Identifierにアプリ管理者から教えてもらったApp IDを指定
 
-- トラブルシューティング
-プロビジョニングプロファイルを選択しても以下のエラーが出る場合
-=> Xcodeを再起動すると解消される可能性があります。再起動の際は必ずXcodeのメニューからQuitを選択してXcodeを一度終了してください。
+##### トラブルシューティング
+  
+###### プロビジョニングプロファイルを選択しても以下のエラーが出る場合
+     - Xcodeを再起動すると解消される可能性があります。再起動の際は必ずXcodeのメニューからQuitを選択してXcodeを一度終了する
 
 ```
 No signing certificate "iOS Development" found
 No "iOS Development" signing certificate matching team ID "D9MUZCM4X6" with a private key was found.
 ```
 
-プロビジョニングプロファイルを選択してもが出る場合
-=>　証明書の秘密鍵がMac端末のキーチェーンに登録できていません。登録してください。
+###### プロビジョニングプロファイルを選択してもが出る場合
 
+証明書の秘密鍵がMac端末のキーチェーンに登録できていません。登録してください。
 
 #### Configuration: DebugAdvancedの作成
 
-- Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info > Configurations > Debugを選択し、+ -の+'を選択 >Duplicate “Debug” Configuration`を選択
+- Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info > Configurations > Debugを選択
+- `+` `-` の `+` を選択 >Duplicate “Debug” Configuration`を選択
 - 名前に「DebugAdvanced」を指定する
-- Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常のTARGET（TestsやtvOSなどついていないTARGET）を指定 > Signing & Capabilities > DebugAdvancedを確認しSigningにプロビジョニングプロファイルが設定されていればOK
+- Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定 > Signing & Capabilities > DebugAdvancedを確認しSigningにプロビジョニングプロファイルが設定されていればOK
 
 
 ####  Configuration: Debug設定
 
-  - Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常のTARGET（TestsやtvOSなどついていないTARGET）を指定 > Signing & Capabilities > Debugにて以下設定を行う
+  - Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定 > Signing & Capabilities > Debugにて以下設定
     - Automatically manage signingのチェックをつける
     - TeamはPersonal Team（個人アカウント）を選択
     - Bundle Identifierはpersonal.${Allで設定したBundle Identifier}.{組織内の誰とも被らないID}を設定
@@ -144,7 +145,7 @@ Appの高度な機能を使うアプリの場合は、開発者が通常使う�
 
 #### Configuration: 設定の確認
 
-設定を行うと、最終的には以下のようになります。
+設定すると、最終的には以下のようになります。
 - All
 - Debug
 - DebugAdvanced
@@ -220,8 +221,7 @@ DEVELOPMENT_TEAM=8G25F9MZKD
 - ConfigurationのDebugにて上記で作成した設定ファイルを読み込むようにする
   - Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info > Configurations > Debugを選択し、アプリ名の右プルダウンを選択先ほど作成した設定ファイルを指定する
 
-**※すでに別の設定ファイルが指定されてる場合**
-- 既に指定されている設定ファイルに、以下のようなinclude文を追加する
+**※すでに別の設定ファイルが指定されてる場合**既に指定されている設定ファイルに、以下のようなinclude文を追加する。
 
 ```
 #include "<<アプリ名>>/PersonalAccount.xconfig"
@@ -229,7 +229,7 @@ DEVELOPMENT_TEAM=8G25F9MZKD
 
 #### ビルドファイルの余計な差分を元に戻す
 
-ビルドファイル`<<アプリ名>>.xcodeproj/project.pbxproj`で、Debug Configurationの部分以外の、下記項目名の差分は変更前に戻してください。変更前のファイルに元の値があれば、元の値を指定して、項目がなければ、項目ごと削除してください
+ビルドファイル`<<アプリ名>>.xcodeproj/project.pbxproj`で、Debug Configurationの部分以外の、下記項目名の差分は変更前に戻してください。変更前のファイルに元の値があれば、元の値を指定して、項目がなければ、項目ごと削除してください。
   - DevelopmentTeam
   - PROVISIONING_PROFILE_SPECIFIER
   - DEVELOPMENT_TEAM
@@ -243,7 +243,7 @@ DEVELOPMENT_TEAM=8G25F9MZKD
   - DEVELOPMENT_TEAM
   - PRODUCT_BUNDLE_IDENTIFIER
 
-修正イメージは以下
+修正イメージはつぎのとおりです。
 ```
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -300,7 +300,7 @@ PERSONAL_IDENTIFIER=
 DEVELOPMENT_TEAM=
 ```
 
-- `PersonalAccount.xcconfig`を構成管理対象外とする。Gitなら`.gitignore`に`PersonalAccount.xcconfig`を追加
+- `PersonalAccount.xcconfig`を構成管理の対象外とする。Gitなら`.gitignore`に`PersonalAccount.xcconfig`を追加
 
 
 #### プロジェクトのビルド設定をリポジトリに反映
