@@ -3,31 +3,56 @@ title: iOSアプリのビルド
 sidebar_label: はじめに
 ---
 
-
 iOSではアプリケーションをビルド、配布するために必要なリソースがあります。
-リソースの作成方法は[iOSのライセンス](../../ios_lisence.md)によって違うため、一度ライセンスのページを確認してください。
+リソースの作成方法は[iOSのライセンス](../../ios_lisence.md)によって違うため、確認していなければライセンスのページを確認してください。
 
+iOSのアプリケーションのビルドではライセンス毎に次のリソースが必要です。
 
+- [証明書](#証明書)
+- [アプリケーション](#アプリケーション)
+- [プロビジョニングプロファイル](#プロビジョニングプロファイル)
 
-#### AdHoc Distributionを利用する場合の考慮
+ここではADP・ADEPライセンスを利用する開発チームの管理者を対象に、作成・展開する必要があるリソースについて記載します。
+開発者が開発時にアプリをインストールする場合は[開発者アカウントを利用](personal_team.md)を参照してください。
 
-高度な機能を利用するアプリを開発する場合、Personal Teamでは機能に制限があるため、ADP・ADEPでUSB経由のインストール（AdHoc配布）を選択するケースがあります。
-ADP・ADEPに登録できるiPhoneは契約毎に100台という厳しい制限があるので、できればUSB経由ではなくTestFlightまたはIn-Houseでの配布をおすすめします。
+iOSアプリをビルドする場合は証明書を取得し、ここのアプリケーションを登録してプロビジョニングプロファイルを作成します。
+作成したプロビジョニングプロファイルを利用して、アプリをビルドします。
 
 ## ビルドで使用するリソース
 
 ### 証明書
 
+アプリケーションをデバイスにインストールするための証明書を作成・取得します。
+インストールするための証明書は開発用（Apple Development）と配布用（Apple Distribution）の2種類があります。
 
-### Provisioning Profileの作成
 
-  - [Apple Developer Webサイト](https://developer.apple.com/account/)にログインし、`Profiles`を開いて`Profiles ⊕`クリック
-  - 配布用途にあわせて、選択してください。
-    - AppStoreで公開する（TestFlightでの配布を含む）場合、**App Store**（ADPのみ選択可能です）
-    - In-Houseでの配布する場合、**In House**（ADEPのみ選択可能です）
-  - 選択後、`Continue`をクリック
-  - 事前に登録したApp IDを選択し`Continue`をクリック
-  - 証明書を選択し`Continue`をクリック
-  - プロビジョニングプロファイル名を入力して`Generate`をクリック
-  - 作成したプロビジョニングプロファイルをMac端末にダウンロード
+利用できる証明書には[上限](https://help.apple.com/xcode/mac/current/#/dev3a05256b8)があります。  
+※配布用証明書はライセンス毎、開発用証明書は開発者アカウント毎です。（[Appleのヘルプ > 証明書の概要](https://help.apple.com/developer-account/#/deveedc0daa0)）を参照してください。
 
+
+
+### アプリケーション
+
+配布するアプリケーションを事前に登録し（`AppId`や`bundle id`と呼ばれる）アプリケーションのIDを取得します。
+WebApplicationのURLドメインのように一意になるIDを指定してください。
+
+### プロビジョニングプロファイル
+
+プロビジョニングプロファイルは証明書とアプリケーションを組み合わせて作成されます。
+作成方法については次のとおりです。
+
+  1. [Apple Developer Webサイト](https://developer.apple.com/account/)にログインする。
+  1. `Profiles`を開いて`Profiles ⊕`クリック
+  1. 配布用途にあわせて選択し、`Continue`をクリック
+     * AppStoreで公開する（TestFlightでの配布を含む）場合は**App Store**
+     * In-Houseでの配布する場合は**In House**
+  1. 事前に登録したApp IDを選択し、`Continue`をクリック
+  1. 証明書を選択し、`Continue`をクリック（※証明書）
+  1. プロビジョニングプロファイル名を入力して`Generate`をクリック
+
+作成したプロビジョニングプロファイルは選択した**※証明書**をインストールしているmacOSでビルドできます。
+
+#### AdHoc Distributionを利用する場合の考慮
+
+Push通知など高度な機能を利用するアプリを開発する場合、Personal Teamでは機能に制限があるため、ADP・ADEPでUSB経由のインストール（AdHoc配布）を選択するケースがあります。
+ADP・ADEPに登録できるiPhoneは契約毎に100台という厳しい制限があるので、できればUSB経由ではなくTestFlightまたはIn-Houseでの配布をおすすめします。
