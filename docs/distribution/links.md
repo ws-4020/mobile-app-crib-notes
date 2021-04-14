@@ -2,7 +2,6 @@
 
 - [Appの高度な機能](https://help.apple.com/developer-account/?lang=ja#/dev21218dfd6)
 - [Appの高度な機能 - サポート - Apple Developer](https://developer.apple.com/jp/support/app-capabilities/)
-- [ADP](https://developer.apple.com/jp/programs/)  
 - [Apple Developer Program (ADP)](https://developer.apple.com/jp/programs/)
 - [Apple Developer Enterprise Program (ADEP)](https://developer.apple.com/jp/programs/enterprise/)
 - [ライセンスの選択](https://developer.apple.com/jp/support/compare-memberships/)
