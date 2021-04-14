@@ -10,9 +10,9 @@ sidebar_label: APKファイルを配布
 Androidアプリをビルドするには[React Native公式サイト](https://reactnative.dev/docs/signed-apk-android)を参考にAPKファイルを作成してください。
 
 :::caution
-TODO：鍵管理についてもガイドする？
-TODO：`cd android`はReactNativeが前提だけど、どうやって案内するか？
-[Generating the release AAB](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab)でAPKファイルを作成するコマンドは `./gradlew bundleRelease` ではなく `.gradlew assembleRelease` を実行してください。 
+TODO：鍵管理についてもガイドするか判断。
+TODO：`cd android`はReactNativeが前提だけど、どうやって案内するか判断。
+[AABを作成するコマンド](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab)は `./gradlew bundleRelease` ではなく `.gradlew assembleRelease` を実行してAPKファイルを作成してください。 
 :::
 
 
