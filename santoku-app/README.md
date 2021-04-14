@@ -55,7 +55,7 @@ Push通知用のサンプルを手元で動作させる必要がない場合は�
     ```
 
 実際にPush通知を確認する場合はRemote通知のためにBackendとの整合性のある設定が必要です。
-Push通知の設定方法は[ガイド](../TODO/mobile/crib-notes/link)を参照してください。
+Push通知の設定方法は[ガイド](https://fintan-contents.github.io/mobile-app-crib-notes/reference/notification/infrastructure)を参照してください。
 設定方法に関しては、本アプリでもご自身が作成するアプリケーションでも共通です。
 
 ### iOS
