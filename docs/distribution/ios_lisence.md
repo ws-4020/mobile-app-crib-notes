@@ -2,6 +2,8 @@
 title: iOSのライセンス
 ---
 
+ライセンスによって[アプリがサポートする機能](https://developer.apple.com/jp/support/app-capabilities/)や配布方法が異なります。
+
 iOSのアプリを開発するときには次の3つのライセンスのいずれかを選択します。
 アプリケーションの配布を説明する中では省略して表記することがあります。
 
@@ -9,8 +11,10 @@ iOSのアプリを開発するときには次の3つのライセンスのいず�
  - [Apple Developer Program (ADP)](https://developer.apple.com/jp/programs/)
  - [Apple Developer Enterprise Program (ADEP)](https://developer.apple.com/jp/programs/enterprise/)
 
-あのフローチャートのやつ。
+ADPはApp Storeでの配布（公開）に必要なライセンスで、[Appの高度な機能](https://help.apple.com/developer-account/?lang=ja#/dev21218dfd6)が利用できます。
+Personal Teamではアプリの配布ができない、[Appの高度な機能](https://help.apple.com/developer-account/?lang=ja#/dev21218dfd6)が利用できないといった制限がありますが、無料で利用できます。
+閉じた組織内で利用する場合はADEPを利用できます。ただしADEPのライセンスの取得は難しくなっています。
 
 :::note
-ADEPライセンスの取得は困難になっていますが、配布方法はADPで代替できるものがあるのでユースケースを参照してください。
+ADEPライセンスの取得は困難になっていますが、ADPで代替できるためユースケースを参照してください。
 :::
