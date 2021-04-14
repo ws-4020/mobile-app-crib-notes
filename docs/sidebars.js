@@ -38,6 +38,7 @@ module.exports = {
         type: 'category',
         label: 'iOSアプリ',
         items: [
+          'distribution/build/ios/overview',
           'distribution/build/ios/personal_team',
           'distribution/build/ios/adp_local',
           'distribution/build/ios/adep_in_house',
@@ -49,6 +50,7 @@ module.exports = {
         label: 'Androidアプリ',
         items: [
           'distribution/build/android/overview',
+          'distribution/build/android/local',
           'distribution/build/android/apk_dist',
           'distribution/build/android/google_play_test',
         ],

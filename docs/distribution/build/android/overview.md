@@ -1,5 +1,6 @@
 ---
 title: Androidアプリのビルド
+sidebar_label: はじめに
 ---
 
 AndroidアプリのビルドはiOSのようにライセンスなどを考慮する必要はありません。
