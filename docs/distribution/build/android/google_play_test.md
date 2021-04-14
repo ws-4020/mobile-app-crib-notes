@@ -33,7 +33,11 @@ Google Playではテストのためにアプリを配信できます。テスト
 Androidアプリの場合、APKファイル配布、内部テスト、外部テスト、オープンテストの全ての配布方法においてビルド手順は同じです。
 React Native公式サイトを参考にAPKファイルを作成してください。
 
-ToDo:アプリのビルドは別に分けておく。
+:::caution
+TODO：鍵管理についてもガイドする？
+TODO：`cd android`はReactNativeが前提だけど、どうやって案内するか？
+[Generating the release AAB](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab)でAPKファイルを作成するコマンドは `./gradlew bundleRelease` ではなく `.gradlew assembleRelease` を実行してください。 
+:::
 
 ## 内部テスト
 
