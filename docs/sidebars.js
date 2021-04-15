@@ -49,6 +49,7 @@ module.exports = {
         label: 'Androidアプリ',
         items: [
           'distribution/build/android/overview',
+          'distribution/build/android/local',
           'distribution/build/android/apk_dist',
           'distribution/build/android/google_play_test',
         ],
