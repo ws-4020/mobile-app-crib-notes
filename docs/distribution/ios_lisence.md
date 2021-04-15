@@ -8,9 +8,11 @@ iOSのアプリを開発するときには次の3つのライセンスのいず�
 アプリケーションの配布を説明する中では省略して表記することがあります。
 
 ## Apple ID個人デベロッパアカウント（開発者アカウント）
+
 開発者アカウントは無料で利用できますが、制限（アプリの配布ができない、Appの高度な機能が利用できない）があります。
 
 ## Apple Developer Program
+
 [Apple Developer Program (ADP)](https://developer.apple.com/jp/programs/)はApp Storeでの配布（公開）に必要なライセンスで、[Appの高度な機能](https://help.apple.com/developer-account/?lang=ja#/dev21218dfd6)が利用できます。
 
 ## Apple Developer Enterprise Program
