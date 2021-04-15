@@ -21,14 +21,7 @@ module.exports = {
   },
   distribution: {
     アプリケーションの配布: ['distribution/index', 'distribution/ios_lisence'],
-    ユースケース: [
-      'distribution/usecase/index',
-      'distribution/usecase/local',
-      'distribution/usecase/demo',
-      'distribution/usecase/develop_test',
-      'distribution/usecase/client_test',
-      'distribution/usecase/field_test',
-    ],
+    ユースケース: ['distribution/usecase/index'],
     アプリのビルド: [
       {
         type: 'doc',
