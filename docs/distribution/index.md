@@ -4,27 +4,31 @@ slug: /distribution
 sidebar_label: Overview
 ---
 
-## 目的
+モバイルアプリケーションはWebとは違って、ユーザや開発者のデバイスにアプリケーションをインストールする必要があります。
 
-モバイルアプリケーションはWebアプリと異なり、ユーザや開発者のデバイスにインストールする必要があります。
 このドキュメントでは、デバイスにアプリをインストールするために開発者が実施する手順や利用するライセンスについて、アプリをインストールしたいシチュエーションごとに紹介します。
 
-## 前提条件
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-- このドキュメントで紹介しないもの
-  - Google PlayやApp Storeでの公開手順
-  - Continuous Delivery (CD)
-  - ライセンスや、配布に必要なリソースの管理方法
+import {PageList} from '../../src/components';
+const overviews = [
+  {
+    title: 'よくあるユースケース',
+    summary: <>よくあるユースケースごとに、どのような配布方法が選択できるかを紹介します</>,
+    to: '/distribution/usecase'
+  },
+  {
+    title: 'アプリケーションの配布',
+    summary: <>配布方法毎に、利用するライセンスや手順を紹介します</>,
+    to: '/distribution/distribute-app'
+  },
+  {
+    title: 'アプリケーションのビルド',
+    summary: <>配布するアプリをビルドする方法を紹介します</>,
+    to: '/distribution/build/index'
+  },
+]
 
-## 構成
+<PageList overviews={overviews} colSize={12} />
 
-<!-- Getting Startedの帯のやつにしたい -->
-
-- 前提知識
-  - [iOSのライセンス](ios_lisence.md)
-- [ユースケース](./usecase/index.md)
-  - モバイルアプリケーション開発でよく利用されると想定されるシチュエーションから配布方法を紹介
-- モバイルアプリケーション配布ガイド
-  - [ビルド方法](./build/index.md)
-    - [iOS](./build/ios/overview.md)
-    - [Android](./build/android/overview.md)
+<!-- textlint-enable ja-technical-writing/sentence-length -->
