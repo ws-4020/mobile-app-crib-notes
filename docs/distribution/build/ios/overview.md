@@ -36,6 +36,7 @@ Apple Developer Webサイトの[登録ページ](https://developer.apple.com/acc
 ### プロビジョニングプロファイル
 
 プロビジョニングプロファイルは[登録ページ](https://developer.apple.com/account/resources/profiles/add)で証明書とApp IDを組み合わせて作成します。
+デバイスに直接インストールするAdHoc配布を利用する場合は事前にデバイスも紐付けておく必要があります。
 
 作成したプロビジョニングプロファイルは[一覧](https://developer.apple.com/account/resources/profiles)で確認できます。
 プロビジョニングプロファイルは作成時に選択した証明書をインストールしているmacOSでビルドできます。
@@ -43,4 +44,5 @@ Apple Developer Webサイトの[登録ページ](https://developer.apple.com/acc
 #### AdHoc Distributionを利用する場合の考慮
 
 Push通知など高度な機能を利用するアプリを開発する場合、開発者アカウントでは機能に制限があるため、ADP・ADEPでUSB経由のインストール（AdHoc）を選択するケースがあります。
-ADP・ADEPに登録できるiPhoneはライセンス毎に100台という制限があるので、AdHocではなくTestFlightまたはIn-Houseでの配布をおすすめします。
+これはプロビジョニングプロファイルに事前にデバイスを紐付けるため、デバイスが増えた場合にプロビジョニングプロファイルから作成し直す必要があり、作業が煩雑になります。
+また登録できるiPhoneはライセンス毎に100台という制限があるので、AdHocではなくTestFlightまたはIn-Houseでの配布をおすすめします。
