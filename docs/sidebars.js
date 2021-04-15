@@ -39,7 +39,7 @@ module.exports = {
         label: 'iOSアプリ',
         items: [
           'distribution/build/ios/overview',
-          'distribution/build/ios/personal_team',
+          'distribution/build/ios/developer_account',
           'distribution/build/ios/adp_local',
           'distribution/build/ios/adep_in_house',
           'distribution/build/ios/adp_testflight',

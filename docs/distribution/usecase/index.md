@@ -17,7 +17,7 @@ slug: /distribution/usecase
 
 ### iOS
 
-|ユースケース/配布|[個人でUSB経由](../build/ios/personal_team.md)|[AdHoc](../build/ios/adp_local.md)|[In-House](../build/ios/adep_in_house.md)|[TestFlight(内部)](../build/ios/adp_testflight.md)|[TestFlight(外部)](../build/ios/adp_testflight.md)|
+|ユースケース/配布|[個人でUSB経由](../build/ios/developer_account.md)|[AdHoc](../build/ios/adp_local.md)|[In-House](../build/ios/adep_in_house.md)|[TestFlight(内部)](../build/ios/adp_testflight.md)|[TestFlight(外部)](../build/ios/adp_testflight.md)|
 |:---------|-:-|-:-|-:-|:--|:--|
 |開発中にデバイスで動作確認したい|YES|YES|YES|YES|X|
 |デモを見せたい|YES|YES|YES|YES|X|

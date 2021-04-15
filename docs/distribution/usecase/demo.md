@@ -10,7 +10,7 @@ sidebar_label: デモを見せる
 
 - ADPの[TestFlight(内部テスター)](../build/ios/adp_testflight.md)で配布
 - ADEPの[In-House](../build/ios/adep_in_house.md)で配布
-- [個人のApple ID](../build/ios/personal_team.md)でインストール
+- [開発者アカウント](../build/ios/developer_account.md)でインストール
 - ADP・ADEPの[AdHoc](../build/ios/adp_local.md)でインストール
 
 ## Android

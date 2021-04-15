@@ -14,7 +14,7 @@ Appの高度な機能を含まない場合は、個人のApple IDに紐づく証
 
 - ADPの[TestFlight](../build/ios/adp_testflight.md)の内部テスターを利用する
 - ADEPの[In-House](../build/ios/adep_in_house.md)で配布
-- [個人のApple ID](../build/ios/personal_team.md)を使用する
+- [開発者アカウント](../build/ios/developer_account.md)を使用する
 - ADP・ADEPの[AdHoc](../build/ios/adp_local.md)でインストールする
 
 ### Android
