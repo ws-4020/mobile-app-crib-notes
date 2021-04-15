@@ -20,7 +20,7 @@ module.exports = {
     ],
   },
   distribution: {
-    アプリケーションの配布: ['distribution/index'],
+    アプリケーションの配布: ['distribution/index', 'distribution/ios_lisence'],
     ユースケース: [
       'distribution/usecase/index',
       'distribution/usecase/local',
