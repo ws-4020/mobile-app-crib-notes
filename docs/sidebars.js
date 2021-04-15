@@ -19,37 +19,81 @@ module.exports = {
       'reference/notification/client',
     ],
   },
-  distribution: {
-    アプリケーションの配布: ['distribution/index', 'distribution/ios_lisence'],
-    ユースケース: ['distribution/usecase/index'],
-    アプリのビルド: [
-      {
-        type: 'doc',
-        id: 'distribution/build/index',
-      },
-      {
-        type: 'category',
-        label: 'iOSアプリ',
-        items: [
-          'distribution/build/ios/overview',
-          'distribution/build/ios/developer_account',
-          'distribution/build/ios/adp_local',
-          'distribution/build/ios/adep_in_house',
-          'distribution/build/ios/adp_testflight',
-        ],
-      },
-      {
-        type: 'category',
-        label: 'Androidアプリ',
-        items: [
-          'distribution/build/android/overview',
-          'distribution/build/android/local',
-          'distribution/build/android/apk_dist',
-          'distribution/build/android/google_play_test',
-        ],
-      },
-    ],
-  },
+  distribution: [
+    {
+      type: 'doc',
+      id: 'distribution/index',
+    },
+    {
+      type: 'doc',
+      id: 'distribution/ios_lisence',
+    },
+    {
+      type: 'doc',
+      id: 'distribution/usecase/index',
+    },
+    {
+      type: 'category',
+      label: 'アプリケーションの配布',
+      items: [
+        {
+          type: 'category',
+          label: 'iOSアプリ',
+          items: [
+            'distribution/build/ios/developer_account',
+            'distribution/build/ios/adp_local',
+            'distribution/build/ios/adep_in_house',
+            'distribution/build/ios/adp_testflight',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Androidアプリ',
+          items: [
+            'distribution/build/android/local',
+            'distribution/build/android/apk_dist',
+            'distribution/build/android/google_play_test',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'アプリケーションのビルド',
+      items: ['distribution/build/ios/overview', 'distribution/build/android/overview'],
+    },
+  ],
+  // distribution: {
+  //   アプリケーションの配布: ['distribution/index', 'distribution/ios_lisence'],
+  //   ユースケース: ['distribution/usecase/index'],
+  //   アプリのビルド: [
+  //     {
+  //       type: 'doc',
+  //       id: 'distribution/build/index',
+  //     },
+  //     {
+  //       type: 'category',
+  //       label: 'iOSアプリ',
+  //       items: [
+  //         'distribution/build/ios/overview',
+  //         'distribution/build/ios/developer_account',
+  //         'distribution/build/ios/adp_local',
+  //         'distribution/build/ios/adep_in_house',
+  //         'distribution/build/ios/adp_testflight',
+  //       ],
+  //     },
+  //     {
+  //       type: 'category',
+  //       label: 'Androidアプリ',
+  //       items: [
+  //         'distribution/build/android/overview',
+  //         'distribution/build/android/local',
+  //         'distribution/build/android/apk_dist',
+  //         'distribution/build/android/google_play_test',
+  //       ],
+  //     },
+  //   ],
+  // },
   learn: [
     {
       type: 'doc',
