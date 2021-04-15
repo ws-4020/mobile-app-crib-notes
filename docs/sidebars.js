@@ -113,15 +113,22 @@ module.exports = {
         'react-native/learn/todo-app/basic-components',
         'react-native/learn/todo-app/logo',
         'react-native/learn/todo-app/exercise',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'ToDo管理の実装',
-      items: [
-        'react-native/learn/todo-app-backend',
-        'react-native/learn/todo-app-backend/development-env',
-        'react-native/learn/todo-app-backend/app-spec',
+        {
+          type: 'category',
+          label: 'バックエンド連携',
+          items: [
+            'react-native/learn/todo-app/todo-backend',
+            {
+              type: 'category',
+              label: 'ToDO管理',
+              items: [
+                'react-native/learn/todo-app/todo-backend/todo-manager',
+                'react-native/learn/todo-app/todo-backend/todo-manager/client-validation',
+
+              ],
+            },
+          ],
+        },
       ],
     },
   ],
