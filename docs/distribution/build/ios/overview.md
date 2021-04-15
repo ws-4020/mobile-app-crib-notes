@@ -45,7 +45,7 @@ WebApplicationのURLドメインのように一意になるIDを指定してく�
   1. [Apple Developer Webサイト](https://developer.apple.com/account/)にログインする。
   1. `Profiles`を開いて`Profiles ⊕`クリック
   1. 配布用途にあわせて選択し、`Continue`をクリック
-     * AppStoreで公開する（TestFlightでの配布を含む）場合は**App Store**
+     * AppStoreで公開、TestFightで配布する場合は**App Store**
      * In-Houseでの配布する場合は**In House**
   1. 事前に登録したApp IDを選択し、`Continue`をクリック
   1. 証明書を選択し、`Continue`をクリック（※証明書）
@@ -55,5 +55,5 @@ WebApplicationのURLドメインのように一意になるIDを指定してく�
 
 #### AdHoc Distributionを利用する場合の考慮
 
-Push通知など高度な機能を利用するアプリを開発する場合、Personal Teamでは機能に制限があるため、ADP・ADEPでUSB経由のインストール（AdHoc配布）を選択するケースがあります。
-ADP・ADEPに登録できるiPhoneは契約毎に100台という厳しい制限があるので、できればUSB経由ではなくTestFlightまたはIn-Houseでの配布をおすすめします。
+Push通知など高度な機能を利用するアプリを開発する場合、開発者アカウントでは機能に制限があるため、ADP・ADEPでUSB経由のインストール（AdHoc配布）を選択するケースがあります。
+ADP・ADEPに登録できるiPhoneはライセンス毎に100台という制限があるので、USB経由ではなくTestFlightまたはIn-Houseでの配布をおすすめします。
