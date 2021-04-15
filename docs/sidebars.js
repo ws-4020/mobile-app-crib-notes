@@ -124,7 +124,28 @@ module.exports = {
               items: [
                 'react-native/learn/todo-app/todo-backend/todo-manager',
                 'react-native/learn/todo-app/todo-backend/todo-manager/client-validation',
-
+                'react-native/learn/todo-app/todo-backend/todo-manager/api-request',
+                'react-native/learn/todo-app/todo-backend/todo-manager/async-api-control',
+                {
+                  type: 'category',
+                  label: 'API実行結果',
+                  items: [
+                    'react-native/learn/todo-app/todo-backend/todo-manager/api-exec-result',
+                    'react-native/learn/todo-app/todo-backend/todo-manager/api-exec-result/success-pattern',
+                    {
+                      type: 'category',
+                      label: '異常応答の処理',
+                      items: [
+                        'react-native/learn/todo-app/todo-backend/todo-manager/api-exec-result/err-pattern',
+                        'react-native/learn/todo-app/todo-backend/todo-manager/api-exec-result/err-pattern/err-client',
+                        'react-native/learn/todo-app/todo-backend/todo-manager/api-exec-result/err-pattern/err-server',
+                        'react-native/learn/todo-app/todo-backend/todo-manager/api-exec-result/err-pattern/err-msg',
+                      ],
+                    },
+                    'react-native/learn/todo-app/todo-backend/todo-manager/api-exec-result/network-err',
+                  ],
+                },
+                'react-native/learn/todo-app/todo-backend/todo-manager/exercise-todo-delete',
               ],
             },
           ],
