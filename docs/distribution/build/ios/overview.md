@@ -40,7 +40,7 @@ Apple Developer Webサイトの[登録ページ](https://developer.apple.com/acc
 作成したプロビジョニングプロファイルは[一覧](https://developer.apple.com/account/resources/profiles)で確認できます。
 プロビジョニングプロファイルは作成時に選択した証明書をインストールしているmacOSでビルドできます。
 
-### AdHoc Distributionを利用する場合の考慮
+#### AdHoc Distributionを利用する場合の考慮
 
 Push通知など高度な機能を利用するアプリを開発する場合、開発者アカウントでは機能に制限があるため、ADP・ADEPでUSB経由のインストール（AdHoc）を選択するケースがあります。
 ADP・ADEPに登録できるiPhoneはライセンス毎に100台という制限があるので、AdHocではなくTestFlightまたはIn-Houseでの配布をおすすめします。

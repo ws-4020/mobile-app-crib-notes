@@ -36,7 +36,7 @@ AndroidはiOSのようにAppの高度な機能を考慮する必要はありま�
 開発チームが開発用端末を操作してお客様にデモを見せたい​​​​​​​ケースでは
 デモの前にあらかじめ、開発用デバイスにアプリをインストールしてください。 開発中にデバイスで動作確認する場合と同様です。
 
-## iOS
+### iOS
 
 iOSの場合はAppの高度な機能を含むか否かによって配布方法が異なります。
 
@@ -45,7 +45,7 @@ iOSの場合はAppの高度な機能を含むか否かによって配布方法�
 - [開発者アカウント](../build/ios/developer_account.md)でインストール
 - ADP・ADEPの[AdHoc](../build/ios/adp_local.md)でインストール
 
-## Android
+### Android
 
 - [デバイスにUSB経由](../build/android/local.md)でインストール
 - [APKファイルを配布](../build/android/apk_dist.md)してインストール
