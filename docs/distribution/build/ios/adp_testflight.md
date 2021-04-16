@@ -5,7 +5,7 @@ sidebar_label: TestFlight（ADP）
 
 ## TestFlightを使った配信
 
-ADPライセンスの[TestFlight](https://developer.apple.com/jp/testflight/)を使ってテストのためにアプリを配信できます。テスト内容や目的に応じて使い分けることができる2つの配信方法が用意されています。
+ADPライセンスの[TestFlight](https://developer.apple.com/jp/testflight/)を使ってテストのためにアプリを配信できます。テスト内容や目的に応じて使い分けることができる2つのテスターが用意されています。
 
 インストールするにはテスターに登録するか、パブリックリンクをテスターに伝え、TestFlightアプリからインストールします。
 
