@@ -153,32 +153,33 @@ Appの高度な機能を使うアプリの場合は、CapabilityからAppの高�
 
 ### Schemaの設定
 
-  - Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリックすると見れる。本設定を終えると以下のようになる
-     - <<アプリ名>>
-        - リリースビルド
-        - ConfigurationはRelease
-     - <<アプリ名>> Debug
-        - Appの高度な機能を無効にしたアプリのデバッグ
-        - ConfigurationはDebug
-     - <<アプリ名>> DebugAdvanced
-        - Appの高度な機能を有効にしたアプリのデバッグ
-        - ConfigurationはDebugAdvanced
-   - Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリック > Edit Scheme... を選択
-   - ダイアログが開く 
+Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリックする確認できます。
+本設定を終えると以下のようになります。
+  - <<アプリ名>>
+    - リリースビルド
+    - ConfigurationはRelease
+  - <<アプリ名>> Debug
+    - Appの高度な機能を無効にしたアプリのデバッグ
+    - ConfigurationはDebug
+  - <<アプリ名>> DebugAdvanced
+    - Appの高度な機能を有効にしたアプリのデバッグ
+    - ConfigurationはDebugAdvanced
+
+Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリックしてEdit Scheme... を選択します。
    - ダイアログ左上を選択し、<<アプリ名>>のSchemaを選択
    - <<アプリ名>>のSchema > Run > Infoにて
-        - Build ConfigurationでReleaseを選択
-        - Debug executeのチェックを外す
-    - Duplicate Schemeをクリック
-    - Schema名を <<アプリ名>> Debugにする
-    - Run > Infoにて
-        - Build ConfigurationでDebugを選択
-        - Debug executeのチェックをつける
-    - Duplicate Schemeをクリック
-    - Schema名を <<アプリ名>> DebugAdvancedにする
-    - Run > Infoにて
-        - Build ConfigurationでDebugAdvancedを選択
-        - Debug executeのチェックをつける
+       - Build ConfigurationでReleaseを選択
+       - Debug executeのチェックを外す
+   - Duplicate Schemeをクリック
+   - Schema名を <<アプリ名>> Debugにする
+   - Run > Infoにて
+       - Build ConfigurationでDebugを選択
+       - Debug executeのチェックをつける
+   - Duplicate Schemeをクリック
+   - Schema名を <<アプリ名>> DebugAdvancedにする
+   - Run > Infoにて
+       - Build ConfigurationでDebugAdvancedを選択
+       - Debug executeのチェックをつける
 
 ### ビルド設定ファイルの作成
 
