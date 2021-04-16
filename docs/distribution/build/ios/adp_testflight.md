@@ -77,7 +77,7 @@ Xcode以外のツールでアップロードする場合は、Uploadではなく
 
 ## App Store Connectで配信の準備
 
-ビルドしたアプリケーションを[App Store Connect](https://appstoreconnect.apple.com/apps)でTestFlightでアプリを配信できるようにします。
+ビルドしたアプリケーションを[App Store Connect](https://appstoreconnect.apple.com/apps)からTestFlightで配信できるようにします。
 
 ベータ版ビルドの輸出コンプライアンスを提出します。[App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev22b9b2174)を参考にしてください。
 
