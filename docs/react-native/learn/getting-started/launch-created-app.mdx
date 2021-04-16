@@ -76,3 +76,36 @@ Expo DevTools is running at http://localhost:19003
 
 </TabItem>
 </Tabs>
+
+## アプリ実行の仕組み
+
+React Nativeアプリ実行の仕組みをかんたんに説明します。
+
+<Tabs
+  defaultValue="rn-build"
+  values={[
+    {label: 'React Native', value: 'rn-build'},
+    {label: 'Expo + React Native', value: 'expo-build'},
+  ]}>
+
+<TabItem value="expo-build">
+
+Expo Goを使用する場合は、React Nativeのみの場合と異なりアプリのビルドが不要です。
+
+`expo start` を実行するとExpoの開発者ツールとMetro Bundlerが起動します。
+Expo Goは同じネットワーク内のMetro Bundlerを通してJava Scriptのソースを読み込み、実行します。
+
+</TabItem>
+
+<TabItem value="rn-build">
+
+起動コマンドを実行するとMetro Bundlerが起動した後、アプリのビルドが始まります。
+
+`react-native run-ios` の場合iOSアプリがビルドされ、シミュレータにインストールされます。  
+`react-native run-android` の場合Androidアプリがビルドされ、エミュレータにインストールされます。
+
+その後、インストールされたアプリがMetro Bundlerを通してJava Scriptのソースを読み込み、実行します。
+
+</TabItem>
+</Tabs>
+
