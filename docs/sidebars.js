@@ -63,37 +63,6 @@ module.exports = {
       items: ['distribution/build/ios/overview', 'distribution/build/android/overview'],
     },
   ],
-  // distribution: {
-  //   アプリケーションの配布: ['distribution/index', 'distribution/ios_lisence'],
-  //   ユースケース: ['distribution/usecase/index'],
-  //   アプリのビルド: [
-  //     {
-  //       type: 'doc',
-  //       id: 'distribution/build/index',
-  //     },
-  //     {
-  //       type: 'category',
-  //       label: 'iOSアプリ',
-  //       items: [
-  //         'distribution/build/ios/overview',
-  //         'distribution/build/ios/developer_account',
-  //         'distribution/build/ios/adp_local',
-  //         'distribution/build/ios/adep_in_house',
-  //         'distribution/build/ios/adp_testflight',
-  //       ],
-  //     },
-  //     {
-  //       type: 'category',
-  //       label: 'Androidアプリ',
-  //       items: [
-  //         'distribution/build/android/overview',
-  //         'distribution/build/android/local',
-  //         'distribution/build/android/apk_dist',
-  //         'distribution/build/android/google_play_test',
-  //       ],
-  //     },
-  //   ],
-  // },
   learn: [
     {
       type: 'doc',
