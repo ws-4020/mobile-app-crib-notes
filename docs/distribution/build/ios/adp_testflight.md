@@ -58,7 +58,7 @@ App Store Connectにアプリをアップロードするためにはセットア
 [App Store Connectヘルプのアップロードツール](https:todo.todo)
 
 
-Xcodeでビルドし、アップロードする手順を記載します。
+Xcodeでアップロードする手順を記載します。
 Xcode以外のツールでアップロードする場合は、UploadではなくExportを選択し、バイナリを保存してください。
 
   - XcodeでArchiveした後に表示されるウインドウでDistribute Appを選択
