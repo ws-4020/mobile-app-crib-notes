@@ -92,16 +92,9 @@ React Nativeアプリ実行の仕組みをかんたんに説明します。
 
 <!-- textlint-enable ja-technical-writing/sentence-length -->
 
-<TabItem value="expo-build">
-
-Expo Goを使用する場合は、React Nativeのみの場合と異なりアプリのビルドが不要です。
-
-`expo start` を実行するとExpoの開発者ツールとMetro Bundlerが起動します。
-Expo Goは同じネットワーク内のMetro Bundlerを通してJava Scriptのソースを読み込み、実行します。
-
-</TabItem>
-
 <TabItem value="rn-build">
+
+![Image](react-native-build.png)
 
 起動コマンドを実行するとMetro Bundlerが起動した後、アプリのビルドが始まります。
 
@@ -109,6 +102,16 @@ Expo Goは同じネットワーク内のMetro Bundlerを通してJava Scriptの�
 `react-native run-android` の場合Androidアプリがビルドされ、エミュレータにインストールされます。
 
 その後、インストールされたアプリがMetro Bundlerを通してJava Scriptのソースを読み込み、実行します。
+
+</TabItem>
+<TabItem value="expo-build">
+
+![Image](expo-build.png)
+
+Expo Goを使用する場合は、React Nativeのみの場合と異なりアプリのビルドが不要です。
+
+`expo start` を実行するとExpoの開発者ツールとMetro Bundlerが起動します。
+Expo Goは同じネットワーク内のMetro Bundlerを通してJava Scriptのソースを読み込み、実行します。
 
 </TabItem>
 </Tabs>
