@@ -54,7 +54,7 @@ App Store Connectにアプリをアップロードするためにはセットア
 
 ビルドしたアプリをApp Store Connectにアップロードします。
 
-[Xcode Help: Develop and distribute an enterprise app](https://help.apple.com/xcode/mac/current/#/devba5e7054d)
+[Xcode Help: Develop and distribute an enterprise app](https://help.apple.com/xcode/mac/current/#/devba5e7054d)  
 [App Store Connectヘルプのアップロードツール](https:todo.todo)
 
 
