@@ -8,15 +8,11 @@ ADEPライセンスはライセンス契約している社内に閉じた配布�
 ## 制限事項
 ADEPのIn-Houseには以下のような制限事項があります。
 
-### 自前のHTTPSサーバが必要
-自作するか、クラウドサービスなどのHTTPSサーバを用意し、そこにIPAファイルをホストして配布する必要があります。
-
-
-
 ### 配布範囲は社内のみ
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 [Apple Developer Enterprise Program](https://developer.apple.com/jp/programs/enterprise/)には「社内用Appのダウンロードを従業員にのみ限定するためのシステム、およびメンバーシップの資格情報やアセットを保護するためのシステムを構築していること」と記載があります。そのため、用意したHTTPSサーバに認証などを設けて、社内の人のみがアクセスできるように制限する必要があります。
 <!-- textlint-enable ja-technical-writing/sentence-length -->
+
 
 1. リソース作成、アプリへの紐付け
 2. Xcodeでのリリースビルドしてipaファイルを生成
