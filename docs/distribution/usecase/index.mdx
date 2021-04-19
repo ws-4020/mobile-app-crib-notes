@@ -52,7 +52,20 @@ AndroidはiOSのようにAppの高度な機能を考慮する必要はありま�
 開発チームが開発用端末を操作してお客様にデモを見せたい​​​​​​​ケースでは
 デモの前にあらかじめ、開発用デバイスにアプリをインストールしてください。 開発中にデバイスで動作確認する場合と同様です。
 
-iOS
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+<Tabs
+  defaultValue="demoIOS"
+  values={[
+    {label: 'iOS', value: 'demoIOS'},
+    {label: 'Android', value: 'demoAndroid'},
+  ]}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+<TabItem value="demoIOS">
+
 
 iOSの場合はAppの高度な機能を含むか否かによって配布方法が異なります。
 
@@ -61,15 +74,30 @@ iOSの場合はAppの高度な機能を含むか否かによって配布方法�
 - [開発者アカウント](../ios-developer-account.md)でインストール
 - ADP・ADEPの[AdHoc](../ios-ad-hoc.md)でインストール
 
-Android
+</TabItem>
+<TabItem value="demoAndroid">
 
 - [デバイスにUSB経由](../build/android/local.md)でインストール
 - [APKファイルを配布](../build/android/apk_dist.md)してインストール
 - [内部テスト版](../build/android/google_play_test.md)で配布
 
+</TabItem>
+</Tabs>
+
 ## 社内や業務委託先でテストをしたい
 
-iOS
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+<Tabs
+  defaultValue="devTestIOS"
+  values={[
+    {label: 'iOS', value: 'devTestIOS'},
+    {label: 'Android', value: 'devTestAndroid'},
+  ]}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+<TabItem value="devTestIOS">
 
 ADEPライセンスでのIn-House配布か、ADPでのTestFlight（内部テスター）の2つが適切です。
 両者はデバイス登録台数制限と配布方法が異なります。プロジェクトの要件に応じて選択してください。
@@ -84,7 +112,8 @@ ADEPライセンスでのIn-House配布か、ADPでのTestFlight（内部テス�
  - [ADPのTestFlight(内部テスター)で配布](../ios-testflight.md)
  - [ADEPのIn-House配布](../ios-in-house.md)
 
-Android
+</TabItem>
+<TabItem value="devTestAndroid">
 
 APKファイルを自前で配布するか、内部テストまたはクローズドテストが使えます。
 内部テストやクローズドテストはGoogle Play Consoleがアプリを配布してくれるので、配布の仕組みを自前で用意する必要がありません。
@@ -92,9 +121,23 @@ APKファイルを自前で配布するか、内部テストまたはクロー�
  - [Google Play](../build/android/google_play_test.md)でテスト配布
  - [APKファイルを配布](../build/android/apk_dist.md)
 
+</TabItem>
+</Tabs>
+
 ## お客様や関係者に実機でテストをしてもらいたい
 
-iOS
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+<Tabs
+  defaultValue="clientTestIOS"
+  values={[
+    {label: 'iOS', value: 'clientTestIOS'},
+    {label: 'Android', value: 'clientTestAndroid'},
+  ]}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+<TabItem value="clientTestIOS">
 
 TestFlight(外部テスター)の場合、テスターであるお客様をApp Store Connectのユーザに登録することなく、パブリックリンクを介してお客様のデバイスにアプリを配信できます。もしお客様自身でADP・ADEPライセンスを契約している場合は、そのライセンスを使ってアプリをお客様に配信できます。この場合は、IPAファイルをビルドする時に、お客様の証明書、プロビジョニングプロファイルなどが必要です。
 
@@ -102,7 +145,8 @@ TestFlight(外部テスター)の場合、テスターであるお客様をApp S
  - お客様のADPのTestFlight(内部テスター、外部テスター)で配布
  - お客様のADEPのIn-Houseで配布
 
-Android
+</TabItem>
+<TabItem value="clientTestAndroid">
 
 お客様のGoogleアカウントに登録しているメールアドレスをテスターとして登録する必要があります。
 
@@ -112,19 +156,37 @@ Android
  - [内部テスト版](../build/android/google_play_test.md)で配布
  - [クローズドテスト版](../build/android/google_play_test.md)で配布
 
+</TabItem>
+</Tabs>
+
 ## フィールドテストをしたい・ベータリリースしたい
 
-iOS
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+<Tabs
+  defaultValue="betaReleaseIOS"
+  values={[
+    {label: 'iOS', value: 'betaReleaseIOS'},
+    {label: 'Android', value: 'betaReleaseAndroid'},
+  ]}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+<TabItem value="betaReleaseIOS">
 
 iOSの場合、TestFlight(外部テスター)ならパブリックリンクで誰でもインストールできます。また外部テスターとしてお客様のメールアドレスを登録して招待コードを送信すれば、お客様側でアプリをインストールできます。
 
  - ADPの[TestFlight(外部テスター)](../ios-testflight.md)で配布
 
-Android
+</TabItem>
+<TabItem value="betaReleaseAndroid">
 
 Androidの場合、オープンテストならGoogle Playで早期アクセス版アプリとして誰でもインストールできる状態になります。
 
  - [オープンテスト](../build/android/google_play_test.md)で配布
+
+</TabItem>
+</Tabs>
 
 ## 早見表
 
