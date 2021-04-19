@@ -30,10 +30,10 @@ iOSでプッシュ通知などのAppの高度な機能を使用するアプリ�
 Appの高度な機能を含まない場合は、個人のApple IDに紐づく証明書、プロビジョニングプロファイル、デバイスを使用できます。
 こちらもiOSのAppの高度な機能を含むアプリの場合と同様にTestFlightまたはIn-Houseでも配布できます。
 
-- ADPの[TestFlight](../build/ios/testflight.md)の内部テスターを利用する
-- ADEPの[In-House](../build/ios/in-house.md)で配布
-- [開発者アカウント](../build/ios/developer-account.md)を使用する
-- ADP・ADEPの[AdHoc](../build/ios/ad-hoc.md)でインストールする
+- ADPの[TestFlight](../ios-testflight.md)の内部テスターを利用する
+- ADEPの[In-House](../ios-in-house.md)で配布
+- [開発者アカウント](../ios-developer-account.md)を使用する
+- ADP・ADEPの[AdHoc](../ios-ad-hoc.md)でインストールする
 
 </TabItem>
 <TabItem value="developerAndroid">
@@ -56,10 +56,10 @@ iOS
 
 iOSの場合はAppの高度な機能を含むか否かによって配布方法が異なります。
 
-- ADPの[TestFlight(内部テスター)](../build/ios/testflight.md)で配布
-- ADEPの[In-House](../build/ios/in-house.md)で配布
-- [開発者アカウント](../build/ios/developer-account.md)でインストール
-- ADP・ADEPの[AdHoc](../build/ios/ad-hoc.md)でインストール
+- ADPの[TestFlight(内部テスター)](../ios-testflight.md)で配布
+- ADEPの[In-House](../ios-in-house.md)で配布
+- [開発者アカウント](../ios-developer-account.md)でインストール
+- ADP・ADEPの[AdHoc](../ios-ad-hoc.md)でインストール
 
 Android
 
@@ -81,8 +81,8 @@ ADEPライセンスでのIn-House配布か、ADPでのTestFlight（内部テス�
 |デバイス台数制限|1人につき30台まで|なし|
 |配布方法 | TestFlight経由|自前のHTTPSサーバ経由|
 
- - [ADPのTestFlight(内部テスター)で配布](../build/ios/testflight.md)
- - [ADEPのIn-House配布](../build/ios/in-house.md)
+ - [ADPのTestFlight(内部テスター)で配布](../ios-testflight.md)
+ - [ADEPのIn-House配布](../ios-in-house.md)
 
 Android
 
@@ -98,7 +98,7 @@ iOS
 
 TestFlight(外部テスター)の場合、テスターであるお客様をApp Store Connectのユーザに登録することなく、パブリックリンクを介してお客様のデバイスにアプリを配信できます。もしお客様自身でADP・ADEPライセンスを契約している場合は、そのライセンスを使ってアプリをお客様に配信できます。この場合は、IPAファイルをビルドする時に、お客様の証明書、プロビジョニングプロファイルなどが必要です。
 
- - ADPの[TestFlight(外部テスター)](../build/ios/testflight.md)で配布
+ - ADPの[TestFlight(外部テスター)](../ios-testflight.md)で配布
  - お客様のADPのTestFlight(内部テスター、外部テスター)で配布
  - お客様のADEPのIn-Houseで配布
 
@@ -118,7 +118,7 @@ iOS
 
 iOSの場合、TestFlight(外部テスター)ならパブリックリンクで誰でもインストールできます。また外部テスターとしてお客様のメールアドレスを登録して招待コードを送信すれば、お客様側でアプリをインストールできます。
 
- - ADPの[TestFlight(外部テスター)](../build/ios/testflight.md)で配布
+ - ADPの[TestFlight(外部テスター)](../ios-testflight.md)で配布
 
 Android
 
@@ -130,7 +130,7 @@ Androidの場合、オープンテストならGoogle Playで早期アクセス�
 
 ### iOS
 
-|ユースケース/配布|[個人でUSB経由](../build/ios/developer-account.md)|[AdHoc](../build/ios/ad-hoc.md)|[In-House](../build/ios/in-house.md)|[TestFlight(内部)](../build/ios/testflight.md)|[TestFlight(外部)](../build/ios/testflight.md)|
+|ユースケース/配布|[個人でUSB経由](../ios-developer-account.md)|[AdHoc](../ios-ad-hoc.md)|[In-House](../ios-in-house.md)|[TestFlight(内部)](../ios-testflight.md)|[TestFlight(外部)](../ios-testflight.md)|
 |:---------|-:-|-:-|-:-|:--|:--|
 |開発中にデバイスで動作確認したい|YES|YES|YES|YES|X|
 |デモを見せたい|YES|YES|YES|YES|X|

@@ -40,10 +40,10 @@ module.exports = {
           type: 'category',
           label: 'iOSアプリ',
           items: [
-            'distribution/build/ios/developer-account',
-            'distribution/build/ios/ad-hoc',
-            'distribution/build/ios/in-house',
-            'distribution/build/ios/testflight',
+            'distribution/ios-developer-account',
+            'distribution/ios-ad-hoc',
+            'distribution/ios-in-house',
+            'distribution/ios-testflight',
           ],
         },
         {
@@ -60,7 +60,11 @@ module.exports = {
     {
       type: 'category',
       label: 'アプリケーションのビルド',
-      items: ['distribution/build/ios/ios-build', 'distribution/build/android/overview'],
+      items: [
+        'distribution/build/ios-build',
+        'distribution/build/ios-build-setting',
+        'distribution/build/android/overview',
+      ],
     },
   ],
   learn: [

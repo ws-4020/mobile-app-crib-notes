@@ -83,4 +83,3 @@ No "iOS Development" signing certificate matching team ID "D9MUZCM4X6" with a pr
 - 以下で信頼を選択
 - 以下のようになります。このあと、実機でアプリをタップすると起動できるようになっています
 
-ToDo：信頼の手順はIn-Houseも同じはず。
