@@ -119,25 +119,7 @@ module.exports = {
             'react-native/learn/todo-app/todo-backend',
             'react-native/learn/todo-app/todo-backend/api-request',
             'react-native/learn/todo-app/todo-backend/async-api-control',
-            {
-              type: 'category',
-              label: 'API実行結果',
-              items: [
-                'react-native/learn/todo-app/todo-backend/api-exec-result',
-                'react-native/learn/todo-app/todo-backend/api-exec-result/success-pattern',
-                {
-                  type: 'category',
-                  label: '異常応答の処理',
-                  items: [
-                    'react-native/learn/todo-app/todo-backend/api-exec-result/err-pattern',
-                    'react-native/learn/todo-app/todo-backend/api-exec-result/err-pattern/err-client',
-                    'react-native/learn/todo-app/todo-backend/api-exec-result/err-pattern/err-server',
-                    'react-native/learn/todo-app/todo-backend/api-exec-result/err-pattern/err-msg',
-                  ],
-                },
-                'react-native/learn/todo-app/todo-backend/api-exec-result/network-err',
-              ],
-            },
+            'react-native/learn/todo-app/todo-backend/api-exec-result',
           ],
         },
         'react-native/learn/todo-app/exercise',
