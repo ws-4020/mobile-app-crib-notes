@@ -7,17 +7,9 @@ USB接続をして開発者が直接デバイスにインストールする方�
 
 ## アプリのビルド
 
-Androidアプリをビルドするには[React Native公式サイト](https://reactnative.dev/docs/signed-apk-android)を参考にAPKファイルを作成してください。
-
-:::caution
-TODO：鍵管理についてもガイドするか判断。
-TODO：`cd android`はReactNativeが前提だけど、どうやって案内するか判断。
-[AABを作成するコマンド](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab)は `./gradlew bundleRelease` ではなく `.gradlew assembleRelease` を実行してAPKファイルを作成してください。 
-:::
-
+アプリのビルドは[Androidアプリのビルド](./overview.md)を参照してください。
 
 ## USBでデバイスを端末に接続してAPKファイルをダウンロードする  
-
 
 Androidのヘルプ：[パソコンと Android デバイス間でファイルを転送する](https://support.google.com/android/answer/9064445?hl=ja)を参考にしてください。
 
