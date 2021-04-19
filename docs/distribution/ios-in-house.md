@@ -6,9 +6,11 @@ sidebar_label: In-House(ADEP)
 ADEPライセンスはライセンス契約している社内に閉じた配布とする必要があります。
 
 ## 制限事項
+
 ADEPのIn-Houseには以下のような制限事項があります。
 
 ### 配布範囲は社内のみ
+
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 [Apple Developer Enterprise Program](https://developer.apple.com/jp/programs/enterprise/)には「社内用Appのダウンロードを従業員にのみ限定するためのシステム、およびメンバーシップの資格情報やアセットを保護するためのシステムを構築していること」と記載があります。そのため、用意したHTTPSサーバに認証などを設けて、社内の人のみがアクセスできるように制限する必要があります。
 <!-- textlint-enable ja-technical-writing/sentence-length -->
@@ -37,8 +39,8 @@ In-House配信をする場合、アプリケーションをビルドしてHTTPS�
         - URLのプロトコルはhttpsとする必要があります（httpは使えません）
            - ここで指定する値は、manifest.plist生成時のインプットです
            - 仮の情報を入力して、あとでmanifest.plistを編集してもよいです
-   1. 証明書とプロビジョニングプロファイルを選択
-   1. Exportを選択しipaファイルを保存
+  1. 証明書とプロビジョニングプロファイルを選択
+  1. Exportを選択しipaファイルを保存
 
 ## マニフェストファイルなどをHTTPSサーバに配置
 
@@ -65,6 +67,7 @@ In Houseで配布するアプリケーションをダウンロードして起動
 
 アプリ初回起動の場合、ポップアップがでて起動できません。
 起動できるようにするため、エンタープライズデベロッパを信頼してください。
+
   - 設定 > 一般 > プロファイルとデバイス管理で、該当するエンタープライズデベロッパを選択
   - 「XXXを信頼」という青い文字を選択
   - ポップアップで信頼を選択

@@ -9,7 +9,6 @@ UIや操作感を確認するため、シミュレータではなく実際のデ
 
 ADP・ADEPに紐付いたデバイスはライセンス毎に台数制限があるため、不用意にデバイス登録台数を増やしたくない場合は開発者アカウントを利用して開発できます。
 
-
 ## インストール
 
 ADP、ADEPは[Apple Developer Webサイト](https://developer.apple.com/account/)でリソースを作成しますが、開発者アカウントの場合Xcodeで作成します。
@@ -30,14 +29,12 @@ ADP、ADEPは[Apple Developer Webサイト](https://developer.apple.com/account/
 - デバイスにアプリをインストール・起動
   - 初めてアプリを起動する際には、デバイスでアプリを信頼する必要があります
 
-
 ### 個人アカウントのApple IDの登録
 
 - ヘッダー > Xcode > Preferences > Apple IDを開き、左下`+`をクリック
 - Apple IDを選択し`Continue`をクリック
 - Apple IDとパスワードを入力
 - 登録したApple IDが表示されればOK
-
 
 ### 個人アカウントの証明書の作成
 
@@ -50,7 +47,6 @@ ADP、ADEPは[Apple Developer Webサイト](https://developer.apple.com/account/
 - Xcodeを起動した状態で、iOS端末を自分の開発用端末にUSB接続する
 - 接続時にパスコードなどを入力
 - Xcode左上部（再生ボタン、停止ボタンの左）をクリックすると、先ほど接続したデバイスが表示されるのでデバイスを選択
-
 
 ### Xcodeでの個人アカウントの紐付け
 
@@ -68,7 +64,7 @@ ADP、ADEPは[Apple Developer Webサイト](https://developer.apple.com/account/
 以下のようなエラーが出てConfigurationのエラーが消えない
 → Xcodeを再起動すると解消される可能性があります。再起動の際は必ずXcodeのメニューから`Quit`を選択してXcodeを一度終了してください。
 
-```
+```console
 No signing certificate "iOS Development" found
 No "iOS Development" signing certificate matching team ID "D9MUZCM4X6" with a private key was found.
 ```
@@ -79,6 +75,7 @@ No "iOS Development" signing certificate matching team ID "D9MUZCM4X6" with a pr
 
 アプリ初回起動の場合、ポップアップがでて起動できません。
 起動できるようにするため、エンタープライズデベロッパを信頼してください。
+
   - 設定 > 一般 > プロファイルとデバイス管理で、該当するエンタープライズデベロッパを選択
   - 「XXXを信頼」という青い文字を選択
   - ポップアップで信頼を選択

@@ -9,7 +9,6 @@ ADPライセンスの[TestFlight](https://developer.apple.com/jp/testflight/)を
 
 インストールするにはテスターに登録するか、パブリックリンクをテスターに伝え、TestFlightアプリからインストールします。
 
-
 ||内部テスター|外部テスター|
 |-|-|-|
 |テスター数|**最大100人**|**最大10000人**|
@@ -29,12 +28,12 @@ TestFlightで配信するにはADPのプロビジョニングプロファイル�
 1. アプリをリリースビルド
 1. ビルドしたアプリをApp Store Connectにアップロード
 1. App Store Connectで配信の準備
-   * 輸出コンプライアンスの提出
-   * テスターの設定
+   - 輸出コンプライアンスの提出
+   - テスターの設定
 
 ### アプリのリリースビルド
 
-アプリのリリースビルドは[iOSのビルド](ios-build)を参照してください。
+アプリのリリースビルドは[iOSのビルド](./build/ios-build)を参照してください。
 
 ### アプリをApp Store Connectにアップロード
 
@@ -42,7 +41,6 @@ TestFlightで配信するにはADPのプロビジョニングプロファイル�
 
 [Xcode Help: Develop and distribute an enterprise app](https://help.apple.com/xcode/mac/current/#/devba5e7054d)  
 [App Store Connectヘルプのアップロードツール](https:todo.todo)
-
 
 Xcodeでアップロードする手順を記載します。
 Xcode以外のツールでアップロードする場合は、UploadではなくExportを選択し、バイナリを保存してください。
