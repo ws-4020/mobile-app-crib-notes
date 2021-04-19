@@ -26,7 +26,7 @@ module.exports = {
     },
     {
       type: 'doc',
-      id: 'distribution/ios_lisence',
+      id: 'distribution/ios-lisence',
     },
     {
       type: 'doc',
@@ -40,10 +40,10 @@ module.exports = {
           type: 'category',
           label: 'iOSアプリ',
           items: [
-            'distribution/build/ios/developer_account',
-            'distribution/build/ios/adp_local',
-            'distribution/build/ios/adep_in_house',
-            'distribution/build/ios/adp_testflight',
+            'distribution/build/ios/developer-account',
+            'distribution/build/ios/ad-hoc',
+            'distribution/build/ios/in-house',
+            'distribution/build/ios/testflight',
           ],
         },
         {
@@ -60,7 +60,7 @@ module.exports = {
     {
       type: 'category',
       label: 'アプリケーションのビルド',
-      items: ['distribution/build/ios/overview', 'distribution/build/android/overview'],
+      items: ['distribution/build/ios/ios-build', 'distribution/build/android/overview'],
     },
   ],
   learn: [
