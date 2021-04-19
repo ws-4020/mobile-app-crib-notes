@@ -8,7 +8,7 @@ AndroidアプリのビルドはiOSのようにライセンスなどを考慮す�
 Androidアプリをビルドするには[React Native公式サイト](https://reactnative.dev/docs/signed-apk-android)を参考に作成してください。
 
 :::caution
-React Native公式サイトではAPKではなく、Android App Bundle(AAB)を作成する手順です。
+React Native公式サイトはAPKではなく、Android App Bundle(AAB)を作成する手順です。
 APKファイルを作成する場合、[AABを作成する手順](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab)のコマンドは `./gradlew bundleRelease` ではなく `.gradlew assembleRelease` と読み替えてください。
 :::
 
