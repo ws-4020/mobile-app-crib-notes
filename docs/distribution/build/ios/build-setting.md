@@ -33,7 +33,7 @@ AppleはADP・ADEPライセンス利用に関して以下のようなルール�
 
 ## ビルド設定で設定するもの
 
-iOSアプリのビルド設定では大きく分けて次の3つを設定できます。
+iOSアプリのビルド設定は大きく分けて次の3つを設定できます。
 
   - [Configuration](#configuration)
   - [Capability](#capability)
@@ -309,4 +309,3 @@ DEVELOPMENT_TEAM=
   - SampleApp/SampleApp.entitlements
   - SampleApp/SampleAppDebug.entitlements
   - SampleApp/SampleAppDebugAdvanced.entitlements
-
