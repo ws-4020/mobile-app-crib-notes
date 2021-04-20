@@ -47,7 +47,7 @@ ADP、ADEPライセンスを利用したiOSアプリをビルドするための�
 
 最終的にはプロビジョニングプロファイルを利用してiOSアプリをビルドします。
 
-![distribution-ios-resources-management-overview](../img/distributin-ios-resources-management-overview.png)
+![distribution-ios-resources-management-overview](../img/distribution-ios-resources-management-overview.png)
 
 ### 証明書
 
