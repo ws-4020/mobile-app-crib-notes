@@ -70,7 +70,7 @@ Apple Developer Webサイトの[登録ページ](https://developer.apple.com/acc
 ### プロビジョニングプロファイル
 
 プロビジョニングプロファイルは[登録ページ](https://developer.apple.com/account/resources/profiles/add)で証明書とApp IDを組み合わせて作成します。
-デバイスに直接インストールする開発要証明書やAd-Hoc配布を利用する場合は事前にデバイスも紐付けておく必要があります。
+デバイスに直接インストールする開発用証明書やAd-Hoc配布を利用する場合は事前にデバイスも紐付けておく必要があります。
 
 作成したプロビジョニングプロファイルは[一覧](https://developer.apple.com/account/resources/profiles)で確認できます。
 プロビジョニングプロファイルは作成時に選択した証明書をインストールしているMac端末でビルドできます。
