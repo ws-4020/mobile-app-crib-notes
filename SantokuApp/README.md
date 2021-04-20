@@ -25,7 +25,8 @@
      - わからない場合は、[個人のApple IDでのチームIDの確認方法](#個人のapple-idでのチームidの確認方法)の手順で確認してください。
 3. ルートディレクトリで`xed ios`と実行して、Xcodeでプロジェクトを開いてください。開くだけで良いようです。
 4. ルートディレクトリで次のコマンドを実行してください。`<device name>`はインストール先のiOSデバイス名です。
-   - `npm run ios -- --simulator='<device name>'`
+   - `npm run ios -- --device='<device name>'` 
+     - `error Could not find a device named: "<device name>". Available devices:`とエラーが出た場合は`npm run ios -- --simulator='<device name>'`を実行してください。
    - デバイス名、シミュレータ名の一覧は `xcrun xctrace list devices` で取得できます
 
 > **Note**: Xcodeで一度もプロジェクトを開かずにデバイスにインストールしようとすると、次のようなエラーが発生します。
