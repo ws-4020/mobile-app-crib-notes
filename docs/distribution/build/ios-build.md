@@ -41,6 +41,14 @@ ADP、ADEPライセンスを利用したiOSアプリをビルドするための�
 
 ## ビルドで使用するリソース
 
+### リソースの全体像
+
+ビルドで使用するリソースの全体像です。
+
+最終的にはプロビジョニングプロファイルを利用してiOSアプリをビルドします。
+
+![distribution-ios-resources-management-overview](../img/distributin-ios-resources-management-overview.png)
+
 ### 証明書
 
 アプリケーションをデバイスにインストールするための証明書を作成・取得します。
