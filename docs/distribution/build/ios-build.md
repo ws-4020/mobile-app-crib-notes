@@ -53,7 +53,7 @@ ADP、ADEPライセンスを利用したiOSアプリをビルドするための�
 
 ### アプリケーションのID
 
-Apple Developer Webサイト(要ログイン)で作成、確認ができます。
+Apple Developer Webサイト（要ログイン）で作成、確認ができます。
 
 [Apple Developer Webサイトの登録ページ](https://developer.apple.com/account/resources/identifiers/add/bundleId)でアプリケーションのID（`App ID`）を登録します。
 
