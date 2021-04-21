@@ -147,6 +147,7 @@ module.exports = {
         'react-native/learn/todo-app/app-spec',
         'react-native/learn/todo-app/app-project-desc',
         'react-native/learn/todo-app/welcome',
+        'react-native/learn/todo-app/stack-navigation',
         'react-native/learn/todo-app/login',
         'react-native/learn/todo-app/keyboard-avoiding-view',
         'react-native/learn/todo-app/auth',
