@@ -3,13 +3,13 @@ title: Stackナビゲーション
 ---
 
 各画面を実装する前に、全体の画面遷移を実装していきましょう。
-まずは、Welcome画面からTodo一覧までの画面遷移をStackナビゲーションで実装します。
+まずは、Welcome画面からToDo一覧までの画面遷移をStackナビゲーションで実装します。
 
 ![StackNavigation](app-hands-on/screen-transition-stack.png)
 
 ## 画面を追加
 
-ログイン画面とTodo一覧画面を追加します。中身は後で実装するため、空の画面を実装します。
+ログイン画面とToDo一覧画面を追加します。中身は後で実装するため、空の画面を実装します。
 
 次のファイルを追加・修正してください。
 
@@ -93,7 +93,7 @@ export const RootStackNav: React.FC = () => {
 
 ### ヘッダーのカスタマイズ
 
-次に、Welcome画面からログイン画面に遷移できるようにします。[To Doアプリの仕様](./app-spec.md)のWelcome画面のように、ヘッダーにログインボタンを追加しましょう。
+次に、Welcome画面からログイン画面へ遷移できるようにします。[To Doアプリの仕様](./app-spec.md)のWelcome画面のように、ログインボタンを追加しましょう。
 Stackナビゲーションではオプションを指定することでヘッダーをカスタマイズできます。
 
 修正量が多いので、次のソースコードで`RootStackNav.tsx`を上書きしてください。
@@ -156,7 +156,7 @@ export const RootStackNav: React.FC = () => {
 Welcome画面にヘッダーが表示されて、ログインボタンからログイン画面に遷移できたら成功です。
 ログイン画面からWelcome画面に戻れることも確認してください。
 
-最後に、ログイン画面からTodo一覧画面への遷移を実装します。`src/screens/auth/Login.tsx`を修正してください。
+最後に、ログイン画面からToDo一覧画面への遷移を実装します。`src/screens/auth/Login.tsx`を修正してください。
 
 ``` diff jsx title="/src/screens/auth/Login.tsx"
 + import {useNavigation} from '@react-navigation/native';
@@ -180,4 +180,4 @@ const styles = StyleSheet.create({
 });
 ```
 
-ログイン画面にログインボタンが表示され、タップしてTodo一覧に遷移できたら成功です。
+ログイン画面にログインボタンが表示され、タップしてToDo一覧に遷移できたら成功です。
