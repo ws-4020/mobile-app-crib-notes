@@ -8,9 +8,11 @@ AndroidアプリのビルドはiOSのようにライセンスなどを考慮す�
 アプリは次の2つの形式にビルドできます。配布方法に合わせてビルドしてください。
 
  - APK:デバイスにUSBでインストールしたり、Google Playを利用せずに配布する場合
- - AAB:テスト版で配布するケースなどで、Google Playにアップロードする場合
+ - App Bundle(AAB):テスト版で配布するケースなどで、Google Playにアップロードする場合
 
-Androidアプリをビルドするには[コマンドラインからアプリをビルドする - Android Studio ユーザーガイド](https://developer.android.com/studio/build/building-cmdline?hl=ja#build_bundle)を参考に作成してください。
+Androidアプリをビルドするには[Android Studio ユーザーガイドのApp Bundle をビルドする](https://developer.android.com/studio/build/building-cmdline?hl=ja#build_bundle)、[APK をビルドしてデプロイする](https://developer.android.com/studio/build/building-cmdline?hl=ja#build_apk)
+を参考に作成してください。
+
 
 ## リリースに必要な秘密鍵の管理（Google Play App Signing)
 
