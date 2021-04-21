@@ -5,10 +5,17 @@ title: Androidアプリのビルド
 AndroidアプリのビルドはiOSのようにライセンスなどを考慮する必要はありません。
 ビルド時に必要となる秘密鍵を管理しなければいけませんが、Google Play App Singingを利用すると鍵を紛失しても影響を小さくできます。
 
-Androidアプリをビルドするには[React Native公式サイト](https://reactnative.dev/docs/signed-apk-android)を参考に作成してください。
+アプリは次の2つの形式にビルドできます。配布方法に合わせてビルドしてください。
+
+ - APK:デバイスにUSBでインストールしたり、Google Playを利用せずに配布する場合
+ - AAB:テスト版で配布するケースなどで、Google Playにアップロードする場合
+
+Androidアプリをビルドするには[コマンドラインからアプリをビルドする - Android Studio ユーザーガイド](https://developer.android.com/studio/build/building-cmdline?hl=ja#build_bundle)を参考に作成してください。
+
+具体的な手順を知りたい場合は[React Native公式サイト](https://reactnative.dev/docs/signed-apk-android)も参考にしてください。
 
 :::caution
-React Native公式サイトはAPKではなく、Android App Bundle(AAB)を作成する手順です。
+React Native公式サイトはAPKではなく、AABを作成する手順です。
 APKファイルを作成する場合、[AABを作成する手順](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab)のコマンドは `./gradlew bundleRelease` ではなく `.gradlew assembleRelease` と読み替えてください。
 :::
 
@@ -25,4 +32,4 @@ Google Play App Signingはこの鍵の管理を代行してくれるサービス
 
 - 参考
   - [Google Play アプリ署名を使用する - Play Console ヘルプ](https://support.google.com/googleplay/android-developer/answer/9842756?hl=ja)
-  - [Google Play App Signingで安全なAndroidの鍵管理 | Developers.IO](https://dev.classmethod.jp/articles/google-play-app-signing/)
+  - [アプリへの署名 - Android Studio ユーザーガイド](https://developer.android.com/studio/publish/app-signing?hl=ja)
