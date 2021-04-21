@@ -6,7 +6,7 @@
 iOSとAndroidを対象に開発してきた経験をもとに、配布方法のパターンではなく、ビルドしたアプリを誰にインストールして確認してもらうかという観点でシチュエーション（ユースケース）を整理したものを[こちら](https://ws-4020.github.io/mobile-app-crib-notes/distribution/)で公開しています。
 
 ## ユースケース
-[ユースケース](https://fintan-contents.github.io/mobile-app-crib-notes/distribution/usecase)としてつぎのようなシチュエーションの配布方法を利用するライセンスや手順とあわせて公開しています。
+[ユースケース](https://ws-4020.github.io/mobile-app-crib-notes/distribution/usecase)としてつぎのようなシチュエーションの配布方法を利用するライセンスや手順とあわせて公開しています。
 
 - 開発中のアプリを開発者のデバイスで動作確認したい
 - お客様にデモを見せたい
