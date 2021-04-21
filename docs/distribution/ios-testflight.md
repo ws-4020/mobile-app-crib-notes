@@ -1,6 +1,6 @@
 ---
 title: ADPライセンスのTestFlight
-sidebar_label: TestFlight（ADP）
+sidebar_label: TestFlight(ADP)
 ---
 
 ## TestFlightを使った配信
@@ -8,7 +8,6 @@ sidebar_label: TestFlight（ADP）
 ADPライセンスの[TestFlight](https://developer.apple.com/jp/testflight/)を使ってテストのためにアプリを配信できます。テスト内容や目的に応じて使い分けることができる2つのテスターが用意されています。
 
 インストールするにはテスターに登録するか、パブリックリンクをテスターに伝え、TestFlightアプリからインストールします。
-
 
 ||内部テスター|外部テスター|
 |-|-|-|
@@ -29,34 +28,19 @@ TestFlightで配信するにはADPのプロビジョニングプロファイル�
 1. アプリをリリースビルド
 1. ビルドしたアプリをApp Store Connectにアップロード
 1. App Store Connectで配信の準備
-   * 輸出コンプライアンスの提出
-   * テスターの設定
+   - 輸出コンプライアンスの提出
+   - テスターの設定
 
 ### アプリのリリースビルド
 
-App Store ConnectにアプリをアップロードするためにはセットアップされたmacOS端末でビルドします。
+アプリのリリースビルドは[iOSのビルド](./build/ios-build)を参照してください。
 
- 1. 配布用証明書の秘密鍵をインストール
- 1. App Developer Webサイトにて作成したプロビジョニングプロファイルのダウンロード
- 1. Xcodeでビルドの設定をする
-    1. Xcodeでアプリを開く
-    1. ADPに紐づくApple IDでサインインする
-    1. アプリのフォルダを選択 > Signing & Capabilitiesで、リリース用のビルド設定を選択
-    1. 自動署名をオフにする（Signing > Automatically manage signingのチェックを外す）
-    1. ダウンロードしたプロビジョニングプロファイルを紐づける（Provisioning Profileのプルダウン選択 > Import Profileを選択）
-    1. リリースビルド用のConfigurationが紐付けられたSchemaを選択し、ビルド先をAny iOS Deviceに設定  
- 1. ヘッダーメニューからProduct > Archiveを選択
- 1. Archiveが終わるとArchivesの画面が表示される
-  
-ビルドしたアプリ（Archive）はXcodeのヘッダーメニューのWindow > Organizerを開き、左のメニューにあるArchivesを選択して一覧を確認できます。
-
-## ビルドしたアプリをApp Store Connectにアップロード
+### アプリをApp Store Connectにアップロード
 
 ビルドしたアプリをApp Store Connectにアップロードします。
 
 [Xcode Help: Develop and distribute an enterprise app](https://help.apple.com/xcode/mac/current/#/devba5e7054d)  
-[App Store Connectヘルプのアップロードツール](https:todo.todo)
-
+[App Store Connectヘルプのアップロードツール](https://help.apple.com/app-store-connect/#/devb1c185036)
 
 Xcodeでアップロードする手順を記載します。
 Xcode以外のツールでアップロードする場合は、UploadではなくExportを選択し、バイナリを保存してください。
@@ -76,9 +60,9 @@ Xcode以外のツールでアップロードする場合は、Uploadではなく
         - altoolを使用するAppバイナリファイルのアップロード
         - Transporterを使用したAppのバイナリファイルのアップロード
 
-## App Store Connectで配信の準備
+### App Store Connectで配信の準備
 
-ビルドしたアプリケーションを[App Store Connect](https://appstoreconnect.apple.com/apps)からTestFlightで配信できるようにします。
+ビルドしたアプリケーションを[App Store Connect(要ログイン)](https://appstoreconnect.apple.com/apps)からTestFlightで配信できるようにします。
 
 ベータ版ビルドの輸出コンプライアンスを提出します。[App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev22b9b2174)を参考にしてください。
 

@@ -26,7 +26,7 @@ module.exports = {
     },
     {
       type: 'doc',
-      id: 'distribution/ios_lisence',
+      id: 'distribution/ios-lisence',
     },
     {
       type: 'doc',
@@ -34,25 +34,25 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'アプリケーションの配布',
+      label: 'アプリケーションの配布方法',
       items: [
         {
           type: 'category',
           label: 'iOSアプリ',
           items: [
-            'distribution/build/ios/developer_account',
-            'distribution/build/ios/adp_local',
-            'distribution/build/ios/adep_in_house',
-            'distribution/build/ios/adp_testflight',
+            'distribution/ios-developer-account',
+            'distribution/ios-develop-certificate',
+            'distribution/ios-in-house',
+            'distribution/ios-testflight',
           ],
         },
         {
           type: 'category',
           label: 'Androidアプリ',
           items: [
-            'distribution/build/android/local',
-            'distribution/build/android/apk_dist',
-            'distribution/build/android/google_play_test',
+            'distribution/android-local',
+            'distribution/android-apk-dist',
+            'distribution/android-google-play-test',
           ],
         },
       ],
@@ -60,7 +60,11 @@ module.exports = {
     {
       type: 'category',
       label: 'アプリケーションのビルド',
-      items: ['distribution/build/ios/overview', 'distribution/build/android/overview'],
+      items: [
+        'distribution/build/ios-build',
+        'distribution/build/ios-build-setting',
+        'distribution/build/android-build',
+      ],
     },
   ],
   learn: [
