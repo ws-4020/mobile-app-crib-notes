@@ -18,7 +18,7 @@ const genericOverview = [
     title: 'Distribution',
     to: 'distribution',
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
-    summary: <>アプリケーションの配布方法</>,
+    summary: <>アプリケーションの配布</>,
   },
 ];
 
