@@ -12,14 +12,6 @@ AndroidアプリのビルドはiOSのようにライセンスなどを考慮す�
 
 Androidアプリをビルドするには[コマンドラインからアプリをビルドする - Android Studio ユーザーガイド](https://developer.android.com/studio/build/building-cmdline?hl=ja#build_bundle)を参考に作成してください。
 
-具体的な手順を知りたい場合は[React Native公式サイト](https://reactnative.dev/docs/signed-apk-android)も参考にしてください。
-
-:::caution
-React Native公式サイトはAPKではなく、AABを作成する手順です。
-APKファイルを作成する場合、[AABを作成する手順](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab)のコマンドは `./gradlew bundleRelease` ではなく `.gradlew assembleRelease` と読み替えてください。
-:::
-
-
 ## リリースに必要な秘密鍵の管理（Google Play App Signing)
 
 Androidのアプリをリリースするには署名が必要で、それにはリリース用秘密鍵が必要です。
