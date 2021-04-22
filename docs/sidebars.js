@@ -153,8 +153,6 @@ module.exports = {
         'react-native/learn/todo-app/keyboard-avoiding-view',
         'react-native/learn/todo-app/auth',
         'react-native/learn/todo-app/alert',
-        'react-native/learn/todo-app/split-navigation',
-        'react-native/learn/todo-app/navigation-hook',
         'react-native/learn/todo-app/todo-board',
         'react-native/learn/todo-app/todo-form',
         'react-native/learn/todo-app/use-focus-effect',
