@@ -9,7 +9,7 @@ title: Stackナビゲーション
 
 ## 画面を追加
 
-ログイン画面とToDo一覧画面を追加します。中身は後で実装するため、空の画面を実装します。
+ログイン画面とToDo一覧画面を追加します。中身は後で実装するため、ひな型を実装します。
 
 次のファイルを追加・修正してください。
 
@@ -62,9 +62,9 @@ export * from './TodoBoard';
 ```
 
 ``` diff jsx title="/src/screens/index.ts"
++ export * from './auth';
 export * from './home';
 export * from './instructions';
-+ export * from './auth';
 + export * from './todo';
 ```
 
