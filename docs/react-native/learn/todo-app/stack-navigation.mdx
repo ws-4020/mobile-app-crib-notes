@@ -63,32 +63,32 @@ export * from './TodoBoard';
 
 ``` diff jsx title="/src/screens/index.ts"
 + export * from './auth';
-export * from './home';
-export * from './instructions';
+  export * from './home';
+  export * from './instructions';
 + export * from './todo';
 ```
 
-## Stackナビゲーションの実装
+## Stackナビゲーション
 
-追加した画面をナビゲーターの対象として追加します。`src/navigation/RootStackNav.tsx`を修正してください。
+追加した画面を`RootStackNav`ナビゲータに追加します。`src/navigation/RootStackNav.tsx`を修正してください。
 
 ``` diff jsx title="src/navigation/RootStackNav.tsx"
-import {createStackNavigator} from '@react-navigation/stack';
-import React from 'react';
+  import {createStackNavigator} from '@react-navigation/stack';
+  import React from 'react';
 - import {Welcome, Instructions} from 'screens';
 + import {Welcome, Instructions, Login, TodoBoard} from 'screens';
 
-const nav = createStackNavigator();
-export const RootStackNav: React.FC = () => {
-  return (
-    <nav.Navigator initialRouteName={Welcome.name}>
-      <nav.Screen name="Welcome" component={Welcome} options={{headerShown: false}} />
-      <nav.Screen name="Instructions" component={Instructions} />
+  const nav = createStackNavigator();
+  export const RootStackNav: React.FC = () => {
+    return (
+      <nav.Navigator initialRouteName={Welcome.name}>
+        <nav.Screen name="Welcome" component={Welcome} options={{headerShown: false}} />
+        <nav.Screen name="Instructions" component={Instructions} />
 +       <nav.Screen name="Login" component={Login} />
 +       <nav.Screen name="TodoBoard" component={TodoBoard} />
-    </nav.Navigator>
-  );
-};
+      </nav.Navigator>
+    );
+  };
 ```
 
 ### ヘッダーのカスタマイズ
@@ -160,24 +160,24 @@ Welcome画面にヘッダーが表示されて、ログインボタンからロ�
 
 ``` diff jsx title="/src/screens/auth/Login.tsx"
 + import {useNavigation} from '@react-navigation/native';
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+  import React from 'react';
+  import {StyleSheet, View} from 'react-native';
 + import {Button} from 'react-native-elements';
 
-export const Login: React.FC = () => {
-  return (
+  export const Login: React.FC = () => {
+    return (
 -     <View style={styles.container}>{/* Todo*/}</View>
 +     <View style={styles.container}>
 +       <Button onPress={() => navigation.navigate('TodoBoard')} title="ログイン" />
 +     </View>
-  );
-};
+    );
+  };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+  });
 ```
 
 ログイン画面にログインボタンが表示され、タップしてToDo一覧に遷移できたら成功です。

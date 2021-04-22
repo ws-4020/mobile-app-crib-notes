@@ -57,8 +57,6 @@ export * from './UserSetting';
 Tabナビゲーターに画面（`TodoBoard`や`UserSetting`）を直接設定せずにStackナビゲーターを設定することで、ひとつのタブ内に複数の画面を表示できます。
 :::
 
-### ナビゲータ構成修正
-
 まず、ToDo一覧画面と設定画面をそれぞれ配置するStackナビゲータ（`TodoStackNav`と`SettingsStackNav`）を追加します。
 その後、それらを切り替えるTabナビゲータ（`MainTabNav`）を追加します。
 次のファイルを追加・修正してください。
@@ -149,58 +147,58 @@ export const MainTabNav: React.FC = () => {
 - `/src/navigation/RootStackNav.tsx`
 
 ``` diff jsx title="/src/navigation/RootStackNav.tsx"
-import {useNavigation} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import React from 'react';
-import {Button} from 'react-native-elements';
+  import {useNavigation} from '@react-navigation/native';
+  import {createStackNavigator} from '@react-navigation/stack';
+  import React from 'react';
+  import {Button} from 'react-native-elements';
 - import {Welcome, Instructions, Login, TodoBoard} from 'screens';
 + import {Welcome, Instructions, Login} from 'screens';
 
 + import {MainTabNav} from 'navigation/MainTabNav';
 
-const HeaderRight: React.FC = () => {
-  const navigation = useNavigation();
-  return <Button type="clear" onPress={() => navigation.navigate('Login')} title="ログイン" />;
-};
+  const HeaderRight: React.FC = () => {
+    const navigation = useNavigation();
+    return <Button type="clear" onPress={() => navigation.navigate('Login')} title="ログイン" />;
+  };
 
-const nav = createStackNavigator();
-export const RootStackNav: React.FC = () => {
-  return (
-    <nav.Navigator
-      initialRouteName={Welcome.name}
-      screenOptions={{
-        headerRight: () => <HeaderRight />
-      }}
-    >
-      <nav.Screen
-        name="Welcome"
-        component={Welcome}
-        options={{
-          headerTitle: 'Welcome',
+  const nav = createStackNavigator();
+  export const RootStackNav: React.FC = () => {
+    return (
+      <nav.Navigator
+        initialRouteName={Welcome.name}
+        screenOptions={{
+          headerRight: () => <HeaderRight />
         }}
-      />
-      <nav.Screen
-        name="Login"
-        component={Login}
-        options={{
-          headerTitle: 'ログイン',
-          headerRight: undefined,
-        }}
-      />
-      <nav.Screen
+      >
+        <nav.Screen
+          name="Welcome"
+          component={Welcome}
+          options={{
+            headerTitle: 'Welcome',
+          }}
+        />
+        <nav.Screen
+          name="Login"
+          component={Login}
+          options={{
+            headerTitle: 'ログイン',
+            headerRight: undefined,
+          }}
+        />
+        <nav.Screen
 -         name="TodoBoard"
 -         component={TodoBoard}
 +         name="Main"
 +         component={MainTabNav}
-        options={{
+          options={{
 -           headerTitle: 'Todo一覧',
 +           headerShown: false,
-        }}
-      />
-      <nav.Screen name="Instructions" component={Instructions} />
-    </nav.Navigator>
-  );
-};
+          }}
+        />
+        <nav.Screen name="Instructions" component={Instructions} />
+      </nav.Navigator>
+    );
+  };
 ```
 
 修正できたら実行してください。ToDo一覧画面と設定画面のタブ切替ができたら成功です。
