@@ -139,9 +139,9 @@ Appの高度な機能を使うアプリの場合は、CapabilityからAppの高�
       1. Automatically manage signingのチェックをつける
       1. TeamはPersonal Team（個人アカウント）を選択
       1. Bundle Identifierはpersonal.${Allで設定したBundle Identifier}.{組織内の誰とも被らないID}を設定
-         1. 例：Allが`jp.fintan.mobile.SantokuApp`なら、Debugは`personal.jp.fintan.mobile.SantokuApp.123456`
+         - 例：Allが`jp.fintan.mobile.SantokuApp`なら、Debugは`personal.jp.fintan.mobile.SantokuApp.123456`
       1. CapabilityからPush Notificationを外す  
-         1. ※このときentitlementsファイルを作るかプロンプトで聞かれますがその時は「はい」を選択してください
+         - ※このときentitlementsファイルを作るかプロンプトで聞かれますがその時は「はい」を選択してください
 
 #### Configuration:設定の確認
 
