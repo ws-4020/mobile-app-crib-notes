@@ -71,6 +71,7 @@ export * from './TodoBoard';
 ## Stackナビゲーション
 
 追加したログイン画面とToDo一覧画面を`RootStackNav`ナビゲータに追加します。`src/navigation/RootStackNav.tsx`を修正してください。
+`name`には、ナビゲータ内で画面を一意に識別する識別子を設定します。この識別子は、`navigation.navigate('Login')`のように遷移先の画面を指定するときなどに使います。
 
 ``` diff jsx title="src/navigation/RootStackNav.tsx"
   import {createStackNavigator} from '@react-navigation/stack';
