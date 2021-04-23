@@ -229,6 +229,7 @@ Welcome画面にヘッダーが表示されて、ログインボタンからロ�
 + import {Button} from 'react-native-elements';
 
   export const Login: React.FC = () => {
++   const navigation = useNavigation();
     return (
       <View style={styles.container}>
 -       <Text h1>ログイン</Text>
