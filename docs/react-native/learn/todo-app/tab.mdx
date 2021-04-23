@@ -8,7 +8,7 @@ ToDo一覧画面と設定画面のタブ切替を実装していきます。タ�
 
 ## 画面を追加
 
-まずは、設定画面を追加します。中身は後で実装するため、ひな型を実装します。
+まずは、設定画面を追加します。まずは画面遷移を確認できるように、最低限のひな型を実装します。
 
 次のファイルを追加・修正してください。
 
@@ -19,10 +19,13 @@ ToDo一覧画面と設定画面のタブ切替を実装していきます。タ�
 ```typescript jsx title="/src/screens/settings/UserSetting.tsx"
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {Text} from 'react-native-elements';
 
-export const UserSetting: React.FC = () => {
+export const TodoBoard: React.FC = () => {
   return (
-    <View style={styles.container}>{/* Todo*/}</View>
+    <View style={styles.container}>
+      <Text h1>設定</Text>
+    </View>
   );
 };
 
