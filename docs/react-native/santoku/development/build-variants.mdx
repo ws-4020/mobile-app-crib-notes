@@ -107,7 +107,7 @@ Android向けのビルドには、Google Playのアップロード鍵を保存�
 
 どのようにプロダクトフレーバーごとの設定をしているかについては、[プロダクトフレーバー](product-flavor-configurations.mdx)を参照してください。
 
-このアプリでは、2つのプロダクトフレーバーを用意しています。
+このアプリでは、2つのプロダクトフレーバーを用意しています。プロダクトフレーバー名はXcode Organizerでアプリを選択するときのアプリ名としても表示されるので、プロダクトフレーバー名にアプリ名も含めるようにしています。
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 
@@ -115,8 +115,8 @@ Android向けのビルドには、Google Playのアップロード鍵を保存�
   groupId="product-flavor"
   defaultValue="development"
   values={[
-    {label: 'Development', value: 'development'},
-    {label: 'Production', value: 'production'},
+    {label: 'DevSantokuApp' value: 'development'},
+    {label: 'SantokuApp', value: 'production'},
   ]
 }>
 
@@ -166,16 +166,16 @@ Android向けのビルドには、Google Playのアップロード鍵を保存�
 npm run android -- --appId jp.fintan.mobile.SantokuApp --variants "<flavor><Type>" --appIdSuffix "<flavorSuffix><typeSuffix>"
 ```
 
-例えばビルドタイプDebug、プロダクトフレーバーDevelopmentでアプリを実行するには次のようにしてください。
+例えばビルドタイプDebug、プロダクトフレーバーDevSantokuAppでアプリを実行するには次のようにしてください。
 
 ```bash
-npm run android -- --variant "developmentDebug" --appIdSuffix "dev.debug"
+npm run android -- --variant "devSantokuAppDebug" --appIdSuffix "dev.debug"
 ```
 
-プロダクトフレーバーをProductionとし、ビルドタイプをReleaseとするには、次のようにします。
+プロダクトフレーバーをSantokuAppとし、ビルドタイプをReleaseとするには、次のようにします。
 
 ```bash
-npm run android -- --variant "productionRelease" --appIdSuffix ""
+npm run android -- --variant "santokuAppRelease" --appIdSuffix ""
 ```
 
 :::note
@@ -213,16 +213,16 @@ Error: Activity class {jp.fintan.mobile.santokuapp.dev.debug/jp.fintan.mobile.sa
 npm run ios -- --scheme "<Flavor>" --configuration "<Type>"
 ```
 
-例えばビルドタイプDebug、プロダクトフレーバーDevelopmentでアプリを実行するには次のようにしてください。
+例えばビルドタイプDebug、プロダクトフレーバーDevSantokuAppでアプリを実行するには次のようにしてください。
 
 ```bash
-npm run ios -- --scheme "Development" --configuration "Debug"
+npm run ios -- --scheme "DevSantokuApp" --configuration "Debug"
 ```
 
 ビルドタイプをReleaseに変更するには、次のようにします。
 
 ```bash
-npm run ios -- --scheme "Development" --configuration "Release"
+npm run ios -- --scheme "DevSantokuApp" --configuration "Release"
 ```
 
 </TabItem>

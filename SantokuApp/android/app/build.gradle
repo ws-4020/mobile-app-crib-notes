@@ -82,8 +82,8 @@ project.ext.react = [
 ]
 
 project.ext.envConfigFiles = [
-    production : ".env.production",
-    development: ".env.development",
+    santokuApp : ".env.production",
+    devSantokuApp: ".env.development",
 ]
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
@@ -205,10 +205,10 @@ android {
 
     flavorDimensions "environment"
     productFlavors {
-        development {
+        devSantokuApp {
             dimension "environment"
         }
-        production {
+        santokuApp {
             dimension "environment"
         }
     }
