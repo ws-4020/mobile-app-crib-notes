@@ -26,19 +26,20 @@ title: ビルドタイプ
 
 実際の設定内容は次のようになります。（`applicationIdSuffix`に関係しない箇所は省略しています）
 
-<!-- 本当はgroovyのハズだけど、javascriptのほうがシンタックスハイライトがきれいなのでjavascriptを指定 -->
-```javascript title="android/app/build.gradle"
-buildTypes {
-    debug {
-        applicationIdSuffix ".debug"
-    }
-    debugAdvanced {
-        applicationIdSuffix ".debugAdvanced"
-    }
-    releaseInHouse {
-        applicationIdSuffix ".house"
-    }
-    release {
+```groovy title="android/app/build.gradle"
+android {
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
+        debugAdvanced {
+            applicationIdSuffix ".debugAdvanced"
+        }
+        releaseInHouse {
+            applicationIdSuffix ".house"
+        }
+        release {
+        }
     }
 }
 ```
@@ -61,7 +62,7 @@ buildTypes {
 <details>
 <summary>ReleaseInHouseとReleaseでのビルドに必要な設定</summary>
 `ReleaseInHouse`および`Release`でのアプリケーションの署名にはリポジトリに含まれない鍵を利用するため、事前の環境設定が必要になります。
-`~/.gradle/gradle.properties`で次のように利用する鍵の設定をしてください。
+`~/.gradle/gradle.properties`で次のように利用する鍵を設定してください。
 
 ```properties
 SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=<path/to/in-house.keystore>
@@ -82,46 +83,47 @@ SANTOKU_APP_UPLOAD_KEY_PASSWORD=*****
 
 実際の設定内容は次のようになります。（`signingConfig`に関係しない箇所は省略しています）
 
-<!-- 本当はgroovyのハズだけど、javascriptのほうがシンタックスハイライトがきれいなのでjavascriptを指定 -->
-```javascript title="android/app/build.gradle"
-signingConfigs {
-    debug {
-        storeFile file('debug.keystore')
-        storePassword 'android'
-        keyAlias 'androiddebugkey'
-        keyPassword 'android'
-    }
-    releaseInHouse {
-        // You must set following properties in gradle.properties for in-house release build
-        if (project.hasProperty('SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE')) {
-            storeFile file(SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE)
-            storePassword SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD
-            keyAlias SANTOKU_APP_IN_HOUSE_KEY_ALIAS
-            keyPassword SANTOKU_APP_IN_HOUSE_KEY_PASSWORD
+```groovy title="android/app/build.gradle"
+android {
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        releaseInHouse {
+            // You must set following properties in gradle.properties for in-house release build
+            if (project.hasProperty('SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE')) {
+                storeFile file(SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE)
+                storePassword SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD
+                keyAlias SANTOKU_APP_IN_HOUSE_KEY_ALIAS
+                keyPassword SANTOKU_APP_IN_HOUSE_KEY_PASSWORD
+            }
+        }
+        release {
+            // You must set following properties in gradle.properties for release build
+            if (project.hasProperty('SANTOKU_APP_UPLOAD_KEYSTORE_FILE')) {
+                storeFile file(SANTOKU_APP_UPLOAD_KEYSTORE_FILE)
+                storePassword SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD
+                keyAlias SANTOKU_APP_UPLOAD_KEY_ALIAS
+                keyPassword SANTOKU_APP_UPLOAD_KEY_PASSWORD
+            }
         }
     }
-    release {
-        // You must set following properties in gradle.properties for release build
-        if (project.hasProperty('SANTOKU_APP_UPLOAD_KEYSTORE_FILE')) {
-            storeFile file(SANTOKU_APP_UPLOAD_KEYSTORE_FILE)
-            storePassword SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD
-            keyAlias SANTOKU_APP_UPLOAD_KEY_ALIAS
-            keyPassword SANTOKU_APP_UPLOAD_KEY_PASSWORD
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
         }
-    }
-}
-buildTypes {
-    debug {
-        signingConfig signingConfigs.debug
-    }
-    debugAdvanced {
-        initWith debug
-    }
-    releaseInHouse {
-        signingConfig signingConfigs.releaseInHouse
-    }
-    release {
-        signingConfig signingConfigs.release
+        debugAdvanced {
+            initWith debug
+        }
+        releaseInHouse {
+            signingConfig signingConfigs.releaseInHouse
+        }
+        release {
+            signingConfig signingConfigs.release
+        }
     }
 }
 ```
@@ -147,6 +149,27 @@ Androidの[圧縮、難読化、最適化の有効化](https://developer.android
 | ----- | ------------- | -------------- | ------- |
 | 無効 | 無効 | 有効 | 有効 |
 
+実際の設定内容は次のようになります。（R8に関係しない箇所は省略しています）
+
+```groovy title="android/app/build.gradle"
+def enableProguardInReleaseBuilds = true
+android {
+    buildTypes {
+        debug {
+        }
+        debugAdvanced {
+        }
+        releaseInHouse {
+            initWith release
+        }
+        release {
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+}
+```
+
 ## iOS (Xcode)
 
 ビルドタイプごとの設定項目を、iOSアプリの場合にどのように設定しているかを記載します。ビルドタイプごとの設定項目については、iOSアプリのビルドの仕組みを利用しており、React Nativeの仕組みや機能は利用していません。
@@ -170,9 +193,59 @@ personal.jp.fintan.mobile.SantokuApp<flavorSuffix>.debug.<personalIdentifier>
 
 :::
 
+プロダクトフレーバーの設定も含みますが、実際の設定内容は次のようになります。（Bundle Identifierに関係しない箇所は省略しています）
+
+```text title="ios/SantokuApp.xcodeproj/project.pbxproj"
+13B07F941A680F5B00A75B9A /* Debug */ = {
+  buildSettings = {
+    PRODUCT_BUNDLE_IDENTIFIER = "personal.jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}.debug.${PERSONAL_IDENTIFIER}";
+  }
+}
+13B07F951A680F5B00A75B9A /* Release */ = {
+  buildSettings = {
+    PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}";
+  }
+}
+B968B33025FD074500099FE1 /* ReleaseInHouse */ = {
+  buildSettings = {
+    PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}.house";
+  }
+}
+EA57F9FD253824C7003D7604 /* DebugAdvanced */ = {
+  buildSettings = {
+    PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}.debugAdvanced";
+  }
+}
+```
+
 ### アイコン（iOS）
 
 Xcodeでビルドタイプごとのアイコンアセットを用意し、Xcodeの「Asset Catalog App Icon Set Name」でビルドタイプごと異なるアイコンアセットを設定しています。`project.pbxproj`では、`ASSETCATALOG_COMPILER_APPICON_NAME`という設定項目です。
+
+実際の設定内容は次のようになります。（アイコンに関係しない箇所は省略しています）
+
+```text title="ios/SantokuApp.xcodeproj/project.pbxproj"
+13B07F941A680F5B00A75B9A /* Debug */ = {
+  buildSettings = {
+    ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.debug;
+  }
+}
+13B07F951A680F5B00A75B9A /* Release */ = {
+  buildSettings = {
+    ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+  }
+}
+B968B33025FD074500099FE1 /* ReleaseInHouse */ = {
+  buildSettings = {
+    ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.house;
+  }
+}
+EA57F9FD253824C7003D7604 /* DebugAdvanced */ = {
+  buildSettings = {
+    ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.debugAdvanced;
+  }
+}
+```
 
 ### プロビジョニングプロファイルなどの設定
 
@@ -195,6 +268,20 @@ Xcodeでビルドタイプごとのアイコンアセットを用意し、Xcode�
 | ----- | ------------- | -------------- | ------- |
 | 有効 | 有効 | 無効 | 無効 |
 
+Flipperについては、`Podfile`で次のように設定してリリースビルドでは依存パッケージに含まれないようにしています。
+
+```ruby title="ios/Podfile"
+# Enables Flipper.
+#
+# Note that if you have use_frameworks! enabled, Flipper will not work and
+# you should disable these next few lines.
+use_flipper!({ 'Flipper' => '0.84.0' }, configurations: ['Debug', 'DebugAdvanced'])
+post_install do |installer|
+  flipper_post_install(installer)
+end
+```
+
+
 ### App Transport Security
 
 App Transport Security (ATS)の設定はdict形式なので、react-native-configで設定することが出来ません。そのため、次のように設定しています。
@@ -206,3 +293,50 @@ App Transport Security (ATS)の設定はdict形式なので、react-native-confi
 | Debug | DebugAdvanced | ReleaseInHouse | Release |
 | ----- | ------------- | -------------- | ------- |
 | 有効（`localhost`を除外） | 有効（`localhost`を除外） | 有効（除外なし） | 有効（除外なし） |
+
+`project.pbxproj`での実際の設定内容は次のようになります。（plistに関係しない箇所は省略しています）
+
+```text title="ios/SantokuApp.xcodeproj/project.pbxproj"
+13B07F941A680F5B00A75B9A /* Debug */ = {
+  buildSettings = {
+    INFOPLIST_FILE = SantokuApp/Debug.plist;
+  }
+}
+13B07F951A680F5B00A75B9A /* Release */ = {
+  buildSettings = {
+    INFOPLIST_FILE = SantokuApp/Info.plist;
+  }
+}
+B968B33025FD074500099FE1 /* ReleaseInHouse */ = {
+  buildSettings = {
+    INFOPLIST_FILE = SantokuApp/Info.plist;
+  }
+}
+EA57F9FD253824C7003D7604 /* DebugAdvanced */ = {
+  buildSettings = {
+    INFOPLIST_FILE = SantokuApp/Debug.plist;
+  }
+}
+```
+
+`Debug.plist`でATSから`localhost`を除外している設定は次のようになります。（ATSに関係しない箇所は省略しています）
+
+```xml ios/SantokuApp/Debug.plist
+<plist version="1.0">
+<dict>
+  <key>NSAppTransportSecurity</key>
+  <dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+    <key>NSExceptionDomains</key>
+    <dict>
+      <key>localhost</key>
+      <dict>
+        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+      </dict>
+    </dict>
+  </dict>
+</dict>
+</plist>
+```
