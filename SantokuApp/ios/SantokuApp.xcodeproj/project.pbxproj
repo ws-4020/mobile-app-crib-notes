@@ -572,6 +572,7 @@
 		};
 		EA57F9FC253824C7003D7604 /* DebugAdvanced */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B96BE75C25FED2460098969A /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
