@@ -47,37 +47,21 @@ const styles = StyleSheet.create({
 ```
 
 つぎに、`AuthedStackNav`ナビゲータに`TodoForm`という名前でタスク登録画面（`TodoForm`）を追加します。
-次のファイルを追加・修正してください。
+次のファイルを修正してください。
 
-- `/src/navigation/types.ts`
 - `/src/navigation/AuthedStackNav.tsx`
-
-```diff title="/src/navigation/types.ts"
-  export type UnauthedStackParamList = {
-    Welcome: undefined;
-    Login: undefined;
-    Instructions: undefined;
-  };
-  
-  export type AuthedStackParamList = {
-    Main: undefined;
-+   TodoForm: undefined;
-  };
-  /* ～省略～ */  
-```
 
 ```diff title="/src/navigation/AuthedStackNav.tsx"
   import {createStackNavigator} from '@react-navigation/stack';
-  import {MainTabNav} from 'navigation/MainTabNav';
   import React from 'react';
+  import {MainTabNav} from 'navigation/MainTabNav';
 + import {TodoForm} from 'screens';
   
-  import {AuthedStackParamList} from './types';
-  
-  const nav = createStackNavigator<AuthedStackParamList>();
+  const nav = createStackNavigator();
   export const AuthedStackNav: React.FC = () => {
     return (
-      <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main">
+-     <nav.Navigator screenOptions={{headerShown: false}}>
++     <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main">
         <nav.Screen name="Main" component={MainTabNav} />
 +       <nav.Screen
 +         name="TodoForm"
@@ -94,23 +78,23 @@ const styles = StyleSheet.create({
 タスク一覧画面からの画面遷移を追加します。`/src/screens/todo/TodoBoard.tsx`を修正してください。
 
 ```diff title="/src/screens/todo/TodoBoard.tsx"
++ import {useNavigation} from '@react-navigation/native';
   import {FilterType, TodoFilter, TodoList} from 'components/parts';
-+ import {useTodoStackNavigation} from 'navigation/hooks';
   import React, {useContext, useEffect, useState} from 'react';
   import {Alert, StyleSheet, View} from 'react-native';
   import {Icon, ThemeContext} from 'react-native-elements';
   import {Todo, TodoService} from 'services';
-
+  
   /* ～省略～ */  
-
+  
   export const TodoBoard: React.FC = () => {
     const {theme} = useContext(ThemeContext);
-+   const navigation = useTodoStackNavigation<'TodoBoard'>();
++   const navigation = useNavigation();
     const [todos, setTodos] = useState<Todo[]>([]);
     const [filterType, setFilterType] = useState<FilterType>(FilterType.ALL);
-
+  
   /* ～省略～ */  
-
+  
         <Icon
           name="plus"
           type="font-awesome-5"
@@ -135,8 +119,8 @@ const styles = StyleSheet.create({
 修正量が多いので、次のソースコードで`TodoForm.tsx`を上書きしてください。
 
 ```typescript jsx title="/src/screens/todo/TodoForm.tsx"
+import {useNavigation} from '@react-navigation/native';
 import {useFormik} from 'formik';
-import {useAuthedStackNavigation} from 'navigation/hooks';
 import React, {useCallback, useEffect} from 'react';
 import {Alert, KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
 import {Button, Input, Text} from 'react-native-elements';
@@ -144,7 +128,7 @@ import {TodoService} from 'services';
 import * as Yup from 'yup';
 
 export const TodoForm: React.FC = () => {
-  const navigation = useAuthedStackNavigation<'TodoForm'>();
+  const navigation = useNavigation();
 
   const onAdd = useCallback<(values: {task: string}) => void>(
     async ({task}) => {
