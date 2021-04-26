@@ -59,9 +59,26 @@ Android Gradle Pluginではreact-native-configを利用しなくても[プロダ
 
 `.env.<flavor>`で設定した`APP_ID_FLAVOR_SUFFIX`の値がアプリケーションIDに反映されます。
 
+実際の設定内容は次のようになります。（`applicationIdSuffix`に関係しない箇所は省略しています）
+
+```groovy title="android/app/build.gradle"
+android {
+    defaultConfig {
+        applicationId "jp.fintan.mobile.SantokuApp"
+        applicationIdSuffix project.env.get("APP_ID_FLAVOR_SUFFIX")
+    }
+}
+```
+
 ### Androidアプリ名の変更
 
 アプリ一覧画面などでアイコンの下に表示される名前は`AndroidManifest.xml`で設定しています。`.env.<flavor>`の`APP_NAME_HOME`の値で、この名前を設定できます。
+
+実際の設定内容は次のようになります。（アプリ名に関係しない箇所は省略しています）
+
+```xml title="android/app/src/main/AndroidManifest.xml"
+<application android:label="@string/APP_NAME_HOME" >
+```
 
 ## Xcodeでのreact-native-configの設定
 
@@ -73,6 +90,44 @@ Schemeでは、ビルドの前処理としてフレーバーに対応する設�
 
 `project.pbxproj`の`PRODUCT_BUNDLE_IDENTIFIER`の設定値に`${APP_ID_FLAVOR_SUFFIX}`を含めています。`.env.<flavor>`で設定した`APP_ID_FLAVOR_SUFFIX`の値がBundle Identifierに反映されます。
 
+ビルドタイプごとの設定も含みますが、実際の設定内容は次のようになります。（Bundle Identifierに関係しない箇所は省略しています）
+
+```text title="ios/SantokuApp.xcodeproj/project.pbxproj"
+13B07F941A680F5B00A75B9A /* Debug */ = {
+  buildSettings = {
+    PRODUCT_BUNDLE_IDENTIFIER = "personal.jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}.debug.${PERSONAL_IDENTIFIER}";
+  }
+}
+13B07F951A680F5B00A75B9A /* Release */ = {
+  buildSettings = {
+    PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}";
+  }
+}
+B968B33025FD074500099FE1 /* ReleaseInHouse */ = {
+  buildSettings = {
+    PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}.house";
+  }
+}
+EA57F9FD253824C7003D7604 /* DebugAdvanced */ = {
+  buildSettings = {
+    PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}.debugAdvanced";
+  }
+}
+```
+
 ### iOSアプリ名の変更
 
 ホーム画面で表示されるアプリケーション名は、`Info.plist`で`CFBundleDisplayName`の値を`${APP_NAME_HOME}`として設定しています。`.env.<flavor>`で設定した`APP_NAME_HOME`の値がホーム画面のアプリケーション名になります。
+
+実際の設定内容は次のようになります。（アプリ名に関係しない箇所は省略しています）
+
+```xml ios/SantokuApp/Info.plist
+<plist version="1.0">
+<dict>
+  <key>CFBundleDisplayName</key>
+  <string>${APP_NAME_HOME}</string>
+</dict>
+</plist>
+```
+
+また、`Debug.plist`でも同じようにアプリ名を設定しています。

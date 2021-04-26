@@ -82,7 +82,7 @@ project.ext.react = [
 ]
 
 project.ext.envConfigFiles = [
-    santokuApp : ".env.production",
+    santokuApp: ".env.production",
     devSantokuApp: ".env.development",
 ]
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
