@@ -36,7 +36,7 @@ npm install yup@0.32.9
 修正量が多いので、次のソースコードで`/src/screens/auth/Login.tsx`を上書きしてください。
 
 ```typescript jsx title="/src/screens/auth/Login.tsx"
-import {useNavigation} from '@react-navigation/native';
+import {useUserContext} from 'contexts/UserContext';
 import {useFormik} from 'formik';
 import React, {useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -44,10 +44,17 @@ import {Button, Input} from 'react-native-elements';
 import * as Yup from 'yup';
 
 export const Login: React.FC = () => {
-  const navigation = useNavigation();
-  const login = useCallback(() => {
-    navigation.navigate('Main');
-  }, [navigation]);
+  const userContext = useUserContext();
+  
+  const login = useCallback(
+    (values: {name: string; password: string}) => {
+      userContext.login(values.name, values.password).then(
+        () => {},
+        () => {},
+      );
+    },
+    [userContext],
+  );
 
   const formik = useFormik({
     initialValues: {name: '', password: ''},

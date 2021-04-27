@@ -2,7 +2,7 @@
 title: Modalスクリーン
 ---
 
-「ToDo一覧」から「タスク登録」をモーダル画面として表示します。画面遷移の実装はこれで最後です。
+「ToDo一覧」から「タスク登録」をモーダル画面として表示します。本セクションで正常系の画面遷移実装が完了します。
 
 ![ModalScreen](app-hands-on/screen-transition-modal.png)
 
@@ -109,7 +109,7 @@ ToDo一覧からタスク登録画面に遷移できるようにナビゲーシ�
   import {StyleSheet, View} from 'react-native';
 - import {Text} from 'react-native-elements';
 + import {Text, Button} from 'react-native-elements';
-
+  
   export const TodoBoard: React.FC = () => {
 +   const navigation = useNavigation();
 +  
@@ -165,6 +165,7 @@ ToDo一覧からタスク登録画面に遷移できるようにナビゲーシ�
 
 ```diff title="/src/navigation/AuthedStackNav.tsx"
 + import {Ionicons} from '@expo/vector-icons';
++ import {useNavigation} from '@react-navigation/native';
   import {createStackNavigator} from '@react-navigation/stack';
 - import React from 'react';
 + import React, {useCallback, useContext} from 'react';

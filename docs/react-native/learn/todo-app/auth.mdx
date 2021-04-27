@@ -2,8 +2,8 @@
 title: 状態に応じた画面切替
 ---
 
-ToDo一覧画面へ遷移できるようになりましたが、ただ画面を移動しているだけなので認証制御はできていません。
-ユーザの認証状態に応じて画面を切替られるよう修正しましょう。
+ToDo一覧画面へ遷移できるようになりましたが、ただ画面を移動しているだけで認証制御はできていません。
+ユーザの認証状態に応じて画面を切り替えるように修正しましょう。
 
 React Navigationでは、状態に応じてスタック定義を切り替えることができます。
 そのコード例を次に示します。
@@ -43,11 +43,12 @@ ToDoアプリでもこれに従い、認証制御を組み込んでいきます�
 上記理由から、本ハンズオンでの部品説明は省略します。
 :::
 
-次のファイルを追加してください。
+次のファイルを追加・修正してください。
 
 - `/src/services/AuthService.ts`
 - `/src/services/index.ts`
 - `/src/contexts/UserContext.tsx`
+- `/src/contexts/App.tsx`
 
 ```typescript jsx title="/src/services/AuthService.ts"
 const refreshCsrfToken = async () => {};
@@ -119,6 +120,23 @@ export const UserContextProvider: React.FC = ({children}) => {
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
 };
+```
+
+```diff title="/src/App.tsx"
+  import {NavigationContainer} from '@react-navigation/native';
++ import {UserContextProvider} from 'contexts/UserContext';
+  import {RootStackNav} from 'navigation';
+  import React from 'react';
+  
+  export const App = () => {
+    return (
++     <UserContextProvider>
+        <NavigationContainer>
+          <RootStackNav />
+        </NavigationContainer>
++     </UserContextProvider>
+    );
+  };
 ```
 
 ## 認証フロー
@@ -269,23 +287,6 @@ export const RootStackNav: React.FC = () => {
     </View>
   );
   /* ～省略～ */  
-```
-
-```diff title="/src/App.tsx"
-  import {NavigationContainer} from '@react-navigation/native';
-+ import {UserContextProvider} from 'contexts/UserContext';
-  import {RootStackNav} from 'navigation';
-  import React from 'react';
-  
-  export const App = () => {
-    return (
-+     <UserContextProvider>
-        <NavigationContainer>
-          <RootStackNav />
-        </NavigationContainer>
-+     </UserContextProvider>
-    );
-  };
 ```
 
 ログインボタンを押下すると、`userContext.login(userName, password)`を呼び出して認証状態にします。
