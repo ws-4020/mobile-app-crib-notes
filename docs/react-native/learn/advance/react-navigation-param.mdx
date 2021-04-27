@@ -5,8 +5,9 @@ title: 遷移先の画面にパラメータを渡す
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-React Navigationで遷移する際、遷移元から遷移先にパラメータを渡すことができます。
+Webアプリケーションでよくあるような、検索条件やIDを次の画面に渡すケースをReact Navigationでどのように実装するか紹介します。
 
+React Navigationで遷移する際、遷移元から遷移先にパラメータを渡すことができます。
 `navigate`の引数で遷移先画面に渡すパラメータを指定できます。
 遷移先画面では、`route`からそのパラメータにアクセスできます。
 
@@ -37,7 +38,12 @@ const Screen2: React.FC = () => {
 };
 ```
 
-ただし、TypeScriptを使用している場合は`route.params.message`で`message`が未定義のエラーが出てしまいます。
+ただし、TypeScriptを使用している場合は次のエラーが発生します。
+
+```bash
+TS2532: Object is possibly 'undefined'.
+TS2339: Property 'message' does not exist on type 'object'.
+```
 
 ## パラメータの型定義
 
@@ -45,32 +51,38 @@ const Screen2: React.FC = () => {
 実装イメージは以下のとおりです。
 
 1. 画面名をキーに、パラメータ定義を値としてもつリストを定義（`RootParamList`）
+
+  ```typescript jsx
+  type RootParamList = {
+    Screen1: undefined;
+    Screen2: {message: string};
+  };
+  ```
+
 1. `useRoute`に`RouteProp<RootParamList, '画面名'>`を渡す
 
-```typescript jsx
-type RootParamList = {
-  Screen1: undefined;
-  Screen2: {message: string};
-};
-
-const Screen2: React.FC = () => {
-    /* 省略 */
-  const route = useRoute<RouteProp<RootParamList, 'Screen2'>>();
-  return (
-    /* 省略 */
-      <Text>{route.params.message}</Text>
-    /* 省略 */
-  );
-};
-```
+  ```typescript jsx
+  const Screen2: React.FC = () => {
+      /* 省略 */
+    const route = useRoute<RouteProp<RootParamList, 'Screen2'>>();
+    return (
+      /* 省略 */
+        <Text>{route.params.message}</Text>
+      /* 省略 */
+    );
+  };
+  ```
 
 :::note
 
 このページでは、画面でパラメータを受け取る実装で発生する、TypeScriptの型チェックエラーを解消する方法を紹介しました。
 
-React Navigationでは。型定義を積極的に利用することでより詳細な型チェックが可能です。例えば、`navigate`で遷移する先の画面のパラメータ名が間違えている時に、型チェックでエラーとすることなどが可能です。もしReact Navigationで利用する型定義の全体像について知りたい場合は、[Type checking with TypeScript | React Navigation](https://reactnavigation.org/docs/typescript/)を参照してください。
+React Navigationでは、型定義を積極的に利用することでより詳細な型チェックが可能です。
+例えば、`navigate`で遷移する先の画面のパラメータ名が間違えている時に、型チェックでエラーとすることなどが可能です。
+もしReact Navigationで利用する型定義の全体像について知りたい場合は、[Type checking with TypeScript | React Navigation](https://reactnavigation.org/docs/typescript/)を参照してください。
 
-ただ、React Navigationで利用する型定義はTypeScriptの型システムに精通していないと理解が難しいです。また、せっかく型定義を頑張ってもその利用方法が誤っていると、型チェックではエラーにはなりませんが実行時にエラーが発生してしまいます。
+ただ、React Navigationで利用する型定義はTypeScriptの型システムに精通していないと理解が難しいです。
+また、せっかく型定義を頑張ってもその利用方法が誤っていると、型チェックではエラーにはなりませんが実行時にエラーが発生してしまいます。
 
 こういった理由から、このコンテンツでのReact Navigationのための型定義の紹介は、定義しないとエラーになるなどの必要最低限の場合に限っています。
 
