@@ -26,7 +26,7 @@ module.exports = {
     },
     {
       type: 'doc',
-      id: 'distribution/ios-lisence',
+      id: 'distribution/ios-license',
     },
     {
       type: 'doc',
@@ -61,9 +61,9 @@ module.exports = {
       type: 'category',
       label: 'アプリケーションのビルド',
       items: [
-        'distribution/build/ios-build',
-        'distribution/build/ios-build-setting',
-        'distribution/build/android-build',
+        'distribution/app-build/ios-build',
+        'distribution/app-build/ios-build-setting',
+        'distribution/app-build/android-build',
       ],
     },
   ],
