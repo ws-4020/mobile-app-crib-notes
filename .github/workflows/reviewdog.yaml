@@ -39,4 +39,4 @@ jobs:
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
           name: Test results
-          path: SantokuApp/junit.xml
+          path: junit.xml
