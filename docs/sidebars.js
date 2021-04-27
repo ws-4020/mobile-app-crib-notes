@@ -180,6 +180,13 @@ module.exports = {
             type: 'doc',
             id: 'react-native/santoku',
           },
+          {
+          type: 'category',
+          label: 'デバッグについて',
+          items: [
+            'react-native/vscode-debug',
+          ],
+        },
         ],
       }
     : {}),
