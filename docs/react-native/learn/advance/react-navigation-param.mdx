@@ -5,13 +5,12 @@ title: 遷移先の画面にパラメータを渡す
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Webアプリケーションでよくあるような、検索条件やIDなどのパラメータを次の画面に渡したい場面があった場合、
-モバイルアプリケーションでどのように実装するか紹介します。
+検索条件やIDなどのパラメータを次の画面に渡したい場合、React Navigationでどのように実装するか紹介します。
 
 React Navigationで遷移する際、遷移先の画面に渡したいパラメータを`navigate`の引数として指定できます。
 遷移先画面では、`route`からそのパラメータにアクセスできます。
 
-```typescript jsx {8-10}
+```typescript jsx {8-10,21}
 const Screen1: React.FC = () => {
   const navigation = useNavigation();
   return (
