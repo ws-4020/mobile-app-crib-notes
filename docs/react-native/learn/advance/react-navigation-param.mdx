@@ -70,7 +70,7 @@ const Screen2: React.FC = () => {
 
 React Navigationでは。型定義を積極的に利用することでより詳細な型チェックが可能です。例えば、`navigate`で遷移する先の画面のパラメータ名が間違えている時に、型チェックでエラーとすることなどが可能です。もしReact Navigationで利用する型定義の全体像について知りたい場合は、[Type checking with TypeScript  | React Navigation](https://reactnavigation.org/docs/typescript/)を参照してください。
 
-ただ、React Navigationで利用する型定義は、TypeScriptの型システムに精通していないと理解が難しいです。また、せっかく型定義を頑張ってもその利用方法が誤っていると、型チェックではエラーとならないが実行時にエラーが発生するという、望まない結果となってしまいます。
+ただ、React Navigationで利用する型定義はTypeScriptの型システムに精通していないと理解が難しいです。また、せっかく型定義を頑張ってもその利用方法が誤っていると、型チェックではエラーにはなりませんが実行時にエラーが発生してしまいます。
 
 こういった理由から、このコンテンツでのReact Navigationのための型定義の紹介は、定義しないとエラーになるなどの必要最低限の場合に限っています。
 
