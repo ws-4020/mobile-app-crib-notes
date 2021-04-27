@@ -9,7 +9,7 @@ title: Tabナビゲーション
 ## 画面を追加
 
 設定画面を追加します。
-設定画面からログアウトできるように、さきほど実装したログアウトボタンは設定画面に移動させます。
+設定画面からログアウトできるように、前セクションで実装したログアウトボタンを設定画面に移動させます。
 
 次のファイルを追加・修正してください。
 
@@ -92,7 +92,9 @@ const styles = StyleSheet.create({
 ![TabNavigation](app-hands-on/tab_navigation.png)
 
 :::info
-Tabナビゲーターに画面（`TodoBoard`や`UserSetting`）を直接設定せずにStackナビゲーターを設定することで、ひとつのタブ内に複数の画面を表示できます。
+Tabナビゲータに画面（`TodoBoard`や`UserSetting`）を直接設定してもよいですが、
+タブ内で画面遷移させたい場合、Stackナビゲータを設定する必要があります。
+今回のアプリではタブ内で画面遷移しないため必要ありませんが、一般的な実装方法としてStackナビゲータを設定します。
 :::
 
 まず、ToDo一覧画面と設定画面をそれぞれ配置するStackナビゲータ（`TodoStackNav`と`SettingsStackNav`）を追加します。
@@ -143,7 +145,8 @@ export const SettingsStackNav: React.FC = () => (
 ```
 
 次に、追加したStackナビゲータを切り替えるTabナビゲータ（`MainTabNav`）を追加します。
-Tabナビゲータは3種類ありますが、今回は最もシンプルなBottomTabNavigatorを使用します。
+「[アプリの実装前に](../basic-concepts/react-navigation-basics/tab.mdx)」で述べたとおりTabナビゲータは3種類ありますが、
+今回は最もシンプルなBottomTabNavigatorを使用します。
 
 次のファイルを追加・修正してください。
 
@@ -196,7 +199,7 @@ export const MainTabNav: React.FC = () => {
 BottomTabNavigatorに指定できるオプションの種類については[公式ドキュメントのAPI定義](https://reactnavigation.org/docs/bottom-tab-navigator#options)を参照してください。
 :::
 
-`AuthedStackNav`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置します。
+最後に、`AuthedStackNav`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置します。
 
 次のファイルを修正してください。
 

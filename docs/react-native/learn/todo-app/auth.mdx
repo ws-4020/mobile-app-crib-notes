@@ -1,5 +1,5 @@
 ---
-title: 状態に応じた画面切替
+title: 状態に応じたナビゲーション
 ---
 
 ToDo一覧画面へ遷移できるようになりましたが、ただ画面を移動しているだけで認証制御はできていません。
@@ -139,7 +139,7 @@ export const UserContextProvider: React.FC = ({children}) => {
   };
 ```
 
-## 認証フロー
+## 状態に応じたナビゲーション
 
 次に、ナビゲーション定義を修正します。修正イメージは以下のとおりです。
 
@@ -254,12 +254,14 @@ export const RootStackNav: React.FC = () => {
 
 以上で、認証状態に応じたナビゲーション定義への修正が完了しました。
 
-次ににログイン機能を追加します。今まではただ画面遷移させていた処理を認証処理に変更します。
+## 認証処理
 
-次のファイルを修正してください。
+次は、ログインボタンを修正します。
 
-- `/src/screens/auth/Login.tsx`
-- `/src/App.tsx`
+ボタンを押した際に`userContext.login(userName, password)`を呼び出して認証状態にします。
+`userName`や`password`を入力するフォームはログイン画面の実装で作成するため、今は固定値を渡します。
+
+`/src/screens/auth/Login.tsx`を修正してください。
 
 ```diff title="/src/screens/auth/Login.tsx"
 - import {useNavigation} from '@react-navigation/native';
@@ -289,9 +291,7 @@ export const RootStackNav: React.FC = () => {
   /* ～省略～ */  
 ```
 
-ログインボタンを押下すると、`userContext.login(userName, password)`を呼び出して認証状態にします。
-
-最後に`TodoBoard`画面を修正し、ログアウトできるようにします。
+最後に、ToDo一覧画面に`userContext.logout()`を呼びだすログアウトボタンを追加します。
 
 `/src/screens/todo/TodoBoard.tsx`を修正してください。
 
@@ -318,12 +318,10 @@ export const RootStackNav: React.FC = () => {
   /* ～省略～ */
 ```
 
-ログアウトボタンを押下すると、`userContext.logout()`を呼び出して認証状態を解除します。
-
 修正できたら実行してください。
 次の操作ができたら成功です。
 
 - ログイン画面からログインしてToDo一覧画面が表示
-- 設定画面でログアウトするとWelcome画面が表示
+- ToDo一覧画面でログアウトするとWelcome画面が表示
 
 ![Logout](app-hands-on/logout.png)
