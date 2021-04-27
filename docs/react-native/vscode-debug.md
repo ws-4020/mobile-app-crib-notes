@@ -1,21 +1,22 @@
 ---
-title: VSCode 上でデバッグを行う
-sidebar_label: VSCode 上でデバッグを行う
+title: VS Code上でデバッグを行う
+sidebar_label: VS Code上でデバッグを行う
 hide_table_of_contents: true
 ---
 
-VSCode上でデバッグを行うには`ReactNativeTools`を利用します
-## ReactNativeTools のセットアップ
-VSCodeのReactNativeの拡張ツールである、`ReactNative Tools` プラグインをインストールします
+VS Code上でデバッグを行うには`ReactNativeTools`を利用します。
 
-VSCodeの「拡張機能」で`ReactNative Tools`検索してインストール
+## ReactNativeToolsのセットアップ
+
+VS CodeのReactNativeの拡張ツールである、`ReactNative Tools`プラグインをインストールします。
+
+VS Codeの「拡張機能」で`ReactNative Tools`検索してインストール。
 
 [拡張機能を検索した画像]
 
-## デバッグの設定としてexpo のポートにアタッチする
+## デバッグの設定としてexpoのポートにアタッチする
 
-プロジェクトルート配下の`/.vscode/launch.json`を変更する。(無い場合は新規に作成する)
-
+プロジェクトルート配下の`/.vscode/launch.json`を変更する（無い場合は新規に作成する）。
 
 ```json title="/launch.json"
 {
@@ -31,8 +32,7 @@ VSCodeの「拡張機能」で`ReactNative Tools`検索してインストール
   ]
 }
 ```
+
 ## デバッグ
 
-通常の起動と同様に`npx expo start`するとデバッガが立ち上がる
-
-
+通常の起動と同様に`npx expo start`するとデバッガが立ち上がる。
