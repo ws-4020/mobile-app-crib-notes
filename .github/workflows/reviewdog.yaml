@@ -32,7 +32,7 @@ jobs:
             });
             var fs = require('fs');
             fs.writeFileSync("${{github.workspace}}/workflow-results.zip", Buffer.from(download.data));
-      - run: unzip artifact.zip
+      - run: unzip workflow-results.zip
     
       - name: Report test result
         uses: ashley-taylor/junit-report-annotations-action@master
