@@ -88,10 +88,9 @@ jobs:
         run: |
           npm run -s test --prefix SantokuApp -- --ci --reporters=default --reporters=jest-junit --coverage
 
-      - name: Report test result
-        uses: ashley-taylor/junit-report-annotations-action@master
-        if: always()
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
         with:
-          access-token: ${{ secrets.GITHUB_TOKEN }}
-          name: Test results
+          name: test-result
           path: SantokuApp/junit.xml
+
