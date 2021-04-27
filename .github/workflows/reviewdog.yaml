@@ -36,7 +36,6 @@ jobs:
     
       - name: Report test result
         uses: ashley-taylor/junit-report-annotations-action@master
-        if: always()
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
           name: Test results
