@@ -1,8 +1,8 @@
 {
   "main": "index.js",
   "scripts": {
-    "android": "react-native run-android --appId jp.fintan.mobile.SantokuApp --variant developmentDebug --appIdSuffix dev.debug",
-    "ios": "react-native run-ios --scheme Development --configuration Debug",
+    "android": "react-native run-android --appId jp.fintan.mobile.SantokuApp --variant devSantokuAppDebug --appIdSuffix dev.debug",
+    "ios": "react-native run-ios --scheme DevSantokuApp --configuration Debug",
     "web": "expo start --web",
     "start": "react-native start",
     "test": "jest --detectOpenHandles --runInBand",
