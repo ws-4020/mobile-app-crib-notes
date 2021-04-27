@@ -24,7 +24,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
-export const TodoBoard: React.FC = () => {
+export const Login: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text h1>ログイン</Text>
@@ -35,6 +35,8 @@ export const TodoBoard: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 ```
@@ -51,7 +53,7 @@ import {Text} from 'react-native-elements';
 export const TodoBoard: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text h1>Todo一覧</Text>
+      <Text h1>Todo</Text>
     </View>
   );
 };
@@ -59,6 +61,8 @@ export const TodoBoard: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 ```
@@ -141,7 +145,7 @@ Stackナビゲーションではオプションを指定することでヘッダ
 +         name="TodoBoard"
 +         component={TodoBoard}
 +         options={{
-+           headerTitle: 'Todo一覧',
++           headerTitle: 'Todo',
 +         }}
 +       />
         <nav.Screen name="Instructions" component={Instructions} />
@@ -196,17 +200,7 @@ Stackナビゲーションではオプションを指定することでヘッダ
 +           headerRight: undefined,
           }}
         />
-        <nav.Screen
-          name="TodoBoard"
-          component={TodoBoard}
-          options={{
-            headerTitle: 'Todo一覧',
-          }}
-        />
-        <nav.Screen name="Instructions" component={Instructions} />
-      </nav.Navigator>
-    );
-  };
+  /* ～省略～ */
 ```
 
 共通定義は`Navigator`の`screenOptions`に、画面ごとの定義は`Screen`の`options`に定義します。
@@ -226,23 +220,20 @@ Welcome画面にヘッダーが表示されて、ログインボタンからロ�
   import React from 'react';
   import {StyleSheet, View} from 'react-native';
 - import {Text} from 'react-native-elements';
-+ import {Button} from 'react-native-elements';
-
++ import {Text, Button} from 'react-native-elements';
+  
   export const Login: React.FC = () => {
 +   const navigation = useNavigation();
     return (
       <View style={styles.container}>
--       <Text h1>ログイン</Text>
+        <Text h1>ログイン</Text>
 +       <Button onPress={() => navigation.navigate('TodoBoard')} title="ログイン" />
       </View>
     );
   };
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
-  });
+  /* ～省略～ */
 ```
 
 ログイン画面にログインボタンが表示され、タップしてToDo一覧に遷移できたら成功です。
+
+![Logout](app-hands-on/stack-login.png)
