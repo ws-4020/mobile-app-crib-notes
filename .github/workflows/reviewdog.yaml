@@ -32,8 +32,8 @@ jobs:
                archive_format: 'zip',
             });
             var fs = require('fs');
-            fs.writeFileSync('${{github.workspace}}/test-result.zip', Buffer.from(download.data));
-        - run: unzip test-result.zip
+            fs.writeFileSync("${{github.workspace}}/artifact.zip", Buffer.from(download.data));
+      - run: unzip artifact.zip
     
       - name: Report test result
         uses: ashley-taylor/junit-report-annotations-action@master
