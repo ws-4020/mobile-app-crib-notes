@@ -31,7 +31,7 @@ jobs:
                archive_format: 'zip',
             });
             var fs = require('fs');
-            fs.writeFileSync("${{github.workspace}}/artifact.zip", Buffer.from(download.data));
+            fs.writeFileSync("${{github.workspace}}/workflow-results.zip", Buffer.from(download.data));
       - run: unzip artifact.zip
     
       - name: Report test result
