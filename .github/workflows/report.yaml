@@ -1,0 +1,22 @@
+name: Report
+
+on:
+  workflow_run:
+    workflows: ["App"]
+    types:
+      - completed
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    if: >
+      ${{ github.event.workflow_run.event == 'pull_request'}}
+    steps:
+      - name: Report test result
+        uses: dorny/test-reporter@v1
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          artifact:  workflow-results
+          name: JEST Tests
+          path: 'junit.xml'
+          reporter: jest-junit
