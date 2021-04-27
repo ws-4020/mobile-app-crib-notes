@@ -11,7 +11,7 @@ Webアプリケーションでよくあるような、検索条件やIDなどの
 React Navigationで遷移する際、遷移先の画面に渡したいパラメータを`navigate`の引数として指定できます。
 遷移先画面では、`route`からそのパラメータにアクセスできます。
 
-```typescript jsx
+```typescript jsx {8-10}
 const Screen1: React.FC = () => {
   const navigation = useNavigation();
   return (
