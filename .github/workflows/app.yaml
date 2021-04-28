@@ -24,6 +24,7 @@ on:
       - SantokuApp/package-lock.json
       - SantokuApp/tsconfig.json
       - .github/workflows/app.yaml
+      - .github/workflows/report.yaml
     types:
       - opened
       - synchronize
