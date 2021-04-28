@@ -118,3 +118,8 @@ public
 junk.md
 tmp/
 _*[Ss]cratch.*
+
+
+### Lint results ###
+.*-results.txt
+.*-results.json

@@ -6,7 +6,7 @@ on:
       - master
   pull_request:
     branches:
-      - '**'
+      - master
     paths:
       - docs/**
       - src/**
@@ -34,10 +34,8 @@ on:
 
 jobs:
   lint:
-    name: Run lints
+    name: Lints
     runs-on: ubuntu-20.04
-    env:
-      REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -74,42 +72,39 @@ jobs:
       - name: Lint (textlint)
         if: always()
         run: |
-          npm run -s lint:text -- -f checkstyle -o textlint.result.txt
+          npm run -s lint:text -- -f checkstyle -o .textlint-results.txt
 
       - name: Lint (markdownlint)
         if: always()
         run: |
-          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' | reviewdog -tee -fail-on-error -reporter=github-pr-review -efm="%t:%f:%l:%c %m" -efm="%t:%f:%l %m" -name=markdownlint
+          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' > .markdownlint-results.txt
 
       - name: Lint (ESLint)
         if: always()
         run: |
-          npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=rdjson -name=ESLint
+          npm run -s lint:es -- -f eslint-formatter-rdjson  -o .eslint-results.json
 
       - name: Lint (TypeScript)
         if: always()
         run: |
-          npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name=TypeScript
+          npm run -s lint:tsc > .tsc-results.txt
 
       - name: Lint (stylelint)
         if: always()
-        uses: reviewdog/action-stylelint@v1
-        # https://github.com/reviewdog/action-stylelint
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          fail_on_error: true
-          # package.jsonでlint:cssに設定しているのと同じ引数を渡す
-          stylelint_input: 'src/**/*.css'
+        run: |
+          npm run -s lint:css -- -f json -o .stylelint-results.json
 
       - name: Archive workflow results
         uses: actions/upload-artifact@v2
         with:
           name: workflow-results
-          path: *lint.result.txt
+          path: |
+            jest-junit.xml
+            .*-results.txt
+            .*-results.json
 
-
-  build-deploy:
+  build:
+    name: Build
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -158,10 +153,3 @@ jobs:
           name: mobile-app-crib-notes
           path: ./build
           retention-days: 30
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/master'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build

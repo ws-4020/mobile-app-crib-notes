@@ -76,12 +76,12 @@ jobs:
       - name: Lint (ESLint)
         if: always()
         run: |
-          npm run -s lint:es --prefix SantokuApp -o eslint.result.txt
+          npm run -s lint:es --prefix SantokuApp -- -f eslint-formatter-rdjson  -o .eslint-results.json
 
       - name: Lint (TypeScript)
         if: always()
         run: |
-          npm run -s lint:tsc --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name="TypeScript"
+          npm run -s lint:tsc --prefix SantokuApp > .tsc-results.txt
 
       - name: Test
         if: always()
@@ -94,4 +94,5 @@ jobs:
           name: workflow-results
           path: |
             SantokuApp/jest-junit.xml
-            SantokuApp/*lint.result.txt
+            SantokuApp/.*-results.txt
+            SantokuApp/.*-results.json
