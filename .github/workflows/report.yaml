@@ -97,5 +97,6 @@ jobs:
         with:
           name: Jest results
           token: ${{ secrets.GITHUB_TOKEN }}
+          artifact: workflow-results
           path: ${{ steps.artifact.outputs.jest-junit }}
           reporter: jest-junit
