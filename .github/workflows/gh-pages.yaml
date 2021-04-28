@@ -74,27 +74,27 @@ jobs:
       - name: Lint (textlint)
         if: always()
         run: |
-          npm run -s lint:text -- -f checkstyle -o .textlint-results.txt
+          npm run -s lint:text -- -f checkstyle -o textlint-results.txt
 
       - name: Lint (markdownlint)
         if: always()
         run: |
-          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' > .markdownlint-results.txt
+          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' > markdownlint-results.txt
 
       - name: Lint (ESLint)
         if: always()
         run: |
-          npm run -s lint:es -- -f eslint-formatter-rdjson  -o .eslint-results.json
+          npm run -s lint:es -- -f eslint-formatter-rdjson  -o eslint-results.json
 
       - name: Lint (TypeScript)
         if: always()
         run: |
-          npm run -s lint:tsc > .tsc-results.txt
+          npm run -s lint:tsc > tsc-results.txt
 
       - name: Lint (stylelint)
         if: always()
         run: |
-          npm run -s lint:css -- -f json -o .stylelint-results.json
+          npm run -s lint:css -- -f json -o stylelint-results.json
 
       - name: Archive workflow results
         uses: actions/upload-artifact@v2
@@ -102,8 +102,8 @@ jobs:
           name: workflow-results
           path: |
             jest-junit.xml
-            .*-results.txt
-            .*-results.json
+            *-results.txt
+            *-results.json
 
   build:
     name: Build
