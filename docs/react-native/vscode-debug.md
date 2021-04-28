@@ -18,7 +18,7 @@ VS Codeの「拡張機能」で`ReactNative Tools`検索してインストール
 
 プロジェクトルート配下の`/.vscode/launch.json`を変更する（無い場合は新規に作成する）。
 
-```json title="/launch.json"
+```json title="/.vscode/launch.json"
 {
   "version": "0.2.0",
   "configurations": [
