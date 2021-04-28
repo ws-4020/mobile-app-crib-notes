@@ -23,10 +23,10 @@ jobs:
           reviewdog_version: latest
 
       - name: Download artifact
-        uses: actions/github-script@v3.1.0
+        uses: actions/github-script@v4
         with:
           script: |
-            var artifactName = "mobile-app-crib-notes"
+            var artifactName = 'workflow-results'
             var artifacts = await github.actions.listWorkflowRunArtifacts({
                owner: context.repo.owner,
                repo: context.repo.repo,
@@ -45,16 +45,17 @@ jobs:
             fs.writeFileSync('${{github.workspace}}/' + artifactName + '.zip', Buffer.from(download.data));
 
       - name: Unzip artifact
-        run: unzip mobile-app-crib-notes.zip -d mobile-app-crib-notes
+        run: unzip workflow-results.zip -d workflow-results
 
       - name: Find workflow results
         id: artifact
-        uses: actions/github-script@v3.1.0
+        uses: actions/github-script@v4
         with:
           script: |
-            var unzipPath = 'mobile-app-crib-notes'
+            var unzipPath = 'workflow-results'
 
             // set outputs
+            var fs = require('fs');
             const fileNames = fs.readdirSync(unzipPath)
             for (const fileName of fileNames) {
               core.setOutput(fileName, '${unzipPath}/fileName')

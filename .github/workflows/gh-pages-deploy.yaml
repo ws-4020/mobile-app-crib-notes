@@ -17,16 +17,17 @@ jobs:
       ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Download artifact
-        uses: actions/github-script@v3.1.0
+        uses: actions/github-script@v4
         with:
           script: |
+            var artifactName = 'workflow-results'
             var artifacts = await github.actions.listWorkflowRunArtifacts({
                owner: context.repo.owner,
                repo: context.repo.repo,
                run_id: ${{github.event.workflow_run.id }},
             });
             var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == "mobile-app-crib-notes"
+              return artifact.name == artifactName
             })[0];
             var download = await github.actions.downloadArtifact({
                owner: context.repo.owner,
@@ -35,9 +36,11 @@ jobs:
                archive_format: 'zip',
             });
             var fs = require('fs');
-            fs.writeFileSync('${{github.workspace}}/mobile-app-crib-notes.zip', Buffer.from(download.data));
+            fs.writeFileSync('${{github.workspace}}/' + artifactName + '.zip', Buffer.from(download.data));
+
       - name: Extract artifact
         run: unzip mobile-app-crib-notes.zip
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
