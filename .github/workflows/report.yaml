@@ -68,28 +68,28 @@ jobs:
       - name: textlint results
         if: ${{ always() && steps.artifact.outputs.textlint-results }}
         run: |
-          reviewdog -tee -reporter=github-pr-review -f=checkstyle -name=textlint < ${{ steps.artifact.outputs.textlint-results }}
+          reviewdog -tee -reporter=github-check -f=checkstyle -name=textlint < ${{ steps.artifact.outputs.textlint-results }}
 
       - name: markdownlint results
         if: ${{ always() && steps.artifact.outputs.markdownlint-results }}
         run: |
-          reviewdog -tee -reporter=github-pr-review -efm="%t:%f:%l:%c %m" -name=markdownlint < ${{ steps.artifact.outputs.markdownlint-results }}
+          reviewdog -tee -reporter=github-check -efm="%t:%f:%l:%c %m" -name=markdownlint < ${{ steps.artifact.outputs.markdownlint-results }}
 
       - name: ESLint results
         if: ${{ always() && steps.artifact.outputs.eslint-results }}
         run: |
-          reviewdog -tee -reporter=github-pr-review -f=rdjson -name=ESLint < ${{ steps.artifact.outputs.eslint-results }}
+          reviewdog -tee -reporter=github-check -f=rdjson -name=ESLint < ${{ steps.artifact.outputs.eslint-results }}
 
       - name: TypeScript results
         if: ${{ always() && steps.artifact.outputs.tsc-results }}
         run: |
-          reviewdog -tee -reporter=github-pr-review -f=tsc -name=TypeScript < ${{ steps.artifact.outputs.tsc-results }}
+          reviewdog -tee -reporter=github-check -f=tsc -name=TypeScript < ${{ steps.artifact.outputs.tsc-results }}
 
       - name: stylelint results
         if: ${{ always() && steps.artifact.outputs.stylelint-results }}
         run: |
           jq -r '.[] | {source: .source, warnings:.warnings[]} | "\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text) [\(.warnings.rule)](https://stylelint.io/user-guide/rules/\(.warnings.rule))"' \
-             < ${{ steps.artifact.outputs.stylelint-results }} | reviewdog -tee -reporter=github-pr-review -efm="%f:%l:%c:%t%*[^:]: %m" -name=stylelint
+             < ${{ steps.artifact.outputs.stylelint-results }} | reviewdog -tee -reporter=github-check -efm="%f:%l:%c:%t%*[^:]: %m" -name=stylelint
 
       - name: Jest results
         uses: dorny/test-reporter@v1
