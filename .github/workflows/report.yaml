@@ -58,7 +58,7 @@ jobs:
             var fs = require('fs');
             const fileNames = fs.readdirSync(unzipPath)
             for (const fileName of fileNames) {
-              core.setOutput(fileName, unzipPath + '/fileName')
+              core.setOutput(fileName, unzipPath + '/' + fileName)
             }
 
       - name: textlint results
