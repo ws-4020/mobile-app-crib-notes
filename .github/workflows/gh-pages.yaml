@@ -101,7 +101,7 @@ jobs:
         with:
           name: workflow-results
           path: |
-            jest-junit.xml
+            jest-junit
             *-results
 
   build:

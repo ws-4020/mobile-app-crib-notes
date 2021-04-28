@@ -89,9 +89,9 @@ jobs:
 
       - name: Jest results
         uses: dorny/test-reporter@v1
-        if: ${{ always() && steps.artifact.outputs.jest-junit.xml }}
+        if: ${{ always() && steps.artifact.outputs.jest-junit }}
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
           name: Jest results
-          path: ${{ steps.artifact.outputs.jest-junit.xml }}
+          path: ${{ steps.artifact.outputs.jest-junit }}
           reporter: jest-junit
