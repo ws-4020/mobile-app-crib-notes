@@ -42,7 +42,7 @@ jobs:
                archive_format: 'zip',
             });
             var fs = require('fs');
-            fs.writeFileSync('${{github.workspace}}/' + ${artifactName} + '.zip', Buffer.from(download.data));
+            fs.writeFileSync('${{github.workspace}}/' + artifactName + '.zip', Buffer.from(download.data));
 
       - name: Unzip artifact
         run: unzip mobile-app-crib-notes.zip -d mobile-app-crib-notes
