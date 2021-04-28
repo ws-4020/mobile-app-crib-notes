@@ -182,7 +182,7 @@ module.exports = {
           },
           {
           type: 'category',
-          label: 'デバッグについて',
+          label: 'IDE',
           items: [
             'react-native/vscode-debug',
           ],
