@@ -86,6 +86,7 @@ jobs:
 
       - name: Archive workflow results
         uses: actions/upload-artifact@v2
+        if: always()
         with:
           name: workflow-results
           path: |
