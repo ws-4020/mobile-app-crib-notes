@@ -26,13 +26,14 @@ jobs:
         uses: actions/github-script@v3.1.0
         with:
           script: |
+            var artifactName = "mobile-app-crib-notes"
             var artifacts = await github.actions.listWorkflowRunArtifacts({
                owner: context.repo.owner,
                repo: context.repo.repo,
                run_id: ${{github.event.workflow_run.id }},
             });
             var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == "mobile-app-crib-notes"
+              return artifact.name == artifactName
             })[0];
             var download = await github.actions.downloadArtifact({
                owner: context.repo.owner,
@@ -41,7 +42,7 @@ jobs:
                archive_format: 'zip',
             });
             var fs = require('fs');
-            fs.writeFileSync('${{github.workspace}}/mobile-app-crib-notes.zip', Buffer.from(download.data));
+            fs.writeFileSync('${{github.workspace}}/${artifactName}.zip', Buffer.from(download.data));
 
       - name: Extract workflow result
         id: artifact
@@ -52,8 +53,8 @@ jobs:
             var unzipPath = 'mobile-app-crib-notes'
 
             // unzip
-            await exec('unzip', [filePath, '-d', unzipPath])
-            await exec('rm', [filePath])
+            await github.actions.exec('unzip', [filePath, '-d', unzipPath])
+            await github.actions.exec('rm', [filePath])
 
             // set outputs
             const fileNames = fs.readdirSync(unzipPath)
