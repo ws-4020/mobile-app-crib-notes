@@ -17,6 +17,6 @@ jobs:
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
           artifact:  workflow-results
-          name: JEST Tests
+          name: Jest results
           path: 'junit.xml'
           reporter: jest-junit
