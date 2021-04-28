@@ -18,9 +18,9 @@ jobs:
       ${{ github.event.workflow_run.event == 'pull_request'}}
     steps:
       - name: Set up reviewdog
-        uses: reviewdog/action-setup@nightly
+        uses: reviewdog/action-setup@v1
         with:
-          reviewdog_version: latest
+          reviewdog_version: nightly
 
       - name: Download artifact
         uses: actions/github-script@v4
