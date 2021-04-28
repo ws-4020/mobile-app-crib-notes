@@ -22,37 +22,70 @@ jobs:
         with:
           reviewdog_version: latest
 
+      - name: Download artifact
+        uses: actions/github-script@v3.1.0
+        with:
+          script: |
+            var artifacts = await github.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: ${{github.event.workflow_run.id }},
+            });
+            var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "mobile-app-crib-notes"
+            })[0];
+            var download = await github.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifact.id,
+               archive_format: 'zip',
+            });
+            var fs = require('fs');
+            fs.writeFileSync('${{github.workspace}}/mobile-app-crib-notes.zip', Buffer.from(download.data));
+
       - name: Extract workflow result
         id: artifact
-        uses: marocchino/on_artifact@v1
+        uses: actions/github-script@v3.1.0
         with:
-          name: workflow-results
+          script: |
+            var filePath = 'mobile-app-crib-notes.zip'
+            var unzipPath = 'mobile-app-crib-notes'
+
+            // unzip
+            await exec('unzip', [filePath, '-d', unzipPath])
+            await exec('rm', [filePath])
+
+            // set outputs
+            const fileNames = fs.readdirSync(unzipPath)
+            for (const fileName of fileNames) {
+              core.setOutput(fileName, '${unzipPath}/fileName')
+            }
 
       - name: textlint results
         if: ${{ always() && steps.artifact.outputs.textlint-results }}
         run: |
-          reviewdog -tee -reporter=github-pr-review -f=checkstyle -name=textlint < textlint-results
+          reviewdog -tee -reporter=github-pr-review -f=checkstyle -name=textlint < ${{ steps.artifact.outputs.textlint-results }}
 
       - name: markdownlint results
         if: ${{ always() && steps.artifact.outputs.markdownlint-results }}
         run: |
-          reviewdog -tee -reporter=github-pr-review -efm="%t:%f:%l:%c %m" -name=markdownlint < markdownlint-results
+          reviewdog -tee -reporter=github-pr-review -efm="%t:%f:%l:%c %m" -name=markdownlint < ${{ steps.artifact.outputs.markdownlint-results }}
 
       - name: ESLint results
         if: ${{ always() && steps.artifact.outputs.eslint-results }}
         run: |
-          reviewdog -tee -reporter=github-pr-review -f=rdjson -name=ESLint < eslint-results
+          reviewdog -tee -reporter=github-pr-review -f=rdjson -name=ESLint < ${{ steps.artifact.outputs.eslint-results }}
 
       - name: TypeScript results
         if: ${{ always() && steps.artifact.outputs.tsc-results }}
         run: |
-          reviewdog -tee -reporter=github-pr-review -f=tsc -name=TypeScript < tsc-results
+          reviewdog -tee -reporter=github-pr-review -f=tsc -name=TypeScript < ${{ steps.artifact.outputs.tsc-results }}
 
       - name: stylelint results
         if: ${{ always() && steps.artifact.outputs.stylelint-results }}
         run: |
           jq -r '.[] | {source: .source, warnings:.warnings[]} | "\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text) [\(.warnings.rule)](https://stylelint.io/user-guide/rules/\(.warnings.rule))"' \
-             < stylelint-results | reviewdog -tee -reporter=github-pr-review -efm="%f:%l:%c:%t%*[^:]: %m" -name=stylelint
+             < ${{ steps.artifact.outputs.stylelint-results }} | reviewdog -tee -reporter=github-pr-review -efm="%f:%l:%c:%t%*[^:]: %m" -name=stylelint
 
       - name: Jest results
         uses: dorny/test-reporter@v1
@@ -60,5 +93,5 @@ jobs:
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
           name: Jest results
-          path: jest-junit.xml
+          path: ${{ steps.artifact.outputs.jest-junit.xml }}
           reporter: jest-junit
