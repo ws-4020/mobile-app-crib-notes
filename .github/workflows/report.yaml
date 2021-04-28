@@ -35,6 +35,10 @@ jobs:
             var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
               return artifact.name == artifactName
             })[0];
+            if (!matchArtifact) {
+              core.setFailed(`${artifactName} is not found in artifacts`);
+              return;
+            }
             var download = await github.actions.downloadArtifact({
                owner: context.repo.owner,
                repo: context.repo.repo,
