@@ -1,26 +1,30 @@
 ---
-title: Visual Studio Code上でデバッグを行う
-sidebar_label: Visual Studio Code上でデバッグを行う
+title: Visual Studio Codeの設定
+sidebar_label: Visual Studio Codeの設定
 hide_table_of_contents: true
 ---
 
-Visual Studio Codeで、React NativeのTypeScriptコードをデバッグできるように、[React Native Tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)をセットアップします。
+ここではVisual Studio Code (以下VS Code) での開発に際して有用なプラグインをご紹介します。
+
+## React Native Tools
+
+VS Codeプラグインである`React Native Tools`を利用することで開発中のモバイルアプリケーションをデバッグできます。
+
+VSで、React NativeのTypeScriptコードをデバッグできるように、[React Native Tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)をセットアップします。
 
 **このページではExpoを利用した場合のデバッグを紹介します。**
 
 Android、およびiOSのシミュレータを利用した場合のデバッグについて詳細は[こちら](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)を参照してください。
 
-## React Native Toolsのセットアップ
+### React Native Toolsのインストール
 
-Visual Studio CodeのReact Nativeの拡張ツールである、`React Native Tools`プラグインをインストールします。
+VS CodeのReact Nativeの拡張ツールである、`React Native Tools`プラグインをインストールします。
 
 Visual Studioマーケットプレイスの[React Native Toolsページ](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)の`Install`をクリックしてインストール。
 
-または、Visual Studio Codeの「拡張機能」で`React Native Tools`検索してインストール。
+または、VS Codeの「拡張機能」で`React Native Tools`検索してインストール。
 
-[拡張機能を検索した画像]
-
-## デバッグの設定としてexpoのポートにアタッチする
+### デバッグの設定としてexpoのポートにアタッチする
 
 プロジェクトルート配下の`/.vscode/launch.json`を変更する（無い場合は新規に作成する）。
 
@@ -39,6 +43,20 @@ Visual Studioマーケットプレイスの[React Native Toolsページ](https:/
 }
 ```
 
-## デバッグ
+### デバッグ
 
 通常の起動と同様に`npx expo start`するとデバッガが立ち上がる。
+
+## Lint、フォーマッタ
+
+- [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+## その他
+
+- [GitLens — Git supercharged](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+- [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
+- [Color Highlight](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)
+- [Rainbow Brackets](https://marketplace.visualstudio.com/items?itemName=2gua.rainbow-brackets)
+- [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
