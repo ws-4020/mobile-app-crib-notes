@@ -12,7 +12,7 @@ jobs:
     if: >
       ${{ github.event.workflow_run.event == 'pull_request'}}
     steps:
-      - name: Report test result
+      - name: Jest results
         uses: dorny/test-reporter@v1
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
