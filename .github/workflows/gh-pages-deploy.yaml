@@ -13,11 +13,31 @@ jobs:
   deploy-pages:
     name: Deploy Pages
     runs-on: ubuntu-latest
+    if: >
+      ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
+      - name: Download artifact
+        uses: actions/github-script@v3.1.0
         with:
-          name: mobile-app-crib-notes
+          script: |
+            var artifacts = await github.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: ${{github.event.workflow_run.id }},
+            });
+            var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "mobile-app-crib-notes"
+            })[0];
+            var download = await github.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifact.id,
+               archive_format: 'zip',
+            });
+            var fs = require('fs');
+            fs.writeFileSync('${{github.workspace}}/mobile-app-crib-notes.zip', Buffer.from(download.data));
+      - name: Extract artifact
+        run: unzip mobile-app-crib-notes.zip
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
