@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/download-artifact@v2
         with:
           name: mobile-app-crib-notes
       - name: Deploy
