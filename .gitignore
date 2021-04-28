@@ -121,6 +121,6 @@ _*[Ss]cratch.*
 
 
 ### Lint results ###
-tsc-results.txt
-*lint-results.txt
-*lint-results.json
+tsc-results
+*lint-results
+*lint-results

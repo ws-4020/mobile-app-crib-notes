@@ -29,27 +29,27 @@ jobs:
           name: workflow-results
 
       - name: textlint results
-        if: ${{ steps.artifact.outputs.textlint-results.txt }}
+        if: ${{ steps.artifact.outputs.textlint-results }}
         run: |
           reviewdog -tee -reporter=github-pr-review -f=checkstyle -name=textlint < textlint-results.txt
 
       - name: markdownlint results
-        if: ${{ steps.artifact.outputs.markdownlint-results.txt }}
+        if: ${{ steps.artifact.outputs.markdownlint-results }}
         run: |
           reviewdog -tee -reporter=github-pr-review -efm="%t:%f:%l:%c %m" -name=markdownlint < markdownlint-results.txt
 
       - name: ESLint results
-        if: ${{ steps.artifact.outputs.eslint-results.json }}
+        if: ${{ steps.artifact.outputs.eslint-results }}
         run: |
           reviewdog -tee -reporter=github-pr-review -f=rdjson -name=ESLint < eslint-results.json
 
       - name: TypeScript results
-        if: ${{ steps.artifact.outputs.tsc-results.txt }}
+        if: ${{ steps.artifact.outputs.tsc-results }}
         run: |
           reviewdog -tee -reporter=github-pr-review -f=tsc -name=TypeScript < tsc-results.txt
 
       - name: stylelint results
-        if: ${{ steps.artifact.outputs.stylelint-results.json }}
+        if: ${{ steps.artifact.outputs.stylelint-results }}
         run: |
           jq -r '.[] | {source: .source, warnings:.warnings[]} | "\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text) [\(.warnings.rule)](https://stylelint.io/user-guide/rules/\(.warnings.rule))"' \
              < stylelint-results.json | reviewdog -tee -reporter=github-pr-review -efm="%f:%l:%c:%t%*[^:]: %m" -name=stylelint

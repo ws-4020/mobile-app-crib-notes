@@ -74,17 +74,17 @@ jobs:
       - name: Lint (textlint)
         if: always()
         run: |
-          npm run -s lint:text -- -f checkstyle -o textlint-results.txt
+          npm run -s lint:text -- -f checkstyle -o textlint-results
 
       - name: Lint (markdownlint)
         if: always()
         run: |
-          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' > markdownlint-results.txt
+          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' > markdownlint-results
 
       - name: Lint (ESLint)
         if: always()
         run: |
-          npm run -s lint:es -- -f eslint-formatter-rdjson  -o eslint-results.json
+          npm run -s lint:es -- -f eslint-formatter-rdjson  -o eslint-results
 
       - name: Lint (TypeScript)
         if: always()
@@ -94,7 +94,7 @@ jobs:
       - name: Lint (stylelint)
         if: always()
         run: |
-          npm run -s lint:css -- -f json -o stylelint-results.json
+          npm run -s lint:css -- -f json -o stylelint-results
 
       - name: Archive workflow results
         uses: actions/upload-artifact@v2

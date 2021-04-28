@@ -72,12 +72,12 @@ jobs:
       - name: Lint (ESLint)
         if: always()
         run: |
-          npm run -s lint:es --prefix SantokuApp -- -f eslint-formatter-rdjson  -o eslint-results.json
+          npm run -s lint:es --prefix SantokuApp -- -f eslint-formatter-rdjson  -o eslint-results
 
       - name: Lint (TypeScript)
         if: always()
         run: |
-          npm run -s lint:tsc --prefix SantokuApp > tsc-results.txt
+          npm run -s lint:tsc --prefix SantokuApp > tsc-results
 
       - name: Test
         if: always()
