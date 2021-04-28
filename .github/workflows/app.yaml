@@ -90,5 +90,4 @@ jobs:
           name: workflow-results
           path: |
             SantokuApp/jest-junit.xml
-            SantokuApp/*-results.txt
-            SantokuApp/*-results.json
+            SantokuApp/*-results
