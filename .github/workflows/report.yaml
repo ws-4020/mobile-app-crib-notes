@@ -2,21 +2,43 @@ name: Report
 
 on:
   workflow_run:
-    workflows: ["App"]
+    workflows: ["App", "GitHub Pages"]
     types:
       - completed
 
 jobs:
   report:
     runs-on: ubuntu-latest
+    env:
+      REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     if: >
       ${{ github.event.workflow_run.event == 'pull_request'}}
     steps:
+      - name: Set up reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      - name: Extract workflow result
+        id: artifact
+        uses: marocchino/on_artifact@v1
+        with:
+          name: workflow-results
+
       - name: Report test result
         uses: dorny/test-reporter@v1
+        if: ${{ steps.artifact.outputs.jest-junit.xml }}        
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
           artifact:  workflow-results
           name: JEST Tests
-          path: 'junit.xml'
-          reporter: jest-junit
+          path: 'jest-junit.xml'
+          reporter: jest-junit      
+      
+      - name: Report textlint
+        if: ${{ steps.artifact.outputs.testlint.result.txt }}
+        run: |
+          reviewdog -tee -fail-on-error -reporter=github-pr-review -f=checkstyle -name=textlint < testlint.result.txt
+
+      - name: Report markdownlint
+      

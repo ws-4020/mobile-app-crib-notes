@@ -59,7 +59,8 @@
     "suiteNameTemplate": "{filepath}",
     "classNameTemplate": "{classname}",
     "titleTemplate": "{title}",
-    "ancestorSeparator": " › "
+    "ancestorSeparator": " › ",
+    "outputName": "jest-junit.xml"
   },
   "private": true
 }

@@ -92,4 +92,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: workflow-results
-          path: SantokuApp/junit.xml
+          path: |
+            SantokuApp/jest-junit.xml
+            SantokuApp/*lint.result.txt
