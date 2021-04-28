@@ -44,17 +44,15 @@ jobs:
             var fs = require('fs');
             fs.writeFileSync('${{github.workspace}}/${artifactName}.zip', Buffer.from(download.data));
 
-      - name: Extract workflow result
+      - name: Unzip artifact
+        run: unzip mobile-app-crib-notes.zip -d mobile-app-crib-notes
+
+      - name: Find workflow results
         id: artifact
         uses: actions/github-script@v3.1.0
         with:
           script: |
-            var filePath = 'mobile-app-crib-notes.zip'
             var unzipPath = 'mobile-app-crib-notes'
-
-            // unzip
-            await github.actions.exec('unzip', [filePath, '-d', unzipPath])
-            await github.actions.exec('rm', [filePath])
 
             // set outputs
             const fileNames = fs.readdirSync(unzipPath)
