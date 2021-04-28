@@ -268,7 +268,7 @@ EA57F9FD253824C7003D7604 /* DebugAdvanced */ = {
 | ----- | ------------- | -------------- | ------- |
 | 有効 | 有効 | 無効 | 無効 |
 
-Flipperについては、`Podfile`で次のように設定してリリースビルドでは依存パッケージに含まれないようにしています。
+Flipperについては、`Podfile`で次のように設定してリリースビルドでは依存パッケージとして含まれないようにしています。
 
 ```ruby title="ios/Podfile"
 # Enables Flipper.
@@ -280,7 +280,6 @@ post_install do |installer|
   flipper_post_install(installer)
 end
 ```
-
 
 ### App Transport Security
 
