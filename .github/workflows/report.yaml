@@ -25,13 +25,13 @@ jobs:
         with:
           name: workflow-results
 
-      - name: Report test result
+      - name: Jest results
         uses: dorny/test-reporter@v1
         if: ${{ steps.artifact.outputs.jest-junit.xml }}        
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
           artifact:  workflow-results
-          name: JEST Tests
+          name: Jest results
           path: 'jest-junit.xml'
           reporter: jest-junit      
       
@@ -41,4 +41,6 @@ jobs:
           reviewdog -tee -fail-on-error -reporter=github-pr-review -f=checkstyle -name=textlint < testlint.result.txt
 
       - name: Report markdownlint
-      
+        if: ${{ steps.artifact.outputs.eslint.result.txt }}
+        run: |
+          reviewdog -tee -fail-on-error -reporter=github-pr-review -f=eslint -name="ESLint" < eslint.result.txt
