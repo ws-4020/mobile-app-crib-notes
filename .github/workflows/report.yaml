@@ -59,7 +59,6 @@ jobs:
         if: ${{ steps.artifact.outputs.jest-junit.xml }}
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
-          artifact: workflow-results
           name: Jest results
           path: jest-junit.xml
           reporter: jest-junit
