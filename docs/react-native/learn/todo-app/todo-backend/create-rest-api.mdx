@@ -1,0 +1,290 @@
+---
+title: REST APIクライアント作成
+---
+
+REST APIクライアントの作成は、OpenAPIドキュメントを利用して作成します。
+ここでは、REST APIクライアントの作成方法を説明します。
+
+## OpenAPIドキュメントの作成
+
+OpenAPIドキュメントを作成します。以下のソースコードを使用して、作成してください。
+このドキュメントには、以下の機能をもったAPIが定義されています。
+
+- ToDo一覧の取得
+- ToDoの登録
+- ToDoステータスの更新
+- ToDoの削除
+
+OpenAPIドキュメントについて、詳しく知りたい方は、[公式](https://swagger.io/specification/)を参照してください。
+
+```yaml title="/src/rest-api-specification/openapi.yaml"
+openapi: 3.0.3
+info:
+  title: ToDo REST API
+  version: '1.0.0'
+  description: サービス開発ハンズオンで作成するToDoアプリのREST API。
+tags:
+  - name: todos
+    description: ToDo管理
+servers:
+  - url: 'http://localhost:9080'
+paths:
+  /api/todos:
+    get:
+      summary: ToDo一覧の取得
+      description: >
+        登録しているToDoを全て取得する。
+      tags:
+        - todos
+      operationId: getTodos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+              examples:
+                example:
+                  value:
+                    - id: 2001
+                      text: やること１
+                      completed: true
+                    - id: 2002
+                      text: やること２
+                      completed: false
+        '403':
+          description: Forbidden
+    post:
+      summary: ToDoの登録
+      tags:
+        - todos
+      description: >
+        ToDoを登録する。
+      operationId: postTodo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  description: ToDoのタイトル
+              required:
+                - text
+              additionalProperties: false
+            examples:
+              example:
+                value:
+                  text: やること３
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+              examples:
+                example:
+                  value:
+                    id: 2003
+                    text: やること３
+                    completed: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+  '/api/todos/{todoId}':
+    parameters:
+      - name: todoId
+        in: path
+        description: ToDoのID
+        required: true
+        schema:
+          type: number
+        example: '2002'
+    put:
+      summary: ToDoステータスの更新
+      description: >
+        ToDoのステータスを更新する。
+      tags:
+        - todos
+      operationId: putTodo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                completed:
+                  type: boolean
+                  description: ToDoのステータス
+              required:
+                - completed
+              additionalProperties: false
+            examples:
+              example:
+                value:
+                  completed: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+              examples:
+                example:
+                  value:
+                    id: 2002
+                    text: やること２
+                    completed: true
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+    delete:
+      summary: ToDoの削除
+      description: >
+        登録しているToDoを削除する。
+      tags:
+        - todos
+      operationId: deleteTodo
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+components:
+  schemas:
+    Todo:
+      title: Todo
+      type: object
+      description: ToDo情報
+      properties:
+        id:
+          type: integer
+          description: ToDoのID
+        text:
+          type: string
+          description: ToDoのタイトル
+        completed:
+          type: boolean
+          description: ToDoのステータス
+      required:
+        - id
+        - text
+        - completed
+      additionalProperties: false
+  securitySchemes: {}
+```
+
+## クライアントコードの作成
+
+REST APIのクライアントコードを、OpenAPIドキュメントから生成します。
+Docker Composeを使用して、コンテナイメージを作成します。
+コンテナ作成の元となるymlは、以下を利用して作成してください。
+（`<YourAppName>`の部分は、[プロジェクトの作成](../../../../getting-started/create-project)で命名したプロジェクト名へ変更してください）
+
+```yaml title="/src/docker/docker-compose.api-gen.yml"
+version: '3.7'
+
+services:
+  openapi-gen:
+    image: openapitools/openapi-generator-cli
+    volumes:
+      - ..:/<YourAppName>
+    command: generate -g typescript-fetch -i /<YourAppName>/src/rest-api-specification/openapi.yaml -o /<YourAppName>/src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
+```
+
+次のコマンドをコマンドプロンプトまたは、ターミナルにて実行してください。
+
+```bash
+docker-compose -f docker/docker-compose.api-gen.yml up
+```
+
+実行後、`src`の下に`backend`ディレクトリが生成され、その配下に`generated-rest-client`ディレクトリが生成されます。
+この`generated-rest-client`配下に、自動生成されたクライアントコードが格納されていれば、クライアントコード作成は無事完了となります。
+
+## クライアントコードのラッパーを生成
+
+OpenAPIドキュメントからREST APIのクライアントコードを生成しましたが、使用時には同じ設定することが多くなります。
+そこで、共通的な設定がされたクライアントコードを使用するために、生成したクライアントコードをラッピングした`BackendSerivce`を作成します。
+コンポーネントからREST APIにアクセスする際には、生成したクライアントコードは直接使用せずに、この`BackendSerivce`を使用するようにします。
+
+```typescript jsx title="/src/docker/docker-compose.api-gen.yml"
+import {
+  Configuration,
+  TodosApi,
+  Middleware,
+  UsersApi
+} from './generated-rest-client';
+
+const requestLogger: Middleware = {
+  pre: async (context) => {
+    console.log(`>> ${context.init.method} ${context.url}`, context.init);
+  },
+  post: async (context) => {
+    console.log(`<< ${context.response.status} ${context.url}`, context.response);
+  }
+};
+
+const corsHandler: Middleware = {
+  pre: async (context) => {
+    return {
+      url: context.url,
+      init: {
+        ...context.init,
+        mode: 'cors',
+        credentials: 'include'
+      }
+    };
+  }
+};
+
+const configuration = new Configuration({
+  middleware: [corsHandler, requestLogger]
+});
+
+const todosApi = new TodosApi(configuration);
+
+const usersApi = new UsersApi(configuration);
+
+const signup = async (userName: string, password: string) => {
+  return usersApi.signup({ inlineObject2 : { userName, password }});
+};
+
+const login = async (userName: string, password: string) => {
+  return usersApi.login({ inlineObject3: { userName, password }});
+};
+
+const logout = async () => {
+  return usersApi.logout();
+};
+
+const getTodos = async () => {
+  return todosApi.getTodos();
+};
+
+const postTodo = async (text: string) => {
+  return todosApi.postTodo({ inlineObject: { text }});
+};
+
+const putTodo = async (todoId: number, completed: boolean) => {
+  return todosApi.putTodo({ todoId, inlineObject1: { completed }});
+};
+
+export const BackendService = {
+  signup,
+  login,
+  logout,
+  getTodos,
+  postTodo,
+  putTodo
+};
+```

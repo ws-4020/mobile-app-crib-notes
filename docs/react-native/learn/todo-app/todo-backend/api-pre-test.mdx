@@ -1,0 +1,141 @@
+---
+title: 動作確認前の準備
+---
+
+ここでは、それぞれの動作確認前の準備を説明します。
+学習環境にあわせて以下の中から適した内容を確認してください。
+
+## Mockで利用する場合
+
+Docker Composeを使用してDockerコンテナ上でモックサーバを起動します。
+ここでは、`モックサーバコンテナの作成`と`モックサーバ起動`を説明します。
+
+### モックサーバコンテナを生成するyml作成
+
+:::caution
+すでにymlを作成済の場合、ここはスキップしてください。
+:::
+
+コンテナ作成の元となるymlは、以下を利用して作成してください。
+（`<YourAppName>`の部分は、[プロジェクトの作成](../../../../getting-started/create-project)で命名したプロジェクト名へ変更してください）
+
+```yaml title="/src/docker/docker-compose.api-mock.yml up"
+version: '3.7'
+
+services:
+  prism:
+    image: stoplight/prism:3
+    ports:
+      - 9080:9080
+    volumes:
+      - ..:/<YourAppName>
+    command: mock -p 9080 -h 0.0.0.0 /<YourAppName>/src/rest-api-specification/openapi.yaml
+```
+
+### モックサーバ起動
+
+次のコマンドをコマンドプロンプトまたは、ターミナルにて実行してください。
+
+```bash
+docker-compose -f docker/docker-compose.api-mock.yml up
+```
+
+コンソールに、`start Prism is listening`が出力されていれば、モックサーバの起動に成功しています。
+
+### モックサーバ停止
+
+モックサーバを起動したコンソールで、`Ctrl + C`を押下してください。
+
+## ローカルで利用する場合
+
+ローカルで利用する場合、`DBコンテナ`と`バックエンドアプリ`を起動します。
+それぞれの起動方法を説明します。
+
+### バックエンドアプリのコンパイルとテスト
+
+次のコマンドコンパイルとテストを実行してください。
+
+```bash
+mvn test
+```
+
+実行結果、コンソールに`BUILD SUCCESS`が出力されていれば、バックエンドアプリが
+正常に動作することが確認できます。
+
+### DBコンテナを生成するyml作成
+
+:::caution
+すでにymlを作成済の場合、ここはスキップしてください。
+:::
+
+コンテナ作成の元となるymlは、以下を利用して作成してください。
+
+```yaml title="/src/docker/docker-compose.api-mock.yml up"
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - 5432:5432
+```
+
+### DBコンテナの起動
+
+DBコンテナの起動については、起動状態の確認し、起動中でなければ起動してください。
+
+#### 起動状態の確認
+
+DBコンテナを起動する前に次のコマンドを実行し、起動状態を確認します。
+
+```bash
+docker-compose -f docker/docker-compose.dev.yml ps
+```
+
+コンソールに、`docker_postgres_1`の`State`が`Up`（起動中）と出力された場合、DBコンテナは起動中を表します。
+（`docker_postgres_1`が出力されていない場合、起動されていないことを表します）
+
+#### 起動
+
+起動状態の確認結果、起動されていなかった場合、次のコマンドを実行し、起動してください。
+
+```bash
+docker-compose -f docker/docker-compose.dev.yml up -d
+```
+
+実行結果、コンソールに、`docker_postgres_1`の`State`が`Up`（起動中）と出力されていれば起動中になります。
+
+### DBコンテナの停止
+
+次のコマンドを実行し、PostgreSQLを起動しているDockerコンテナを終了します。
+
+```bash
+docker-compose -f docker/docker-compose.dev.yml down
+```
+
+終了したことを確認するため、次のコマンドを実行します。
+
+```bash
+docker-compose -f docker/docker-compose.dev.yml ps
+```
+
+起動中のDockerコンテナとして出力されないことを確認します。
+
+### バックエンドアプリの起動
+
+次のコマンドを実行し、バックエンドアプリを起動します。
+
+```bash
+mvn jetty:run
+```
+
+### バックエンドアプリの停止
+
+バックエンドアプリを起動したコンソールで、`Ctrl + C`を押下してください。
+
+## Web APIで利用する場合
+
+Web APIについて、学習者での事前準備はありません。

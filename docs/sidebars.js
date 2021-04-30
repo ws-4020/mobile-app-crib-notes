@@ -160,6 +160,8 @@ module.exports = {
         'react-native/learn/todo-app/modal',
         'react-native/learn/todo-app/basic-components',
         'react-native/learn/todo-app/logo',
+        'react-native/learn/todo-app/todo-backend/api-request',
+        'react-native/learn/todo-app/todo-backend/async-api-control',
         'react-native/learn/todo-app/exercise',
       ],
     },

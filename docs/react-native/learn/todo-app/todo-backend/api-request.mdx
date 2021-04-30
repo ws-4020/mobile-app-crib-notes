@@ -1,0 +1,208 @@
+---
+title: バックエンドの呼び出し
+---
+
+次はフロントエンドからバックエンドの呼び出しを実装します。
+
+## REST APIクライアントの作成
+
+バックエンドのREST APIにアクセスする為、OpenAPIドキュメントを利用して、[REST APIのクライアントを作成](./create-rest-api)します。
+
+## 疎通確認
+
+実装前に呼びだすバックエンド側との疎通確認を実施します。
+疎通確認前に[動作確認前の準備](./api-pre-test)の内容を確認して、必要な準備を実施してください。
+
+### Mockで利用する場合
+
+ブラウザを起動し、`http:localhost:9080/api/todos`にアクセスします。
+以下のjsonがブラウザへ表示されていれば、モックサーバが正常に起動されていることが確認できます。
+
+```json
+[
+  - {
+        id: 2001,
+        text: "やること１",
+        completed: true
+    },
+  - {
+        id: 2002,
+        text: "やること２",
+        completed: false
+    }
+]
+```
+
+### ローカルで利用する場合
+
+ブラウザを起動し、`http:lostlhost:9080/api/test`にアクセスします。
+以下のjsonがブラウザへ表示されていれば、モックサーバが正常に起動されていることが確認できます。
+
+```json
+{
+    status: "ok"
+}
+```
+
+### Web APIで利用する場合
+
+<!-- TODO:提供方法を整理が終わった後に記載する -->
+
+## バックエンド呼び出しの実装
+
+バックエンド呼び出しを実装していきます。
+事前に作成したRest APIクライアントのバックエンド呼び出し部分はPromiseを利用して非同期処理をしています。（非同期処理は別途説明します）
+その為、バックエンド処理のレスポンスを受けてから後続処理を続行する必要があります。このような状態を実現するためにバックエンド呼び出し部分は以下のように実装します。
+
+```typescript
+await シンボル名.メソッド(param...);
+```
+
+バックエンド呼び出し部分を実装する為、`/src/service/TodoService.tsx`を修正してください。
+
+```diff title="/src/service/TodoService.tsx"
++ import { BackendService } from 'services/BackendService';
+
+export type Todo = {
+  id: number;
+  text: string;
+  completed: boolean;
+};
+
+- const todos: Todo[] = [
+-  {
+-    id: 0,
+-    text: '洗濯物をたたむ',
+-    completed: false,
+-  },
+-  {
+-    id: 1,
+-    text: '食器を洗う',
+-    completed: false,
+-  },
+-  {
+-    id: 2,
+-    text: 'ゴミを出す',
+-    completed: false,
+-  },
+-  {
+-    id: 3,
+-    text: '風呂掃除',
+-    completed: false,
+-  },
+-  {
+-    id: 4,
+-    text: 'パンを買いに行く',
+-    completed: false,
+-  },
+-  {
+-    id: 5,
+-    text: '電球をかえる',
+-    completed: false,
+-  },
+-  {
+-    id: 6,
+-    text: '塾の送り迎え',
+-    completed: false,
+-  },
+-  {
+-    id: 7,
+-    text: 'ご飯を炊く',
+-    completed: false,
+-  },
+-];
+-let id = 7;
+
++ let todos = new Array();
++ let id: number;
+
+
+const getTodos = async () => {
+
++ todos = await BackendSerivce.getTodos();
++ id = Math.max.apply(null,todos.map(function(o){return o.id;}))
+
+
+  // 新しい配列オブジェクトとして返却する
+  return Promise.resolve([...todos]);
+
+
+};
+
+const postTodo = async (text: string) => {
+  id++;
+-  const todo: Todo = {
+-    id,
+-    text,
+-    completed: false,
+-  };
+
++ var todo = await BackendService.postTodo(id,text)
+
+
+-  todos.push(todo);
+
+
+  return Promise.resolve(todo);
+
+
+};
+
+const putTodo = async (id: number, completed: boolean) => {
+-  const target = todos.find((todo) => todo.id === id);
+-  if (!target) {
+-    return Promise.reject(new Error('not found'));
+-  }
+-  target.completed = completed;
+
+
++ var localTodo = await BackendService.putTodo(id,completed)
+
+
+  return Promise.resolve(target);
+
+
+};
+
+export const TodoService = {
+  getTodos,
+  postTodo,
+  putTodo,
+};
+```
+
+## 動作確認
+
+修正できたら動作に問題がないかを確認してください。
+確認結果は、バックエンドアプリの利用状況によって変わります。
+以下、該当する利用状況に記載の想定結果と確認結果が一致することを確認してください。
+
+### Mockでの想定結果
+
+それぞれの実行結果は、以下を想定。
+
+- ToDo一覧の取得
+
+- ToDoの登録
+
+- ToDoステータスの更新
+
+### ローカルでの想定結果
+
+それぞれの実行結果は、以下を想定。
+
+- ToDo一覧の取得
+
+- ToDoの登録
+
+- ToDoステータスの更新
+
+### Web APIでの想定結果
+
+それぞれの実行結果は、以下を想定。
+
+- ToDo一覧の取得
+
+- ToDoの登録
+
+- ToDoステータスの更新
