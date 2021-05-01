@@ -7,8 +7,9 @@ REST APIクライアントの作成は、OpenAPIドキュメントを利用し�
 
 ## OpenAPIドキュメントの作成
 
-OpenAPIドキュメントを作成します。以下のソースコードを使用して、作成してください。
-このドキュメントには、以下の機能をもったAPIが定義されています。
+OpenAPI GeneratorにてREST APIクライアントを生成する為、OpenAPIドキュメントを作成します。
+以下のソースコードを使用して、作成してください。
+このドキュメントには、以下の機能をもったAPIを生成するための定義がされています。
 
 - ToDo一覧の取得
 - ToDoの登録
@@ -186,9 +187,8 @@ components:
 
 ## クライアントコードの作成
 
-REST APIのクライアントコードを、OpenAPIドキュメントから生成します。
-Docker Composeを使用して、コンテナイメージを作成します。
-コンテナ作成の元となるymlは、以下を利用して作成してください。
+OpenAPI定義ファイルからクライアント実装を生成するための、Docker Composeの定義ファイルです。
+以下を利用して作成してください。
 （`<YourAppName>`の部分は、[プロジェクトの作成](../../../../getting-started/create-project)で命名したプロジェクト名へ変更してください）
 
 ```yaml title="/src/docker/docker-compose.api-gen.yml"
@@ -225,15 +225,6 @@ import {
   UsersApi
 } from './generated-rest-client';
 
-const requestLogger: Middleware = {
-  pre: async (context) => {
-    console.log(`>> ${context.init.method} ${context.url}`, context.init);
-  },
-  post: async (context) => {
-    console.log(`<< ${context.response.status} ${context.url}`, context.response);
-  }
-};
-
 const corsHandler: Middleware = {
   pre: async (context) => {
     return {
@@ -248,24 +239,10 @@ const corsHandler: Middleware = {
 };
 
 const configuration = new Configuration({
-  middleware: [corsHandler, requestLogger]
+  middleware: [corsHandler]
 });
 
 const todosApi = new TodosApi(configuration);
-
-const usersApi = new UsersApi(configuration);
-
-const signup = async (userName: string, password: string) => {
-  return usersApi.signup({ inlineObject2 : { userName, password }});
-};
-
-const login = async (userName: string, password: string) => {
-  return usersApi.login({ inlineObject3: { userName, password }});
-};
-
-const logout = async () => {
-  return usersApi.logout();
-};
 
 const getTodos = async () => {
   return todosApi.getTodos();
@@ -280,9 +257,6 @@ const putTodo = async (todoId: number, completed: boolean) => {
 };
 
 export const BackendService = {
-  signup,
-  login,
-  logout,
   getTodos,
   postTodo,
   putTodo
