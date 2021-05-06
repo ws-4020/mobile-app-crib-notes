@@ -43,10 +43,10 @@ jobs:
             fs.writeFileSync('${{github.workspace}}/' + artifactName + '.zip', Buffer.from(download.data));
 
       - name: Extract artifact
-        run: unzip mobile-app-crib-notes.zip
+        run: unzip -d mobile-app-crib-notes mobile-app-crib-notes.zip
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+          publish_dir: ./mobile-app-crib-notes
