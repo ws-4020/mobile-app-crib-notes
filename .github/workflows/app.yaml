@@ -69,15 +69,20 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm clean-install --prefix SantokuApp
 
+      - name: Set up reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
       - name: Lint (ESLint)
         if: always()
         run: |
-          npm run -s lint:es --prefix SantokuApp -- -f eslint-formatter-rdjson  -o eslint-results
+          npm run -s lint:es --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-check -f=eslint -name="ESLint"
 
       - name: Lint (TypeScript)
         if: always()
         run: |
-          npm run -s lint:tsc --prefix SantokuApp > tsc-results
+          npm run -s lint:tsc --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript"
 
       - name: Test
         if: always()

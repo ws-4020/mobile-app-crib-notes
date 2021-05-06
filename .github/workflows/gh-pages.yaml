@@ -38,6 +38,8 @@ jobs:
   lint:
     name: Lints
     runs-on: ubuntu-20.04
+    env:
+      REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -71,39 +73,41 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm clean-install
 
+      - name: Set up reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
       - name: Lint (textlint)
         if: always()
         run: |
-          npm run -s lint:text -- -f checkstyle -o textlint-results
+          npm run -s lint:text -- -f checkstyle | reviewdog -tee -fail-on-error -reporter=github-check -f=checkstyle -name=textlint
 
       - name: Lint (markdownlint)
         if: always()
         run: |
-          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' > markdownlint-results
+          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' | reviewdog -tee -fail-on-error -reporter=github-check -efm="%t:%f:%l:%c %m" -efm="%t:%f:%l %m" -name=markdownlint
 
       - name: Lint (ESLint)
         if: always()
         run: |
-          npm run -s lint:es -- -f eslint-formatter-rdjson  -o eslint-results
+          npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name=ESLint
 
       - name: Lint (TypeScript)
         if: always()
         run: |
-          npm run -s lint:tsc > tsc-results.txt
+          npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name=TypeScript
 
       - name: Lint (stylelint)
         if: always()
-        run: |
-          npm run -s lint:css -- -f json -o stylelint-results
-
-      - name: Archive workflow results
-        uses: actions/upload-artifact@v2
-        if: always()
+        uses: reviewdog/action-stylelint@v1
+        # https://github.com/reviewdog/action-stylelint
         with:
-          name: workflow-results
-          path: |
-            jest-junit
-            *-results
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-check
+          fail_on_error: true
+          # package.jsonでlint:cssに設定しているのと同じ引数を渡す
+          stylelint_input: 'src/**/*.css'
 
   build:
     name: Build

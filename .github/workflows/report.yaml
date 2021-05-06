@@ -4,7 +4,6 @@ on:
   workflow_run:
     workflows:
       - App
-      - GitHub Pages
     types:
       - completed
 
@@ -12,85 +11,7 @@ jobs:
   report:
     name: Report
     runs-on: ubuntu-latest
-    env:
-      REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    if: >
-      ${{ github.event.workflow_run.event == 'pull_request'}}
     steps:
-      - name: Set up reviewdog
-        uses: reviewdog/action-setup@v1
-        with:
-          reviewdog_version: nightly
-
-      - name: Download artifact
-        uses: actions/github-script@v4
-        with:
-          script: |
-            var artifactName = 'workflow-results'
-            var artifacts = await github.actions.listWorkflowRunArtifacts({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               run_id: ${{github.event.workflow_run.id }},
-            });
-            var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == artifactName
-            })[0];
-            if (!matchArtifact) {
-              core.setFailed(`${artifactName} is not found in artifacts`);
-              return;
-            }
-            var download = await github.actions.downloadArtifact({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               artifact_id: matchArtifact.id,
-               archive_format: 'zip',
-            });
-            var fs = require('fs');
-            fs.writeFileSync('${{github.workspace}}/' + artifactName + '.zip', Buffer.from(download.data));
-
-      - name: Unzip artifact
-        run: unzip workflow-results.zip -d workflow-results
-
-      - name: Find workflow results
-        id: artifact
-        uses: actions/github-script@v4
-        with:
-          script: |
-            var unzipPath = 'workflow-results'
-
-            // set outputs
-            var fs = require('fs');
-            const fileNames = fs.readdirSync(unzipPath)
-            for (const fileName of fileNames) {
-              core.setOutput(fileName, unzipPath + '/' + fileName)
-            }
-
-      - name: textlint results
-        if: ${{ always() && steps.artifact.outputs.textlint-results }}
-        run: |
-          reviewdog -tee -reporter=github-check -f=checkstyle -name=textlint < ${{ steps.artifact.outputs.textlint-results }}
-
-      - name: markdownlint results
-        if: ${{ always() && steps.artifact.outputs.markdownlint-results }}
-        run: |
-          reviewdog -tee -reporter=github-check -efm="%t:%f:%l:%c %m" -name=markdownlint < ${{ steps.artifact.outputs.markdownlint-results }}
-
-      - name: ESLint results
-        if: ${{ always() && steps.artifact.outputs.eslint-results }}
-        run: |
-          reviewdog -tee -reporter=github-check -f=rdjson -name=ESLint < ${{ steps.artifact.outputs.eslint-results }}
-
-      - name: TypeScript results
-        if: ${{ always() && steps.artifact.outputs.tsc-results }}
-        run: |
-          reviewdog -tee -reporter=github-check -f=tsc -name=TypeScript < ${{ steps.artifact.outputs.tsc-results }}
-
-      - name: stylelint results
-        if: ${{ always() && steps.artifact.outputs.stylelint-results }}
-        run: |
-          jq -r '.[] | {source: .source, warnings:.warnings[]} | "\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text) [\(.warnings.rule)](https://stylelint.io/user-guide/rules/\(.warnings.rule))"' \
-             < ${{ steps.artifact.outputs.stylelint-results }} | reviewdog -tee -reporter=github-check -efm="%f:%l:%c:%t%*[^:]: %m" -name=stylelint
-
       - name: Jest results
         uses: dorny/test-reporter@v1
         if: ${{ always() && steps.artifact.outputs.jest-junit }}
