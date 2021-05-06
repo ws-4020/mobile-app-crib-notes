@@ -82,7 +82,7 @@ jobs:
       - name: Lint (TypeScript)
         if: always()
         run: |
-          npm run -s lint:tsc --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript (SantokuApp)"
+          npm run -s lint:tsc --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -wd=SantokuApp -name="TypeScript (SantokuApp)"
 
       - name: Test
         if: always()
