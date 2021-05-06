@@ -1,4 +1,4 @@
-name: App
+name: SantokuApp
 
 on:
   push:
@@ -77,12 +77,12 @@ jobs:
       - name: Lint (ESLint)
         if: always()
         run: |
-          npm run -s lint:es --prefix SantokuApp -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name=ESLint
+          npm run -s lint:es --prefix SantokuApp -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name="ESLint (SantokuApp)"
 
       - name: Lint (TypeScript)
         if: always()
         run: |
-          npm run -s lint:tsc --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript"
+          npm run -s lint:tsc --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript (SantokuApp)"
 
       - name: Test
         if: always()
