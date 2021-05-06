@@ -31,7 +31,7 @@
 
 .pageOverviewLinkCard:hover {
   color: var(--ifm-color-content);
-  text-decoration: ;
+  text-decoration: none;
   border-color: var(--ifm-color-primary-lightest);
 }
 

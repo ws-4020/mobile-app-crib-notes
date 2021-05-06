@@ -64,5 +64,3 @@ function Home() {
 }
 
 export default Home;
-
-const e: any;

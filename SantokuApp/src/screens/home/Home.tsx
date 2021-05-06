@@ -29,5 +29,3 @@ const styles = StyleSheet.create({
     color: '#fefefe',
   },
 });
-
-const a: any;

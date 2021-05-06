@@ -3,8 +3,6 @@ import {activateKeepAwake} from 'expo-keep-awake';
 import {RootStackNav} from 'navigation';
 import React from 'react';
 
-const b: any;
-
 export const App = () => {
   // 開発中は画面がスリープしないようにしておきます。
   if (__DEV__) {
