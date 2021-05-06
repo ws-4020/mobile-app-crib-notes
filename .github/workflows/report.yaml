@@ -3,7 +3,7 @@ name: Report
 on:
   workflow_run:
     workflows:
-      - App
+      - SantokuApp
     types:
       - completed
 
