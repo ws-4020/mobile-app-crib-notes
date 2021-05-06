@@ -77,7 +77,7 @@ jobs:
       - name: Lint (ESLint)
         if: always()
         run: |
-          npm run -s lint:es --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-check -f=eslint -name="ESLint"
+          npm run -s lint:es --prefix SantokuApp -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name=ESLint
 
       - name: Lint (TypeScript)
         if: always()
@@ -95,5 +95,4 @@ jobs:
         with:
           name: workflow-results
           path: |
-            SantokuApp/jest-junit
-            SantokuApp/*-results
+            SantokuApp/jest-junit.xml

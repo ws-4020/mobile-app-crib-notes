@@ -118,8 +118,3 @@ public
 junk.md
 tmp/
 _*[Ss]cratch.*
-
-
-### Lint results ###
-tsc-results
-*lint-results

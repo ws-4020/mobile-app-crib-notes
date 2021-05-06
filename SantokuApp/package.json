@@ -61,7 +61,7 @@
     "classNameTemplate": "{classname}",
     "titleTemplate": "{title}",
     "ancestorSeparator": " › ",
-    "outputName": "jest-junit"
+    "outputName": "jest-junit.xml"
   },
   "private": true
 }
