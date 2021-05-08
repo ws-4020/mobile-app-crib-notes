@@ -2,14 +2,14 @@
 title: REST APIクライアント作成
 ---
 
-REST APIクライアントの作成は、OpenAPIドキュメントを利用して作成します。
+REST APIクライアントの作成は、OpenAPIドキュメントを利用してOpenAPI Generatorにて作成します。
 ここでは、REST APIクライアントの作成方法を説明します。
 
 ## OpenAPIドキュメントの作成
 
 OpenAPI GeneratorにてREST APIクライアントを生成する為、OpenAPIドキュメントを作成します。
 以下のソースコードを使用して、作成してください。
-このドキュメントには、以下の機能をもったAPIを生成するための定義がされています。
+このOpenAPIドキュメントには、以下の機能をもったAPIを生成するための定義がされています。
 
 - ToDo一覧の取得
 - ToDoの登録
@@ -17,6 +17,7 @@ OpenAPI GeneratorにてREST APIクライアントを生成する為、OpenAPIド
 - ToDoの削除
 
 OpenAPIドキュメントについて、詳しく知りたい方は、[公式](https://swagger.io/specification/)を参照してください。
+（`<YourIPAddress>`の部分は、学習を進めている端末のIPアドレスを確認して変更してください）
 
 ```yaml title="/src/rest-api-specification/openapi.yaml"
 openapi: 3.0.3
@@ -28,7 +29,7 @@ tags:
   - name: todos
     description: ToDo管理
 servers:
-  - url: 'http://localhost:9080'
+  - url: 'http://<YourIPAddress>:9080'
 paths:
   /api/todos:
     get:
@@ -198,14 +199,15 @@ services:
   openapi-gen:
     image: openapitools/openapi-generator-cli
     volumes:
-      - ..:/<YourAppName>
+      - ../..:/<YourAppName>
     command: generate -g typescript-fetch -i /<YourAppName>/src/rest-api-specification/openapi.yaml -o /<YourAppName>/src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
 ```
 
-次のコマンドをコマンドプロンプトまたは、ターミナルにて実行してください。
+コマンドプロンプトまたは、ターミナルにて、ルートディレクトリへ移動してください。
+その後、次のコマンドを実行してください。
 
 ```bash
-docker-compose -f docker/docker-compose.api-gen.yml up
+docker-compose -f src/docker/docker-compose.api-gen.yml up
 ```
 
 実行後、`src`の下に`backend`ディレクトリが生成され、その配下に`generated-rest-client`ディレクトリが生成されます。
@@ -217,13 +219,12 @@ OpenAPIドキュメントからREST APIのクライアントコードを生成�
 そこで、共通的な設定がされたクライアントコードを使用するために、生成したクライアントコードをラッピングした`BackendSerivce`を作成します。
 コンポーネントからREST APIにアクセスする際には、生成したクライアントコードは直接使用せずに、この`BackendSerivce`を使用するようにします。
 
-```typescript jsx title="/src/docker/docker-compose.api-gen.yml"
+```typescript jsx title="/src/services/BackendSerivce.tsx"
 import {
   Configuration,
   TodosApi,
-  Middleware,
-  UsersApi
-} from './generated-rest-client';
+  Middleware
+} from '../backend/generated-rest-client';
 
 const corsHandler: Middleware = {
   pre: async (context) => {

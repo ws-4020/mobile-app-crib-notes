@@ -3,13 +3,12 @@ title: バックエンドの呼び出し
 ---
 
 次はフロントエンドからバックエンドの呼び出しを実装します。
-この学習コンテンツのバックエンドはRESTfulウェブサービス構成となります。
-まずはREST APIアクセスを行うために必要なクライアントから作成していきます。
+バックエンドはRESTfulウェブサービス構成となります。
 
 ## REST APIクライアントの作成
 
-バックエンドのREST APIにアクセスする為、OpenAPIドキュメントを定義して、OpenAPI Generatorを利用して生成します。
-[REST APIのクライアントを作成](./create-rest-api)に沿って作成します。
+まずはREST APIアクセスを行うために必要なクライアントから作成していきます。
+[REST APIのクライアントを作成](./create-rest-api)にしたがって進めてください。
 
 ## 疎通確認
 
@@ -18,8 +17,9 @@ title: バックエンドの呼び出し
 
 ### Mockで利用する場合
 
-ブラウザを起動し、`http:localhost:9080/api/todos`にアクセスします。
+ブラウザを起動し、`http:<YourIPAddress>:9080/api/todos`にアクセスします。
 以下のjsonがブラウザへ表示されていれば、モックサーバが正常に起動されていることが確認できます。
+（`<YourIPAddress>`の部分は、学習を進めている端末のIPアドレスを確認して変更してください）
 
 ```json
 [
@@ -38,8 +38,9 @@ title: バックエンドの呼び出し
 
 ### ローカルで利用する場合
 
-ブラウザを起動し、`http:lostlhost:9080/api/test`にアクセスします。
+ブラウザを起動し、`http:<YourIPAddress>:9080/api/test`にアクセスします。
 以下のjsonがブラウザへ表示されていれば、モックサーバが正常に起動されていることが確認できます。
+（`<YourIPAddress>`の部分は、学習を進めている端末のIPアドレスを確認して変更してください）
 
 ```json
 {
@@ -64,7 +65,7 @@ await シンボル名.メソッド(param...);
 バックエンド呼び出し部分を実装する為、`/src/service/TodoService.tsx`を修正してください。
 
 ```diff title="/src/service/TodoService.tsx"
-+ import { BackendService } from 'services/BackendService';
++ import { BackendService } from './BackendService';
 
 export type Todo = {
   id: number;
@@ -122,7 +123,7 @@ export type Todo = {
 
 const getTodos = async () => {
 
-+ todos = await BackendSerivce.getTodos();
++ todos = await BackendService.getTodos();
 + id = Math.max.apply(null,todos.map(function(o){return o.id;}))
 
 
@@ -140,10 +141,10 @@ const postTodo = async (text: string) => {
 -    completed: false,
 -  };
 
-+ var todo = await BackendService.postTodo(id,text)
++ const todo = await BackendService.postTodo(text)
 
 
--  todos.push(todo);
+  todos.push(todo);
 
 
   return Promise.resolve(todo);
@@ -152,14 +153,14 @@ const postTodo = async (text: string) => {
 };
 
 const putTodo = async (id: number, completed: boolean) => {
--  const target = todos.find((todo) => todo.id === id);
--  if (!target) {
--    return Promise.reject(new Error('not found'));
--  }
--  target.completed = completed;
+  const target = todos.find((todo) => todo.id === id);
+  if (!target) {
+    return Promise.reject(new Error('not found'));
+  }
+  target.completed = completed;
 
 
-+ var localTodo = await BackendService.putTodo(id,completed)
++ await BackendService.putTodo(id,completed)
 
 
   return Promise.resolve(target);
@@ -178,34 +179,40 @@ export const TodoService = {
 
 修正できたら動作に問題がないかを確認してください。
 確認結果は、バックエンドアプリの利用状況によって変わります。
-以下、該当する利用状況に記載の想定結果と確認結果が一致することを確認してください。
+以下、該当する利用状況に応じて確認してください。
 
-### Mockでの想定結果
+### Mockでの確認
 
-それぞれの実行結果は、以下を想定。
-
-- ToDo一覧の取得
-
-- ToDoの登録
-
-- ToDoステータスの更新
-
-### ローカルでの想定結果
-
-それぞれの実行結果は、以下を想定。
+ToDoアプリを起動して、ログイン後に以下それぞれの方法で確認してください。
 
 - ToDo一覧の取得
+`全て`タブに`やること1`と`やること2`が表示されていれば、
+無事に実行出来ています。
 
 - ToDoの登録
+`＋`を押下して、タスクを登録してください。OpenAPIドキュメントに設定した値が常に返却されるようになっています。
+実際に入力した値が登録されるわけではありません。
+ここでの確認は登録をし、アプリ内とコンソールにエラーメッセージが表示されなければ、
+無事に実行出来ています。
 
 - ToDoステータスの更新
+`全て`タブ表示されている`やること2`のチェックボックスを押下し、ステータスが更新されていることが確認出来れば
+無事に実行出来ています。
 
-### Web APIでの想定結果
+### ローカルまたは、Web APIでの確認
 
-それぞれの実行結果は、以下を想定。
+ToDoアプリを起動して、ログイン後に以下それぞれの方法で確認してください。
 
 - ToDo一覧の取得
+`全て`タブに`やること1`と`やること2`が表示されていれば、
+無事に実行出来ています。
 
 - ToDoの登録
+`＋`を押下して、タスクを登録してください。登録したタスクが表示されていることを確認できれば
+無事に実行出来ています。
+また、アプリ再起動後、登録したタスクが再度表示されていれば問題ありません。
+DBを停止することで、登録された情報は初期化されます。
 
 - ToDoステータスの更新
+`全て`タブ表示されている`やること2`のチェックボックスを押下し、ステータスが更新されていることが確認出来れば
+無事に実行出来ています。
