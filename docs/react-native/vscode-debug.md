@@ -1,7 +1,5 @@
 ---
 title: Visual Studio Codeの設定
-sidebar_label: Visual Studio Codeの設定
-hide_table_of_contents: true
 ---
 
 ここではVisual Studio Code (以下VS Code) での開発に際して有用なプラグインをご紹介します。
