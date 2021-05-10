@@ -9,7 +9,9 @@ import TabItem from '@theme/TabItem';
 
 Androidの[ビルドバリアント](https://developer.android.com/studio/build/build-variants)（[ビルドタイプとプロダクトフレーバー](https://developer.android.com/studio/build#build-config)）の考え方を参考にして、React Nativeアプリケーションのビルド設定をしています。
 
-また、ビルドバリアントごとに異なるアプリケーションとしてインストールできるように、アプリケーションID（Android）とBundle Identifier（iOS）を次のルールで設定しています。
+ビルドバリアントはAndroidではGradle、iOSではXcodeのConfigurationで設定し、プロダクトフレーバーは[react-native-config](https://github.com/luggit/react-native-config)で設定しています。
+
+ビルドバリアントごとに異なるアプリケーションとしてインストールできるように、アプリケーションID（Android）とBundle Identifier（iOS）を次のルールで設定しています。
 
 ```console title="アプリケーションID（Android）とBundle Identifier（iOS）のルール"
 jp.fintan.mobile.SantokuApp<flavorSuffix><typeSuffix>
