@@ -19,7 +19,7 @@ OpenAPI GeneratorにてREST APIクライアントを生成する為、OpenAPIド
 OpenAPIドキュメントについて、詳しく知りたい方は、[公式](https://swagger.io/specification/)を参照してください。
 （`<YourIPAddress>`の部分は、学習を進めている端末のIPアドレスを確認して変更してください）
 
-```yaml title="/src/rest-api-specification/openapi.yaml"
+```yaml title="/rest-api-specification/openapi.yaml"
 openapi: 3.0.3
 info:
   title: ToDo REST API
@@ -192,22 +192,22 @@ OpenAPI定義ファイルからクライアント実装を生成するための�
 以下を利用して作成してください。
 （`<YourAppName>`の部分は、[プロジェクトの作成](../../getting-started/create-project.md)で命名したプロジェクト名へ変更してください）
 
-```yaml title="/src/docker/docker-compose.api-gen.yml"
+```yaml title="/docker/docker-compose.api-gen.yml"
 version: '3.7'
 
 services:
   openapi-gen:
     image: openapitools/openapi-generator-cli
     volumes:
-      - ../..:/<YourAppName>
-    command: generate -g typescript-fetch -i /<YourAppName>/src/rest-api-specification/openapi.yaml -o /<YourAppName>/src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
+      - ..:/<YourAppName>
+    command: generate -g typescript-fetch -i /<YourAppName>/rest-api-specification/openapi.yaml -o /<YourAppName>/src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
 ```
 
 コマンドプロンプトまたは、ターミナルにて、ルートディレクトリへ移動してください。
 その後、次のコマンドを実行してください。
 
 ```bash
-docker-compose -f src/docker/docker-compose.api-gen.yml up
+docker-compose -f docker/docker-compose.api-gen.yml up
 ```
 
 実行後、`src`の下に`backend`ディレクトリが生成され、その配下に`generated-rest-client`ディレクトリが生成されます。
