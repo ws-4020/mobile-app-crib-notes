@@ -30,7 +30,6 @@ Visual Studioマーケットプレイスの[React Native Toolsページ](https:/
 
 ```json title="/.vscode/launch.json"
 {
-  "version": "0.2.0",
   "configurations": [
     {
       "name": "Attach to packager",
