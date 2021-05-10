@@ -11,7 +11,7 @@ VS Codeプラグインである`React Native Tools`を利用することで開�
 VS Codeで、React NativeのTypeScriptコードをデバッグできるように、[React Native Tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)をセットアップします。
 
 :::info
-このページではExpoを利用した場合のデバッグを紹介します。
+このページでは主にExpoを利用した場合のデバッグを紹介します。
 Android、およびiOSのシミュレータを利用した場合のデバッグについて詳細は[公式ドキュメント](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)を参照してください。
 :::
 
@@ -35,15 +35,44 @@ Visual Studioマーケットプレイスの[React Native Toolsページ](https:/
       "cwd": "${workspaceFolder}",
       "type": "reactnative",
       "request": "attach",
-      "port": "19001"
+      "port": "19000"
     }
   ]
 }
 ```
 
+:::info
+
+#### （補足）アンドロイドシミュレータで指定したポートにアタッチする方法
+
+1. `npm run android -- --port=任意のポート`
+2. `launch.json`の`"port"`を`1.`で指定したポートに修正
+:::
+
 ### デバッグ
 
-通常の起動と同様に`npx expo start`するとデバッガが立ち上がる。
+#### 実機の場合
+
+1. 任意の起動方法にてアプリ起動した後に端末をシェイクし、開発者メニューを表示。
+2. `Debug Remote JS`を選択した後、ブラウザで`debugger-ui`が立ち上がるのでそのタブを閉じる。
+3. VS Codeの「実行とデバッグ」から`Attach to packager`をクリックして実行。
+4. 開発者メニューからアプリをリロード。
+
+#### シミュレータの場合
+
+##### iOSシミュレータ
+
+1. 任意の起動方法にてアプリ起動した後に`Ctrl+cmd+z`を押下し、開発者メニューを表示。
+2. `Debug Remote JS`を選択した後、ブラウザで`debugger-ui`が立ち上がるのでそのタブを閉じる。
+3. VS Codeの「実行とデバッグ」から`Attach to packager`をクリックして実行。
+4. 開発者メニューからアプリをリロード。
+
+##### Androidシミュレータ
+
+1. 任意の起動方法にてアプリ起動した後にWindows環境の場合`Ctrl+m`、 Mac環境の場合`cmd+m`を押下し、開発者メニューを表示。
+2. `Debug Remote JS`を選択した後、ブラウザで`debugger-ui`が立ち上がるのでそのタブを閉じる。
+3. VS Codeの「実行とデバッグ」から`Attach to packager`をクリックして実行。
+4. 開発者メニューからアプリをリロード。
 
 ## Lint、フォーマッタ
 
