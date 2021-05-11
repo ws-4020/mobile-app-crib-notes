@@ -13,18 +13,16 @@ Flipperはバージョン0.62以降のReact Nativeに対応していますが、
 
 ## インストール
 
-[公式サイト](https://fbflipper.com/)からダウンロードし、zipファイルを解凍してください。
+インストール手順は[Desktop App | Flipper](https://fbflipper.com/docs/getting-started/index)を参照してください。
 最新以外のバージョンは[Github](https://github.com/facebook/flipper/releases)からダウンロード可能です。
 
-OpenSSLとWatchmanも合わせてインストールする必要があります。
-
-インストール手順は[Desktop App | Flipper](https://fbflipper.com/docs/getting-started/index)を参照してください。
 全てインストールしたあと、Flipperを起動してSetup Doctorがグリーンになっていることを確認してください。
+
+OpenSSLとWatchmanも合わせてインストールする必要があります。
 
 ## アプリの検証
 
 セットアップが完了したらReact NativeアプリとFlipperを起動して検証してみましょう。
-Flipperを使う際はアプリの開発者メニューからデバッグを有効化してください。
 
 :::caution
 Flipperはデフォルトで`8088`,`8089`ポートを使用するため、Metro Bundlerのポート番号を変更している場合被らないようにしてください。
