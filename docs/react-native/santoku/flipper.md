@@ -24,13 +24,6 @@ Watchmanは公式サイトの[インストール手順](https://facebook.github.
 
 全てインストールしたあと、Flipperを起動してSetup Doctorがグリーンになっていることを確認してください。
 
-## アプリのセットアップ
-
-公式サイトの[セットアップ手順](https://fbflipper.com/docs/getting-started/react-native/)に従いReact NativeアプリにFlipperの設定を追加してください。
-バージョンは使用するFlipperのバージョンに合わせて読み替えてください。
-
-サンプルアプリではあらかじめセットアップされています。
-
 ## デバッグ
 
 セットアップが完了したらReact NativeアプリとFlipperを起動してデバッグしてみましょう。
