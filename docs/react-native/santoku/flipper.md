@@ -19,9 +19,7 @@ Flipperはバージョン0.62以降のReact Nativeに対応していますが、
 
 OpenSSLとWatchmanも合わせてインストールする必要があります。
 
-OpenSSLは[こちら](https://slproweb.com/products/Win32OpenSSL.html)からLight版をインストールしてください。
-Watchmanは公式サイトの[インストール手順](https://facebook.github.io/watchman/docs/install.html)から該当するOSの手順に沿ってインストールしてください。
-
+インストール手順は[Desktop App | Flipper](https://fbflipper.com/docs/getting-started/index)を参照してください。
 全てインストールしたあと、Flipperを起動してSetup Doctorがグリーンになっていることを確認してください。
 
 ## デバッグ
