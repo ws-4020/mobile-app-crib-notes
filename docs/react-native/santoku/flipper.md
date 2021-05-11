@@ -39,7 +39,7 @@ Watchmanは公式サイトの[インストール手順](https://facebook.github.
 :::caution
 Flipperはデフォルトで`8088`,`8089`ポートを使用するため、Metro Bundlerのポート番号を変更している場合被らないようにしてください。
 また、Metro Bundlerのポート番号を変更している場合は、起動時にポート番号を指定する必要があります。
-Flipperのディレクトリで以下のコマンドでを実行してください。
+Flipperのインストールディレクトリで以下のコマンドを実行し、Flipperを起動してください。
 
 ```bash
 METRO_SERVER_PORT=<Metro Bundlerのポート番号> ./flipper
