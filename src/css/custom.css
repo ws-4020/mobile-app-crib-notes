@@ -21,7 +21,7 @@
   /* --ifm-color-primary-lighter: rgb(102, 212, 189); */
 
   /* --ifm-color-primary-lightest: rgb(146, 224, 208); */
-  --ifm-code-font-size: 95%;
+  --ifm-code-font-size: 95%
   --ifm-container-width: 1250px;
   --ifm-alert-color: rgba(0, 0, 0, 0.65);
   --font-size-small: 90%;
@@ -29,7 +29,7 @@
   --alert-warning-background-cloor: #fff6e4;
   --alert-info-background-cloor: #f0fbff;
   --alert-success-background-cloor: #f0fff0;
-  --alert-secondary-background-cloor: #f7f7f8;
+  --alert-secondary-background-cloor: #f7f7f8
 }
 
 .docusaurus-highlight-code-line {

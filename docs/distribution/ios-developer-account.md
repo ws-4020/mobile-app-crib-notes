@@ -17,8 +17,8 @@ ADP、ADEPは[Apple Developer Webサイト(要ログイン)](https://developer.a
 個人アカウントの証明書が作成できている場合は[開発デバイスの登録](#開発デバイスの登録)から進めてください。
 
   1. 個人アカウントのApple IDの登録
-     - Xcodeにて個人のApple IDを登録します
-  1. 個人アカウントの証明書の作成
+     - Xcodeにて個人のApple IDを登録します。
+  1. 個人アカウントの証明書の作成。
      - Personal Team(個人のApple ID)に紐づいた証明書を作成します
      - ここで誤ってADP・ADEPのTeamを選択しないことが重要です
   1. 開発用デバイス登録
