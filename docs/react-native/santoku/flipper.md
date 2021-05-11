@@ -8,7 +8,7 @@ title: Flipper
 また、FlipperはReact Nativeを標準でサポートしているため、セットアップ後すぐにReact Nativeアプリのデバッグを開始できます。
 
 :::note
-Flipperはバージョン0.62以降のReact Nativeに対応していますが、Expoでは使用できないため注意してください。
+Flipperはバージョン0.62以降のReact Nativeに対応していますが、Expo Goでアプリを起動した場合は使用できません。
 :::
 
 ## インストール
