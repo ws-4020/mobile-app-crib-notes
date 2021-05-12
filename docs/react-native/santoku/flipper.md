@@ -20,9 +20,9 @@ Flipperはバージョン0.62以降のReact Nativeに対応していますが、
 
 OpenSSLとWatchmanも合わせてインストールする必要があります。
 
-## アプリの検証
+## Flipperを利用する
 
-セットアップが完了したらReact NativeアプリとFlipperを起動して検証してみましょう。
+セットアップが完了したらReact NativeアプリとFlipperを起動してみましょう。
 
 :::caution
 Flipperはデフォルトで`8088`,`8089`ポートを使用するため、Metro Bundlerのポート番号を変更している場合被らないようにしてください。
