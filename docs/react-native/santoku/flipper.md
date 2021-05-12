@@ -14,7 +14,7 @@ Flipperはバージョン0.62以降のReact Nativeに対応していますが、
 ## インストール
 
 インストール手順は[Desktop App | Flipper](https://fbflipper.com/docs/getting-started/index)を参照してください。
-最新以外のバージョンは[Github](https://github.com/facebook/flipper/releases)からダウンロード可能です。
+最新以外のバージョンは[GitHub](https://github.com/facebook/flipper/releases)からダウンロード可能です。
 
 全てインストールしたあと、Flipperを起動してSetup Doctorがグリーンになっていることを確認してください。
 
