@@ -23,9 +23,9 @@ Visual Studioマーケットプレイスの[React Native Toolsページ](https:/
 
 または、VS Codeの「拡張機能」で`React Native Tools`検索してインストール。
 
-### デバッグの設定としてexpoのポートにアタッチする
+### 起動構成を追加する
 
-プロジェクトルート配下の`/.vscode/launch.json`を変更する（無い場合は新規に作成する）。
+プロジェクトルート配下の`/.vscode/launch.json`に以下を追加してください。ファイルが無い場合は新規に作成してください。
 
 ```json title="/.vscode/launch.json"
 {
