@@ -10,10 +10,6 @@ VS Codeプラグインである`React Native Tools`を利用することで開�
 
 VS Codeで、React NativeのTypeScriptコードをデバッグできるように、[React Native Tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)をセットアップします。
 
-:::info
-このページでは主にExpoを利用した場合のデバッグを紹介します。
-Android、およびiOSのシミュレータを利用した場合のデバッグについて詳細は[公式ドキュメント](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)を参照してください。
-:::
 
 ### React Native Toolsのインストール
 
