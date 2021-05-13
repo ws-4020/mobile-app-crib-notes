@@ -63,6 +63,8 @@ portにはMetro Bundlerのポート番号を指定してください。デフォ
 
 ## Lint、フォーマッタ
 
+このプロジェクトでは、LintツールとしてESLint、フォーマッタとしてEditorConfigとPrettierの設定をしています。 次にあげるESLintとPrettier, EditorConfigのプラグインをインストールして、React Nativeのプロジェクトを開くと、ESLintとPrettierのチェックが有効になります。 チェックに違反しているコードは黄色か赤の波線が表示されます。
+
 - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
