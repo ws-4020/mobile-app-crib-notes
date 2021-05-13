@@ -147,20 +147,26 @@ module.exports = {
         'react-native/learn/todo-app/app-spec',
         'react-native/learn/todo-app/app-project-desc',
         'react-native/learn/todo-app/welcome',
+        'react-native/learn/todo-app/stack',
+        'react-native/learn/todo-app/auth',
+        'react-native/learn/todo-app/tab',
+        'react-native/learn/todo-app/modal',
         'react-native/learn/todo-app/login',
         'react-native/learn/todo-app/keyboard-avoiding-view',
-        'react-native/learn/todo-app/auth',
         'react-native/learn/todo-app/alert',
-        'react-native/learn/todo-app/split-navigation',
-        'react-native/learn/todo-app/navigation-hook',
-        'react-native/learn/todo-app/tab',
         'react-native/learn/todo-app/todo-board',
         'react-native/learn/todo-app/todo-form',
         'react-native/learn/todo-app/use-focus-effect',
-        'react-native/learn/todo-app/modal',
         'react-native/learn/todo-app/basic-components',
         'react-native/learn/todo-app/logo',
         'react-native/learn/todo-app/exercise',
+      ],
+    },
+    {
+      type: 'category',
+      label: '応用編',
+      items: [
+        'react-native/learn/advance/react-navigation-param',
       ],
     },
   ],
@@ -181,12 +187,36 @@ module.exports = {
             id: 'react-native/santoku',
           },
           {
-          type: 'category',
-          label: 'IDE',
-          items: [
-            'react-native/vscode-debug',
-          ],
-        },
+            type: 'category',
+            label: 'IDE',
+            items: ['react-native/settings-vscode'],
+          },
+        {
+            type: 'category',
+            label: 'Development',
+            items: [
+              {
+                type: 'doc',
+                id: 'react-native/santoku/development',
+              },
+              {
+                type: 'category',
+                label: 'ビルド設定',
+                items: [
+                  'react-native/santoku/development/build-variants',
+                  'react-native/santoku/development/build-type-configurations',
+                  'react-native/santoku/development/product-flavor-configurations',
+                ],
+              },
+            ],
+          },
+          {
+            type: 'category',
+            label: 'Tools',
+            items: [
+              'react-native/santoku/flipper',
+            ]
+          },
         ],
       }
     : {}),

@@ -57,8 +57,8 @@ portにはMetro Bundlerのポート番号を指定してください。デフォ
 開発者メニューの表示方法は端末によって異なります。
 
 - 実機：端末をシェイクする
-- iPhoneシミュレータ：Windowsの場合`Ctrl+Z`、 Macの場合`cmd+Z`
-- Androidエミュレータ：Windowsの場合`Ctrl+M`、 Macの場合`cmd+M`
+- iPhoneシミュレータ：Windowsの場合`Ctrl+Z`、 Macの場合`Cmd+Z`
+- Androidエミュレータ：Windowsの場合`Ctrl+M`、 Macの場合`Cmd+M`
 :::
 
 ## Lint、フォーマッタ
