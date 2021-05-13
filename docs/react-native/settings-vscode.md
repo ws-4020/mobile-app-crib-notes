@@ -10,7 +10,6 @@ VS Codeプラグインである`React Native Tools`を利用することで開�
 
 VS Codeで、React NativeのTypeScriptコードをデバッグできるように、[React Native Tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)をセットアップします。
 
-
 ### React Native Toolsのインストール
 
 VS CodeのReact Nativeの拡張ツールである、`React Native Tools`プラグインをインストールします。
@@ -63,7 +62,11 @@ portにはMetro Bundlerのポート番号を指定してください。デフォ
 
 ## Lint、フォーマッタ
 
-このプロジェクトでは、LintツールとしてESLint、フォーマッタとしてEditorConfigとPrettierの設定をしています。 次にあげるESLintとPrettier, EditorConfigのプラグインをインストールして、React Nativeのプロジェクトを開くと、ESLintとPrettierのチェックが有効になります。 チェックに違反しているコードは黄色か赤の波線が表示されます。
+このプロジェクトでは、LintツールとしてESLint、フォーマッタとしてEditorConfigとPrettierの設定をしています。
+
+次にあげる3つのプラグインをインストールして、React Nativeのプロジェクトを開くと、
+ESLintとPrettierのチェックが有効になります。
+チェックに違反しているコードは黄色か赤の波線が表示されます。
 
 - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
