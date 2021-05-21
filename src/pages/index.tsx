@@ -30,10 +30,10 @@ const reactNativeOverview = [
     summary: <>学習用コンテンツ</>,
   },
   {
-    title: 'Troubleshooting',
-    to: 'react-native/troubleshooting',
+    title: 'Common Trap',
+    to: 'react-native/common-trap',
     imageUrl: 'img/undraw_docusaurus_react.svg',
-    summary: <>トラブルシュート</>,
+    summary: <>ハマりがちな罠</>,
   },
 ];
 
