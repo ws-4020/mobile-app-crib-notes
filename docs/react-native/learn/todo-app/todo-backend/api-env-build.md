@@ -13,6 +13,8 @@ title: バックエンド連携の準備
   - モック
   - ローカル
   - Web API
+- その他
+  - configへバックエンドアプリ接続先URLの編集（Mockの場合、ポートは要検証：9080または、4000）
 
 疎通確認では、[localhost:9080/api/todos(Todo取得API)](http://localhost:9080/api/todos)を実行して確認する。
 なので、想定を入れて実行結果を確認する。
