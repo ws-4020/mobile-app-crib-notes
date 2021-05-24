@@ -171,12 +171,12 @@ module.exports = {
     },
   ],
   trap: {
-    About: ['react-native/common-trap'],
+    About: ['react-native/pitfall'],
     アプリを実行できない: [
-      'react-native/common-trap/unable-to-load-script',
-      'react-native/common-trap/debug-keystore-not-found',
-      'react-native/common-trap/react-native-cli-uninstall',
-      'react-native/common-trap/cant-build-in-xcode',
+      'react-native/pitfall/unable-to-load-script',
+      'react-native/pitfall/debug-keystore-not-found',
+      'react-native/pitfall/react-native-cli-uninstall',
+      'react-native/pitfall/cant-build-in-xcode',
     ],
   },
   ...(process.env.NODE_ENV === 'development'

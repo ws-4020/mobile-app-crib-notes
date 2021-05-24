@@ -31,9 +31,9 @@ const reactNativeOverview = [
   },
   {
     title: 'Common Trap',
-    to: 'react-native/common-trap',
+    to: 'react-native/pitfall',
     imageUrl: 'img/undraw_docusaurus_react.svg',
-    summary: <>ハマりがちな罠</>,
+    summary: <>落とし穴</>,
   },
 ];
 
