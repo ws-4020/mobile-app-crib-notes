@@ -170,13 +170,13 @@ module.exports = {
       ],
     },
   ],
-  pitfall: {
-    About: ['react-native/common-pitfall'],
+  pitfalls: {
+    About: ['react-native/common-pitfalls'],
     アプリを実行できない: [
-      'react-native/common-pitfall/unable-to-load-script',
-      'react-native/common-pitfall/debug-keystore-not-found',
-      'react-native/common-pitfall/react-native-cli-uninstall',
-      'react-native/common-pitfall/cant-build-in-xcode',
+      'react-native/common-pitfalls/unable-to-load-script',
+      'react-native/common-pitfalls/debug-keystore-not-found',
+      'react-native/common-pitfalls/react-native-cli-uninstall',
+      'react-native/common-pitfalls/cant-build-in-xcode',
     ],
   },
   ...(process.env.NODE_ENV === 'development'
