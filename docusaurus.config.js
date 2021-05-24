@@ -90,8 +90,8 @@ module.exports = {
               ? [{label: 'Example App', to: 'react-native/santoku', position: 'left'}]
               : []),
             {
-              label: '落とし穴',
-              to: 'react-native/pitfall',
+              label: 'ハマりがちな落とし穴',
+              to: 'react-native/common-pitfall',
               position: 'left',
             },
           ],
@@ -125,8 +125,8 @@ module.exports = {
               to: 'react-native/learn',
             },
             {
-              label: '落とし穴',
-              to: 'react-native/pitfall',
+              label: 'ハマりがちな落とし穴',
+              to: 'react-native/common-pitfall',
             },
             ...(process.env.NODE_ENV === 'development'
               ? [{label: 'Example App', to: 'react-native/santoku', position: 'left'}]
