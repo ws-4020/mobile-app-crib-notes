@@ -11,9 +11,9 @@ ADEPのIn-Houseには以下のような制限事項があります。
 
 ### 配布範囲は社内のみ
 
-<!-- textlint-disable ja-technical-writing/sentence-length -->
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses -->
 [Apple Developer Enterprise Program](https://developer.apple.com/jp/programs/enterprise/)には「社内用Appのダウンロードを従業員にのみ限定するためのシステム、およびメンバーシップの資格情報やアセットを保護するためのシステムを構築していること」と記載があります。そのため、用意したHTTPSサーバに認証などを設けて、社内の人のみがアクセスできるように制限する必要があります。
-<!-- textlint-enable ja-technical-writing/sentence-length -->
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses -->
 
 ## 配信の準備
 
