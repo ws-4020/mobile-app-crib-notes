@@ -168,10 +168,10 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'API呼び出しの実装',
+          label: 'REST APIとの接続',
           items: [
-            'react-native/learn/todo-app/networking/api-backend-spec',
-            'react-native/learn/todo-app/networking/api-env-build',
+            'react-native/learn/todo-app/networking/setting-up-local-server',
+            'react-native/learn/todo-app/networking/generate-api-client',
             'react-native/learn/todo-app/networking/api-request',
             'react-native/learn/todo-app/networking/async-api-control',
             'react-native/learn/todo-app/networking/api-err-control',
