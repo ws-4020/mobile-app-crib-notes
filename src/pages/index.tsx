@@ -30,7 +30,7 @@ const reactNativeOverview = [
     summary: <>学習用コンテンツ</>,
   },
   {
-    title: 'CommonPitfalls',
+    title: 'Common Pitfalls',
     to: 'react-native/common-pitfalls',
     imageUrl: 'img/undraw_docusaurus_react.svg',
     summary: <>ハマりがちな落とし穴</>,
