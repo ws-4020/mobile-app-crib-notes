@@ -146,33 +146,43 @@ module.exports = {
         'react-native/learn/todo-app',
         'react-native/learn/todo-app/app-spec',
         'react-native/learn/todo-app/app-project-desc',
-        'react-native/learn/todo-app/welcome',
-        'react-native/learn/todo-app/stack',
-        'react-native/learn/todo-app/auth',
-        'react-native/learn/todo-app/tab',
-        'react-native/learn/todo-app/modal',
-        'react-native/learn/todo-app/login',
-        'react-native/learn/todo-app/keyboard-avoiding-view',
-        'react-native/learn/todo-app/alert',
-        'react-native/learn/todo-app/todo-board',
-        'react-native/learn/todo-app/todo-form',
-        'react-native/learn/todo-app/use-focus-effect',
-        'react-native/learn/todo-app/basic-components',
-        'react-native/learn/todo-app/logo',
-        'react-native/learn/todo-app/todo-backend/api-backend-spec',
-        'react-native/learn/todo-app/todo-backend/api-env-build',
-        'react-native/learn/todo-app/todo-backend/api-request',
-        'react-native/learn/todo-app/todo-backend/async-api-control',
-        'react-native/learn/todo-app/todo-backend/api-err-control',
-        'react-native/learn/todo-app/exercise',
+        {
+          type: 'category',
+          label: '画面の実装',
+          items: [
+            'react-native/learn/todo-app/screens/welcome',
+            'react-native/learn/todo-app/screens/stack',
+            'react-native/learn/todo-app/screens/auth',
+            'react-native/learn/todo-app/screens/tab',
+            'react-native/learn/todo-app/screens/modal',
+            'react-native/learn/todo-app/screens/login',
+            'react-native/learn/todo-app/screens/keyboard-avoiding-view',
+            'react-native/learn/todo-app/screens/alert',
+            'react-native/learn/todo-app/screens/todo-board',
+            'react-native/learn/todo-app/screens/todo-form',
+            'react-native/learn/todo-app/screens/use-focus-effect',
+            'react-native/learn/todo-app/screens/basic-components',
+            'react-native/learn/todo-app/screens/logo',
+            'react-native/learn/todo-app/screens/exercise',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'API呼び出しの実装',
+          items: [
+            'react-native/learn/todo-app/networking/api-backend-spec',
+            'react-native/learn/todo-app/networking/api-env-build',
+            'react-native/learn/todo-app/networking/api-request',
+            'react-native/learn/todo-app/networking/async-api-control',
+            'react-native/learn/todo-app/networking/api-err-control',
+          ],
+        },
       ],
     },
     {
       type: 'category',
       label: '応用編',
-      items: [
-        'react-native/learn/advance/react-navigation-param',
-      ],
+      items: ['react-native/learn/advance/react-navigation-param'],
     },
   ],
   pitfalls: {
@@ -196,7 +206,7 @@ module.exports = {
             label: 'IDE',
             items: ['react-native/settings-vscode'],
           },
-        {
+          {
             type: 'category',
             label: 'Development',
             items: [
@@ -218,9 +228,7 @@ module.exports = {
           {
             type: 'category',
             label: 'Tools',
-            items: [
-              'react-native/santoku/flipper',
-            ]
+            items: ['react-native/santoku/flipper'],
           },
         ],
       }
