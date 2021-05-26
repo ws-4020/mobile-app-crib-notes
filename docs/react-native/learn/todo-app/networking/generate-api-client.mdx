@@ -75,7 +75,7 @@ todo_app
         └─runtime.ts
 ```
 
-`apis`にはToDoAPIの呼びだすための部品（`TodosApi.ts`）があり、`models`にはAPI呼び出しのInput,Outputになるモデルが生成されています。
+`apis`にはREST APIを呼びだすための部品（`TodosApi.ts`）があり、`models`にはAPI呼び出しのInput,Outputになるモデルが生成されています。
 クライアントを利用するとエラーレスポンス（ステータスコードが4xxまたは5xx系）の場合、`Promise.reject` されるため、エラーとしてハンドリングできます。
 
 runtime.tsには共通する機能がありますが、OpenAPIドキュメントによって定義されているように接続先が固定されています。
