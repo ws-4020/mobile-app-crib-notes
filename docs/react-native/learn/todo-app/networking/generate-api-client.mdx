@@ -91,9 +91,11 @@ export const BASE_PATH = "http://localhost:9080/api".replace(/\/+$/, "");
 
 次のようにbackendディレクトリに`config.ts`と`index.ts`を作成してください。
 
+`${端末のIP}`には[APIサーバへの接続確認](./setting-up-local-server.mdx#APIサーバへの接続確認)で確認したIPを設定してください。
+
 ```typescript title="src/backend/config.ts"
 import {Configuration} from './generated-rest-client';
-export const config = new Configuration({basePath: 'http://localhost:9080/api'});
+export const config = new Configuration({basePath: 'http://${端末のIP}:9080/api'});
 ```
 
 ```typescript title="src/backend/index.ts"
