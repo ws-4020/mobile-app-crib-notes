@@ -12,7 +12,7 @@ APIクライアントは、APIと通信し、レスポンスのJSONとJavaScript
 
 ToDoアプリでは、Open APIドキュメントからAPIクライアントを自動生成します。
 
-クライアントコードの生成には、[OpenAPI Generator](https://openapi-generator.tech/)を使用します。OpenAPIが提供しているツールで、OpenAPIドキュメントから様々なものを生成することができます。TypeScript用のクライアントコードについても様々な実装を生成することができますが、ここではtypescript-fetchを使用します。
+クライアントコードの生成には、[OpenAPI Generator](https://openapi-generator.tech/)を使用します。OpenAPIが提供しているツールで、OpenAPIドキュメントから様々なものを生成できます。TypeScript用のクライアントコードについても様々な実装を生成できますが、ここではtypescript-fetchを使用します。
 
 ToDoアプリのプロジェクトに`openapi-generator-cli` をインストールします。
 
@@ -42,6 +42,7 @@ npm install @openapitools/openapi-generator-cli -D
 ```console
 npx openapi-generator-cli generate -g typescript-fetch -i https://raw.githubusercontent.com/ws-4020/mobile-app-hands-on-backend/main/rest-api-specification/openapi.yaml -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
 ```
+
 </TabItem>
 
 <TabItem value="npm-script">
@@ -55,6 +56,7 @@ npx openapi-generator-cli generate -g typescript-fetch -i https://raw.githubuser
 +    "api:gen-client": "openapi-generator-cli generate -g typescript-fetch -i https://raw.githubusercontent.com/ws-4020/mobile-app-hands-on-backend/main/rest-api-specification/openapi.yaml -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true"
    },
 ```
+
 </TabItem>
 
 </Tabs>
