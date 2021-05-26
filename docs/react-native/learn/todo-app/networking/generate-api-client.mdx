@@ -14,7 +14,7 @@ ToDoアプリでは、Open APIドキュメントからAPIクライアントを�
 
 クライアントコードの生成には、[OpenAPI Generator](https://openapi-generator.tech/)を使用します。OpenAPIが提供しているツールで、OpenAPIドキュメントから様々なものを生成できます。TypeScript用のクライアントコードについても様々な実装を生成できますが、ここではtypescript-fetchを使用します。
 
-ToDoアプリのプロジェクトに`openapi-generator-cli` をインストールします。
+まず、ToDoアプリのプロジェクトに`openapi-generator-cli` をインストールします。
 
 ```console
 npm install @openapitools/openapi-generator-cli -D
@@ -64,13 +64,41 @@ npx openapi-generator-cli generate -g typescript-fetch -i https://raw.githubuser
 ## APIクライアントの簡単な説明
 
 それでは、自動生成されたAPIクライアントを簡単に見ていきましょう。
+APIクライアントは`src/components/backend` に作成されています。
 
-> 🚧 作成中 🚧
+```console
+todo_app
+└─src/components/backend
+     └─generated-rest-client
+        ├─apis
+        ├─models
+        └─runtime.ts
+```
 
-<!--
-TODO: たぶん、ここでConfigクラスの説明とか、どう修正するかを説明したほうがいい。
-      Middlewareの説明とかは必要ないけど、apisとmodelsの中身くらいは紹介してあげるのがいいんじゃないかな、と。
-      あとは、レスポンスのステータスコードに応じてrejectされるという話も紹介したほうがいい気がする。
--->
+`apis`にはToDoAPIの呼びだすための部品（`TodosApi.ts`）があり、`models`にはAPI呼び出しのInput,Outputになるモデルが生成されています。
+クライアントを利用するとエラーレスポンス（ステータスコードが4xxまたは5xx系）の場合、`Promise.reject` されるため、エラーとしてハンドリングできます。
+
+runtime.tsには共通する機能がありますが、OpenAPIドキュメントによって定義されているように接続先が固定されています。
+
+```typescript title="src/components/backend/generated-rest-client/runtime.ts"
+export const BASE_PATH = "http://localhost:9080/api".replace(/\/+$/, "");
+```
+
+APIサーバを起動しているマシン以外のデバイスやAndroid Emulatorからアクセスできるように接続先を変更します。
+
+自動生成したファイルに修正を入れてしまうと自動生成し直したときに修正漏れが発生するため、自動生成したファイルは修正せず、`backend`ディレクトリに接続先の設定をするためのコンポーネントを追加します。
+また、作成したコンポーネントを`TodoService`から利用しやすいように`index.ts`も作成します。
+
+次のようにbackendディレクトリに`config.ts`と`index.ts`を作成してください。
+
+```typescript title="src/components/backend/config.ts"
+import {Configuration} from './generated-rest-client';
+export const config = new Configuration({basePath: 'http://localhost:9080/api'});
+```
+
+```typescript title="src/components/backend/index.ts"
+export * from './generated-rest-client';
+export * from './config';
+```
 
 これで、`TodoService`からREST APIを呼びだす準備が整いました。次は、実際に`TodoService`からREST APIを呼び出して、結果を画面に表示してみましょう。
