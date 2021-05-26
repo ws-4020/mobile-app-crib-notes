@@ -2,18 +2,42 @@
 title: REST APIの準備
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ここまでで、ToDoアプリの画面は一通り実装できました。ここからは、画面に表示するデータをREST APIから取得するように修正していきます。
 
 ## 開発時のネットワーク構成
 
-ToDoアプリをAPIサーバと接続する場合、下の図にあるようなネットワーク構成で開発することになります。まずはこのような環境を構築しましょう。
+ToDoアプリをAPIサーバと接続する場合、下の図にあるようなネットワーク構成で開発することになります。
+ToDoアプリをAPIサーバと接続する場合の構成を説明します。まずは[アプリの実行](../../getting-started/launch-created-app.mdx#アプリ実行の仕組み)参照してここまでで作成した構成を確認しましょう。
+次にこれから作成する構成を説明します。これからの学習で構築していく環境です。
 
-> 🚧 作成中 🚧
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-<!--
-TODO: クライアントはExpo Go / iOS Simulator / Android Emulatorで、接続先はMetro BundlerとAPIサーバになる
-      ここまでに構築できている環境と、これから追加する環境がわかるように説明する。
--->
+<Tabs
+  defaultValue="rn-build"
+  values={[
+    {label: 'React Native', value: 'rn-build'},
+    {label: 'Expo + React Native', value: 'expo-build'},
+  ]}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+<TabItem value="rn-build">
+
+![Image](react-native-api-env.png)
+
+</TabItem>
+<TabItem value="expo-build">
+
+![Image](expo-api-env.png)
+
+</TabItem>
+</Tabs>
+
+これまでとの大きな違いはREST APIとの通信が発生する部分です。
+これからの学習でクライアントからREST APIへRequestを送信し、Responseをクライアントが受け取ったら画面へ出力する等を学習していきます。
 
 ## APIサーバの起動
 
