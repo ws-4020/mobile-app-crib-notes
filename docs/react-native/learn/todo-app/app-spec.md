@@ -53,10 +53,13 @@ title: ToDoアプリの仕様
 ## REST API
 
 ToDoアプリから利用するREST APIの仕様について説明します。
+今回の学習コンテンツでは、バックエンドアプリの実装は行いません。
+バックエンドアプリは公開しているDockeイメージまたは、ソースコードを利用します。(利用方法は別途説明します。)
+ここでは、ToDoを操作するためのREST APIを次のとおり紹介します。
 
-> 🚧 作成中 🚧
-
-<!--
-TODO: https://fintan-contents.github.io/spa-restapi-handson/todo-spec/#rest-api のようにREST APIの仕様を説明する。
-      ただ、SPA+RESTハンズオンと違ってこのコンテンツではバックエンドを実装しないので、少し書き方を変えたほうがいいところがあるかも。
--->
+| HTTPメソッド | パス | 説明 | リクエスト | レスポンス |
+| :--- | :--- | :--- | :--- | :--- |
+| GET | /api/todos | ToDoを全て取得する | - | ToDoの一覧 |
+| POST | /api/todos | ToDoを新しく登録する | ToDoの内容 | 登録したToDo |
+| PUT | /api/todo/{id} | ToDoの状態を更新する | ToDoの状態 | 更新したToDo |
+| DELETE | /api/todo/{id} | ToDoを削除する | - | - |
