@@ -173,8 +173,6 @@ module.exports = {
             'react-native/learn/todo-app/networking/setting-up-local-server',
             'react-native/learn/todo-app/networking/generate-api-client',
             'react-native/learn/todo-app/networking/api-request',
-            'react-native/learn/todo-app/networking/async-api-control',
-            'react-native/learn/todo-app/networking/api-err-control',
           ],
         },
       ],
