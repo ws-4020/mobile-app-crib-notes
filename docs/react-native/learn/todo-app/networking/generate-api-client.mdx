@@ -14,12 +14,6 @@ ToDoアプリでは、Open APIドキュメントからAPIクライアントを�
 
 クライアントコードの生成には、[OpenAPI Generator](https://openapi-generator.tech/)を使用します。OpenAPIが提供しているツールで、OpenAPIドキュメントから様々なものを生成できます。TypeScript用のクライアントコードについても様々な実装を生成できますが、ここではtypescript-fetchを使用します。
 
-まず、ToDoアプリのプロジェクトに`openapi-generator-cli`をインストールします。
-
-```console
-npm install -D @openapitools/openapi-generator-cli
-```
-
 自動生成で利用するOpenAPIは[mobile-app-hands-on-backend](https://github.com/ws-4020/mobile-app-hands-on-backend/tree/main/rest-api-specification)で公開されているものを利用します。
 
 `npx`か、package.jsonに`npm script`を追加してAPIクライアントを自動生成してください。
@@ -37,17 +31,23 @@ npm install -D @openapitools/openapi-generator-cli
 
 <TabItem value="npx">
 
-以下のように`npx`で生成する。
+以下のように`npx`で生成してください。
 
 ```console
-npx openapi-generator-cli generate -g typescript-fetch -i https://raw.githubusercontent.com/ws-4020/mobile-app-hands-on-backend/main/rest-api-specification/openapi.yaml -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
+npx @openapitools/openapi-generator-cli generate -g typescript-fetch -i https://raw.githubusercontent.com/ws-4020/mobile-app-hands-on-backend/main/rest-api-specification/openapi.yaml -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
 ```
 
 </TabItem>
 
 <TabItem value="npm-script">
 
-以下の例のように`npm script`に自動生成用のscriptを追加して`npm run api:gen-client`で生成する。
+まず、ToDoアプリのプロジェクトに`openapi-generator-cli`をインストールします。
+
+```console
+npm install -D @openapitools/openapi-generator-cli
+```
+
+以下の例のように`npm script`に自動生成用のscriptを追加して`npm run api:gen-client`で生成してください。
 
 ```diff title="package.json"
      "reset-cache:all": "node .script/runner.js reset-cache --all",
