@@ -64,11 +64,11 @@ npx openapi-generator-cli generate -g typescript-fetch -i https://raw.githubuser
 ## APIクライアントの簡単な説明
 
 それでは、自動生成されたAPIクライアントを簡単に見ていきましょう。
-APIクライアントは`src/components/backend` に作成されています。
+APIクライアントは`src/backend/generated-rest-client` に作成されています。
 
 ```console
 todo_app
-└─src/components/backend
+└─src/backend
      └─generated-rest-client
         ├─apis/
         ├─models/
@@ -80,7 +80,7 @@ todo_app
 
 runtime.tsには共通する機能がありますが、OpenAPIドキュメントによって定義されているように接続先が固定されています。
 
-```typescript title="src/components/backend/generated-rest-client/runtime.ts"
+```typescript title="src/backend/generated-rest-client/runtime.ts"
 export const BASE_PATH = "http://localhost:9080/api".replace(/\/+$/, "");
 ```
 
@@ -91,12 +91,12 @@ APIサーバを起動しているマシン以外のデバイスやAndroidエミ�
 
 次のようにbackendディレクトリに`config.ts`と`index.ts`を作成してください。
 
-```typescript title="src/components/backend/config.ts"
+```typescript title="src/backend/config.ts"
 import {Configuration} from './generated-rest-client';
 export const config = new Configuration({basePath: 'http://localhost:9080/api'});
 ```
 
-```typescript title="src/components/backend/index.ts"
+```typescript title="src/backend/index.ts"
 export * from './generated-rest-client';
 export * from './config';
 ```
