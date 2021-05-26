@@ -78,7 +78,7 @@ todo_app
 `apis`にはREST APIを呼びだすための部品（`TodosApi.ts`）があり、`models`にはAPI呼び出しのInput,Outputになるモデルが生成されています。
 クライアントを利用するとエラーレスポンス（ステータスコードが4xxまたは5xx系）の場合、`Promise.reject` されるため、エラーとしてハンドリングできます。
 
-runtime.tsには共通する機能がありますが、OpenAPIドキュメントによって定義されているように接続先が固定されています。
+`runtime.ts`では、すべてのREST APIの呼びだしに共通する機能が実装されています。この中でREST APIへの接続先も定義されているのですが、OpenAPIドキュメントの`server`に指定されている値がデフォルト値として設定されています。
 
 ```typescript title="src/backend/generated-rest-client/runtime.ts"
 export const BASE_PATH = "http://localhost:9080/api".replace(/\/+$/, "");
