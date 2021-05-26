@@ -53,7 +53,7 @@ title: ToDoアプリの仕様
 ## REST API
 
 ToDoアプリから利用するREST APIの仕様について説明します。
-REST APIでは、URIでリソースを表現し、HTTPメソッドでそれに対する操作を表現します。ここでは、「ToDo」をリソースとし、ToDoの集合を`/todos`、集合の中の1つのToDoを`/todos/{id}`として表現します。
+REST APIでは、URIでリソースを表現し、HTTPメソッドでそれに対する操作を表現します。ここでは「ToDo」をリソースとし、ToDoの集合を`/todos`、集合の中の1つのToDoを`/todos/{id}`として表現します。
 また、機能や画面から、ToDoの属性として次の項目を用意します。
 
 - ToDoを識別するためのID
