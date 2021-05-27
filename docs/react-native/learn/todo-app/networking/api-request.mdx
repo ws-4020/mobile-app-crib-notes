@@ -34,13 +34,16 @@ const putTodo = async (id: number, completed: boolean) => {
 };
 ```
 
-メソッドを修正すると`TodoService`のダミーデータである`todos`と`id`が不要になるので削除します。
-削除すると`TodoService`は以下のような実装になります。
+Serviceで`type ToDo`を定義していますが、Open APIドキュメントで定義されているモデルを利用します。
+また、メソッドを修正すると`TodoService`のダミーデータである`todos`と`id`が不要になるので削除します。
+`TodoService`は以下のような実装になります。
 
 ```typescript title="src/service/TodoService.ts"
 import {TodosApi, config} from 'backend';
 
 const todosApi = new TodosApi(config);
+
+export type {Todo} from 'backend';
 
 const getTodos = async () => {
   return await todosApi.getTodos();
