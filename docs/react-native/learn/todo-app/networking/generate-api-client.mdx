@@ -6,7 +6,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 ToDoアプリでは各画面で`TodoService`からデータを取得しますが、`TodoService`から直接REST APIを呼びだすのではなく共通的なAPIクライアントを用意します。
-APIクライアントは、APIと通信し、JSONとJavaScriptのクラスとの型変換や共通的なエラー処理を担当します。
+APIクライアントは、APIと通信し、JSONとOpen APIドキュメントで定義されているモデルとの型変換や共通的なエラー処理を担当します。
 
 ## Open APIドキュメントから自動生成
 
@@ -87,7 +87,7 @@ export const BASE_PATH = "http://localhost:9080/api".replace(/\/+$/, "");
 デフォルトでは接続先が`localhost`となっているため、このままではAPIサーバを起動しているマシン以外のデバイスやAndroidエミュレータなどからアクセスできません。
 
 接続先を変更するために、`backend`ディレクトリに接続先を設定するためのモジュールを追加します。再生成したときに修正漏れが発生しないように、自動生成したファイルは修正しないでください。
-また、作成したコンポーネントを`TodoService`から利用しやすいように`index.ts`も作成します。
+また、自動生成したAPIクライアントや設定モジュールを`TodoService`から利用しやすいように`index.ts`も作成します。
 
 次のようにbackendディレクトリに`config.ts`と`index.ts`を作成してください。
 
