@@ -8,12 +8,63 @@ ToDoアプリからREST APIを呼び出して、サーバから取得したデ�
 
 `TodoService`の各メソッドから、適切なAPIクライアントのメソッドを呼びだすように修正していきます。
 
-> 🚧 作成中 🚧
+共通的な設定をしている`config`と自動生成された`TodosApi`を`backend`からimportします。
 
-<!--
-TODO: たぶん、SPA+RESTのハンズオンで説明されているような内容で十分なのかな？もう少し説明してあげてもいい気もしないでもないけど。
-      https://fintan-contents.github.io/spa-restapi-handson/todo/frontend/api/#%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E3%83%A9%E3%83%83%E3%83%91%E3%83%BC%E3%82%92%E4%BD%9C%E6%88%90
--->
+```typescript title="src/service/TodoService.ts"
+import {TodosApi, config} from 'backend';
+```
+
+次に`TodosApi`のインスタンスを作成し、`TodoService`のメソッドから呼びだすように修正します。
+`TodoService`の3つのメソッドを以下のように修正してください。
+
+```typescript
+const todosApi = new TodosApi(config);
+
+const getTodos = async () => {
+  return await todosApi.getTodos();
+};
+
+const postTodo = async (text: string) => {
+  return await todosApi.postTodo({newTodo: {text}});
+};
+
+const putTodo = async (id: number, completed: boolean) => {
+  return await todosApi.putTodo({todoId: id, toDoStatus: {completed}});
+};
+```
+
+メソッドを修正すると`TodoService`のダミーデータである`todos`と`id`が不要になるので削除します。
+削除すると`TodoService`は以下のような実装になります。
+
+```typescript title="src/service/TodoService.ts"
+import {TodosApi, config} from 'backend';
+
+export type Todo = {
+  id: number;
+  text: string;
+  completed: boolean;
+};
+
+const todosApi = new TodosApi(config);
+
+const getTodos = async () => {
+  return await todosApi.getTodos();
+};
+
+const postTodo = async (text: string) => {
+  return await todosApi.postTodo({newTodo: {text}});
+};
+
+const putTodo = async (id: number, completed: boolean) => {
+  return await todosApi.putTodo({todoId: id, toDoStatus: {completed}});
+};
+
+export const TodoService = {
+  getTodos,
+  postTodo,
+  putTodo,
+};
+```
 
 ## 動作確認
 
