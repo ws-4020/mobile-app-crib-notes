@@ -30,7 +30,7 @@ const postTodo = async (text: string) => {
 };
 
 const putTodo = async (id: number, completed: boolean) => {
-  return await todosApi.putTodo({todoId: id, toDoStatus: {completed}});
+  return await todosApi.putTodo({todoId: id, todoStatus: {completed}});
 };
 ```
 
