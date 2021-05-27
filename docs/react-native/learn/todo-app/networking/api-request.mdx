@@ -15,6 +15,7 @@ import {TodosApi, config} from 'backend';
 ```
 
 次に`TodosApi`のインスタンスを作成し、`TodoService`のメソッドから呼びだすように修正します。
+`TodosApi`に`config`を渡すことで、接続先を切り替えられるようにします。
 `TodoService`の3つのメソッドを以下のように修正してください。
 
 ```typescript
@@ -38,12 +39,6 @@ const putTodo = async (id: number, completed: boolean) => {
 
 ```typescript title="src/service/TodoService.ts"
 import {TodosApi, config} from 'backend';
-
-export type Todo = {
-  id: number;
-  text: string;
-  completed: boolean;
-};
 
 const todosApi = new TodosApi(config);
 
