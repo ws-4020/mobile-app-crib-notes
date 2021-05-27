@@ -10,8 +10,7 @@ import TabItem from '@theme/TabItem';
 ## 開発時のネットワーク構成
 
 ToDoアプリをAPIサーバと接続する場合、下の図にあるようなネットワーク構成で開発することになります。
-ToDoアプリをAPIサーバと接続する場合の構成を説明します。まずは[アプリの実行](../../getting-started/launch-created-app.mdx#アプリ実行の仕組み)参照してここまでで作成した構成を確認しましょう。
-次にこれから作成する構成を説明します。これからの学習で構築していく環境です。
+これまでの構成との違いを理解してもらいたいので、[アプリの実行](../../getting-started/launch-created-app.mdx#アプリ実行の仕組み)を参照してここまでで作成した構成を確認してください。
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
@@ -36,14 +35,12 @@ ToDoアプリをAPIサーバと接続する場合の構成を説明します。�
 </TabItem>
 </Tabs>
 
-これまでとの大きな違いはREST APIとの通信が発生する部分です。
-これからの学習でクライアントからREST APIへRequestを送信し、Responseをクライアントが受け取ったら画面へ出力する等を学習していきます。
+これまでの構成との大きな違いはREST APIとの通信が発生する部分です。
+これからの学習でクライアントからREST APIへRequestを送信し、Responseをクライアントが受け取り、結果を画面出力する等を学習していきます。
 
 ## APIサーバの起動
 
 では、React Nativeを開発している端末にAPIサーバを起動します。APIサーバはDockerを利用して起動する方法と、Mavenを利用して起動する方法があります。いずれかお好みの方法で起動してください。
-
-> 🚧 作成中 🚧
 
 <!--
 TODO: Dockerで起動する方法、Maven(wrapper)で起動する方法のそれぞれを簡単に紹介する。多分、1行ずつくらいじゃないかな。
