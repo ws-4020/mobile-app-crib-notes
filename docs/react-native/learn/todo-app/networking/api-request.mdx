@@ -38,6 +38,10 @@ const putTodo = async (id: number, completed: boolean) => {
 また、メソッドを修正すると`TodoService`のダミーデータである`todos`と`id`が不要になるので削除します。
 `TodoService`は以下のような実装になります。
 
+:::note
+画面の実装の演習問題で[タスクの削除](../screens/exercise.mdx#タスクの削除)を実装している場合は削除メソッドもAPIクライアントを呼びだすように修正してください。
+:::
+
 ```typescript title="src/service/TodoService.ts"
 import {TodosApi, config} from 'backend';
 
