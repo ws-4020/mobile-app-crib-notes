@@ -34,7 +34,7 @@ const putTodo = async (id: number, completed: boolean) => {
 };
 ```
 
-Serviceで`type ToDo`を定義していますが、Open APIドキュメントで定義されているモデルを利用します。
+ここまではServiceで`type ToDo`を定義していましたが、Open APIドキュメントで定義されているモデルを利用するように修正します。
 また、メソッドを修正すると`TodoService`のダミーデータである`todos`と`id`が不要になるので削除します。
 `TodoService`は以下のような実装になります。
 
