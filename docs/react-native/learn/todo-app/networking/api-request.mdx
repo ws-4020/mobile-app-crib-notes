@@ -93,7 +93,7 @@ TODO: APIサーバ再起動でデータが消えるかどうかはBackendの起�
 1. curlなどで登録したToDoが表示される
 
 ```console title="curlでの登録"
-curl http://localhost:9080/api/todos -X POST -d '{"text": "アプリ外からの登録"}' -H "Content-type: application/json"
+curl http://localhost:9080/api/todos -X POST -d '{"text": "アプリ外からの登録"}' -H "Content-Type: application/json"
 ```
 
 これで、REST APIを呼び出せるようになりました。しかし、このままではAPIを呼び出している間も画面が操作可能のままになってしまいますし、ユーザにアプリが処理中であることを伝えられません。
