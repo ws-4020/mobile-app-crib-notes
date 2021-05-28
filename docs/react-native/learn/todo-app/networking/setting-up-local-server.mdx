@@ -10,38 +10,40 @@ import TabItem from '@theme/TabItem';
 ## 開発時のネットワーク構成
 
 ToDoアプリをAPIサーバと接続する場合、下の図にあるようなネットワーク構成で開発することになります。
-これまでの構成との違いを理解してもらいたいので、[アプリの実行](../../getting-started/launch-created-app.mdx#アプリ実行の仕組み)を参照してここまでで作成した構成を確認してください。
+構成の説明として、
+ここまででとこれから作成する構成の違いがわかるよう色分けしています。
+背景色または、実線が青色になっている部分がこれから構成する部分を表しています。
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 <Tabs
-  defaultValue="rn-build"
+  defaultValue="emulator"
   values={[
-    {label: 'React Native', value: 'rn-build'},
-    {label: 'Expo + React Native', value: 'expo-build'},
+    {label: 'エミュレータ/シミュレータ', value: 'emulator'},
+    {label: '実機', value: 'machine'},
   ]}>
 
 <!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-<TabItem value="rn-build">
+<TabItem value="emulator">
 
-![Image](react-native-api-env.png)
+![Image](emulator-api-env.png)
 
 </TabItem>
-<TabItem value="expo-build">
+<TabItem value="machine">
 
-![Image](expo-api-env.png)
+![Image](machine-api-env.png)
 
 </TabItem>
 </Tabs>
 
 これまでの構成との大きな違いはREST APIとの通信が発生する部分です。
-これからの学習でクライアントからREST APIへRequestを送信し、Responseをクライアントが受け取り、結果を画面出力する等を学習していきます。
+次の学習でクライアントからREST APIへRequestを送信し、Responseをクライアントが受け取り、結果を画面出力する等を学習していきます。
 
 ## APIサーバの起動
 
 では、React Nativeを開発している端末にAPIサーバを起動します。APIサーバはDockerを利用して起動する方法と、Mavenを利用して起動する方法があります。いずれかお好みの方法で起動してください。
-[バックエンド サンプルアプリ](https://github.com/ws-4020/mobile-app-hands-on-backend#readme)にそれぞれの起動と確認方法が記載されているので確認して実行してください。
+[ハンズオン用 バックエンドサンプルアプリ](https://github.com/ws-4020/mobile-app-hands-on-backend#readme)にそれぞれの起動と確認方法が記載されているので確認して実行してください。
 
 ## APIサーバへの接続確認
 
@@ -85,6 +87,25 @@ ipconfig
 
 </TabItem>
 </Tabs>
+
+アクセス先端末のIPアドレスが確認出来たので、ブラウザを利用して実際にアクセスしてみましょう。
+アクセス先のURLとレスポンスの期待値は以下となります。
+
+### アクセス先URL
+
+`${IP}`部分を確認したIPアドレスへ変更してアクセスしてください。
+
+```console
+http://${IP}:9080/api/todos
+```
+
+### レスポンス結果の期待値
+
+データを登録していない場合、空配列のJSONがレスポンスとなります。
+
+```console
+{}
+```
 
 このときアクセスするのに利用したIPアドレスは、後で設定ファイルに設定するので忘れないようにしてください。
 
