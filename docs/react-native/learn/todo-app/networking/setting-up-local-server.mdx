@@ -11,43 +11,25 @@ import TabItem from '@theme/TabItem';
 
 ToDoアプリをAPIサーバと接続する場合、下の図にあるようなネットワーク構成で開発することになります。
 構成の説明として、
-ここまででとこれから作成する構成の違いがわかるよう色分けしています。
-背景色または、実線が青色になっている部分がこれから構成する部分を表しています。
+いままでの構成とこれから準備する構成の違いがわかるよう色分けしています。
 
-<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+- グレー部分は画面の実装のときに用意し、確認していた部分です。アプリケーションを開発環境で動かすために必要な構成です。
+- 背景色または、実線が青色になっている部分はこれから準備する部分を表しています。
+  ここはアプリケーションが利用するので、アプリケーションに接続先を設定する必要がある箇所です。
 
-<Tabs
-  defaultValue="emulator"
-  values={[
-    {label: 'エミュレータ/シミュレータ', value: 'emulator'},
-    {label: '実機', value: 'machine'},
-  ]}>
-
-<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
-
-<TabItem value="emulator">
-
-![Image](emulator-api-env.png)
-
-</TabItem>
-<TabItem value="machine">
-
-![Image](machine-api-env.png)
-
-</TabItem>
-</Tabs>
+![Image](add-api-to-env.png)
 
 これまでの構成との大きな違いはREST APIとの通信が発生する部分です。
 次の学習でクライアントからREST APIへRequestを送信し、Responseをクライアントが受け取り、結果を画面出力する等を学習していきます。
 
 ## APIサーバの起動
 
-では、React Nativeを開発している端末にAPIサーバを起動します。APIサーバはDockerを利用して起動する方法と、Mavenを利用して起動する方法があります。いずれかお好みの方法で起動してください。
-[ハンズオン用 バックエンドサンプルアプリ](https://github.com/ws-4020/mobile-app-hands-on-backend#readme)にそれぞれの起動と確認方法が記載されているので確認して実行してください。
+ToDoアプリを開発している端末にAPIサーバを起動します。APIサーバはDockerを利用して起動する方法と、Mavenを利用して起動する方法があります。いずれかお好みの方法で起動してください。
+[ハンズオン用 バックエンドサンプルアプリ](https://github.com/ws-4020/mobile-app-hands-on-backend#readme)にそれぞれの起動方法が記載されているので確認して実行してください。
 
 ## APIサーバへの接続確認
 
-Expo Goやテスト用のデバイスからAPIサーバにアクセスしようとしても、ファイアウォールなどに制限されてアクセスできない場合があります。
+アプリを起動するデバイスからAPIサーバにアクセスしようとしても、ファイアウォールなどに制限されてアクセスできない場合があります。
 
 そのため初めに、ToDoアプリをインストールして実行するデバイスやシミュレータなどから、APIサーバにアクセスできるかどうかを確認しておきます。
 
@@ -101,10 +83,11 @@ http://${IP}:9080/api/todos
 
 ### レスポンス結果の期待値
 
+ブラウザにレスポンスのJSONが表示されます。
 データを登録していない場合、空配列のJSONがレスポンスとなります。
 
 ```console
-{}
+[]
 ```
 
 このときアクセスするのに利用したIPアドレスは、後で設定ファイルに設定するので忘れないようにしてください。
