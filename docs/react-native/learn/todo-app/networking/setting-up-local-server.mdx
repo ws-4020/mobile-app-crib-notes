@@ -49,6 +49,7 @@ URLには確認時に使用する端末のIPアドレスが必要となります
   values={[
     {label: 'macOS', value: 'mac'},
     {label: 'Windows', value: 'win'},
+    {label: 'Androidエミュレータ', value: 'emulator'},
   ]
 }>
 
@@ -66,6 +67,23 @@ ipconfig getifaddr en0
 ```bash
 ipconfig
 ```
+
+</TabItem>
+<TabItem value="emulator">
+
+Androidエミュレータから同じ端末のAPIサーバにアクセスする場合、[Android Emulatorのネットワーク](https://developer.android.com/studio/run/emulator-networking.html#networkaddresses)を利用出来ます。
+そのため、`10.0.2.2` というIPを利用すると端末のIPアドレスに関わらずアクセス出来ます。
+
+Androidエミュレータだけで動作確認する場合は`10.0.2.2`を利用して動作確認ができます。
+
+```bash
+http://10.0.2.2:9080/api/todos
+```
+
+:::note
+[開発時のネットワーク構成](#開発時のネットワーク構成)で説明しているようにアプリケーションに設定する値なので、
+Androidエミュレータ以外の方法でも確認する場合はIPを確認して設定したほうが効率的です。
+:::
 
 </TabItem>
 </Tabs>
