@@ -2,144 +2,58 @@
 title: REST API呼びだし中の表示
 ---
 
-REST APIの呼びだしには少し時間がかかるものです。呼びだし中に何もフィードバックを返さないと、アプリで処理中なのか、自分の操作が伝わっていないのか、ユーザには判断できなくなってしまいます。そのため、REST APIの呼びだし中は、アプリが処理中であることをユーザに伝えるのが望ましいです。
+REST APIの呼びだしには少し時間がかかるものです。呼びだし中に何もフィードバックを返さないと、アプリで処理中なのか、自分の操作が伝わっていないのか、ユーザには判断できなくなってしまいます。
+そのため、REST APIの呼びだしのような時間のかかる非同期処理は、アプリが処理中であることをユーザに伝えるのが望ましいです。
 
-また、削除したToDoの編集など、REST APIでの処理が完了するまでブロックしたい操作もあります。
+また、ToDo一覧が最新化されていないため、削除されているToDoを更新してしまうようなことを防ぐようなケースを想定すると、処理が完了するまでブロックしたい操作もあります。
 
-ToDoアプリでは、REST APIの呼びだし中はToDo一覧上に、ローディング中であることを伝えるアクティビティインジケーターを表示します。また、ToDo一覧内での完了や編集などの操作をブロックします。
+ToDoアプリでは、一覧を取得中はToDo一覧上にローディング中であることを伝える[アクティビティインジケーター](https://reactnative.dev/docs/activityindicator)を表示しToDoの操作をブロックしましょう。
 
-これから学習して実装して表現するローディング中状態は以下になります。
+そのような機能を実現するためには処理中かどうかという状態を管理して、処理中の場合だけアクティビティインジケーターとブロックするためのViewを表示します。
+下のイメージはアクティビティインジケーターを表示している画面です。
 
 ![Image](../app-hands-on/ios-wait.png)
 
 ## REST APIの呼びだし状態の管理
 
-まず、REST APIを呼びだすコンポーネントで、REST APIを呼びだし中かどうかを管理します。状態の管理には、Reactのステートを利用します。
-処理中を`true`。処理済を`false`としてREST APIの呼びだし状態を管理するように修正します。
+まず、REST APIを呼びだすコンポーネントで、REST APIを呼びだし中かどうかを、ReactのStateで管理します。
 
-修正量が多いので、次のソースコードで`TodoBoard.tsx`を上書きしてください。
+次のように `useState` を利用して`loading`状態を管理します。
+REST APIを呼びだす`TodoService.getTodos()`の前でloading状態を設定し、`finally`でloadingを解除します。
 
-```typescript jsx title="/src/screens/todo/TodoBoard.tsx"
-import {useFocusEffect} from '@react-navigation/native';
-import {FilterType, TodoFilter, TodoList} from 'components/parts';
-import {useTodoStackNavigation} from 'navigation/hooks';
-import React, {useCallback, useContext, useState} from 'react';
-import {Alert, StyleSheet, View} from 'react-native';
-import {Icon, ThemeContext} from 'react-native-elements';
-import {Todo, TodoService, ErrorObject} from 'services';
-
-type ShowFilter = {
-  [K in FilterType]: (todo: Todo) => boolean;
-};
-
-const showFilter: ShowFilter = {
-  [FilterType.ALL]: () => true,
-  [FilterType.INCOMPLETE]: (todo) => !todo.completed,
-  [FilterType.COMPLETED]: (todo) => todo.completed,
-};
-
+```typescript diff title="screens/todo/TodoBoard.tsx"
 export const TodoBoard: React.FC = () => {
-  const {theme} = useContext(ThemeContext);
-  const navigation = useTodoStackNavigation<'TodoBoard'>();
-  const [todos, setTodos] = useState<Todo[]>();
-  const [filterType, setFilterType] = useState<FilterType>(FilterType.ALL);
-  const [loading, setLoading] = useState(false);
+   const {theme} = useContext(ThemeContext);
+   const [todos, setTodos] = useState<Todo[]>([]);
+   const [filterType, setFilterType] = useState<FilterType>(FilterType.ALL);
++  const [loading, setLoading] = useState(false);
+ 
+   useFocusEffect(
+     useCallback(() => {
+       let isActive = true;
 
-  useFocusEffect(
-    useCallback(() => {
-      let isActive = true;
-      setLoading(true);
-
-      TodoService.getTodos()
-        .then((response) => {
-          if (isActive) {
-            setTodos(response);
-          }
-        })
-        .catch((e: ErrorObject) => {
-          console.log(e.message);
-        })
-        .finally(() => {
-          if (isActive) {
-            setLoading(false);
-          }
-        });
++      setLoading(true);
+       TodoService.getTodos()
+         .then((response) => {
+           if (isActive) {
+             setTodos(response);
+           }
+         })
+-        .catch(() => {});
++        .catch((error) => {
++          console.log(error);
++        })
++        .finally(() => {
++          if (isActive) {
++            setLoading(false);
++          }
++        });
 
       return () => {
         isActive = false;
       };
     }, []),
-  );
 
-  const toggleTodoCompletion = useCallback(
-    (id: number) => {
-      if (todos === undefined) {
-        return;
-      }
-      const target = todos.find((todo) => todo.id === id);
-      if (!target) {
-        return;
-      }
-      /*
-       * Network越しの処理時間を待たずにUIを更新する。
-       * 処理が正常に出来ない場合は戻すが、リソース（タスク）がなくなっている場合は削除する。
-       */
-      setTodos(todos.map((todo) => (todo.id === id ? {...todo, completed: !target.completed} : todo)));
-      TodoService.putTodo(id, !target.completed).catch((e: ErrorObject) => {
-        if (e.status && e.status === 404) {
-          setTodos(todos.filter((todo) => todo.id !== id));
-          console.log(`更新しようとしたタスクが存在しませんでした。`);
-        } else {
-          // errorで処理できなければ戻す
-          setTodos(todos.map((todo) => (todo.id === id ? {...todo, completed: target.completed} : todo)));
-          console.log(e.message);
-        }
-      });
-    },
-    [todos],
-  );
-
-  const showTodos = todos?.filter(showFilter[filterType]);
-
-  return (
-    <View style={styles.container} testID="screen/main/home">
-      <TodoFilter filterType={filterType} setFilterType={setFilterType} />
-      <TodoList
-        todos={showTodos}
-        contentContainerStyle={styles.todoListContainer}
-        toggleTodoCompletion={toggleTodoCompletion}
-      />
-      <Icon
-        name="plus"
-        type="font-awesome-5"
-        color={theme.colors?.primary}
-        raised
-        reverse
-        size={30}
-        containerStyle={styles.iconContainerStyle}
-        onPress={() => {
-          navigation.navigate('TodoForm');
-        }}
-      />
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  todoListContainer: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingBottom: 80,
-  },
-  iconContainerStyle: {
-    position: 'absolute',
-    bottom: 10,
-    right: 10,
-  },
-});
 ```
 
 :::caution
@@ -150,60 +64,19 @@ const styles = StyleSheet.create({
 
 ## アクティビティインジケータの表示
 
-次に、REST APIを呼び出している間だけアクティビティインジケータを表示するように修正します。このとき、アクティビティインジケータを表示するコンポーネントをToDo一覧の上にかぶせて表示することで、ToDo一覧内でのユーザの操作をブロックします。
-処理中（`true`）の時はアクティビティインジケータを表示。それ以外の場合は非表示とします。
-ユーザへ処理中の時は、操作出来ないことを伝える為、アクティビティインジケータを画面中央に表示します。
+次に、REST APIを呼びだし中にアクティビティインジケータを表示するように修正します。このとき、アクティビティインジケータを表示するコンポーネントをToDo一覧の上にかぶせて表示することで、ToDo一覧内でのユーザの操作をブロックします。
+処理中（`true`）の時だけアクティビティインジケータを中央に表示し、操作できないようにToDo一覧を触れないように覆います。
+
+ToDo一覧の操作は出来ませんが、設定タブをタップし、設定画面に遷移することは出来ます。
+
+まず、操作をブロックするための`indicatorContainer`とアクティビティインジケーターを中央に表示するための`indicator`のスタイルを定義してください。
 
 ``` diff typescript jsx title="/src/screens/todo/TodoBoard.tsx"
-import {useFocusEffect} from '@react-navigation/native';
-import {FilterType, TodoFilter, TodoList} from 'components/parts';
-import {useTodoStackNavigation} from 'navigation/hooks';
-import React, {useCallback, useContext, useState} from 'react';
-- import {Alert, StyleSheet, View} from 'react-native';
-+ import {Alert, StyleSheet, View, ActivityIndicator} from 'react-native';
-import {Icon, ThemeContext} from 'react-native-elements';
-import {Todo, TodoService, ErrorObject} from 'services';
-
-  /* ～省略～ */  
-
-  return (
-    <View style={styles.container} testID="screen/main/home">
-      <TodoFilter filterType={filterType} setFilterType={setFilterType} />
-      <TodoList
-        todos={showTodos}
-        contentContainerStyle={styles.todoListContainer}
-        toggleTodoCompletion={toggleTodoCompletion}
-      />
-      <Icon
-        name="plus"
-        type="font-awesome-5"
-        color={theme.colors?.primary}
-        raised
-        reverse
-        size={30}
-        containerStyle={styles.iconContainerStyle}
-        onPress={() => {
-          navigation.navigate('TodoForm');
-        }}
-      />
-+      {loading && (
-+        <View style={styles.indicatorContainer}>
-+          <ActivityIndicator animating={loading} color="red" style={styles.indicator} size="large" />
-+        </View>
-+      )}
-    </View>
-  );
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  todoListContainer: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingBottom: 80,
-  },
+  // 中略
   iconContainerStyle: {
     position: 'absolute',
     bottom: 10,
@@ -221,8 +94,44 @@ const styles = StyleSheet.create({
 +  indicator: {
 +    flex: 1,
 +  },
-});
+ });
 ```
+
+ReactNativeの `ActivityIndicator` を利用してローディングを表示します。
+操作ブロック用のContainerがあるため、loading中でなければ表示しない制御も入れます。
+
+```typescript diff title="/src/screens/todo/TodoBoard.tsx"
+ import React, {useCallback, useContext, useState} from 'react';
+-import {Alert, StyleSheet, View} from 'react-native';
++import {Alert, StyleSheet, View, ActivityIndicator} from 'react-native';
+ import {Icon, ThemeContext} from 'react-native-elements';
+
+// 中略
+       <Icon
+         name="plus"
+         type="font-awesome-5"
+         color={theme.colors?.primary}
+         raised
+         reverse
+         size={30}
+         containerStyle={styles.iconContainerStyle}
+         onPress={() => {
+           navigation.navigate('TodoForm');
+         }}
+       />
++      {loading && (
++        <View style={styles.indicatorContainer}>
++          <ActivityIndicator color="red" style={styles.indicator} size="large" />
++        </View>
++      )}
+     </View>
+   );
+```
+
+:::note
+`TodoService.getTodos()`の`finally`での`setLoaing(false)`をコメントアウトするとアクティビティインジケーターを確認出来ますが、コードを修正しないとToDo一覧を操作出来ません。
+次の動作確認ではREST APIの応答を一定時間待つという状態を擬似的に作り出してみましょう。
+:::
 
 ## 動作確認
 
@@ -230,9 +139,13 @@ const styles = StyleSheet.create({
 
 ただ、APIサーバをローカルホストで起動している場合などは、REST APIからの応答が早いため一瞬しかアクティビティインジケータが表示されません。この状態だとアクティビティインジケータの確認は難しいので、まずREST APIからの応答に時間がかかっている状況を擬似的に再現します。
 
-今回は、REST APIを呼び出したら応答までの時間を設定する部分を汎用的に適用したいので、Middlewareとして切り出します。
+今回は、REST APIを呼び出したら応答までの時間を待つことを擬似的に再現してみましょう。
+応答時間を待つ処理はREST APIではなくREST APIクライアントで実装します。
 
-次のファイルを追加してください。
+REST APIクライントの接続先を切り替えていた`config.ts`で`Middleware`というインタフェースを利用して機能を追加してみましょう。
+
+Middlewareを利用して一定時間待機させるために、config.tsを次のように修正してください。
+`${IP}` はご自身の環境に合わせて設定したままにしてください。
 
 ``` typescript jsx title="/src/backend/config.ts"
 import {Configuration, Middleware} from './generated-rest-client';
@@ -242,12 +155,13 @@ const waitResponse: Middleware = {
     return Promise.resolve(context.response);
   },
 };
-export const config = new Configuration({basePath: 'http://localhost:9080/api', middleware: [waitResponse]});
+export const config = new Configuration({basePath: 'http://${IP}:9080/api', middleware: [waitResponse]});
 ```
 
-`setTimeout(resolve, 1000)`の第二引数へ、待機時間を設定します。今回の例は`1000`（1秒）を設定します。
-
-このように修正すると、`TodoService`でToDo一覧などを取得するまでに1秒かかるようになります。なので、その間アクティビティインジケータが表示され、1秒経つとインジケータが消えることを確認しましょう。
+:::note
+ここではREST APIの応答後に`await`を利用して`Promise`が`resolve`するまで1秒間だけ待つように実装しています。
+`await`について知りたい場合は事前学習で紹介しているJavaScript Primerの[非同期処理](https://jsprimer.net/basic/async/)にある[await 式](https://jsprimer.net/basic/async/#await-expression)を参照してみてください。
+:::
 
 > 🚧 作成中 🚧
 
