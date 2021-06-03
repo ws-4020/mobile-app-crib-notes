@@ -15,13 +15,144 @@ ToDoアプリでは、REST APIの呼びだし中はToDo一覧上に、ローデ�
 ## REST APIの呼びだし状態の管理
 
 まず、REST APIを呼びだすコンポーネントで、REST APIを呼びだし中かどうかを管理します。状態の管理には、Reactのステートを利用します。
-ステートとは、コンポーネントの状態を表すデータ（状態）を指します。今回はステートを利用してREST APIの処理状態を更新したり、参照したりする際に利用します。
+処理中を`true`。処理済を`false`としてREST APIの呼びだし状態を管理するように修正します。
 
-> 🚧 作成中 🚧
+修正量が多いので、次のソースコードで`TodoBoard.tsx`を上書きしてください。
 
-<!--
-TODO: Hooksの説明はいらないっけ。ステートはここまでほとんど触れてない気もするから、書いてあげたほうがいい気がする。
--->
+```typescript jsx title="/src/screens/todo/TodoBoard.tsx"
+import {useFocusEffect} from '@react-navigation/native';
+import {FilterType, TodoFilter, TodoList} from 'components/parts';
+import {useTodoStackNavigation} from 'navigation/hooks';
+import React, {useCallback, useContext, useState} from 'react';
+import {Alert, StyleSheet, View} from 'react-native';
+import {Icon, ThemeContext} from 'react-native-elements';
+import {Todo, TodoService, ErrorObject} from 'services';
+
+type ShowFilter = {
+  [K in FilterType]: (todo: Todo) => boolean;
+};
+
+const showFilter: ShowFilter = {
+  [FilterType.ALL]: () => true,
+  [FilterType.INCOMPLETE]: (todo) => !todo.completed,
+  [FilterType.COMPLETED]: (todo) => todo.completed,
+};
+
+export const TodoBoard: React.FC = () => {
+  const {theme} = useContext(ThemeContext);
+  const navigation = useTodoStackNavigation<'TodoBoard'>();
+  const [todos, setTodos] = useState<Todo[]>();
+  const [filterType, setFilterType] = useState<FilterType>(FilterType.ALL);
+  const [loading, setLoading] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      let isActive = true;
+      setLoading(true);
+
+      TodoService.getTodos()
+        .then((response) => {
+          if (isActive) {
+            setTodos(response);
+          }
+        })
+        .catch((e: ErrorObject) => {
+          console.log(e.message);
+        })
+        .finally(() => {
+          if (isActive) {
+            setLoading(false);
+          }
+        });
+
+      return () => {
+        isActive = false;
+      };
+    }, []),
+  );
+
+  const toggleTodoCompletion = useCallback(
+    (id: number) => {
+      if (todos === undefined) {
+        return;
+      }
+      const target = todos.find((todo) => todo.id === id);
+      if (!target) {
+        return;
+      }
+      /*
+       * Network越しの処理時間を待たずにUIを更新する。
+       * 処理が正常に出来ない場合は戻すが、リソース（タスク）がなくなっている場合は削除する。
+       */
+      setTodos(todos.map((todo) => (todo.id === id ? {...todo, completed: !target.completed} : todo)));
+      TodoService.putTodo(id, !target.completed).catch((e: ErrorObject) => {
+        if (e.status && e.status === 404) {
+          setTodos(todos.filter((todo) => todo.id !== id));
+          console.log(`更新しようとしたタスクが存在しませんでした。`);
+        } else {
+          // errorで処理できなければ戻す
+          setTodos(todos.map((todo) => (todo.id === id ? {...todo, completed: target.completed} : todo)));
+          console.log(e.message);
+        }
+      });
+    },
+    [todos],
+  );
+
+  const showTodos = todos?.filter(showFilter[filterType]);
+
+  return (
+    <View style={styles.container} testID="screen/main/home">
+      <TodoFilter filterType={filterType} setFilterType={setFilterType} />
+      <TodoList
+        todos={showTodos}
+        contentContainerStyle={styles.todoListContainer}
+        toggleTodoCompletion={toggleTodoCompletion}
+      />
+      <Icon
+        name="plus"
+        type="font-awesome-5"
+        color={theme.colors?.primary}
+        raised
+        reverse
+        size={30}
+        containerStyle={styles.iconContainerStyle}
+        onPress={() => {
+          navigation.navigate('TodoForm');
+        }}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  todoListContainer: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 80,
+  },
+  iconContainerStyle: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+  },
+  indicatorContainer: {
+    position: 'absolute',
+    zIndex: 2,
+    width: '100%',
+    flex: 1,
+    alignContent: 'center',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+  },
+  indicator: {
+    flex: 1,
+  },
+});
+```
 
 :::caution
 現時点では、エラー発生時の処理は実装しませんが、実装中にどのようなエラーが発生しているかを確認したいことは多いのでログ出力だけしています。
