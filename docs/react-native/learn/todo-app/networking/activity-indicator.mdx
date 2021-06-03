@@ -139,18 +139,6 @@ const styles = StyleSheet.create({
     bottom: 10,
     right: 10,
   },
-  indicatorContainer: {
-    position: 'absolute',
-    zIndex: 2,
-    width: '100%',
-    flex: 1,
-    alignContent: 'center',
-    height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-  },
-  indicator: {
-    flex: 1,
-  },
 });
 ```
 
@@ -163,12 +151,78 @@ const styles = StyleSheet.create({
 ## アクティビティインジケータの表示
 
 次に、REST APIを呼び出している間だけアクティビティインジケータを表示するように修正します。このとき、アクティビティインジケータを表示するコンポーネントをToDo一覧の上にかぶせて表示することで、ToDo一覧内でのユーザの操作をブロックします。
+処理中（`true`）の時はアクティビティインジケータを表示。それ以外の場合は非表示とします。
+ユーザへ処理中の時は、操作出来ないことを伝える為、アクティビティインジケータを画面中央に表示します。
 
-> 🚧 作成中 🚧
+``` diff typescript jsx title="/src/screens/todo/TodoBoard.tsx"
+import {useFocusEffect} from '@react-navigation/native';
+import {FilterType, TodoFilter, TodoList} from 'components/parts';
+import {useTodoStackNavigation} from 'navigation/hooks';
+import React, {useCallback, useContext, useState} from 'react';
+- import {Alert, StyleSheet, View} from 'react-native';
++ import {Alert, StyleSheet, View, ActivityIndicator} from 'react-native';
+import {Icon, ThemeContext} from 'react-native-elements';
+import {Todo, TodoService, ErrorObject} from 'services';
 
-<!--
-TODO: ステートを参照して、表示するかどうかを切り替えることと、下に配置すると上に表示されるから操作をブロックできることを伝えられれば良いだろうか。
--->
+  /* ～省略～ */  
+
+  return (
+    <View style={styles.container} testID="screen/main/home">
+      <TodoFilter filterType={filterType} setFilterType={setFilterType} />
+      <TodoList
+        todos={showTodos}
+        contentContainerStyle={styles.todoListContainer}
+        toggleTodoCompletion={toggleTodoCompletion}
+      />
+      <Icon
+        name="plus"
+        type="font-awesome-5"
+        color={theme.colors?.primary}
+        raised
+        reverse
+        size={30}
+        containerStyle={styles.iconContainerStyle}
+        onPress={() => {
+          navigation.navigate('TodoForm');
+        }}
+      />
++      {loading && (
++        <View style={styles.indicatorContainer}>
++          <ActivityIndicator animating={loading} color="red" style={styles.indicator} size="large" />
++        </View>
++      )}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  todoListContainer: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 80,
+  },
+  iconContainerStyle: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+  },
++  indicatorContainer: {
++    position: 'absolute',
++    zIndex: 2,
++    width: '100%',
++    flex: 1,
++    alignContent: 'center',
++    height: '100%',
++    backgroundColor: 'rgba(0, 0, 0, 0.2)',
++  },
++  indicator: {
++    flex: 1,
++  },
+});
+```
 
 ## 動作確認
 
@@ -176,13 +230,24 @@ TODO: ステートを参照して、表示するかどうかを切り替える�
 
 ただ、APIサーバをローカルホストで起動している場合などは、REST APIからの応答が早いため一瞬しかアクティビティインジケータが表示されません。この状態だとアクティビティインジケータの確認は難しいので、まずREST APIからの応答に時間がかかっている状況を擬似的に再現します。
 
-> 🚧 作成中 🚧
+今回は、REST APIを呼び出したら応答までの時間を設定する部分を汎用的に適用したいので、Middlewareとして切り出します。
 
-<!--
-TODO: ここでMiddlewareの話をして、APIクライアントからのレスポンスを遅延させるようにしてみる。
--->
+次のファイルを追加してください。
 
-このように修正すると、`TodoService`でToDo一覧などを取得するまでにxx秒かかるようになります。なので、その間アクティビティインジケータが表示され、xx秒経つとインジケータが消えることを確認しましょう。
+``` typescript jsx title="/src/backend/config.ts"
+import {Configuration, Middleware} from './generated-rest-client';
+const waitResponse: Middleware = {
+  post: async (context) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return Promise.resolve(context.response);
+  },
+};
+export const config = new Configuration({basePath: 'http://localhost:9080/api', middleware: [waitResponse]});
+```
+
+`setTimeout(resolve, 1000)`の第二引数へ、待機時間を設定します。今回の例は`1000`（1秒）を設定します。
+
+このように修正すると、`TodoService`でToDo一覧などを取得するまでに1秒かかるようになります。なので、その間アクティビティインジケータが表示され、1秒経つとインジケータが消えることを確認しましょう。
 
 > 🚧 作成中 🚧
 
