@@ -2,9 +2,10 @@
 title: 前提知識
 ---
 
-React Nativeを用いてアプリを実装するには、JavaScript、TypeScript、Reactの習得が必要です。 これらの習得がまだ出来ていない場合は、最初に基本的な知識を習得した後にReact Nativeの基本へと進んでください。
+React Nativeを用いてアプリを実装するには、JavaScript、TypeScript、Reactの知識が必要です。
+技術習得にあたり有効なサイトを紹介させて頂きますので、用語やコード例など、わからないことがあるときは参照してください。
 
-ここでは、技術習得にあたり有効なサイトを紹介させて頂きます。
+まずは[Reactのチュートリアル](https://ja.reactjs.org/tutorial/tutorial.html)の内容がわかるようになってからReact Nativeの学習に進んでください。
 
 ## [JavaScript Primer](https://jsprimer.net/)
 
