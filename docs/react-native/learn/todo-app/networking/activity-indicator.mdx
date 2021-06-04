@@ -2,7 +2,7 @@
 title: REST API呼びだし中の表示
 ---
 
-REST APIの呼びだしには少し時間がかかるものです。呼びだし中に何もフィードバックを返さないと、アプリで処理中なのか、自分の操作が伝わっていないのか、ユーザには判断できなくなってしまいます。
+REST APIの呼びだすと応答を受け取るまでに少し時間がかかることがあります。呼びだし中に何もフィードバックを返さないと、アプリで処理中なのか、自分の操作が伝わっていないのか、ユーザには判断できなくなってしまいます。
 そのため、REST APIの呼びだしのような時間のかかる非同期処理は、アプリが処理中であることをユーザに伝えるのが望ましいです。
 
 また、ToDo一覧が最新化されていないため、削除されているToDoを更新してしまうようなことを防ぐようなケースを想定すると、処理が完了するまでブロックしたい操作もあります。
@@ -10,8 +10,8 @@ REST APIの呼びだしには少し時間がかかるものです。呼びだし
 ToDoアプリでは、一覧を取得中はToDo一覧上にローディング中であることを伝える[アクティビティインジケーター](https://reactnative.dev/docs/activityindicator)を表示しToDoの操作をブロックしましょう。
 
 そのような機能を実現するためには処理中かどうかという状態を管理して、処理中の場合だけアクティビティインジケーターとブロックするためのViewを表示します。
-下のイメージはアクティビティインジケーターを表示している画面です。
 
+下のイメージはアクティビティインジケーターを表示している画面です。
 ![Image](../app-hands-on/ios-wait.png)
 
 ## REST APIの呼びだし状態の管理
@@ -19,7 +19,7 @@ ToDoアプリでは、一覧を取得中はToDo一覧上にローディング中
 まず、REST APIを呼びだすコンポーネントで、REST APIを呼びだし中かどうかを、ReactのStateで管理します。
 
 次のように `useState` を利用して`loading`状態を管理します。
-REST APIを呼びだす`TodoService.getTodos()`の前でloading状態を設定し、`finally`でloadingを解除します。
+REST APIを呼びだす`TodoService.getTodos()`の前でloading状態を設定し、`finally`で`loading`を解除します。
 
 ```typescript diff title="screens/todo/TodoBoard.tsx"
 export const TodoBoard: React.FC = () => {
@@ -62,12 +62,16 @@ export const TodoBoard: React.FC = () => {
 本来は、エラーが発生した場合にはユーザにもエラーの内容と（可能であれば）エラーから回復する方法を伝えるべきです。
 :::
 
-## アクティビティインジケータの表示
+## 処理中UIの表示
 
-次に、REST APIを呼びだし中にアクティビティインジケータを表示するように修正します。このとき、アクティビティインジケータを表示するコンポーネントをToDo一覧の上にかぶせて表示することで、ToDo一覧内でのユーザの操作をブロックします。
-処理中（`true`）の時だけアクティビティインジケータを中央に表示し、操作できないようにToDo一覧を触れないように覆います。
+次に、処理中であることを表示するように修正します。
 
-ToDo一覧の操作は出来ませんが、設定タブをタップし、設定画面に遷移することは出来ます。
+処理中のUIはアクティビティインジケータを表示し、ViewコンポーネントをToDo一覧の上にかぶせて表示することで、ToDo一覧にあるToDoをユーザが操作できないようにします。
+（ToDo一覧の操作は出来ませんが、設定タブをタップし、設定画面に遷移することは出来ます。）
+
+具体的には`loading`が`true`の時だけアクティビティインジケータを中央に表示し、操作できないように`View`でToDo一覧を覆います。
+
+### 操作をブロックするためのスタイル定義
 
 まず、操作をブロックするための`indicatorContainer`とアクティビティインジケーターを中央に表示するための`indicator`のスタイルを定義してください。
 
@@ -97,8 +101,10 @@ const styles = StyleSheet.create({
  });
 ```
 
-ReactNativeの `ActivityIndicator` を利用してローディングを表示します。
-操作ブロック用のContainerがあるため、loading中でなければ表示しない制御も入れます。
+### 処理中であることを伝えるUI
+
+つぎにReactNativeの `ActivityIndicator` を表示します。
+操作をブロックするためのContainerは、`loading` 中でなければ表示しない制御も入れます。
 
 ```typescript diff title="/src/screens/todo/TodoBoard.tsx"
  import React, {useCallback, useContext, useState} from 'react';
@@ -130,7 +136,7 @@ ReactNativeの `ActivityIndicator` を利用してローディングを表示し
 
 :::note
 `TodoService.getTodos()`の`finally`での`setLoaing(false)`をコメントアウトするとアクティビティインジケーターを確認出来ますが、コードを修正しないとToDo一覧を操作出来ません。
-次の動作確認ではREST APIの応答を一定時間待つという状態を擬似的に作り出してみましょう。
+次の動作確認でREST APIの応答を一定時間待つという状態を擬似的に作り出してみましょう。
 :::
 
 ## 動作確認
