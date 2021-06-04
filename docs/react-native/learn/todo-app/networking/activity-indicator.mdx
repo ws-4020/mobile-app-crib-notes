@@ -20,6 +20,9 @@ ToDoアプリでは、一覧を取得中はToDo一覧上にローディング中
 
 次のように `useState` を利用して`loading`状態を管理します。
 REST APIを呼びだす`TodoService.getTodos()`の前でloading状態を設定し、`finally`で`loading`を解除します。
+また、`TodoForm`でToDOの追加ボタンを押した後、応答前にヘッダーの`×ボタン`で閉じるとREST APIの処理完了を待たずに元の画面へ遷移してしまう為、
+修正します。
+ToDoの更新時、ToDo更新APIの応答前にUIを更新するよう`toggleTodoCompletion`へ追加する。
 
 ```diff typescript title="screens/todo/TodoBoard.tsx"
 export const TodoBoard: React.FC = () => {
@@ -54,6 +57,39 @@ export const TodoBoard: React.FC = () => {
       };
     }, []),
 
+
+    const toggleTodoCompletion = (id: number) => {
+      const target = todos.find((todo) => todo.id === id);
+      if (!target) {
+        return;
+      }
+-      TodoService.putTodo(id, !target.completed)
+-        .then((returnedTodo) => setTodos(todos.map((todo) => (todo.id === id ? returnedTodo : todo))))
+-        .catch(() => {});
++      const updateTodo = {...target, completed: !target.completed};
++      setTodos(todos.map((todo) => (todo.id === id ? updateTodo : todo)));
++      TodoService.putTodo(id, !target.completed).catch(() => {});
+    };
+
+```
+
+つづいてToDo登録でも同様の事象が発生するので、ToDo登録APIの応答後に`TodoForm`がフォーカスされているかを判定し、
+フォーカスされている場合、元画面へ戻るように修正します。
+
+```diff typescript title="screens/todo/TodoForm.tsx"
+export const TodoForm: React.FC = () => {
+  const navigation = useNavigation();
+
+
+  const onAdd = useCallback<(values: {task: string}) => void>(
+    async ({task}) => {
+      await TodoService.postTodo(task);
++      if (navigation.isFocused()) {
+        navigation.goBack();
++      }
+    },
+    [navigation],
+  );
 ```
 
 :::caution
@@ -157,7 +193,7 @@ Middlewareを利用して一定時間待機させるために、config.tsを次�
 import {Configuration, Middleware} from './generated-rest-client';
 const waitResponse: Middleware = {
   post: async (context) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     return Promise.resolve(context.response);
   },
 };
@@ -165,7 +201,7 @@ export const config = new Configuration({basePath: 'http://${IP}:9080/api', midd
 ```
 
 :::note
-ここではREST APIの応答後に`await`を利用して`Promise`が`resolve`するまで1秒間だけ待つように実装しています。
+ここではREST APIの応答後に`await`を利用して`Promise`が`resolve`するまで3秒間だけ待つように実装しています。
 `await`について知りたい場合は事前学習で紹介しているJavaScript Primerの[非同期処理](https://jsprimer.net/basic/async/)にある[await 式](https://jsprimer.net/basic/async/#await-expression)を参照してみてください。
 :::
 
@@ -177,10 +213,6 @@ export const config = new Configuration({basePath: 'http://${IP}:9080/api', midd
 3. ログイン
 
 ToDo一覧画面マウント時にToDo一覧取得APIの呼び出しをするので画面中央にアクティビティインジケーターが表示されることと操作がブロックされていることが確認できます。
-
-:::note
-REST API呼び出しの応答時間を1秒に設定しています。確認の際に1秒だと早すぎる場合は、お好みの時間に変更して再度確認してみてください。
-:::
 
 > 🚧 作成中 🚧
 
