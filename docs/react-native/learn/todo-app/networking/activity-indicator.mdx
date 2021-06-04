@@ -16,10 +16,10 @@ ToDoアプリでは、一覧を取得中はToDo一覧上にローディング中
 
 ## REST APIの呼びだし状態の管理
 
-まず、REST APIを呼びだすコンポーネントで、REST APIを呼びだし中かどうかを、ReactのStateで管理します。
+まず、REST APIを呼びだすコンポーネントで、REST APIを呼びだし中かどうかの状態を管理します。
 
 次のように `useState` を利用して`loading`状態を管理します。
-REST APIを呼びだす`TodoService.getTodos()`の前でloading状態を設定し、`finally`で`loading`を解除します。
+REST APIを呼びだす`TodoService.getTodos()`の前で`loading`中に設定し、`finally`で`loading`を解除します。
 また、`TodoForm`でToDOの追加ボタンを押した後、応答前にヘッダーの`×ボタン`で閉じるとREST APIの処理完了を待たずに元の画面へ遷移してしまう為、
 修正します。
 ToDoの更新時、ToDo更新APIの応答前にUIを更新するよう`toggleTodoCompletion`へ追加する。
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
 次の動作確認でREST APIの応答を一定時間待つという状態を擬似的に作り出してみましょう。
 :::
 
-## 動作確認
+### 動作確認
 
 これで、ToDo一覧取得のREST APIを呼びだしている間はアクティビティインジケータが表示され、一部の操作はブロックされるようになりました。実際にアプリを起動して動きを確認しましょう。
 
