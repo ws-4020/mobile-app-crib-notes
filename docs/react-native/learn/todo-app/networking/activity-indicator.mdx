@@ -21,7 +21,7 @@ ToDoアプリでは、一覧を取得中はToDo一覧上にローディング中
 次のように `useState` を利用して`loading`状態を管理します。
 REST APIを呼びだす`TodoService.getTodos()`の前でloading状態を設定し、`finally`で`loading`を解除します。
 
-```typescript diff title="screens/todo/TodoBoard.tsx"
+```diff typescript title="screens/todo/TodoBoard.tsx"
 export const TodoBoard: React.FC = () => {
    const {theme} = useContext(ThemeContext);
    const [todos, setTodos] = useState<Todo[]>([]);
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
 つぎにReactNativeの `ActivityIndicator` を表示します。
 操作をブロックするためのContainerは、`loading` 中でなければ表示しない制御も入れます。
 
-```typescript diff title="/src/screens/todo/TodoBoard.tsx"
+```diff typescript title="/src/screens/todo/TodoBoard.tsx"
  import React, {useCallback, useContext, useState} from 'react';
 -import {Alert, StyleSheet, View} from 'react-native';
 +import {Alert, StyleSheet, View, ActivityIndicator} from 'react-native';
@@ -167,6 +167,19 @@ export const config = new Configuration({basePath: 'http://${IP}:9080/api', midd
 :::note
 ここではREST APIの応答後に`await`を利用して`Promise`が`resolve`するまで1秒間だけ待つように実装しています。
 `await`について知りたい場合は事前学習で紹介しているJavaScript Primerの[非同期処理](https://jsprimer.net/basic/async/)にある[await 式](https://jsprimer.net/basic/async/#await-expression)を参照してみてください。
+:::
+
+ここまででREST APIを呼び出したら応答までの時間を擬似的に待つ設定が完了です。
+実際に動作確認を進めていきます。次の手順で確認してください。
+
+1. APIサーバを起動
+2. アプリを起動
+3. ログイン
+
+Todo一覧画面マウント時にTodo一覧取得APIの呼び出しをするので画面中央にアクティビティインジケーターが表示されることと操作がブロックされていることが確認できると思います。
+
+:::note
+REST API呼び出しの応答時間を1秒に設定しています。確認の際に1秒だと早すぎる場合は、お好みの時間に変更して再度確認してみてください。
 :::
 
 > 🚧 作成中 🚧
