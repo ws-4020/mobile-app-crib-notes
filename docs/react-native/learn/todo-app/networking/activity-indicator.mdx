@@ -56,7 +56,6 @@ export const TodoBoard: React.FC = () => {
 
 ```
 
-
 `ToDo登録画面`でToDOの追加ボタンを押した後、応答前にヘッダーの`×ボタン`で閉じるとREST APIの処理完了を待たずに元の画面へ遷移してしまう為、
 修正します。
 ToDoの更新時、ToDo更新APIの応答前にUIを更新するよう`toggleTodoCompletion`へ追加する。
