@@ -56,12 +56,15 @@ export const TodoBoard: React.FC = () => {
 
 ```
 
-今の状態で、`ToDo登録画面`でToDoの`追加ボタン`を押した直後にヘッダーの`×ボタン`を押すと、ToDo登録APIの処理結果を待たずに`ToDo登録画面`を閉じてしまいます。
-その後、`goBack()`で前画面に戻ろうとすると不整合（既に対象画面へ遷移しているのにまた遷移しようとしている）が起きて、エラーが発生してしまいます。
-この事象を解消するために以下の修正を実施します。
+今の状態では以下の不具合が発生します。
 
-- ToDoの更新時、ToDo更新APIの応答前に一覧画面を更新するよう`toggleTodoCompletion`へ追加する。
-- ToDo登録APIの応答後に`ToDo登録画面`がフォーカスされているかを判定する。フォーカスされている場合、元画面へ戻るように修正します。
+- `ToDo一覧画面`でToDoのステータスを更新した後に、`未完了のみ`または、`完了のみ`へタブ移動した結果、表示されているToDoが意図して更新したものと一致しない。
+- `ToDo登録画面`でToDoの`追加ボタン`を押した直後にヘッダーの`×ボタン`を押すと、ToDo登録APIの処理結果を待たずに`ToDo登録画面`を閉じてしまいます。
+その後、`goBack()`で前画面に戻ろうとすると不整合（既に対象画面へ遷移しているのにまた遷移しようとしている）が起きて、エラーが発生。
+
+これらの事象を解消するために以下の修正を実施します。
+
+まずは、ToDoステータス更新の不具合から説明します。ToDoの更新時、ToDo更新APIの応答前に一覧画面を更新するよう`toggleTodoCompletion`へ追加します。
 
 ```diff typescript title="screens/todo/TodoBoard.tsx"
 export const TodoBoard: React.FC = () => {
@@ -83,6 +86,9 @@ export const TodoBoard: React.FC = () => {
 
 ```
 
+このように修正することで、ToDo更新APIを呼びだす前に更新内容を画面内へ反映されるので不具合が解消されます。
+つづいて、ToDo登録APIの応答後に`ToDo登録画面`がフォーカスされているかを判定して、フォーカスされている場合、元画面へ戻るように修正します。
+
 ```diff typescript title="screens/todo/TodoForm.tsx"
 export const TodoForm: React.FC = () => {
   const navigation = useNavigation();
@@ -90,14 +96,18 @@ export const TodoForm: React.FC = () => {
 
   const onAdd = useCallback<(values: {task: string}) => void>(
     async ({task}) => {
-      await TodoService.postTodo(task);
-+      if (navigation.isFocused()) {
-        navigation.goBack();
-+      }
+      await TodoService.postTodo(task)
++      .then(() => {
++        if (navigation.isFocused()) {
+          navigation.goBack();
++        }
++      })
     },
     [navigation],
   );
 ```
+
+これで、`goBack()`前にフォーカスされている画面が判定されるようになり、不整合が発生しなくなります。
 
 :::caution
 現時点では、エラー発生時の処理は実装しませんが、実装中にどのようなエラーが発生しているかを確認したいことは多いのでログ出力だけしています。
