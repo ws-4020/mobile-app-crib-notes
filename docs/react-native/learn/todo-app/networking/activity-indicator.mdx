@@ -62,63 +62,6 @@ export const TodoBoard: React.FC = () => {
 本来は、エラーが発生した場合にはユーザにもエラーの内容と（可能であれば）エラーから回復する方法を伝えるべきです。
 :::
 
-今の状態では以下の不具合が発生します。
-
-- `ToDo一覧画面`でToDoのステータスを更新した後に、`未完了のみ`または、`完了のみ`へタブ移動した結果、表示されているToDoが意図して更新したものと一致しない。
-- `ToDo登録画面`でToDoの`追加ボタン`を押した直後にヘッダーの`×ボタン`を押すと、ToDo登録APIの処理結果を待たずに`ToDo登録画面`を閉じてしまいます。
-その後、`goBack()`で前画面に戻ろうとすると不整合（既に対象画面へ遷移しているのにまた遷移しようとしている）が起きて、エラーが発生。
-
-これらの事象を解消するために以下の修正を実施します。
-
-まずは、ToDoステータス更新の不具合から説明します。ToDoの更新時、ToDo更新APIの応答前に一覧画面を更新するよう`toggleTodoCompletion`へ追加します。
-
-```diff typescript title="screens/todo/TodoBoard.tsx"
-export const TodoBoard: React.FC = () => {
-
-// 中略
-
-    const toggleTodoCompletion = (id: number) => {
-      const target = todos.find((todo) => todo.id === id);
-      if (!target) {
-        return;
-      }
--      TodoService.putTodo(id, !target.completed)
--        .then((returnedTodo) => setTodos(todos.map((todo) => (todo.id === id ? returnedTodo : todo))))
--        .catch(() => {});
-+      const updateTodo = {...target, completed: !target.completed};
-+      setTodos(todos.map((todo) => (todo.id === id ? updateTodo : todo)));
-+      TodoService.putTodo(id, !target.completed).catch(() => {});
-    };
-
-```
-
-:::caution
-現時点では、REST APIで発生したエラー処理は実装していませんが、本来は開発するアプリの仕様にあわせて例外処理（`catch`）として、エラーが発生した場合の挙動を実装する必要があります。
-:::
-
-このように修正することで、ToDo更新APIを呼びだす前に更新内容を画面内へ反映されるので不具合が解消されます。
-つづいて、ToDo登録APIの応答後に`ToDo登録画面`がフォーカスされているかを判定して、フォーカスされている場合、元画面へ戻るように修正します。
-
-```diff typescript title="screens/todo/TodoForm.tsx"
-export const TodoForm: React.FC = () => {
-  const navigation = useNavigation();
-
-
-  const onAdd = useCallback<(values: {task: string}) => void>(
-    async ({task}) => {
-      await TodoService.postTodo(task)
-+      .then(() => {
-+        if (navigation.isFocused()) {
-          navigation.goBack();
-+        }
-+      })
-    },
-    [navigation],
-  );
-```
-
-これで、`goBack()`前にフォーカスされている画面が判定されるようになり、不整合が発生しなくなります。
-
 ## 処理中UIの表示
 
 次に、処理中であることを表示するように修正します。
@@ -196,7 +139,66 @@ const styles = StyleSheet.create({
 次の動作確認でREST APIの応答を一定時間待つという状態を擬似的に作り出してみましょう。
 :::
 
-### 動作確認
+## 不具合箇所の修正
+
+ここまでを実装した結果、以下の不具合が発生します。
+
+- `ToDo一覧画面`でToDoのステータスを更新した後に、`未完了のみ`または、`完了のみ`へタブ移動した結果、表示されているToDoが意図して更新したものと一致しない。
+- `ToDo登録画面`でToDoの`追加ボタン`を押した直後にヘッダーの`×ボタン`を押すと、ToDo登録APIの処理結果を待たずに`ToDo登録画面`を閉じてしまいます。
+その後、`goBack()`で前画面に戻ろうとすると不整合（既に対象画面へ遷移しているのにまた遷移しようとしている）が起きて、エラーが発生。
+
+これらの事象を解消するためにそれぞれの修正を実施します。
+
+まずは、ToDoステータス更新の不具合から説明します。ToDoの更新時、ToDo更新APIの応答前に一覧画面を更新するよう`toggleTodoCompletion`へ追加します。
+
+```diff typescript title="screens/todo/TodoBoard.tsx"
+export const TodoBoard: React.FC = () => {
+
+// 中略
+
+    const toggleTodoCompletion = (id: number) => {
+      const target = todos.find((todo) => todo.id === id);
+      if (!target) {
+        return;
+      }
+-      TodoService.putTodo(id, !target.completed)
+-        .then((returnedTodo) => setTodos(todos.map((todo) => (todo.id === id ? returnedTodo : todo))))
+-        .catch(() => {});
++      const updateTodo = {...target, completed: !target.completed};
++      setTodos(todos.map((todo) => (todo.id === id ? updateTodo : todo)));
++      TodoService.putTodo(id, !target.completed).catch(() => {});
+    };
+
+```
+
+:::caution
+現時点では、REST APIで発生したエラー処理は実装していません。本来は開発するアプリの仕様にあわせて例外処理（`catch`）を実装する必要があります。
+:::
+
+このように修正することで、ToDo更新APIを呼びだす前に更新内容を画面内へ反映されるので不具合が解消されます。
+つづいて、ToDo登録APIの応答後に`ToDo登録画面`がフォーカスされているかを判定して、フォーカスされている場合、元画面へ戻るように修正します。
+
+```diff typescript title="screens/todo/TodoForm.tsx"
+export const TodoForm: React.FC = () => {
+  const navigation = useNavigation();
+
+
+  const onAdd = useCallback<(values: {task: string}) => void>(
+    async ({task}) => {
+      await TodoService.postTodo(task)
++      .then(() => {
++        if (navigation.isFocused()) {
+          navigation.goBack();
++        }
++      })
+    },
+    [navigation],
+  );
+```
+
+これで、`goBack()`前にフォーカスされている画面が判定されるようになり、不整合が発生しなくなります。
+
+## 動作確認
 
 これで、ToDo一覧取得のREST APIを呼びだしている間はアクティビティインジケータが表示され、一部の操作はブロックされるようになりました。
 あわせて不具合箇所も解消されました。実際にアプリを起動して動きを確認しましょう。
