@@ -20,9 +20,6 @@ ToDoアプリでは、一覧を取得中はToDo一覧上にローディング中
 
 次のように `useState` を利用して`loading`状態を管理します。
 REST APIを呼びだす`TodoService.getTodos()`の前で`loading`中に設定し、`finally`で`loading`を解除します。
-また、`TodoForm`でToDOの追加ボタンを押した後、応答前にヘッダーの`×ボタン`で閉じるとREST APIの処理完了を待たずに元の画面へ遷移してしまう為、
-修正します。
-ToDoの更新時、ToDo更新APIの応答前にUIを更新するよう`toggleTodoCompletion`へ追加する。
 
 ```diff typescript title="screens/todo/TodoBoard.tsx"
 export const TodoBoard: React.FC = () => {
@@ -57,6 +54,19 @@ export const TodoBoard: React.FC = () => {
       };
     }, []),
 
+```
+
+
+`ToDo登録画面`でToDOの追加ボタンを押した後、応答前にヘッダーの`×ボタン`で閉じるとREST APIの処理完了を待たずに元の画面へ遷移してしまう為、
+修正します。
+ToDoの更新時、ToDo更新APIの応答前にUIを更新するよう`toggleTodoCompletion`へ追加する。
+つづいてToDo登録でも同様の事象が発生するので、ToDo登録APIの応答後に`ToDo登録画面`がフォーカスされているかを判定し、
+フォーカスされている場合、元画面へ戻るように修正します。
+
+```diff typescript title="screens/todo/TodoBoard.tsx"
+export const TodoBoard: React.FC = () => {
+
+// 中略
 
     const toggleTodoCompletion = (id: number) => {
       const target = todos.find((todo) => todo.id === id);
@@ -72,9 +82,6 @@ export const TodoBoard: React.FC = () => {
     };
 
 ```
-
-つづいてToDo登録でも同様の事象が発生するので、ToDo登録APIの応答後に`TodoForm`がフォーカスされているかを判定し、
-フォーカスされている場合、元画面へ戻るように修正します。
 
 ```diff typescript title="screens/todo/TodoForm.tsx"
 export const TodoForm: React.FC = () => {
