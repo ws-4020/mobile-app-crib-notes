@@ -3,15 +3,21 @@ title: 前提知識
 ---
 
 React Nativeを用いてアプリを実装するには、JavaScript、TypeScript、Reactの知識が必要です。
-参考にしてもらいたいサイトを紹介します。
 
-## JavaScript Primer
+ToDoアプリの実装例や解説を理解するために参考になるサイトを紹介します。
+用語やコード例でわからないことがあるときは参照してください。
+
+JavaScriptやReactの知識がない方はまず参考サイトで学習してからToDoアプリの実装を進めてください。
+
+## 参考サイト
+
+### JavaScript Primer
 
 Reactを学ぶにはJavaScriptの言語知識が必須です。 JavaScriptを触れたことがない人は、まずはJavaScriptの知識習得からお願いします。
 
 [JavaScript Primer](https://jsprimer.net/)は、JavaScriptの文法や機能を一から学べるサイトです。「第一部：基本文法」までの知識があれば、ひとまず充分です。[基本文法の目次](https://jsprimer.net/basic/)を見てわからないことがあれば学習してください。
 
-## サバイバルTypeScript
+### サバイバルTypeScript
 
 TypeScriptは、JavaScriptに静的型付けを追加したプログラミング言語です。 JavaScriptと上位互換性があり、静的型付けによりコード実行前にエラーを検出できます。 その性質から、開発規模が大きくなるほどその効果を発揮します。
 
@@ -19,7 +25,7 @@ TypeScriptは、JavaScriptに静的型付けを追加したプログラミング
 
 実務レベルに必要な一通りの知識が必要な場合はサバイバルTypeScriptで学習しましょう。[これだけはおさえておきたいTypeScriptの機能](https://book.yyts.org/features)の見出しをみて内容がイメージできれば大丈夫です。
 
-## React公式サイト
+### React公式サイト
 
 Reactを学ぶには[React公式サイト](https://ja.reactjs.org/)が一番お勧めです。
 
