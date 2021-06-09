@@ -137,7 +137,8 @@ const styles = StyleSheet.create({
 ```
 
 :::note
-`TodoService.getTodos()`の`finally`での`setLoaing(false)`をコメントアウトするとアクティビティインジケーターを確認出来ますが、コードを修正しないとToDo一覧を操作出来ません。
+このままだとREST APIからの応答が早いため一瞬しかアクティビティインジケータが表示されないので、確認ができません。
+`TodoService.getTodos()`の`finally`での`setLoaing(false)`をコメントアウトするとアクティビティインジケータを確認出来ますが、コードを修正しないとToDo一覧を操作出来ません。
 次の動作確認でREST APIの応答を一定時間待つという状態を擬似的に作り出してみましょう。
 :::
 
