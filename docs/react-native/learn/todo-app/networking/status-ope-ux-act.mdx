@@ -1,0 +1,54 @@
+---
+title: ユーザー操作への応答
+---
+
+ToDoの一覧が表示されたらToDoのステータスを変更してみましょう。
+
+タップしてもすぐに変更されず、応答が返ってくるまでユーザは待つ必要があります。
+ToDo一覧の最新化と同じように処理が終わるまで操作をブロックしても良いですが、複数のToDoのステータスを変更することがストレスになります。
+
+ここではToDoアプリ側でToDoのステータスがタップされたタイミングでUIを変更するようにしましょう。
+
+## ToDoステータス操作タイミングでの更新
+
+次のようにToDo更新APIを呼びだす前に`setTodos`へステータス更新した結果を反映するように修正します。
+
+```diff typescript title="screens/todo/TodoBoard.tsx"
+export const TodoBoard: React.FC = () => {
+
+    const toggleTodoCompletion = useCallback(
+
+         // 中略
+
++        const updateTodo = {...target, completed: !target.completed};
+-        setTodos(todos.map((todo) => (todo.id === id ? {...todo, completed: !target.completed} : todo)));
++        setTodos(todos.map((todo) => (todo.id === id ? updateTodo : todo)));
+        TodoService.putTodo(id, !target.completed)
+        .then((returnedTodo) =>
+            setTodos((prevTodos) => {
+                return prevTodos.map((todo) => (todo.id === id ? returnedTodo : todo));
+            }),
+        )
+        .catch(() => {});
+
+        // 中略
+
+    );
+```
+
+:::note
+REST APIが正常に処理出来なかった場合にUIを戻す必要がありますが、その方法についてはガイドしません。
+catchブロックで「ユーザにエラーを伝え」、「ToDo一覧」を操作前、もしくは最新化するという方法を考えてみてください。
+:::
+
+## 動作確認
+
+これでToDoのステータスをタップしたタイミングでUIへ反映されるようになりました。
+実際にアプリを動かして、そのようになっていることを確認していきましょう。次の手順でアプリを操作してください。
+
+1. APIサーバを起動
+2. アプリを起動
+3. ログイン
+4. 任意のToDoのステータスをタップする（複数個）
+
+タップしたToDoのステータスがすぐに反映されることが確認できます。
