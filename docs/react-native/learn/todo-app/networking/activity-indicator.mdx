@@ -154,6 +154,12 @@ REST APIクライントの接続先を切り替えていた`config.ts`で`Middle
 Middlewareを利用して一定時間待機させるために、config.tsを次のように修正してください。
 `${IP}` はご自身の環境に合わせて設定したままにしてください。
 
+:::note
+Middlewareとは、特定の処理に対して共通的に行いたい処理（例えば、ログ記録、クラッシュレポート等）をカスタマイズして設定できるインタフェースです。
+
+今回は、REST APIの応答時間を任意のものへ設定するのに使用してます。
+:::
+
 ``` typescript jsx title="/src/backend/config.ts"
 import {Configuration, Middleware} from './generated-rest-client';
 const waitResponse: Middleware = {
