@@ -21,7 +21,9 @@ export const TodoForm: React.FC = () => {
   const onAdd = useCallback<(values: {task: string}) => void>(
     async ({task}) => {
       await TodoService.postTodo(task);
-      navigation.goBack();
+      if (navigation.isFocused()) {
+        navigation.goBack();
+      }
     },
     [navigation],
   );
