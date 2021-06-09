@@ -384,6 +384,12 @@ Reactのよくある問題として、画面が破棄（アンマウント）さ
 詳細は、React公式ドキュメントの[フックでデータの取得をどのように行うのですか？](https://ja.reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks)を参照してください。
 :::
 
+:::info
+`toggleTodoCompletion`では[関数型の更新](https://ja.reactjs.org/docs/hooks-reference.html#functional-updates)を利用しています。
+`setTodos(todos.map((todo) => (todo.id === id ? returnedTodo : todo)))`では「複数のToDoを連続で更新する」ような操作をするとToDoの状態が戻ってしまうような事象が発生します。
+これは「画面の実装」中には再現しづらい不具合ですが、「REST APIとの接続」した後でToDoのステータス更新処理で時間がかかるようになると発生します。
+:::
+
 修正できたら実行してください。
 次の操作ができたら成功です。
 
