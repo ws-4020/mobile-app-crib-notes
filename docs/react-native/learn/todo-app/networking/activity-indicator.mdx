@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
 ### 処理中であることを伝えるUI
 
 つぎにReactNativeの `ActivityIndicator` を表示します。
-操作をブロックするためのContainerは、`loading` 中でなければ表示しない制御も入れます。
+操作をブロックするためのContainerは、`loading`中でなければ表示されないようにします。
 
 ```diff typescript title="/src/screens/todo/TodoBoard.tsx"
  import React, {useCallback, useContext, useState} from 'react';
