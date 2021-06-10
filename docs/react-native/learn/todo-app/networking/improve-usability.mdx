@@ -18,24 +18,27 @@ ToDo一覧の最新化と同じように処理が終わるまで操作をブロ�
 ```diff typescript title="screens/todo/TodoBoard.tsx"
 export const TodoBoard: React.FC = () => {
 
-    const toggleTodoCompletion = useCallback(
+    // 中略
 
-         // 中略
+    const toggleTodoCompletion = (id: number) => {
 
+         const target = todos.find((todo) => todo.id === id);
+         if (!target) {
+             return;
+         }
 +        const updateTodo = {...target, completed: !target.completed};
--        setTodos(todos.map((todo) => (todo.id === id ? {...todo, completed: !target.completed} : todo)));
-+        setTodos(todos.map((todo) => (todo.id === id ? updateTodo : todo)));
++        setTodos(prevTodos.map((todo) => (todo.id === id ? updateTodo : todo)));
         TodoService.putTodo(id, !target.completed)
-        .then((returnedTodo) =>
-            setTodos((prevTodos) => {
-                return prevTodos.map((todo) => (todo.id === id ? returnedTodo : todo));
-            }),
-        )
-        .catch(() => {});
-
-        // 中略
-
+-            .then((returnedTodo) =>
+-                setTodos((prevTodos) => {
+-                    return prevTodos.map((todo) => (todo.id === id ? returnedTodo : todo));
+-                }),
+-            )
+            .catch(() => {});
     );
+
+    // 中略
+
 ```
 
 :::note
