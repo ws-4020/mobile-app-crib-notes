@@ -386,10 +386,6 @@ Reactのよくある問題として、画面が破棄（アンマウント）さ
 
 :::info
 `toggleTodoCompletion`では**[関数型の更新](https://ja.reactjs.org/docs/hooks-reference.html#functional-updates)**を利用しています。
-
-`setTodos(todos.map((todo) => (todo.id === id ? returnedTodo : todo)))`という実装では、ユーザが「複数のToDoを連続で更新」したとき後から操作したToDoを更新するときに古い`todos`を参照してしまう可能性があります。
-そのため、最後に更新したToDo以外のToDoの状態が戻ってしまうことがあります。
-これは「画面の実装」を学習中には発生しづらい不具合ですが、「REST APIとの接続」で実装を追加するとToDoのステータス更新処理で時間がかかるようになるため不具合が発生します。
 :::
 
 修正できたら実行してください。
