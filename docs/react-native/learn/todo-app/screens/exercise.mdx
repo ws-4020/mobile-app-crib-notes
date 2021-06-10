@@ -72,8 +72,9 @@ const putTodo = async (id: number, completed: boolean) => {
 
 このように実装することで`Promise`を返す（`resolve`する）までに2秒程度待つことになり、返されるTodoも`TodoService`が参照しているオブジェクトとは別のインスタンスになります。
 
-`TodoBoard.tsx`と`TodoService.tsx`を修正したらアプリを起動して、連続してTodoのステータスを更新してみましょう。
-未完了のものを上から順番に連続でタップしてみてください。
+`TodoBoard.tsx`と`TodoService.tsx`を修正したらアプリを起動して、複数のTodoのステータスを連続して更新してみましょう。
+
+まず、全てのTodoを未完了にします。次に未完了のものを上から順番に連続でタップしてみてください。
 
 全て完了になるはずですが、未完了に戻ってしまうことがあります。
 
