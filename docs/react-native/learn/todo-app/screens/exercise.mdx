@@ -35,7 +35,7 @@ ToDo一覧画面に削除ボタンを追加する方法が簡単です。
 ### 関数型のState更新
 
 まず不具合が発生する実装を紹介します。
-`TodoBoard.tsx`の`toggleTodoCompletion`を次のように書き換えます。
+`TodoBoard.tsx`の`toggleTodoCompletion`を次のように書き換えてください。
 
 正しくは`setTodos`に関数を渡す[関数型の更新](https://ja.reactjs.org/docs/hooks-reference.html#functional-updates)を利用すべきですが
 この実装ではレンダリング用の値を参照して更新しています。
@@ -53,9 +53,9 @@ ToDo一覧画面に削除ボタンを追加する方法が簡単です。
 ```
 
 次に不具合を再現できるように実装を修正しましょう。
-REST APIと接続すれば不具合は再現できますが、ここではREST APIと接続した場合と同じ状況を再現します。
+REST APIに接続すれば不具合は再現できます。準備に時間がかかるため、ここではREST APIに接続した場合と同じ状況を再現します。
 
-`TodoService.ts`の`putTodo`を次のように書き換えます。
+`TodoService.ts`の`putTodo`を次のように書き換えてください。
 
 ```typescript jsx title="/src/services/TodoService.tsx"
 const putTodo = async (id: number, completed: boolean) => {
@@ -85,7 +85,7 @@ const putTodo = async (id: number, completed: boolean) => {
 
 ### 処理完了後の画面遷移
 
-TODO:不具合が発生する実装と再現させるための実装、再現方法を記載して、原因を考えるためのガイドを書く
+TODO:不具合が発生する実装と再現させるための実装、再現方法を記載して、原因を考えるためのガイドを書く。
 
 :::note
 演習課題後は不具合が発生する実装を戻してください。
