@@ -11,31 +11,37 @@ ToDo一覧の最新化と同じように処理が終わるまで操作をブロ�
 
 ## ToDoのチェックボックスをタップしたタイミングで更新
 
-次のように更新対象のToDoの状態を変更して`setTodos`でstateを更新した後にREST APIを呼びだすように修正します。
+次のように対象のToDoの完了状態を変更して`setTodos`でstateを更新した後にREST APIを呼びだすように修正します。
 
-すでにUIは更新しているため、`todos`を更新する必要はないので`then`での処理も削除します。
+すでにUIへ反映しているので、REST API呼び出し後のUI反映は不要です。
 
-`then`を削除する理由は、REST API呼び出し後にまたUIへ反映してしまい、完了状態が意図しない状態となってしまうためです。
+例えば、ToDoをタップして完了にしたとします。
 
-```diff typescript title="screens/todo/TodoBoard.tsx"
+その後にREST APIの応答を待たずに同じToDoをタップして未完了へ更新します。
+
+本来は対象のToDoが`未完了`になってUIへ反映されることを期待しているのに`完了`へ間違った反映が発生します。
+
+そのような事故を防止するために`then`の部分を削除します。
+
+```diff typescript title="/src/screens/todo/TodoBoard.tsx"
 export const TodoBoard: React.FC = () => {
 
     // 中略
 
     const toggleTodoCompletion = (id: number) => {
 
-         const target = todos.find((todo) => todo.id === id);
-         if (!target) {
-             return;
-         }
-+        const updateTodo = {...target, completed: !target.completed};
-+        setTodos((prevTodos) => prevTodos.map((todo) => (todo.id === id ? updateTodo : todo)));
+        const target = todos.find((todo) => todo.id === id);
+        if (!target) {
+            return;
+        }
++       const updateTodo = {...target, completed: !target.completed};
++       setTodos((prevTodos) => prevTodos.map((todo) => (todo.id === id ? updateTodo : todo)));
         TodoService.putTodo(id, !target.completed)
--            .then((returnedTodo) =>
--                setTodos((prevTodos) => {
--                    return prevTodos.map((todo) => (todo.id === id ? returnedTodo : todo));
--                }),
--            )
+-           .then((returnedTodo) =>
+-               setTodos((prevTodos) => {
+-                   return prevTodos.map((todo) => (todo.id === id ? returnedTodo : todo));
+-               }),
+-           )
             .catch(() => {});
     );
 
