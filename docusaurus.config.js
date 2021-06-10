@@ -61,11 +61,11 @@ module.exports = {
       additionalLanguages: ['ruby', 'groovy'],
     },
     navbar: {
-      title: 'Fintan » Mobile App',
+      title: '» Mobile App',
       hideOnScroll: true,
       logo: {
         alt: 'Fintan Logo',
-        src: 'img/favicon.ico',
+        src: 'img/fintan-logo-long.svg',
         href: 'https://fintan.jp',
       },
       items: [
