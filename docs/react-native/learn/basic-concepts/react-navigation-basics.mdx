@@ -56,6 +56,12 @@ const Screen1: React.FC = () => {
 ナビゲーターはネストした定義もできます（例えばTabナビゲーター内にStackナビゲーターがあるなど）。
 ナビゲーターがネストされている場合でも、必要な`NavigationContainer`は1つだけです。
 
+:::note
+初期表示画面は最初に定義した画面コンポーネントになります。
+以下のソースコードでは`Screen1`が初期表示画面です。
+初期表示画面を指定する場合は、`Navigator`の`initialRouteName`属性に画面コンポーネントを指定します。
+:::
+
 ```typescript jsx
 export const App = () => {
   return (
