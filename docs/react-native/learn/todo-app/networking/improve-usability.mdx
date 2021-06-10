@@ -27,7 +27,7 @@ export const TodoBoard: React.FC = () => {
              return;
          }
 +        const updateTodo = {...target, completed: !target.completed};
-+        setTodos(prevTodos.map((todo) => (todo.id === id ? updateTodo : todo)));
++        setTodos((prevTodos) => prevTodos.map((todo) => (todo.id === id ? updateTodo : todo)));
         TodoService.putTodo(id, !target.completed)
 -            .then((returnedTodo) =>
 -                setTodos((prevTodos) => {
