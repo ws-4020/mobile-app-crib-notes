@@ -103,7 +103,7 @@ const putTodo = async (id: number, completed: boolean) => {
 
 ```
 
-正しくは`navigation.isFocused()`が`true`の場合のみ`navigation.goBack()`を呼びますが、
+正しくは画面が表示されている場合（`navigation.isFocused()`が`true`の場合）のみ`navigation.goBack()`を呼ぶべきですが、
 この実装では`postTodo`が完了したら必ず呼びます。
 
 次に不具合を再現できるように実装を修正しましょう。
