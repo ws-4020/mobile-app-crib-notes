@@ -93,9 +93,9 @@ const putTodo = async (id: number, completed: boolean) => {
 `TodoForm.tsx`の`onAdd`を次のように書き換えてください。
 
 ```typescript title="/src/screens/todo/TodoForm.tsx"
-  const onAdd = useCallback<(values: {task: string}) => void>(
-    async ({task}) => {
-      await TodoService.postTodo(task);
+  const onAdd = useCallback<(values: {todo: string}) => void>(
+    async ({todo}) => {
+      await TodoService.postTodo(todo);
       navigation.goBack();
     },
     [navigation],
@@ -117,6 +117,7 @@ const postTodo = async (text: string) => {
     text,
     completed: false,
   };
+  todos.push(todo);
   return new Promise((resolve) => setTimeout(() => resolve(todo), 3000));
 };
 
