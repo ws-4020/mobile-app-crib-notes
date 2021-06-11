@@ -71,7 +71,7 @@ const putTodo = async (id: number, completed: boolean) => {
 
 ```
 
-このように実装することで`Promise`を返す（`resolve`する）までに2秒程度待つことになり、返されるToDoも`TodoService`が参照しているオブジェクトとは別のインスタンスになります。
+このように実装することで`Promise`を返す（`resolve`する）までに3秒程度待つことになり、返されるToDoも`TodoService`が参照しているオブジェクトとは別のインスタンスになります。
 
 `TodoBoard.tsx`と`TodoService.ts`を修正したらアプリを起動して、複数のToDoのステータスを連続して更新してみましょう。
 
