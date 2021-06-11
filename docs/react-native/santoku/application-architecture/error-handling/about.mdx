@@ -2,11 +2,6 @@
 title: 基本的な考え方
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-> 🚧 ファイル名適当にaboutにしちゃってるから変えたほうが良いかも 🚧
-
 モバイルアプリケーションでは、エラーが発生した場合にユーザへエラーの内容と、どのような手順で操作をすればエラーから回復できるかを伝える事が非常に重要です。
 
 エラーは様々な場面で発生する可能性があります。React Nativeを利用したモバイルアプリケーションではそれらを網羅的にハンドリングするような仕組みを構築することは困難であり、機能やユーザ操作に応じて個別に設計する必要があります。
@@ -38,7 +33,12 @@ Reactにはコンポーネント内で発生したエラーをハンドリング
 
 Reactコンポーネントのレンダリングでエラーが発生した場合は、`Error Boundary`でエラーを捕捉します。全てのレンダリングエラーを捕捉できるように、`Error Boundary`はコンポーネントツリーの最上部に定義します。
 
-> 🚧 Error Boundaryを用いたコードを記載 🚧
+> 🚧 作成中 🚧
+
+<!--
+TODO: Error Boundaryを用いたコードを追記。
+      FallbackComponentの引数として受け取るresetErrorBoundaryを使用して、Error Boundaryを含めたコンポーネントツリーを再レンダリングする記載を追記
+-->
 
 個別にReactコンポーネントから発生したエラーをハンドリングしたい場合は、該当のコンポーネントを`Error Boundary`でラップしてエラー処理を実施してください。
 
@@ -46,7 +46,14 @@ Reactコンポーネントのレンダリングでエラーが発生した場合
 
 イベントハンドラでエラーが発生した場合は、個別にエラーをハンドリングしない限りアプリケーションがクラッシュします。
 
-> 🚧 同期処理のエラーはErrorUtilsで捕捉できないか調査 🚧
+> 🚧 作業中 🚧
+
+<!--
+TODO: ErrorUtilsを使用すれば、同期処理のエラーはハンドリングできる可能性があるので、検証後必要に応じて追記。
+      ハンドリングできる可能性があると思ったのは、react-native-exception-handlerがErrorUtilsを使用してハンドリングしているから。
+      https://github.com/a7ul/react-native-exception-handler/blob/master/index.js#L15
+      ErrorUtilsでエラーを捕捉できた場合、react-native-restartとかを利用してアプリを再起動できるか検証必要。
+-->
 
 :::caution
 アプリケーションのクラッシュは、ユーザのアプリケーション離脱率が高くなる一因になります。イベントハンドラ内で発生するエラーは個別にハンドリングして、アプリケーションのクラッシュを防ぐようにしてください。
@@ -77,51 +84,49 @@ Reactコンポーネントのレンダリングでエラーが発生した場合
 
 Native ModulesはJava(Kotlin)やObjective-C(Swift)、C++などのネイティブ言語を使用したモジュールです。OSが提供しているAPIなどを利用する時に作成します。
 
-Native Modulesでエラーが発生した場合は、個別にエラーをハンドリングしない限りアプリケーションがクラッシュします。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-:::caution
-アプリケーションのクラッシュは、ユーザのアプリケーション離脱率が高くなる一因になります。Native Modules内で発生するエラーは個別にハンドリングして、アプリケーションのクラッシュを防ぐようにしてください。
-:::
+Native Modulesでエラーが発生した場合は、Androidでは`Thread.setDefaultUncaughtExceptionHandler`、iOSでは`NSSetUncaughtExceptionHandler`を使用してエラーを捕捉します。捕捉したエラーの詳細は[Firebase Crashlytics](https://firebase.google.com/docs/crashlytics?hl=ja)に送ります。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+Firebase Crashlyticsにエラー情報を送信後、Androidではアプリケーションを再起動します。iOSではエラー発生時にアプリケーションを再起動する手段がないため、ユーザにアプリケーションの再起動を促すUIを表示します。
+
+> 🚧 作業中 🚧
+
+<!--
+TODO: `Thread.setDefaultUncaughtExceptionHandler`や`NSSetUncaughtExceptionHandler`を使用してハンドリングできるか検証必要。
+      react-native-exception-handlerのREADMEには、Androidでは再起動できてiOSではできないと記載されているが、自分たちでも検証必要。
+      https://github.com/a7ul/react-native-exception-handler
+      アプリケーションの再起動については、react-native-restartなどの動作も含めて、別ページで詳細に説明したほうが良いかも。
+-->
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 
 :::note
-Androidでは`Thread.setDefaultUncaughtExceptionHandler`、iOSでは`NSSetUncaughtExceptionHandler`などを利用して全てのエラーを捕捉し、アプリケーションのクラッシュ防ぐことが可能です。Androidの場合はエラー捕捉後にアプリケーションを再起動させることもできます。
+全てのエラーを捕捉すると、アプリケーションのクラッシュは防げますが、本来App Store Connect/Google Play Consoleに送られるはずのクラッシュデータは送信されません。
+そのため、SantokuAppではFirebase Crashlyticsにエラーログを送信することで、アプリケーションのエラーを検知しています。
+
+Firebase Crashlyticsや[Sentry](https://sentry.io/welcome/)のようなログを管理するプロダクトを利用できない場合は、エラーを捕捉せずにOSの機能を利用してアプリケーションのクラッシュデータをApp Store ConnectやGoogle Play Consoleに送信するのも1つの手段ではあります。
+
+ただしアプリケーションがクラッシュすると、App StoreやGoogle Playでのアプリケーション検索時にヒット率が下がる可能性はあります。また、App Store ConnectやGoogle Play Consoleにクラッシュデータを送信するかはユーザに委ねられているため送信されない可能性もあります。送信された場合もクラッシュデータの詳細な内容は閲覧できません。
+
+そのため、基本的には全てのエラーを捕捉してFirebase CrashlyticsやSentryのようなプロダクトに送信することが望ましいです。
 :::
 
 <!-- textlint-enable ja-technical-writing/sentence-length -->
 
 Native Modulesで発生したエラーを個別にハンドリングをしたい場合は、言語毎のエラー処理方式にしたがってエラーを捕捉してください。
-> 🚧 言語毎のエラー処理方式を記載  🚧
 
-また、Native Modulesで発生したエラーをJavascript側に伝えたい場面もあります。その場合は、Javascript側からエラー時に実行したいコールバック関数を受け取るか、Native ModulesからPromiseを返却する方法があります。詳細は、React Nativeのドキュメントを参照してください。
+> 🚧 作業中 🚧
 
-<!-- textlint-disable ja-technical-writing/sentence-length -->
+<!--
+TODO: 言語毎のエラー処理方式を記載
+-->
 
-<Tabs
-  groupId="operating-systems"
-  defaultValue="android"
-  values={[
-    {label: 'Android', value: 'android'},
-    {label: 'iOS', value: 'ios'},
-  ]
- }>
+また、Native Modulesで発生したエラーをJavaScript側に伝えたい場面もあります。その場合は、JavaScript側からエラー時に実行したいコールバック関数を受け取るか、Native ModulesからPromiseを返却する方法があります。詳細は、React Nativeのドキュメントを参照してください。
 
-<!-- textlint-enable ja-technical-writing/sentence-length -->
-
-<TabItem value="android">
-
-- [Callbacks](https://reactnative.dev/docs/native-modules-android#callbacks)
-- [Promises](https://reactnative.dev/docs/native-modules-android#promises)
-
-</TabItem>
-
-<TabItem value="ios">
-
-- [Callbacks](https://reactnative.dev/docs/native-modules-ios#callbacks)
-- [Promises](https://reactnative.dev/docs/native-modules-ios#promises)
-
-</TabItem>
-</Tabs>
-
-> 🚧 このAndroidとiOSのタブはちょっと謎だから、他のページにも同じようなのにか確認して修正  🚧
+- [Android - Callbacks](https://reactnative.dev/docs/native-modules-android#callbacks)
+- [Android - Promises](https://reactnative.dev/docs/native-modules-android#promises)
+- [iOS - Callbacks](https://reactnative.dev/docs/native-modules-ios#callbacks)
+- [iOS - Promises](https://reactnative.dev/docs/native-modules-ios#promises)
