@@ -207,6 +207,25 @@ module.exports = {
           },
           {
             type: 'category',
+            label: 'Application Architecture',
+            items: [
+              {
+                type: 'doc',
+                id: 'react-native/santoku/application-architecture',
+              },
+              {
+                type: 'category',
+                label: 'エラーハンドリング',
+                items: [
+                  'react-native/santoku/application-architecture/error-handling/about',
+                  'react-native/santoku/application-architecture/error-handling/api-error-handling',
+                  'react-native/santoku/application-architecture/error-handling/webview-error-handling',
+                ],
+              },
+            ],
+          },
+          {
+            type: 'category',
             label: 'Development',
             items: [
               {

@@ -1,0 +1,127 @@
+---
+title: 基本的な考え方
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+> 🚧 ファイル名適当にaboutにしちゃってるから変えたほうが良いかも 🚧
+
+モバイルアプリケーションでは、エラーが発生した場合にユーザへエラーの内容と、どのような手順で操作をすればエラーから回復できるかを伝える事が非常に重要です。
+
+エラーは様々な場面で発生する可能性があります。React Nativeを利用したモバイルアプリケーションではそれらを網羅的にハンドリングするような仕組みを構築することは困難であり、機能やユーザ操作に応じて個別に設計する必要があります。
+
+ここではエラーの処理方法に関する基本方針を定義します。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+:::note
+Reactにはコンポーネント内で発生したエラーをハンドリングできる[Error Boundary](https://ja.reactjs.org/docs/error-boundaries.html)というコンポーネントがありますが、これはイベントハンドラや非同期処理で発生したエラーをハンドリングできません。
+:::
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+## エラーの処理方法に関する方針
+
+エラーが発生する箇所は大きく以下のように分類できます。
+
+- Reactコンポーネント
+- イベントハンドラ
+  - 非同期処理
+  - 同期処理
+- ロジック
+  - 非同期処理
+  - 同期処理
+- Native Modules
+
+### Reactコンポーネントのエラー処理
+
+Reactコンポーネントのレンダリングでエラーが発生した場合は、`Error Boundary`でエラーを捕捉します。全てのレンダリングエラーを捕捉できるように、`Error Boundary`はコンポーネントツリーの最上部に定義します。
+
+> 🚧 Error Boundaryを用いたコードを記載 🚧
+
+個別にReactコンポーネントから発生したエラーをハンドリングしたい場合は、該当のコンポーネントを`Error Boundary`でラップしてエラー処理を実施してください。
+
+### イベントハンドラのエラー処理
+
+イベントハンドラでエラーが発生した場合は、個別にエラーをハンドリングしない限りアプリケーションがクラッシュします。
+
+> 🚧 同期処理のエラーはErrorUtilsで捕捉できないか調査 🚧
+
+:::caution
+アプリケーションのクラッシュは、ユーザのアプリケーション離脱率が高くなる一因になります。イベントハンドラ内で発生するエラーは個別にハンドリングして、アプリケーションのクラッシュを防ぐようにしてください。
+:::
+
+イベントハンドラ内で発生するエラーを個別にハンドリングする場合、非同期処理と同期処理で対応が変わります。
+
+非同期処理は、以下のいづれかの方法でエラーを捕捉できます。
+
+- `Promise.catch()`を使用してエラーを捕捉します。
+- `await`式を利用した場合は`try...catch`文で囲んでエラーを捕捉します。
+
+同期処理は、`try...catch`文で囲んでエラーを捕捉します。
+
+### ロジックのエラー処理
+
+イベントハンドラ以外のロジックでエラーが発生した場合は、非同期処理と同期処理で動作が違います。
+
+非同期処理の場合は、イベントハンドラと同様で個別にエラーをハンドリングしない限りアプリケーションがクラッシュします。同期処理の場合は、Reactコンポーネントと同様に`Error Boundary`でエラーを捕捉します。
+
+:::caution
+アプリケーションのクラッシュは、ユーザのアプリケーション離脱率が高くなる一因になります。ロジック内で発生するエラーは個別にハンドリングして、アプリケーションのクラッシュを防ぐようにしてください。
+:::
+
+個別にロジック内で発生したエラーをハンドリングしたい場合は、イベントハンドラの非同期処理・同期処理と同様に`Promise.catch()`、または`try...catch`を利用してエラーを捕捉してください。
+
+### Native Modulesのエラー処理
+
+Native ModulesはJava(Kotlin)やObjective-C(Swift)、C++などのネイティブ言語を使用したモジュールです。OSが提供しているAPIなどを利用する時に作成します。
+
+Native Modulesでエラーが発生した場合は、個別にエラーをハンドリングしない限りアプリケーションがクラッシュします。
+
+:::caution
+アプリケーションのクラッシュは、ユーザのアプリケーション離脱率が高くなる一因になります。Native Modules内で発生するエラーは個別にハンドリングして、アプリケーションのクラッシュを防ぐようにしてください。
+:::
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+:::note
+Androidでは`Thread.setDefaultUncaughtExceptionHandler`、iOSでは`NSSetUncaughtExceptionHandler`などを利用して全てのエラーを捕捉し、アプリケーションのクラッシュ防ぐことが可能です。Androidの場合はエラー捕捉後にアプリケーションを再起動させることもできます。
+:::
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+Native Modulesで発生したエラーを個別にハンドリングをしたい場合は、言語毎のエラー処理方式にしたがってエラーを捕捉してください。
+> 🚧 言語毎のエラー処理方式を記載  🚧
+
+また、Native Modulesで発生したエラーをJavascript側に伝えたい場面もあります。その場合は、Javascript側からエラー時に実行したいコールバック関数を受け取るか、Native ModulesからPromiseを返却する方法があります。詳細は、React Nativeのドキュメントを参照してください。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+<Tabs
+  groupId="operating-systems"
+  defaultValue="android"
+  values={[
+    {label: 'Android', value: 'android'},
+    {label: 'iOS', value: 'ios'},
+  ]
+ }>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+<TabItem value="android">
+
+- [Callbacks](https://reactnative.dev/docs/native-modules-android#callbacks)
+- [Promises](https://reactnative.dev/docs/native-modules-android#promises)
+
+</TabItem>
+
+<TabItem value="ios">
+
+- [Callbacks](https://reactnative.dev/docs/native-modules-ios#callbacks)
+- [Promises](https://reactnative.dev/docs/native-modules-ios#promises)
+
+</TabItem>
+</Tabs>
+
+> 🚧 このAndroidとiOSのタブはちょっと謎だから、他のページにも同じようなのにか確認して修正  🚧
