@@ -15,8 +15,8 @@ Reactの公式サイトにあるチュートリアルのようなガイドがな
 
 ## コンテンツで学習できる内容
 
-公開しているコンテンツでは、React Nativeの学習の前に理解しておいたほうがよい内容(JavaScriptやReactなど)も紹介しています。
-学習を進めるための[前提知識](link)なので、React Nativeの学習をする前に確認してもらい、自信がなければ紹介しているサイトを参照して事前知識を理解してみてください。
+公開しているコンテンツでは、React Nativeの学習の前に理解しておいたほうがよい内容（JavaScriptやReactなど）も紹介しています。
+学習を進めるための[前提知識](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts/pre-requisites)なので、React Nativeの学習をする前に確認してもらい、自信がなければ紹介しているサイトを参照して事前知識を理解してみてください。
 
 学習の流れとして、React Nativeを利用した開発環境の構築から学習を進めていきます。
 以降では実際に「ToDoアプリ」というシンプルなアプリを手を動かしながら作成し、学習できます。
