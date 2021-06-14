@@ -1,5 +1,6 @@
 const path = require('path');
 const baseUrl = '/mobile-app-crib-notes/';
+const {Plugin: Embed} = require('remarkable-embed');
 
 if (!process.env.CI) {
   process.env.GITHUB_REPOSITORY = __dirname.toLowerCase().includes('ws-4020')
@@ -9,6 +10,30 @@ if (!process.env.CI) {
 
 // for debug
 console.debug(`GITHUB_REPOSITORY: ${process.env.GITHUB_REPOSITORY}`);
+
+const createVariableInjectionPlugin = (variables) => {
+  // `let` binding used to initialize the `Embed` plugin only once for efficiency.
+  // See `if` statement below.
+  let initializedPlugin;
+
+  const embed = new Embed();
+  embed.register({
+    // Call the render method to process the corresponding variable with
+    // the passed Remarkable instance.
+    // -> the Markdown markup in the variable will be converted to HTML.
+    inject: (key) => initializedPlugin.render(variables[key]),
+  });
+
+  return (md, options) => {
+    if (!initializedPlugin) {
+      initializedPlugin = {
+        render: md.render.bind(md),
+        hook: embed.hook(md, options),
+      };
+    }
+    return initializedPlugin.hook;
+  };
+};
 
 const isDraft = !!process.env.GITHUB_REPOSITORY && process.env.GITHUB_REPOSITORY.toLowerCase().startsWith('ws-4020');
 const organization = isDraft ? 'ws-4020' : 'fintan-contents';
@@ -29,6 +54,10 @@ const copyright = `<div class="no-content">
 </div>
 </div>
 `;
+
+const siteVariables = {
+  rn_spoiler_ver: '2021.05.0',
+};
 
 module.exports = {
   title: 'Fintan » Mobile App Development',
@@ -168,6 +197,7 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+        remarkPlugins: [createVariableInjectionPlugin(siteVariables)],
       },
     ],
   ],

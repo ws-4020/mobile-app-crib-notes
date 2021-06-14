@@ -20,7 +20,7 @@ RN Spoilerは、Expoの[expo-template-bare-typescript](https://github.com/expo/e
 [npm](https://www.npmjs.com/)ではなく[Yarn](https://yarnpkg.com/)を利用したい場合は、`--npm`というオプションを削除してください。Yarnがインストールされている場合は、Yarnを利用してパッケージがインストールされます。
 
 ```bash
-npx react-native init --template https://github.com/ws-4020/rn-spoiler#2021.05.0 <YourAppName>
+npx react-native init --template https://github.com/ws-4020/rn-spoiler#{@inject: rn_spoiler_ver} <YourAppName>
 ```
 
 :::
