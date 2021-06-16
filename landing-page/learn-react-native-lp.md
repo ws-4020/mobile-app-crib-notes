@@ -23,7 +23,7 @@
 
 学習を進めるための[前提知識](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts/pre-requisites)なので、React Nativeの学習をする前に確認してもらい、自信がなければ紹介しているサイトを参照して事前知識を理解してみてください。
 
-React Nativeでの開発を学習する中で、特に経験の浅い方が理解するのに難しかったと感じたReact Native ComponentsとNavigationの部分をより深堀して説明し、実際に動作させながら学習できるよう説明しています。
+React Nativeでの開発を学習する中で、特に経験の浅い方が理解するのに難しかったと感じたReact Native ComponentsとNavigationの部分をより深堀して説明しています。
 
 学習の流れとしては、「ToDoアプリ」というシンプルなアプリを手を動かしながら作成して学習していきます。
 
