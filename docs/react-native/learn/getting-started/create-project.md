@@ -10,6 +10,10 @@ title: プロジェクトの作成
 
 次のコマンドを実行して、新規プロジェクトを作成してください。（`<YourAppName>`の部分は、好みのプロジェクト名に変更してください。このプロジェクトは後ほど[ToDoアプリの実装](../todo-app.md)で使用します）
 
+:::info
+プロジェクト名はUpperCamelCaseで指定するのが一般的です。また、`-`使えないのでkebab-caseでの指定はできません。
+:::
+
 ```bash
 npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler#2021.05.0 <YourAppName>
 ```
