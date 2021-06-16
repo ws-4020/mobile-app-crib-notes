@@ -49,6 +49,7 @@ ToDo一覧画面に削除ボタンを追加する方法が簡単です。
       .then((returnedTodo) => setTodos(todos.map((todo) => (todo.id === id ? returnedTodo : todo))))
       .catch(() => {});
   };
+
 ```
 
 正しくは`setTodos`に関数を渡す[関数型の更新](https://ja.reactjs.org/docs/hooks-reference.html#functional-updates)を利用すべきですが

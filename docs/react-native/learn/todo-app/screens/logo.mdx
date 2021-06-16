@@ -19,6 +19,7 @@ declare module '*.png' {
   const value: ImageSourcePropType;
   export default value;
 }
+
 ```
 
 :::info
@@ -60,10 +61,12 @@ const styles = StyleSheet.create({
     height: defaultImageSize,
   },
 });
+
 ```
 
 ```typescript jsx title="/src/components/basics/image/index.ts"
 export * from './Logo';
+
 ```
 
 ```diff title="/src/components/basics/index.ts"

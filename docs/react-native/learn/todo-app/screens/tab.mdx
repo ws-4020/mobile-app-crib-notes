@@ -43,10 +43,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
 ```
 
 ```typescript jsx title="/src/screens/settings/index.ts"
 export * from './UserSetting';
+
 ```
 
 `TodoBoard`はひな形に戻すため下記のコードで上書きしてください。
@@ -71,6 +73,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
 ```
 
 ```diff title="/src/screens/index.ts"
@@ -121,6 +124,7 @@ export const TodoStackNav: React.FC = () => (
     />
   </nav.Navigator>
 );
+
 ```
 
 ```typescript jsx title="/src/navigation/SettingsStackNav.tsx"
@@ -134,6 +138,7 @@ export const SettingsStackNav: React.FC = () => (
     <nav.Screen name="UserSetting" component={UserSetting} />
   </nav.Navigator>
 );
+
 ```
 
 ``` diff jsx title="/src/navigation/index.ts"
@@ -184,6 +189,7 @@ export const MainTabNav: React.FC = () => {
     </nav.Navigator>
   );
 };
+
 ```
 
 ``` diff jsx title="/src/navigation/index.ts"

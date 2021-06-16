@@ -71,10 +71,12 @@ export const AuthService = {
   logout,
   refreshCsrfToken,
 };
+
 ```
 
 ```typescript jsx title="/src/services/index.ts"
 export * from './AuthService';
+
 ```
 
 ```typescript jsx title="/src/contexts/UserContext.tsx"
@@ -120,6 +122,7 @@ export const UserContextProvider: React.FC = ({children}) => {
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
 };
+
 ```
 
 ```diff title="/src/App.tsx"
@@ -221,6 +224,7 @@ export const AuthedStackNav: React.FC = () => {
     </nav.Navigator>
   );
 };
+
 ```
 
 ```typescript jsx title="/src/navigation/RootStackNav.tsx"
@@ -244,6 +248,7 @@ export const RootStackNav: React.FC = () => {
     </rootNav.Navigator>
   );
 };
+
 ```
 
 ```diff title="/src/navigation/index.ts"

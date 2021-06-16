@@ -96,11 +96,13 @@ export const BASE_PATH = "http://localhost:9080/api".replace(/\/+$/, "");
 ```typescript title="src/backend/config.ts"
 import {Configuration} from './generated-rest-client';
 export const config = new Configuration({basePath: 'http://${端末のIP}:9080/api'});
+
 ```
 
 ```typescript title="src/backend/index.ts"
 export * from './generated-rest-client';
 export * from './config';
+
 ```
 
 これで、`TodoService`からREST APIを呼びだす準備が整いました。次は、実際に`TodoService`からREST APIを呼び出して、結果を画面に表示してみましょう。
