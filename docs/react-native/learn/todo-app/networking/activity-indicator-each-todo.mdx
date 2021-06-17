@@ -97,7 +97,7 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
 
 次に`TodoList`で処理中のToDoを判定し`TodoItem`の`processing`状態を設定します。
 
-受け取るパラメータ（`Props`）に`processing`を追加してインジケータと、ToDoの操作ブロックするViewを表示できるようにしましょう。
+受け取るパラメータ（`Props`）に`processing`を追加して、`ToDoItem`で表示しているToDoが処理中かどうかを判断できるようにしましょう。
 
 `TodoItem.tsx`で`processing`を受け取れるように修正します。
 
