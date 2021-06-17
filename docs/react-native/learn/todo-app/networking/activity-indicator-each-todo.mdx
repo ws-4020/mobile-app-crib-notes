@@ -57,9 +57,9 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
 
 ## ToDoごとの処理ステータスを引き継ぐ
 
-処理中のToDoのIDを管理できたので、処理中の状態を判断できるように`TodoList.tsx`、`TodoItem.tsx`を修正します。
+処理中のToDoのIDを管理できたので、処理中の状態を判断できるように`TodoList.tsx`、`TodoItem`を修正します。
 
-まずは`TodoBoard.tsx`から`TodoList.tsx`に処理中のToDoのIDのリスト（`processingTodos`）を渡します。
+まずは`TodoList.tsx`が処理中のToDoのIDのリスト（`processingTodos`）を受け取れるようにパラメータに追加します。
 
 ```diff typescritp title="/src/components/parts/todo/TodoList.tsx"
  interface Props {
@@ -96,7 +96,7 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
 
 受け取るパラメータ（`Props`）に`processing`を追加してインジケータと、ToDoの操作ブロックするViewを表示できるようにしましょう。
 
-`TodoList.tsx`でも`TodoItem`にprocessingを渡すようにします。
+`TodoItem.tsx`で`processing`を受け取れるように修正します。
 
 ```diff typescript title="/src/components/parts/todo/TodoItem.tsx "
  interface Props {
@@ -110,6 +110,20 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
  
 -export const TodoItem: React.FC<Props> = ({id, text, completed, toggleTodoCompletion, onRemove}) => {
 +export const TodoItem: React.FC<Props> = ({id, text, completed, toggleTodoCompletion, onRemove, processing}) => {
+```
+
+`TodoList.tsx`で判定した値を`TodoItem`に渡します。
+
+```diff typescript title="/src/components/parts/todo/TodoList.tsx"
+        <TodoItem
+          key={todo.id}
+          id={todo.id}
+          text={todo.text}
+          completed={todo.completed}
+          toggleTodoCompletion={toggleTodoCompletion}
++         processing={processingTodos.includes(todo.id)}
+        />
+
 ```
 
 ## 処理中のUIを表示する
