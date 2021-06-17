@@ -132,7 +132,7 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
 ## 処理中のUIを表示する
 
 `TodoItem`に処理状態が渡せたので、処理中のUIを表示するように修正します。
-アクティビティインジケータと操作ブロック用のViewを表示できるよう、次のように修正してください。
+次のように修正して、ToDoが処理中の場合だけアクティビティインジケータと操作ブロック用のViewを表示しましょう。
 
 ```diff typescript title="/src/components/parts/todo/TodoItem.tsx"
  import React, {useCallback} from 'react';
