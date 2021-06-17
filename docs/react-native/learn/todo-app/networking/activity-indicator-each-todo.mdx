@@ -22,7 +22,8 @@ export const TodoBoard: React.FC = () => {
    const [filterType, setFilterType] = useState<FilterType>(FilterType.ALL);
    const [loading, setLoading] = useState(false);
 +  const [processingTodos, setProcessingTodos] = useState<number[]>([]);
-// 中略
+
+/* ～省略～ */  
 
   const toggleTodoCompletion = (id: number) => {
     const target = todos.find((todo) => todo.id === id);
@@ -36,7 +37,8 @@ export const TodoBoard: React.FC = () => {
           return prevTodos.map((todo) => (todo.id === id ? returnedTodo : todo));
         }),
       )
-      .catch(() => {})
+-     .catch(() => {});
++     .catch(() => {})
 +     .finally(() => {
 +       setProcessingTodos((prevs) => {
 +         return prevs.filter((processedId) => processedId !== id);
