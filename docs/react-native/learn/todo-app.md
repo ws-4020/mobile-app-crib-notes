@@ -8,6 +8,11 @@ hide_table_of_contents: true
 
 ReactでのWebアプリケーションの経験がない、または前提となるレベルを確認したい方はWebベースのハンズオンを参照し、必要であれば学習してください。
 
+経験の浅い方で理解が難しいと感じた以下の点をより詳しく説明しています。
+
+- React Navigationの中で一般的に利用される`Stack`、`Modal`、`Tab`のナビゲーションを対象に注意事項等を交えての実装方法
+- フックを利用したStateの管理方法が難しい為、`ステートフック`と`副作用フック`を利用した管理方法
+
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 import {PageList} from '../../../src/components';

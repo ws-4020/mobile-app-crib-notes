@@ -18,43 +18,23 @@
 
 公開するコンテンツでは、次のことが学習できます。
 
-- React Nativeを使用した開発環境の構築と動作確認方法
-- ReactとReact Nativeの違い
-- ハンズオン形式でのサンプルアプリの作成
-- サンプルアプリとバックエンドの連携方法
+- [React Nativeを使用した開発環境の構築とアプリの実行](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/getting-started)
 
-### React Nativeを使用した開発環境の構築と動作確認
+    React Nativeでのアプリ開発に必要な環境を用意し、アプリを起動方法と仕組みを学習します。
 
-React Nativeでの開発するための環境構築の方法を説明します。構築した環境を利用して、以降でサンプルアプリを作成する際に使用するプロジェクトを作成します。React Nativeアプリを実行するときの仕組みを説明し、実際に動かして学習していきます。
+- [学習開始前の前提知識](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts)
 
-### React Nativeの前提知識
+    アプリを実装する前に必要となる前提知識を確認した後、React Nativeの基本、React Navigationの基本を学習します。
 
-ハンズオン形式のアプリケーション実装の学習前に前提知識として理解しておいたほうがよい内容（JavaScriptやReactなど）を紹介しています。
+- [サンプルアプリを作成しながらの学習](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/todo-app)
 
-学習を進めるための[前提知識](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts/pre-requisites)なので、React Nativeの学習をする前に確認してもらい、自信がなければ紹介しているサイトを参照して事前知識を理解してみてください。
-
-また、Reactとの違いの中でも特に理解を深めてもらいたい部分を説明します。
-
-- React Native Components
-- React Native Navigation
-
-### サンプルアプリ作成をテーマとした学習
-
-題材として「ToDoアプリ」というシンプルなアプリを作成することをテーマとして、手を動かしながら学習していきます。経験の浅い方で理解が難しいと感じた以下の点をより詳しく説明しています。
-
-- React Navigationの中で一般的に利用される`Stack`、`Modal`、`Tab`のナビゲーションを対象に注意事項等を交えての実装方法
-- フックを利用したStateの管理方法が難しい為、`ステートフック`と`副作用フック`を利用した管理方法
-
-学習を進める中で、ToDoアプリからバックエンドの連携方法を学習します。
-このコンテンツでは、フロントエンドの開発学習に集中してもらいたいので、バックエンドアプリは公開しているものを利用できます。React Nativeを利用した開発の基本とこれまでの経験から理解が難しかったところの点を理解してもらいたいと考えています。
+    題材として「ToDoアプリ」というシンプルなアプリを作成することをテーマとして、手を動かしながら学習していきます。
 
 ## 学習に必要な期間
 
 このコンテンツは、ReactでのWebアプリ開発の知識があることを前提としています。
 
-理由としては、ReactとReact Nativeの違いを理解してもらいたい内容を含めているからです。
-
-自信のない方は、まず[SPA + REST API構成のサービス開発リファレンス](https://fintan.jp/?p=5952)から学習を進めてみてください。
+Reactでの開発経験がない方は、まず[SPA + REST API構成のサービス開発リファレンス](https://fintan.jp/?p=5952)からに含まれるハンズオンコンテンツから学習を始めてみてください。
 
 このコンテンツを学習するのに必要な期間はReact Nativeを利用した開発経験の有無で変わってきます。
 
@@ -63,10 +43,8 @@ React Nativeでの開発するための環境構築の方法を説明します�
 - 経験者：3日間
 - 未経験者（経験の浅い方含む）：5日間
 
-上記の学習期間に、[SPA + REST API構成のサービス開発リファレンス](https://fintan.jp/?p=5952)の学習期間は含んでいません。
-
 ## ハンズオンコンテンツ
 
-React Nativeを利用して開発を進める中で挙がったFAQ（[ハマりがちな落とし穴](https://ws-4020.github.io/mobile-app-crib-notes/react-native/common-pitfalls)）を紹介しています。もし学習を進める中でエラー等が発生した際は参考にしてみてください。
-
 [React Native学習コンテンツ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn)
+
+React Nativeを利用して開発を進める中で挙がったFAQ（[ハマりがちな落とし穴](https://ws-4020.github.io/mobile-app-crib-notes/react-native/common-pitfalls)）を紹介しています。もし学習を進める中でエラー等が発生した際は参考にしてみてください。
