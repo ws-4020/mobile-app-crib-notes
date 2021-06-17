@@ -92,24 +92,24 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
       />
 ```
 
-次に`TodoList`で処理中のToDoを判定し`TodoItem`の`loading`状態を設定します。
+次に`TodoList`で処理中のToDoを判定し`TodoItem`の`processing`状態を設定します。
 
-受け取るパラメータ（`Props`）に`loading`を追加してインジケータと、ToDoの操作ブロックするViewを表示できるようにしましょう。
+受け取るパラメータ（`Props`）に`processing`を追加してインジケータと、ToDoの操作ブロックするViewを表示できるようにしましょう。
 
-`TodoList.tsx`でも`TodoItem`にloadingを渡すようにします。
+`TodoList.tsx`でも`TodoItem`にprocessingを渡すようにします。
 
 ```diff typescript title="/src/components/parts/todo/TodoItem.tsx "
  interface Props {
    id: number;
    text: string;
    completed: boolean;
-+  loading: boolean;
++  processing: boolean;
    toggleTodoCompletion: (id: number) => void;
    onRemove: (id: number) => void;
  }
  
 -export const TodoItem: React.FC<Props> = ({id, text, completed, toggleTodoCompletion, onRemove}) => {
-+export const TodoItem: React.FC<Props> = ({id, text, completed, toggleTodoCompletion, onRemove, loading}) => {
++export const TodoItem: React.FC<Props> = ({id, text, completed, toggleTodoCompletion, onRemove, processing}) => {
 ```
 
 ## 処理中のUIを表示する
@@ -121,9 +121,9 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
          <CheckBox title={text} checked={completed} containerStyle={styles.checkbox} onPress={onToggle} />
        </View>
        <AntDesign name="delete" size={24} onPress={onDelete} />
-+      {loading && (
-+        <View style={styles.loading}>
-+          <ActivityIndicator animating={loading} size="large" color="white" style={styles.indicator} />
++      {processing && (
++        <View style={styles.processing}>
++          <ActivityIndicator animating={processing} size="large" color="white" style={styles.indicator} />
 +        </View>
 +      )}
      </View>
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
      flexGrow: 1,
      flexShrink: 1,
    },
-+  loading: {
++  processing: {
 +    flex: 1,
 +    position: 'absolute',
 +    borderRadius: 10,
