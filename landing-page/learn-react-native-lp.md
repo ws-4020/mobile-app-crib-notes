@@ -18,7 +18,7 @@
 
 はじめに、React Nativeを利用した開発環境の構築から進めていきます。
 
-学習前に前提知識として理解しておいたほうがよい内容（JavaScriptやReactなど）を紹介しています。
+ハンズオン形式のアプリケーション実装の学習前に前提知識として理解しておいたほうがよい内容（JavaScriptやReactなど）を紹介しています。
 
 学習を進めるための[前提知識](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts/pre-requisites)なので、React Nativeの学習をする前に確認してもらい、自信がなければ紹介しているサイトを参照して事前知識を理解してみてください。
 
