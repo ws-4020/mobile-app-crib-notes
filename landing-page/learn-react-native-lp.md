@@ -16,13 +16,25 @@ React Nativeを利用したモバイルアプリケーション開発を学習�
 
 ## コンテンツで学習できる内容
 
-はじめに、React Nativeを利用した開発環境の構築から進めていきます。
+公開するコンテンツでは、次のことが学習できます。
+
+- ReactとReact Nativeの違い
+- React Nativeで作成したモバイルアプリケーションの動作確認方法
+
+### 前提知識
 
 ハンズオン形式のアプリケーション実装の学習前に前提知識として理解しておいたほうがよい内容（JavaScriptやReactなど）を紹介しています。
 
 学習を進めるための[前提知識](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts/pre-requisites)なので、React Nativeの学習をする前に確認してもらい、自信がなければ紹介しているサイトを参照して事前知識を理解してみてください。
 
-React Nativeでの開発を学習する中で、特に経験の浅い方が理解するのに難しかったと感じたReact Native ComponentsとNavigationの部分をより深堀して説明しています。
+### 学習の進め方
+
+はじめに、React Nativeを利用した開発環境の構築から進めていきます。
+
+React Nativeでの開発を学習する中で、Reactとの違いを学習してもらいたいと感じた以下の点を深堀して説明しています。
+
+- React Native Components
+- React Native Navigation
 
 学習の流れとしては、「ToDoアプリ」というシンプルなアプリを手を動かしながら作成して学習していきます。
 
