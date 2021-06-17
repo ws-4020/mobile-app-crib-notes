@@ -67,6 +67,7 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
 +  processingTodos: number[];
    contentContainerStyle?: StyleProp<ViewStyle>;
    toggleTodoCompletion: (id: number) => void;
+   removeTodo: (id: number) => void;
  }
 
 -export const TodoList: React.FC<Props> = ({todos, contentContainerStyle, toggleTodoCompletion, removeTodo}) => {
