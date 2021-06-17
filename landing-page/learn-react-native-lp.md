@@ -6,6 +6,8 @@
 
 そこで、React Nativeを利用したモバイルアプリケーション開発が学習できるコンテンツを公開します。
 
+[React Native学習コンテンツ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn)
+
 モバイルアプリケーションを開発しようとするとき、Reactの経験が多い組織やチームであれば、React Nativeを採用して学習コストを抑えてすぐに開発できることが期待できます。アプリの実装はReactに近いので学習コストは低くなりますが、ReactでのWebアプリの開発とは異なるポイントがあります。
 
 - React Nativeでのアプリ開発環境はどうやって構築すればよいか
@@ -18,33 +20,27 @@
 
 公開するコンテンツでは、次のことが学習できます。
 
-- [React Nativeを使用した開発環境の構築とアプリの実行](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/getting-started)
+- [開発環境の構築とアプリの実行](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/getting-started)
 
-    React Nativeでのアプリ開発に必要な環境を用意し、アプリを起動方法と仕組みを学習します。
+    React Nativeでのアプリ開発に必要な環境を用意し、アプリの起動方法と仕組みを学習します。
 
-- [学習開始前の前提知識](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts)
+- [アプリの実装前](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts)
 
     アプリを実装する前に必要となる前提知識を確認した後、React Nativeの基本、React Navigationの基本を学習します。
 
-- [サンプルアプリを作成しながらの学習](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/todo-app)
+- [ToDoアプリの実装](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/todo-app)
 
-    題材として「ToDoアプリ」というシンプルなアプリを作成することをテーマとして、手を動かしながら学習していきます。
+    題材として「ToDoアプリ」というシンプルなアプリを作成することをテーマとして、手を動かしながら学習します。
+
+React Nativeを利用して開発を進める中で挙がったFAQ（[ハマりがちな落とし穴](https://ws-4020.github.io/mobile-app-crib-notes/react-native/common-pitfalls)）を紹介しています。もし学習を進める中でエラー等が発生した際は参考にしてみてください。
 
 ## 学習に必要な期間
 
 このコンテンツは、ReactでのWebアプリ開発の知識があることを前提としています。
 
-Reactでの開発経験がない方は、まず[SPA + REST API構成のサービス開発リファレンス](https://fintan.jp/?p=5952)からに含まれるハンズオンコンテンツから学習を始めてみてください。
-
-このコンテンツを学習するのに必要な期間はReact Nativeを利用した開発経験の有無で変わってきます。
+Reactでの開発経験がない方は、まず[SPA + REST API構成のサービス開発リファレンス](https://fintan.jp/?p=5952)からに含まれるハンズオンコンテンツから学習を始めてみてください。このコンテンツを学習するのに必要な期間はReact Nativeを利用した開発経験の有無で変わってきます。
 
 それぞれで学習に必要なおおよその期間は以下となります。
 
 - 経験者：3日間
 - 未経験者（経験の浅い方含む）：5日間
-
-## ハンズオンコンテンツ
-
-[React Native学習コンテンツ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn)
-
-React Nativeを利用して開発を進める中で挙がったFAQ（[ハマりがちな落とし穴](https://ws-4020.github.io/mobile-app-crib-notes/react-native/common-pitfalls)）を紹介しています。もし学習を進める中でエラー等が発生した際は参考にしてみてください。
