@@ -1,6 +1,6 @@
 # モバイルアプリケーション開発の学習コンテンツ
 
-Reactを利用したWebアプリの開発経験者がガイドにそってReact Nativeを利用したモバイルアプリケーション開発が学習できるコンテンツを公開しています。
+Reactを利用したWebアプリの開発経験者がReact Nativeを利用したモバイルアプリケーション開発を学習するための[React Native学習コンテンツ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn)を公開しています。
 
 モバイルアプリケーションを開発しようとするとき、Reactの経験が多い組織やチームであれば、React Nativeを採用して学習コストを抑えてすぐに開発できることが期待できます。アプリの実装はReactに近いので学習コストは低くなりますが、ReactでのWebアプリの開発とは異なるポイントがあります。
 
@@ -8,9 +8,7 @@ Reactを利用したWebアプリの開発経験者がガイドにそってReact 
 - 開発中のアプリをどうやって動作確認するのか
 - ReactでWebアプリを実装する場合と比べて大きな違いはあるか
 
-React Nativeを利用した開発経験が浅い方向けに、実際にアプリを作成して学習できるコンテンツを公開しています。
-
-[React Native学習コンテンツ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn)
+React Nativeを利用した開発経験が浅い方向けに、実際にアプリを作成して学習できるコンテンツとなっています。
 
 ## コンテンツで学習できる内容
 
