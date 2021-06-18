@@ -1,6 +1,6 @@
 # モバイルアプリケーション開発の学習コンテンツ
 
-Reactを利用したWebアプリを開発してきた開発者がガイドにそってReact Nativeを利用したモバイルアプリケーション開発が学習できるコンテンツを公開しています。
+Reactを利用したWebアプリの開発経験者がガイドにそってReact Nativeを利用したモバイルアプリケーション開発が学習できるコンテンツを公開しています。
 
 モバイルアプリケーションを開発しようとするとき、Reactの経験が多い組織やチームであれば、React Nativeを採用して学習コストを抑えてすぐに開発できることが期待できます。アプリの実装はReactに近いので学習コストは低くなりますが、ReactでのWebアプリの開発とは異なるポイントがあります。
 
@@ -8,7 +8,7 @@ Reactを利用したWebアプリを開発してきた開発者がガイドにそ
 - 開発中のアプリをどうやって動作確認するのか
 - ReactでWebアプリを実装する場合と比べて大きな違いはあるか
 
-そのため、React Nativeを利用した開発経験が浅い方向けに、実際にアプリを作成して学習できるコンテンツを公開しています。
+React Nativeを利用した開発経験が浅い方向けに、実際にアプリを作成して学習できるコンテンツを公開しています。
 
 [React Native学習コンテンツ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn)
 
@@ -22,13 +22,13 @@ Reactを利用したWebアプリを開発してきた開発者がガイドにそ
 
 - [アプリの実装前](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts)
 
-    アプリを実装する前に必要となる前提知識を確認した後、React Nativeの基本、React Navigationの基本を学習します。
+    アプリを実装する前に必要となる前提知識を確認した後、React NativeとReact Navigationの基本を学習します。
 
 - [ToDoアプリの実装](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/todo-app)
 
-    題材として「ToDoアプリ」というシンプルなアプリを作成することをテーマとして、手を動かしながら学習します。
+    題材として「ToDoアプリ」というシンプルなアプリを作成することをテーマに手を動かしながら学習します。
 
-React Nativeを利用して開発を進める中で挙がったFAQ（[ハマりがちな落とし穴](https://ws-4020.github.io/mobile-app-crib-notes/react-native/common-pitfalls)）を紹介しています。もし学習を進める中でエラー等が発生した際は参考にしてみてください。
+React Nativeを利用して開発を進める中で挙がったFAQ（[ハマりがちな落とし穴](https://ws-4020.github.io/mobile-app-crib-notes/react-native/common-pitfalls)）を紹介しています。もし学習を進める中で困ったこと（アプリ起動時のエラー等）があれば参考にしてみてください。
 
 ## 学習に必要な期間
 
