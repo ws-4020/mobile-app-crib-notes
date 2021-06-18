@@ -18,18 +18,20 @@ import * as Yup from 'yup';
 export const TodoForm: React.FC = () => {
   const navigation = useNavigation();
 
-  const onAdd = useCallback<(values: {task: string}) => void>(
-    async ({task}) => {
-      await TodoService.postTodo(task);
-      navigation.goBack();
+  const onAdd = useCallback<(values: {todo: string}) => void>(
+    async ({todo}) => {
+      await TodoService.postTodo(todo);
+      if (navigation.isFocused()) {
+        navigation.goBack();
+      }
     },
     [navigation],
   );
 
   const formik = useFormik({
-    initialValues: {task: ''},
+    initialValues: {todo: ''},
     validationSchema: Yup.object().shape({
-      task: Yup.string().required('ToDoを入力してください'),
+      todo: Yup.string().required('ToDoを入力してください'),
     }),
     validateOnChange: false,
     onSubmit: onAdd,
@@ -67,9 +69,9 @@ export const TodoForm: React.FC = () => {
           placeholder="ToDoを入力してください"
           containerStyle={styles.input}
           autoCapitalize="none"
-          errorMessage={formik.errors.task}
-          onChangeText={formik.handleChange('task')}
-          value={formik.values.task}
+          errorMessage={formik.errors.todo}
+          onChangeText={formik.handleChange('todo')}
+          value={formik.values.todo}
         />
         <Button
           disabled={formik.isSubmitting}
@@ -97,7 +99,12 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
 });
+
 ```
+
+:::note
+`onAdd`では`navigation.goBack()`を呼ぶ前に状態を判定して、画面が表示されている場合だけToDo一覧に戻るように制御しています。
+:::
 
 ToDo登録画面では変更途中のデータがあった場合、破棄確認ダイアログを表示します。
 次に示すのは、`TodoForm.tsx`でそれを実現しているコード箇所です。
@@ -129,7 +136,7 @@ ToDo登録画面では変更途中のデータがあった場合、破棄確認�
 これを利用して、次の条件時においてイベントをキャンセルして（`event.preventDefault()`）破棄確認ダイアログを表示しています。
 
 - フォームに入力あり（`formik.dirty`が`true`）
-- フォームがサブミットされていない（`formik.isSubmitting`が``false`）
+- フォームがサブミットされていない（`formik.isSubmitting`が`false`）
 
 「ナビゲーションイベント」、および「戻るを防ぐ」の詳細は、次のReact Navigation公式ドキュメントを参照してください。
 
