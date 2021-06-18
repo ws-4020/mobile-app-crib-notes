@@ -12,7 +12,7 @@ React Nativeを利用した開発経験が浅い方向けに、実際にアプ�
 
 ## コンテンツで学習できる内容
 
-公開するコンテンツでは、次のことが学習できます。
+公開しているコンテンツでは、次のことが学習できます。
 
 - [開発環境の構築とアプリの実行](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/getting-started)
 
