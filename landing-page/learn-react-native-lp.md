@@ -18,7 +18,7 @@ React Nativeを利用した開発経験が浅い方向けに、実際にアプ�
 
     React Nativeでのアプリ開発に必要な環境を用意し、アプリの実行方法と仕組みを学習します。
 
-- [アプリの実装前](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts)
+- [アプリの実装前に](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts)
 
     アプリを実装する前に必要となる前提知識を確認した後、React NativeとReact Navigationの基本を学習します。
 
