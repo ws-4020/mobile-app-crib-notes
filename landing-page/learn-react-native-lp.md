@@ -28,7 +28,7 @@ React Nativeを利用した開発経験が浅い方向けに、実際にアプ�
 
 React Nativeを利用して開発を進める中で挙がったFAQ（[ハマりがちな落とし穴](https://ws-4020.github.io/mobile-app-crib-notes/react-native/common-pitfalls)）を紹介しています。もし学習を進める中で困ったこと（アプリ起動時のエラー等）があれば参考にしてみてください。
 
-## 学習に必要な期間
+## 前提と学習に必要な期間
 
 このコンテンツは、ReactでのWebアプリ開発の知識があることを前提としています。Reactでの開発経験がない方は、まず[SPA + REST API構成のサービス開発リファレンス](https://fintan.jp/?p=5952)に含まれるハンズオンコンテンツから学習を始めてみてください。
 
