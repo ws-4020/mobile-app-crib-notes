@@ -8,11 +8,6 @@ hide_table_of_contents: true
 
 ReactでのWebアプリケーションの経験がない、または前提となるレベルを確認したい方はWebベースのハンズオンを参照し、必要であれば学習してください。
 
-経験の浅い方で理解が難しいと感じた以下の点をより詳しく説明しています。
-
-- React Navigationの中で一般的に利用される`Stack`、`Modal`、`Tab`のナビゲーションを対象に注意事項等を交えての実装方法
-- フックを利用したStateの管理方法が難しい為、`ステートフック`と`副作用フック`を利用した管理方法
-
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 import {PageList} from '../../../src/components';
@@ -30,7 +25,7 @@ const overviews = [
   {
     title: '画面の実装',
     to: '/react-native/learn/todo-app/screens/welcome',
-    summary: <>まずは、ToDoアプリの各画面と画面遷移を実装します。この時点ではバックエンドのREST APIは利用せず、データは固定値とします。</>
+    summary: <>まずは、ToDoアプリの各画面と画面遷移を実装します。この時点ではバックエンドのREST APIは利用せず、データは固定値とします。その他に私たちが、理解するのに難しいと感じたReact Navigation（Stack、Modal、Tab）を利用する際のポイントや注意事項を交えた実装方法と、ステートフックと副作用フックを利用したStateの管理方法をより詳しく説明しています。</>
   },
   {
     title: 'REST APIとの接続',
