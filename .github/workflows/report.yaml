@@ -10,7 +10,7 @@ on:
 jobs:
   report:
     name: Report
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Jest results
         uses: dorny/test-reporter@v1
