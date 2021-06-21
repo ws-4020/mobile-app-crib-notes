@@ -4,9 +4,14 @@ title: APIクライアントの作成
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import {siteConfig} from '@generated/docusaurus.config';
+import {RepositoryLink, GithubContentsUrl} from '../../../../../src/components';
 
 ToDoアプリでは各画面で`TodoService`からデータを取得しますが、`TodoService`から直接REST APIを呼びだすのではなく共通的なAPIクライアントを用意します。
 APIクライアントは、APIと通信し、JSONとOpen APIドキュメントで定義されているモデルとの型変換や共通的なエラー処理を担当します。
+
+{`${siteConfig.organizationName}`}
+
 
 ## Open APIドキュメントから自動生成
 
@@ -14,7 +19,7 @@ ToDoアプリでは、Open APIドキュメントからAPIクライアントを�
 
 クライアントコードの生成には、[OpenAPI Generator](https://openapi-generator.tech/)を使用します。OpenAPIが提供しているツールで、OpenAPIドキュメントから様々なものを生成できます。TypeScript用のクライアントコードについても様々な実装を生成できますが、ここではtypescript-fetchを使用します。
 
-自動生成で利用するOpenAPIドキュメントは[mobile-app-hands-on-backend](https://github.com/ws-4020/mobile-app-hands-on-backend/tree/main/rest-api-specification)で公開されているものを利用します。
+自動生成で利用するOpenAPIドキュメントは<RepositoryLink projectName="mobile-app-hands-on-backend" path="tree/main/rest-api-specification">mobile-app-hands-on-backend</RepositoryLink>で公開されているものを利用します。
 
 `npx`か、package.jsonに`npm script`を追加してAPIクライアントを自動生成してください。
 
@@ -33,9 +38,9 @@ ToDoアプリでは、Open APIドキュメントからAPIクライアントを�
 
 以下のように`npx`で生成してください。
 
-```console
-npx @openapitools/openapi-generator-cli generate -g typescript-fetch -i https://raw.githubusercontent.com/ws-4020/mobile-app-hands-on-backend/main/rest-api-specification/openapi.yaml -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
-```
+<pre><code class="language-console">
+npx @openapitools/openapi-generator-cli generate -g typescript-fetch -i <GithubContentsUrl path="main/rest-api-specification/openapi.yaml" projectName="mobile-app-hands-on-backend"/> -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
+</code></pre>
 
 </TabItem>
 
