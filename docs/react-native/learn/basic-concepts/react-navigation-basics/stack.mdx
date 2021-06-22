@@ -41,7 +41,6 @@ Stackの操作として次のAPIが用意されています。
 <TabItem value="source">
 
 ```typescript jsx title="/src/App.tsx"
-import { ParamListBase } from '@react-navigation/native';
 import {
   NavigationContainer,
   useNavigation,
@@ -59,7 +58,7 @@ type RootParamList = {
   Screen2: undefined;
 };
 
-const Root = createStackNavigator();
+const Root = createStackNavigator<RootParamList>();
 
 export const App = () => {
   return (
@@ -73,7 +72,7 @@ export const App = () => {
 };
 
 const Screen1: React.FC = () => {
-  const navigation = useNavigation<StackNavigationProp<RootParamList>>();
+  const navigation = useNavigation<StackNavigationProp<RootParamList, 'Screen1'>>();
   const state = useNavigationState((state) => state);
 
   return (
@@ -97,7 +96,7 @@ const Screen1: React.FC = () => {
 };
 
 const Screen2: React.FC = () => {
-  const navigation = useNavigation<StackNavigationProp<RootParamList>>();
+  const navigation = useNavigation<StackNavigationProp<RootParamList, 'Screen2'>>();
   const state = useNavigationState((state) => state);
 
   return (
