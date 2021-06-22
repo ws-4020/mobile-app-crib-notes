@@ -54,6 +54,11 @@ import React from 'react';
 import {Text, View, ScrollView, StyleSheet} from 'react-native';
 import {Button} from 'react-native-elements';
 
+type RootParamList = {
+  Screen1: undefined;
+  Screen2: undefined;
+};
+
 const Root = createStackNavigator();
 
 export const App = () => {
@@ -68,7 +73,7 @@ export const App = () => {
 };
 
 const Screen1: React.FC = () => {
-  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
+  const navigation = useNavigation<StackNavigationProp<RootParamList>>();
   const state = useNavigationState((state) => state);
 
   return (
@@ -92,7 +97,7 @@ const Screen1: React.FC = () => {
 };
 
 const Screen2: React.FC = () => {
-  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
+  const navigation = useNavigation<StackNavigationProp<RootParamList>>();
   const state = useNavigationState((state) => state);
 
   return (
