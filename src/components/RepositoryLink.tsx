@@ -23,11 +23,3 @@ export const RepositoryLink: React.FC<PropsWithChildren<RepositoryLinkProps & Co
     </a>
   );
 };
-
-export const GithubContentsUrl: React.FC<RepositoryLinkProps> = ({path, projectName}) => {
-  const {siteConfig} = useDocusaurusContext() as DocusaurusContext;
-  const url = `https://raw.githubusercontent.com/${siteConfig.organizationName}/${
-    projectName ? projectName : siteConfig.projectName
-  }${path ?? ''}`;
-  return <span>`${url}`</span>;
-};

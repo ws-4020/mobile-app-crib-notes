@@ -5,7 +5,7 @@ title: APIクライアントの作成
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteConfig} from '@generated/docusaurus.config';
-import {RepositoryLink, GithubContentsUrl} from '../../../../../src/components';
+import {RepositoryLink} from '../../../../../src/components';
 
 ToDoアプリでは各画面で`TodoService`からデータを取得しますが、`TodoService`から直接REST APIを呼びだすのではなく共通的なAPIクライアントを用意します。
 APIクライアントは、APIと通信し、JSONとOpen APIドキュメントで定義されているモデルとの型変換や共通的なエラー処理を担当します。
@@ -38,9 +38,9 @@ ToDoアプリでは、Open APIドキュメントからAPIクライアントを�
 
 以下のように`npx`で生成してください。
 
-<pre><code class="language-console">
-npx @openapitools/openapi-generator-cli generate -g typescript-fetch -i <GithubContentsUrl path="main/rest-api-specification/openapi.yaml" projectName="mobile-app-hands-on-backend"/> -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
-</code></pre>
+```console
+npx @openapitools/openapi-generator-cli generate -g typescript-fetch -i https://raw.githubusercontent.com/{@inject: organizationName}/mobile-app-hands-on-backend/main/rest-api-specification/openapi.yaml -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
+```
 
 </TabItem>
 
