@@ -1,11 +1,4 @@
 const path = require('path');
-const baseUrl = '/mobile-app-crib-notes/';
-
-if (!process.env.CI) {
-  process.env.GITHUB_REPOSITORY = __dirname.toLowerCase().includes('ws-4020')
-    ? 'ws-4020/mobile-app-crib-notes'
-    : 'fintan-contents/mobile-app-crib-notes';
-}
 
 const injector = (options) => {
   const keys = Object.keys(options);
@@ -38,11 +31,13 @@ const injector = (options) => {
   }
 };
 
-// for debug
-console.debug(`GITHUB_REPOSITORY: ${process.env.GITHUB_REPOSITORY}`);
-
-const isDraft = !!process.env.GITHUB_REPOSITORY && process.env.GITHUB_REPOSITORY.toLowerCase().startsWith('ws-4020');
-const organization = isDraft ? 'ws-4020' : 'fintan-contents';
+const productionOrganization = 'fintan-contents';
+const draftOrganization = 'ws-4020';
+const project = 'mobile-app-crib-notes';
+const organization = process.env.GITHUB_REPOSITORY?.toLowerCase()?.startsWith(`${productionOrganization}/`)
+  ? productionOrganization
+  : draftOrganization;
+const isDraft = organization === draftOrganization;
 
 const copyright = `<div class="no-content">
 <div class="copyright">
@@ -56,7 +51,7 @@ const copyright = `<div class="no-content">
   </div>
 </div>
 <div class="supplementary">
-  <a href="${baseUrl}trademark/" class="footer__link-item">商標について</a>
+  <a href="/${project}/trademark/" class="footer__link-item">商標について</a>
 </div>
 </div>
 `;
@@ -70,12 +65,12 @@ module.exports = {
   title: 'Fintan » Mobile App Development',
   tagline: '',
   url: `https://${organization}.github.io`,
-  baseUrl,
+  baseUrl: `/${project}/`,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: organization, // Usually your GitHub org/user name.
-  projectName: 'mobile-app-crib-notes', // Usually your repo name.
+  projectName: project, // Usually your repo name.
   noIndex: isDraft,
   i18n: {
     defaultLocale: 'ja-JP',
@@ -107,7 +102,7 @@ module.exports = {
         {
           label: 'Home',
           to: '/',
-          activeBaseRegex: `${baseUrl}?$`,
+          activeBaseRegex: `${project}?$`,
           position: 'left',
         },
         {
@@ -140,7 +135,7 @@ module.exports = {
         },
         ...(process.env.NODE_ENV === 'development' ? [{label: 'Docusaurus', to: 'docusaurus', position: 'left'}] : []),
         {
-          href: `https://github.com/${organization}/mobile-app-crib-notes`,
+          href: `https://github.com/${organization}/${project}`,
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
