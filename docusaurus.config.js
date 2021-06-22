@@ -25,11 +25,9 @@ const injector = (options) => {
   }
 
   function replace(value) {
-    let replaced = value;
-    keys.forEach((key) => {
-      replaced = replaced.replace(`{@inject: ${key}}`, options[key]);
-    });
-    return replaced;
+    return keys.reduce((replaced, key) => {
+      return replaced.replace(key, options[key]);
+    }, value);
   }
 };
 
