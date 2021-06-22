@@ -7,6 +7,32 @@ if (!process.env.CI) {
     : 'fintan-contents/mobile-app-crib-notes';
 }
 
+const injector = (options) => {
+  const keys = Object.keys(options);
+  return inject;
+  function inject(tree) {
+    if (tree.type === 'root' || tree.type === 'element') {
+      tree.children = tree.children.map((c) => inject(c));
+    }
+    if (tree.type === 'text' && hasPlaceHolder(tree.value)) {
+      tree.value = replace(tree.value);
+    }
+    return tree;
+  }
+
+  function hasPlaceHolder(value) {
+    return value.includes('{@inject:');
+  }
+
+  function replace(value) {
+    let replaced = value;
+    keys.forEach((key) => {
+      replaced = replaced.replace(`{@inject: ${key}}`, options[key]);
+    });
+    return replaced;
+  }
+};
+
 // for debug
 console.debug(`GITHUB_REPOSITORY: ${process.env.GITHUB_REPOSITORY}`);
 
@@ -29,6 +55,10 @@ const copyright = `<div class="no-content">
 </div>
 </div>
 `;
+
+const injectOptions = {
+  organization,
+};
 
 module.exports = {
   title: 'Fintan » Mobile App Development',
@@ -163,6 +193,7 @@ module.exports = {
           sidebarPath: require.resolve('./docs/sidebars.js'),
           routeBasePath: '/',
           showLastUpdateTime: true,
+          rehypePlugins: [[injector, injectOptions]],
         },
         blog: false,
         theme: {
