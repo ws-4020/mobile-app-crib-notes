@@ -73,8 +73,8 @@ module.exports = {
   projectName: project, // Usually your repo name.
   noIndex: isDraft,
   i18n: {
-    defaultLocale: 'ja-JP',
-    locales: ['ja-JP'],
+    defaultLocale: 'ja',
+    locales: ['ja'],
   },
   themeConfig: {
     hideableSidebar: true,
