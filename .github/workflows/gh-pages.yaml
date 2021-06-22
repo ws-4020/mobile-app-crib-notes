@@ -74,7 +74,7 @@ jobs:
         run: npm clean-install
 
       - name: Set up reviewdog
-        if: steps.cache-node-modules.outputs.cache-hit === 'true' || steps.install-dependencies.conclusion === 'success'
+        if: steps.cache-node-modules.outputs.cache-hit == 'true' || steps.install-dependencies.conclusion == 'success'
         uses: reviewdog/action-setup@v1
         with:
           reviewdog_version: latest
