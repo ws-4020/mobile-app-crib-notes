@@ -99,15 +99,8 @@ jobs:
 
       - name: Lint (stylelint)
         if: always()
-        uses: reviewdog/action-stylelint@v1
-        # https://github.com/reviewdog/action-stylelint
-        with:
-          name: stylelint (GitHub Pages)
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-check
-          fail_on_error: true
-          # package.jsonでlint:cssに設定しているのと同じ引数を渡す
-          stylelint_input: 'src/**/*.css'
+        run: |
+          npm run -s lint:css | reviewdog -tee -fail-on-error -reporter=github-check -f=stylelint -name="stylelint (GitHub Pages)"
 
   build:
     name: Build
