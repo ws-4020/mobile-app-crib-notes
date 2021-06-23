@@ -26,7 +26,7 @@ const injector = (options) => {
   }
 
   function hasPlaceHolder(value) {
-    return value.includes('{@inject:');
+    return value && value.includes('{@inject:');
   }
 
   function replace(value) {
