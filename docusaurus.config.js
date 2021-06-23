@@ -71,7 +71,7 @@ module.exports = {
         {
           label: 'Home',
           to: '/',
-          activeBaseRegex: `${projectName}/?$`,
+          activeBaseRegex: `${baseUrl}?$`,
           position: 'left',
         },
         {
