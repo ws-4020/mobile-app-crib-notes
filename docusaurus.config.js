@@ -26,7 +26,7 @@ const injector = (options) => {
 
   function replace(value) {
     return keys.reduce((replaced, key) => {
-      return replaced.replace(key, options[key]);
+      return replaced.replace(`{@inject: ${key}}`, options[key]);
     }, value);
   }
 };
