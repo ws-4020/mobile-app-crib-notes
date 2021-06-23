@@ -9,7 +9,7 @@ if (!process.env.CI) {
 
 const injector = (options) => {
   const keys = Object.keys(options);
-  const placeHolders = keys.map((key) => new RegExp('{@inject: ?' + key + '}'));
+  const placeHolders = keys.map((key) => new RegExp('{@inject: *' + key + '}'));
   return inject;
   function inject(tree) {
     if (tree.type === 'root' || tree.type === 'element') {
