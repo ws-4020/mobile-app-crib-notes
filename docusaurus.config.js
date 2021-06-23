@@ -9,10 +9,15 @@ if (!process.env.CI) {
 
 const injector = (options) => {
   const keys = Object.keys(options);
+  const placeHolders = keys.map((key) => new RegExp('{@inject: ?' + key + '}'));
   return inject;
   function inject(tree) {
     if (tree.type === 'root' || tree.type === 'element') {
       tree.children = tree.children.map((c) => inject(c));
+      if (tree.tagName === 'a' && tree.properties?.href) {
+        const href = decodeURI(tree.properties?.href);
+        tree.properties.href = hasPlaceHolder(href) ? replace(href) : href;
+      }
     }
     if (tree.type === 'text' && hasPlaceHolder(tree.value)) {
       tree.value = replace(tree.value);
@@ -25,8 +30,8 @@ const injector = (options) => {
   }
 
   function replace(value) {
-    return keys.reduce((replaced, key) => {
-      return replaced.replace(`{@inject: ${key}}`, options[key]);
+    return keys.reduce((replaced, key, index) => {
+      return replaced.replace(placeHolders[index], options[key]);
     }, value);
   }
 };
