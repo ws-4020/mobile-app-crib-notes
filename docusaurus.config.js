@@ -13,7 +13,7 @@ const injector = (options) => {
   return inject;
   function inject(tree) {
     if (tree.type === 'root' || tree.type === 'element') {
-      tree.children = tree.children.map((c) => inject(c));
+      tree.children = tree.children.map(inject);
       if (tree.tagName === 'a' && tree.properties?.href) {
         const href = decodeURI(tree.properties.href);
         tree.properties.href = encodeURI(hasPlaceHolder(href) ? replace(href) : href);
