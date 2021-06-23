@@ -56,6 +56,7 @@ const copyright = `<div class="no-content">
 
 const injectOptions = {
   organization,
+  rnSpoilerTag: '2021.05.0',
 };
 
 module.exports = {
