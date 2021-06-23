@@ -16,9 +16,9 @@ const injector = (options) => {
       tree.children = tree.children.map(inject);
       if (tree.tagName === 'a' && tree.properties?.href) {
         const href = decodeURI(tree.properties.href);
-if (hasPlaceHolder(href)) {
-  tree.properties.href = encodeURI(replace(href))
-}
+        if (hasPlaceHolder(href)) {
+          tree.properties.href = encodeURI(replace(href));
+        }
       }
     }
     if (tree.type === 'text' && hasPlaceHolder(tree.value)) {
