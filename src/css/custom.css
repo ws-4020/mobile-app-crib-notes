@@ -165,12 +165,13 @@ html[data-theme='dark'] .header-github-link::before {
 /******************************************************************************
  * Tabs
  *****************************************************************************/
-[role="tabpanel"] {
-  margin: -1rem 1px -1rem;
+.tabs {
+  padding-left: 0.5rem;
 }
+
 .tabs-container .margin-vert--md {
-  border: solid 2px #ddd;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  border-top: none;
+  border: solid 1px #ddd;
+  border-radius: 0.5rem;
+  margin-top: 0 !important;
+  padding: 0.5rem 1rem;
 }
