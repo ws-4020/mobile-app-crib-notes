@@ -208,6 +208,21 @@ module.exports = {
           },
           {
             type: 'category',
+            label: 'Application Architecture',
+            items: [
+              {
+                type: 'doc',
+                id: 'react-native/santoku/application-architecture',
+              },
+              {
+                type: 'category',
+                label: 'アプリの初期処理',
+                items: ['react-native/santoku/application-architecture/initialization/initialization'],
+              },
+            ],
+          },
+          {
+            type: 'category',
             label: 'Development',
             items: [
               {
