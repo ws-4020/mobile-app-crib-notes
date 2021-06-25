@@ -70,7 +70,8 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm clean-install
+        run: |
+          npm clean-install 2>&1 | tee /dev/stderr | test $(grep --count -E '(Error:|gyp ERR!)') -le 0
 
       - name: Set up reviewdog
         uses: reviewdog/action-setup@v1
