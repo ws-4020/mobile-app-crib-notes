@@ -1,13 +1,13 @@
 import Link from '@docusaurus/Link';
-import clsx from 'clsx';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import clsx from 'clsx';
 import React, {ComponentProps, ImgHTMLAttributes} from 'react';
 
 import styles from './PageList.module.css';
 
 interface OverviewsProps {
   overviews: ComponentProps<typeof PageOverview>[];
-  colSize: number;
+  colSize?: number;
 }
 
 type PageSummaryProps = {
