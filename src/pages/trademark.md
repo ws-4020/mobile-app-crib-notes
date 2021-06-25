@@ -12,8 +12,9 @@ title: 商標について
   ※iPhone商標は、アイホン株式会社のライセンスに基づき使用されています。  
   ※iOS商標は、 Cisco Systems, Inc. のライセンスに基づき使用されています。
 - 「Google Chrome」「Android」「Flutter」「Firebase」は、 Google LLCの登録商標です。
-<!-- textlint-disable -->
-- 「Azure」「Windows」は、 Microsoft Corporationの米国およびその他の国におけるMicrosoft Corporationおよび/またはその関連会社の登録商標または商標です。<!-- textlint-enable -->
+<!-- textlint-disable ja-technical-writing/sentence-length-->
+- 「Azure」「Windows」は、 Microsoft Corporationの米国およびその他の国におけるMicrosoft Corporationおよび/またはその関連会社の登録商標または商標です。
+<!-- textlint-enable ja-technical-writing/sentence-length-->
 - 「Java」は、Oracle Corporationおよびその子会社、関連会社の米国およびその他の国における登録商標または商標です。
 - 「Open Web Application Security Project」「OWASP」は、 OWASP Foundation, Inc. の登録商標です。
 
