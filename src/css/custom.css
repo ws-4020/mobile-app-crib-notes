@@ -161,3 +161,16 @@ html[data-theme='dark'] .header-github-link::before {
   max-width: 100%;
   max-height: 50em;
 }
+
+/******************************************************************************
+ * Tabs
+ *****************************************************************************/
+[role="tabpanel"] {
+  margin: 0 5px;
+}
+.tabs-container .margin-vert--md {
+  border: solid 2px rgba(0, 0, 0, 0.3);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top: none;
+}
