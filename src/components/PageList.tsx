@@ -1,13 +1,13 @@
 import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import clsx from 'clsx';
-import React, {ComponentProps, ImgHTMLAttributes, useEffect} from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import React, {ComponentProps, ImgHTMLAttributes} from 'react';
 
 import styles from './PageList.module.css';
 
 interface OverviewsProps {
   overviews: ComponentProps<typeof PageOverview>[];
-  colSize?: number;
+  colSize: number;
 }
 
 type PageSummaryProps = {
@@ -19,7 +19,6 @@ type PageSummaryProps = {
 
 const Container: React.FC<{colSize?: number} & ComponentProps<typeof Link>> = ({children, colSize = 4, ...props}) => {
   const toUrl = useBaseUrl(props.to);
-  useEffect(() => toUrl, []);
   return (
     <div className={clsx('col', `col--${colSize}`, styles.pageOverviewContainer)}>
       <Link className={clsx('card', styles.pageOverviewLinkCard)} {...props} to={toUrl}>
