@@ -163,7 +163,6 @@ module.exports = {
             'react-native/learn/todo-app/screens/use-focus-effect',
             'react-native/learn/todo-app/screens/basic-components',
             'react-native/learn/todo-app/screens/logo',
-            'react-native/learn/todo-app/screens/exercise',
           ],
         },
         {
@@ -175,6 +174,7 @@ module.exports = {
             'react-native/learn/todo-app/networking/api-request',
             'react-native/learn/todo-app/networking/activity-indicator',
             'react-native/learn/todo-app/networking/activity-indicator-each-todo',
+            'react-native/learn/todo-app/screens/exercise',
           ],
         },
       ],
