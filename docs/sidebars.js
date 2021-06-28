@@ -216,8 +216,11 @@ module.exports = {
               },
               {
                 type: 'category',
-                label: 'アプリの初期処理',
-                items: ['react-native/santoku/application-architecture/initialization/initialization'],
+                label: 'スプラッシュスクリーン',
+                items: [
+                  'react-native/santoku/application-architecture/splash-screen/overview',
+                  'react-native/santoku/application-architecture/splash-screen/initialization',
+                ],
               },
             ],
           },
