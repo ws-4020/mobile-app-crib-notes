@@ -1,24 +1,38 @@
 module.exports = {
-  reference: {
-    このドキュメントについて: ['reference/index'],
-    セキュリティ: ['reference/security/awesome-sites'],
-    認証: [
-      'reference/auth/overview',
-      'reference/auth/authn-architecture',
-      'reference/auth/login-screens',
-      'reference/auth/manage-credentials',
-      'reference/auth/stateless-authn',
-      'reference/auth/webassets-integration',
-      'reference/auth/authn-with-backend-using-OIDC-and-device-authn',
-    ],
-    プッシュ通知: [
-      'reference/notification/overview',
-      'reference/notification/infrastructure',
-      'reference/notification/configuration',
-      'reference/notification/backend',
-      'reference/notification/client',
-    ],
-  },
+  reference: [
+    {
+      type: 'doc',
+      id: 'reference/index',
+    },
+    {
+      type: 'doc',
+      id: 'reference/security/awesome-sites',
+    },
+    {
+      type: 'category',
+      label: '認証',
+      items: [
+        'reference/auth/overview',
+        'reference/auth/authn-architecture',
+        'reference/auth/login-screens',
+        'reference/auth/manage-credentials',
+        'reference/auth/stateless-authn',
+        'reference/auth/webassets-integration',
+        'reference/auth/authn-with-backend-using-OIDC-and-device-authn',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'プッシュ通知',
+      items: [
+        'reference/notification/overview',
+        'reference/notification/infrastructure',
+        'reference/notification/configuration',
+        'reference/notification/backend',
+        'reference/notification/client',
+      ],
+    }
+  ],
   distribution: [
     {
       type: 'doc',
