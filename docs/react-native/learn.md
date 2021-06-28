@@ -1,5 +1,5 @@
 ---
-title: About
+title: React Nativeの学習用コンテンツ
 hide_table_of_contents: true
 ---
 
