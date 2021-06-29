@@ -1,5 +1,5 @@
 ---
-title: React Native学習
+title: React Nativeの学習
 hide_table_of_contents: true
 sidebar_label: Overview
 ---
