@@ -174,9 +174,9 @@ module.exports = {
             'react-native/learn/todo-app/networking/api-request',
             'react-native/learn/todo-app/networking/activity-indicator',
             'react-native/learn/todo-app/networking/activity-indicator-each-todo',
-            'react-native/learn/todo-app/screens/exercise',
           ],
         },
+        'react-native/learn/todo-app/screens/exercise',
       ],
     },
     {
