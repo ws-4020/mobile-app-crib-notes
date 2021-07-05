@@ -2,39 +2,6 @@ const productionOrganization = 'fintan-contents';
 const draftOrganization = 'ws-4020';
 const project = 'mobile-app-crib-notes';
 
-const path = require('path');
-
-const injector = (options) => {
-  const keys = Object.keys(options);
-  const placeHolders = keys.map((key) => new RegExp('{@inject: *' + key + '}'));
-  return inject;
-  function inject(tree) {
-    if (tree.type === 'root' || tree.type === 'element') {
-      tree.children = tree.children.map(inject);
-      if (tree.tagName === 'a' && tree.properties?.href) {
-        const href = decodeURI(tree.properties.href);
-        if (hasPlaceHolder(href)) {
-          tree.properties.href = encodeURI(replace(href));
-        }
-      }
-    }
-    if (tree.type === 'text' && hasPlaceHolder(tree.value)) {
-      tree.value = replace(tree.value);
-    }
-    return tree;
-  }
-
-  function hasPlaceHolder(value) {
-    return value && value.includes('{@inject:');
-  }
-
-  function replace(value) {
-    return keys.reduce((replaced, key, index) => {
-      return replaced.replace(placeHolders[index], options[key]);
-    }, value);
-  }
-};
-
 const organization = process.env.GITHUB_REPOSITORY?.toLowerCase()?.startsWith(`${productionOrganization}/`)
   ? productionOrganization
   : draftOrganization;
@@ -200,7 +167,7 @@ module.exports = {
           sidebarPath: require.resolve('./docs/sidebars.js'),
           routeBasePath: '/',
           showLastUpdateTime: true,
-          rehypePlugins: [[injector, injectOptions]],
+          rehypePlugins: [[require('./src/plugins/literal-injector-rehype-plugin'), injectOptions]],
         },
         blog: false,
         theme: {
@@ -257,6 +224,6 @@ module.exports = {
         ],
       },
     ],
-    path.resolve(__dirname, 'src/plugins/medium-zoom-docusaurus-plugin'),
+    './src/plugins/medium-zoom-docusaurus-plugin',
   ],
 };
