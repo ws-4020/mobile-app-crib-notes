@@ -1,3 +1,7 @@
+const productionOrganization = 'fintan-contents';
+const draftOrganization = 'ws-4020';
+const project = 'mobile-app-crib-notes';
+
 const path = require('path');
 
 const injector = (options) => {
@@ -31,9 +35,6 @@ const injector = (options) => {
   }
 };
 
-const productionOrganization = 'fintan-contents';
-const draftOrganization = 'ws-4020';
-const project = 'mobile-app-crib-notes';
 const organization = process.env.GITHUB_REPOSITORY?.toLowerCase()?.startsWith(`${productionOrganization}/`)
   ? productionOrganization
   : draftOrganization;
@@ -41,10 +42,10 @@ const isDraft = organization === draftOrganization;
 
 const copyright = `<div class="no-content">
 <div class="copyright">
-  <div class="copyrightImage">
+  <div class="copyright-image">
     <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width: 0; height: auto;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
   </div>
-  <div class="copyrightText">
+  <div class="copyright-text">
     ドキュメントは、<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">クリエイティブ・コモンズ 表示 - 継承 4.0 国際 ライセンス</a
     >の下に提供されており、コードサンプルは<a rel="license" href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a
     >の下に提供されています。
