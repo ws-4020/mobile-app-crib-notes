@@ -1,24 +1,38 @@
 module.exports = {
-  reference: {
-    このドキュメントについて: ['reference/index'],
-    セキュリティ: ['reference/security/awesome-sites'],
-    認証: [
-      'reference/auth/overview',
-      'reference/auth/authn-architecture',
-      'reference/auth/login-screens',
-      'reference/auth/manage-credentials',
-      'reference/auth/stateless-authn',
-      'reference/auth/webassets-integration',
-      'reference/auth/authn-with-backend-using-OIDC-and-device-authn',
-    ],
-    プッシュ通知: [
-      'reference/notification/overview',
-      'reference/notification/infrastructure',
-      'reference/notification/configuration',
-      'reference/notification/backend',
-      'reference/notification/client',
-    ],
-  },
+  reference: [
+    {
+      type: 'doc',
+      id: 'reference/index',
+    },
+    {
+      type: 'doc',
+      id: 'reference/security/awesome-sites',
+    },
+    {
+      type: 'category',
+      label: '認証',
+      items: [
+        'reference/auth/overview',
+        'reference/auth/authn-architecture',
+        'reference/auth/login-screens',
+        'reference/auth/manage-credentials',
+        'reference/auth/stateless-authn',
+        'reference/auth/webassets-integration',
+        'reference/auth/authn-with-backend-using-OIDC-and-device-authn',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'プッシュ通知',
+      items: [
+        'reference/notification/overview',
+        'reference/notification/infrastructure',
+        'reference/notification/configuration',
+        'reference/notification/backend',
+        'reference/notification/client',
+      ],
+    }
+  ],
   distribution: [
     {
       type: 'doc',
@@ -80,6 +94,7 @@ module.exports = {
         'react-native/learn/getting-started/setting-up-development-environment',
         'react-native/learn/getting-started/create-project',
         'react-native/learn/getting-started/launch-created-app',
+        'react-native/learn/getting-started/supplement',
       ],
     },
     {
@@ -163,7 +178,6 @@ module.exports = {
             'react-native/learn/todo-app/screens/use-focus-effect',
             'react-native/learn/todo-app/screens/basic-components',
             'react-native/learn/todo-app/screens/logo',
-            'react-native/learn/todo-app/screens/exercise',
           ],
         },
         {
@@ -177,6 +191,7 @@ module.exports = {
             'react-native/learn/todo-app/networking/activity-indicator-each-todo',
           ],
         },
+        'react-native/learn/todo-app/screens/exercise',
       ],
     },
     {
@@ -185,15 +200,23 @@ module.exports = {
       items: ['react-native/learn/advance/react-navigation-param'],
     },
   ],
-  pitfalls: {
-    About: ['react-native/common-pitfalls'],
-    アプリを実行できない: [
-      'react-native/common-pitfalls/unable-to-load-script',
-      'react-native/common-pitfalls/debug-keystore-not-found',
-      'react-native/common-pitfalls/react-native-cli-uninstall',
-      'react-native/common-pitfalls/cant-build-in-xcode',
-    ],
-  },
+  pitfalls: [
+    {
+      type: 'doc',
+      id: 'react-native/common-pitfalls',
+    },
+    {
+      type: 'category',
+      label: 'アプリを実行できない',
+      items: [
+        'react-native/common-pitfalls/overview',
+        'react-native/common-pitfalls/unable-to-load-script',
+        'react-native/common-pitfalls/debug-keystore-not-found',
+        'react-native/common-pitfalls/react-native-cli-uninstall',
+        'react-native/common-pitfalls/cant-build-in-xcode',
+      ],
+    },
+  ],
   ...(process.env.NODE_ENV === 'development'
     ? {
         santoku: [
@@ -251,6 +274,10 @@ module.exports = {
           {
             type: 'doc',
             id: 'docusaurus/mdx',
+          },
+          {
+            type: 'doc',
+            id: 'docusaurus/plugins',
           },
           {
             // TODO: ヘッダリンクの作り方: ['docusaurus/create-link-in-header'],
