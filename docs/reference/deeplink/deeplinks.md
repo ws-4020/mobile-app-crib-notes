@@ -8,11 +8,11 @@ title: DeepLink
 
 例：フォトライブラリで画像を選択して、メールアプリに共有する。
 
-## 実現方法
+# 実現方法
 
-リンクの情報をアプリケーションが受け取るための実現方式。
+URLにある情報をもとにアプリを起動し、受け取るための実現方式。
 
-### App Links
+## App Links
 
 対象はAndroid。
 
@@ -28,16 +28,16 @@ title: DeepLink
 IntentのデータにMIMEタイプを指定するとOSが適切アプリを絞り込めるらしいけどリンク作る方の話。
 
 
-#### App Linksをアプリで実装する
+### App Linksをアプリで実装する
 
 TODO: 実装する人がやること、アプリの管理者に依頼することとか。
 
-#### App Links向けのURLの作成
+### App Links向けのURLの作成
 
 - ドメインをあわせる
 - MIME typeをManifestにあわせる
 
-### Universal Links
+## Universal Links
 
 対象はiOS。
 
@@ -50,11 +50,11 @@ TODO: 実装する人がやること、アプリの管理者に依頼するこ�
 アプリを起動して欲しい場合、ユニバーサルリンク自体はアプリに紐付いていないドメインに配置する。
 同一ドメインの場合、ブラウジングしたいと判断してブラウザでコンテンツを参照させてしまう。
 
-#### Universal Linksをアプリで実装する
+### Universal Linksをアプリで実装する
 
 TODO: 実装する人がやること、アプリの管理者に依頼することとか。
 
-### Firebase Dynamic Links
+## Firebase Dynamic Links
 
 iOS, Androidが対象。
 
@@ -67,18 +67,18 @@ iOS, Androidが対象。
 ウェブ向けのリンク先コンテンツを用意していない場合は、この URL が有効なウェブリソースを指していなくてもかまいません。その場合は、この URL からサイトのトップページなどにリダイレクトするようにしてください。
 :::
 
-#### Firebase Dynamic Linksをアプリで実装する
+### Firebase Dynamic Linksをアプリで実装する
 
 TODO: 実装する人がやること、アプリの管理者に依頼することとか。
 
-#### Firebase Dynamic LinksのURLを作成する
+### Firebase Dynamic LinksのURLを作成する
 
 [Linksの作成パターン](https://firebase.google.com/docs/dynamic-links/create-links)
 
 TODO: 実装する人がやること、アプリの管理者に依頼することとか。
 
 
-### custom URL Scheme
+## custom URL Scheme
 
 対象はiOS、Android。
 
@@ -89,11 +89,10 @@ HTTP(`https://`)ではなくアプリで指定したスキームを利用する�
 
 例：`expo://`
 
-#### custom URL Schemeの実装
+### custom URL Schemeの実装
 
-TODO:
+TODO: 実装する人がやること、アプリの管理者に依頼することとか。
 
-#### custom URL Schemeの作成方法
+### custom URL Schemeの作成方法
 
-TODO:
-
+TODO: 実装する人がやること、アプリの管理者に依頼することとか。
