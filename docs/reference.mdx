@@ -1,48 +1,37 @@
 ---
-title: モバイルアプリケーション開発ガイド
+title: リファレンス
 sidebar_label: Overview
 ---
 
-## 目的
+Android/iOSのモバイルアプリケーションの開発に必要となる基本的な知識をまとめています。
 
-モバイルアプリケーションは多種多様ですが、多くのアプリで共通するユースケースは存在すると考えられます。
-本ガイドでは、そのようなユースケースに対してシステムアーキテクチャの特性・制約と具体的な設計例を、開発者が理解して実装できることを目的としています。
-その他にモバイルアプリケーションの代表的な要求の1つであるPush通知について、プロジェクトで参考にできるPush通知のガイドと実装例を用意しています。
+:::caution 留意事項
+これまでWebアプリケーションを開発していたエンジニアが、モバイルアプリケーションの開発を始めるために調査した内容などをまとめています。そのため、Webとは考え方やアーキテクチャが異なるポイントを重視した内容となっています。
 
-## 前提条件
+ここでは、モバイルアプリケーションの開発におけるごく一部の側面しか紹介できていません。また、すでに紹介している内容についても、内容を追記する可能性もありますし、プラットフォームの変化などで変更されていく可能性もあります。
+:::
 
-- 共通ユースケースを網羅的にカバーするのではなく、使用頻度が高く難易度の高いものに絞って説明しています
-- モバイルアプリケーションの開発プロセス、Google Play・App Storeへのアプリ配布方法などについては説明していません
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-## 全体構成
+import {PageList} from '../src/components';
+const overviews = [
+  {
+    title: 'セキュリティ',
+    summary: <>モバイルアプリケーション開発を始める上で参考になる、セキュリティ関連のガイドや記事を紹介しています。</>,
+    to: '/reference/security/awesome-sites'
+  },
+  {
+    title: '認証',
+    summary: <>モバイルアプリケーションでの認証方式についてまとめています。特に、WebViewとAPIで認証情報を共有する方式やOpenID Connectを用いて認証する場合の方式について紹介しています。</>,
+    to: '/reference/auth/overview'
+  },
+  {
+    title: 'プッシュ通知',
+    summary: <>モバイルアプリケーションでのプッシュ通知（リモートプッシュ）のについてまとめています。Firebase Cloud Messagingを利用してプッシュ通知を送受信するためのソースコード例も載せています。</>,
+    to: '/reference/notification/overview'
+  },
+]
 
-本ガイドとサンプルアプリおよび、コード例の3つで構成されています。
-ユースケースごとのシステムアーキテクチャと設計についてはガイドをご覧ください。
-それを実現するための実装方法についてはサンプルアプリをご覧ください。
+<PageList overviews={overviews} colSize={12} />
 
-- モバイルアプリケーション開発ガイド
-  - モバイルアプリケーションのセキュリティにおける一般的な注意事項
-  - モバイルアプリケーションにおける認証方式と制約
-  - Webアプリケーションをモバイルアプリケーション内で表示する際の注意事項や制約
-  - Firebase Cloud Messagingを用いたプッシュ通知の構成例の紹介と説明
-- サンプルアプリ
-  - ステートレスな認証（OpenID Connectを使った認証）
-  - Webアプリケーションのモバイルアプリケーション内表示（Webアプリケーションとの認証状態の同期）
-- 初期設定とコード例
-  - リモート通知の送信のために必要なファイルやアカウントの説明と初期設定
-  - FirebaseのAPIを呼びだすための初期設定
-  - バックエンドからFirebase Admin SDKを使用したFirebaseのAPIを呼びだす際のコード例
-  - クライアントアプリからFirebase SDKを使用したFirebaseのAPIを呼びだす際のコード例
-
-## サンプルアプリの目的
-
-ガイドで示したアーキテクチャと設計を実際のソースコードに落としたものです。
-ソースコードを参照して、開発者が実際の開発を進めやすいようにするのが目的です。ガイドと合わせてご覧ください。
-サンプルアプリではFacebookが開発したモバイルアプリケーションフレームワークである[React Native](https://reactnative.dev/)を使っています。
-そのためReact Nativeを使うプロジェクトで同じユースケースであればソースコードを流用可能です。
-
-## 初期設定とコード例の目的
-
-React Nativeを利用した実装イメージをつかめるように設定方法とサンプルコードを合わせて公開しています。
-リモート通知を配信するサービスの設定やモバイルアプリケーションで利用するライブラリの設定も説明していますので、
-ガイドとあわせて理解を深めるのに利用してください。
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
