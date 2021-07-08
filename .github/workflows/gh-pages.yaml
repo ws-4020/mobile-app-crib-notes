@@ -8,24 +8,24 @@ on:
     branches:
       - master
     paths:
-      - docs/**
-      - src/**
-      - static/**
-      - landing-page/**
+      - website/docs/**
+      - website/src/**
+      - website/static/**
+      - website/landing-page/**
       - .editorconfig
-      - .eslintrc.js
-      - .htmltest.yaml
-      - .markdownlint.js
-      - .prettierrc.js
-      - .stylelintrc.js
-      - .textlintrc.js
-      - babel.config.js
-      - docusaurus.config.js
-      - package.json
-      - package-lock.json
-      - prh.yaml
-      - README.md
-      - tsconfig.json
+      - website/.eslintrc.js
+      - website/.htmltest.yaml
+      - website/.markdownlint.js
+      - website/.prettierrc.js
+      - website/.stylelintrc.js
+      - website/.textlintrc.js
+      - website/babel.config.js
+      - website/docusaurus.config.js
+      - website/package.json
+      - website/package-lock.json
+      - website/prh.yaml
+      - website/README.md
+      - website/tsconfig.json
       - .github/workflows/gh-pages.yaml
       - .github/workflows/gh-pages-deploy.yaml
     types:
