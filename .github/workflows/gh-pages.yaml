@@ -127,13 +127,11 @@ jobs:
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm clean-install
-        with:
-          path: ./website
+        working-directory: ./website
 
       - name: Build documents
         run: npm run build
-        with:
-          path: ./website
+        working-directory: ./website
 
       - name: Save artifacts
         uses: actions/upload-artifact@v2
