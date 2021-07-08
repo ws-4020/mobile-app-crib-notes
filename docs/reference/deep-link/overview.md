@@ -17,7 +17,7 @@ const overviews = [
     to: '/reference/deep-link/app-links',
   },
   {
-    title: 'App Links',
+    title: 'Android App Links',
     summary: 'Androidのアプリ間データ連携',
     to: '/reference/deep-link/app-links',
   },

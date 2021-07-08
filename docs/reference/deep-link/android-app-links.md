@@ -1,8 +1,8 @@
 ---
-title: App Links
+title: Android App Links
 ---
 
-[App Links](https://developer.android.com/training/app-links)はAndoirdで利用できるHTTP URLを使ったDeep Linkです。
+[Android App Links](https://developer.android.com/training/app-links)はAndoirdで利用できるHTTP URLを使ったDeep Linkです。
 
 :::note
 Androidにはカスタムスキームを利用したDeepLinkも合わせて説明されています。[Deep Linkとの違い](https://developer.android.com/training/app-links/verify-site-associations#the-difference)を参照してください。
