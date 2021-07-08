@@ -8,26 +8,16 @@ on:
     branches:
       - master
     paths:
-      - website/docs/**
-      - website/src/**
-      - website/static/**
-      - website/landing-page/**
+      - website/**
       - .editorconfig
-      - website/.eslintrc.js
-      - website/.htmltest.yaml
-      - website/.markdownlint.js
-      - website/.prettierrc.js
-      - website/.stylelintrc.js
-      - website/.textlintrc.js
-      - website/babel.config.js
-      - website/docusaurus.config.js
-      - website/package.json
-      - website/package-lock.json
-      - website/prh.yaml
-      - website/README.md
-      - website/tsconfig.json
       - .github/workflows/gh-pages.yaml
       - .github/workflows/gh-pages-deploy.yaml
+    paths-ignore:
+      - website/.docusaurus/**
+      - website/build/**
+      - website/nginx/**
+      - website/node_modules/**
+      - website/.gitignore
     types:
       - opened
       - synchronize
