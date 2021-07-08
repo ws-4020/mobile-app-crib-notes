@@ -9,11 +9,11 @@ on:
       - master
     paths:
       - website/**
-      - !website/.docusaurus/**
-      - !website/build/**
-      - !website/nginx/**
-      - !website/node_modules/**
-      - !website/.gitignore
+      - '!website/.docusaurus/**'
+      - '!website/build/**'
+      - '!website/nginx/**'
+      - '!website/node_modules/**'
+      - '!website/.gitignore'
       - .editorconfig
       - .github/workflows/gh-pages.yaml
       - .github/workflows/gh-pages-deploy.yaml
