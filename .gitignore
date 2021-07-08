@@ -1,6 +1,3 @@
-# Created by https://www.gitignore.io/api/node
-# Edit at https://www.gitignore.io/?templates=node
-
 ### IntelliJ IDEA ###
 .idea/*
 !/.idea/codeStyles
@@ -19,10 +16,10 @@
 *.iml
 *.ipr
 
-### Hugo ###
-public
-
 ### Junk ###
 junk.md
 tmp/
 _*[Ss]cratch.*
+
+# For Mac
+.DS_Store
