@@ -17,7 +17,7 @@
 修正などをPull Requestで出していただけると大変ありがたいです。また、改変の制約はありませんのでフォークしていただくことも可能ですし、商用利用の制限もありません。
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-  <img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /> </a>```
+  <img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /> </a>
 
 モバイルアプリケーション開発チームで利用する各フォルダの説明です。
 
