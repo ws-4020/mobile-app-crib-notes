@@ -22,8 +22,7 @@ URLにアプリをマッピングする設定をする。設定はAndroid App Li
 
 - [iOS](https://firebase.google.com/docs/dynamic-links/ios/receive)
 - [Android](https://firebase.google.com/docs/dynamic-links/android/receive)
-
-
+- [React Native](https://rnfirebase.io/dynamic-links/usage)
 
 ## URLを作成する
 
