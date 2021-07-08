@@ -2,19 +2,23 @@
 title: Universal Links
 ---
 
-対象はiOS。
+[Universal Links](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content)はiOSで利用できるHTTP URLを使ったDeep Linkです。
 
-ドメインに紐付いたアプリを利用してアクセスする。
-アプリがなければWebサイトにアクセスする。  
- → in-app browserなどで表示する。
+Universal Linksでアプリを利用するためにはドメインとアプリの双方が信頼できることを証明するため、次のように[ドメインを関連付け](https://developer.apple.com/documentation/Xcode/supporting-associated-domains)ます。
 
-ユーザアクティビティオブジェクトを受け取る。
+アプリの`Info.plist`でリンクを受け取るように設定します。（[アプリで実装する](#アプリで実装する)で詳細を記載しています。）
 
-アプリを起動してほしい場合、ユニバーサルリンク自体はアプリに紐付いていないドメインに配置する。
-同一ドメインの場合、ブラウジングしたいと判断してブラウザでコンテンツを参照させてしまう。
+`apple-app-site-association`ファイル（拡張なし）をドメインに配置します。
+
+```
+https://${ドメイン}/apple-app-site-association
+# もしくは
+https://${ドメイン}/.well-known/apple-app-site-association
+```
 
 ## アプリで実装する
 
 TODO:実装する人がやること、アプリの管理者に依頼することとか。
 
 ## URLを作成する
+
