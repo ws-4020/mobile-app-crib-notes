@@ -1,21 +1,22 @@
 ---
-title: アプリ間のデータ連携の基本
+title: アプリ間のデータ連携の概要
 ---
 
-## 概要
+URLで指定したコンテンツとしてWebサイトかアプリケーションにユーザを誘導します。
 
-データを受け取るアプリケーション。
+細かい点で違いはありますが、次のようにアプリにデータを連携します。
 
- - URIで指定（HTTP URLやCustom Scheme）
- - アプリケーションの設定時にURIと対応させる
- - HTTP URLの場合、ドメインとアプリケーションのIDを結びつける。
+User -> URL -> Android or iOS -> navigate to Contents on Web-Site or Installed-App.
 
+TODO: 簡単に図にする。
 
-User -> HTTP URL -> Android or iOS -> navigate to Contents on Web-Site or Installed-App.
-
-を簡単に図にする。
+URLからアプリは導き出される。
 
 :::note
 Firebase Dynamic LinksはInstalledじゃないユースケースが実現できる。
 :::
+
+ - ユーザはURIで指定されたリンクをタップ（HTTP URLやCustom Scheme）
+ - アプリケーションの設定時にURIと対応させる
+ - HTTP URLの場合、ドメインとアプリケーションのIDを結びつける。
 

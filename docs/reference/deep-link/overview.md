@@ -14,6 +14,11 @@ sidebar_label: Overview
 import {PageList} from '../../../src/components';
 const overviews = [
   {
+    title: 'はじめに',
+    summary: 'アプリ間のデータ連携の概要を紹介します',
+    to: '/reference/deep-link/app-links',
+  },
+  {
     title: 'App Links',
     summary: 'Androidのアプリ間データ連携',
     to: '/reference/deep-link/app-links',
