@@ -7,8 +7,6 @@ sidebar_label: Overview
 
 ユーザがコンテンツにアクセスする場合、適切なアプリをOSが選択して起動するアプリを選択するため、ユーザはコンテンツを利用しやすくなる。
 
-例：フォトライブラリで画像を選択して、メールアプリに共有する。
-
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 import {PageList} from '../../../src/components';
