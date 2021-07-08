@@ -20,3 +20,6 @@
 junk.md
 tmp/
 _*[Ss]cratch.*
+
+# For Mac
+.DS_Store
