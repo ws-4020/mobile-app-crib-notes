@@ -1,6 +1,3 @@
-# Created by https://www.gitignore.io/api/node
-# Edit at https://www.gitignore.io/?templates=node
-
 ### IntelliJ IDEA ###
 .idea/*
 !/.idea/codeStyles
@@ -18,9 +15,6 @@
 *.iws
 *.iml
 *.ipr
-
-### Hugo ###
-public
 
 ### Junk ###
 junk.md
