@@ -4,6 +4,10 @@ title: Universal Links
 
 [Universal Links](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content)はiOSで利用できるHTTP URLを使ったDeep Linkです。
 
+Universal Linksを利用する場合、ユーザがブラウザで開いているドメインとは異なるドメインのURLを利用しないとアプリケーションに渡せません。
+
+ユーザがブラウザでWebサイトにアクセスしているのに、サイト内のリンクをアプリケーションに誘導するとユーザ体験を損なうためです。
+
 ## 設定
 
 Universal Linksでアプリを利用するためにはドメインとアプリの双方が信頼できることを証明するため、次のように[ドメインを関連付け](https://developer.apple.com/documentation/Xcode/supporting-associated-domains)ます。
