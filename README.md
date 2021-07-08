@@ -19,18 +19,4 @@
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
   <img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /> </a>
 
-モバイルアプリケーション開発チームで利用する各フォルダの説明です。
-
-## example-app
-
-サンプルアプリケーション（ソースコード）が格納させています。
-
-## react-native-samples
-
-モバイルアプリの基本的な知識（ソースコード）が格納させています。
-
-## website
-
-Docusaurusで作成した公開ドキュメント類が格納させています。
-
 <!-- textlint-enable -->
