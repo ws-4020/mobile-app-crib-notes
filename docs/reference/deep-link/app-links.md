@@ -12,7 +12,7 @@ Androidにはカスタムスキームを利用したDeepLinkも合わせて説�
 
 AndroidアプリでApp Linksを利用するには、まずマニュフェストファイルに[リンクを受け取るための設定](https://developer.android.com/training/app-links/deep-linking?hl=ja#adding-filters)をします。
 
-マニュフェストファイルで設定した[<data>](https://developer.android.com/guide/topics/manifest/data-element)エレメントにより受け取れるURL（Androidが選択するアプリ）が決定します。
+マニュフェストファイルで設定した[data エレメント](https://developer.android.com/guide/topics/manifest/data-element)により受け取れるURL（Androidが選択するアプリ）が決定します。
 
 アプリケーションでは受け取ったデータ（[インテント](https://developer.android.com/guide/components/intents-filters)）をもとにアプリケーションで処理します。
 
