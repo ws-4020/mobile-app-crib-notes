@@ -138,13 +138,17 @@ jobs:
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm clean-install
+        with:
+          path: ./website
 
       - name: Build documents
         run: npm run build
+        with:
+          path: ./website
 
       - name: Save artifacts
         uses: actions/upload-artifact@v2
         with:
           name: mobile-app-crib-notes
-          path: ./build
+          path: ./website/build
           retention-days: 30
