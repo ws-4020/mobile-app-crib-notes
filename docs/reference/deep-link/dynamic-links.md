@@ -14,7 +14,7 @@ Dynamic Linksの[仕組み](https://firebase.google.com/docs/dynamic-links#how-d
 ウェブ向けのリンク先コンテンツを用意していない場合は、このURLが有効なウェブリソースを指していなくてもかまいません。その場合は、このURLからサイトのトップページなどにリダイレクトするようにしてください。
 :::
 
-## アプリで実装する
+## アプリの実装
 
 URLにアプリをマッピングする設定をする。設定はAndroid App LinksとUniversal Linksを参照してもらえばいい。
 
@@ -24,6 +24,6 @@ URLにアプリをマッピングする設定をする。設定はAndroid App Li
 - [Android](https://firebase.google.com/docs/dynamic-links/android/receive)
 - [React Native](https://rnfirebase.io/dynamic-links/usage)
 
-## URLを作成する
+## URLを作成
 
 [Linksの作成パターン](https://firebase.google.com/docs/dynamic-links/create-links)
