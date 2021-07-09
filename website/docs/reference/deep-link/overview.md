@@ -1,5 +1,5 @@
 ---
-title: DeepLink
+title: Deep Link
 sidebar_label: Overview
 ---
 
@@ -13,27 +13,27 @@ import {PageList} from '../../../src/components';
 const overviews = [
   {
     title: 'はじめに',
-    summary: 'アプリ間のデータ連携の概要を紹介します',
+    summary: 'Deep Linkの概要を紹介します',
     to: '/reference/deep-link/basics',
   },
   {
     title: 'Android App Links',
-    summary: 'Androidのアプリ間データ連携',
+    summary: 'AndroidのDeep Link',
     to: '/reference/deep-link/android-app-links',
   },
   {
     title: 'Universal Links',
-    summary: 'iOSのアプリ間データ連携',
+    summary: 'iOSのDeep Link',
     to: '/reference/deep-link/universal-links',
   },
   {
     title: 'Firebase Dynamic Links',
-    summary: 'Firebaseを利用したAndroid、iOSのアプリ間データ連携',
+    summary: 'Firebaseを利用したAndroid、iOSのDeep Link',
     to: '/reference/deep-link/dynamic-links',
   },
   {
     title: 'Custom URL Scheme',
-    summary: 'スキームを指定したアプリ間データ連携の問題',
+    summary: 'スキームを指定したDeep Linkの問題',
     to: '/reference/deep-link/custom-url-scheme',
   },
 ]

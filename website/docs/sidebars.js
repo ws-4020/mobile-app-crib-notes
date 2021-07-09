@@ -34,7 +34,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'アプリ間データ連携',
+      label: 'Deep Link',
       items: [
         'reference/deep-link/overview',
         'reference/deep-link/basics',
