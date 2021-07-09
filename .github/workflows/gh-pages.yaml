@@ -64,6 +64,8 @@ jobs:
         with:
           reviewdog_version: latest
 
+      # In the case of reviewdog, the result of the lint error is determined based on the current directory.
+      # So, use cd instead of --prefix to move the current directory.
       - name: Lint (textlint)
         continue-on-error: true
         run: |
