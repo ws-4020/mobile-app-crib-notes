@@ -43,19 +43,14 @@ ci:
 
 # Add 'doc' label to any change within the 'website/docs' directory
 doc:
-  - website/docs/**
-  - website/src/**
-  - website/static/**
+  - website/**
+  - '!website/nginx/**'
+  - '!website/.eslintrc.js'
+  - '!website/.gitignore'
+  - '!website/.prettierrc.js'
+  - '!website/.stylelintrc.js'
+  - '!website/tsconfig.json'
   - SantokuApp/README.md
-  - website/.htmltest.yaml
-  - website/.markdownlint.js
-  - website/.textlintrc.js
-  - website/babel.config.js
-  - website/docusaurus.config.js
-  - website/package.json
-  - website/package-lock.json
-  - website/prh.yaml
-  - website/README.md
 
 # Add 'test' label to any change to files within the directories listed below
 test:
