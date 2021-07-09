@@ -43,13 +43,15 @@ ci:
 
 # Add 'doc' label to any change within the 'website/docs' directory
 doc:
-  - website/**
-  - '!website/nginx/**'
-  - '!website/.eslintrc.js'
-  - '!website/.gitignore'
-  - '!website/.prettierrc.js'
-  - '!website/.stylelintrc.js'
-  - '!website/tsconfig.json'
+  - any: [
+      'website/**',
+      '!website/nginx/**',
+      '!website/.eslintrc.js',
+      '!website/.gitignore',
+      '!website/.prettierrc.js',
+      '!website/.stylelintrc.js',
+      '!website/tsconfig.json',
+    ]
   - SantokuApp/README.md
 
 # Add 'test' label to any change to files within the directories listed below
