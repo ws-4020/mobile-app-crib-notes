@@ -16,8 +16,7 @@ Universal Linksでアプリを利用するためにはドメインとアプリ�
 
 [`apple-app-site-association`](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_associated-domains)ファイル（拡張なし）をドメインに配置します。
 
-
-```
+```console
 https://${ドメイン}/apple-app-site-association
 # もしくは
 https://${ドメイン}/.well-known/apple-app-site-association
@@ -26,6 +25,7 @@ https://${ドメイン}/.well-known/apple-app-site-association
 <!-- 
 [iOS 14](https://www.wantedly.com/companies/wantedly/post_articles/305303)の問題があるらしい
 -->
+
 ## アプリで実装する
 
 Xcode上でTargetsを選択し、`Signing & Capabilities`を選択し、`+ Capabilities`で`Associated Domains`を追加します。
