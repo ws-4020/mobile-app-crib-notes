@@ -32,6 +32,18 @@ module.exports = {
         'reference/notification/client',
       ],
     },
+    {
+      type: 'category',
+      label: 'アプリ間データ連携',
+      items: [
+        'reference/deep-link/overview',
+        'reference/deep-link/basics',
+        'reference/deep-link/universal-links',
+        'reference/deep-link/android-app-links',
+        'reference/deep-link/dynamic-links',
+        'reference/deep-link/custom-url-scheme',
+      ],
+    },
   ],
   distribution: [
     {
