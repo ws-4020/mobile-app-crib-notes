@@ -14,7 +14,7 @@ Universal Linksでアプリを利用するためにはドメインとアプリ�
 
 アプリの`Info.plist`でリンクを受け取るように設定します。（[アプリで実装する](#アプリで実装する)で詳細を記載しています）
 
-`apple-app-site-association`ファイル（拡張なし）をドメインに配置します。
+[`apple-app-site-association`](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_associated-domains)ファイル（拡張なし）をドメインに配置します。
 
 ```
 https://${ドメイン}/apple-app-site-association
@@ -24,6 +24,12 @@ https://${ドメイン}/.well-known/apple-app-site-association
 
 ## アプリで実装する
 
-TODO:実装する人がやること、アプリの管理者に依頼することとか。
+設定の細かい点とURLからのパラメータの受け方。
+
+初期化処理に関してはReact Nativeでのサンプルにしたいな。
 
 ## URLを作成する
+
+- ドメインをあわせる
+- リンクを受け取る設定に合わせたLinkを作成する
+- パラメータはクエリパラメータ（未検証）

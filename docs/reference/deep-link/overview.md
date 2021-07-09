@@ -5,7 +5,7 @@ sidebar_label: Overview
 
 モバイルアプリの利用が増えたため、WebだけでなくモバイルアプリもURLでコンテンツを利用やデータ連携することを実現するための機能です。
 
-ユーザがコンテンツにアクセスする場合、適切なアプリをOSが選択して起動するアプリを選択するため、ユーザはコンテンツを利用しやすくなる。
+ユーザがコンテンツにアクセスする場合、適切なアプリをOSが選択して起動するアプリを選択するため、ユーザは簡単にコンテンツを利用できます。
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
@@ -33,7 +33,7 @@ const overviews = [
   },
   {
     title: 'Custom URL Scheme',
-    summary: 'スキームを指定したアプリ間データ連携',
+    summary: 'スキームを指定したアプリ間データ連携の問題',
     to: '/reference/deep-link/custom-url-scheme',
   },
 ]

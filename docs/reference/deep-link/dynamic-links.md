@@ -27,5 +27,3 @@ URLにアプリをマッピングする設定をする。設定はAndroid App Li
 ## URLを作成する
 
 [Linksの作成パターン](https://firebase.google.com/docs/dynamic-links/create-links)
-
-TODO:実装する人がやること、アプリの管理者に依頼することとか。
