@@ -1,4 +1,4 @@
-# santoku-app-backend
+# santoku-app-push-notification-backend
 
 <!-- markdownlint-disable-file MD024 -->
 

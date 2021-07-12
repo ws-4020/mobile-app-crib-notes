@@ -83,7 +83,7 @@ export type Message = {
 } & BaseMessage;
 
 /**
- * Backendにsantoku-app-backendを利用する場合のサービス
+ * Backendにsantoku-app-push-notification-backendを利用する場合のサービス
  */
 export const santokuNotificationService: PushNotificationService = {
   getToken,
