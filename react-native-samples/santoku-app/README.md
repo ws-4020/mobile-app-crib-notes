@@ -16,7 +16,7 @@
 1. クローンしたリポジトリで依存ライブラリをインストール
 
     ```bash
-    cd santoku-app
+    cd react-native-samples/santoku-app
     npm ci
     ```
 
