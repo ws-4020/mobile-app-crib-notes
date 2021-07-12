@@ -1,5 +1,7 @@
 # SantokuApp
 
+## mod
+
 ## React Native開発環境の構築
 
 - [Setting up the development environment - React Native](https://reactnative.dev/docs/environment-setup)を参考に開発環境を構築してください。

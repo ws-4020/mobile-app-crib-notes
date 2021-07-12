@@ -98,3 +98,4 @@ jobs:
           name: workflow-results
           path: |
             example-app/SantokuApp/jest-junit.xml
+            # mod
