@@ -2,7 +2,7 @@
 title: Universal Links
 ---
 
-[Universal Links](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content)はiOSで利用できるHTTP URLを使ったDeep Linkです。
+[Universal Links](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content)はiOSで利用できるHTTP URLを使ったDeep Linksです。
 
 Universal Linksを利用する場合、ユーザがブラウザで開いているドメインとは異なるドメインのURLを利用しないとアプリケーションに渡せません。
 
