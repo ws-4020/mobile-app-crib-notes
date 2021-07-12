@@ -3,9 +3,7 @@ title: Deep Link
 sidebar_label: Overview
 ---
 
-モバイルアプリの利用が増えたため、WebだけでなくモバイルアプリもURLでコンテンツを利用やデータ連携することを実現するための機能です。
-
-ユーザがコンテンツにアクセスする場合、適切なアプリをOSが選択して起動するアプリを選択するため、ユーザは簡単にコンテンツを利用できます。
+WebサイトのURLをブラウザではなくモバイルアプリケーションを利用するようにする実装方式であるDeep Linkを紹介します。
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
@@ -18,12 +16,12 @@ const overviews = [
   },
   {
     title: 'Android App Links',
-    summary: 'AndroidのDeep Link',
+    summary: 'AndroidのDeep Link実装',
     to: '/reference/deep-link/android-app-links',
   },
   {
     title: 'Universal Links',
-    summary: 'iOSのDeep Link',
+    summary: 'iOSのDeep Link実装',
     to: '/reference/deep-link/universal-links',
   },
   {
