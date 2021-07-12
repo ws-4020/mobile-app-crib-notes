@@ -1,5 +1,5 @@
 ---
-title: Deep Link
+title: Deep Links
 sidebar_label: Overview
 ---
 
@@ -11,28 +11,28 @@ import {PageList} from '../../../src/components';
 const overviews = [
   {
     title: 'はじめに',
-    summary: 'Deep Linkの概要を紹介します',
-    to: '/reference/deep-link/basics',
+    summary: 'Deep Linksの概要を紹介します',
+    to: '/reference/deep-links/basics',
   },
   {
     title: 'Android App Links',
-    summary: 'AndroidのDeep Link実装',
-    to: '/reference/deep-link/android-app-links',
+    summary: 'AndroidのDeep Links実装',
+    to: '/reference/deep-links/android-app-links',
   },
   {
     title: 'Universal Links',
-    summary: 'iOSのDeep Link実装',
-    to: '/reference/deep-link/universal-links',
+    summary: 'iOSのDeep Links実装',
+    to: '/reference/deep-links/universal-links',
   },
   {
     title: 'Firebase Dynamic Links',
-    summary: 'Firebaseを利用したAndroid、iOSのDeep Link',
-    to: '/reference/deep-link/dynamic-links',
+    summary: 'Firebaseを利用したAndroid、iOSのDeep Links',
+    to: '/reference/deep-links/dynamic-links',
   },
   {
     title: 'Custom URL Scheme',
-    summary: 'スキームを指定したDeep Linkの問題',
-    to: '/reference/deep-link/custom-url-scheme',
+    summary: 'スキームを指定したDeep Linksの問題',
+    to: '/reference/deep-links/custom-url-scheme',
   },
 ]
 
