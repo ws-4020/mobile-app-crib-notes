@@ -34,7 +34,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Deep Links',
+      label: 'ディープリンク',
       items: [
         'reference/deep-links/overview',
         'reference/deep-links/basics',
