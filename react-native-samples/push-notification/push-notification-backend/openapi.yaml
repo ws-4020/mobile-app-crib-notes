@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: santoku-app-push-notification-backend
+  title: push-notification-backend
   version: '1.0'
   description: SantokuApp Backend API
 servers:
