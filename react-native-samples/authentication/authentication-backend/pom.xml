@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.nablarch.example</groupId>
-  <artifactId>nablarch-example-web</artifactId>
+  <artifactId>authentication-backend</artifactId>
   <version>5u17</version>
   <packaging>war</packaging>
 
