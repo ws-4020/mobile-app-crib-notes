@@ -225,6 +225,20 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Architecture Decision Records',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/decisions',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/decisions/adr-001-global-error-handling',
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Development',
       items: [
         {
