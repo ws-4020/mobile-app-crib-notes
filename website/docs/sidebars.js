@@ -225,7 +225,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Architecture Decision Records',
+      label: 'Decision Records',
       items: [
         {
           type: 'doc',
