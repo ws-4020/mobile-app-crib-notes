@@ -13,7 +13,7 @@ Deprecated: 廃止
 
 ## 要約
 
-<<ADRの決定事項を要約して、3行程度で記載してください>>
+T.B.W.
 
 ## コンテキスト
 
@@ -24,9 +24,9 @@ Deprecated: 廃止
 ## 議論
 
 React Nativeを使用したモバイルアプリでは、発生したエラーをハンドリングしないとアプリがクラッシュします。
-アプリのクラッシュは、ユーザのアプリ離脱率が高くなる一因になります。そのため基本方針として、エラーが発生する可能性がある箇所については個別にエラーを捕捉してエラーの内容と復旧手順を適切にユーザに伝えます。また、必要に応じてFirebase Crashlyticsにエラーログを送信します。
+アプリのクラッシュは、ユーザのアプリ離脱率が高くなる一因になります。そのため基本方針として、エラーの発生する可能性がある箇所については個別にエラーを捕捉してエラーの内容と復旧手順を適切にユーザに伝えます。また、必要に応じてFirebase Crashlyticsにエラーログを送信します。
 
-ただし、エラーのハンドリング漏れが発生する可能性がないとは断言できないため、捕捉されなかったエラーをグローバルにハンドリングする方法も検討します。
+ただし、エラーのハンドリング漏れが発生する可能性はないとは断言できないため、捕捉されなかったエラーをグローバルにハンドリングする方法も検討します。
 
 ### エラーの発生箇所とグローバルにハンドリングする方法
 
@@ -36,24 +36,24 @@ React Nativeを使用したモバイルアプリでは、発生したエラー�
 |:--|:--|
 |Reactコンポーネント|・[Error Boundary](https://ja.reactjs.org/docs/error-boundaries.html)<br/>・ErrorUtils|
 |ロジック - 同期処理|・Error Boundary<br/>・ErrorUtils|
-|ロジック - 非同期処理|個別にエラーのハンドリングが必要（※１）|
+|ロジック - 非同期処理|個別にエラーのハンドリングが必要（※1）|
 |イベントハンドラ - 同期処理|・ErrorUtils|
-|イベントハンドラ - 非同期処理|個別にエラーのハンドリングが必要（※１）|
+|イベントハンドラ - 非同期処理|個別にエラーのハンドリングが必要（※1）|
 |Native Modules - Android（Java）|・[Thread.UncaughtExceptionHandler](https://developer.android.com/reference/java/lang/Thread.UncaughtExceptionHandler?hl=ja)|
-|Native Modules - iOS（Objective-C）|・[NSSetUncaughtExceptionHandler](https://developer.apple.com/documentation/foundation/1409609-nssetuncaughtexceptionhandler?language=objc) + シグナルハンドラ（※２）|
+|Native Modules - iOS（Objective-C）|・[NSSetUncaughtExceptionHandler](https://developer.apple.com/documentation/foundation/1409609-nssetuncaughtexceptionhandler?language=objc) + シグナルハンドラ（※2）|
 
-（※１）非同期処理のエラーをハンドリングする方法としては、[rejection-tracking](https://github.com/then/promise)を使用する方法があります。しかし十分な検証ができていない事や、[rejection-trackingのドキュメント](https://github.com/then/promise#unhandled-rejections)において全てのエラーを捕捉することは開発時のみ使用することが推奨されているため、ここには載せていません。
+（※1）非同期処理のエラーをハンドリングする方法としては、[rejection-tracking](https://github.com/then/promise)を使用する方法があります。しかし十分な検証ができていない事や、[rejection-trackingのドキュメント](https://github.com/then/promise#unhandled-rejections)において全てのエラーを捕捉することは開発時のみ使用することが推奨されているため、ここには載せていません。
 
-（※２）`NSSetUncaughtExceptionHandler`は[NSException](https://developer.apple.com/documentation/foundation/nsexception?language=objc)を捕捉しますが、独自に作成したエラーオブジェクトなどは捕捉しません。`NSSetUncaughtExceptionHandler`で捕捉できないエラーは、[signal](https://developer.apple.com/documentation/kernel/1591562-signal/)を使用してシグナルハンドラを登録します。
+（※2）`NSSetUncaughtExceptionHandler`は[NSException](https://developer.apple.com/documentation/foundation/nsexception?language=objc)を捕捉しますが、独自に作成したエラーオブジェクトなどは捕捉しません。`NSSetUncaughtExceptionHandler`で捕捉できないエラーは、[signal](https://developer.apple.com/documentation/kernel/1591562-signal/)を使用してシグナルハンドラを登録します。
 
 ### エラーを捕捉した後に、どのような処理を実施したいか
 
 エラーを捕捉した後に、実施する想定の処理は以下になります。
 
-* エラーログをFirebase Crashlyticsに送信
-* アプリをクラッシュさせない
-* エラーの内容をUIで表示
-* アプリを再起動
+- エラーログをFirebase Crashlyticsに送信
+- アプリをクラッシュさせない
+- エラーの内容をUIで表示
+- アプリを再起動
 
 アプリが動作するプラットフォームやエラーの発生箇所、エラーハンドリング方法によって実現可否が変わるため、まずはそれらを整理します。
 
@@ -67,60 +67,59 @@ React Nativeを使用したモバイルアプリでは、発生したエラー�
 
 #### Reactコンポーネント/ロジック - 同期処理
 
-| 処理 | Error Boundary | ErrorUtils | React Native Firebase Crashlytics（※１） |
+| 処理 | Error Boundary | ErrorUtils | React Native Firebase Crashlytics（※1） |
 |:--|:--|:--|:--|
 |エラーログをFirebase Crashlyticsに送信|○|○|◎|
 |アプリをクラッシュさせない|○|○|◎|
-|エラーの内容をUIで表示|○|○（※２）|○（※２）|
-|アプリを再起動|○（※３）|○（※４）|○（※４）|
+|エラーの内容をUIで表示|○|○（※2）|○（※2）|
+|アプリを再起動|○（※3）|○（※4）|○（※4）|
 
-（※１）React Native Firebase CrashlyticsはJavaScriptで発生したエラーのハンドリングにErrorUtilsを使用しています。ErrorUtilsはハンドリングしたい処理をハンドラとして登録できます。そのため、React Native Firebase Crashlyticsに追加で処理を実施したい場合は、独自に作成したハンドラをErrorUtilsに登録することで実現できます。
+（※1）React Native Firebase CrashlyticsはJavaScriptで発生したエラーのハンドリングにErrorUtilsを使用しています。ErrorUtilsはハンドリングしたい処理をハンドラとして登録できます。そのため、React Native Firebase Crashlyticsに追加で処理を実施したい場合は、独自に作成したハンドラをErrorUtilsに登録することで実現できます。
 
-（※２）ErrorUtilsで捕捉したエラーの内容をUIで表示するには、Native Modulesを呼び出してUIを表示する必要があります。
+（※2）ErrorUtilsで捕捉したエラーの内容をUIで表示するには、Native Modulesを呼び出してUIを表示する必要があります。
 
-（※３）Reactコンポーネントツリーの最上位から再構築します。
+（※3）Reactコンポーネントツリーの最上位から再構築します。
 
-（※４）JavaScriptのランタイムにバンドルされているモジュールをリロードするか、Androidの場合はActivityを再構築します。
-
+（※4）JavaScriptのランタイムにバンドルされているモジュールをリロードするか、Androidの場合はActivityを再構築します。
 
 #### イベントハンドラ - 同期処理
 
-| 処理 | ErrorUtils | React Native Firebase Crashlytics（※１） |
+| 処理 | ErrorUtils | React Native Firebase Crashlytics（※1） |
 |:--|:--|:--|
 |エラーログをFirebase Crashlyticsに送信|○|◎|
 |アプリをクラッシュさせない|○|◎|
-|エラーの内容をUIで表示|○（※２）|○（※２）|
-|アプリを再起動|○（※３）|○（※３）|
+|エラーの内容をUIで表示|○（※2）|○（※2）|
+|アプリを再起動|○（※3）|○（※3）|
 
-（※１）React Native Firebase CrashlyticsはJavaScriptで発生したエラーのハンドリングにErrorUtilsを使用しています。ErrorUtilsはハンドリングしたい処理をハンドラとして登録できます。そのため、React Native Firebase Crashlyticsに追加で処理を実施したい場合は、独自に作成したハンドラをErrorUtilsに登録することで実現できます。
+（※1）React Native Firebase CrashlyticsはJavaScriptで発生したエラーのハンドリングにErrorUtilsを使用しています。ErrorUtilsはハンドリングしたい処理をハンドラとして登録できます。そのため、React Native Firebase Crashlyticsに追加で処理を実施したい場合は、独自に作成したハンドラをErrorUtilsに登録することで実現できます。
 
-（※２）ErrorUtilsで捕捉したエラーの内容をUIで表示するには、Native Modulesを呼び出してUIを表示する必要があります。
+（※2）ErrorUtilsで捕捉したエラーの内容をUIで表示するには、Native Modulesを呼び出してUIを表示する必要があります。
 
-（※３）JavaScriptのランタイムにバンドルされているモジュールをリロードするか、Androidの場合はActivityを再構築します。
+（※3）JavaScriptのランタイムにバンドルされているモジュールをリロードするか、Androidの場合はActivityを再構築します。
 
 #### Native Modules - Android（Java）
 
-| 処理 | `Thread.UncaughtExceptionHandler` | React Native Firebase Crashlytics（※１） |
+| 処理 | `Thread.UncaughtExceptionHandler` | React Native Firebase Crashlytics（※1） |
 |:--|:--|:--|
 |エラーログをFirebase Crashlyticsに送信|○|◎|
 |アプリをクラッシュさせない|○|×|
 |エラーの内容をUIで表示|○|×|
-|アプリを再起動|○（※２）|×|
+|アプリを再起動|○（※2）|×|
 
-（※１）React Native Firebase Crashlyticsは、Native Modulesのエラーハンドリングに[Firebase Crashlytics SDK](https://github.com/firebase/firebase-android-sdk/tree/master/firebase-crashlytics)を使用しています。
+（※1）React Native Firebase Crashlyticsは、Native Modulesのエラーハンドリングに[Firebase Crashlytics SDK](https://github.com/firebase/firebase-android-sdk/tree/master/firebase-crashlytics)を使用しています。
 
-（※２）Activityを再構築します。
+（※2）Activityを再構築します。
 
 #### Native Modules - iOS（Objective-C）
 
-| 処理 | `NSSetUncaughtExceptionHandler` + シグナルハンドラ | React Native Firebase Crashlytics（※１） |
+| 処理 | `NSSetUncaughtExceptionHandler` + シグナルハンドラ | React Native Firebase Crashlytics（※1） |
 |:--|:--|:--|
 |エラーログをFirebase Crashlyticsに送信|○|◎|
 |アプリをクラッシュさせない|○|×|
 |エラーの内容をUIで表示|○|×|
 |アプリを再起動|×|×|
 
-（※１）React Native Firebase Crashlyticsは、Native Modulesのエラーハンドリングに[Firebase Crashlytics SDK](https://github.com/firebase/firebase-ios-sdk/tree/master/Crashlytics)を使用しています。
+（※1）React Native Firebase Crashlyticsは、Native Modulesのエラーハンドリングに[Firebase Crashlytics SDK](https://github.com/firebase/firebase-ios-sdk/tree/master/Crashlytics)を使用しています。
 
 ### エラーを捕捉した後に実施する処理の再検討
 
@@ -131,8 +130,8 @@ React Nativeを使用したモバイルアプリでは、発生したエラー�
 
 そのため、エラーを捕捉した後に実施する処理から、「アプリをクラッシュさせない」を削除する方針としました。アプリがクラッシュするため、「エラーの内容をUIで表示」、「アプリを再起動」は実現できなくなります。よって、エラーを捕捉した後の処理としては、「エラーログをFirebase Crashlyticsに送信」のみとなります。
 
-エラーを捕捉した後に実施する処理が、「エラーログをFirebase Crashlyticsに送信」のみの場合は、これまでの調査から独自に追加実装をする必要がないReact Native Firebase Crashlyticsを使用することが最善と判断し、グローバルにエラーをハンドリングする方法としてはReact Native Firebase Crashlyticsを採用する方針とします。
+その場合、これまでの調査から独自に追加実装をする必要がないReact Native Firebase Crashlyticsを使用することが最善と判断できます。よって、グローバルにエラーをハンドリングする方法としてはReact Native Firebase Crashlyticsを採用する方針とします。
 
 ## 決定
 
-<<最終的な決定内容を記録してください>>
+T.B.W.
