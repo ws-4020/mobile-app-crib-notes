@@ -17,20 +17,20 @@ Deprecated: 廃止
 
 ## コンテキスト
 
-モバイルアプリでは、エラーが発生した場合にエラーの内容と、どのような手順で操作をすればエラーから回復できるかを伝える事が非常に重要です。また、アプリがクラッシュしてしまった場合は、どのような操作でアプリがクラッシュしたかを特定することも重要です。
+モバイルアプリでは、エラーが発生した場合にエラーの内容と、どのような手順で操作をすればエラーから回復できるかをユーザに伝える事が大切です。また、アプリがクラッシュしてしまった場合は、どのような操作でアプリがクラッシュしたかを特定することも重要です。
 
-ここでは、React Nativeを使用したモバイルアプリにおいて、エラーの発生箇所毎にどのようなハンドリングを実施するべきかを検討します。なお、エラーが発生した場合にログを送信するプロダクトとして、[Firebase Crashlytics](https://firebase.google.com/docs/crashlytics?hl=ja)を使用する前提とします。Firebase Crashlyticsにログを送信するライブラリとしては[React Native Firebase Crashlytics](https://rnfirebase.io/crashlytics/usage)を使用する前提とします。
+ここでは、React Nativeを使用したモバイルアプリにおいて、エラーの発生箇所毎にどのようなハンドリングを実施するべきかを検討します。なお、エラーが発生した場合にログを送信するプロダクトとして、[Firebase Crashlytics](https://firebase.google.com/docs/crashlytics?hl=ja)を使用する前提とします。Firebase Crashlyticsにログを送信するライブラリとしては[React Native Firebase Crashlytics](https://rnfirebase.io/crashlytics/usage)を使用します。
 
 ## 議論
 
-React Nativeを使用したモバイルアプリでは、発生したエラーをハンドリングしない場合アプリがクラッシュします。
+React Nativeを使用したモバイルアプリでは、発生したエラーをハンドリングしないとアプリがクラッシュします。
 アプリのクラッシュは、ユーザのアプリ離脱率が高くなる一因になります。そのため基本方針として、エラーが発生する可能性がある箇所については個別にエラーを捕捉してエラーの内容と復旧手順を適切にユーザに伝えます。また、必要に応じてFirebase Crashlyticsにエラーログを送信します。
 
 ただし、エラーのハンドリング漏れが発生する可能性がないとは断言できないため、捕捉されなかったエラーをグローバルにハンドリングする方法も検討します。
 
 ### エラーの発生箇所とグローバルにハンドリングする方法
 
-React Nativeを使用したモバイルアプリにおいて、エラーの発生する箇所とそれぞれのエラーをグローバルにハンドリングする方法は以下になります。
+エラーが発生する箇所とそれぞれのエラーをグローバルにハンドリングする方法は以下になります。
 
 | エラー発生箇所 | エラーのハンドリング方法 |
 |:--|:--|
@@ -42,9 +42,9 @@ React Nativeを使用したモバイルアプリにおいて、エラーの発�
 |Native Modules - Android（Java）|・[Thread.UncaughtExceptionHandler](https://developer.android.com/reference/java/lang/Thread.UncaughtExceptionHandler?hl=ja)|
 |Native Modules - iOS（Objective-C）|・[NSSetUncaughtExceptionHandler](https://developer.apple.com/documentation/foundation/1409609-nssetuncaughtexceptionhandler?language=objc) + シグナルハンドラ（※２）|
 
-（※１）非同期処理のエラーをハンドリングする方法としては、[rejection-tracking](https://github.com/then/promise)を使用する方法があります。しかし十分な検証ができていない事や、[rejection-trackingのドキュメント](https://github.com/then/promise#unhandled-rejections)において開発時のみ使用することが推奨されているため、ここには載せていません。
+（※１）非同期処理のエラーをハンドリングする方法としては、[rejection-tracking](https://github.com/then/promise)を使用する方法があります。しかし十分な検証ができていない事や、[rejection-trackingのドキュメント](https://github.com/then/promise#unhandled-rejections)において全てのエラーを捕捉することは開発時のみ使用することが推奨されているため、ここには載せていません。
 
-（※２）`NSSetUncaughtExceptionHandler`は[NSException](https://developer.apple.com/documentation/foundation/nsexception?language=objc)を捕捉しますが、独自に作成したエラーオブジェクトなどは捕捉しません。`NSSetUncaughtExceptionHandler`で捕捉できないエラーは、[signal](https://developer.apple.com/documentation/kernel/1591562-signal/)を受け取ってエラー処理を実施します。
+（※２）`NSSetUncaughtExceptionHandler`は[NSException](https://developer.apple.com/documentation/foundation/nsexception?language=objc)を捕捉しますが、独自に作成したエラーオブジェクトなどは捕捉しません。`NSSetUncaughtExceptionHandler`で捕捉できないエラーは、[signal](https://developer.apple.com/documentation/kernel/1591562-signal/)を使用してシグナルハンドラを登録します。
 
 ### エラーを捕捉した後に、どのような処理を実施したいか
 
@@ -55,9 +55,9 @@ React Nativeを使用したモバイルアプリにおいて、エラーの発�
 * エラーの内容をUIで表示
 * アプリを再起動
 
-エラーの発生箇所、エラーハンドリング方法毎に上記処理の実現可否を整理します。
+アプリが動作するプラットフォームやエラーの発生箇所、エラーハンドリング方法によって実現可否が変わるため、まずはそれらを整理します。
 
-#### 以降のテーブルで使用する凡例
+#### 以降の表で使用する凡例
 
 | 凡例 | 概要 |
 |:--|:--|
@@ -105,7 +105,7 @@ React Nativeを使用したモバイルアプリにおいて、エラーの発�
 |エラーログをFirebase Crashlyticsに送信|○|◎|
 |アプリをクラッシュさせない|○|×|
 |エラーの内容をUIで表示|○|×|
-|アプリを再起動|○（※１）|×|
+|アプリを再起動|○（※２）|×|
 
 （※１）React Native Firebase Crashlyticsは、Native Modulesのエラーハンドリングに[Firebase Crashlytics SDK](https://github.com/firebase/firebase-android-sdk/tree/master/firebase-crashlytics)を使用しています。
 
@@ -126,7 +126,7 @@ React Nativeを使用したモバイルアプリにおいて、エラーの発�
 
 これまでの議論の中で、エラーを捕捉した後に実施する処理として、「アプリをクラッシュさせない」を含めていました。アプリがクラッシュすると、ユーザの離脱率が高くなる一因になるためです。しかし調査を進める中で、「アプリをクラッシュさせない」仕様が最善なのかという疑問が湧いてきました。理由としては以下になります。
 
-- エラーが捕捉されない場合、React NativeやReact Native Firebase Crashlyticsのデフォルトの動作はアプリのクラッシュ
+- エラーが捕捉されない場合、React NativeやReact Native Firebase Crashlyticsのデフォルトの動作ではアプリがクラッシュする
 - iOSにおいて、signalを受け取ってエラーをハンドリングする方法が適切なのかをAppleのドキュメントからは読み取れない
 
 そのため、エラーを捕捉した後に実施する処理から、「アプリをクラッシュさせない」を削除する方針としました。アプリがクラッシュするため、「エラーの内容をUIで表示」、「アプリを再起動」は実現できなくなります。よって、エラーを捕捉した後の処理としては、「エラーログをFirebase Crashlyticsに送信」のみとなります。
