@@ -33,7 +33,7 @@ const overviews = [
   },
   {
     title: 'Custom URL Scheme',
-    summary: 'スキームを指定したディープリンクの問題',
+    summary: 'カスタムスキームを利用したディープリンク',
     to: '/reference/deep-links/custom-url-scheme',
   },
 ]
