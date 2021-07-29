@@ -18,7 +18,7 @@ const overviews = [
   },
   {
     title: 'Android App Links',
-    summary: 'Androidのディープリンク実装',
+    summary: 'Androidでのディープリンク',
     to: '/reference/deep-links/android-app-links',
   },
   {
