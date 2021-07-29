@@ -23,7 +23,7 @@ const overviews = [
   },
   {
     title: 'Universal Links',
-    summary: 'iOSのディープリンク実装',
+    summary: 'iOSでのディープリンク',
     to: '/reference/deep-links/universal-links',
   },
   {
