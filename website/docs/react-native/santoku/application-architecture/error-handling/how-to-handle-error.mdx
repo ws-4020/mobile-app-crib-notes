@@ -1,0 +1,28 @@
+---
+title: エラーの発生箇所と処理方法
+---
+
+エラーの発生箇所は大きく以下のように分類できます。
+
+- Reactコンポーネント
+- ロジック（useEffect内のロジックなど）
+  - 非同期処理
+  - 同期処理
+- イベントハンドラ
+  - 非同期処理
+  - 同期処理
+- Native Modules
+
+## Reactコンポーネントのエラー処理
+
+Reactコンポーネントのレンダリングでエラーが発生した場合は、[Error Boundary](https://ja.reactjs.org/docs/error-boundaries.html)でエラーを捕捉します。該当のコンポーネントを`Error Boundary`でラップしてエラー処理を実施してください。
+
+:::note
+Error Boundaryは、イベントハンドラや非同期処理で発生したエラーを捕捉できません。
+:::
+
+未処理のエラーは、Firebase Crashlytics SDKが捕捉してFirebase Crashlyticsにクラッシュログを送信します。
+
+:::caution
+Firebase Crashlyticsにログを送信するタイミングは、アプリを再起動したタイミングになります。即座にログが送信されないことにご注意ください。
+:::
