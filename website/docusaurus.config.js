@@ -26,7 +26,7 @@ const copyright = `<div class="no-content">
 
 const injectOptions = {
   organization,
-  rnSpoilerTag: '2021.05.0',
+  rnSpoilerTag: 'v2021.5.0',
 };
 
 module.exports = {
@@ -89,13 +89,11 @@ module.exports = {
             {
               label: 'Learn',
               to: 'react-native/learn',
-              position: 'left',
             },
-            ...(isDraft ? [{label: 'Example App', to: 'react-native/santoku', position: 'left'}] : []),
+            ...(isDraft ? [{label: 'Example App', to: 'react-native/santoku'}] : []),
             {
               label: 'Pitfalls',
               to: 'react-native/common-pitfalls',
-              position: 'left',
             },
           ],
         },
