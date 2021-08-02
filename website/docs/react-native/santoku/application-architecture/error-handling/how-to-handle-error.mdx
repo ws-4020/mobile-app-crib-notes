@@ -15,6 +15,16 @@ title: エラーの発生箇所と処理方法
 
 [^1]: useEffect内の処理などを指します。
 
+## 未処理のエラーを処理する方法
+
+未処理のエラーは、Firebase Crashlytics SDKがエラーを捕捉してFirebase Crashlyticsにクラッシュログを送信します。
+
+ただし、ロジックやイベントハンドラの非同期処理で発生したエラーに関しては、Firebase Crashlytics SDKで捕捉できないため、必ず個別にエラー処理を実施してください。
+
+:::caution
+Firebase Crashlyticsにログを送信するタイミングは、アプリを再起動した時になります。即座にログが送信されないことに注意してください。
+:::
+
 ## 個別にエラーを処理する方法
 
 ### Reactコンポーネントのエラー処理
@@ -52,13 +62,3 @@ Native Modulesで発生するエラーを個別にハンドリングする場合
 - [Android - Promises](https://reactnative.dev/docs/native-modules-android#promises)
 - [iOS - Callbacks](https://reactnative.dev/docs/native-modules-ios#callbacks)
 - [iOS - Promises](https://reactnative.dev/docs/native-modules-ios#promises)
-
-## 未処理のエラーを処理する方法
-
-未処理のエラーは、Firebase Crashlytics SDKがエラーを捕捉してFirebase Crashlyticsにクラッシュログを送信します。
-
-ただし、ロジックやイベントハンドラの非同期処理で発生したエラーに関しては、Firebase Crashlytics SDKで捕捉できないため、必ず個別にエラー処理を実施してください。
-
-:::caution
-Firebase Crashlyticsにログを送信するタイミングは、アプリを再起動した時になります。即座にログが送信されないことに注意してください。
-:::
