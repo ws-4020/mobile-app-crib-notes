@@ -23,7 +23,9 @@ Deprecated: 廃止
 
 モバイルアプリでは、エラーが発生した場合にエラーの内容と、どのような手順で操作をすればエラーから回復できるかをユーザに伝える事が大切です。また、アプリがクラッシュしてしまった場合は、どのような操作でアプリがクラッシュしたかを特定することも重要です。
 
-ここでは、React Nativeを使用したモバイルアプリにおいて、エラーの発生箇所毎にどのようなハンドリングを実施するべきかを検討します。なお、エラーが発生した場合にログを送信するプロダクトとして、[Firebase Crashlytics](https://firebase.google.com/docs/crashlytics?hl=ja)を使用する前提とします。Firebase Crashlyticsにログを送信するライブラリとしては[React Native Firebase Crashlytics](https://rnfirebase.io/crashlytics/usage)を使用します。
+ここでは、React Nativeを使用したモバイルアプリにおいて、エラーの発生箇所毎にどのようなハンドリングを実施するべきかを検討します。なお、エラーが発生した場合にログを送信するプロダクトとして、[Firebase Crashlytics](https://firebase.google.com/docs/crashlytics?hl=ja)を使用する前提[^1]とします。Firebase Crashlyticsにログを送信するライブラリとしては[React Native Firebase Crashlytics](https://rnfirebase.io/crashlytics/usage)を使用します。
+
+[^1]: SantokuAppでは、Firebase Crashlyticsを使用する前提としていますが、React Nativeに対応しているプロダクトとしては[SENTRY](https://sentry.io/welcome/)などもあります。
 
 ## 議論
 
