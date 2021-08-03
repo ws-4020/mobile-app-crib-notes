@@ -15,3 +15,11 @@ React Nativeを使用したモバイルアプリでは、発生したエラー�
 SantokuAppでエラーを捕捉してFirebase Crashlyticsにログを送信する全体像は以下になります。
 
 ![エラーハンドリングアーキテクチャ](error-handling-architecture.drawio.png)
+
+| エラー処理パターン | 処理概要 |
+|:--|:--|
+|エラー処理パターン①|JavaScript Moduleでエラーを捕捉した場合は、エラー内容をUI表示します。また、必要に応じてReact Native Firebase Crashlyticsを経由してFirebase Crashlyticsにエラーログを送信します。|
+|エラー処理パターン②|JavaScript Moduleで未処理のエラーは、React NativeのBridgeを経由して最終的にはFirebase Crashlytics SDKによって捕捉されます。Firebase Crashlytics SDKはクラッシュログをFirebase Crashlyticsに送信します。|
+|エラー処理パターン③|Native Moduleでエラーを捕捉しエラー内容をUI表示するには、React NativeのBridgeを経由してエラーをJavaScript Moduleに連携します。エラーを受け取ったJavaScript Moduleはエラー内容をUI表示し、必要に応じてReact Native Firebase Crashlyticsを経由してFirebase Crashlyticsにエラーログを送信します。|
+|エラー処理パターン④|Native Moduleでエラーを捕捉後、Firebase Crashlytics SDK使用してFirebase Crashlyticsにエラーログを送信します。エラー内容をUI表示しない場合は、直接Firebase Crashlytics SDKを使用します。|
+|エラー処理パターン⑤|Native Moduleで未処理のエラーは、Firebase Crashlytics SDKに捕捉されます。Firebase Crashlytics SDKはクラッシュログをFirebase Crashlyticsに送信します。|
