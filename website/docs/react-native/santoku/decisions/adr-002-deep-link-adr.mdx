@@ -66,9 +66,11 @@ OSの機能を利用する場合、インストールされていないアプリ
 
 #### 🚧iOSのmatchType🚧
 
-Firebase Dynamic Linksには[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)があり、`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。
+iOSの場合、Firebase Dynamic Linksには[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)があり、`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。
 
 matchTypeが`unique`であるか判定してからURLを処理します。
+
+Androidの場合は他のユーザのURLを受け取る事はありません。
 
 #### iOS14以降のクリップボードについて
 
@@ -83,12 +85,12 @@ iOS14以降ではクリップボードを読み取るとOSが通知を表示す�
 Dynamic LinksでもOSの機能でもアプリケーションにドメインとの関連付けが必要になります。
 設定する作業はFirebaseが簡単ですが、静的なWebサイト上でドメインと関連付けのためにファイルを配置するだけでそこまで大きな差はありません。
 
-Dynamic Linksを利用する場合のみGoogleServiceの設定ファイルが必要です。この設定ファイルを開発者毎にするとなると管理が煩雑になります。（とくにiOSでの開発は個人開発者アカウントを利用してもらいためBundleIdが変わっていまいます）
-
-実際に必要になるものは環境毎（たとえば、開発、外部テスターなどのステージング、本番）設定ファイルです。（これはFirebase Crashlyticsも同様なため、Firebaseを導入するのであれば、設定ファイルを準備することはコスト増にはなりません）
+Dynamic Linksを利用する場合のみGoogleServiceの設定ファイルが必要です。この設定ファイルにはbundleIdやpackage_nameが設定されています。とくにiOSでの開発は個人開発者アカウントを利用するのでBundleIdが変わってしまうため開発者毎に設定するとなると管理が煩雑になります。
 
 GoogleService-info.plistとアプリケーションのbunndleIdは一致させる必要がないため
 個人開発者アカウントを利用する場合でもアカウント毎にアプリの作成は不要です。そのため、開発者が増えるたびに手続きが増えるような問題はありません。
+
+実際に必要になるものは環境毎（たとえば、開発、外部テスターなどのステージング、本番）設定ファイルです。（これはFirebase Crashlyticsも同様なため、Firebaseを導入するのであれば、設定ファイルを準備することはコスト増にはなりません）
 
 一方でAndriodアプリケーションは`pakcage_name`を一致させる必要がありますが、開発者毎に切り替える必要はないためiOSと同様に3ファイル程度あれば問題ありません。
 
