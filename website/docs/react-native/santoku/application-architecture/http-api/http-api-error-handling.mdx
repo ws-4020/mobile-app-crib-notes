@@ -72,6 +72,10 @@ SantokuAppのHTTP APIクライアントとして利用するaxiosでは、[timeo
 そのため、SantokuAppではaxiosの`timeout`を使用せず、[CancelToken](https://github.com/axios/axios#cancellation)を利用してHTTP API通信をキャンセルすることによりタイムアウトを実現しています。
 :::
 
+## エラー発生時に表示するメッセージ
+
+HTTP API通信時にエラーが発生した場合は、レスポンスに含まれているエラーコードに応じたメッセージをダイアログで表示します。エラーコードがレスポンスに含まれていない場合は、SantokuAppで定義したデフォルトのメッセージを表示します。
+
 ## HTTP API通信のリトライ
 
 HTTP API通信で発生したエラー内容に応じて、HTTP APIのリクエストを再試行します。
