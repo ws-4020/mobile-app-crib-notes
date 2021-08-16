@@ -22,7 +22,7 @@ HTTPステータスコードが4xxの場合は、モバイルアプリケーシ�
 | 401               | Unauthorized - 認証トークンの期限が切れた場合                                    |
 | 404               | Not found - リソースが見つからなかった場合                                       |
 | 412               | Precondition Failed - 操作しているモバイルアプリケーションが強制アップデート対象の場合 |
-| 429               | Too many requests - クライアントから大量のリクエストが送信された場合                |
+| 429               | Too Many Requests - クライアントから大量のリクエストが送信された場合                |
 
 4xxのHTTPステータスコードが返却された場合、SantokuAppの動作は以下のようになります。
 
@@ -65,9 +65,9 @@ HTTP APIからレスポンスが返却されない場合は、以下のような
 HTTP APIとの通信が1分以上経過した場合、通信を強制的にキャンセルします。この場合は、ネットワークの状態を確認してもらうか、時間をおいてから再操作をするように促すダイアログを表示します。
 
 :::note
-axiosでは[timeout](https://github.com/axios/axios#request-config)を設定できます。axiosの`timeout`は、Androidではコネクションタイムアウトのみに使用されるため、コネクション接続後にサーバの応答が遅い場合などはタイムアウトしません。
+SantokuAppのHTTP APIクライアントとして利用するaxiosでは、[timeout](https://github.com/axios/axios#request-config)を設定できます。axiosの`timeout`は、Androidではコネクションタイムアウトのみに使用されるため、コネクション接続後にサーバの応答が遅い場合などはタイムアウトしません。
 
-そのため、SantokuAppではaxiosの`timeout`を使用せず、[CancelToken](https://github.com/axios/axios#cancellation)を利用して独自にHTTP API通信をキャンセルすることによりタイムアウトを実現しています。
+そのため、SantokuAppではaxiosの`timeout`を使用せず、[CancelToken](https://github.com/axios/axios#cancellation)を利用してHTTP API通信をキャンセルすることによりタイムアウトを実現しています。
 :::
 
 ## HTTP API通信のリトライ
