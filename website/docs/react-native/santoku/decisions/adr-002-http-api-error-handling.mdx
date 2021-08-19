@@ -28,6 +28,8 @@ ADRの決定事項を要約して、3行程度で記載してください。
 
 ここでは、どのようなエラーの場合に共通処理としてエラーのハンドリングを行い、どのような場合に個別処理として実施する必要があるのかを検討します。また、エラーが発生した場合にリトライ処理を実施するかなどについても検討していきます。
 
+なお、HTTP API通信に使用するライブラリとして、[axios](https://github.com/axios/axios)を利用する前提とします。また、HTTP API通信のエラーハンドリングには、[React Query](https://react-query.tanstack.com/overview)を利用する前提とします。
+
 ## 議論
 
 ### HTTPステータスコードが400以上のエラーハンドリング
@@ -42,6 +44,7 @@ HTTP APIとの通信時には、処理が失敗した場合にHTTPステータ�
 | 412               | Precondition Failed - 操作しているモバイルアプリケーションが強制アップデート対象の場合       | 共通 |
 | 429               | Too Many Requests - クライアントから大量のリクエストが送信された場合                      | 共通 |
 | 503               | Service Unavailable - HTTP APIがシステムメンテナンスで止まっている場合                   | 共通 |
+| その他             | 想定外のエラーが発生した場合                                                           | 共通 |
 
 #### 403 - Forbiddenは想定外のエラーなのか
 
@@ -70,6 +73,22 @@ HTTP APIとの通信時には、処理が失敗した場合にHTTPステータ�
 ### HTTP APIからレスポンスが返却されない場合のエラーハンドリング
 
 モバイル端末のネットワークがOFFになっていたり、接続先サーバのポートにアクセスできない場合などは、HTTP APIからレスポンスが返却されません。これらの場合は、共通でエラーのハンドリングを実施してユーザにエラーに内容を伝えます。
+
+### HTTP API通信のタイムアウト
+
+axiosでは、[timeout](https://github.com/axios/axios#request-config)を設定できます。しかし、axiosの`timeout`はAndroidではコネクションタイムアウトのみに使用されるため、コネクション接続後にサーバの応答が遅い場合などはタイムアウトしません。
+
+そのため、SantokuAppではaxiosの`timeout`を使用せず、[CancelToken](https://github.com/axios/axios#cancellation)を利用してHTTP API通信をキャンセルすることによりタイムアウトを実現します。React Queryを使用した場合は、[Query Cancellation](https://react-query.tanstack.com/guides/query-cancellation)が参考になります。
+
+Query Cancellationは、リソースを取得する`useQuery`を使用した場合にHTTP API通信をキャンセルする方法です。リソースの登録や更新時に使用する`useMutation`ではHTTP API通信をキャンセルできません。[^1]
+
+リソースの登録や更新時には、axiosの`CancelToken`を利用して、一定の時間が経過後にHTTP API通信のキャンセル処理を実施することは可能かと思います。しかし、リソースの登録や更新時にHTTP APIを通信をキャンセルした場合、モバイルアプリではHTTP APIの処理が成功したか失敗したかを把握することができません。
+
+モバイルアプリを操作するユーザに正確な情報を伝えることができないのは良くないと考えたため、SantokuAppではリソースの取得時のみHTTP API通信のタイムアウト処理を実施します。
+
+[^1]: `useMutation`を使用した場合のキャンセル機能については、React QueryのGitHubリポジトリで[ディスカッション](https://github.com/tannerlinsley/react-query/discussions/1551)されています。
+
+### HTTP API通信のリトライ
 
 ## 決定
 
