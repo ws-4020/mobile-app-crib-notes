@@ -1,0 +1,39 @@
+---
+title: HTTP API通信で使用するライブラリ
+---
+
+Status: Accepted
+
+<!--
+Proposed: 提案中
+Accepted: 採用
+Rejected: 却下
+Superseded: 廃止
+-->
+
+## 要約
+
+:::note
+ADRの決定事項を要約して、3行程度で記載してください。
+:::
+
+## コンテキスト
+
+React Nativeを使用したモバイルアプリでは、HTTP APIクライアントとして[Fetch API](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API)や、[Frisbee](https://github.com/niftylettuce/frisbee)、[axios](https://github.com/axios/axios)などの[XMLHttpRequest API](https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest)に依存したサードパーティのライブラリも使用可能です。
+ここでは、それらのライブラリをいくつかの観点で比較して、使用するHTTP APIクライアントを決定します。
+
+また、HTTP APIと通信する際は、エラーのハンドリングやローディング中などの状態を管理する必要があります。そういった課題に対応するために、[React Query](https://react-query.tanstack.com/overview)などのライブラリを使用することも検討していきます。
+
+
+
+## 議論
+
+:::note
+解決方法や選択肢について検討・議論した内容を記録してください。
+:::
+
+## 決定
+
+:::note
+最終的な決定内容を記録してください
+:::
