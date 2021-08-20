@@ -19,18 +19,16 @@ ADRの決定事項を要約して、3行程度で記載してください。
 
 ## コンテキスト
 
-React Nativeを使用したモバイルアプリでは、HTTP APIクライアントとして[Fetch API](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API)や、[Frisbee](https://github.com/niftylettuce/frisbee)、[axios](https://github.com/axios/axios)などの[XMLHttpRequest API](https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest)に依存したサードパーティのライブラリも使用可能です。
+React Nativeを使用したモバイルアプリでは、HTTP APIクライアントとして[Fetch API](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API)が使用できます。また、[Frisbee](https://github.com/niftylettuce/frisbee)、[axios](https://github.com/axios/axios)などの[XMLHttpRequest API](https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest)に依存したライブラリも使用可能です。
 ここでは、それらのライブラリをいくつかの観点で比較して、使用するHTTP APIクライアントを決定します。
 
-また、HTTP APIと通信する際は、エラーのハンドリングやローディング中などの状態を管理する必要があります。そういった課題に対応するために、[React Query](https://react-query.tanstack.com/overview)などのライブラリを使用することも検討していきます。
-
-
+また、HTTP APIと通信する際は、エラーのハンドリングやローディング中などの状態を管理する必要があります。そういった課題に対応するため、[React Query](https://react-query.tanstack.com/overview)などのライブラリを使用することも検討していきます。
 
 ## 議論
 
 ### HTTP APIクライアントの選定
 
-React Nativeを使用したモバイルアプリで使用可能なライブラリとしては、Fetch APIやFrisbee、axios、superagentなど多くのライブラリが存在します。その中で、チームメンバーが使用した経験が多いのはFetch APIとaxiosでした。そのため、まずはFetch APIとaxiosの2つに絞って比較していきます。
+React Nativeを使用したモバイルアプリで使用可能なライブラリとしては、Fetch APIやFrisbee、axios、superagentなど多くのライブラリが存在します。その中で、チームメンバーの経験が多いのはFetch APIとaxiosでした。そのため、まずはFetch APIとaxiosの2つに絞って比較していきます。
 
 Fetch APIとaxiosは非常に有名で、OSS、商用利用問わず多くのアプリケーションで使用されています。チームメンバーが過去に開発したアプリでも安定して動作しており、安定性やパフォーマンスなどの観点において双方とも問題なさそうです。ドキュメントも充実しており、学習コストはさほど高くありません。ライセンスは双方ともMITライセンスになります。[^1]
 
@@ -54,6 +52,18 @@ Fetch APIとaxiosは非常に有名で、OSS、商用利用問わず多くのア
 しかし、現時点の要件としてはありませんが、今後ファイルのアップロード機能が追加された場合は差が出てきそうです。axiosは、アップロード中の進捗状況を取得できます。アップロード中の進捗状況を取得できると、プログレスバーなどで視覚的にアップロード状況を伝えることができます。
 
 そのため、追加される可能性のある要件を見据えて、axiosを採用することにします。
+
+### React Queryを使用するか
+
+React Queryを使用しない場合、エラーのハンドリングやローディング中などの状態を管理するのが大きな課題となります。React Queryを使用するとそれらの管理が非常に楽になり、効率良く開発ができます。また、HTTPリクエストのキャッシュ管理やページネーション、無限スクロールの対応など多くの便利な機能が搭載されています。
+
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+
+その反面、学習コストは決して低くないように思います。チーム内にはReact Queryの経験者もいないため、開発コストは高くなる可能性もあります。
+
+<!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
+
+そういった懸念はありますが、React Queryを使用した場合の方式設計や開発ガイドを整備することにより、最終的にはより良い方向に適用できると考えています。よって、SantokuAppではReact Queryを採用することにします。
 
 ## 決定
 
