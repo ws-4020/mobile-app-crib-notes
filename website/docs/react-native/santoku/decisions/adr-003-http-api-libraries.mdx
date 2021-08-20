@@ -13,9 +13,10 @@ Superseded: 廃止
 
 ## 要約
 
-:::note
-ADRの決定事項を要約して、3行程度で記載してください。
-:::
+SantokuAppでは、HTTP API通信に以下のライブラリを使用します。
+
+- axios
+- React Query
 
 ## コンテキスト
 
@@ -63,10 +64,9 @@ React Queryを使用しない場合、エラーのハンドリングやローデ
 
 <!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
 
-そういった懸念はありますが、React Queryを使用した場合の方式設計や開発ガイドを整備することにより、最終的にはより良い方向に適用できると考えています。よって、SantokuAppではReact Queryを採用することにします。
+そういった懸念はありますが、React Queryを使用した場合の方式設計や開発ガイドを整備することにより、効率的に開発を進めることができると考えています。よって、SantokuAppではReact Queryを採用することにします。
 
 ## 決定
 
-:::note
-最終的な決定内容を記録してください
-:::
+- HTTP APIクライアントは、axiosを使用する
+- React Queryの機能を使用して、効率的に開発を進める
