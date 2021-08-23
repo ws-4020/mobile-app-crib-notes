@@ -15,9 +15,9 @@ Superseded: 廃止
 
 チームにユーザを招待するときに、招待されたユーザが、共有されたURLやQRコードからアプリを開けるようにします。これを実現するために、Firebaseの[Dynamic Links](https://firebase.google.com/docs/dynamic-links)を採用し、以下の方針で利用します。
 
-- アプリケーションをインストール後もURLを読み取る機能をサポートしている[Dynamic Links](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)を採用する。
+- アプリケーションを[インストール後もURLを読み取る機能をサポート](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)しているDynamic Linksを採用する。
 - ディープリンクのURLに対応するWebサイトは構築しない。
-- iOSで意図しないURLが共有されるリスクについてもアプリケーションで対応する。
+- iOSで意図しないURLが共有されるリスクはアプリケーションで対応する。
 
 ## コンテキスト
 
@@ -61,7 +61,8 @@ Dynamic LinksはOSの機能と比較すると、アプリへの誘導をサポ�
 
 ### アプリへの誘導
 
-OSの機能を利用する場合、インストールされていないアプリケーションと関連付けられたURLのWebサイトにブラウザでアクセスしてしまいます。
+OSの機能をそのまま利用すると、URLに関連付けられたアプリケーションがインストールされていない場合は、Webサイトと判断されてブラウザでアクセスしてしまいます。
+そのため、アプリケーションをインストールしていないユーザ向けに、導線としてのWebサイトも用意する必要があります。
 
 たとえばECサイトのURLを共有されたとき、ドメインに関連付けられたアプリをインストールしていないときにはブラウザでECサイトにアクセスします。インストールしていればアプリが起動します。
 
