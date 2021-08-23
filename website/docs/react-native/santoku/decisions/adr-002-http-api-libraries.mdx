@@ -45,7 +45,7 @@ Fetch APIとaxiosは非常に有名で、OSS、商用利用問わず多くのア
 | HTTP通信のタイムアウト | △[^2] | △[^2][^3] |
 | HTTP通信のキャンセル | ○ | ○ |
 
-[^2]: HTTP通信をタイムアウトする機能はないですが、HTTP通信のキャンセル機能を使えば実現可能です。
+[^2]: HTTP通信をタイムアウトする機能はないですが、HTTP通信のキャンセル機能（[AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)(fetch)や[CancelToken](https://axios-http.com/docs/cancellation)(axios)）を使えば実現可能です。
 [^3]: axiosでは[timeout](https://github.com/axios/axios#request-config)を設定できます。ただし、axiosの`timeout`はAndroidではコネクションタイムアウトのみに使用されるため、コネクション接続後にサーバの応答が遅い場合などはタイムアウトしません。
 
 ほとんど差はなく、採用の決め手になる要因はありませんでした。
