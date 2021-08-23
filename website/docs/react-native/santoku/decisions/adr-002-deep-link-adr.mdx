@@ -13,7 +13,7 @@ Superseded: 廃止
 
 ## 要約
 
-ユーザが自分のチームへ招待をするときにURLを利用したディープリンクを採用し、以下の方針とします。
+チームにユーザを招待するときに、招待されたユーザが、共有されたURLやQRコードからアプリを開けるようにします。これを実現するために、Firebaseの[Dynamic Links](https://firebase.google.com/docs/dynamic-links)を採用し、以下の方針で利用します。
 
 - アプリケーションをインストールするフローもサポートしている[Dynamic Links](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)を採用する。
 - ディープリンクのURLに対応するWebサイトは構築しない。
