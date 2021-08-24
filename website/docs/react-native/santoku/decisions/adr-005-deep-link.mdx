@@ -55,6 +55,13 @@ Dynamic LinksとOSの機能を直接利用する場合の違いは以下のと�
 |環境の切り分け|△|○|
 
 Dynamic LinksはOSの機能と比較すると、アプリへの誘導をサポートしている分、セキュリティや環境の切り分けで対応が必要になります。
+またインストールしていないユーザへの導線のためにWebサイトを構築する作業が短縮されます。
+
+:::note
+Dynamic Linksを利用すると簡単に組み込めますが、注意する点があります。（セキュリティの課題やReact Nativeアプリの場合[iOSのissue]((https://github.com/invertase/react-native-firebase/issues/2660))があります）
+
+OSの機能を直接利用したほうがよい場合もあるため、導入するときにはサービスの特性を考慮して利用するか判断します。
+:::
 
 [^1]:カスタムURLスキームは自由に設定できるため、作成したURLを別のアプリに乗っ取られるリスクがあります。
 [^2]:アプリへの誘導はアプリのインストールを促し、インストール後もURLを読み取れる機能です。
@@ -112,6 +119,20 @@ Firebaseの`page.link`ドメインを利用できるためホストを準備し�
 Dynamic Linksを利用する場合のみGoogleServiceの設定ファイルが必要です。（これは他のFirebaseサービスと同じファイルなので、他にもFirebaseのサービスを利用するのであれば、設定ファイルを準備することはコスト増にはなりません）
 
 必要になるものは環境毎（たとえば、開発、外部テスターなどのステージング、本番）設定ファイルを想定しています。
+
+### アプリケーションの実装
+
+ディープリンクをReact Nativeで受け取る場合は次のAPIが利用できます。
+
+ - Dynamic Linksを利用する場合は[React Native Firebase](https://rnfirebase.io/dynamic-links/usage)
+ - OSの機能は[React Native Linking](https://reactnative.dev/docs/linking#handling-deep-links)
+
+どちらかのAPIを利用すれば実装できますが、下記の点を考慮しCold Startする場合はPlatformを判定して呼び分けます。
+
+ - React Native Firebaseには[iOSのissue](https://github.com/invertase/react-native-firebase/issues/2660)があるためLinking API
+ - React Native Linkingには[Androidのissue](https://github.com/facebook/react-native/issues/25675)があるためReact Native Firebase API
+
+Dynamic Linksの「インストール後もURLを読み取る機能」を利用するためにはリスナーに[React Native FirebaseのonLink](https://rnfirebase.io/dynamic-links/usage#foreground-events)を利用します。
 
 ### 環境の切り分け
 
