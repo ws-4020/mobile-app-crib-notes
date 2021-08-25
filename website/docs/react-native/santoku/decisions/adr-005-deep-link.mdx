@@ -86,7 +86,7 @@ Dynamic Linksでは、未インストールのユーザに対する導線が簡�
 iOSの場合[^3]、Dynamic Linksには[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)があり、`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。
 
 そのため、matchTypeが`unique`であるか判定してからURLを処理します。
-この対応でユーザが意図しないデータを受け取らないように保護します。
+この対応で別のユーザがデータを受け取らないようになります。
 
 [^3]: Androidの場合は他のユーザのURLを受け取る事はありません。
 
