@@ -237,7 +237,7 @@ module.exports = {
         },
         {
           type: 'doc',
-          id: 'react-native/santoku/decisions/adr-005-deep-link',
+          id: 'react-native/santoku/decisions/adr-004-deep-link',
         },
       ],
     },
