@@ -83,12 +83,13 @@ Dynamic Linksでは、未インストールのユーザに対する導線が簡�
 
 #### iOSでの意図しない共有
 
-iOSの場合[^3]、Dynamic Linksには[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)があり、`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。
+iOSの場合[^3]、Dynamic Linksには[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)があり、`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。インストール後にアプリを初回起動したとき、クリップボードに値がない場合、Webサイトから情報を取得することがあります。[^4]
 
 そのため、matchTypeが`unique`であるか判定してからURLを処理します。
 この対応で別のユーザがデータを受け取らないようになります。
 
 [^3]: Androidの場合は他のユーザのURLを受け取る事はありません。
+[^4]: クリップボードの情報によっては[iOSで受信する > 6.オプションの警告](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)にあるように、matchTypeが`unique`にならないケースがあります。クリップボード機能を有効にしていても発生します。
 
 #### iOS14以降でのクリップボード利用の通知
 
@@ -127,8 +128,8 @@ Dynamic Linksを利用する場合のみGoogleServiceの設定ファイルが必
 
 どちらかのAPIを利用すれば実装できますが、下記の点を考慮しCold Startする場合はPlatformを判定して呼び分けます。
 
- - React Native Firebaseには[iOSのissue](https://github.com/invertase/react-native-firebase/issues/2660)があるためLinking API
- - React Native Linkingには[Androidのissue](https://github.com/facebook/react-native/issues/25675)があるためReact Native Firebase API
+ - React Native Firebaseには[iOSで起動時間が短いと読み取れないissue](https://github.com/invertase/react-native-firebase/issues/2660)があるためLinking API
+ - React Native Linkingには[AndroidはLikingで読み取れないissue](https://github.com/facebook/react-native/issues/25675)があるためReact Native Firebase API
 
 Dynamic Linksの「インストール後もURLを読み取る機能」を利用するためにはリスナーに[React Native FirebaseのonLink](https://rnfirebase.io/dynamic-links/usage#foreground-events)を利用します。
 
