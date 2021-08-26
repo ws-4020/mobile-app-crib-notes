@@ -255,11 +255,8 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'アプリのライフサイクル管理',
-          items: [
-            'react-native/santoku/application-architecture/life-cycle-managing/overview',
-            'react-native/santoku/application-architecture/life-cycle-managing/initialization',
-          ],
+          label: 'アプリのライフサイクル',
+          items: ['react-native/santoku/application-architecture/life-cycle-managing/initialization'],
         },
         {
           type: 'category',
