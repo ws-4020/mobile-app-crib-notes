@@ -1,0 +1,16 @@
+---
+title: iOSの対応
+---
+
+iOSで発生する2つの課題に対応します。
+ - 他のユーザが受け取ったURLを読み取ってしまう可能性がある
+ - React Native Firebaseがアプリ起動の時間が短いとURLが取得できない
+
+## 他のユーザーが受け取ったURLを読み取る可能性
+
+matchTypeが必要な理由を記載。
+また、patchを当てないとアプリケーションでハンドリングできないためpatchを当てて対応することを記載。
+
+## アプリ起動の時間が短い場合にURLが取得できない
+
+[iOSでは起動が速いと読み取れないissue](https://github.com/invertase/react-native-firebase/issues/2660)があるため、React Native Linkingを利用します。

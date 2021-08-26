@@ -263,6 +263,15 @@ module.exports = {
             'react-native/santoku/application-architecture/webview/webview-error-handling',
           ],
         },
+        {
+          type: 'category',
+          label: 'ディープリンク',
+          items: [
+            'react-native/santoku/application-architecture/deep-link/overview',
+            'react-native/santoku/application-architecture/deep-link/create-deep-link',
+            'react-native/santoku/application-architecture/deep-link/process-deep-link',
+          ],
+        },
       ],
     },
     {
