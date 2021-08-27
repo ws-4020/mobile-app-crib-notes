@@ -243,6 +243,10 @@ module.exports = {
           type: 'doc',
           id: 'react-native/santoku/decisions/adr-003-http-api-error-handling',
         },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/decisions/adr-005-push-notification-and-deep-links-parameters-at-cold-start',
+        },
       ],
     },
     {
