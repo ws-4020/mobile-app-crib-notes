@@ -23,11 +23,6 @@ Dynamic Linksを利用するため未インストール時の[フロー](https:/
 
 React NativeでFirebase Dynamic Linksを利用するために[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用します。
 
-### テスト
-
-ディープリンクを利用した機能のテストをする場合、本番環境とは異なるFirebaseプロジェクトのアプリを利用する。
-ビルドバリアントの説明に沿った形式でFirebaseアプリとモバイルアプリを関連付ける。
-
 ### ディープリンクの作成
 
 アプリ内では[React Native Firebase Dynamic LinksのAPI](https://rnfirebase.io/dynamic-links/usage#create-a-link)を利用してディープリンクを作成します。
@@ -46,3 +41,9 @@ URLは共有しやすいように[短いDynamic Link](https://firebase.google.co
 |ios.bundleId|アプリケーションのbundleId|`jp.fintan.mobile.SantokuApp`|
 |android.fallback|Androidデバイスでアプリをインストールしていない場合のURL|Google Play|
 |android.package_name|Androidのパッケージ名|`jp.fintan.mobile.SantokuApp`|
+
+### テスト
+
+ディープリンクを利用した機能のテストをする場合、本番環境とは異なるサイトからインストールする必要があります。
+
+ビルドバリアントの説明に沿った形式でFirebaseアプリとモバイルアプリを関連付けます。
