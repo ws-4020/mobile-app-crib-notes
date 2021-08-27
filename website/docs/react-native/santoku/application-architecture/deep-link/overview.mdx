@@ -3,25 +3,31 @@ title: ディープリンク
 sidebar_label: Overview
 ---
 
-ディープリンクを利用することでURLをタップすることでモバイルアプリケーションに情報を渡す事ができます。
-そのためアプリケーション内で情報を共有する仕組みを作るのではなく、URLで共有する仕組みとしてFirebase Dynamic Linksを利用した方式について記載します。
+ディープリンクを利用するとURLからモバイルアプリケーションに情報を渡す事ができます。
+アプリケーションで情報を共有する仕組みを作るのではなく、ディープリンクで共有することで情報共有を可能にします。
 
-方式では構成と機能およびURLを共有する仕組みのうち、ディープリンクを利用したURLの作成とURLの処理について記載します。
+ここではアプリケーションでFirebase Dynamic LinksをReact Nativeで利用する方式を記載します。
 
-## 構成
+## 全体の構成
 
 ディープリンク機能を利用するために[Fireabse Dynamic Links](https://firebase.google.com/docs/dynamic-links)を導入します。
 
-TODO:ここにモバイル（デバイスとアプリのインストール状況、設定ファイルにドメイン）とFirebaseの箱のなかにあるWebサイト（ドメイン）を書いた図を記載します。
+TODO:ここにモバイル（デバイスとアプリのインストール状況、設定ファイルにドメイン）とFirebaseの箱のなかにあるWebサイト（ドメイン）を書いた図を記載する。
 
-本番環境の構成を記載。
+### URLの構成
 
-開発環境など本番と切り替える箇所を記載。（Androidの鍵ファイルや配信方法の切り替え）
+ディープリンクはURLのドメインとアプリケーションに関連付けたドメインを使用する必要があります。
+本アプリケーションではFireabseの`page.link`ドメインを利用するためURLの構成は以下の通りです。
 
-### URLの形式
+|パラメータ|値|備考|
+|:-------|:-|:--|
+|domainUriPrefix|アプリケーションに関連付けたドメイン||
+|ios.fallback|iOSデバイスでアプリをインストールしていない場合のURL|AppStoreやTestFlight|
+|ios.bundleId|アプリケーションのbundleId|`jp.fintan.mobile.SantokuApp`|
+|android.fallback|Androidデバイスでアプリをインストールしていない場合のURL|GooglePlayStore|
+|android.package_name|Androidのパッケージ名|`jp.fintan.mobile.SantokuApp`|
 
-ディープリンクの形式はURLのドメインとアプリケーションの設定を一致させたURLであればアプリに遷移できます。
 
-URLの形式としては通常のURLと短縮URLがあります。通常のURLだと非常に長くなる[^1]ため、短縮URLを採用します。
+### 利用するライブラリ
 
-[^1]: `https://関連付けするドメイン/?link=https://アプリケーションが受け取るURL/app?アプリのパラメータ&Android向けのパラメータ&ibi=iOS向けのパラメータ`の通りに非常に長いURLになります。
+React Native でFirebase Dynamic Linksを利用するために[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用します。
