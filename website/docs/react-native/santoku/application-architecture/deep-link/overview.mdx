@@ -12,7 +12,10 @@ sidebar_label: Overview
 
 ディープリンク機能を利用するために[Fireabse Dynamic Links](https://firebase.google.com/docs/dynamic-links)を導入します。
 
-TODO:ここにモバイル（デバイスとアプリのインストール状況、設定ファイルにドメイン）とFirebaseの箱のなかにあるWebサイト（ドメイン）を書いた図を記載する。
+TODO:ここにモバイル（デバイスとアプリのインストール状況、設定ファイルにドメイン）とWebサイト（ドメイン）を書いた図を記載する。
+ - 関連したドメイン
+ - fallback
+ - 設定ファイル
 
 ### URLの構成
 
@@ -27,7 +30,19 @@ TODO:ここにモバイル（デバイスとアプリのインストール状況
 |android.fallback|Androidデバイスでアプリをインストールしていない場合のURL|GooglePlayStore|
 |android.package_name|Androidのパッケージ名|`jp.fintan.mobile.SantokuApp`|
 
-
 ### 利用するライブラリ
 
 React Native でFirebase Dynamic Linksを利用するために[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用します。
+
+### テスト
+
+ディープリンクを利用した機能のテストをする場合、本番環境とは異なるFirebaseプロジェクトのアプリを利用する。
+ビルドバリアントの説明に沿った形式になるようにFirebaseアプリとモバイルアプリを関連付ける。
+
+### ディープリンクの作成
+
+アプリ内では[React Native Firebase Dynamic LinksのAPI](https://rnfirebase.io/dynamic-links/usage#create-a-link)を利用してディープリンクを作成します。
+
+URLは共有しやすいように短縮URLを利用します。
+
+
