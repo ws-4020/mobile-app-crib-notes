@@ -7,9 +7,9 @@ import TabItem from '@theme/TabItem';
 
 ## 基本方針
 
-このアプリケーションでは、デバッグビルドなどを切り替えるビルドタイプと、接続先の環境などを切り替えるプロダクトフレーバーの組み合わせをビルドバリアントと呼んでいます。
+このアプリケーションでは、デバッグビルドなどを切り替えるビルドタイプと、接続先の環境などを切り替えるプロダクトフレーバーの組み合わせを[ビルドバリアント](https://developer.android.com/studio/build/build-variants)と呼んでいます。
 
-ビルドタイプはAndroidではGradle、iOSではXcodeのConfigurationで設定し、プロダクトフレーバーは[react-native-config](https://github.com/luggit/react-native-config)で設定しています。
+具体的な設定方法として、ビルドタイプはAndroidではGradle(`buildTypes`)、iOSではXcodeのConfigurationを利用し、プロダクトフレーバーは[react-native-config](https://github.com/luggit/react-native-config)を利用しています。
 
 ビルドバリアントごとに異なるアプリケーションとしてインストールできるように、アプリケーションID（Android）とBundle Identifier（iOS）を次のルールで設定しています。
 
