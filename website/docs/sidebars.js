@@ -245,7 +245,7 @@ module.exports = {
         },
         {
           type: 'doc',
-          id: 'react-native/santoku/decisions/adr-005-push-notification-and-deep-links-parameters-at-cold-start',
+          id: 'react-native/santoku/decisions/adr-005-get-push-notification-and-deep-links-parameters-at-app-initialization',
         },
       ],
     },
