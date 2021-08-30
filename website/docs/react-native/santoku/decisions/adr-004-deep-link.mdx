@@ -129,7 +129,7 @@ Dynamic Linksを利用する場合のみGoogleServiceの設定ファイルが必
  - Dynamic Linksを利用する場合は[React Native Firebase](https://rnfirebase.io/dynamic-links/usage)
  - OSの機能は[React Native Linking](https://reactnative.dev/docs/linking#handling-deep-links)
 
-どちらかのAPIを利用すれば実装できますが、下記の点を考慮しCold Startする場合はPlatformを判定して呼び分けます。
+どちらかのAPIを利用すれば実装できますが、下記の点を考慮しアプリ起動時にはPlatformを判定して呼び分けます。
 
  - React Native Firebaseには[iOSで起動時間が短いと読み取れないissue](https://github.com/invertase/react-native-firebase/issues/2660)があるためReact Native Linking API
  - React Native Linkingには[AndroidはLikingで読み取れないissue](https://github.com/facebook/react-native/issues/25675)があるためReact Native Firebase API
