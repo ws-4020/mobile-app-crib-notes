@@ -10,11 +10,25 @@ URLを取得するためのAPIは[コールドスタート](https://rnfirebase.i
 
 どちらの場合でもURLパラメータを取得して、画面遷移の判定をした上でパラメータを処理します。
 
+### Cold Start
+
+TODO:アプリの初期化見てみる
+
+### バックグラウンドの場合
+
+TODO:アプリの初期化見てみる
+
 ### URLパラメータの保持
 
-URLパラメータはコンテキストに入れるとしてもアプリケーションのURLには含めない。
+URLパラメータはコンテキストに入れるとしてもアプリケーションのコンテキストには入れない。
 パラメータで持ち回るか、共有すべきコンテキストを整理する。
- - ログイン ~ チーム未参加
- - チームタブ
- - ホームタブ
 
+- アカウント登録まで: Routesパラメータで受け渡し
+  ログイン画面から新規登録画面までRoutesパラメータでディープリンクのURLを任意で設定する
+- Homeタブ: 不要
+- Teamタブ: チーム詳細のRoutesパラメータに設定
+
+### iOSで受け取る
+
+iOSではではユーザの操作でディープリンクを受信したかどうかを判定するために[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)でハンドリングできます。
+matchTypeが`unique`でないリンクは破棄します。
