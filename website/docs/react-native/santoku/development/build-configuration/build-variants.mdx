@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 このアプリケーションでは、デバッグビルドなどを切り替えるビルドタイプと、接続先の環境などを切り替えるプロダクトフレーバーの組み合わせを[ビルドバリアント](https://developer.android.com/studio/build/build-variants)と呼んでいます。
 
-具体的な設定方法として、ビルドタイプはAndroidではGradle(`buildTypes`)、iOSではXcodeのConfigurationを利用し、プロダクトフレーバーは[react-native-config](https://github.com/luggit/react-native-config)を利用しています。
+ビルドタイプはAndroidではGradle(`buildTypes`)、iOSではXcodeのConfigurationで設定し、プロダクトフレーバーは[react-native-config](https://github.com/luggit/react-native-config)で設定しています。
 
 ビルドバリアントごとに異なるアプリケーションとしてインストールできるように、アプリケーションID（Android）とBundle Identifier（iOS）を次のルールで設定しています。
 
@@ -66,7 +66,7 @@ USB接続でデバイスにインストールして、iOSのAppの高度な機�
 
 `<typeSuffix>`は`.debugAdvanced`です。
 
-iOS向けのビルドには、Apple Developer Enterprise Programの開発用プロビジョニングプロファイルと開発用証明書の秘密鍵が必要です。また、インストール先のデバイスのUDIDが、開発用デバイスとして登録してある必要があります。
+iOS向けのビルドには、Apple Developer (Enterprise) Programの開発用プロビジョニングプロファイルと開発用証明書の秘密鍵が必要です。また、インストール先のデバイスのUDIDが、開発用デバイスとして登録してある必要があります。
 
 :::warning
 Apple Developer (Enterprise) Programでは、開発用デバイスはデバイス種別ごとに100台までしか登録できません。大量のデバイスを登録しないように注意してください。
