@@ -15,32 +15,13 @@ sidebar_label: Overview
 
 アプリケーションとドメインの関連方法については[iOS](https://firebase.google.com/docs/dynamic-links/ios/receive)と[Android](https://firebase.google.com/docs/dynamic-links/android/receive)を参照してください。
 
-Dynamic Linksを利用するため未インストール時の[フロー](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)もサポートします。
+SantokuAppではDynamic Linksを利用するため、破線で示す未インストール時の[フロー](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)も実現しています。
 
 ![overview](./overview.drawio.png)
 
 ### 利用するライブラリ
 
 React NativeでFirebase Dynamic Linksを利用するために[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用します。
-
-### ディープリンクの作成
-
-アプリ内では[React Native Firebase Dynamic LinksのAPI](https://rnfirebase.io/dynamic-links/usage#create-a-link)を利用してディープリンクを作成します。
-
-URLは共有しやすいように[短いDynamic Link](https://firebase.google.com/docs/dynamic-links/android/create)を利用します。
-
-### URLの構成
-
-ディープリンクはURLのドメインとアプリケーションに関連付けたドメインを使用する必要があります。
-本アプリケーションではFireabseの`page.link`ドメインを利用するためURLの構成は以下のとおりです。
-
-|パラメータ|値|備考|
-|:-------|:-|:--|
-|domainUriPrefix|アプリケーションに関連付けたドメイン|`https://xxxx.page.link/`|
-|ios.fallback|iOSデバイスでアプリをインストールしていない場合のURL|App StoreやTestFlight|
-|ios.bundleId|アプリケーションのbundleId|`jp.fintan.mobile.SantokuApp`|
-|android.fallback|Androidデバイスでアプリをインストールしていない場合のURL|Google Play|
-|android.package_name|Androidのパッケージ名|`jp.fintan.mobile.SantokuApp`|
 
 ### テスト
 
