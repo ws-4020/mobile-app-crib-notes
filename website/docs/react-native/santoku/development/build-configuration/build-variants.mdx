@@ -9,9 +9,14 @@ import TabItem from '@theme/TabItem';
 
 このアプリケーションでは、デバッグビルドなどを切り替えるビルドタイプと、接続先の環境などを切り替えるプロダクトフレーバーの組み合わせを[ビルドバリアント](https://developer.android.com/studio/build/build-variants)と呼んでいます。
 
-ビルドタイプはAndroidではGradle(`buildTypes`)、iOSではXcodeのConfigurationで設定し、プロダクトフレーバーは[react-native-config](https://github.com/luggit/react-native-config)で設定しています。
+ビルドタイプ、プロダクトフレーバーの設定箇所は次のようになっています。プロダクトフレーバーの設定はアプリ内からも参照できるように [react-native-config](https://github.com/luggit/react-native-config)を利用しています。
 
-ビルドバリアントごとに異なるアプリケーションとしてインストールできるように、アプリケーションID（Android）とBundle Identifier（iOS）を次のルールで設定しています。
+| 用語              | 用途                                                  | Android (Gradle)  | iOS (Xcode)   |
+|:------------------|:-----------------------------------------------------|:------------------|:--------------|
+| ビルドタイプ        | ビルド種類（リリースやデバッグなど）の設定                  | BuildType DSL     | Configuration |
+| プロダクトフレーバー | 環境（本番環境や開発環境）ごとの設定（react-native-config） | ProductFlavor DSL | Scheme        |
+
+また、ビルドバリアントごとに異なるアプリケーションとしてインストールできるように、アプリケーションID（Android）とBundle Identifier（iOS）を次のルールで設定しています。
 
 ```console title="アプリケーションID（Android）とBundle Identifier（iOS）のルール"
 jp.fintan.mobile.SantokuApp<flavorSuffix><typeSuffix>
