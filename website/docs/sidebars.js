@@ -246,7 +246,7 @@ module.exports = {
           label: 'ディープリンク',
           items: [
             'react-native/santoku/application-architecture/deep-link/overview',
-            'react-native/santoku/application-architecture/deep-link/recieve-deep-link',
+            'react-native/santoku/application-architecture/deep-link/process-deep-link',
             'react-native/santoku/application-architecture/deep-link/create-deep-link',
             'react-native/santoku/application-architecture/deep-link/ios-patch',
           ],

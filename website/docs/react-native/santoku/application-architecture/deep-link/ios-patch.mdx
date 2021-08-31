@@ -9,9 +9,14 @@ iOSで発生する2つの課題に対応します。
 
 ## 他のユーザが受け取ったURLを読み取る可能性
 
-matchTypeが必要な理由を記載。
-利用ライブラリがmatchTypeを返さないためアプリケーションでハンドリングできないのでpatchを当てて対応することを記載。
+iOSではユーザの操作でディープリンクを受信したかどうかを判定するために[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)というパラメータを受け取る事ができます。
+
+matchTypeが`unique`でないリンクは誤って受信した情報の可能性があるため、リンクをアプリケーション内で破棄します。
+
+React Native Firebase Dynamic Linksでは、matchTypeをアプリケーションが取得できないため、ライブラリに[パッチを適用](./ios-patch.mdx)して判定できるようにします。
 
 ## アプリ起動の時間が短い場合にURLが取得できない
 
 [iOSでは起動が速いと読み取れないissue](https://github.com/invertase/react-native-firebase/issues/2660)があるため、React Native Linkingを利用します。
+
+React Native LinkingはリンクではなくディープリンクのURLが取得されるため、[resolveLink](https://rnfirebase.io/reference/dynamic-links#resolveLink)を利用してリンクを取得します。

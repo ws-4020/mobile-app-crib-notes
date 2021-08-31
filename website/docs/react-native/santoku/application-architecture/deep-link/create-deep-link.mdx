@@ -14,8 +14,8 @@ URLは共有しやすいように[短いDynamic Link](https://firebase.google.co
 |パラメータ|値|備考|
 |:-------|:-|:--|
 |domainUriPrefix|アプリケーションに関連付けたドメイン|`https://santokuapp.page.link/`|
-|link|ドメインを`jp.fintan.mobile.santokuapp`、値を`/${screen}/?${key=value}`に設定|screenで画面、keyとvalueでパラメータを指定|
-|ios.fallback|iOSデバイスでアプリをインストールしていない場合のURL|App StoreやTestFlight|
+|link|ドメインを`jp.fintan.mobile.santokuapp`、値を`/${screen}/?${key}=${value}`に設定|screenで画面、keyとvalueでパラメータを指定|
+|ios.fallback|iOSデバイスでアプリをインストールしていない場合のURL|App StoreやTestFlight、DeployGate|
 |ios.bundleId|アプリケーションのbundleId|`jp.fintan.mobile.SantokuApp`|
-|android.fallback|Androidデバイスでアプリをインストールしていない場合のURL|Google Play|
+|android.fallback|Androidデバイスでアプリをインストールしていない場合のURL|Google Play、DeployGate|
 |android.package_name|Androidのパッケージ名|`jp.fintan.mobile.santokuapp`|

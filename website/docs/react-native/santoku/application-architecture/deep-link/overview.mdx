@@ -6,14 +6,14 @@ sidebar_label: Overview
 ディープリンクを利用するとURLからモバイルアプリケーションに情報を渡す事ができます。
 情報を共有する仕組みをアプリケーションで作るのではなく、ディープリンクを共有することで情報共有を可能にします。
 
-ここではアプリケーションでFirebase Dynamic LinksをReact Nativeで利用する方式を記載します。
+ここではアプリケーションで[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links)をReact Nativeで利用する方式を記載します。
 
 ## 全体の構成
 
-ディープリンクは下記の図のようにURLを開いたときにOSがドメインとの関連を検査します。
-アプリケーションとドメインが相互に関連を持っていることが確認できると対象のアプリケーションにURLを渡します。
+ディープリンクを開くと、下記の図のようにOSがアプリとURLの関連を検証します。
+アプリケーションとURLが相互に関連を持っていることが検証できると対象のアプリケーションにURLを渡します。
 
-アプリケーションとドメインの関連方法については[iOS](https://firebase.google.com/docs/dynamic-links/ios/receive)と[Android](https://firebase.google.com/docs/dynamic-links/android/receive)を参照してください。
+アプリケーションとドメインの関連については[iOS](https://firebase.google.com/docs/dynamic-links/ios/receive)と[Android](https://firebase.google.com/docs/dynamic-links/android/receive)を参照してください。
 
 SantokuAppではDynamic Linksを利用するため、破線で示す未インストール時の[フロー](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)も実現しています。
 
@@ -25,15 +25,29 @@ SantokuAppではDynamic Linksを利用するため、破線で示す未インス
 
 |用語|意味|備考|
 |:--|:--|:--|
-
-
+|ディープリンク|ユーザをアプリ内の特定のコンテンツに直接誘導するURL|[Android App Links](https://developer.android.com/training/app-links)|
+|URL|OSが関連を検証するHTTPS URLです。Dynamic Linksの場合、URLにリンクが含まれる|詳しくは[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links/create-manually)を参照|
+|リンク|アプリに渡されるHTTPS URLです。Dynamic Linksの場合、URLにリンクが含まれる|詳しくは[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links/create-manually)を参照|
+|リンクパラメータ|リンクにあるパラメータ|パラメータについては[URLの構成](./create-deep-link.mdx#URLの構成)の`link`を確認してください|
+|ディープリンクで起動|アプリが非アクティブな状態でディープリンクを開いたときにアクティブになり、リンクを受け取ること||
+|ディープリンクを受信|アプリがアクティブな状態でディープリンクを開き、リンクを受け取ること||
+|ディープリンクの処理|アプリがリンクを受け取り、リンクをもとに処理すること||
 
 ### 利用するライブラリ
 
 React NativeでFirebase Dynamic Linksを利用するために[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用します。
+
+このライブラリのAPIを利用するDynamic LinksのURLをリンクへ変換できます。
 
 ### テスト
 
 ディープリンクを利用した機能のテストをする場合、本番環境とは異なるサイトからインストールする必要があります。
 
 ビルドバリアントの説明に沿った形式でFirebaseアプリとモバイルアプリを関連付けます。
+
+SantokuAppではテストにはDeployGate、本番環境は公式のStoreで配信します。
+
+- iOSでは利用するライセンスがことなるため`bundleId`の切り替えが必要です。
+- Androidでは本番と異なる証明書（keystore）を利用します。
+
+![テストと本番の設定](./test-setting.drawio.png)
