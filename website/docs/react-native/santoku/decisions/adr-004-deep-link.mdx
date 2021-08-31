@@ -31,6 +31,7 @@ Superseded: 廃止
 ## 議論
 
 ユーザに共有されたURLからアプリケーションが情報を受け取る方法として、3つの方法を検討しました。
+また、ディープリンクの仕組みや詳細について[用語](#用語)を整理しています。
 
  - OSの機能（[Universal Links](https://developer.apple.com/ios/universal-links/)、[Android App Links](https://developer.android.com/training/app-links)）を直接利用する
  - Firebaseの[Dynamic Links](https://firebase.google.com/docs/dynamic-links)を利用する
@@ -150,6 +151,15 @@ OSの機能を利用したディープリンクだけであれば、本番のド
 
 Dynamic Linksではアプリへの誘導をするために、アプリを配信するサイトを指定します。
 指定する配信サイトが本番環境だけではテストが難しいため、配信サイトを本番用と開発用に切り分けます。
+
+### 用語
+
+|用語|意味|備考|
+|:--|:--|:--|
+|ディープリンク|ユーザをアプリ内の特定のコンテンツに直接誘導するURL。|[Android App Links](https://developer.android.com/training/app-links)|
+|カスタムURLスキーム|`mailto:`のようにスキームに任意のプレフィックスを指定したURL||
+|Dynamic Links|Firebase Dynamic Links|OSの機能を拡張した機能。カスタムURLは対象外|
+|`page.link`サブドメイン|アプリ用のWebサイトが無いときにFirebaseがWebサイトを提供するためのドメイン|[Firebaseガイド](https://firebase.google.com/docs/dynamic-links?hl=ja#custom-link-domains)|
 
 ## 決定
 
