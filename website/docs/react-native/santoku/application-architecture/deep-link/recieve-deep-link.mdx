@@ -6,17 +6,17 @@ title: ディープリンクの受信
 
 ## アプリケーションの状態とURLの取得
 
-URLを取得するためのAPIはディープリンクで起動した場合と起動中の場合があります。
+アプリがURLを取得するための[API](https://rnfirebase.io/dynamic-links/usage#listening-for-dynamic-links)はディープリンクで起動した場合と起動にディープリンクを開いた場合があります。
 
 どちらの場合でもURLパラメータを取得して、画面遷移の判定をした上でパラメータを処理します。
 
 ### ディープリンクで起動した場合の受信
 
-getInitialLinkについて記載する。
+ディープリンクでアプリがアクティブになった場合は[getInitialLink](https://rnfirebase.io/dynamic-links/usage#backgroundquit-events)でディープリンクのURLを取得します。
 
 ### アプリ起動中の受信
 
-onLinkについて記載する。
+アプリがアクティブなときにディープリンクを開いた場合は[onLink](https://rnfirebase.io/dynamic-links/usage#foreground-events)
 
 ### URLパラメータの保持
 
