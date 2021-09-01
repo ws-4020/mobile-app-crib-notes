@@ -67,15 +67,13 @@ Dynamic Linksでは、未インストールのユーザに対する導線が簡�
 
 ディープリンクのURLをReact Nativeで受け取る場合は次のライブラリが利用できます。
 
- - Dynamic Linksを利用する場合は[React Native Firebase](https://rnfirebase.io/dynamic-links/usage)
- - OSの機能は[React Native Linking](https://reactnative.dev/docs/linking#handling-deep-links)
+ - Dynamic Linksを利用する場合は[React Native Firebase](https://rnfirebase.io/dynamic-links/usage)と[React Native Linking](https://reactnative.dev/docs/linking#handling-deep-links)（併用可能）
+ - OSの機能はReact Native Linking
 
 Dynamic Linksを利用する場合は、どちらかのAPIを利用すれば実装できます。ただし、下記の点を考慮しアプリ起動時にはPlatformを判定して呼び分けます。
 
  - React Native Firebaseには[iOSで起動時間が短いと読み取れないissue](https://github.com/invertase/react-native-firebase/issues/2660)があるためReact Native Linking API
  - React Native Linkingには[AndroidはLikingで読み取れないissue](https://github.com/facebook/react-native/issues/25675)があるためReact Native Firebase API
-
-Dynamic Linksの「インストール後もURLを読み取る機能」を利用するためにはリスナーに[React Native FirebaseのonLink](https://rnfirebase.io/dynamic-links/usage#foreground-events)を利用します。
 
 OSの機能を直接利用する場合（Dynamic Linksを利用しない場合）、AndroidでLinkingが読み取れないissueの原因の調査と対応するための実装、テストが必要です。
 
