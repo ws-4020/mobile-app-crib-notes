@@ -88,8 +88,7 @@ iOSの場合[^3]、Dynamic Linksには受け取ったURLの信頼性を表す[ma
 
 matchTypeの値が`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。[^4]
 
-そのため、matchTypeの値が`unique`であるか判定してからURLを処理します。
-このように対応することで別のユーザがデータを受け取りません。
+そのため、matchTypeの値が`unique`であるか判定してからURLを処理します。このように対応することで別のユーザがデータを受け取りません。
 
 アプリケーションで利用しているReact Native FirebaseではアプリケーションにmatchTypeが渡されないため、ライブラリに[パッチ](https://www.npmjs.com/package/patch-package)を適用する必要があります。
 
