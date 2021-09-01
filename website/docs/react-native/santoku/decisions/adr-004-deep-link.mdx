@@ -84,7 +84,7 @@ OSの機能を直接利用する場合（Dynamic Linksを利用しない場合�
 
 #### iOSでの意図しない共有
 
-iOSの場合[^3]、Dynamic Linksには信頼性を表す[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
+iOSの場合[^3]、Dynamic Linksには受け取ったURLの信頼性を表す[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
 
 matchTypeの値が`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。[^4]
 
