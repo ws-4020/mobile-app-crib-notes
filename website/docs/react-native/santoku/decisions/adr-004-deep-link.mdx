@@ -17,7 +17,7 @@ Superseded: 廃止
 
 - アプリケーションを[インストール後もURLを読み取る機能をサポート](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)を利用し、モバイルアプリと同等の機能を持つWebサイトは構築しない
 - モバイルアプリケーションでは[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用する。
-  - セキュリティに関する不具合はパッチを適用して対応する。
+  - 利用ライブラリの課題はパッチを適用して対応する。
 
 ## コンテキスト
 
@@ -129,5 +129,5 @@ iOSの場合[^3]、Dynamic Linksには[matchType](https://firebase.google.com/do
   - アプリインストール後の[アプリへの誘導](#アプリへの誘導)ができるため、Webサイトを独自で構築しない。
   - URLのドメインはFirebaseの`page.link`ドメインを利用し、Webサイトは独自で準備しない。
 - React Native Firebase Dynamic Linksを採用する。
-  - Android向けにReact Native Linkingの不具合を回避する。
+  - 上記ライブラリを利用して、AndroidのReact Native Linkingの不具合に対応する。
   - [iOSでの意図しない共有](#iosでの意図しない共有)はパッチを適用して回避する。
