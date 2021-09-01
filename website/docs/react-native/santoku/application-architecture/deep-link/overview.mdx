@@ -18,7 +18,7 @@ SantokuApp（React Nativeアプリ）でFirebase Dynamic Linksを利用する方
 
 まずディープリンクの全体の構成を以下に示します。
 
-ディープリンクを開くと、下記の図のようにOSがアプリとURLの関連を検証します。
+ディープリンクのURLを開くと、下記の図のようにOSがアプリとURLの関連を検証します。
 アプリケーションとURLが相互に関連を持っていることが検証できると対象のアプリケーションにURLを渡します。
 
 アプリケーションとドメインの関連については[iOS](https://firebase.google.com/docs/dynamic-links/ios/receive)と[Android](https://firebase.google.com/docs/dynamic-links/android/receive)を参照してください。
@@ -33,7 +33,7 @@ SantokuAppではDynamic Linksを利用するため、破線で示す未インス
 
 |用語|意味|備考|
 |:--|:--|:--|
-|ディープリンク|ユーザをアプリ内の特定のコンテンツに直接誘導するURL|[Android App Links](https://developer.android.com/training/app-links)|
+|ディープリンクのURL|ユーザをアプリ内の特定のコンテンツに直接誘導するURL|[Android App Links](https://developer.android.com/training/app-links)|
 |URL|OSが関連を検証するHTTPS URLです。Dynamic Linksの場合、URLにリンクが含まれる|詳しくは[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links/create-manually)を参照|
 |リンク|アプリに渡されるHTTPS URLです。Dynamic Linksの場合、URLにリンクが含まれる|詳しくは[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links/create-manually)を参照|
 |リンクパラメータ|リンクにあるパラメータ|パラメータについては[URLの構成](./create-deep-link.mdx#URLの構成)の`link`を確認してください|
@@ -48,6 +48,16 @@ React NativeでFirebase Dynamic Linksを利用するために[React Native Fireb
 React Native Linkingを利用してURLを受け取ることはできますが、URLからリンクにする機能がなく、未インストール時のフローに対応できません。
 
 React Native Firebaseの導入については[React Native Fireabase](https://rnfirebase.io/)と[Dynamic Link](https://rnfirebase.io/dynamic-links/usage)を参照してください。
+
+### ディープリンクのURLに対応するWebサイト
+
+ディープリンクは[Android App Links](https://developer.android.com/training/app-links?hl=ja#app-links-vs-deep-links)でも説明されているようにWebサイトとモバイルアプリで同等の機能が提供されます。
+
+> シームレスなユーザー エクスペリエンス: Android アプリリンクでは、ウェブサイトとアプリの同じコンテンツに単一の HTTP URL を使用するため、アプリをインストールしていないユーザーは、アプリではなく単にウェブサイトに移動します。404 などのエラーはありません。
+
+本プロジェクトでは[Dynamic Linksの仕組み](https://firebase.google.com/docs/dynamic-links?hl=ja#how-does-it-work)を利用しWebサイトでは機能を提供しません。
+
+また独自のカスタムドメインではなく`page.link`サブドメインを利用します。
 
 ### テスト
 
