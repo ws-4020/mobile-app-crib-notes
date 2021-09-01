@@ -13,11 +13,7 @@ Superseded: 廃止
 
 ## 要約
 
-ディープリンクの実現方式としてFirebaseの[Dynamic Links](https://firebase.google.com/docs/dynamic-links)を採用し、以下の方針で利用します。
-
-- アプリケーションを[インストール後もURLを読み取る機能をサポート](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)を利用し、モバイルアプリと同等の機能を持つWebサイトは構築しない
-- モバイルアプリケーションでは[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用する。
-  - 利用ライブラリの課題はパッチを適用して対応する。
+ディープリンクの実現方式としてFirebaseの[Dynamic Links](https://firebase.google.com/docs/dynamic-links)を採用します。
 
 ## コンテキスト
 
@@ -26,6 +22,15 @@ Superseded: 廃止
  - OSの機能（[Universal Links](https://developer.apple.com/ios/universal-links/)、[Android App Links](https://developer.android.com/training/app-links)）を直接利用する
  - Firebaseの[Dynamic Links](https://firebase.google.com/docs/dynamic-links)を利用する
  - カスタムURLスキームを利用する
+
+用語は以下のとおりです。
+
+|用語|意味|備考|
+|:--|:--|:--|
+|ディープリンク|URLを開いた時に対応するモバイルアプリケーションをユーザに利用させる機能||
+|ディープリンクのURL|ユーザをアプリ内の特定のコンテンツに直接誘導するURL。|[Android App Links](https://developer.android.com/training/app-links)|
+|カスタムURLスキーム|`mailto:`のようにスキームに任意のプレフィックスを指定したURL||
+|Dynamic Links|Firebase Dynamic Links|OSの機能を拡張した機能。カスタムURLは対象外|
 
 ## 議論
 
@@ -66,21 +71,9 @@ Dynamic Linksでは、未インストールのユーザに対する導線が簡�
 
 本プロジェクトではアプリを誘導するためのWebサイトを独自に作成せずに、Firebaseで用意しできるWebサイトを利用します。
 
-#### iOS14以降でのクリップボード利用の通知
-
-Dynamic Linksでは、インストール直後のアプリケーションとURLを共有するためにクリップボードを利用しています。この機能のため、アプリケーションは初回起動時のみクリップボードの値を読み込みます。
-[クリップボードを無効にする](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)こともできますが、後述する[iOSでの意図しない共有](#iosでの意図しない共有)に対応するためインストール後もURLを読み取る機能が利用できなくなります。
-
-iOS14以降ではクリップボードを読み取るとOSが通知を表示する仕様となっています。そのため、初めてアプリケーションを起動したときのみ、クリップボードに値が存在していると、「`<アプリ名>にSafariからペースト`」のような通知が表示されます。
-
-:::note
-初回起動時のクリップボードの読み取りは、ディープリンクでアプリを起動した場合でも形式（`https://関連付けたドメイン`）であれば読み取ります。
-ただし、起動したときのディープリングが優先されるため、iOS14以降ではクリップボードから読み取ったという通知は出ますが、クリップボードの値は利用されません。
-:::
-
 ### アプリケーションの実装
 
-ディープリンクをReact Nativeで受け取る場合は次のライブラリが利用できます。
+ディープリンクのURLをReact Nativeで受け取る場合は次のライブラリが利用できます。
 
  - Dynamic Linksを利用する場合は[React Native Firebase](https://rnfirebase.io/dynamic-links/usage)
  - OSの機能は[React Native Linking](https://reactnative.dev/docs/linking#handling-deep-links)
@@ -114,20 +107,6 @@ iOSの場合[^3]、Dynamic Linksには[matchType](https://firebase.google.com/do
 [^3]: Androidの場合は他のユーザのURLを受け取る事はありません。
 [^4]: クリップボードの情報によっては[iOSで受信する ＞ 6.オプションの警告](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)にあるように、matchTypeが`unique`にならないケースがあります。クリップボード機能を有効にしていても発生します。
 
-### 用語
-
-|用語|意味|備考|
-|:--|:--|:--|
-|ディープリンク|ユーザをアプリ内の特定のコンテンツに直接誘導するURL。|[Android App Links](https://developer.android.com/training/app-links)|
-|カスタムURLスキーム|`mailto:`のようにスキームに任意のプレフィックスを指定したURL||
-|Dynamic Links|Firebase Dynamic Links|OSの機能を拡張した機能。カスタムURLは対象外|
-|`page.link`サブドメイン|アプリ用のWebサイトが無いときにFirebaseがWebサイトを提供するためのドメイン|[Firebaseガイド](https://firebase.google.com/docs/dynamic-links?hl=ja#custom-link-domains)|
-
 ## 決定
 
-- ユーザ間で共有する方法としてディープリンクを採用し、Dynamic Linksを利用する。
-  - アプリインストール後の[アプリへの誘導](#アプリへの誘導)ができるため、Webサイトを独自で構築しない。
-  - URLのドメインはFirebaseの`page.link`ドメインを利用し、Webサイトは独自で準備しない。
-- React Native Firebase Dynamic Linksを採用する。
-  - 上記ライブラリを利用して、AndroidのReact Native Linkingの不具合に対応する。
-  - [iOSでの意図しない共有](#iosでの意図しない共有)はパッチを適用して回避する。
+ディープリンクの実現方式として、Dynamic Linksを利用する。
