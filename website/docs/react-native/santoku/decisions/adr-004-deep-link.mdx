@@ -84,9 +84,9 @@ OSの機能を直接利用する場合（Dynamic Linksを利用しない場合�
 
 #### iOSでの意図しない共有
 
-iOSの場合[^3]、Dynamic Linksには受け取ったURLの信頼性を表す[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
+iOSの場合、Dynamic Linksには受け取ったURLの信頼性を表す[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
 
-matchTypeの値が`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。[^4]
+matchTypeの値が`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。[^3]
 
 そのため、matchTypeの値が`unique`であるか判定してからURLを処理します。このように対応することで別のユーザがデータを受け取りません。
 
@@ -98,8 +98,7 @@ matchTypeの値が`unique`でない場合はユーザが意図しないURLをア
 <!-- textlint-enable ja-technical-writing/sentence-length -->
 :::
 
-[^3]: Androidの場合は他のユーザのURLを受け取る事はありません。
-[^4]: [iOSで受信する ＞ 6.オプションの警告](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)にあるように、matchTypeの値が`unique`にならないケースがあります。これはクリップボード機能を有効にしていても発生します。
+[^3]: [iOSで受信する ＞ 6.オプションの警告](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)にあるように、matchTypeの値が`unique`にならないケースがあります。これはクリップボード機能を有効にしていても発生します。
 
 ## 決定
 
