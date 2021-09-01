@@ -3,12 +3,20 @@ title: ディープリンク
 sidebar_label: Overview
 ---
 
-ディープリンクを利用するとURLからモバイルアプリケーションに情報を渡す事ができます。
-情報を共有する仕組みをアプリケーションで作るのではなく、ディープリンクを共有することで情報共有を可能にします。
+ディープリンクを利用することで、情報共有の仕組みをアプリで作り込まずに、ユーザ間でURLを共有することで実現できます。
 
-ここではアプリケーションで[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links)をReact Nativeで利用する方式を記載します。
+情報を共有する方法としては次のようなものがあります。
+ 1. 他のユーザから入力する情報を聞き、アプリケーション内で入力する
+ 1. URLをSNSやメール、QRコードで開きアプリケーションにわたす（ディープリンク）
+
+アプリケーション内で入力するより、URLを開くだけで操作できる方がUXとして好ましい場合にディープリンクを利用します。
+
+ディープリンクの実現方式として[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links)を利用し、
+SantokuApp（React Nativeアプリ）でFirebase Dynamic Linksを利用する方式を記載します。
 
 ## 全体の構成
+
+まずディープリンクの全体の構成を以下に示します。
 
 ディープリンクを開くと、下記の図のようにOSがアプリとURLの関連を検証します。
 アプリケーションとURLが相互に関連を持っていることが検証できると対象のアプリケーションにURLを渡します。
@@ -37,7 +45,9 @@ SantokuAppではDynamic Linksを利用するため、破線で示す未インス
 
 React NativeでFirebase Dynamic Linksを利用するために[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用します。
 
-このライブラリのAPIを利用するDynamic LinksのURLをリンクへ変換できます。
+React Native Linkingを利用してURLを受け取ることはできますが、URLからリンクにする機能がなく、未インストール時のフローに対応できません。
+
+React Native Firebaseの導入については[React Native Fireabase](https://rnfirebase.io/)と[Dynamic Link](https://rnfirebase.io/dynamic-links/usage)を参照してください。
 
 ### テスト
 
