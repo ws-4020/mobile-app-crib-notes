@@ -96,7 +96,7 @@ matchTypeの値が`unique`でない場合はユーザが意図しないURLをア
 パッチを適用する対象はiOSのみで、FirebaseのSDKではディープリンクのmatchTypeを返しているため、パッチ適用の難易度自体は高くないと判断し、パッチを適用して回避することにしました。
 
 [^3]: Androidの場合は他のユーザのURLを受け取る事はありません。
-[^4]: [iOSで受信する ＞ 6.オプションの警告](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)にあるように、matchTypeの値が`unique`にならないケースがあります。クリップボード機能を有効にしていても発生します。
+[^4]: [iOSで受信する ＞ 6.オプションの警告](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)にあるように、matchTypeの値が`unique`にならないケースがあります。これはクリップボード機能を有効にしていても発生します。
 
 ## 決定
 
