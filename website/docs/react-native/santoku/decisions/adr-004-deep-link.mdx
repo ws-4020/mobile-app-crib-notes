@@ -13,31 +13,23 @@ Superseded: 廃止
 
 ## 要約
 
-共有されたURLやQRコードからアプリを開けるようにします。これを実現するために、Firebaseの[Dynamic Links](https://firebase.google.com/docs/dynamic-links)を採用し、以下の方針で利用します。
+ディープリンクの実現方式としてFirebaseの[Dynamic Links](https://firebase.google.com/docs/dynamic-links)を採用し、以下の方針で利用します。
 
-- アプリケーションを[インストール後もURLを読み取る機能をサポート](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)しているDynamic Linksを採用する。
-- ディープリンクのURLに対応するWebサイトは構築しない。
-- iOSで意図しないURLが共有されるリスクはアプリケーションで対応する。
+- アプリケーションを[インストール後もURLを読み取る機能をサポート](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)を利用し、モバイルアプリと同等の機能を持つWebサイトは構築しない
+- モバイルアプリケーションでは[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用する。
+  - セキュリティに関する不具合はパッチを適用して対応する。
 
 ## コンテキスト
 
-招待コードをユーザ間で共有してもらう場合、次のいずれかの方法が考えられます。
-
-- ガイドや操作方法を教えてもらい、アプリをインストールしてから、アプリを起動し該当ページに移動してコードを入力する。
-- SNSやQRコードなどで共有されたURLを開き、アプリをインストールし起動する。起動すると該当ページで入力済みになっている。
-
-後者のほうが入力の間違いもなくユーザの操作も少ないため、ユーザ体験が向上することを期待できます。
-
-## 議論
-
-ユーザに共有されたURLからアプリケーションが情報を受け取る方法として、3つの方法を検討しました。
-また、ディープリンクの仕組みや詳細について[用語](#用語)を整理しています。
+ディープリンクを実現する方式は、次の3つの方式から選択します。
 
  - OSの機能（[Universal Links](https://developer.apple.com/ios/universal-links/)、[Android App Links](https://developer.android.com/training/app-links)）を直接利用する
  - Firebaseの[Dynamic Links](https://firebase.google.com/docs/dynamic-links)を利用する
  - カスタムURLスキームを利用する
 
-まず、カスタムURLスキームには回避できないセキュリティのリスク[^1]があるため、採用は見送りました。
+## 議論
+
+ディープリンクの3つの実現方式のうち、カスタムURLスキームには回避できないセキュリティのリスク[^1]があるため、採用は見送りました。
 
 Dynamic LinksとOSの機能を直接利用する場合の違いは以下のとおりです。
 
@@ -52,8 +44,6 @@ Dynamic LinksとOSの機能を直接利用する場合の違いは以下のと�
 |アプリへの誘導[^2]|○|☓|
 |アプリケーションの実装|△|x|
 |セキュリティ|△|○|
-|設定作業の容易さ|○|○|
-|環境の切り分け|△|○|
 
 Dynamic LinksはOSの機能と比較すると、アプリへの誘導をサポートしている分、セキュリティや環境の切り分けで対応が必要になります。
 またインストールしていないユーザへの導線のためにWebサイトを構築する作業が短縮されます。
@@ -88,50 +78,9 @@ iOS14以降ではクリップボードを読み取るとOSが通知を表示す�
 ただし、起動したときのディープリングが優先されるため、iOS14以降ではクリップボードから読み取ったという通知は出ますが、クリップボードの値は利用されません。
 :::
 
-### セキュリティ
-
-カスタムURLスキームとは異なり、アプリケーションとURL（ドメイン）の関連付けが正当であることをOSが検証しているため、他のアプリに情報が意図せず共有されることはありません。
-
-認可が必要な情報を共有する場合は、情報自体をURLに含めず、取得するためのパラメータをURLに含めディープリンクを受け取ったアプリケーション内で（認証したうえで）情報にアクセスします。
-
-#### iOSでの意図しない共有
-
-iOSの場合[^3]、Dynamic Linksには[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)があり、`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。インストール後にアプリを初回起動したとき、クリップボードに値がない場合、Webサイトから情報を取得することがあります。[^4]
-
-そのため、matchTypeが`unique`であるか判定してからURLを処理します。
-この対応で別のユーザがデータを受け取らないようになります。
-
-[^3]: Androidの場合は他のユーザのURLを受け取る事はありません。
-[^4]: クリップボードの情報によっては[iOSで受信する ＞ 6.オプションの警告](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)にあるように、matchTypeが`unique`にならないケースがあります。クリップボード機能を有効にしていても発生します。
-
-### 設定作業の容易さ
-
-「OSの機能を直接利用する」場合でも「Dynamic Linksを利用する」場合でも設定する内容自体は大きく変わりません。
-
-ディープリンクを利用する場合、「サーバ」と「アプリケーション」の設定作業が必要です。
-
-#### サーバ
-
-Dynamic LinksでもOSの機能でもアプリケーションとドメインとの関連付けが必要になります。関連付けのために、アプリと関連付けるドメインに構築するWebサイト内の定められたパスに、関連付けを定義したファイルを配置します。
-
-<!-- textlint-disable ja-technical-writing/sentence-length -->
-`some-app.com`ドメインとアプリを関連付ける場合、サーバ側にも設定ファイルが必要です。
-iOSであれば`https://some-app.com/apple-app-site-association`、Androidであれば`https://some-app.com/.well-known/assetlinks.json`に関連付けを定義したファイルを配置します。
-<!-- textlint-enable ja-technical-writing/sentence-length -->
-
-Firebaseの`page.link` サブドメインを利用する場合は、WebサイトをFirebaseが構築してくれます。そのため、ホストを構築する作業は少なくなります。
-
-#### アプリケーション
-
-アプリの設定ファイルにドメインの紐付けを設定する作業は共通です。
-
-Dynamic Linksを利用する場合のみGoogleServiceの設定ファイルが必要です。（これは他のFirebaseサービスと同じファイルなので、他にもFirebaseのサービスを利用するのであれば、設定ファイルを準備することはコスト増にはなりません）
-
-必要になるものは環境毎（たとえば、開発、外部テスターなどのステージング、本番）のFirebaseの設定ファイルを想定しています。
-
 ### アプリケーションの実装
 
-ディープリンクをReact Nativeで受け取る場合は次のAPIが利用できます。
+ディープリンクをReact Nativeで受け取る場合は次のライブラリが利用できます。
 
  - Dynamic Linksを利用する場合は[React Native Firebase](https://rnfirebase.io/dynamic-links/usage)
  - OSの機能は[React Native Linking](https://reactnative.dev/docs/linking#handling-deep-links)
@@ -145,12 +94,25 @@ Dynamic Linksの「インストール後もURLを読み取る機能」を利用�
 
 OSの機能を直接利用する場合（Dynamic Linksを利用しない場合）、AndroidでLinkingが読み取れないissueの原因の調査と対応するための実装、テストが必要です。
 
-### 環境の切り分け
+### セキュリティ
 
-OSの機能を利用したディープリンクだけであれば、本番のドメインと開発用のドメインを分ける必要はありません。
+カスタムURLスキームとは異なり、アプリケーションとURL（ドメイン）の関連付けが正当であることをOSが検証しているため、他のアプリに情報が意図せず共有されることはありません。
 
-Dynamic Linksではアプリへの誘導をするために、アプリを配信するサイトを指定します。
-指定する配信サイトが本番環境だけではテストが難しいため、配信サイトを本番用と開発用に切り分けます。
+認可が必要な情報を共有する場合は、情報自体をURLに含めず、取得するためのパラメータをURLに含めディープリンクを受け取ったアプリケーション内で（認証したうえで）情報にアクセスします。
+
+#### iOSでの意図しない共有
+
+iOSの場合[^3]、Dynamic Linksには[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)があり、`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。インストール後にアプリを初回起動したとき、クリップボードに値がない場合、Webサイトから情報を取得することがあります。[^4]
+
+そのため、matchTypeが`unique`であるか判定してからURLを処理します。
+この対応で別のユーザがデータを受け取らないようになります。
+
+アプリケーションで利用しているReact Native FirebaseではアプリケーションにmatchTypeが渡されないため、ライブラリに[パッチ](https://www.npmjs.com/package/patch-package)を適用する必要があります。
+
+パッチを適用する対象はiOSのみで、FirebaseのSDKではディープリンクのmatchTypeを返しているため、パッチ適用の難易度自体は高くないと判断し、パッチを適用して回避することにしました。
+
+[^3]: Androidの場合は他のユーザのURLを受け取る事はありません。
+[^4]: クリップボードの情報によっては[iOSで受信する ＞ 6.オプションの警告](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)にあるように、matchTypeが`unique`にならないケースがあります。クリップボード機能を有効にしていても発生します。
 
 ### 用語
 
@@ -164,6 +126,8 @@ Dynamic Linksではアプリへの誘導をするために、アプリを配信�
 ## 決定
 
 - ユーザ間で共有する方法としてディープリンクを採用し、Dynamic Linksを利用する。
-  - アプリインストール後の[アプリへの誘導](#アプリへの誘導)ができる点を評価し、[iOSでの意図しない共有](#iosでの意図しない共有)は対応する。
-  - Android向けにReact Nativeで実装したときのLinkingの不具合はDynamic Linksを利用することで回避する。
-- URLのドメインはFirebaseの`page.link`ドメインを利用し、Webサイトは独自で準備しない。
+  - アプリインストール後の[アプリへの誘導](#アプリへの誘導)ができるため、Webサイトを独自で構築しない。
+  - URLのドメインはFirebaseの`page.link`ドメインを利用し、Webサイトは独自で準備しない。
+- React Native Firebase Dynamic Linksを採用する。
+  - Android向けにReact Native Linkingの不具合を回避する。
+  - [iOSでの意図しない共有](#iosでの意図しない共有)はパッチを適用して回避する。
