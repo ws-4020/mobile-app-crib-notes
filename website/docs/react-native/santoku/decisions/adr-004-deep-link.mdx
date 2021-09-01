@@ -47,7 +47,7 @@ Dynamic LinksとOSの機能を直接利用する場合の違いは以下のと�
 |観点|Dynamic Links|OSの機能|
 |:--|:------------|:------|
 |アプリへの誘導[^2]|○|☓|
-|アプリケーションの実装|△|x|
+|アプリケーションの実装|△|x[^3]|
 |セキュリティ|△|○|
 
 Dynamic LinksはOSの機能と比較すると、アプリへの誘導をサポートしている分、セキュリティの対応が必要になります。
@@ -55,6 +55,7 @@ Dynamic LinksはOSの機能と比較すると、アプリへの誘導をサポ�
 
 [^1]:カスタムURLスキームは自由に設定できるため、作成したURLを別のアプリに乗っ取られるリスクがあります。
 [^2]:アプリへの誘導はアプリのインストールを促し、インストール後もURLを読み取れる機能です。
+[^3]:[AndroidはLikingで読み取れないissue](https://github.com/facebook/react-native/issues/25675)については調査が完了していないためX（対応が難しい）としています。
 
 ### アプリへの誘導
 
@@ -75,7 +76,7 @@ Dynamic Linksを利用する場合は、どちらかのAPIを利用すれば実�
  - React Native Firebaseには[iOSで起動時間が短いと読み取れないissue](https://github.com/invertase/react-native-firebase/issues/2660)があるためReact Native Linking API
  - React Native Linkingには[AndroidはLikingで読み取れないissue](https://github.com/facebook/react-native/issues/25675)があるためReact Native Firebase API
 
-OSの機能を直接利用する場合（Dynamic Linksを利用しない場合）、AndroidでLinkingが読み取れないissueの原因の調査と対応するための実装、テストが必要です。
+OSの機能を直接利用する場合（Dynamic Linksを利用しない場合）、AndroidでLinkingが読み取れないissueの原因の調査が必要です。
 
 ### セキュリティ
 
@@ -83,9 +84,11 @@ OSの機能を直接利用する場合（Dynamic Linksを利用しない場合�
 
 #### iOSでの意図しない共有
 
-iOSの場合[^3]、Dynamic Linksには[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)があり、`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。インストール後にアプリを初回起動したとき、クリップボードに値がない場合、Webサイトから情報を取得することがあります。[^4]
+iOSの場合[^3]、Dynamic Linksには信頼性を表す[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
 
-そのため、matchTypeが`unique`であるか判定してからURLを処理します。
+matchTypeの値が`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。[^4]
+
+そのため、matchTypeの値が`unique`であるか判定してからURLを処理します。
 このように対応することで別のユーザがデータを受け取りません。
 
 アプリケーションで利用しているReact Native FirebaseではアプリケーションにmatchTypeが渡されないため、ライブラリに[パッチ](https://www.npmjs.com/package/patch-package)を適用する必要があります。
@@ -93,7 +96,7 @@ iOSの場合[^3]、Dynamic Linksには[matchType](https://firebase.google.com/do
 パッチを適用する対象はiOSのみで、FirebaseのSDKではディープリンクのmatchTypeを返しているため、パッチ適用の難易度自体は高くないと判断し、パッチを適用して回避することにしました。
 
 [^3]: Androidの場合は他のユーザのURLを受け取る事はありません。
-[^4]: クリップボードの情報によっては[iOSで受信する ＞ 6.オプションの警告](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)にあるように、matchTypeが`unique`にならないケースがあります。クリップボード機能を有効にしていても発生します。
+[^4]: [iOSで受信する ＞ 6.オプションの警告](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)にあるように、matchTypeの値が`unique`にならないケースがあります。クリップボード機能を有効にしていても発生します。
 
 ## 決定
 
