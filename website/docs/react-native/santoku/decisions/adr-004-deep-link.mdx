@@ -28,7 +28,7 @@ Superseded: 廃止
 |用語|意味|備考|
 |:--|:--|:--|
 |ディープリンク|URLを開いた時に対応するモバイルアプリケーションをユーザに利用させる機能||
-|ディープリンクのURL|ユーザをアプリ内の特定のコンテンツに直接誘導するURL。|[Android App Links](https://developer.android.com/training/app-links)|
+|ディープリンクのURL|ユーザをアプリ内の特定のコンテンツに直接誘導するURL|[Android App Linksの説明](https://developer.android.com/training/app-links)|
 |カスタムURLスキーム|`mailto:`のようにスキームに任意のプレフィックスを指定したURL||
 |Dynamic Links|Firebase Dynamic Links|OSの機能を拡張した機能。カスタムURLは対象外|
 
@@ -91,14 +91,12 @@ OSの機能を直接利用する場合（Dynamic Linksを利用しない場合�
 
 カスタムURLスキームとは異なり、アプリケーションとURL（ドメイン）の関連付けが正当であることをOSが検証しているため、他のアプリに情報が意図せず共有されることはありません。
 
-認可が必要な情報を共有する場合は、情報自体をURLに含めず、取得するためのパラメータをURLに含めディープリンクを受け取ったアプリケーション内で（認証したうえで）情報にアクセスします。
-
 #### iOSでの意図しない共有
 
 iOSの場合[^3]、Dynamic Linksには[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)があり、`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。インストール後にアプリを初回起動したとき、クリップボードに値がない場合、Webサイトから情報を取得することがあります。[^4]
 
 そのため、matchTypeが`unique`であるか判定してからURLを処理します。
-この対応で別のユーザがデータを受け取らないようになります。
+このように対応することで別のユーザがデータを受け取りません。
 
 アプリケーションで利用しているReact Native FirebaseではアプリケーションにmatchTypeが渡されないため、ライブラリに[パッチ](https://www.npmjs.com/package/patch-package)を適用する必要があります。
 
