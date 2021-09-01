@@ -92,7 +92,10 @@ matchTypeの値が`unique`でない場合はユーザが意図しないURLをア
 
 アプリケーションで利用しているReact Native FirebaseではアプリケーションにmatchTypeが渡されないため、ライブラリに[パッチ](https://www.npmjs.com/package/patch-package)を適用する必要があります。
 
-パッチを適用する対象はiOSのみで、FirebaseのSDKではディープリンクのmatchTypeを返しているため、パッチ適用の難易度自体は高くないと判断し、パッチを適用して回避することにしました。
+:::note
+パッチを適用する対象はiOSのみです。React Native Firebaseに含まれるNative Moduleは、FirebaseのSDKからmatchTypeを受け取っているため、そのmatchTypeをJavaScript Moduleに渡す機能を追加する必要があります。
+:::
+
 
 [^3]: Androidの場合は他のユーザのURLを受け取る事はありません。
 [^4]: [iOSで受信する ＞ 6.オプションの警告](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)にあるように、matchTypeの値が`unique`にならないケースがあります。これはクリップボード機能を有効にしていても発生します。
