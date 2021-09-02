@@ -39,18 +39,6 @@ SantokuAppではDynamic Linksを利用するため、破線で示す[未イン�
 
 （図の④で）アプリケーションはOSからディープリンクURLを受け取ったあと、Firebase Dynamic LinksのSDKを利用してコンテンツリンクを取得します。
 
-## 用語
-
-ディープリンクのアーキテクチャで使用する用語をまとめています。
-
-|用語|意味|備考|
-|:--|:--|:--|
-|コンテンツリンクパラメータ|コンテンツリンクにあるパラメータです。|パラメータについては[URLの構成](./create-deep-link.mdx#URLの構成)の`link`を確認してください。|
-|ディープリンクで起動|アプリが非アクティブな状態でディープリンクURLを開いたときにアクティブになり、リンクを受け取ることです。||
-|ディープリンクを受信|アプリがアクティブな状態でディープリンクURLを開き、リンクを受け取ることです。||
-|ディープリンクの処理|アプリがディープリンクURLを受け取り、FirebaseSDKを利用してコンテンツリンクをもとに処理することです。||
-|Firebaseアプリ|[Firebaseプロジェクト](https://firebase.google.com/docs/projects/learn-more)で管理されているアプリケーションです。||
-
 ### 利用するライブラリ
 
 React NativeでFirebase Dynamic Linksを利用するために[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用します。
@@ -72,9 +60,9 @@ React Native Firebaseの導入については[React Native Fireabase](https://rn
 ### テスト
 
 ディープリンクを利用した機能のテストをする場合、本番環境とは異なるフォールバックURLからインストールします。
-本番環境ではリリースされたアプリのバージョンになりますが、テスト時には開発中の最新バージョンを利用するためです。
+本番環境ではリリースされたアプリのバージョンを利用しますが、テスト時には開発中のバージョンを利用するためです。
 
-モバイルアプリの設定の切り替えはビルドバリアントの説明に沿った形式でFirebaseアプリとモバイルアプリをひもづけます。
+モバイルアプリの設定の切り替えはビルドバリアントの説明に沿った形式で[Firebaseアプリ](https://firebase.google.com/docs/projects/learn-more)とモバイルアプリをひもづけます。
 
 SantokuAppではテストにはDeployGate、本番環境は公式のStoreで配信します。
 

@@ -4,14 +4,25 @@ title: ディープリンクの処理
 
 ディープリンクをアプリケーションが受信するタイミングは2つあります。ユーザがアプリを起動していない状態でディープリンクから起動した場合とアプリが起動中の場合です。
 
-## アプリケーションの状態とURLの取得
+## 用語
 
-アプリがURLを取得するための[API](https://rnfirebase.io/dynamic-links/usage#listening-for-dynamic-links)は[ディープリンクで起動](#ディープリンクで起動)した場合と[ディープリンクを受信](#ディープリンクを受信)した場合があります。
+ディープリンクの処理で使用する用語をまとめます。
 
-- ディープリンクでアプリがアクティブになった場合は[getInitialLink](https://rnfirebase.io/reference/dynamic-links#getInitialLink)でリンクを取得します。
-- アプリがアクティブなときにディープリンクを開いた場合は[onLink](https://rnfirebase.io/reference/dynamic-links#onLink)でリンクを取得します。
+|用語|意味|備考|
+|:--|:--|:--|
+|コンテンツリンクパラメータ|コンテンツリンクにあるパラメータです。|パラメータについては[URLの構成](./create-deep-link.mdx#URLの構成)の`link`を確認してください。|
+|ディープリンクで起動|アプリが非アクティブな状態でディープリンクURLを開いたときにアクティブになり、リンクを受け取ることです。||
+|ディープリンクを受信|アプリがアクティブな状態でディープリンクURLを開き、リンクを受け取ることです。||
+|ディープリンクの処理|アプリがディープリンクURLを受け取り、FirebaseSDKを利用してコンテンツリンクをもとに処理することです。||
 
-どちらの場合でもURLからリンクを取得し、検査した上で画面遷移の判定をし、リンクのパラメータを処理します。リンクのパラメータは[URLの構成](./create-deep-link.mdx#URLの構成)にあるとおり、スクリーンとパラメータを受け取ります。
+## アプリケーションの状態とディープリンクURLの取得
+
+アプリがディープリンクURLを取得するための[API](https://rnfirebase.io/dynamic-links/usage#listening-for-dynamic-links)は[ディープリンクで起動](#ディープリンクで起動)した場合と[ディープリンクを受信](#ディープリンクを受信)した場合があります。
+
+- ディープリンクによりアプリがアクティブになった場合は[getInitialLink](https://rnfirebase.io/reference/dynamic-links#getInitialLink)でディープリンクURLを取得します。
+- アプリがアクティブなときにディープリンクURLを開いた場合は[onLink](https://rnfirebase.io/reference/dynamic-links#onLink)でディープリンクURLを取得します。
+
+どちらの場合でもディープリンクURLからコンテンツリンクを取得し、画面遷移の判定をして、リンクのパラメータを処理します。リンクのパラメータは[URLの構成](./create-deep-link.mdx#URLの構成)にあるとおり、スクリーンとパラメータを受け取ります。
 
 [Universal Linksの警告](https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app)にもあるようにディーリンクのパラメータは外部入力として構成に合致するか検査し、ユーザに情報を表示するなど安全なアクションにとどめてください。
 

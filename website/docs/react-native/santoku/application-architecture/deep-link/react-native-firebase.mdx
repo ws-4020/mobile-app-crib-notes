@@ -4,19 +4,24 @@ title: React Native Firebaseの対応
 
 React Native Fireabaseで発生する2つの課題に対応します。
 
- - iOSで他のユーザが受け取ったURLを読み取ってしまう可能性がある
- - iOSでReact Native Firebaseがアプリ起動の時間が短いとURLが取得できない
+ - iOSアプリで他のユーザが開いたディープリンクURLを読み取っていないか検証できない
+ - [iOSアプリでアプリ起動の時間が短いとURLが取得できない](https://github.com/invertase/react-native-firebase/issues/2660)
 
 ## 他のユーザが受け取ったURLを読み取る可能性
 
-iOSではユーザの操作でディープリンクを受信したかどうかを判定するために[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)というパラメータを受け取る事ができます。
+iOSではユーザが開いたディープリンクURLを受信したかどうかを判定するために[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
 
-matchTypeが`unique`でないリンクは誤って受信した情報の可能性があるため、リンクをアプリケーション内で破棄します。
+このmatchTypeの値が`unique`でないリンクは誤って受信したディープリンクURLの可能性があるため、アプリケーションで破棄します。
 
-React Native Firebase Dynamic Linksでは、matchTypeをアプリケーションが取得できないため、ライブラリに[パッチを適用](./ios-patch.mdx)して判定できるようにします。
+ただし、React Native Firebase Dynamic Linksでは、matchTypeをJavaScript Moduleに渡していないため、アプリケーションが参照できません。
+そのためReact Native Firebase Dynamic Linksに[patch-package](https://www.npmjs.com/package/patch-package)でパッチを適用し、判定できるようにします。
 
-## アプリ起動の時間が短い場合にURLが取得できない
+## アプリ起動の時間が短い場合にディープリンクURLが取得できない
 
-[iOSでは起動が速いと読み取れないissue](https://github.com/invertase/react-native-firebase/issues/2660)があるため、React Native Linkingを利用します。
+iOSアプリでアプリ起動の時間が短いとURLが取得できないissueがあるため、代替手段としてReact Native Linkingを利用します。
 
-React Native LinkingはリンクではなくディープリンクのURLが取得されるため、[resolveLink](https://rnfirebase.io/reference/dynamic-links#resolveLink)を利用してリンクを取得します。
+React Native LinkingはコンテンツリンクではなくディープリンクのURLが取得されるため、[resolveLink](https://rnfirebase.io/reference/dynamic-links#resolveLink)を利用してコンテンツリンクを取得します。
+
+:::note
+Androidアプリでは[React Native Linkgにissue](https://github.com/facebook/react-native/issues/25675)があるため、iOSのみReact Native Linkingを利用します。
+:::
