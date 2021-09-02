@@ -3,15 +3,17 @@ title: ディープリンク
 sidebar_label: Overview
 ---
 
-ディープリンクを利用することで、情報共有の仕組みをアプリで作り込まずに、ユーザ間でURLを共有することで実現できます。
+ユーザが他のユーザに情報を共有する方法としては次のような方法があります。
 
-情報を共有する方法としては次のようなものがあります。
- 1. 他のユーザから入力する情報を聞き、アプリケーション内で入力する
- 1. URLをSNSやメール、QRコードで開きアプリケーションにわたす（ディープリンク）
+ 1. 他のユーザから入力する情報を教えてもらい、アプリケーション内で入力する
+ 1. SNSやメール、QRコードURLを受け取り、アプリケーションにわたす
+ 1. Push通知を利用してメッセージを特定のユーザに送信してアプリケーションにわたす
+ 1. 上記以外でアプリケーションが作り込んだ情報共有の仕組みを利用する
 
-アプリケーション内で入力するより、URLを開くだけで操作できる方がユーザ体験として好ましい場合にディープリンクを利用します。
+3、4の機能はアプリケーションをインストールしていることとアプリ内のユーザを特定できることが前提となります。
+上記の2のディープリンクを利用することで、情報共有の仕組みをアプリで作り込まずに、ユーザ間でURLを共有することで実現できます。アプリケーション内で入力するより、URLを開くだけで操作できる方がユーザ体験として好ましい場合にディープリンクを利用します。
 
-ディープリンクの実現方式として[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links)を利用した実現方式を記載します。
+ここでは、ディープリンクの実現方式として[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links)を利用した実現方式を記載します。
 
 ## 全体の構成
 
@@ -22,7 +24,7 @@ sidebar_label: Overview
 
 アプリケーションとドメインの関連については[iOS](https://firebase.google.com/docs/dynamic-links/ios/receive)と[Android](https://firebase.google.com/docs/dynamic-links/android/receive)を参照してください。
 
-SantokuAppではDynamic Linksを利用するため、破線で示す未インストール時の[フロー](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)も実現しています。
+SantokuAppではDynamic Linksを利用するため、破線で示す[未インストール時のフロー](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)も実現します。
 
 ![overview](./overview.drawio.png)
 
@@ -32,13 +34,12 @@ SantokuAppではDynamic Linksを利用するため、破線で示す未インス
 
 |用語|意味|備考|
 |:--|:--|:--|
-|ディープリンクのURL|ユーザをアプリ内の特定のコンテンツに直接誘導するURL|[Android App Links](https://developer.android.com/training/app-links)|
-|URL|OSが関連を検証するHTTPS URLです。Dynamic Linksの場合、URLにリンクが含まれる|詳しくは[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links/create-manually)を参照|
-|リンク|アプリに渡されるHTTPS URLです。Dynamic Linksの場合、URLにリンクが含まれる|詳しくは[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links/create-manually)を参照|
-|リンクパラメータ|リンクにあるパラメータ|パラメータについては[URLの構成](./create-deep-link.mdx#URLの構成)の`link`を確認してください|
-|ディープリンクで起動|アプリが非アクティブな状態でディープリンクを開いたときにアクティブになり、リンクを受け取ること||
-|ディープリンクを受信|アプリがアクティブな状態でディープリンクを開き、リンクを受け取ること||
-|ディープリンクの処理|アプリがリンクを受け取り、リンクをもとに処理すること||
+|ディープリンクのURL|ユーザをアプリ内の特定のコンテンツに直接誘導するURLで、OSが検証するURLです。|[Android App Links](https://developer.android.com/training/app-links)|
+|リンク|アプリに渡されるHTTPS URLです。Dynamic Linksの場合、URLにリンクが含まれるます。|詳しくは[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links/create-manually)を参照|
+|リンクパラメータ|リンクにあるパラメータ|パラメータについては[URLの構成](./create-deep-link.mdx#URLの構成)の`link`を確認してください。|
+|ディープリンクで起動|アプリが非アクティブな状態でディープリンクを開いたときにアクティブになり、リンクを受け取ることです。||
+|ディープリンクを受信|アプリがアクティブな状態でディープリンクを開き、リンクを受け取ることです。||
+|ディープリンクの処理|アプリがリンクを受け取り、リンクをもとに処理することです。||
 
 ### 利用するライブラリ
 
@@ -56,7 +57,7 @@ React Native Firebaseの導入については[React Native Fireabase](https://rn
 
 本プロジェクトでは[Dynamic Linksの仕組み](https://firebase.google.com/docs/dynamic-links?hl=ja#how-does-it-work)を利用しWebサイトでは機能を提供しません。
 
-また独自のカスタムドメインではなく`page.link`サブドメインを利用します。
+また独自の[カスタムドメイン](https://firebase.google.com/docs/dynamic-links/custom-domains)ではなく`page.link`サブドメインを利用します。
 
 ### テスト
 
@@ -65,8 +66,5 @@ React Native Firebaseの導入については[React Native Fireabase](https://rn
 ビルドバリアントの説明に沿った形式でFirebaseアプリとモバイルアプリを関連付けます。
 
 SantokuAppではテストにはDeployGate、本番環境は公式のStoreで配信します。
-
-- iOSでは利用するライセンスがことなるため`bundleId`の切り替えが必要です。
-- Androidでは本番と異なる証明書（keystore）を利用します。
 
 ![テストと本番の設定](./test-setting.drawio.png)
