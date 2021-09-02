@@ -29,7 +29,9 @@ sidebar_label: Overview
 ディープリンクURLを開くと、下記の図のようにOSがアプリとディープリンクURL（ドメイン）の関連を検証します。
 アプリケーションとドメインが相互に関連を持っていることが検証できると対象のアプリケーションにディープリンクURLを渡します。
 
-アプリケーションとドメインの関連については[iOS](https://firebase.google.com/docs/dynamic-links/ios/receive)と[Android](https://firebase.google.com/docs/dynamic-links/android/receive)を参照してください。
+アプリケーションとドメインの関連については[iOS](https://firebase.google.com/docs/dynamic-links/ios/receive)[^1]と[Android](https://firebase.google.com/docs/dynamic-links/android/receive)を参照してください。
+
+[^1]:iOSで[関連するドメイン（Associated Domains）](https://help.apple.com/developer-account/#/dev21218dfd6)の機能を利用するためにはADPかADEPライセンスが必要です。
 
 SantokuAppではDynamic Linksを利用するため、破線で示す[未インストール時のフロー](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)も実現します。
 
