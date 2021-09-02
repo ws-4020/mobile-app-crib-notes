@@ -225,37 +225,16 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Decision Records',
-      items: [
-        {
-          type: 'doc',
-          id: 'react-native/santoku/decisions',
-        },
-        {
-          type: 'doc',
-          id: 'react-native/santoku/decisions/adr-001-error-handling',
-        },
-        {
-          type: 'doc',
-          id: 'react-native/santoku/decisions/adr-002-http-api-libraries',
-        },
-        {
-          type: 'doc',
-          id: 'react-native/santoku/decisions/adr-003-http-api-error-handling',
-        },
-        {
-          type: 'doc',
-          id: 'react-native/santoku/decisions/adr-005-get-push-notification-and-deep-links-parameters-at-app-initialization',
-        },
-      ],
-    },
-    {
-      type: 'category',
       label: 'Application Architecture',
       items: [
         {
           type: 'doc',
           id: 'react-native/santoku/application-architecture',
+        },
+        {
+          type: 'category',
+          label: 'アプリのライフサイクル管理',
+          items: ['react-native/santoku/application-architecture/life-cycle-managing/initialization'],
         },
         {
           type: 'category',
@@ -299,6 +278,28 @@ module.exports = {
         {
           type: 'doc',
           id: 'react-native/santoku/development/dependency-management',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Decision Records',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/decisions/adr-001-error-handling',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/decisions/adr-002-http-api-libraries',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/decisions/adr-003-http-api-error-handling',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/decisions/adr-005-get-push-notification-and-deep-links-parameters-at-app-initialization',
         },
       ],
     },
