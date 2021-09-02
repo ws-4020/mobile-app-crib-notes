@@ -33,7 +33,7 @@ iOSではインストール直後にアプリケーションへURLを渡すた�
 
 iOS14以降ではクリップボードを読み取るとOSが通知を表示する仕様となっています。そのため、初めてアプリケーションを起動したときのみ、クリップボードに値が存在していると、「`<アプリ名>にSafariからペースト`」のような通知が表示されます。
 
-[クリップボードを無効にする](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)こともできますが、[iOSの他のユーザのURLを読み取る課題](./ios-patch.mdx#他のユーザが受け取ったURLを読み取る可能性)に対応するため、インストール後もURLを読み取る機能が利用できなくなります。
+[クリップボードを無効にする](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)こともできますが、[iOSの他のユーザのURLを読み取る課題](./react-native-firebase.mdx#他のユーザが受け取ったURLを読み取る可能性)に対応するため、インストール後もURLを読み取る機能が利用できなくなります。
 そのため、このユーザへの通知は制限事項としています。
 
 :::note
