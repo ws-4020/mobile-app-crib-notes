@@ -9,9 +9,9 @@ React Native Fireabaseで発生する2つの課題に対応します。
 
 ## 他のユーザが開いたディープリンクURLを読み取る可能性がある
 
-iOSではユーザが開いたディープリンクURLを受信したかどうかを判定するために[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
+iOSではアプリが受け取ったディープリンクURLをユーザが開いたものかどうかを判定するために[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
 
-このmatchTypeの値が`unique`でないリンクは誤って受信したディープリンクURLの可能性があるため、アプリケーションで破棄します。
+このmatchTypeの値が`unique`でないリンクは誤って受け取ったディープリンクURLの可能性があるため、アプリケーションは破棄します。
 
 ただし、React Native Firebase Dynamic Linksでは、matchTypeをJavaScript Moduleに渡していないため、アプリケーションが参照できません。
 そのためReact Native Firebase Dynamic Linksに[patch-package](https://www.npmjs.com/package/patch-package)でパッチを適用し、判定できるようにします。
