@@ -1,16 +1,13 @@
-import {FirebaseCrashlyticsLogger} from './FirebaseCrashlyticsLogger';
+import {FirebaseCrashlyticsTransport} from './FirebaseCrashlyticsTransport';
 import {DEFAULT_LOGGER_OPTIONS, Logger, LoggerOptions} from './Logger';
-import {SimpleConsoleLogger} from './SimpleConsoleLogger';
 
 function createLogger(options: LoggerOptions): Logger {
-  if (__DEV__) {
-    return new SimpleConsoleLogger({...DEFAULT_LOGGER_OPTIONS, ...options});
-  } else {
-    return new FirebaseCrashlyticsLogger({...DEFAULT_LOGGER_OPTIONS, ...options});
-  }
+  return new Logger(options);
 }
 
-const log = createLogger(DEFAULT_LOGGER_OPTIONS);
+const log = __DEV__
+  ? createLogger(DEFAULT_LOGGER_OPTIONS)
+  : createLogger({...DEFAULT_LOGGER_OPTIONS, transport: new FirebaseCrashlyticsTransport()});
 
 export type {Logger, LoggerOptions};
 export {log, createLogger};
