@@ -20,7 +20,7 @@ Firebase Dynamic LinksはOSの機能（[Universal Link（iOS）](https://develop
 |:-------|:--|
 |ディープリンクURL|ユーザが開くURLで、OSがドメインとの関連を検証するときに利用するURLです。OSの検証が成功するとアプリケーションに渡されます。|
 |コンテンツリンクURL|アプリで表示したいコンテンツをあらわすURLです。（OSの機能だけの場合はディープリンクURLと同じです）Dynamic Linksではアプリと関連付けていないドメインのURLも渡すことができます。|
-|ウェブサイト|ディープリンクURLを開いたときにアプリケーションがインストールされていないときに開くサイト。|
+|ウェブサイト|ディープリンクURLを開いたときにアプリケーションがインストールされていないときに開くサイトです。|
 |[プレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)|iOSでディープリンクURLに対応するアプリケーションがインストールされていない場合に表示されるページです。|
 |フォールバックURL|アプリがインストールされていない場合にユーザがアクセスするURLです。アプリのインストール用のURLなどを設定します。|
 
@@ -53,7 +53,7 @@ React Native Firebaseの導入については[React Native Fireabase](https://rn
 
 ### 環境とビルドの切り替え
 
-テスト時（DevSantokuApp）では本番（SantokuApp）と異なるビルド設定でアプリをビルドします。
+テスト（DevSantokuApp）は本番（SantokuApp）と異なるビルド設定でアプリをビルドします。
 モバイルアプリの設定の切り替えは[ビルドバリアント](../../development/build-configuration.mdx)の説明に沿った形式で[Firebaseアプリ](https://firebase.google.com/docs/projects/learn-more)とモバイルアプリをひもづけます。
 
 ディープリンクを利用する場合、ディープリンクURLとドメインの関連を検証するために証明書の情報や署名鍵の情報をFirebaseに登録する必要があります。
@@ -61,7 +61,7 @@ React Native Firebaseの導入については[React Native Fireabase](https://rn
  - Firebaseプロジェクト毎にディープリンクURLのドメインを設定します。
  - Firebaseアプリ毎に署名情報を設定します。
    - iOSではビルドに利用する証明書のTeamID（ADPまたはADEPライセンス）をFirebaseアプリに登録します。
-   - Androidは署名鍵のSHA256を複数アプリに設定できるため、ビルドで利用する署名鍵のSHA値をアプリに登録します。
+   - Androidは署名鍵のSHA256を１つのFireabseアプリに複数設定できるため、ビルドで利用する複数あっても１つのアプリに登録します。
  - Firebase ConsoleでディープリンクURLのドメインにFireabaseアプリを登録します。
  - モバイルアプリケーションは複数のドメインに関連させられるため、ビルド毎に設定を切り替える必要はありません。
 
