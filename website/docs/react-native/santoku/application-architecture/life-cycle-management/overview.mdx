@@ -102,7 +102,9 @@ JavaScriptとして実装されるアプリの初期化処理は、以下の処�
 
 一方、iOSでは以下のイベントに対応して状態を変えているようです。（[react-native/RCTAppState.mm at v0.63.4 · facebook/react-native](https://github.com/facebook/react-native/blob/v0.63.4/React/CoreModules/RCTAppState.mm)）
 
-- UIApplicationDidBecomeActiveNotification, UIApplicationDidEnterBackgroundNotification, UIApplicationDidFinishLaunchingNotification
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+- `UIApplicationDidBecomeActiveNotification`, `UIApplicationDidEnterBackgroundNotification`, `UIApplicationDidFinishLaunchingNotification`
+  <!-- textlint-enable ja-technical-writing/sentence-length -->
   - [`UIApplication`の`applicationState`](https://developer.apple.com/documentation/uikit/uiapplication/1623003-applicationstate?language=objc)に応じて、`active`, `background`, `unknown`のいずれか
 - UIApplicationWillResignActiveNotification
   - `inactive`
