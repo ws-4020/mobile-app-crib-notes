@@ -98,16 +98,12 @@ JavaScriptとして実装されるアプリの初期化処理は、以下の処�
 
 ## 補足
 
-ドキュメントには見つけられませんでしたが、Androidの場合はアクティビティの`onResume`で`active`にし、`onPause`で`background`にしているようです。（[react-native/AppStateModule.java at v0.63.4 · facebook/react-native (github.com)](https://github.com/facebook/react-native/blob/v0.63.4/ReactAndroid/src/main/java/com/facebook/react/modules/appstate/AppStateModule.java)）
+ドキュメントには見つけられませんでしたが、Androidの場合はアクティビティの`onResume`で`active`にし、`onPause`で`background`にしているようです。（[react-native/AppStateModule.java at v0.63.4 · facebook/react-native](https://github.com/facebook/react-native/blob/v0.63.4/ReactAndroid/src/main/java/com/facebook/react/modules/appstate/AppStateModule.java)）
 
-一方、iOSでは以下のイベントに対応して状態を変えているようです。（[react-native/RCTAppState.mm at v0.63.4 · facebook/react-native (github.com)](https://github.com/facebook/react-native/blob/v0.63.4/React/CoreModules/RCTAppState.mm)）
+一方、iOSでは以下のイベントに対応して状態を変えているようです。（[react-native/RCTAppState.mm at v0.63.4 · facebook/react-native](https://github.com/facebook/react-native/blob/v0.63.4/React/CoreModules/RCTAppState.mm)）
 
-- UIApplicationDidBecomeActiveNotification
-  - [`UIApplication`の`applicationState`](https://developer.apple.com/documentation/uikit/uiapplication/1623003-applicationstate?language=objc)
-- UIApplicationDidEnterBackgroundNotification
-  - [`UIApplication`の`applicationState`](https://developer.apple.com/documentation/uikit/uiapplication/1623003-applicationstate?language=objc)
-- UIApplicationDidFinishLaunchingNotification
-  - [`UIApplication`の`applicationState`](https://developer.apple.com/documentation/uikit/uiapplication/1623003-applicationstate?language=objc)
+- UIApplicationDidBecomeActiveNotification, UIApplicationDidEnterBackgroundNotification, UIApplicationDidFinishLaunchingNotification
+  - [`UIApplication`の`applicationState`](https://developer.apple.com/documentation/uikit/uiapplication/1623003-applicationstate?language=objc)に応じて、`active`, `background`, `unknown`のいずれか
 - UIApplicationWillResignActiveNotification
   - `inactive`
 - UIApplicationWillEnterForegroundNotification
