@@ -19,7 +19,8 @@ Firebase Dynamic LinksはOSの機能（[Universal Link（iOS）](https://develop
 |URLの種類|説明|
 |:-------|:--|
 |ディープリンクURL|ユーザが開くURLで、OSがドメインとの関連を検証するときに利用するURLです。OSの検証が成功するとアプリケーションに渡されます。|
-|コンテンツリンクURL|アプリで表示したいコンテンツをあらわすURLです。（OSの機能だけの場合はディープリンクURLと同じです。）Dynamic Linksではアプリと関連付けていないドメインのURLも渡すことができます。|
+|コンテンツリンクURL|アプリで表示したいコンテンツをあらわすURLです。（OSの機能だけの場合はディープリンクURLと同じです）Dynamic Linksではアプリと関連付けていないドメインのURLも渡すことができます。|
+|ウェブサイト|ディープリンクURLを開いたときにアプリケーションがインストールされていないときに開くサイト。|
 |[プレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)|iOSでディープリンクURLに対応するアプリケーションがインストールされていない場合に表示されるページです。|
 |フォールバックURL|アプリがインストールされていない場合にユーザがアクセスするURLです。アプリのインストール用のURLなどを設定します。|
 
@@ -34,7 +35,7 @@ OSの機能ではディープリンクURLを開くと、下記の図のように
 
 OSの機能では、アプリをインストールしていなければディープリンクURLのウェブサイトを表示します。（ウェブサイトがなければエラー画面が表示されます）
 
-Firebase Dynamic Linksを利用すると、破線で示している未インストールのユーザが[インストールしたあとに、そのままディープリンクURL](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)を利用できます
+Firebase Dynamic Linksを利用すると、破線で示している未インストールのユーザが[インストールしたあとに、そのままディープリンクURL](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)を利用できます。
 
 ### 利用するライブラリ
 
