@@ -63,3 +63,7 @@ ios/PersonalAccount.xcconfig
 # react-native-config
 .env
 ios/tmp.xcconfig
+
+# Firebase
+GoogleService-Info.plist
+google-services.json
