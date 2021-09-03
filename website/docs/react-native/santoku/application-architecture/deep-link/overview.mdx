@@ -3,15 +3,12 @@ title: ディープリンク
 sidebar_label: Overview
 ---
 
-ユーザが他のユーザに情報を共有する方法としては次のような方法があります。
+ディープリンクとは、AndroidやiOSでURLのリンクを開くとアプリが起動するという仕組みのことです
+ディープリンクから起動されたとき、アプリではそのURLを取得することができます。
 
- 1. 他のユーザから入力する情報を教えてもらい、アプリケーション内で入力する
- 1. SNSやメール、QRコードURLを受け取り、アプリケーションにわたす
+例えば、リンクを開いたときにURLに応じた画面を表示するようにしたり、URLのパラメータから受け取った値を初期値として入力欄に設定しておくなど、幅広く活用することができます。これらの場合にディープリンクを利用しない場合、ユーザはアプリを起動してから手順に従って指定の画面に移動する必要があるなど、使いづらいアプリとなってしまうことがあります。
 
-上記の2のディープリンクを利用することで、情報共有の仕組みをアプリで作り込まずに、ユーザ間でURLを共有することで実現できます。
-アプリケーション内で入力するより、URLを開くだけで操作できる方がユーザ体験を向上できるためディープリンクを利用します。
-
-ここでは、ディープリンクの実現方式として[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links)を利用した実現方式を記載します。
+このアプリでもディープリンクを利用するので、[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links)を利用した実現方式を記載します。
 
 ## 全体の構成
 
@@ -19,7 +16,7 @@ sidebar_label: Overview
 
 |URLの種類|説明|
 |:-------|:--|
-|ディープリンクURL|ユーザが開くURLで、OSがドメインとの関連を検証するときに利用するURLです。OSの検証が成功するとアプリケーションに渡されます。|
+|ディープリンクURL|ユーザが開くURLで、OSがドメインとの関連を検証するときに利用するURLです。OSの検証が成功するとアプリケーションに渡されます。パラメータ部分にコンテンツリンクなどを保持します。|
 |コンテンツリンク|アプリで表示したいコンテンツをあらわすURLです。アプリと関連付けていないドメインのURLも渡すことができます。|
 |[プレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)|iOSでディープリンクURLに対応するアプリケーションがインストールされていない場合に表示されるページです。|
 |フォールバックURL|アプリがインストールされていない場合にユーザがアクセスするURLです。アプリのインストール用のURLなどを設定します。|
@@ -49,11 +46,9 @@ React Native Firebaseの導入については[React Native Fireabase](https://rn
 
 ### ディープリンクURLに対応するWebサイト
 
-Dynamic Linksを利用しない場合、ディープリンクは[Android App Links](https://developer.android.com/training/app-links#app-links-vs-deep-links)でも説明されているようにWebサイトとモバイルアプリで同等の機能を提供することが必要です。
+アプリケーションがインストールされていない場合、ディープリンクのURLを開くとブラウザでURLが開かれます。このとき、ディープリンクのURLに対応するWebサイトが存在していないと、ユーザはコンテンツへの導線を失ってしまいます。インストールしていないユーザの導線を確保するために、ディープリンクを利用する場合はWebサイトも準備することが望ましいです。
 
-本プロジェクトでは[Dynamic Linksの仕組み](https://firebase.google.com/docs/dynamic-links#how-does-it-work)を利用しWebサイトではコンテンツリンクに対応するをコンテンツを提供しません。
-
-またディーリンクURLで利用するドメインは独自の[カスタムドメイン](https://firebase.google.com/docs/dynamic-links/custom-domains)ではなく`page.link`サブドメインを利用します。
+本プロジェクトでは、WebサイトとしてDynamic Linksがデフォルトで提供する[アプリのプレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)を利用します。プレビューページではURLに対応するコンテンツ自体を表示することはできませんが、ストアなどに誘導することができるため、ユーザが導線を失うことにはなりません。
 
 ### テスト
 
