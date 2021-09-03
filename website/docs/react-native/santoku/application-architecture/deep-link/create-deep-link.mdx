@@ -7,15 +7,15 @@ title: ディープリンクの作成
 ### ディープリンクURLの構成
 
 ディープリンクURLのドメインには、アプリケーションに関連付けたドメインを使用する必要があります。
-またコンテンツリンク（`link`）はURL形式で、以下のように構成を決めて妥当なURLかどうかを検証できるようにします。
+またコンテンツリンクURL（`link`）は、以下のように構成を決めて信頼できるURLかどうかを検証します。
 
 本アプリケーションではFireabseの`page.link`ドメインを利用するためディープリンクURLの構成は以下のとおりです。
 
-|項目|APIのパラメータ|値|備考|
+|項目|APIのパラメータ|値|本番の設定例|
 |:-------|:-|:--|:---|
 |ディープリンクURLのプレフィックス|domainUriPrefix|アプリケーションに関連付けたドメイン|`https://santokuapp.page.link/`|
-|コンテンツリンク|link|screenで画面、keyとvalueでパラメータを指定|`https://jp.fintan.mobile.santokuapp/`|
-|iOSのフォールバックURL|ios.fallback|iOSアプリをインストールするときのURL|App StoreやTestFlight、DeployGate|
+|コンテンツリンクURL|link|`screen`で画面、`key`と`value`でパラメータを指定|`https://jp.fintan.mobile.santokuapp/${screen}?{key}=${value}`|
+|iOSのフォールバックURL|ios.fallback|iOSアプリをインストールするときのURL||
 |バンドルID|ios.bundleId|アプリケーションのbundleId|`jp.fintan.mobile.SantokuApp`|
-|androidのフォールバックURL|android.fallback|AndroidアプリをインストールするときのURL|Google Play、DeployGate|
-|パッケージ名|android.package_name|Androidのパッケージ名|`jp.fintan.mobile.santokuapp`|
+|androidのフォールバックURL|android.fallback|AndroidアプリをインストールするときのURL||
+|パッケージ名|android.package_name|AndroidのアプリケーションID|`jp.fintan.mobile.SantokuApp`|

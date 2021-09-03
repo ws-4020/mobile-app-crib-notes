@@ -16,12 +16,14 @@ sidebar_label: Overview
 
 |URLの種類|説明|
 |:-------|:--|
-|ディープリンクURL|ユーザが開くURLで、OSがドメインとの関連を検証するときに利用するURLです。OSの検証が成功するとアプリケーションに渡されます。パラメータ部分にコンテンツリンクなどを保持します。|
-|コンテンツリンク|アプリで表示したいコンテンツをあらわすURLです。アプリと関連付けていないドメインのURLも渡すことができます。|
+|ディープリンクURL|ユーザが開くURLで、OSがドメインとの関連を検証するときに利用するURLです。OSの検証が成功するとアプリケーションに渡されます。パラメータ部分にコンテンツリンクURLやフォールバックURLなどを保持します。|
+|コンテンツリンクURL|アプリで表示したいコンテンツをあらわすURLです。アプリと関連付けていないドメインのURLも渡すことができます。|
 |[プレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)|iOSでディープリンクURLに対応するアプリケーションがインストールされていない場合に表示されるページです。|
 |フォールバックURL|アプリがインストールされていない場合にユーザがアクセスするURLです。アプリのインストール用のURLなどを設定します。|
 
 ディープリンクの全体の構成を以下に示します。
+
+破線以外の部分はDynamic Linksの機能ではなくOSが提供する[Universal Link（iOS）]()や[App Links（Android）]()の機能です。まずはこのOSの機能について説明します。
 
 ディープリンクURLを開くと、下記の図のようにOSがアプリとディープリンクURL（ドメイン）の関連を検証します。
 アプリケーションとドメインが相互に関連を持っていることが検証できると対象のアプリケーションにディープリンクURLを渡します。
@@ -34,13 +36,13 @@ SantokuAppではDynamic Linksを利用するため、破線で示す[未イン�
 
 ![overview](./overview.drawio.png)
 
-（図の④で）アプリケーションはOSからディープリンクURLを受け取ったあと、Firebase Dynamic LinksのSDKを利用してコンテンツリンクを取得します。
+（図の④で）アプリケーションはOSからディープリンクURLを受け取ったあと、Firebase Dynamic LinksのSDKを利用してコンテンツリンクURLを取得します。
 
 ### 利用するライブラリ
 
 React NativeでFirebase Dynamic Linksを利用するために[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用します。
 
-React Native Linkingを利用してディープリンクURLを受け取ることはできますが、ディープリンクURLからコンテンツリンクを取得する機能がありません。また、未インストール時のフローに対応できません。
+React Native Linkingを利用してディープリンクURLを受け取ることはできますが、ディープリンクURLからコンテンツリンクURLを取得する機能がありません。また、未インストール時のフローに対応できません。
 
 React Native Firebaseの導入については[React Native Fireabase](https://rnfirebase.io/)と[Dynamic Link](https://rnfirebase.io/dynamic-links/usage)を参照してください。
 
