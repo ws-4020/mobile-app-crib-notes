@@ -1,4 +1,4 @@
-import {LogLevel, LogMessageSupplier} from './Logger';
+import {LogLevel} from './Logger';
 
 interface Transport {
   log: LogMethod;
@@ -10,11 +10,11 @@ interface Transport {
 }
 
 interface LogMethod {
-  (level: LogLevel, message: string | LogMessageSupplier, errorCode: string): Transport;
+  (level: LogLevel, message: string, errorCode: string): Transport;
 }
 
 interface LeveledLogMethod {
-  (message: string | LogMessageSupplier, errorCode: string): Transport;
+  (message: string, errorCode: string): Transport;
 }
 
 export type {Transport};

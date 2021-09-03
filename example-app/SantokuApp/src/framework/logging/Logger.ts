@@ -20,39 +20,46 @@ class Logger {
 
   trace(message: string | LogMessageSupplier, errorCode: string): Logger {
     if (this.isLevelEnabled('trace')) {
-      this.transport.trace(message, errorCode);
+      this.transport.trace(resolveMessage(message), errorCode);
     }
     return this;
   }
 
   debug(message: string | LogMessageSupplier, errorCode: string): Logger {
     if (this.isLevelEnabled('debug')) {
-      this.transport.debug(message, errorCode);
+      this.transport.debug(resolveMessage(message), errorCode);
     }
     return this;
   }
 
   info(message: string | LogMessageSupplier, errorCode: string): Logger {
     if (this.isLevelEnabled('info')) {
-      this.transport.info(message, errorCode);
+      this.transport.info(resolveMessage(message), errorCode);
     }
     return this;
   }
 
   warn(message: string | LogMessageSupplier, errorCode: string): Logger {
     if (this.isLevelEnabled('warn')) {
-      this.transport.warn(message, errorCode);
+      this.transport.warn(resolveMessage(message), errorCode);
     }
     return this;
   }
 
   error(message: string | LogMessageSupplier, errorCode: string): Logger {
     if (this.isLevelEnabled('error')) {
-      this.transport.error(message, errorCode);
+      this.transport.error(resolveMessage(message), errorCode);
     }
     return this;
   }
 }
+
+const resolveMessage = (message: string | LogMessageSupplier) => {
+  if (typeof message === 'string') {
+    return message;
+  }
+  return message();
+};
 
 const LogLevelSet = {
   trace: -1,
