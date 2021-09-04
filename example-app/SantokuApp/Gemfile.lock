@@ -43,11 +43,11 @@ GEM
       public_suffix
       typhoeus (~> 1.0)
     cocoapods-deintegrate (1.0.5)
-    cocoapods-downloader (1.4.0)
+    cocoapods-downloader (1.5.0)
     cocoapods-plugins (1.0.0)
       nap
     cocoapods-search (1.0.1)
-    cocoapods-trunk (1.5.0)
+    cocoapods-trunk (1.6.0)
       nap (>= 0.8, < 2.0)
       netrc (~> 0.11)
     cocoapods-try (1.2.0)
@@ -56,7 +56,7 @@ GEM
     escape (0.0.4)
     ethon (0.14.0)
       ffi (>= 1.15.0)
-    ffi (1.15.3)
+    ffi (1.15.4)
     fourflusher (2.3.1)
     fuzzy_match (2.0.4)
     gh_inspector (1.1.3)
