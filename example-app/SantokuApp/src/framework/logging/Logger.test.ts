@@ -1,5 +1,19 @@
 import {ConsoleTransport} from './ConsoleTransport';
+import {FirebaseCrashlyticsTransport} from './FirebaseCrashlyticsTransport';
 import {Logger} from './Logger';
+
+describe('Logger constructor', () => {
+  test('ログオプションを指定しなかった場合の検証', () => {
+    const log = new Logger();
+    expect(log['level']).toEqual(1);
+    expect(log['transport']).toBeInstanceOf(ConsoleTransport);
+  });
+  test('ログオプションを指定した場合の検証', () => {
+    const log = new Logger({level: 'error', transport: new FirebaseCrashlyticsTransport()});
+    expect(log['level']).toEqual(3);
+    expect(log['transport']).toBeInstanceOf(FirebaseCrashlyticsTransport);
+  });
+});
 
 describe('Logger isLevelEnabled', () => {
   const transport = new ConsoleTransport();
