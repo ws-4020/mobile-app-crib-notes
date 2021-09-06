@@ -51,18 +51,21 @@ React Native Firebaseの導入については[React Native Fireabase](https://rn
 
 本プロジェクトでは、ウェブサイトとしてDynamic Linksがデフォルトで提供するウェブサイトと[アプリのプレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)を利用します。ウェブサイトやプレビューページではURLに対応するコンテンツ自体は表示できませんが、ストアなどに誘導できるため、ユーザが導線を失うことにはなりません。
 
-### 環境とビルドの切り替え
+### 環境の切り替え
 
-テスト（DevSantokuApp）は本番（SantokuApp）と異なるビルド設定でアプリをビルドします。
-モバイルアプリの設定の切り替えは[ビルドバリアント](../../development/build-configuration.mdx)の説明に沿った形式で[Firebaseアプリ](https://firebase.google.com/docs/projects/learn-more)とモバイルアプリをひもづけます。
+SantokuAppでは2つのFirebaseプロジェクト（DevSantokuAppとSantokuApp）を使用するため、Firebaseプロジェクトに応じた環境を構築します。
 
-ディープリンクを利用する場合、ディープリンクURLとドメインの関連を検証するために証明書の情報や署名鍵の情報をFirebaseに登録する必要があります。
-
- - Firebaseプロジェクト毎にディープリンクURLのドメインを設定します。
- - Firebaseアプリ毎に署名情報を設定します。
-   - iOSではビルドに利用する証明書のTeamID（ADPまたはADEPライセンス）をFirebaseアプリに登録します。
-   - Androidは署名鍵のSHA256を1つのFireabseアプリに複数設定できるため、ビルドで利用する複数あっても1つのアプリに登録します。
- - Firebase ConsoleでディープリンクURLのドメインにFireabaseアプリを登録します。
- - モバイルアプリケーションは複数のドメインに関連させられるため、ビルド毎に設定を切り替える必要はありません。
+1. Firebaseプロジェクト毎にディープリンクURLで利用するURLプレフィックス（ドメイン）を[Fireabse Console上](https://console.firebase.google.com/u/4/project/_/durablelinks/links)で追加します。
+1. [ビルドバリアント](../../development/build-configuration.mdx)にそってFirebaseアプリを作成します。
+    - AndroidはアプリケーションID毎にFirebaseアプリを作成してください。
+    - iOSはBundle Identifierとライセンスの組み合わせ毎にFirebaseアプリを作成してください。
+1. FirebaseアプリにOSが検証するための設定値を追加します。
+    - iOSではADPまたはADEPライセンスのTeamIDを設定します。
+    - Androidは署名鍵のSHA256を設定します。これは複数設定できます。
+1. 作成したFirebaseアプリケーション毎にFirebase Console上でディープリンクURLを作成し、アプリケーションを指定します。
+1. ビルド設定にあったFirebaseアプリの設定ファイル（google-service.json、GoogleService-Info.plist）を取得してモバイルアプリプロジェクトに設定します。
+1. モバイルアプリケーションの設定でドメインと関連付ける設定をします。
+    - iOSではXcode上でCapabilitiesからAssociated Domainsに追加して[ドメインを関連付けます](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#open-dynamic-links-in-your-app)。
+    - Androidではアプリマニフェストに[設定を追加してドメインを関連付けます](https://developer.android.com/training/app-links/verify-site-associations?hl=ja#request-verify)。
 
 ![テストと本番の設定](./test-setting.drawio.png)
