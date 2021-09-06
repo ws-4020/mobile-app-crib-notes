@@ -9,6 +9,7 @@ title: ディープリンクの処理
 React Native Firebase Dynamic LinksではディープリンクURLを取得するための[API](https://rnfirebase.io/dynamic-links/usage#listening-for-dynamic-links)は次の2つがあります。
 
 - [コールドスタート、ウォームスタート](../life-cycle-management/overview.mdx#コールドスタート、ウォームスタート)では[getInitialLink](https://rnfirebase.io/reference/dynamic-links#getInitialLink)でディープリンクURLを取得します。
+  - iOSでは[不具合に対応するため](./react-native-firebase.mdx)にReact Native Linkingを利用します。
 - [ホットスタート](../life-cycle-management/overview.mdx#ホットスタート)では[onLink](https://rnfirebase.io/reference/dynamic-links#onLink)でディープリンクURLを取得します。
 
 どちらの場合でもディープリンクURLからコンテンツリンクURLを取得し、画面遷移を判定して、コンテンツリンクURLのパラメータを処理します。コンテンツリンクURLのパラメータは[ディープリンクURLの構成](./create-deep-link.mdx#ディープリンクURLの構成)にあるとおり、スクリーンとパラメータを受け取ります。
