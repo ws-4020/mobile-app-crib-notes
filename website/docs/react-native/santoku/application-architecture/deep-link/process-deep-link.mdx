@@ -8,8 +8,8 @@ title: ディープリンクの処理
 
 React Native Firebase Dynamic LinksではディープリンクURLを取得するための[API](https://rnfirebase.io/dynamic-links/usage#listening-for-dynamic-links)は次の2つがあります。
 
-- ディープリンクによりアプリがアクティブになった場合は[getInitialLink](https://rnfirebase.io/reference/dynamic-links#getInitialLink)でディープリンクURLを取得します。
-- アプリがアクティブなときにディープリンクURLを開いた場合は[onLink](https://rnfirebase.io/reference/dynamic-links#onLink)でディープリンクURLを取得します。
+- [コールドスタート、ウォームスタート](../life-cycle-management/overview.mdx#コールドスタート、ウォームスタート)では[getInitialLink](https://rnfirebase.io/reference/dynamic-links#getInitialLink)でディープリンクURLを取得します。
+- [ホットスタート](../life-cycle-management/overview.mdx#ホットスタート)では[onLink](https://rnfirebase.io/reference/dynamic-links#onLink)でディープリンクURLを取得します。
 
 どちらの場合でもディープリンクURLからコンテンツリンクURLを取得し、画面遷移を判定して、コンテンツリンクURLのパラメータを処理します。コンテンツリンクURLのパラメータは[ディープリンクURLの構成](./create-deep-link.mdx#ディープリンクURLの構成)にあるとおり、スクリーンとパラメータを受け取ります。
 
@@ -33,7 +33,8 @@ iOSではインストール直後にアプリケーションへURLを渡すた�
 
 iOS14以降ではクリップボードを読み取るとOSが通知を表示する仕様となっています。そのため、初めてアプリケーションを起動したときのみ、クリップボードに値が存在していると、「`<アプリ名>にSafariからペースト`」のような通知が表示されます。
 
-設定により[クリップボードを無効にする](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)こともできますが、Dynamic Linksをするため[^1]、インストール後にそのまま起動してディープリンクURLを読み取る機能が利用できません。
+設定により[クリップボードを無効にする](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)こともできますが、インストール後にそのまま起動してディープリンクURLを読み取る機能が利用できません。クリップボードを無効にする場合の警告にあるように`matchType`の値が`week`程度になり、SantokuAppでは`matchType`が`unique`でないディープリンクURLは利用しないからです。[^1]
+
 そのため、このユーザへの通知は制限事項としています。
 
 [^1]:詳しくは[こちら](./react-native-firebase.mdx#他のユーザが開いたディープリンクURLを読み取る可能性がある)を参照してください。
