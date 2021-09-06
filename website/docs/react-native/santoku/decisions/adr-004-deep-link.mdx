@@ -28,9 +28,12 @@ Superseded: 廃止
 |用語|意味|備考|
 |:--|:--|:--|
 |ディープリンク|URLに紐付いたモバイルアプリケーションを起動する機能||
-|ディープリンクのURL|ユーザをアプリ内の特定のコンテンツに直接誘導するURL|[Android App Linksの説明](https://developer.android.com/training/app-links)|
+|ディープリンクURL|ユーザが開くURLで、OSがドメインとの関連を検証するときに利用するURLです。OSの検証が成功するとアプリケーションに渡されます。|Dynamic Linksではパラメータ部分にコンテンツリンクURLなどを保持します。|
+|コンテンツリンクURL|アプリで表示したいコンテンツをあらわすURLです。（OSの機能だけの場合はディープリンクURLと同じです）|Dynamic Linksではアプリと関連付けていないドメインのURLも渡すことができます。|
 |カスタムURLスキーム|`mailto:`のようにスキームに任意のプレフィックスを指定したURL||
-|Dynamic Links|Firebase Dynamic Links|OSの機能を拡張した機能。カスタムURLは対象外|
+|App Links|AndroidがOSの機能としてサポートしているディープリンク|[Android App Links](https://developer.android.com/studio/write/app-link-indexing)|
+|Universal Links|iOSのがOSの機能としてサポートしているディープリンク|[iOS Universal Link](https://developer.apple.com/ios/universal-links/)|
+|Dynamic Links|App Links、Universal Linksを拡張したFirebaseの機能|カスタムURLは対象外|
 
 ## 議論
 
@@ -46,35 +49,36 @@ Dynamic LinksとOSの機能を直接利用する場合の違いは以下のと�
 
 |観点|Dynamic Links|OSの機能|
 |:--|:------------|:------|
-|アプリへの誘導|○|☓[^2]|
+|アプリへの導線|○|☓[^2]|
 |アプリケーションの実装|△|☓[^3]|
 |セキュリティ|△|○|
 
-Dynamic LinksはOSの機能と比較すると、アプリへの誘導をサポートしている分、セキュリティの対応が必要になります。
-またインストールしていないユーザへの導線のためにWebサイトを構築する作業が短縮されます。
+Dynamic LinksはOSの機能と比較すると、アプリへの導線をサポートしている分、セキュリティの対応が必要になります。
+またインストールしていないユーザへの導線のためにウェブサイトを構築する作業が短縮されます。
 
 [^1]:カスタムURLスキームは自由に設定できるため、作成したURLを別のアプリに乗っ取られるリスクがあります。
-[^2]:アプリへの誘導はアプリのインストールを促し、インストール後もURLを読み取れる機能です。
+[^2]:アプリへの導線はアプリのインストールを促し、インストール後もURLを読み取れる機能です。
 [^3]:[AndroidはLikingで読み取れないissue](https://github.com/facebook/react-native/issues/25675)については調査が完了していないためX（対応が難しい）としています。
 
-### アプリへの誘導
+### アプリへの導線
 
-OSの機能をそのまま利用すると、URLに関連付けられたアプリケーションがインストールされていない場合は、Webサイトと判断されてブラウザでアクセスしてしまいます。
-そのため、アプリケーションをインストールしていないユーザ向けに、導線となるWebサイトも用意する必要があります。
+OSの機能をそのまま利用すると、URLに関連付けられたアプリケーションがインストールされていない場合は、ウェブサイトと判断されてブラウザでアクセスしてしまいます。
+そのため、アプリケーションをインストールしていないユーザ向けに、導線となるウェブサイトも用意する必要があります。
 
-Dynamic Linksでは、未インストールのユーザに対する導線が簡単に用意できるので、Webサイトを持たないサービスでも簡単にディープリンクを導入できます。
+Dynamic Linksでは、未インストールのユーザに対する導線が簡単に用意できるので、ウェブサイトを持たないサービスでも簡単にディープリンクを導入できます。
 
 ### アプリケーションの実装
 
-ディープリンクのURLをReact Nativeで受け取る場合は次のライブラリが利用できます。
+ディープリンクURLをReact Nativeで受け取る場合は次のライブラリが利用できます。
 
  - Dynamic Linksを利用する場合は[React Native Firebase](https://rnfirebase.io/dynamic-links/usage)と[React Native Linking](https://reactnative.dev/docs/linking#handling-deep-links)（併用可能）
  - OSの機能はReact Native Linking
 
 Dynamic Linksを利用する場合は、どちらかのAPIを利用すれば実装できます。ただし、下記の点を考慮しアプリ起動時にはPlatformを判定して呼び分けます。
 
- - React Native Firebaseには[iOSで起動時間が短いと読み取れないissue](https://github.com/invertase/react-native-firebase/issues/2660)があるためReact Native Linking API
- - React Native Linkingには[AndroidはLikingで読み取れないissue](https://github.com/facebook/react-native/issues/25675)があるためReact Native Firebase API
+ - React Native Firebaseには[iOSで起動時間が短いと読み取れないissue](https://github.com/invertase/react-native-firebase/issues/2660)があるためReact Native Linking APIを利用してディープリンクURLを取得します。
+   - ディープリンクURLに含まれるコンテンツリンクURLを取得するために[resolveLink](https://rnfirebase.io/reference/dynamic-links#resolveLink)を利用します。
+ - React Native Linkingには[AndroidはLikingで読み取れないissue](https://github.com/facebook/react-native/issues/25675)があるためReact Native Firebase APIを利用してコンテンツリンクURLを取得します。
 
 OSの機能を直接利用する場合（Dynamic Linksを利用しない場合）、AndroidでLinkingが読み取れないissueの原因の調査が必要です。
 
