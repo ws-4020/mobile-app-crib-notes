@@ -1,9 +1,5 @@
 import {FirebaseCrashlyticsTransport} from './FirebaseCrashlyticsTransport';
-import {DEFAULT_LOGGER_OPTIONS, Logger, LoggerOptions} from './Logger';
-
-function createLogger(options: LoggerOptions): Logger {
-  return new Logger(options);
-}
+import {Logger, createLogger, DEFAULT_LOGGER_OPTIONS, LoggerOptions} from './Logger';
 
 const log = __DEV__
   ? createLogger(DEFAULT_LOGGER_OPTIONS)

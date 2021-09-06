@@ -159,5 +159,13 @@ const DEFAULT_LOGGER_OPTIONS: StrictLoggerOptions = {
   transport: new ConsoleTransport(),
 };
 
+/**
+ * ロガーを生成します。
+ * @param options ロガーオプション
+ */
+function createLogger(options: LoggerOptions): Logger {
+  return new Logger(options);
+}
+
 export type {LogLevel, LoggerOptions, StrictLoggerOptions, LogMessageSupplier};
-export {Logger, LogLevelSet, DEFAULT_LOGGER_OPTIONS};
+export {Logger, createLogger, LogLevelSet, DEFAULT_LOGGER_OPTIONS};
