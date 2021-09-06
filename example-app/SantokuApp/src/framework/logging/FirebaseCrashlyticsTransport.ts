@@ -12,68 +12,56 @@ class FirebaseCrashlyticsTransport implements Transport {
    * @param level ログレベル
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
-   * @returns トランスポートインスタンス
    * @see {@link https://rnfirebase.io/crashlytics/usage#usage}
    * @see {@link FirebaseCrashlyticsTypes.Module.recordError}
    */
-  log(level: LogLevel, message: string, errorCode: string): Transport {
+  log(level: LogLevel, message: string, errorCode: string) {
     crashlytics().recordError(new Error(`[${level}] [${errorCode}] ${message}`), errorCode);
-    return this;
   }
 
   /**
    * Firebase Crashlyticsにtraceログを出力します。
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
-   * @returns トランスポートインスタンス
    */
-  trace(message: string, errorCode: string): Transport {
+  trace(message: string, errorCode: string) {
     this.log('trace', message, errorCode);
-    return this;
   }
 
   /**
    * Firebase Crashlyticsにdebugログを出力します。
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
-   * @returns トランスポートインスタンス
    */
-  debug(message: string, errorCode: string): Transport {
+  debug(message: string, errorCode: string) {
     this.log('debug', message, errorCode);
-    return this;
   }
 
   /**
    * Firebase Crashlyticsにinfoログを出力します。
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
-   * @returns トランスポートインスタンス
    */
-  info(message: string, errorCode: string): Transport {
+  info(message: string, errorCode: string) {
     this.log('info', message, errorCode);
-    return this;
   }
 
   /**
    * Firebase Crashlyticsにwarnログを出力します。
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
-   * @returns トランスポートインスタンス
    */
-  warn(message: string, errorCode: string): Transport {
+  warn(message: string, errorCode: string) {
     this.log('warn', message, errorCode);
-    return this;
   }
 
   /**
    * Firebase Crashlyticsにerrorログを出力します。
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
-   * @returns トランスポートインスタンス
    */
-  error(message: string, errorCode: string): Transport {
+  error(message: string, errorCode: string) {
     this.log('error', message, errorCode);
-    return this;
   }
 }
 

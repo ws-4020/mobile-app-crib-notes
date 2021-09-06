@@ -25,67 +25,55 @@ class ConsoleTransport implements Transport {
    * @param level ログレベル
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
-   * @returns トランスポートインスタンス
    */
-  log(level: LogLevel, message: string, errorCode: string): Transport {
+  log(level: LogLevel, message: string, errorCode: string) {
     const log = ConsoleMethod.for(level);
     log(`[${level}] [${errorCode}] ${message}`);
-    return this;
   }
 
   /**
    * {@link console.trace}にログを出力します。
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
-   * @returns トランスポートインスタンス
    */
-  trace(message: string, errorCode: string): Transport {
+  trace(message: string, errorCode: string) {
     this.log('trace', message, errorCode);
-    return this;
   }
 
   /**
    * {@link console.debug}にログを出力します。
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
-   * @returns トランスポートインスタンス
    */
-  debug(message: string, errorCode: string): Transport {
+  debug(message: string, errorCode: string) {
     this.log('debug', message, errorCode);
-    return this;
   }
 
   /**
    * {@link console.info}にログを出力します。
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
-   * @returns トランスポートインスタンス
    */
-  info(message: string, errorCode: string): Transport {
+  info(message: string, errorCode: string) {
     this.log('info', message, errorCode);
-    return this;
   }
 
   /**
    * {@link console.warn}にログを出力します。
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
-   * @returns トランスポートインスタンス
    */
-  warn(message: string, errorCode: string): Transport {
+  warn(message: string, errorCode: string) {
     this.log('warn', message, errorCode);
-    return this;
   }
 
   /**
    * {@link console.error}にログを出力します。
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
-   * @returns トランスポートインスタンス
    */
-  error(message: string, errorCode: string): Transport {
+  error(message: string, errorCode: string) {
     this.log('error', message, errorCode);
-    return this;
   }
 }
 

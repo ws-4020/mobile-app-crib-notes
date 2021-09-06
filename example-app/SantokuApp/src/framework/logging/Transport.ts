@@ -10,11 +10,11 @@ interface Transport {
 }
 
 interface TransportMethod {
-  (level: LogLevel, message: string, errorCode: string): Transport;
+  (level: LogLevel, message: string, errorCode: string): void;
 }
 
 interface LeveledTransportMethod {
-  (message: string, errorCode: string): Transport;
+  (message: string, errorCode: string): void;
 }
 
 export type {Transport};
