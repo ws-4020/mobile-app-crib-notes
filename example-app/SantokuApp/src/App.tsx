@@ -1,4 +1,3 @@
-import crashlytics from '@react-native-firebase/crashlytics';
 import {NavigationContainer} from '@react-navigation/native';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {RootStackNav} from 'navigation';
@@ -11,7 +10,7 @@ export const App = () => {
   }
 
   // Firebase Crashlyticsの初期化
-  crashlytics();
+  require('@react-native-firebase/crashlytics');
 
   return (
     <NavigationContainer>

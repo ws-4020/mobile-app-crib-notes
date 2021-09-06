@@ -21,31 +21,51 @@ describe('Logger isLevelEnabled', () => {
   test('ログレベルをtraceにした場合の検証', () => {
     const log = new Logger({level: 'trace', transport});
     logAllMethod(log);
-    expectLogMethodsToHaveBeenCalledTimes({trace: 1, debug: 1, info: 1, warn: 1, error: 1});
+    expect(mockTrace).toHaveBeenCalledTimes(1);
+    expect(mockDebug).toHaveBeenCalledTimes(1);
+    expect(mockInfo).toHaveBeenCalledTimes(1);
+    expect(mockWarn).toHaveBeenCalledTimes(1);
+    expect(mockError).toHaveBeenCalledTimes(1);
   });
 
   test('ログレベルをdebugにした場合の検証', () => {
     const log = new Logger({level: 'debug', transport});
     logAllMethod(log);
-    expectLogMethodsToHaveBeenCalledTimes({trace: 0, debug: 1, info: 1, warn: 1, error: 1});
+    expect(mockTrace).toHaveBeenCalledTimes(0);
+    expect(mockDebug).toHaveBeenCalledTimes(1);
+    expect(mockInfo).toHaveBeenCalledTimes(1);
+    expect(mockWarn).toHaveBeenCalledTimes(1);
+    expect(mockError).toHaveBeenCalledTimes(1);
   });
 
   test('ログレベルをinfoにした場合の検証', () => {
     const log = new Logger({level: 'info', transport});
     logAllMethod(log);
-    expectLogMethodsToHaveBeenCalledTimes({trace: 0, debug: 0, info: 1, warn: 1, error: 1});
+    expect(mockTrace).toHaveBeenCalledTimes(0);
+    expect(mockDebug).toHaveBeenCalledTimes(0);
+    expect(mockInfo).toHaveBeenCalledTimes(1);
+    expect(mockWarn).toHaveBeenCalledTimes(1);
+    expect(mockError).toHaveBeenCalledTimes(1);
   });
 
   test('ログレベルをwarnにした場合の検証', () => {
     const log = new Logger({level: 'warn', transport});
     logAllMethod(log);
-    expectLogMethodsToHaveBeenCalledTimes({trace: 0, debug: 0, info: 0, warn: 1, error: 1});
+    expect(mockTrace).toHaveBeenCalledTimes(0);
+    expect(mockDebug).toHaveBeenCalledTimes(0);
+    expect(mockInfo).toHaveBeenCalledTimes(0);
+    expect(mockWarn).toHaveBeenCalledTimes(1);
+    expect(mockError).toHaveBeenCalledTimes(1);
   });
 
   test('ログレベルをerrorにした場合の検証', () => {
     const log = new Logger({level: 'error', transport});
     logAllMethod(log);
-    expectLogMethodsToHaveBeenCalledTimes({trace: 0, debug: 0, info: 0, warn: 0, error: 1});
+    expect(mockTrace).toHaveBeenCalledTimes(0);
+    expect(mockDebug).toHaveBeenCalledTimes(0);
+    expect(mockInfo).toHaveBeenCalledTimes(0);
+    expect(mockWarn).toHaveBeenCalledTimes(0);
+    expect(mockError).toHaveBeenCalledTimes(1);
   });
 
   const logAllMethod = (log: Logger) => {
@@ -55,29 +75,9 @@ describe('Logger isLevelEnabled', () => {
     log.warn('warnLog', 'err0004');
     log.error('errorLog', 'err0005');
   };
-
-  const expectLogMethodsToHaveBeenCalledTimes = ({
-    trace,
-    debug,
-    info,
-    warn,
-    error,
-  }: {
-    trace: number;
-    debug: number;
-    info: number;
-    warn: number;
-    error: number;
-  }) => {
-    expect(mockTrace).toHaveBeenCalledTimes(trace);
-    expect(mockDebug).toHaveBeenCalledTimes(debug);
-    expect(mockInfo).toHaveBeenCalledTimes(info);
-    expect(mockWarn).toHaveBeenCalledTimes(warn);
-    expect(mockError).toHaveBeenCalledTimes(error);
-  };
 });
 
-describe('Logger message and errorCode', () => {
+describe('Logger transport message and errorCode', () => {
   const transport = new ConsoleTransport();
   const mockTrace = jest.spyOn(transport, 'trace');
   const mockDebug = jest.spyOn(transport, 'debug');
