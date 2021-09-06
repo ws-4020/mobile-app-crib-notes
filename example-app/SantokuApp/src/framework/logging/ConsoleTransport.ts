@@ -29,7 +29,7 @@ class ConsoleTransport implements Transport {
    */
   log(level: LogLevel, message: string, errorCode: string): Transport {
     const log = ConsoleMethod.for(level);
-    log(`[${errorCode}] ${message}`);
+    log(`[${level}] [${errorCode}] ${message}`);
     return this;
   }
 

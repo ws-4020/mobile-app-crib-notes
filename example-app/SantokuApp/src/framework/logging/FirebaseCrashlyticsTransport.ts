@@ -17,7 +17,7 @@ class FirebaseCrashlyticsTransport implements Transport {
    * @see {@link FirebaseCrashlyticsTypes.Module.recordError}
    */
   log(level: LogLevel, message: string, errorCode: string): Transport {
-    crashlytics().recordError(new Error(`[${level}] ${message}`), errorCode);
+    crashlytics().recordError(new Error(`[${level}] [${errorCode}] ${message}`), errorCode);
     return this;
   }
 
