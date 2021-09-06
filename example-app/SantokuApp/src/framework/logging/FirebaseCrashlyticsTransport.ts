@@ -1,4 +1,4 @@
-import crashlytics, {FirebaseCrashlyticsTypes} from '@react-native-firebase/crashlytics';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import {LogLevel} from './Logger';
 import {Transport} from './Transport';
@@ -7,10 +7,6 @@ class FirebaseCrashlyticsTransport implements Transport {
   log(level: LogLevel, message: string, errorCode: string): Transport {
     crashlytics().recordError(new Error(`[${level}] ${message}`), errorCode);
     return this;
-  }
-
-  test2(crashlytics2: FirebaseCrashlyticsTypes.Module) {
-    crashlytics2.recordError(new Error(), '');
   }
 
   trace(message: string, errorCode: string): Transport {
