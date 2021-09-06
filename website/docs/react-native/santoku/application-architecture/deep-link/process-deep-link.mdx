@@ -14,7 +14,7 @@ React Native Firebase Dynamic LinksではディープリンクURLを取得する
 
 どちらの場合でもディープリンクURLからコンテンツリンクURLを取得し、画面遷移を判定して、コンテンツリンクURLのパラメータを処理します。コンテンツリンクURLのパラメータは[ディープリンクURLの構成](./create-deep-link.mdx#ディープリンクURLの構成)にあるとおり、スクリーンとパラメータを受け取ります。
 
-[Universal Linksの警告](https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app)にもあるようにディーリンクのパラメータは外部入力として構成に合致するか検査し、ユーザに情報を表示するなど安全なアクションにとどめてください。
+[Universal Linksの警告](https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app)にもあるようにコンテンツリンクURLが妥当なURLかどうかを検証して、ユーザに情報を表示するなど安全なアクションにとどめてください。コンテンツリンクURLが想定されない値の場合はアプリケーションで利用しません。
 
 ### リンクパラメータの保持
 
