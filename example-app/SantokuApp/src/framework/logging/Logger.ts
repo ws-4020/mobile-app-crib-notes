@@ -107,12 +107,12 @@ class Logger {
  * @param message ログメッセージ
  * @returns メッセージ
  */
-const resolveMessage = (message: string | LogMessageSupplier) => {
+function resolveMessage(message: string | LogMessageSupplier) {
   if (typeof message === 'string') {
     return message;
   }
   return message();
-};
+}
 
 /**
  * ログレベルのセットです。
