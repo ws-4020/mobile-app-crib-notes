@@ -1,19 +1,19 @@
 import {LogLevel} from './Logger';
 
 interface Transport {
-  log: LogMethod;
-  error: LeveledLogMethod;
-  warn: LeveledLogMethod;
-  info: LeveledLogMethod;
-  debug: LeveledLogMethod;
-  trace: LeveledLogMethod;
+  log: TransportMethod;
+  error: LeveledTransportMethod;
+  warn: LeveledTransportMethod;
+  info: LeveledTransportMethod;
+  debug: LeveledTransportMethod;
+  trace: LeveledTransportMethod;
 }
 
-interface LogMethod {
+interface TransportMethod {
   (level: LogLevel, message: string, errorCode: string): Transport;
 }
 
-interface LeveledLogMethod {
+interface LeveledTransportMethod {
   (message: string, errorCode: string): Transport;
 }
 
