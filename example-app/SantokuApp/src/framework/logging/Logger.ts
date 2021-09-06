@@ -159,4 +159,4 @@ function createLogger(options?: LoggerOptions): Logger {
 }
 
 export type {LogLevel, LoggerOptions, LogMessageSupplier};
-export {Logger, createLogger, LogLevelSet, DEFAULT_LOGGER_OPTIONS};
+export {Logger, createLogger, LogLevelSet};
