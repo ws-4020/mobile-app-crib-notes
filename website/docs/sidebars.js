@@ -238,22 +238,22 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'エラーハンドリング',
-          items: [
-            'react-native/santoku/application-architecture/error-handling/overview',
-            'react-native/santoku/application-architecture/error-handling/how-to-handle-error',
-            'react-native/santoku/application-architecture/http-api/http-api-error-handling',
-            'react-native/santoku/application-architecture/webview/webview-error-handling',
-          ],
-        },
-        {
-          type: 'category',
           label: 'ディープリンク',
           items: [
             'react-native/santoku/application-architecture/deep-link/overview',
             'react-native/santoku/application-architecture/deep-link/process-deep-link',
             'react-native/santoku/application-architecture/deep-link/create-deep-link',
             'react-native/santoku/application-architecture/deep-link/react-native-firebase',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'エラーハンドリング',
+          items: [
+            'react-native/santoku/application-architecture/error-handling/overview',
+            'react-native/santoku/application-architecture/error-handling/how-to-handle-error',
+            'react-native/santoku/application-architecture/http-api/http-api-error-handling',
+            'react-native/santoku/application-architecture/webview/webview-error-handling',
           ],
         },
       ],
