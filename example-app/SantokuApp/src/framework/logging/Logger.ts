@@ -13,9 +13,10 @@ class Logger {
    * ロガーのコンストラクタです。
    * @param options ロガーオプション
    */
-  constructor(options: LoggerOptions) {
-    this.level = LogLevelSet[options.level ?? DEFAULT_LOGGER_OPTIONS.level];
-    this.transport = options.transport ?? DEFAULT_LOGGER_OPTIONS.transport;
+  constructor(options?: LoggerOptions) {
+    const mergedOptions = {...DEFAULT_LOGGER_OPTIONS, ...options};
+    this.level = LogLevelSet[mergedOptions.level];
+    this.transport = mergedOptions.transport;
   }
 
   /**
@@ -142,19 +143,9 @@ type LoggerOptions = {
 };
 
 /**
- * ロガーに設定できるオプションを全て必須項目にしたタイプ定義です。
- * ロガーのデフォルトオプションに使用します。
- * @see {DEFAULT_LOGGER_OPTIONS}
- */
-type StrictLoggerOptions = {
-  level: LogLevel;
-  transport: Transport;
-};
-
-/**
  * ロガーのデフォルトオプションです。
  */
-const DEFAULT_LOGGER_OPTIONS: StrictLoggerOptions = {
+const DEFAULT_LOGGER_OPTIONS: Required<LoggerOptions> = {
   level: 'info',
   transport: new ConsoleTransport(),
 };
@@ -163,9 +154,9 @@ const DEFAULT_LOGGER_OPTIONS: StrictLoggerOptions = {
  * ロガーを生成します。
  * @param options ロガーオプション
  */
-function createLogger(options: LoggerOptions): Logger {
+function createLogger(options?: LoggerOptions): Logger {
   return new Logger(options);
 }
 
-export type {LogLevel, LoggerOptions, StrictLoggerOptions, LogMessageSupplier};
+export type {LogLevel, LoggerOptions, LogMessageSupplier};
 export {Logger, createLogger, LogLevelSet, DEFAULT_LOGGER_OPTIONS};
