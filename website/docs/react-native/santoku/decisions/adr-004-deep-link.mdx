@@ -94,7 +94,7 @@ matchTypeの値が`unique`でない場合はユーザが意図しないURLをア
 
 そのため、matchTypeの値が`unique`であるか判定してからURLを処理します。このように対応することで別のユーザがデータを受け取りません。
 
-アプリケーションで利用しているReact Native FirebaseではアプリケーションにmatchTypeが渡されないため、ライブラリに[パッチ](https://www.npmjs.com/package/patch-package)を適用する必要があります。
+アプリケーションで利用しているReact Native FirebaseではアプリケーションにmatchTypeが渡されないため、ライブラリにパッチを適用する必要があります。
 
 :::note
 <!-- textlint-disable ja-technical-writing/sentence-length -->
