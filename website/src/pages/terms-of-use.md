@@ -3,7 +3,7 @@ title: 当サイトのご利用にあたって
 ---
 
 <!-- textlint-disable -->
-<!-- 当社公式サイトの文言をコピーしているのでLint対象外としています -->
+<!-- 弊社公式サイトの文言をコピーしているのでLint対象外としています -->
 
 ## 当サイトのご利用にあたって
 
@@ -20,7 +20,7 @@ title: 当サイトのご利用にあたって
 Googleアナリティクス利用規約、プライバシーポリシー、の詳細については、以下をご確認ください。
 
 - [Googleアナリティクス利用規約](https://marketingplatform.google.com/about/analytics/terms/jp/)
-- [Googleプライバシーポリシー](https://marketingplatform.google.com/about/analytics/terms/jp/)
+- [Googleプライバシーポリシー](https://policies.google.com/privacy?hl=ja)
 
 Google Analyticsでデータが収集・処理される仕組みの詳細については、以下をご確認ください。
 
