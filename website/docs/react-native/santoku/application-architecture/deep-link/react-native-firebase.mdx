@@ -24,7 +24,7 @@ Firebase Dynamic Linksは、iOSで初回起動時にコンテンツURLを取得�
 
 iOSアプリではアプリ起動の時間が短いとディープリンクURLを取得できない[issue](https://github.com/invertase/react-native-firebase/issues/2660)があります。このissueに対応するため、`getInitialLink`ではなく、React Native Linkingの[`getInitialURL`](https://reactnative.dev/docs/linking#getinitialurl)を利用します。
 
-React Native LinkingではコンテンツリンクURLではなくディープリンクURLが取得されるため、[resolveLink](https://rnfirebase.io/reference/dynamic-links#resolveLink)を利用してコンテンツリンクURLを取得します。
+React Native Linkingでは、コンテンツリンクURLではなく、ディープリンクURLが取得されるため[resolveLink](https://rnfirebase.io/reference/dynamic-links#resolveLink)を利用してコンテンツリンクURLを取得します。
 
 :::note
 Androidアプリでは[React Native Linkingにissue](https://github.com/facebook/react-native/issues/25675)があるため、iOSのみReact Native Linkingを利用します。
