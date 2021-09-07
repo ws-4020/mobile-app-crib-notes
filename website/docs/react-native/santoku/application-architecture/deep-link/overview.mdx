@@ -39,7 +39,7 @@ OSの機能では、アプリをインストールしていなければディー
 Firebase Dynamic Linksの拡張機能では、未インストールのユーザがディープリンクURLを開くとアプリのインストールページ（フォールバックURL）に誘導します。この際、Androidでは自動的にフォールバックURLが表示され、iOSではフォールバックURLへのリンクのあるプレビューページが表示されます。
 さらに、ユーザがアプリをインストールして起動すると①で開いた[ディープリンクURLをアプリに渡せる](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)ため、ユーザがもう一度ディープリンクを開く必要が有りません。
 
-### 利用するライブラリ
+## 利用するライブラリ
 
 React NativeでFirebase Dynamic Linksを利用するために[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用します。
 
@@ -49,13 +49,13 @@ React NativeにはOS機能の範囲のディープリンクを扱うLinkingと�
 
 React Native Firebaseの導入については[React Native Fireabase](https://rnfirebase.io/)と[Dynamic Link](https://rnfirebase.io/dynamic-links/usage)を参照してください。
 
-### ディープリンクURLに対応するウェブサイト
+## ディープリンクURLに対応するウェブサイト
 
 アプリケーションがインストールされていない場合、ディープリンクのURLを開くとブラウザでURLが開かれます。このとき、ディープリンクのURLに対応するウェブサイトが存在していないと、ユーザはコンテンツへの導線を失ってしまいます。インストールしていないユーザの導線を確保するために、ディープリンクを利用する場合はウェブサイトも準備することが望ましいです。
 
 このアプリでは、ウェブサイトとしてDynamic Linksがデフォルトで提供するウェブサイトと[アプリのプレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)を利用します。ウェブサイトやプレビューページではURLに対応するコンテンツ自体は表示できませんが、ストアなどに誘導できるため、ユーザが導線を失うことにはなりません。
 
-### 環境の切り替え
+## 環境の切り替え
 
 開発やテストは本番環境とは切り離された環境で実施します。ディープリンクに関しても同じように「テスト用のアプリを起動するディープリンクURL」と「本番アプリを起動するディープリンクURL」を分ける必要があります。
 
