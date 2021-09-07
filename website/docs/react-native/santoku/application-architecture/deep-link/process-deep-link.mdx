@@ -32,7 +32,7 @@ iOSではインストール直後にアプリケーションへURLを渡すた�
 
 iOS14以降ではクリップボードを読み取るとOSが通知を表示する仕様となっています。そのため、初めてアプリケーションを起動したときのみ、クリップボードに値が存在していると、「`<アプリ名>にSafariからペースト`」のような通知が表示されます。
 
-設定により[クリップボードを無効にする](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)こともできますが、インストール後にそのまま起動してディープリンクURLを読み取る機能が利用できません。クリップボードを無効にする場合の警告にあるように`matchType`の値が`week`程度になり、SantokuAppでは`matchType`が`unique`でないディープリンクURLは利用しないからです。[^1]
+Firebase SDKの設定で[この機能を無効にする](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)こともできますが、インストール後にそのまま起動してディープリンクURLを読み取る機能が利用できません。ドキュメントの警告に記載があるように`matchType`の値が`week`程度になり、このアプリでは`matchType`が`unique`でないディープリンクURLは利用しないためです。[^1]
 
 そのため、このユーザへの通知は制限事項としています。
 
