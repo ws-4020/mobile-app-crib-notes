@@ -62,24 +62,3 @@ React Native Firebaseの導入については[React Native Fireabase](https://rn
 これまで説明してきたとおり、ディープリンクではディープリンクURLに対してアプリIDと証明書の組み合わせを確認して、起動するアプリケーションが決定されます。このとき利用されるのはドメイン名だけではなく、URLのパス部分も含めて確認されます。
 
 これらを利用して、ディープリンクURLのパス部分に応じて対象とするアプリが変わるように設定します。
-
-SantokuAppではディープリンクURLを作成して共有するため`react-native-config`と`__DEV__`変数で切り替えられるものに限定します。たとえば、ビルドタイプのReleaseとReleaseInHouseは切り替えません。
-
-ビルドバリアントに応じたディープリンクURLサフィックスは次のとおりです。
-
-|プロダクトフレーバー|ビルドタイプ|ディープリンクURLサフィックス|
-|:--|:--|:--|
-|dev|debug[^3]|`https://devdebugsantokuapp.page.link/`|
-|dev|debugAdvanced|`https://devdebugsantokuapp.page.link/`|
-|dev|inhouse|`https://devsantokuapp.page.link/`|
-|dev|(Release)|`https://devsantokuapp.page.link/`|
-||debug[^3]|`https://devdebugsantokuapp.page.link/`|
-||debugAdvanced|`https://debugsantokuapp.page.link/`|
-||inhouse|`https://santokuapp.page.link/`|
-||(Release)|`https://santokuapp.page.link/`|
-
-ビルドバリアント毎にFirebaseアプリを作成してディープリンクURLサフィックスにアプリを設定します。
-
-[^3]:iOSでは高度な機能を利用するため個人デベロッパーアカウントでは利用できません。Androidのみ利用できます。
-
-![テストと本番の設定](./test-setting.drawio.png)
