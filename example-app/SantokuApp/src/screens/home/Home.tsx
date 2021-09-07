@@ -3,7 +3,7 @@ import React, {useCallback, useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Text, ThemeContext} from 'react-native-elements';
 
-import {ErrorCase} from '../error/ErrorCase';
+import {ErrorCase} from '../demo/error/ErrorCase';
 
 export const Home: React.FC = () => {
   const navigation = useNavigation();

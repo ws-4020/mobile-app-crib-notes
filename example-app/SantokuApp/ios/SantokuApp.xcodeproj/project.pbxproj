@@ -58,6 +58,7 @@
 		13B07FAE1A68108700A75B9A /* SantokuApp */ = {
 			isa = PBXGroup;
 			children = (
+				69C8ACE526E7062F00816784 /* Demo */,
 				6909A3A526E1EC0000F9111D /* GoogleService-Info.plist */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -70,8 +71,6 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				699A764226E6E45C00D48F9D /* RCTThrowErrorModule.h */,
-				699A764326E6E48500D48F9D /* RCTThrowErrorModule.m */,
 			);
 			name = SantokuApp;
 			sourceTree = "<group>";
@@ -84,6 +83,15 @@
 				58EEBF8E8E6FB1BC6CAF49B5 /* libPods-SantokuApp.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		69C8ACE526E7062F00816784 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				699A764226E6E45C00D48F9D /* RCTThrowErrorModule.h */,
+				699A764326E6E48500D48F9D /* RCTThrowErrorModule.m */,
+			);
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {

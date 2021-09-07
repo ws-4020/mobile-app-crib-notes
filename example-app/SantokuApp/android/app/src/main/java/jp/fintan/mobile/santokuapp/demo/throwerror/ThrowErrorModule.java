@@ -1,4 +1,4 @@
-package jp.fintan.mobile.santokuapp.throwerror;
+package jp.fintan.mobile.santokuapp.demo.throwerror;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;

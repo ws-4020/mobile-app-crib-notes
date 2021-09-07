@@ -2,12 +2,13 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {Home, Instructions, ApplicationInfo} from 'screens';
 
-import {ErrorCase} from '../screens/error/ErrorCase';
-import {ErrorInEventHandler} from '../screens/error/ErrorInEventHandler';
-import {ErrorInNativeModule} from '../screens/error/ErrorInNativeModules';
-import {ErrorInReactComponent} from '../screens/error/ErrorInReactComponent';
-import {ErrorInUseEffectAsyncProcess} from '../screens/error/ErrorInUseEffectAsyncProcess';
-import {ErrorInUseEffectSyncProcess} from '../screens/error/ErrorInUseEffectSyncProcess';
+import {ErrorCase} from '../screens/demo/error/ErrorCase';
+import {ErrorInEventHandler} from '../screens/demo/error/ErrorInEventHandler';
+import {ErrorInNativeModule} from '../screens/demo/error/ErrorInNativeModules';
+import {ErrorInReactComponent} from '../screens/demo/error/ErrorInReactComponent';
+import {ErrorInUseEffect} from '../screens/demo/error/ErrorInUseEffect';
+import {ErrorInUseEffectAsyncProcess} from '../screens/demo/error/ErrorInUseEffectAsyncProcess';
+import {ErrorInUseEffectSyncProcess} from '../screens/demo/error/ErrorInUseEffectSyncProcess';
 
 const nav = createStackNavigator();
 export const RootStackNav: React.FC = () => {
@@ -19,6 +20,7 @@ export const RootStackNav: React.FC = () => {
       {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
       <nav.Screen name={ErrorCase.ScreenName} component={ErrorCase.Screen} />
       <nav.Screen name={ErrorInEventHandler.ScreenName} component={ErrorInEventHandler.Screen} />
+      <nav.Screen name={ErrorInUseEffect.ScreenName} component={ErrorInUseEffect.Screen} />
       <nav.Screen name={ErrorInUseEffectSyncProcess.ScreenName} component={ErrorInUseEffectSyncProcess.Screen} />
       <nav.Screen name={ErrorInUseEffectAsyncProcess.ScreenName} component={ErrorInUseEffectAsyncProcess.Screen} />
       <nav.Screen name={ErrorInReactComponent.ScreenName} component={ErrorInReactComponent.Screen} />
