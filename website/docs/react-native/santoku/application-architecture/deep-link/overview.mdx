@@ -53,19 +53,23 @@ React Native Firebaseの導入については[React Native Fireabase](https://rn
 
 ### 環境の切り替え
 
-SantokuAppでは2つのFirebaseプロジェクト（DevSantokuAppとSantokuApp）を使用するため、Firebaseプロジェクトに応じた環境を構築します。
+[ビルドバリアント](../../development/build-configuration.mdx)を設定しているためアプリケーションのID（AndroidはアプリケーションID、iOSはBundle Identifier）が切り替わります。
 
-1. Firebaseプロジェクト毎にディープリンクURLで利用するURLプレフィックス（ドメイン）を[Fireabse Console上](https://console.firebase.google.com/u/4/project/_/durablelinks/links)で追加します。
-1. [ビルドバリアント](../../development/build-configuration.mdx)にそってFirebaseアプリを作成します。
-    - AndroidはアプリケーションID毎にFirebaseアプリを作成してください。
-    - iOSはBundle Identifierとライセンスの組み合わせ毎にFirebaseアプリを作成してください。
-1. FirebaseアプリにOSが検証するための設定値を追加します。
-    - iOSではADPまたはADEPライセンスのTeamIDを設定します。
-    - Androidは署名鍵のSHA256を設定します。これは複数設定できます。
-1. 作成したFirebaseアプリケーション毎にFirebase Console上でディープリンクURLを作成し、アプリケーションを指定します。
-1. ビルド設定にあったFirebaseアプリの設定ファイル（google-service.json、GoogleService-Info.plist）を取得してモバイルアプリプロジェクトに設定します。
-1. モバイルアプリケーションの設定でドメインと関連付ける設定をします。
-    - iOSではXcode上でCapabilitiesからAssociated Domainsに追加して[ドメインを関連付けます](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#open-dynamic-links-in-your-app)。
-    - Androidではアプリマニフェストに[設定を追加してドメインを関連付けます](https://developer.android.com/training/app-links/verify-site-associations?hl=ja#request-verify)。
+SantokuAppではディープリンクURLを作成して共有するため`react-native-config`と`__DEV__`変数で切り替えられるものに限定します。たとえば、ビルドタイプのReleaseとinhouseは切り替えません。
+
+ビルドバリアントに応じたディープリンクURLサフィックスは次のとおりです。
+
+|プロダクトフレーバー|ビルドタイプ|ディープリンク利用|ディープリンクURLサフィックス|
+|:--|:--|:--|:--|
+|dev|debug|☓|-|
+|dev|debugAdvanced|○|`https://devdebugsantokuapp.page.link/`|
+|dev|inhouse|○|`https://devsantokuapp.page.link/`|
+|dev|(Release)|○|`https://devsantokuapp.page.link/`|
+||debug|☓|-|
+||debugAdvanced|○|`https://debugsantokuapp.page.link/`|
+||inhouse|○|`https://santokuapp.page.link/`|
+||(Release)|○|`https://santokuapp.page.link/`|
+
+ビルドバリアント毎にFirebaseアプリを作成してディープリンクURLサフィックスにアプリを紐付けます。
 
 ![テストと本番の設定](./test-setting.drawio.png)
