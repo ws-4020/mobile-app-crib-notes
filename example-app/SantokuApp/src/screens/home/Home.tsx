@@ -3,11 +3,14 @@ import React, {useCallback, useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Text, ThemeContext} from 'react-native-elements';
 
+import {ErrorCase} from '../error/ErrorCase';
+
 export const Home: React.FC = () => {
   const navigation = useNavigation();
   const {theme} = useContext(ThemeContext);
   const onGoToInstructionButtonPress = useCallback(() => navigation.navigate('Instructions'), [navigation]);
   const onViewApplicationInformationButtonPress = useCallback(() => navigation.navigate('AppInfo'), [navigation]);
+  const onGlobalErrorHandlingButtonPress = useCallback(() => navigation.navigate(ErrorCase.ScreenName), [navigation]);
   return (
     <View style={StyleSheet.flatten([styles.container, {backgroundColor: theme.colors?.primary}])}>
       <Text h1 style={styles.textColor}>
@@ -15,6 +18,7 @@ export const Home: React.FC = () => {
       </Text>
       <Button title="Go to instructions" onPress={onGoToInstructionButtonPress} />
       <Button title="View application information" onPress={onViewApplicationInformationButtonPress} />
+      <Button title="Global error handling" onPress={onGlobalErrorHandlingButtonPress} />
     </View>
   );
 };
