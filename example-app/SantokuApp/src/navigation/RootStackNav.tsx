@@ -1,6 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {Home, Instructions, ApplicationInfo} from 'screens';
+import {Home, Instructions, ApplicationInfo, AppStateScreen, Demo} from 'screens';
 
 import {ErrorCase} from '../screens/demo/error/ErrorCase';
 import {ErrorInEventHandler} from '../screens/demo/error/ErrorInEventHandler';
@@ -17,7 +17,8 @@ export const RootStackNav: React.FC = () => {
       <nav.Screen name="Home" component={Home} options={{headerShown: false}} />
       <nav.Screen name="Instructions" component={Instructions} />
       <nav.Screen name="AppInfo" component={ApplicationInfo} options={{title: 'Application Information'}} />
-      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
+      <nav.Screen name="Demo" component={Demo} options={{title: 'Demo Screens'}} />
+      <nav.Screen name="AppState" component={AppStateScreen} options={{title: 'AppState Test'}} />
       <nav.Screen name={ErrorCase.ScreenName} component={ErrorCase.Screen} />
       <nav.Screen name={ErrorInEventHandler.ScreenName} component={ErrorInEventHandler.Screen} />
       <nav.Screen name={ErrorInUseEffect.ScreenName} component={ErrorInUseEffect.Screen} />

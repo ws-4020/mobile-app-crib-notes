@@ -10,6 +10,7 @@ export const Home: React.FC = () => {
   const {theme} = useContext(ThemeContext);
   const onGoToInstructionButtonPress = useCallback(() => navigation.navigate('Instructions'), [navigation]);
   const onViewApplicationInformationButtonPress = useCallback(() => navigation.navigate('AppInfo'), [navigation]);
+  const onDemoButtonPress = useCallback(() => navigation.navigate('Demo'), [navigation]);
   const onGlobalErrorHandlingButtonPress = useCallback(() => navigation.navigate(ErrorCase.ScreenName), [navigation]);
   return (
     <View style={StyleSheet.flatten([styles.container, {backgroundColor: theme.colors?.primary}])}>
@@ -18,6 +19,7 @@ export const Home: React.FC = () => {
       </Text>
       <Button title="Go to instructions" onPress={onGoToInstructionButtonPress} />
       <Button title="View application information" onPress={onViewApplicationInformationButtonPress} />
+      <Button title="Demo" onPress={onDemoButtonPress} />
       <Button title="Global error handling" onPress={onGlobalErrorHandlingButtonPress} />
     </View>
   );
