@@ -14,7 +14,7 @@ RCT_EXPORT_MODULE(ThrowErrorModule);
 RCT_EXPORT_METHOD(throwErrorSyncProcess)
 {
   [NSException raise:@"NativeModulesSyncProcessException" format:@"Throw exception in synchronous process."];
-  // ↓のようなNSException以外のオブジェクトをthrowした場合は、NSSetUncaughtExceptionHandlerで捕捉できない想定
+  // ↓のようなNSException以外のオブジェクトをthrowした場合は、NSSetUncaughtExceptionHandlerで捕捉できない
   // @throw @"Throw exception in synchronous process.";
   // @throw [NSError errorWithDomain:@"ws4020" code:100 userInfo:nil];
 }
