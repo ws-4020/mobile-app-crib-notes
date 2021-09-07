@@ -59,17 +59,19 @@ SantokuAppではディープリンクURLを作成して共有するため`react-
 
 ビルドバリアントに応じたディープリンクURLサフィックスは次のとおりです。
 
-|プロダクトフレーバー|ビルドタイプ|ディープリンク利用|ディープリンクURLサフィックス|
-|:--|:--|:--|:--|
-|dev|debug|☓|-|
-|dev|debugAdvanced|○|`https://devdebugsantokuapp.page.link/`|
-|dev|inhouse|○|`https://devsantokuapp.page.link/`|
-|dev|(Release)|○|`https://devsantokuapp.page.link/`|
-||debug|☓|-|
-||debugAdvanced|○|`https://debugsantokuapp.page.link/`|
-||inhouse|○|`https://santokuapp.page.link/`|
-||(Release)|○|`https://santokuapp.page.link/`|
+|プロダクトフレーバー|ビルドタイプ|ディープリンクURLサフィックス|
+|:--|:--|:--|
+|dev|debug[^2]|`https://devdebugsantokuapp.page.link/`|
+|dev|debugAdvanced|`https://devdebugsantokuapp.page.link/`|
+|dev|inhouse|`https://devsantokuapp.page.link/`|
+|dev|(Release)|`https://devsantokuapp.page.link/`|
+||debug[^2]|`https://devdebugsantokuapp.page.link/`|
+||debugAdvanced|`https://debugsantokuapp.page.link/`|
+||inhouse|`https://santokuapp.page.link/`|
+||(Release)|`https://santokuapp.page.link/`|
 
 ビルドバリアント毎にFirebaseアプリを作成してディープリンクURLサフィックスにアプリを設定します。
+
+[^2]:iOSでは高度な機能を利用するため個人デベロッパーアカウントでは利用できません。Androidのみ利用できます。
 
 ![テストと本番の設定](./test-setting.drawio.png)
