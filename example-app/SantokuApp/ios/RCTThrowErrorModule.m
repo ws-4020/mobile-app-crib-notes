@@ -22,7 +22,7 @@ RCT_EXPORT_METHOD(throwErrorSyncProcess)
 RCT_EXPORT_METHOD(throwErrorAsyncProcess)
 {
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-    [NSException raise:@"NativeModulesSyncProcessException" format:@"Throw exception in synchronous process."];
+    [NSException raise:@"NativeModulesAsyncProcessException" format:@"Throw exception in asynchronous process."];
   });
 }
 
