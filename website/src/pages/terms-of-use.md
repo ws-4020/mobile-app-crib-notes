@@ -2,6 +2,9 @@
 title: 当サイトのご利用にあたって
 ---
 
+<!-- textlint-disable -->
+<!-- 当社公式サイトの文言をコピーしているのでLint対象外としています -->
+
 ## 当サイトのご利用にあたって
 
 ### クッキー（Cookie）について
@@ -22,3 +25,5 @@ Googleアナリティクス利用規約、プライバシーポリシー、の�
 Google Analyticsでデータが収集・処理される仕組みの詳細については、以下をご確認ください。
 
 - [Googleのサービスを使用するサイトやアプリから収集した情報のGoogleによる使用](https://policies.google.com/technologies/partner-sites?hl=ja)
+
+<!-- textlint-enable -->
