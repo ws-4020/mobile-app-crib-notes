@@ -37,8 +37,6 @@ iOS14以降ではクリップボードを読み取るとOSが通知を表示す�
 
 Firebase SDKの設定で[この機能を無効にする](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)こともできますが、インストール後にそのまま起動してディープリンクURLを読み取る機能が利用できません。ドキュメントの警告に記載があるように`matchType`の値が`week`程度になり、このアプリでは`matchType`が`unique`でないディープリンクURLは利用しないためです。[^1]
 
-そのため、このユーザへの通知は制限事項としています。
-
 [^1]:詳しくは[こちら](./react-native-firebase.mdx#他のユーザが開いたディープリンクURLを読み取る可能性がある)を参照してください。
 
 :::note
