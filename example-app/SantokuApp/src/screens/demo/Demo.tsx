@@ -11,7 +11,7 @@ const demos = [
     to: 'AppState',
   },
   {
-    title: 'グローバルエラーハンドリング',
+    title: 'GlobalErrorHandling',
     to: ErrorCase.ScreenName,
   },
 ];
