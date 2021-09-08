@@ -367,7 +367,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}";
 				PRODUCT_NAME = SantokuApp;
-				PROVISIONING_PROFILE_SPECIFIER = "SantokuApp AppStore Development";
+				PROVISIONING_PROFILE_SPECIFIER = "SantokuApp ${PROVISIONING_PROFILE_FLAVOR}AppStore Development";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -563,7 +563,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}.house";
 				PRODUCT_NAME = SantokuApp;
-				PROVISIONING_PROFILE_SPECIFIER = "SantokuApp In-House Development";
+				PROVISIONING_PROFILE_SPECIFIER = "SantokuApp ${PROVISIONING_PROFILE_FLAVOR}InHouse Development";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -654,7 +654,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}.debugAdvanced";
 				PRODUCT_NAME = SantokuApp;
-				PROVISIONING_PROFILE_SPECIFIER = "SantokuApp DebugAdvanced Development";
+				PROVISIONING_PROFILE_SPECIFIER = "SantokuApp ${PROVISIONING_PROFILE_FLAVOR}DebugAdvanced Development";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
