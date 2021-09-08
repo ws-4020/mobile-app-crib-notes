@@ -314,6 +314,10 @@ module.exports = {
           type: 'doc',
           id: 'react-native/santoku/decisions/adr-004-deep-link',
         },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/decisions/adr-005-message-management',
+        },
       ],
     },
   ],
