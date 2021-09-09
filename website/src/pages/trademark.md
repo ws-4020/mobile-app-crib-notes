@@ -18,5 +18,6 @@ title: 商標について
 <!-- textlint-enable ja-technical-writing/sentence-length-->
 - 「Java」は、Oracle Corporationおよびその子会社、関連会社の米国およびその他の国における登録商標または商標です。
 - 「Open Web Application Security Project」「OWASP」は、 OWASP Foundation, Inc. の登録商標です。
+- 「DeployGate」は、株式会社デプロイゲートの登録商標です。
 
 ※ その他、本サイトに記載されている会社名、商品・サービス名は、各社の商標または登録商標です。
