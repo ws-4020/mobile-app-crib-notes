@@ -298,7 +298,7 @@ module.exports = {
       type: 'category',
       label: 'Decision Records',
       items: [
-        'react-native/santoku/decisions-records',
+        'react-native/santoku/decisions',
         'react-native/santoku/decisions/adr-001-error-handling',
         'react-native/santoku/decisions/adr-002-http-api-libraries',
         'react-native/santoku/decisions/adr-003-http-api-error-handling',
