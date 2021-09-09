@@ -3,16 +3,10 @@ import React from 'react';
 import {FlatList} from 'react-native';
 import {ListItem} from 'react-native-elements';
 
-import {ErrorCase} from './error/ErrorCase';
-
 const demos = [
   {
     title: 'AppState',
     to: 'AppState',
-  },
-  {
-    title: 'GlobalErrorHandling',
-    to: ErrorCase.ScreenName,
   },
 ];
 

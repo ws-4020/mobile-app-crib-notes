@@ -18,10 +18,6 @@ HTTPHeaders:
   #   - https://marketplace.visualstudio.com/items
   #   - https://play.google.com/store/apps/details
   User-Agent: "bot/0.1"
-# rel=alternativeに入るURLがドメイン名まで含んでいるので、追加したページがNot Foundエラーになってしまう
-CheckLinks: false
-# og:urlに入るURLがドメイン名まで含んでいるので、追加したページがNot Foundエラーになってしまう
-CheckMeta: false
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreInternalEmptyHash: true
 IgnoreInternalURLs:
@@ -30,7 +26,6 @@ IgnoreURLs:
   - localhost:19002
   # 認証が必要なURLは無視
   - https://developer.apple.com/account/resources/identifiers/add/bundleId
-  - https://developer.apple.com/account/resources/identifiers/list/bundleId
   - https://developer.apple.com/account/resources/profiles
   - https://developer.apple.com/account/resources/authkeys/list
   - https://developer.apple.com/account/resources/profiles
@@ -47,3 +42,4 @@ IgnoreURLs:
   - https://marketplace.visualstudio.com/items\?itemName=naumovs.color-highlight
   - https://marketplace.visualstudio.com/items\?itemName=2gua.rainbow-brackets
   - https://marketplace.visualstudio.com/items\?itemName=yzhang.markdown-all-in-one
+

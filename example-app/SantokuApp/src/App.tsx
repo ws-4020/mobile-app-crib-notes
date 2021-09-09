@@ -9,9 +9,6 @@ export const App = () => {
     activateKeepAwake();
   }
 
-  // Firebase Crashlyticsの初期化
-  require('@react-native-firebase/crashlytics');
-
   return (
     <NavigationContainer>
       <RootStackNav />
