@@ -31,6 +31,16 @@ Reactコンポーネントでは、JSXのレンダリング処理や、コンポ
 
 JSXのレンダリングでエラーが発生した場合は、[Error Boundary](https://ja.reactjs.org/docs/error-boundaries.html)でエラーを捕捉します。該当のコンポーネントを`Error Boundary`でラップしてエラー処理を実施してください。
 
+```typescript jsx title='Error Boundaryの例'
+const Screen = () => {
+  return (
+    <ErrorBoundary>
+      <Avator />
+    </ErrorBoundary>
+  );
+};
+```
+
 JSXのエラーは基本的にプログラムの不具合によるものです。ほとんどのユースケースにおいて、`Error Boundary`を使用して個別にエラー処理を実施することはないと思われます。
 
 :::note
@@ -41,10 +51,57 @@ JSXのレンダリング以外で発生したエラーをハンドリングす�
 
 同期処理は、`try...catch`文で囲んでエラーを捕捉します。
 
+```typescript jsx title=try...catchの例
+const Screen = () => {
+  useEffect(() => {
+    try {
+      syncFunction();
+      // 正常時の処理
+    } catch(e) {
+      // エラー処理
+    }
+  }, [syncFunction]);
+
+  /* ～省略～ */
+};
+```
+
 非同期処理は、以下のいずれかの方法でエラーを捕捉します。
 
 - `Promise.catch()`を使用してエラーを捕捉します。
 - `await`式を利用した場合は`try...catch`文で囲んでエラーを捕捉します。
+
+```typescript jsx title=Promise.catch()の例
+const Screen = () => {
+  useEffect(() => {
+    asyncFunction
+      .fetch()
+      .then((value) => {
+        // 正常時の処理
+      })
+      .catch((e) => {
+        // エラー処理
+      });
+  }, [asyncFunction]);
+
+  /* ～省略～ */
+};
+```
+
+```typescript jsx title=await式を使用した場合のtry...catchの例
+const Screen = () => {
+  useEffect(() => {
+    try {
+      const result await asyncFunction();
+      // 正常時の処理
+    } catch(e) {
+      // エラー処理
+    }
+  }, [asyncFunction]);
+
+  /* ～省略～ */
+};
+```
 
 :::note
 コンポーネントのライフサイクルに応じた処理や`useEffect`内の処理で発生したエラーも、`Error Boundary`で捕捉できます。しかし、Reactコンポーネントで発生したエラー全てを`Error Boundary`で捕捉してしまうと、個々のエラーに応じた処理を実施することが難しくなります。
@@ -55,6 +112,46 @@ JSXのレンダリング以外で発生したエラーをハンドリングす�
 ### イベントハンドラのエラー処理
 
 イベントハンドラで発生するエラーを個別にハンドリングする場合は、ロジックの同期処理・非同期処理と同様に`Promise.catch()`、または`try...catch`を利用してエラーを捕捉してください。
+
+```typescript jsx title=try...catchの例
+const Screen = () => {
+  const syncFunction = useCallback(() => {
+    try {
+      const result calculate();
+      // 正常時の処理
+    } catch(e) {
+      // エラー処理
+    }
+  }, [calculate]);
+
+  return (
+    <View>
+      <Button onPress={syncFunction} />
+    </View>
+  );
+};
+```
+
+```typescript jsx title=Promise.catch()の例
+const Screen = () => {
+  const asyncFunction = useCallback(() => {
+    accountService
+      .fetch()
+      .then((value) => {
+        // 正常時の処理
+      })
+      .catch((e) => {
+        // エラー処理
+      });
+  }, [accountService]);
+
+  return (
+    <View>
+      <Button onPress={asyncFunction} />
+    </View>
+  );
+};
+```
 
 ### Native Modulesのエラー処理
 
