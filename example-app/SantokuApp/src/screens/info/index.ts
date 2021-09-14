@@ -1,1 +1,1 @@
-export * from './ApplicationInfo';
+export * from './AppInfo';
