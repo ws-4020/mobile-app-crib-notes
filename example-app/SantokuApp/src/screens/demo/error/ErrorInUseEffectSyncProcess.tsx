@@ -10,6 +10,6 @@ const Screen = () => {
 };
 
 export const ErrorInUseEffectSyncProcess = {
-  Screen,
-  ScreenName,
+  name: ScreenName,
+  component: Screen,
 };

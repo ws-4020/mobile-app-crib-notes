@@ -13,6 +13,6 @@ const Screen = () => {
 };
 
 export const ErrorInUseEffectAsyncProcess = {
-  Screen,
-  ScreenName,
+  name: ScreenName,
+  component: Screen,
 };

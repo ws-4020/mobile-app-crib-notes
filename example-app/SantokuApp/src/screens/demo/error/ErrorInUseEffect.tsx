@@ -32,6 +32,6 @@ const styles = StyleSheet.create({
 });
 
 export const ErrorInUseEffect = {
-  Screen,
-  ScreenName,
+  name: ScreenName,
+  component: Screen,
 };

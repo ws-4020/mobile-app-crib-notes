@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
 });
 
 export const ErrorCase = {
-  Screen,
-  ScreenName,
+  name: ScreenName,
+  component: Screen,
 };

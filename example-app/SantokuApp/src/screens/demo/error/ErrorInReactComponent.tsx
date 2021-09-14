@@ -8,6 +8,6 @@ const Screen = () => {
 };
 
 export const ErrorInReactComponent = {
-  Screen,
-  ScreenName,
+  name: ScreenName,
+  component: Screen,
 };
