@@ -88,7 +88,26 @@ App Links、Universal Linksは、ドメインに配置されたファイルを�
 
 #### iOSでの意図しない共有
 
-iOSの場合、Dynamic Linksには受け取ったURLの信頼性を表す[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
+Dynamic Linksではアプリをインストールしていないユーザがディープリンクを開いたとき、初回起動時に[URLを読み取る仕組み](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)があります。
+この仕組みにより、OSの機能を拡張して、アプリケーションの初回起動時にディープリンクを読み取ることができます。
+
+この拡張機能を利用すると、iOSで初回起動時に開いていないディープリンクを読み取る可能性があります。
+
+:::note
+[公式ドキュメント](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)では、iOSの場合クリップボードを利用すると記載があります。
+一方で「[iOSで受信する](https://firebase.google.com/docs/dynamic-links/ios/receive)」の警告にあるようにクリップボード以外にも読みとる場所があるようです。
+
+> Dynamic Links SDK による iOS のペーストボードの使用を無効にします。
+>
+> この機能を無効にすると、受信する Dynamic Links の matchType は weak 程度になります。
+
+Firebase SDKの実装からFirebaseがデバイスの情報などを利用してサーバに保存していると想定されます。
+
+実際にプレビューページからアプリをインストールし、クリップボードに`テキスト`のような文字列をコピーしてから、アプリを起動するとクリップボード以外からディープリンクを取得していることが確認できます。
+
+:::
+
+iOS向けにDynamic Linksには受け取ったURLの信頼性を表す[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
 
 matchTypeの値が`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。[^4]
 
