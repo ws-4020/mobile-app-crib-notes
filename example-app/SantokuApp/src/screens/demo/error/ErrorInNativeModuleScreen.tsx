@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ErrorInNativeModule = {
+export const ErrorInNativeModuleScreen = {
   name: ScreenName,
   component: Screen,
 };

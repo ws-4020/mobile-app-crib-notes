@@ -1,20 +1,9 @@
 import {NavigationProp, ParamListBase, useNavigation} from '@react-navigation/native';
 import React, {useMemo} from 'react';
+import {AppInfoScreen, AppStateScreen, ErrorCaseScreen, InstructionsScreen} from 'screens';
 
 import {DemoLinkItemData} from './DemoLinkItem';
 import {DemoTemplate} from './DemoTemplate';
-import {ErrorCase} from './error/ErrorCase';
-
-const demoScreenList = [
-  {
-    title: 'AppState',
-    to: 'AppState',
-  },
-  {
-    title: 'GlobalErrorHandling',
-    to: ErrorCase.ScreenName,
-  },
-];
 
 const addOnPressHandlerToItems = (navigation: NavigationProp<ParamListBase>) => (demo: {title: string; to: string}) => {
   return {
@@ -28,11 +17,35 @@ const keyExtractor = (item: DemoLinkItemData, index: number) => item.to + index.
 const name = 'Demo';
 const Screen: React.FC = () => {
   const navigation = useNavigation();
-  const demoItems = useMemo(() => demoScreenList.map(addOnPressHandlerToItems(navigation)), [navigation]);
+  const demoScreenList = useMemo(
+    () => [
+      {
+        title: 'Application Information',
+        to: AppInfoScreen.name,
+      },
+      {
+        title: 'Track AppState',
+        to: AppStateScreen.name,
+      },
+      {
+        title: 'GlobalErrorHandling',
+        to: ErrorCaseScreen.name,
+      },
+      {
+        title: 'React Native Instructions',
+        to: InstructionsScreen.name,
+      },
+    ],
+    [],
+  );
+  const demoItems = useMemo(
+    () => demoScreenList.map(addOnPressHandlerToItems(navigation)),
+    [demoScreenList, navigation],
+  );
   return <DemoTemplate testID="DemoScreen" items={demoItems} keyExtractor={keyExtractor} />;
 };
 
-export const Demo = {
+export const DemoScreen = {
   component: Screen,
   name,
   options: {

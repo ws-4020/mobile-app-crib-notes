@@ -9,7 +9,7 @@ const Screen: React.FC = () => {
   return <AppInfoTemplate testID="AppInfoScreen" items={info} keyExtractor={infoKeyExtractor} />;
 };
 
-export const AppInfo = {
+export const AppInfoScreen = {
   name: ScreenName,
   component: Screen,
   options: {

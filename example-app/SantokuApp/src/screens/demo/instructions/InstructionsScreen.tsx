@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
 });
 /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
 
-export const Instructions = {
+export const InstructionsScreen = {
   name: 'Instructions',
   component: Screen,
 };

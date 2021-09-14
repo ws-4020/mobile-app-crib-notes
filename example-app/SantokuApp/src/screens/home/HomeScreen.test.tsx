@@ -2,13 +2,13 @@ import '@testing-library/jest-native/extend-expect';
 import {fireEvent, render, RenderAPI} from '@testing-library/react-native';
 import React from 'react';
 
-import {Home} from './Home';
+import {HomeScreen} from './HomeScreen';
 
 describe('Home', () => {
   let app: RenderAPI;
 
   beforeEach(() => {
-    app = render(<Home.component />);
+    app = render(<HomeScreen.component />);
   });
 
   it('マウントされたときに正常にレンダリングされること', () => {

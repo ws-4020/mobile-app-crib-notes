@@ -11,8 +11,8 @@ const Screen: React.FC = () => {
   return <AppStateTemplate testID="AppStateScreen" history={appStateHistory} keyExtractor={historyKeyExtractor} />;
 };
 
-export const AppState = {
+export const AppStateScreen = {
   name: ScreenName,
   component: Screen,
-  options: {title: 'AppState Test'},
+  options: {title: 'Track AppState'},
 };

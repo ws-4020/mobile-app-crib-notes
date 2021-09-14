@@ -9,7 +9,7 @@ const useNavigate = (screen: string) => {
   return useCallback(() => navigation.navigate(screen), [navigation, screen]);
 };
 
-const name = 'Home';
+const ScreenName = 'Home';
 const Screen: React.FC = () => {
   const {theme} = useContext(ThemeContext);
   const onGoToInstructionButtonPress = useNavigate('Instructions');
@@ -28,9 +28,9 @@ const Screen: React.FC = () => {
 };
 
 // Navigatorに登録する情報
-export const Home = {
+export const HomeScreen = {
   component: Screen,
-  name,
+  name: ScreenName,
   options: {
     headerShown: false,
   },
