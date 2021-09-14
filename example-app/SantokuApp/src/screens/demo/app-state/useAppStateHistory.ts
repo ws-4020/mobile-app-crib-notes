@@ -1,6 +1,8 @@
 import {useCallback, useState} from 'react';
 import {AppState, AppStateEvent, AppStateStatus} from 'react-native';
 
+import {useIsMounted} from '../../../framework/utilities/useIsMounted';
+
 export type StateChangedEventRecord = {
   event: AppStateEvent;
   state: AppStateStatus;
@@ -15,12 +17,18 @@ export const useAppStateHistory = () => {
       state: AppState.currentState,
     },
   ]);
+  const isMounted = useIsMounted();
 
-  const changeEventListener = useCallback((nextAppState: AppStateStatus) => {
-    setAppStateHistory((history) => {
-      return [...history, {event: 'change', timestamp: new Date(), state: nextAppState}];
-    });
-  }, []);
+  const changeEventListener = useCallback(
+    (nextAppState: AppStateStatus) => {
+      if (isMounted()) {
+        setAppStateHistory((history) => {
+          return [...history, {event: 'change', timestamp: new Date(), state: nextAppState}];
+        });
+      }
+    },
+    [isMounted],
+  );
 
   const registerChangeEventListener = () => {
     AppState.addEventListener('change', changeEventListener);
