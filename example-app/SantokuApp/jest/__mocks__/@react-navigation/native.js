@@ -19,7 +19,6 @@ Object.defineProperty(global.__mocks, 'navigation', {value: mock});
 
 // テストケースごとにnavigationのモックは初期化しておく。
 beforeEach(() => {
-  console.log('before each');
   Object.keys(global.__mocks.navigation).forEach((key) => {
     mock[key].mockClear();
   });
