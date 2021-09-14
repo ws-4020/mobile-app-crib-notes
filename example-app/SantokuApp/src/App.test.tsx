@@ -7,12 +7,14 @@ import {App} from './App';
 
 // 実際にnavigateさせるので、React Navigationのモックは解除しておく。
 jest.unmock('@react-navigation/native');
+beforeEach(() => {
+  // 画面遷移時のアニメーションが、コンポーネントのアンマウント後にステートを更新してしまうようで、
+  // テストは成功するものの、エラーログが出力されてしまう。
+  // タイマーを使わないようにして、アニメーションを動かさないことで回避しているつもり。
+  jest.useFakeTimers();
+});
 
 describe('App', () => {
-  beforeEach(() => {
-    jest.useFakeTimers();
-  });
-
   it('マウントされたときに正常にレンダリングされること', () => {
     const app = render(<App />);
     expect(app.queryByTestId('HomeScreen')).not.toBeNull();
