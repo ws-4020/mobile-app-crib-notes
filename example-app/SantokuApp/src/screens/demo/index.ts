@@ -1,2 +1,2 @@
-export * from './AppState';
+export * from './app-state';
 export * from './Demo';

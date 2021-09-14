@@ -1,6 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {Home, Instructions, ApplicationInfo, AppStateScreen, Demo} from 'screens';
+import {Home, Instructions, ApplicationInfo, Demo, AppState} from 'screens';
 
 import {ErrorCase} from '../screens/demo/error/ErrorCase';
 import {ErrorInEventHandler} from '../screens/demo/error/ErrorInEventHandler';
@@ -18,7 +18,7 @@ export const RootStackNav: React.FC = () => {
       <nav.Screen name="Instructions" component={Instructions} />
       <nav.Screen name="AppInfo" component={ApplicationInfo} options={{title: 'Application Information'}} />
       <nav.Screen {...Demo} />
-      <nav.Screen name="AppState" component={AppStateScreen} options={{title: 'AppState Test'}} />
+      <nav.Screen {...AppState} />
       <nav.Screen name={ErrorCase.ScreenName} component={ErrorCase.Screen} />
       <nav.Screen name={ErrorInEventHandler.ScreenName} component={ErrorInEventHandler.Screen} />
       <nav.Screen name={ErrorInUseEffect.ScreenName} component={ErrorInUseEffect.Screen} />
