@@ -1,11 +1,11 @@
-import {useNavigation} from '@react-navigation/native';
-import React from 'react';
-import {FlatList} from 'react-native';
-import {ListItem} from 'react-native-elements';
+import {NavigationProp, ParamListBase, useNavigation} from '@react-navigation/native';
+import React, {useMemo} from 'react';
 
+import {DemoLinkItemData} from './DemoLinkItem';
+import {DemoTemplate} from './DemoTemplate';
 import {ErrorCase} from './error/ErrorCase';
 
-const demos = [
+const demoScreenList = [
   {
     title: 'AppState',
     to: 'AppState',
@@ -16,23 +16,26 @@ const demos = [
   },
 ];
 
-export const Demo: React.FC = () => {
+const addOnPressHandlerToItems = (navigation: NavigationProp<ParamListBase>) => (demo: {title: string; to: string}) => {
+  return {
+    ...demo,
+    onPress: () => navigation.navigate(demo.to),
+  };
+};
+
+const keyExtractor = (item: DemoLinkItemData, index: number) => item.to + index.toString();
+
+const name = 'Demo';
+const Screen: React.FC = () => {
   const navigation = useNavigation();
-  return (
-    <FlatList
-      data={demos}
-      renderItem={({item}) => {
-        return (
-          <ListItem bottomDivider onPress={() => navigation.navigate(item.to)}>
-            <ListItem.Content>
-              <ListItem.Title>{item.title}</ListItem.Title>
-            </ListItem.Content>
-            <ListItem.Chevron />
-          </ListItem>
-        );
-      }}
-      keyExtractor={(item, index) => item.to + index.toString()}
-      testID="DemoScreen"
-    />
-  );
+  const demoItems = useMemo(() => demoScreenList.map(addOnPressHandlerToItems(navigation)), [navigation]);
+  return <DemoTemplate testID="DemoScreen" items={demoItems} keyExtractor={keyExtractor} />;
+};
+
+export const Demo = {
+  component: Screen,
+  name,
+  options: {
+    title: 'Demo Screens',
+  },
 };

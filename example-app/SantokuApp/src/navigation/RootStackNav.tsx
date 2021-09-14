@@ -17,7 +17,7 @@ export const RootStackNav: React.FC = () => {
       <nav.Screen {...Home} />
       <nav.Screen name="Instructions" component={Instructions} />
       <nav.Screen name="AppInfo" component={ApplicationInfo} options={{title: 'Application Information'}} />
-      <nav.Screen name="Demo" component={Demo} options={{title: 'Demo Screens'}} />
+      <nav.Screen {...Demo} />
       <nav.Screen name="AppState" component={AppStateScreen} options={{title: 'AppState Test'}} />
       <nav.Screen name={ErrorCase.ScreenName} component={ErrorCase.Screen} />
       <nav.Screen name={ErrorInEventHandler.ScreenName} component={ErrorInEventHandler.Screen} />
