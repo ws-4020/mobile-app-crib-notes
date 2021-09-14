@@ -14,7 +14,7 @@ const nav = createStackNavigator();
 export const RootStackNav: React.FC = () => {
   return (
     <nav.Navigator initialRouteName={Home.name}>
-      <nav.Screen name="Home" component={Home} options={{headerShown: false}} />
+      <nav.Screen {...Home} />
       <nav.Screen name="Instructions" component={Instructions} />
       <nav.Screen name="AppInfo" component={ApplicationInfo} options={{title: 'Application Information'}} />
       <nav.Screen name="Demo" component={Demo} options={{title: 'Demo Screens'}} />

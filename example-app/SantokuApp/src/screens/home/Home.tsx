@@ -1,33 +1,37 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useCallback, useContext} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Button, Text, ThemeContext} from 'react-native-elements';
+import {ThemeContext} from 'react-native-elements';
 
-export const Home: React.FC = () => {
+import {HomeTemplate} from './HomeTemplate';
+
+const useNavigate = (screen: string) => {
   const navigation = useNavigation();
+  return useCallback(() => navigation.navigate(screen), [navigation, screen]);
+};
+
+const name = 'Home';
+const Screen: React.FC = () => {
   const {theme} = useContext(ThemeContext);
-  const onGoToInstructionButtonPress = useCallback(() => navigation.navigate('Instructions'), [navigation]);
-  const onViewApplicationInformationButtonPress = useCallback(() => navigation.navigate('AppInfo'), [navigation]);
-  const onDemoButtonPress = useCallback(() => navigation.navigate('Demo'), [navigation]);
+  const onGoToInstructionButtonPress = useNavigate('Instructions');
+  const onViewApplicationInformationButtonPress = useNavigate('AppInfo');
+  const onGoToDemoButtonPress = useNavigate('Demo');
+
   return (
-    <View style={StyleSheet.flatten([styles.container, {backgroundColor: theme.colors?.primary}])} testID="HomeScreen">
-      <Text h1 style={styles.textColor}>
-        Hello, World!
-      </Text>
-      <Button title="Go to instructions" onPress={onGoToInstructionButtonPress} />
-      <Button title="View application information" onPress={onViewApplicationInformationButtonPress} />
-      <Button title="Demo" onPress={onDemoButtonPress} testID="goToDemoButton" />
-    </View>
+    <HomeTemplate
+      testID="HomeScreen"
+      theme={theme}
+      onGoToInstructionButtonPress={onGoToInstructionButtonPress}
+      onViewApplicationInformationButtonPress={onViewApplicationInformationButtonPress}
+      onGoToDemoButtonPress={onGoToDemoButtonPress}
+    />
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+// Navigatorに登録する情報
+export const Home = {
+  component: Screen,
+  name,
+  options: {
+    headerShown: false,
   },
-  textColor: {
-    color: '#fefefe',
-  },
-});
+};
