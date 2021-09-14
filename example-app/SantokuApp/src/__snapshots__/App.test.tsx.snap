@@ -198,6 +198,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                             "fontSize": 51.42857142857143,
                           }
                         }
+                        testID="HelloWorld"
                       >
                         Hello, World!
                       </Text>
@@ -238,6 +239,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                               "opacity": 1,
                             }
                           }
+                          testID="goToInstructionsButton"
                         >
                           <View
                             style={
@@ -305,6 +307,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                               "opacity": 1,
                             }
                           }
+                          testID="viewApplicationInformationButton"
                         >
                           <View
                             style={
