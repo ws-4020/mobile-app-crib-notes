@@ -7,13 +7,14 @@ import {StateChangedEventRecord} from './useAppStateHistory';
 type AppStateHistoryListItemProps = {
   item: StateChangedEventRecord;
 };
+
 export const AppStateHistoryListItem: React.FC<AppStateHistoryListItemProps> = ({item}) => {
   return (
     <ListItem bottomDivider>
       <View style={styles.record}>
         <View style={styles.stateAndEvent}>
+          <Text>{item.event}</Text>
           <Text style={styles.state}>{item.state}</Text>
-          <Text style={styles.event}>{item.event}</Text>
         </View>
         <Text style={styles.timestamp}>{item.timestamp?.toISOString()}</Text>
       </View>
@@ -23,7 +24,6 @@ export const AppStateHistoryListItem: React.FC<AppStateHistoryListItemProps> = (
 const styles = StyleSheet.create({
   record: {flex: 1, flexDirection: 'row', justifyContent: 'space-between'},
   stateAndEvent: {flex: 1, flexDirection: 'row'},
-  state: {fontWeight: 'bold'},
-  event: {marginLeft: 5},
+  state: {fontWeight: 'bold', marginLeft: 5},
   timestamp: {color: '#666666'},
 });
