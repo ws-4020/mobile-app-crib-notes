@@ -98,7 +98,7 @@ Dynamic Linksではアプリをインストールしていないユーザがデ�
 
 しかし、Firebase SDKの[実装](https://github.com/firebase/firebase-ios-sdk/blob/8.7.0/FirebaseDynamicLinks/Sources/FIRDynamicLinkNetworking.m#L190)を見ると、デバイスの情報なども利用してサーバからダイナミックリンクURLを取得しているように見えます。
 
-実際に次のようにアプリを起動すると、クリップボードに値がない場合でも、ディープリンクのURLが読み取れます。
+実際に次のようにアプリを起動すると、クリップボードにディープリンクURLがコピーされていない場合でも、ディープリンクURLを取得できます。
 
  - アプリをインストールしていないデバイスでディープリンクのURLを開く
  - iOSでアプリがインストールされてない場合に表示される[プレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)のOpenボタンをタップする
