@@ -1,4 +1,6 @@
-const mock = {
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
+
+const mock: jest.Mocked<NavigationProp<ParamListBase>> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
   dangerouslyGetParent: jest.fn(),
@@ -15,16 +17,14 @@ const mock = {
   setParams: jest.fn(),
 };
 
-Object.defineProperty(global.__mocks, 'navigation', {value: mock});
+Object.defineProperty(__mocks, 'navigation', {value: mock});
 
 // テストケースごとにnavigationのモックは初期化しておく。
 beforeEach(() => {
-  Object.keys(global.__mocks.navigation).forEach((key) => {
-    mock[key].mockClear();
-  });
+  (Object.values(mock) as jest.Mock[]).forEach((fn) => fn.mockClear());
 });
 
-module.exports = {
+export default {
   ...jest.requireActual('@react-navigation/native'),
   useNavigation: () => mock,
 };
