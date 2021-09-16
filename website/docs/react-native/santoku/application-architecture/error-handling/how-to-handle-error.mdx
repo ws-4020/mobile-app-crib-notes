@@ -99,7 +99,7 @@ const Component = () => {
     }
 
     setTimeout(() => {
-      // コールバック関数内でtry...catchする
+      // コールバック関数内でエラーを捕捉する
       try {
         const result = syncFunction();
         // 正常時の処理
@@ -114,7 +114,7 @@ const Component = () => {
 ```
 
 :::note
-コンポーネントのライフサイクルに応じた同期処理で発生したエラーも、`Error Boundary`で捕捉できます。しかし、Reactコンポーネントで発生したエラー全てを`Error Boundary`で捕捉してしまうと、個々のエラーに応じた処理を実施することが難しくなります。
+コンポーネントのライフサイクルに応じた同期処理で発生したエラーも、`Error Boundary`で捕捉できます。しかし、それらのエラーも`Error Boundary`で捕捉してしまうと、個々のエラーに応じた処理を実施することが難しくなります。
 
 そのため、JSX以外の同期処理で発生したエラーについては`Error Boundary`を使用しないで、個別にエラー処理を実施します。
 :::
@@ -135,7 +135,7 @@ const Component = () => {
     }
 
     setTimeout(() => {
-      // コールバック関数内でtry...catchする
+      // コールバック関数内でエラーを捕捉する
       try {
         const result = syncFunction();
         // 正常時の処理
