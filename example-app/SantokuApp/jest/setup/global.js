@@ -3,7 +3,7 @@
 // 例えば、React Navigationの`navigation.navigate`のように、モックインスタンスの検証が必要な場合は、
 // このオブジェクトに設定して、テストから参照できるようにしておく必要があります。
 //
-// React Navigationの`useNavigation`は、`jest/__mocks__/@react-navigation/native.js`でモック化されて、
+// React Navigationの`useNavigation`は、`jest/__mocks__/@react-navigation/native.ts`でモック化されて、
 // `global.__mocks`に登録されています。
 //
 // テストでは、`expect(__mocks.navigation.navigate).toBeCalledWith('Screen')`のようにして、
