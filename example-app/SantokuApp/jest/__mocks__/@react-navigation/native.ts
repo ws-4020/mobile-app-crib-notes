@@ -19,10 +19,14 @@ const mock: jest.Mocked<ReturnType<typeof useNavigation>> = {
 
 Object.defineProperty(__mocks, 'navigation', {value: mock});
 
-// テストケースごとにnavigationのモックは初期化しておく。
-beforeEach(() => {
-  (Object.values(mock) as jest.Mock[]).forEach((fn) => fn.mockClear());
-});
+// テストケースごとにモックは初期化しておく。
+beforeEach(() =>
+  Object.values(mock).forEach((fn) => {
+    if (jest.isMockFunction(fn)) {
+      fn.mockClear();
+    }
+  }),
+);
 
 export default {
   ...jest.requireActual('@react-navigation/native'),
