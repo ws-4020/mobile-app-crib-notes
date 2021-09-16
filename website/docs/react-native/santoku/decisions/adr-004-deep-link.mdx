@@ -95,7 +95,7 @@ Dynamic Linksではアプリをインストールしていないユーザがデ�
 一方で、[iOSのペーストボードの使用を無効に](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)設定しても、初回起動時に読み取ることができます。
 
 :::note
-[公式ドキュメント](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)では、iOSの場合クリップボードを利用するという記載があります。
+[公式ドキュメント](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)には、iOSの場合クリップボードを利用するということは記載されています。
 
 しかし、Firebase SDKの[実装](https://github.com/firebase/firebase-ios-sdk/blob/8.7.0/FirebaseDynamicLinks/Sources/FIRDynamicLinkNetworking.m#L190)を見ると、デバイスの情報なども利用してサーバからダイナミックリンクURLを取得しているように見えます。
 
