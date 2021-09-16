@@ -50,7 +50,7 @@ React Nativeを使用したモバイルアプリでは、発生したエラー�
 |Native Modules - Android（Java）|・[Thread.UncaughtExceptionHandler](https://developer.android.com/reference/java/lang/Thread.UncaughtExceptionHandler?hl=ja)|
 |Native Modules - iOS（Objective-C）|・[NSSetUncaughtExceptionHandler](https://developer.apple.com/documentation/foundation/1409609-nssetuncaughtexceptionhandler?language=objc) + シグナルハンドラ（※3）|
 
-（※1）`setTimeout`や`requestAnimationFrame`に渡すコールバック関数など
+（※1）`setTimeout`や`requestAnimationFrame`に渡すコールバック関数などが該当します。
 
 （※2）Promiseで発生するエラーをハンドリングする方法としては、[rejection-tracking](https://github.com/then/promise)を使用する方法があります。しかし十分な検証ができていない事や、[rejection-trackingのドキュメント](https://github.com/then/promise#unhandled-rejections)において全てのエラーを捕捉することは開発時のみ使用することが推奨されているため、ここには載せていません。
 
