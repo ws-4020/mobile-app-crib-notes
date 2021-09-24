@@ -3,6 +3,8 @@ import {activateKeepAwake} from 'expo-keep-awake';
 import {RootStackNav} from 'navigation';
 import React from 'react';
 
+import {BundledSystemMessagesLoader, loadSystemMessages} from './framework/message';
+
 export const App = () => {
   // 開発中は画面がスリープしないようにしておきます。
   if (__DEV__) {
@@ -11,6 +13,8 @@ export const App = () => {
 
   // Firebase Crashlyticsの初期化
   require('@react-native-firebase/crashlytics');
+  // アプリ内で使用するメッセージのロード
+  loadSystemMessages(new BundledSystemMessagesLoader());
 
   return (
     <NavigationContainer>
