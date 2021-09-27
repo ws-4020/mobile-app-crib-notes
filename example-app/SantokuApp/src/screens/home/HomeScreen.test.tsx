@@ -19,18 +19,18 @@ describe('Home', () => {
   it('Demoをタップすると、デモ画面に遷移すること', () => {
     fireEvent.press(app.getByTestId('goToDemoButton'));
     expect(__mocks.navigation.navigate).toHaveBeenCalledTimes(1);
-    expect(__mocks.navigation.navigate).toHaveBeenCalledWith('Demo');
+    expect(__mocks.navigation.navigate).toHaveBeenCalledWith('DemoStackNav', {screen: 'Demo'});
   });
 
   it('Go to instructionsをタップすると、Reactの説明画面に遷移すること', () => {
     fireEvent.press(app.getByTestId('goToInstructionsButton'));
     expect(__mocks.navigation.navigate).toHaveBeenCalledTimes(1);
-    expect(__mocks.navigation.navigate).toHaveBeenCalledWith('Instructions');
+    expect(__mocks.navigation.navigate).toHaveBeenCalledWith('DemoStackNav', {screen: 'Instructions'});
   });
 
   it('Application Informationをタップすると、アプリ情報画面に遷移すること', () => {
     fireEvent.press(app.getByTestId('viewApplicationInformationButton'));
     expect(__mocks.navigation.navigate).toHaveBeenCalledTimes(1);
-    expect(__mocks.navigation.navigate).toHaveBeenCalledWith('AppInfo');
+    expect(__mocks.navigation.navigate).toHaveBeenCalledWith('DemoStackNav', {screen: 'AppInfo'});
   });
 });

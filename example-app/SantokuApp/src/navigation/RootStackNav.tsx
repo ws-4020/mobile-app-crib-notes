@@ -1,36 +1,20 @@
-import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {
-  HomeScreen,
-  InstructionsScreen,
-  AppInfoScreen,
-  DemoScreen,
-  AppStateScreen,
-  ErrorCaseScreen,
-  ErrorInEventHandlerScreen,
-  ErrorInUseEffectScreen,
-  ErrorInUseEffectSyncProcessScreen,
-  ErrorInUseEffectAsyncProcessScreen,
-  ErrorInReactComponentScreen,
-  ErrorInNativeModuleScreen,
-} from 'screens';
+import {createNativeStackNavigator} from 'react-native-screens/native-stack';
+import {HomeScreen} from 'screens';
 
-const nav = createStackNavigator();
+import {DemoStackNav} from './DemoStackNav';
+
+const nav = createNativeStackNavigator();
 export const RootStackNav: React.FC = () => {
   return (
-    <nav.Navigator initialRouteName={HomeScreen.name}>
+    <nav.Navigator
+      initialRouteName={HomeScreen.name}
+      screenOptions={{
+        headerShown: false,
+        stackPresentation: 'formSheet',
+      }}>
       <nav.Screen {...HomeScreen} />
-      <nav.Screen {...InstructionsScreen} />
-      <nav.Screen {...AppInfoScreen} />
-      <nav.Screen {...DemoScreen} />
-      <nav.Screen {...AppStateScreen} />
-      <nav.Screen {...ErrorCaseScreen} />
-      <nav.Screen {...ErrorInEventHandlerScreen} />
-      <nav.Screen {...ErrorInUseEffectScreen} />
-      <nav.Screen {...ErrorInUseEffectSyncProcessScreen} />
-      <nav.Screen {...ErrorInUseEffectAsyncProcessScreen} />
-      <nav.Screen {...ErrorInReactComponentScreen} />
-      <nav.Screen {...ErrorInNativeModuleScreen} />
+      <nav.Screen {...DemoStackNav} />
     </nav.Navigator>
   );
 };

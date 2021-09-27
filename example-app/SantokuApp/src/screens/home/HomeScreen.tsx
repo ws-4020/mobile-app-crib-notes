@@ -4,17 +4,17 @@ import {ThemeContext} from 'react-native-elements';
 
 import {HomeTemplate} from './HomeTemplate';
 
-const useNavigate = (screen: string) => {
+const useNavigateToDemoStackScreen = (screen: string) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate(screen), [navigation, screen]);
+  return useCallback(() => navigation.navigate('DemoStackNav', {screen}), [navigation, screen]);
 };
 
 const ScreenName = 'Home';
 const Screen: React.FC = () => {
   const {theme} = useContext(ThemeContext);
-  const onGoToInstructionButtonPress = useNavigate('Instructions');
-  const onViewApplicationInformationButtonPress = useNavigate('AppInfo');
-  const onGoToDemoButtonPress = useNavigate('Demo');
+  const onGoToInstructionButtonPress = useNavigateToDemoStackScreen('Instructions');
+  const onViewApplicationInformationButtonPress = useNavigateToDemoStackScreen('AppInfo');
+  const onGoToDemoButtonPress = useNavigateToDemoStackScreen('Demo');
 
   return (
     <HomeTemplate
@@ -31,7 +31,4 @@ const Screen: React.FC = () => {
 export const HomeScreen = {
   component: Screen,
   name: ScreenName,
-  options: {
-    headerShown: false,
-  },
 };
