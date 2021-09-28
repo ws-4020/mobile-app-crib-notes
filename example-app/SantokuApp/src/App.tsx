@@ -14,7 +14,9 @@ export const App = () => {
   // Firebase Crashlyticsの初期化
   require('@react-native-firebase/crashlytics');
   // アプリ内で使用するメッセージのロード
-  loadSystemMessages(new BundledSystemMessagesLoader());
+  loadSystemMessages(new BundledSystemMessagesLoader()).catch(() => {
+    // アプリにバンドルしているメッセージのロードは失敗しない想定
+  });
 
   return (
     <NavigationContainer>

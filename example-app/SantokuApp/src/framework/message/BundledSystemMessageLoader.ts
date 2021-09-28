@@ -1,12 +1,12 @@
-import {BundledSystemMessages} from '../../generated/BundledSystemMessages';
+import {BundledSystemMessages, BundledSystemMessagesType} from '../../generated/BundledSystemMessages';
 import {SystemMessagesLoader} from './SystemMessage';
 
 /**
  * アプリ内にバンドルされたシステムメッセージをロードするクラスです。
  */
-class BundledSystemMessagesLoader implements SystemMessagesLoader<typeof BundledSystemMessages> {
+class BundledSystemMessagesLoader implements SystemMessagesLoader<BundledSystemMessagesType> {
   load() {
-    return BundledSystemMessages;
+    return new Promise<BundledSystemMessagesType>((resolve) => resolve(BundledSystemMessages));
   }
 }
 
