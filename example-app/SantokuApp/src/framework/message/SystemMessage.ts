@@ -4,7 +4,7 @@ import {SystemMessageKey} from '../../generated/BundledSystemMessages';
  * システムメッセージをロードします。
  */
 interface SystemMessagesLoader<T extends Record<SystemMessageKey, string>> {
-  load(): T;
+  load(): Promise<T>;
 }
 
 let cache: Record<string, string> | undefined;
@@ -13,8 +13,8 @@ let cache: Record<string, string> | undefined;
  * システムメッセージをロードします。
  * @param loader システムメッセージをロードするクラス
  */
-function loadSystemMessages(loader: SystemMessagesLoader<Record<SystemMessageKey, string>>) {
-  cache = loader.load();
+async function loadSystemMessages(loader: SystemMessagesLoader<Record<SystemMessageKey, string>>) {
+  cache = await loader.load();
 }
 
 /**
