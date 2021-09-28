@@ -1,4 +1,4 @@
-import {SystemErrorCode} from '../../generated/BundledSystemMessages';
+import {SystemMessageKey} from '../../generated/BundledSystemMessages';
 import {ConsoleTransport} from './ConsoleTransport';
 import {Transport} from './Transport';
 
@@ -44,7 +44,7 @@ class Logger {
    * @param errorCode エラーコード
    * @returns ロガーインスタンス
    */
-  trace(message: string | LogMessageSupplier, errorCode: SystemErrorCode | string): Logger {
+  trace(message: string | LogMessageSupplier, errorCode: SystemMessageKey | string): Logger {
     if (this.isLevelEnabled('trace')) {
       this.transport.trace(resolveMessage(message), errorCode);
     }
@@ -57,7 +57,7 @@ class Logger {
    * @param errorCode エラーコード
    * @returns ロガーインスタンス
    */
-  debug(message: string | LogMessageSupplier, errorCode: SystemErrorCode | string): Logger {
+  debug(message: string | LogMessageSupplier, errorCode: SystemMessageKey | string): Logger {
     if (this.isLevelEnabled('debug')) {
       this.transport.debug(resolveMessage(message), errorCode);
     }
@@ -70,7 +70,7 @@ class Logger {
    * @param errorCode エラーコード
    * @returns ロガーインスタンス
    */
-  info(message: string | LogMessageSupplier, errorCode: SystemErrorCode | string): Logger {
+  info(message: string | LogMessageSupplier, errorCode: SystemMessageKey | string): Logger {
     if (this.isLevelEnabled('info')) {
       this.transport.info(resolveMessage(message), errorCode);
     }
@@ -83,7 +83,7 @@ class Logger {
    * @param errorCode エラーコード
    * @returns ロガーインスタンス
    */
-  warn(message: string | LogMessageSupplier, errorCode: SystemErrorCode | string): Logger {
+  warn(message: string | LogMessageSupplier, errorCode: SystemMessageKey | string): Logger {
     if (this.isLevelEnabled('warn')) {
       this.transport.warn(resolveMessage(message), errorCode);
     }
@@ -96,7 +96,7 @@ class Logger {
    * @param errorCode エラーコード
    * @returns ロガーインスタンス
    */
-  error(message: string | LogMessageSupplier, errorCode: SystemErrorCode | string): Logger {
+  error(message: string | LogMessageSupplier, errorCode: SystemMessageKey | string): Logger {
     if (this.isLevelEnabled('error')) {
       this.transport.error(resolveMessage(message), errorCode);
     }

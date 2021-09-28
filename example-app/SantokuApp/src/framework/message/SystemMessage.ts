@@ -1,9 +1,9 @@
-import {SystemErrorCode} from '../../generated/BundledSystemMessages';
+import {SystemMessageKey} from '../../generated/BundledSystemMessages';
 
 /**
  * システムメッセージをロードします。
  */
-interface SystemMessagesLoader<T extends Record<SystemErrorCode, string>> {
+interface SystemMessagesLoader<T extends Record<SystemMessageKey, string>> {
   load(): T;
 }
 
@@ -13,7 +13,7 @@ let cache: Record<string, string> | undefined;
  * システムメッセージをロードします。
  * @param loader システムメッセージをロードするクラス
  */
-function loadSystemMessages(loader: SystemMessagesLoader<Record<SystemErrorCode, string>>) {
+function loadSystemMessages(loader: SystemMessagesLoader<Record<SystemMessageKey, string>>) {
   cache = loader.load();
 }
 
@@ -23,7 +23,7 @@ function loadSystemMessages(loader: SystemMessagesLoader<Record<SystemErrorCode,
  * @param key システムメッセージのキー
  * @param options システムメッセージのオプション
  */
-function systemMessage(key: SystemErrorCode, ...options: string[]): string {
+function systemMessage(key: SystemMessageKey, ...options: string[]): string {
   if (!cache) {
     throw new Error('System messages was not cached.');
   }
