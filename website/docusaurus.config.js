@@ -9,14 +9,9 @@ const isDraft = organization === draftOrganization;
 
 const copyright = `<div class="no-content">
 <div class="copyright">
-  <div class="copyright-image">
-    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width: 0; height: auto;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
-  </div>
-  <div class="copyright-text">
-    ドキュメントは、<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">クリエイティブ・コモンズ 表示 - 継承 4.0 国際 ライセンス</a
-    >の下に提供されており、コードサンプルは<a rel="license" href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a
-    >の下に提供されています。
-  </div>
+  ドキュメントは、<a rel="license" href="https://fintan.jp/?page_id=201" target="_blank">Fintan コンテンツ 使用許諾条項</a
+  >の下に提供されており、コードサンプルは<a rel="license" href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache 2.0 License</a
+  >の下に提供されています。
 </div>
 <div class="supplementary">
   <a href="/${project}/terms-of-use/" class="footer__link-item">当サイトのご利用にあたって</a>
@@ -91,7 +86,10 @@ module.exports = {
               label: 'Learn',
               to: 'react-native/learn',
             },
-            ...(isDraft ? [{label: 'Example App', to: 'react-native/santoku'}] : []),
+            {
+              label: 'Example App',
+              to: 'react-native/santoku',
+            },
             {
               label: 'Pitfalls',
               to: 'react-native/common-pitfalls',
@@ -127,10 +125,13 @@ module.exports = {
               to: 'react-native/learn',
             },
             {
+              label: 'Example App',
+              to: 'react-native/santoku',
+            },
+            {
               label: 'Pitfalls',
               to: 'react-native/common-pitfalls',
             },
-            ...(isDraft ? [{label: 'Example App', to: 'react-native/santoku', position: 'left'}] : []),
           ],
         },
         {
