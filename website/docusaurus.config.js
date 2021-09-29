@@ -125,7 +125,10 @@ module.exports = {
               label: 'Pitfalls',
               to: 'react-native/common-pitfalls',
             },
-            ...(isDraft ? [{label: 'Example App', to: 'react-native/santoku', position: 'left'}] : []),
+            {
+              label: 'Example App',
+              to: 'react-native/santoku',
+            },
           ],
         },
         {
