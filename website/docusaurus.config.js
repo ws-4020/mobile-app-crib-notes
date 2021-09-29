@@ -125,12 +125,12 @@ module.exports = {
               to: 'react-native/learn',
             },
             {
-              label: 'Pitfalls',
-              to: 'react-native/common-pitfalls',
-            },
-            {
               label: 'Example App',
               to: 'react-native/santoku',
+            },
+            {
+              label: 'Pitfalls',
+              to: 'react-native/common-pitfalls',
             },
           ],
         },
