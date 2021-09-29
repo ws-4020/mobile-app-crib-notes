@@ -59,7 +59,7 @@ const overviews = [
 | DebugAdvanced                                | iOS端末                        | [USB接続でiOS端末にインストール（Appの高度な機能）](development-environment/03.setting-up-ios-advanced-run-on-device.mdx) |
 | ReleaseInHouse、Release                      | iOS端末                        | [iOSアプリの配布用ビルドの設定](development-environment/11.setting-up-ios-distribution-build.mdx)                                                 |
 
-[^1]: [基本的なセットアップ](#基本的なセットアップ)は、すべてのビルドタイプでのビルドに必要な手順です。
+[^1]: [基本的なセットアップ](development-environment/01.basic-setup.mdx)は、すべてのビルドタイプでのビルドに必要な手順です。
 
 ## 配布用アプリのビルド環境構築
 
@@ -90,4 +90,4 @@ export const v = [
 bundle exec fastlane <Platform: ios/android> <Lane>
 ```
 
-用意してあるレーンは、`bundle exec fastlane lanes`を実行すると確認できます。レーンの詳細が確認したい場合は、[Fastfile](https://github.com/{@inject:organization}/blob/master/example-app/SantokuApp/fastlane/Fastfile)を参照してください。
+用意してあるレーンは、`bundle exec fastlane lanes`を実行すると確認できます。レーンの詳細が確認したい場合は、[Fastfile](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/fastlane/Fastfile)を参照してください。
