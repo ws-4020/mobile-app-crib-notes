@@ -11,7 +11,6 @@ export const RootStackNav: React.FC = () => {
       initialRouteName={HomeScreen.name}
       screenOptions={{
         headerShown: false,
-        stackPresentation: 'formSheet',
       }}>
       <nav.Screen {...HomeScreen} />
       <nav.Screen {...DemoStackNav} />

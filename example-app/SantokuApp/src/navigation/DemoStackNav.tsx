@@ -50,4 +50,7 @@ export const Screen: React.FC = () => {
 export const DemoStackNav = {
   component: Screen,
   name,
+  options: {
+    stackPresentation: 'formSheet' as const,
+  },
 };
