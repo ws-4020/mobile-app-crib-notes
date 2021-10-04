@@ -17,3 +17,7 @@ Android用には、次の命名ルールで`android/src`に設定ファイルを
 ```console
 android/app/src/<variant>/google-services.json
 ```
+
+`<variant>`は、ビルドバリアント名を設定します。例えば、ビルドタイプが`ReleaseInHouse`でプロダクトフレーバーが`DevSantokuApp`の場合は、`devSantokuAppReleaseInHouse`となります。先頭の文字は小文字となることに注意してください。
+
+ビルドバリアントの詳細については、[ビルド](../build-configuration.mdx)を参照してください。
