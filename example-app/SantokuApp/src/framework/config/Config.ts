@@ -9,17 +9,16 @@ import {Config as RNConfig} from 'react-native-config';
  * console.log(Config.appNameHome);
  * ```
  */
-class Config {
-  get appIdFlavorSuffix(): string {
+export abstract class Config {
+  static get appIdFlavorSuffix(): string {
     return RNConfig.APP_ID_FLAVOR_SUFFIX;
   }
 
-  get appNameHome(): string {
+  static get appNameHome(): string {
     return RNConfig.APP_NAME_HOME;
   }
 
-  get provisioningProfileFlavor(): string {
+  static get provisioningProfileFlavor(): string {
     return RNConfig.PROVISIONING_PROFILE_FLAVOR;
   }
 }
-export const config = new Config();
