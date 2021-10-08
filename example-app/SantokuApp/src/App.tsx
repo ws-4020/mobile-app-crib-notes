@@ -3,7 +3,7 @@ import {activateKeepAwake} from 'expo-keep-awake';
 import {RootStackNav} from 'navigation';
 import React from 'react';
 
-import {firebaseConfig} from './framework/firebase/FirebaseConfig';
+import {firebaseConfig} from './framework/firebase';
 
 export const App = () => {
   // 開発中は画面がスリープしないようにしておきます。
