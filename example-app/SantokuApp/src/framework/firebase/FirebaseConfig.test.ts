@@ -4,7 +4,6 @@ import {firebaseConfig} from './FirebaseConfig';
 
 describe('Firebase Config', () => {
   test('FirebaseインスタンスのOption情報を取得できるかの検証', () => {
-    // spy.mockReturnValue(mockAppWithNonDummySettings);
     expect(firebaseConfig.options).toEqual({
       appId: 'mocked firebase app id',
       projectId: 'mocked firebase project id',
@@ -26,7 +25,6 @@ describe('Firebase Config', () => {
     spy.mockRestore();
   });
   test('Firebaseの接続情報がダミーではない場合の検証', () => {
-    // spy.mockReturnValue(mockAppWithNonDummySettings);
     expect(firebaseConfig.isDummy).toEqual(false);
   });
 });
