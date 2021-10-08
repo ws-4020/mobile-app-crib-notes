@@ -1,0 +1,1 @@
+export {dummyFirebaseModule} from './DummyFirebaseModule';

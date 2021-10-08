@@ -1,5 +1,5 @@
-import firebase from '@react-native-firebase/app';
 import * as Application from 'expo-application';
+import {firebase} from 'framework/native';
 import {Platform} from 'react-native';
 
 const info = [
