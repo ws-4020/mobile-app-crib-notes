@@ -1,3 +1,3 @@
-import {config} from './Config';
+import {config} from './AppConfig';
 
 export {config};

@@ -1,4 +1,4 @@
-import {Config as RNConfig} from 'react-native-config';
+import {Config} from 'react-native-config';
 
 /**
  * 環境設定値を取得できます。
@@ -9,16 +9,16 @@ import {Config as RNConfig} from 'react-native-config';
  * console.log(Config.appNameHome);
  * ```
  */
-export abstract class Config {
+export abstract class AppConfig {
   static get appIdFlavorSuffix(): string {
-    return RNConfig.APP_ID_FLAVOR_SUFFIX;
+    return Config.APP_ID_FLAVOR_SUFFIX;
   }
 
   static get appNameHome(): string {
-    return RNConfig.APP_NAME_HOME;
+    return Config.APP_NAME_HOME;
   }
 
   static get provisioningProfileFlavor(): string {
-    return RNConfig.PROVISIONING_PROFILE_FLAVOR;
+    return Config.PROVISIONING_PROFILE_FLAVOR;
   }
 }
