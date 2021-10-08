@@ -6,7 +6,7 @@ const dummyProjectId = 'santoku-app-dummy';
  * Firebaseインスタンスの情報を取得するクラスです。
  */
 class FirebaseConfig {
-  private name: string | undefined;
+  private name?: string;
 
   /**
    * コンストラクタ
