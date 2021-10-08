@@ -3,9 +3,6 @@ import firebase from '@react-native-firebase/app';
 import {firebaseConfig} from './FirebaseConfig';
 
 describe('Firebase Config', () => {
-  // afterEach(() => {
-  //   spy.mockClear();
-  // });
   test('FirebaseインスタンスのOption情報を取得できるかの検証', () => {
     // spy.mockReturnValue(mockAppWithNonDummySettings);
     expect(firebaseConfig.options).toEqual({
