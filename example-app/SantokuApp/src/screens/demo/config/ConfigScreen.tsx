@@ -13,6 +13,6 @@ export const ConfigScreen = {
   name: ScreenName,
   component: Screen,
   options: {
-    title: 'Application Information',
+    title: 'Configuration',
   },
 };
