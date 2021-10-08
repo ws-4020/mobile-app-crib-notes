@@ -1,17 +1,17 @@
-import {config} from 'framework/config';
+import {AppConfig} from 'framework';
 
 const info = [
   {
     name: 'APP_ID_FLAVOR_SUFFIX',
-    value: config.appIdFlavorSuffix,
+    value: AppConfig.appIdFlavorSuffix,
   },
   {
     name: 'APP_NAME_HOME',
-    value: config.appNameHome,
+    value: AppConfig.appNameHome,
   },
   {
     name: 'PROVISIONING_PROFILE_FLAVOR',
-    value: config.provisioningProfileFlavor,
+    value: AppConfig.provisioningProfileFlavor,
   },
 ];
 

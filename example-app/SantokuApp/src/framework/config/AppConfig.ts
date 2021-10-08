@@ -4,9 +4,9 @@ import {Config} from 'react-native-config';
  * 環境設定値を取得できます。
  *
  * ```ts
- * import {config} from 'framework/config';
+ * import {AppConfig} from 'framework';
  *
- * console.log(Config.appNameHome);
+ * console.log(AppConfig.appNameHome);
  * ```
  */
 export abstract class AppConfig {
