@@ -9,7 +9,7 @@ const dummyProjectId = 'dummy';
  * Firebaseインスタンスの情報を取得するクラスです。
  */
 export class FirebaseConfig {
-  private app: FirebaseApp;
+  private app: ReactNativeFirebase.FirebaseApp;
 
   /**
    * コンストラクタ
