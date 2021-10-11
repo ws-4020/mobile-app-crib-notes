@@ -1,6 +1,6 @@
 import firebase from '@react-native-firebase/app';
 
-const dummyProjectId = 'santoku-app-dummy';
+const dummyProjectId = 'dummy';
 
 /**
  * Firebaseインスタンスの情報を取得するクラスです。

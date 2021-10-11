@@ -15,7 +15,7 @@ describe('Firebase Config', () => {
       name: 'dummy',
       options: {
         appId: 'dummy firebase app id',
-        projectId: 'santoku-app-dummy',
+        projectId: 'dummy',
       },
       delete: jest.fn(),
       utils: jest.fn(),
