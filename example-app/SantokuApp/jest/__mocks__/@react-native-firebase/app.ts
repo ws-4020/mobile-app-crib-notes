@@ -1,6 +1,6 @@
 import firebase from '@react-native-firebase/app';
 
-const mock = (name: string): ReturnType<typeof firebase.app> => {
+const mock = (name?: string): ReturnType<typeof firebase.app> => {
   return {
     name: name ?? 'DEFAULT',
     options: {
@@ -13,8 +13,6 @@ const mock = (name: string): ReturnType<typeof firebase.app> => {
   };
 };
 
-const app = (name: string) => mock(name);
-
 export default {
-  app,
+  app: mock,
 };
