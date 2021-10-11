@@ -25,11 +25,18 @@ const mockDummySettings = {
 };
 
 describe('Firebase Config', () => {
-  test('Firebaseインスタンス名を指定していない場合はFirebaseインスタンス名がデフォルト値になることの検証', () => {
-    expect(firebaseConfig.name).toEqual('DEFAULT');
+  test('指定した名前でFirebaseインスタンスが生成されることの検証', () => {
+    const spy = jest.spyOn(firebase, 'app');
+    // eslint-disable-next-line no-new
+    new FirebaseConfig('testApp');
+    expect(spy).toHaveBeenCalledWith('testApp');
+    // eslint-disable-next-line no-new
+    new FirebaseConfig();
+    expect(spy).toHaveBeenCalledWith(undefined);
+    spy.mockRestore();
   });
-  test('指定したFirebaseインスタンス名を取得できるかの検証', () => {
-    expect(new FirebaseConfig('testApp').name).toEqual('testApp');
+  test('Firebaseインスタンスの名前を取得できるかの検証', () => {
+    expect(firebaseConfig.name).toEqual('DEFAULT');
   });
   test('FirebaseインスタンスのOption情報を取得できるかの検証', () => {
     expect(firebaseConfig.options).toEqual({
