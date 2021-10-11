@@ -13,10 +13,6 @@ const mock = (name: string): ReturnType<typeof firebase.app> => {
   };
 };
 
-Object.defineProperty(global, 'ReactNativeFirebase', {
-  value: {},
-});
-
 const app = (name: string) => mock(name);
 
 export default {
