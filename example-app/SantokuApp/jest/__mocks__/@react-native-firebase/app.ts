@@ -11,6 +11,10 @@ const mock: ReturnType<typeof firebase.app> = {
   crashlytics: jest.fn(),
 };
 
+Object.defineProperty(global, 'ReactNativeFirebase', {
+  value: {},
+});
+
 const app = () => mock;
 
 export default {

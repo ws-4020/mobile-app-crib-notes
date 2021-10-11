@@ -1,19 +1,28 @@
-import firebase from '@react-native-firebase/app';
+import firebase, {ReactNativeFirebase} from '@react-native-firebase/app';
+
+import FirebaseApp = ReactNativeFirebase.FirebaseApp;
 
 const dummyProjectId = 'dummy';
 
 /**
  * Firebaseインスタンスの情報を取得するクラスです。
  */
-class FirebaseConfig {
-  private name?: string;
+export class FirebaseConfig {
+  private app: FirebaseApp;
 
   /**
    * コンストラクタ
    * @param name Firebaseインスタンスの名前
    */
   constructor(name?: string) {
-    this.name = name;
+    this.app = firebase.app(name);
+  }
+  /**
+   * Firebaseインスタンス名です。
+   * @returns Firebaseインスタンス名
+   */
+  get name() {
+    return this.app.name;
   }
   /**
    * FirebaseインスタンスのOption情報です。
@@ -21,7 +30,7 @@ class FirebaseConfig {
    * @returns Firebaseインスタンスに設定されているOption情報
    */
   get options() {
-    return firebase.app(this.name).options;
+    return this.app.options;
   }
   /**
    * Firebaseの接続情報がダミーかどうかを判定します。

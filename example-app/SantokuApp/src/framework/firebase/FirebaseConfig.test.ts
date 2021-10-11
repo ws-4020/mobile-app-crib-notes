@@ -1,8 +1,33 @@
 import firebase from '@react-native-firebase/app';
 
-import {firebaseConfig} from './FirebaseConfig';
+import {FirebaseConfig, firebaseConfig} from './FirebaseConfig';
+
+const mockNonDummySettings = {
+  name: 'nonDummy',
+  options: {
+    appId: 'non dummy firebase app id',
+    projectId: 'non dummy',
+  },
+  delete: jest.fn(),
+  utils: jest.fn(),
+  crashlytics: jest.fn(),
+};
+
+const mockDummySettings = {
+  name: 'dummy',
+  options: {
+    appId: 'dummy firebase app id',
+    projectId: 'dummy',
+  },
+  delete: jest.fn(),
+  utils: jest.fn(),
+  crashlytics: jest.fn(),
+};
 
 describe('Firebase Config', () => {
+  test('Firebaseインスタンス名を取得できるかの検証', () => {
+    expect(firebaseConfig.name).toEqual('mock');
+  });
   test('FirebaseインスタンスのOption情報を取得できるかの検証', () => {
     expect(firebaseConfig.options).toEqual({
       appId: 'mocked firebase app id',
@@ -11,20 +36,14 @@ describe('Firebase Config', () => {
   });
   test('Firebaseの接続情報がダミーの場合の検証', () => {
     const spy = jest.spyOn(firebase, 'app');
-    spy.mockReturnValue({
-      name: 'dummy',
-      options: {
-        appId: 'dummy firebase app id',
-        projectId: 'dummy',
-      },
-      delete: jest.fn(),
-      utils: jest.fn(),
-      crashlytics: jest.fn(),
-    });
-    expect(firebaseConfig.isDummy).toEqual(true);
+    spy.mockReturnValue(mockDummySettings);
+    expect(new FirebaseConfig().isDummy).toEqual(true);
     spy.mockRestore();
   });
   test('Firebaseの接続情報がダミーではない場合の検証', () => {
-    expect(firebaseConfig.isDummy).toEqual(false);
+    const spy = jest.spyOn(firebase, 'app');
+    spy.mockReturnValue(mockNonDummySettings);
+    expect(new FirebaseConfig().isDummy).toEqual(false);
+    spy.mockRestore();
   });
 });
