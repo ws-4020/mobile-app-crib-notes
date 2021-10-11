@@ -2,29 +2,15 @@
 title: ビルドバリアントごとのアプリ起動方法
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 このアプリケーションでは、ビルドバリアントごとにビルドの種類（リリースビルド、デバッグビルドなど）や接続先のホスト名などを切り替えることができます。
 
 ビルドバリアントの詳細については、[ビルド](../build-configuration.mdx)を参照してください。
 
 ここでは、ビルドバリアントごとにアプリを起動する方法を説明します。
 
-<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+## iOS
 
-<Tabs
-  defaultValue="ios"
-  values={[
-    {label: 'iOS', value: 'ios'},
-    {label: 'Android', value: 'android'},
-  ]}>
-
-<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
-
-<TabItem value="ios">
-
-#### ビルドタイプ：`Debug`、プロダクトフレーバー：`DevSantokuApp`
+### プロダクトフレーバー：`DevSantokuApp`、ビルドタイプ：`Debug`
 
 ```bash
 npm run ios -- --scheme "DevSantokuApp" --configuration "Debug"
@@ -36,53 +22,53 @@ npm run ios -- --scheme "DevSantokuApp" --configuration "Debug"
 npm run ios
 ```
 
-#### ビルドタイプ：`DebugAdvanced`、プロダクトフレーバー：`DevSantokuApp`
+### プロダクトフレーバー：`DevSantokuApp`、ビルドタイプ：`DebugAdvanced`
 
 ```bash
 npm run ios -- --scheme "DevSantokuApp" --configuration "DebugAdvanced"
 ```
 
-#### ビルドタイプ：`ReleaseInHouse`、プロダクトフレーバー：`DevSantokuApp`
+### プロダクトフレーバー：`DevSantokuApp`、ビルドタイプ：`ReleaseInHouse`
 
 ```bash
 npm run ios -- --scheme "DevSantokuApp" --configuration "ReleaseInHouse"
 ```
 
-#### ビルドタイプ：`Release`、プロダクトフレーバー：`DevSantokuApp`
+### プロダクトフレーバー：`DevSantokuApp`、ビルドタイプ：`Release`
 
 ```bash
 npm run ios -- --scheme "DevSantokuApp" --configuration "Release"
 ```
 
-#### ビルドタイプ：`Debug`、プロダクトフレーバー：`SantokuApp`
+### プロダクトフレーバー：`SantokuApp`、ビルドタイプ：`Debug`
 
 ```bash
 npm run ios -- --scheme "SantokuApp" --configuration "Debug"
 ```
 
-#### ビルドタイプ：`DebugAdvanced`、プロダクトフレーバー：`SantokuApp`
+### プロダクトフレーバー：`SantokuApp`、ビルドタイプ：`DebugAdvanced`
 
 ```bash
 npm run ios -- --scheme "SantokuApp" --configuration "DebugAdvanced"
 ```
 
-#### ビルドタイプ：`ReleaseInHouse`、プロダクトフレーバー：`SantokuApp`
+### プロダクトフレーバー：`SantokuApp`、ビルドタイプ：`ReleaseInHouse`
 
 ```bash
 npm run ios -- --scheme "SantokuApp" --configuration "ReleaseInHouse"
 ```
 
-#### ビルドタイプ：`Release`、プロダクトフレーバー：`SantokuApp`
+### プロダクトフレーバー：`SantokuApp`、ビルドタイプ：`Release`
 
 ```bash
 npm run ios -- --scheme "SantokuApp" --configuration "Release"
 ```
 
-</TabItem>
+## Android
 
-<TabItem value="android">
+<!-- markdownlint-disable MD024 -->
 
-#### ビルドタイプ：Debug、プロダクトフレーバー：DevSantokuApp
+### プロダクトフレーバー：`DevSantokuApp`、ビルドタイプ：`Debug`
 
 ```bash
 npm run android -- --variant "devSantokuAppDebug" --appIdSuffix "dev.debug"
@@ -94,48 +80,46 @@ npm run android -- --variant "devSantokuAppDebug" --appIdSuffix "dev.debug"
 npm run android
 ```
 
-#### ビルドタイプ：DebugAdvanced、プロダクトフレーバー：DevSantokuApp
+### プロダクトフレーバー：`DevSantokuApp`、ビルドタイプ：`DebugAdvanced`
 
 ```bash
 npm run android -- --variant "devSantokuAppDebugAdvanced" --appIdSuffix "dev.debugAdvanced"
 ```
 
-#### ビルドタイプ：ReleaseInHouse、プロダクトフレーバー：DevSantokuApp
+### プロダクトフレーバー：`DevSantokuApp`、ビルドタイプ：`ReleaseInHouse`
 
 ```bash
 npm run android -- --variant "devSantokuAppReleaseInHouse" --appIdSuffix "dev.house"
 ```
 
-#### ビルドタイプ：Release、プロダクトフレーバー：DevSantokuApp
+### プロダクトフレーバー：`DevSantokuApp`、ビルドタイプ：`Release`
 
 ```bash
 npm run android -- --variant "devSantokuAppRelease" --appIdSuffix "dev"
 ```
 
-#### ビルドタイプ：Debug、プロダクトフレーバー：SantokuApp
+### プロダクトフレーバー：`SantokuApp`、ビルドタイプ：`Debug`
 
 ```bash
 npm run android -- --variant "santokuAppDebug" --appIdSuffix "debug"
 ```
 
-#### ビルドタイプ：DebugAdvanced、プロダクトフレーバー：SantokuApp
+### プロダクトフレーバー：`SantokuApp`、ビルドタイプ：`DebugAdvanced`
 
 ```bash
 npm run android -- --variant "santokuAppDebugAdvanced" --appIdSuffix "debugAdvanced"
 ```
 
-#### ビルドタイプ：ReleaseInHouse、プロダクトフレーバー：SantokuApp
+### プロダクトフレーバー：`SantokuApp`、ビルドタイプ：`ReleaseInHouse`
 
 ```bash
 npm run android -- --variant "santokuAppReleaseInHouse" --appIdSuffix "house"
 ```
 
-#### ビルドタイプ：Release、プロダクトフレーバー：SantokuApp
+### プロダクトフレーバー：`SantokuApp`、ビルドタイプ：`Release`
 
 ```bash
 npm run android -- --variant "santokuAppRelease" --appIdSuffix ""
 ```
 
-</TabItem>
-
-</Tabs>
+<!-- markdownlint-enable MD024 -->
