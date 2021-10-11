@@ -1,8 +1,6 @@
 import firebase from '@react-native-firebase/app';
 import type {ReactNativeFirebase} from '@react-native-firebase/app';
 
-import FirebaseApp = ReactNativeFirebase.FirebaseApp;
-
 const dummyProjectId = 'dummy';
 
 /**
