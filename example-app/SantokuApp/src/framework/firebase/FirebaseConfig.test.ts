@@ -25,8 +25,11 @@ const mockDummySettings = {
 };
 
 describe('Firebase Config', () => {
-  test('Firebaseインスタンス名を取得できるかの検証', () => {
-    expect(firebaseConfig.name).toEqual('mock');
+  test('Firebaseインスタンス名を指定していない場合はFirebaseインスタンス名がデフォルト値になることの検証', () => {
+    expect(firebaseConfig.name).toEqual('DEFAULT');
+  });
+  test('指定したFirebaseインスタンス名を取得できるかの検証', () => {
+    expect(new FirebaseConfig('testApp').name).toEqual('testApp');
   });
   test('FirebaseインスタンスのOption情報を取得できるかの検証', () => {
     expect(firebaseConfig.options).toEqual({
