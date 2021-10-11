@@ -1,0 +1,258 @@
+openapi: 3.0.0
+info:
+  title: openapi.yml
+  version: '1.0'
+  description: SantokuApp バックエンドAPI
+servers:
+  - url: 'http://localhost:9080/api'
+paths:
+  /signup:
+    parameters: []
+    post:
+      summary: サインアップをリクエストする
+      operationId: post-signup
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                    description: アカウントID
+                  userName:
+                    type: string
+                    description: ユーザー名
+                required:
+                  - accountId
+              examples:
+                example:
+                  value:
+                    accountId: 9bca0d3a-a29e-441f-8373-f9441e875c67
+                    userName: user1
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                  description: ユーザー名
+                password:
+                  type: string
+                  description: パスワード
+              required:
+                - userName
+                - password
+            examples:
+              example:
+                value:
+                  userName: hoge
+                  password: password
+      parameters: []
+      description: ''
+  /accounts/me:
+    get:
+      summary: アカウント情報を取得する
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                    description: アカウントID
+                  userName:
+                    type: string
+                    description: ユーザー名
+                required:
+                  - accountId
+              examples:
+                example:
+                  value:
+                    accountId: 9bca0d3a-a29e-441f-8373-f9441e875c67
+                    userName: user1
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      operationId: get-accounts
+    parameters: []
+  /login:
+    post:
+      summary: ログインする
+      operationId: post-login
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - COMPLETE
+                required:
+                  - status
+              examples:
+                example:
+                  value:
+                    status: COMPLETE
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountId:
+                  type: string
+                  description: アカウントID
+                password:
+                  type: string
+                  description: パスワード
+              required:
+                - accountId
+                - password
+            examples:
+              example:
+                value:
+                  accountId: "30b65d82-8a64-4a3a-a097-031313f43c69"
+                  password: pass123-
+      parameters: []
+      description: ''
+  /logout:
+    post:
+      summary: ログアウトする
+      operationId: post-logout
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      description: ''
+  /systeminfo/messages:
+    get:
+      summary: メッセージ一覧を取得する
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                description: メッセージIDをキーとしたメッセージ一覧
+                additionalProperties:
+                  type: string
+              examples:
+                example:
+                  value:
+                    label.welcome: Welcome
+                    validation.upload.notAllowFileExtension: 'アップロードできるファイルの拡張子は「jpg, jpeg, png, gif」のみです。'
+                    validation.upload.fileUnread: ファイルが壊れているため、読み取ることができません。
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      operationId: get-systeminfo-messages
+  /accounts/me/delete:
+    post:
+      summary: アカウントを削除する
+      operationId: delete-accounts-me-delete
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: パスワード
+              required:
+                - password
+            examples:
+              example:
+                value:
+                  password: 'password'
+components:
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    PayloadTooLarge:
+      description: Payload Too Large
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServiceUnavailable:
+      description: Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      title: Error
+      type: object
+      description: エラーレスポンス
+      properties:
+        code:
+          type: string
+          description: エラーコード
+        message:
+          type: string
+          description: エラーメッセージ
+      required:
+        - code
+        - message
+  securitySchemes: {}

@@ -117,6 +117,11 @@
 
     <dependency>
       <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-fw-web-dbstore</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
       <artifactId>nablarch-core-validation-ee</artifactId>
       <!-- hibernate validatorのバージョンを上げるため -->
       <exclusions>
