@@ -1,4 +1,5 @@
-import firebase, {ReactNativeFirebase} from '@react-native-firebase/app';
+import firebase from '@react-native-firebase/app';
+import type {ReactNativeFirebase} from '@react-native-firebase/app';
 
 import FirebaseApp = ReactNativeFirebase.FirebaseApp;
 
