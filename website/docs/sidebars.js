@@ -259,6 +259,15 @@ module.exports = {
             'react-native/santoku/application-architecture/webview/webview-error-handling',
           ],
         },
+        {
+          type: 'category',
+          label: 'メッセージ管理',
+          items: [
+            'react-native/santoku/application-architecture/message-configuration/overview',
+            'react-native/santoku/application-architecture/message-configuration/message-configuration-rule',
+            'react-native/santoku/application-architecture/message-configuration/message-configuration-library',
+          ],
+        },
       ],
     },
     {
