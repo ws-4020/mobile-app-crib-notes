@@ -1,0 +1,63 @@
+import {MessageKey} from '../../generated/BundledMessages';
+
+/**
+ * メッセージをロードします。
+ */
+interface MessagesLoader {
+  load(): Promise<Record<MessageKey, string>>;
+}
+
+let cache: Record<MessageKey, string> | undefined;
+
+/**
+ * メッセージをロードします。
+ * @param loader メッセージをロードするクラス
+ */
+async function loadMessages(loader: MessagesLoader) {
+  cache = await loader.load();
+}
+
+/**
+ * メッセージを取得します。
+ * {@link loadMessages}を呼び出してして、メッセージをロード後に使用してください。
+ * @param key メッセージのキー
+ * @param options メッセージのオプション
+ *
+ * @example
+ * 定義されているメッセージの例
+ * ```
+ * export const BundledMessages = {
+ *  'validation.email': 'メールアドレスの形式が正しくありません。',
+ *  'validation.required': '{0}を入力してください。',
+ *  'validation.min': '{0}は{1}文字以上の値を入力してください。',
+ * } as const;
+ * ```
+ * @example
+ * メッセージを取得する例
+ * ```
+ * m('validation.email') // メールアドレスの形式が正しくありません。
+ * m('validation.required', 'パスワード') // パスワードを入力してください。
+ * m('validation.min', 'パスワード', '8') // パスワードは8文字以上の値を入力してください。
+ * ```
+ */
+function message(key: MessageKey, ...options: string[]): string {
+  if (!cache) {
+    throw new Error('Messages was not cached.');
+  }
+  return !options.length ? cache[key] : format(cache[key], options);
+}
+
+/**
+ * メッセージをフォーマットします。
+ * @param message メッセージ
+ * @param options メッセージのオプション
+ * @returns フォーマット後のメッセージ
+ */
+function format(message: string, options: string[]): string {
+  return options.reduce((message, option, index) => {
+    return message.replace(`{${index}}`, option);
+  }, message);
+}
+
+export type {MessagesLoader};
+export {message as m, loadMessages};
