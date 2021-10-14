@@ -4,3 +4,42 @@ title: メッセージのロード
 
 ## メッセージのロードと取得
 
+SantokuAppでは、アプリ内にバンドルしたメッセージをアプリ起動時にロードします。
+入出力が発生しない為、ロードは失敗しない想定となっています。
+メッセージのプレースホルダーは...。
+
+```typescript title='アプリ内にバンドルされたメッセージ'
+export const BundledMessages = {
+  'validation.必須入力': '%sを入力してください。',
+  'validation.文字列長': '%sは%d文字以上、%d文字以下で入力してください。',
+  'validation.メール': 'メールアドレスの形式が正しくありません。',
+  // {{省略}}
+} as const;
+```
+
+```typescript jsx title='メッセージロード'
+export const App = () => {
+
+  // アプリ内で使用するメッセージのロード
+  loadMessages(new BundledMessagesLoader()).catch(() => {
+    // アプリにバンドルしているメッセージのロードは失敗しない想定
+  });
+
+}
+```
+
+メッセージの取得方法は次の通りです。
+
+```typescript jsx title='メッセージの取得'
+import {m} from './Message';
+
+ const SignupSchema = Yup.object().shape({
+   name: Yup.string()
+     .min(2, m(validation.文字列長, '名前', 2, 70))
+     .max(70, m(validation.文字列長, '名前', 2, 70))
+     .required(m(validation.必須, '名前')),
+   email: Yup.string()
+     .email(m(validation.メール))
+     .required(m(validation.必須, 'メール')),
+ });
+```
