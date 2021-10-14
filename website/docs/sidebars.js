@@ -241,6 +241,14 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'メッセージ管理',
+          items: [
+            'react-native/santoku/application-architecture/message-configuration/overview',
+            'react-native/santoku/application-architecture/message-configuration/load-message',
+          ],
+        },
+        {
+          type: 'category',
           label: 'ディープリンク',
           items: [
             'react-native/santoku/application-architecture/deep-link/overview',
@@ -257,15 +265,6 @@ module.exports = {
             'react-native/santoku/application-architecture/error-handling/how-to-handle-error',
             'react-native/santoku/application-architecture/http-api/http-api-error-handling',
             'react-native/santoku/application-architecture/webview/webview-error-handling',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'メッセージ管理',
-          items: [
-            'react-native/santoku/application-architecture/message-configuration/overview',
-            'react-native/santoku/application-architecture/message-configuration/message-configuration-rule',
-            'react-native/santoku/application-architecture/message-configuration/message-configuration-library',
           ],
         },
       ],
