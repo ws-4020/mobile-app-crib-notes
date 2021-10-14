@@ -5,14 +5,12 @@ title: メッセージのロード
 ## メッセージのロードと取得
 
 SantokuAppでは、アプリ内にバンドルしたメッセージをアプリ起動時にロードします。
-入出力が発生しない為、ロードは失敗しない想定となっています。
-メッセージのプレースホルダーは...。
+ストレージや外部サービスへの入出力が発生しない為、ロードは失敗しない想定となっています。
+メッセージのプレースホルダーは{n}の書式で定義します。nには挿入句の順番を数値で指定します。
 
 ```typescript title='アプリ内にバンドルされたメッセージ'
 export const BundledMessages = {
-  'validation.必須入力': '%sを入力してください。',
-  'validation.文字列長': '%sは%d文字以上、%d文字以下で入力してください。',
-  'validation.メール': 'メールアドレスの形式が正しくありません。',
+  'msg.error.期限超過タスク': '期限を超過したタスクが{0}件です。',
   // {{省略}}
 } as const;
 ```
@@ -31,15 +29,7 @@ export const App = () => {
 メッセージの取得方法は次の通りです。
 
 ```typescript jsx title='メッセージの取得'
-import {m} from './Message';
+import {m} from 'framework';
 
- const SignupSchema = Yup.object().shape({
-   name: Yup.string()
-     .min(2, m(validation.文字列長, '名前', 2, 70))
-     .max(70, m(validation.文字列長, '名前', 2, 70))
-     .required(m(validation.必須, '名前')),
-   email: Yup.string()
-     .email(m(validation.メール))
-     .required(m(validation.必須, 'メール')),
- });
+console.log(m('msg.error.期限超過タスク', '3')); // => 期限を超過したタスクが3件です。
 ```
