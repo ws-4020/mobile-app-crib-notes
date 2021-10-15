@@ -10,7 +10,7 @@ SantokuAppでは、アプリ内にバンドルしたメッセージをアプリ�
 
 ```typescript title='アプリ内にバンドルされたメッセージ'
 export const BundledMessages = {
-  'app.期限超過タスク{0}件': '期限を超過したタスクが{0}件です。',
+  'app.task.期限超過タスク{0}件': '期限を超過したタスクが{0}件です。',
   // {{省略}}
 } as const;
 ```
@@ -31,5 +31,5 @@ export const App = () => {
 ```typescript jsx title='メッセージの取得'
 import {m} from 'framework';
 
-console.log(m('app.期限超過タスク{0}件', '3')); // => 期限を超過したタスクが3件です。
+console.log(m('app.task.期限超過タスク{0}件', '3')); // => 期限を超過したタスクが3件です。
 ```
