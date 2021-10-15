@@ -23,6 +23,7 @@ async function loadMessages(loader: MessagesLoader) {
  * {@link loadMessages}を呼び出してして、メッセージをロード後に使用してください。
  * @param key メッセージのキー
  * @param options メッセージのオプション
+ * @returns 指定されたメッセージキーに該当するメッセージ。指定されたメッセージキーに該当するメッセージが存在しない場合はメッセージキーを返却
  *
  * @example
  * 定義されているメッセージの例
