@@ -20,7 +20,7 @@ export const App = () => {
   // アプリ内で使用するメッセージのロード
   loadMessages(new BundledMessagesLoader()).catch(() => {
     // アプリにバンドルしているメッセージのロードは失敗しない想定
-    log.error('Failed to load message.', 'MessageLoadingFailure');
+    log.error('Failed to load message.', 'BundledMessagesLoadingFailure');
   });
 
   return (
