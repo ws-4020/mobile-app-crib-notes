@@ -245,7 +245,7 @@ module.exports = {
           items: [
             'react-native/santoku/application-architecture/message-configuration/overview',
             'react-native/santoku/application-architecture/message-configuration/load-message',
-            'react-native/santoku/application-architecture/message-configuration/message-configuration-rule',
+            'react-native/santoku/application-architecture/message-configuration/managed-message',
           ],
         },
         {
