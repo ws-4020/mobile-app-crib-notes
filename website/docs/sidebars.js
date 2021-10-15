@@ -282,6 +282,14 @@ module.exports = {
         },
         {
           type: 'category',
+          label: '設計',
+          items: [
+            'react-native/santoku/development/design',
+            'react-native/santoku/development/design/message-configuration',
+          ],
+        },
+        {
+          type: 'category',
           label: '実装',
           items: [
             'react-native/santoku/development/implement',
