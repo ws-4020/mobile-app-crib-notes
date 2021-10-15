@@ -26,10 +26,6 @@ stages:
         workingDir: '$(appDir)'
         verbose: false
     - task: CmdLine@2
-      displayName: 'gem install fastlane'
-      inputs:
-        script: 'gem install fastlane'
-    - task: CmdLine@2
       displayName: 'fastlane android dev_debug_advanced'
       inputs:
         script: 'fastlane android dev_debug_advanced'
@@ -83,15 +79,11 @@ stages:
         command: ci
         workingDir: '$(appDir)'
         verbose: false
-    - task: CmdLine@2
-      displayName: 'gem install fastlane'
-      inputs:
-        script: 'gem install fastlane'
     - task: CocoaPods@0
       displayName: 'pod install'
       inputs:
         workingDirectory: '$(appDir)/ios'
-        forceRepoUpdate: true
+        forceRepoUpdate: false
     - task: CmdLine@2
       displayName: 'fastlane ios dev_debug_advanced'
       inputs:
