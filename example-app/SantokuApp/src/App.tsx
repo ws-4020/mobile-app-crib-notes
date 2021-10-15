@@ -5,6 +5,7 @@ import React from 'react';
 
 import {BundledMessagesLoader, loadMessages} from './framework';
 import {firebaseConfig} from './framework/firebase';
+import {log} from './framework/logging';
 
 export const App = () => {
   // 開発中は画面がスリープしないようにしておきます。
@@ -19,6 +20,7 @@ export const App = () => {
   // アプリ内で使用するメッセージのロード
   loadMessages(new BundledMessagesLoader()).catch(() => {
     // アプリにバンドルしているメッセージのロードは失敗しない想定
+    log.error('Failed to load message.', 'MessageLoadingFailure');
   });
 
   return (
