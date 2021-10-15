@@ -1,4 +1,5 @@
 import {MessageKey} from '../../generated/BundledMessages';
+import {log} from '../logging';
 
 /**
  * メッセージをロードします。
@@ -43,6 +44,10 @@ async function loadMessages(loader: MessagesLoader) {
 function message(key: MessageKey, ...options: string[]): string {
   if (!cache) {
     throw new Error('Messages was not cached.');
+  }
+  if (cache[key] === undefined) {
+    log.error(`Message was not found. messageKey=[${key}]`, 'MessageNotFound');
+    return key;
   }
   return !options.length ? cache[key] : format(cache[key], options);
 }
