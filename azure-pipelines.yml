@@ -79,11 +79,6 @@ stages:
         command: ci
         workingDir: '$(appDir)'
         verbose: false
-    - task: CocoaPods@0
-      displayName: 'pod install'
-      inputs:
-        workingDirectory: '$(appDir)/ios'
-        forceRepoUpdate: false
     - task: CmdLine@2
       displayName: 'fastlane ios dev_debug_advanced'
       inputs:
