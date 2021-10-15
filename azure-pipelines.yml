@@ -98,7 +98,7 @@ stages:
     - task: CocoaPods@0
       displayName: 'pod install'
       inputs:
-        workingDirectory: ios
+        workingDirectory: '$(appDir)/ios'
         forceRepoUpdate: true
     - task: CmdLine@2
       displayName: 'fastlane ios dev_debug_advanced'
