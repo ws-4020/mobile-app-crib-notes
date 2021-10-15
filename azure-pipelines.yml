@@ -80,11 +80,14 @@ stages:
         workingDir: '$(appDir)'
         verbose: false
     - task: CmdLine@2
+      displayName: 'bundle install'
+      inputs:
+        script: 'bundle install'
+        workingDirectory: '$(appDir)'
+    - task: CmdLine@2
       displayName: 'fastlane ios dev_debug_advanced'
       inputs:
-        script: |
-          bundle install
-          fastlane ios dev_debug_advanced
+        script: 'fastlane ios dev_debug_advanced'
         workingDirectory: '$(appDir)'
     - task: CopyFiles@2
       displayName: 'Copy artifacts to: $(build.artifactstagingdirectory)'
