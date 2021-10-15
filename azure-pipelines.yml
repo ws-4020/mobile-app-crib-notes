@@ -13,7 +13,7 @@ stages:
   displayName: Build Android Application
   jobs:
   - job: build_android_app
-    displayName: [Job] Build Android App
+    displayName: 'Build Android App'
     pool:
       vmImage: macOS-10.15
     steps:
@@ -62,7 +62,7 @@ stages:
   displayName: Build iOS Application
   jobs:
   - job: build_ios_app
-    displayName: [Job] Build iOS App
+    displayName: 'Build iOS App'
     pool:
       vmImage: macOS-10.15
     steps:
