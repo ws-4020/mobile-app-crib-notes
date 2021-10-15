@@ -5,8 +5,6 @@ name: $(date:yyyyMMdd)$(rev:.rr)
 variables:
 - name: appDir
   value: '$(System.DefaultWorkingDirectory)/example-app/SantokuApp'
-- name: npmCacheDir
-  value: '$(Pipeline.Workspace)/.npm'
 
 stages:
 - stage: Android
@@ -21,11 +19,6 @@ stages:
       displayName: 'Use Node 16.x'
       inputs:
         versionSpec: '16.x'
-    - task: Cache@2
-      displayName: 'Cache npm packages'
-      inputs:
-        key: '$(appDir)/package-lock.json'
-        path: '$(npmCacheDir)'
     - task: Npm@1
       displayName: 'npm ci'
       inputs:
@@ -88,11 +81,6 @@ stages:
       displayName: 'Use Node 16.x'
       inputs:
         versionSpec: '16.x'
-    - task: Cache@2
-      displayName: 'Cache npm packages'
-      inputs:
-        key: '$(appDir)/package-lock.json'
-        path: '$(npmCacheDir)'
     - task: Npm@1
       displayName: 'npm ci'
       inputs:
