@@ -1,0 +1,131 @@
+trigger: none
+
+name: $(date:yyyyMMdd)$(rev:.rr)
+
+variables:
+- name: appDir
+  value: '$(System.DefaultWorkingDirectory)/example-app/SantokuApp'
+- name: npmCacheDir
+  value: '$(Pipeline.Workspace)/.npm'
+
+stages:
+- stage: Android
+  displayName: Build Android Application
+  jobs:
+  - job: build_android_app
+    displayName: [Job] Build Android App
+    pool:
+      vmImage: macOS-10.15
+    steps:
+    - task: NodeTool@0
+      displayName: 'Use Node 16.x'
+      inputs:
+        versionSpec: '16.x'
+    - task: Cache@2
+      displayName: 'Cache npm packages'
+      inputs:
+        key: '$(appDir)/package-lock.json'
+        path: '$(npmCacheDir)'
+    - task: Npm@1
+      displayName: 'npm ci'
+      inputs:
+        command: 'ci'
+        workingDir: '$(appDir)'
+        verbose: false
+    - task: UseRubyVersion@0
+      displayName: 'Use Ruby >= 2.7'
+      inputs:
+        versionSpec: '>= 2.7'
+    - task: CmdLine@2
+      displayName: 'gem install fastlane'
+      inputs:
+        script: 'gem install fastlane'
+    - task: CmdLine@2
+      displayName: 'fastlane android dev_debug_advanced'
+      inputs:
+        script: 'fastlane android dev_debug_advanced'
+        workingDirectory: '$(appDir)'
+    - task: CopyFiles@2
+      displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+      inputs:
+        SourceFolder: '$(appDir)/android/app/build'
+        Contents: '**/*.aab'
+        TargetFolder: '$(build.artifactstagingdirectory)'
+      condition: succeededOrFailed()
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+      inputs:
+        PathtoPublish: '$(build.artifactstagingdirectory)'
+      condition: succeededOrFailed()
+
+- stage: iOS
+  displayName: Build iOS Application
+  jobs:
+  - job: build_ios_app
+    displayName: [Job] Build iOS App
+    pool:
+      vmImage: macOS-10.15
+    steps:
+    - task: InstallAppleCertificate@2
+      displayName: 'Install an Apple certificate for DevSantokuApp DebugAdvanced Development'
+      inputs:
+        certSecureFile: '$(AppleDevelopmentCertificateSecureFileUUID)'
+        certPwd: '$(AppleDevelopmentCertificatePassword)'
+    - task: InstallAppleCertificate@2
+      displayName: 'Install Apple certificate for DevSantokuApp DebugAdvanced Distribution'
+      inputs:
+        certSecureFile: '$(AppleDistributionCertificateSecureFileUUID)'
+        certPwd: '$(AppleDistributionCertificatePassword)'
+    - task: InstallAppleProvisioningProfile@1
+      displayName: 'Install an Apple provisioning profile for DevSantokuApp DebugAdvanced Development'
+      inputs:
+        provProfileSecureFile: '$(AppleDevelopmentProvisioningProfileSecureFileUUID)'
+    - task: InstallAppleProvisioningProfile@1
+      displayName: 'Install an Apple provisioning profile for DevSantokuApp DebugAdvanced Distribution'
+      inputs:
+        provProfileSecureFile: '$(AppleDistributionProvisioningProfileSecureFileUUID)'
+    - task: NodeTool@0
+      displayName: 'Use Node 16.x'
+      inputs:
+        versionSpec: '16.x'
+    - task: Cache@2
+      displayName: 'Cache npm packages'
+      inputs:
+        key: '$(appDir)/package-lock.json'
+        path: '$(npmCacheDir)'
+    - task: Npm@1
+      displayName: 'npm ci'
+      inputs:
+        command: ci
+        workingDir: '$(appDir)'
+        verbose: false
+    - task: UseRubyVersion@0
+      displayName: 'Use Ruby = 2.7'
+      inputs:
+        versionSpec: '= 2.7'
+    - task: CmdLine@2
+      displayName: 'gem install fastlane'
+      inputs:
+        script: 'gem install fastlane'
+    - task: CocoaPods@0
+      displayName: 'pod install'
+      inputs:
+        workingDirectory: ios
+        forceRepoUpdate: true
+    - task: CmdLine@2
+      displayName: 'fastlane ios dev_debug_advanced'
+      inputs:
+        script: 'fastlane ios dev_debug_advanced'
+        workingDirectory: '$(appDir)'
+    - task: CopyFiles@2
+      displayName: 'Copy artifacts to: $(build.artifactstagingdirectory)'
+      inputs:
+        SourceFolder: '$(appDir)/ios'
+        Contents: '**/*.ipa'
+        TargetFolder: '$(build.artifactstagingdirectory)'
+      condition: succeededOrFailed()
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+      inputs:
+        PathtoPublish: '$(build.artifactstagingdirectory)'
+      condition: succeededOrFailed()
