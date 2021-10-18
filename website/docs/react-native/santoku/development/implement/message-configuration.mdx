@@ -27,6 +27,5 @@ export const bundledMessages = {
 ```typescript jsx title='メッセージの取得'
 import {m} from 'framework';
 
-console.log(m('app.task.期限超過{0}件エラー', '3'));
-// => 期限を超過したタスクが3件です。確認してください。
+console.log(m('最大{0}件', '3'));  // => 最大3件
 ```
