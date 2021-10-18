@@ -2,16 +2,33 @@ trigger: none
 
 name: $(date:yyyyMMdd)$(rev:.rr)
 
+parameters:
+- name: buildVariants
+  type: object
+  default:
+    - name: 'devSantokuAppDebugAdvanced'
+      laneName: 'dev_debug_advanced'
+      androidAppPath: 'android/app/build/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab'
+      iOSAppPath: 'ios/build/DevSantokuAppDebugAdvanced.ipa'
+      certificates:
+        - secureFileUUIDVariableName: '$(AppleDevelopmentCertificateSecureFileUUID)'
+          certPasswordVariableName: '$(AppleDevelopmentCertificatePassword)'
+        - secureFileUUIDVariableName: '$(AppleDistributionCertificateSecureFileUUID)'
+          certPasswordVariableName: '$(AppleDistributionCertificatePassword)'
+      provisioningProfiles:
+        - secureFileUUIDVariableName: '$(AppleDevelopmentProvisioningProfileSecureFileUUID)'
+        - secureFileUUIDVariableName: '$(AppleDistributionProvisioningProfileSecureFileUUID)'
+
 variables:
 - name: appDir
   value: '$(System.DefaultWorkingDirectory)/example-app/SantokuApp'
 
 stages:
 - stage: Android
-  displayName: Build Android Application
+  displayName: Build Android Applications
   jobs:
   - job: build_android_app
-    displayName: 'Build Android App'
+    displayName: 'Build Android Apps'
     pool:
       vmImage: macOS-10.15
     steps:
@@ -25,16 +42,24 @@ stages:
         command: 'ci'
         workingDir: '$(appDir)'
         verbose: false
-    - task: CmdLine@2
-      displayName: 'fastlane android dev_debug_advanced'
-      inputs:
-        script: 'fastlane android dev_debug_advanced'
-        workingDirectory: '$(appDir)'
+    - ${{ each buildVariant in parameters.buildVariants }}:
+      - task: CmdLine@2
+        displayName: 'Build Android app for ${{buildVariant.name}}'
+        inputs:
+          script: 'fastlane android ${{buildVariant.laneName}}'
+          workingDirectory: '$(appDir)'
     - task: CopyFiles@2
-      displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+      displayName: 'Copy aab files to: $(build.artifactstagingdirectory)'
       inputs:
         SourceFolder: '$(appDir)/android/app/build/outputs'
         Contents: '**/*.aab'
+        TargetFolder: '$(build.artifactstagingdirectory)'
+      condition: succeededOrFailed()
+    - task: CopyFiles@2
+      displayName: 'Copy apk files to: $(build.artifactstagingdirectory)'
+      inputs:
+        SourceFolder: '$(appDir)/android/app/build/outputs'
+        Contents: '**/*.apk'
         TargetFolder: '$(build.artifactstagingdirectory)'
       condition: succeededOrFailed()
     - task: PublishBuildArtifacts@1
@@ -44,31 +69,25 @@ stages:
       condition: succeededOrFailed()
 
 - stage: iOS
-  displayName: Build iOS Application
+  displayName: Build iOS Applications
   jobs:
   - job: build_ios_app
-    displayName: 'Build iOS App'
+    displayName: 'Build iOS Apps'
     pool:
       vmImage: macOS-10.15
     steps:
-    - task: InstallAppleCertificate@2
-      displayName: 'Install an Apple certificate for DevSantokuApp DebugAdvanced Development'
-      inputs:
-        certSecureFile: '$(AppleDevelopmentCertificateSecureFileUUID)'
-        certPwd: '$(AppleDevelopmentCertificatePassword)'
-    - task: InstallAppleCertificate@2
-      displayName: 'Install Apple certificate for DevSantokuApp DebugAdvanced Distribution'
-      inputs:
-        certSecureFile: '$(AppleDistributionCertificateSecureFileUUID)'
-        certPwd: '$(AppleDistributionCertificatePassword)'
-    - task: InstallAppleProvisioningProfile@1
-      displayName: 'Install an Apple provisioning profile for DevSantokuApp DebugAdvanced Development'
-      inputs:
-        provProfileSecureFile: '$(AppleDevelopmentProvisioningProfileSecureFileUUID)'
-    - task: InstallAppleProvisioningProfile@1
-      displayName: 'Install an Apple provisioning profile for DevSantokuApp DebugAdvanced Distribution'
-      inputs:
-        provProfileSecureFile: '$(AppleDistributionProvisioningProfileSecureFileUUID)'
+    - ${{ each buildVariant in parameters.buildVariants }}:
+      - ${{ each certificate in buildVariant.certificates }}:
+        - task: InstallAppleCertificate@2
+          displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
+          inputs:
+            certSecureFile: ${{certificate.secureFileUUIDVariableName}}
+            certPwd: ${{certificate.certPasswordVariableName}}
+      - ${{ each profile in buildVariant.provisioningProfiles }}:
+        - task: InstallAppleProvisioningProfile@1
+          displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
+          inputs:
+            provProfileSecureFile: ${{profile.secureFileUUIDVariableName}}
     - task: NodeTool@0
       displayName: 'Use Node 16.x'
       inputs:
@@ -84,11 +103,12 @@ stages:
       inputs:
         script: 'bundle install'
         workingDirectory: '$(appDir)'
-    - task: CmdLine@2
-      displayName: 'fastlane ios dev_debug_advanced'
-      inputs:
-        script: 'fastlane ios dev_debug_advanced'
-        workingDirectory: '$(appDir)'
+    - ${{ each buildVariant in parameters.buildVariants }}:
+      - task: CmdLine@2
+        displayName: 'Build iOS app for ${{buildVariant.name}}'
+        inputs:
+          script: 'fastlane ios ${{buildVariant.laneName}}'
+          workingDirectory: '$(appDir)'
     - task: CopyFiles@2
       displayName: 'Copy artifacts to: $(build.artifactstagingdirectory)'
       inputs:
