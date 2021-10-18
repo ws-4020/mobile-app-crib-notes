@@ -293,6 +293,7 @@ module.exports = {
           label: '実装',
           items: [
             'react-native/santoku/development/implement',
+            'react-native/santoku/development/implement/message-configuration',
             'react-native/santoku/development/implement/app-launch-with-build-variants',
             'react-native/santoku/development/implement/cautions-on-using-firebase',
             'react-native/santoku/development/implement/configurations',
