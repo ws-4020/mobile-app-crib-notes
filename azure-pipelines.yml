@@ -10,11 +10,30 @@ parameters:
       laneName: 'dev_debug_advanced'
       androidAppPath: 'android/app/build/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab'
       iOSAppPath: 'ios/build/DevSantokuAppDebugAdvanced.ipa'
+    - name: 'devSantokuAppReleaseInHouse'
+      laneName: 'dev_release_in_house'
+      androidAppPath: 'android/app/build/bundle/devSantokuAppReleaseInHouse/app-devSantokuApp-releaseInHouse.aab'
+      iOSAppPath: 'ios/build/DevSantokuAppReleaseInHouse.ipa'
+    - name: 'santokuAppDebugAdvanced'
+      laneName: 'debug_advanced'
+      androidAppPath: 'android/app/build/bundle/santokuAppDebugAdvanced/app-santokuApp-debugAdvanced.aab'
+      iOSAppPath: 'ios/build/SantokuAppDebugAdvanced.ipa'
+    - name: 'santokuAppReleaseInHouse'
+      laneName: 'release_in_house'
+      androidAppPath: 'android/app/build/bundle/santokuAppReleaseInHouse/app-santokuApp-releaseInHouse.aab'
+      iOSAppPath: 'ios/build/SantokuAppReleaseInHouse.ipa'
 
 variables:
+- group: apple
+- group: deployGate
 - group: devSantokuAppDebugAdvanced
+- group: devSantokuAppReleaseInHouse
+- group: santokuAppDebugAdvanced
+- group: santokuAppReleaseInHouse
 - name: appDir
   value: '$(System.DefaultWorkingDirectory)/example-app/SantokuApp'
+- name: branchName
+  value: '$(Build.SourceBranch)'
 
 stages:
 - stage: Android
@@ -51,7 +70,7 @@ stages:
     - task: CopyFiles@2
       displayName: 'Copy apk files to: $(build.artifactstagingdirectory)'
       inputs:
-        SourceFolder: '$(appDir)/android/app/build/outputs'
+        SourceFolder: '$(appDir)/android/app/build'
         Contents: '**/*.apk'
         TargetFolder: '$(build.artifactstagingdirectory)'
       condition: succeededOrFailed()
@@ -73,13 +92,13 @@ stages:
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
         inputs:
-          certSecureFile: $(${{buildVariant.name}}_AppleDevelopmentCertificateSecureFileUUID)
-          certPwd: $(${{buildVariant.name}}_AppleDevelopmentCertificatePassword)
+          certSecureFile: $(Apple_DevelopmentCertificateSecureFileUUID)
+          certPwd: $(Apple_DevelopmentCertificatePassword)
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
         inputs:
-          certSecureFile: $(${{buildVariant.name}}_AppleDistributionCertificateSecureFileUUID)
-          certPwd: $(${{buildVariant.name}}_AppleDistributionCertificatePassword)
+          certSecureFile: $(Apple_DistributionCertificateSecureFileUUID)
+          certPwd: $(Apple_DistributionCertificatePassword)
       - task: InstallAppleProvisioningProfile@1
         displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
         inputs:
@@ -108,6 +127,12 @@ stages:
         displayName: 'Build iOS app for ${{buildVariant.name}}'
         inputs:
           script: 'fastlane ios ${{buildVariant.laneName}}'
+          workingDirectory: '$(appDir)'
+      - task: CmdLine@2
+        displayName: 'Upload app to DeployGate'
+        inputs:
+          script: |
+            curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.iOSAppPath}}" -F "distribution_name=$(branchName)" -F "message=Build $(branchName) with Azure Pipeline"
           workingDirectory: '$(appDir)'
     - task: CopyFiles@2
       displayName: 'Copy artifacts to: $(build.artifactstagingdirectory)'
