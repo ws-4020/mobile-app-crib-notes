@@ -73,7 +73,7 @@ title: メッセージの管理
 メッセージキーとメッセージ文言は同じ値となります。
 メッセージのプレースホルダーもそのままメッセージキーとして含めます。
 
-```typescript
+```typescript title="ラベル"
 export const bundledMessages = {
   'パスワード': 'ホーム',
   'ホーム': 'チーム名',
@@ -88,7 +88,7 @@ export const bundledMessages = {
 英単語はバリデーションの種類を表すものとし、[YupのAPI](https://github.com/jquense/yup#api)に対応したものとします。
 メッセージのプレースホルダーはメッセージキーに含めません。
 
-```typescript
+```typescript title="バリデーション"
 export const bundledMessages = {
   validation.string.required: '{0}は必須項目です。',
   validation.string.length: '{0}は{1}文字でなければなりません。',
@@ -101,6 +101,7 @@ export const bundledMessages = {
 
 メッセージはユーザーの操作確認や操作結果を通知するメッセージ文言を管理します。
 メッセージキーには、メッセージの機能を表すピリオド区切りの英単語をプレフィックスとした、メッセージを表す簡潔な日本語を用います。
+メッセージ文言にプレースホルダーの指定がある場合、それが分かるようにメッセージキーにも含めます。
 
 プレフィックスの種類は次の通りです。
 
@@ -108,7 +109,7 @@ export const bundledMessages = {
 - app・・・アプリの共通メッセージ
 - app.[機能名]・・・アプリの個別メッセージ
 
-```typescript
+```typescript title="メッセージ"
 export const bundledMessages = {
   'fw.コンフリクト': '処理が競合しました。',
   'app.登録完了': '登録しました。',
