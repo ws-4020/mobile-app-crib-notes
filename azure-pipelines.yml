@@ -10,16 +10,9 @@ parameters:
       laneName: 'dev_debug_advanced'
       androidAppPath: 'android/app/build/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab'
       iOSAppPath: 'ios/build/DevSantokuAppDebugAdvanced.ipa'
-      certificates:
-        - secureFileUUIDVariableName: '$(AppleDevelopmentCertificateSecureFileUUID)'
-          certPasswordVariableName: '$(AppleDevelopmentCertificatePassword)'
-        - secureFileUUIDVariableName: '$(AppleDistributionCertificateSecureFileUUID)'
-          certPasswordVariableName: '$(AppleDistributionCertificatePassword)'
-      provisioningProfiles:
-        - secureFileUUIDVariableName: '$(AppleDevelopmentProvisioningProfileSecureFileUUID)'
-        - secureFileUUIDVariableName: '$(AppleDistributionProvisioningProfileSecureFileUUID)'
 
 variables:
+- group: devSantokuAppDebugAdvanced
 - name: appDir
   value: '$(System.DefaultWorkingDirectory)/example-app/SantokuApp'
 
@@ -77,17 +70,24 @@ stages:
       vmImage: macOS-10.15
     steps:
     - ${{ each buildVariant in parameters.buildVariants }}:
-      - ${{ each certificate in buildVariant.certificates }}:
-        - task: InstallAppleCertificate@2
-          displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
-          inputs:
-            certSecureFile: ${{certificate.secureFileUUIDVariableName}}
-            certPwd: ${{certificate.certPasswordVariableName}}
-      - ${{ each profile in buildVariant.provisioningProfiles }}:
-        - task: InstallAppleProvisioningProfile@1
-          displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
-          inputs:
-            provProfileSecureFile: ${{profile.secureFileUUIDVariableName}}
+      - task: InstallAppleCertificate@2
+        displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
+        inputs:
+          certSecureFile: $(${{buildVariant.name}}_AppleDevelopmentCertificateSecureFileUUID)
+          certPwd: $(${{buildVariant.name}}_AppleDevelopmentCertificatePassword)
+      - task: InstallAppleCertificate@2
+        displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
+        inputs:
+          certSecureFile: $(${{buildVariant.name}}_AppleDistributionCertificateSecureFileUUID)
+          certPwd: $(${{buildVariant.name}}_AppleDistributionCertificatePassword)
+      - task: InstallAppleProvisioningProfile@1
+        displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
+        inputs:
+          provProfileSecureFile: $(${{buildVariant.name}}_AppleDevelopmentProvisioningProfileSecureFileUUID)
+      - task: InstallAppleProvisioningProfile@1
+        displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
+        inputs:
+          provProfileSecureFile: $(${{buildVariant.name}}_AppleDistributionProvisioningProfileSecureFileUUID)
     - task: NodeTool@0
       displayName: 'Use Node 16.x'
       inputs:
