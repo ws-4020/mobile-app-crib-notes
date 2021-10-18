@@ -10,18 +10,22 @@ parameters:
       laneName: 'dev_debug_advanced'
       androidAppPath: 'android/app/build/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab'
       iOSAppPath: 'ios/build/DevSantokuAppDebugAdvanced.ipa'
+      requireKeyStoreFile: false
     - name: 'devSantokuAppReleaseInHouse'
       laneName: 'dev_release_in_house'
       androidAppPath: 'android/app/build/bundle/devSantokuAppReleaseInHouse/app-devSantokuApp-releaseInHouse.aab'
       iOSAppPath: 'ios/build/DevSantokuAppReleaseInHouse.ipa'
+      requireKeyStoreFile: true
     - name: 'santokuAppDebugAdvanced'
       laneName: 'debug_advanced'
       androidAppPath: 'android/app/build/bundle/santokuAppDebugAdvanced/app-santokuApp-debugAdvanced.aab'
       iOSAppPath: 'ios/build/SantokuAppDebugAdvanced.ipa'
+      requireKeyStoreFile: false
     - name: 'santokuAppReleaseInHouse'
       laneName: 'release_in_house'
       androidAppPath: 'android/app/build/bundle/santokuAppReleaseInHouse/app-santokuApp-releaseInHouse.aab'
       iOSAppPath: 'ios/build/SantokuAppReleaseInHouse.ipa'
+      requireKeyStoreFile: true
 
 variables:
 - group: apple
@@ -60,18 +64,19 @@ stages:
         inputs:
           script: 'fastlane android ${{buildVariant.laneName}}'
           workingDirectory: '$(appDir)'
+        condition: eq('${{buildVariant.requireKeyStoreFile}}', 'false')
+      - task: CmdLine@2
+        displayName: 'Upload app to DeployGate'
+        inputs:
+          script: |
+            curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.androidAppPath}}" -F "distribution_name=$(branchName)" -F "message=Build $(branchName) with Azure Pipeline"
+          workingDirectory: '$(appDir)'
+        condition: eq('${{buildVariant.requireKeyStoreFile}}', 'false')
     - task: CopyFiles@2
       displayName: 'Copy aab files to: $(build.artifactstagingdirectory)'
       inputs:
         SourceFolder: '$(appDir)/android/app/build/outputs'
         Contents: '**/*.aab'
-        TargetFolder: '$(build.artifactstagingdirectory)'
-      condition: succeededOrFailed()
-    - task: CopyFiles@2
-      displayName: 'Copy apk files to: $(build.artifactstagingdirectory)'
-      inputs:
-        SourceFolder: '$(appDir)/android/app/build'
-        Contents: '**/*.apk'
         TargetFolder: '$(build.artifactstagingdirectory)'
       condition: succeededOrFailed()
     - task: PublishBuildArtifacts@1
