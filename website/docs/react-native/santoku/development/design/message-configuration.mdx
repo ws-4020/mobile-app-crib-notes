@@ -75,10 +75,12 @@ title: メッセージの管理
 
 ```typescript title="ラベル"
 export const bundledMessages = {
-  'パスワード': 'ホーム',
-  'ホーム': 'チーム名',
+  /* 中略 */
+  パスワード: 'パスワード',
+  ホーム: 'ホーム',
   '最大{0}件': '最大{0}件',
   'ユーザー名とパスワードを入力してください。': 'ユーザー名とパスワードを入力してください。',
+  /* 中略 */
 } as const;
 ```
 
@@ -90,10 +92,12 @@ export const bundledMessages = {
 
 ```typescript title="バリデーション"
 export const bundledMessages = {
-  validation.string.required: '{0}は必須項目です。',
-  validation.string.length: '{0}は{1}文字でなければなりません。',
-  validation.string.min: '{0}は{1}文字以上でなければなりません。',
-  validation.string.max: '{0}は${1}文字以下でなければなりません。',
+  /* 中略 */
+  'validation.string.required': '{0}は必須項目です。',
+  'validation.string.length': '{0}は{1}文字でなければなりません。',
+  'validation.string.min': '{0}は{1}文字以上でなければなりません。',
+  'validation.string.max': '{0}は${1}文字以下でなければなりません。',
+  /* 中略 */
 } as const;
 ```
 
@@ -112,9 +116,11 @@ export const bundledMessages = {
 
 ```typescript title="メッセージ"
 export const bundledMessages = {
+  /* 中略 */
   'fw.コンフリクト': '処理が競合しました。',
   'app.登録完了': '登録しました。',
   'app.task.期限超過{0}件エラー': '期限を超過したタスクが{0}件です。確認してください。',
   'app.task.タスク登録完了': 'タスクを登録しました。',
+  /* 中略 */
 } as const;
 ```
