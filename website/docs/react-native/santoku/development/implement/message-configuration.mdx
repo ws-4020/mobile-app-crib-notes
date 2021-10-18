@@ -6,12 +6,13 @@ title: メッセージの定義と取得
 
 ## メッセージの定義
 
-メッセージを新たに定義する場合は、メッセージ定義ファイル（`src/generated/BundledMessages.ts`）に定義を追加します。
+新たなメッセージを追加する場合は、メッセージ定義ファイル（`src/generated/BundledMessages.ts`）を修正します。
+例えば、ユーザ名というラベルを追加する場合の例は次の通りです。
 
 ```diff typescript title="BundledMessages.ts"
 export const bundledMessages = {
   /* 中略 */
-+ ユーザー名: 'ユーザー名',
++ ユーザ名: 'ユーザ名',
   パスワード: 'パスワード',
   ホーム: 'ホーム',
   '最大{0}件': '最大{0}件',
