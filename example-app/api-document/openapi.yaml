@@ -11,6 +11,26 @@ paths:
     post:
       summary: サインアップをリクエストする
       operationId: post-signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nickname:
+                  type: string
+                  description: ユーザー名
+                password:
+                  type: string
+                  description: パスワード
+              required:
+                - nickname
+                - password
+            examples:
+              example:
+                value:
+                  nickname: hoge
+                  password: password
       responses:
         '201':
           description: Created
@@ -40,26 +60,6 @@ paths:
                 example: /api/accounts/me
         '400':
           $ref: '#/components/responses/BadRequest'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                nickname:
-                  type: string
-                  description: ユーザー名
-                password:
-                  type: string
-                  description: パスワード
-              required:
-                - nickname
-                - password
-            examples:
-              example:
-                value:
-                  nickname: hoge
-                  password: password
       parameters: []
       description: ''
   /accounts/me:
@@ -95,6 +95,26 @@ paths:
     post:
       summary: ログインする
       operationId: post-login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountId:
+                  type: string
+                  description: アカウントID
+                password:
+                  type: string
+                  description: パスワード
+              required:
+                - accountId
+                - password
+            examples:
+              example:
+                value:
+                  accountId: "30b65d82-8a64-4a3a-a097-031313f43c69"
+                  password: pass123-
       responses:
         '200':
           description: OK
@@ -117,26 +137,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                accountId:
-                  type: string
-                  description: アカウントID
-                password:
-                  type: string
-                  description: パスワード
-              required:
-                - accountId
-                - password
-            examples:
-              example:
-                value:
-                  accountId: "30b65d82-8a64-4a3a-a097-031313f43c69"
-                  password: pass123-
       parameters: []
       description: ''
   /logout:
@@ -178,15 +178,6 @@ paths:
     post:
       summary: アカウントを削除する
       operationId: delete-accounts-me-delete
-      responses:
-        '204':
-          description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
       requestBody:
         content:
           application/json:
@@ -202,6 +193,15 @@ paths:
               example:
                 value:
                   password: 'password'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
 components:
   responses:
     BadRequest:
