@@ -8,22 +8,22 @@ parameters:
   default:
     - name: 'devSantokuAppDebugAdvanced'
       laneName: 'dev_debug_advanced'
-      androidAppPath: 'android/app/build/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab'
+      androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab
       iOSAppPath: 'ios/build/DevSantokuAppDebugAdvanced.ipa'
       requireKeyStoreFile: false
     - name: 'devSantokuAppReleaseInHouse'
       laneName: 'dev_release_in_house'
-      androidAppPath: 'android/app/build/bundle/devSantokuAppReleaseInHouse/app-devSantokuApp-releaseInHouse.aab'
+      androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppReleaseInHouse/app-devSantokuApp-releaseInHouse.aab'
       iOSAppPath: 'ios/build/DevSantokuAppReleaseInHouse.ipa'
       requireKeyStoreFile: true
     - name: 'santokuAppDebugAdvanced'
       laneName: 'debug_advanced'
-      androidAppPath: 'android/app/build/bundle/santokuAppDebugAdvanced/app-santokuApp-debugAdvanced.aab'
+      androidAppPath: 'android/app/build/outputs/bundle/santokuAppDebugAdvanced/app-santokuApp-debugAdvanced.aab'
       iOSAppPath: 'ios/build/SantokuAppDebugAdvanced.ipa'
       requireKeyStoreFile: false
     - name: 'santokuAppReleaseInHouse'
       laneName: 'release_in_house'
-      androidAppPath: 'android/app/build/bundle/santokuAppReleaseInHouse/app-santokuApp-releaseInHouse.aab'
+      androidAppPath: 'android/app/build/outputs/bundle/santokuAppReleaseInHouse/app-santokuApp-releaseInHouse.aab'
       iOSAppPath: 'ios/build/SantokuAppReleaseInHouse.ipa'
       requireKeyStoreFile: true
 
