@@ -46,7 +46,7 @@ stages:
   - job: build_android_app
     displayName: 'Build Android Apps'
     pool:
-      vmImage: macOS-10.15
+      vmImage: macOS-11
     steps:
     - task: NodeTool@0
       displayName: 'Use Node 16.x'
@@ -91,7 +91,7 @@ stages:
   - job: build_ios_app
     displayName: 'Build iOS Apps'
     pool:
-      vmImage: macOS-10.15
+      vmImage: macOS-11
     steps:
     - ${{ each buildVariant in parameters.buildVariants }}:
       - task: InstallAppleCertificate@2
