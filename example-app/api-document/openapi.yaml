@@ -22,7 +22,7 @@ paths:
                   accountId:
                     type: string
                     description: アカウントID
-                  userName:
+                  nickname:
                     type: string
                     description: ユーザー名
                 required:
@@ -31,7 +31,7 @@ paths:
                 example:
                   value:
                     accountId: 9bca0d3a-a29e-441f-8373-f9441e875c67
-                    userName: user1
+                    nickname: user1
         '400':
           $ref: '#/components/responses/BadRequest'
       requestBody:
@@ -40,19 +40,19 @@ paths:
             schema:
               type: object
               properties:
-                userName:
+                nickname:
                   type: string
                   description: ユーザー名
                 password:
                   type: string
                   description: パスワード
               required:
-                - userName
+                - nickname
                 - password
             examples:
               example:
                 value:
-                  userName: hoge
+                  nickname: hoge
                   password: password
       parameters: []
       description: ''
@@ -71,7 +71,7 @@ paths:
                   accountId:
                     type: string
                     description: アカウントID
-                  userName:
+                  nickname:
                     type: string
                     description: ユーザー名
                 required:
@@ -80,7 +80,7 @@ paths:
                 example:
                   value:
                     accountId: 9bca0d3a-a29e-441f-8373-f9441e875c67
-                    userName: user1
+                    nickname: user1
         '403':
           $ref: '#/components/responses/Forbidden'
       operationId: get-accounts

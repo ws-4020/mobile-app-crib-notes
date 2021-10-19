@@ -11,25 +11,25 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class UserNameTest {
+public class NicknameTest {
 
   @ParameterizedTest
   @ValueSource(strings = {"testuser"})
   @MethodSource("justMaxlength")
   void validWith(String value) {
-    assertDoesNotThrow(() -> new UserName(value));
+    assertDoesNotThrow(() -> new Nickname(value));
   }
 
   @Test
   void invalidWithNull() {
-    assertThrows(NullPointerException.class, () -> new UserName(null));
+    assertThrows(NullPointerException.class, () -> new Nickname(null));
   }
 
   @ParameterizedTest
   @ValueSource(strings = {"", " "})
   @MethodSource("overMaxlength")
   void invalidWith(String value) {
-    assertThrows(IllegalArgumentException.class, () -> new UserName(value));
+    assertThrows(IllegalArgumentException.class, () -> new Nickname(value));
   }
 
   static Stream<String> justMaxlength() {

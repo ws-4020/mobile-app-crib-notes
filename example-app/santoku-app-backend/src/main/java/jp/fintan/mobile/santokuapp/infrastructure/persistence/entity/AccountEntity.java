@@ -13,7 +13,7 @@ public class AccountEntity {
 
   @Id private String accountId;
 
-  private String userName;
+  private String nickname;
 
   public String getAccountId() {
     return accountId;
@@ -23,11 +23,11 @@ public class AccountEntity {
     this.accountId = accountId;
   }
 
-  public String getUserName() {
-    return userName;
+  public String getNickname() {
+    return nickname;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
   }
 }

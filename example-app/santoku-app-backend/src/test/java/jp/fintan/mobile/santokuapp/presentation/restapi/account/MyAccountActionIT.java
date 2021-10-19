@@ -20,7 +20,7 @@ public class MyAccountActionIT extends RestIntegrationTestBase {
 
     JsonAssert.with(response.getBodyString())
         .assertEquals("$.accountId", "a2527b34-4c9a-4b81-8f60-4faa63372fbb")
-        .assertEquals("$.userName", "user1");
+        .assertEquals("$.nickname", "user1");
 
     validateByOpenAPI("get-accounts", request, response);
   }

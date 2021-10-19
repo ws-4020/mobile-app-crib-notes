@@ -18,13 +18,13 @@ public class SignupActionIT extends RestIntegrationTestBase {
   public void アカウントを登録できる() throws Exception {
     loadCsrfToken();
 
-    String userName = "testUser1";
+    String nickname = "testUser1";
     String password = "password";
 
     RestMockHttpRequest request =
         post("/api/signup")
             .setContentType("application/json")
-            .setBody(Map.of("userName", userName, "password", password));
+            .setBody(Map.of("nickname", nickname, "password", password));
     HttpResponse response = sendRequest(request);
 
     assertEquals(200, response.getStatusCode());
@@ -50,16 +50,16 @@ public class SignupActionIT extends RestIntegrationTestBase {
     loadCsrfToken();
 
     // 形式が不正
-    String[] invalidUserNames = new String[] {"", " "};
+    String[] invalidNicknames = new String[] {"", " "};
     String password = "pass123-";
 
-    Arrays.stream(invalidUserNames)
+    Arrays.stream(invalidNicknames)
         .forEach(
-            invalidUserName -> {
+            invalidNickname -> {
               RestMockHttpRequest request =
                   post("/api/signup")
                       .setContentType("application/json")
-                      .setBody(Map.of("userName", invalidUserName, "password", password));
+                      .setBody(Map.of("nickname", invalidNickname, "password", password));
               HttpResponse response = sendRequest(request);
 
               assertEquals(400, response.getStatusCode());
@@ -83,7 +83,7 @@ public class SignupActionIT extends RestIntegrationTestBase {
   public void アカウント登録のパスワードとして不正() {
     loadCsrfToken();
 
-    String userName = "testUser1";
+    String nickname = "testUser1";
     String[] invalidPasswords = new String[] {"", "       ", "1234567"};
 
     Arrays.stream(invalidPasswords)
@@ -92,7 +92,7 @@ public class SignupActionIT extends RestIntegrationTestBase {
               RestMockHttpRequest request =
                   post("/api/signup")
                       .setContentType("application/json")
-                      .setBody(Map.of("userName", userName, "password", invalidPassword));
+                      .setBody(Map.of("nickname", nickname, "password", invalidPassword));
               HttpResponse response = sendRequest(request);
 
               assertEquals(400, response.getStatusCode());
@@ -104,7 +104,7 @@ public class SignupActionIT extends RestIntegrationTestBase {
     RestMockHttpRequest request =
         post("/api/signup")
             .setContentType("application/json")
-            .setBody(Map.of("userName", userName));
+            .setBody(Map.of("nickname", nickname));
     HttpResponse response = sendRequest(request);
 
     assertEquals(400, response.getStatusCode());

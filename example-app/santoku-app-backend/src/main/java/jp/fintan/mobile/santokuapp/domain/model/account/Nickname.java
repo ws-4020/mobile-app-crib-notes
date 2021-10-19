@@ -2,13 +2,13 @@ package jp.fintan.mobile.santokuapp.domain.model.account;
 
 import java.util.Objects;
 
-public class UserName {
+public class Nickname {
 
   private final String value;
 
   private static final int MAX_LENGTH = 50;
 
-  public UserName(String value) {
+  public Nickname(String value) {
     Objects.requireNonNull(value);
     validateNotBlank(value);
     validateLength(value);
@@ -29,7 +29,7 @@ public class UserName {
   private static void validateLength(String value) {
     if (value.codePointCount(0, value.length()) > MAX_LENGTH) {
       throw new IllegalArgumentException(
-          String.format("UserName length is too long. value=[%s]", value));
+          String.format("Nickname length is too long. value=[%s]", value));
     }
   }
 }

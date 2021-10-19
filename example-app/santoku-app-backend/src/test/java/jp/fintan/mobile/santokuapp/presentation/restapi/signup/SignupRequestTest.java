@@ -8,7 +8,7 @@ import java.util.Set;
 import javax.validation.constraints.NotNull;
 import jp.fintan.mobile.santokuapp.ValidationExtension;
 import jp.fintan.mobile.santokuapp.domain.model.account.RawPassword;
-import jp.fintan.mobile.santokuapp.domain.model.account.UserName;
+import jp.fintan.mobile.santokuapp.domain.model.account.Nickname;
 import jp.fintan.mobile.santokuapp.presentation.restapi.signup.SignupAction.SignupRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -21,7 +21,7 @@ public class SignupRequestTest {
 
   @Test
   void valid() throws Exception {
-    sut.userName = new UserName("testuser");
+    sut.nickname = new Nickname("testuser");
     sut.password = new RawPassword("pass123-");
 
     Map<String, Set<Class<? extends Annotation>>> validationResult = validation.validate(sut);
@@ -29,18 +29,18 @@ public class SignupRequestTest {
   }
 
   @Test
-  void invalid_userNameがnull() throws Exception {
-    sut.userName = null;
+  void invalid_nicknameがnull() throws Exception {
+    sut.nickname = null;
     sut.password = new RawPassword("pass123-");
 
     Map<String, Set<Class<? extends Annotation>>> validationResult = validation.validate(sut);
     assertEquals(1, validationResult.size());
-    assertEquals(Set.of(NotNull.class), validationResult.get("userName"));
+    assertEquals(Set.of(NotNull.class), validationResult.get("nickname"));
   }
 
   @Test
   void invalid_passwordがnull() throws Exception {
-    sut.userName = new UserName("testuser");
+    sut.nickname = new Nickname("testuser");
     sut.password = null;
 
     Map<String, Set<Class<? extends Annotation>>> validationResult = validation.validate(sut);

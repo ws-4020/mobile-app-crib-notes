@@ -6,7 +6,7 @@ import jp.fintan.mobile.santokuapp.domain.model.account.AccountId;
 import jp.fintan.mobile.santokuapp.domain.model.account.AccountPassword;
 import jp.fintan.mobile.santokuapp.domain.model.account.HashedPassword;
 import jp.fintan.mobile.santokuapp.domain.model.account.RawPassword;
-import jp.fintan.mobile.santokuapp.domain.model.account.UserName;
+import jp.fintan.mobile.santokuapp.domain.model.account.Nickname;
 import jp.fintan.mobile.santokuapp.domain.repository.AccountPasswordRepository;
 import jp.fintan.mobile.santokuapp.domain.repository.AccountRepository;
 import nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;
@@ -33,10 +33,10 @@ public class AccountRegistrationService {
     this.passwordHashingProcessor = passwordHashingProcessor;
   }
 
-  public Account registerAccount(UserName userName, RawPassword rawPassword) {
+  public Account registerAccount(Nickname nickname, RawPassword rawPassword) {
     HashedPassword password = passwordHashingProcessor.hash(rawPassword);
     AccountId id = idProvider.generate();
-    Account account = new Account(id, userName);
+    Account account = new Account(id, nickname);
 
     accountRepository.add(account);
 

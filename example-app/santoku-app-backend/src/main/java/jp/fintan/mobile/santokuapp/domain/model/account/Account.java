@@ -4,18 +4,18 @@ public class Account {
 
   private final AccountId id;
 
-  private final UserName userName;
+  private final Nickname nickname;
 
-  public Account(AccountId id, UserName userName) {
+  public Account(AccountId id, Nickname nickname) {
     this.id = id;
-    this.userName = userName;
+    this.nickname = nickname;
   }
 
   public AccountId accountId() {
     return id;
   }
 
-  public UserName userName() {
-    return userName;
+  public Nickname nickname() {
+    return nickname;
   }
 }

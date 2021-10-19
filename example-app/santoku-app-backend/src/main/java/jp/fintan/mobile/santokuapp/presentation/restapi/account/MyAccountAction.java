@@ -34,11 +34,11 @@ public class MyAccountAction {
   public static class AccountResponse {
 
     public String accountId;
-    public String userName;
+    public String nickname;
 
     public AccountResponse(Account account) {
       this.accountId = account.accountId().value();
-      this.userName = account.userName().value();
+      this.nickname = account.nickname().value();
     }
   }
 }

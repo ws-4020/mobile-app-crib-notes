@@ -2,7 +2,7 @@ package jp.fintan.mobile.santokuapp.infrastructure.persistence;
 
 import jp.fintan.mobile.santokuapp.domain.model.account.Account;
 import jp.fintan.mobile.santokuapp.domain.model.account.AccountId;
-import jp.fintan.mobile.santokuapp.domain.model.account.UserName;
+import jp.fintan.mobile.santokuapp.domain.model.account.Nickname;
 import jp.fintan.mobile.santokuapp.domain.repository.AccountRepository;
 import jp.fintan.mobile.santokuapp.infrastructure.persistence.entity.AccountEntity;
 import nablarch.common.dao.NoDataException;
@@ -16,7 +16,7 @@ public class AccountDataSource implements AccountRepository {
   public void add(Account account) {
     AccountEntity accountEntity = new AccountEntity();
     accountEntity.setAccountId(account.accountId().value());
-    accountEntity.setUserName(account.userName().value());
+    accountEntity.setNickname(account.nickname().value());
 
     UniversalDao.insert(accountEntity);
   }
@@ -51,8 +51,8 @@ public class AccountDataSource implements AccountRepository {
 
   private Account toAccount(AccountEntity accountEntity) {
     AccountId id = new AccountId(accountEntity.getAccountId());
-    UserName userName = new UserName(accountEntity.getUserName());
+    Nickname nickname = new Nickname(accountEntity.getNickname());
 
-    return new Account(id, userName);
+    return new Account(id, nickname);
   }
 }
