@@ -8,7 +8,7 @@ parameters:
   default:
     - name: 'devSantokuAppDebugAdvanced'
       laneName: 'dev_debug_advanced'
-      androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab
+      androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab'
       iOSAppPath: 'ios/build/DevSantokuAppDebugAdvanced.ipa'
       requireKeyStoreFile: false
     - name: 'devSantokuAppReleaseInHouse'
