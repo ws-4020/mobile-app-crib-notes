@@ -44,10 +44,10 @@ async function loadMessages(loader: MessagesLoader) {
  */
 function message(key: MessageKey, ...options: string[]): string {
   if (!cache) {
-    throw new Error('Messages was not cached.');
+    throw new Error('Messages are not loaded.');
   }
   if (cache[key] === undefined) {
-    log.error(`Message was not found. messageKey=[${key}]`, 'MessageNotFound');
+    log.error(`Could not find the message. messageKey=[${key}]`, 'MessageNotFound');
     return key;
   }
   return !options.length ? cache[key] : format(cache[key], options);

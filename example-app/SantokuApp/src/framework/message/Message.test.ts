@@ -4,7 +4,7 @@ import {loadMessages, m} from './Message';
 describe('Message message', () => {
   test('メッセージがロードされていない場合の検証', () => {
     // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
-    expect(() => m('msg.error.network')).toThrowError(new Error('Messages was not cached.'));
+    expect(() => m('msg.error.network')).toThrowError(new Error('Messages are not loaded.'));
   });
   test('オプションが存在しないメッセージの取得を検証', async () => {
     await loadMessages({
@@ -44,6 +44,6 @@ describe('Message message', () => {
     const spy = jest.spyOn(log, 'error');
     // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
     expect(m('dummyKey')).toEqual('dummyKey');
-    expect(spy).toHaveBeenCalledWith('Message was not found. messageKey=[dummyKey]', 'MessageNotFound');
+    expect(spy).toHaveBeenCalledWith('Could not find the message. messageKey=[dummyKey]', 'MessageNotFound');
   });
 });
