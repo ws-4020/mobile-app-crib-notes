@@ -83,7 +83,7 @@ paths:
                     nickname: user1
         '403':
           $ref: '#/components/responses/Forbidden'
-      operationId: get-accounts
+      operationId: get-accounts-me
     parameters: []
   /login:
     post:

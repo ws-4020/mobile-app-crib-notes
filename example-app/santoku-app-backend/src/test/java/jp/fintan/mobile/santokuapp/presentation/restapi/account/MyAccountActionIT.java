@@ -22,7 +22,7 @@ public class MyAccountActionIT extends RestIntegrationTestBase {
         .assertEquals("$.accountId", "a2527b34-4c9a-4b81-8f60-4faa63372fbb")
         .assertEquals("$.nickname", "user1");
 
-    validateByOpenAPI("get-accounts", request, response);
+    validateByOpenAPI("get-accounts-me", request, response);
   }
 
   @Test
@@ -34,6 +34,6 @@ public class MyAccountActionIT extends RestIntegrationTestBase {
 
     assertEquals(403, response.getStatusCode());
     JsonAssert.with(response.getBodyString()).assertEquals("$.code", "access.denied");
-    validateByOpenAPI("get-accounts", request, response);
+    validateByOpenAPI("get-accounts-me", request, response);
   }
 }
