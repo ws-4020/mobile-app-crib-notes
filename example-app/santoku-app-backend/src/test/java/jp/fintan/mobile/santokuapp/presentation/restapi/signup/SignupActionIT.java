@@ -27,7 +27,7 @@ public class SignupActionIT extends RestIntegrationTestBase {
             .setBody(Map.of("nickname", nickname, "password", password));
     HttpResponse response = sendRequest(request);
 
-    assertEquals(200, response.getStatusCode());
+    assertEquals(201, response.getStatusCode());
     validateByOpenAPI("post-signup", request, response);
 
     // 登録したアカウントでログインできること
@@ -37,7 +37,7 @@ public class SignupActionIT extends RestIntegrationTestBase {
     // 同じユーザー名で新しくサインアップできること
     HttpResponse otherSignupResponse = sendRequest(request);
 
-    assertEquals(200, otherSignupResponse.getStatusCode());
+    assertEquals(201, otherSignupResponse.getStatusCode());
     validateByOpenAPI("post-signup", request, otherSignupResponse);
     String otherAccountId = JsonPath.parse(otherSignupResponse.getBodyString()).read("$.accountId");
     login(otherAccountId, password);
