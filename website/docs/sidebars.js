@@ -243,9 +243,9 @@ module.exports = {
           label: '非機能要件',
           items: [
             'react-native/santoku/requirements/non-functional/overview',
+            'react-native/santoku/requirements/non-functional/usability',
             'react-native/santoku/requirements/non-functional/system-method',
             'react-native/santoku/requirements/non-functional/test-outline',
-            'react-native/santoku/requirements/non-functional/usability',
          ],
         },
       ]
