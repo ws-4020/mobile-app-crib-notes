@@ -47,13 +47,13 @@ import nablarch.fw.web.HttpErrorResponse;
  * "errors.length.min": "{0}は{1}文字以上の値を入力してください。", "errors.email": "メールアドレスの形式が正しくありません。" }
  */
 @SystemRepositoryComponent
-@Path("/systeminfo/messages")
-public class SystemInfoMessageAction {
+@Path("/system/messages")
+public class SystemMessageAction {
 
   private final String[] messagesExportExcludes;
   private final Set<String> messageIds;
 
-  public SystemInfoMessageAction(
+  public SystemMessageAction(
       @ConfigValue("${messages.export.excludes}") String[] messagesExportExcludes) {
     this.messagesExportExcludes = messagesExportExcludes;
 

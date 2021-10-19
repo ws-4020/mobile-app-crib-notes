@@ -145,7 +145,7 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
       description: ''
-  /systeminfo/messages:
+  /system/messages:
     get:
       summary: メッセージ一覧を取得する
       tags: []
@@ -167,7 +167,7 @@ paths:
                     validation.upload.fileUnread: ファイルが壊れているため、読み取ることができません。
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
-      operationId: get-systeminfo-messages
+      operationId: get-system-messages
   /accounts/me/delete:
     post:
       summary: アカウントを削除する
