@@ -19,6 +19,7 @@
     <java.version>11</java.version>
     <jetty.version>9.4.19.v20190610</jetty.version>
     <version.plugins.failsafe>2.22.2</version.plugins.failsafe>
+    <version.plugins.jib>3.1.4</version.plugins.jib>
     <!--
     JibでDockerコンテナを作るときのベースイメージ
     https://hub.docker.com/layers/tomcat/library/tomcat/9.0.54-jdk11-temurin-focal/images/sha256-0535a04354ac95a35aa6d5cff941720441c8064594c2e07ea955de39fadc7d55?context=explore
@@ -293,7 +294,7 @@
     <dependency>
       <groupId>org.openapi4j</groupId>
       <artifactId>openapi-operation-validator</artifactId>
-      <version>1.0.3</version>
+      <version>1.0.7</version>
       <scope>test</scope>
     </dependency>
     <dependency>
