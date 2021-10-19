@@ -10,24 +10,21 @@ parameters:
       laneName: 'dev_debug_advanced'
       androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab'
       iOSAppPath: 'ios/build/DevSantokuAppDebugAdvanced.ipa'
-      requireKeyStoreFile: false
     - name: 'devSantokuAppReleaseInHouse'
       laneName: 'dev_release_in_house'
       androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppReleaseInHouse/app-devSantokuApp-releaseInHouse.aab'
       iOSAppPath: 'ios/build/DevSantokuAppReleaseInHouse.ipa'
-      requireKeyStoreFile: true
     - name: 'santokuAppDebugAdvanced'
       laneName: 'debug_advanced'
       androidAppPath: 'android/app/build/outputs/bundle/santokuAppDebugAdvanced/app-santokuApp-debugAdvanced.aab'
       iOSAppPath: 'ios/build/SantokuAppDebugAdvanced.ipa'
-      requireKeyStoreFile: false
     - name: 'santokuAppReleaseInHouse'
       laneName: 'release_in_house'
       androidAppPath: 'android/app/build/outputs/bundle/santokuAppReleaseInHouse/app-santokuApp-releaseInHouse.aab'
       iOSAppPath: 'ios/build/SantokuAppReleaseInHouse.ipa'
-      requireKeyStoreFile: true
 
 variables:
+- group: android
 - group: apple
 - group: deployGate
 - group: devSantokuAppDebugAdvanced
@@ -58,20 +55,38 @@ stages:
         command: 'ci'
         workingDir: '$(appDir)'
         verbose: false
+    - task: DownloadSecureFile@1
+      displayName: 'Download Keystore file for ReleaseInHouse'
+      inputs:
+        secureFile: $(Android_ReleaseInHouseKeyStoreSecureFileUUID)
+    - task: CopyFiles@2
+      displayName: 'Copy Keystore file to: $(appDir)/android/app'
+      inputs:
+        SourceFolder: '$(Agent.TempDirectory)'
+        Contents: $(Android_ReleaseInHouseKeyStoreFileName)
+        TargetFolder: '$(appDir)/android/app'
+    - task: CmdLine@2
+      displayName: 'Add gradle.properties settings for ReleaseInHouse'
+      inputs:
+        script: |
+          echo '# Keystore properties for ReleaseInHouse' >> gradle.properties
+          echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=$(Android_ReleaseInHouseKeyStoreFileName)' >> gradle.properties
+          echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD=$(Android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
+          echo 'SANTOKU_APP_IN_HOUSE_KEY_ALIAS=$(Android_ReleaseInHouseKeyAlias)' >> gradle.properties
+          echo 'SANTOKU_APP_IN_HOUSE_KEY_PASSWORD=$(Android_ReleaseInHouseKeyPassword)' >> gradle.properties
+        workingDirectory: '$(appDir)/android'
     - ${{ each buildVariant in parameters.buildVariants }}:
       - task: CmdLine@2
         displayName: 'Build Android app for ${{buildVariant.name}}'
         inputs:
           script: 'fastlane android ${{buildVariant.laneName}}'
           workingDirectory: '$(appDir)'
-        condition: eq('${{buildVariant.requireKeyStoreFile}}', 'false')
       - task: CmdLine@2
         displayName: 'Upload app to DeployGate'
         inputs:
           script: |
             curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.androidAppPath}}" -F "distribution_name=$(branchName)" -F "message=Build $(branchName) with Azure Pipeline"
           workingDirectory: '$(appDir)'
-        condition: eq('${{buildVariant.requireKeyStoreFile}}', 'false')
     - task: CopyFiles@2
       displayName: 'Copy aab files to: $(build.artifactstagingdirectory)'
       inputs:
