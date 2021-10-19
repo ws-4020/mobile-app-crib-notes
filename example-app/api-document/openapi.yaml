@@ -62,35 +62,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
       parameters: []
       description: ''
-  /accounts/me:
-    get:
-      summary: アカウント情報を取得する
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  accountId:
-                    type: string
-                    description: アカウントID
-                  nickname:
-                    type: string
-                    description: ユーザー名
-                required:
-                  - accountId
-              examples:
-                example:
-                  value:
-                    accountId: 9bca0d3a-a29e-441f-8373-f9441e875c67
-                    nickname: user1
-        '403':
-          $ref: '#/components/responses/Forbidden'
-      operationId: get-accounts-me
-    parameters: []
   /login:
     post:
       summary: ログインする
@@ -174,6 +145,35 @@ paths:
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
       operationId: get-system-messages
+  /accounts/me:
+    get:
+      summary: アカウント情報を取得する
+      tags: [ ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                    description: アカウントID
+                  nickname:
+                    type: string
+                    description: ユーザー名
+                required:
+                  - accountId
+              examples:
+                example:
+                  value:
+                    accountId: 9bca0d3a-a29e-441f-8373-f9441e875c67
+                    nickname: user1
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      operationId: get-accounts-me
+    parameters: [ ]
   /accounts/me/delete:
     post:
       summary: アカウントを削除する
