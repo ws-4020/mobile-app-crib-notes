@@ -21,6 +21,11 @@ export const bundledMessages = {
 } as const;
 ```
 
+:::info
+開発現場によっては、（Excelなどで作成された）メッセージ定義書からメッセージ定義ファイルを自動生成する運用も考えられます。
+そうした背景から、`BundledMessages.ts`ファイルは`src/generated/`ディレクトリに配置しています。
+:::
+
 ## メッセージの取得
 
 メッセージを取得する場合は、`src/framework/message/Message.ts`に定義されている`m`関数を使用します。
