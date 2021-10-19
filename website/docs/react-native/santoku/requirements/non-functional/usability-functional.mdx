@@ -62,12 +62,12 @@ Apple系OSについてはiOSおよびiPadOSを対象とし、Mac OSとApple Watc
 - iOS：開発時点でリリース済み最新バージョンとn世代前までのバージョン
 - iPadOS: iOSと同様
 
-OSバージョンについては、原則最新バージョンを保つことが[IPAのセキュリティ対策として推奨されています][ipasecurity]。
+OSバージョンについては、原則最新バージョンを保つことが[IPAのセキュリティ対策として推奨されています][ipa-security]。
 その上でAndroidについてはスマートフォン端末の買い替えサイクルが[内閣府消費動向調査（2021年3月時点）][search]で平均3〜4年であることが調査結果として示されています。
-iPhoneについてはAppleが公表する[iOSバージョンシェア][vershare]を参考に、シェア3％未満となるかその他に分類されない限り対象とします。
+iPhoneについてはAppleが公表する[iOSバージョンシェア][ver-share]を参考に、シェア3％未満となるかその他に分類されない限り対象とします。
 
-[ipasecurity]:https://www.ipa.go.jp/security/measures/everyday.html
-[vershare]:https://developer.apple.com/support/app-store/
+[ipa-security]:https://www.ipa.go.jp/security/measures/everyday.html
+[ver-share]:https://developer.apple.com/support/app-store/
 [search]:https://www.esri.cao.go.jp/jp/stat/shouhi/honbun202103.pdf
 
 #### 配信対象端末
@@ -83,7 +83,7 @@ AndroidはOSバージョンによって端末側がサポートするかどう�
 iPhoneについてはOSバージョン毎にサポートする端末がAppleによって定められています。
 そのため配信対象OSバージョンをサポートする端末が配信対象となります。
 
-<a id="targetcountry"></a>
+<a id="target-country"></a>
 
 #### 配信対象国
 
@@ -99,13 +99,13 @@ App StoreやGoogle Playのような公式ストア経由でアプリケーショ
 
 #### 対象年齢層
 
-Androidアプリの場合、ストアでの公開時には[ターゲットユーザ][targetuser]の対象年齢層の設定を求められます。
+Androidアプリの場合、ストアでの公開時には[ターゲットユーザ][target-user]の対象年齢層の設定を求められます。
 対象年齢層は6段階の区分に分けられており、複数の区分を同時に選択できます。
 対象年齢層に子どもを含める場合、Google Playのファミリーポリシーに関する要件に準拠する必要があります。
 
 このアプリでは対象年齢層に子どもは含めず、18歳以上のみを対象年齢層とします。
 
-[targetuser]:https://support.google.com/googleplay/android-developer/answer/9867159?hl=ja
+[target-user]:https://support.google.com/googleplay/android-developer/answer/9867159?hl=ja
 
 #### レーティング
 
@@ -153,7 +153,7 @@ Androidアプリのレーティングは対象年齢層の設定と異なり、�
 テストの際にはダークモードに設定された端末においても正常にアプリの各画面の描画が行えることや、
 ステータスバーやナビゲーションバーなどのアプリ外の領域がダークモードの配色に切り替わっていてもアプリの利用上支障がでないことを確認します。
 
-<a id="kaiten"></a>
+<a id="screen-rotation"></a>
 
 #### 画面回転の対応
 
@@ -162,14 +162,14 @@ Androidアプリのレーティングは対象年齢層の設定と異なり、�
 #### OS機能によるフォントサイズの変更対応
 
 iOSやAndroidでは、OSの設定としてフォントサイズを変更できます。
-iOSではOSの設定からフォントサイズを変更した場合、[Dynamic Type][dynamictype]に対応したアプリであれば表示される文字の大きさが変更されます。
+iOSではOSの設定からフォントサイズを変更した場合、[Dynamic Type][dynamic-type]に対応したアプリであれば表示される文字の大きさが変更されます。
 AndroidではOSの設定からフォントサイズを変更した場合、原則全てのアプリの文字の大きさが変更されます。
 
 このアプリではDynamic Typeに対応し、OSのフォントサイズ設定変更を無効化はしませんが、
 考え方・アーキテクチャの整備を優先するため、表示上の動作確認は原則各OSの標準のフォントサイズでのみ実施し、
 これらのフォントサイズ設定の変更に対して特別なサポートは行いません。
 
-[dynamictype]:https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/#dynamic-type-sizes
+[dynamic-type]:https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/#dynamic-type-sizes
 
 #### 側面ディスプレイ・折り畳みスマートフォン対応について
 
@@ -181,17 +181,17 @@ AndroidではOSの設定からフォントサイズを変更した場合、原�
 
 #### マルチウィンドウ対応
 
-iPad端末やAndroid端末では、画面内に複数のアプリケーションを同時に表示する[Split View、Slide Over機能][splitview]や[マルチウィンドウ機能][multiwindow]が提供されています。
+iPad端末やAndroid端末では、画面内に複数のアプリケーションを同時に表示する[Split View、Slide Over機能][split-view]や[マルチウィンドウ機能][multi-window]が提供されています。
 
 このアプリでは考え方・アーキテクチャの整備を優先するため、マルチウィンドウへの対応はせず、単一アプリでの全画面表示を基本とします。
 
-[splitview]:https://support.apple.com/ja-jp/HT207582
-[multiwindow]:https://developer.android.com/guide/topics/ui/multi-window
+[split-view]:https://support.apple.com/ja-jp/HT207582
+[multi-window]:https://developer.android.com/guide/topics/ui/multi-window
 
 #### タブレット端末での画面回転
 
 タブレット端末で横持ちをした場合は縦表示のまま全画面表示となるようにします。
-画面回転については[画面回転の対応について](#kaiten)で記載した通り対応しませんが、画面サイズが大きいタブレット端末においては横持ちをした際にアプリが縦表示のまま回転操作がされ、適切な対応がされていない場合全画面表示とならないことがあります。
+画面回転については[画面回転の対応について](#screen-rotation)で記載した通り対応しませんが、画面サイズが大きいタブレット端末においては横持ちをした際にアプリが縦表示のまま回転操作がされ、適切な対応がされていない場合全画面表示とならないことがあります。
 このアプリにおいてはタブレット端末の横持ち時でも全画面表示がされるように適切に対応します。
 
 <!--
