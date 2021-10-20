@@ -77,24 +77,34 @@ stages:
     - task: DownloadSecureFile@1
       displayName: 'Download Keystore file for ReleaseInHouse'
       inputs:
-        secureFile: $(Android_ReleaseInHouseKeyStoreSecureFileUUID)
+        secureFile: $(Android_ReleaseInHouseKeyStoreSecureFileName)
     - task: CopyFiles@2
       displayName: 'Copy Keystore file to: $(appDir)/android/app'
       inputs:
         SourceFolder: '$(Agent.TempDirectory)'
-        Contents: $(Android_ReleaseInHouseKeyStoreFileName)
+        Contents: $(Android_ReleaseInHouseKeyStoreSecureFileName)
         TargetFolder: '$(appDir)/android/app'
     - task: CmdLine@2
       displayName: 'Add gradle.properties settings for ReleaseInHouse'
       inputs:
         script: |
           echo '# Keystore properties for ReleaseInHouse' >> gradle.properties
-          echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=$(Android_ReleaseInHouseKeyStoreFileName)' >> gradle.properties
+          echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=$(Android_ReleaseInHouseKeyStoreSecureFileName)' >> gradle.properties
           echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD=$(Android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
           echo 'SANTOKU_APP_IN_HOUSE_KEY_ALIAS=$(Android_ReleaseInHouseKeyAlias)' >> gradle.properties
           echo 'SANTOKU_APP_IN_HOUSE_KEY_PASSWORD=$(Android_ReleaseInHouseKeyPassword)' >> gradle.properties
         workingDirectory: '$(appDir)/android'
     - ${{ each buildVariant in parameters.buildVariants }}:
+      - task: DownloadSecureFile@1
+        name: googleServicesJson${{buildVariant.name}}
+        displayName: 'Download google-services.json file for ${{buildVariant.name}}'
+        inputs:
+          secureFile: $(${{buildVariant.name}}_GoogleServicesJsonSecureFileName)
+      - task: CmdLine@2
+        displayName: 'Copy and rename google-services.json file to: $(appDir)/android/app/src/${{buildVariant.name}}'
+        inputs:
+          script: |
+            'cp $(Agent.TempDirectory)/$(${{buildVariant.name}}_GoogleServicesJsonSecureFileName) $(appDir)/android/app/src/${{buildVariant.name}}/google-services.json'
       - task: CmdLine@2
         displayName: 'Build Android app for ${{buildVariant.name}}'
         inputs:
@@ -131,21 +141,21 @@ stages:
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
         inputs:
-          certSecureFile: $(Apple_DevelopmentCertificateSecureFileUUID)
+          certSecureFile: $(Apple_DevelopmentCertificateSecureFileName)
           certPwd: $(Apple_DevelopmentCertificatePassword)
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
         inputs:
-          certSecureFile: $(Apple_DistributionCertificateSecureFileUUID)
+          certSecureFile: $(Apple_DistributionCertificateSecureFileName)
           certPwd: $(Apple_DistributionCertificatePassword)
       - task: InstallAppleProvisioningProfile@1
         displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
         inputs:
-          provProfileSecureFile: $(${{buildVariant.name}}_AppleDevelopmentProvisioningProfileSecureFileUUID)
+          provProfileSecureFile: $(${{buildVariant.name}}_AppleDevelopmentProvisioningProfileSecureFileName)
       - task: InstallAppleProvisioningProfile@1
         displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
         inputs:
-          provProfileSecureFile: $(${{buildVariant.name}}_AppleDistributionProvisioningProfileSecureFileUUID)
+          provProfileSecureFile: $(${{buildVariant.name}}_AppleDistributionProvisioningProfileSecureFileName)
     - task: NodeTool@0
       displayName: 'Use Node 16.x'
       inputs:
@@ -162,6 +172,16 @@ stages:
         script: 'bundle install'
         workingDirectory: '$(appDir)'
     - ${{ each buildVariant in parameters.buildVariants }}:
+      - task: DownloadSecureFile@1
+        displayName: 'Download GoogleServices-Info.plist file for ${{buildVariant.name}}'
+        inputs:
+          secureFile: $(${{buildVariant.name}}_GoogleServicesPlistSecureFileName)
+      - task: CopyFiles@2
+        displayName: 'Copy GoogleServices-Info.plist file to: $(appDir)/ios/SantokuApp/Supporting'
+        inputs:
+          SourceFolder: '$(Agent.TempDirectory)'
+          Contents: $(${{buildVariant.name}}_GoogleServicesPlistSecureFileName)
+          TargetFolder: '$(appDir)/ios/SantokuApp/Supporting'
       - task: CmdLine@2
         displayName: 'Build iOS app for ${{buildVariant.name}}'
         inputs:
