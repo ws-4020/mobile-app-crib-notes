@@ -114,7 +114,7 @@ stages:
         displayName: 'Rename google-services.json'
         inputs:
           script: |
-            'mv $(${{buildVariant.name}}_GoogleServicesJsonSecureFileName) google-services.json'
+            '/bin/mv $(${{buildVariant.name}}_GoogleServicesJsonSecureFileName) google-services.json'
           workingDirectory: '$(appDir)/android/app/src/${{buildVariant.buildType}}'
       - task: CmdLine@2
         displayName: 'Build Android app for ${{buildVariant.name}}'
