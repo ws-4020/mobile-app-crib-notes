@@ -53,7 +53,7 @@ variables:
 - name: appDir
   value: '$(System.DefaultWorkingDirectory)/example-app/SantokuApp'
 - name: branchName
-  value: '$(Build.SourceBranch)'
+  value: '$(Build.SourceBranchName)'
 
 stages:
 - stage: Android
