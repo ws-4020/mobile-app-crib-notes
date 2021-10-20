@@ -104,7 +104,7 @@ stages:
         displayName: 'Copy and rename google-services.json file to: $(appDir)/android/app/src/${{buildVariant.name}}'
         inputs:
           script: |
-            'cp $(Agent.TempDirectory)/$(${{buildVariant.name}}_GoogleServicesJsonSecureFileName) $(appDir)/android/app/src/${{buildVariant.name}}/google-services.json'
+            'cp $(googleServicesJson${{buildVariant.name}}.secureFilePath) $(appDir)/android/app/src/${{buildVariant.name}}/google-services.json'
       - task: CmdLine@2
         displayName: 'Build Android app for ${{buildVariant.name}}'
         inputs:
