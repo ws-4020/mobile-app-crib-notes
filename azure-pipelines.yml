@@ -175,12 +175,12 @@ stages:
       - task: DownloadSecureFile@1
         displayName: 'Download GoogleServices-Info.plist file for ${{buildVariant.name}}'
         inputs:
-          secureFile: $(${{buildVariant.name}}_GoogleServicesPlistSecureFileName)
+          secureFile: $(${{buildVariant.name}}_GoogleServicesInfoPlistSecureFileName)
       - task: CopyFiles@2
         displayName: 'Copy GoogleServices-Info.plist file to: $(appDir)/ios/SantokuApp/Supporting'
         inputs:
           SourceFolder: '$(Agent.TempDirectory)'
-          Contents: $(${{buildVariant.name}}_GoogleServicesPlistSecureFileName)
+          Contents: $(${{buildVariant.name}}_GoogleServicesInfoPlistSecureFileName)
           TargetFolder: '$(appDir)/ios/SantokuApp/Supporting'
       - task: CmdLine@2
         displayName: 'Build iOS app for ${{buildVariant.name}}'
