@@ -27,18 +27,22 @@ parameters:
   default:
     - name: 'devSantokuAppDebugAdvanced'
       laneName: 'dev_debug_advanced'
+      buildType: 'debugAdvanced'
       androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab'
       iOSAppPath: 'ios/build/DevSantokuAppDebugAdvanced.ipa'
     - name: 'devSantokuAppReleaseInHouse'
       laneName: 'dev_release_in_house'
+      buildType: 'releaseInHouse'
       androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppReleaseInHouse/app-devSantokuApp-releaseInHouse.aab'
       iOSAppPath: 'ios/build/DevSantokuAppReleaseInHouse.ipa'
     - name: 'santokuAppDebugAdvanced'
       laneName: 'debug_advanced'
+      buildType: 'debugAdvanced'
       androidAppPath: 'android/app/build/outputs/bundle/santokuAppDebugAdvanced/app-santokuApp-debugAdvanced.aab'
       iOSAppPath: 'ios/build/SantokuAppDebugAdvanced.ipa'
     - name: 'santokuAppReleaseInHouse'
       laneName: 'release_in_house'
+      buildType: 'releaseInHouse'
       androidAppPath: 'android/app/build/outputs/bundle/santokuAppReleaseInHouse/app-santokuApp-releaseInHouse.aab'
       iOSAppPath: 'ios/build/SantokuAppReleaseInHouse.ipa'
 
@@ -101,10 +105,10 @@ stages:
         inputs:
           secureFile: $(${{buildVariant.name}}_GoogleServicesJsonSecureFileName)
       - task: CmdLine@2
-        displayName: 'Copy and rename google-services.json file to: $(appDir)/android/app/src/${{buildVariant.name}}'
+        displayName: 'Copy and rename google-services.json file to: $(appDir)/android/app/src/${{buildVariant.buildType}}'
         inputs:
           script: |
-            'cp $(googleServicesJson${{buildVariant.name}}.secureFilePath) $(appDir)/android/app/src/${{buildVariant.name}}/google-services.json'
+            'cp $(googleServicesJson${{buildVariant.name}}.secureFilePath) $(appDir)/android/app/src/${{buildVariant.buildType}}/google-services.json'
       - task: CmdLine@2
         displayName: 'Build Android app for ${{buildVariant.name}}'
         inputs:
