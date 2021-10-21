@@ -7,6 +7,8 @@ import {BundledMessagesLoader, loadMessages} from './framework';
 import {firebaseConfig} from './framework/firebase';
 import {log} from './framework/logging';
 
+// 変更を加えるとPipelineの実行対象になることの確認
+
 export const App = () => {
   // 開発中は画面がスリープしないようにしておきます。
   if (__DEV__) {
