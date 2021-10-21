@@ -163,6 +163,10 @@ stages:
         displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
         inputs:
           provProfileSecureFile: $(${{buildVariant.name}}_AppleDistributionProvisioningProfileSecureFileName)
+    - task: CmdLine@2
+      displayName: 'Use Xcode 12.5.1'
+      inputs:
+        script: 'xcode-select --switch /Applications/Xcode_12.5.1.app'
     - task: NodeTool@0
       displayName: 'Use Node 16.12.0'
       inputs:
