@@ -102,7 +102,7 @@ class Logger {
   }
 
   /**
-   * 指定された型に応じてメッセージを取得します。
+   * LogFormatterを使用してメッセージをフォーマットします。
    * @param level ログレベル
    * @param message ログメッセージ
    * @param errorCode エラーコード
