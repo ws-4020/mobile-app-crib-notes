@@ -41,10 +41,10 @@ variables:
 
 stages:
 - stage: Android
-  displayName: Build Android Applications
+  displayName: Android
   jobs:
-  - job: build_android_app
-    displayName: 'Build Android Apps'
+  - job: build_and_deploy
+    displayName: 'build and deploy to DeployGate'
     pool:
       vmImage: macOS-11
     steps:
@@ -105,7 +105,7 @@ stages:
         displayName: 'Upload app to DeployGate'
         inputs:
           script: |
-            curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.androidAppPath}}" -F "distribution_name=$(branchName)" -F "message=Build $(branchName) with Azure Pipeline"
+            curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.androidAppPath}}" -F "distribution_name=$(branchName)" -F "message=$(Build.Reason) triggered build by $(Build.BuildNumber)"
           workingDirectory: '$(appDir)'
     - task: PublishPipelineArtifact@1
       displayName: 'Publish Artifact'
@@ -117,10 +117,10 @@ stages:
       condition: succeeded()
 
 - stage: iOS
-  displayName: Build iOS Applications
+  displayName: iOS
   jobs:
-  - job: build_ios_app
-    displayName: 'Build iOS Apps'
+  - job: build_and_deploy
+    displayName: 'build and deploy to DeployGate'
     pool:
       vmImage: macOS-11
     steps:
@@ -182,7 +182,7 @@ stages:
         displayName: 'Upload app to DeployGate'
         inputs:
           script: |
-            curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.iOSAppPath}}" -F "distribution_name=$(branchName)" -F "message=Build $(branchName) with Azure Pipeline"
+            curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.iOSAppPath}}" -F "distribution_name=$(branchName)" -F "message=$(Build.Reason) triggered build by $(Build.BuildNumber)"
           workingDirectory: '$(appDir)'
     - task: PublishPipelineArtifact@1
       displayName: 'Publish Artifact'
