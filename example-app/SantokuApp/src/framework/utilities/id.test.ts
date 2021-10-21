@@ -1,5 +1,6 @@
-import {launchedId, random, randomAsync} from './id';
 import * as Random from 'expo-random';
+
+import {launchedId, random, randomAsync} from './id';
 
 describe('random', () => {
   test('指定したバイト数のランダム値が取得できるかの検証', () => {

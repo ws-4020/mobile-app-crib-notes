@@ -1,3 +1,4 @@
+import crashlytics from '@react-native-firebase/crashlytics';
 import {NavigationContainer} from '@react-navigation/native';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {RootStackNav} from 'navigation';
@@ -7,7 +8,6 @@ import {BundledMessagesLoader, loadMessages} from './framework';
 import {firebaseConfig} from './framework/firebase';
 import {log} from './framework/logging';
 import {launchedId} from './framework/utilities/id';
-import crashlytics from '@react-native-firebase/crashlytics';
 
 export const App = () => {
   // 開発中は画面がスリープしないようにしておきます。
