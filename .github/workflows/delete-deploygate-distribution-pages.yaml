@@ -1,4 +1,4 @@
-name: DeployGateClean
+name: DeleteDeployGateDistributionPages
 
 on:
   pull_request:
@@ -23,5 +23,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '/azp run DeleteDeployGateDistributionPages'
+              body: '/azp run delete-deploygate-distribution-pages'
             })
