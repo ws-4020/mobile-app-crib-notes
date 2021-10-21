@@ -1,0 +1,55 @@
+trigger: none
+
+pr:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - 'example-app/SantokuApp'
+    exclude:
+      - 'example-app/SantokuApp/README.md'
+  drafts: false
+
+name: $(date:yyyyMMdd)$(rev:.rr)
+
+parameters:
+- name: platforms
+  type: object
+  default:
+    - 'android'
+    - 'ios'
+- name: appIds
+  type: object
+  default:
+    - 'jp.fintan.mobile.SantokuApp.dev.debugAdvanced'
+    - 'jp.fintan.mobile.SantokuApp.dev.house'
+    - 'jp.fintan.mobile.SantokuApp.debugAdvanced'
+    - 'jp.fintan.mobile.SantokuApp.house'
+
+variables:
+- group: deployGate
+- name: branchName
+  value:
+    ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/') }}:
+      branchName: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
+    ${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
+      branchName: $[ replace(variables['System.PullRequest.SourceBranch'], 'refs/heads/', '') ]
+
+stages:
+- stage: DeleteDistributionPages
+  displayName: Delete DeployGate distribution pages
+  jobs:
+  - job: delete_distribution_pages
+    displayName: 'Delete DeployGate distribution pages'
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - ${{ each platform in parameters.platforms }}:
+      - ${{ each appId in parameters.appIds }}:
+        - task: CmdLine@2
+          displayName: 'Delete distribution page for $(parameters.branchName):${{platform}}:${{appId}}'
+          inputs:
+            script: |
+              curl -X DELETE -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/platforms/${{platform}}/${{appId}}/distributions" -F "distribution_name=$(parameters.branchName)"
+          failOnStderr: false

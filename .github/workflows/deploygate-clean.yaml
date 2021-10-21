@@ -10,23 +10,18 @@ on:
       - closed
 
 jobs:
-  delete-distribution-pages:
-    name: Delete DeployGate distiribution pages
+  comment:
+    name: Comment /azp run command to closed pull request.
     # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md
     runs-on: ubuntu-latest
-    env:
-      DEPLOYGATE_ORGANIZATION_NAME: ${{ secrets.DEPLOYGATE_ORGANIZATION_NAME }}
-      DEPLOYGATE_API_KEY: ${{ secrets.DEPLOYGATE_API_KEY }}
-      BRANCH_REF: ${{ github.head_ref }}
     steps:
-      - name: Delete DeployGate distribution pages
-        continue-on-error: true
-        env:
-          PLATFORMS: "android ios"
-          APP_ID_SUFFIXES: ".dev.debugAdvanced .dev.house .debugAdvanced .house"
-        run: |
-          for platform in ${PLATFORMS}; do
-            for appIdSuffix in ${APP_ID_SUFFIXES}; do
-              curl -X DELETE -H "Authorization: token ${DEPLOYGATE_API_KEY}" "https://deploygate.com/api/users/${DEPLOYGATE_ORGANIZATION_NAME}/platforms/${platform}/jp.fintan.mobile.SantokuApp${appIdSuffix}/distributions" -F "distribution_name=${BRANCH_REF#refs/heads/}"
-            done
-          done
+      - uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '/azp run DeleteDeployGateDistributionPages'
+            })

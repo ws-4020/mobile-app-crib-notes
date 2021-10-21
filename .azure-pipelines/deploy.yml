@@ -1,26 +1,3 @@
-trigger:
-  branches:
-    include:
-      - 'master'
-  paths:
-    include:
-      - 'example-app/SantokuApp'
-    exclude:
-      - 'example-app/SantokuApp/README.md'
-
-pr:
-  branches:
-    include:
-      - '*'
-  paths:
-    include:
-      - 'example-app/SantokuApp'
-    exclude:
-      - 'example-app/SantokuApp/README.md'
-  drafts: false
-
-name: $(date:yyyyMMdd)$(rev:.rr)
-
 parameters:
 - name: buildVariants
   type: object
