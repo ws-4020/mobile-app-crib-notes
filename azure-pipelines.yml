@@ -69,9 +69,9 @@ stages:
       vmImage: macOS-11
     steps:
     - task: NodeTool@0
-      displayName: 'Use Node 16.x'
+      displayName: 'Use Node 16.12.0'
       inputs:
-        versionSpec: '16.x'
+        versionSpec: '16.12.0'
     - task: Npm@1
       displayName: 'npm ci'
       inputs:
@@ -164,9 +164,9 @@ stages:
         inputs:
           provProfileSecureFile: $(${{buildVariant.name}}_AppleDistributionProvisioningProfileSecureFileName)
     - task: NodeTool@0
-      displayName: 'Use Node 16.x'
+      displayName: 'Use Node 16.12.0'
       inputs:
-        versionSpec: '16.x'
+        versionSpec: '16.12.0'
     - task: Npm@1
       displayName: 'npm ci'
       inputs:
