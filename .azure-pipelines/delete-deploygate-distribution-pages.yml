@@ -47,8 +47,8 @@ stages:
     - ${{ each platform in parameters.platforms }}:
       - ${{ each appId in parameters.appIds }}:
         - task: CmdLine@2
-          displayName: 'Delete distribution page for $(parameters.branchName):${{platform}}:${{appId}}'
+          displayName: 'Delete distribution page for $(branchName):${{platform}}:${{appId}}'
           inputs:
             script: |
-              curl -X DELETE -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/platforms/${{platform}}/${{appId}}/distributions" -F "distribution_name=$(parameters.branchName)"
+              curl -X DELETE -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/platforms/${{platform}}/${{appId}}/distributions" -F "distribution_name=$(branchName)"
           failOnStderr: false
