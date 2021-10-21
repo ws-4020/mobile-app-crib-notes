@@ -34,11 +34,7 @@ variables:
 - name: appDir
   value: '$(System.DefaultWorkingDirectory)/example-app/SantokuApp'
 - name: branchName
-  value:
-    ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/') }}:
-      $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
-    ${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
-      $[ replace(variables['System.PullRequest.SourceBranch'], 'refs/heads/', '') ]
+  value: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
 
 stages:
 - stage: Android
