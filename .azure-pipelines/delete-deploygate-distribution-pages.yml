@@ -29,12 +29,11 @@ parameters:
 
 variables:
 - group: deployGate
-${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/') }}:
 - name: branchName
-  value: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
-${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
-- name: branchName
-  value: $[ replace(variables['System.PullRequest.SourceBranch'], 'refs/heads/', '') ]
+  ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/') }}:
+    value: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
+  ${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
+    value: $[ replace(variables['System.PullRequest.SourceBranch'], 'refs/heads/', '') ]
 
 stages:
 - stage: DeleteDistributionPages
