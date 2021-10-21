@@ -9,6 +9,7 @@ import {ErrorCaseScreen} from './error';
 import {AppInfoScreen} from './info';
 import {InstructionsScreen} from './instructions';
 import {MessageScreen} from './message';
+import {TrackingSampleScreen} from './firebase-analytics';
 
 const demoScreenList = [
   {
@@ -34,6 +35,10 @@ const demoScreenList = [
   {
     title: 'Message',
     to: MessageScreen.name,
+  },
+  {
+    title: 'Firebase Analytics',
+    to: TrackingSampleScreen.name,
   },
 ];
 
