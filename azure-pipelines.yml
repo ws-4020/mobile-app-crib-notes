@@ -127,18 +127,14 @@ stages:
           script: |
             curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.androidAppPath}}" -F "distribution_name=$(branchName)" -F "message=Build $(branchName) with Azure Pipeline"
           workingDirectory: '$(appDir)'
-    - task: CopyFiles@2
-      displayName: 'Copy aab files to: $(build.artifactstagingdirectory)'
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Artifact'
       inputs:
-        SourceFolder: '$(appDir)/android/app/build/outputs'
-        Contents: '**/*.aab'
-        TargetFolder: '$(build.artifactstagingdirectory)'
-      condition: succeededOrFailed()
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
-      inputs:
-        PathtoPublish: '$(build.artifactstagingdirectory)'
-      condition: succeededOrFailed()
+        targetPath: '$(appDir)/android/app/build/outputs'
+        artifactType: 'pipeline'
+        artifactName: 'aab'
+        parallel: true
+      condition: succeeded()
 
 - stage: iOS
   displayName: Build iOS Applications
@@ -204,15 +200,11 @@ stages:
           script: |
             curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.iOSAppPath}}" -F "distribution_name=$(branchName)" -F "message=Build $(branchName) with Azure Pipeline"
           workingDirectory: '$(appDir)'
-    - task: CopyFiles@2
-      displayName: 'Copy artifacts to: $(build.artifactstagingdirectory)'
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Artifact'
       inputs:
-        SourceFolder: '$(appDir)/ios'
-        Contents: '**/*.ipa'
-        TargetFolder: '$(build.artifactstagingdirectory)'
-      condition: succeededOrFailed()
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
-      inputs:
-        PathtoPublish: '$(build.artifactstagingdirectory)'
-      condition: succeededOrFailed()
+        targetPath: '$(appDir)/ios/build'
+        artifactType: 'pipeline'
+        artifactName: 'ipa'
+        parallel: true
+      condition: succeeded()
