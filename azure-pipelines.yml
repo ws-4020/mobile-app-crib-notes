@@ -81,22 +81,22 @@ stages:
     - task: DownloadSecureFile@1
       displayName: 'Download Keystore file for ReleaseInHouse'
       inputs:
-        secureFile: $(Android_ReleaseInHouseKeyStoreSecureFileName)
+        secureFile: $(android_ReleaseInHouseKeyStoreSecureFileName)
     - task: CopyFiles@2
       displayName: 'Copy Keystore file to: $(appDir)/android/app'
       inputs:
         SourceFolder: '$(Agent.TempDirectory)'
-        Contents: $(Android_ReleaseInHouseKeyStoreSecureFileName)
+        Contents: $(android_ReleaseInHouseKeyStoreSecureFileName)
         TargetFolder: '$(appDir)/android/app'
     - task: CmdLine@2
       displayName: 'Add gradle.properties settings for ReleaseInHouse'
       inputs:
         script: |
           echo '# Keystore properties for ReleaseInHouse' >> gradle.properties
-          echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=$(Android_ReleaseInHouseKeyStoreSecureFileName)' >> gradle.properties
-          echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD=$(Android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
-          echo 'SANTOKU_APP_IN_HOUSE_KEY_ALIAS=$(Android_ReleaseInHouseKeyAlias)' >> gradle.properties
-          echo 'SANTOKU_APP_IN_HOUSE_KEY_PASSWORD=$(Android_ReleaseInHouseKeyPassword)' >> gradle.properties
+          echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=$(android_ReleaseInHouseKeyStoreSecureFileName)' >> gradle.properties
+          echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD=$(android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
+          echo 'SANTOKU_APP_IN_HOUSE_KEY_ALIAS=$(android_ReleaseInHouseKeyAlias)' >> gradle.properties
+          echo 'SANTOKU_APP_IN_HOUSE_KEY_PASSWORD=$(android_ReleaseInHouseKeyPassword)' >> gradle.properties
         workingDirectory: '$(appDir)/android'
     - ${{ each buildVariant in parameters.buildVariants }}:
       - task: DownloadSecureFile@1
@@ -152,13 +152,13 @@ stages:
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
         inputs:
-          certSecureFile: $(Apple_DevelopmentCertificateSecureFileName)
-          certPwd: $(Apple_DevelopmentCertificatePassword)
+          certSecureFile: $(apple_DevelopmentCertificateSecureFileName)
+          certPwd: $(apple_DevelopmentCertificatePassword)
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
         inputs:
-          certSecureFile: $(Apple_DistributionCertificateSecureFileName)
-          certPwd: $(Apple_DistributionCertificatePassword)
+          certSecureFile: $(apple_DistributionCertificateSecureFileName)
+          certPwd: $(apple_DistributionCertificatePassword)
       - task: InstallAppleProvisioningProfile@1
         displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
         inputs:
