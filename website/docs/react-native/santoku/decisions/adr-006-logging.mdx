@@ -105,7 +105,9 @@ Superseded: 廃止
 - モバイルアプリのmBaaSとして主流
 - プッシュ通知でFirebase Cloud Messagingを使用する
 
-また、リリースビルドされたアプリのエラーログのみFirebase Crashlyticsに送信する、ログ出力部品をデフォルトとして提供します。
+ビルドタイプ`Release`および`ReleaseInHouse`では、ログ出力先をFirebase Crashlyticsとします。それ以外の場合はReact NativeのConsoleに出力し、Metro Bundlerを起動しているターミナル上でログを確認できるようにします。
+
+なお、Firebase Crashlyticsに送信するのはログレベルがエラーのログのみとします。デバッグ用途のログが誤って送信されるのを防ぐためです。
 
 :::caution
 Firebase Crashlyticsをログ収集先として使用するにあたり、次の注意事項があります。
