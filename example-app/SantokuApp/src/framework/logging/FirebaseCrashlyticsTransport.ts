@@ -21,7 +21,7 @@ class FirebaseCrashlyticsTransport implements Transport {
   }
 
   /**
-   * traceログは、Firebase Crashlyticsに送信しません。
+   * traceログは、Firebase Crashlyticsに出力しません。
    * @param message 出力するメッセージ
    */
   trace(message: string) {
@@ -29,7 +29,7 @@ class FirebaseCrashlyticsTransport implements Transport {
   }
 
   /**
-   * debugログは、Firebase Crashlyticsに送信しません。
+   * debugログは、Firebase Crashlyticsに出力しません。
    * @param message 出力するメッセージ
    */
   debug(message: string) {
@@ -37,7 +37,7 @@ class FirebaseCrashlyticsTransport implements Transport {
   }
 
   /**
-   * infoログは、Firebase Crashlyticsに送信しません。
+   * infoログは、Firebase Crashlyticsに出力しません。
    * @param message 出力するメッセージ
    */
   info(message: string) {
@@ -45,7 +45,7 @@ class FirebaseCrashlyticsTransport implements Transport {
   }
 
   /**
-   * warnログは、Firebase Crashlyticsに送信しません。
+   * warnログは、Firebase Crashlyticsに出力しません。
    * @param message 出力するメッセージ
    */
   warn(message: string) {
