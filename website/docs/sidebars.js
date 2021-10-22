@@ -225,28 +225,30 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Test Planning',
+      label: 'Requirements',
       items: [
         {
           type: 'doc',
-          id: 'react-native/santoku/test-planning',
+          id: 'react-native/santoku/requirements',
         },
         {
           type: 'category',
-          label: '全体テスト計画',
+          label: '機能要件',
           items: [
-            'react-native/santoku/test-planning/all/overview',
-            'react-native/santoku/test-planning/all/test-policy',
-            'react-native/santoku/test-planning/all/test-planning-positioning',
-            'react-native/santoku/test-planning/all/test-process-positioning',
-            'react-native/santoku/test-planning/all/test-coverage-policy',
-            'react-native/santoku/test-planning/all/test-range',
-            'react-native/santoku/test-planning/all/test-environment',
-            'react-native/santoku/test-planning/all/task-roles',
-            'react-native/santoku/test-planning/all/management-policy',
-          ],
+            'react-native/santoku/requirements/functional/overview'
+         ],
         },
-      ],
+        {
+          type: 'category',
+          label: '非機能要件',
+          items: [
+            'react-native/santoku/requirements/non-functional/overview',
+            'react-native/santoku/requirements/non-functional/usability',
+            'react-native/santoku/requirements/non-functional/system-method',
+            'react-native/santoku/requirements/non-functional/test-outline',
+         ],
+        },
+      ]
     },
     {
       type: 'category',
@@ -291,6 +293,31 @@ module.exports = {
             'react-native/santoku/application-architecture/error-handling/how-to-handle-error',
             'react-native/santoku/application-architecture/http-api/http-api-error-handling',
             'react-native/santoku/application-architecture/webview/webview-error-handling',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Test Planning',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning',
+        },
+        {
+          type: 'category',
+          label: '全体テスト計画',
+          items: [
+            'react-native/santoku/test-planning/all/overview',
+            'react-native/santoku/test-planning/all/test-policy',
+            'react-native/santoku/test-planning/all/test-planning-positioning',
+            'react-native/santoku/test-planning/all/test-process-positioning',
+            'react-native/santoku/test-planning/all/test-coverage-policy',
+            'react-native/santoku/test-planning/all/test-range',
+            'react-native/santoku/test-planning/all/test-environment',
+            'react-native/santoku/test-planning/all/task-roles',
+            'react-native/santoku/test-planning/all/management-policy',
           ],
         },
       ],
