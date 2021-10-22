@@ -109,13 +109,21 @@ Superseded: 廃止
 
 なお、Firebase Crashlyticsに送信するのはログレベルがエラーのログのみとします。デバッグ用途のログが誤って送信されるのを防ぐためです。
 
+:::info
+クラッシュ時の情報をクラッシュレポートとしてFirebase Crashlyticsに送信します。
+クラッシュレポートには大きく次の2つがあります。
+
+- 致命的な例外発生時（アプリクラッシュ時）に自動的に送信するもの
+- 非致命的な例外発生時に明示的に送信するもの
+:::
+
 :::caution
 Firebase Crashlyticsをログ収集先として使用するにあたり、次の注意事項があります。
 
 - エラーログは非致命的な例外として記録され、次回のアプリ起動時に送信されます。即座にログが送信されないことに注意してください。
 - 最新8件の例外だけを保管します。8件を超える例外をスローすると、古い例外は失われます。ユーザ操作の把握などの用途でエラーログを使用しないよう注意してください。
 
-詳細は、Firebase Crashlyticsドキュメントの「[非致命的な例外を報告する](https://firebase.google.com/docs/crashlytics/customize-crash-reports?hl=ja&platform=ios#log-excepts)」を参照してください。
+詳細は、Firebase Crashlyticsドキュメントの「[非致命的な例外を報告する](https://firebase.google.com/docs/crashlytics/customize-crash-reports?hl=ja#log-excepts)」を参照してください。
 :::
 
 ### ログに含める内容
@@ -137,6 +145,25 @@ Firebase Crashlyticsをログ収集先として使用するにあたり、次の
 よって、ログに含める内容は出力日時のみとします。
 ログ出力部品として出力日時を含めるログフォーマットを実装し、それをデフォルトで利用します。
 アカウントID、エラーコード、起動IDは障害解析時に必要な情報のため、Firebase Crashlyticsのクラッシュレポートに含めて収集できるよう、別途設定します。
+
+:::infomation
+
+アカウントIDと起動IDは、次の設定を通じてFirebase Crashlyticsに送信します。
+
+<!-- textlint-disable prh -->
+<!-- 
+「ユーザー」がtextlintチェックNGとなる
+ Firebase Crashlyticsドキュメントの表記に合わせたいので、ここでのチェックは無効とする
+ -->
+
+- アカウントIDはユーザーIDの設定
+<!-- textlint-enable prh -->
+- 起動IDはカスタムキーの追加
+
+上記内容は致命的、非致命的な例外発生時を問わずFirebase Crashlyticsに送信されますが、エラーコードは非致命的な例外発生時にのみストックトレースのファイル名として送信されます。
+
+詳細は、Firebase Crashlyticsドキュメントの「[Firebase Crashlyticsのクラッシュレポートのカスタマイズ](https://firebase.google.com/docs/crashlytics/customize-crash-reports?hl=ja)」を参照してください。
+:::
 
 ### サードパーティー・ライブラリの使用
 
