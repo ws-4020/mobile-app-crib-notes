@@ -103,7 +103,7 @@ Superseded: 廃止
 次の理由によりFirebase Crashlyticsをログ収集先として採用します。
 
 - モバイルアプリのmBaaSとして主流
-- プッシュ通知でFirebase Cloud Messagingを使用する
+- プッシュ通知でFIrebaseの機能（Firebase Cloud Messaging）を使用するのでそれに併せる（関係する外部サービスを広げない）
 
 ビルドタイプ`Release`および`ReleaseInHouse`では、ログ出力先をFirebase Crashlyticsとします。それ以外の場合はReact NativeのConsoleに出力し、Metro Bundlerを起動しているターミナル上でログを確認できるようにします。
 
