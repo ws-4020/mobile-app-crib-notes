@@ -320,6 +320,32 @@ module.exports = {
             'react-native/santoku/test-planning/all/management-policy',
           ],
         },
+        {
+          type: 'category',
+          label: '単体テスト計画',
+          items: [
+            'react-native/santoku/test-planning/ut/overview',
+            'react-native/santoku/test-planning/ut/test-policy',
+            'react-native/santoku/test-planning/ut/test-range',
+            'react-native/santoku/test-planning/ut/test-coverage-policy',
+            'react-native/santoku/test-planning/ut/test-environment',
+            'react-native/santoku/test-planning/ut/management-policy',
+            'react-native/santoku/test-planning/ut/test-schedule',
+          ],
+        },
+        {
+          type: 'category',
+          label: '結合テスト計画',
+          items: [
+            'react-native/santoku/test-planning/it/overview',
+            'react-native/santoku/test-planning/it/test-policy',
+            'react-native/santoku/test-planning/it/test-range',
+            'react-native/santoku/test-planning/it/test-coverage-policy',
+            'react-native/santoku/test-planning/it/test-environment',
+            'react-native/santoku/test-planning/it/management-policy',
+            'react-native/santoku/test-planning/it/test-schedule',
+          ],
+        },
       ],
     },
     {
