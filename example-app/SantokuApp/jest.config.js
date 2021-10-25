@@ -1,3 +1,4 @@
+process.env.TZ = 'Asia/Tokyo';
 module.exports = {
   preset: 'jest-expo',
   // __mocks__ディレクトリをjestディレクトリ内に配置したいので、ルートディレクトリにjestを設定しています。
