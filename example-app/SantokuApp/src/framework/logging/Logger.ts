@@ -47,7 +47,8 @@ class Logger {
    */
   trace(message: string | LogMessageSupplier): Logger {
     if (this.isLevelEnabled('trace')) {
-      this.transports.forEach((t) => t.trace(this.formatMessage('trace', message)));
+      const formatted = this.formatMessage('trace', message);
+      this.transports.forEach((t) => t.trace(formatted));
     }
     return this;
   }
@@ -59,7 +60,8 @@ class Logger {
    */
   debug(message: string | LogMessageSupplier): Logger {
     if (this.isLevelEnabled('debug')) {
-      this.transports.forEach((t) => t.debug(this.formatMessage('debug', message)));
+      const formatted = this.formatMessage('debug', message);
+      this.transports.forEach((t) => t.debug(formatted));
     }
     return this;
   }
@@ -71,7 +73,8 @@ class Logger {
    */
   info(message: string | LogMessageSupplier): Logger {
     if (this.isLevelEnabled('info')) {
-      this.transports.forEach((t) => t.info(this.formatMessage('info', message)));
+      const formatted = this.formatMessage('info', message);
+      this.transports.forEach((t) => t.info(formatted));
     }
     return this;
   }
@@ -83,7 +86,8 @@ class Logger {
    */
   warn(message: string | LogMessageSupplier): Logger {
     if (this.isLevelEnabled('warn')) {
-      this.transports.forEach((t) => t.warn(this.formatMessage('warn', message)));
+      const formatted = this.formatMessage('warn', message);
+      this.transports.forEach((t) => t.warn(formatted));
     }
     return this;
   }
@@ -96,7 +100,8 @@ class Logger {
    */
   error(message: string | LogMessageSupplier, errorCode: string): Logger {
     if (this.isLevelEnabled('error')) {
-      this.transports.forEach((t) => t.error(this.formatMessage('error', message, errorCode), errorCode));
+      const formatted = this.formatMessage('error', message, errorCode);
+      this.transports.forEach((t) => t.error(formatted, errorCode));
     }
     return this;
   }
