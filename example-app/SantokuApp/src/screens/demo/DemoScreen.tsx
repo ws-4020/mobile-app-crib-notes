@@ -6,10 +6,10 @@ import {DemoTemplate} from './DemoTemplate';
 import {AppStateScreen} from './app-state';
 import {ConfigScreen} from './config';
 import {ErrorCaseScreen} from './error';
+import {TrackingSampleScreen} from './firebase-analytics';
 import {AppInfoScreen} from './info';
 import {InstructionsScreen} from './instructions';
 import {MessageScreen} from './message';
-import {TrackingSampleScreen} from './firebase-analytics';
 
 const demoScreenList = [
   {
