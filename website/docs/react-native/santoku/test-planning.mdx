@@ -6,32 +6,22 @@ hide_table_of_contents: true
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
+ここでのそれぞれのテスト計画は、一般的な開発で作成する部分を除いたモバイルアプリケーション開発特有な部分をまとめています。
+
 import {PageList} from '../../../src/components';
 const overviews = [
   {
-    title: 'テスト方針',
-    to: '/react-native/santoku/test-planning/all/test-policy',
+    title: '全体テスト計画',
+    to: '/react-native/santoku/test-planning/all/overview',
   },
   {
-    title: 'テスト工程の位置づけ',
-    to: '/react-native/santoku/test-planning/all/test-process-positioning',
+    title: '単体テスト計画',
+    to: '/react-native/santoku/test-planning/ut/overview',
   },
   {
-    title: 'テスト実施範囲',
-    to: '/react-native/santoku/test-planning/all/test-range',
-  },
-  {
-    title: 'タスクと役割分担',
-    to: '/react-native/santoku/test-planning/all/task-roles',
-  },
-  {
-    title: '管理方針',
-    to: '/react-native/santoku/test-planning/all/management-policy',
-  },
-  {
-    title: 'スケジュール',
-    to: '/react-native/santoku/test-planning/all/schedule',
-  },
+    title: '結合テスト計画',
+    to: '/react-native/santoku/test-planning/it/overview',
+  }
 ]
 
 <PageList overviews={overviews} colSize={12} />

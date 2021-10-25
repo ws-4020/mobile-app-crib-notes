@@ -311,11 +311,8 @@ module.exports = {
           items: [
             'react-native/santoku/test-planning/all/overview',
             'react-native/santoku/test-planning/all/test-policy',
-            'react-native/santoku/test-planning/all/test-process-positioning',
             'react-native/santoku/test-planning/all/test-range',
-            'react-native/santoku/test-planning/all/task-roles',
-            'react-native/santoku/test-planning/all/management-policy',
-            'react-native/santoku/test-planning/all/schedule',
+            'react-native/santoku/test-planning/all/test-environment'
           ],
         },
         {
