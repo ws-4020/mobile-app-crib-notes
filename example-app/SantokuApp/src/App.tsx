@@ -1,4 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
+import type {ParamListBase} from '@react-navigation/routers';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {RootStackNav} from 'navigation';
 import React from 'react';
@@ -6,6 +7,13 @@ import React from 'react';
 import {BundledMessagesLoader, loadMessages} from './framework';
 import {firebaseConfig} from './framework/firebase';
 import {log} from './framework/logging';
+
+// React Navigation の useNavigation/Link/ref 等のデフォルトタイプを指定
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends ParamListBase {}
+  }
+}
 
 export const App = () => {
   // 開発中は画面がスリープしないようにしておきます。
