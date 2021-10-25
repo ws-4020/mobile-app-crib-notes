@@ -4,7 +4,7 @@ title: ログ出力
 
 ログ出力は、以下のクラスで構成されます。
 
-- Logger ... ログを出力するAPIを提供するクラスです。他2つのクラスを指定できます。
+- Logger ... ログを出力するAPIを提供するクラスです。`LogFormatter`と`Transport`をインスタンス生成時に指定できます。
 - LogFormatter ... メッセージを出力する際のフォーマットを表すクラスです。
 - Transport ... ログの出力先を表すクラスです。出力先はコンソールやFirebase Crashlyticsがあります。
 
