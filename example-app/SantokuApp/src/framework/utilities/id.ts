@@ -1,5 +1,9 @@
 import * as Random from 'expo-random';
 
+function toNumberAlphabet(n: number): string {
+  return (n % 36).toString(36);
+}
+
 /**
  * 指定されたバイト数のランダム値を生成します。
  * @param byteCount 生成したいランダム値のバイト数
@@ -7,7 +11,7 @@ import * as Random from 'expo-random';
  */
 function random(byteCount: number): string {
   const randomBytes = Random.getRandomBytes(byteCount);
-  return randomBytes.reduce((a, c) => a + (c % 36).toString(36), '');
+  return randomBytes.reduce((a, c) => a + toNumberAlphabet(c), '');
 }
 
 /**
