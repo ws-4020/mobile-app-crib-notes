@@ -9,16 +9,6 @@ function toNumberAlphabet(n: number): string {
  * @param byteCount 生成したいランダム値のバイト数
  * @returns 半角数字と半角英子文字で構成されたランダム値
  */
-function random(byteCount: number): string {
-  const randomBytes = Random.getRandomBytes(byteCount);
-  return randomBytes.reduce((a, c) => a + toNumberAlphabet(c), '');
-}
-
-/**
- * 指定されたバイト数のランダム値を生成します。
- * @param byteCount 生成したいランダム値のバイト数
- * @returns 半角数字と半角英子文字で構成されたランダム値
- */
 async function randomAsync(byteCount: number): Promise<string> {
   const randomBytes = await Random.getRandomBytesAsync(byteCount);
   return randomBytes.reduce((a, c) => a + toNumberAlphabet(c), '');
@@ -32,4 +22,4 @@ async function launchedId(): Promise<string> {
   return await randomAsync(32);
 }
 
-export {random, randomAsync, launchedId};
+export {launchedId};
