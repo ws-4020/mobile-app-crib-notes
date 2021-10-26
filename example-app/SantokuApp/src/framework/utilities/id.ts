@@ -19,7 +19,7 @@ async function randomAsync(byteCount: number): Promise<string> {
  * @returns 32桁の半角数字と半角英子文字で構成されたランダム値
  */
 async function launchedId(): Promise<string> {
-  return await randomAsync(32);
+  return randomAsync(32);
 }
 
 export {launchedId};
