@@ -182,12 +182,11 @@ AndroidではOSの設定からフォントサイズを変更した場合、原�
 
 #### マルチウィンドウ対応
 
-iPad端末やAndroid端末では、画面内に複数のアプリケーションを同時に表示する[Split View、Slide Over機能][split-view]や[マルチウィンドウ機能][multi-window]が提供されています。
+iPad端末やAndroid端末では、画面内に複数のアプリケーションを同時に表示する[Split View、Slide Over機能][splitview]や[マルチウィンドウ機能][multiwindow]が提供されています。
+このアプリでは考え方・アーキテクチャの整備を優先するため、これらの機能を使用した場合にレイアウト崩れが発生してもレイアウトを調整することはしません。ただしアプリでの操作は継続できるようにします。
 
-このアプリでは考え方・アーキテクチャの整備を優先するため、マルチウィンドウへの対応はせず、単一アプリでの全画面表示を基本とします。
-
-[split-view]:https://support.apple.com/ja-jp/HT207582
-[multi-window]:https://developer.android.com/guide/topics/ui/multi-window
+[splitview]:https://support.apple.com/ja-jp/HT207582
+[multiwindow]:https://developer.android.com/guide/topics/ui/multi-window
 
 #### タブレット端末での画面回転
 
