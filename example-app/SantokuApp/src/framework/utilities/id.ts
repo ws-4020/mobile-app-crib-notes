@@ -18,7 +18,7 @@ async function randomAsync(byteCount: number): Promise<string> {
  * アプリの起動IDを生成します。
  * @returns 32桁の半角数字と半角英子文字で構成されたランダム値
  */
-async function launchedId(): Promise<string> {
+function launchedId(): Promise<string> {
   return randomAsync(32);
 }
 
