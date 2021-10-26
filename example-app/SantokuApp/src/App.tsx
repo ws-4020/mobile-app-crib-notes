@@ -1,4 +1,4 @@
-import crashlytics from '@react-native-firebase/crashlytics';
+import type crashlyticsType from '@react-native-firebase/crashlytics';
 import {NavigationContainer} from '@react-navigation/native';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {RootStackNav} from 'navigation';
@@ -17,6 +17,10 @@ export const App = () => {
 
   if (!firebaseConfig.isDummy) {
     // Firebase Crashlyticsの初期化
+    // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
+    // 型は、typeofで明示するようにします。
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    const crashlytics = require('@react-native-firebase/crashlytics').default as typeof crashlyticsType;
     // アプリの起動IDを設定
     launchedId()
       .then((value) => crashlytics().setAttribute('launchedId', value))
