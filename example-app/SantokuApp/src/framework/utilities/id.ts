@@ -21,7 +21,7 @@ function random(byteCount: number): string {
  */
 async function randomAsync(byteCount: number): Promise<string> {
   const randomBytes = await Random.getRandomBytesAsync(byteCount);
-  return randomBytes.reduce((a, c) => a + (c % 36).toString(36), '');
+  return randomBytes.reduce((a, c) => a + toNumberAlphabet(c), '');
 }
 
 /**
