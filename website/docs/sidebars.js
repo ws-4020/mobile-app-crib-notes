@@ -272,12 +272,63 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Test Planning',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning',
+        },
+        {
+          type: 'category',
+          label: '全体テスト計画',
+          items: [
+            'react-native/santoku/test-planning/all/overview',
+            'react-native/santoku/test-planning/all/test-policy',
+            'react-native/santoku/test-planning/all/test-range',
+            'react-native/santoku/test-planning/all/test-environment'
+          ],
+        },
+        {
+          type: 'category',
+          label: '単体テスト計画',
+          items: [
+            'react-native/santoku/test-planning/ut/overview',
+            'react-native/santoku/test-planning/ut/test-policy',
+            'react-native/santoku/test-planning/ut/test-range',
+            'react-native/santoku/test-planning/ut/test-coverage-policy',
+            'react-native/santoku/test-planning/ut/test-environment'
+          ],
+        },
+        {
+          type: 'category',
+          label: '結合テスト計画',
+          items: [
+            'react-native/santoku/test-planning/it/overview',
+            'react-native/santoku/test-planning/it/test-policy',
+            'react-native/santoku/test-planning/it/test-range',
+            'react-native/santoku/test-planning/it/test-coverage-policy',
+            'react-native/santoku/test-planning/it/test-environment'
+          ],
+        },
+        {
+          type: 'category',
+          label: 'テスト観点',
+          items: [
+            'react-native/santoku/test-planning/perspective/overview',
+            'react-native/santoku/test-planning/perspective/perspective-list'
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Development',
       items: [
         {
           type: 'doc',
           id: 'react-native/santoku/development',
         },
+        
         {
           type: 'category',
           label: '開発環境',
