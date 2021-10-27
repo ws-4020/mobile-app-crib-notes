@@ -5,12 +5,73 @@ title: ログの利用
 ## デバッグ用途の利用
 
 ログのデバッグとトレースをレベルに応じてデバッグ用途で使用します。  
-ロガーのログレベルを開発中とリリース時で分けることでコードを変えることなくデバッグ情報を出力する・しないを切り替えできます。
-
+ロガーのログレベルを開発中とリリース時とを分けることでコードを変えることなくデバッグ情報を出力する・しないを切り替えできます。
 
 ## エラーレベルとFirebase Crashlytics
 
 ログのエラーレベルの出力は、Firebase Crashlyticsにメッセージを送信します。  
 そのため方式設計によってWebViewでのエラー発生時とHTTPステータスの500台のエラーに限定的に使用されているたます。  
 エラーレベルでの使用は方式設計チームと相談の上で利用ください。
+
+## Firebase Crashlyticsのコンソールに表示されるスタックトレースとソースコードのマッピング
+
+Firebase Crashlyticsコンソールで送信されたメッセージやスタックトレースが確認できます。
+しかし、スタックトレースに関してはソースコードのマッピングがないため、直感的にはわからない表示になります。  
+
+```title="スタックトレオースの例"
+Fatal Exception: com.facebook.react.common.JavascriptException: Error: Error has occurred in synchronous process., stack:
+<unknown>@855:884
+<unknown>@677:2461
+value@231:8208
+value@231:7464
+onResponderRelease@231:6218
+p@96:384
+b@96:527
+T@96:581
+w@96:876
+ke@96:12621
+forEach@-1
+_@96:2057
+<unknown>@96:12968
+xe@96:89236
+Se@96:12419
+Re@96:12808
+receiveTouches@96:13600
+value@32:3350
+<unknown>@32:747
+value@32:2610
+value@32:719
+value@-1
+```
+
+
+以下の手順を行うことでソースコードとのマッピングを解決して表示できます。
+
+### ソースマップの作成
+
+まず、次のコマンドでソースマップを作成します。
+
+```
+npm run bundle
+```
+
+［プロジェクトルート］/generatedに、index.android.bundle.map, index.ios.bundle.mapが作成されます。
+
+次に、Firebase Crashlyticsのコンソールに表示されているスタックトレースをコピーして、任意のファイル、ディレクトリに格納します。  
+ここでは、［プロジェクトルート］/stack-trace.txtに保存する仮定とします。
+
+### ソースコードとのマッピング
+次に、ソースマップを使って、スタックトレースとソースコードをマッピングします。
+
+【Android】
+```
+cat stack-trace.txt | npm run symbolicate:android
+```
+
+【iOS】
+```
+cat stack-trace.txt | npm run symbolicate:ios
+```
+
+実行後に、ソースコードの行数と関数名のマッピング解決済みのスタックトレースが標準出力され、エラー発生箇所がわかるようになります。
 
