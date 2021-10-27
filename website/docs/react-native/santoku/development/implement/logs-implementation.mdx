@@ -10,7 +10,7 @@ title: ログの利用
 ## エラーレベルとFirebase Crashlytics
 
 ログのエラーレベルの出力は、Firebase Crashlyticsにメッセージを送信します。  
-そのため方式設計によってWebViewでのエラー発生時とHTTPステータスの500台のエラーに限定的に使用されているたます。  
+そのため方式設計によってWebViewでのエラー発生時とHTTPステータスの500台のエラーに限定的に使用されています。
 エラーレベルでの使用は方式設計チームと相談の上で利用ください。
 
 ## Firebase Crashlyticsのコンソールに表示されるスタックトレースとソースコードのマッピング
@@ -18,7 +18,7 @@ title: ログの利用
 Firebase Crashlyticsコンソールで送信されたメッセージやスタックトレースが確認できます。
 しかし、スタックトレースに関してはソースコードのマッピングがないため、直感的にはわからない表示になります。  
 
-```title="スタックトレオースの例"
+```text title="スタックトレースの例"
 Fatal Exception: com.facebook.react.common.JavascriptException: Error: Error has occurred in synchronous process., stack:
 <unknown>@855:884
 <unknown>@677:2461
@@ -44,14 +44,13 @@ value@32:719
 value@-1
 ```
 
-
 以下の手順を行うことでソースコードとのマッピングを解決して表示できます。
 
 ### ソースマップの作成
 
 まず、次のコマンドでソースマップを作成します。
 
-```
+```sh
 npm run bundle
 ```
 
@@ -61,17 +60,15 @@ npm run bundle
 ここでは、［プロジェクトルート］/stack-trace.txtに保存する仮定とします。
 
 ### ソースコードとのマッピング
+
 次に、ソースマップを使って、スタックトレースとソースコードをマッピングします。
 
-【Android】
-```
+```sh title="【Android】の場合"
 cat stack-trace.txt | npm run symbolicate:android
 ```
 
-【iOS】
-```
+```sh title="【iOS】の場合"
 cat stack-trace.txt | npm run symbolicate:ios
 ```
 
 実行後に、ソースコードの行数と関数名のマッピング解決済みのスタックトレースが標準出力され、エラー発生箇所がわかるようになります。
-
