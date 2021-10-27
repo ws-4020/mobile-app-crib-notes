@@ -292,13 +292,30 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Design',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/screen-list/overview',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/screen-transitions/overview',
+        }
+      ],
+    },
+    {
+      type: 'category',
       label: 'Development',
       items: [
         {
           type: 'doc',
           id: 'react-native/santoku/development',
         },
-        
         {
           type: 'category',
           label: '開発環境',
