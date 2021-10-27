@@ -4,4 +4,5 @@ export * from './error';
 export * from './info';
 export * from './instructions';
 export * from './message';
+export * from './snackbar';
 export * from './DemoScreen';
