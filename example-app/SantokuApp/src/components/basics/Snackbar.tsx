@@ -28,7 +28,7 @@ export const Snackbar: React.FC<SnackbarProp> = (props) => {
   const barrierFadeOutAnimationRef = useRef<CompositeAnimation>();
   const [visibleSnackbarProps, setVisibleSnackbarProps] = useState<SnackbarProp>();
 
-  // TODO リファクタ（適切に関数に切り出しとかしてもうちょっと可読性を高くしたい）
+  //TODO リファクタ（適切に関数に切り出しとかしてもうちょっと可読性を高くしたい）
   const show = useCallback(() => {
     setVisibleSnackbarProps(props);
     const fadeInAnimation = Animated.timing(fadeAnim, {
@@ -61,7 +61,7 @@ export const Snackbar: React.FC<SnackbarProp> = (props) => {
     });
   }, [fadeAnim, props]);
 
-  // TODO リファクタ（適切に関数に切り出しとかしてもうちょっと可読性を高くしたい）
+  //TODO リファクタ（適切に関数に切り出しとかしてもうちょっと可読性を高くしたい）
   React.useEffect(() => {
     if (!props.message) {
       return;
