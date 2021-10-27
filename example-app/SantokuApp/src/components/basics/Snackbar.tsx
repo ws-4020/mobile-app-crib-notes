@@ -1,5 +1,6 @@
 import React, {useCallback, useRef, useState} from 'react';
 import {Animated, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle} from 'react-native';
+import {FullWindowOverlay} from 'react-native-screens';
 
 import CompositeAnimation = Animated.CompositeAnimation;
 
@@ -99,20 +100,22 @@ export const Snackbar: React.FC<SnackbarProp> = (props) => {
     <>
       {props.children}
       {visibleSnackbarProps && (
-        <Animated.View style={StyleSheet.flatten([{opacity: fadeAnim}, animatedViewStyle])}>
-          <View style={snackbarStyle}>
-            <View style={styles.messageContainer}>
-              <Text style={styles.messageText}>{visibleSnackbarProps.message}</Text>
-            </View>
-            {visibleSnackbarProps.actionText && visibleSnackbarProps.actionHandler && (
-              <View style={styles.actionContainer}>
-                <TouchableOpacity onPress={visibleSnackbarProps.actionHandler}>
-                  <Text style={styles.actionText}>{visibleSnackbarProps.actionText}</Text>
-                </TouchableOpacity>
+        <FullWindowOverlay>
+          <Animated.View style={StyleSheet.flatten([{opacity: fadeAnim}, animatedViewStyle])}>
+            <View style={snackbarStyle}>
+              <View style={styles.messageContainer}>
+                <Text style={styles.messageText}>{visibleSnackbarProps.message}</Text>
               </View>
-            )}
-          </View>
-        </Animated.View>
+              {visibleSnackbarProps.actionText && visibleSnackbarProps.actionHandler && (
+                <View style={styles.actionContainer}>
+                  <TouchableOpacity onPress={visibleSnackbarProps.actionHandler}>
+                    <Text style={styles.actionText}>{visibleSnackbarProps.actionText}</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+          </Animated.View>
+        </FullWindowOverlay>
       )}
     </>
   );
