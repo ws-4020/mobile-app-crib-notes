@@ -1,6 +1,7 @@
 import React, {useCallback, useRef, useState} from 'react';
 import {Animated, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle} from 'react-native';
-import {FullWindowOverlay} from 'react-native-screens';
+
+import {FullWindowOverlay} from './FullWindowOverlay';
 
 import CompositeAnimation = Animated.CompositeAnimation;
 
