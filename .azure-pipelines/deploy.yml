@@ -64,14 +64,14 @@ stages:
         displayName: 'Download Keystore file for ReleaseInHouse'
         inputs:
           secureFile: $(android_ReleaseInHouseKeyStoreSecureFileName)
-        condition: and(succeeded(), eq(variables['buildVariant.buildType'], 'releaseInHouse'))
+        condition: and(succeeded(), eq('${{buildVariant.buildType}}', 'releaseInHouse'))
       - task: CopyFiles@2
         displayName: 'Copy Keystore file to: $(appDir)/android/app'
         inputs:
           SourceFolder: '$(Agent.TempDirectory)'
           Contents: $(android_ReleaseInHouseKeyStoreSecureFileName)
           TargetFolder: '$(appDir)/android/app'
-        condition: and(succeeded(), eq(variables['buildVariant.buildType'], 'releaseInHouse'))
+        condition: and(succeeded(), eq('${{buildVariant.buildType}}', 'releaseInHouse'))
       - task: CmdLine@2
         displayName: 'Add gradle.properties settings for ReleaseInHouse'
         inputs:
@@ -82,7 +82,7 @@ stages:
             echo 'SANTOKU_APP_IN_HOUSE_KEY_ALIAS=$(android_ReleaseInHouseKeyAlias)' >> gradle.properties
             echo 'SANTOKU_APP_IN_HOUSE_KEY_PASSWORD=$(android_ReleaseInHouseKeyPassword)' >> gradle.properties
           workingDirectory: '$(appDir)/android'
-        condition: and(succeeded(), eq(variables['buildVariant.buildType'], 'releaseInHouse'))
+        condition: and(succeeded(), eq('${{buildVariant.buildType}}', 'releaseInHouse'))
       - task: DownloadSecureFile@1
         name: googleServicesJson${{buildVariant.name}}
         displayName: 'Download google-services.json file for ${{buildVariant.name}}'
