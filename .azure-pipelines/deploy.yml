@@ -40,10 +40,11 @@ variables:
     value: $[ replace(variables['System.PullRequest.SourceBranch'], 'refs/heads/', '') ]
 
 stages:
-- stage: Android
-  displayName: Android
-  jobs:
-  - ${{ each buildVariant in parameters.buildVariants }}:
+- ${{ each buildVariant in parameters.buildVariants }}:
+  - stage: Android_${{buildVariant.name}}
+    displayName: Android_${{buildVariant.name}}
+    dependsOn: []
+    jobs:
     - job: build_${{buildVariant.name}}
       displayName: 'build ${{buildVariant.name}}'
       pool:
@@ -118,11 +119,11 @@ stages:
           artifactName: 'aab'
           parallel: true
         condition: succeeded()
-
-- stage: iOS
-  displayName: iOS
-  jobs:
-  - ${{ each buildVariant in parameters.buildVariants }}:
+- ${{ each buildVariant in parameters.buildVariants }}:
+  - stage: iOS_${{buildVariant.name}}
+    displayName: iOS_${{buildVariant.name}}
+    dependsOn: []
+    jobs:
     - job: build_${{buildVariant.name}}
       displayName: 'build ${{buildVariant.name}}'
       pool:
