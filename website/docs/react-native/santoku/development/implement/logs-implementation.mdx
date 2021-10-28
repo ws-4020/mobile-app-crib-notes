@@ -4,14 +4,29 @@ title: ログの利用
 
 ## 開発時のデバッグ用途の利用
 
-ログのデバッグとトレースをレベルに応じてデバッグ用途で使用します。  
-ロガーのログレベルを開発中とリリース時とを分けることでコードを変えることなくデバッグ情報を出力する・しないを切り替えできます。
+ログのデバッグ出力をデバッグ用途で使用します。  
+
+```typescript title="基本的な利用方法"
+import {log} from 'framework';
+
+log.debug("デバッグ用の文字列") // デバッグログを出力
+```
+
+ロガーのログレベルをビルドタイプ毎に分けることで、コードを変えることなくデバッグ情報の出力有無を切り替えできます。
+このアプリケーションでは、ビルドタイプ毎に以下のログレベルのログを出力します。
+
+- `Release`、または`ReleaseInHouse`: エラーレベル
+- `Debug`、または`DebugAdvanced`: 全てのログレベル
 
 ## リリース時の障害解析
 
 ビルドタイプが`Release`、`ReleaseInHouse`の場合は、エラーレベルのログをFirebase Crashlyticsに送信します。
-そのため方式設計によってWebViewでのエラー発生時とHTTPステータスの500台のエラーに限定的に使用されています。
-エラーレベルでの使用はプロジェクト全体で協議の上ご利用ください。
+WebViewでのエラー発生時とHTTPステータス5xx系のエラー発生時は、基盤部品で自動的にエラーログが出力されます。
+それ以外にも障害として検知するべきエラーが発生した場合には、エラーログを出力してください。
+
+:::caution
+デバッグ情報のためのログなど、障害には当たらないログはエラーレベルでは出力しないでください。
+:::
 
 ## Firebase Crashlyticsのコンソールに表示されるスタックトレースとソースコードのマッピング
 
@@ -77,3 +92,29 @@ cat stack-trace.txt | npm run symbolicate:ios
 ```
 
 実行後に、ソースコードの行数と関数名のマッピング解決済みのスタックトレースが標準出力され、エラー発生箇所がわかるようになります。
+
+```text
+Fatal Exception: com.facebook.react.common.JavascriptException: Error: Error has occurred in synchronous process., stack:
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/src/screens/error/ErrorInEventHandler.tsx:8:useCallback$argument_0
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native-elements/dist/buttons/Button.js:35:useCallback$argument_0
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Pressability/Pressability.js:691:_performTransitionSideEffects
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Pressability/Pressability.js:628:_receiveSignal
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Pressability/Pressability.js:524:responderEventHandlers.onResponderRelease
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js:32:invokeGuardedCallbackImpl
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js:50:invokeGuardedCallback
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js:63:invokeGuardedCallbackAndCatchFirstError
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js:82:executeDispatch
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js:976:executeDispatchesAndReleaseTopLevel
+forEach@-1
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js:155:forEachAccumulated
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js:1007:batchedUpdates$argument_0
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js:7566:batchedUpdatesImpl
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js:957:batchedUpdates
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js:988:_receiveRootNodeIDEvent
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js:1053:ReactNativePrivateInterface.RCTEventEmitter.register$argument_0.receiveTouches
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/BatchedBridge/MessageQueue.js:416:__callFunction
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/BatchedBridge/MessageQueue.js:109:__guard$argument_0
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/BatchedBridge/MessageQueue.js:364:__guard
+~/dev/src/github.com/ws-4020/mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native/Libraries/BatchedBridge/MessageQueue.js:108:callFunctionReturnFlushedQueue
+value@-1
+```
