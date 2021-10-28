@@ -38,6 +38,8 @@ variables:
     value: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
   ${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
     value: $[ replace(variables['System.PullRequest.SourceBranch'], 'refs/heads/', '') ]
+- name: npmConfigCache
+  value: '$(Pipeline.Workspace)/.npm'
 
 stages:
 - ${{ each buildVariant in parameters.buildVariants }}:
@@ -54,6 +56,13 @@ stages:
         displayName: 'Use Node 16.12.0'
         inputs:
           versionSpec: '16.12.0'
+      - task: Cache@2
+        displayName: Cache npm
+        inputs:
+          key: 'npm | "$(Agent.OS)" | $(appDir)/package-lock.json'
+          restoreKeys: |
+            npm | "$(Agent.OS)"
+          path: $(npmConfigCache)
       - task: Npm@1
         displayName: 'npm ci'
         inputs:
@@ -155,6 +164,13 @@ stages:
         displayName: 'Use Node 16.12.0'
         inputs:
           versionSpec: '16.12.0'
+      - task: Cache@2
+        displayName: Cache npm
+        inputs:
+          key: 'npm | "$(Agent.OS)" | $(appDir)/package-lock.json'
+          restoreKeys: |
+            npm | "$(Agent.OS)"
+          path: $(npmConfigCache)
       - task: Npm@1
         displayName: 'npm ci'
         inputs:
