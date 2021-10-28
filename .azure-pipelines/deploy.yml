@@ -63,12 +63,11 @@ stages:
           restoreKeys: |
             npm | "$(Agent.OS)"
           path: $(npmConfigCache)
-      - task: Npm@1
-        displayName: 'npm ci'
+      - task: CmdLine@2
+        displayName: 'npm ci --cache $(npmConfigCache)'
         inputs:
-          command: 'ci'
-          workingDir: '$(appDir)'
-          verbose: false
+          script: 'npm ci --cache $(npmConfigCache)'
+          workingDirectory: '$(appDir)'
       - task: DownloadSecureFile@1
         displayName: 'Download Keystore file for ReleaseInHouse'
         inputs:
@@ -171,12 +170,11 @@ stages:
           restoreKeys: |
             npm | "$(Agent.OS)"
           path: $(npmConfigCache)
-      - task: Npm@1
-        displayName: 'npm ci'
+      - task: CmdLine@2
+        displayName: 'npm ci --cache $(npmConfigCache)'
         inputs:
-          command: ci
-          workingDir: '$(appDir)'
-          verbose: false
+          script: 'npm ci --cache $(npmConfigCache)'
+          workingDirectory: '$(appDir)'
       - task: CmdLine@2
         displayName: 'bundle install'
         inputs:
