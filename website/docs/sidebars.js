@@ -318,6 +318,10 @@ module.exports = {
           type: 'doc',
           id: 'react-native/santoku/test-planning/ut/ut-planning',
         },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/perspective/perspective-list',
+        },
       ],
     },
     {
