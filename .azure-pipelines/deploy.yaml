@@ -131,7 +131,7 @@ stages:
         inputs:
           targetPath: '$(appDir)/android/app/build/outputs'
           artifactType: 'pipeline'
-          artifactName: '${{buildVariant.name}}_aab'
+          artifactName: '${{buildVariant.name}}.aab'
           parallel: true
         condition: succeeded()
 - ${{ each buildVariant in parameters.buildVariants }}:
@@ -214,6 +214,6 @@ stages:
         inputs:
           targetPath: '$(appDir)/ios/build'
           artifactType: 'pipeline'
-          artifactName: '${{buildVariant.name}}_ipa'
+          artifactName: '${{buildVariant.name}}.ipa'
           parallel: true
         condition: succeeded()
