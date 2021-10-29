@@ -224,14 +224,8 @@ module.exports = {
       id: 'react-native/santoku',
     },
     {
-      type: 'category',
-      label: 'Glossary',
-      items: [
-        {
-          type: 'doc',
-          id: 'react-native/santoku/glossary',
-        },
-      ]
+      type: 'doc',
+      id: 'react-native/santoku/glossary',
     },
     {
       type: 'category',
