@@ -138,6 +138,7 @@ stages:
   - stage: iOS_${{buildVariant.name}}
     displayName: iOS_${{buildVariant.name}}
     dependsOn: []
+    condition: and(succeeded(), ne('${{buildVariant.buildType}}', 'debugAdvanced'))
     jobs:
     - job: build_${{buildVariant.name}}
       displayName: 'build ${{buildVariant.name}}'
