@@ -206,6 +206,6 @@ stages:
         inputs:
           targetPath: '$(appDir)/ios/build'
           artifactType: 'pipeline'
-          artifactName: '${{buildVariant.name}}_ipa'
+          artifactName: '${{buildVariant.name}}.ipa'
           parallel: true
         condition: succeeded()
