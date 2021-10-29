@@ -68,6 +68,13 @@ stages:
         inputs:
           script: 'npm ci --cache $(npmConfigCache)'
           workingDirectory: '$(appDir)'
+      - task: Cache@2
+        displayName: Cache Pods
+        inputs:
+          key: 'pods | "$(Agent.OS)" | $(appDir)/ios/Podfile.lock'
+          restoreKeys: |
+            pods | "$(Agent.OS)"
+          path: $(appDir)/ios/Pods
       - task: DownloadSecureFile@1
         displayName: 'Download Keystore file for ReleaseInHouse'
         inputs:
