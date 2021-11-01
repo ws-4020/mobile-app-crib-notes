@@ -36,14 +36,14 @@
   - 開発ガイド
     - [メッセージの管理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/design/message-configuration)
     - [メッセージの定義と取得](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/message-configuration)
-  - ADR
+  - Decision Records
     - [メッセージ管理の方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-005-message)
 - ログ出力
   - アプリケーション方式
     - [アプリのログ出力](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/logging-app/overview)
   - 開発ガイド
     - [ログの利用](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/logs-implementation)
-  - ADR
+  - Decision Records
     - [ログ出力の方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-006-logging)
 
 #### 🌿 更新コンテンツ
