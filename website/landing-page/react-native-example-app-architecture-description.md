@@ -6,7 +6,7 @@
 
 このコンテンツでは、React Nativeアプリを開発する際に参考としていただけるよう、方式設計や開発ガイドのサンプルを公開しています。実際のアプリ開発のふりかえりで特に必要だったと評価しているテーマから順に着手しており、今後も継続的にアップデートし、内容を充実させていく予定です。
 
-また、方式を設計する際により有効に活用できるよう、設計した方式だけでなく検討した内容をADR（Architecture Decision Records）として残してあるので、ぜひご活用ください。
+また、方式を設計する際により有効に活用できるよう、設計した方式だけでなく検討した内容をDecision Recordsとして残してあるので、ぜひご活用ください。
 
 [React Nativeのサンプルアプリケーション \| Fintan » Mobile App Development](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku)
 
