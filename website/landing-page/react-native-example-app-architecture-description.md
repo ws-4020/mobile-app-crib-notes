@@ -48,7 +48,7 @@
   - ADR
     - [ログ出力の方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-006-logging)
 
-#### ⭕更新コンテンツ
+#### 🌿 更新コンテンツ
 
   - アプリケーション方式
     - [アプリ起動後の初期化処理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/life-cycle-management/initialization)
