@@ -119,6 +119,7 @@ paths:
         アカウントIDをキーとして登録されているアカウントを取得する。
       tags:
         - アカウント
+      operationId: get-accounts-accountId
       responses:
         '200':
           description: OK
@@ -140,6 +141,7 @@ paths:
         アバターを取得する。
       tags:
         - アカウント
+      operationId: get-accounts-accountId-avatar
       responses:
         '200':
           description: OK
@@ -171,6 +173,7 @@ paths:
         ログイン済みアカウントのアバターを取得する。
       tags:
         - アカウント
+      operationId: get-accounts-me-avatar
       responses:
         '200':
           description: OK
@@ -184,6 +187,7 @@ paths:
         ログイン済みアカウントのアバターを登録する。
       tags:
         - アカウント
+      operationId: put-accounts-me-avatar
       requestBody:
         content:
           multipart/form-data:
@@ -208,6 +212,7 @@ paths:
         ログイン済みアカウントのデバイス登録トークンを登録する。
       tags:
         - アカウント
+      operationId: post-accounts-me-device-token
       requestBody:
         content:
           application/json:
@@ -227,6 +232,7 @@ paths:
         ログイン済みアカウントの有効な利用規約に同意しているかの状態を取得します。
       tags:
         - アカウント
+      operationId: get-accounts-me-terms
       responses:
         '200':
           description: OK
@@ -240,6 +246,7 @@ paths:
         ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。
       tags:
         - アカウント
+      operationId: post-accounts-me-terms
       requestBody:
         content:
           application/json:
@@ -290,6 +297,7 @@ paths:
       tags:
         - 利用規約
       security: []
+      operationId: get-terms
       responses:
         '200':
           description: OK
@@ -304,6 +312,7 @@ paths:
         チームを登録します。チームを作成したアカウントは 特権ユーザとして登録されます。
       tags:
         - チーム
+      operationId: get-teams
       requestBody:
         content:
           application/json:
@@ -330,6 +339,7 @@ paths:
         チームIDを指定して、チームを取得します。
       tags:
         - チーム
+      operationId: get-teams-teamId
       responses:
         '200':
           description: OK
@@ -351,6 +361,7 @@ paths:
         チームの参加に必要な招待コードを発行します。
       tags:
         - チーム
+      operationId: post-teams-teamId-invitation-code
       responses:
         '201':
           description: Created
@@ -372,6 +383,7 @@ paths:
         チームに参加します。
       tags:
         - チーム
+      operationId: post-teams-teamId-join
       requestBody:
         content:
           application/json:
@@ -398,6 +410,7 @@ paths:
         時間割テンプレートの一覧を取得します。
       tags:
         - チーム
+      operationId: get-teams-teamId-timetable-templates
       parameters:
         - schema:
             type: string
@@ -430,6 +443,7 @@ paths:
         時間割テンプレートを登録します。
       tags:
         - チーム
+      operationId: post-teams-teamId-timetable-templates
       requestBody:
         content:
           application/json:
@@ -462,6 +476,7 @@ paths:
         時間割テンプレートを取得します。
       tags:
         - チーム
+      operationId: get-teams-teamId-timetable-templates-templateId
       responses:
         '200':
           description: OK
@@ -475,6 +490,7 @@ paths:
         時間割テンプレートを更新します。
       tags:
         - チーム
+      operationId: put-teams-teamId-timetable-templates-templateId
       requestBody:
         content:
           application/json:
@@ -507,6 +523,7 @@ paths:
         当日の時間割を取得します。
       tags:
         - チーム
+      operationId: get-teams-teamId-timetables-timetableId
       responses:
         '200':
           description: OK
@@ -519,6 +536,7 @@ paths:
       description: 今日の時間割を開始します。チームメンバーに今日の時間割の開始を通知します。
       tags:
         - チーム
+      operationId: put-teams-teamId-timetables-timetableId
       responses:
         '201':
           description: update
@@ -540,6 +558,7 @@ paths:
         当日の時間割の一覧を取得します。
       tags:
         - チーム
+      operationId: get-teams-teamId-timetables
       parameters:
         - name: limit
           in: query
@@ -578,6 +597,7 @@ paths:
       description: 当日の時間割を登録します。
       tags:
         - チーム
+      operationId: post-teams-teamId-timetables
       requestBody:
         content:
           application/json:
@@ -823,7 +843,7 @@ components:
           description: 当日日付
           format: date
       description: 当日時間割登録のインプット
-    Error:
+    ErrorResponse:
       title: Error
       type: object
       description: エラーレスポンス
@@ -843,43 +863,43 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Unauthorized
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Forbidden
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Not Found
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorResponse'
     Conflict:
       description: Conflict
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorResponse'
     PayloadTooLarge:
       description: Payload Too Large
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorResponse'
     ServiceUnavailable:
       description: Service Unavailable
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     Session:
       type: apiKey
