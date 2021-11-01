@@ -310,7 +310,7 @@ module.exports = {
           label: '全体テスト計画',
           items: [
             'react-native/santoku/test-planning/all/overview',
-            'react-native/santoku/test-planning/all/test-policy',
+            'react-native/santoku/test-planning/all/test-process-scope',
             'react-native/santoku/test-planning/all/test-environment'
           ],
         },
