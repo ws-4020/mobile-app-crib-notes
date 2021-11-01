@@ -25,8 +25,6 @@
 #### 🌱 新規コンテンツ
 
 - 環境切り替え
-  - アプリケーション方式
-    - [アプリ起動後の初期化処理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/life-cycle-management/initialization)
   - 開発ガイド
     - [Firebaseの機能を利用する](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/use-firebase)
     - [ビルドバリアントごとのアプリ起動](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/app-launch-with-build-variants)
