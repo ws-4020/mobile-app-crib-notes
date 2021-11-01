@@ -323,23 +323,6 @@ module.exports = {
             },
             {
               type: 'category',
-              label: '画面設計における定義事項',
-              items: [
-                'react-native/santoku/design/screen-specs/definitions/overview',
-                {
-                  type: 'category',
-                  label: '画面種別',
-                  items: [
-                    'react-native/santoku/design/screen-specs/definitions/screen-type/overview',
-                    'react-native/santoku/design/screen-specs/definitions/screen-type/screen',
-                    'react-native/santoku/design/screen-specs/definitions/screen-type/form-sheet',
-                    'react-native/santoku/design/screen-specs/definitions/screen-type/overlay',
-                  ],
-                },
-              ],
-            },
-            {
-              type: 'category',
               label: '画面',
               items: [
                 'react-native/santoku/design/screen-specs/screens/overview',
