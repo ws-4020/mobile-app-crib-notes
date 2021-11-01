@@ -25,7 +25,7 @@
     https://hub.docker.com/layers/tomcat/library/tomcat/9.0.54-jdk11-temurin-focal/images/sha256-0535a04354ac95a35aa6d5cff941720441c8064594c2e07ea955de39fadc7d55?context=explore
     -->
     <jib.from.image>tomcat@sha256:0535a04354ac95a35aa6d5cff941720441c8064594c2e07ea955de39fadc7d55</jib.from.image>
-    <jib.to.image>ws4020.azurecr.io/santoku-app-backend</jib.to.image>
+    <jib.to.image>ws4020wip.azurecr.io/santoku-app-backend</jib.to.image>
   </properties>
 
   <repositories>
