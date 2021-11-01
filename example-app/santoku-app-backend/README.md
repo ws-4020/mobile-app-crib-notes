@@ -62,6 +62,23 @@ Dockerイメージは次のコマンドで作成します。Dockerイメージ�
 docker run -it --rm -p 9080:8080 --network santoku-app-network -e NABLARCH_DB_URL="jdbc:postgresql://postgres:5432/postgres" santoku-app-backend:latest
 ```
 
+## Dockerイメージのプッシュ
+
+Dockerイメージは次のコマンドでDockerレジストリにプッシュできます。Dockerイメージの名前はsantoku-app-backendになります。
+
+```bash
+./mvnw clean package jib:build
+```
+
+> **Note:** `pom.xml`の`jib.to.image`プロパティにプッシュ先のレジストリを設定し、`docker login`などのコマンドでレジストリにログインしている必要があります。
+> 
+> Azure Container Registryの例
+> ```bash
+> az login
+> az acr login <registry name>
+> ./mvnw clean package jib:build
+> ```
+
 ## 静的解析
 
 ### Spotbugs
