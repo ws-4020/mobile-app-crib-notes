@@ -53,17 +53,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                accountId:
-                  type: string
-                  description: アカウントID
-                password:
-                  type: string
-                  description: パスワード
-              required:
-                - accountId
-                - password
+              $ref: '#/components/schemas/AccountLogin'
             examples:
               example:
                 value:
@@ -75,14 +65,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    enum:
-                      - COMPLETE
-                required:
-                  - status
+                $ref: '#/components/schemas/AccountLoginResponse'
               examples:
                 example:
                   value:
@@ -586,12 +569,10 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  timetableOfDayList:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/TimetableOfDay'
+                type: array
+                description: 当日の時間割一覧
+                items:
+                  $ref: '#/components/schemas/TimetableOfDay'
     post:
       summary: 当日の時間割登録
       description: 当日の時間割を登録します。
@@ -667,6 +648,28 @@ components:
         password:
           type: string
           description: パスワード
+    AccountLogin:
+      title: AccountLogin
+      type: object
+      description: アカウントのログイン情報
+      properties:
+        accountId:
+          type: string
+          description: アカウントID
+        password:
+          type: string
+          description: パスワード
+    AccountLoginResponse:
+      title: AccountLoginResponse
+      type: object
+      description: アカウントのログイン結果
+      properties:
+        status:
+          type: string
+          enum:
+            - COMPLETE
+      required:
+        - status
     AccountDeletion:
       title: AccountDeletion
       type: object
