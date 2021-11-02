@@ -23,7 +23,7 @@ const Screen: React.FC = () => {
         {...TeamStackNav}
         options={{
           title: 'Team',
-          header: () => undefined,
+          headerShown: false,
           tabBarIcon: ({color}) => <MaterialIcons name="groups" size={30} color={color} />,
         }}
       />
