@@ -1,1 +1,1 @@
-export * from './team-detail';
+export * from './TeamDetailScreen';
