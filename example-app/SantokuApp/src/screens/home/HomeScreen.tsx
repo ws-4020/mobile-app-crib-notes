@@ -1,11 +1,23 @@
 import React from 'react';
-
-import {HomeTemplate} from './HomeTemplate';
+import {StyleSheet, View} from 'react-native';
+import {Text} from 'react-native-elements';
 
 const ScreenName = 'Home';
 const Screen: React.FC = () => {
-  return <HomeTemplate testID="HomeScreen" />;
+  return (
+    <View style={styles.container} testID="HomeScreen">
+      <Text h2>開発中</Text>
+    </View>
+  );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 // Navigatorに登録する情報
 export const HomeScreen = {
