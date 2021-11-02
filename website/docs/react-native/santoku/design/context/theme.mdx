@@ -1,0 +1,82 @@
+---
+title: テーマコンテキスト
+---
+
+## 概要
+
+アプリ内の描画に用いられるカラーコードを用途毎に整理したテーマを管理するコンテキストです。
+利用する色を一元管理することでアプリ全体のデザイン変更を容易にし、
+また将来的なライトモード・ダークモードの切り替えへ容易に対応できるようにします。
+
+## 提供するインタフェース
+
+このアプリでは、アプリ内にバンドルしたテーマをアプリ起動時にロードします。
+ストレージや外部サービスへの入出力が発生しないため、ロードは失敗しない想定です。
+
+- テーマのロード
+  - 現在の設定に対応する、アプリ独自に定義したテーマを取得します
+  - このアプリは現段階では端末OSのダークモード設定に基づくカラーテーマの切り替え、ユーザ設定によるカラーテーマの切り替えのいずれにも対応しません。そのため、常に同一のテーマが返されます
+
+## 管理対象データとライフサイクル
+
+テーマとそれに付随する各カラーコードのデータは、アプリ内にバンドルする形で提供されます。
+テーマ内のデータの追加・更新・削除は、アプリを再ビルドすることで行います。
+
+このアプリは現段階では端末OSのダークモード設定、ユーザ設定によるカラーテーマの切り替えのいずれにも対応しません。
+そのためテーマは1種類のみ用意し、ライトモード・ダークモードのいずれにおいても同じテーマを適用します。
+
+このアプリで定義するテーマの形式は以下のとおりです。
+
+```typescript
+type AppTheme = {
+  colors: {
+    background: string;
+    backgroundHeader: string;
+    text: string;
+    textInverted: string;
+    textStrong: string;
+    textWeak: string;
+    border: string;
+    borderStrong: string;
+    primary: string;
+    primaryVariant: string;
+    secondary: string;
+    secondaryVariant: string;
+    inactive: string;
+    danger: string;
+    error: string; 
+    warning: string;
+    snackbarBackground: string;
+  }
+}
+```
+
+colors内の各属性で定義するカラーコードは、以下の用途に用いられます。
+
+- background: 画面の標準背景色
+- backgroundHeader: ヘッダーやフッターの背景色
+- text: 標準文字色
+- textInverted: 標準背景色と濃淡が異なる背景に重ねる場合や、選択範囲内の色を反転させたい場合に用いる文字色
+- textStrong: 標準よりも強調したい場合の文字色（例：タイトル）
+- textWeak: 標準よりも控え目にしたい場合の文字色（例：プレースホルダー）
+- border: 標準ボーダー色
+- borderStrong: 標準よりも強調したい場合のボーダー色（例：テキスト入力欄の下線）
+- primary: 正常系のボタンや選択中の要素など、強調したい要素に用いる色
+- primaryVariant: 標準背景色と濃淡が異なる背景に重ねる場合のprimary色。primaryと同時に並べて濃淡を表現する場合にも用いる
+- secondary: 補助的な要素に用いる色
+- secondaryVariant: 標準背景色と濃淡が異なる背景に重ねる場合のsecondary色。secondaryと同時に並べて濃淡を表現する場合にも用いる
+- inactive: 無効化された、または非選択状態の要素に用いる色
+- danger: 破壊的操作のボタンや、破壊的操作への警告に用いる色（例：削除ボタン）
+- error: エラーメッセージなどに用いる色
+- warning: 警告メッセージなどに用いる色
+- snackbarBackground: 今回のアプリで通知に用いるスナックバーの背景色
+
+:::info
+React Navigationには[Theme機能](https://reactnavigation.org/docs/themes/)が存在します。
+このアプリでは、以下の理由からReact NavigationのTheme機能を利用しません。
+
+- React NavigationのTheme内に定義できるcolorsの属性は、primary、background、card、text、border、notificationの6種類のみ
+- React NavigationにThemeを適用した場合、上記6種類の色をそのまま利用するだけでなく、アルファ値の変更や2色以上の混合によって新たな色を生成して利用している。そのため大体の色調を指定できれば良いケースには適しているが、各所のカラーコードが明確に定義されているデザインに合致させる必要がある場合には適していない
+
+React Navigation内で定義されているコンポーネントを利用する際には、style内で各部品の色を明示的に指定します。
+:::
