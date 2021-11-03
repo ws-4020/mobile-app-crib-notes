@@ -14,3 +14,7 @@
 # https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?hl=ja&platform=android
 -keepattributes SourceFile,LineNumberTable        # Keep file names and line numbers.
 -keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
+
+# React Native ReanimatedからTurbomoduleを使うための設定
+# https://docs.swmansion.com/react-native-reanimated/docs/2.2.0/installation
+-keep class com.facebook.react.turbomodule.** { *; }
