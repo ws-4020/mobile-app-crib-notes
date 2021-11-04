@@ -316,6 +316,23 @@ module.exports = {
           type: 'doc',
           id: 'react-native/santoku/design/screen-transitions/overview',
         },
+        {
+          type: 'category',
+          label: '画面設計',
+          items: [
+            {
+              type: 'category',
+              label: '画面',
+              items: [
+                {
+                  type: 'category',
+                  label: '共通部',
+                  items: ['react-native/santoku/design/screen-specs/screens/common/bottom-tab/overview'],
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
     {
