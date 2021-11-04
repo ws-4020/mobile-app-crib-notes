@@ -54,23 +54,25 @@ type AppTheme = {
 
 colors内の各属性で定義するカラーコードは、以下の用途に用いられます。
 
-- background: 画面の標準背景色
-- backgroundHeader: ヘッダーやフッターの背景色
-- text: 標準文字色
-- textInverted: 標準背景色と濃淡が異なる背景に重ねる場合や、選択範囲内の色を反転させたい場合に用いる文字色
-- textStrong: 標準よりも強調したい場合の文字色（例：タイトル）
-- textWeak: 標準よりも控え目にしたい場合の文字色（例：プレースホルダー）
-- border: 標準ボーダー色
-- borderStrong: 標準よりも強調したい場合のボーダー色（例：テキスト入力欄の下線）
-- primary: 正常系のボタンや選択中の要素など、強調したい要素に用いる色
-- primaryVariant: 標準背景色と濃淡が異なる背景に重ねる場合のprimary色。primaryと同時に並べて濃淡を表現する場合にも用いる
-- secondary: 補助的な要素に用いる色
-- secondaryVariant: 標準背景色と濃淡が異なる背景に重ねる場合のsecondary色。secondaryと同時に並べて濃淡を表現する場合にも用いる
-- inactive: 無効化された、または非選択状態の要素に用いる色
-- danger: 破壊的操作のボタンや、破壊的操作への警告に用いる色（例：削除ボタン）
-- error: エラーメッセージなどに用いる色
-- warning: 警告メッセージなどに用いる色
-- snackbarBackground: 今回のアプリで通知に用いるスナックバーの背景色
+| 属性名             | 用途 |
+|:-------------------|:-----|
+| background         | 画面の標準背景色 |
+| backgroundHeader   | ヘッダーやボトムタブの背景色 |
+| text               | 標準文字色 |
+| textInverted       | 標準背景色と濃淡が異なる背景に重ねる場合や、選択範囲内の色を反転させたい場合に用いる文字色 |
+| textStrong         | 標準よりも強調したい場合の文字色（例：タイトル） |
+| textWeak           | 標準よりも控え目にしたい場合の文字色（例：プレースホルダー） |
+| border             | 標準ボーダー色 |
+| borderStrong       | 標準よりも強調したい場合のボーダー色（例：テキスト入力欄の下線） |
+| primary            | 正常系のボタンや選択中の要素など、強調したい要素に用いる色 |
+| primaryVariant     | 標準背景色と濃淡が異なる背景に重ねる場合のprimary色。primaryと同時に並べて濃淡を表現する場合にも用いる |
+| secondary          | 補助的な要素に用いる色 |
+| secondaryVariant   | 標準背景色と濃淡が異なる背景に重ねる場合のsecondary色。secondaryと同時に並べて濃淡を表現する場合にも用いる |
+| inactive           | 無効化された、または非選択状態の要素に用いる色 |
+| danger             | 破壊的操作のボタンや、破壊的操作への警告に用いる色（例：削除ボタン） |
+| error              | エラーメッセージなどに用いる色 |
+| warning            | 警告メッセージなどに用いる色 |
+| snackbarBackground | 今回のアプリで通知に用いるスナックバーの背景色 |
 
 :::info
 React Navigationには[Theme機能](https://reactnavigation.org/docs/themes/)が存在します。
