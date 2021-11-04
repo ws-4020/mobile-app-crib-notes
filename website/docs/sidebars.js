@@ -316,6 +316,20 @@ module.exports = {
           type: 'doc',
           id: 'react-native/santoku/design/screen-transitions/overview',
         },
+        {
+          type: 'category',
+          label: '画面設計',
+          items: [
+            {
+              type: 'category',
+              label: '共通部品',
+              items: [
+                'react-native/santoku/design/screen-specs/common-parts/overview',
+                'react-native/santoku/design/screen-specs/common-parts/snackbar/overview',
+              ],
+            },
+          ],
+        },
       ],
     },
     {
