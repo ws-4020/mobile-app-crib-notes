@@ -224,6 +224,10 @@ module.exports = {
       id: 'react-native/santoku',
     },
     {
+      type: 'doc',
+      id: 'react-native/santoku/glossary',
+    },
+    {
       type: 'category',
       label: 'Requirements',
       items: [
@@ -234,9 +238,7 @@ module.exports = {
         {
           type: 'category',
           label: '機能要件',
-          items: [
-            'react-native/santoku/requirements/functional/overview'
-         ],
+          items: ['react-native/santoku/requirements/functional/overview'],
         },
         {
           type: 'category',
@@ -245,10 +247,11 @@ module.exports = {
             'react-native/santoku/requirements/non-functional/overview',
             'react-native/santoku/requirements/non-functional/usability',
             'react-native/santoku/requirements/non-functional/system-method',
+            'react-native/santoku/requirements/non-functional/performance',
             'react-native/santoku/requirements/non-functional/test-outline',
-         ],
+          ],
         },
-      ]
+      ],
     },
     {
       type: 'category',
