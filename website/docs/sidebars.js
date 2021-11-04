@@ -319,10 +319,7 @@ module.exports = {
         {
           type: 'category',
           label: 'コンテキスト設計',
-          items: [
-            'react-native/santoku/design/context/overview',
-            'react-native/santoku/design/context/theme',
-          ],
+          items: ['react-native/santoku/design/context/overview', 'react-native/santoku/design/context/theme'],
         },
       ],
     },
