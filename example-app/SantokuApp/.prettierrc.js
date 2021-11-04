@@ -7,7 +7,8 @@ module.exports = {
   // JSXのタグが複数行になったときに、最後の'>'の前で改行しない。
   bracketSameLine: true,
   // https://prettier.io/docs/en/options.html#deprecated-jsx-brackets
-  // JSXのタグが複数行になったときに、最後の'>'の前で改行しない。
+  // 【Deprecated】 JSXのタグが複数行になったときに、最後の'>'の前で改行しない。
+  // IntelliJ IDEAのPrettierプラグインでbracketSameLineがまだサポートされていないようなので残しておく
   jsxBracketSameLine: true,
   // https://prettier.io/docs/en/options.html#quotes
   // ダブルクオートではなく、シングルクオートに統一する。
