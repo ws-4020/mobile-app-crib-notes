@@ -15,7 +15,6 @@
 		6909A3A626E1EC0000F9111D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6909A3A526E1EC0000F9111D /* GoogleService-Info.plist */; };
 		699A764426E6E48500D48F9D /* RCTThrowErrorModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 699A764326E6E48500D48F9D /* RCTThrowErrorModule.m */; };
 		96905EF65AED1B983A6B3ABC /* libPods-SantokuApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-SantokuApp.a */; };
-		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +35,6 @@
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = SantokuApp/SplashScreen.storyboard; sourceTree = "<group>"; };
 		B96BE75C25FED2460098969A /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = SantokuApp/Config.xcconfig; sourceTree = "<group>"; };
 		B984315D25FD254A0099A303 /* Debug.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Debug.plist; path = SantokuApp/Debug.plist; sourceTree = "<group>"; };
-		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		C619EF87A242231A7FA3659F /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-SantokuApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -122,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				6909A3A526E1EC0000F9111D /* GoogleService-Info.plist */,
-				BB2F792C24A3F905000567C9 /* Expo.plist */,
 			);
 			name = Supporting;
 			path = SantokuApp/Supporting;
@@ -218,7 +215,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				6909A3A626E1EC0000F9111D /* GoogleService-Info.plist in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
