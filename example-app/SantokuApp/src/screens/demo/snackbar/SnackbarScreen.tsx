@@ -14,6 +14,6 @@ export const SnackbarScreen = {
   component: Screen,
   options: {
     title: 'Message',
-    presentation: 'formSheet',
+    presentation: 'formSheet' as const,
   },
 };

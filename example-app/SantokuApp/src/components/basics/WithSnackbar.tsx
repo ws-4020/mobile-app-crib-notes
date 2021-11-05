@@ -19,7 +19,10 @@ export function WithSnackbar(props: {initialState?: SnackbarShowProps; children:
       message: '',
     },
   );
-  const snackbarContext = useMemo(() => ({show: setState, hide: () => setState({...state, hide: true})}), []);
+  const snackbarContext = useMemo(
+    () => ({show: setState, hide: () => setState((prevState) => ({...prevState, hide: true}))}),
+    [],
+  );
   return (
     <SnackbarContext.Provider value={snackbarContext}>
       <Snackbar {...state}>{props.children}</Snackbar>

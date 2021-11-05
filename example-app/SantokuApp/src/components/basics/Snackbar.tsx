@@ -32,24 +32,8 @@ export type SnackbarProps = SnackbarShowProps & SnackbarHideProps;
 export const Snackbar: React.FC<SnackbarProps> = (props) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const fadeInAnimationRef = useRef<CompositeAnimation>();
-  const fadeInAnimationConfig = {
-    toValue: 1,
-    duration: props.fadeInDuration,
-    useNativeDriver: true,
-  };
   const fadeOutAnimationRef = useRef<CompositeAnimation>();
-  const fadeOutAnimationConfig = {
-    toValue: 0,
-    delay: props.autoHideDuration,
-    duration: props.fadeOutDuration,
-    useNativeDriver: true,
-  };
   const barrierFadeOutAnimationRef = useRef<CompositeAnimation>();
-  const barrierFadeOutAnimationConfig = {
-    toValue: 0,
-    duration: props.forceFadeOutDuration,
-    useNativeDriver: true,
-  };
   const [visibleSnackbarProps, setVisibleSnackbarProps] = useState<SnackbarShowProps>();
 
   const animationStart = useCallback(
@@ -73,8 +57,19 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
   const show = useCallback(() => {
     setVisibleSnackbarProps(props);
 
+    const fadeInAnimationConfig = {
+      toValue: 1,
+      duration: props.fadeInDuration,
+      useNativeDriver: true,
+    };
     animationStart(fadeInAnimationRef, fadeInAnimationConfig, ({finished}) => {
       if (finished) {
+        const fadeOutAnimationConfig = {
+          toValue: 0,
+          delay: props.autoHideDuration,
+          duration: props.fadeOutDuration,
+          useNativeDriver: true,
+        };
         animationStart(fadeOutAnimationRef, fadeOutAnimationConfig, () => {
           if (!barrierFadeOutAnimationRef) {
             setVisibleSnackbarProps(undefined);
@@ -86,19 +81,25 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
         }
       }
     });
-  }, [props, fadeInAnimationConfig, fadeOutAnimationConfig]);
+  }, [props, animationStart]);
 
   const forceFadeout = useCallback(
     (callback?: () => void) => {
+      const barrierFadeOutAnimationConfig = {
+        toValue: 0,
+        duration: props.forceFadeOutDuration,
+        useNativeDriver: true,
+      };
+
       fadeInAnimationRef.current?.stop();
       fadeOutAnimationRef.current?.stop();
 
       animationStart(barrierFadeOutAnimationRef, barrierFadeOutAnimationConfig, () => {
         setVisibleSnackbarProps(undefined);
-        callback && callback();
+        callback?.();
       });
     },
-    [barrierFadeOutAnimationConfig],
+    [props, animationStart],
   );
 
   React.useEffect(() => {
@@ -117,7 +118,7 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
       return;
     }
     show();
-  }, [props, show, barrierFadeOutAnimationConfig]);
+  }, [props, show, forceFadeout]);
 
   const snackbarStyle = StyleSheet.flatten([styles.snackbar, props.style]);
 
