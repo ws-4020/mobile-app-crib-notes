@@ -318,6 +318,20 @@ module.exports = {
         },
         {
           type: 'category',
+          label: '画面設計',
+          items: [
+            {
+              type: 'category',
+              label: '画面',
+              items: [
+                'react-native/santoku/design/screen-specs/screens/overview',
+                'react-native/santoku/design/screen-specs/screens/splash-screen/overview',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
           label: 'コンテキスト設計',
           items: ['react-native/santoku/design/context/overview', 'react-native/santoku/design/context/theme'],
         },
