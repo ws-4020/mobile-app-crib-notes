@@ -34,6 +34,7 @@ type AppTheme = {
     background: string;
     backgroundHeader: string;
     backgroundBottomTab: string;
+    backgroundSnackbar: string;
     text: string;
     textInverted: string;
     textStrong: string;
@@ -48,7 +49,6 @@ type AppTheme = {
     danger: string;
     error: string; 
     warning: string;
-    snackbarBackground: string;
   }
 }
 ```
@@ -60,6 +60,7 @@ colors内の各属性で定義するカラーコードは、以下の用途に�
 | background         | 画面の標準背景色 |
 | backgroundHeader   | ヘッダーの背景色 |
 | backgroundBottomTab| ボトムタブの背景色 |
+| backgroundSnackbar | 通知に用いるスナックバーの背景色 |
 | text               | 標準文字色 |
 | textInverted       | 標準背景色と濃淡が異なる背景に重ねる場合や、選択範囲内の色を反転させたい場合に用いる文字色 |
 | textStrong         | 標準よりも強調したい場合の文字色（例：タイトル） |
@@ -74,7 +75,6 @@ colors内の各属性で定義するカラーコードは、以下の用途に�
 | danger             | 破壊的操作のボタンや、破壊的操作への警告に用いる色（例：削除ボタン） |
 | error              | エラーメッセージなどに用いる色 |
 | warning            | 警告メッセージなどに用いる色 |
-| snackbarBackground | 今回のアプリで通知に用いるスナックバーの背景色 |
 
 :::info
 React Navigationには[Theme機能](https://reactnavigation.org/docs/themes/)が存在します。
