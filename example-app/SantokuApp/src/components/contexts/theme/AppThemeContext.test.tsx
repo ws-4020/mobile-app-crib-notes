@@ -1,5 +1,5 @@
 import '@testing-library/jest-native/extend-expect';
-import {render, RenderAPI, RenderOptions} from '@testing-library/react-native';
+import {render, RenderOptions} from '@testing-library/react-native';
 import React, {useContext} from 'react';
 import {Text} from 'react-native';
 import {AppearanceProvider, useColorScheme} from 'react-native-appearance';
