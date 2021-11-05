@@ -10,6 +10,7 @@ import {ErrorCaseScreen} from './error';
 import {AppInfoScreen} from './info';
 import {InstructionsScreen} from './instructions';
 import {MessageScreen} from './message';
+import {LocalAuthnScreen} from './local-authn';
 
 const demoScreenList = [
   {
@@ -35,6 +36,10 @@ const demoScreenList = [
   {
     title: 'Message',
     to: MessageScreen.name,
+  },
+  {
+    title: 'Local-Authentication',
+    to: LocalAuthnScreen.name,
   },
 ];
 
