@@ -5,3 +5,4 @@ export * from './info';
 export * from './instructions';
 export * from './message';
 export * from './DemoScreen';
+export * from './button';
