@@ -5,7 +5,7 @@ import {FullWindowOverlay} from './FullWindowOverlay';
 
 import CompositeAnimation = Animated.CompositeAnimation;
 
-export type SnackbarProp = {
+export type SnackbarShowProps = {
   message: string;
   messageTextStyle?: StyleProp<TextStyle>;
   top?: number;
@@ -23,7 +23,13 @@ export type SnackbarProp = {
   forceFadeOutDuration?: number;
 };
 
-export const Snackbar: React.FC<SnackbarProp> = (props) => {
+export type SnackbarHideProps = {
+  hide?: true;
+};
+
+export type SnackbarProps = SnackbarShowProps & SnackbarHideProps;
+
+export const Snackbar: React.FC<SnackbarProps> = (props) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const fadeInAnimationRef = useRef<CompositeAnimation>();
   const fadeInAnimationConfig = {
@@ -44,7 +50,7 @@ export const Snackbar: React.FC<SnackbarProp> = (props) => {
     duration: props.forceFadeOutDuration,
     useNativeDriver: true,
   };
-  const [visibleSnackbarProps, setVisibleSnackbarProps] = useState<SnackbarProp>();
+  const [visibleSnackbarProps, setVisibleSnackbarProps] = useState<SnackbarShowProps>();
 
   const animationStart = useCallback(
     (
@@ -82,7 +88,24 @@ export const Snackbar: React.FC<SnackbarProp> = (props) => {
     });
   }, [props, fadeInAnimationConfig, fadeOutAnimationConfig]);
 
+  const forceFadeout = useCallback(
+    (callback?: () => void) => {
+      fadeInAnimationRef.current?.stop();
+      fadeOutAnimationRef.current?.stop();
+
+      animationStart(barrierFadeOutAnimationRef, barrierFadeOutAnimationConfig, () => {
+        setVisibleSnackbarProps(undefined);
+        callback && callback();
+      });
+    },
+    [barrierFadeOutAnimationConfig],
+  );
+
   React.useEffect(() => {
+    if (props.hide) {
+      forceFadeout();
+      return;
+    }
     if (!props.message) {
       return;
     }
@@ -90,13 +113,7 @@ export const Snackbar: React.FC<SnackbarProp> = (props) => {
       return;
     }
     if (fadeInAnimationRef.current || fadeOutAnimationRef.current) {
-      fadeInAnimationRef.current?.stop();
-      fadeOutAnimationRef.current?.stop();
-
-      animationStart(barrierFadeOutAnimationRef, barrierFadeOutAnimationConfig, () => {
-        setVisibleSnackbarProps(undefined);
-        show();
-      });
+      forceFadeout(show);
       return;
     }
     show();
@@ -106,7 +123,7 @@ export const Snackbar: React.FC<SnackbarProp> = (props) => {
 
   const animatedViewStyle = StyleSheet.flatten<ViewStyle>([styles.animatedContainer, props.animatedContainerStyle]);
   if (animatedViewStyle?.top === undefined && animatedViewStyle.bottom === undefined) {
-    animatedViewStyle.bottom = 50;
+    animatedViewStyle.bottom = 20;
   }
 
   return (
@@ -117,7 +134,9 @@ export const Snackbar: React.FC<SnackbarProp> = (props) => {
           <Animated.View style={StyleSheet.flatten([{opacity: fadeAnim}, animatedViewStyle])}>
             <View style={snackbarStyle}>
               <View style={styles.messageContainer}>
-                <Text style={styles.messageText}>{visibleSnackbarProps.message}</Text>
+                <Text numberOfLines={4} ellipsizeMode="tail" style={styles.messageText}>
+                  {visibleSnackbarProps.message}
+                </Text>
               </View>
               {visibleSnackbarProps.actionText && visibleSnackbarProps.actionHandler && (
                 <View style={styles.actionContainer}>
@@ -153,6 +172,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 5,
     backgroundColor: '#393939',
   },
