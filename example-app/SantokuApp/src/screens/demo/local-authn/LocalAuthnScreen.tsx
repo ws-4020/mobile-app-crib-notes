@@ -1,11 +1,10 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import {StyleSheet, View} from 'react-native';
+
 import LocalAuthnTestScreen from './LocalAuthnTestScreen';
 
 const ScreenName = 'LocalAuthn';
 const Screen = () => {
-  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <LocalAuthnTestScreen />

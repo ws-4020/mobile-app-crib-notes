@@ -1,8 +1,8 @@
-import ExpoLocalAuthentication from './ExpoLocalAuthentication'
-import LocalAuthentication from './LocalAuthentication'
+import {ExpoLocalAuthentication} from './ExpoLocalAuthentication';
+import {LocalAuthentication} from './LocalAuthentication';
 
-export * from './LocalAuthentication'
+export * from './LocalAuthentication';
 
-const localAuthentication : LocalAuthentication = new ExpoLocalAuthentication()
+const localAuthentication: LocalAuthentication = new ExpoLocalAuthentication();
 
-export default localAuthentication
+export default localAuthentication;

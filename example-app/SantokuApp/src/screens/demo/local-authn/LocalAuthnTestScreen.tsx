@@ -1,44 +1,43 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-elements';
-import localAuthentication from '../../../framework/local-authentication'
+import {StyleSheet, View} from 'react-native';
+import {Button} from 'react-native-elements';
 
+import localAuthentication from '../../../framework/local-authentication';
 export default class LocalAuthnTestScreen extends React.Component {
   checkIsEnrolled = async () => {
-    const isEnrolled = await localAuthentication.isEnrolled();
-    alert(isEnrolled)
-  }
+    const isEnrolled: boolean = await localAuthentication.isEnrolled();
+    alert(isEnrolled);
+  };
 
   checkIsFingerPrintSupported = async () => {
-    const supportedTypes = await localAuthentication.isFingerPrintSupported();
-    alert(supportedTypes);
-  }
+    const isSupported = await localAuthentication.isFingerPrintSupported();
+    alert(isSupported);
+  };
 
   checkIsFacialSupported = async () => {
-    const supportedTypes = await localAuthentication.isFacialSupported();
-    alert(supportedTypes);
-  }
+    const isSupported = await localAuthentication.isFacialSupported();
+    alert(isSupported);
+  };
 
   checkIsIrisSupported = async () => {
-    const supportedTypes = await localAuthentication.isIrisSupported();
-    alert(supportedTypes);
-  }
+    const isSupported = await localAuthentication.isIrisSupported();
+    alert(isSupported);
+  };
 
   testLocalAuthentication1 = async () => {
-    const result = await localAuthentication.authenticate({promptMessage: 'Test Message', disableFallback:true})
-    alert(result.success ? "success:" + result.success : "success:" + result.success + " error:" + result.error)
-  }
+    const result = await localAuthentication.authenticate({promptMessage: 'Test Message', disableFallback: true});
+    alert(JSON.stringify(result));
+  };
 
   testLocalAuthentication2 = async () => {
     const result = await localAuthentication.authenticate({
-      promptMessage:  "認証テスト",
-      cancelLabel:  "キャンセル",
-      fallbackLabel: "失敗時の基本認証",
+      promptMessage: '認証テスト',
+      cancelLabel: 'キャンセル',
+      fallbackLabel: '失敗時の基本認証',
       disableFallback: false,
-    })
-    alert(result.success ? "success:" + result.success : "success:" + result.success + " error:" + result.error)
-  }
-
+    });
+    alert(JSON.stringify(result));
+  };
 
   render() {
     return (
@@ -52,7 +51,7 @@ export default class LocalAuthnTestScreen extends React.Component {
       </View>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   container: {
