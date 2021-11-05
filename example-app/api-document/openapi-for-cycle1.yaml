@@ -1,0 +1,291 @@
+openapi: 3.0.3
+info:
+  title: SantokuApp REST API
+  version: 1.0.0
+  description: SantokuAppのREST API。
+  contact: {}
+tags:
+  - name: アカウント
+  - name: 利用規約
+  - name: チーム
+servers:
+  - url: 'http://localhost:9080/api'
+security:
+  - Session: []
+paths:
+  /accounts/me:
+    get:
+      summary: ログイン済みアカウントの取得
+      description: |
+        ログイン済みのアカウントを取得する。
+      tags:
+        - アカウント
+      operationId: get-accounts-me
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              examples:
+                example:
+                  value:
+                    accountId: 30b65d82-8a64-4a3a-a097-031313f43c69
+                    profile:
+                      nickname: ニックネーム
+                      avatarImageUrl: 'http://xxx.com/xxx.png'
+                    defaultTeamId: '123456789'
+                    joinedTeamIdList:
+                      - qwertyuiop
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /accounts/me/terms:
+    post:
+      summary: ログイン済みアカウントの利用規約同意
+      description: |
+        ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。
+      tags:
+        - アカウント
+      operationId: post-accounts-me-terms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TermsOfServiceAgreementStatus'
+            examples:
+              example:
+                value:
+                  hasAgreedValidTermsOfService: true
+                  agreedTermsOfServiceVersion: 1.0.0
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermsOfServiceAgreementStatus'
+              examples:
+                example:
+                  value:
+                    hasAgreedValidTermsOfService: true
+                    agreedTermsOfServiceVersion: 1.0.0
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /terms:
+    get:
+      summary: 有効な利用規約の取得
+      description: |
+        有効な利用規約を取得します。このAPIの呼び出しには認証情報は不要です。
+      tags:
+        - 利用規約
+      security: []
+      operationId: get-terms
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermsOfService'
+              examples:
+                example:
+                  value:
+                    latestTermsOfServiceVersion: 1.0.0
+                    url: 'https://www.tis.co.jp/privacypolicy/'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+components:
+  schemas:
+    Profile:
+      title: Profile
+      type: object
+      description: プロフィール情報
+      properties:
+        nickname:
+          type: string
+          description: アカウントのニックネーム
+        avatarImageUrl:
+          type: string
+          description: アカウントのアバター画像のURL
+      required:
+        - nickname
+    Account:
+      title: Account
+      description: アカウント
+      allOf:
+        - $ref: '#/components/schemas/AccountProfile'
+        - $ref: '#/components/schemas/AccountJoinedTeam'
+    AccountProfile:
+      title: AccountProfile
+      type: object
+      description: アカウントプロフィール情報
+      properties:
+        accountId:
+          type: string
+          description: アカウントID
+          readOnly: true
+        profile:
+          $ref: '#/components/schemas/Profile'
+      required:
+        - accountId
+    AccountJoinedTeam:
+      title: AccountJoinedTeam
+      type: object
+      description: アカウントチーム情報
+      properties:
+        defaultTeamId:
+          type: string
+          description: デフォルトのチームID
+        joinedTeamIdList:
+          type: array
+          items:
+            type: string
+          description: 参加済みチームID一覧
+    AccountRegistration:
+      title: AccountRegistration
+      type: object
+      description: アカウントの登録情報
+      properties:
+        nickname:
+          type: string
+          description: アカウントのニックネーム
+        password:
+          type: string
+          description: パスワード
+    AccountLogin:
+      title: AccountLogin
+      type: object
+      description: アカウントのログイン情報
+      properties:
+        accountId:
+          type: string
+          description: アカウントID
+        password:
+          type: string
+          description: パスワード
+    AccountLoginResponse:
+      title: AccountLoginResponse
+      type: object
+      description: アカウントのログイン結果
+      properties:
+        status:
+          type: string
+          enum:
+            - COMPLETE
+      required:
+        - status
+    TermsOfService:
+      title: TermsOfService
+      type: object
+      description: 利用規約
+      properties:
+        latestTermsOfServiceVersion:
+          type: string
+          description: 最新の利用規約のバージョン
+        url:
+          type: string
+          description: 利用規約のURL
+    TermsOfServiceAgreementStatus:
+      title: TermsOfServiceAgreementStatus
+      type: object
+      description: 利用規約同意状態
+      properties:
+        hasAgreedValidTermsOfService:
+          type: boolean
+          description: 有効な利用規約に同意済みかどうか
+          readOnly: true
+        agreedTermsOfServiceVersion:
+          type: string
+          description: 同意した利用規約のバージョン
+    ErrorResponse:
+      title: Error
+      type: object
+      description: エラーレスポンス
+      properties:
+        code:
+          type: string
+          description: エラーコード
+        message:
+          type: string
+          description: エラーメッセージ
+      required:
+        - code
+        - message
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            example:
+              value:
+                code: request
+                message: 不正なリクエストです。
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            example:
+              value:
+                code: authentication.failed
+                message: 認証に失敗しました。
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            example:
+              value:
+                code: forbidden
+                message: 有効な利用規約に同意していません。
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Conflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    PayloadTooLarge:
+      description: Payload Too Large
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServiceUnavailable:
+      description: Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            example:
+              value:
+                code: maintenance
+                message: システムメンテナンス中です。
+  securitySchemes:
+    Session:
+      type: apiKey
+      in: cookie
+      name: NABLARCH_SID
+      description: Cookieに格納されたセッションIDで認証状態を維持します。
