@@ -43,8 +43,8 @@ export default class LocalAuthnTestScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Button onPress={this.checkIsEnrolled} title="デバイスの設定チェック" />
-        <Button onPress={this.checkIsFingerPrintSupported} title="指紋認証サポートのチェック" />
-        <Button onPress={this.checkIsFacialSupported} title="顔認証サポートのチェック" />
+        <Button onPress={this.checkIsFingerPrintSupported} title="指紋認証のサポートのチェック" />
+        <Button onPress={this.checkIsFacialSupported} title="顔認証のサポートのチェック" />
         <Button onPress={this.checkIsIrisSupported} title="虹彩認証のサポートのチェック" />
         <Button onPress={this.testLocalAuthentication1} title="認証の実行 Option指定2つ" />
         <Button onPress={this.testLocalAuthentication2} title="認証の実行 Option全指定" />
