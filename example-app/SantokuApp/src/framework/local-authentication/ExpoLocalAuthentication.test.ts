@@ -1,6 +1,6 @@
 import * as ExpoAuthentication from 'expo-local-authentication';
 
-import ExpoLocalAuthentication from './ExpoLocalAuthentication';
+import {ExpoLocalAuthentication} from './ExpoLocalAuthentication';
 
 describe('ConsoleTransport logMethods', () => {
   test('isEnrolled メソッドの検証', async () => {
