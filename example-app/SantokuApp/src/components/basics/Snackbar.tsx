@@ -26,31 +26,50 @@ export type SnackbarProp = {
 export const Snackbar: React.FC<SnackbarProp> = (props) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const fadeInAnimationRef = useRef<CompositeAnimation>();
+  const fadeInAnimationConfig = {
+    toValue: 1,
+    duration: props.fadeInDuration,
+    useNativeDriver: true,
+  };
   const fadeOutAnimationRef = useRef<CompositeAnimation>();
+  const fadeOutAnimationConfig = {
+    toValue: 0,
+    delay: props.autoHideDuration,
+    duration: props.fadeOutDuration,
+    useNativeDriver: true,
+  };
   const barrierFadeOutAnimationRef = useRef<CompositeAnimation>();
+  const barrierFadeOutAnimationConfig = {
+    toValue: 0,
+    duration: props.forceFadeOutDuration,
+    useNativeDriver: true,
+  };
   const [visibleSnackbarProps, setVisibleSnackbarProps] = useState<SnackbarProp>();
 
-  //TODO リファクタ（適切に関数に切り出しとかしてもうちょっと可読性を高くしたい）
+  const animationStart = useCallback(
+    (
+      animationRef: React.MutableRefObject<CompositeAnimation | undefined>,
+      config: Animated.TimingAnimationConfig,
+      callback?: Animated.EndCallback,
+    ) => {
+      const animation = Animated.timing(fadeAnim, config);
+      animationRef.current = animation;
+      animation.start((result) => {
+        animationRef.current = undefined;
+        if (callback) {
+          callback(result);
+        }
+      });
+    },
+    [fadeAnim],
+  );
+
   const show = useCallback(() => {
     setVisibleSnackbarProps(props);
-    const fadeInAnimation = Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: props.fadeInDuration,
-      useNativeDriver: true,
-    });
-    fadeInAnimationRef.current = fadeInAnimation;
-    fadeInAnimation.start((fadeInResult) => {
-      fadeInAnimationRef.current = undefined;
-      if (fadeInResult.finished) {
-        const fadeOutAnimation = Animated.timing(fadeAnim, {
-          toValue: 0,
-          delay: props.autoHideDuration,
-          duration: props.fadeOutDuration,
-          useNativeDriver: true,
-        });
-        fadeOutAnimationRef.current = fadeOutAnimation;
-        fadeOutAnimation.start(() => {
-          fadeOutAnimationRef.current = undefined;
+
+    animationStart(fadeInAnimationRef, fadeInAnimationConfig, ({finished}) => {
+      if (finished) {
+        animationStart(fadeOutAnimationRef, fadeOutAnimationConfig, () => {
           if (!barrierFadeOutAnimationRef) {
             setVisibleSnackbarProps(undefined);
           }
@@ -61,9 +80,8 @@ export const Snackbar: React.FC<SnackbarProp> = (props) => {
         }
       }
     });
-  }, [fadeAnim, props]);
+  }, [props, fadeInAnimationConfig, fadeOutAnimationConfig]);
 
-  //TODO リファクタ（適切に関数に切り出しとかしてもうちょっと可読性を高くしたい）
   React.useEffect(() => {
     if (!props.message) {
       return;
@@ -72,23 +90,17 @@ export const Snackbar: React.FC<SnackbarProp> = (props) => {
       return;
     }
     if (fadeInAnimationRef.current || fadeOutAnimationRef.current) {
-      const barrierFadeOutAnimation = Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: props.forceFadeOutDuration,
-        useNativeDriver: true,
-      });
-      barrierFadeOutAnimationRef.current = barrierFadeOutAnimation;
       fadeInAnimationRef.current?.stop();
       fadeOutAnimationRef.current?.stop();
-      barrierFadeOutAnimation.start(() => {
-        barrierFadeOutAnimationRef.current = undefined;
+
+      animationStart(barrierFadeOutAnimationRef, barrierFadeOutAnimationConfig, () => {
         setVisibleSnackbarProps(undefined);
         show();
       });
       return;
     }
     show();
-  }, [props, fadeAnim, show]);
+  }, [props, show, barrierFadeOutAnimationConfig]);
 
   const snackbarStyle = StyleSheet.flatten([styles.snackbar, props.style]);
 
