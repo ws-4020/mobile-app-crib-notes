@@ -252,7 +252,7 @@ module.exports = {
             'react-native/santoku/requirements/non-functional/performance',
             'react-native/santoku/requirements/non-functional/test-outline',
             'react-native/santoku/requirements/non-functional/operation',
-         ],
+          ],
         },
       ]
     },
