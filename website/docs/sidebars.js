@@ -224,6 +224,36 @@ module.exports = {
       id: 'react-native/santoku',
     },
     {
+      type: 'doc',
+      id: 'react-native/santoku/glossary',
+    },
+    {
+      type: 'category',
+      label: 'Requirements',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/requirements',
+        },
+        {
+          type: 'category',
+          label: '機能要件',
+          items: ['react-native/santoku/requirements/functional/overview'],
+        },
+        {
+          type: 'category',
+          label: '非機能要件',
+          items: [
+            'react-native/santoku/requirements/non-functional/overview',
+            'react-native/santoku/requirements/non-functional/usability',
+            'react-native/santoku/requirements/non-functional/system-method',
+            'react-native/santoku/requirements/non-functional/performance',
+            'react-native/santoku/requirements/non-functional/test-outline',
+          ],
+        },
+      ],
+    },
+    {
       type: 'category',
       label: 'Application Architecture',
       items: [
@@ -307,6 +337,11 @@ module.exports = {
             },
           ],
         },
+        {
+          type: 'category',
+          label: 'コンテキスト設計',
+          items: ['react-native/santoku/design/context/overview', 'react-native/santoku/design/context/theme'],
+        },
       ],
     },
     {
@@ -382,6 +417,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-003-http-api-error-handling',
         'react-native/santoku/decisions/adr-004-deep-link',
         'react-native/santoku/decisions/adr-005-message',
+        'react-native/santoku/decisions/adr-007-auth',
       ],
     },
   ],
