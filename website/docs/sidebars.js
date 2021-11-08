@@ -314,7 +314,7 @@ module.exports = {
           items: [
             'react-native/santoku/test-planning/all/overview',
             'react-native/santoku/test-planning/all/test-process-scope',
-            'react-native/santoku/test-planning/all/test-environment'
+            'react-native/santoku/test-planning/all/test-environment',
           ],
         },
       ],
