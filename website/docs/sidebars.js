@@ -328,6 +328,10 @@ module.exports = {
                 'react-native/santoku/design/screen-specs/screens/splash-screen/overview',
               ],
             },
+            {
+              type: 'doc',
+              id: 'react-native/santoku/design/screen-specs/message-list',
+            },
           ],
         },
         {
