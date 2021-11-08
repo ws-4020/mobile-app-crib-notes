@@ -301,6 +301,10 @@ module.exports = {
                 'react-native/santoku/design/screen-specs/common-parts/webview/overview',
               ],
             },
+            {
+              type: 'doc',
+              id: 'react-native/santoku/design/screen-specs/message-list',
+            },
           ],
         },
       ],
