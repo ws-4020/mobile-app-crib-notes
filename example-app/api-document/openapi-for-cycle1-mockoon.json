@@ -1,0 +1,252 @@
+{
+  "uuid": "b4d99b38-3b82-4db0-90f9-c188e1125017",
+  "lastMigration": 18,
+  "name": "SantokuApp REST API",
+  "endpointPrefix": "api",
+  "latency": 0,
+  "port": 9080,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "681661b4-b8ad-4478-95f0-7f06616ffd0e",
+      "documentation": "ログイン済みアカウントの利用規約同意状態確認",
+      "method": "get",
+      "endpoint": "accounts/me/terms",
+      "responses": [
+        {
+          "uuid": "13b199e0-0b75-494f-9355-bfa87bba0536",
+          "body": "{\n  \"hasAgreedValidTermsOfService\": false,\n  \"agreedTermsOfServiceVersion\": \"1.0.0\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "利用規約に未同意",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "a0bfc1e3-9d4e-470b-aa96-cb8450dbcc58",
+          "body": "{\n  \"hasAgreedValidTermsOfService\": true,\n  \"agreedTermsOfServiceVersion\": \"1.0.0\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "利用規約に同意済み",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "c65706f8-ef4f-4dd6-b19a-6607c677e714",
+          "body": "{\n  \"code\": \"request\",\n  \"message\": \"不正なリクエストです。\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "d0a2e70d-c0fb-4669-8e59-ac0e0037c003",
+          "body": "{\n  \"code\": \"maintenance\",\n  \"message\": \"システムメンテナンス中です。\"\n}",
+          "latency": 0,
+          "statusCode": 503,
+          "label": "Service Unavailable",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "6ba669c1-5c34-46a6-b2fe-a8116d5292ae",
+      "documentation": "ログイン済みアカウントの利用規約同意",
+      "method": "post",
+      "endpoint": "accounts/me/terms",
+      "responses": [
+        {
+          "uuid": "698bca70-6349-42f6-9930-f14cb9f4eca9",
+          "body": "{\n  \"hasAgreedValidTermsOfService\": true,\n  \"agreedTermsOfServiceVersion\": \"1.0.0\"\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Created",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "ab25553a-a5d8-46f6-be7d-0a131faf1445",
+          "body": "{\n  \"code\": \"request\",\n  \"message\": \"不正なリクエストです。\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad Request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "3f7134a6-cea7-44f6-922a-80ae6d85b91f",
+          "body": "{\n  \"code\": \"maintenance\",\n  \"message\": \"システムメンテナンス中です。\"\n}",
+          "latency": 0,
+          "statusCode": 503,
+          "label": "Service Unavailable",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "1691a4b0-bd83-43d4-bd04-5091832476bd",
+      "documentation": "有効な利用規約の取得",
+      "method": "get",
+      "endpoint": "terms",
+      "responses": [
+        {
+          "uuid": "31c7b845-39a7-4b53-8d1d-b8b32d4bf04b",
+          "body": "{\n  \"latestTermsOfServiceVersion\": \"1.0.0\",\n  \"url\": \"https://www.tis.co.jp/privacypolicy/\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "OK",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "83c73fe9-7ecd-49ec-b2c7-c4bd6d91e730",
+          "body": "{\n  \"code\": \"request\",\n  \"message\": \"不正なリクエストです。\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad Request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "0996597f-afa8-41de-9684-0c1503afa123",
+          "body": "{\n  \"code\": \"maintenance\",\n  \"message\": \"システムメンテナンス中です。\"\n}",
+          "latency": 0,
+          "statusCode": 503,
+          "label": "Service Unavailable",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "https": false,
+  "cors": true,
+  "headers": [],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ]
+}
