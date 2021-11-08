@@ -338,6 +338,11 @@ module.exports = {
             },
           ],
         },
+        {
+          type: 'category',
+          label: 'コンテキスト設計',
+          items: ['react-native/santoku/design/context/overview', 'react-native/santoku/design/context/theme'],
+        },
       ],
     },
     {
@@ -413,6 +418,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-003-http-api-error-handling',
         'react-native/santoku/decisions/adr-004-deep-link',
         'react-native/santoku/decisions/adr-005-message',
+        'react-native/santoku/decisions/adr-007-auth',
       ],
     },
   ],
