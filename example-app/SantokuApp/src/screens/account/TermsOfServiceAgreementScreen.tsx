@@ -2,7 +2,7 @@ import {Button} from 'components/basics/Button';
 import {WebView, WebViewHandler} from 'components/basics/WebView';
 import {m} from 'framework';
 import React, {useRef, useState} from 'react';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 import {useNavigateToAuthenticatedStackScreen} from 'screens/useNavigateToScreen';
 
@@ -48,7 +48,7 @@ const Screen: React.FC = () => {
         />
       )}
       <View style={styles.footer}>
-        <Button title="同意" onPress={onGoToHomeScreen} disabled={buttonDisable} />
+        <Button title={m('同意')} onPress={onGoToHomeScreen} disabled={buttonDisable} />
       </View>
     </View>
   );
