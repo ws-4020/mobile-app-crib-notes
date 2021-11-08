@@ -13,38 +13,34 @@ servers:
 security:
   - Session: []
 paths:
-  /accounts/me:
+  /accounts/me/terms:
     get:
-      summary: ログイン済みアカウントの取得
+      summary: ログイン済みアカウントの利用規約同意状態確認
       description: |
-        ログイン済みのアカウントを取得する。
+        ログイン済みアカウントの有効な利用規約に同意しているかの状態を取得します。
       tags:
         - アカウント
-      operationId: get-accounts-me
+      operationId: get-accounts-me-terms
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Account'
+                $ref: '#/components/schemas/TermsOfServiceAgreementStatus'
               examples:
-                example:
+                example-already:
                   value:
-                    accountId: 30b65d82-8a64-4a3a-a097-031313f43c69
-                    profile:
-                      nickname: ニックネーム
-                      avatarImageUrl: 'http://xxx.com/xxx.png'
-                    defaultTeamId: '123456789'
-                    joinedTeamIdList:
-                      - qwertyuiop
+                    hasAgreedValidTermsOfService: true
+                    agreedTermsOfServiceVersion: 1.0.0
+                example-yet:
+                  value:
+                    hasAgreedValidTermsOfService: false
+                    agreedTermsOfServiceVersion: 1.0.0
         '401':
           $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
-  /accounts/me/terms:
     post:
       summary: ログイン済みアカウントの利用規約同意
       description: |
