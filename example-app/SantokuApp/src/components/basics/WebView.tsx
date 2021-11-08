@@ -1,6 +1,5 @@
 import React, {useCallback, useImperativeHandle, useRef} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-elements';
+import {ActivityIndicator, StyleSheet} from 'react-native';
 import {WebView as RNWebView} from 'react-native-webview';
 import {WebViewErrorEvent, WebViewHttpErrorEvent, WebViewScrollEvent} from 'react-native-webview/lib/WebViewTypes';
 
@@ -48,6 +47,7 @@ export const WebView = React.forwardRef<WebViewHandler, Props>(function WebView(
       onError={onError}
       onHttpError={onHttpError}
       ref={webViewRef}
+      renderLoading={() => <ActivityIndicator size="large" color="#0000ff" />}
     />
   );
 });
