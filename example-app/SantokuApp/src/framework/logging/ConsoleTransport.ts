@@ -26,41 +26,45 @@ class ConsoleTransport implements Transport {
    * @param message 出力するメッセージ
    * @param errorCode エラーコード
    */
-  log(level: LogLevel, message: string, errorCode?: string) {
+  log(level: LogLevel, message: string, errorCode: string) {
     const log = ConsoleMethod.for(level);
-    log(message);
+    log(`[${level}] [${errorCode}] ${message}`);
   }
 
   /**
    * {@link console.trace}にログを出力します。
    * @param message 出力するメッセージ
+   * @param errorCode エラーコード
    */
-  trace(message: string) {
-    this.log('trace', message);
+  trace(message: string, errorCode: string) {
+    this.log('trace', message, errorCode);
   }
 
   /**
    * {@link console.debug}にログを出力します。
    * @param message 出力するメッセージ
+   * @param errorCode エラーコード
    */
-  debug(message: string) {
-    this.log('debug', message);
+  debug(message: string, errorCode: string) {
+    this.log('debug', message, errorCode);
   }
 
   /**
    * {@link console.info}にログを出力します。
    * @param message 出力するメッセージ
+   * @param errorCode エラーコード
    */
-  info(message: string) {
-    this.log('info', message);
+  info(message: string, errorCode: string) {
+    this.log('info', message, errorCode);
   }
 
   /**
    * {@link console.warn}にログを出力します。
    * @param message 出力するメッセージ
+   * @param errorCode エラーコード
    */
-  warn(message: string) {
-    this.log('warn', message);
+  warn(message: string, errorCode: string) {
+    this.log('warn', message, errorCode);
   }
 
   /**

@@ -2,7 +2,7 @@ import {LogLevel} from './Logger';
 
 interface Transport {
   log: TransportMethod;
-  error: LeveledTransportMethodWithErrorCode;
+  error: LeveledTransportMethod;
   warn: LeveledTransportMethod;
   info: LeveledTransportMethod;
   debug: LeveledTransportMethod;
@@ -10,14 +10,10 @@ interface Transport {
 }
 
 interface TransportMethod {
-  (level: LogLevel, message: string, errorCode?: string): void;
+  (level: LogLevel, message: string, errorCode: string): void;
 }
 
 interface LeveledTransportMethod {
-  (message: string): void;
-}
-
-interface LeveledTransportMethodWithErrorCode {
   (message: string, errorCode: string): void;
 }
 
