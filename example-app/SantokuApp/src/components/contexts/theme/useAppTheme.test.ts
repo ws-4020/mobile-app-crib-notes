@@ -1,10 +1,10 @@
 import {renderHook} from '@testing-library/react-hooks';
-import {useColorScheme} from 'react-native-appearance';
+import {useColorScheme} from 'react-native';
 
 import {darkModeAppTheme, lightModeAppTheme} from './AppTheme';
 import {useAppTheme} from './useAppTheme';
 
-jest.mock('react-native-appearance', () => {
+jest.mock('react-native', () => {
   return {
     useColorScheme: jest.fn().mockName('mockUseColorScheme').mockReturnValue('light'),
   };

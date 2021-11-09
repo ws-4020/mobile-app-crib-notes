@@ -1,13 +1,8 @@
-import {render, RenderOptions} from '@testing-library/react-native';
+import {render} from '@testing-library/react-native';
 import React from 'react';
 import {Text} from 'react-native';
-import {AppearanceProvider} from 'react-native-appearance';
 
 import {AppThemeProvider} from './AppThemeProvider';
-
-const renderWithAppearanceProvider = (component: React.ReactElement<any>, options?: RenderOptions) => {
-  return render(component, {wrapper: AppearanceProvider, ...options});
-};
 
 describe('AppThemeProvider', () => {
   const ChildComponent: React.FC = () => {
@@ -15,7 +10,7 @@ describe('AppThemeProvider', () => {
   };
 
   it('AppThemeProviderを子要素を含めて正常にrenderできること', () => {
-    const appThemeProvider = renderWithAppearanceProvider(
+    const appThemeProvider = render(
       <AppThemeProvider>
         <ChildComponent />
       </AppThemeProvider>,

@@ -2,7 +2,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {RootStackNav} from 'navigation';
 import React from 'react';
-import {AppearanceProvider} from 'react-native-appearance';
 
 import {AppThemeProvider} from './components/contexts/theme';
 import {BundledMessagesLoader, loadMessages} from './framework';
@@ -26,12 +25,10 @@ export const App = () => {
   });
 
   return (
-    <AppearanceProvider>
-      <AppThemeProvider>
-        <NavigationContainer>
-          <RootStackNav />
-        </NavigationContainer>
-      </AppThemeProvider>
-    </AppearanceProvider>
+    <AppThemeProvider>
+      <NavigationContainer>
+        <RootStackNav />
+      </NavigationContainer>
+    </AppThemeProvider>
   );
 };

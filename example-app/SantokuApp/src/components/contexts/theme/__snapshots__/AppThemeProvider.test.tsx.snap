@@ -1,17 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AppThemeProvider AppThemeProviderを子要素を含めて正常にrenderできること 1`] = `
-<RNCAppearanceProvider
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
+<Text
+  testID="test"
 >
-  <Text
-    testID="test"
-  >
-    test
-  </Text>
-</RNCAppearanceProvider>
+  test
+</Text>
 `;
