@@ -1,7 +1,7 @@
 import {Button} from 'components/basics/Button';
 import {WebView, WebViewHandler} from 'components/basics/WebView';
 import {m, AppConfig} from 'framework';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 import {useNavigateToAuthenticatedStackScreen} from 'screens/useNavigateToScreen';
