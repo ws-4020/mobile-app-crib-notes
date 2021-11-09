@@ -3,7 +3,7 @@ import React from 'react';
 import {Text} from 'react-native';
 import {AppearanceProvider} from 'react-native-appearance';
 
-import {AppThemeProvider} from './AppThemeContext';
+import {AppThemeProvider} from './AppThemeProvider';
 
 const renderWithAppearanceProvider = (component: React.ReactElement<any>, options?: RenderOptions) => {
   return render(component, {wrapper: AppearanceProvider, ...options});
@@ -21,5 +21,6 @@ describe('AppThemeProvider', () => {
       </AppThemeProvider>,
     );
     expect(appThemeProvider.queryByTestId('test')).not.toBeNull();
+    expect(appThemeProvider).toMatchSnapshot();
   });
 });
