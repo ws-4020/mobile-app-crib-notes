@@ -1,20 +1,13 @@
 import {Button} from 'components/basics/Button';
 import {WebView, WebViewHandler} from 'components/basics/WebView';
-import {m} from 'framework';
-import React, {useRef, useState} from 'react';
+import {m, AppConfig} from 'framework';
+import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 import {useNavigateToAuthenticatedStackScreen} from 'screens/useNavigateToScreen';
 
-const uri = {
-  normal: 'https://fintan-contents.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture',
-  httpError: 'https://fintan-contents.github.io/mobile-app-crib-notes/react-native/santoku/application-architectur',
-  error: 'http://125.124.124.84',
-};
-
 const ScreenName = 'TermsOfServiceAgreement';
 const Screen: React.FC = () => {
-  const [currentUri, setCurrentUri] = useState(uri.httpError);
   const [buttonDisable, setButtonDisable] = useState(true);
   const [isWebViewError, setIsWebViewError] = useState(false);
   const webViewHandler = useRef<WebViewHandler>(null);
@@ -27,7 +20,6 @@ const Screen: React.FC = () => {
 
   const onReload = () => {
     setIsWebViewError(false);
-    setCurrentUri(uri.normal);
     webViewHandler.current?.reload();
   };
 
@@ -40,7 +32,7 @@ const Screen: React.FC = () => {
         </View>
       ) : (
         <WebView
-          uri={currentUri}
+          uri={AppConfig.termsUrl}
           onScrollEnd={() => setButtonDisable(false)}
           ref={webViewHandler}
           onError={onWebViewError}
