@@ -321,6 +321,10 @@ module.exports = {
           label: '画面設計',
           items: [
             {
+              type: 'doc',
+              id: 'react-native/santoku/design/screen-specs/overview',
+            },
+            {
               type: 'category',
               label: '画面',
               items: [
