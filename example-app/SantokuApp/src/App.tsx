@@ -4,7 +4,7 @@ import {RootStackNav} from 'navigation';
 import React from 'react';
 import {AppearanceProvider} from 'react-native-appearance';
 
-import {AppThemeProvider} from './components/contexts/theme/AppThemeContext';
+import {AppThemeProvider} from './components/contexts/theme';
 import {BundledMessagesLoader, loadMessages} from './framework';
 import {firebaseConfig} from './framework/firebase';
 import {log} from './framework/logging';

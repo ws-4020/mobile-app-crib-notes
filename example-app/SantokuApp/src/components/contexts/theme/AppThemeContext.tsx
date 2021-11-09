@@ -1,23 +1,14 @@
-import React, {createContext} from 'react';
-import {useColorScheme} from 'react-native-appearance';
+import React from 'react';
 import {ThemeProvider} from 'react-native-elements';
 
-import {AppTheme, darkModeAppTheme, lightModeAppTheme} from './AppTheme';
 import {getReactNativeElementsTheme} from './ReactNativeElementsTheme';
-
-const defaultAppTheme = lightModeAppTheme;
-const AppThemeContext = createContext<AppTheme>(defaultAppTheme);
+import {useAppTheme} from './useAppTheme';
 
 const AppThemeProvider: React.FC = ({children}) => {
-  const colorScheme = useColorScheme();
-  const appTheme = colorScheme === 'dark' ? darkModeAppTheme : lightModeAppTheme;
+  const appTheme = useAppTheme();
   const reactNativeElementsTheme = getReactNativeElementsTheme(appTheme);
 
-  return (
-    <AppThemeContext.Provider value={appTheme}>
-      <ThemeProvider theme={reactNativeElementsTheme}>{children}</ThemeProvider>
-    </AppThemeContext.Provider>
-  );
+  return <ThemeProvider theme={reactNativeElementsTheme}>{children}</ThemeProvider>;
 };
 
-export {AppThemeContext, AppThemeProvider};
+export {AppThemeProvider};
