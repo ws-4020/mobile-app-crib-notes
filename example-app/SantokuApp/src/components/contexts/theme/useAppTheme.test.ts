@@ -27,9 +27,9 @@ describe('useAppTheme', () => {
     expect(appTheme).toEqual(darkModeAppTheme);
   });
 
-  it('colorSchemeがno-preferenceの場合にlight用のAppThemeが取得できること', () => {
+  it('colorSchemeがnullの場合にlight用のAppThemeが取得できること', () => {
     const mockUseColorScheme = useColorScheme as jest.Mock;
-    mockUseColorScheme.mockReturnValue('no-preference');
+    mockUseColorScheme.mockReturnValue(null);
     const {result} = renderHook(() => useAppTheme());
     const appTheme = result.current;
     expect(appTheme).toEqual(lightModeAppTheme);
