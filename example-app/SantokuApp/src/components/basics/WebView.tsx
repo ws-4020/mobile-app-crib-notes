@@ -48,7 +48,8 @@ export const WebView = React.forwardRef<WebViewHandler, Props>(function WebView(
       onError={onError}
       onHttpError={onHttpError}
       ref={webViewRef}
-      renderLoading={() => <ActivityIndicator size="large" color="#0000ff" />}
+      startInLoadingState
+      renderLoading={() => <ActivityIndicator style={styles.indicator} size="large" color="#0000ff" />}
     />
   );
 });
@@ -56,5 +57,13 @@ export const WebView = React.forwardRef<WebViewHandler, Props>(function WebView(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  indicator: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
