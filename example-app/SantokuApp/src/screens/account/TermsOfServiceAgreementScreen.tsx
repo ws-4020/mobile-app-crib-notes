@@ -1,16 +1,17 @@
 import {Button} from 'components/basics/Button';
-import {WebView, WebViewHandler} from 'components/basics/WebView';
+import {WebView} from 'components/basics/WebView';
 import {m, AppConfig} from 'framework';
 import React, {useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
+import {WebView as RNWebView} from 'react-native-webview';
 import {useNavigateToAuthenticatedStackScreen} from 'screens/useNavigateToScreen';
 
 const ScreenName = 'TermsOfServiceAgreement';
 const Screen: React.FC = () => {
   const [buttonDisable, setButtonDisable] = useState(true);
   const [isWebViewError, setIsWebViewError] = useState(false);
-  const webViewHandler = useRef<WebViewHandler>(null);
+  const webViewRef = useRef<RNWebView>(null);
 
   const onGoToHomeScreen = useNavigateToAuthenticatedStackScreen('Home');
 
@@ -20,7 +21,7 @@ const Screen: React.FC = () => {
 
   const onReload = () => {
     setIsWebViewError(false);
-    webViewHandler.current?.reload();
+    webViewRef.current?.reload();
   };
 
   return (
@@ -32,9 +33,9 @@ const Screen: React.FC = () => {
         </View>
       ) : (
         <WebView
-          uri={AppConfig.termsUrl}
+          source={{uri: AppConfig.termsUrl}}
           onScrollEnd={() => setButtonDisable(false)}
-          ref={webViewHandler}
+          ref={webViewRef}
           onError={onWebViewError}
           onHttpError={onWebViewError}
         />

@@ -108,6 +108,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                   "uri": "https://www.tis.co.jp/termsofuse/",
                 }
               }
+              startInLoadingState={true}
               style={
                 Array [
                   Object {
@@ -123,6 +124,22 @@ exports[`App マウントされたときに正常にレンダリングされる�
                 ]
               }
               useSharedProcessPool={true}
+            />
+            <ActivityIndicator
+              animating={true}
+              color="#0000ff"
+              hidesWhenStopped={true}
+              size="large"
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "position": "absolute",
+                  "width": "100%",
+                }
+              }
             />
           </View>
           <View
@@ -147,7 +164,6 @@ exports[`App マウントされたときに正常にレンダリングされる�
                   },
                   Object {
                     "borderRadius": 8,
-                    "height": 50,
                     "width": 90,
                   },
                   false,
