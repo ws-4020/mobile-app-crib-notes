@@ -341,11 +341,11 @@ module.exports = {
                 'react-native/santoku/design/screen-specs/common-parts/webview/overview',
               ],
             },
-            {
-              type: 'doc',
-              id: 'react-native/santoku/design/screen-specs/message-list',
-            },
           ],
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/message-list/overview',
         },
         {
           type: 'category',
