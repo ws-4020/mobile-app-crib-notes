@@ -1,6 +1,6 @@
 import React from 'react';
-import {GestureResponderEvent, StyleSheet} from 'react-native';
-import {Button as RNEButton} from 'react-native-elements';
+import {StyleSheet} from 'react-native';
+import {Button as RNEButton, ButtonProps} from 'react-native-elements';
 
 type ButtonSizeType = 'small' | 'middle' | 'large' | 'full';
 
@@ -15,26 +15,17 @@ const buttonWidthSizes: ButtonWidthSize = {
   full: '100%',
 };
 
-type Props = {
-  title: string;
-  type?: 'solid' | 'outline';
-  disabled?: boolean;
-  loading?: boolean;
-  onPress?: (event: GestureResponderEvent) => void;
+type Props = ButtonProps & {
   size?: ButtonSizeType;
 };
 
 export const Button: React.FC<Props> = (props) => {
   const {size, ...buttonProps} = props;
-  const widthStyle = {width: buttonWidthSizes[props.size ?? 'small']};
+  const widthStyle = {width: buttonWidthSizes[size ?? 'small']};
   const buttonStyle = StyleSheet.flatten([styles.button, widthStyle]);
   const containerStyle = StyleSheet.flatten([styles.container, widthStyle]);
 
   return <RNEButton {...buttonProps} raised buttonStyle={buttonStyle} containerStyle={containerStyle} />;
-};
-
-Button.defaultProps = {
-  type: 'solid',
 };
 
 const styles = StyleSheet.create({
