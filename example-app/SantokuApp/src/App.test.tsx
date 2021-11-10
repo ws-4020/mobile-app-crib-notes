@@ -1,6 +1,6 @@
 import '@testing-library/jest-native/extend-expect';
 import 'react-native';
-import {act, fireEvent, render, waitFor} from '@testing-library/react-native';
+import {render, waitFor} from '@testing-library/react-native';
 import React from 'react';
 
 import {App} from './App';
