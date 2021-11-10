@@ -2,18 +2,14 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Button as RNEButton, ButtonProps} from 'react-native-elements';
 
-type ButtonSizeType = 'small' | 'middle' | 'large' | 'full';
-
-type ButtonWidthSize = {
-  [K in ButtonSizeType]: number | string;
-};
-
-const buttonWidthSizes: ButtonWidthSize = {
+const buttonWidthSizes = {
   small: 90,
   middle: 140,
   large: 200,
   full: '100%',
-};
+} as const;
+
+type ButtonSizeType = keyof typeof buttonWidthSizes;
 
 type Props = ButtonProps & {
   size?: ButtonSizeType;
