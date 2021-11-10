@@ -1,17 +1,7 @@
-import {useEffect, useState} from 'react';
-import {useColorScheme} from 'react-native';
+import {useContext} from 'react';
 
-import {AppTheme, darkModeAppTheme, lightModeAppTheme} from './AppTheme';
-
-const defaultAppTheme = lightModeAppTheme;
+import {AppThemeContext} from './AppThemeContext';
 
 export const useAppTheme = () => {
-  const [appTheme, setAppTheme] = useState<AppTheme>(defaultAppTheme);
-  const colorScheme = useColorScheme();
-
-  useEffect(() => {
-    setAppTheme(colorScheme === 'dark' ? darkModeAppTheme : lightModeAppTheme);
-  }, [colorScheme]);
-
-  return appTheme;
+  return useContext(AppThemeContext);
 };
