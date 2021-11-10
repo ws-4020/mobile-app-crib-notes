@@ -5,10 +5,10 @@ sidebar_label: Button
 ## 概要
 
 このアプリ内で、ユーザが押下できるボタンを提供するコンポーネントです。
+[React Native ElementsのButton](https://reactnativeelements.com/docs/button/)を使用します。
 
 ## 機能
 
-- ボタンはPrimary filledとPrimary outlinedの2種類を、用途に応じて使い分けることができます。
 - タップ時にはハイライト表示をします。
 - ユーザがタップできないよう、非活性化できます。非活性になった場合、ユーザがわかるようにボタンの色を変更します。
 - ボタンの中に表示するテキスト（以下、ボタンテキスト）は、任意の文字列を指定できます。
@@ -29,7 +29,7 @@ sidebar_label: Button
 | 番号 | 名称          | 項目種別    | 取得元               | 表示/活性条件                                 |
 |:----|:--------------|:-----------|:--------------------|:--------------------------------------------|
 | O1  | ボタンテキスト   | ラベル     | -（※1）               | インジケータ表示中の場合は非表示                |
-（※1）呼び出し元から渡す。
+（※1）[Buttonのプロパティ](https://reactnativeelements.com/docs/button/#title)で任意の文字列を指定します。
 
 - インジケータは、[React Native ElementsのButton](https://reactnativeelements.com/docs/button/)の機能を使用するため割愛する。
 
@@ -51,7 +51,9 @@ sidebar_label: Button
   - インジケータを非表示にして、メッセージを表示します。
   - ボタンを活性化し、タップできるようにします。
 
-※上記以外は、[React Native ElementsのButton](https://reactnativeelements.com/docs/button/)をご参照ください。
+## プロパティ
+
+※ [React Native ElementsのButton](https://reactnativeelements.com/docs/button/#props)をご参照ください。
 
 ## エラー発生時の処理
 
