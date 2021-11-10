@@ -26,9 +26,11 @@ type Props = {
 
 export const Button: React.FC<Props> = (props) => {
   const {size, ...buttonProps} = props;
-  const style = StyleSheet.flatten([styles.button, {width: buttonWidthSizes[props.size ?? 'small']}]);
+  const widthStyle = {width: buttonWidthSizes[props.size ?? 'small']};
+  const buttonStyle = StyleSheet.flatten([styles.button, widthStyle]);
+  const containerStyle = StyleSheet.flatten([styles.container, widthStyle]);
 
-  return <RNEButton {...buttonProps} raised buttonStyle={style} containerStyle={style} />;
+  return <RNEButton {...buttonProps} raised buttonStyle={buttonStyle} containerStyle={containerStyle} />;
 };
 
 Button.defaultProps = {
@@ -39,5 +41,8 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 8,
     height: 50,
+  },
+  container: {
+    borderRadius: 8,
   },
 });
