@@ -25,7 +25,11 @@ export const Button: React.FC<Props> = (props) => {
   const buttonStyle = StyleSheet.flatten([styles.button, widthStyle]);
   const containerStyle = StyleSheet.flatten([styles.container, widthStyle]);
 
-  return <RNEButton {...buttonProps} raised buttonStyle={buttonStyle} containerStyle={containerStyle} />;
+  return <RNEButton {...buttonProps} buttonStyle={buttonStyle} containerStyle={containerStyle} />;
+};
+
+Button.defaultProps = {
+  raised: true,
 };
 
 const styles = StyleSheet.create({
