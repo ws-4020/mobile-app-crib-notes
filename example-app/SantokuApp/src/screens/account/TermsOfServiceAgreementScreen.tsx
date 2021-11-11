@@ -1,7 +1,7 @@
 import {Button} from 'components/basics/Button';
 import {WebView} from 'components/basics/WebView';
 import {m, AppConfig} from 'framework';
-import React, {useRef, useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 import {WebView as RNWebView} from 'react-native-webview';
@@ -15,14 +15,14 @@ const Screen: React.FC = () => {
 
   const onGoToHomeScreen = useNavigateToAuthenticatedStackScreen('Home');
 
-  const onWebViewError = () => {
+  const onWebViewError = useCallback(() => {
     setIsWebViewError(true);
-  };
+  }, []);
 
-  const onReload = () => {
+  const onReload = useCallback(() => {
     setIsWebViewError(false);
     webViewRef.current?.reload();
-  };
+  }, []);
 
   return (
     <View style={styles.container} testID="TermsOfServiceAgreementScreen">
