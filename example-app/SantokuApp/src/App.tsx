@@ -3,7 +3,7 @@ import {activateKeepAwake} from 'expo-keep-awake';
 import {RootStackNav} from 'navigation';
 import React from 'react';
 
-import {WithAppTheme} from './components/contexts/theme';
+import {WithAppTheme} from './components/theme';
 import {BundledMessagesLoader, loadMessages} from './framework';
 import {firebaseConfig} from './framework/firebase';
 import {log} from './framework/logging';
