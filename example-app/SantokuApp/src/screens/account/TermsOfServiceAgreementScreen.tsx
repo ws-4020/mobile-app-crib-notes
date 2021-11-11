@@ -34,7 +34,7 @@ const Screen: React.FC = () => {
       ) : (
         <WebView
           source={{uri: AppConfig.termsUrl}}
-          onceScrollEnd={() => setButtonDisable(false)}
+          onScrollEndOnce={() => setButtonDisable(false)}
           ref={webViewRef}
           onError={onWebViewError}
           onHttpError={onWebViewError}

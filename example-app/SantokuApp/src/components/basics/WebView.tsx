@@ -5,13 +5,13 @@ import {WebViewErrorEvent, WebViewNavigationEvent, WebViewScrollEvent} from 'rea
 
 type Props = WebViewProps & {
   onScrollEnd?: () => void;
-  onceScrollEnd?: () => void;
+  onScrollEndOnce?: () => void;
 };
 
 export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props, ref) {
   const [loadEnd, setLoadEnd] = useState(false);
   const [scrollEndCalled, setScrollEndCalled] = useState(false);
-  const {onScrollEnd, onceScrollEnd, ...webViewProps} = props;
+  const {onScrollEnd, onScrollEndOnce: onceScrollEnd, ...webViewProps} = props;
 
   const handleScroll = useCallback(
     (event: WebViewScrollEvent) => {
