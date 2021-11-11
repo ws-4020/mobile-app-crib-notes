@@ -13,6 +13,7 @@ import {
   ErrorInNativeModuleScreen,
   InstructionsScreen,
   AppInfoScreen,
+  LogScreen,
   MessageScreen,
   SnackbarScreen,
 } from 'screens';
@@ -43,6 +44,7 @@ export const Screen: React.FC = () => {
       <nav.Screen {...ErrorInUseEffectScreen} />
       <nav.Screen {...ErrorInUseEffectSyncProcessScreen} />
       <nav.Screen {...InstructionsScreen} />
+      <nav.Screen {...LogScreen} />
       <nav.Screen {...MessageScreen} />
       <nav.Screen {...SnackbarScreen} />
     </nav.Navigator>

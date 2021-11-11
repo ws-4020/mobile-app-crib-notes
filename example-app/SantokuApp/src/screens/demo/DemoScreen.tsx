@@ -9,6 +9,7 @@ import {ConfigScreen} from './config';
 import {ErrorCaseScreen} from './error';
 import {AppInfoScreen} from './info';
 import {InstructionsScreen} from './instructions';
+import {LogScreen} from './log';
 import {MessageScreen} from './message';
 import {SnackbarScreen} from './snackbar';
 
@@ -32,6 +33,10 @@ const demoScreenList = [
   {
     title: 'Configuration',
     to: ConfigScreen.name,
+  },
+  {
+    title: 'Log',
+    to: LogScreen.name,
   },
   {
     title: 'Message',
