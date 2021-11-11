@@ -1,7 +1,7 @@
 import {m} from 'framework';
 import {useCallback} from 'react';
 
-import {useSnackbar} from '../../../components/basics/WithSnackbar';
+import {useSnackbar} from '../../../components/snackbar/';
 
 export const useSnackbarDemo = () => {
   const snackbar = useSnackbar();
