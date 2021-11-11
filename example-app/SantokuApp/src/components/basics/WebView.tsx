@@ -11,17 +11,17 @@ type Props = WebViewProps & {
 export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props, ref) {
   const [loadEnd, setLoadEnd] = useState(false);
   const [scrollEndCalled, setScrollEndCalled] = useState(false);
-  const {onScrollEnd, onScrollEndOnce: onceScrollEnd, ...webViewProps} = props;
+  const {onScrollEnd, onScrollEndOnce, ...webViewProps} = props;
 
   const handleScroll = useCallback(
     (event: WebViewScrollEvent) => {
-      if ((onScrollEnd || onceScrollEnd) && loadEnd) {
+      if ((onScrollEnd || onScrollEndOnce) && loadEnd) {
         // 小数点の誤差があるため、1px分は丸め誤差として扱う
         const scrollY = event.nativeEvent.contentOffset.y + event.nativeEvent.layoutMeasurement.height + 1;
         if (event.nativeEvent.contentSize.height <= scrollY) {
           if (!scrollEndCalled) {
             setScrollEndCalled(true);
-            onceScrollEnd?.();
+            onScrollEndOnce?.();
           }
           onScrollEnd?.();
         }
@@ -29,7 +29,7 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
 
       props.onScroll?.(event);
     },
-    [loadEnd, scrollEndCalled, onScrollEnd, onceScrollEnd, props],
+    [loadEnd, scrollEndCalled, onScrollEnd, onScrollEndOnce, props],
   );
 
   const handleLoadEnd = useCallback(
