@@ -54,6 +54,7 @@ sidebar_label: WebView
 | 名称           | 必須 | 型     | 説明                                                   |
 |:--------------|:-----|:-------|:------------------------------------------------------|
 | onScrollEnd   | -    | function  | イベント：最底部に到達が発生した時に実行する処理              |
+| onceScrollEnd | -    | boolean  | イベント：最底部に到達の発行回数を制御するフラグ<br />trueまたは指定なしの場合、最底部に到達した最初の1回だけ発行<br /> falseの場合、最底部に到達する度に毎回発行           |
 | onError       | -    | function  | React Native WebViewのonErrorが発生した時に実行する処理<br />指定がない場合は、後述のエラー発生時の処理に準拠します |
 | onHttpError   | -    | function  | React Native WebViewのonHttpErrorが発生した時に実行する処理<br />指定がない場合は、後述のエラー発生時の処理に準拠します              |
 
