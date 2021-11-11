@@ -1,5 +1,5 @@
-import {Button} from 'components/basics/Button';
-import {WebView} from 'components/basics/WebView';
+import {Button} from 'components/button/Button';
+import {WebView} from 'components/webview/WebView';
 import {m, AppConfig} from 'framework';
 import React, {useCallback, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';

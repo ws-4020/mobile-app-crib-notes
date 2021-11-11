@@ -1,4 +1,4 @@
-import {Button} from 'components/basics/Button';
+import {Button} from 'components/button/Button';
 import React from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 
