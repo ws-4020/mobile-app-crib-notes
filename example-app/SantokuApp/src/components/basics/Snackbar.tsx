@@ -25,6 +25,7 @@ export type SnackbarShowProps = {
 
 export type SnackbarHideProps = {
   hide?: true;
+  hideFadeOutDuration?: number;
 };
 
 export type SnackbarProps = SnackbarShowProps & SnackbarHideProps;
@@ -84,10 +85,10 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
   }, [props, animationStart]);
 
   const forceFadeout = useCallback(
-    (callback?: () => void) => {
+    (fadeOutDuration?: number, callback?: () => void) => {
       const barrierFadeOutAnimationConfig = {
         toValue: 0,
-        duration: props.forceFadeOutDuration,
+        duration: fadeOutDuration,
         useNativeDriver: true,
       };
 
@@ -99,12 +100,12 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
         callback?.();
       });
     },
-    [props, animationStart],
+    [animationStart],
   );
 
   React.useEffect(() => {
     if (props.hide) {
-      forceFadeout();
+      forceFadeout(props.hideFadeOutDuration ?? props.forceFadeOutDuration);
       return;
     }
     if (!props.message) {
@@ -114,7 +115,7 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
       return;
     }
     if (fadeInAnimationRef.current || fadeOutAnimationRef.current) {
-      forceFadeout(show);
+      forceFadeout(props.forceFadeOutDuration, show);
       return;
     }
     show();
@@ -135,9 +136,7 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
           <Animated.View style={StyleSheet.flatten([{opacity: fadeAnim}, animatedViewStyle])}>
             <View style={snackbarStyle}>
               <View style={styles.messageContainer}>
-                <Text numberOfLines={4} ellipsizeMode="tail" style={styles.messageText}>
-                  {visibleSnackbarProps.message}
-                </Text>
+                <Text style={styles.messageText}>{visibleSnackbarProps.message}</Text>
               </View>
               {visibleSnackbarProps.actionText && visibleSnackbarProps.actionHandler && (
                 <View style={styles.actionContainer}>

@@ -1,10 +1,12 @@
-import React, {Dispatch, DispatchWithoutAction, SetStateAction, useContext, useMemo, useState} from 'react';
+import React, {Dispatch, SetStateAction, useContext, useMemo, useState} from 'react';
 
-import {Snackbar, SnackbarProps, SnackbarShowProps} from './Snackbar';
+import {Snackbar, SnackbarHideProps, SnackbarProps, SnackbarShowProps} from './Snackbar';
+
+type SnackbarHideContextProps = Omit<SnackbarHideProps, 'hide'>;
 
 type SnackbarContextType = {
   show: Dispatch<SetStateAction<SnackbarShowProps>>;
-  hide: DispatchWithoutAction;
+  hide: (hideProps?: SnackbarHideContextProps) => void;
 };
 
 const SnackbarContext = React.createContext<SnackbarContextType>({show: () => {}, hide: () => {}});
@@ -20,7 +22,12 @@ export function WithSnackbar(props: {initialState?: SnackbarShowProps; children:
     },
   );
   const snackbarContext = useMemo(
-    () => ({show: setState, hide: () => setState((prevState) => ({...prevState, hide: true}))}),
+    () => ({
+      show: setState,
+      hide: (hideProps?: SnackbarHideContextProps) => {
+        setState((prevState) => ({...prevState, ...hideProps, hide: true}));
+      },
+    }),
     [],
   );
   return (
