@@ -327,6 +327,18 @@ module.exports = {
             'react-native/santoku/test-planning/all/test-environment',
           ],
         },
+        {
+          type: 'category',
+          label: 'テスト観点',
+          items: [
+            'react-native/santoku/test-planning/test-point/overview',
+            'react-native/santoku/test-planning/test-point/ut-point-screen-display',
+            'react-native/santoku/test-planning/test-point/ut-point-validation',
+            'react-native/santoku/test-planning/test-point/ut-point-screen-display',
+            'react-native/santoku/test-planning/test-point/ui-point-terminal',
+            'react-native/santoku/test-planning/test-point/it-point-terminal',
+          ],
+        },
       ],
     },
     {
