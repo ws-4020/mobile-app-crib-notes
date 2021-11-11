@@ -1,0 +1,44 @@
+---
+title: 全体テスト計画
+sidebar_label: 概要
+---
+
+テストにおける基本方針は以下のとおりです。
+
+## テスト方針
+
+- リスク
+
+  それぞれのテストで必要な端末機種とOSのバリエーションの準備に時間が掛かるため、早期に調整を実施して準備を進めます。
+
+- 品質
+
+  各画面および、機能毎の品質は単体テストにて担保します。結合テストでは画面および、機能と連携するサービスを含めた網羅的なテストと性能テストを実施してアプリ全体の品質を担保します。
+
+テストにおける前提事項と制約事項は、以下のとおりです。
+
+### テスト工程と実施環境
+
+実施するテスト工程とそれぞれの工程毎にどのようなテストを実施するかをまとめています。
+また、それぞれのテストで必要なテスト環境についてもまとめています。
+テスト実施環境で定義している機種とOSバージョンは、[動作検証端末について](../../requirements/non-functional/performance#動作検証端末について)で定義した選定基準に基づいて、決定します。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+import {PageList} from '../../../../../src/components';
+const overviews = [
+  {
+    title: 'テスト工程定義',
+    to: '/react-native/santoku/test-planning/all/test-process-scope',
+    summary: <>テスト全体に関する工程とそれぞれの実施範囲、内容をまとめています</>,
+  },
+  {
+    title: 'テスト環境',
+    to: '/react-native/santoku/test-planning/all/test-environment',
+    summary: <>テスト全体に関する環境をまとめています</>,
+  }
+];
+
+<PageList overviews={overviews} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
