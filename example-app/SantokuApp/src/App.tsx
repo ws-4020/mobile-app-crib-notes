@@ -5,6 +5,8 @@ import {activateKeepAwake} from 'expo-keep-awake';
 import {RootStackNav} from 'navigation';
 import React from 'react';
 
+import {WithSnackbar} from './components/snackbar/';
+import {WithAppTheme} from './components/theme';
 import {BundledMessagesLoader, loadMessages} from './framework';
 import {firebaseConfig} from './framework/firebase';
 import {log} from './framework/logging';
@@ -36,8 +38,12 @@ export const App = () => {
   });
 
   return (
-    <NavigationContainer>
-      <RootStackNav />
-    </NavigationContainer>
+    <WithAppTheme>
+      <WithSnackbar>
+        <NavigationContainer>
+          <RootStackNav />
+        </NavigationContainer>
+      </WithSnackbar>
+    </WithAppTheme>
   );
 };
