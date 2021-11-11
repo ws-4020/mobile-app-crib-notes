@@ -1,31 +1,45 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {WebView as RNWebView, WebViewProps} from 'react-native-webview';
-import {WebViewScrollEvent} from 'react-native-webview/lib/WebViewTypes';
+import {WebViewErrorEvent, WebViewNavigationEvent, WebViewScrollEvent} from 'react-native-webview/lib/WebViewTypes';
 
 type Props = WebViewProps & {
   onScrollEnd?: () => void;
+  onceScrollEnd?: boolean;
 };
 
 export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props, ref) {
-  const {onScrollEnd, ...webViewProps} = props;
+  const [loadEnd, setLoadEnd] = useState(false);
+  const [scrollEndCalled, setScrollEndCalled] = useState(false);
+  const {onScrollEnd, onceScrollEnd, ...webViewProps} = props;
 
   const handleScroll = useCallback(
     (event: WebViewScrollEvent) => {
-      if (onScrollEnd) {
+      if (onScrollEnd && loadEnd && (!scrollEndCalled || !onceScrollEnd)) {
         // 小数点の誤差があるため、1px分は丸め誤差として扱う
         const scrollY = event.nativeEvent.contentOffset.y + event.nativeEvent.layoutMeasurement.height + 1;
         if (event.nativeEvent.contentSize.height <= scrollY) {
+          setScrollEndCalled(true);
           onScrollEnd();
         }
       }
 
       props.onScroll?.(event);
     },
-    [onScrollEnd, props],
+    [loadEnd, scrollEndCalled, onScrollEnd, onceScrollEnd, props],
   );
 
-  return <RNWebView {...webViewProps} style={styles.container} onScroll={handleScroll} ref={ref} />;
+  const handleLoadEnd = useCallback(
+    (event: WebViewNavigationEvent | WebViewErrorEvent) => {
+      setLoadEnd(true);
+      props.onLoadEnd?.(event);
+    },
+    [props],
+  );
+
+  return (
+    <RNWebView {...webViewProps} style={styles.container} onScroll={handleScroll} onLoadEnd={handleLoadEnd} ref={ref} />
+  );
 });
 
 WebView.defaultProps = {
@@ -34,6 +48,7 @@ WebView.defaultProps = {
   androidLayerType: 'software',
   startInLoadingState: true,
   renderLoading: () => <ActivityIndicator style={styles.indicator} size="large" color="#0000ff" />,
+  onceScrollEnd: true,
 };
 
 const styles = StyleSheet.create({
