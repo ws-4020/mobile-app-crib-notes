@@ -96,6 +96,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
               onContentProcessDidTerminate={[Function]}
               onError={[Function]}
               onHttpError={[Function]}
+              onLoadEnd={[Function]}
               onLoadingError={[Function]}
               onLoadingFinish={[Function]}
               onLoadingProgress={[Function]}
