@@ -21,7 +21,9 @@ SplashScreen
   - 有効な利用規約に同意済みか確認する。
 - 有効な利用規約に同意していない場合、利用規約同意の画面へ遷移します。
 - 有効な利用規約に同意済みの場合、ホーム画面へ遷移します。
-- 表示する画像は、端末サイズごとに用意します。
+- 画面サイズに最適化した画像を表示します。各OSで、以下の方針で画像を用意します。
+  - Androidのピクセル密度：ldpi、mdpi、hdpi、xhdpi、xxhdpi、xxxhdpi
+  - iOSの画像スケール：@1x、@2x、@3x
 
 （※1）[アプリスタートの種類](/react-native/santoku/application-architecture/life-cycle-management/overview.mdx#アプリスタートの種類に応じた初期化処理)の、コールドスタートとウォームスタートが該当します。
 
