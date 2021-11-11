@@ -2,18 +2,18 @@ import {render} from '@testing-library/react-native';
 import React from 'react';
 import {Text} from 'react-native';
 
-import {AppThemeProvider} from './AppThemeContext';
+import {WithAppTheme} from './AppThemeContext';
 
-describe('AppThemeProvider', () => {
+describe('WithAppTheme', () => {
   const ChildComponent: React.FC = () => {
     return <Text testID="test">test</Text>;
   };
 
-  it('AppThemeProviderを子要素を含めて正常にrenderできること', () => {
+  it('WithAppThemeを子要素を含めて正常にrenderできること', () => {
     const appThemeProvider = render(
-      <AppThemeProvider>
+      <WithAppTheme>
         <ChildComponent />
-      </AppThemeProvider>,
+      </WithAppTheme>,
     );
     expect(appThemeProvider.queryByTestId('test')).not.toBeNull();
     expect(appThemeProvider).toMatchSnapshot();
