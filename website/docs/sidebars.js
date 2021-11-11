@@ -248,7 +248,10 @@ module.exports = {
             'react-native/santoku/requirements/non-functional/usability',
             'react-native/santoku/requirements/non-functional/system-method',
             'react-native/santoku/requirements/non-functional/performance',
+            'react-native/santoku/requirements/non-functional/compatibility',
+            'react-native/santoku/requirements/non-functional/security',
             'react-native/santoku/requirements/non-functional/test-outline',
+            'react-native/santoku/requirements/non-functional/operation',
           ],
         },
       ],
@@ -276,6 +279,14 @@ module.exports = {
             'react-native/santoku/application-architecture/message-configuration/overview',
             'react-native/santoku/application-architecture/message-configuration/load-message',
             'react-native/santoku/application-architecture/message-configuration/managed-message',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'アプリのログ出力',
+          items: [
+            'react-native/santoku/application-architecture/logging-app/overview',
+            'react-native/santoku/application-architecture/logging-app/logging',
           ],
         },
         {
@@ -365,6 +376,7 @@ module.exports = {
           items: [
             'react-native/santoku/development/design',
             'react-native/santoku/development/design/message-configuration',
+            'react-native/santoku/development/design/logs',
           ],
         },
         {
@@ -373,6 +385,7 @@ module.exports = {
           items: [
             'react-native/santoku/development/implement',
             'react-native/santoku/development/implement/message-configuration',
+            'react-native/santoku/development/implement/logs-implementation',
             'react-native/santoku/development/implement/app-launch-with-build-variants',
             'react-native/santoku/development/implement/cautions-on-using-firebase',
             'react-native/santoku/development/implement/configurations',
@@ -413,6 +426,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-003-http-api-error-handling',
         'react-native/santoku/decisions/adr-004-deep-link',
         'react-native/santoku/decisions/adr-005-message',
+        'react-native/santoku/decisions/adr-006-logging',
         'react-native/santoku/decisions/adr-007-auth',
       ],
     },
