@@ -5,7 +5,7 @@ import {WebViewErrorEvent, WebViewNavigationEvent, WebViewScrollEvent} from 'rea
 
 type Props = WebViewProps & {
   onScrollEnd?: () => void;
-  onceScrollEnd?: boolean;
+  onceScrollEnd?: () => void;
 };
 
 export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props, ref) {
@@ -15,12 +15,15 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
 
   const handleScroll = useCallback(
     (event: WebViewScrollEvent) => {
-      if (onScrollEnd && loadEnd && (!scrollEndCalled || !onceScrollEnd)) {
+      if ((onScrollEnd || onceScrollEnd) && loadEnd) {
         // 小数点の誤差があるため、1px分は丸め誤差として扱う
         const scrollY = event.nativeEvent.contentOffset.y + event.nativeEvent.layoutMeasurement.height + 1;
         if (event.nativeEvent.contentSize.height <= scrollY) {
-          setScrollEndCalled(true);
-          onScrollEnd();
+          if (!scrollEndCalled) {
+            setScrollEndCalled(true);
+            onceScrollEnd?.();
+          }
+          onScrollEnd?.();
         }
       }
 
@@ -48,7 +51,6 @@ WebView.defaultProps = {
   androidLayerType: 'software',
   startInLoadingState: true,
   renderLoading: () => <ActivityIndicator style={styles.indicator} size="large" color="#0000ff" />,
-  onceScrollEnd: true,
 };
 
 const styles = StyleSheet.create({
