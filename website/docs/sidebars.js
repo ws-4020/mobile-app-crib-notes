@@ -328,6 +328,10 @@ module.exports = {
             'react-native/santoku/test-planning/all/test-environment',
           ],
         },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/ut/ut-planning',
+        },
       ],
     },
     {
