@@ -76,4 +76,5 @@ SplashScreen
 
 | エラー | 発生時の挙動 |
 |:------|:-----------|
-| 初期化失敗 | メッセージキー：`app.初期化エラー`をダイアログで表示し、アプリを終了します。 |
+| 初期化失敗 | メッセージキー：`app.初期化エラー`をダイアログで表示し、アプリを終了します。（※1） |
+（※1）クリティカルエラーの可能性があるため、発生時のログを[Firebase Crashlyticsで収集](/react-native/santoku/application-architecture/logging-app/logging.mdx#firebase-crashlyticsについて)します。
