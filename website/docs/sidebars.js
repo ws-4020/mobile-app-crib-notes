@@ -344,10 +344,6 @@ module.exports = {
             },
             {
               type: 'doc',
-              id: 'react-native/santoku/design/screen-specs/message-list',
-            },
-            {
-              type: 'doc',
               id: 'react-native/santoku/design/screen-specs/basic-policy',
             },
             {
