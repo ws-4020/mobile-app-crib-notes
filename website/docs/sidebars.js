@@ -249,6 +249,7 @@ module.exports = {
             'react-native/santoku/requirements/non-functional/system-method',
             'react-native/santoku/requirements/non-functional/performance',
             'react-native/santoku/requirements/non-functional/compatibility',
+            'react-native/santoku/requirements/non-functional/security',
             'react-native/santoku/requirements/non-functional/test-outline',
             'react-native/santoku/requirements/non-functional/operation',
           ],
@@ -305,7 +306,6 @@ module.exports = {
             'react-native/santoku/application-architecture/error-handling/overview',
             'react-native/santoku/application-architecture/error-handling/how-to-handle-error',
             'react-native/santoku/application-architecture/http-api/http-api-error-handling',
-            'react-native/santoku/application-architecture/webview/webview-error-handling',
           ],
         },
       ],
@@ -332,6 +332,10 @@ module.exports = {
           items: [
             {
               type: 'doc',
+              id: 'react-native/santoku/design/screen-specs/overview',
+            },
+            {
+              type: 'doc',
               id: 'react-native/santoku/design/screen-specs/basic-policy',
             },
             {
@@ -351,7 +355,19 @@ module.exports = {
                 },
               ],
             },
+            {
+              type: 'category',
+              label: '共通部品',
+              items: [
+                'react-native/santoku/design/screen-specs/common-parts/overview',
+                'react-native/santoku/design/screen-specs/common-parts/webview/overview',
+              ],
+            },
           ],
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/message-list/overview',
         },
         {
           type: 'category',
