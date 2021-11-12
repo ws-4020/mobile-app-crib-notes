@@ -43,11 +43,11 @@ exports[`App マウントされたときに正常にレンダリングされる�
         color="rgb(0, 122, 255)"
         direction="ltr"
         disableBackButtonMenu={false}
-        hidden={false}
+        hidden={true}
         hideBackButton={false}
         hideShadow={false}
         largeTitleHideShadow={false}
-        title="利用規約"
+        title="InitialScreen"
         titleColor="rgb(28, 28, 30)"
         topInsetEnabled={false}
         translucent={false}
@@ -68,164 +68,19 @@ exports[`App マウントされたときに正常にレンダリングされる�
         <View
           style={
             Object {
-              "backgroundColor": "white",
+              "alignItems": "center",
               "flex": 1,
               "justifyContent": "center",
             }
           }
-          testID="TermsOfServiceAgreementScreen"
+          testID="InitialScreen"
         >
-          <View
-            style={
-              Array [
-                Object {
-                  "flex": 1,
-                  "overflow": "hidden",
-                },
-                undefined,
-              ]
-            }
-          >
-            <RNCWebView
-              androidLayerType="software"
-              cacheEnabled={true}
-              injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
-              injectedJavaScriptForMainFrameOnly={true}
-              javaScriptEnabled={true}
-              messagingEnabled={false}
-              onContentProcessDidTerminate={[Function]}
-              onError={[Function]}
-              onHttpError={[Function]}
-              onLoadEnd={[Function]}
-              onLoadingError={[Function]}
-              onLoadingFinish={[Function]}
-              onLoadingProgress={[Function]}
-              onLoadingStart={[Function]}
-              onMessage={[Function]}
-              onScroll={[Function]}
-              onShouldStartLoadWithRequest={[Function]}
-              source={
-                Object {
-                  "uri": "https://www.tis.co.jp/termsofuse/",
-                }
-              }
-              startInLoadingState={true}
-              style={
-                Array [
-                  Object {
-                    "flex": 1,
-                    "overflow": "hidden",
-                  },
-                  Object {
-                    "backgroundColor": "#ffffff",
-                  },
-                  Object {
-                    "flex": 1,
-                  },
-                ]
-              }
-              useSharedProcessPool={true}
-            />
-            <ActivityIndicator
-              animating={true}
-              color="#0000ff"
-              hidesWhenStopped={true}
-              size="large"
-              style={
-                Object {
-                  "alignItems": "center",
-                  "display": "flex",
-                  "height": "100%",
-                  "justifyContent": "center",
-                  "position": "absolute",
-                  "width": "100%",
-                }
-              }
-            />
-          </View>
-          <View
-            style={
-              Object {
-                "flex": 0,
-                "flexDirection": "row-reverse",
-                "paddingHorizontal": 20,
-                "paddingVertical": 14,
-              }
-            }
-          >
-            <View
-              style={
-                Array [
-                  Object {
-                    "borderRadius": 3,
-                    "overflow": "hidden",
-                  },
-                  Object {
-                    "borderRadius": 3,
-                  },
-                  Object {
-                    "borderRadius": 8,
-                    "width": 90,
-                  },
-                  false,
-                ]
-              }
-            >
-              <View
-                accessibilityRole="button"
-                accessibilityState={
-                  Object {
-                    "busy": false,
-                    "disabled": true,
-                  }
-                }
-                accessible={true}
-                focusable={true}
-                onClick={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                style={
-                  Object {
-                    "opacity": 1,
-                  }
-                }
-              >
-                <View
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "backgroundColor": "hsl(208, 8%, 90%)",
-                      "borderColor": "#2089dc",
-                      "borderRadius": 8,
-                      "borderWidth": 0,
-                      "flexDirection": "row",
-                      "height": 50,
-                      "justifyContent": "center",
-                      "padding": 8,
-                      "width": 90,
-                    }
-                  }
-                >
-                  <Text
-                    style={
-                      Object {
-                        "color": "hsl(208, 8%, 63%)",
-                        "fontSize": 18,
-                        "paddingVertical": 1,
-                        "textAlign": "center",
-                      }
-                    }
-                  >
-                    同意
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
+          <ActivityIndicator
+            animating={true}
+            color="#3a6be8"
+            hidesWhenStopped={true}
+            size="large"
+          />
         </View>
       </View>
     </View>

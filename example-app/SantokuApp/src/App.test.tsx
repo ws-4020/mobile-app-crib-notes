@@ -5,8 +5,6 @@ import React from 'react';
 
 import {App} from './App';
 
-// 実際にnavigateさせるので、React Navigationのモックは解除しておく。
-jest.unmock('@react-navigation/native');
 beforeEach(() => {
   // 画面遷移時のアニメーションが、コンポーネントのアンマウント後にステートを更新してしまうようで、
   // テストは成功するものの、エラーログが出力されてしまう。
@@ -17,9 +15,8 @@ beforeEach(() => {
 describe('App', () => {
   it('マウントされたときに正常にレンダリングされること', async () => {
     const app = render(<App />);
-
     await waitFor(() => {
-      expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
+      expect(app.queryByTestId('InitialScreen')).not.toBeNull();
       expect(app).toMatchSnapshot();
     });
   });
