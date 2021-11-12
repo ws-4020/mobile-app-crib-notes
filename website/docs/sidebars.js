@@ -306,7 +306,6 @@ module.exports = {
             'react-native/santoku/application-architecture/error-handling/overview',
             'react-native/santoku/application-architecture/error-handling/how-to-handle-error',
             'react-native/santoku/application-architecture/http-api/http-api-error-handling',
-            'react-native/santoku/application-architecture/webview/webview-error-handling',
           ],
         },
       ],
@@ -347,7 +346,40 @@ module.exports = {
               type: 'doc',
               id: 'react-native/santoku/design/screen-specs/message-list',
             },
+            {
+              type: 'doc',
+              id: 'react-native/santoku/design/screen-specs/basic-policy',
+            },
+            {
+              type: 'category',
+              label: '画面設計における定義事項',
+              items: [
+                'react-native/santoku/design/screen-specs/definitions/overview',
+                {
+                  type: 'category',
+                  label: '画面種別',
+                  items: [
+                    'react-native/santoku/design/screen-specs/definitions/screen-type/overview',
+                    'react-native/santoku/design/screen-specs/definitions/screen-type/screen',
+                    'react-native/santoku/design/screen-specs/definitions/screen-type/form-sheet',
+                    'react-native/santoku/design/screen-specs/definitions/screen-type/overlay',
+                  ],
+                },
+              ],
+            },
+            {
+              type: 'category',
+              label: '共通部品',
+              items: [
+                'react-native/santoku/design/screen-specs/common-parts/overview',
+                'react-native/santoku/design/screen-specs/common-parts/webview/overview',
+              ],
+            },
           ],
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/message-list/overview',
         },
         {
           type: 'category',
