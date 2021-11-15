@@ -15,22 +15,6 @@ export type SnackbarShowProps = {
    */
   messageTextStyle?: StyleProp<TextStyle>;
   /**
-   * Vertical position of the element from the top.
-   */
-  top?: number;
-  /**
-   * Vertical position of the element from the bottom.
-   */
-  bottom?: number;
-  /**
-   * Horizon position of the element from the right.
-   */
-  right?: number;
-  /**
-   * Horizon position of the element from the left.
-   */
-  left?: number;
-  /**
    * Style of snackbar.
    */
   style?: StyleProp<ViewStyle>;
@@ -181,6 +165,9 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
     animatedViewStyle.bottom = 20;
   }
 
+  const messageTextStyle = StyleSheet.flatten([styles.messageText, props.messageTextStyle]);
+  const actionTextStyle = StyleSheet.flatten([styles.actionText, props.actionTextStyle]);
+
   return (
     <>
       {props.children}
@@ -189,12 +176,12 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
           <Animated.View style={StyleSheet.flatten([{opacity: fadeAnim}, animatedViewStyle])}>
             <View style={snackbarStyle}>
               <View style={styles.messageContainer}>
-                <Text style={styles.messageText}>{visibleSnackbarProps.message}</Text>
+                <Text style={messageTextStyle}>{visibleSnackbarProps.message}</Text>
               </View>
               {visibleSnackbarProps.actionText && visibleSnackbarProps.actionHandler && (
                 <View style={styles.actionContainer}>
                   <TouchableOpacity onPress={visibleSnackbarProps.actionHandler}>
-                    <Text style={styles.actionText}>{visibleSnackbarProps.actionText}</Text>
+                    <Text style={actionTextStyle}>{visibleSnackbarProps.actionText}</Text>
                   </TouchableOpacity>
                 </View>
               )}
