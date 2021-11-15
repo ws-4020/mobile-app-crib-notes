@@ -22,10 +22,12 @@ SplashScreen
 - 有効な利用規約に同意していない場合、利用規約同意の画面へ遷移します。
 - 有効な利用規約に同意済みの場合、ホーム画面へ遷移します。
 - 画面サイズに最適化した画像を表示します。各OSで、以下の方針で画像を用意します。
-  - Androidのピクセル密度：ldpi、mdpi、hdpi、xhdpi、xxhdpi、xxxhdpi
-  - iOSの画像スケール：@1x、@2x、@3x
+  - Androidのピクセル密度（※2）：ldpi、mdpi、hdpi、xhdpi、xxhdpi、xxxhdpi
+  - iOSの画像スケール（※3）：@1x、@2x、@3x
 
-（※1）[アプリスタートの種類](/react-native/santoku/application-architecture/life-cycle-management/overview.mdx#アプリスタートの種類に応じた初期化処理)の、コールドスタートとウォームスタートが該当します。
+（※1）[アプリスタートの種類](/react-native/santoku/application-architecture/life-cycle-management/overview.mdx#アプリスタートの種類に応じた初期化処理)の、コールドスタートとウォームスタートが該当します。<br />
+（※2）Androidのピクセル密度については、[こちら](https://developer.android.com/training/multiscreen/screendensities?hl=ja)をご参照ください。<br />
+（※3）iOSの画像スケールについては、[こちら](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)をご参照ください。
 
 :::note
 初期化処理および初期データの取得は、現在は上記の処理を開発対象としております。上記以外の処理は今後開発予定です。
