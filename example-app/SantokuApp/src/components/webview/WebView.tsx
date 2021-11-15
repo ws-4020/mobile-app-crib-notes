@@ -1,9 +1,17 @@
+import {useSnackbar} from 'components/snackbar';
+import {m} from 'framework';
 import React, {useCallback, useState} from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {WebView as RNWebView, WebViewProps} from 'react-native-webview';
 import {WebViewErrorEvent, WebViewNavigationEvent, WebViewScrollEvent} from 'react-native-webview/lib/WebViewTypes';
 
 type Props = WebViewProps & {
+  /**
+   * Error message when React Native WebView original onError is raised.
+   * If not specified, the default message is displayed.
+   * If onError is specified by the parent, this message will not be displayed.
+   */
+  errorMessage?: string;
   /**
    * End-of-Scroll Event.
    * Occurs every time the web page scrolls to the bottom of the content.
@@ -20,6 +28,7 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
   const [loadEnd, setLoadEnd] = useState(false);
   const [scrollEndCalled, setScrollEndCalled] = useState(false);
   const {onScrollEnd, onScrollEndOnce, ...webViewProps} = props;
+  const {showWithCloseButton} = useSnackbar();
 
   const handleScroll = useCallback(
     (event: WebViewScrollEvent) => {
@@ -48,8 +57,26 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
     [props],
   );
 
+  const handleError = useCallback(
+    (event: WebViewErrorEvent) => {
+      if (props.onError !== undefined) {
+        props.onError(event);
+      } else {
+        showWithCloseButton({message: props.errorMessage ?? m('app.webview.onError')});
+      }
+    },
+    [props],
+  );
+
   return (
-    <RNWebView {...webViewProps} style={styles.container} onScroll={handleScroll} onLoadEnd={handleLoadEnd} ref={ref} />
+    <RNWebView
+      {...webViewProps}
+      style={styles.container}
+      onScroll={handleScroll}
+      onLoadEnd={handleLoadEnd}
+      onError={handleError}
+      ref={ref}
+    />
   );
 });
 
