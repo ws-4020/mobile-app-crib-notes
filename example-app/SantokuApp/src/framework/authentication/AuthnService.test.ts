@@ -1,29 +1,58 @@
-import {generatePassword} from 'framework/utilities/id';
 import {AuthnService} from '.';
+import {api} from '../../backend/BackendService';
+import {AccountLoginResponseStatusEnum} from '../../generated/api';
+import {generatePassword} from '../utilities/id';
 
-describe('Message message', () => {
+const mockGetCsrfToken = jest.spyOn(api, 'getCsrfToken').mockResolvedValue({
+  data: {csrfTokenValue: 'abcdef', csrfTokenHeaderName: 'test', csrfTokenParameterName: 'test'},
+  status: 200,
+  statusText: 'success',
+  headers: {},
+  config: {},
+});
+
+const mockSignup = jest.spyOn(api, 'postSignup').mockResolvedValue({
+  data: {accountId: '123456789', profile: {nickname: 'testNickName'}},
+  status: 200,
+  statusText: 'success',
+  headers: {},
+  config: {},
+});
+
+const mockLogin = jest.spyOn(api, 'postLogin').mockResolvedValue({
+  data: {status: AccountLoginResponseStatusEnum.Complete},
+  status: 200,
+  statusText: 'success',
+  headers: {},
+  config: {},
+});
+
+const mockLogout = jest.spyOn(api, 'postLogout').mockResolvedValue({
+  data: undefined,
+  status: 200,
+  statusText: 'success',
+  headers: {},
+  config: {},
+});
+
+beforeEach(() => {
+  mockGetCsrfToken.mockClear();
+  mockSignup.mockClear();
+  mockLogin.mockClear();
+  mockLogout.mockClear();
+});
+
+describe('AuthnService', () => {
   test('サインアップ -> ログイン -> ログアウト', async () => {
-    try{
-      //@ts-ignore レスポンスはAny型のため 
-      const ret = await AuthnService.getCsrfToken();
-      //@ts-ignore レスポンスはAny型のため 
-      console.log(ret.data);
-      const password = await generatePassword();
-      //@ts-ignore レスポンスはAny型のため 
-      let res = await AuthnService.signup('nicknameAaaaaa', password);
-      //@ts-ignore レスポンスはAny型のため 
-      console.log(res);
-      const accountId = res.data.accountId;
-      //@ts-ignore レスポンスはAny型のため 
-      res = await AuthnService.login(accountId, password);
-      //@ts-ignore レスポンスはAny型のため 
-      console.log(res);
-      //@ts-ignore レスポンスはAny型のため 
-      res = await AuthnService.logout();
-      //@ts-ignore レスポンスはAny型のため 
-      console.log(res);
-    } catch(err) {
-      console.error(err);
-    }
-  })
+    const csrfTokenRes = await AuthnService.getCsrfToken();
+    expect(csrfTokenRes).toEqual('abcdef');
+    const password = await generatePassword();
+    const signupRes = await AuthnService.signup('testNickName', password);
+    expect(signupRes).toEqual({accountId: '123456789', profile: {nickname: 'testNickName'}});
+    const accountId = signupRes.accountId;
+    const loginRes = await AuthnService.login(accountId, password);
+    expect(loginRes).toEqual({status: AccountLoginResponseStatusEnum.Complete});
+    const logoutRes = await AuthnService.logout();
+    expect(logoutRes).toBeUndefined();
+  });
 });
