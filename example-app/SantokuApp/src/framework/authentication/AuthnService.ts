@@ -1,4 +1,5 @@
-import {DefaultApi, Configuration} from '../../generated/api';
+import {api} from '../../backend/BackendService';
+import {Account, AccountLoginResponse} from '../../generated/api';
 
 class CsrfToken {
   isInitialized: boolean = false;
@@ -6,57 +7,46 @@ class CsrfToken {
 }
 
 class AuthnContext {
-  isAuthronized: boolean = false;
+  isAuthorized: boolean = false;
   accountId: string = '';
 }
 
 const csrfToken = new CsrfToken();
-// パスは実行時のものを環境変数や外部から設定できるようにしてください。
-const basePath = 'http://10.0.2.2:9080/api';
 
-async function getCsrfToken(): Promise<any>{
-  if(csrfToken.isInitialized) {
+async function getCsrfToken(): Promise<string | undefined> {
+  if (csrfToken.isInitialized) {
     return undefined;
   }
-  const api = new DefaultApi(new Configuration({basePath: basePath}));
   const token = await api.getCsrfToken();
   csrfToken.isInitialized = true;
   csrfToken.tokenValue = token.data.csrfTokenValue ?? '';
-  return token;
-}
-
-function createApi() {
-  return new DefaultApi(new Configuration({basePath: basePath}));
+  return token.data.csrfTokenValue;
 }
 
 function requestOptions() {
   return {
-    headers:{
+    headers: {
       'Content-Type': 'Application/json',
       'X-CSRF-TOKEN': csrfToken.tokenValue,
     },
   };
 }
 
-async function signup(nickname: string, password: string): Promise<any> {
-  if(!csrfToken.isInitialized) {
+async function signup(nickname: string, password: string): Promise<Account> {
+  if (!csrfToken.isInitialized) {
     await getCsrfToken();
   }
-  const api = createApi()
-  const res = await api.postSignup({nickname: nickname, password: password}, requestOptions());
-  return res;
+  const res = await api.postSignup({nickname, password}, requestOptions());
+  return res.data;
 }
 
-async function login(accountId: string, password: string): Promise<any> {
-  const api = createApi();
-  const res = await api.postLogin({accountId: accountId, password: password},requestOptions());
-  return res;
+async function login(accountId: string, password: string): Promise<AccountLoginResponse> {
+  const res = await api.postLogin({accountId, password}, requestOptions());
+  return res.data;
 }
 
-async function logout(): Promise<any> {
-  const api = createApi()
-  const res = await api.postLogout(requestOptions());
-  return res;
+async function logout(): Promise<void> {
+  await api.postLogout(requestOptions());
 }
 
 const context = new AuthnContext();
