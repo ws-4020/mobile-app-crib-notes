@@ -12,6 +12,9 @@ const buttonWidthSizes = {
 type ButtonSizeType = keyof typeof buttonWidthSizes;
 
 type Props = ButtonProps & {
+  /**
+   * Button width size.
+   */
   size?: ButtonSizeType;
 };
 

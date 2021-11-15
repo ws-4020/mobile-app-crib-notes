@@ -5,7 +5,13 @@ import {Snackbar, SnackbarHideProps, SnackbarProps, SnackbarShowProps} from './S
 type SnackbarHideContextProps = Omit<SnackbarHideProps, 'hide'>;
 
 type SnackbarContextType = {
+  /**
+   * Show snackbar.
+   */
   show: Dispatch<SetStateAction<SnackbarShowProps>>;
+  /**
+   * Hide snackbar.
+   */
   hide: (hideProps?: SnackbarHideContextProps) => void;
 };
 

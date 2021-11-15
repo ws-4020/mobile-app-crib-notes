@@ -6,25 +6,78 @@ import {FullWindowOverlay} from './FullWindowOverlay';
 import CompositeAnimation = Animated.CompositeAnimation;
 
 export type SnackbarShowProps = {
+  /**
+   * Displayed message.
+   */
   message: string;
+  /**
+   * Style of message.
+   */
   messageTextStyle?: StyleProp<TextStyle>;
+  /**
+   * Vertical position of the element from the top.
+   */
   top?: number;
+  /**
+   * Vertical position of the element from the bottom.
+   */
   bottom?: number;
+  /**
+   * Horizon position of the element from the right.
+   */
   right?: number;
+  /**
+   * Horizon position of the element from the left.
+   */
   left?: number;
+  /**
+   * Style of snackbar.
+   */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style of animated container.
+   */
   animatedContainerStyle?: StyleProp<ViewStyle>;
+  /**
+   * Button text.
+   * Placed to the right of the message.
+   */
   actionText?: string;
+  /**
+   * Function called when the user taps the button.
+   */
   actionHandler?: () => void;
+  /**
+   * Style of Button text.
+   */
   actionTextStyle?: StyleProp<TextStyle>;
+  /**
+   * Time from when the snackbar appears to when it starts to fade-out.
+   */
   autoHideDuration?: number;
+  /**
+   * Snackbar fade-in time.
+   */
   fadeInDuration?: number;
+  /**
+   * Snackbar fade-out time.
+   */
   fadeOutDuration?: number;
+  /**
+   * Fade-out time when forcing the snackbar to fade-out.
+   * This is applied when you try to display another snackbar while a snackbar is being displayed.
+   */
   forceFadeOutDuration?: number;
 };
 
 export type SnackbarHideProps = {
+  /**
+   * Specify when to hide the snackbar.
+   */
   hide?: true;
+  /**
+   * Fade-out time when hide is specified.
+   */
   hideFadeOutDuration?: number;
 };
 

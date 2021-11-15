@@ -4,7 +4,15 @@ import {WebView as RNWebView, WebViewProps} from 'react-native-webview';
 import {WebViewErrorEvent, WebViewNavigationEvent, WebViewScrollEvent} from 'react-native-webview/lib/WebViewTypes';
 
 type Props = WebViewProps & {
+  /**
+   * End-of-Scroll Event.
+   * Occurs every time the web page scrolls to the bottom of the content.
+   */
   onScrollEnd?: () => void;
+  /**
+   * End-of-scroll event that occurs only once.
+   * Occurs only once when the web page scroll reaches the bottom of the content.
+   */
   onScrollEndOnce?: () => void;
 };
 
@@ -15,6 +23,7 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
 
   const handleScroll = useCallback(
     (event: WebViewScrollEvent) => {
+      console.log('onScroll', loadEnd);
       if ((onScrollEnd || onScrollEndOnce) && loadEnd) {
         // 小数点の誤差があるため、1px分は丸め誤差として扱う
         const scrollY = event.nativeEvent.contentOffset.y + event.nativeEvent.layoutMeasurement.height + 1;
