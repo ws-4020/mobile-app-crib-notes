@@ -72,6 +72,8 @@ paths:
                     agreedTermsOfServiceVersion: 1.0.0
         '400':
           $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
   /terms:
