@@ -23,7 +23,6 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
 
   const handleScroll = useCallback(
     (event: WebViewScrollEvent) => {
-      console.log('onScroll', loadEnd);
       if ((onScrollEnd || onScrollEndOnce) && loadEnd) {
         // 小数点の誤差があるため、1px分は丸め誤差として扱う
         const scrollY = event.nativeEvent.contentOffset.y + event.nativeEvent.layoutMeasurement.height + 1;
