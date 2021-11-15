@@ -28,7 +28,7 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
   const [loadEnd, setLoadEnd] = useState(false);
   const [scrollEndCalled, setScrollEndCalled] = useState(false);
   const {onScrollEnd, onScrollEndOnce, ...webViewProps} = props;
-  const {showWithCloseButton} = useSnackbar();
+  const snackbar = useSnackbar();
 
   const handleScroll = useCallback(
     (event: WebViewScrollEvent) => {
@@ -62,10 +62,10 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
       if (props.onError !== undefined) {
         props.onError(event);
       } else {
-        showWithCloseButton({message: props.errorMessage ?? m('app.webview.onError')});
+        snackbar.showWithCloseButton(props.errorMessage ?? m('app.webview.onError'));
       }
     },
-    [props],
+    [props, snackbar],
   );
 
   return (

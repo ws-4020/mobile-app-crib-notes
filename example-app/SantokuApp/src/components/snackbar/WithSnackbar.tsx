@@ -1,22 +1,23 @@
 import {m} from 'framework';
-import React, {Dispatch, SetStateAction, useContext, useMemo, useState} from 'react';
+import React, {useContext, useMemo, useState} from 'react';
 
 import {Snackbar, SnackbarHideProps, SnackbarProps, SnackbarShowProps} from './Snackbar';
 
+type SnackbarShowContextProps = Omit<SnackbarShowProps, 'message'>;
+type SnackbarShowCloseButtonContextProps = Omit<SnackbarShowContextProps, 'actionText' | 'actionHandler'>;
 type SnackbarHideContextProps = Omit<SnackbarHideProps, 'hide'>;
-type SnackbarShowCloseButtonContextProps = Omit<SnackbarShowProps, 'actionText' | 'actionHandler'>;
 
 type SnackbarContextType = {
   /**
    * Show snackbar.
    */
-  show: Dispatch<SetStateAction<SnackbarShowProps>>;
+  show: (message: string, showProps?: SnackbarShowContextProps) => void;
 
   /**
    * Show the snack bar with the close button.
    * The close button is placed to the right of the message.
    */
-  showWithCloseButton: (showProps: SnackbarShowCloseButtonContextProps) => void;
+  showWithCloseButton: (message: string, showProps?: SnackbarShowCloseButtonContextProps) => void;
 
   /**
    * Hide snackbar.
@@ -40,16 +41,21 @@ export function WithSnackbar(props: {initialState?: SnackbarShowProps; children:
       message: '',
     },
   );
-  const snackbarContext = useMemo(
+  const snackbarContext = useMemo<SnackbarContextType>(
     () => ({
-      show: setState,
-      showWithCloseButton: (showProps: SnackbarShowCloseButtonContextProps) => {
-        setState((prevState) => ({
-          ...prevState,
+      show: (message: string, showProps?: SnackbarShowContextProps) => {
+        setState({
+          ...showProps,
+          message,
+        });
+      },
+      showWithCloseButton: (message: string, showProps?: SnackbarShowCloseButtonContextProps) => {
+        setState({
           ...showProps,
           actionText: m('閉じる'),
           actionHandler: snackbarContext.hide,
-        }));
+          message,
+        });
       },
       hide: (hideProps?: SnackbarHideContextProps) => {
         setState((prevState) => ({...prevState, ...hideProps, hide: true}));
