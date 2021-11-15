@@ -217,6 +217,7 @@ components:
         - code
         - message
   responses:
+    ## エラーコードの体系は/santoku-app-backend/src/main/resources/messages.propertiesを参照(backend.errors.XXXの、XXXの部分)
     BadRequest:
       description: Bad Request
       content:
