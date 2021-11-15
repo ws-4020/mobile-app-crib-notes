@@ -365,6 +365,7 @@ module.exports = {
                   label: '共通部',
                   items: ['react-native/santoku/design/screen-specs/screens/common/bottom-tab/overview'],
                 },
+                'react-native/santoku/design/screen-specs/screens/splash-screen/overview',
                 'react-native/santoku/design/screen-specs/screens/terms-of-service-agreement/overview',
               ],
             },
