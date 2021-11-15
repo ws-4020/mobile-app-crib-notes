@@ -1,6 +1,10 @@
 import 'react-native-gesture-handler';
 import {registerRootComponent} from 'expo';
 import * as SplashScreen from 'expo-splash-screen';
+// OpenAPI Generatorを使用して生成したコードの中で、URL#searchやURLSearchParamsを利用しているが、それらはReact Nativeでは実装されていない
+// https://github.com/facebook/react-native/blob/main/Libraries/Blob/URL.js
+// そのため、react-native-url-polyfillを使用する
+import 'react-native-url-polyfill/auto';
 
 import {App} from './src/App';
 
