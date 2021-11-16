@@ -15,6 +15,8 @@ import {
   AppInfoScreen,
   LogScreen,
   MessageScreen,
+  ButtonScreen,
+  SnackbarScreen,
   AuthnScreen,
 } from 'screens';
 
@@ -46,6 +48,8 @@ export const Screen: React.FC = () => {
       <nav.Screen {...InstructionsScreen} />
       <nav.Screen {...LogScreen} />
       <nav.Screen {...MessageScreen} />
+      <nav.Screen {...ButtonScreen} />
+      <nav.Screen {...SnackbarScreen} />
       <nav.Screen {...AuthnScreen} />
     </nav.Navigator>
   );

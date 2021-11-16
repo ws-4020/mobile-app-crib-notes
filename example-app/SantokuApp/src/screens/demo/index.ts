@@ -5,5 +5,7 @@ export * from './info';
 export * from './instructions';
 export * from './log';
 export * from './message';
+export * from './snackbar';
 export * from './DemoScreen';
+export * from './button';
 export * from './authn';
