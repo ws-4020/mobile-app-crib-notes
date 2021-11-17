@@ -5,7 +5,7 @@ import {AppConfig} from '../config';
 
 const instance = axios.create();
 
-export const api = new DefaultApi(undefined, AppConfig.santokuAppBackendUrl, instance);
+export const api = new DefaultApi(undefined, `${AppConfig.santokuAppBackendUrl}/api`, instance);
 
 export async function csrfToken() {
   const token = await api.getCsrfToken();
