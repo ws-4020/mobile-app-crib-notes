@@ -1,7 +1,7 @@
 import {waitFor} from '@testing-library/react-native';
 import {Alert} from 'react-native';
 
-import {initialize, hideSplashScreen, showErrorDialog} from './Initialize';
+import {initialize, hideSplashScreen, showInitializeErrorDialog} from './Initialize';
 
 describe('initialize', () => {
   it('navigatorOptionsが返されること', async () => {
@@ -47,7 +47,7 @@ describe('hideSplashScreen', () => {
 describe('showErrorDialog', () => {
   it('Alertが表示されること', () => {
     const mockAlert = jest.spyOn(Alert, 'alert');
-    showErrorDialog();
+    showInitializeErrorDialog(() => {});
     expect(mockAlert).toBeCalled();
   });
 });

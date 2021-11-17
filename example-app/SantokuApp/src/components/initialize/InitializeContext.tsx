@@ -1,7 +1,7 @@
 import {log} from 'framework/logging';
 import React, {createContext, useContext, useEffect, useMemo, useState} from 'react';
 
-import {initialize, hideSplashScreen, showErrorDialog, NavigatorOptions} from './Initialize';
+import {initialize, hideSplashScreen, showInitializeErrorDialog, NavigatorOptions} from './Initialize';
 
 type InitializeContextValue = {
   initialized: boolean;
@@ -16,6 +16,7 @@ const defaultInitializeContextValue: InitializeContextValue = {
 export const InitializeContext = createContext<InitializeContextValue>(defaultInitializeContextValue);
 
 export const WithInitializeContext: React.FC = ({children}) => {
+  const [isError, setIsError] = useState<boolean>(false);
   const [initialized, setInitialized] = useState<boolean>(defaultInitializeContextValue.initialized);
   const [navigatorOptions, setNavigatorOptions] = useState<NavigatorOptions>(
     defaultInitializeContextValue.navigatorOptions,
@@ -38,9 +39,16 @@ export const WithInitializeContext: React.FC = ({children}) => {
       })
       .catch(() => {
         log.error('Failed to initialize.', 'InitializeFailure');
-        showErrorDialog();
+        showInitializeErrorDialog(() => setIsError(true));
       });
   }, []);
+
+  useEffect(() => {
+    if (isError) {
+      // 初期化処理に失敗した場合はアプリをクラッシュ扱いで終了
+      throw new Error('Failed to initialize');
+    }
+  }, [isError]);
 
   if (initialized) {
     return <InitializeContext.Provider value={contextValue}>{children}</InitializeContext.Provider>;

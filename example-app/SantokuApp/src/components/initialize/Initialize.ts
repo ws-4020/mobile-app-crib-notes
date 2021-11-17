@@ -3,7 +3,6 @@ import type crashlyticsModule from '@react-native-firebase/crashlytics';
 import {activateKeepAwake} from 'expo-keep-awake';
 import * as SplashScreen from 'expo-splash-screen';
 import {Alert} from 'react-native';
-import RNExitApp from 'react-native-exit-app';
 
 import {BundledMessagesLoader, loadMessages, m} from '../../framework';
 import {firebaseConfig} from '../../framework/firebase';
@@ -63,14 +62,12 @@ export const hideSplashScreen = async () => {
   }
 };
 
-export const showErrorDialog = () => {
+export const showInitializeErrorDialog = (onPress: (value?: string | undefined) => void) => {
   Alert.alert(m('初期化エラー'), m('app.初期化エラー'), [
     {
       text: 'OK',
       style: 'default',
-      onPress: () => {
-        RNExitApp.exitApp();
-      },
+      onPress,
     },
   ]);
 };
