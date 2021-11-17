@@ -4,7 +4,10 @@ import React, {useContext, useMemo, useState} from 'react';
 import {Snackbar, SnackbarHideProps, SnackbarProps, SnackbarShowProps} from './Snackbar';
 
 type SnackbarShowContextProps = Omit<SnackbarShowProps, 'message'>;
-type SnackbarShowCloseButtonContextProps = Omit<SnackbarShowContextProps, 'actionText' | 'actionHandler'>;
+type SnackbarShowCloseButtonContextProps = Omit<
+  SnackbarShowContextProps,
+  'actionText' | 'actionHandler' | 'actionTextStyle'
+>;
 type SnackbarHideContextProps = Omit<SnackbarHideProps, 'hide'>;
 
 type SnackbarContextType = {
@@ -58,7 +61,7 @@ export function WithSnackbar(props: {initialState?: SnackbarShowProps; children:
         });
       },
       hide: (hideProps?: SnackbarHideContextProps) => {
-        setState((prevState) => ({...prevState, ...hideProps, hide: true}));
+        setState({...hideProps, hide: true, message: ''});
       },
     }),
     [],

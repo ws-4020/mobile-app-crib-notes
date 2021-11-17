@@ -15,13 +15,13 @@ export type SnackbarShowProps = {
    */
   messageTextStyle?: StyleProp<TextStyle>;
   /**
-   * Style of snackbar.
+   * Style to adjust the look of the snackbar.
    */
   style?: StyleProp<ViewStyle>;
   /**
-   * Style of animated container.
+   * Adjust the position of the snackbar style.
    */
-  animatedContainerStyle?: StyleProp<ViewStyle>;
+  positionStyle?: StyleProp<ViewStyle>;
   /**
    * Button text.
    * Placed to the right of the message.
@@ -48,7 +48,7 @@ export type SnackbarShowProps = {
    */
   fadeOutDuration?: number;
   /**
-   * Fade-out time when forcing the snackbar to fade-out.
+   * Fade-out time to close the previously displayed snack bar when displaying a new one.
    * This is applied when you try to display another snackbar while a snackbar is being displayed.
    */
   forceFadeOutDuration?: number;
@@ -142,7 +142,7 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
 
   React.useEffect(() => {
     if (props.hide) {
-      forceFadeout(props.hideFadeOutDuration ?? props.forceFadeOutDuration);
+      forceFadeout(props.hideFadeOutDuration);
       return;
     }
     if (!props.message) {
@@ -160,7 +160,7 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
 
   const snackbarStyle = StyleSheet.flatten([styles.snackbar, props.style]);
 
-  const animatedViewStyle = StyleSheet.flatten<ViewStyle>([styles.animatedContainer, props.animatedContainerStyle]);
+  const animatedViewStyle = StyleSheet.flatten<ViewStyle>([styles.animatedContainer, props.positionStyle]);
   if (animatedViewStyle?.top === undefined && animatedViewStyle.bottom === undefined) {
     animatedViewStyle.bottom = 20;
   }
@@ -198,6 +198,7 @@ Snackbar.defaultProps = {
   fadeInDuration: 1000,
   fadeOutDuration: 1000,
   forceFadeOutDuration: 300,
+  hideFadeOutDuration: 300,
 };
 
 const styles = StyleSheet.create({
