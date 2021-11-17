@@ -28,9 +28,14 @@ function loadPassword(accountId: string): Promise<string | null> {
   });
 }
 
+function deleteActiveAccountId(): Promise<void> {
+  return SecureStore.deleteItemAsync(STORED_ITEM_KEYS.ACTIVE_ACCOUNT_ID);
+}
+
 export const SecureStorageAdapter = {
   saveActiveAccountId,
   savePassword,
   loadActiveAccountId,
   loadPassword,
+  deleteActiveAccountId,
 };

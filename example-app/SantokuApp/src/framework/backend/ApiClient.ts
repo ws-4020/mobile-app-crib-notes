@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {DefaultApi} from '../../generated/api';
-import {AppConfig} from '../index';
+import {AppConfig} from '../config';
 
 const instance = axios.create();
 

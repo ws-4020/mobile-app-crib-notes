@@ -2,8 +2,8 @@ import {Account, AccountLoginResponse} from '../../generated/api';
 import {api} from '../backend';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 
-class AccountIdNotFoundError extends Error {}
-class PasswordNotFoundError extends Error {}
+export class AccountIdNotFoundError extends Error {}
+export class PasswordNotFoundError extends Error {}
 async function signup(nickname: string, password: string): Promise<Account> {
   const res = await api.postSignup({nickname, password});
   const accountId = res.data.accountId;
@@ -46,6 +46,7 @@ async function refresh(): Promise<AccountLoginResponse> {
 
 async function logout(): Promise<void> {
   await api.postLogout();
+  return SecureStorageAdapter.deleteActiveAccountId();
 }
 
 export const AuthnService = {
