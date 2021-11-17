@@ -2,13 +2,12 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
-import {AuthnService} from '../../../framework/authentication';
-import {generatePassword} from '../../../framework/utilities/id';
+import {AuthnService, csrfToken, generatePassword} from '../../../framework';
 
 export default class AuthnTestScreen extends React.Component {
   testCsrfToken = async () => {
     //@ts-ignore レスポンスはany型のため
-    const res = await AuthnService.getCsrfToken();
+    await csrfToken();
     //@ts-ignore レスポンスはany型のため
     alert(JSON.stringify(res));
   };
@@ -22,8 +21,8 @@ export default class AuthnTestScreen extends React.Component {
   };
 
   testLogin = async () => {
-    const accountId = AuthnService.context.accountId;
-    const password = "storeInSomewhere";
+    const accountId = 'accountId';
+    const password = 'storeInSomewhere';
     //@ts-ignore レスポンスはany型のため
     const res = await AuthnService.login(accountId, password);
     //@ts-ignore レスポンスはany型のため
@@ -37,10 +36,6 @@ export default class AuthnTestScreen extends React.Component {
     alert(JSON.stringify(res));
   };
 
-  showContext = () => {
-    alert(JSON.stringify(AuthnService.context));
-  };
-
   render() {
     return (
       <View style={styles.container}>
@@ -48,7 +43,6 @@ export default class AuthnTestScreen extends React.Component {
         <Button onPress={this.testSignup} title="サインアップのテスト" />
         <Button onPress={this.testLogin} title="ログインのテスト" />
         <Button onPress={this.testLogout} title="ログアウトのテスト" />
-        <Button onPress={this.showContext} title="認証コンテキストの表示" />
       </View>
     );
   }

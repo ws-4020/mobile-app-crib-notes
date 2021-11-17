@@ -1,6 +1,6 @@
 import {AuthnService} from '.';
-import {api} from '../../backend/BackendService';
 import {AccountLoginResponseStatusEnum} from '../../generated/api';
+import {api} from '../backend/BackendService';
 import {generatePassword} from '../utilities/id';
 
 const mockGetCsrfToken = jest.spyOn(api, 'getCsrfToken').mockResolvedValue({
