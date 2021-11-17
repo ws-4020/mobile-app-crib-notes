@@ -37,9 +37,9 @@ const Screen = () => {
     }
   }, [setAccountId]);
 
-  const login = useCallback(async () => {
+  const changeAccount = useCallback(async () => {
     try {
-      const res = await AuthnService.login(accountIdInput);
+      const res = await AuthnService.changeAccount(accountIdInput);
       alert(`ログイン成功しました state=${res.status}`);
     } catch (e) {
       const backendErrorMessage = resolveBackendErrorMessage(e);
@@ -114,7 +114,7 @@ const Screen = () => {
           value={accountIdInput}
           onChangeText={(value) => setAccountIdInput(value)}
         />
-        <Button onPress={login} title="ログイン" />
+        <Button onPress={changeAccount} title="アカウント切り替え" />
       </View>
       <Button onPress={canAutoLogin} title="自動ログイン可能かチェック" />
       <Button onPress={autoLogin} title="自動ログイン" />

@@ -14,12 +14,13 @@ async function signup(nickname: string, password: string): Promise<Account> {
   return res.data;
 }
 
-async function login(accountId: string): Promise<AccountLoginResponse> {
+async function changeAccount(accountId: string): Promise<AccountLoginResponse> {
   const password = await SecureStorageAdapter.loadPassword(accountId);
   if (!password) {
     throw new PasswordNotFoundError('The password for the account ID does not exist.');
   }
   const res = await api.postLogin({accountId, password});
+  await SecureStorageAdapter.saveActiveAccountId(accountId);
   return res.data;
 }
 
@@ -28,7 +29,7 @@ async function autoLogin(): Promise<AccountLoginResponse> {
   if (!accountId) {
     throw new AccountIdNotFoundError('There is no auto-login enabled account.');
   }
-  return login(accountId);
+  return changeAccount(accountId);
 }
 
 async function canAutoLogin(): Promise<boolean> {
@@ -51,7 +52,7 @@ async function logout(): Promise<void> {
 
 export const AuthnService = {
   signup,
-  login,
+  changeAccount,
   canAutoLogin,
   autoLogin,
   refresh,
