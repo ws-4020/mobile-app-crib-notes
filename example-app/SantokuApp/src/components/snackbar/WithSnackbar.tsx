@@ -13,17 +13,25 @@ type SnackbarHideContextProps = Omit<SnackbarHideProps, 'hide'>;
 type SnackbarContextType = {
   /**
    * Show snackbar.
+   *
+   * @param message - Displayed message.
+   * @param showProps - Snackbar props(SnackbarShowContextProps).
    */
   show: (message: string, showProps?: SnackbarShowContextProps) => void;
 
   /**
-   * Show the snack bar with the close button.
+   * Show the snackbar with the close button.
    * The close button is placed to the right of the message.
+   *
+   * @param message - Displayed message.
+   * @param showProps - Snackbar props(SnackbarShowCloseButtonContextProps).
    */
   showWithCloseButton: (message: string, showProps?: SnackbarShowCloseButtonContextProps) => void;
 
   /**
    * Hide snackbar.
+   *
+   * @param hideProps - Snackbar props(SnackbarHideContextProps).
    */
   hide: (hideProps?: SnackbarHideContextProps) => void;
 };
