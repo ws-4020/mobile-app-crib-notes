@@ -14,6 +14,7 @@ sidebar_label: スナックバー
 - 任意の表示位置を指定できます。
 - 任意のスタイルを指定できます。
 - 任意のアクションを指定できます。アクションを指定すると、メッセージ横にボタンが表示されます。
+- 表示や非表示の開始は共通のメソッドで制御できるようにします。詳細は[本アプリでの共通化][]を参照してください。
 
 ## イメージ
 
@@ -47,21 +48,31 @@ sidebar_label: スナックバー
 
 ## プロパティ
 
+後述の[本アプリでの共通化][]のとおり、スナックバーの表示や非表示を制御する際は共通のメソッドを使用します。以下のように、表示または非表示のメソッドによって指定できるプロパティが変わります。
+
+### 表示メソッド用プロパティ
+
 | 名称           | 必須 | 型     | 説明                                                   |
 |:--------------|:-----|:-------|:------------------------------------------------------|
 | message       | ○    | string | メッセージに表示する文字列                                |
-| messageTextStyle       | -    | TextStyle（※1）| メッセージに表示する文字列のスタイル        |
+| messageTextStyle       | -    | [TextStyle][] | メッセージに表示する文字列のスタイル        |
 | style       | -    | [ViewStyle][] | スナックバーのスタイル                               |
 | animatedContainerStyle       | -    | [ViewStyle][] | スナックバー外周のスタイル<br />表示位置などはこちらで指定します |
 | actionText       | -    | string | アクションボタンに表示する文字列                       |
 | actionHandler       | -    | function | アクションボタンタップ時の処理            |
 | actionTextStyle       | -    | [TextStyle][] | アクションボタンに表示する文字列のスタイル           |
-| autoHideDuration       | -    | number | 表示してから自動で閉じるまでの秒数（ミリ秒）<br />デフォルトは4000ms   |
-| fadeInDuration       | -    | number | 表示する際のフェードイン演出の速度（ミリ秒）<br />デフォルトは1000ms                         |
-| fadeOutDuration       | -    | number | 自動で閉じる際のフェードアウト演出の速度（ミリ秒）<br />デフォルトは1000ms                    |
-| forceFadeOutDuration       | -    | number | 強制的に閉じる際のフェードアウト演出の速度（ミリ秒）<br />デフォルトは300ms              |
-| hide       | -    | boolean | スナックバーを強制的に閉じるフラグ<br />trueにすると、強制的に閉じます |
-| hideFadeOutDuration       | -    | number | 強制的に閉じる際のフェードアウト演出の速度（ミリ秒）<br />閉じる際の演出速度を個別に変えたい場合に使用します。指定がない場合はforceFadeOutDurationが有効になります。 |
+| autoHideDuration       | -    | number | 表示してから自動で閉じるまでの時間（ミリ秒）<br />デフォルトは4000ms   |
+| fadeInDuration       | -    | number | 表示する際のフェードイン演出の時間（ミリ秒）<br />デフォルトは1000ms                         |
+| fadeOutDuration       | -    | number | 自動で閉じる際のフェードアウト演出の時間（ミリ秒）<br />デフォルトは1000ms                    |
+| forceFadeOutDuration       | -    | number | 強制的に閉じる（※1）際のフェードアウト演出の時間（ミリ秒）<br />デフォルトは300ms              |
+
+（※1）スナックバー表示中に新たなスナックバーを表示する場合、先に表示していたスナックバーは強制的にフェードアウトして閉じます。
+
+### 非表示メソッド用プロパティ
+
+| 名称           | 必須 | 型     | 説明                                                   |
+|:--------------|:-----|:-------|:------------------------------------------------------|
+| hideFadeOutDuration       | -    | number | 後述の`hide`メソッドがコールされた際のフェードアウト演出の時間（ミリ秒）<br />指定がない場合は`forceFadeOutDuration`の値が利用されます。 |
 
 ## エラー発生時の処理
 
@@ -73,15 +84,20 @@ sidebar_label: スナックバー
 - スナックバー表示中に新たなスナックバーを表示する場合、表示中のスナックバーをフェードアウトしてから新しいスナックバーを表示します。
   - この場合、先に表示していたスナックバーは表示時間を経過していなくてもフェードアウトします。
 
-## このアプリ内の共通動作
+## 本アプリでの共通化
 
-このアプリでスナックバーを使用する場合、アクションボタンのプロパティ：actionTextとactionHandlerには以下の指定を多用します。そのため、画面個別での実装ではなく、どの画面からでも使えるよう共通化します。
+本アプリでは、上記の[イメージ](/react-native/santoku/design/screen-specs/common-parts/snackbar/overview#イメージ)のように「閉じる」ボタンを配置したスナックバーを多用します。
+そのため、どの画面からでも共通の手段でスナックバーを制御できるように、下記メソッドを提供します。
 
-| プロパティ      | 型       | 値/処理                                             |
-|:--------------|:---------|:---------------------------------------------------|
-| actionText    | string   | 閉じる                                              |
-| actionHandler | function | スナックバーを閉じる                                  |
+| メソッド | 指定可能なプロパティ |  説明 |
+|:--------|:-------------------|:------|
+| show | [表示メソッド用プロパティ][] | スナックバーを表示する |
+| showWithCloseButton | [表示メソッド用プロパティ][]から以下すべてを除外したプロパティ<br />・ `actionText`<br />・ `actionHandler`<br />・ `actionTextStyle`  | スナックバーを「閉じる」ボタン付きで表示する |
+| hide | [非表示メソッド用プロパティ][] | スナックバーを非表示にする |
 
 <!-- link定義を使う場合は以下に記載する -->
 [ViewStyle]: https://reactnative.dev/docs/view-style-props
 [TextStyle]: https://reactnative.dev/docs/text-style-props
+[表示メソッド用プロパティ]: /react-native/santoku/design/screen-specs/common-parts/snackbar/overview#表示メソッド用プロパティ
+[非表示メソッド用プロパティ]: /react-native/santoku/design/screen-specs/common-parts/snackbar/overview#非表示メソッド用プロパティ
+[本アプリでの共通化]: /react-native/santoku/design/screen-specs/common-parts/snackbar/overview#本アプリでの共通化
