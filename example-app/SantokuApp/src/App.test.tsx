@@ -16,7 +16,7 @@ describe('App', () => {
   it('マウントされたときに正常にレンダリングされること', async () => {
     const app = render(<App />);
     await waitFor(() => {
-      expect(app.queryByTestId('InitialScreen')).not.toBeNull();
+      expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
       expect(app).toMatchSnapshot();
     });
   });
