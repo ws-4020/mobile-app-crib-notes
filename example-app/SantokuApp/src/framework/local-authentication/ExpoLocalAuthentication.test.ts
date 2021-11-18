@@ -2,7 +2,7 @@ import * as ExpoAuthentication from 'expo-local-authentication';
 
 import {ExpoLocalAuthentication} from './ExpoLocalAuthentication';
 
-describe('ConsoleTransport logMethods', () => {
+describe('ExpoLocalAuthentication', () => {
   test('isEnrolled メソッドの検証', async () => {
     const authn = new ExpoLocalAuthentication();
     jest.spyOn(ExpoAuthentication, 'isEnrolledAsync').mockResolvedValueOnce(true);
@@ -16,31 +16,49 @@ describe('ConsoleTransport logMethods', () => {
   test('isFingerPrintSupported メソッドの検証', async () => {
     const authn = new ExpoLocalAuthentication();
     jest.spyOn(ExpoAuthentication, 'supportedAuthenticationTypesAsync').mockResolvedValueOnce([1]);
-    const yes = await authn.isFingerPrintSupported();
-    expect(yes).toBeTruthy();
+    const singleSupported = await authn.isFingerPrintSupported();
+    expect(singleSupported).toBeTruthy();
+    jest.spyOn(ExpoAuthentication, 'supportedAuthenticationTypesAsync').mockResolvedValueOnce([1, 3]);
+    const multipleSupported = await authn.isFingerPrintSupported();
+    expect(multipleSupported).toBeTruthy();
     jest.spyOn(ExpoAuthentication, 'supportedAuthenticationTypesAsync').mockResolvedValueOnce([]);
-    const no = await authn.isFingerPrintSupported();
-    expect(no).toBeFalsy();
+    const noSupport = await authn.isFingerPrintSupported();
+    expect(noSupport).toBeFalsy();
+    jest.spyOn(ExpoAuthentication, 'supportedAuthenticationTypesAsync').mockResolvedValueOnce([2, 3]);
+    const otherSupported = await authn.isFingerPrintSupported();
+    expect(otherSupported).toBeFalsy();
   });
 
   test('isFacialSupported メソッドの検証', async () => {
     const authn = new ExpoLocalAuthentication();
     jest.spyOn(ExpoAuthentication, 'supportedAuthenticationTypesAsync').mockResolvedValueOnce([2]);
-    const yes = await authn.isFacialSupported();
-    expect(yes).toBeTruthy();
+    const singleSupported = await authn.isFacialSupported();
+    expect(singleSupported).toBeTruthy();
+    jest.spyOn(ExpoAuthentication, 'supportedAuthenticationTypesAsync').mockResolvedValueOnce([1, 2]);
+    const multipleSupported = await authn.isFacialSupported();
+    expect(multipleSupported).toBeTruthy();
     jest.spyOn(ExpoAuthentication, 'supportedAuthenticationTypesAsync').mockResolvedValueOnce([]);
-    const no = await authn.isFacialSupported();
-    expect(no).toBeFalsy();
+    const noSupport = await authn.isFacialSupported();
+    expect(noSupport).toBeFalsy();
+    jest.spyOn(ExpoAuthentication, 'supportedAuthenticationTypesAsync').mockResolvedValueOnce([1, 3]);
+    const otherSupported = await authn.isFacialSupported();
+    expect(otherSupported).toBeFalsy();
   });
 
   test('isIrisSupported メソッドの検証', async () => {
     const authn = new ExpoLocalAuthentication();
     jest.spyOn(ExpoAuthentication, 'supportedAuthenticationTypesAsync').mockResolvedValueOnce([3]);
-    const yes = await authn.isIrisSupported();
-    expect(yes).toBeTruthy();
+    const singleSupported = await authn.isIrisSupported();
+    expect(singleSupported).toBeTruthy();
+    jest.spyOn(ExpoAuthentication, 'supportedAuthenticationTypesAsync').mockResolvedValueOnce([2, 3]);
+    const multipleSupported = await authn.isIrisSupported();
+    expect(multipleSupported).toBeTruthy();
     jest.spyOn(ExpoAuthentication, 'supportedAuthenticationTypesAsync').mockResolvedValueOnce([]);
-    const no = await authn.isIrisSupported();
-    expect(no).toBeFalsy();
+    const noSupport = await authn.isIrisSupported();
+    expect(noSupport).toBeFalsy();
+    jest.spyOn(ExpoAuthentication, 'supportedAuthenticationTypesAsync').mockResolvedValueOnce([1, 2]);
+    const otherSupported = await authn.isIrisSupported();
+    expect(otherSupported).toBeFalsy();
   });
 
   test('authenticate メソッドの検証', async () => {
