@@ -143,7 +143,6 @@ describe('AuthnService refresh', () => {
     spyLoginApi.mockClear();
     spySecureStorageAdapterLoadActiveAccountId.mockClear();
     spySecureStorageAdapterLoadPassword.mockClear();
-    console.log('kita');
   });
 
   test('セキュアストレージからクレデンシャルを取得してログインAPIを呼び出しているかの検証', async () => {

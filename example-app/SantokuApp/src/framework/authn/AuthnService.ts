@@ -41,7 +41,7 @@ async function canAutoLogin(): Promise<boolean> {
   return !!password;
 }
 
-async function refresh(): Promise<AccountLoginResponse> {
+function refresh(): Promise<AccountLoginResponse> {
   return autoLogin();
 }
 
