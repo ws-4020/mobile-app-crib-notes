@@ -1,4 +1,3 @@
-import {log} from 'framework/logging';
 import React, {createContext, useContext, useEffect, useMemo, useState} from 'react';
 
 import {initialize, hideSplashScreen, NavigatorOptions} from './Initialize';
@@ -42,12 +41,6 @@ export const WithInitializeContext: React.FC = ({children}) => {
 
   useEffect(() => {
     if (error) {
-      // 可能ならログ送信
-      try {
-        if (error instanceof Error) {
-          log.error(error.message, 'InitializeFailure');
-        }
-      } catch (e) {}
       // 初期化処理に失敗した場合はアプリをクラッシュ扱いで終了
       throw error;
     }
