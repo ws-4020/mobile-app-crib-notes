@@ -1,7 +1,7 @@
 import {AuthnService} from '.';
 import {AccountLoginResponseStatusEnum} from '../../generated/api';
 import {api} from '../backend';
-import {AccountIdNotFoundError, PasswordNotFoundError} from './AuthnService';
+import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthnService';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 
 describe('AuthnService signup', () => {
@@ -78,7 +78,7 @@ describe('AuthnService autoLogin', () => {
   test('セキュアストレージからアクティブなアカウントIDを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
     const autoLogin = AuthnService.autoLogin();
-    await expect(autoLogin).rejects.toThrowError(AccountIdNotFoundError);
+    await expect(autoLogin).rejects.toThrowError(ActiveAccountIdNotFoundError);
     await expect(autoLogin).rejects.toThrowError('There is no auto-login enabled account.');
   });
 
@@ -158,7 +158,7 @@ describe('AuthnService refresh', () => {
   test('セキュアストレージからアクティブなアカウントIDを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
     const refresh = AuthnService.refresh();
-    await expect(refresh).rejects.toThrowError(AccountIdNotFoundError);
+    await expect(refresh).rejects.toThrowError(ActiveAccountIdNotFoundError);
     await expect(refresh).rejects.toThrowError('There is no auto-login enabled account.');
   });
 

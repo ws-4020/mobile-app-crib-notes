@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import {Text, Button, Input} from 'react-native-elements';
 
 import {AuthnService, csrfToken, generatePassword} from '../../../framework';
-import {AccountIdNotFoundError, PasswordNotFoundError} from '../../../framework/authn/AuthnService';
+import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from '../../../framework/authn/AuthnService';
 import {ErrorResponse} from '../../../generated/api';
 
 const ScreenName = 'Authn';
@@ -74,7 +74,7 @@ const Screen = () => {
         alert(backendErrorMessage);
         return;
       }
-      if (e instanceof AccountIdNotFoundError) {
+      if (e instanceof ActiveAccountIdNotFoundError) {
         alert('自動ログイン可能なアカウントIDが見つかりません');
         return;
       }

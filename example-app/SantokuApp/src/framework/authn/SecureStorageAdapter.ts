@@ -6,12 +6,32 @@ const STORED_ITEM_KEYS = {
   ACTIVE_ACCOUNT_ID: 'activeAccountId',
 } as const;
 
+/**
+ * 指定されたアカウントIDを、アクティブなアカウントとしてセキュアストレージに格納します。
+ * セキュアストレージに格納する際のオプションとして、以下を指定します。
+ * ・keychainAccessible: {@link SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY}
+ *
+ * @param accountId アカウントID
+ * @see {@link https://docs.expo.dev/versions/latest/sdk/securestore/#constants}
+ */
 function saveActiveAccountId(accountId: string): Promise<void> {
   return SecureStore.setItemAsync(STORED_ITEM_KEYS.ACTIVE_ACCOUNT_ID, accountId, {
     keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
   });
 }
 
+/**
+ * 指定されたパスワードをセキュアストレージに格納します。
+ * 指定されたアカウントIDをSHA256でハッシュ化して、その値をキーとしてセキュアストレージに格納します。
+ *
+ * セキュアストレージに格納する際のオプションとして、以下を指定します。
+ * ・keychainAccessible: {@link SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY}
+ * ・keychainService: ハッシュ化したアカウントID
+ *
+ * @param accountId アカウントID
+ * @param password パスワード
+ * @see {@link https://docs.expo.dev/versions/latest/sdk/securestore/#securestoreoptions}
+ */
 async function savePassword(accountId: string, password: string): Promise<void> {
   const hash = await sha256(accountId);
   return SecureStore.setItemAsync(hash, password, {
@@ -20,10 +40,19 @@ async function savePassword(accountId: string, password: string): Promise<void> 
   });
 }
 
+/**
+ * セキュアストレージからアクティブなアカウントのIDを取得します。
+ * @returns セキュアストレージに存在する場合はアクティブなアカウントIDの文字列、存在しない場合はnull
+ */
 function loadActiveAccountId(): Promise<string | null> {
   return SecureStore.getItemAsync(STORED_ITEM_KEYS.ACTIVE_ACCOUNT_ID);
 }
 
+/**
+ * セキュアストレージから指定されたアカウントIDに該当するパスワードを取得します。
+ * @param accountId アカウントID
+ * @returns セキュアストレージに存在する場合はパスワードの文字列、存在しない場合はnull
+ */
 async function loadPassword(accountId: string): Promise<string | null> {
   const hash = await sha256(accountId);
   return SecureStore.getItemAsync(hash, {
@@ -31,6 +60,9 @@ async function loadPassword(accountId: string): Promise<string | null> {
   });
 }
 
+/**
+ * セキュアストレージからアクティブなアカウントのIDを削除します。
+ */
 function deleteActiveAccountId(): Promise<void> {
   return SecureStore.deleteItemAsync(STORED_ITEM_KEYS.ACTIVE_ACCOUNT_ID);
 }
