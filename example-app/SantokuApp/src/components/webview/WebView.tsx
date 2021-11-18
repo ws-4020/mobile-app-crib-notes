@@ -59,7 +59,7 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
 
   const handleError = useCallback(
     (event: WebViewErrorEvent) => {
-      if (props.onError !== undefined) {
+      if (props.onError) {
         props.onError(event);
       } else {
         snackbar.showWithCloseButton(props.errorMessage ?? m('app.webview.onError'));
