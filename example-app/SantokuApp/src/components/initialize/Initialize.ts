@@ -62,7 +62,7 @@ export const hideSplashScreen = async () => {
   }
 };
 
-export const showInitializeErrorDialog = (onPress: (value?: string | undefined) => void) => {
+export const showInitializeErrorDialog = (onPress: (value?: string) => void) => {
   Alert.alert(m('初期化エラー'), m('app.初期化エラー'), [
     {
       text: 'OK',
