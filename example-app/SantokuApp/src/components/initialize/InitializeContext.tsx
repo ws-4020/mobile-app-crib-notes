@@ -1,7 +1,7 @@
 import {log} from 'framework/logging';
 import React, {createContext, useContext, useEffect, useMemo, useState} from 'react';
 
-import {initialize, hideSplashScreen, showInitializeErrorDialog, NavigatorOptions} from './Initialize';
+import {initialize, hideSplashScreen, NavigatorOptions} from './Initialize';
 
 type InitializeContextValue = {
   initialized: boolean;
@@ -16,7 +16,7 @@ const defaultInitializeContextValue: InitializeContextValue = {
 export const InitializeContext = createContext<InitializeContextValue>(defaultInitializeContextValue);
 
 export const WithInitializeContext: React.FC = ({children}) => {
-  const [isError, setIsError] = useState<boolean>(false);
+  const [error, setError] = useState<Error>();
   const [initialized, setInitialized] = useState<boolean>(defaultInitializeContextValue.initialized);
   const [navigatorOptions, setNavigatorOptions] = useState<NavigatorOptions>(
     defaultInitializeContextValue.navigatorOptions,
@@ -33,22 +33,27 @@ export const WithInitializeContext: React.FC = ({children}) => {
       .then((navigatorOptions: NavigatorOptions) => {
         setNavigatorOptions(navigatorOptions);
         setInitialized(true);
-        hideSplashScreen().catch(() => {
-          log.error('Failed to hide splash screen.', 'HideSplashScreenFailure');
-        });
+        hideSplashScreen().catch(() => {});
       })
-      .catch(() => {
-        log.error('Failed to initialize.', 'InitializeFailure');
-        showInitializeErrorDialog(() => setIsError(true));
+      .catch((e) => {
+        if (e instanceof Error) {
+          setError(e);
+        } else {
+          setError(new Error('Failed to initialize.'));
+        }
       });
   }, []);
 
   useEffect(() => {
-    if (isError) {
+    if (error) {
+      // 可能ならログ送信
+      try {
+        log.error(error.message, 'InitializeFailure');
+      } catch (e) {}
       // 初期化処理に失敗した場合はアプリをクラッシュ扱いで終了
-      throw new Error('Failed to initialize');
+      throw error;
     }
-  }, [isError]);
+  }, [error]);
 
   if (initialized) {
     return <InitializeContext.Provider value={contextValue}>{children}</InitializeContext.Provider>;

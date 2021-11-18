@@ -1,4 +1,3 @@
-// import時の副作用を防ぐためにimport typeにしてます。
 import {NavigationContainer} from '@react-navigation/native';
 import {WithInitializeContext} from 'components/initialize';
 import {RootStackNav} from 'navigation';

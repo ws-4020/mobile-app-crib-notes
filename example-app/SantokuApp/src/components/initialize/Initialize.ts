@@ -2,11 +2,9 @@
 import type crashlyticsModule from '@react-native-firebase/crashlytics';
 import {activateKeepAwake} from 'expo-keep-awake';
 import * as SplashScreen from 'expo-splash-screen';
-import {Alert} from 'react-native';
 
-import {BundledMessagesLoader, loadMessages, m} from '../../framework';
+import {BundledMessagesLoader, loadMessages} from '../../framework';
 import {firebaseConfig} from '../../framework/firebase';
-import {log} from '../../framework/logging';
 import {launchedId} from '../../framework/utilities/id';
 
 type TermsAgreement = {
@@ -62,16 +60,6 @@ export const hideSplashScreen = async () => {
   }
 };
 
-export const showInitializeErrorDialog = (onPress: (value?: string) => void) => {
-  Alert.alert(m('初期化エラー'), m('app.初期化エラー'), [
-    {
-      text: 'OK',
-      style: 'default',
-      onPress,
-    },
-  ]);
-};
-
 const initializeFirebaseCrashlyticsAsync = async () => {
   if (!firebaseConfig.isDummy) {
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
@@ -83,7 +71,7 @@ const initializeFirebaseCrashlyticsAsync = async () => {
       const id = await launchedId();
       await crashlytics().setAttribute('launchedId', id);
     } catch (e) {
-      log.error('Failed to get launchedId.', 'LaunchedIdGettingFailure');
+      throw new Error('Failed to get launchedId.');
     }
   }
 };
@@ -93,13 +81,13 @@ const loadBundledMessagesAsync = async () => {
     await loadMessages(new BundledMessagesLoader());
   } catch (e) {
     // アプリにバンドルしているメッセージのロードは失敗しない想定
-    log.error('Failed to load message.', 'BundledMessagesLoadingFailure');
+    throw new Error('Failed to load message.');
   }
 };
 
 const loadInitialDataAsync = async (): Promise<InitialData> => {
   // 利用規約同意状態を取得
-  const terms = (await getAccountMeTerms()) as TermsAgreement;
+  const terms = await getAccountMeTerms();
   return {
     terms,
   };
@@ -138,7 +126,7 @@ const getInitialNavigatorOptions = (initialData: InitialData): NavigatorOptions 
 
 // OpenAPI generatorで生成されたコードを導入するまでの一時的なMock
 export const getAccountMeTerms = async () => {
-  return await new Promise((resolve) =>
+  return await new Promise<TermsAgreement>((resolve) =>
     setTimeout(
       () =>
         resolve({
