@@ -16,7 +16,7 @@ const defaultInitializeContextValue: InitializeContextValue = {
 export const InitializeContext = createContext<InitializeContextValue>(defaultInitializeContextValue);
 
 export const WithInitializeContext: React.FC = ({children}) => {
-  const [error, setError] = useState<Error>();
+  const [error, setError] = useState<unknown>();
   const [initialized, setInitialized] = useState<boolean>(defaultInitializeContextValue.initialized);
   const [navigatorOptions, setNavigatorOptions] = useState<NavigatorOptions>(
     defaultInitializeContextValue.navigatorOptions,
@@ -36,11 +36,7 @@ export const WithInitializeContext: React.FC = ({children}) => {
         hideSplashScreen().catch(() => {});
       })
       .catch((e) => {
-        if (e instanceof Error) {
-          setError(e);
-        } else {
-          setError(new Error('Failed to initialize.'));
-        }
+        setError(e);
       });
   }, []);
 
@@ -48,7 +44,9 @@ export const WithInitializeContext: React.FC = ({children}) => {
     if (error) {
       // 可能ならログ送信
       try {
-        log.error(error.message, 'InitializeFailure');
+        if (error instanceof Error) {
+          log.error(error.message, 'InitializeFailure');
+        }
       } catch (e) {}
       // 初期化処理に失敗した場合はアプリをクラッシュ扱いで終了
       throw error;
