@@ -56,7 +56,7 @@ export const WithInitializeContext: React.FC = ({children}) => {
   if (initialized) {
     return <InitializeContext.Provider value={contextValue}>{children}</InitializeContext.Provider>;
   } else {
-    return <InitializeContext.Provider value={contextValue} />;
+    return null;
   }
 };
 
