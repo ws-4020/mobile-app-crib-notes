@@ -25,7 +25,11 @@ export default class LocalAuthnTestScreen extends React.Component {
   };
 
   testLocalAuthentication1 = async () => {
-    const result = await localAuthentication.authenticate({promptMessage: 'Test Message', disableFallback: true});
+    const result = await localAuthentication.authenticate({
+      promptMessage: 'Test Message',
+      disableFallback: true,
+      cancelLabel: 'キャンセル', // FallbackをOFFにしている場合は必須
+    });
     alert(JSON.stringify(result));
   };
 
@@ -46,7 +50,7 @@ export default class LocalAuthnTestScreen extends React.Component {
         <Button onPress={this.checkIsFingerPrintSupported} title="指紋認証のサポートのチェック" />
         <Button onPress={this.checkIsFacialSupported} title="顔認証のサポートのチェック" />
         <Button onPress={this.checkIsIrisSupported} title="虹彩認証のサポートのチェック" />
-        <Button onPress={this.testLocalAuthentication1} title="認証の実行 Option指定2つ" />
+        <Button onPress={this.testLocalAuthentication1} title="認証の実行 Option指定3つ" />
         <Button onPress={this.testLocalAuthentication2} title="認証の実行 Option全指定" />
       </View>
     );
