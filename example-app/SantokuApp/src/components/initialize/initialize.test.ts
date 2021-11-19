@@ -32,17 +32,4 @@ describe('hideSplashScreen', () => {
     });
     done();
   });
-
-  it('スプラッシュスクリーンを閉じるのに失敗しても何もしないこと', async () => {
-    __mocks.expoSplashScreen.hideAsync.mockImplementationOnce(() =>
-      Promise.reject(new Error('Splash screen is already closed')),
-    );
-    hideSplashScreen().catch(() => {
-      throw new Error('Failed to hide splash screen.');
-    });
-    jest.advanceTimersByTime(200);
-    await waitFor(() => {
-      expect(__mocks.expoSplashScreen.hideAsync).toHaveBeenCalled();
-    });
-  });
 });
