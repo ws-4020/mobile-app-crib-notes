@@ -69,7 +69,7 @@ export function WithSnackbar(props: {initialState?: SnackbarShowProps; children:
         });
       },
       hide: (hideProps?: SnackbarHideContextProps) => {
-        setState({...hideProps, hide: true, message: ''});
+        setState((prevState) => ({...prevState, ...hideProps, hide: true}));
       },
     }),
     [],
