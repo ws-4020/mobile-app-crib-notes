@@ -2,45 +2,45 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
-import localAuthentication from '../../../framework/local-authentication';
+import {LocalAuthentication} from '../../../framework';
 
 const ScreenName = 'Local Authentication';
 const Screen = () => {
   const isEnrolled = async () => {
-    const isEnrolled: boolean = await localAuthentication.isEnrolled();
+    const isEnrolled: boolean = await LocalAuthentication.isEnrolled();
     alert(isEnrolled);
   };
 
   const isFingerPrintSupported = async () => {
-    const isSupported = await localAuthentication.isFingerPrintSupported();
+    const isSupported = await LocalAuthentication.isFingerPrintSupported();
     alert(isSupported);
   };
 
   const isFacialSupported = async () => {
-    const isSupported = await localAuthentication.isFacialSupported();
+    const isSupported = await LocalAuthentication.isFacialSupported();
     alert(isSupported);
   };
 
   const isIrisSupported = async () => {
-    const isSupported = await localAuthentication.isIrisSupported();
+    const isSupported = await LocalAuthentication.isIrisSupported();
     alert(isSupported);
   };
 
   const localAuthentication1 = async () => {
-    const result = await localAuthentication.authenticate({
+    const result = await LocalAuthentication.authenticate({
       promptMessage: 'Test Message',
-      disableFallback: true,
+      disableDeviceFallback: true,
       cancelLabel: 'キャンセル', // FallbackをOFFにしている場合は必須
     });
     alert(JSON.stringify(result));
   };
 
   const localAuthentication2 = async () => {
-    const result = await localAuthentication.authenticate({
+    const result = await LocalAuthentication.authenticate({
       promptMessage: '認証テスト',
       cancelLabel: 'キャンセル',
       fallbackLabel: '失敗時の基本認証',
-      disableFallback: false,
+      disableDeviceFallback: false,
     });
     alert(JSON.stringify(result));
   };
