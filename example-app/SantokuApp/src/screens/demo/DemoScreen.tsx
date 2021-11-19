@@ -53,7 +53,7 @@ const demoScreenList = [
     to: SnackbarScreen.name,
   },
   {
-    title: 'Local-Authentication',
+    title: 'Local Authentication',
     to: LocalAuthnScreen.name,
   },
 ];
