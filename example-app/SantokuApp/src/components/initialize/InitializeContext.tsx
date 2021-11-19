@@ -1,6 +1,6 @@
 import React, {createContext, useContext, useEffect, useMemo, useState} from 'react';
 
-import {initialize, hideSplashScreen, NavigatorOptions} from './Initialize';
+import {initialize, hideSplashScreen, NavigatorOptions} from './initialize';
 
 type InitializeContextValue = {
   initialized: boolean;
