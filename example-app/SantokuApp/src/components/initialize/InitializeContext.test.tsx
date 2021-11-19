@@ -2,8 +2,8 @@ import {render, waitFor} from '@testing-library/react-native';
 import React from 'react';
 import {Text} from 'react-native';
 
-import * as Initialize from './Initialize';
 import {WithInitializeContext} from './InitializeContext';
+import * as Initialize from './initialize';
 
 describe('WithInitializeContext', () => {
   const ChildComponent: React.FC = () => {
