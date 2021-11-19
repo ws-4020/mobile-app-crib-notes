@@ -3,8 +3,13 @@ import React, {useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text, Button, Input} from 'react-native-elements';
 
-import {AuthnService, csrfToken, generatePassword} from '../../../framework';
-import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from '../../../framework/authn/AuthnService';
+import {
+  ActiveAccountIdNotFoundError,
+  AuthnService,
+  csrfToken,
+  generatePassword,
+  PasswordNotFoundError,
+} from '../../../framework';
 import {ErrorResponse} from '../../../generated/api';
 
 const ScreenName = 'Authn';
@@ -139,7 +144,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const AuthnScreen = {
+export const AuthenticationScreen = {
   name: ScreenName,
   component: Screen,
 };

@@ -1,7 +1,7 @@
 import {AuthnService} from '.';
 import {AccountLoginResponseStatusEnum} from '../../generated/api';
 import {api} from '../backend';
-import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthnService';
+import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthenticationService';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 
 describe('AuthnService signup', () => {

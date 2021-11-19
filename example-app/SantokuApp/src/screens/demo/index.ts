@@ -8,4 +8,4 @@ export * from './message';
 export * from './snackbar';
 export * from './DemoScreen';
 export * from './button';
-export * from './authn';
+export * from './authentication';
