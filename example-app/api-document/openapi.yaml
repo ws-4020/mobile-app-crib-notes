@@ -5,6 +5,7 @@ info:
   description: SantokuAppのREST API。
   contact: {}
 tags:
+  - name: システム
   - name: アカウント
   - name: 利用規約
   - name: チーム
@@ -17,7 +18,7 @@ paths:
     get: 
       summary: CSRFトークンの取得
       tags:
-        - CSRFトークン
+        - システム
       description: CSRFトークンを取得します。
       operationId: get-csrf-token
       responses:
@@ -621,6 +622,10 @@ components:
         csrfTokenParameterName:
           type: string
           description: トークンのパラメータ名        
+      required:
+        - csrfTokenValue 
+        - csrfTokenHeaderName 
+        - csrfTokenParameterName 
     Profile:
       title: Profile
       type: object

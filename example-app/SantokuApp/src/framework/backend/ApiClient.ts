@@ -11,7 +11,5 @@ export async function csrfToken() {
   const token = await api.getCsrfToken();
   const csrfTokenValue = token.data.csrfTokenValue;
   const csrfTokenHeaderName = token.data.csrfTokenHeaderName;
-  if (csrfTokenValue && csrfTokenHeaderName) {
-    instance.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
-  }
+  instance.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
 }

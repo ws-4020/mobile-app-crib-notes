@@ -187,19 +187,19 @@ export interface CsrfTokenResponse {
      * @type {string}
      * @memberof CsrfTokenResponse
      */
-    'csrfTokenValue'?: string;
+    'csrfTokenValue': string;
     /**
      * トークンのヘッダー名
      * @type {string}
      * @memberof CsrfTokenResponse
      */
-    'csrfTokenHeaderName'?: string;
+    'csrfTokenHeaderName': string;
     /**
      * トークンのパラメータ名
      * @type {string}
      * @memberof CsrfTokenResponse
      */
-    'csrfTokenParameterName'?: string;
+    'csrfTokenParameterName': string;
 }
 /**
  * デバイス情報
@@ -677,6 +677,38 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          */
         getAccountsMeTerms: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/accounts/me/terms`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Session required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * CSRFトークンを取得します。
+         * @summary CSRFトークンの取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCsrfToken: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/csrf_token`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1521,6 +1553,16 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * CSRFトークンを取得します。
+         * @summary CSRFトークンの取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCsrfToken(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CsrfTokenResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCsrfToken(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * チームを登録します。チームを作成したアカウントは 特権ユーザとして登録されます。 
          * @summary チーム登録
          * @param {Team} [team] 
@@ -1810,6 +1852,15 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getAccountsMeTerms(options).then((request) => request(axios, basePath));
         },
         /**
+         * CSRFトークンを取得します。
+         * @summary CSRFトークンの取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCsrfToken(options?: any): AxiosPromise<CsrfTokenResponse> {
+            return localVarFp.getCsrfToken(options).then((request) => request(axios, basePath));
+        },
+        /**
          * チームを登録します。チームを作成したアカウントは 特権ユーザとして登録されます。 
          * @summary チーム登録
          * @param {Team} [team] 
@@ -2092,6 +2143,17 @@ export class DefaultApi extends BaseAPI {
     }
 
     /**
+     * CSRFトークンを取得します。
+     * @summary CSRFトークンの取得
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getCsrfToken(options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getCsrfToken(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * チームを登録します。チームを作成したアカウントは 特権ユーザとして登録されます。 
      * @summary チーム登録
      * @param {Team} [team] 
@@ -2330,106 +2392,6 @@ export class DefaultApi extends BaseAPI {
      */
     public putTeamsTeamIdTimetablesTimetableId(teamId: string, timetableId: string, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).putTeamsTeamIdTimetablesTimetableId(teamId, timetableId, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * CSRFApi - axios parameter creator
- * @export
- */
-export const CSRFApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * CSRFトークンを取得します。
-         * @summary CSRFトークンの取得
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getCsrfToken: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/csrf_token`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Session required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * CSRFApi - functional programming interface
- * @export
- */
-export const CSRFApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = CSRFApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * CSRFトークンを取得します。
-         * @summary CSRFトークンの取得
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getCsrfToken(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CsrfTokenResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCsrfToken(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * CSRFApi - factory interface
- * @export
- */
-export const CSRFApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = CSRFApiFp(configuration)
-    return {
-        /**
-         * CSRFトークンを取得します。
-         * @summary CSRFトークンの取得
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getCsrfToken(options?: any): AxiosPromise<CsrfTokenResponse> {
-            return localVarFp.getCsrfToken(options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * CSRFApi - object-oriented interface
- * @export
- * @class CSRFApi
- * @extends {BaseAPI}
- */
-export class CSRFApi extends BaseAPI {
-    /**
-     * CSRFトークンを取得します。
-     * @summary CSRFトークンの取得
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof CSRFApi
-     */
-    public getCsrfToken(options?: AxiosRequestConfig) {
-        return CSRFApiFp(this.configuration).getCsrfToken(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
