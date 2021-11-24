@@ -17,7 +17,7 @@ paths:
     get: 
       summary: CSRFトークンの取得
       tags:
-        - アカウント
+        - CSRFトークン
       description: CSRFトークンを取得します。
       operationId: get-csrf-token
       responses:
