@@ -23,7 +23,7 @@ export const useAuthentication = () => {
       alert(`アカウントIDは${res.accountId}です`);
     } catch (e) {
       if (e instanceof ApiResponseError) {
-        alert(e.data.message);
+        alert(e.response.data.message);
         return;
       }
       alert(e);
@@ -38,7 +38,7 @@ export const useAuthentication = () => {
       alert(`ログイン成功しました state=${res.status}`);
     } catch (e) {
       if (e instanceof ApiResponseError) {
-        alert(e.data.message);
+        alert(e.response.data.message);
         return;
       }
       if (e instanceof PasswordNotFoundError) {
@@ -66,7 +66,7 @@ export const useAuthentication = () => {
       alert(`自動ログイン成功しました state=${res.status}`);
     } catch (e) {
       if (e instanceof ApiResponseError) {
-        alert(e.data.message);
+        alert(e.response.data.message);
         return;
       }
       if (e instanceof ActiveAccountIdNotFoundError) {
@@ -87,7 +87,7 @@ export const useAuthentication = () => {
       alert(`ログアウト成功しました`);
     } catch (e) {
       if (e instanceof ApiResponseError) {
-        alert(e.data.message);
+        alert(e.response.data.message);
         return;
       }
       alert(e);
