@@ -1,11 +1,12 @@
 import {Account, AccountLoginResponse} from '../../generated/api';
 import {accountApi} from '../backend';
+import {ApplicationError} from '../error/ApplicationError';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 
 /** アクティブなアカウントIDがセキュアストレージに存在しない場合に送出するエラー */
-export class ActiveAccountIdNotFoundError extends Error {}
+export class ActiveAccountIdNotFoundError extends ApplicationError {}
 /** パスワードがセキュアストレージに存在しない場合に送出するエラー */
-export class PasswordNotFoundError extends Error {}
+export class PasswordNotFoundError extends ApplicationError {}
 
 /**
  * サインアップします。
