@@ -46,20 +46,25 @@ const mergeStackTrace = (stackTraceToMerge?: string, baseStackTrace?: string) =>
 };
 
 export class ApplicationError extends Error {
-  constructor(message: any, arg: unknown) {
-    if (typeof message === 'string') {
-      super(message);
-    } else if (message instanceof Error) {
-      super(message.message);
+  constructor(message: string);
+  constructor(message: string, cause?: unknown);
+  constructor(cause: unknown);
+  constructor(messageOrCause: unknown, cause?: unknown) {
+    if (typeof messageOrCause === 'string') {
+      super(messageOrCause);
+    } else if (messageOrCause instanceof Error) {
+      super(messageOrCause.message);
+    } else if (!messageOrCause) {
+      super();
     } else {
-      super(String(message));
+      super(String(messageOrCause));
     }
 
     let errorToWrap;
-    if (message instanceof Error) {
-      errorToWrap = message;
-    } else if (arg instanceof Error) {
-      errorToWrap = arg;
+    if (messageOrCause instanceof Error) {
+      errorToWrap = messageOrCause;
+    } else if (cause instanceof Error) {
+      errorToWrap = cause;
     }
 
     // Align with Object.getOwnPropertyDescriptor(Error.prototype, 'name')
