@@ -4,6 +4,7 @@ import {sha256} from '../utilities/crypto';
 
 const STORED_ITEM_KEYS = {
   ACTIVE_ACCOUNT_ID: 'activeAccountId',
+  PASSWORD: 'password',
 } as const;
 
 /**
@@ -26,16 +27,15 @@ function saveActiveAccountId(accountId: string): Promise<void> {
  *
  * セキュアストレージに格納する際のオプションとして、以下を指定します。
  * ・keychainAccessible: {@link SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY}
- * ・keychainService: ハッシュ化したアカウントID
  *
  * @param accountId アカウントID
  * @param password パスワード
  * @see {@link https://docs.expo.dev/versions/latest/sdk/securestore/#securestoreoptions}
  */
 async function savePassword(accountId: string, password: string): Promise<void> {
-  // ログインに利用するような項目は平文で保存しないでハッシュ化する
+  // ログインに利用するような項目は平文で保存しないでハッシュ化します。
   const hash = await sha256(accountId);
-  return SecureStore.setItemAsync(`${hash}_password`, password, {
+  return SecureStore.setItemAsync(`${hash}_${STORED_ITEM_KEYS.PASSWORD}`, password, {
     keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
   });
 }
@@ -54,9 +54,9 @@ function loadActiveAccountId(): Promise<string | null> {
  * @returns セキュアストレージに存在する場合はパスワードの文字列、存在しない場合はnull
  */
 async function loadPassword(accountId: string): Promise<string | null> {
-  // ログインに利用するような項目は平文で保存しないでハッシュ化する
+  // ログインに利用するような項目は平文で保存しないでハッシュ化します。
   const hash = await sha256(accountId);
-  return SecureStore.getItemAsync(`${hash}_password`);
+  return SecureStore.getItemAsync(`${hash}_${STORED_ITEM_KEYS.PASSWORD}`);
 }
 
 /**

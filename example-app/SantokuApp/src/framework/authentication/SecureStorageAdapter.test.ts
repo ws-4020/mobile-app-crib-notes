@@ -20,9 +20,8 @@ describe('SecureStorageAdapter savePassword', () => {
     const spyCrypto = jest.spyOn(Crypto, 'sha256').mockReturnValue(Promise.resolve('abcdef'));
     await SecureStorageAdapter.savePassword('1234567890', 'password');
 
-    expect(spySecureStore).toHaveBeenCalledWith('abcdef', 'password', {
+    expect(spySecureStore).toHaveBeenCalledWith('abcdef_password', 'password', {
       keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
-      keychainService: 'abcdef',
     });
     expect(spyCrypto).toHaveBeenCalledWith('1234567890');
   });
@@ -44,9 +43,7 @@ describe('SecureStorageAdapter loadPassword', () => {
     const spyCrypto = jest.spyOn(Crypto, 'sha256').mockReturnValue(Promise.resolve('abcdef'));
     const result = await SecureStorageAdapter.loadPassword('1234567890');
 
-    expect(spySecureStore).toHaveBeenCalledWith('abcdef', {
-      keychainService: 'abcdef',
-    });
+    expect(spySecureStore).toHaveBeenCalledWith('abcdef_password');
     expect(result).toEqual('password');
     expect(spyCrypto).toHaveBeenCalledWith('1234567890');
   });
