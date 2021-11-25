@@ -1,1 +1,1 @@
-export * from './LocalAuthnScreen';
+export * from './LocalAuthenticationScreen';
