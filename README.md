@@ -17,7 +17,7 @@
 また、一部でMIT Licenseのソースコードを利用させていただいています。
 
 * [extensible-custom-error](https://github.com/necojackarc/extensible-custom-error)
-  * License: https://github.com/necojackarc/extensible-custom-error/blob/52d56448d9f535835a9ffbc7e447b951555c08c2/README.md
-  * [ApplicationError.ts](example-app/SantokuApp/src/framework/error/ApplicationError.ts)
+  * ライセンス： https://github.com/necojackarc/extensible-custom-error/blob/52d56448d9f535835a9ffbc7e447b951555c08c2/README.md
+  * 利用箇所： [ApplicationError.ts](example-app/SantokuApp/src/framework/error/ApplicationError.ts)
 
 <!-- textlint-enable -->
