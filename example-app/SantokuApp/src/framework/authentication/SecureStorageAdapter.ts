@@ -33,6 +33,7 @@ function saveActiveAccountId(accountId: string): Promise<void> {
  * @see {@link https://docs.expo.dev/versions/latest/sdk/securestore/#securestoreoptions}
  */
 async function savePassword(accountId: string, password: string): Promise<void> {
+  // ログインに利用するような項目は平文で保存しないでハッシュ化する
   const hash = await sha256(accountId);
   return SecureStore.setItemAsync(hash, password, {
     keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
@@ -54,6 +55,7 @@ function loadActiveAccountId(): Promise<string | null> {
  * @returns セキュアストレージに存在する場合はパスワードの文字列、存在しない場合はnull
  */
 async function loadPassword(accountId: string): Promise<string | null> {
+  // ログインに利用するような項目は平文で保存しないでハッシュ化する
   const hash = await sha256(accountId);
   return SecureStore.getItemAsync(hash, {
     keychainService: hash,
