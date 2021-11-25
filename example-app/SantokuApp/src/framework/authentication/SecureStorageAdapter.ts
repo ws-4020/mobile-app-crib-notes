@@ -35,9 +35,8 @@ function saveActiveAccountId(accountId: string): Promise<void> {
 async function savePassword(accountId: string, password: string): Promise<void> {
   // ログインに利用するような項目は平文で保存しないでハッシュ化する
   const hash = await sha256(accountId);
-  return SecureStore.setItemAsync(hash, password, {
+  return SecureStore.setItemAsync(`${hash}_password`, password, {
     keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
-    keychainService: hash,
   });
 }
 
@@ -57,9 +56,7 @@ function loadActiveAccountId(): Promise<string | null> {
 async function loadPassword(accountId: string): Promise<string | null> {
   // ログインに利用するような項目は平文で保存しないでハッシュ化する
   const hash = await sha256(accountId);
-  return SecureStore.getItemAsync(hash, {
-    keychainService: hash,
-  });
+  return SecureStore.getItemAsync(`${hash}_password`);
 }
 
 /**

@@ -7,10 +7,7 @@ import React, {useState} from 'react';
 
 import {WithSnackbar} from './components/snackbar/';
 import {WithAppTheme} from './components/theme';
-import {BundledMessagesLoader, loadMessages} from './framework';
-import {firebaseConfig} from './framework/firebase';
-import {log} from './framework/logging';
-import {launchedId} from './framework/utilities/id';
+import {BundledMessagesLoader, firebaseConfig, launchedId, loadMessages, log} from './framework';
 
 export const App = () => {
   const [initialized, setInitialized] = useState(false);

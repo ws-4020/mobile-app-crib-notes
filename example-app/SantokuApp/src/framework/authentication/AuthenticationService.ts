@@ -33,6 +33,16 @@ async function changeAccount(accountId: string): Promise<AccountLoginResponse> {
   if (!password) {
     throw new PasswordNotFoundError('The password for the account ID does not exist.');
   }
+  return login(accountId, password);
+}
+
+/**
+ * ログインします。
+ * @param accountId アカウントID
+ * @param password パスワード
+ * @returns アカウントの切り替え結果
+ */
+async function login(accountId: string, password: string): Promise<AccountLoginResponse> {
   const res = await accountApi.postLogin({accountId, password});
   await SecureStorageAdapter.saveActiveAccountId(accountId);
   return res.data;
