@@ -1,12 +1,12 @@
 import {AuthnService} from '.';
 import {AccountLoginResponseStatusEnum} from '../../generated/api';
-import {api} from '../backend';
+import {accountApi} from '../backend';
 import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthenticationService';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 
 describe('AuthnService signup', () => {
   test('サインアップAPIを呼び出して、クレデシャルをセキュアストレージに格納しているかの検証', async () => {
-    const spySignupApi = jest.spyOn(api, 'postSignup').mockResolvedValue({
+    const spySignupApi = jest.spyOn(accountApi, 'postSignup').mockResolvedValue({
       data: {accountId: '123456789', profile: {nickname: 'testNickName'}},
       status: 200,
       statusText: 'ok',
@@ -20,7 +20,7 @@ describe('AuthnService signup', () => {
 });
 
 describe('AuthnService changeAccount', () => {
-  const spyLoginApi = jest.spyOn(api, 'postLogin').mockResolvedValue({
+  const spyLoginApi = jest.spyOn(accountApi, 'postLogin').mockResolvedValue({
     data: {status: AccountLoginResponseStatusEnum.Complete},
     status: 200,
     statusText: 'ok',
@@ -49,7 +49,7 @@ describe('AuthnService changeAccount', () => {
 });
 
 describe('AuthnService autoLogin', () => {
-  const spyLoginApi = jest.spyOn(api, 'postLogin').mockResolvedValue({
+  const spyLoginApi = jest.spyOn(accountApi, 'postLogin').mockResolvedValue({
     data: {status: AccountLoginResponseStatusEnum.Complete},
     status: 200,
     statusText: 'ok',
@@ -129,7 +129,7 @@ describe('AuthnService canAutoLogin', () => {
 });
 
 describe('AuthnService refresh', () => {
-  const spyLoginApi = jest.spyOn(api, 'postLogin').mockResolvedValue({
+  const spyLoginApi = jest.spyOn(accountApi, 'postLogin').mockResolvedValue({
     data: {status: AccountLoginResponseStatusEnum.Complete},
     status: 200,
     statusText: 'ok',
@@ -172,7 +172,7 @@ describe('AuthnService refresh', () => {
 });
 
 describe('AuthnService logout', () => {
-  const spyLogoutApi = jest.spyOn(api, 'postLogout').mockResolvedValue({
+  const spyLogoutApi = jest.spyOn(accountApi, 'postLogout').mockResolvedValue({
     data: undefined,
     status: 200,
     statusText: 'ok',

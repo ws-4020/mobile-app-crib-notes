@@ -1,5 +1,5 @@
 import {Account, AccountLoginResponse} from '../../generated/api';
-import {api} from '../backend';
+import {accountApi} from '../backend';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 
 /** アクティブなアカウントIDがセキュアストレージに存在しない場合に送出するエラー */
@@ -14,7 +14,7 @@ export class PasswordNotFoundError extends Error {}
  * @returns アカウント
  */
 async function signup(nickname: string, password: string): Promise<Account> {
-  const res = await api.postSignup({nickname, password});
+  const res = await accountApi.postSignup({nickname, password});
   const accountId = res.data.accountId;
   await Promise.all([
     SecureStorageAdapter.saveActiveAccountId(accountId),
@@ -33,7 +33,7 @@ async function changeAccount(accountId: string): Promise<AccountLoginResponse> {
   if (!password) {
     throw new PasswordNotFoundError('The password for the account ID does not exist.');
   }
-  const res = await api.postLogin({accountId, password});
+  const res = await accountApi.postLogin({accountId, password});
   await SecureStorageAdapter.saveActiveAccountId(accountId);
   return res.data;
 }
@@ -75,7 +75,7 @@ function refresh(): Promise<AccountLoginResponse> {
  * ログアウトします。
  */
 async function logout(): Promise<void> {
-  await api.postLogout();
+  await accountApi.postLogout();
   return SecureStorageAdapter.deleteActiveAccountId();
 }
 
