@@ -5,4 +5,5 @@ export {firebaseConfig, FirebaseConfig} from './firebase';
 export type {Logger, LoggerOptions} from './logging';
 export {log, createLogger} from './logging';
 export {m, loadMessages, BundledMessagesLoader} from './message';
+export {LocalAuthentication} from './local-authentication';
 export {launchedId, generatePassword, useIsMounted} from './utilities';

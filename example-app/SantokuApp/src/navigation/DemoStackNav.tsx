@@ -17,6 +17,7 @@ import {
   MessageScreen,
   ButtonScreen,
   SnackbarScreen,
+  LocalAuthenticationScreen,
   AuthenticationScreen,
 } from 'screens';
 
@@ -50,6 +51,7 @@ export const Screen: React.FC = () => {
       <nav.Screen {...MessageScreen} />
       <nav.Screen {...ButtonScreen} />
       <nav.Screen {...SnackbarScreen} />
+      <nav.Screen {...LocalAuthenticationScreen} />
       <nav.Screen {...AuthenticationScreen} />
     </nav.Navigator>
   );
