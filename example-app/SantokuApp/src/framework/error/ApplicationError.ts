@@ -77,7 +77,9 @@ export class ApplicationError extends Error {
 
     const stackTraceSoFar = errorToWrap ? errorToWrap.stack : undefined;
 
-    Error.captureStackTrace(this, this.constructor);
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, this.constructor);
+    }
     this.stack = mergeStackTrace(this.stack, stackTraceSoFar);
   }
 }
