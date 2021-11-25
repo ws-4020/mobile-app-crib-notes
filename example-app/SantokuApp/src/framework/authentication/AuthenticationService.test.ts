@@ -48,7 +48,6 @@ describe('AuthnService changeAccount', () => {
     jest.spyOn(SecureStorageAdapter, 'loadPassword').mockResolvedValue(null);
     const changeAccount = AuthnService.changeAccount('123456789');
     await expect(changeAccount).rejects.toThrowError(PasswordNotFoundError);
-    await expect(changeAccount).rejects.toThrowError('The password for the account ID does not exist.');
   });
 });
 
@@ -83,7 +82,6 @@ describe('AuthnService autoLogin', () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
     const autoLogin = AuthnService.autoLogin();
     await expect(autoLogin).rejects.toThrowError(ActiveAccountIdNotFoundError);
-    await expect(autoLogin).rejects.toThrowError('There is no auto-login enabled account.');
   });
 
   test('セキュアストレージかパスワードを取得できなかった場合の検証', async () => {
@@ -91,7 +89,6 @@ describe('AuthnService autoLogin', () => {
     spySecureStorageAdapterLoadPassword.mockResolvedValue(null);
     const autoLogin = AuthnService.autoLogin();
     await expect(autoLogin).rejects.toThrowError(PasswordNotFoundError);
-    await expect(autoLogin).rejects.toThrowError('The password for the account ID does not exist.');
   });
 });
 
@@ -163,7 +160,6 @@ describe('AuthnService refresh', () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
     const refresh = AuthnService.refresh();
     await expect(refresh).rejects.toThrowError(ActiveAccountIdNotFoundError);
-    await expect(refresh).rejects.toThrowError('There is no auto-login enabled account.');
   });
 
   test('セキュアストレージかパスワードを取得できなかった場合の検証', async () => {
@@ -171,7 +167,6 @@ describe('AuthnService refresh', () => {
     spySecureStorageAdapterLoadPassword.mockResolvedValue(null);
     const refresh = AuthnService.refresh();
     await expect(refresh).rejects.toThrowError(PasswordNotFoundError);
-    await expect(refresh).rejects.toThrowError('The password for the account ID does not exist.');
   });
 });
 
