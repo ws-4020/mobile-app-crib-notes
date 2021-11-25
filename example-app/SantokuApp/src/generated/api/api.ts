@@ -492,10 +492,10 @@ export interface TimetableTemplate {
 }
 
 /**
- * DefaultApi - axios parameter creator
+ * AccountApi - axios parameter creator
  * @export
  */
-export const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
+export const AccountApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * ログイン済みアカウントを削除します。  アカウントの削除にパスワードを要求するので、DELETEメソッドではなくPOSTメソッドを利用しています。  参考: [4.3.5. DELETE - RFC 7231](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.5)  > A payload within a DELETE request message has no defined semantics; > sending a payload body on a DELETE request might cause some existing > implementations to reject the request. 
@@ -702,6 +702,645 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * ログイン済みアカウントのデバイス登録トークンを登録する。 
+         * @summary ログイン済みアカウントのデバイス登録トークンの登録
+         * @param {Device} [device] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postAccountsMeDeviceToken: async (device?: Device, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/accounts/me/device-token`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Session required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(device, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。 
+         * @summary ログイン済みアカウントの利用規約同意
+         * @param {TermsOfServiceAgreementStatus} [termsOfServiceAgreementStatus] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postAccountsMeTerms: async (termsOfServiceAgreementStatus?: TermsOfServiceAgreementStatus, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/accounts/me/terms`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Session required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(termsOfServiceAgreementStatus, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * アカウントIDとパスワードを指定してログインします。 
+         * @summary ログインする
+         * @param {AccountLogin} [accountLogin] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postLogin: async (accountLogin?: AccountLogin, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/login`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Session required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(accountLogin, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary ログアウトする
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postLogout: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/logout`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Session required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * アカウントを登録します。アカウントの登録には、ニックネームとパスワードが必要です。 
+         * @summary アカウントの登録
+         * @param {AccountRegistration} [accountRegistration] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postSignup: async (accountRegistration?: AccountRegistration, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/signup`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Session required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(accountRegistration, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * ログイン済みアカウントのアバターを登録する。 
+         * @summary ログイン済みアカウントのアバターを登録する
+         * @param {any} [avatarImage] アバター画像
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        putAccountsMeAvatar: async (avatarImage?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/accounts/me/avatar`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Session required
+
+
+            if (avatarImage !== undefined) { 
+                localVarFormParams.append('avatarImage', avatarImage as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AccountApi - functional programming interface
+ * @export
+ */
+export const AccountApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AccountApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * ログイン済みアカウントを削除します。  アカウントの削除にパスワードを要求するので、DELETEメソッドではなくPOSTメソッドを利用しています。  参考: [4.3.5. DELETE - RFC 7231](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.5)  > A payload within a DELETE request message has no defined semantics; > sending a payload body on a DELETE request might cause some existing > implementations to reject the request. 
+         * @summary ログイン済みアカウント削除
+         * @param {AccountDeletion} [accountDeletion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteAccountsMeDelete(accountDeletion?: AccountDeletion, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAccountsMeDelete(accountDeletion, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * アカウントIDをキーとして登録されているアカウントを取得する。 
+         * @summary アカウントの取得
+         * @param {string} accountId アカウントのID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccountsAccountId(accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsAccountId(accountId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * アバターを取得する。 
+         * @summary アバターを取得する
+         * @param {string} accountId アカウントのID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccountsAccountIdAvatar(accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AvatarImage>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsAccountIdAvatar(accountId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ログイン済みのアカウントを取得する。 
+         * @summary ログイン済みアカウントの取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccountsMe(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsMe(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ログイン済みアカウントのアバターを取得する。 
+         * @summary ログイン済みアカウントのアバターを取得する
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccountsMeAvatar(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AvatarImage>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsMeAvatar(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ログイン済みアカウントの有効な利用規約に同意しているかの状態を取得します。 
+         * @summary ログイン済みアカウントの利用規約同意状態確認
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccountsMeTerms(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TermsOfServiceAgreementStatus>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsMeTerms(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ログイン済みアカウントのデバイス登録トークンを登録する。 
+         * @summary ログイン済みアカウントのデバイス登録トークンの登録
+         * @param {Device} [device] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postAccountsMeDeviceToken(device?: Device, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Device>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postAccountsMeDeviceToken(device, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。 
+         * @summary ログイン済みアカウントの利用規約同意
+         * @param {TermsOfServiceAgreementStatus} [termsOfServiceAgreementStatus] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postAccountsMeTerms(termsOfServiceAgreementStatus?: TermsOfServiceAgreementStatus, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TermsOfServiceAgreementStatus>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postAccountsMeTerms(termsOfServiceAgreementStatus, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * アカウントIDとパスワードを指定してログインします。 
+         * @summary ログインする
+         * @param {AccountLogin} [accountLogin] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postLogin(accountLogin?: AccountLogin, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountLoginResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postLogin(accountLogin, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary ログアウトする
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postLogout(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postLogout(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * アカウントを登録します。アカウントの登録には、ニックネームとパスワードが必要です。 
+         * @summary アカウントの登録
+         * @param {AccountRegistration} [accountRegistration] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postSignup(accountRegistration?: AccountRegistration, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postSignup(accountRegistration, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ログイン済みアカウントのアバターを登録する。 
+         * @summary ログイン済みアカウントのアバターを登録する
+         * @param {any} [avatarImage] アバター画像
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async putAccountsMeAvatar(avatarImage?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.putAccountsMeAvatar(avatarImage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * AccountApi - factory interface
+ * @export
+ */
+export const AccountApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AccountApiFp(configuration)
+    return {
+        /**
+         * ログイン済みアカウントを削除します。  アカウントの削除にパスワードを要求するので、DELETEメソッドではなくPOSTメソッドを利用しています。  参考: [4.3.5. DELETE - RFC 7231](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.5)  > A payload within a DELETE request message has no defined semantics; > sending a payload body on a DELETE request might cause some existing > implementations to reject the request. 
+         * @summary ログイン済みアカウント削除
+         * @param {AccountDeletion} [accountDeletion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAccountsMeDelete(accountDeletion?: AccountDeletion, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteAccountsMeDelete(accountDeletion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * アカウントIDをキーとして登録されているアカウントを取得する。 
+         * @summary アカウントの取得
+         * @param {string} accountId アカウントのID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountsAccountId(accountId: string, options?: any): AxiosPromise<Account> {
+            return localVarFp.getAccountsAccountId(accountId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * アバターを取得する。 
+         * @summary アバターを取得する
+         * @param {string} accountId アカウントのID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountsAccountIdAvatar(accountId: string, options?: any): AxiosPromise<AvatarImage> {
+            return localVarFp.getAccountsAccountIdAvatar(accountId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ログイン済みのアカウントを取得する。 
+         * @summary ログイン済みアカウントの取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountsMe(options?: any): AxiosPromise<Account> {
+            return localVarFp.getAccountsMe(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ログイン済みアカウントのアバターを取得する。 
+         * @summary ログイン済みアカウントのアバターを取得する
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountsMeAvatar(options?: any): AxiosPromise<AvatarImage> {
+            return localVarFp.getAccountsMeAvatar(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ログイン済みアカウントの有効な利用規約に同意しているかの状態を取得します。 
+         * @summary ログイン済みアカウントの利用規約同意状態確認
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountsMeTerms(options?: any): AxiosPromise<TermsOfServiceAgreementStatus> {
+            return localVarFp.getAccountsMeTerms(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ログイン済みアカウントのデバイス登録トークンを登録する。 
+         * @summary ログイン済みアカウントのデバイス登録トークンの登録
+         * @param {Device} [device] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postAccountsMeDeviceToken(device?: Device, options?: any): AxiosPromise<Device> {
+            return localVarFp.postAccountsMeDeviceToken(device, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。 
+         * @summary ログイン済みアカウントの利用規約同意
+         * @param {TermsOfServiceAgreementStatus} [termsOfServiceAgreementStatus] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postAccountsMeTerms(termsOfServiceAgreementStatus?: TermsOfServiceAgreementStatus, options?: any): AxiosPromise<TermsOfServiceAgreementStatus> {
+            return localVarFp.postAccountsMeTerms(termsOfServiceAgreementStatus, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * アカウントIDとパスワードを指定してログインします。 
+         * @summary ログインする
+         * @param {AccountLogin} [accountLogin] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postLogin(accountLogin?: AccountLogin, options?: any): AxiosPromise<AccountLoginResponse> {
+            return localVarFp.postLogin(accountLogin, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary ログアウトする
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postLogout(options?: any): AxiosPromise<void> {
+            return localVarFp.postLogout(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * アカウントを登録します。アカウントの登録には、ニックネームとパスワードが必要です。 
+         * @summary アカウントの登録
+         * @param {AccountRegistration} [accountRegistration] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postSignup(accountRegistration?: AccountRegistration, options?: any): AxiosPromise<Account> {
+            return localVarFp.postSignup(accountRegistration, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ログイン済みアカウントのアバターを登録する。 
+         * @summary ログイン済みアカウントのアバターを登録する
+         * @param {any} [avatarImage] アバター画像
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        putAccountsMeAvatar(avatarImage?: any, options?: any): AxiosPromise<void> {
+            return localVarFp.putAccountsMeAvatar(avatarImage, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AccountApi - object-oriented interface
+ * @export
+ * @class AccountApi
+ * @extends {BaseAPI}
+ */
+export class AccountApi extends BaseAPI {
+    /**
+     * ログイン済みアカウントを削除します。  アカウントの削除にパスワードを要求するので、DELETEメソッドではなくPOSTメソッドを利用しています。  参考: [4.3.5. DELETE - RFC 7231](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.5)  > A payload within a DELETE request message has no defined semantics; > sending a payload body on a DELETE request might cause some existing > implementations to reject the request. 
+     * @summary ログイン済みアカウント削除
+     * @param {AccountDeletion} [accountDeletion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public deleteAccountsMeDelete(accountDeletion?: AccountDeletion, options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).deleteAccountsMeDelete(accountDeletion, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * アカウントIDをキーとして登録されているアカウントを取得する。 
+     * @summary アカウントの取得
+     * @param {string} accountId アカウントのID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public getAccountsAccountId(accountId: string, options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).getAccountsAccountId(accountId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * アバターを取得する。 
+     * @summary アバターを取得する
+     * @param {string} accountId アカウントのID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public getAccountsAccountIdAvatar(accountId: string, options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).getAccountsAccountIdAvatar(accountId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ログイン済みのアカウントを取得する。 
+     * @summary ログイン済みアカウントの取得
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public getAccountsMe(options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).getAccountsMe(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ログイン済みアカウントのアバターを取得する。 
+     * @summary ログイン済みアカウントのアバターを取得する
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public getAccountsMeAvatar(options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).getAccountsMeAvatar(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ログイン済みアカウントの有効な利用規約に同意しているかの状態を取得します。 
+     * @summary ログイン済みアカウントの利用規約同意状態確認
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public getAccountsMeTerms(options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).getAccountsMeTerms(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ログイン済みアカウントのデバイス登録トークンを登録する。 
+     * @summary ログイン済みアカウントのデバイス登録トークンの登録
+     * @param {Device} [device] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public postAccountsMeDeviceToken(device?: Device, options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).postAccountsMeDeviceToken(device, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。 
+     * @summary ログイン済みアカウントの利用規約同意
+     * @param {TermsOfServiceAgreementStatus} [termsOfServiceAgreementStatus] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public postAccountsMeTerms(termsOfServiceAgreementStatus?: TermsOfServiceAgreementStatus, options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).postAccountsMeTerms(termsOfServiceAgreementStatus, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * アカウントIDとパスワードを指定してログインします。 
+     * @summary ログインする
+     * @param {AccountLogin} [accountLogin] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public postLogin(accountLogin?: AccountLogin, options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).postLogin(accountLogin, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary ログアウトする
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public postLogout(options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).postLogout(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * アカウントを登録します。アカウントの登録には、ニックネームとパスワードが必要です。 
+     * @summary アカウントの登録
+     * @param {AccountRegistration} [accountRegistration] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public postSignup(accountRegistration?: AccountRegistration, options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).postSignup(accountRegistration, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ログイン済みアカウントのアバターを登録する。 
+     * @summary ログイン済みアカウントのアバターを登録する
+     * @param {any} [avatarImage] アバター画像
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public putAccountsMeAvatar(avatarImage?: any, options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).putAccountsMeAvatar(avatarImage, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * SystemApi - axios parameter creator
+ * @export
+ */
+export const SystemApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
          * CSRFトークンを取得します。
          * @summary CSRFトークンの取得
          * @param {*} [options] Override http request option.
@@ -733,6 +1372,74 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+    }
+};
+
+/**
+ * SystemApi - functional programming interface
+ * @export
+ */
+export const SystemApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SystemApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * CSRFトークンを取得します。
+         * @summary CSRFトークンの取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCsrfToken(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CsrfTokenResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCsrfToken(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * SystemApi - factory interface
+ * @export
+ */
+export const SystemApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SystemApiFp(configuration)
+    return {
+        /**
+         * CSRFトークンを取得します。
+         * @summary CSRFトークンの取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCsrfToken(options?: any): AxiosPromise<CsrfTokenResponse> {
+            return localVarFp.getCsrfToken(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * SystemApi - object-oriented interface
+ * @export
+ * @class SystemApi
+ * @extends {BaseAPI}
+ */
+export class SystemApi extends BaseAPI {
+    /**
+     * CSRFトークンを取得します。
+     * @summary CSRFトークンの取得
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SystemApi
+     */
+    public getCsrfToken(options?: AxiosRequestConfig) {
+        return SystemApiFp(this.configuration).getCsrfToken(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TeamApi - axios parameter creator
+ * @export
+ */
+export const TeamApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
         /**
          * チームを登録します。チームを作成したアカウントは 特権ユーザとして登録されます。 
          * @summary チーム登録
@@ -993,212 +1700,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 有効な利用規約を取得します。このAPIの呼び出しには認証情報は不要です。 
-         * @summary 有効な利用規約の取得
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getTerms: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/terms`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * ログイン済みアカウントのデバイス登録トークンを登録する。 
-         * @summary ログイン済みアカウントのデバイス登録トークンの登録
-         * @param {Device} [device] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postAccountsMeDeviceToken: async (device?: Device, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/accounts/me/device-token`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Session required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(device, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。 
-         * @summary ログイン済みアカウントの利用規約同意
-         * @param {TermsOfServiceAgreementStatus} [termsOfServiceAgreementStatus] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postAccountsMeTerms: async (termsOfServiceAgreementStatus?: TermsOfServiceAgreementStatus, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/accounts/me/terms`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Session required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(termsOfServiceAgreementStatus, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * アカウントIDとパスワードを指定してログインします。 
-         * @summary ログインする
-         * @param {AccountLogin} [accountLogin] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postLogin: async (accountLogin?: AccountLogin, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/login`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Session required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(accountLogin, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary ログアウトする
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postLogout: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/logout`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Session required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * アカウントを登録します。アカウントの登録には、ニックネームとパスワードが必要です。 
-         * @summary アカウントの登録
-         * @param {AccountRegistration} [accountRegistration] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postSignup: async (accountRegistration?: AccountRegistration, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/signup`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Session required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(accountRegistration, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * チームの参加に必要な招待コードを発行します。 
          * @summary 招待コード発行
          * @param {string} teamId チームのID
@@ -1355,47 +1856,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * ログイン済みアカウントのアバターを登録する。 
-         * @summary ログイン済みアカウントのアバターを登録する
-         * @param {any} [avatarImage] アバター画像
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        putAccountsMeAvatar: async (avatarImage?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/accounts/me/avatar`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-            // authentication Session required
-
-
-            if (avatarImage !== undefined) { 
-                localVarFormParams.append('avatarImage', avatarImage as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * 時間割テンプレートを更新します。 
          * @summary 時間割テンプレート更新
          * @param {string} teamId チームのID
@@ -1483,85 +1943,12 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 };
 
 /**
- * DefaultApi - functional programming interface
+ * TeamApi - functional programming interface
  * @export
  */
-export const DefaultApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = DefaultApiAxiosParamCreator(configuration)
+export const TeamApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TeamApiAxiosParamCreator(configuration)
     return {
-        /**
-         * ログイン済みアカウントを削除します。  アカウントの削除にパスワードを要求するので、DELETEメソッドではなくPOSTメソッドを利用しています。  参考: [4.3.5. DELETE - RFC 7231](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.5)  > A payload within a DELETE request message has no defined semantics; > sending a payload body on a DELETE request might cause some existing > implementations to reject the request. 
-         * @summary ログイン済みアカウント削除
-         * @param {AccountDeletion} [accountDeletion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteAccountsMeDelete(accountDeletion?: AccountDeletion, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAccountsMeDelete(accountDeletion, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * アカウントIDをキーとして登録されているアカウントを取得する。 
-         * @summary アカウントの取得
-         * @param {string} accountId アカウントのID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAccountsAccountId(accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsAccountId(accountId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * アバターを取得する。 
-         * @summary アバターを取得する
-         * @param {string} accountId アカウントのID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAccountsAccountIdAvatar(accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AvatarImage>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsAccountIdAvatar(accountId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * ログイン済みのアカウントを取得する。 
-         * @summary ログイン済みアカウントの取得
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAccountsMe(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsMe(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * ログイン済みアカウントのアバターを取得する。 
-         * @summary ログイン済みアカウントのアバターを取得する
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAccountsMeAvatar(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AvatarImage>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsMeAvatar(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * ログイン済みアカウントの有効な利用規約に同意しているかの状態を取得します。 
-         * @summary ログイン済みアカウントの利用規約同意状態確認
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAccountsMeTerms(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TermsOfServiceAgreementStatus>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsMeTerms(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * CSRFトークンを取得します。
-         * @summary CSRFトークンの取得
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getCsrfToken(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CsrfTokenResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCsrfToken(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
         /**
          * チームを登録します。チームを作成したアカウントは 特権ユーザとして登録されます。 
          * @summary チーム登録
@@ -1638,70 +2025,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 有効な利用規約を取得します。このAPIの呼び出しには認証情報は不要です。 
-         * @summary 有効な利用規約の取得
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getTerms(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TermsOfService>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTerms(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * ログイン済みアカウントのデバイス登録トークンを登録する。 
-         * @summary ログイン済みアカウントのデバイス登録トークンの登録
-         * @param {Device} [device] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async postAccountsMeDeviceToken(device?: Device, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Device>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postAccountsMeDeviceToken(device, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。 
-         * @summary ログイン済みアカウントの利用規約同意
-         * @param {TermsOfServiceAgreementStatus} [termsOfServiceAgreementStatus] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async postAccountsMeTerms(termsOfServiceAgreementStatus?: TermsOfServiceAgreementStatus, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TermsOfServiceAgreementStatus>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postAccountsMeTerms(termsOfServiceAgreementStatus, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * アカウントIDとパスワードを指定してログインします。 
-         * @summary ログインする
-         * @param {AccountLogin} [accountLogin] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async postLogin(accountLogin?: AccountLogin, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountLoginResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postLogin(accountLogin, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary ログアウトする
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async postLogout(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postLogout(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * アカウントを登録します。アカウントの登録には、ニックネームとパスワードが必要です。 
-         * @summary アカウントの登録
-         * @param {AccountRegistration} [accountRegistration] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async postSignup(accountRegistration?: AccountRegistration, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postSignup(accountRegistration, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * チームの参加に必要な招待コードを発行します。 
          * @summary 招待コード発行
          * @param {string} teamId チームのID
@@ -1749,17 +2072,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * ログイン済みアカウントのアバターを登録する。 
-         * @summary ログイン済みアカウントのアバターを登録する
-         * @param {any} [avatarImage] アバター画像
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async putAccountsMeAvatar(avatarImage?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.putAccountsMeAvatar(avatarImage, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * 時間割テンプレートを更新します。 
          * @summary 時間割テンプレート更新
          * @param {string} teamId チームのID
@@ -1788,78 +2100,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * DefaultApi - factory interface
+ * TeamApi - factory interface
  * @export
  */
-export const DefaultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = DefaultApiFp(configuration)
+export const TeamApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TeamApiFp(configuration)
     return {
-        /**
-         * ログイン済みアカウントを削除します。  アカウントの削除にパスワードを要求するので、DELETEメソッドではなくPOSTメソッドを利用しています。  参考: [4.3.5. DELETE - RFC 7231](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.5)  > A payload within a DELETE request message has no defined semantics; > sending a payload body on a DELETE request might cause some existing > implementations to reject the request. 
-         * @summary ログイン済みアカウント削除
-         * @param {AccountDeletion} [accountDeletion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteAccountsMeDelete(accountDeletion?: AccountDeletion, options?: any): AxiosPromise<void> {
-            return localVarFp.deleteAccountsMeDelete(accountDeletion, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * アカウントIDをキーとして登録されているアカウントを取得する。 
-         * @summary アカウントの取得
-         * @param {string} accountId アカウントのID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAccountsAccountId(accountId: string, options?: any): AxiosPromise<Account> {
-            return localVarFp.getAccountsAccountId(accountId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * アバターを取得する。 
-         * @summary アバターを取得する
-         * @param {string} accountId アカウントのID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAccountsAccountIdAvatar(accountId: string, options?: any): AxiosPromise<AvatarImage> {
-            return localVarFp.getAccountsAccountIdAvatar(accountId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * ログイン済みのアカウントを取得する。 
-         * @summary ログイン済みアカウントの取得
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAccountsMe(options?: any): AxiosPromise<Account> {
-            return localVarFp.getAccountsMe(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * ログイン済みアカウントのアバターを取得する。 
-         * @summary ログイン済みアカウントのアバターを取得する
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAccountsMeAvatar(options?: any): AxiosPromise<AvatarImage> {
-            return localVarFp.getAccountsMeAvatar(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * ログイン済みアカウントの有効な利用規約に同意しているかの状態を取得します。 
-         * @summary ログイン済みアカウントの利用規約同意状態確認
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAccountsMeTerms(options?: any): AxiosPromise<TermsOfServiceAgreementStatus> {
-            return localVarFp.getAccountsMeTerms(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * CSRFトークンを取得します。
-         * @summary CSRFトークンの取得
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getCsrfToken(options?: any): AxiosPromise<CsrfTokenResponse> {
-            return localVarFp.getCsrfToken(options).then((request) => request(axios, basePath));
-        },
         /**
          * チームを登録します。チームを作成したアカウントは 特権ユーザとして登録されます。 
          * @summary チーム登録
@@ -1930,64 +2176,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getTeamsTeamIdTimetablesTimetableId(teamId, timetableId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 有効な利用規約を取得します。このAPIの呼び出しには認証情報は不要です。 
-         * @summary 有効な利用規約の取得
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getTerms(options?: any): AxiosPromise<TermsOfService> {
-            return localVarFp.getTerms(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * ログイン済みアカウントのデバイス登録トークンを登録する。 
-         * @summary ログイン済みアカウントのデバイス登録トークンの登録
-         * @param {Device} [device] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postAccountsMeDeviceToken(device?: Device, options?: any): AxiosPromise<Device> {
-            return localVarFp.postAccountsMeDeviceToken(device, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。 
-         * @summary ログイン済みアカウントの利用規約同意
-         * @param {TermsOfServiceAgreementStatus} [termsOfServiceAgreementStatus] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postAccountsMeTerms(termsOfServiceAgreementStatus?: TermsOfServiceAgreementStatus, options?: any): AxiosPromise<TermsOfServiceAgreementStatus> {
-            return localVarFp.postAccountsMeTerms(termsOfServiceAgreementStatus, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * アカウントIDとパスワードを指定してログインします。 
-         * @summary ログインする
-         * @param {AccountLogin} [accountLogin] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postLogin(accountLogin?: AccountLogin, options?: any): AxiosPromise<AccountLoginResponse> {
-            return localVarFp.postLogin(accountLogin, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary ログアウトする
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postLogout(options?: any): AxiosPromise<void> {
-            return localVarFp.postLogout(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * アカウントを登録します。アカウントの登録には、ニックネームとパスワードが必要です。 
-         * @summary アカウントの登録
-         * @param {AccountRegistration} [accountRegistration] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postSignup(accountRegistration?: AccountRegistration, options?: any): AxiosPromise<Account> {
-            return localVarFp.postSignup(accountRegistration, options).then((request) => request(axios, basePath));
-        },
-        /**
          * チームの参加に必要な招待コードを発行します。 
          * @summary 招待コード発行
          * @param {string} teamId チームのID
@@ -2031,16 +2219,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.postTeamsTeamIdTimetables(teamId, timetableOfDayInput, options).then((request) => request(axios, basePath));
         },
         /**
-         * ログイン済みアカウントのアバターを登録する。 
-         * @summary ログイン済みアカウントのアバターを登録する
-         * @param {any} [avatarImage] アバター画像
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        putAccountsMeAvatar(avatarImage?: any, options?: any): AxiosPromise<void> {
-            return localVarFp.putAccountsMeAvatar(avatarImage, options).then((request) => request(axios, basePath));
-        },
-        /**
          * 時間割テンプレートを更新します。 
          * @summary 時間割テンプレート更新
          * @param {string} teamId チームのID
@@ -2067,102 +2245,22 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
 };
 
 /**
- * DefaultApi - object-oriented interface
+ * TeamApi - object-oriented interface
  * @export
- * @class DefaultApi
+ * @class TeamApi
  * @extends {BaseAPI}
  */
-export class DefaultApi extends BaseAPI {
-    /**
-     * ログイン済みアカウントを削除します。  アカウントの削除にパスワードを要求するので、DELETEメソッドではなくPOSTメソッドを利用しています。  参考: [4.3.5. DELETE - RFC 7231](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.5)  > A payload within a DELETE request message has no defined semantics; > sending a payload body on a DELETE request might cause some existing > implementations to reject the request. 
-     * @summary ログイン済みアカウント削除
-     * @param {AccountDeletion} [accountDeletion] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public deleteAccountsMeDelete(accountDeletion?: AccountDeletion, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).deleteAccountsMeDelete(accountDeletion, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * アカウントIDをキーとして登録されているアカウントを取得する。 
-     * @summary アカウントの取得
-     * @param {string} accountId アカウントのID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public getAccountsAccountId(accountId: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getAccountsAccountId(accountId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * アバターを取得する。 
-     * @summary アバターを取得する
-     * @param {string} accountId アカウントのID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public getAccountsAccountIdAvatar(accountId: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getAccountsAccountIdAvatar(accountId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * ログイン済みのアカウントを取得する。 
-     * @summary ログイン済みアカウントの取得
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public getAccountsMe(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getAccountsMe(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * ログイン済みアカウントのアバターを取得する。 
-     * @summary ログイン済みアカウントのアバターを取得する
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public getAccountsMeAvatar(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getAccountsMeAvatar(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * ログイン済みアカウントの有効な利用規約に同意しているかの状態を取得します。 
-     * @summary ログイン済みアカウントの利用規約同意状態確認
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public getAccountsMeTerms(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getAccountsMeTerms(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * CSRFトークンを取得します。
-     * @summary CSRFトークンの取得
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public getCsrfToken(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getCsrfToken(options).then((request) => request(this.axios, this.basePath));
-    }
-
+export class TeamApi extends BaseAPI {
     /**
      * チームを登録します。チームを作成したアカウントは 特権ユーザとして登録されます。 
      * @summary チーム登録
      * @param {Team} [team] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * @memberof TeamApi
      */
     public getTeams(team?: Team, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getTeams(team, options).then((request) => request(this.axios, this.basePath));
+        return TeamApiFp(this.configuration).getTeams(team, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2171,10 +2269,10 @@ export class DefaultApi extends BaseAPI {
      * @param {string} teamId チームのID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * @memberof TeamApi
      */
     public getTeamsTeamId(teamId: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getTeamsTeamId(teamId, options).then((request) => request(this.axios, this.basePath));
+        return TeamApiFp(this.configuration).getTeamsTeamId(teamId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2186,10 +2284,10 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [page] 取得するページ番号
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * @memberof TeamApi
      */
     public getTeamsTeamIdTimetableTemplates(teamId: string, sort?: string, limit?: number, page?: number, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getTeamsTeamIdTimetableTemplates(teamId, sort, limit, page, options).then((request) => request(this.axios, this.basePath));
+        return TeamApiFp(this.configuration).getTeamsTeamIdTimetableTemplates(teamId, sort, limit, page, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2199,10 +2297,10 @@ export class DefaultApi extends BaseAPI {
      * @param {string} templateId テンプレートのID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * @memberof TeamApi
      */
     public getTeamsTeamIdTimetableTemplatesTemplateId(teamId: string, templateId: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getTeamsTeamIdTimetableTemplatesTemplateId(teamId, templateId, options).then((request) => request(this.axios, this.basePath));
+        return TeamApiFp(this.configuration).getTeamsTeamIdTimetableTemplatesTemplateId(teamId, templateId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2215,10 +2313,10 @@ export class DefaultApi extends BaseAPI {
      * @param {string} [until] 検索対象日付To
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * @memberof TeamApi
      */
     public getTeamsTeamIdTimetables(teamId: string, limit?: number, sort?: string, since?: number, until?: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getTeamsTeamIdTimetables(teamId, limit, sort, since, until, options).then((request) => request(this.axios, this.basePath));
+        return TeamApiFp(this.configuration).getTeamsTeamIdTimetables(teamId, limit, sort, since, until, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2228,80 +2326,10 @@ export class DefaultApi extends BaseAPI {
      * @param {string} timetableId 時間割ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * @memberof TeamApi
      */
     public getTeamsTeamIdTimetablesTimetableId(teamId: string, timetableId: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getTeamsTeamIdTimetablesTimetableId(teamId, timetableId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 有効な利用規約を取得します。このAPIの呼び出しには認証情報は不要です。 
-     * @summary 有効な利用規約の取得
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public getTerms(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getTerms(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * ログイン済みアカウントのデバイス登録トークンを登録する。 
-     * @summary ログイン済みアカウントのデバイス登録トークンの登録
-     * @param {Device} [device] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public postAccountsMeDeviceToken(device?: Device, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).postAccountsMeDeviceToken(device, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。 
-     * @summary ログイン済みアカウントの利用規約同意
-     * @param {TermsOfServiceAgreementStatus} [termsOfServiceAgreementStatus] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public postAccountsMeTerms(termsOfServiceAgreementStatus?: TermsOfServiceAgreementStatus, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).postAccountsMeTerms(termsOfServiceAgreementStatus, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * アカウントIDとパスワードを指定してログインします。 
-     * @summary ログインする
-     * @param {AccountLogin} [accountLogin] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public postLogin(accountLogin?: AccountLogin, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).postLogin(accountLogin, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ログアウトする
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public postLogout(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).postLogout(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * アカウントを登録します。アカウントの登録には、ニックネームとパスワードが必要です。 
-     * @summary アカウントの登録
-     * @param {AccountRegistration} [accountRegistration] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public postSignup(accountRegistration?: AccountRegistration, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).postSignup(accountRegistration, options).then((request) => request(this.axios, this.basePath));
+        return TeamApiFp(this.configuration).getTeamsTeamIdTimetablesTimetableId(teamId, timetableId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2310,10 +2338,10 @@ export class DefaultApi extends BaseAPI {
      * @param {string} teamId チームのID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * @memberof TeamApi
      */
     public postTeamsTeamIdInvitationCode(teamId: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).postTeamsTeamIdInvitationCode(teamId, options).then((request) => request(this.axios, this.basePath));
+        return TeamApiFp(this.configuration).postTeamsTeamIdInvitationCode(teamId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2323,10 +2351,10 @@ export class DefaultApi extends BaseAPI {
      * @param {TeamInvitation} [teamInvitation] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * @memberof TeamApi
      */
     public postTeamsTeamIdJoin(teamId: string, teamInvitation?: TeamInvitation, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).postTeamsTeamIdJoin(teamId, teamInvitation, options).then((request) => request(this.axios, this.basePath));
+        return TeamApiFp(this.configuration).postTeamsTeamIdJoin(teamId, teamInvitation, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2336,10 +2364,10 @@ export class DefaultApi extends BaseAPI {
      * @param {TimetableTemplate} [timetableTemplate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * @memberof TeamApi
      */
     public postTeamsTeamIdTimetableTemplates(teamId: string, timetableTemplate?: TimetableTemplate, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).postTeamsTeamIdTimetableTemplates(teamId, timetableTemplate, options).then((request) => request(this.axios, this.basePath));
+        return TeamApiFp(this.configuration).postTeamsTeamIdTimetableTemplates(teamId, timetableTemplate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2349,22 +2377,10 @@ export class DefaultApi extends BaseAPI {
      * @param {TimetableOfDayInput} [timetableOfDayInput] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * @memberof TeamApi
      */
     public postTeamsTeamIdTimetables(teamId: string, timetableOfDayInput?: TimetableOfDayInput, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).postTeamsTeamIdTimetables(teamId, timetableOfDayInput, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * ログイン済みアカウントのアバターを登録する。 
-     * @summary ログイン済みアカウントのアバターを登録する
-     * @param {any} [avatarImage] アバター画像
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public putAccountsMeAvatar(avatarImage?: any, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).putAccountsMeAvatar(avatarImage, options).then((request) => request(this.axios, this.basePath));
+        return TeamApiFp(this.configuration).postTeamsTeamIdTimetables(teamId, timetableOfDayInput, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2375,10 +2391,10 @@ export class DefaultApi extends BaseAPI {
      * @param {TimetableTemplate} [timetableTemplate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * @memberof TeamApi
      */
     public putTeamsTeamIdTimetableTemplatesTemplateId(teamId: string, templateId: string, timetableTemplate?: TimetableTemplate, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).putTeamsTeamIdTimetableTemplatesTemplateId(teamId, templateId, timetableTemplate, options).then((request) => request(this.axios, this.basePath));
+        return TeamApiFp(this.configuration).putTeamsTeamIdTimetableTemplatesTemplateId(teamId, templateId, timetableTemplate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2388,10 +2404,108 @@ export class DefaultApi extends BaseAPI {
      * @param {string} timetableId 時間割ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * @memberof TeamApi
      */
     public putTeamsTeamIdTimetablesTimetableId(teamId: string, timetableId: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).putTeamsTeamIdTimetablesTimetableId(teamId, timetableId, options).then((request) => request(this.axios, this.basePath));
+        return TeamApiFp(this.configuration).putTeamsTeamIdTimetablesTimetableId(teamId, timetableId, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TermsApi - axios parameter creator
+ * @export
+ */
+export const TermsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 有効な利用規約を取得します。このAPIの呼び出しには認証情報は不要です。 
+         * @summary 有効な利用規約の取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTerms: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/terms`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TermsApi - functional programming interface
+ * @export
+ */
+export const TermsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TermsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 有効な利用規約を取得します。このAPIの呼び出しには認証情報は不要です。 
+         * @summary 有効な利用規約の取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getTerms(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TermsOfService>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTerms(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TermsApi - factory interface
+ * @export
+ */
+export const TermsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TermsApiFp(configuration)
+    return {
+        /**
+         * 有効な利用規約を取得します。このAPIの呼び出しには認証情報は不要です。 
+         * @summary 有効な利用規約の取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTerms(options?: any): AxiosPromise<TermsOfService> {
+            return localVarFp.getTerms(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TermsApi - object-oriented interface
+ * @export
+ * @class TermsApi
+ * @extends {BaseAPI}
+ */
+export class TermsApi extends BaseAPI {
+    /**
+     * 有効な利用規約を取得します。このAPIの呼び出しには認証情報は不要です。 
+     * @summary 有効な利用規約の取得
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TermsApi
+     */
+    public getTerms(options?: AxiosRequestConfig) {
+        return TermsApiFp(this.configuration).getTerms(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
