@@ -11,11 +11,13 @@ export class ApiError extends ApplicationError {}
 export class ApiResponseError extends ApiError {
   constructor(
     cause: AxiosError,
-    public data: ErrorResponse,
-    public status: number,
-    public statusText: string,
-    public headers: Record<string, string>,
-    public request?: any,
+    public response: {
+      data: ErrorResponse;
+      status: number;
+      statusText: string;
+      headers: Record<string, string>;
+      request?: any;
+    },
   ) {
     super(cause);
   }
@@ -31,15 +33,7 @@ instance.interceptors.response.use(
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError<ErrorResponse>;
       if (axiosError.response) {
-        const response = axiosError.response;
-        throw new ApiResponseError(
-          axiosError,
-          response.data,
-          response.status,
-          response.statusText,
-          response.headers,
-          response.request,
-        );
+        throw new ApiResponseError(axiosError, axiosError.response);
       }
       throw new ApiResourceAccessError(error);
     }
