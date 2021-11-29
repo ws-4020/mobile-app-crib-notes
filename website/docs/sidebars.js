@@ -314,6 +314,25 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Test Planning',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning',
+        },
+        {
+          type: 'category',
+          label: '全体テスト計画',
+          items: [
+            'react-native/santoku/test-planning/all/overview',
+            'react-native/santoku/test-planning/all/test-environment',
+            'react-native/santoku/test-planning/all/test-environment-variation',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Design',
       items: [
         {
