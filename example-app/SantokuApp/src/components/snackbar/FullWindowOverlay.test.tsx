@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react-native';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 
 import {FullWindowOverlay} from './FullWindowOverlay';
 
