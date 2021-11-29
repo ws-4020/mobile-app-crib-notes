@@ -32,7 +32,7 @@ exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
     onShouldStartLoadWithRequest={[Function]}
     source={
       Object {
-        "uri": "https://www.tis.co.jp/termsofuse/",
+        "uri": "https://localhost/",
       }
     }
     startInLoadingState={true}

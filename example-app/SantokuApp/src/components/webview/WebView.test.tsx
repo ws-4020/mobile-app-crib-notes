@@ -14,7 +14,7 @@ jest.mock('components/snackbar', () => ({
 
 describe('WebView', () => {
   it('WebViewが正常にrenderできることを確認', () => {
-    const renderResult = render(<WebView testID="webview" source={{uri: 'https://www.tis.co.jp/termsofuse/'}} />);
+    const renderResult = render(<WebView testID="webview" source={{uri: 'https://localhost/'}} />);
     expect(renderResult.queryByTestId('webview')).not.toBeNull();
     expect(renderResult).toMatchSnapshot();
   });
@@ -29,7 +29,7 @@ describe('WebView', () => {
 
     const webview = render(
       <WebView
-        source={{uri: 'https://www.tis.co.jp/termsofuse/'}}
+        source={{uri: 'https://localhost/'}}
         onScroll={handleOnScroll}
         onScrollEnd={handleOnScrollEnd}
         onScrollEndOnce={handleOnScrollEndOnce}
@@ -73,7 +73,7 @@ describe('WebView', () => {
     const contentSize = {height: 2000};
 
     const webview = render(
-      <WebView source={{uri: 'https://www.tis.co.jp/termsofuse/'}} onScrollEnd={handleOnScrollEnd} testID="webview" />,
+      <WebView source={{uri: 'https://localhost/'}} onScrollEnd={handleOnScrollEnd} testID="webview" />,
     ).getByTestId('webview');
 
     fireEvent(webview, 'onLoadEnd');
@@ -94,11 +94,7 @@ describe('WebView', () => {
     const contentSize = {height: 2000};
 
     const webview = render(
-      <WebView
-        source={{uri: 'https://www.tis.co.jp/termsofuse/'}}
-        onScrollEndOnce={handleOnScrollEndOnce}
-        testID="webview"
-      />,
+      <WebView source={{uri: 'https://localhost/'}} onScrollEndOnce={handleOnScrollEndOnce} testID="webview" />,
     ).getByTestId('webview');
 
     fireEvent(webview, 'onLoadEnd');
@@ -117,15 +113,13 @@ describe('WebView', () => {
 
     const handleOnError = jest.fn();
 
-    const webview = render(
-      <WebView source={{uri: 'https://www.tis.co.jp/termsofuse/'}} testID="webview" />,
-    ).getByTestId('webview');
+    const webview = render(<WebView source={{uri: 'https://localhost/'}} testID="webview" />).getByTestId('webview');
 
     fireEvent(webview, 'onError');
     expect(mockedShowWithCloseButton).toHaveBeenCalledTimes(1);
 
     const webviewOnError = render(
-      <WebView source={{uri: 'https://www.tis.co.jp/termsofuse/'}} onError={handleOnError} testID="webviewOnError" />,
+      <WebView source={{uri: 'https://localhost/'}} onError={handleOnError} testID="webviewOnError" />,
     ).getByTestId('webviewOnError');
 
     fireEvent(webviewOnError, 'onError');
