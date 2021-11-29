@@ -85,7 +85,7 @@ exports[`Button Buttonが正常にrenderできることを確認 1`] = `
 </View>
 `;
 
-exports[`Button Buttonのpropsが指定通りrenderに反映されることを確認 1`] = `
+exports[`Button Buttonのprops（buttonStyle / containerStyle）が指定通りrenderに反映されることを確認 1`] = `
 <View
   style={
     Array [

@@ -25,7 +25,7 @@ describe('Button', () => {
     expect(render(<Button title="ボタン" size="full" />)).toMatchSnapshot('size full');
   });
 
-  it('Buttonのpropsが指定通りrenderに反映されることを確認', () => {
+  it('Buttonのprops（buttonStyle / containerStyle）が指定通りrenderに反映されることを確認', () => {
     // スナップショットに反映されているか確認
     expect(
       render(

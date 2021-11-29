@@ -96,7 +96,7 @@ describe('Snackbar', () => {
     });
   });
 
-  it('Snackbar表示中にpropsでhideを指定した場合、Snackbarが消えること', async () => {
+  it('Snackbar表示中にpropsでhideを指定した場合、Snackbarが消えることを確認', async () => {
     const renderResult = render(
       <Snackbar message="テストメッセージ">
         <ChildComponent />
@@ -118,7 +118,7 @@ describe('Snackbar', () => {
     });
   });
 
-  it('Snackbarに指定したpropsがrenderに反映されていること', () => {
+  it('Snackbarに指定したpropsがrenderに反映されていることを確認', () => {
     /**
      * 下記項目は対象外
      * - autoHideDuration / fadeInDuration / fadeOutDuration / forceFadeOutDuration / hideFadeOutDuration
