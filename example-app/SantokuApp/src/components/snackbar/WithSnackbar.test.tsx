@@ -80,7 +80,8 @@ describe('WithSnackbar', () => {
     );
 
     await waitFor(() => {
-      jest.advanceTimersByTime(300);
+      const HIDE_FADE_OUT_DURATION = 300;
+      jest.advanceTimersByTime(HIDE_FADE_OUT_DURATION);
       expect(renderResult.queryByText('テストメッセージ')).toBeNull();
       expect(renderResult.queryByText('閉じる')).toBeNull();
       expect(renderResult).toMatchSnapshot();

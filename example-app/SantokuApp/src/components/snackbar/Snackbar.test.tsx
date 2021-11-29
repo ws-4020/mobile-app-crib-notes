@@ -19,6 +19,12 @@ const ChildComponent = () => {
   return <Text testID="text">test</Text>;
 };
 
+const AUTO_HIDE_DURATION = 4000;
+const FADE_IN_DURATION = 1000;
+const FADE_OUT_DURATION = 1000;
+const FORCE_FADE_OUT_DURATION = 300;
+const HIDE_FADE_OUT_DURATION = 300;
+
 describe('Snackbar', () => {
   it('Snackbarが正常にrenderできることを確認', () => {
     const renderResult = render(
@@ -35,11 +41,11 @@ describe('Snackbar', () => {
     expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).opacity).toBe(0);
     expect(renderResult).toMatchSnapshot('render直後');
 
-    jest.advanceTimersByTime(1000);
+    jest.advanceTimersByTime(FADE_IN_DURATION);
     expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).opacity).toBe(1);
     expect(renderResult).toMatchSnapshot('フェードイン後');
 
-    jest.advanceTimersByTime(5000);
+    jest.advanceTimersByTime(AUTO_HIDE_DURATION + FADE_OUT_DURATION);
     expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).opacity).toBe(0);
     expect(renderResult).toMatchSnapshot('フェードアウト後');
   });
@@ -62,7 +68,7 @@ describe('Snackbar', () => {
     await waitFor(() => {
       expect(renderResult.queryByText('初回')).not.toBeNull();
 
-      jest.advanceTimersByTime(300);
+      jest.advanceTimersByTime(FORCE_FADE_OUT_DURATION);
 
       expect(renderResult.queryByText('２回目')).not.toBeNull();
     });
@@ -90,7 +96,7 @@ describe('Snackbar', () => {
     );
 
     await waitFor(() => {
-      jest.advanceTimersByTime(300);
+      jest.advanceTimersByTime(FORCE_FADE_OUT_DURATION);
 
       expect(renderResult.queryByText('３回目')).not.toBeNull();
     });
@@ -103,7 +109,7 @@ describe('Snackbar', () => {
       </Snackbar>,
     );
 
-    jest.advanceTimersByTime(1000);
+    jest.advanceTimersByTime(FADE_IN_DURATION);
     expect(renderResult.queryByText('テストメッセージ')).not.toBeNull();
 
     renderResult.update(
@@ -113,7 +119,7 @@ describe('Snackbar', () => {
     );
 
     await waitFor(() => {
-      jest.advanceTimersByTime(300);
+      jest.advanceTimersByTime(HIDE_FADE_OUT_DURATION);
       expect(renderResult.queryByText('テストメッセージ')).toBeNull();
     });
   });
@@ -141,7 +147,7 @@ describe('Snackbar', () => {
       </Snackbar>,
     );
 
-    jest.advanceTimersByTime(1000);
+    jest.advanceTimersByTime(FADE_IN_DURATION);
 
     expect(queryByText('テストメッセージ')).not.toBeNull();
     expect(getStyle<TextStyle>(getByText('テストメッセージ')).color).toBe('black');
