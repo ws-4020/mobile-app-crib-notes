@@ -1,10 +1,15 @@
 import {render, waitFor} from '@testing-library/react-native';
 import {BundledMessagesLoader, loadMessages} from 'framework';
 import React, {useEffect} from 'react';
-import {Text} from 'react-native';
+import {Text, TextStyle} from 'react-native';
+import {ReactTestInstance} from 'react-test-renderer';
 import {Snackbar} from '.';
 
 import {WithSnackbar, useSnackbar} from './WithSnackbar';
+
+function getStyle<T>(instance: ReactTestInstance) {
+  return instance.props.style as T;
+}
 
 jest.mock('react-native/Libraries/Utilities/Platform', () => ({
   OS: 'android',
@@ -20,8 +25,10 @@ const ChildComponent: React.FC<{type: UseSnackbarType}> = ({type}) => {
   useEffect(() => {
     switch (type) {
       case 'show':
+        snackbar.show('テストメッセージ', {messageTextStyle: {color: 'blue'}});
+        break;
       case 'showWithCloseButton':
-        snackbar[type]('テストメッセージ');
+        snackbar.showWithCloseButton('テストメッセージ', {messageTextStyle: {color: 'red'}});
         break;
       case 'hide':
         snackbar.hide();
@@ -40,6 +47,7 @@ describe('WithSnackbar', () => {
     );
 
     expect(renderResult.queryByText('テストメッセージ')).not.toBeNull();
+    expect(getStyle<TextStyle>(renderResult.getByText('テストメッセージ')).color).toBe('blue');
     expect(renderResult.queryByText('閉じる')).toBeNull();
     expect(renderResult).toMatchSnapshot();
   });
@@ -54,6 +62,7 @@ describe('WithSnackbar', () => {
     );
 
     expect(renderResult.queryByText('テストメッセージ')).not.toBeNull();
+    expect(getStyle<TextStyle>(renderResult.getByText('テストメッセージ')).color).toBe('red');
     expect(renderResult.queryByText('閉じる')).not.toBeNull();
     expect(renderResult).toMatchSnapshot();
   });
