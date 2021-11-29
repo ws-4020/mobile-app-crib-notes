@@ -108,21 +108,23 @@ describe('WebView', () => {
     expect(handleOnScrollEndOnce).toHaveBeenCalledTimes(1);
   });
 
-  it('WebViewのonErrorイベントが正常に処理されることを確認', async () => {
+  it('WebViewのonErrorイベントで、親からonErrorを指定してない場合はSnackbar表示関数をコールすることを確認', async () => {
     await loadMessages(new BundledMessagesLoader());
-
-    const handleOnError = jest.fn();
 
     const webview = render(<WebView source={{uri: 'https://localhost/'}} testID="webview" />).getByTestId('webview');
 
     fireEvent(webview, 'onError');
     expect(mockedShowWithCloseButton).toHaveBeenCalledTimes(1);
+  });
 
-    const webviewOnError = render(
-      <WebView source={{uri: 'https://localhost/'}} onError={handleOnError} testID="webviewOnError" />,
-    ).getByTestId('webviewOnError');
+  it('WebViewのonErrorイベントで、親からonErrorを指定した場合は親へイベント通知することを確認', () => {
+    const handleOnError = jest.fn();
 
-    fireEvent(webviewOnError, 'onError');
+    const webview = render(
+      <WebView source={{uri: 'https://localhost/'}} onError={handleOnError} testID="webview" />,
+    ).getByTestId('webview');
+
+    fireEvent(webview, 'onError');
     expect(handleOnError).toHaveBeenCalledTimes(1);
   });
 });
