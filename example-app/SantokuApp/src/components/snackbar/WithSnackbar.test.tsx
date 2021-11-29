@@ -10,10 +10,6 @@ function getStyle<T>(instance: ReactTestInstance) {
   return instance.props.style as T;
 }
 
-jest.mock('react-native/Libraries/Utilities/Platform', () => ({
-  OS: 'android',
-}));
-
 jest.useFakeTimers();
 
 type UseSnackbarType = 'show' | 'showWithCloseButton' | 'hide';

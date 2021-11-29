@@ -5,10 +5,6 @@ import {ReactTestInstance} from 'react-test-renderer';
 
 import {Snackbar} from './Snackbar';
 
-jest.mock('react-native/Libraries/Utilities/Platform', () => ({
-  OS: 'android',
-}));
-
 jest.useFakeTimers();
 
 function getStyle<T>(instance: ReactTestInstance) {
@@ -70,6 +66,7 @@ describe('Snackbar', () => {
 
       jest.advanceTimersByTime(FORCE_FADE_OUT_DURATION);
 
+      expect(renderResult.queryByText('初回')).toBeNull();
       expect(renderResult.queryByText('２回目')).not.toBeNull();
     });
   });

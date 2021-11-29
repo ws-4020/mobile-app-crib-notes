@@ -15,12 +15,6 @@ describe('FullWindowOverlay', () => {
   });
 
   it('iOS環境で子要素を含めて正常にrenderできることを確認', () => {
-    const MockView = (props: {children: React.ReactNode}) => <View testID="ios-view">{props.children}</View>;
-
-    jest.mock('react-native-screens', () => ({
-      FullWindowOverlay: MockView,
-    }));
-
     jest.mock('react-native/Libraries/Utilities/Platform', () => ({
       OS: 'ios',
     }));
@@ -30,7 +24,7 @@ describe('FullWindowOverlay', () => {
         <ChildComponent />
       </FullWindowOverlay>,
     );
-    expect(renderResult.queryByTestId('ios-view')).not.toBeNull();
+    expect(renderResult.queryByTestId('FullWindowOverlay')).not.toBeNull();
     expect(renderResult.queryByTestId('text')).not.toBeNull();
     expect(renderResult).toMatchSnapshot();
   });
@@ -45,6 +39,7 @@ describe('FullWindowOverlay', () => {
         <ChildComponent />
       </FullWindowOverlay>,
     );
+    expect(renderResult.queryByTestId('FullWindowOverlay')).toBeNull();
     expect(renderResult.queryByTestId('text')).not.toBeNull();
     expect(renderResult).toMatchSnapshot();
   });
