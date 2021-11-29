@@ -22,6 +22,8 @@ public class LoginCheckHandler implements Handler<HttpRequest, Object> {
     // ただしサインアップやパスワードリセットなど、認証が不要なリクエストはホワイトリスト形式で定義を行い、判定からは除外する。
     // ホワイトリストにないリクエストかつ未認証の場合は、エラーを返却する。
     whitePatterns
+        .add("/api/fetch_test/redirect", HttpMethod.GET)
+        .add("/api/fetch_test/ok", HttpMethod.GET)
         .add("/api/signup", HttpMethod.POST)
         .add("/api/login", HttpMethod.POST)
         .add("/api/system/messages", HttpMethod.GET)

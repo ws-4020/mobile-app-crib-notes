@@ -19,6 +19,7 @@ import {
   SnackbarScreen,
   LocalAuthenticationScreen,
   AuthenticationScreen,
+  FetchTestScreen,
 } from 'screens';
 
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
@@ -53,6 +54,7 @@ export const Screen: React.FC = () => {
       <nav.Screen {...SnackbarScreen} />
       <nav.Screen {...LocalAuthenticationScreen} />
       <nav.Screen {...AuthenticationScreen} />
+      <nav.Screen {...FetchTestScreen} />
     </nav.Navigator>
   );
 };
