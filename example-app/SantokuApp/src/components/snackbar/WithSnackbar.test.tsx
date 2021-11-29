@@ -3,7 +3,6 @@ import {BundledMessagesLoader, loadMessages} from 'framework';
 import React, {useEffect} from 'react';
 import {Text, TextStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';
-import {Snackbar} from '.';
 
 import {WithSnackbar, useSnackbar} from './WithSnackbar';
 
