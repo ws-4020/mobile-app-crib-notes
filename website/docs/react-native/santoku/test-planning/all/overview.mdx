@@ -44,96 +44,16 @@ sidebar_label: 概要
 
 ## 網羅の方針
 
-### テスト対象機種を揃えた網羅検証
-
 このアプリがサポートしている端末構成を対象にどの環境であっても問題なくアプリが動作することを網羅的に検証します。
-OSバージョンについて、要件を決めた時点で最新であった以下のものを指します。
-
-| OS | 最新バージョン |
-| :--- | --- |
-| Android | 11 |
-| iOS（iPadOS） | 14 |
-
-このアプリがサポートしている端末構成の範囲は以下のとおりです。
-
-| カテゴリ | 区分 | サポート範囲 |
-| :--- | :--- | :--- |
-| OSバージョン | Android OSバージョン | 8.0 ～ 11 |
-| OSバージョン | iOS(iPadOS) | 13 ～ 14 |
-| アスペクト比率 | Android（スマートフォン） | 19:9、19:9、20:9、21:9、9:16、19.5:9 |
-| アスペクト比率 | Android（タブレット） | 16:10 |
-| 画面解像度 | iPhone | 1284×2778、750×1334 |
-| 画面解像度 | iPad | 2732x2048、1536×2048 |
-| ネイティブ機能 | ― | カメラ、生体認証（指紋認証、顔認証） |
-
-上記それぞれのサポート範囲の中からこのテストで使用するバージョンや規格を選定基準によって決定します。
-また、このアプリのメインターゲットはスマートフォンなので、タブレットでのテストはエミュレータ／シミュレータのみで実施します。
-
-#### OSバージョン
-
-OS毎の動作を検証して異なるOSバージョンであっても仕様通りの動作となることを検証します。
-テストに関する事項の[テスト対象OSバージョン](../../requirements/non-functional/test-outline#テスト対象osバージョン)のとおり、選定したテスト対象OSバージョンは以下です。
-
-| OSバージョン | 選定理由 |
-| :--- | :--- |
-| Android 11 | ユーザ使用率の高いOSバージョンのため  |
-| Android 10 | ダークモードが利用可能となったバージョンであり、このアプリに影響があるため |
-| iOS 14 | ユーザ使用率の高いOSバージョンのため  |
-| iOS 13 | シェア3%未満に入らないOSバージョンのため |
-| iPadOS 14 | ユーザ使用率の高いOSバージョンのため  |
-| iPadOS 13 | シェア3%未満に入らないOSバージョンのため |
-
-上記のものをテスト対象OSバージョンとして、決定します。
-
-#### 画面構成
-
-異なる画面解像度でこのアプリを使用し、レイアウト崩れなど表示に関する問題がないことを検証します。
-テストに関する事項の[構成テスト（レイアウトバリエーション）](../../requirements/non-functional/test-outline#構成テストレイアウトバリエーション)のとおり、選定した構成は以下です。
-
-| カテゴリ | 選定基準（※1） | 構成 |
-| :--- | :--- | :--- |
-| Android（スマートフォン） | A | 19:9、19:9、20:9、21:9、9:16 |
-| Android（スマートフォン） | B | 19.5:9 |
-| Android（タブレット） | A | 16:10 |
-| 画面解像度（iPhone） | C | 1284×2778（※2） |
-| 画面解像度（iPhone） | D | 750×1334 |
-| 画面解像度（iPad） | C | 2732x2048 |
-| 画面解像度（iPad） | D | 1536×2048 |
-
-（※1）選定基準は以下のとおりです。
-
-- （A）最多シェアメーカーのローエンドまたは、ミドルレンジの機種で最多シェアのOSバージョン
-- （B）パンチホール有の機種の中で最大のアスペクト比率
-- （C）[配信対象OSバージョン](../../requirements/non-functional/usability#配信対象osバージョン)の範囲内で最大の画面解像度
-- （D）[配信対象OSバージョン](../../requirements/non-functional/usability#配信対象osバージョン)の範囲内で最小の画面解像度
-
-（※2）[配信対象OSバージョン](../../requirements/non-functional/usability#配信対象osバージョン)の範囲内の最大とノッチ有の画面解像度が重複しているため統一して選定。
-  
-#### ネイティブ機能
-
-このアプリが利用するネイティブ機能を利用した部分に問題がないことを検証します。
-テストに関する事項の[構成テスト（ネイティブ機能バリエーション）](../../requirements/non-functional/test-outline#構成テストネイティブ機能バリエーション)のとおり、選定したネイティブ機能は以下です。
-
-カメラ、生体認証（指紋認証、顔認証）
-
-## テスト環境
-
-このアプリに必要なテスト環境として、AndroidとiOS（iPadOS）毎でテストに必要な機種とOSバージョンを選定します。
-それぞれの選定基準および、結果は以下のとおりです。
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 import {PageList} from '../../../../../src/components';
 const overviews = [
   {
-    title: 'テスト端末選定方法',
-    to: '/react-native/santoku/test-planning/all/test-environment',
-    summary: <>AndroidとiOS（iPadOS）それぞれの機種とOS選定方法をまとめています</>,
-  },
-  {
-    title: 'テスト端末バリエーション',
-    to: '/react-native/santoku/test-planning/all/test-environment-variation',
-    summary: <>テスト端末選定方法に従って選定したテスト対象機種とテスト対象OSバージョンをまとめています</>,
+    title: '網羅の方針',
+    to: '/react-native/santoku/test-planning/all/test-coverage',
+    summary: <>このテストでの網羅の方針をまとめています</>,
   }
 ];
 
@@ -141,4 +61,21 @@ const overviews = [
 
 <!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
+## テスト環境
+
+このアプリに必要なテスト環境として、AndroidとiOS（iPadOS）毎でテストに必要な機種とOSバージョンを選定します。
 このアプリが利用するバックエンドは、mock化してテストします。データベースは利用しないのでmockサーバでデータを切り替えてテストを実施します。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+export const v = [
+  {
+    title: 'テスト端末バリエーション',
+    to: '/react-native/santoku/test-planning/all/test-variation',
+    summary: <>網羅の方針で選定したテスト対象機種とテスト対象OSバージョンをまとめています</>,
+  }
+];
+
+<PageList overviews={v} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
