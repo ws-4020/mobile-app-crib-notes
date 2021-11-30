@@ -321,13 +321,12 @@ module.exports = {
           id: 'react-native/santoku/test-planning',
         },
         {
-          type: 'category',
-          label: '全体テスト計画',
-          items: [
-            'react-native/santoku/test-planning/all/overview',
-            'react-native/santoku/test-planning/all/test-coverage',
-            'react-native/santoku/test-planning/all/test-variation',
-          ],
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/test-all-planning',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/test-variation',
         },
       ],
     },
