@@ -23,7 +23,7 @@ title: 端末認証
 const isEnrolled = await LocalAuthentication.isEnrolled();
 ```
 
-どの生体属性が登録されているか（例えば、指紋データが登録されているか）を確認することもできます。
+どの生体属性が登録されているか（例えば、指紋データが登録されているか）も確認できます。
 
 ```typescript jsx title='生体属性の登録確認の例'
 const isSupported = await LocalAuthentication.isFingerPrintSupported();
@@ -61,9 +61,10 @@ const result = await LocalAuthentication.authenticate({
 ```
 
 :::caution
-Androidでは、`disableDeviceFallback`をtrueにして、生体認証失敗時などのフォールバックを無効にした場合、`cancelLabel`も設定しないと以下のようなエラーが発生します。
+Androidでは、`disableDeviceFallback`を`true`にして生体認証のフォールバックを無効にした場合、`cancelLabel`設定する必要があります。設定しないと以下のようなエラーが発生します。
 
 ```console
 Negative text must be set and non-empty.
 ```
+
 :::
