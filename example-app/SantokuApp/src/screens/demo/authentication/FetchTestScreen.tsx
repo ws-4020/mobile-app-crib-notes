@@ -13,7 +13,7 @@ const Screen = () => {
   const [responseInfo, setResponseInfo] = useState('');
 
   const callFetch = useCallback(() => {
-    fetch('http://' + AppConfig.santokuAppBackendUrl + '/api/fetch_test/redirect', {
+    fetch(AppConfig.santokuAppBackendUrl + '/api/fetch_test/redirect', {
       redirect: redirectOptions[redirectOptionIndex],
       credentials: credentialsOptions[credentialsOptionIndex],
     })
