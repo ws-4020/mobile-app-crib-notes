@@ -36,6 +36,7 @@ export const useHttpApi = () => {
         setResponseInfo(info);
       })
       .catch(error => {
+        setResponseInfo('Error occurred\n' + JSON.stringify(error));
         console.error(error);
       });
   }, [redirectOptionIndex, credentialsOptionIndex]);
@@ -59,6 +60,7 @@ export const useHttpApi = () => {
         setResponseInfo(info);
       })
       .catch(error => {
+        setResponseInfo('Error occurred\n' + JSON.stringify(error));
         console.error(error);
       });
   }, [maxRedirectsOption, withCredentialsOption]);
