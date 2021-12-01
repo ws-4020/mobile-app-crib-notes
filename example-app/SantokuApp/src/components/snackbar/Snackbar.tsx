@@ -67,7 +67,7 @@ export type SnackbarHideProps = {
 
 export type SnackbarProps = SnackbarShowProps & SnackbarHideProps;
 
-export const Snackbar: React.FC<SnackbarProps> = (props) => {
+export const Snackbar: React.FC<SnackbarProps> = props => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const fadeInAnimationRef = useRef<CompositeAnimation>();
   const fadeOutAnimationRef = useRef<CompositeAnimation>();
@@ -82,7 +82,7 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
     ) => {
       const animation = Animated.timing(fadeAnim, config);
       animationRef.current = animation;
-      animation.start((result) => {
+      animation.start(result => {
         animationRef.current = undefined;
         if (callback) {
           callback(result);
@@ -129,12 +129,15 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
         useNativeDriver: true,
       };
 
+      barrierFadeOutAnimationRef.current?.stop();
       fadeInAnimationRef.current?.stop();
       fadeOutAnimationRef.current?.stop();
 
-      animationStart(barrierFadeOutAnimationRef, barrierFadeOutAnimationConfig, () => {
-        setVisibleSnackbarProps(undefined);
-        callback?.();
+      animationStart(barrierFadeOutAnimationRef, barrierFadeOutAnimationConfig, ({finished}) => {
+        if (finished) {
+          setVisibleSnackbarProps(undefined);
+          callback?.();
+        }
       });
     },
     [animationStart],
@@ -149,6 +152,7 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
       return;
     }
     if (barrierFadeOutAnimationRef.current) {
+      forceFadeout(props.forceFadeOutDuration, show);
       return;
     }
     if (fadeInAnimationRef.current || fadeOutAnimationRef.current) {
@@ -173,8 +177,10 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
       {props.children}
       {visibleSnackbarProps && (
         <FullWindowOverlay>
-          <Animated.View style={StyleSheet.flatten([{opacity: fadeAnim}, animatedViewStyle])}>
-            <View style={snackbarStyle}>
+          <Animated.View
+            style={StyleSheet.flatten([{opacity: fadeAnim}, animatedViewStyle])}
+            testID="snackbarAnimatedView">
+            <View style={snackbarStyle} testID="snackbarStyleView">
               <View style={styles.messageContainer}>
                 <Text style={messageTextStyle}>{visibleSnackbarProps.message}</Text>
               </View>
