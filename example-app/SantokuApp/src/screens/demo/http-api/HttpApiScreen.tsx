@@ -7,7 +7,7 @@ import {Button, ButtonGroup, CheckBox, Divider, Text} from 'react-native-element
 const redirectOptions: ['follow', 'error', 'manual'] = ['follow', 'error', 'manual'];
 const credentialsOptions: ['include', 'same-origin', 'omit'] = ['include', 'same-origin', 'omit'];
 
-const ScreenName = 'FetchTest';
+const ScreenName = 'HttpApi';
 const Screen = () => {
   const [redirectOptionIndex, setRedirectOptionIndex] = useState(0);
   const [credentialsOptionIndex, setCredentialsOptionIndex] = useState(0);
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const FetchTestScreen = {
+export const HttpApiScreen = {
   name: ScreenName,
   component: Screen,
 };
