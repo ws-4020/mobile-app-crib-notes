@@ -51,13 +51,16 @@ const Screen = () => {
         <View style={styles.requestSection}>
           <Text h4>axios</Text>
           <Text>maxRedirects option:</Text>
-          <TextInput onChangeText={setMaxRedirectsOption} value={maxRedirectsOption} keyboardType="numeric" />
+          <TextInput
+            style={styles.textInput}
+            onChangeText={setMaxRedirectsOption}
+            value={maxRedirectsOption}
+            keyboardType="numeric"
+          />
           <Text>withCredentials option:</Text>
           <CheckBox
             center
             title="withCredentials"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
             checked={withCredentialsOption}
             onPress={() => setWithCredentialsOption(!withCredentialsOption)}
           />
@@ -94,6 +97,10 @@ const styles = StyleSheet.create({
   requestSection: {
     width: '100%',
     alignItems: 'flex-start',
+  },
+  textInput: {
+    width: '100%',
+    borderBottomWidth: 1,
   },
   actionBar: {
     alignSelf: 'flex-end',
