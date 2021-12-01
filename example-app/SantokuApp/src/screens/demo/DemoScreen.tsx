@@ -5,10 +5,11 @@ import React, {useMemo} from 'react';
 import {DemoLinkItemData} from './DemoLinkItem';
 import {DemoTemplate} from './DemoTemplate';
 import {AppStateScreen} from './app-state';
-import {AuthenticationScreen, FetchTestScreen} from './authentication';
+import {AuthenticationScreen} from './authentication';
 import {ButtonScreen} from './button';
 import {ConfigScreen} from './config';
 import {ErrorCaseScreen} from './error';
+import {HttpApiScreen} from './http-api';
 import {AppInfoScreen} from './info';
 import {InstructionsScreen} from './instructions';
 import {LocalAuthenticationScreen} from './local-authn';
@@ -62,8 +63,8 @@ const demoScreenList = [
     to: AuthenticationScreen.name,
   },
   {
-    title: 'FetchTest',
-    to: FetchTestScreen.name,
+    title: 'HttpApi',
+    to: HttpApiScreen.name,
   },
 ];
 
