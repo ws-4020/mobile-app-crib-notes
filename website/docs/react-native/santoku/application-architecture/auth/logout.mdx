@@ -17,5 +17,4 @@ title: ログアウト
 | ① | ログアウトのリクエスト | SantokuAppは、SantokuApp Backendにログアウトリクエストを送ります。ネイティブの機能を利用して、端末内に保持されたCookie（セッションID）をHTTPリクエストに設定します。 |
 | ② | ログアウト | SantokuApp Backendは、ログアウト処理（セッションIDの破棄）をします。 |
 | ③ | ログアウト結果の返却 | SantokuApp Backendはログアウト処理の結果をSantokuAppに返却します。 |
-| ④ | Cookieの破棄 | SantokuAppは、SantokuApp Backendからログアウト処理の結果を受け取って、Cookieを破棄します。Cookieの破棄はネイティブの機能で透過的に実施されます。 |
-| ⑤ | ログアウトしたアカウントIDの破棄 | SantokuAppは、ログイン中のアカウントIDとして保存していたアカウントIDを、セキュアストレージから破棄します。 |
+| ④ | ログアウトしたアカウントIDの破棄 | SantokuAppは、ログイン中のアカウントIDとして保存していたアカウントIDを、セキュアストレージから破棄します。 |
