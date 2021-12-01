@@ -2,7 +2,7 @@
 title: ログイン
 ---
 
-このアプリでは、ユーザが本人であることを確認するために、Cookieベースの認証機能を提供します。ID・パスワードを用いて認証し、SantokuApp BackendからCookieでセッションIDを受け取ります。
+このアプリでは、ユーザが本人であることを確認するために、Cookieベースの認証機能を提供します。ID・パスワードを用いて認証し、SantokuApp BackendからCookie経由でセッションIDを受け取ります。
 
 認証後は、SantokuApp BackendへのHTTPリクエスト送信時に、Cookie経由でセッションIDを渡すことにより認証状態を維持します。
 
@@ -26,8 +26,8 @@ title: ログイン
 | ③ | ログインのリクエスト | SantokuAppは、アカウントIDとパスワードを用いてSantokuApp Backendにログインリクエストを送ります。 |
 | ④ | 認証 | SantokuApp Backendは、ログインリクエストで受け取ったアカウントIDとパスワードを用いて認証処理をします。 |
 | ⑤ | 認証結果の返却 | SantokuApp Backendは認証処理の結果をSantokuAppに返却します。|
-| ⑥ | Cookieの保存 | SantokuAppは、SantokuApp Backendから認証処理の結果を受け取って、Cookie（セッションID）を保存します。Cookieの保存に関しては、[認証状態の保持](login.mdx#認証状態の保持)を参照してください。 |
-| ⑦ | ログイン中のアカウントIDを保存 | SantokuAppは、ログイン中のアカウントIDとして、入力されたアカウントIDをセキュアストレージに保存します。 |
+| ⑥ | Cookieの保存 | SantokuAppは、SantokuApp Backendから認証処理の結果を受け取って、Cookie（セッションID）を保存します。Cookieの保存に関しては、[認証状態の維持](login.mdx#認証状態の維持)を参照してください。 |
+| ⑦ | ログインしたアカウントIDを保存 | SantokuAppは、入力されたアカウントIDをセキュアストレージに保存します。 |
 
 ## 自動ログイン
 
@@ -49,18 +49,16 @@ title: ログイン
 
 | No | 処理 | 内容 |
 |:--|:--|:--|
-| ① | ログイン資格情報の取得 | SantokuAppは、セキュアストレージから前回ログインしていたアカウントIDと、そのアカウントIDに紐づくパスワード取得します。 |
+| ① | ログイン資格情報の取得 | SantokuAppは、セキュアストレージから前回ログインしていたアカウントIDと、そのアカウントIDに紐づくパスワード取得します。<br/>ただし、サインアップ後は前回ログインしていたアカウントIDではなく、[SantokuApp Backendから返却されたアカウントID](signup.mdx#処理フロー)を使用します。 |
 | ② | ログインのリクエスト | SantokuAppは、アカウントIDとパスワードを用いてSantokuApp Backendにログインリクエストを送ります。 |
 | ③ | 認証 | SantokuApp Backendは、ログインリクエストで受け取ったアカウントIDとパスワードを用いて認証処理をします。 |
 | ④ | 認証結果の返却 | SantokuApp Backendは認証処理の結果をSantokuAppに返却します。|
-| ⑤ | Cookieの保存 | SantokuAppは、SantokuApp Backendから認証処理の結果を受け取って、Cookie（セッションID）を保存します。Cookieの保存に関しては、[認証状態の保持](login.mdx#認証状態の保持)を参照してください。 |
+| ⑤ | Cookieの保存 | SantokuAppは、SantokuApp Backendから認証処理の結果を受け取って、Cookie（セッションID）を保存します。Cookieの保存に関しては、[認証状態の維持](login.mdx#認証状態の維持)を参照してください。 |
 
-## 認証状態の保持
+## 認証状態の維持
 
 SantokuApp BackendへのHTTPリクエスト送信時に、Cookie経由でセッションIDを渡すことにより認証状態を維持します。
 
 認証後に受け取ったCookie（セッションID）など、HTTPレスポンスとして受け取ったCookieは、ネイティブの機能で端末内に自動で保持されます。SantokuApp BackendへのHTTPリクエスト送信時には、ネイティブの機能でCookie（セッションID）を透過的に設定します。
 
-なお、セッションIDには有効期限があります。有効期限が切れた場合は自動ログインを使用して再度セッションIDを取得します。詳細は、[HTTPステータスコードが4xxのエラーハンドリング](../http-api/http-api-error-handling#httpステータスコードが4xxのエラーハンドリング)を参照してください。
-
-## FetchとCookieベースの認証に関する既知の問題
+なお、セッションIDには有効期限があります。有効期限が切れた場合は自動ログインを使用して再度セッションIDを取得します。
