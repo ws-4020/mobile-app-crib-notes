@@ -54,6 +54,8 @@ const isSupported = await LocalAuthentication.isIrisSupported();
 
 生体認証には、いくつかのオプション項目を指定できます。詳細は、[LocalAuthenticationOptions](https://docs.expo.dev/versions/latest/sdk/local-authentication/#localauthenticationoptions)を参照してください。
 
+このアプリでは、`disableDeviceFallback`を`false`に設定して、生体認証に失敗した場合などのフォールバックとしてPINコード（パスコード）による認証も許可します。
+
 ```typescript jsx title='生体認証の例'
 const result = await LocalAuthentication.authenticate({
   cancelLabel: 'キャンセル',
