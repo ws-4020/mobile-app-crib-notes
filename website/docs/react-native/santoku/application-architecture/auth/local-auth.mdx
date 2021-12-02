@@ -29,6 +29,7 @@ const isEnrolled = await LocalAuthentication.isEnrolled();
 どの生体属性が登録されているか（例えば、指紋データが登録されているか）も確認できます。
 
 ```typescript jsx title='生体属性の登録確認の例'
+// 指紋認証がサポートされているかどうか
 const isSupported = await LocalAuthentication.isFingerPrintSupported();
 ```
 
