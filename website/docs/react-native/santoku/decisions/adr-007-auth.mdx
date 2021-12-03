@@ -82,7 +82,7 @@ React NativeでCookieを扱う場合、[Known Issues with fetch and cookie based
 - 以下のオプションがfetchで動作しない
   - `redirect:manual`
   - `credentials:omit`
-- Androidで同じ名前のヘッダーを持つと、最新のものだけが表示される
+- Androidで同じ名前のレスポンスヘッダーを受け取ると、最後に与えられたものだけが使用される
 - `302`によるリダイレクト時に`Set-Cookie`ヘッダが存在すると、少なくともiOSでCookieが正しく設定されない
 
 これらについて、次の環境で動作を検証しました。
