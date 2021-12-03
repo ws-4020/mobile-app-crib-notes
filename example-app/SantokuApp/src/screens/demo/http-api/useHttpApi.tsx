@@ -13,27 +13,17 @@ export const useHttpApi = () => {
   const [responseInfo, setResponseInfo] = useState('');
 
   const callFetch = useCallback(() => {
-    fetch(AppConfig.santokuAppBackendUrl + '/api/fetch_test/redirect', {
+    fetch(AppConfig.santokuAppBackendUrl + '/api/sandbox/fetch_test/redirect', {
       redirect: redirectOptions[redirectOptionIndex],
       credentials: credentialsOptions[credentialsOptionIndex],
     })
       .then(async response => {
         const json = (await response.json()) as {message: string};
-        const info =
-          'redirect option:' +
-          redirectOptions[redirectOptionIndex] +
-          '\n' +
-          'credentials option:' +
-          credentialsOptions[credentialsOptionIndex] +
-          '\n' +
-          'response.uri:' +
-          response.url +
-          '\n' +
-          'response.redirected :' +
-          String(response.redirected) +
-          '\n' +
-          json.message;
-        setResponseInfo(info);
+        setResponseInfo(`redirect option:${redirectOptions[redirectOptionIndex]}
+credentials option:${credentialsOptions[credentialsOptionIndex]}
+response.uri:${response.url}
+response.redirected:${String(response.redirected)}
+${json.message}`);
       })
       .catch(error => {
         setResponseInfo('Error occurred\n' + JSON.stringify(error));
@@ -44,20 +34,14 @@ export const useHttpApi = () => {
   const callAxios = useCallback(() => {
     const maxRedirects = isNaN(Number(maxRedirectsOption)) ? undefined : Number(maxRedirectsOption);
     axios
-      .get<{message: string}>(AppConfig.santokuAppBackendUrl + '/api/fetch_test/redirect', {
+      .get<{message: string}>(AppConfig.santokuAppBackendUrl + '/api/sandbox/fetch_test/redirect', {
         maxRedirects,
         withCredentials: withCredentialsOption,
       })
       .then(response => {
-        const info =
-          'maxRedirects option:' +
-          String(maxRedirects) +
-          '\n' +
-          'withCredentials option:' +
-          String(withCredentialsOption) +
-          '\n' +
-          response.data.message;
-        setResponseInfo(info);
+        setResponseInfo(`maxRedirects option:${String(maxRedirects)}
+withCredentials option:${String(withCredentialsOption)}
+${response.data.message}`);
       })
       .catch(error => {
         setResponseInfo('Error occurred\n' + JSON.stringify(error));
