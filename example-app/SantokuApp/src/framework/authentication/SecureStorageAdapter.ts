@@ -20,7 +20,7 @@ const KEY_CHAIN_ACCESSIBILITY = SecureStore.WHEN_UNLOCKED;
  */
 function saveActiveAccountId(accountId: string): Promise<void> {
   return SecureStore.setItemAsync(STORED_ITEM_KEYS.ACTIVE_ACCOUNT_ID, accountId, {
-    keychainAccessible: SecureStore.WHEN_UNLOCKED,
+    keychainAccessible: KEY_CHAIN_ACCESSIBILITY,
   });
 }
 
