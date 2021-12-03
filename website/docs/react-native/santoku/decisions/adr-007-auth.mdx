@@ -85,13 +85,26 @@ React NativeでCookieを扱う場合、[Known Issues with fetch and cookie based
 - Androidで同じ名前のレスポンスヘッダーを受け取ると、最後に与えられたものだけが使用される
 - `302`によるリダイレクト時に`Set-Cookie`ヘッダが存在すると、少なくともiOSでCookieが正しく設定されない
 
+:::info
+`redirect`、および`credentials`オプションの詳細は、次のリンクをご確認ください。
+- https://developer.mozilla.org/ja/docs/Web/API/fetch
+- https://developer.mozilla.org/ja/docs/Web/API/Request/credentials
+:::
+
 これらについて、次の環境で動作を検証しました。
 
 - React Native: 0.64.3
 - Android実機、エミュレータ
 - iOS実機、シミュレータ
 
-`redirect`オプションについては、`redirect:follow`、`redirect:error`、`redirect:manual`のいずれを指定しても、302でリダイレクトされました。`redirect`オプションは機能していないようです。
+`redirect`オプションについて、次のオプションを用いて302応答を返すURLにリクエストしました。
+
+- `redirect:follow`
+- `redirect:error`
+- `redirect:manual`
+
+結果、どのオプションを指定しても302応答でリダイレクトされ、リダイレクト先のURLのリソースが応答として返ってきました。
+`redirect`オプションは機能していないようです。
 
 `credentials`オプションについては、`credentials:include`、`credentials:same-origin`のいずれを指定しても、Cookieはバックエンドに送信されました。一方で`credentials:omit`を指定すると、AndroidはCookieが送信されませんでしたが（想定される動作）、iOSは送信されました。さらに確認を進めると、iOSで`credentials:omit`を指定した場合、`Set-Cookie`を無視する動作に見えます。
 
