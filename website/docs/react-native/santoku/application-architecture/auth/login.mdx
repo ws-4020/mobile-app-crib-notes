@@ -29,7 +29,7 @@ title: ログイン
 
 ### 利用方法
 
-ログインするためには、事前にバックエンドからCSRFトークンを取得する必要があります。ログインに成功した後、バックエンドにアクセスするためには、CSRFトークンを再度取得する必要があります。
+ログインは`AuthenticationService`の`changeAccount`メソッドを使用します。このメソッドを使用する前に、バックエンドからCSRFトークンを取得する必要があります。ログインに成功するとCSRFトークンが更新されるため、再度CSRFトークンを取得する必要があります。
 
 ```typescript title="ログイン画面からログインする場合の利用方法"
 import {AuthenticationService, csrfToken} from 'framework';
