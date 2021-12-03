@@ -7,6 +7,9 @@ const STORED_ITEM_KEYS = {
   PASSWORD: 'password',
 } as const;
 
+// https://github.com/ws-4020/mobile-app-crib-notes/pull/640#issuecomment-984500781
+const KEY_CHAIN_ACCESSIBILITY = SecureStore.WHEN_UNLOCKED;
+
 /**
  * 指定されたアカウントIDを、アクティブなアカウントとしてセキュアストレージに格納します。
  * セキュアストレージに格納する際のオプションとして、以下を指定します。
