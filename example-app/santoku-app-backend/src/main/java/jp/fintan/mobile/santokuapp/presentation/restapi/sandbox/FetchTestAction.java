@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.UUID;
 
 @SystemRepositoryComponent
-@Path("/fetch_test")
+@Path("/sandbox/fetch_test")
 public class FetchTestAction {
 
   private static final Logger LOGGER = LoggerManager.get(FetchTestAction.class);
@@ -30,7 +30,7 @@ public class FetchTestAction {
     EntityResponse response = new EntityResponse();
     response.setEntity(new FetchTestResponse("ok"));
     response.setStatusCode(HttpResponse.Status.FOUND.getStatusCode());
-    response.setHeader("Location", "/api/fetch_test/ok");
+    response.setHeader("Location", "/api/sandbox/fetch_test/ok");
 
     // Note::
     // JaxRsResponseHandlerがCookieに対応していないのか下記コードが動作しない。
