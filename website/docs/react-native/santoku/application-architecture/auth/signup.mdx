@@ -42,7 +42,7 @@ const signup = useCallback(async () => {
     // サインアップ
     const res = await AuthenticationService.signup('[nickName]', password);
   } catch (e) {
-    // エラーハンドリング
+    // エラー処理
   }
 }, []);
 ```
