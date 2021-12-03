@@ -114,7 +114,7 @@ Androidで同じ名前のヘッダーを持つ場合の問題を検証するた�
 リダイレクトされた時に`Set-Cookie`ヘッダが存在しても、Cookieは正しく設定されました。
 
 これらのことから、いくつかの不具合は既に解消しています。
-[Fetch APIの仕様](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API)通りに実装が提供されているわけではないようですが、通常のモバイルアプリとして開発を進める分には問題ないでしょう。
+[Fetch APIの仕様](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API)通りに実装が提供されているわけではないようですが、Cookie-basedの認証には影響ありません。`redirect`、`credentials`オプションの動作で問題がでる機能はないため、このアプリとして開発を進める分には問題ないでしょう。
 
 #### 端末認証
 
