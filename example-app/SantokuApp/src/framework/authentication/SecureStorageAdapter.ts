@@ -39,7 +39,7 @@ async function savePassword(accountId: string, password: string): Promise<void> 
   // ログインに利用するような項目は平文で保存しないでハッシュ化します。
   const hash = await sha256(accountId);
   return SecureStore.setItemAsync(`${hash}_${STORED_ITEM_KEYS.PASSWORD}`, password, {
-    keychainAccessible: SecureStore.WHEN_UNLOCKED,
+    keychainAccessible: KEY_CHAIN_ACCESSIBILITY,
   });
 }
 
