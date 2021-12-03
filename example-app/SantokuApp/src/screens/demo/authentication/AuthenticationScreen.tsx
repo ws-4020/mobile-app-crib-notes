@@ -4,7 +4,7 @@ import {Button, Input, Text} from 'react-native-elements';
 
 import {useAuthentication} from './useAuthentication';
 
-const ScreenName = 'Authn';
+const ScreenName = 'Authentication';
 const Screen = () => {
   const {accountId, accountIdInput, setAccountIdInput, signup, changeAccount, canAutoLogin, autoLogin, logout} =
     useAuthentication();
@@ -20,7 +20,7 @@ const Screen = () => {
         <Input
           placeholder="アカウントIDを入力してください"
           value={accountIdInput}
-          onChangeText={(value) => setAccountIdInput(value)}
+          onChangeText={value => setAccountIdInput(value)}
         />
         <Button onPress={changeAccount} title="アカウント切り替え" />
       </View>

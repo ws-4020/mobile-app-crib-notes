@@ -276,6 +276,18 @@ module.exports = {
         },
         {
           type: 'category',
+          label: '認証',
+          items: [
+            'react-native/santoku/application-architecture/auth/overview',
+            'react-native/santoku/application-architecture/auth/signup',
+            'react-native/santoku/application-architecture/auth/login',
+            'react-native/santoku/application-architecture/auth/logout',
+            'react-native/santoku/application-architecture/auth/local-auth',
+            'react-native/santoku/application-architecture/auth/credential-management',
+          ],
+        },
+        {
+          type: 'category',
           label: 'メッセージ管理',
           items: [
             'react-native/santoku/application-architecture/message-configuration/overview',
@@ -321,6 +333,10 @@ module.exports = {
           id: 'react-native/santoku/test-planning',
         },
         {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/test-all-planning',
+        },
+        {
           type: 'category',
           label: 'テスト観点',
           items: [
@@ -341,6 +357,10 @@ module.exports = {
               items: ['react-native/santoku/test-planning/test-point/it-point-terminal'],
             },
           ],
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/test-variation',
         },
       ],
     },
