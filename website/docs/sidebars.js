@@ -314,6 +314,16 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Test Planning',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/ut-planning',
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Design',
       items: [
         {
@@ -442,6 +452,14 @@ module.exports = {
             'react-native/santoku/development/build-configuration/build-variants',
             'react-native/santoku/development/build-configuration/build-type-configurations',
             'react-native/santoku/development/build-configuration/product-flavor-configurations',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'テスト',
+          items: [
+            'react-native/santoku/development/test',
+            'react-native/santoku/development/test/emulator-with-same-config',
           ],
         },
         {
