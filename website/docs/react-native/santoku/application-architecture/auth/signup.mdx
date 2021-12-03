@@ -28,7 +28,7 @@ title: サインアップ
 
 ## 利用方法
 
-サインアップするためには、事前にバックエンドからCSRFトークンを取得する必要があります。
+サインアップは`AuthenticationService`の`signup`メソッドを使用します。このメソッドを使用する前に、バックエンドからCSRFトークンを取得する必要があります。
 
 ```typescript title="サインアップの利用方法"
 import {AuthenticationService, csrfToken, generatePassword} from 'framework';
