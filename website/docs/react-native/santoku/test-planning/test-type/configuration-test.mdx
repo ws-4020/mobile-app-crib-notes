@@ -2,50 +2,44 @@
 title: 構成テスト
 ---
 
-構成テストに関連するテスト観点をまとめています。
+## 目的
 
-- 構成テストは、OS/レイアウト/ネイティブ機能の各バリエーションごとに実施するため、それぞれのテスト観点を定義します。
-- 構成テストは、複数の端末で実施します。端末の選定基準は、各バリエーションのテスト対象端末をご参照ください。
-- テスト観点は、[機能テストに関するテスト観点](functional-testing.mdx#機能テストに関するテスト観点)より抜粋します。
+OSバージョンや
 
-## OSバリエーションテスト
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-Android、iOS／iPadOS、それぞれのテスト対象OSバージョンを対象にOSバージョンが相違しても問題なく動作することを検証します。
-テスト対象端末とテスト観点は以下のとおりです。
+## OSバリエーション
 
-### テスト対象端末：OSバリエーション
+### テスト観点
 
-[テスト端末バリエーション](../test-variation.mdx)の中から、Android、iOS／iPadOSでそれぞれテスト対象OSバージョンごとに1端末ずつ選定します。
+- テスト対象の全OSバージョンで、OS依存の機能が正常に動作すること
+  - 上記観点の確認のため、[端末やOSに関する観点](functional-testing/terminal-os.mdx)を全OSバージョンで実施する
 
-### テスト観点：OSバリエーション
+### テスト方法
 
-- [端末やOSに関する観点](functional-testing/terminal-os.mdx)
+- [テスト端末バリエーション](../test-variation.mdx)の中から、Android、iOS／iPadOSで全OSバージョンの実機を1機種ずつ選択してテストを実施する
 
-端末やOSに関する観点の中から[機種依存機能の検証](functional-testing/terminal-os.mdx#機種依存機能の検証)を除く観点がテスト対象観点になります。
+## レイアウトバリエーション
 
-## レイアウトバリエーションテスト
+### テスト観点
 
-スマートフォンの機種は多種多様であり、それに伴って画面サイズのバリエーションが豊富に存在します。
-ここでは、それぞれでテスト対象としたアスペクト比率、画面解像度を対象に表示崩れなどがないことを検証します。
-テスト対象端末とテスト観点は以下のとおりです。
+- 全ての機種毎のアスペクト比率、画面解像度毎に表示崩れなどがないこと
+- パンチホール有無、ノッチ有無の機種毎に表示崩れなどがないこと
+  - 上記観点の確認のため、[画面デザインや出力結果の表示に関する観点](functional-testing/screen-output-result.mdx)を全アスペクト比率、画面解像度で実施する
 
-### テスト対象端末：レイアウトバリエーション
+### テスト方法
 
-[テスト端末バリエーション](../test-variation.mdx)の中から、Android、iOS／iPadOSでそれぞれテスト対象のアスペクト比率、画面解像度ごとに1端末ずつ選定します。
+- [テスト端末バリエーション](../test-variation.mdx)の中から、Android、iOS／iPadOSで全アスペクト比率、画面解像度をエミュレータ／シミュレータで1機種ずつ選択してテストを実施する
 
-### テスト観点：レイアウトバリエーション
+## ネイティブ機能バリエーション
 
-- [画面デザインや出力結果の表示に関する観点](functional-testing/screen-output-result.mdx)
+### テスト観点
 
-## ネイティブ機能バリエーションテスト
+- ネイティブ機能の有無や種類（カメラ、指紋認証、顔認証）に関係なくアプリが動作すること
+  - 上記観点の確認のため、端末やOSに関する観点の[機種依存機能の検証](functional-testing/terminal-os.mdx#機種依存機能の検証)をネイティブ機能の有無、種類毎で実施する
 
-このアプリに関連するネイティブ機能を対象にネイティブ機能の有無や種別に関係なく動作することを検証します。
-テスト対象端末とテスト観点は以下のとおりです。
+### テスト方法
 
-### テスト対象端末：ネイティブ機能バリエーション
+- [テスト端末バリエーション](../test-variation.mdx)の中から、Android、iOS／iPadOSでネイティブ機能の有無、種類毎に実機を1機種ずつ選択してテストを実施する
 
-[テスト端末バリエーション](../test-variation.mdx)の中でネイティブ機能ごとに1端末ずつ選定します。
-
-### テスト観点：ネイティブ機能バリエーション
-
-- 端末やOSに関する観点の[機種依存機能の検証](functional-testing/terminal-os.mdx#機種依存機能の検証)
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
