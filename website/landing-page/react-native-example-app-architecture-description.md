@@ -4,7 +4,7 @@
 
 モバイルアプリの開発は短期間での開発が要求される傾向にあります。そのため、技術選定や方式設計など、開発準備を十分に行う時間を確保できないことが多いと感じています。
 
-そこで、React Nativeアプリの開発をスムーズに進行できるように、時間割共有アプリを題材とした次のコンテンツを公開しています。
+そこで、React Nativeアプリの開発をスムーズに進行できるよう、時間割共有アプリを題材とした次のコンテンツを公開しています。
 
 [React Nativeのサンプルアプリケーション \| Fintan » Mobile App Development](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku)
 
