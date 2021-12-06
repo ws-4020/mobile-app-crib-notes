@@ -341,14 +341,17 @@ module.exports = {
           label: 'テスト観点',
           items: [
             'react-native/santoku/test-planning/test-point/overview',
+            'react-native/santoku/test-planning/test-point/function-test',
             {
               type: 'category',
-              label: '単体テスト観点',
+              label: '各テスト観点',
               items: [
-                'react-native/santoku/test-planning/test-point/ut-point-screen-display',
-                'react-native/santoku/test-planning/test-point/ut-point-validation',
-                'react-native/santoku/test-planning/test-point/ui-point-screen-ope',
-                'react-native/santoku/test-planning/test-point/ui-point-terminal',
+                'react-native/santoku/test-planning/test-point/function-test/screen-output-result',
+                'react-native/santoku/test-planning/test-point/function-test/operation-event',
+                'react-native/santoku/test-planning/test-point/function-test/screen-transition',
+                'react-native/santoku/test-planning/test-point/function-test/terminal-os',
+                'react-native/santoku/test-planning/test-point/function-test/validation-check',
+                'react-native/santoku/test-planning/test-point/function-test/log-output',
               ],
             },
             {
