@@ -6,7 +6,7 @@ title: 構成テスト
 
 - 構成テストは、OS/レイアウト/ネイティブ機能の各バリエーションごとに実施するため、それぞれのテスト観点を定義します。
 - 構成テストは、複数の端末で実施します。端末の選定基準は、各バリエーションのテスト対象端末をご参照ください。
-- テスト観点は、[機能テストに関するテスト観点](function-test.mdx#機能テストに関するテスト観点)より抜粋します。
+- テスト観点は、[機能テストに関するテスト観点](functional-testing.mdx#機能テストに関するテスト観点)より抜粋します。
 
 ## OSバリエーションテスト
 
@@ -15,14 +15,13 @@ Android、iOS／iPadOS、それぞれのテスト対象OSバージョンを対�
 
 ### テスト対象端末：OSバリエーション
 
-[テスト端末バリエーション](/react-native/santoku/test-planning/test-variation.mdx)の中から、
-Android、iOS／iPadOSでそれぞれテスト対象OSバージョンごとに1端末ずつ選定します。
+[テスト端末バリエーション](../test-variation.mdx)の中から、Android、iOS／iPadOSでそれぞれテスト対象OSバージョンごとに1端末ずつ選定します。
 
 ### テスト観点：OSバリエーション
 
-- [端末やOSに関する観点](/react-native/santoku/test-planning/test-point/function-test/terminal-os.mdx)
+- [端末やOSに関する観点](functional-testing/terminal-os.mdx)
 
-端末やOSに関する観点の中から[機種依存機能の検証](/react-native/santoku/test-planning/test-point/function-test/terminal-os.mdx#機種依存機能の検証)を除く観点がテスト対象観点になります。
+端末やOSに関する観点の中から[機種依存機能の検証](functional-testing/terminal-os.mdx#機種依存機能の検証)を除く観点がテスト対象観点になります。
 
 ## レイアウトバリエーションテスト
 
@@ -32,12 +31,11 @@ Android、iOS／iPadOSでそれぞれテスト対象OSバージョンごとに1�
 
 ### テスト対象端末：レイアウトバリエーション
 
-[テスト端末バリエーション](/react-native/santoku/test-planning/test-variation.mdx)の中から、
-Android、iOS／iPadOSでそれぞれテスト対象のアスペクト比率、画面解像度ごとに1端末ずつ選定します。
+[テスト端末バリエーション](../test-variation.mdx)の中から、Android、iOS／iPadOSでそれぞれテスト対象のアスペクト比率、画面解像度ごとに1端末ずつ選定します。
 
 ### テスト観点：レイアウトバリエーション
 
-- [画面デザインや出力結果の表示に関する観点](/react-native/santoku/test-planning/test-point/function-test/screen-output-result.mdx)
+- [画面デザインや出力結果の表示に関する観点](functional-testing/screen-output-result.mdx)
 
 ## ネイティブ機能バリエーションテスト
 
@@ -46,8 +44,8 @@ Android、iOS／iPadOSでそれぞれテスト対象のアスペクト比率、�
 
 ### テスト対象端末：ネイティブ機能バリエーション
 
-[テスト端末バリエーション](/react-native/santoku/test-planning/test-variation.mdx)の中でネイティブ機能ごとに1端末ずつ選定します。
+[テスト端末バリエーション](../test-variation.mdx)の中でネイティブ機能ごとに1端末ずつ選定します。
 
 ### テスト観点：ネイティブ機能バリエーション
 
-- 端末やOSに関する観点の[機種依存機能の検証](/react-native/santoku/test-planning/test-point/function-test/terminal-os.mdx#機種依存機能の検証)
+- 端末やOSに関する観点の[機種依存機能の検証](functional-testing/terminal-os.mdx#機種依存機能の検証)
