@@ -84,4 +84,4 @@
   - アプリケーション方式
     - [アプリ起動後の初期化処理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/life-cycle-management/initialization)
 
-[^1]: 方式を設計する際により有効に活用できるよう、設計した方式だけでなく検討した内容を記録してます。ぜひご活用ください。
+[^1]: このアプリのアーキテクチャや機能設計に関する判断の記録です。実際に方式を設計する際に、このサンプルアプリケーションをより有効に活用できるよう、設計した方式だけでなく検討過程も記録しています。
