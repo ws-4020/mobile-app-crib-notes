@@ -4,11 +4,11 @@
 
 モバイルアプリの開発は短期間での開発が要求される傾向にあります。そのため、技術選定や方式設計など、開発準備を十分に行う時間を確保できないことが多いと感じています。
 
-そこで、React Nativeアプリを開発する際に参考としていただけるよう、時間割共有アプリを題材とした次のコンテンツを公開しています。
+そこで、React Nativeアプリの開発をスムーズに進行できるように、時間割共有アプリを題材とした次のコンテンツを公開しています。
 
 [React Nativeのサンプルアプリケーション \| Fintan » Mobile App Development](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku)
 
-コンテンツの内容は以下のとおりです。実際の開発プロセスに沿った形で作成しており、アプリ開発現場で役立つドキュメント類および、[ソースコード](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp)を提供しています。
+コンテンツの内容は以下のとおりです。実際の開発プロセスに沿った形で作成しており、アプリ開発現場で役立つドキュメント類および、[ソースコード](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp)となっています。
 
 - 要件定義
 - 方式設計
