@@ -3,46 +3,51 @@ title: テスト観点
 sidebar_label: 概要
 ---
 
-単体テストと結合テストのテスト観点をまとめています。
+テスト種別のそれぞれを網羅するためのテスト観点をまとめています。
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-## 単体テスト観点
+## 機能テスト
 
 import {PageList} from '../../../../../src/components';
 const overviews = [
   {
-    title: '画面デザインと表示データに関する観点',
-    to: '/react-native/santoku/test-planning/test-point/ut-point-screen-display',
-    summary: <>画面デザインと表示データに関するテスト観点をまとめています</>,
-  },
-  {
-    title: 'バリデーションに関する観点',
-    to: '/react-native/santoku/test-planning/test-point/ut-point-validation',
+    title: '単項目／相関バリデーションに関する観点',
+    to: '/react-native/santoku/test-planning/test-point/function-validation-point',
     summary: <>単項目と相関のバリデーションに関するテスト観点をまとめています</>,
   },
   {
-    title: 'ユーザ操作と画面遷移に関する観点',
-    to: '/react-native/santoku/test-planning/test-point/ui-point-screen-ope',
-    summary: <>ユーザ操作と画面遷移に関するテスト観点をまとめています</>,
+    title: '端末やOSに関する観点',
+    to: '/react-native/santoku/test-planning/test-point/function-terminal-point',
+    summary: <>端末やOSに関するテスト観点をまとめています</>,
   },
   {
-    title: '端末やOSに関する観点',
-    to: '/react-native/santoku/test-planning/test-point/ui-point-terminal',
-    summary: <>端末やOSに関するテスト観点をまとめています</>,
+    title: '画面デザインに関する観点',
+    to: '/react-native/santoku/test-planning/test-point/function-design-point',
+    summary: <>画面表示とユーザ操作の結果の表示に関するテスト観点をまとめています</>,
+  },
+  {
+    title: '画面内操作／イベント実行に関する観点',
+    to: '/react-native/santoku/test-planning/test-point/function-operation-point',
+    summary: <>画面内操作のエラー時の挙動に関するテスト観点をまとめています</>,
+  },
+  {
+    title: '画面遷移に関する観点',
+    to: '/react-native/santoku/test-planning/test-point/function-screen-transition-point',
+    summary: <>画面遷移に関するテスト観点をまとめています</>,
   }
 ];
 
 <PageList overviews={overviews} colSize={12} />
 
-## 結合テスト観点
+## 構成テスト（レイアウトバリエーション）
 
 export const v = [
   {
-    title: '端末やOSに関する観点',
-    to: '/react-native/santoku/test-planning/test-point/it-point-terminal',
-    summary: <>端末やOSに関するテスト観点をまとめていますす</>,
-  }
+    title: '画面デザインに関する観点',
+    to: '/react-native/santoku/test-planning/test-point/function-design-point',
+    summary: <>画面表示とユーザ操作の結果の表示に関するテスト観点をまとめています</>,
+  },
 ];
 
 <PageList overviews={v} colSize={12} />
