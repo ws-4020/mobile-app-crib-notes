@@ -354,6 +354,7 @@ module.exports = {
                 'react-native/santoku/test-planning/test-point/function-test/terminal-os',
                 'react-native/santoku/test-planning/test-point/function-test/validation-check',
                 'react-native/santoku/test-planning/test-point/function-test/log-output',
+                'react-native/santoku/test-planning/test-point/function-test/use-case',
               ],
             },
           ],
