@@ -4,21 +4,25 @@
 
 モバイルアプリの開発は短期間での開発が要求される傾向にあります。そのため、技術選定や方式設計など、開発準備を十分に行う時間を確保できないことが多いと感じています。
 
-そこで、React Nativeアプリを開発する際に参考としていただけるよう、次のコンテンツを公開しています。
+そこで、React Nativeアプリを開発する際に参考としていただけるよう、時間割共有アプリを題材とした次のコンテンツを公開しています。
 
 [React Nativeのサンプルアプリケーション \| Fintan » Mobile App Development](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku)
 
-コンテンツの内容は以下のとおりです。実際のアプリ開発で役立つドキュメント類および、サンプルコードを提供しています。
+コンテンツの内容は以下のとおりです。実際の開発プロセスに沿った形で作成しており、アプリ開発現場で役立つドキュメント類および、[ソースコード](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp)を提供しています。
 
-- 用語集
 - 要件定義
 - 方式設計
 - テスト計画
-- 外部設計・内部設計
+- 外部設計
 - 開発ガイド
 - Decision Records[^1]
 
 今後も継続的にアップデートし、内容を充実させていく予定です。
+
+なお、サンプルアプリケーションの開発手法はウォーターフォールモデルを採用しています。その理由は以下のとおりです。
+
+- 主要な読者として想定しているウォーターフォールモデルに慣れている開発者にとっては、公開するサンプルがウォーターフォールモデルで作成する成果物と一致していた方が理解しやすい
+- ウォーターフォールモデルに沿って各工程ごとの成果物を一通り作成し、その後に各成果物の効果を振り返ることで、モバイルアプリの開発を成功させるために最低限必要な成果物を見極めたい
 
 ---
 
@@ -34,7 +38,6 @@
 
 #### 🌱 新規コンテンツ（2021/12/22）
 
-- [用語集](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/glossary)
 - 要件定義
   - [機能要件](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/requirements/functional/overview)
   - [非機能要件](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/requirements/non-functional/overview)
@@ -42,15 +45,13 @@
   - [全体テスト計画](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/test-planning/test-all-planning)
   - [テスト観点](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/test-planning/test-point/overview)
   - [テスト端末バリエーション](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/test-planning/test-variation)
-- 外部設計・内部設計
+- 外部設計
   - 画面
     - [画面一覧](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/design/screen-list/overview)
     - [画面遷移図](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/design/screen-transitions/overview)
-    - [画面設計](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/design/screen-specs/overview)
+    - [画面仕様](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/design/screen-specs/overview)
   - [メッセージ一覧](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/design/message-list/overview)
   - [コンテキスト設計](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/design/context/overview)
-- 実装
-  - [プロトタイプ実装](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp)
 
 ### 2021/11/24
 
