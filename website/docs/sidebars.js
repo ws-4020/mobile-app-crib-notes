@@ -341,13 +341,11 @@ module.exports = {
           label: 'テスト観点',
           items: [
             'react-native/santoku/test-planning/test-type/overview',
-            'react-native/santoku/test-planning/test-type/functional-testing',
-            'react-native/santoku/test-planning/test-type/configuration-test',
-            'react-native/santoku/test-planning/test-type/performance-test',
             {
               type: 'category',
-              label: '各テスト観点',
+              label: '機能テスト',
               items: [
+                'react-native/santoku/test-planning/test-type/functional-testing',
                 'react-native/santoku/test-planning/test-type/functional-testing/screen-output-result',
                 'react-native/santoku/test-planning/test-type/functional-testing/operation-event',
                 'react-native/santoku/test-planning/test-type/functional-testing/screen-transition',
@@ -357,6 +355,8 @@ module.exports = {
                 'react-native/santoku/test-planning/test-type/functional-testing/use-case',
               ],
             },
+            'react-native/santoku/test-planning/test-type/configuration-test',
+            'react-native/santoku/test-planning/test-type/performance-test',
           ],
         },
         {
