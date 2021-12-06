@@ -342,6 +342,8 @@ module.exports = {
           items: [
             'react-native/santoku/test-planning/test-point/overview',
             'react-native/santoku/test-planning/test-point/function-test',
+            'react-native/santoku/test-planning/test-point/configuration-test',
+            'react-native/santoku/test-planning/test-point/performance-test',
             {
               type: 'category',
               label: '各テスト観点',
@@ -353,11 +355,6 @@ module.exports = {
                 'react-native/santoku/test-planning/test-point/function-test/validation-check',
                 'react-native/santoku/test-planning/test-point/function-test/log-output',
               ],
-            },
-            {
-              type: 'category',
-              label: '結合テスト観点',
-              items: ['react-native/santoku/test-planning/test-point/it-point-terminal'],
             },
           ],
         },
