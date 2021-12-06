@@ -18,8 +18,8 @@ Xcode 13から、`xcodebuild`の実行時に常に`destination`が適切に指�
 
 ## Podfile.lockにdiffが出ないようにするパッチ
 
-React Native 0.64.3ではReact Nativeに含まれるPodのpodspecファイルが`pod install`した環境によって異なるという問題があります。この問題のため、`Podfile.lock`の内容も環境によって異なるものになってしまいます。
+React Native 0.64.3ではReact Nativeに含まれるPodのpodspecの内容が`pod install`した環境によって異なるという問題があります。この問題のため、`Podfile.lock`の内容も環境によって異なるものになってしまいます。
 
 [Diff in Podfile.lock when runs in different machines](https://github.com/facebook/react-native/issues/31121#issuecomment-802182459)
 
-[このコミット](https://github.com/facebook/react-native/commit/bdfe2a51791046c4e6836576e08655431373ed67)で解決されているようなので、内容をパッチとして取り込んでいます。
+[このコミット](https://github.com/facebook/react-native/commit/bdfe2a51791046c4e6836576e08655431373ed67)で解決されているので、内容をパッチとして取り込んでいます。
