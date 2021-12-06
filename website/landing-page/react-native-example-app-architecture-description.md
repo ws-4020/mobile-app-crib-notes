@@ -32,7 +32,7 @@
 
 ### 2021/12/22
 
-#### 🌱 新規コンテンツ
+#### 🌱 新規コンテンツ（2021/12/22）
 
 - [用語集](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/glossary)
 - 要件定義
@@ -54,7 +54,7 @@
 
 ### 2021/11/24
 
-#### 🌱 新規コンテンツ
+#### 🌱 新規コンテンツ（2021/11/24）
 
 - 環境切り替え
   - 開発ガイド
@@ -78,7 +78,7 @@
   - Decision Records
     - [ログ出力の方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-006-logging)
 
-#### 🌿 更新コンテンツ
+#### 🌿 更新コンテンツ（2021/11/24）
 
   - アプリケーション方式
     - [アプリ起動後の初期化処理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/life-cycle-management/initialization)
