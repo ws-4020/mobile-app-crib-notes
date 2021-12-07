@@ -346,9 +346,10 @@ module.exports = {
               label: '機能テスト',
               items: [
                 'react-native/santoku/test-planning/test-type/functional-testing',
-                'react-native/santoku/test-planning/test-type/functional-testing/screen-output-result',
+                'react-native/santoku/test-planning/test-type/functional-testing/screen-design',
                 'react-native/santoku/test-planning/test-type/functional-testing/operation-event',
                 'react-native/santoku/test-planning/test-type/functional-testing/screen-transition',
+                'react-native/santoku/test-planning/test-type/functional-testing/output-result',
                 'react-native/santoku/test-planning/test-type/functional-testing/terminal-os',
                 'react-native/santoku/test-planning/test-type/functional-testing/validation-check',
                 'react-native/santoku/test-planning/test-type/functional-testing/log-output',
