@@ -163,6 +163,8 @@
     </property>
   </component>
 
+  <component name="firebaseInitializer" class="jp.fintan.mobile.santokuapp.system.nablarch.initialization.FirebaseInitializer" />
+
   <!-- ハンドラキュー構成 -->
   <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
     <property name="handlerQueue">
@@ -248,6 +250,7 @@
         <component-ref name="dbMigration"/>
         <component-ref name="dbStore"/>
         <component-ref name="dbExpiration"/>
+        <component-ref name="firebaseInitializer"/>
       </list>
     </property>
   </component>
