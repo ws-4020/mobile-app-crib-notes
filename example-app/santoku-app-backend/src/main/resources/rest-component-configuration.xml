@@ -163,7 +163,7 @@
     </property>
   </component>
 
-  <component name="firebaseInitializer" class="jp.fintan.mobile.santokuapp.system.nablarch.initialization.FirebaseInitializer" />
+  <component name="firebaseInitializer" class="jp.fintan.mobile.santokuapp.system.nablarch.FirebaseInitializer" />
 
   <!-- ハンドラキュー構成 -->
   <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
