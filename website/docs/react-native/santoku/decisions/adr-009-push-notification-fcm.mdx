@@ -1,5 +1,5 @@
 ---
-title: FCMを用いたプッシュ通知の管理方式
+title: FCMを用いたプッシュ通知の管理方針
 ---
 
 Status: Proposed
@@ -23,22 +23,11 @@ ADRの決定事項を要約して、3行程度で記載してください。
 この決定や変更をしなくてはいけない状況や問題などを説明してください。
 :::
 
-次の観点でFCMを用いたプッシュ通知の管理方式について議論・調査を進めていきます。
+次の観点でFCMを用いたプッシュ通知の管理方針について議論・調査を進めていきます。
 
-- FCMを用いたプッシュ通知の送信制御に関する議論
-  - デバイス登録トークンの管理
-  - レート制限
-  - エラーハンドリング
-- プッシュ通知の内容に関する議論
-  - 通知に表示できる内容
-  - 通知に含められるデータ
-  - タップ時・ロングタップ時のアクション
-  - 通知のグルーピング
-  - バッジ表示
-  - 通知音
-  - 優先度
-  - 通知の有効期限
-  - その他のOS固有のオプション
+- デバイス登録トークンの管理
+- レート制限
+- エラーハンドリング
 
 ## 議論
 
@@ -129,14 +118,101 @@ UNREGISTERDが返された場合は登録トークンが無効であるため、
 
 ### レート制限
 
-- FCMが定める上限
-- APNsが定める上限
+#### FCMが定める上限
+
+- 1台のデバイスに送信できるメッセージ
+  - 1分あたり最大240件
+  - 1時間あたり最大5000件
+- アップストリームメッセージの制限
+  - プロジェクトあたり1500000件/分
+  - デバイスあたり1000件/分
+- トピック・デバイスグループを対象とした送信（ファンアウト）
+  - プロジェクトあたりの同時ファンアウト数1000
+  - プロジェクトあたりのファンアウト数10000 QPS
+- トピック登録・解除の制限
+  - トピック登録の追加・解除はプロジェクトごとに3000 QPS
+
+#### APNsが定める上限
+
+通知に関する送信上限について明確に記載された最新のドキュメントは見つけられませんでした。
+
+Appleのドキュメントアーカイブに残されている過去のドキュメントとしては、
+[Troubleshooting Push Notifications](https://developer.apple.com/library/archive/technotes/tn2265/_index.html)がありました。
+ここでは、"There are no caps or batch size limits for using APNs."と記載されています。
+
+しかしAPNsが返しうるステータスコードの中には429が含まれています。
+その理由としては、"The server received too many requests for the same device token."と記載されています。
+そのため、同一のデバイスにあまりにも高頻度に送信すると制限されることが予想されます。
 
 ### エラーハンドリング
 
-- エラー応答の種類
-- 再送制御
-- 無効な登録トークンの削除
+#### エラー応答の種類
+
+エラー応答については、以下の公式ドキュメントに詳細が記載されています。
+
+- [FCM HTTP v1 API (現行最新のAPI)](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages)
+- [FcmError](https://firebase.google.com/docs/reference/fcm/rest/v1/FcmError)
+- [ErrorCode](https://firebase.google.com/docs/reference/fcm/rest/v1/ErrorCode)
+- [ApnsError](https://firebase.google.com/docs/reference/fcm/rest/v1/ApnsError)
+- [Handling Notification Responses from APNs](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/handling_notification_responses_from_apns)
+
+TODO: 具体的なエラーレスポンスの形式を後で確認して記載。
+
+エラー原因によってレスポンスボディのerror.detailsに格納される内容が異なります。
+
+- FCM起因の場合は、FcmError形式の応答（FCMのErrorCodeが返ってくる）
+- Apns起因の場合は、ApnsError形式の応答（ApnsのStatusCodeとreason文字列が返ってくる）
+
+#### 再送制御
+
+FCMから以下のエラー応答が返ってきた場合には、通知送信の一時的な失敗とその理由をログに記録した上で、時間をおいた後にFCMへの通知送信をリトライします。
+
+- FcmError
+  - 429 QUOTA_EXCEEDED
+  - 503 UNAVAILABLE
+  - 500 INTERNAL
+- ApnsError
+  - 429 TooManyRequests
+  - 500 InternalServerError
+  - 503 ServiceUnavailable
+  - 503 Shutdown
+
+リトライするまでの待機時間は、以下のルールに従って決定します。
+
+- レスポンスヘッダにRetry-Afterが含まれている場合は、そのヘッダで指定された秒数だけ待機
+- レスポンスヘッダにRetry-Afterが含まれていない場合は指数バックオフに従い、1秒、2秒、4秒と指数関数的に時間を増やしながら待機
+
+リトライ回数の上限は、サンプルアプリケーションでは3回とします。
+
+リトライ回数の上限に達しても送信に成功しなかった場合には、通知送信の失敗とその理由をログに記録します。
+その後の処理については、通知のユースケースごとにアプリケーションのエラーハンドリングとして別途検討します。
+
+#### 無効な登録トークンの削除
+
+FCMから以下のエラー応答が返ってきた場合には、通知送信の失敗とその理由をログに記録した上で、バックエンドサーバに保存されている当該登録トークンを削除します。
+その後の処理については、通知のユースケースごとにアプリケーションのエラーハンドリングとして別途検討します。
+
+- FcmError
+  - 404 UNREGISTERED
+- ApnsError
+  - 410 Unregistered
+
+#### その他のエラーへの対応
+
+その他のエラー応答が返ってきた場合には、通知送信の失敗とその理由をログに記録します。
+その後の処理については、通知のユースケースごとにアプリケーションのエラーハンドリングとして別途検討します。
+
+### 運用上の注意点
+
+#### APNs Auth Keyの管理
+
+APNs Auth Keyを使った認証形式は、過去の証明書を用いた形式と異なり有効期限はなく、更新運用は不要です。
+その代わり、APNs Auth KeyはApple Developer Programのアカウント全体で2つまでしか発行できず、
+アプリ単位ではなくアカウント全体で共用されるものとなります。
+
+2つまでしか発行できず、APNs Auth Keyの移行期間中に並行運用することなどを考えると
+開発・本番環境で別の鍵を利用するのも難しいです。
+鍵ファイルの管理には最新の注意を払いましょう。
 
 ## 決定
 
