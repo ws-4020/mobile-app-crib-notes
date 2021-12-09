@@ -99,6 +99,9 @@ TODO: 通知上でどういうアクションが可能かまとめる。タッ�
 
 TODO: Androidにおける通知チャンネルについてまとめる。
 
+FCMでは明示的に通知チャンネルを指定しなかった場合、デフォルトで"Miscellaneous"（その他）の通知チャンネル宛へ通知が送信されます。
+そのため、もし通知チャンネルを指定しなかったとしても、Android端末に通知が到達しないといった事態を避けられます。
+
 ### 優先度
 
 <https://firebase.google.com/docs/cloud-messaging/concept-options#setting-the-priority-of-a-message>
