@@ -11,23 +11,40 @@ title: 単体テスト計画
 - 対象
 
   - モバイルアプリで実装した機能や画面全般
-  - ただし、モバイルアプリが利用する外部サービスとの連携部分はモックサーバもしくはJestのモック機能を使う
+  - ただし、モバイルアプリが利用する外部サービスとの連携部分はモックサーバ、もしくはJestのモック機能を使う
 
 - 対象外
 
   - バックエンド
 
-## テスト観点　★作成中★
+## テスト観点
 
-既存のテスト観点参照。
+別途、[テスト観点](/react-native/santoku/test-planning/test-type/overview.mdx)がまとめられているため、そちらをベースに単体テストとしてのテスト観点を決定します。
+
+### 対象のテスト観点
+
+単体テストのテスト方針に基づき、画面や機能の検証に適した[機能テスト][]のテスト観点が対象になります。
+
+- [レイアウトに関する観点][]
+- [操作やイベントに関する観点](/react-native/santoku/test-planning/test-type/functional-testing/operation-event.mdx)
+- [表示内容に関する観点](/react-native/santoku/test-planning/test-type/functional-testing/display-content.mdx)
+- [バリデーションに関する観点](/react-native/santoku/test-planning/test-type/functional-testing/validation-check.mdx)
+- [端末やOSに関する観点][]
+- [ユースケースに関する観点][]
+
+基本的には、上記観点に従います。ただし、[ユースケースに関する観点][]については、画面や機能に完結する範囲のユースケースに絞ります。複数機能の連携や、複数画面にまたがるようなユースケースについては、単体テストではなく結合テストの観点になるためです。
+
+### 対象外のテスト観点
+
+[構成テスト][]と[性能テスト](/react-native/santoku/test-planning/test-type/performance-test)のテスト観点は結合テストにて実施するため、対象外となります。
+
+- 構成テストについて補足
+
+  構成テストに挙げられているテスト観点（[レイアウトに関する観点][]や[端末やOSに関する観点][]など）は機能テストにも含まれているため、結果的に各OS1種類ずつは検証することになります。あくまで、サポート対象の端末やOSバージョンを網羅した検証は対象外ということです。
 
 ## テスト実施環境
 
 基本的にエミュレータ／シミュレータを用いて検証します。ただし、実機でしか確認できないようなOS依存の機能（例：カメラ）については、実機を用いて検証します。
-
-```text
-観点に機能と実機／エミュレータの紐付けができてれば、実機依存の話は不要。
-```
 
 このアプリで、実機でしか確認できない機能は次のとおりです。
 
@@ -130,3 +147,9 @@ ignoreでテスト対象外とするには、テスト対象のコードの直�
 - [x] 単体テスト仕様書に記載したすべてのテストケースに合格していること
 - [x] 自動テストを実行した際にエラーが発生していないこと
 - [x] 自動テストの`c0/c1`のカバレッジが100%に達していること
+
+[機能テスト]: /react-native/santoku/test-planning/test-type/functional-testing.mdx
+[レイアウトに関する観点]: /react-native/santoku/test-planning/test-type/functional-testing/layout-test.mdx
+[端末やOSに関する観点]: /react-native/santoku/test-planning/test-type/functional-testing/terminal-os.mdx
+[ユースケースに関する観点]: /react-native/santoku/test-planning/test-type/functional-testing/use-case.mdx
+[構成テスト]: /react-native/santoku/test-planning/test-type/configuration-test.mdx
