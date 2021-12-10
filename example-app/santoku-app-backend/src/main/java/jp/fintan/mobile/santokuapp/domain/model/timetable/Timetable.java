@@ -1,5 +1,7 @@
 package jp.fintan.mobile.santokuapp.domain.model.timetable;
 
+import java.util.List;
+
 public class Timetable {
 
   private final TimetableId timetableId;
@@ -10,14 +12,14 @@ public class Timetable {
 
   private final TimetableStartedAt timetableStartedAt;
 
-  private final PeriodList periodList;
+  private final List<Period> periodList;
 
   public Timetable(
       TimetableId timetableId,
       TimetableName timetableName,
       TimetableDate timetableDate,
       TimetableStartedAt timetableStartedAt,
-      PeriodList periodList) {
+      List<Period> periodList) {
     this.timetableId = timetableId;
     this.timetableName = timetableName;
     this.timetableDate = timetableDate;
@@ -41,7 +43,7 @@ public class Timetable {
     return timetableStartedAt;
   }
 
-  public PeriodList periodList() {
+  public List<Period> periodList() {
     return periodList;
   }
 }

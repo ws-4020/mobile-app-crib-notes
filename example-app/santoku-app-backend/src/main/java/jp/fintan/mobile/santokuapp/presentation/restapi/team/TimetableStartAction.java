@@ -54,7 +54,7 @@ public class TimetableStartAction {
       this.timetableDate = timetable.timetableDate().value();
       this.timetableStartedAt = timetable.timetableStartedAt().value();
       this.periodList =
-          timetable.periodList().value().stream()
+          timetable.periodList().stream()
               .map(
                   period ->
                       new PeriodResponse(

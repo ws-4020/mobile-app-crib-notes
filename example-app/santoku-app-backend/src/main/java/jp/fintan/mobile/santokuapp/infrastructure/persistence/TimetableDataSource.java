@@ -6,7 +6,6 @@ import java.util.List;
 import jp.fintan.mobile.santokuapp.domain.model.team.TeamId;
 import jp.fintan.mobile.santokuapp.domain.model.timetable.EndTime;
 import jp.fintan.mobile.santokuapp.domain.model.timetable.Period;
-import jp.fintan.mobile.santokuapp.domain.model.timetable.PeriodList;
 import jp.fintan.mobile.santokuapp.domain.model.timetable.StartTime;
 import jp.fintan.mobile.santokuapp.domain.model.timetable.TimeBoxName;
 import jp.fintan.mobile.santokuapp.domain.model.timetable.Timetable;
@@ -27,11 +26,10 @@ public class TimetableDataSource implements TimetableRepository {
         new TimetableName("name"),
         new TimetableDate(LocalDate.now()),
         null,
-        new PeriodList(
-            List.of(
-                new Period(
-                    new TimeBoxName("コマ"),
-                    new StartTime(LocalTime.now()),
-                    new EndTime(LocalTime.now())))));
+        List.of(
+            new Period(
+                new TimeBoxName("コマ"),
+                new StartTime(LocalTime.now()),
+                new EndTime(LocalTime.now()))));
   }
 }
