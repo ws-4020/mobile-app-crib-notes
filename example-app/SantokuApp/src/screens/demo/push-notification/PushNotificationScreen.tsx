@@ -6,8 +6,16 @@ import {usePushNotification} from './usePushNotification';
 
 const ScreenName = 'PushNotification';
 const Screen = () => {
-  const {authStatus, token, requestUserPermission, notification, getToken, onMessage, onNotificationOpenedApp} =
-    usePushNotification();
+  const {
+    authStatus,
+    token,
+    requestUserPermission,
+    notification,
+    getToken,
+    onMessage,
+    onNotificationOpenedApp,
+    notifyMessage,
+  } = usePushNotification();
 
   useEffect(() => {
     const onMessageRes = onMessage();
@@ -34,6 +42,7 @@ const Screen = () => {
         <Text selectable>{token ?? 'FCM登録トークンが表示されます'}</Text>
       </View>
       <Button onPress={getToken} title="FCM登録トークンの取得" />
+      <Button onPress={notifyMessage} title="Pushメッセージ送信" />
     </View>
   );
 };
