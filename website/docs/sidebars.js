@@ -500,7 +500,7 @@ module.exports = {
           label: 'テスト',
           items: [
             'react-native/santoku/development/test',
-            'react-native/santoku/development/test/emulator-with-same-config',
+            'react-native/santoku/development/test/create-emulator-simulator',
           ],
         },
         {
