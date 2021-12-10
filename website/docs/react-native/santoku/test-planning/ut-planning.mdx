@@ -95,9 +95,9 @@ ignoreでテスト対象外とするには、テスト対象コードの直前�
 
   使用する[ビルドバリアント](/react-native/santoku/development/build-configuration/build-variants.mdx)は、`devSantokuAppDebug`です。単体テストでは性能面の評価をしないため、デバッグ効率を重視する方針です。
 
-- テスト端末
+- テスト端末（実機）
 
-  [テスト端末バリエーション](/react-native/santoku/test-planning/test-variation.mdx)から選定します。単体テストで使用するテスト端末は、AndroidとiOSのサポート対象内の最新OSを搭載した次の端末です。なお、単体テストにおいて、Androidスマートフォンを使う予定はありませんが、後述のエミュレータ利用にて同様の構成で作成するため、記載しています。
+  [テスト端末バリエーション](/react-native/santoku/test-planning/test-variation.mdx)から選定します。単体テストでは、AndroidとiOSのサポート対象内の最新OSを搭載した次の端末を使用します。
 
   - [Androidスマートフォン](/react-native/santoku/test-planning/test-variation.mdx#androidスマートフォン)の`機種B`
   - [iPhone](/react-native/santoku/test-planning/test-variation.mdx#iphone)の`機種E`
@@ -116,11 +116,15 @@ ignoreでテスト対象外とするには、テスト対象コードの直前�
 
 - モックデータ
 
-  バックエンドや外部サービス連携用のモックデータを準備します。
+  バックエンド連携用に、テストケースを網羅（異常系も考慮）したモックデータを準備します。
 
 #### 手動テストの実施
 
-作成したテストケースに従い、機能や画面単位での動作を検証します。実際の動作とテストケースの期待結果が合致していることを確認します。
+次のとおり手動テストを実施します。
+
+- 作成したテストケースに従い、機能や画面単位での動作を検証
+- テストケースごとにAndroidスマートフォン（エミュレータもしくは実機）、iPhone（シミュレータもしくは実機）それぞれで検証
+- 実際の動作とテストケースの期待結果が合致していることを確認
 
 ## テスト結果のエビデンス
 
