@@ -20,7 +20,8 @@ public class TimetableStartNotifier {
 
   public void notify(TeamId teamId, Timetable timetable) {
     // TODO: チームに所蔵するメンバーのトークンを取得
-    final List<PushNotificationToken> tokens = List.of(new PushNotificationToken("1234567890"));
+    final String fcmToken = System.getenv("FCM_TOKEN");
+    final List<PushNotificationToken> tokens = List.of(new PushNotificationToken(fcmToken));
     pushNotificationRepository.notifyToDevice(
         new PushNotification(
             new NotificationTitle("本日の時間割の開始"),
