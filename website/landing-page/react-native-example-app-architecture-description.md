@@ -8,7 +8,7 @@
 
 [React Nativeのサンプルアプリケーション \| Fintan » Mobile App Development](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku)
 
-コンテンツの内容は以下のとおりです。コンテンツは今後も継続的にアップデートし、内容を充実させていく予定です。
+コンテンツの主な内容は以下のとおりです。コンテンツは今後も継続的にアップデートし、内容を充実させていく予定です。
 
 - 要件定義
 - 方式設計
