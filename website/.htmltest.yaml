@@ -26,15 +26,6 @@ IgnoreDirectoryMissingTrailingSlash: true
 IgnoreInternalEmptyHash: true
 IgnoreInternalURLs:
   - '#!'
-  # hash does not existになってしまうので無視
-  - /react-native/santoku/design/api-document
-  - /react-native/santoku/design/api-document#operation/get-accounts-me-terms
-  - '/react-native/santoku/design/api-document'
-  - '/react-native/santoku/design/api-document#operation/get-accounts-me-terms'
-  - /mobile-app-crib-notes/react-native/santoku/design/api-document
-  - /mobile-app-crib-notes/react-native/santoku/design/api-document#operation/get-accounts-me-terms
-  - '/mobile-app-crib-notes/react-native/santoku/design/api-document'
-  - '/mobile-app-crib-notes/react-native/santoku/design/api-document#operation/get-accounts-me-terms'
 IgnoreURLs:
   - localhost:19002
   # 認証が必要なURLは無視
@@ -56,14 +47,5 @@ IgnoreURLs:
   - https://marketplace.visualstudio.com/items\?itemName=naumovs.color-highlight
   - https://marketplace.visualstudio.com/items\?itemName=2gua.rainbow-brackets
   - https://marketplace.visualstudio.com/items\?itemName=yzhang.markdown-all-in-one
-  # hash does not existになってしまうので無視
-  - /react-native/santoku/design/api-document
-  - /react-native/santoku/design/api-document#operation/get-accounts-me-terms
-  - '/react-native/santoku/design/api-document'
-  - '/react-native/santoku/design/api-document#operation/get-accounts-me-terms'
-  - /mobile-app-crib-notes/react-native/santoku/design/api-document
-  - /mobile-app-crib-notes/react-native/santoku/design/api-document#operation/get-accounts-me-terms
-  - '/mobile-app-crib-notes/react-native/santoku/design/api-document'
-  - '/mobile-app-crib-notes/react-native/santoku/design/api-document#operation/get-accounts-me-terms'
-# タイムアウトでビルドが失敗すると困るので、余裕を持って長めに設定しておく。
+ # タイムアウトでビルドが失敗すると困るので、余裕を持って長めに設定しておく。
 ExternalTimeout: 60
