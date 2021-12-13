@@ -80,5 +80,5 @@
 
 #### 🌿 更新コンテンツ（2021/11/24）
 
-  - アプリケーション方式
-    - [アプリ起動後の初期化処理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/life-cycle-management/initialization)
+- アプリケーション方式
+  - [アプリ起動後の初期化処理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/life-cycle-management/initialization)
