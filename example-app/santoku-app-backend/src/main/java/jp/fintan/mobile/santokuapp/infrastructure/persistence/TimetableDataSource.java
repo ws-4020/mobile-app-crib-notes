@@ -23,7 +23,7 @@ public class TimetableDataSource implements TimetableRepository {
     // TODO: 時間割をデータベースから取得
     return new Timetable(
         timetableId,
-        new TimetableName("name"),
+        new TimetableName("Daily Scrum"),
         new TimetableDate(LocalDate.now()),
         null,
         List.of(
