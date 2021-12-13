@@ -16,6 +16,6 @@ sidebar_label: システム構成
 ## AzureやFirebaseを使用した場合のシステム構成
 
 このアプリを配布する場合や、Azure、Firebaseのサービスと接続してテストする場合は、以下の構成になります。
-Firebaseの機能を利用する際は、こちらの[注意点](react-native/santoku/development/implement/cautions-on-using-firebase.mdx)をご参照ください。
+Firebaseの機能を利用する際は、こちらの[注意点](react-native/santoku/development/implement/cautions-on-using-firebase.mdx)を参照してください。
 
 ![system-configuration](./system-configuration.drawio.png)
