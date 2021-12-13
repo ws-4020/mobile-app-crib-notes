@@ -66,11 +66,21 @@ title: 単体テスト計画
 
 ![ut-reconfirmation-flow](ut-reconfirmation-flow.drawio.png)
 
-ignoreでテスト対象外とするには、テスト対象コードの直前に下記形式で記述します。上記フローにも明記してますが、必ずテスト対象外とする理由も併せてコメントとして残してください。
+カバレッジ対象外とするには、次のとおり対応します。
+
+- Jestがカバレッジを計算するために使用しているツール「Istanbul」の[カバレッジ除外記法](https://github.com/gotwarlost/istanbul/blob/master/ignoring-code-for-coverage.md#the-interface)に従ったコメントを記述
+- カバレッジ除外のコメント記述箇所は、カバレッジ対象外としたいコードの直前
+- カバレッジ対象外とする理由も併せてコメントとして残す
+
+以下は具体例です。
 
 ```ts
-// テスト対象外とする理由
-/* istanbul ignore next */
+// コンテキストの初期値として設定するメソッドはコールされるタイミングがないため、カバレッジ対象外とする
+// （コンテキストのプロパイダをレンダリングする際、別の定義で上書きされる）
+const Context = React.createContext<ContextType>({
+  show: /* istanbul ignore next */() => {},
+  hide: /* istanbul ignore next */() => {},
+});
 ```
 
 ### 手動テスト
