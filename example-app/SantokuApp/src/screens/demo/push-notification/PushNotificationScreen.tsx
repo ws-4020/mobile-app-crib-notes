@@ -15,6 +15,7 @@ const Screen = () => {
     onMessage,
     onNotificationOpenedApp,
     setBackgroundMessageHandler,
+    getInitialNotification,
     notifyMessage,
   } = usePushNotification();
 
@@ -22,6 +23,7 @@ const Screen = () => {
     const onMessageRes = onMessage();
     const onNotificationOpenedAppRes = onNotificationOpenedApp();
     setBackgroundMessageHandler();
+    getInitialNotification().catch(err => console.log(err));
     return () => {
       onMessageRes();
       onNotificationOpenedAppRes();
