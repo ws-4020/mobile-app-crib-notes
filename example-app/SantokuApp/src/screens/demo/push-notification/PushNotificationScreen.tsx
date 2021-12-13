@@ -28,7 +28,7 @@ const Screen = () => {
       onMessageRes();
       onNotificationOpenedAppRes();
     };
-  }, [onMessage, onNotificationOpenedApp, setBackgroundMessageHandler]);
+  }, [onMessage, onNotificationOpenedApp, setBackgroundMessageHandler, getInitialNotification]);
 
   return (
     <View style={styles.container}>
