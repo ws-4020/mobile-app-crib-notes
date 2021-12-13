@@ -24,6 +24,7 @@ CheckLinks: false
 CheckMeta: false
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreInternalEmptyHash: true
+CheckInternal: false
 IgnoreInternalURLs:
   - '#!'
   # hash does not existになってしまうので無視
