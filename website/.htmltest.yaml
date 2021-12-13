@@ -26,6 +26,8 @@ IgnoreDirectoryMissingTrailingSlash: true
 IgnoreInternalEmptyHash: true
 IgnoreInternalURLs:
   - '#!'
+  # hash does not existになってしまうので無視
+  - '/react-native/santoku/design/api-document'
 IgnoreURLs:
   - localhost:19002
   # 認証が必要なURLは無視
