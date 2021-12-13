@@ -22,6 +22,7 @@ HTTPHeaders:
 CheckLinks: false
 # og:urlに入るURLがドメイン名まで含んでいるので、追加したページがNot Foundエラーになってしまう
 CheckMeta: false
+CheckInternalHash: false
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreInternalEmptyHash: true
 IgnoreInternalURLs:
@@ -47,5 +48,5 @@ IgnoreURLs:
   - https://marketplace.visualstudio.com/items\?itemName=naumovs.color-highlight
   - https://marketplace.visualstudio.com/items\?itemName=2gua.rainbow-brackets
   - https://marketplace.visualstudio.com/items\?itemName=yzhang.markdown-all-in-one
- # タイムアウトでビルドが失敗すると困るので、余裕を持って長めに設定しておく。
+  # タイムアウトでビルドが失敗すると困るので、余裕を持って長めに設定しておく。
 ExternalTimeout: 60
