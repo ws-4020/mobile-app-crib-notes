@@ -14,17 +14,19 @@ const Screen = () => {
     getToken,
     onMessage,
     onNotificationOpenedApp,
+    setBackgroundMessageHandler,
     notifyMessage,
   } = usePushNotification();
 
   useEffect(() => {
     const onMessageRes = onMessage();
     const onNotificationOpenedAppRes = onNotificationOpenedApp();
+    setBackgroundMessageHandler();
     return () => {
       onMessageRes();
       onNotificationOpenedAppRes();
     };
-  }, [onMessage, onNotificationOpenedApp]);
+  }, [onMessage, onNotificationOpenedApp, setBackgroundMessageHandler]);
 
   return (
     <View style={styles.container}>

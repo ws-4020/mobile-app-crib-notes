@@ -56,6 +56,18 @@ export const usePushNotification = () => {
     });
   }, []);
 
+  const setBackgroundMessageHandler = useCallback(() => {
+    // awaitするものはなく、Promiseで返却するものもないのでignoreしておく
+    // eslint-disable-next-line @typescript-eslint/require-await
+    return messaging().setBackgroundMessageHandler(async message => {
+      const parsedMessage = JSON.stringify({
+        notification: message.notification,
+        data: message.data,
+      });
+      console.log(`setBackgroundMessageHandler. message=[${parsedMessage}]`);
+    });
+  }, []);
+
   const getInitialNotification = useCallback(async () => {
     const message = await messaging().getInitialNotification();
     if (message) {
@@ -86,6 +98,7 @@ export const usePushNotification = () => {
     notification,
     onMessage,
     onNotificationOpenedApp,
+    setBackgroundMessageHandler,
     getInitialNotification,
     notifyMessage,
   };

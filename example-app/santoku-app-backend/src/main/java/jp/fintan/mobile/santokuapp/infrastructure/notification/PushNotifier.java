@@ -1,5 +1,7 @@
 package jp.fintan.mobile.santokuapp.infrastructure.notification;
 
+import com.google.firebase.messaging.AndroidConfig;
+import com.google.firebase.messaging.AndroidConfig.Priority;
 import com.google.firebase.messaging.BatchResponse;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
@@ -34,10 +36,17 @@ public class PushNotifier implements PushNotificationRepository {
     Notification.Builder notificationBuilder = Notification.builder();
     notificationBuilder.setTitle(pushNotification.title().value());
     notificationBuilder.setBody(pushNotification.body().value());
+    notificationBuilder.setImage("https://foo.bar.pizza-monster.png");
     Notification notification = notificationBuilder.build();
 
+    AndroidConfig.Builder androidConfigBuilder = AndroidConfig.builder();
+    androidConfigBuilder.setPriority(Priority.HIGH);
+    androidConfigBuilder.setCollapseKey(pushNotification.type().name());
+    AndroidConfig androidConfig = androidConfigBuilder.build();
+
     multicastMessageBuilder.setNotification(notification);
-    multicastMessageBuilder.putData("type", pushNotification.type().value());
+    multicastMessageBuilder.putData("type", pushNotification.type().name());
+    multicastMessageBuilder.setAndroidConfig(androidConfig);
     MulticastMessage multicastMessage = multicastMessageBuilder.build();
 
     // Send a message to the device corresponding to the provided token.

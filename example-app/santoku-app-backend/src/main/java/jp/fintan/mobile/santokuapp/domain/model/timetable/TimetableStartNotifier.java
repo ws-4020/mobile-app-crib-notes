@@ -25,8 +25,8 @@ public class TimetableStartNotifier {
     pushNotificationRepository.notifyToDevice(
         new PushNotification(
             new NotificationTitle("本日の時間割の開始"),
-            new NotificationBody(timetable.timetableName() + "が開始されました"),
-            new PushNotificationType("startedTimetable")),
+            new NotificationBody(timetable.timetableName().value() + "が開始されました"),
+            PushNotificationType.STARTED_TIMETABLE),
         tokens);
   }
 }
