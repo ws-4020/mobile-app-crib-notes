@@ -55,22 +55,22 @@ TermsOfServiceAgreement
 ## イベント定義
 
 - 初期表示
-  - `有効な利用規約の取得API`を呼び出します。
+  - [有効な利用規約の取得API][]を呼び出します。
     - APIから正常レスポンスが返却された場合、イベント：有効な利用規約を表示が発生。
     - APIからエラーレスポンスが返却された場合、エラー：利用規約取得に失敗が発生。
 - 有効な利用規約を表示
-  - `有効な利用規約の取得API`のレスポンスに含まれるURLのコンテンツを、利用規約本文に表示します。
+  - [有効な利用規約の取得API][]のレスポンスに含まれるURLのコンテンツを、利用規約本文に表示します。
 - 利用規約に同意
   - 同意ボタンにインジケータを表示し、タップできないようにします。
-  - `ログイン済みアカウントの利用規約同意API`を呼び出します。
-    - リクエストの`同意した利用規約のバージョン`は、上記の`有効な利用規約の取得API`で取得したバージョンを使用します。
+  - [ログイン済みアカウントの利用規約同意API](/react-native/santoku/design/api-document#operation/post-accounts-me-terms)を呼び出します。
+    - リクエストの`同意した利用規約のバージョン`は、上記の[有効な利用規約の取得API][]で取得したバージョンを使用します。
     - APIから正常レスポンスが返却された場合、イベント：利用規約同意に成功が発生。
     - APIからエラーレスポンスが返却された場合、エラー：利用規約同意に失敗が発生。
 - 利用規約同意に成功
   - ホーム画面に遷移します。
 - コンテンツ再読込
   - WebViewを表示し、コンテンツ取得エラーメッセージとリロードボタンを非表示にします。
-  - `有効な利用規約の取得API`を呼び出します。呼び出し後の挙動は、初期表示と同じです。
+  - [有効な利用規約の取得API][]を呼び出します。呼び出し後の挙動は、初期表示と同じです。
 
 ## エラー発生時の挙動
 
@@ -87,3 +87,4 @@ TermsOfServiceAgreement
 <!-- link定義を使う場合は以下に記載する -->
 [WebView]: /react-native/santoku/design/screen-specs/common-parts/webview/overview.mdx
 [スナックバー]: /react-native/santoku/design/screen-specs/common-parts/snackbar/overview.mdx
+[有効な利用規約の取得API]: /react-native/santoku/design/api-document#operation/get-terms
