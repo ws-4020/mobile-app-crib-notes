@@ -8,7 +8,7 @@
 
 [React Nativeのサンプルアプリケーション \| Fintan » Mobile App Development](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku)
 
-コンテンツの内容は以下のとおりです。コンテンツは今後も継続的にアップデートし、内容を充実させていく予定です。
+コンテンツの主な内容は以下のとおりです。実際の開発プロセスに沿った形で作成しており、アプリ開発現場で役立つドキュメント類および、[ソースコード](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp)となっています。コンテンツは今後も継続的にアップデートし、内容を充実させていく予定です。
 
 - 要件定義
 - 方式設計
@@ -16,9 +16,7 @@
 - 外部設計
 - 開発ガイド
 
-これらのコンテンツは実際の開発プロセスに沿った形で作成しており、アプリ開発現場で役立つドキュメント類および、[ソースコード](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/S0antokuApp)となっています。
-
-また、実際の方式設計でこのサンプルアプリケーションをより有効活用してもらうため、「Decision Records」にアーキテクチャや方式設計に関する検討過程も記録し公開します。
+また、アプリ開発現場でこのサンプルアプリケーションをより有効に活用してもらうため、方式設計などについては検討過程も「[Decision Records](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions)」として公開しています。
 
 なお、このサンプルアプリケーションでは開発手法にウォーターフォールモデルを採用しています。その理由は以下のとおりです。
 
@@ -82,5 +80,5 @@
 
 #### 🌿 更新コンテンツ（2021/11/24）
 
-  - アプリケーション方式
-    - [アプリ起動後の初期化処理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/life-cycle-management/initialization)
+- アプリケーション方式
+  - [アプリ起動後の初期化処理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/life-cycle-management/initialization)
