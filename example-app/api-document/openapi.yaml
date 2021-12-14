@@ -755,14 +755,6 @@ components:
         agreedTermsOfServiceVersion:
           type: string
           description: 同意した利用規約のバージョン
-        latestTermsOfServiceVersion:
-          type: string
-          description: 最新の利用規約のバージョン
-          readOnly: true
-        url:
-          type: string
-          description: 利用規約のURL
-          readOnly: true
     Team:
       title: Team
       type: object
