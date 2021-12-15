@@ -54,7 +54,7 @@ sidebar_label: スプラッシュスクリーン
 
 | イベント | 処理概要 |
 |:------|:------|
-| 初期表示 | 初期化処理を実施します。<br /> <li>[ログイン済みアカウントの利用規約の同意状態確認API][]を呼び出し、有効な利用規約に同意済みか確認します。同意済みであればホーム画面へ遷移、未同意であれば利用規約同意の画面へ遷移します。</li> |
+| 初期表示 | 初期化処理を実施します。<br /> <li>[ログイン済みアカウントの利用規約同意状態確認API][]を呼び出し、有効な利用規約に同意済みか確認します。同意済みであればホーム画面へ遷移、未同意であれば利用規約同意の画面へ遷移します。</li> |
 
 :::note
 ホーム画面は今後作成する予定です。
@@ -64,7 +64,7 @@ sidebar_label: スプラッシュスクリーン
 
 | API | 呼出に使用するパラメータ |
 |:------|:------|
-| [ログイン済みアカウントの利用規約の同意状態確認API][] | なし |
+| [ログイン済みアカウントの利用規約同意状態確認API][] | なし |
 
 ## エラー発生時の動作
 
@@ -74,4 +74,4 @@ sidebar_label: スプラッシュスクリーン
 （※1）クリティカルエラーの可能性があるため、発生時のログを[Firebase Crashlyticsで収集](/react-native/santoku/application-architecture/logging-app/logging.mdx#firebase-crashlyticsについて)します。
 
 <!-- link定義を使う場合は以下に記載する -->
-[ログイン済みアカウントの利用規約の同意状態確認API]: /react-native/santoku/design/api-document#operation/get-accounts-me-terms
+[ログイン済みアカウントの利用規約同意状態確認API]: /react-native/santoku/design/api-document#operation/get-accounts-me-terms
