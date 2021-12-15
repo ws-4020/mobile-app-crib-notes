@@ -63,17 +63,20 @@ SplashScreen
 
 ## イベント定義
 
-- 初期表示
-  - 初期化処理を開始します。
+### ライフサイクルのイベント
+
+#### 初期表示
+
+  - 初期化処理を実施します。
     - [ログイン済みアカウントの利用規約同意状態確認API](/react-native/santoku/design/api-document#operation/get-accounts-me-terms)を呼び出します。
       - APIから正常レスポンスが返却された場合、返却値によって分岐します。
         - 同意済みの場合、ホーム画面に遷移します。
         - 同意していない場合、利用規約同意の画面に遷移します。
       - APIからエラーレスポンスが返却された場合、エラー：初期化失敗が発生。
 
-## エラー発生時の挙動
+## エラー発生時の動作
 
-| エラー | 発生時の挙動 |
+| エラー | 発生時の動作 |
 |:------|:-----------|
 | 初期化失敗 | メッセージキー：`app.初期化エラー`をダイアログで表示し、アプリを終了します。（※1） |
 （※1）クリティカルエラーの可能性があるため、発生時のログを[Firebase Crashlyticsで収集](/react-native/santoku/application-architecture/logging-app/logging.mdx#firebase-crashlyticsについて)します。
