@@ -229,7 +229,7 @@ paths:
                 $ref: '#/components/schemas/Device'
   /accounts/me/terms:
     get:
-      summary: ログイン済みアカウントの利用規約同意状態確認
+      summary: ログイン済みアカウントの利用規約の同意状態確認
       description: |
         ログイン済みアカウントの有効な利用規約に同意しているかの状態を取得します。
       tags:
