@@ -4,7 +4,7 @@ title: 単体テスト計画
 
 ## テスト方針
 
-単体テストでは、主に開発した画面や機能単位のレイアウト（表示崩れなど）と動作を検証します。これにより、画面や機能単位の品質を保証することが目的となります。詳細は[全体テスト計画書のテスト工程定義](/react-native/santoku/test-planning/test-all-planning.mdx#テスト工程定義)を参照してください。
+単体テストでは、主に開発した画面や機能単位のレイアウト（表示崩れなど）と動作を検証します。これにより、画面や機能単位の品質を保証することが目的となります。詳細は全体テスト計画書の[テスト工程定義](/react-native/santoku/test-planning/test-all-planning.mdx#テスト工程定義)を参照してください。
 
 ## テスト実施範囲
 
@@ -19,16 +19,16 @@ title: 単体テスト計画
 
 ## テスト観点
 
-単体テストのテスト方針に基づき、画面や機能の検証に適した[機能テスト][]のテスト観点が対象になります。
+全体テスト計画の[網羅の方針](/react-native/santoku/test-planning/test-all-planning.mdx#網羅の方針)に従い、単体テストのテスト観点は以下のとおりです。
 
-- [レイアウトに関する観点][]
-- [操作やイベントに関する観点](/react-native/santoku/test-planning/test-type/functional-testing/operation-event.mdx)
-- [表示内容に関する観点](/react-native/santoku/test-planning/test-type/functional-testing/display-content.mdx)
-- [バリデーションに関する観点](/react-native/santoku/test-planning/test-type/functional-testing/validation-check.mdx)
-- [端末やOSに関する観点][]
-- [ユースケースに関する観点][]
+- [レイアウト](/react-native/santoku/test-planning/test-type/functional-testing/layout-test.mdx)
+- [操作やイベント](/react-native/santoku/test-planning/test-type/functional-testing/operation-event.mdx)
+- [表示内容](/react-native/santoku/test-planning/test-type/functional-testing/display-content.mdx)
+- [バリデーション](/react-native/santoku/test-planning/test-type/functional-testing/validation-check.mdx)
+- [端末やOS](/react-native/santoku/test-planning/test-type/functional-testing/terminal-os.mdx)
+- [ユースケース][]
 
-基本的には、上記観点に従います。ただし、[ユースケースに関する観点][]については、画面単位や機能単位で完結する範囲のユースケースに絞ります。複数機能の連携や、複数画面にまたがるようなユースケースについては、単体テストではなく結合テストの観点になるためです。
+基本的には、上記のテスト観点に従います。ただし、[ユースケース][]については、画面単位や機能単位で完結する範囲のユースケースに絞ります。
 
 ## テスト方法
 
@@ -144,8 +144,4 @@ const Context = React.createContext<ContextType>({
 - [x] 自動テストを実行した際にエラーが発生していないこと
 - [x] 自動テストの`c0/c1`のカバレッジが100%に達していること
 
-[機能テスト]: /react-native/santoku/test-planning/test-type/functional-testing.mdx
-[レイアウトに関する観点]: /react-native/santoku/test-planning/test-type/functional-testing/layout-test.mdx
-[端末やOSに関する観点]: /react-native/santoku/test-planning/test-type/functional-testing/terminal-os.mdx
-[ユースケースに関する観点]: /react-native/santoku/test-planning/test-type/functional-testing/use-case.mdx
-[構成テスト]: /react-native/santoku/test-planning/test-type/configuration-test.mdx
+[ユースケース]: /react-native/santoku/test-planning/test-type/functional-testing/use-case.mdx
