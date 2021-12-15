@@ -208,8 +208,8 @@ Firebase Cloud Messagingを利用したデバイス単位での送信では、�
 そのためグループに登録するデバイス数が20を超えることが予想される用途には適していません。
 作成可能なデバイスグループの上限については、公式ドキュメント内では特に言及されていませんでした。
 
-[端末グループに送信する](https://firebase.google.com/docs/cloud-messaging/android/device-group)という公式ドキュメントは用意されているものの、
-デバイスグループの作成やデバイスグループへのデバイス登録・削除は2021年12月時点ではHTTP v1 API以前の古いAPIでしか対応していないようです。
+[端末グループに送信する](https://firebase.google.com/docs/cloud-messaging/android/device-group)というドキュメントは存在するものの、
+デバイスグループの作成やデバイス登録・削除は2021年12月時点ではHTTP v1 API以前の古いAPIでしか対応していないようです。
 Firebase Admin Java SDKの[Issue](https://github.com/firebase/firebase-admin-java/issues/187)内のコメントでは、
 FCMチームでデバイスグループに相当するプライベートトピックの機能に取り組んでいると言及されています。
 デバイスグループは今後廃止される可能性もありそうです。
