@@ -102,7 +102,7 @@ Dockerイメージは次のコマンドでDockerレジストリにプッシュ�
 3. 名前は適切な値、値にFirebaseコンソールからダウンロードしたService Account Credentials FileのJSONを入力して作成
 4. 作成したシークレットの詳細画面を開き、Secret Identifierの項目をコピーして控えておく
 
-### AppServiceへ環境変数を設定
+### App Serviceへ環境変数を設定
 
 1. App Serviceのシステム割り当てマネージドIDを有効化
     1. App Serviceの画面を開き、左側タブからIDを選択
