@@ -40,6 +40,10 @@ public class FcmPushNotifier implements PushNotificationRepository {
   private static final String APNS_PRIORITY = "10";
   // APNSの通知優先度
   private static final int MAX_SEND_COUNT = 500;
+  // データに設定するキー：type
+  private static final String DATA_KEY_TYPE = "type";
+  // データに設定するキー：params
+  private static final String DATA_KEY_PARAMS = "params";
 
   @Override
   public PushNotificationResult notifyToDevice(
@@ -61,9 +65,9 @@ public class FcmPushNotifier implements PushNotificationRepository {
 
       MulticastMessage.Builder multicastMessageBuilder = MulticastMessage.builder();
       multicastMessageBuilder.addAllTokens(fcmTokens);
-      multicastMessageBuilder.putData("type", pushNotification.type().name());
+      multicastMessageBuilder.putData(DATA_KEY_TYPE, pushNotification.type().name());
       if (params != null) {
-        multicastMessageBuilder.putData("params", params);
+        multicastMessageBuilder.putData(DATA_KEY_PARAMS, params);
       }
       multicastMessageBuilder.setNotification(createNotification(pushNotification));
       multicastMessageBuilder.setApnsConfig(createApnsConfig());
@@ -88,7 +92,7 @@ public class FcmPushNotifier implements PushNotificationRepository {
 
           LOGGER.logWarn(
               String.format(
-                  "Failed to sent message to Firebase Cloud Messaging.. fcmToken=[%s]", fcmToken),
+                  "Failed to sent message to Firebase Cloud Messaging.. fcmToken=[%s]", fcmToken.value()),
               response.getException());
 
           if (isUnregisteredDeviceToken(response)) {
