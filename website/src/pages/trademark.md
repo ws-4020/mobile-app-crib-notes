@@ -17,7 +17,6 @@ title: 商標について
 - 「Azure」「Windows」は、 Microsoft Corporationの米国およびその他の国におけるMicrosoft Corporationおよび/またはその関連会社の登録商標または商標です。
 <!-- textlint-enable ja-technical-writing/sentence-length-->
 - 「Java」は、Oracle Corporationおよびその子会社、関連会社の米国およびその他の国における登録商標または商標です。
-- 「Kotlin」は、Kotlin Foundationの登録商標です。
 - 「Open Web Application Security Project」「OWASP」は、 OWASP Foundation, Inc. の登録商標です。
 - 「DeployGate」は、株式会社デプロイゲートの登録商標です。
 - 「moto」は、Motorola Trademark Holdings, LLCの商標または登録商標です。
