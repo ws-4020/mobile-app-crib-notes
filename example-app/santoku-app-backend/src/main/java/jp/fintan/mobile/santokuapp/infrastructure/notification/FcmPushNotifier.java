@@ -25,7 +25,7 @@ import jp.fintan.mobile.santokuapp.domain.model.notification.FailureDeviceTokens
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotification;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationResult;
 import jp.fintan.mobile.santokuapp.domain.model.notification.SuccessDeviceTokens;
-import jp.fintan.mobile.santokuapp.domain.model.notification.UnavailableDeviceTokens;
+import jp.fintan.mobile.santokuapp.domain.model.notification.UnregisteredDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.repository.PushNotificationRepository;
 import nablarch.core.log.Logger;
 import nablarch.core.log.LoggerManager;
@@ -47,7 +47,7 @@ public class FcmPushNotifier implements PushNotificationRepository {
 
     final List<DeviceToken> successDeviceTokens = new ArrayList<>();
     final List<DeviceToken> failureDeviceTokens = new ArrayList<>();
-    final List<DeviceToken> unavailableDeviceTokens = new ArrayList<>();
+    final List<DeviceToken> unregisteredDeviceTokens = new ArrayList<>();
 
     String params = translateParams(pushNotification.params());
 
@@ -91,9 +91,9 @@ public class FcmPushNotifier implements PushNotificationRepository {
                   "Failed to sent message to Firebase Cloud Messaging.. fcmToken=[%s]", fcmToken),
               response.getException());
 
-          if (isUnavailableDeviceToken(response)) {
+          if (isUnregisteredDeviceToken(response)) {
             // 利用されていないトークンの場合
-            unavailableDeviceTokens.add(fcmToken);
+            unregisteredDeviceTokens.add(fcmToken);
           }
           failureDeviceTokens.add(fcmToken);
         }
@@ -106,7 +106,7 @@ public class FcmPushNotifier implements PushNotificationRepository {
     return new PushNotificationResult(
         new SuccessDeviceTokens(successDeviceTokens),
         new FailureDeviceTokens(failureDeviceTokens),
-        new UnavailableDeviceTokens(unavailableDeviceTokens));
+        new UnregisteredDeviceTokens(unregisteredDeviceTokens));
   }
 
   private String translateParams(Map<String, Object> params) {
@@ -143,9 +143,9 @@ public class FcmPushNotifier implements PushNotificationRepository {
       FirebaseMessaging.getInstance().send(message, true);
     } catch (FirebaseMessagingException e) {
       final MessagingErrorCode errorCode = e.getMessagingErrorCode();
-      // FCMに登録されていないデバイストークンの場合は、エラーコード「UNAVAILABLE」が返却される
+      // FCMに登録されていないデバイストークンの場合は、エラーコード「UNREGISTERED」が返却される
       // リクエストのパラメータ不正の場合は「INVALID_ARGUMENT」が返却される
-      if (errorCode == MessagingErrorCode.UNAVAILABLE
+      if (errorCode == MessagingErrorCode.UNREGISTERED
           || errorCode == MessagingErrorCode.INVALID_ARGUMENT) {
         return false;
       }
@@ -181,7 +181,7 @@ public class FcmPushNotifier implements PushNotificationRepository {
     return androidConfigBuilder.build();
   }
 
-  private boolean isUnavailableDeviceToken(SendResponse response) {
+  private boolean isUnregisteredDeviceToken(SendResponse response) {
     final FirebaseMessagingException e = response.getException();
     final MessagingErrorCode errorCode = e.getMessagingErrorCode();
     return errorCode == MessagingErrorCode.UNAVAILABLE;

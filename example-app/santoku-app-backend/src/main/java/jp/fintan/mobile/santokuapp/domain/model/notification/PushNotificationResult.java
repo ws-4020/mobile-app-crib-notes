@@ -6,15 +6,15 @@ public class PushNotificationResult {
 
   private final FailureDeviceTokens failureDeviceTokens;
 
-  private final UnavailableDeviceTokens unavailableDeviceTokens;
+  private final UnregisteredDeviceTokens unregisteredDeviceTokens;
 
   public PushNotificationResult(
       SuccessDeviceTokens successDeviceTokens,
       FailureDeviceTokens failureDeviceTokens,
-      UnavailableDeviceTokens unavailableDeviceTokens) {
+      UnregisteredDeviceTokens unregisteredDeviceTokens) {
     this.successDeviceTokens = successDeviceTokens;
     this.failureDeviceTokens = failureDeviceTokens;
-    this.unavailableDeviceTokens = unavailableDeviceTokens;
+    this.unregisteredDeviceTokens = unregisteredDeviceTokens;
   }
 
   public SuccessDeviceTokens successDeviceTokens() {
@@ -25,7 +25,7 @@ public class PushNotificationResult {
     return failureDeviceTokens;
   }
 
-  public UnavailableDeviceTokens invalidDeviceTokens() {
-    return unavailableDeviceTokens;
+  public UnregisteredDeviceTokens unregisteredDeviceTokens() {
+    return unregisteredDeviceTokens;
   }
 }
