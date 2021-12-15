@@ -116,7 +116,7 @@ Dockerイメージは次のコマンドでDockerレジストリにプッシュ�
     5. Select principalで、App Service名で検索して出てきたものを選んでSelectボタンを押す
     6. Addボタンを押して保存
 3. App ServiceのConfigurationで環境変数を追加
-    1. 作成したFunction Appの画面を開き、左側タブからConfigurationを選択
+    1. 作成したApp Serviceの画面を開き、左側タブからConfigurationを選択
     2. Application settingsのタブで、New application settingを押す
     3. Nameには"FIREBASE_SERVICE_ACCOUNT"を、Valueには"@Microsoft.KeyVault(SecretUri=先ほど控えておいたSecretIdentifierのURL)"を入力してOKを押す
         - Valueの例： `@Microsoft.KeyVault(SecretUri=https://yourvaultname.vault.azure.net/secrets/FirebaseServiceAccount/ffffffffffffffffffffffffffffffff)`
