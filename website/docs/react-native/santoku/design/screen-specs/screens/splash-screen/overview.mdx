@@ -11,15 +11,7 @@ sidebar_label: スプラッシュスクリーン
 
 アプリの起動時（※1）に表示される画面です。
 
-- アプリの初期化処理は、この画面の表示中に行います。初期化処理が完了するまで、次の画面には遷移しません。
-- 初期化処理は[Application Architectureのアプリ起動後の初期化処理](/react-native/santoku/application-architecture/life-cycle-management/initialization.mdx#初期化処理のフロー)に従い、以下の処理を行います。
-  - Firebase Crashlyticsの設定
-  - メッセージのロード
-  - 初期データの取得
-  - 初期表示画面の決定
-  - スプラッシュスクリーンを閉じる
-- 初期データの取得では、以下の処理のみ行います。
-  - 有効な利用規約に同意済みか確認する。
+- アプリの[初期化処理][]は、この画面の表示中に行います。初期化処理が完了するまで、次の画面には遷移しません。
 - 有効な利用規約に同意していない場合、利用規約同意の画面へ遷移します。
 - 有効な利用規約に同意済みの場合、ホーム画面へ遷移します。
 - 画面サイズに最適化した画像を表示します。各OSで、以下の方針で画像を用意します。
@@ -31,7 +23,7 @@ sidebar_label: スプラッシュスクリーン
 （※3）iOSの画像スケールについては、[こちら](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)をご参照ください。
 
 :::note
-初期化処理および初期データの取得は、現在は上記の処理を開発対象としております。上記以外の処理は今後開発予定です。
+初期化処理は、今後開発予定です。現在は一部の処理のみ開発対象としております。
 :::
 
 ## 画面レイアウト
@@ -54,11 +46,7 @@ sidebar_label: スプラッシュスクリーン
 
 | イベント | 処理概要 |
 |:------|:------|
-| 初期表示 | 初期化処理を実施します。<br /> <li>[ログイン済みアカウントの利用規約同意状態確認API][]を呼び出し、有効な利用規約に同意済みか確認します。同意済みであればホーム画面へ遷移、未同意であれば利用規約同意の画面へ遷移します。</li> |
-
-:::note
-ホーム画面は今後作成する予定です。
-:::
+| 初期表示 | [初期化処理][]を実施します。 |
 
 ## API呼出仕様
 
@@ -74,4 +62,5 @@ sidebar_label: スプラッシュスクリーン
 （※1）クリティカルエラーの可能性があるため、発生時のログを[Firebase Crashlyticsで収集](/react-native/santoku/application-architecture/logging-app/logging.mdx#firebase-crashlyticsについて)します。
 
 <!-- link定義を使う場合は以下に記載する -->
+[初期化処理]: /react-native/santoku/application-architecture/life-cycle-management/initialization.mdx#初期化処理のフロー
 [ログイン済みアカウントの利用規約同意状態確認API]: /react-native/santoku/design/api-document#operation/get-accounts-me-terms
