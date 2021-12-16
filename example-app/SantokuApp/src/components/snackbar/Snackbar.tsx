@@ -109,12 +109,12 @@ export const Snackbar: React.FC<SnackbarProps> = props => {
           useNativeDriver: true,
         };
         animationStart(fadeOutAnimationRef, fadeOutAnimationConfig, () => {
-          if (!barrierFadeOutAnimationRef) {
+          if (!barrierFadeOutAnimationRef.current) {
             setVisibleSnackbarProps(undefined);
           }
         });
       } else {
-        if (!barrierFadeOutAnimationRef) {
+        if (!barrierFadeOutAnimationRef.current) {
           setVisibleSnackbarProps(undefined);
         }
       }
