@@ -13,7 +13,7 @@ CREATE TABLE password
   FOREIGN KEY (account_id) REFERENCES account (account_id)
 );
 
-CREATE TABLE device_token
+CREATE TABLE device
 (
   account_id VARCHAR(255) NOT NULL,
   device_token   VARCHAR(255)  NOT NULL,

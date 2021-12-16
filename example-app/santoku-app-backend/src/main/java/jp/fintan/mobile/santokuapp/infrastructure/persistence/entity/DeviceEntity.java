@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "device_token")
+@Table(name = "device")
 @Access(AccessType.FIELD)
 public class DeviceEntity {
 

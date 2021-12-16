@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import jp.fintan.mobile.santokuapp.domain.model.account.DeviceToken;
+import jp.fintan.mobile.santokuapp.domain.model.core.ValueObject;
 import jp.fintan.mobile.santokuapp.domain.model.notification.NotificationBody;
 import jp.fintan.mobile.santokuapp.domain.model.notification.NotificationTitle;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotification;
@@ -15,6 +16,9 @@ import jp.fintan.mobile.santokuapp.domain.model.notification.UnregisteredDeviceT
 import jp.fintan.mobile.santokuapp.domain.repository.PushNotificationRepository;
 import jp.fintan.mobile.santokuapp.infrastructure.persistence.entity.DeviceEntity;
 import nablarch.common.dao.UniversalDao;
+import nablarch.core.db.connection.AppDbConnection;
+import nablarch.core.db.connection.DbConnectionContext;
+import nablarch.core.db.statement.ParameterizedSqlPStatement;
 import nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;
 import nablarch.fw.ExecutionContext;
 import nablarch.fw.web.HttpRequest;
@@ -67,15 +71,18 @@ public class PushNotificationTestAction {
   }
 
   private void removeUnregisteredDeviceTokens(UnregisteredDeviceTokens unregisteredDeviceTokens) {
-    final List<DeviceEntity> deviceEntities =
-        unregisteredDeviceTokens.value().stream()
-            .map(
-                deviceToken -> {
-                  DeviceEntity deviceEntity = new DeviceEntity();
-                  deviceEntity.setDeviceToken(deviceToken.value());
-                  return deviceEntity;
-                })
-            .collect(Collectors.toList());
-    UniversalDao.batchDelete(deviceEntities);
+    // デバイストークンに紐づくアカウントIDがわからないので、デバイストークンを条件にdeviceテーブルから削除する
+    // UniversalDaoの機能では実現できなかったので、JDBCラッパーを使用する
+    final Map<String, List<String>> condition =
+        Map.of(
+            "deviceTokens",
+            unregisteredDeviceTokens.value().stream()
+                .map(ValueObject::value)
+                .collect(Collectors.toList()));
+    AppDbConnection connection = DbConnectionContext.getConnection();
+    ParameterizedSqlPStatement statement =
+        connection.prepareParameterizedSqlStatementBySqlId(
+            "db.sql.sandbox.device#delete_by_device_tokens", condition);
+    statement.executeUpdateByMap(condition);
   }
 }
