@@ -9,7 +9,9 @@ import jp.fintan.mobile.santokuapp.domain.model.account.DeviceToken;
 import jp.fintan.mobile.santokuapp.domain.model.notification.NotificationBody;
 import jp.fintan.mobile.santokuapp.domain.model.notification.NotificationTitle;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotification;
+import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationResult;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationType;
+import jp.fintan.mobile.santokuapp.domain.model.notification.UnregisteredDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.repository.PushNotificationRepository;
 import jp.fintan.mobile.santokuapp.infrastructure.persistence.entity.DeviceEntity;
 import nablarch.common.dao.UniversalDao;
@@ -43,12 +45,14 @@ public class PushNotificationTestAction {
             new NotificationBody("一斉通知を受信できましたか？"),
             PushNotificationType.STARTED_TIMETABLE,
             Map.of("testKey", "testValue"));
-    pushNotificationRepository.notifyToDevice(pushNotification, deviceTokens);
+    PushNotificationResult pushNotificationResult =
+        pushNotificationRepository.notifyToDevice(pushNotification, deviceTokens);
+    removeUnregisteredDeviceTokens(pushNotificationResult.unregisteredDeviceTokens());
   }
 
   @PUT
-  @Path("/{deviceToken}")
-  public void ok(ExecutionContext context, HttpRequest request) {
+  @Path("/single/{deviceToken}")
+  public void single(ExecutionContext context, HttpRequest request) {
     final DeviceToken deviceToken = new DeviceToken(request.getParam("deviceToken")[0]);
 
     final PushNotification pushNotification =
@@ -57,6 +61,21 @@ public class PushNotificationTestAction {
             new NotificationBody("特定デバイス通知を受信できましたか？"),
             PushNotificationType.STARTED_TIMETABLE,
             Map.of("testKey", "testValue"));
-    pushNotificationRepository.notifyToDevice(pushNotification, List.of(deviceToken));
+    PushNotificationResult pushNotificationResult =
+        pushNotificationRepository.notifyToDevice(pushNotification, List.of(deviceToken));
+    removeUnregisteredDeviceTokens(pushNotificationResult.unregisteredDeviceTokens());
+  }
+
+  private void removeUnregisteredDeviceTokens(UnregisteredDeviceTokens unregisteredDeviceTokens) {
+    final List<DeviceEntity> deviceEntities =
+        unregisteredDeviceTokens.value().stream()
+            .map(
+                deviceToken -> {
+                  DeviceEntity deviceEntity = new DeviceEntity();
+                  deviceEntity.setDeviceToken(deviceToken.value());
+                  return deviceEntity;
+                })
+            .collect(Collectors.toList());
+    UniversalDao.batchDelete(deviceEntities);
   }
 }

@@ -65,7 +65,7 @@ public class FcmPushNotifier implements PushNotificationRepository {
 
       MulticastMessage.Builder multicastMessageBuilder = MulticastMessage.builder();
       multicastMessageBuilder.addAllTokens(fcmTokens);
-      multicastMessageBuilder.putData(DATA_KEY_TYPE, pushNotification.type().name());
+      multicastMessageBuilder.putData(DATA_KEY_TYPE, pushNotification.type().value());
       if (params != null) {
         multicastMessageBuilder.putData(DATA_KEY_PARAMS, params);
       }
@@ -82,20 +82,22 @@ public class FcmPushNotifier implements PushNotificationRepository {
           final SendResponse response = responses.get(j);
           final DeviceToken fcmToken = requestFcmTokens.get(j);
           if (response.isSuccessful()) {
-            LOGGER.logInfo(
+            LOGGER.logDebug(
                 String.format(
-                    "Successfully sent message to Firebase Cloud Messaging.. fcmToken=[%s]",
+                    "Successfully sent message to Firebase Cloud Messaging. fcmToken=[%s]",
                     fcmToken.value()));
             successDeviceTokens.add(fcmToken);
             continue;
           }
 
+          final MessagingErrorCode messagingErrorCode = response.getException().getMessagingErrorCode();
           LOGGER.logWarn(
               String.format(
-                  "Failed to sent message to Firebase Cloud Messaging.. fcmToken=[%s]", fcmToken.value()),
+                  "Failed to sent message to Firebase Cloud Messaging. fcmToken=[%s] errorCode=[%s]",
+                  fcmToken.value(), messagingErrorCode.name()),
               response.getException());
 
-          if (isUnregisteredDeviceToken(response)) {
+          if (messagingErrorCode == MessagingErrorCode.UNREGISTERED) {
             // 利用されていないトークンの場合
             unregisteredDeviceTokens.add(fcmToken);
           }
@@ -126,7 +128,7 @@ public class FcmPushNotifier implements PushNotificationRepository {
 
   /**
    * FCMのSDKを利用して、dry-run（実際に送信はしないでリクエストを検証）実行してデバイストークンの検証をします
-   * dry-run実行後に、エラーコードが「UNAVAILABLE」「INVALID_ARGUMENT」の場合は不正なデバイストークンとします
+   * dry-run実行後に、エラーコードが「UNREGISTERED」「INVALID_ARGUMENT」の場合は不正なデバイストークンとします
    *
    * <p>「INVALID_ARGUMENT」はデバイストークン以外のパラメータが不正の場合も返却されますが、
    * ここで実施するdry-runのリクエストにはデバイストークンしか含めないため、不正なデバイストークン以外では返却されない想定です
@@ -183,11 +185,5 @@ public class FcmPushNotifier implements PushNotificationRepository {
     androidConfigBuilder.setPriority(Priority.HIGH);
     androidConfigBuilder.setTtl(TTL);
     return androidConfigBuilder.build();
-  }
-
-  private boolean isUnregisteredDeviceToken(SendResponse response) {
-    final FirebaseMessagingException e = response.getException();
-    final MessagingErrorCode errorCode = e.getMessagingErrorCode();
-    return errorCode == MessagingErrorCode.UNAVAILABLE;
   }
 }

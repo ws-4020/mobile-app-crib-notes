@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Button, Text} from 'react-native-elements';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import {Button, Divider, Text} from 'react-native-elements';
 
 import {usePushNotification} from './usePushNotification';
 
@@ -16,7 +16,10 @@ const Screen = () => {
     onNotificationOpenedApp,
     setBackgroundMessageHandler,
     getInitialNotification,
-    notifyMessage,
+    registerFcmToken,
+    removeFcmToken,
+    notifyMessageToAll,
+    notifyMessageToMe,
   } = usePushNotification();
 
   useEffect(() => {
@@ -31,31 +34,56 @@ const Screen = () => {
   }, [onMessage, onNotificationOpenedApp, setBackgroundMessageHandler, getInitialNotification]);
 
   return (
-    <View style={styles.container}>
-      <View>
-        <Text>【通知メッセージ】</Text>
-        <Text>{notification ?? '通知メッセージが表示されます'}</Text>
-      </View>
-      <View>
-        <Text>【Permissionのステータス】</Text>
-        <Text>{authStatus ?? 'Permissionのステータスが表示されます'}</Text>
-      </View>
-      <Button onPress={requestUserPermission} title="Permissionの許可" />
-      <View>
-        <Text>【FCM登録トークン】</Text>
-        <Text selectable>{token ?? 'FCM登録トークンが表示されます'}</Text>
-      </View>
-      <Button onPress={getToken} title="FCM登録トークンの取得" />
-      <Button onPress={requestUserPermission} title="FCM登録トークンの登録" />
-      <Button onPress={notifyMessage} title="Pushメッセージ一斉送信" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <View>
+          <Text>【Permissionのステータス】</Text>
+          <Text>{authStatus ?? 'Permissionのステータスが表示されます'}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button onPress={requestUserPermission} title="Permissionの許可" />
+        </View>
+        <Divider orientation="vertical" style={styles.divider} />
+        <View>
+          <Text>【FCM登録トークン】</Text>
+          <Text selectable>{token ?? 'FCM登録トークンが表示されます'}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button onPress={getToken} title="FCM登録トークンの取得" />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button onPress={registerFcmToken} title="FCM登録トークンをバックエンドに登録" />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button onPress={removeFcmToken} title="FCM登録トークンをバックエンドから削除" />
+        </View>
+        <Divider orientation="vertical" style={styles.divider} />
+        <View>
+          <Text>【通知メッセージ】</Text>
+          <Text>{notification ?? '通知メッセージが表示されます'}</Text>
+          <View style={styles.buttonContainer}>
+            <Button onPress={notifyMessageToAll} title="Pushメッセージ一斉送信" />
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button onPress={notifyMessageToMe} title="Pushメッセージを自分に送信" />
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'space-around',
+    padding: 10,
+  },
+  notificationMessageContainer: {},
+  divider: {
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  buttonContainer: {
+    padding: 20,
   },
 });
 
