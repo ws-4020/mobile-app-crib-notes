@@ -46,7 +46,8 @@ const Screen = () => {
         <Text selectable>{token ?? 'FCM登録トークンが表示されます'}</Text>
       </View>
       <Button onPress={getToken} title="FCM登録トークンの取得" />
-      <Button onPress={notifyMessage} title="Pushメッセージ送信" />
+      <Button onPress={requestUserPermission} title="FCM登録トークンの登録" />
+      <Button onPress={notifyMessage} title="Pushメッセージ一斉送信" />
     </View>
   );
 };

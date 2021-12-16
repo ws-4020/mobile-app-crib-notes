@@ -1,7 +1,9 @@
 import messaging from '@react-native-firebase/messaging';
 import {useCallback, useState} from 'react';
 
-import {teamApi} from '../../../framework';
+import {accountApi, AppConfig} from '../../../framework';
+import {ApiResponseError} from "../../../framework/backend";
+import axios from "axios";
 
 export const usePushNotification = () => {
   const [authStatus, setAuthStatus] = useState<string>();
@@ -28,13 +30,11 @@ export const usePushNotification = () => {
 
   const getToken = useCallback(async () => {
     const fcmToken = await messaging().getToken();
-    console.log(`fcmToken: ${fcmToken}`);
     setToken(fcmToken);
   }, []);
 
   const onMessage = useCallback(() => {
     return messaging().onMessage(message => {
-      console.log('onMessage');
       setNotification(
         JSON.stringify({
           notification: message.notification,
@@ -46,7 +46,6 @@ export const usePushNotification = () => {
 
   const onNotificationOpenedApp = useCallback(() => {
     return messaging().onNotificationOpenedApp(message => {
-      console.log('onNotificationOpenedApp');
       setNotification(
         JSON.stringify({
           notification: message.notification,
@@ -71,7 +70,6 @@ export const usePushNotification = () => {
   const getInitialNotification = useCallback(async () => {
     const message = await messaging().getInitialNotification();
     if (message) {
-      console.log('getInitialNotification');
       setNotification(
         JSON.stringify({
           notification: message.notification,
@@ -81,12 +79,23 @@ export const usePushNotification = () => {
     }
   }, []);
 
+  const registerFcmToken = useCallback(async () => {
+    try {
+      await accountApi.postAccountsMeDeviceToken({newDeviceToken: token});
+    } catch (e) {
+      if (e instanceof ApiResponseError) {
+        alert(e.response.data.message);
+        return;
+      }
+      alert(e);
+    }
+  }, [token]);
+
   const notifyMessage = useCallback(async () => {
     try {
-      const res = await teamApi.putTeamsTeamIdTimetablesTimetableId('1', '2');
-      console.log(res);
+      await axios.put(AppConfig.santokuAppBackendUrl + '/api/sandbox/push-notification/all');
     } catch (e) {
-      console.log(e);
+      alert(e);
     }
   }, []);
 
@@ -100,6 +109,7 @@ export const usePushNotification = () => {
     onNotificationOpenedApp,
     setBackgroundMessageHandler,
     getInitialNotification,
+    registerFcmToken,
     notifyMessage,
   };
 };
