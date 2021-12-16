@@ -1,12 +1,14 @@
 import {createUseContextAndProvider} from 'framework/utilities';
 import {AppNavigatorOptions} from 'navigation/types';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 
 import {initialize, hideSplashScreen} from './initialize';
 
 type InitializeContextValue = {
   initialized: boolean;
   navigatorOptions: AppNavigatorOptions;
+  reservedSnackbarMessage: string | undefined;
+  clearReservedSnackbarMessage: () => void;
 };
 
 const [useInitializeContext, InitializeContextProvider] = createUseContextAndProvider<InitializeContextValue>();
@@ -15,17 +17,24 @@ const WithInitializeContext: React.FC = ({children}) => {
   const [error, setError] = useState<unknown>();
   const [initialized, setInitialized] = useState<boolean>(false);
   const [navigatorOptions, setNavigatorOptions] = useState<AppNavigatorOptions>({});
+  const [reservedSnackbarMessage, setReservedSnackbarMessage] = useState<string>();
+
+  const clearReservedSnackbarMessage = useCallback(() => {
+    setReservedSnackbarMessage(undefined);
+  }, []);
+
   const contextValue = useMemo(() => {
     return {
       initialized,
       navigatorOptions,
+      reservedSnackbarMessage,
+      clearReservedSnackbarMessage,
     };
-  }, [initialized, navigatorOptions]);
+  }, [initialized, navigatorOptions, reservedSnackbarMessage, clearReservedSnackbarMessage]);
 
   useEffect(() => {
-    initialize()
-      .then((navigatorOptions: AppNavigatorOptions) => {
-        setNavigatorOptions(navigatorOptions);
+    initialize(setNavigatorOptions, setReservedSnackbarMessage)
+      .then(() => {
         setInitialized(true);
         hideSplashScreen().catch(() => {});
       })

@@ -11,7 +11,7 @@ describe('WithInitializeContext', () => {
   };
 
   it('WithInitialContextを子要素を含めて正常にrenderできること', async () => {
-    const mockInitialize = jest.spyOn(Initialize, 'initialize').mockResolvedValue({});
+    const mockInitialize = jest.spyOn(Initialize, 'initialize').mockResolvedValue();
     const withInitializeContext = render(
       <WithInitializeContext>
         <ChildComponent />

@@ -1,8 +1,10 @@
 // import時の副作用を防ぐためにimport typeにしてます。
 import type crashlyticsModule from '@react-native-firebase/crashlytics';
+import messaging, {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import {activateKeepAwake} from 'expo-keep-awake';
 import * as SplashScreen from 'expo-splash-screen';
 import {AppNavigatorOptions} from 'navigation/types';
+import {Alert} from 'react-native';
 
 import {BundledMessagesLoader, firebaseConfig, launchedId, loadMessages} from '../../framework';
 
@@ -15,7 +17,16 @@ type InitialData = {
   terms?: TermsAgreement;
 };
 
-export const initialize = async () => {
+export type NavigatorOptions = {
+  [navigatorName: string]: {
+    initialRouteName?: string;
+  };
+};
+
+export const initialize = async (
+  setNavigatorOptions: React.Dispatch<React.SetStateAction<NavigatorOptions>>,
+  setReservedSnackbarMessage: React.Dispatch<React.SetStateAction<string | undefined>>,
+) => {
   // 開発中は画面がスリープしないように設定
   if (__DEV__) {
     activateKeepAwake();
@@ -27,7 +38,12 @@ export const initialize = async () => {
   // アプリ内で使用するメッセージのロード
   await loadBundledMessagesAsync();
 
-  // TODO: 通知をタップして起動した場合のパラメータ取得
+  // 通知受信時処理を行うためのハンドラ設定
+  setNotificationHandlers(setReservedSnackbarMessage);
+
+  // アプリ未起動時に通知をタップしてアプリを起動した場合の通知パラメータ取得
+  const initialNotificationMessage = await handleInitialNotificationAsync();
+
   // TODO: ディープリンクから起動した場合のパラメータ取得
   // TODO: 強制アップデート対象バージョンかどうかの確認
   // TODO: キャッシュの削除
@@ -38,7 +54,7 @@ export const initialize = async () => {
   // TODO: 読み込んだ初期データをFirebase Crashlyticsの設定に反映
 
   // 初期画面の決定
-  return getInitialNavigatorOptions(initialData);
+  getInitialNavigatorOptions(setNavigatorOptions, initialData, initialNotificationMessage);
 };
 
 export const hideSplashScreen = async () => {
@@ -78,6 +94,58 @@ const loadBundledMessagesAsync = async () => {
   }
 };
 
+const setNotificationHandlers = (
+  setReservedSnackbarMessage: React.Dispatch<React.SetStateAction<string | undefined>>,
+) => {
+  // アプリを前面で操作中に通知を受信した際に行う処理
+  messaging().onMessage(message => {
+    console.debug(`onMessage. message=[${JSON.stringify(message)}]`);
+    if (message.notification) {
+      // アプリ操作中に受信した場合は、通知内容をスナックバーに表示して画面遷移は行わない
+      const snackBarText = [message.notification.title, message.notification.body].join('\n');
+      setReservedSnackbarMessage(snackBarText);
+    }
+  });
+
+  // アプリがバックグラウンド状態で通知を受信した場合に、その時点でバックグラウンド状態のまま実行する処理
+  // awaitするものはなく、Promiseで返却するものもないのでignoreしておく
+  // eslint-disable-next-line @typescript-eslint/require-await
+  messaging().setBackgroundMessageHandler(async message => {
+    console.debug(`setBackgroundMessageHandler. message=[${JSON.stringify(message)}]`);
+  });
+
+  // アプリがバックグラウンド状態で通知を受信した場合に、通知領域から通知をタップしてアプリを前面に移動した際に行う処理
+  messaging().onNotificationOpenedApp(message => {
+    console.debug(`onNotificationOpenedApp. message=[${JSON.stringify(message)}]`);
+    // デモ画面での動作確認用に、一旦Alertを表示しておく
+    const alertTitle = '通知がタップされました';
+    const alertText = [
+      `タイトル: ${message.notification?.title ?? ''}`,
+      `本文: ${message.notification?.body ?? ''}`,
+      `データ: ${JSON.stringify(message.data)}`,
+    ].join('\n');
+    Alert.alert(alertTitle, alertText);
+  });
+};
+
+const handleInitialNotificationAsync = async () => {
+  // アプリが起動していなかった間に受信した通知を確認し、届いていれば処理を行う
+  const message = await messaging().getInitialNotification();
+  if (message) {
+    console.debug(`handleInitialNotification. message=[${JSON.stringify(message)}]`);
+    // デモ画面での動作確認用に、一旦Alertを表示しておく
+    const alertTitle = 'アプリ停止中に通知を受信しました';
+    const alertText = [
+      `タイトル: ${message.notification?.title ?? ''}`,
+      `本文: ${message.notification?.body ?? ''}`,
+      `データ: ${JSON.stringify(message.data)}`,
+    ].join('\n');
+    Alert.alert(alertTitle, alertText);
+  }
+  // 後続の初期画面決定で使うためにmessageを返しておく
+  return message;
+};
+
 const loadInitialDataAsync = async (): Promise<InitialData> => {
   // 利用規約同意状態を取得
   const terms = await getAccountMeTerms();
@@ -86,35 +154,69 @@ const loadInitialDataAsync = async (): Promise<InitialData> => {
   };
 };
 
-const getInitialNavigatorOptions = (initialData: InitialData): AppNavigatorOptions => {
+const getInitialNavigatorOptions = (
+  setNavigatorOptions: React.Dispatch<React.SetStateAction<NavigatorOptions>>,
+  initialData: InitialData,
+  initialNotificationMessage: FirebaseMessagingTypes.RemoteMessage | null,
+): AppNavigatorOptions => {
   // TODO: 未認証状態ならログイン画面へ
-  // TODO: チーム未参加状態ならチーム新規登録画面へ
-  // TODO: 通知パラメータがあればそれに応じた画面へ
-  // TODO: ディープリンクパラメータがあればそれに応じた画面へ
+
+  // 利用規約に同意していなければ利用規約画面へ
   if (!initialData.terms?.hasAgreedValidTermsOfService) {
-    // 利用規約同意画面
-    return {
+    setNavigatorOptions({
       RootStackNav: {
         initialRouteName: 'TermsOfServiceAgreement',
       },
-    };
-  } else {
-    // ホーム画面
-    return {
-      RootStackNav: {
-        initialRouteName: 'AuthenticatedStackNav',
-      },
-      AuthenticatedStackNav: {
-        initialRouteName: 'MainTabNav',
-      },
-      MainTabNav: {
-        initialRouteName: 'HomeStackNav',
-      },
-      HomeStackNav: {
-        initialRouteName: 'Home',
-      },
-    };
+    });
+    return;
   }
+
+  // TODO: チーム未参加状態ならチーム新規登録画面へ
+
+  // 通知パラメータがあればそれに応じた画面へ
+  if (initialNotificationMessage?.data?.type) {
+    switch (initialNotificationMessage.data.type) {
+      case 'StartedTimetable': {
+        // チーム詳細画面
+        setNavigatorOptions({
+          RootStackNav: {
+            initialRouteName: 'AuthenticatedStackNav',
+          },
+          AuthenticatedStackNav: {
+            initialRouteName: 'MainTabNav',
+          },
+          MainTabNav: {
+            initialRouteName: 'TeamStackNav',
+          },
+          HomeStackNav: {
+            initialRouteName: 'TeamDetail',
+          },
+        });
+        return;
+      }
+      default: {
+        break;
+      }
+    }
+  }
+
+  // TODO: ディープリンクパラメータがあればそれに応じた画面へ
+
+  // 何もなければホーム画面へ
+  setNavigatorOptions({
+    RootStackNav: {
+      initialRouteName: 'AuthenticatedStackNav',
+    },
+    AuthenticatedStackNav: {
+      initialRouteName: 'MainTabNav',
+    },
+    MainTabNav: {
+      initialRouteName: 'HomeStackNav',
+    },
+    HomeStackNav: {
+      initialRouteName: 'Home',
+    },
+  });
 };
 
 // OpenAPI generatorで生成されたコードを導入するまでの一時的なMock

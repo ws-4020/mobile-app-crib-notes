@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Divider, Text} from 'react-native-elements';
 
@@ -10,28 +10,12 @@ const Screen = () => {
     authStatus,
     token,
     requestUserPermission,
-    notification,
     getToken,
-    onMessage,
-    onNotificationOpenedApp,
-    setBackgroundMessageHandler,
-    getInitialNotification,
     registerFcmToken,
     removeFcmToken,
     notifyMessageToAll,
     notifyMessageToMe,
   } = usePushNotification();
-
-  useEffect(() => {
-    const onMessageRes = onMessage();
-    const onNotificationOpenedAppRes = onNotificationOpenedApp();
-    setBackgroundMessageHandler();
-    getInitialNotification().catch(err => console.log(err));
-    return () => {
-      onMessageRes();
-      onNotificationOpenedAppRes();
-    };
-  }, [onMessage, onNotificationOpenedApp, setBackgroundMessageHandler, getInitialNotification]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -60,7 +44,6 @@ const Screen = () => {
         <Divider orientation="vertical" style={styles.divider} />
         <View>
           <Text>【通知メッセージ】</Text>
-          <Text>{notification ?? '通知メッセージが表示されます'}</Text>
           <View style={styles.buttonContainer}>
             <Button onPress={notifyMessageToAll} title="Pushメッセージ一斉送信" />
           </View>

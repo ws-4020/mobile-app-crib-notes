@@ -9,7 +9,6 @@ import {ErrorResponse} from '../../../generated/api';
 export const usePushNotification = () => {
   const [authStatus, setAuthStatus] = useState<string>();
   const [token, setToken] = useState<string>();
-  const [notification, setNotification] = useState<string>();
 
   const requestUserPermission = useCallback(async () => {
     const authStatus = await messaging().requestPermission();
@@ -32,52 +31,6 @@ export const usePushNotification = () => {
   const getToken = useCallback(async () => {
     const fcmToken = await messaging().getToken();
     setToken(fcmToken);
-  }, []);
-
-  const onMessage = useCallback(() => {
-    return messaging().onMessage(message => {
-      setNotification(
-        JSON.stringify({
-          notification: message.notification,
-          data: message.data,
-        }),
-      );
-    });
-  }, []);
-
-  const onNotificationOpenedApp = useCallback(() => {
-    return messaging().onNotificationOpenedApp(message => {
-      setNotification(
-        JSON.stringify({
-          notification: message.notification,
-          data: message.data,
-        }),
-      );
-    });
-  }, []);
-
-  const setBackgroundMessageHandler = useCallback(() => {
-    // awaitするものはなく、Promiseで返却するものもないのでignoreしておく
-    // eslint-disable-next-line @typescript-eslint/require-await
-    return messaging().setBackgroundMessageHandler(async message => {
-      const parsedMessage = JSON.stringify({
-        notification: message.notification,
-        data: message.data,
-      });
-      console.log(`setBackgroundMessageHandler. message=[${parsedMessage}]`);
-    });
-  }, []);
-
-  const getInitialNotification = useCallback(async () => {
-    const message = await messaging().getInitialNotification();
-    if (message) {
-      setNotification(
-        JSON.stringify({
-          notification: message.notification,
-          data: message.data,
-        }),
-      );
-    }
   }, []);
 
   const registerFcmToken = useCallback(async () => {
@@ -145,11 +98,6 @@ export const usePushNotification = () => {
     token,
     requestUserPermission,
     getToken,
-    notification,
-    onMessage,
-    onNotificationOpenedApp,
-    setBackgroundMessageHandler,
-    getInitialNotification,
     registerFcmToken,
     removeFcmToken,
     notifyMessageToAll,

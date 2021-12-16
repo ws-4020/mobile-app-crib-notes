@@ -3,12 +3,10 @@ import {waitFor} from '@testing-library/react-native';
 import {initialize, hideSplashScreen} from './initialize';
 
 describe('initialize', () => {
-  it('navigatorOptionsが返されること', async () => {
-    await expect(initialize()).resolves.toEqual({
-      RootStackNav: {
-        initialRouteName: 'TermsOfServiceAgreement',
-      },
-    });
+  it('エラーなく実行できること', async () => {
+    const mockSetNavigatorProps = jest.fn();
+    const mockSetReservedSnackbarMessage = jest.fn();
+    await expect(initialize(mockSetNavigatorProps, mockSetReservedSnackbarMessage)).resolves.toBeUndefined();
   });
 });
 
