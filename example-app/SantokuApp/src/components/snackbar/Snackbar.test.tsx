@@ -1,3 +1,4 @@
+import {act} from '@testing-library/react-hooks';
 import {render, waitFor} from '@testing-library/react-native';
 import React from 'react';
 import {Text, TextStyle, ViewStyle} from 'react-native';
@@ -22,7 +23,7 @@ const FORCE_FADE_OUT_DURATION = 300;
 const HIDE_FADE_OUT_DURATION = 300;
 
 describe('Snackbar', () => {
-  it('Snackbarが正常にrenderできることを確認', async () => {
+  it('Snackbarが正常にrenderできることを確認', () => {
     const renderResult = render(
       <Snackbar message="テストメッセージ">
         <ChildComponent />
@@ -37,15 +38,17 @@ describe('Snackbar', () => {
     expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).opacity).toBe(0);
     expect(renderResult).toMatchSnapshot('render直後');
 
-    await waitFor(() => {
+    act(() => {
       jest.advanceTimersByTime(FADE_IN_DURATION);
-      expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).opacity).toBe(1);
-      expect(renderResult).toMatchSnapshot('フェードイン後');
-
-      jest.advanceTimersByTime(AUTO_HIDE_DURATION + FADE_OUT_DURATION);
-      expect(queryByTestId('snackbarAnimatedView')).toBeNull();
-      expect(renderResult).toMatchSnapshot('フェードアウト後');
     });
+    expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).opacity).toBe(1);
+    expect(renderResult).toMatchSnapshot('フェードイン後');
+
+    act(() => {
+      jest.advanceTimersByTime(AUTO_HIDE_DURATION + FADE_OUT_DURATION);
+    });
+    expect(queryByTestId('snackbarAnimatedView')).toBeNull();
+    expect(renderResult).toMatchSnapshot('フェードアウト後');
   });
 
   it('Snackbar表示中にpropsが更新された場合、フェードアウト後に更新後のpropsでSnackbarが表示されることを確認', async () => {
