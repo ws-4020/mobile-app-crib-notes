@@ -42,7 +42,7 @@ describe('Snackbar', () => {
     expect(renderResult).toMatchSnapshot('フェードイン後');
 
     jest.advanceTimersByTime(AUTO_HIDE_DURATION + FADE_OUT_DURATION);
-    expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).opacity).toBe(0);
+    expect(queryByTestId('snackbarAnimatedView')).toBeNull();
     expect(renderResult).toMatchSnapshot('フェードアウト後');
   });
 
