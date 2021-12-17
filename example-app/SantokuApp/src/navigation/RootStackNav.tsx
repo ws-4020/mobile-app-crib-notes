@@ -13,7 +13,7 @@ const nav = createNativeStackNavigator<RootStackParamList>();
 const name = 'RootStackNav';
 
 export const RootStackNav: React.FC = () => {
-  const {navigatorOptions} = useInitializeContext();
+  const {navigatorOptions, reservedNavigation, clearReservedNavigation} = useInitializeContext();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   useEffect(() => {
@@ -21,6 +21,13 @@ export const RootStackNav: React.FC = () => {
       navigation.navigate('DemoStackNav', {screen: 'Demo'});
     });
   }, [navigation]);
+
+  useEffect(() => {
+    if (reservedNavigation) {
+      navigation.navigate(reservedNavigation.screen, reservedNavigation.params);
+      clearReservedNavigation();
+    }
+  }, [navigation, reservedNavigation, clearReservedNavigation]);
 
   return (
     <nav.Navigator

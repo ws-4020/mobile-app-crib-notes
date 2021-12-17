@@ -6,7 +6,10 @@ describe('initialize', () => {
   it('エラーなく実行できること', async () => {
     const mockSetNavigatorProps = jest.fn();
     const mockSetReservedSnackbarMessage = jest.fn();
-    await expect(initialize(mockSetNavigatorProps, mockSetReservedSnackbarMessage)).resolves.toBeUndefined();
+    const mockSetReservedNavigation = jest.fn();
+    await expect(
+      initialize(mockSetNavigatorProps, mockSetReservedSnackbarMessage, mockSetReservedNavigation),
+    ).resolves.toBeUndefined();
   });
 });
 
