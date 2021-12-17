@@ -321,6 +321,17 @@ module.exports = {
             'react-native/santoku/application-architecture/http-api/http-api-error-handling',
           ],
         },
+        {
+          type: 'category',
+          label: 'Push通知',
+          items: [
+            'react-native/santoku/application-architecture/push-notification/overview',
+            'react-native/santoku/application-architecture/push-notification/register-token',
+            'react-native/santoku/application-architecture/push-notification/delete-token',
+            'react-native/santoku/application-architecture/push-notification/send-push-notification',
+            'react-native/santoku/application-architecture/push-notification/receive-push-notification',
+          ],
+        },
       ],
     },
     {
