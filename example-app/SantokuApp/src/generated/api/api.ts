@@ -51,6 +51,12 @@ export interface Account {
      * @memberof Account
      */
     'joinedTeamIdList'?: Array<string>;
+    /**
+     * アカウントに紐づくデバイストークン（デバイストークンの更新期限を超過しているものは除く）
+     * @type {Array<string>}
+     * @memberof Account
+     */
+    'deviceTokens': Array<string>;
 }
 /**
  * アカウント削除
@@ -64,6 +70,19 @@ export interface AccountDeletion {
      * @memberof AccountDeletion
      */
     'password'?: string;
+}
+/**
+ * アカウント紐づくデバイストークン
+ * @export
+ * @interface AccountDeviceTokens
+ */
+export interface AccountDeviceTokens {
+    /**
+     * アカウントに紐づくデバイストークン（デバイストークンの更新期限を超過しているものは除く）
+     * @type {Array<string>}
+     * @memberof AccountDeviceTokens
+     */
+    'deviceTokens': Array<string>;
 }
 /**
  * アカウントチーム情報

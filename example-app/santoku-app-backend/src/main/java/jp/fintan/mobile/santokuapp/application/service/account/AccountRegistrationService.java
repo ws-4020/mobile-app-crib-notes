@@ -1,9 +1,11 @@
 package jp.fintan.mobile.santokuapp.application.service.account;
 
+import java.util.List;
 import jp.fintan.mobile.santokuapp.application.AuthenticationException;
 import jp.fintan.mobile.santokuapp.domain.model.account.Account;
 import jp.fintan.mobile.santokuapp.domain.model.account.AccountId;
 import jp.fintan.mobile.santokuapp.domain.model.account.AccountPassword;
+import jp.fintan.mobile.santokuapp.domain.model.account.Devices;
 import jp.fintan.mobile.santokuapp.domain.model.account.HashedPassword;
 import jp.fintan.mobile.santokuapp.domain.model.account.RawPassword;
 import jp.fintan.mobile.santokuapp.domain.model.account.Nickname;
@@ -36,7 +38,7 @@ public class AccountRegistrationService {
   public Account registerAccount(Nickname nickname, RawPassword rawPassword) {
     HashedPassword password = passwordHashingProcessor.hash(rawPassword);
     AccountId id = idProvider.generate();
-    Account account = new Account(id, nickname);
+    Account account = new Account(id, nickname, new Devices(List.of()));
 
     accountRepository.add(account);
 

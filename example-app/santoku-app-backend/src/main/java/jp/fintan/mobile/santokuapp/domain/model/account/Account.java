@@ -6,9 +6,12 @@ public class Account {
 
   private final Nickname nickname;
 
-  public Account(AccountId id, Nickname nickname) {
+  private final Devices devices;
+
+  public Account(AccountId id, Nickname nickname, Devices devices) {
     this.id = id;
     this.nickname = nickname;
+    this.devices = devices;
   }
 
   public AccountId accountId() {
@@ -17,5 +20,9 @@ public class Account {
 
   public Nickname nickname() {
     return nickname;
+  }
+
+  public Devices devices() {
+    return devices;
   }
 }

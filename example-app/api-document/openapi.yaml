@@ -645,6 +645,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/AccountProfile'
         - $ref: '#/components/schemas/AccountJoinedTeam'
+        - $ref: '#/components/schemas/AccountDeviceTokens'
     AccountProfile:
       title: AccountProfile
       type: object
@@ -672,6 +673,18 @@ components:
           items:
             type: string
           description: 参加済みチームID一覧
+    AccountDeviceTokens:
+      title: AccountDeviceTokens
+      type: object
+      description: アカウント紐づくデバイストークン
+      properties:
+        deviceTokens:
+          type: array
+          items:
+            type: string
+          description: アカウントに紐づくデバイストークン（デバイストークンの更新期限を超過しているものは除く）
+      required:
+        - deviceTokens
     AccountRegistration:
       title: AccountRegistration
       type: object
