@@ -85,6 +85,7 @@ WebView.defaultProps = {
   // https://github.com/react-native-webview/react-native-webview/issues/1915
   androidLayerType: 'software',
   startInLoadingState: true,
+  decelerationRate: 'normal',
   renderLoading: () => <ActivityIndicator style={styles.indicator} size="large" color="#0000ff" />,
 };
 
