@@ -38,12 +38,16 @@ public class FcmPushNotifier implements PushNotificationRepository {
   private static final long TTL = 43200;
   // APNSの通知優先度
   private static final String APNS_PRIORITY = "10";
-  // APNSの通知優先度
+  // 1度に送信可能なデバイス最大数
   private static final int MAX_SEND_COUNT = 500;
   // データに設定するキー：type
   private static final String DATA_KEY_TYPE = "type";
   // データに設定するキー：params
   private static final String DATA_KEY_PARAMS = "params";
+  // APNsの通知優先度を設定するHTTPヘッダキー
+  private static final String APNS_HEADER_KEY_APNS_PRIORITY = "apns-priority";
+  // APNsの1度に送信可能なデバイス最大数を設定するHTTPヘッダキー
+  private static final String APNS_HEADER_KEY_APNS_EXPIRATION = "apns-expiration";
 
   @Override
   public PushNotificationResult notifyToDevice(
@@ -173,7 +177,7 @@ public class FcmPushNotifier implements PushNotificationRepository {
     // https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns?language=objc
     ApnsConfig.Builder apnsConfigBuilder = ApnsConfig.builder();
     apnsConfigBuilder.putAllHeaders(
-        Map.of("apns-priority", APNS_PRIORITY, "apns-expiration", apnsExpiration));
+        Map.of(APNS_HEADER_KEY_APNS_PRIORITY, APNS_PRIORITY, APNS_HEADER_KEY_APNS_EXPIRATION, apnsExpiration));
     Aps aps = Aps.builder().build();
     apnsConfigBuilder.setAps(aps);
     return apnsConfigBuilder.build();
