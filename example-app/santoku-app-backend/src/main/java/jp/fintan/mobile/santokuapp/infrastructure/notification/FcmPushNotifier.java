@@ -16,6 +16,7 @@ import com.google.firebase.messaging.Notification;
 import com.google.firebase.messaging.SendResponse;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,7 +26,6 @@ import jp.fintan.mobile.santokuapp.domain.model.notification.FailureDeviceTokens
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotification;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationPriority;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationResult;
-import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationTtl;
 import jp.fintan.mobile.santokuapp.domain.model.notification.SuccessDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.model.notification.UnregisteredDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.repository.PushNotificationRepository;
@@ -36,16 +36,10 @@ import nablarch.core.repository.di.config.externalize.annotation.SystemRepositor
 @SystemRepositoryComponent
 public class FcmPushNotifier implements PushNotificationRepository {
   private static final Logger LOGGER = LoggerManager.get(FcmPushNotifier.class);
-  // デフォルトTTL（12時間）
-  private static final long DEFAULT_TTL = 43200;
   // APNSの通知優先度:NORMAL
   private static final String APNS_PRIORITY_NORMAL = "5";
   // APNSの通知優先度:HIGH
   private static final String APNS_PRIORITY_HIGH = "10";
-  // APNSのデフォルト通知優先度
-  private static final String DEFAULT_APNS_PRIORITY = APNS_PRIORITY_HIGH;
-  // Androidのデフォルト通知優先度
-  private static final Priority DEFAULT_ANDROID_PRIORITY = Priority.HIGH;
   // 1度に送信可能なデバイス最大数
   private static final int MAX_SEND_COUNT = 500;
   // データに設定するキー：type
@@ -180,18 +174,18 @@ public class FcmPushNotifier implements PushNotificationRepository {
   }
 
   private ApnsConfig createApnsConfig(PushNotification pushNotification) {
-    // APNSは有効期限をエポック秒で指定する必要がある
-    final String apnsExpiration =
-        Long.toString(Instant.now().plusSeconds(getTtl(pushNotification.ttl())).getEpochSecond());
-    // 指定するキーは以下を参照
-    // https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns?language=objc
+    Map<String, String> headers = new HashMap<>();
+    if (pushNotification.ttl() != null) {
+      // APNSは有効期限をエポック秒で指定する必要がある
+      final String apnsExpiration =
+          Long.toString(Instant.now().plusSeconds(pushNotification.ttl().value()).getEpochSecond());
+      headers.put(APNS_HEADER_KEY_APNS_EXPIRATION, apnsExpiration);
+    }
+    if (pushNotification.priority() != null) {
+      headers.put(APNS_HEADER_KEY_APNS_PRIORITY, getApnsPriority(pushNotification.priority()));
+    }
     ApnsConfig.Builder apnsConfigBuilder = ApnsConfig.builder();
-    apnsConfigBuilder.putAllHeaders(
-        Map.of(
-            APNS_HEADER_KEY_APNS_PRIORITY,
-            getApnsPriority(pushNotification.priority()),
-            APNS_HEADER_KEY_APNS_EXPIRATION,
-            apnsExpiration));
+    apnsConfigBuilder.putAllHeaders(headers);
     Aps aps = Aps.builder().build();
     apnsConfigBuilder.setAps(aps);
     return apnsConfigBuilder.build();
@@ -200,26 +194,23 @@ public class FcmPushNotifier implements PushNotificationRepository {
   private AndroidConfig createAndroidConfig(PushNotification pushNotification) {
 
     AndroidConfig.Builder androidConfigBuilder = AndroidConfig.builder();
-    androidConfigBuilder.setPriority(getAndroidPriority(pushNotification.priority()));
-    androidConfigBuilder.setTtl(getTtl(pushNotification.ttl()));
+    if (pushNotification.ttl() != null) {
+      androidConfigBuilder.setTtl(pushNotification.ttl().value());
+    }
+    if (pushNotification.priority() != null) {
+      androidConfigBuilder.setPriority(getAndroidPriority(pushNotification.priority()));
+    }
     return androidConfigBuilder.build();
-  }
-
-  private long getTtl(PushNotificationTtl ttl) {
-    return ttl == null ? DEFAULT_TTL : ttl.value();
   }
 
   private String getApnsPriority(PushNotificationPriority priority) {
     if (priority == PushNotificationPriority.NORMAL) {
       return APNS_PRIORITY_NORMAL;
     }
-    return DEFAULT_APNS_PRIORITY;
+    return APNS_PRIORITY_HIGH;
   }
 
   private Priority getAndroidPriority(PushNotificationPriority priority) {
-    if (priority == null) {
-      return DEFAULT_ANDROID_PRIORITY;
-    }
     if (priority == PushNotificationPriority.NORMAL) {
       return Priority.NORMAL;
     }
