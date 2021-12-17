@@ -48,7 +48,7 @@ public class PushNotificationTestAction {
             new NotificationTitle("一斉通知テスト"),
             new NotificationBody("一斉通知を受信できましたか？"),
             PushNotificationType.STARTED_TIMETABLE,
-            Map.of("testKey", "testValue"));
+            Map.of("testKey", "testValue"), null, null);
     PushNotificationResult pushNotificationResult =
         pushNotificationRepository.notifyToDevice(pushNotification, deviceTokens);
     removeUnregisteredDeviceTokens(pushNotificationResult.unregisteredDeviceTokens());
@@ -64,7 +64,7 @@ public class PushNotificationTestAction {
             new NotificationTitle("特定デバイス通知テスト"),
             new NotificationBody("特定デバイス通知を受信できましたか？"),
             PushNotificationType.STARTED_TIMETABLE,
-            Map.of("testKey", "testValue"));
+            Map.of("testKey", "testValue"), null, null);
     PushNotificationResult pushNotificationResult =
         pushNotificationRepository.notifyToDevice(pushNotification, List.of(deviceToken));
     removeUnregisteredDeviceTokens(pushNotificationResult.unregisteredDeviceTokens());

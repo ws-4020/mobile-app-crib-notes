@@ -23,7 +23,9 @@ import jp.fintan.mobile.santokuapp.domain.model.account.DeviceToken;
 import jp.fintan.mobile.santokuapp.domain.model.core.ValueObject;
 import jp.fintan.mobile.santokuapp.domain.model.notification.FailureDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotification;
+import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationPriority;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationResult;
+import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationTtl;
 import jp.fintan.mobile.santokuapp.domain.model.notification.SuccessDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.model.notification.UnregisteredDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.repository.PushNotificationRepository;
@@ -34,10 +36,16 @@ import nablarch.core.repository.di.config.externalize.annotation.SystemRepositor
 @SystemRepositoryComponent
 public class FcmPushNotifier implements PushNotificationRepository {
   private static final Logger LOGGER = LoggerManager.get(FcmPushNotifier.class);
-  // TTLは12時間に設定
-  private static final long TTL = 43200;
-  // APNSの通知優先度
-  private static final String APNS_PRIORITY = "10";
+  // デフォルトTTL（12時間）
+  private static final long DEFAULT_TTL = 43200;
+  // APNSの通知優先度:NORMAL
+  private static final String APNS_PRIORITY_NORMAL = "5";
+  // APNSの通知優先度:HIGH
+  private static final String APNS_PRIORITY_HIGH = "10";
+  // APNSのデフォルト通知優先度
+  private static final String DEFAULT_APNS_PRIORITY = APNS_PRIORITY_HIGH;
+  // Androidのデフォルト通知優先度
+  private static final Priority DEFAULT_ANDROID_PRIORITY = Priority.HIGH;
   // 1度に送信可能なデバイス最大数
   private static final int MAX_SEND_COUNT = 500;
   // データに設定するキー：type
@@ -74,8 +82,8 @@ public class FcmPushNotifier implements PushNotificationRepository {
         multicastMessageBuilder.putData(DATA_KEY_PARAMS, params);
       }
       multicastMessageBuilder.setNotification(createNotification(pushNotification));
-      multicastMessageBuilder.setApnsConfig(createApnsConfig());
-      multicastMessageBuilder.setAndroidConfig(createAndroidConfig());
+      multicastMessageBuilder.setApnsConfig(createApnsConfig(pushNotification));
+      multicastMessageBuilder.setAndroidConfig(createAndroidConfig(pushNotification));
       MulticastMessage multicastMessage = multicastMessageBuilder.build();
 
       try {
@@ -94,7 +102,8 @@ public class FcmPushNotifier implements PushNotificationRepository {
             continue;
           }
 
-          final MessagingErrorCode messagingErrorCode = response.getException().getMessagingErrorCode();
+          final MessagingErrorCode messagingErrorCode =
+              response.getException().getMessagingErrorCode();
           LOGGER.logWarn(
               String.format(
                   "Failed to sent message to Firebase Cloud Messaging. fcmToken=[%s] errorCode=[%s]",
@@ -170,24 +179,50 @@ public class FcmPushNotifier implements PushNotificationRepository {
     return notificationBuilder.build();
   }
 
-  private ApnsConfig createApnsConfig() {
+  private ApnsConfig createApnsConfig(PushNotification pushNotification) {
     // APNSは有効期限をエポック秒で指定する必要がある
-    final String apnsExpiration = Long.toString(Instant.now().plusSeconds(TTL).getEpochSecond());
+    final String apnsExpiration =
+        Long.toString(Instant.now().plusSeconds(getTtl(pushNotification.ttl())).getEpochSecond());
     // 指定するキーは以下を参照
     // https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns?language=objc
     ApnsConfig.Builder apnsConfigBuilder = ApnsConfig.builder();
     apnsConfigBuilder.putAllHeaders(
-        Map.of(APNS_HEADER_KEY_APNS_PRIORITY, APNS_PRIORITY, APNS_HEADER_KEY_APNS_EXPIRATION, apnsExpiration));
+        Map.of(
+            APNS_HEADER_KEY_APNS_PRIORITY,
+            getApnsPriority(pushNotification.priority()),
+            APNS_HEADER_KEY_APNS_EXPIRATION,
+            apnsExpiration));
     Aps aps = Aps.builder().build();
     apnsConfigBuilder.setAps(aps);
     return apnsConfigBuilder.build();
   }
 
-  private AndroidConfig createAndroidConfig() {
+  private AndroidConfig createAndroidConfig(PushNotification pushNotification) {
 
     AndroidConfig.Builder androidConfigBuilder = AndroidConfig.builder();
-    androidConfigBuilder.setPriority(Priority.HIGH);
-    androidConfigBuilder.setTtl(TTL);
+    androidConfigBuilder.setPriority(getAndroidPriority(pushNotification.priority()));
+    androidConfigBuilder.setTtl(getTtl(pushNotification.ttl()));
     return androidConfigBuilder.build();
+  }
+
+  private long getTtl(PushNotificationTtl ttl) {
+    return ttl == null ? DEFAULT_TTL : ttl.value();
+  }
+
+  private String getApnsPriority(PushNotificationPriority priority) {
+    if (priority == PushNotificationPriority.NORMAL) {
+      return APNS_PRIORITY_NORMAL;
+    }
+    return DEFAULT_APNS_PRIORITY;
+  }
+
+  private Priority getAndroidPriority(PushNotificationPriority priority) {
+    if (priority == null) {
+      return DEFAULT_ANDROID_PRIORITY;
+    }
+    if (priority == PushNotificationPriority.NORMAL) {
+      return Priority.NORMAL;
+    }
+    return Priority.HIGH;
   }
 }

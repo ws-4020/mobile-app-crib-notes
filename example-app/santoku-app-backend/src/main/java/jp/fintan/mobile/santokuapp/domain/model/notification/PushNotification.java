@@ -12,13 +12,20 @@ public class PushNotification {
 
   private final Map<String, Object> params;
 
+  private final PushNotificationPriority priority;
+
+  private final PushNotificationTtl ttl;
+
   public PushNotification(
       NotificationTitle title, NotificationBody body, PushNotificationType type,
-      Map<String, Object> params) {
+      Map<String, Object> params,
+      PushNotificationPriority priority, PushNotificationTtl ttl) {
     this.title = title;
     this.body = body;
     this.type = type;
     this.params = params;
+    this.priority = priority;
+    this.ttl = ttl;
   }
 
   public NotificationTitle title() {
@@ -35,5 +42,13 @@ public class PushNotification {
 
   public Map<String, Object> params() {
     return params;
+  }
+
+  public PushNotificationPriority priority() {
+    return priority;
+  }
+
+  public PushNotificationTtl ttl() {
+    return ttl;
   }
 }
