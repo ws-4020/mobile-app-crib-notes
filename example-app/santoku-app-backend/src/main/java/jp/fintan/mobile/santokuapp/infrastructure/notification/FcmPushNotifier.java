@@ -28,13 +28,13 @@ import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationPri
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationResult;
 import jp.fintan.mobile.santokuapp.domain.model.notification.SuccessDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.model.notification.UnregisteredDeviceTokens;
-import jp.fintan.mobile.santokuapp.domain.repository.PushNotificationRepository;
+import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotifier;
 import nablarch.core.log.Logger;
 import nablarch.core.log.LoggerManager;
 import nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;
 
 @SystemRepositoryComponent
-public class FcmPushNotifier implements PushNotificationRepository {
+public class FcmPushNotifier implements PushNotifier {
   private static final Logger LOGGER = LoggerManager.get(FcmPushNotifier.class);
   // APNSの通知優先度:NORMAL
   private static final String APNS_PRIORITY_NORMAL = "5";

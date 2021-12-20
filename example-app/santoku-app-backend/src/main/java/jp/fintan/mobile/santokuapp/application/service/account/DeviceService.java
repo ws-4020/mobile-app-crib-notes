@@ -5,24 +5,24 @@ import jp.fintan.mobile.santokuapp.domain.model.account.Device;
 import jp.fintan.mobile.santokuapp.domain.model.account.DeviceToken;
 import jp.fintan.mobile.santokuapp.domain.model.account.DeviceTokenCreatedAt;
 import jp.fintan.mobile.santokuapp.domain.repository.DeviceRepository;
-import jp.fintan.mobile.santokuapp.domain.repository.PushNotificationRepository;
+import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotifier;
 import nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;
 
 @SystemRepositoryComponent
 public class DeviceService {
 
   private final DeviceRepository deviceRepository;
-  private final PushNotificationRepository pushNotificationRepository;
+  private final PushNotifier pushNotifier;
 
   public DeviceService(
-      DeviceRepository deviceRepository, PushNotificationRepository pushNotificationRepository) {
+      DeviceRepository deviceRepository, PushNotifier pushNotifier) {
     this.deviceRepository = deviceRepository;
-    this.pushNotificationRepository = pushNotificationRepository;
+    this.pushNotifier = pushNotifier;
   }
 
   public void registerDevice(AccountId accountId, DeviceToken deviceToken) {
     if (!deviceRepository.existsBy(accountId, deviceToken)) {
-      if (pushNotificationRepository.verifyDeviceToken(deviceToken)) {
+      if (pushNotifier.verifyDeviceToken(deviceToken)) {
         Device newDevice = new Device(accountId, deviceToken, DeviceTokenCreatedAt.now());
         deviceRepository.add(newDevice);
       }

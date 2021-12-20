@@ -13,7 +13,7 @@ import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotification;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationResult;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationType;
 import jp.fintan.mobile.santokuapp.domain.model.notification.UnregisteredDeviceTokens;
-import jp.fintan.mobile.santokuapp.domain.repository.PushNotificationRepository;
+import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotifier;
 import jp.fintan.mobile.santokuapp.infrastructure.persistence.entity.DeviceEntity;
 import nablarch.common.dao.UniversalDao;
 import nablarch.core.db.connection.AppDbConnection;
@@ -27,10 +27,10 @@ import nablarch.fw.web.HttpRequest;
 @Path("/sandbox/push-notification")
 public class PushNotificationTestAction {
 
-  private final PushNotificationRepository pushNotificationRepository;
+  private final PushNotifier pushNotifier;
 
-  public PushNotificationTestAction(PushNotificationRepository pushNotificationRepository) {
-    this.pushNotificationRepository = pushNotificationRepository;
+  public PushNotificationTestAction(PushNotifier pushNotifier) {
+    this.pushNotifier = pushNotifier;
   }
 
   @PUT
@@ -50,7 +50,7 @@ public class PushNotificationTestAction {
             PushNotificationType.STARTED_TIMETABLE,
             Map.of("testKey", "testValue"), null, null);
     PushNotificationResult pushNotificationResult =
-        pushNotificationRepository.notifyToDevice(pushNotification, deviceTokens);
+        pushNotifier.notifyToDevice(pushNotification, deviceTokens);
     removeUnregisteredDeviceTokens(pushNotificationResult.unregisteredDeviceTokens());
   }
 
@@ -66,7 +66,7 @@ public class PushNotificationTestAction {
             PushNotificationType.STARTED_TIMETABLE,
             Map.of("testKey", "testValue"), null, null);
     PushNotificationResult pushNotificationResult =
-        pushNotificationRepository.notifyToDevice(pushNotification, List.of(deviceToken));
+        pushNotifier.notifyToDevice(pushNotification, List.of(deviceToken));
     removeUnregisteredDeviceTokens(pushNotificationResult.unregisteredDeviceTokens());
   }
 
