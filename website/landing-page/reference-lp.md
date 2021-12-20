@@ -57,7 +57,7 @@ Webアプリケーションを公開した後に、モバイルアプリケー�
 
 ## Push通知のガイドと実装例
 
-モバイルアプリケーションの代表的な要求のうちの1つであるPush通知について、プロジェクトで参考にできる[Push通知のガイドと実装例](https://ws-4020.github.io/mobile-app-crib-notes/reference/notification/overview)を用意しています。
+モバイルアプリケーションの代表的な要求の1つであるPush通知について、プロジェクトで参考にできる[Push通知のガイドと実装例](https://ws-4020.github.io/mobile-app-crib-notes/reference/notification/overview)を用意しています。
 
 ガイドでは実装する上で知っておくべき点の多いリモート通知について
 Firebase Cloud Messagingを用いてAndroid、iOS双方に送信する場合の構成と実装例について解説しています。
