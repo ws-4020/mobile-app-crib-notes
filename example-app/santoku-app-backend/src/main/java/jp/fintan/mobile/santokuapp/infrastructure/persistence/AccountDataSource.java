@@ -1,18 +1,11 @@
 package jp.fintan.mobile.santokuapp.infrastructure.persistence;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import jp.fintan.mobile.santokuapp.domain.model.account.Account;
 import jp.fintan.mobile.santokuapp.domain.model.account.AccountId;
-import jp.fintan.mobile.santokuapp.domain.model.account.Device;
-import jp.fintan.mobile.santokuapp.domain.model.account.DeviceToken;
-import jp.fintan.mobile.santokuapp.domain.model.account.DeviceTokenCreatedAt;
-import jp.fintan.mobile.santokuapp.domain.model.account.Devices;
 import jp.fintan.mobile.santokuapp.domain.model.account.Nickname;
 import jp.fintan.mobile.santokuapp.domain.repository.AccountRepository;
 import jp.fintan.mobile.santokuapp.infrastructure.persistence.entity.AccountEntity;
-import jp.fintan.mobile.santokuapp.infrastructure.persistence.entity.DeviceEntity;
 import nablarch.common.dao.NoDataException;
 import nablarch.common.dao.UniversalDao;
 import nablarch.core.db.connection.AppDbConnection;
@@ -53,12 +46,7 @@ public class AccountDataSource implements AccountRepository {
   public Account findById(AccountId accountId) {
     try {
       AccountEntity accountEntity = UniversalDao.findById(AccountEntity.class, accountId.value());
-      List<DeviceEntity> deviceEntities =
-          UniversalDao.findAllBySqlFile(
-              DeviceEntity.class,
-              "db.sql.device#find_by_account_id",
-              Map.of("accountId", accountId.value()));
-      return toAccount(accountEntity, deviceEntities);
+      return toAccount(accountEntity);
     } catch (NoDataException e) {
       return null;
     }
@@ -74,21 +62,10 @@ public class AccountDataSource implements AccountRepository {
     }
   }
 
-  private Account toAccount(AccountEntity accountEntity, List<DeviceEntity> deviceEntities) {
+  private Account toAccount(AccountEntity accountEntity) {
     AccountId id = new AccountId(accountEntity.getAccountId());
     Nickname nickname = new Nickname(accountEntity.getNickname());
-    Devices devices =
-        new Devices(deviceEntities.stream().map(this::toDevice).collect(Collectors.toList()));
 
-    return new Account(id, nickname, devices);
-  }
-
-  private Device toDevice(DeviceEntity deviceEntity) {
-    AccountId id = new AccountId(deviceEntity.getAccountId());
-    DeviceToken deviceToken = new DeviceToken(deviceEntity.getDeviceToken());
-    DeviceTokenCreatedAt deviceTokenCreatedAt =
-        new DeviceTokenCreatedAt(deviceEntity.getCreatedAt().toLocalDateTime());
-
-    return new Device(id, deviceToken, deviceTokenCreatedAt);
+    return new Account(id, nickname);
   }
 }
