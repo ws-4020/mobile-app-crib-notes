@@ -9,6 +9,5 @@ public class UnregisteredDeviceTokens extends ListValue<DeviceToken> {
 
   public UnregisteredDeviceTokens(List<DeviceToken> value) {
     super(value);
-    Objects.requireNonNull(value);
   }
 }

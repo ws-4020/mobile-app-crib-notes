@@ -8,6 +8,7 @@ public abstract class ValueObject<RAW> {
 
   protected ValueObject(RAW value) {
     this.value = value;
+    Objects.requireNonNull(value);
   }
 
   public RAW value() {

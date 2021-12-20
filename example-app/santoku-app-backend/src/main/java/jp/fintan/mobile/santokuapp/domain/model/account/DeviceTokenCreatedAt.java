@@ -8,7 +8,6 @@ import jp.fintan.mobile.santokuapp.domain.model.core.LocalDateTimeValue;
 public class DeviceTokenCreatedAt extends LocalDateTimeValue {
   public DeviceTokenCreatedAt(LocalDateTime value) {
     super(value);
-    Objects.requireNonNull(value);
   }
 
   public static DeviceTokenCreatedAt now() {

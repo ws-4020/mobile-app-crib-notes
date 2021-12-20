@@ -10,6 +10,5 @@ public class PushNotificationTtl extends LongValue {
 
   public PushNotificationTtl(Long value) {
     super(value);
-    Objects.requireNonNull(value);
   }
 }

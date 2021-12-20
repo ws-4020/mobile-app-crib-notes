@@ -7,7 +7,6 @@ public class HashedPassword extends StringValue {
 
   public HashedPassword(String value) {
     super(value);
-    Objects.requireNonNull(value);
   }
 
   public boolean matches(HashedPassword other) {

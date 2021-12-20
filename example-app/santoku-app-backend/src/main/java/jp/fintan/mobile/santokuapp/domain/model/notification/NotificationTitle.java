@@ -7,6 +7,5 @@ public class NotificationTitle extends StringValue {
 
   public NotificationTitle(String value) {
     super(value);
-    Objects.requireNonNull(value);
   }
 }

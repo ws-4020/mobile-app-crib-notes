@@ -7,6 +7,5 @@ public class DeviceToken extends StringValue {
 
   public DeviceToken(String value) {
     super(value);
-    Objects.requireNonNull(value);
   }
 }

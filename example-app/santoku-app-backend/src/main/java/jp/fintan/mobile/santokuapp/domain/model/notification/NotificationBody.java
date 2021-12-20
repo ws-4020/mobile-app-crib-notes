@@ -7,6 +7,5 @@ public class NotificationBody extends StringValue {
 
   public NotificationBody(String value) {
     super(value);
-    Objects.requireNonNull(value);
   }
 }

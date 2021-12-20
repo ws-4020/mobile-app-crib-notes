@@ -9,6 +9,5 @@ public class SuccessDeviceTokens extends ListValue<DeviceToken> {
 
   public SuccessDeviceTokens(List<DeviceToken> value) {
     super(value);
-    Objects.requireNonNull(value);
   }
 }

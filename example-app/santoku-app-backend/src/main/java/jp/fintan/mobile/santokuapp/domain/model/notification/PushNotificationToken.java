@@ -7,6 +7,5 @@ public class PushNotificationToken extends StringValue {
 
   public PushNotificationToken(String value) {
     super(value);
-    Objects.requireNonNull(value);
   }
 }

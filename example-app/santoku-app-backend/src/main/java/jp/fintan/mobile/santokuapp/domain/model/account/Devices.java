@@ -9,7 +9,6 @@ public class Devices extends ListValue<Device> {
 
   public Devices(List<Device> value) {
     super(value);
-    Objects.requireNonNull(value);
   }
 
   /** デバイスの更新期限を超過しているものを除外します。 */

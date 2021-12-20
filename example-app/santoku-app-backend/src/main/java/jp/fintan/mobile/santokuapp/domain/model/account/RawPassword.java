@@ -11,7 +11,6 @@ public class RawPassword extends StringValue {
 
   public RawPassword(String value) {
     super(value);
-    Objects.requireNonNull(value);
     validateNotBlank(value);
     validateLength(value);
   }
