@@ -22,7 +22,7 @@ public class AccountDeviceTokenService {
   }
 
   public AccountDeviceTokens findByAccountId(AccountId accountId) {
-    return accountDeviceTokenRepository.findByAccountId(accountId);
+    return accountDeviceTokenRepository.findBy(accountId);
   }
 
   public void registerDevice(AccountId accountId, DeviceToken deviceToken) {

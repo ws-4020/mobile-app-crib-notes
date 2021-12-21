@@ -40,7 +40,7 @@ public class AccountDeviceTokenDataSource implements AccountDeviceTokenRepositor
   }
 
   @Override
-  public AccountDeviceTokens findByAccountId(AccountId accountId) {
+  public AccountDeviceTokens findBy(AccountId accountId) {
     List<AccountDeviceTokenEntity> deviceEntities =
         UniversalDao.findAllBySqlFile(
             AccountDeviceTokenEntity.class,
