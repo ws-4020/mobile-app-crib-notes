@@ -104,7 +104,6 @@ const setNotificationHandlers = (
 ) => {
   // アプリを前面で操作中に通知を受信した際に行う処理
   messaging().onMessage(message => {
-    console.debug(`onMessage. message=[${JSON.stringify(message)}]`);
     if (message.notification) {
       // アプリ操作中に受信した場合は通知内容をスナックバーに表示し、通知データに応じた処理は行わない
       const snackBarText = [message.notification.title, message.notification.body].join('\n');
@@ -114,7 +113,6 @@ const setNotificationHandlers = (
 
   // アプリがバックグラウンド状態で通知を受信した場合に、通知領域から通知をタップしてアプリを前面に移動した際に行う処理
   messaging().onNotificationOpenedApp(message => {
-    console.debug(`onNotificationOpenedApp. message=[${JSON.stringify(message)}]`);
     if (message.data?.type) {
       switch (message.data.type) {
         case 'StartedTimetable': {
@@ -145,7 +143,6 @@ const handleInitialNotificationAsync = async () => {
   // アプリが起動していなかった間に受信した通知を確認し、届いていれば処理を行う
   const message = await messaging().getInitialNotification();
   if (message) {
-    console.debug(`handleInitialNotification. message=[${JSON.stringify(message)}]`);
     if (message.data?.type) {
       switch (message.data.type) {
         case 'StartedTimetable': {

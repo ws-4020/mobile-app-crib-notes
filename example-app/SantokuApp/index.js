@@ -19,7 +19,7 @@ SplashScreen.preventAutoHideAsync().catch(() => {
 // To setup a background handler, call the setBackgroundMessageHandler outside of your application logic as early as possible
 // https://rnfirebase.io/messaging/usage#background--quit-state-messages
 messaging().setBackgroundMessageHandler(async remoteMessage => {
-  console.debug(`Receive notification message in background. message=[${JSON.stringify(remoteMessage)}]`);
+  // このアプリでは何も実施しないが、Handler未設定だとconsole.warnのログが出力されるため設定だけしておく
 });
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
