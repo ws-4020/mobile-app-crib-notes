@@ -22,10 +22,7 @@ public class AccountDeviceTokenDataSource implements AccountDeviceTokenRepositor
 
   @Override
   public void add(AccountDeviceToken accountDeviceToken) {
-    AccountDeviceTokenEntity accountDeviceTokenEntity = new AccountDeviceTokenEntity();
-    accountDeviceTokenEntity.setAccountId(accountDeviceToken.accountId().value());
-    accountDeviceTokenEntity.setDeviceToken(accountDeviceToken.deviceToken().value());
-    accountDeviceTokenEntity.setCreatedAt(Timestamp.from(accountDeviceToken.createdAt().value().toInstant()));
+    AccountDeviceTokenEntity accountDeviceTokenEntity = toEntity(accountDeviceToken);
 
     UniversalDao.insert(accountDeviceTokenEntity);
   }
@@ -57,6 +54,14 @@ public class AccountDeviceTokenDataSource implements AccountDeviceTokenRepositor
     } catch (NoDataException e) {
       return false;
     }
+  }
+
+  private AccountDeviceTokenEntity toEntity(AccountDeviceToken accountDeviceToken) {
+    AccountDeviceTokenEntity accountDeviceTokenEntity = new AccountDeviceTokenEntity();
+    accountDeviceTokenEntity.setAccountId(accountDeviceToken.accountId().value());
+    accountDeviceTokenEntity.setDeviceToken(accountDeviceToken.deviceToken().value());
+    accountDeviceTokenEntity.setCreatedAt(Timestamp.from(accountDeviceToken.createdAt().value().toInstant()));
+    return accountDeviceTokenEntity;
   }
 
   private AccountDeviceToken toDomainModel(AccountDeviceTokenEntity accountDeviceTokenEntity) {
