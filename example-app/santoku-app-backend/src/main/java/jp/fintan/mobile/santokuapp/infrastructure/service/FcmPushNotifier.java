@@ -80,46 +80,54 @@ public class FcmPushNotifier implements PushNotifier {
       multicastMessageBuilder.setAndroidConfig(createAndroidConfig(pushNotification));
       MulticastMessage multicastMessage = multicastMessageBuilder.build();
 
-      try {
-        BatchResponse batchResponse =
-            FirebaseMessaging.getInstance().sendMulticast(multicastMessage);
-        final List<SendResponse> responses = batchResponse.getResponses();
-        for (int j = 0; j < responses.size(); j++) {
-          final SendResponse response = responses.get(j);
-          final DeviceToken fcmToken = requestFcmTokens.get(j);
-          if (response.isSuccessful()) {
-            LOGGER.logDebug(
-                String.format(
-                    "Successfully sent message to Firebase Cloud Messaging. fcmToken=[%s]",
-                    fcmToken.value()));
-            successDeviceTokens.add(fcmToken);
-            continue;
-          }
-
-          final MessagingErrorCode messagingErrorCode =
-              response.getException().getMessagingErrorCode();
-          LOGGER.logWarn(
-              String.format(
-                  "Failed to sent message to Firebase Cloud Messaging. fcmToken=[%s] errorCode=[%s]",
-                  fcmToken.value(), messagingErrorCode.name()),
-              response.getException());
-
-          if (messagingErrorCode == MessagingErrorCode.UNREGISTERED) {
-            // 利用されていないトークンの場合
-            unregisteredDeviceTokens.add(fcmToken);
-          }
-          failureDeviceTokens.add(fcmToken);
-        }
-      } catch (FirebaseMessagingException e) {
-        LOGGER.logWarn("Failed to sent message to Firebase Cloud Messaging.", e);
-        failureDeviceTokens.addAll(requestFcmTokens);
-      }
+      sendMulticast(multicastMessage, requestFcmTokens, successDeviceTokens, failureDeviceTokens, unregisteredDeviceTokens);
     }
 
     return new PushNotificationResult(
         new SuccessDeviceTokens(successDeviceTokens),
         new FailureDeviceTokens(failureDeviceTokens),
         new UnregisteredDeviceTokens(unregisteredDeviceTokens));
+  }
+
+  private void sendMulticast(
+      MulticastMessage multicastMessage,
+      List<DeviceToken> fcmTokens,
+      List<DeviceToken> successDeviceTokens,
+      List<DeviceToken> failureDeviceTokens,
+      List<DeviceToken> unregisteredDeviceTokens) {
+    try {
+      BatchResponse batchResponse = FirebaseMessaging.getInstance().sendMulticast(multicastMessage);
+      final List<SendResponse> responses = batchResponse.getResponses();
+      for (int j = 0; j < responses.size(); j++) {
+        final SendResponse response = responses.get(j);
+        final DeviceToken fcmToken = fcmTokens.get(j);
+        if (response.isSuccessful()) {
+          LOGGER.logDebug(
+              String.format(
+                  "Successfully sent message to Firebase Cloud Messaging. fcmToken=[%s]",
+                  fcmToken.value()));
+          successDeviceTokens.add(fcmToken);
+          continue;
+        }
+
+        final MessagingErrorCode messagingErrorCode =
+            response.getException().getMessagingErrorCode();
+        LOGGER.logWarn(
+            String.format(
+                "Failed to sent message to Firebase Cloud Messaging. fcmToken=[%s] errorCode=[%s]",
+                fcmToken.value(), messagingErrorCode.name()),
+            response.getException());
+
+        if (messagingErrorCode == MessagingErrorCode.UNREGISTERED) {
+          // 利用されていないトークンの場合
+          unregisteredDeviceTokens.add(fcmToken);
+        }
+        failureDeviceTokens.add(fcmToken);
+      }
+    } catch (FirebaseMessagingException e) {
+      LOGGER.logWarn("Failed to sent message to Firebase Cloud Messaging.", e);
+      failureDeviceTokens.addAll(fcmTokens);
+    }
   }
 
   private String translateParams(Map<String, Object> params) {
