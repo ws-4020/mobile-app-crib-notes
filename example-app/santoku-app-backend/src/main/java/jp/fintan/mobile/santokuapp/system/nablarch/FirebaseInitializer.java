@@ -3,12 +3,11 @@ package jp.fintan.mobile.santokuapp.system.nablarch;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import nablarch.core.repository.initialization.Initializable;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import nablarch.core.repository.initialization.Initializable;
 
 public class FirebaseInitializer implements Initializable {
   @Override

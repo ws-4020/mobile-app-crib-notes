@@ -26,9 +26,9 @@ import jp.fintan.mobile.santokuapp.domain.model.notification.FailureDeviceTokens
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotification;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationPriority;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationResult;
+import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotifier;
 import jp.fintan.mobile.santokuapp.domain.model.notification.SuccessDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.model.notification.UnregisteredDeviceTokens;
-import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotifier;
 import nablarch.core.log.Logger;
 import nablarch.core.log.LoggerManager;
 import nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;

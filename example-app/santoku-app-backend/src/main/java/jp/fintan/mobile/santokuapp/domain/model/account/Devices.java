@@ -1,7 +1,6 @@
 package jp.fintan.mobile.santokuapp.domain.model.account;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import jp.fintan.mobile.santokuapp.domain.model.core.ListValue;
 
