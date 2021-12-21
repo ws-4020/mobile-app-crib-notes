@@ -2,15 +2,15 @@ package jp.fintan.mobile.santokuapp.infrastructure.persistence;
 
 import java.sql.Timestamp;
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import jp.fintan.mobile.santokuapp.domain.model.account.AccountDeviceToken;
+import jp.fintan.mobile.santokuapp.domain.model.account.AccountDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.model.account.AccountId;
 import jp.fintan.mobile.santokuapp.domain.model.account.DeviceToken;
 import jp.fintan.mobile.santokuapp.domain.model.account.DeviceTokenCreatedAt;
-import jp.fintan.mobile.santokuapp.domain.model.account.AccountDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.repository.AccountDeviceTokenRepository;
 import jp.fintan.mobile.santokuapp.infrastructure.persistence.entity.AccountDeviceTokenEntity;
 import nablarch.common.dao.NoDataException;
@@ -64,7 +64,7 @@ public class AccountDeviceTokenDataSource implements AccountDeviceTokenRepositor
     DeviceToken deviceToken = new DeviceToken(accountDeviceTokenEntity.getDeviceToken());
     DeviceTokenCreatedAt deviceTokenCreatedAt =
         new DeviceTokenCreatedAt(
-            OffsetDateTime.ofInstant(accountDeviceTokenEntity.getCreatedAt().toInstant(), ZoneId.of("UTC")));
+            OffsetDateTime.ofInstant(accountDeviceTokenEntity.getCreatedAt().toInstant(), ZoneOffset.UTC));
 
     return new AccountDeviceToken(id, deviceToken, deviceTokenCreatedAt);
   }
