@@ -1,4 +1,4 @@
-package jp.fintan.mobile.santokuapp.infrastructure.notification;
+package jp.fintan.mobile.santokuapp.infrastructure.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
