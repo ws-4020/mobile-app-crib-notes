@@ -127,7 +127,7 @@ public class FcmPushNotifier implements PushNotifier {
       try {
         return new ObjectMapper().writeValueAsString(params);
       } catch (JsonProcessingException e) {
-        e.printStackTrace();
+        throw new RuntimeException("Failed to parse params of notification data.", e);
       }
     }
     return null;
