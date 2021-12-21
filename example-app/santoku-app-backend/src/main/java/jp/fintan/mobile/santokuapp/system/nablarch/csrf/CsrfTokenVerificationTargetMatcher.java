@@ -13,11 +13,11 @@ import nablarch.fw.web.handler.csrf.HttpMethodVerificationTargetMatcher;
  * HTTPメソッドが検証対象であり、かつPathも検証対象である場合のみ、CSRFトークンの検証を実施する。
  * なお、検証対象外とするPathは、ホワイトリスト形式で指定する。
  */
-public class PathHttpMethodVerificationTargetMatcher extends HttpMethodVerificationTargetMatcher {
+public class CsrfTokenVerificationTargetMatcher extends HttpMethodVerificationTargetMatcher {
 
   private final WhitePatterns whitePatterns = new WhitePatterns();
 
-  public PathHttpMethodVerificationTargetMatcher() {
+  public CsrfTokenVerificationTargetMatcher() {
     whitePatterns.add("/api/sandbox/**");
   }
 

@@ -123,7 +123,7 @@
       <component class="jp.fintan.mobile.santokuapp.system.nablarch.handler.csrf.CsrfTokenVerificationFailureHandler"/>
     </property>
     <property name="verificationTargetMatcher">
-      <component class="jp.fintan.mobile.santokuapp.system.nablarch.csrf.PathHttpMethodVerificationTargetMatcher"/>
+      <component class="jp.fintan.mobile.santokuapp.system.nablarch.csrf.CsrfTokenVerificationTargetMatcher"/>
     </property>
   </component>
 
