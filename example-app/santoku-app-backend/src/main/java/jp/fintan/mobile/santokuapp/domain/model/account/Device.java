@@ -1,7 +1,7 @@
 package jp.fintan.mobile.santokuapp.domain.model.account;
 
-import java.time.Clock;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 public class Device {
 
@@ -38,7 +38,7 @@ public class Device {
    */
   public boolean isOverdueRenewals() {
     return 0
-        <= LocalDateTime.now(Clock.systemUTC())
+        <= LocalDateTime.now(ZoneOffset.UTC)
             .minusMonths(DEVICE_TOKEN_RENEWAL_DEADLINE_MONTH)
             .compareTo(this.createdAt().value());
   }
