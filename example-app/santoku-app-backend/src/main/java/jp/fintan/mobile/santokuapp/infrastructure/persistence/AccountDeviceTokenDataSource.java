@@ -46,7 +46,7 @@ public class AccountDeviceTokenDataSource implements AccountDeviceTokenRepositor
             AccountDeviceTokenEntity.class,
             "db.sql.device#find_by_account_id",
             Map.of("accountId", accountId.value()));
-    return new AccountDeviceTokens(deviceEntities.stream().map(this::toDevice).collect(Collectors.toList()));
+    return new AccountDeviceTokens(deviceEntities.stream().map(this::toDomainModel).collect(Collectors.toList()));
   }
 
   @Override
@@ -59,7 +59,7 @@ public class AccountDeviceTokenDataSource implements AccountDeviceTokenRepositor
     }
   }
 
-  private AccountDeviceToken toDevice(AccountDeviceTokenEntity accountDeviceTokenEntity) {
+  private AccountDeviceToken toDomainModel(AccountDeviceTokenEntity accountDeviceTokenEntity) {
     AccountId id = new AccountId(accountDeviceTokenEntity.getAccountId());
     DeviceToken deviceToken = new DeviceToken(accountDeviceTokenEntity.getDeviceToken());
     DeviceTokenCreatedAt deviceTokenCreatedAt =
