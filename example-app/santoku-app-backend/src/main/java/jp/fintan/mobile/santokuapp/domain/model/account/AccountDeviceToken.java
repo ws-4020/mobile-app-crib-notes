@@ -2,7 +2,7 @@ package jp.fintan.mobile.santokuapp.domain.model.account;
 
 import java.time.OffsetDateTime;
 
-public class Device {
+public class AccountDeviceToken {
 
   private final AccountId id;
 
@@ -12,7 +12,7 @@ public class Device {
 
   private static final long DEVICE_TOKEN_RENEWAL_DEADLINE_MONTH = 1;
 
-  public Device(AccountId id, DeviceToken deviceToken, DeviceTokenCreatedAt createdAt) {
+  public AccountDeviceToken(AccountId id, DeviceToken deviceToken, DeviceTokenCreatedAt createdAt) {
     this.id = id;
     this.deviceToken = deviceToken;
     this.createdAt = createdAt;

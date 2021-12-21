@@ -16,7 +16,7 @@ import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationTtl
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationType;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotifier;
 import jp.fintan.mobile.santokuapp.domain.model.notification.UnregisteredDeviceTokens;
-import jp.fintan.mobile.santokuapp.infrastructure.persistence.entity.DeviceEntity;
+import jp.fintan.mobile.santokuapp.infrastructure.persistence.entity.AccountDeviceTokenEntity;
 import nablarch.common.dao.UniversalDao;
 import nablarch.core.db.connection.AppDbConnection;
 import nablarch.core.db.connection.DbConnectionContext;
@@ -39,10 +39,10 @@ public class PushNotificationTestAction {
   @Path("/all")
   public void all(ExecutionContext context) {
 
-    final List<DeviceEntity> devices = UniversalDao.findAll(DeviceEntity.class);
+    final List<AccountDeviceTokenEntity> devices = UniversalDao.findAll(AccountDeviceTokenEntity.class);
     final List<DeviceToken> deviceTokens =
         devices.stream()
-            .map(deviceEntity -> new DeviceToken(deviceEntity.getDeviceToken()))
+            .map(accountDeviceTokenEntity -> new DeviceToken(accountDeviceTokenEntity.getDeviceToken()))
             .collect(Collectors.toList());
 
     final PushNotification pushNotification =

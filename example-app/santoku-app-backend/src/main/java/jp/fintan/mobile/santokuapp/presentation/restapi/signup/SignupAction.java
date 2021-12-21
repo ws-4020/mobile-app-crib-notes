@@ -9,7 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jp.fintan.mobile.santokuapp.application.service.account.AccountRegistrationService;
 import jp.fintan.mobile.santokuapp.domain.model.account.Account;
-import jp.fintan.mobile.santokuapp.domain.model.account.Devices;
+import jp.fintan.mobile.santokuapp.domain.model.account.AccountDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.model.account.Nickname;
 import jp.fintan.mobile.santokuapp.domain.model.account.RawPassword;
 import jp.fintan.mobile.santokuapp.presentation.restapi.account.MyAccountAction.AccountResponse;
@@ -37,7 +37,7 @@ public class SignupAction {
     Account account =
         accountRegistrationService.registerAccount(requestBody.nickname, requestBody.password);
     EntityResponse response = new EntityResponse();
-    response.setEntity(new AccountResponse(account, new Devices(List.of())));
+    response.setEntity(new AccountResponse(account, new AccountDeviceTokens(List.of())));
     response.setStatusCode(201);
     response.setLocation("/api/accounts/me");
     return response;

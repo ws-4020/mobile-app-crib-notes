@@ -5,7 +5,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import jp.fintan.mobile.santokuapp.application.service.LoginAccountIdSupplier;
-import jp.fintan.mobile.santokuapp.application.service.account.DeviceService;
+import jp.fintan.mobile.santokuapp.application.service.account.AccountDeviceTokenService;
 import jp.fintan.mobile.santokuapp.domain.model.account.AccountId;
 import jp.fintan.mobile.santokuapp.domain.model.account.DeviceToken;
 import nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;
@@ -15,13 +15,13 @@ import nablarch.fw.ExecutionContext;
 @Path("accounts/me/device-token")
 public class MyAccountDeviceTokenAction {
 
-  private final DeviceService deviceService;
+  private final AccountDeviceTokenService accountDeviceTokenService;
 
   private final LoginAccountIdSupplier loginAccountIdSupplier;
 
   public MyAccountDeviceTokenAction(
-      DeviceService deviceService, LoginAccountIdSupplier loginAccountIdSupplier) {
-    this.deviceService = deviceService;
+      AccountDeviceTokenService accountDeviceTokenService, LoginAccountIdSupplier loginAccountIdSupplier) {
+    this.accountDeviceTokenService = accountDeviceTokenService;
     this.loginAccountIdSupplier = loginAccountIdSupplier;
   }
 
@@ -32,11 +32,11 @@ public class MyAccountDeviceTokenAction {
     AccountId accountId = loginAccountIdSupplier.supply();
 
     if (requestBody.oldDeviceToken != null) {
-      deviceService.deleteDevice(accountId, new DeviceToken(requestBody.oldDeviceToken));
+      accountDeviceTokenService.deleteDevice(accountId, new DeviceToken(requestBody.oldDeviceToken));
     }
 
     if (requestBody.newDeviceToken != null) {
-      deviceService.registerDevice(accountId, new DeviceToken(requestBody.newDeviceToken));
+      accountDeviceTokenService.registerDevice(accountId, new DeviceToken(requestBody.newDeviceToken));
     }
   }
 

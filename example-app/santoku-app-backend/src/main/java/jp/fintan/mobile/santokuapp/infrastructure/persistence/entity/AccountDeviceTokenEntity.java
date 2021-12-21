@@ -8,9 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "device")
+@Table(name = "account_device_token")
 @Access(AccessType.FIELD)
-public class DeviceEntity {
+public class AccountDeviceTokenEntity {
 
   @Id private String accountId;
 

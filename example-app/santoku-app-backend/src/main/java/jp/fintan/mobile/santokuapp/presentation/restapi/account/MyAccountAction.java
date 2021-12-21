@@ -8,10 +8,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jp.fintan.mobile.santokuapp.application.service.LoginAccountIdSupplier;
 import jp.fintan.mobile.santokuapp.application.service.account.AccountSearchService;
-import jp.fintan.mobile.santokuapp.application.service.account.DeviceService;
+import jp.fintan.mobile.santokuapp.application.service.account.AccountDeviceTokenService;
 import jp.fintan.mobile.santokuapp.domain.model.account.Account;
 import jp.fintan.mobile.santokuapp.domain.model.account.AccountId;
-import jp.fintan.mobile.santokuapp.domain.model.account.Devices;
+import jp.fintan.mobile.santokuapp.domain.model.account.AccountDeviceTokens;
 import nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;
 
 @SystemRepositoryComponent
@@ -20,14 +20,14 @@ public class MyAccountAction {
 
   private final LoginAccountIdSupplier loginAccountIdSupplier;
   private final AccountSearchService accountSearchService;
-  private final DeviceService deviceService;
+  private final AccountDeviceTokenService accountDeviceTokenService;
 
   public MyAccountAction(
       LoginAccountIdSupplier loginAccountIdSupplier, AccountSearchService accountSearchService,
-      DeviceService deviceService) {
+      AccountDeviceTokenService accountDeviceTokenService) {
     this.loginAccountIdSupplier = loginAccountIdSupplier;
     this.accountSearchService = accountSearchService;
-    this.deviceService = deviceService;
+    this.accountDeviceTokenService = accountDeviceTokenService;
   }
 
   @GET
@@ -36,9 +36,9 @@ public class MyAccountAction {
 
     AccountId accountId = loginAccountIdSupplier.supply();
     Account account = accountSearchService.findById(accountId);
-    Devices devices = deviceService.findByAccountId(accountId);
+    AccountDeviceTokens accountDeviceTokens = accountDeviceTokenService.findByAccountId(accountId);
 
-    return new AccountResponse(account, devices);
+    return new AccountResponse(account, accountDeviceTokens);
   }
 
   public static class AccountResponse {
@@ -47,12 +47,12 @@ public class MyAccountAction {
     public String nickname;
     public List<String> deviceTokens;
 
-    public AccountResponse(Account account, Devices devices) {
+    public AccountResponse(Account account, AccountDeviceTokens accountDeviceTokens) {
       this.accountId = account.accountId().value();
       this.nickname = account.nickname().value();
-      final Devices devicesWithoutOverdueRenewals = devices.excludeOverdueRenewals();
+      final AccountDeviceTokens accountDeviceTokensWithoutOverdueRenewals = accountDeviceTokens.excludeOverdueRenewals();
       this.deviceTokens =
-          devicesWithoutOverdueRenewals.value().stream()
+          accountDeviceTokensWithoutOverdueRenewals.value().stream()
               .map(device -> device.deviceToken().value())
               .collect(Collectors.toList());
     }

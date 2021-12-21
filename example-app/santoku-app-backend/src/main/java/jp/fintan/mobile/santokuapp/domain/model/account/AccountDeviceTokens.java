@@ -4,17 +4,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 import jp.fintan.mobile.santokuapp.domain.model.core.ListValue;
 
-public class Devices extends ListValue<Device> {
+public class AccountDeviceTokens extends ListValue<AccountDeviceToken> {
 
-  public Devices(List<Device> value) {
+  public AccountDeviceTokens(List<AccountDeviceToken> value) {
     super(value);
   }
 
   /** デバイスの更新期限を超過しているものを除外します。 */
-  public Devices excludeOverdueRenewals() {
-    return new Devices(
+  public AccountDeviceTokens excludeOverdueRenewals() {
+    return new AccountDeviceTokens(
         value().stream()
-            .filter(device -> !device.isOverdueRenewals())
+            .filter(accountDeviceToken -> !accountDeviceToken.isOverdueRenewals())
             .collect(Collectors.toList()));
   }
 }
