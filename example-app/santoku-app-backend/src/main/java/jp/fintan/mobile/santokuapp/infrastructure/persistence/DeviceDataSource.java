@@ -1,6 +1,8 @@
 package jp.fintan.mobile.santokuapp.infrastructure.persistence;
 
 import java.sql.Timestamp;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,7 +25,7 @@ public class DeviceDataSource implements DeviceRepository {
     DeviceEntity deviceEntity = new DeviceEntity();
     deviceEntity.setAccountId(device.accountId().value());
     deviceEntity.setDeviceToken(device.deviceToken().value());
-    deviceEntity.setCreatedAt(Timestamp.valueOf(device.createdAt().value()));
+    deviceEntity.setCreatedAt(Timestamp.from(device.createdAt().value().toInstant()));
 
     UniversalDao.insert(deviceEntity);
   }
@@ -61,7 +63,8 @@ public class DeviceDataSource implements DeviceRepository {
     AccountId id = new AccountId(deviceEntity.getAccountId());
     DeviceToken deviceToken = new DeviceToken(deviceEntity.getDeviceToken());
     DeviceTokenCreatedAt deviceTokenCreatedAt =
-        new DeviceTokenCreatedAt(deviceEntity.getCreatedAt().toLocalDateTime());
+        new DeviceTokenCreatedAt(
+            OffsetDateTime.ofInstant(deviceEntity.getCreatedAt().toInstant(), ZoneId.of("UTC")));
 
     return new Device(id, deviceToken, deviceTokenCreatedAt);
   }
