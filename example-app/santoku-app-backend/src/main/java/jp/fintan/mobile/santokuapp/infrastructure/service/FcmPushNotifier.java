@@ -98,9 +98,9 @@ public class FcmPushNotifier implements PushNotifier {
     try {
       BatchResponse batchResponse = FirebaseMessaging.getInstance().sendMulticast(multicastMessage);
       final List<SendResponse> responses = batchResponse.getResponses();
-      for (int j = 0; j < responses.size(); j++) {
-        final SendResponse response = responses.get(j);
-        final DeviceToken fcmToken = fcmTokens.get(j);
+      for (int i = 0; i < responses.size(); i++) {
+        final SendResponse response = responses.get(i);
+        final DeviceToken fcmToken = fcmTokens.get(i);
         if (response.isSuccessful()) {
           LOGGER.logDebug(
               String.format(
