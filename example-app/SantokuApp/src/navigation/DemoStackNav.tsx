@@ -22,9 +22,10 @@ import {
   HttpApiScreen,
 } from 'screens';
 
+import {DemoStackParamList, RootStackParamList} from './types';
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
 
-const nav = createNativeStackNavigator();
+const nav = createNativeStackNavigator<DemoStackParamList>();
 
 const name = 'DemoStackNav';
 export const Screen: React.FC = () => {
@@ -59,7 +60,7 @@ export const Screen: React.FC = () => {
   );
 };
 
-export const DemoStackNav = {
+export const DemoStackNav: ScreenInstanceProps<RootStackParamList, typeof name> = {
   component: Screen,
   name,
   options: {

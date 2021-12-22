@@ -11,7 +11,8 @@ beforeAll(async () => {
 
 describe('TermsOfServiceAgreement', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
-    const app = render(<TermsOfServiceAgreementScreen.component />);
+    const Screen = TermsOfServiceAgreementScreen.component as React.FC;
+    const app = render(<Screen />);
     expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
     expect(app).toMatchSnapshot();
   });
