@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useInitializeContext} from 'components/initialize';
 import React, {useEffect} from 'react';
 import {DevSettings} from 'react-native';
+=======
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useInitializeContext} from 'components/initialize';
+import React from 'react';
+>>>>>>> 24aae025f... 通知受信時の画面遷移をNavigationContainerがReadyになってから実施するように修正
 import {TermsOfServiceAgreementScreen} from 'screens';
 
 import {AuthenticatedStackNav} from './AuthenticatedStackNav';

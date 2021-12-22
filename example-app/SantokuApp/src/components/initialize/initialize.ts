@@ -116,7 +116,7 @@ const setNotificationHandlers = (
     if (message.data?.type) {
       switch (message.data.type) {
         case 'StartedTimetable': {
-          // チーム詳細画面へ遷移
+          // ホーム画面へ遷移
           const args = getNavigationArgsFromNotification(message);
           if (args) {
             setReservedNavigation(args);
@@ -184,9 +184,15 @@ const getNavigationArgsFromNotification = (
       case 'StartedTimetable': {
         // ホーム画面へ遷移する
         return {
-          screen: 'HomeStackNav',
+          screen: 'AuthenticatedStackNav',
           params: {
-            screen: 'HomeDetail',
+            screen: 'MainTabNav',
+            params: {
+              screen: 'HomeStackNav',
+              params: {
+                screen: 'HomeDetail',
+              },
+            },
           },
         };
       }
