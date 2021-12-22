@@ -16,6 +16,7 @@ import {InstructionsScreen} from './instructions';
 import {LocalAuthenticationScreen} from './local-authn';
 import {LogScreen} from './log';
 import {MessageScreen} from './message';
+import {NavigationScreen} from './navigation';
 import {SnackbarScreen} from './snackbar';
 
 type ScreenList = {
@@ -71,6 +72,10 @@ const demoScreenList: ScreenList[] = [
   {
     title: 'HttpApi',
     to: HttpApiScreen.name,
+  },
+  {
+    title: 'Navigation',
+    to: NavigationScreen.name,
   },
 ];
 

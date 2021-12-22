@@ -43,6 +43,7 @@ export type DemoStackParamList = {
   LocalAuthentication: undefined;
   Authentication: undefined;
   HttpApi: undefined;
+  Navigation: undefined;
 };
 
 export type AppNavigatorOptions = {

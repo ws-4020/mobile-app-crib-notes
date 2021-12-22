@@ -20,6 +20,7 @@ import {
   LocalAuthenticationScreen,
   AuthenticationScreen,
   HttpApiScreen,
+  NavigationScreen,
 } from 'screens';
 
 import {DemoStackParamList, RootStackParamList} from './types';
@@ -56,6 +57,7 @@ export const Screen: React.FC = () => {
       <nav.Screen {...LocalAuthenticationScreen} />
       <nav.Screen {...AuthenticationScreen} />
       <nav.Screen {...HttpApiScreen} />
+      <nav.Screen {...NavigationScreen} />
     </nav.Navigator>
   );
 };
