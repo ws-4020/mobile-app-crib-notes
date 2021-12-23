@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ErrorCaseScreen: ScreenInstanceProps<DemoStackParamList, typeof ScreenName> = {
+export const ErrorCaseScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

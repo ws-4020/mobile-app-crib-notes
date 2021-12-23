@@ -17,7 +17,7 @@ const Screen: React.FC = () => {
   );
 };
 
-export const HomeStackNav: TabInstanceProps<MainTabParamList, typeof name> = {
+export const HomeStackNav: TabScreenConfig<MainTabParamList, typeof name> = {
   component: Screen,
   name,
 };

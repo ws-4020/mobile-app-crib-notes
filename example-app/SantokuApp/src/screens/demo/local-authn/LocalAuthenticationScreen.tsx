@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const LocalAuthenticationScreen: ScreenInstanceProps<DemoStackParamList, typeof ScreenName> = {
+export const LocalAuthenticationScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TeamDetailScreen: ScreenInstanceProps<TeamStackParamList, typeof ScreenName> = {
+export const TeamDetailScreen: NativeStackScreenConfig<TeamStackParamList, typeof ScreenName> = {
   component: Screen,
   name: ScreenName,
   options: () => ({

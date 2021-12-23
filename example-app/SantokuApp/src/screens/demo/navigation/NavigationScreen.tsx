@@ -34,7 +34,7 @@ const Screen: React.FC<Props> = ({navigation}) => {
   );
 };
 
-export const NavigationScreen: ScreenInstanceProps<DemoStackParamList, typeof ScreenName> = {
+export const NavigationScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

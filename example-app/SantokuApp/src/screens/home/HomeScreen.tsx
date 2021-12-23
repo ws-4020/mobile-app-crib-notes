@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 });
 
 // Navigatorに登録する情報
-export const HomeScreen: ScreenInstanceProps<HomeStackParamList, typeof ScreenName> = {
+export const HomeScreen: NativeStackScreenConfig<HomeStackParamList, typeof ScreenName> = {
   component: Screen,
   name: ScreenName,
   options: () => ({

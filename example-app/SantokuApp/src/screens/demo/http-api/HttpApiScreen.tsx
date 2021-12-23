@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const HttpApiScreen: ScreenInstanceProps<DemoStackParamList, typeof ScreenName> = {
+export const HttpApiScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

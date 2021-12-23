@@ -5,9 +5,8 @@ import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
 import {NativeStackNavigationEventMap} from '@react-navigation/native-stack/lib/typescript/src/types';
 import type {ParamListBase} from '@react-navigation/routers';
 
-// React Navigation の useNavigation/Link/ref 等のデフォルトタイプを指定
 declare global {
-  type ScreenInstanceProps<ParamList extends ParamListBase, RouteName extends keyof ParamList> = RouteConfig<
+  type NativeStackScreenConfig<ParamList extends ParamListBase, RouteName extends keyof ParamList> = RouteConfig<
     ParamList,
     RouteName,
     NavigationState<ParamList>,
@@ -15,7 +14,7 @@ declare global {
     NativeStackNavigationEventMap
   >;
 
-  type TabInstanceProps<ParamList extends ParamListBase, RouteName extends keyof ParamList> = RouteConfig<
+  type TabScreenConfig<ParamList extends ParamListBase, RouteName extends keyof ParamList> = RouteConfig<
     ParamList,
     RouteName,
     TabNavigationState<ParamList>,

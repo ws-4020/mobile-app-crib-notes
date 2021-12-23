@@ -8,7 +8,7 @@ const Screen = () => {
   return <View>test</View>;
 };
 
-export const ErrorInReactComponentScreen: ScreenInstanceProps<DemoStackParamList, typeof ScreenName> = {
+export const ErrorInReactComponentScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

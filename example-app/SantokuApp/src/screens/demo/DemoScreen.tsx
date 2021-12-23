@@ -96,7 +96,7 @@ const Screen: React.FC<Props> = ({navigation}) => {
   return <DemoTemplate testID="DemoScreen" items={demoItems} keyExtractor={keyExtractor} />;
 };
 
-export const DemoScreen: ScreenInstanceProps<DemoStackParamList, typeof name> = {
+export const DemoScreen: NativeStackScreenConfig<DemoStackParamList, typeof name> = {
   component: Screen,
   name,
   options: {

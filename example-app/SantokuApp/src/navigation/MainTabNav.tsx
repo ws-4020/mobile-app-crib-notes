@@ -36,7 +36,7 @@ const Screen: React.FC = () => {
   );
 };
 
-export const MainTabNav: ScreenInstanceProps<AuthenticatedStackParamList, typeof name> = {
+export const MainTabNav: NativeStackScreenConfig<AuthenticatedStackParamList, typeof name> = {
   component: Screen,
   name,
   options: {

@@ -25,7 +25,7 @@ const Screen: React.FC = () => {
   );
 };
 
-export const ButtonScreen: ScreenInstanceProps<DemoStackParamList, typeof ScreenName> = {
+export const ButtonScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
   options: {

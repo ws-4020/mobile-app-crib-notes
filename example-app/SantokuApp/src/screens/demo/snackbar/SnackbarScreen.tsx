@@ -26,7 +26,7 @@ const Screen: React.FC = () => {
   );
 };
 
-export const SnackbarScreen: ScreenInstanceProps<DemoStackParamList, typeof ScreenName> = {
+export const SnackbarScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
   options: {

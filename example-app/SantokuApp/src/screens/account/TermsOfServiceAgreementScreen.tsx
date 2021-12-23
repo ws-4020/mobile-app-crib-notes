@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TermsOfServiceAgreementScreen: ScreenInstanceProps<RootStackParamList, typeof ScreenName> = {
+export const TermsOfServiceAgreementScreen: NativeStackScreenConfig<RootStackParamList, typeof ScreenName> = {
   component: Screen,
   name: ScreenName,
   options: () => ({

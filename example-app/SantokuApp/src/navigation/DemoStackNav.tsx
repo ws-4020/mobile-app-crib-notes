@@ -62,7 +62,7 @@ export const Screen: React.FC = () => {
   );
 };
 
-export const DemoStackNav: ScreenInstanceProps<RootStackParamList, typeof name> = {
+export const DemoStackNav: NativeStackScreenConfig<RootStackParamList, typeof name> = {
   component: Screen,
   name,
   options: {

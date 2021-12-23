@@ -10,7 +10,7 @@ const Screen: React.FC = () => {
   return <ConfigTemplate testID="ConfigScreen" items={info} keyExtractor={infoKeyExtractor} />;
 };
 
-export const ConfigScreen: ScreenInstanceProps<DemoStackParamList, typeof ScreenName> = {
+export const ConfigScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
   options: {

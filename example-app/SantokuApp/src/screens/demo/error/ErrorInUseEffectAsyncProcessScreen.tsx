@@ -13,7 +13,7 @@ const Screen = () => {
   return null;
 };
 
-export const ErrorInUseEffectAsyncProcessScreen: ScreenInstanceProps<DemoStackParamList, typeof ScreenName> = {
+export const ErrorInUseEffectAsyncProcessScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

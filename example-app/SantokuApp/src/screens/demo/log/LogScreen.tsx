@@ -19,7 +19,7 @@ const Screen: React.FC = () => {
   );
 };
 
-export const LogScreen: ScreenInstanceProps<DemoStackParamList, typeof ScreenName> = {
+export const LogScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
   options: {

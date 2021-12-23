@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ErrorInNativeModuleScreen: ScreenInstanceProps<DemoStackParamList, typeof ScreenName> = {
+export const ErrorInNativeModuleScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

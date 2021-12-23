@@ -12,7 +12,7 @@ const Screen: React.FC = () => {
   return <AppStateTemplate testID="AppStateScreen" history={appStateHistory} keyExtractor={historyKeyExtractor} />;
 };
 
-export const AppStateScreen: ScreenInstanceProps<DemoStackParamList, typeof ScreenName> = {
+export const AppStateScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
   options: {title: 'Track AppState'},
