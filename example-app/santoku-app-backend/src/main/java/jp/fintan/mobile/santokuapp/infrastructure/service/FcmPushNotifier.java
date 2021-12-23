@@ -50,6 +50,7 @@ public class FcmPushNotifier implements PushNotifier {
   private static final String APNS_HEADER_KEY_APNS_PRIORITY = "apns-priority";
   // APNsの1度に送信可能なデバイス最大数を設定するHTTPヘッダキー
   private static final String APNS_HEADER_KEY_APNS_EXPIRATION = "apns-expiration";
+  private final ObjectMapper objectMapper = new ObjectMapper();
 
   @Override
   public PushNotificationResult notifyToDevice(
@@ -133,7 +134,7 @@ public class FcmPushNotifier implements PushNotifier {
   private String translateParams(Map<String, Object> params) {
     if (params != null) {
       try {
-        return new ObjectMapper().writeValueAsString(params);
+        return objectMapper.writeValueAsString(params);
       } catch (JsonProcessingException e) {
         throw new RuntimeException("Failed to parse params of notification data.", e);
       }
