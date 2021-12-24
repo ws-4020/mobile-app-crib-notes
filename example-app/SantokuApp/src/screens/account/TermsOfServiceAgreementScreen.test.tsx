@@ -1,5 +1,6 @@
 import '@testing-library/jest-native/extend-expect';
 import {render} from '@testing-library/react-native';
+import {WithSnackbar} from 'components/snackbar';
 import {BundledMessagesLoader, loadMessages} from 'framework';
 import React from 'react';
 
@@ -12,7 +13,9 @@ beforeAll(async () => {
 describe('TermsOfServiceAgreement', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
     const Screen = TermsOfServiceAgreementScreen.component as React.FC;
-    const app = render(<Screen />);
+    const app = render(<Screen />, {
+      wrapper: WithSnackbar,
+    });
     expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
     expect(app).toMatchSnapshot();
   });
