@@ -60,8 +60,10 @@ const WithInitializeContext: React.FC = ({children}) => {
     messaging().onMessage(message => {
       if (message.notification) {
         // アプリ操作中に受信した場合は通知内容をスナックバーに表示し、通知データに応じた処理は行わない
-        const snackBarText = [message.notification.title, message.notification.body].join('\n');
-        snackbar.show(snackBarText);
+        const snackBarText = message.notification.body ?? message.notification.title;
+        if (snackBarText) {
+          snackbar.show(snackBarText);
+        }
       }
     });
     // アプリがバックグラウンド状態の時に通知を受信し、通知領域から通知をタップしてアプリが前面に移動した際に行う処理
