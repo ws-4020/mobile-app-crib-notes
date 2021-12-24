@@ -21,14 +21,14 @@ export const App = ({isHeadless}: AppProperties) => {
     return null;
   }
   return (
-    <WithInitializeContext>
-      <WithAppTheme>
-        <WithSnackbar>
-          <WithNavigationContainer>
+    <WithAppTheme>
+      <WithSnackbar>
+        <WithNavigationContainer>
+          <WithInitializeContext>
             <RootStackNav />
-          </WithNavigationContainer>
-        </WithSnackbar>
-      </WithAppTheme>
-    </WithInitializeContext>
+          </WithInitializeContext>
+        </WithNavigationContainer>
+      </WithSnackbar>
+    </WithAppTheme>
   );
 };

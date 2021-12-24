@@ -1,4 +1,3 @@
-import {useInitializeContext} from 'components/initialize';
 import {m} from 'framework';
 import {createUseContextAndProvider} from 'framework/utilities';
 import React, {useMemo, useState} from 'react';
@@ -68,17 +67,6 @@ function WithSnackbar(props: {initialState?: SnackbarShowProps; children: React.
     }),
     [],
   );
-  const {reservedSnackbarMessage, clearReservedSnackbarMessage} = useInitializeContext();
-
-  useEffect(() => {
-    if (reservedSnackbarMessage) {
-      setState({
-        message: reservedSnackbarMessage,
-      });
-      clearReservedSnackbarMessage();
-    }
-  }, [reservedSnackbarMessage, clearReservedSnackbarMessage]);
-
   return (
     <SnackbarContextProvider value={snackbarContext}>
       <Snackbar {...state}>{props.children}</Snackbar>

@@ -1,17 +1,6 @@
 import {waitFor} from '@testing-library/react-native';
 
-import {initialize, hideSplashScreen} from './initialize';
-
-describe('initialize', () => {
-  it('エラーなく実行できること', async () => {
-    const mockSetNavigatorProps = jest.fn();
-    const mockSetReservedSnackbarMessage = jest.fn();
-    const mockSetReservedNavigation = jest.fn();
-    await expect(
-      initialize(mockSetNavigatorProps, mockSetReservedSnackbarMessage, mockSetReservedNavigation),
-    ).resolves.toBeUndefined();
-  });
-});
+import {hideSplashScreen} from './splashScreen';
 
 describe('hideSplashScreen', () => {
   beforeEach(() => {
