@@ -16,7 +16,28 @@ sidebar_label: 概要
 ### FCMの設定
 
 - APNs Auth Keyの設定について
+  - p12形式の証明書とp8形式の鍵について
+    - p12
+      - App ID単位で管理する
+      - 本番環境と開発環境で別々に証明書を発行する必要がある
+      - 年1年で証明書を更新する必要がある
+      - 証明書自体を再ダウンロード可能
+      - 証明書ベース
+    - p8
+      - Apple Developer Programで登録しているApple IDで管理している全てのアプリで使用可能
+      - 本番環境と開発環境で同じ証明書を使用できる
+      - 有効期限は無期限
+      - 証明書は一度しかダウンロードできない(再度作成することは可能)
+      - 一つのApple IDで2つまでしか証明書を作成できない
+      - Firebaseではp8が推奨されている
+      - トークンベース
+
 - FCMの料金とか情報は必要？
+- ANPs
+  - Development server: api.sandbox.push.apple.com:443
+  - Production server: api.push.apple.com:443
+  - iOS：デバッグビルドを実行すると、APNトークンが"sandbox"キータイプとしてFCMに登録されます
+    - https://rnfirebase.io/releases/v6.4.0
 
 ### バックエンドサーバの設定
 

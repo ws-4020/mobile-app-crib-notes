@@ -8,6 +8,16 @@ title: Push通知の受信
 
 ![Push通知受信時の処理フロー](receive-push-notification.drawio.png)
 
+- デバイスの状態によりPush通知の取り扱いが変わる
+  - Foreground
+    - アプリケーションが起動して表示中
+  - Background
+    - アプリは起動中だがバックグラウンドにいる
+  - Quit
+    - デバイスがロックされている、もしくはアプリがアクティブでないか実行されていないとき
+
+- isHeadlessの説明は必要？
+
 ## Push通知タップ時の処理
 
 ![Push通知タップ時(Background)の処理フロー](tap-push-notification-when-background.drawio.png)
