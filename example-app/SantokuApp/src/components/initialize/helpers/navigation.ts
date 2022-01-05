@@ -60,7 +60,7 @@ const getNavigationArgsFromNotification = (message: FirebaseMessagingTypes.Remot
             params: {
               screen: 'HomeStackNav',
               params: {
-                screen: 'HomeDetail',
+                screen: 'Home',
               },
             },
           },
