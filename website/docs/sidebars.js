@@ -319,7 +319,7 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Push通知',
+          label: 'プッシュ通知',
           items: [
             'react-native/santoku/application-architecture/push-notification/overview',
             'react-native/santoku/application-architecture/push-notification/register-token',
