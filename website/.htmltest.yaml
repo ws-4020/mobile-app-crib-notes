@@ -52,9 +52,5 @@ IgnoreURLs:
   - https://marketplace.visualstudio.com/items\?itemName=naumovs.color-highlight
   - https://marketplace.visualstudio.com/items\?itemName=2gua.rainbow-brackets
   - https://marketplace.visualstudio.com/items\?itemName=yzhang.markdown-all-in-one
-  # React Native Elementsの新バージョンで、404が発生するので無視（※ページ自体は閲覧できるが、遷移前に404が発生する。バージョンを指定しても発生する。）
-  - https://reactnativeelements.com/docs
-  - https://reactnativeelements.com/docs/button
-  - https://reactnativeelements.com/docs/customization
 # タイムアウトでビルドが失敗すると困るので、余裕を持って長めに設定しておく。
 ExternalTimeout: 60
