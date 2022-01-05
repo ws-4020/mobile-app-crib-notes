@@ -1,17 +1,17 @@
 import {Ionicons, MaterialIcons} from '@expo/vector-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useInitializeContext} from 'components/initialize';
 import React from 'react';
 
 import {HomeStackNav} from './HomeStackNav';
 import {TeamStackNav} from './TeamStackNav';
 import {AuthenticatedStackParamList, MainTabParamList} from './types';
+import {useNavigationContainerContext} from './WithNavigationContainer';
 
 const nav = createBottomTabNavigator<MainTabParamList>();
 
 const name = 'MainTabNav';
 const Screen: React.FC = () => {
-  const {navigatorOptions} = useInitializeContext();
+  const {navigatorOptions} = useNavigationContainerContext();
   return (
     <nav.Navigator {...navigatorOptions[name]}>
       <nav.Screen

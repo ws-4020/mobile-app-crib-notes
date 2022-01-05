@@ -1,12 +1,7 @@
 import {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
-import {DefaultRouterOptions} from '@react-navigation/routers';
-import {NavigationArgs} from 'navigation/WithNavigationContainer';
+import {NavigationArgs, NavigatorOptions} from 'navigation/WithNavigationContainer';
 
 import {InitialData} from './initialData';
-
-export type NavigatorOptions = {
-  [navigatorName: string]: DefaultRouterOptions;
-};
 
 const getInitialNavigatorOptions = (
   initialData: InitialData,

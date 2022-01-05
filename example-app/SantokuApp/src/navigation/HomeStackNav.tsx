@@ -1,15 +1,15 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useInitializeContext} from 'components/initialize';
 import React from 'react';
 import {HomeScreen} from 'screens';
 
 import {HomeStackParamList, MainTabParamList} from './types';
+import {useNavigationContainerContext} from './WithNavigationContainer';
 
 const nav = createNativeStackNavigator<HomeStackParamList>();
 
 const name = 'HomeStackNav';
 const Screen: React.FC = () => {
-  const {navigatorOptions} = useInitializeContext();
+  const {navigatorOptions} = useNavigationContainerContext();
   return (
     <nav.Navigator {...navigatorOptions[name]}>
       <nav.Screen {...HomeScreen} />
