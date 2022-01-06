@@ -1,14 +1,13 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useInitializeContext} from 'components/initialize';
 import React, {useEffect} from 'react';
 import {DevSettings} from 'react-native';
 import {TermsOfServiceAgreementScreen} from 'screens';
 
 import {AuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
-import {RootStackParamList} from './types';
 import {useNavigationContainerContext} from './WithNavigationContainer';
+import {RootStackParamList} from './types';
 
 const nav = createNativeStackNavigator<RootStackParamList>();
 const name = 'RootStackNav';

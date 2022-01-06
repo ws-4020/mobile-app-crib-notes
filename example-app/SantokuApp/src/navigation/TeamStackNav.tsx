@@ -2,8 +2,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {TeamDetailScreen} from 'screens';
 
-import {MainTabParamList, TeamStackParamList} from './types';
 import {useNavigationContainerContext} from './WithNavigationContainer';
+import {MainTabParamList, TeamStackParamList} from './types';
 
 const nav = createNativeStackNavigator<TeamStackParamList>();
 

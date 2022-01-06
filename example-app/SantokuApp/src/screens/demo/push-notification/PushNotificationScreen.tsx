@@ -1,11 +1,19 @@
+import {CompositeScreenProps} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Divider, Text} from 'react-native-elements';
 
 import {usePushNotification} from './usePushNotification';
 
+type Props = CompositeScreenProps<
+  NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
 const ScreenName = 'PushNotification';
-const Screen = () => {
+const Screen: React.FC<Props> = ({navigation}) => {
   const {
     authStatus,
     token,
@@ -56,6 +64,11 @@ const Screen = () => {
   );
 };
 
+export const PushNotificationScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
+  name: ScreenName,
+  component: Screen,
+};
+
 const styles = StyleSheet.create({
   container: {
     padding: 10,
@@ -69,8 +82,3 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 });
-
-export const PushNotificationScreen = {
-  name: ScreenName,
-  component: Screen,
-};

@@ -2,8 +2,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {HomeScreen} from 'screens';
 
-import {HomeStackParamList, MainTabParamList} from './types';
 import {useNavigationContainerContext} from './WithNavigationContainer';
+import {HomeStackParamList, MainTabParamList} from './types';
 
 const nav = createNativeStackNavigator<HomeStackParamList>();
 

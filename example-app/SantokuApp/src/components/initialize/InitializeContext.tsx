@@ -1,9 +1,8 @@
 import messaging from '@react-native-firebase/messaging';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {createUseContextAndProvider} from 'framework/utilities';
-import {AppNavigatorOptions} from 'navigation/types';
 import {useNavigationContainerContext} from 'navigation/WithNavigationContainer';
-import React, {createContext, useCallback, useContext, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 
 import {
   getInitialNavigatorOptions,

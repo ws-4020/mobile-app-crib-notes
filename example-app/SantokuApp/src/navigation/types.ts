@@ -44,6 +44,7 @@ export type DemoStackParamList = {
   Authentication: undefined;
   HttpApi: undefined;
   Navigation: undefined;
+  PushNotification: undefined;
 };
 
 export type AppNavigatorOptions = {
@@ -53,3 +54,5 @@ export type AppNavigatorOptions = {
   HomeStackNav?: DefaultRouterOptions<keyof HomeStackParamList>;
   TeamStackNav?: DefaultRouterOptions<keyof TeamStackParamList>;
 };
+
+export type NavigationArgs = [screen: string] | [screen: string, params: object];

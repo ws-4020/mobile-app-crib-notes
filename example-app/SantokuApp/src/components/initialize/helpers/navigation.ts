@@ -1,12 +1,12 @@
 import {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
-import {NavigationArgs, NavigatorOptions} from 'navigation/WithNavigationContainer';
+import {AppNavigatorOptions, NavigationArgs} from 'navigation/types';
 
 import {InitialData} from './initialData';
 
 const getInitialNavigatorOptions = (
   initialData: InitialData,
   initialNotificationMessage: FirebaseMessagingTypes.RemoteMessage | null,
-): NavigatorOptions => {
+): AppNavigatorOptions => {
   // TODO: 未認証状態ならログイン画面へ
   // 利用規約に同意していなければ利用規約画面へ
   if (!initialData.terms?.hasAgreedValidTermsOfService) {

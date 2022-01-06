@@ -2,8 +2,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 
 import {MainTabNav} from './MainTabNav';
-import {AuthenticatedStackParamList, RootStackParamList} from './types';
 import {useNavigationContainerContext} from './WithNavigationContainer';
+import {AuthenticatedStackParamList, RootStackParamList} from './types';
 
 const nav = createNativeStackNavigator<AuthenticatedStackParamList>();
 

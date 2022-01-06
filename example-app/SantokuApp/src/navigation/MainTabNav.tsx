@@ -4,8 +4,8 @@ import React from 'react';
 
 import {HomeStackNav} from './HomeStackNav';
 import {TeamStackNav} from './TeamStackNav';
-import {AuthenticatedStackParamList, MainTabParamList} from './types';
 import {useNavigationContainerContext} from './WithNavigationContainer';
+import {AuthenticatedStackParamList, MainTabParamList} from './types';
 
 const nav = createBottomTabNavigator<MainTabParamList>();
 
