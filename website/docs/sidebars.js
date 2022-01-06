@@ -310,15 +310,6 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'エラーハンドリング',
-          items: [
-            'react-native/santoku/application-architecture/error-handling/overview',
-            'react-native/santoku/application-architecture/error-handling/how-to-handle-error',
-            'react-native/santoku/application-architecture/http-api/http-api-error-handling',
-          ],
-        },
-        {
-          type: 'category',
           label: 'プッシュ通知',
           items: [
             'react-native/santoku/application-architecture/push-notification/overview',
@@ -326,6 +317,15 @@ module.exports = {
             'react-native/santoku/application-architecture/push-notification/delete-token',
             'react-native/santoku/application-architecture/push-notification/send-push-notification',
             'react-native/santoku/application-architecture/push-notification/receive-push-notification',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'エラーハンドリング',
+          items: [
+            'react-native/santoku/application-architecture/error-handling/overview',
+            'react-native/santoku/application-architecture/error-handling/how-to-handle-error',
+            'react-native/santoku/application-architecture/http-api/http-api-error-handling',
           ],
         },
       ],
