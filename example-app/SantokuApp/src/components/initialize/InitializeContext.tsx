@@ -1,6 +1,4 @@
-import messaging, {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
-import {useNavigationContainerRef} from '@react-navigation/core';
-import {useSnackbar} from 'components/snackbar';
+import messaging from '@react-native-firebase/messaging';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {createUseContextAndProvider} from 'framework/utilities';
 import {AppNavigatorOptions} from 'navigation/types';
@@ -13,7 +11,8 @@ import {
   loadBundledMessagesAsync,
   loadInitialDataAsync,
   hideSplashScreen,
-  getNavigationArgsFromNotification,
+  useOnMessageCallback,
+  useOnNotificationOpenedAppCallback,
 } from './helpers';
 
 type InitializeContextValue = {
@@ -25,48 +24,15 @@ const [useInitializeContext, InitializeContextProvider] = createUseContextAndPro
 const WithInitializeContext: React.FC = ({children}) => {
   const [error, setError] = useState<unknown>();
   const [initialized, setInitialized] = useState<boolean>(false);
-  const snackbar = useSnackbar();
-  const navigationContainerRef = useNavigationContainerRef();
-  const {setNavigatorOptions, setReservedNavigationArgs} = useNavigationContainerContext();
+  const {setNavigatorOptions} = useNavigationContainerContext();
+  const onMessage = useOnMessageCallback();
+  const onNotificationOpenedApp = useOnNotificationOpenedAppCallback();
 
   const contextValue = useMemo(() => {
     return {
       initialized,
     };
   }, [initialized]);
-
-  // アプリを前面で操作中に通知を受信した際に行う処理
-  const onMessage = useCallback(
-    (message: FirebaseMessagingTypes.RemoteMessage) => {
-      if (message.notification) {
-        // アプリ操作中に受信した場合は通知内容をスナックバーに表示し、通知データに応じた処理は行わない
-        const snackBarText = message.notification.body ?? message.notification.title;
-        if (snackBarText) {
-          snackbar.show(snackBarText);
-        }
-      }
-    },
-    [snackbar],
-  );
-
-  // アプリがバックグラウンド状態の時に通知を受信し、通知領域から通知をタップしてアプリが前面に移動した際に行う処理
-  const onNotificationOpenedApp = useCallback(
-    (message: FirebaseMessagingTypes.RemoteMessage) => {
-      // バックグラウンド時に受信した場合は通知を開いた際に通知内容に応じた画面へ遷移する
-      const navigationArgs = getNavigationArgsFromNotification(message);
-      if (navigationArgs) {
-        if (navigationContainerRef.isReady()) {
-          navigationContainerRef.navigate(...navigationArgs);
-        } else {
-          // アプリがバックグラウンドから前面に戻った直後はまだNavigationContainerがReadyではなく画面遷移に失敗する
-          // https://github.com/react-navigation/react-navigation/issues/6879
-          // そのためNavigationContainerの準備ができてから画面遷移を行えるように遷移に必要な情報を残しておく
-          setReservedNavigationArgs(navigationArgs);
-        }
-      }
-    },
-    [navigationContainerRef, setReservedNavigationArgs],
-  );
 
   const initialize = useCallback(async () => {
     if (initialized) {
