@@ -10,10 +10,10 @@ sidebar_label: 概要
 
 ## プッシュ通知の方式
 
-プッシュ通知は次の方式で実現します。
+プッシュ通知はFirebase Cloud Messaging (FCM)を介して各OSのプッシュ通知送信用サービスを利用する方式で実現します。
 
 - アプリ固有の登録トークンをバックエンドサーバで管理します。
-- バックエンドサーバがFirebase Cloud Messaging (FCM)と連携します。
+- バックエンドサーバがFCMと連携します。
 - FCMは次のサービスを介して各端末へプッシュ通知を送信します。
   - Android: Android Transport Layer (ATL)
   - Apple Push Notification service (APNs)
@@ -36,7 +36,7 @@ sidebar_label: 概要
 - アカウントのログインやログアウト
 - プッシュ通知の送信エラー受信時
 
-:::info
+:::note
 登録トークンは次のような場合に変更されることがあります。
 
 - アプリが新しいデバイスで復元される場合
@@ -57,12 +57,12 @@ FCMとの連携に必要なサービスアカウント用の秘密鍵（JSON）�
 ### FCMの設定
 
 FCMがAPNsを介してプッシュ通知を送信するためには、Apple DeveloperアカウントのAPNs Auth Keyが必要です。
-また、プッシュ通知を有効にしたプロビジョニングプロファイルがアプリに必要です。
-[iOS Messaging Setup](https://rnfirebase.io/messaging/usage/ios-setup)に従い、事前に設定します
+また、プッシュ通知を有効にするためにアプリ側の設定も必要です。
+[iOS Messaging Setup](https://rnfirebase.io/messaging/usage/ios-setup)に従い、事前に設定してください。
 
-:::info
+:::note
 APNsを利用するには、認証トークン（p8形式）またはサーバー証明書（p12形式）が必要です。
-APNs Auth Keyは認証トークンであり、Firebaseではこちらの使用が推奨されています。
+APNs Auth Keyは認証トークンのことであり、Firebaseではこちらの使用が推奨されています。
 それぞれ特徴は次のとおりです。
 
 - 認証トークン
