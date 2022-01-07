@@ -10,18 +10,17 @@ sidebar_label: 概要
 
 ## プッシュ通知の方式
 
-プッシュ通知はFirebase Cloud Messaging (FCM)を介して各OSのプッシュ通知送信用サービスを利用する方式で実現します。
+プッシュ通知はFirebase Cloud Messaging (FCM)を介して各OSのプッシュ通知送信用サービスを利用します。
+
+方式の全体像を以下に示します。
+
+![プッシュ通知のアーキテクチャ](push-notification-architecture.drawio.png)
 
 - アプリ固有の登録トークンをバックエンドサーバで管理します。
 - バックエンドサーバがFCMと連携します。
 - FCMは次のサービスを介して各端末へプッシュ通知を送信します。
   - Android: Android Transport Layer (ATL)
   - Apple Push Notification service (APNs)
-
-方式の全体像は次の通りです。
-
-![プッシュ通知のアーキテクチャ](push-notification-architecture.drawio.png)
-
 
 ### 登録トークンの管理
 
@@ -30,8 +29,7 @@ sidebar_label: 概要
 このトークンを用いてプッシュ通知を送受信します。
 
 [FCM登録トークン管理のベストプラクティス](https://firebase.google.com/docs/cloud-messaging/manage-tokens)に従い、バックエンドサーバのデータベースで登録トークンを管理します。
-アカウントID、登録トークン、登録日時の組をデータベースで管理します。
-次のタイミングでデータベースの登録トークンを更新します。
+アカウントID、登録トークン、登録日時の組をデータベースで管理し、次のタイミングで更新します。
 
 - アカウントのログインやログアウト
 - プッシュ通知の送信エラー受信時
