@@ -193,4 +193,11 @@ describe('AuthenticationService logout', () => {
     expect(spySecureStorageAdapterDeleteActiveAccountId).toHaveBeenCalled();
     expect(spySecureStorageAdapterDeletePassword).toHaveBeenCalledWith('123456789');
   });
+  test('ログインしたアカウントIDがnullの場合はセキュアストレージの削除が呼ばれないことを確認', async () => {
+    spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
+    await AuthenticationService.logout();
+    expect(spyLogoutApi).toHaveBeenCalled();
+    expect(spySecureStorageAdapterDeleteActiveAccountId).not.toHaveBeenCalled();
+    expect(spySecureStorageAdapterDeletePassword).not.toHaveBeenCalled();
+  });
 });
