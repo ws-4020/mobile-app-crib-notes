@@ -1,5 +1,5 @@
 import {DemoStackParamList} from 'navigation/types';
-import React, {useCallback} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Input, Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -8,13 +8,17 @@ import {useAuthentication} from './useAuthentication';
 
 const ScreenName = 'Authentication';
 const Screen = () => {
-  const {accountId, accountIdInput, setAccountIdInput, signup, changeAccount, canAutoLogin, autoLogin, logout} =
-    useAuthentication();
-  const copyInput = useCallback(() => {
-    if (accountId) {
-      setAccountIdInput(accountId);
-    }
-  }, [setAccountIdInput, accountId]);
+  const {
+    accountId,
+    accountIdInput,
+    setAccountIdInput,
+    copyAccountIdInput,
+    signup,
+    changeAccount,
+    canAutoLogin,
+    autoLogin,
+    logout,
+  } = useAuthentication();
 
   return (
     <View style={styles.container}>
@@ -24,7 +28,7 @@ const Screen = () => {
           <Text>【AccountId】</Text>
           <Text selectable>{accountId ?? '匿名サインアップするとアカウントIDが表示されます'}</Text>
           <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-            <Button containerStyle={styles.button} onPress={copyInput} title="入力欄にコピー" />
+            <Button containerStyle={styles.button} onPress={copyAccountIdInput} title="入力欄にコピー" />
           </View>
         </View>
         <View>
