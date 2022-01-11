@@ -42,9 +42,9 @@ PODS:
   - Firebase/Crashlytics (8.10.0):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 8.10.0)
-  - Firebase/Messaging (8.8.0):
+  - Firebase/Messaging (8.10.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 8.8.0)
+    - FirebaseMessaging (~> 8.10.0)
   - FirebaseCore (8.10.0):
     - FirebaseCoreDiagnostics (~> 8.0)
     - GoogleUtilities/Environment (~> 7.6)
@@ -66,14 +66,14 @@ PODS:
     - GoogleUtilities/Environment (~> 7.6)
     - GoogleUtilities/UserDefaults (~> 7.6)
     - PromisesObjC (< 3.0, >= 1.2)
-  - FirebaseMessaging (8.8.0):
+  - FirebaseMessaging (8.10.0):
     - FirebaseCore (~> 8.0)
     - FirebaseInstallations (~> 8.0)
-    - GoogleDataTransport (~> 9.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
-    - GoogleUtilities/Environment (~> 7.4)
-    - GoogleUtilities/Reachability (~> 7.4)
-    - GoogleUtilities/UserDefaults (~> 7.4)
+    - GoogleDataTransport (~> 9.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.6)
+    - GoogleUtilities/Environment (~> 7.6)
+    - GoogleUtilities/Reachability (~> 7.6)
+    - GoogleUtilities/UserDefaults (~> 7.6)
     - nanopb (~> 2.30908.0)
   - Flipper (0.75.1):
     - Flipper-Folly (~> 2.5)
@@ -425,8 +425,8 @@ PODS:
     - Firebase/Crashlytics (= 8.10.0)
     - React-Core
     - RNFBApp
-  - RNFBMessaging (12.9.3):
-    - Firebase/Messaging (= 8.8.0)
+  - RNFBMessaging (13.1.0):
+    - Firebase/Messaging (= 8.10.0)
     - React-Core
     - RNFBApp
   - RNGestureHandler (1.10.3):
@@ -694,7 +694,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 56fb7216d87e0e6ec2feddefa9d8a392fe8b2c18
   FirebaseCrashlytics: 3b7f17cdf5bf1ae6ad5956696a6c26edeb39cca7
   FirebaseInstallations: 830327b45345ffc859eaa9c17bcd5ae893fd5425
-  FirebaseMessaging: 419b5c9d84f294a753c6501d8cfb9ced1ce37304
+  FirebaseMessaging: b0aeba17332ee1ee610662b4d1e02a86db82f08f
   Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
   Flipper-Folly: 755929a4f851b2fb2c347d533a23f191b008554c
@@ -738,7 +738,7 @@ SPEC CHECKSUMS:
   RNCMaskedView: b7a3b119b1d738734a9d761e4220c6850bb248a3
   RNFBApp: 1d553b3f201e9aaeba03d777b1dea51eaacc24cc
   RNFBCrashlytics: 5b0472223e5bfcdf5760ee787f1d114bc1cf2162
-  RNFBMessaging: 8415ec196e5c1196caa26ec0742cdb48ed4d0f97
+  RNFBMessaging: 0815242e4c06e3200f79e6eea312d124be357a13
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNReanimated: 024eff8202342abf4b24e11575a16afc441dabfe
   RNScreens: 6e1ea5787989f92b0671049b808aef64fa1ef98c

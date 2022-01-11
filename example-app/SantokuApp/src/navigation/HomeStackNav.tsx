@@ -1,23 +1,28 @@
+import {Ionicons} from '@expo/vector-icons';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {HomeScreen} from 'screens';
 
-import {useNavigationContainerContext} from './WithNavigationContainer';
 import {HomeStackParamList, MainTabParamList} from './types';
 
 const nav = createNativeStackNavigator<HomeStackParamList>();
 
-const name = 'HomeStackNav';
+const ScreenName = 'HomeStackNav';
 const Screen: React.FC = () => {
-  const {navigatorOptions} = useNavigationContainerContext();
   return (
-    <nav.Navigator {...navigatorOptions[name]}>
+    <nav.Navigator>
       <nav.Screen {...HomeScreen} />
     </nav.Navigator>
   );
 };
 
-export const HomeStackNav: TabScreenConfig<MainTabParamList, typeof name> = {
+export const HomeStackNav: TabScreenConfig<MainTabParamList, typeof ScreenName> = {
   component: Screen,
-  name,
+  name: ScreenName,
+  options: {
+    tabBarAccessibilityLabel: 'Home',
+    tabBarShowLabel: false,
+    headerShown: false,
+    tabBarIcon: ({color}) => <Ionicons name="md-home" size={30} color={color} />,
+  },
 };

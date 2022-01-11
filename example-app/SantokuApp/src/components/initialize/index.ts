@@ -1,1 +1,1 @@
-export {WithInitializeContext, useInitializeContext} from './InitializeContext';
+export * from './withInitialData';
