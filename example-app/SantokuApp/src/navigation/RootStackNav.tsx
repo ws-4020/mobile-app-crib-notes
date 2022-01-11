@@ -4,7 +4,7 @@ import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
 import {TermsOfServiceAgreementScreen} from 'screens';
 
-import {AppInitialData} from '../components/initialize/types';
+import {AppInitialData} from '../framework/initialize/types';
 import {AuthenticatedStackNav, useAuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
 import {RootStackParamList} from './types';

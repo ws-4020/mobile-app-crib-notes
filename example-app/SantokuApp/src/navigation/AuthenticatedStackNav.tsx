@@ -1,8 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useMemo} from 'react';
 
-import {InitialDataDependingComponent, withInitialData} from '../components/initialize';
-import {AppInitialData} from '../components/initialize/types';
+import {InitialDataDependingComponent, withInitialData} from '../framework/initialize';
+import {AppInitialData} from '../framework/initialize/types';
 import {MainTabNav, useMainTabNav} from './MainTabNav';
 import {AuthenticatedStackParamList, RootStackParamList} from './types';
 

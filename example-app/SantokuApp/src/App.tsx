@@ -1,7 +1,7 @@
 import React from 'react';
 import {Platform} from 'react-native';
 
-import {AppWithInitialization} from './components/initialize/AppWithInitialization';
+import {AppWithInitialization} from './AppWithInitialization';
 import {WithSnackbar} from './components/snackbar';
 import {WithAppTheme} from './components/theme';
 

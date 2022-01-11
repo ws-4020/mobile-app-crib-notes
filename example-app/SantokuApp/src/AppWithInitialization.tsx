@@ -1,9 +1,9 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 
-import {RootStackNav} from '../../navigation';
-import {WithFirebaseMessagingHandlers} from './WithFirebaseMessagingHandlers';
-import {useAppInitializer} from './useAppInitializer';
+import {WithFirebaseMessagingHandlers} from './framework/firebase/WithFirebaseMessagingHandlers';
+import {useAppInitializer} from './framework/initialize';
+import {RootStackNav} from './navigation';
 
 export const AppWithInitialization: React.FC = () => {
   const {initialize, isInitialized, initialData} = useAppInitializer();
