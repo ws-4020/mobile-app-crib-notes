@@ -61,7 +61,9 @@ export const WithFirebaseMessagingHandlers: InitialDataDependingComponent = ({ch
     (message: FirebaseMessagingTypes.RemoteMessage) => showMessageOnSnackbar(message, snackbar),
     [snackbar],
   );
-  messaging().onMessage(onMessage);
+  useEffect(() => {
+    messaging().onMessage(onMessage);
+  }, [onMessage]);
 
   // アプリがバックグラウンド状態の時に通知を受信し、通知領域から通知をタップしてアプリが前面に移動した際に行う処理
   const onNotificationOpenedApp = useCallback(
