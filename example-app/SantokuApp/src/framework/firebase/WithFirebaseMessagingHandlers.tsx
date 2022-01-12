@@ -62,7 +62,7 @@ export const WithFirebaseMessagingHandlers: InitialDataDependingComponent = ({ch
     [snackbar],
   );
   useEffect(() => {
-    messaging().onMessage(onMessage);
+    return messaging().onMessage(onMessage);
   }, [onMessage]);
 
   // アプリがバックグラウンド状態の時に通知を受信し、通知領域から通知をタップしてアプリが前面に移動した際に行う処理
