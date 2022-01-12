@@ -70,7 +70,7 @@ export const WithFirebaseMessagingHandlers: InitialDataDependingComponent = ({ch
   );
   useEffect(() => {
     return messaging().onNotificationOpenedApp(onNotificationOpenedApp);
-  });
+  }, [onNotificationOpenedApp]);
 
   return <>{children}</>;
 };
