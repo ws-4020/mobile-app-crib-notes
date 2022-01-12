@@ -55,4 +55,9 @@ export type AppNavigatorOptions = {
   TeamStackNav?: DefaultRouterOptions<keyof TeamStackParamList>;
 };
 
-export type NavigationArgs = [screen: string] | [screen: string, params: object];
+export type NavigationParameter<
+  ParamList,
+  RouteName extends keyof ParamList = keyof ParamList,
+> = undefined extends ParamList[RouteName]
+  ? [RouteName] | [RouteName, ParamList[RouteName]]
+  : [RouteName, ParamList[RouteName]];

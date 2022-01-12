@@ -8,7 +8,7 @@ import {useSnackbar} from '../../components/snackbar';
 import {AuthenticatedStackNav} from '../../navigation/AuthenticatedStackNav';
 import {HomeStackNav} from '../../navigation/HomeStackNav';
 import {MainTabNav} from '../../navigation/MainTabNav';
-import {RootStackParamList} from '../../navigation/types';
+import {NavigationParameter, RootStackParamList} from '../../navigation/types';
 import {HomeScreen} from '../../screens';
 import {AppInitialData} from '../initialize/types';
 import {InitialDataDependingComponent} from '../initialize/withInitialData';
@@ -25,13 +25,6 @@ const showMessageOnSnackbar = (
     }
   }
 };
-
-type NavigationParameter<
-  ParamList,
-  RouteName extends keyof ParamList = keyof ParamList,
-> = undefined extends ParamList[RouteName]
-  ? [RouteName] | [RouteName, ParamList[RouteName]]
-  : [RouteName, ParamList[RouteName]];
 
 const getNavigateToScreen = (
   message: FirebaseMessagingTypes.RemoteMessage,
