@@ -6,8 +6,10 @@ import {accountApi, AppConfig} from '../../../framework';
 import {ApiResponseError} from '../../../framework/backend';
 import {ErrorResponse} from '../../../generated/api';
 
+type AuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
+
 export const usePushNotification = () => {
-  const [authStatus, setAuthStatus] = useState<string>();
+  const [authStatus, setAuthStatus] = useState<AuthStatusType >();
   const [token, setToken] = useState<string>();
 
   const requestUserPermission = useCallback(async () => {
