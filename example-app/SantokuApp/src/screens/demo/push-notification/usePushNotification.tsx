@@ -9,7 +9,7 @@ import {ErrorResponse} from '../../../generated/api';
 type AuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
 
 export const usePushNotification = () => {
-  const [authStatus, setAuthStatus] = useState<AuthStatusType >();
+  const [authStatus, setAuthStatus] = useState<AuthStatusType>();
   const [token, setToken] = useState<string>();
 
   const requestUserPermission = useCallback(async () => {
