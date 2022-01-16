@@ -2,31 +2,32 @@ PODS:
   - boost-for-react-native (1.63.0)
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
-  - EXApplication (4.0.0):
+  - EXApplication (4.0.1):
     - ExpoModulesCore
-  - EXConstants (12.1.3):
+  - EXConstants (13.0.0):
     - ExpoModulesCore
-  - EXCrypto (10.0.3):
+  - EXCrypto (10.1.1):
     - ExpoModulesCore
-  - EXErrorRecovery (3.0.3):
+  - EXErrorRecovery (3.0.4):
     - ExpoModulesCore
-  - EXFileSystem (13.0.3):
+  - EXFileSystem (13.1.0):
     - ExpoModulesCore
-  - EXFont (10.0.3):
+  - EXFont (10.0.4):
     - ExpoModulesCore
-  - EXKeepAwake (10.0.0):
+  - EXKeepAwake (10.0.1):
     - ExpoModulesCore
-  - EXLocalAuthentication (12.0.1):
+  - EXLocalAuthentication (12.1.0):
     - ExpoModulesCore
-  - Expo (43.0.4):
+  - Expo (44.0.5):
     - ExpoModulesCore
-  - ExpoModulesCore (0.4.9):
+  - ExpoModulesCore (0.6.4):
     - React-Core
-  - EXRandom (12.0.1):
+    - ReactCommon/turbomodule/core
+  - EXRandom (12.1.1):
     - React-Core
-  - EXSecureStore (11.0.3):
+  - EXSecureStore (11.1.0):
     - ExpoModulesCore
-  - EXSplashScreen (0.13.5):
+  - EXSplashScreen (0.14.1):
     - ExpoModulesCore
     - React-Core
   - FBLazyVector (0.64.3)
@@ -327,7 +328,7 @@ PODS:
     - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
-  - react-native-webview (11.13.0):
+  - react-native-webview (11.15.0):
     - React-Core
   - React-perflogger (0.64.3)
   - React-RCTActionSheet (0.64.3):
@@ -393,18 +394,18 @@ PODS:
     - React-cxxreact (= 0.64.3)
     - React-jsi (= 0.64.3)
     - React-perflogger (= 0.64.3)
-  - RNCMaskedView (0.2.5):
+  - RNCMaskedView (0.2.6):
     - React-Core
-  - RNFBApp (13.1.0):
+  - RNFBApp (13.1.1):
     - Firebase/CoreOnly (= 8.10.0)
     - React-Core
-  - RNFBCrashlytics (13.1.0):
+  - RNFBCrashlytics (13.1.1):
     - Firebase/Crashlytics (= 8.10.0)
     - React-Core
     - RNFBApp
-  - RNGestureHandler (1.10.3):
+  - RNGestureHandler (2.1.1):
     - React-Core
-  - RNReanimated (2.2.4):
+  - RNReanimated (2.3.1):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -430,10 +431,9 @@ PODS:
     - React-RCTNetwork
     - React-RCTSettings
     - React-RCTText
-    - React-RCTVibration
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.8.0):
+  - RNScreens (3.10.1):
     - React-Core
     - React-RCTImage
   - Yoga (1.14.0)
@@ -643,19 +643,19 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
-  EXApplication: 0e15240e4d125b62f1cae48759ffbbd32b9286a6
-  EXConstants: 6d585d93723b18d7a8c283591a335609e3bc153e
-  EXCrypto: 7bcda085ffaccdaf3a252c20774a08be4277b8e3
-  EXErrorRecovery: ac2622400a32be84604591f70d0efff416e4b9a2
-  EXFileSystem: 99aac7962c11c680681819dd9cbca24e20e5b1e7
-  EXFont: 2e1c6fe726d008a039db80df95f48b4921b7fe59
-  EXKeepAwake: 8aa32396a5972d26e75e538603aad0f032396503
-  EXLocalAuthentication: c0ec9379a81c3c823a362382b6a2145e880d9840
-  Expo: 363a3f3c60d5a1d4f8badb29a869005487f2d9e4
-  ExpoModulesCore: e41ed0b72daeac74731816ad7997d639f0115a9d
-  EXRandom: 64c954ae24619b8d0c18ff46aa96401e98efc977
-  EXSecureStore: 919bf7c28472862020d2cd7b59b69aae160b5d40
-  EXSplashScreen: 57f329dbf25c5c12800feed79068a056453dc772
+  EXApplication: bdc8dc27713235565da1029a34385229f31b8e08
+  EXConstants: 5d18484e38e8eacef7695a82214b6ac90133dedf
+  EXCrypto: e3c0853c2a9ef885928f6227b967b9598132f727
+  EXErrorRecovery: deea88a01d38f8b1c1181b4e1d179b0ba0e4bb5b
+  EXFileSystem: 7d1309ba6b38b82ef7fc9e80174de3f9184ac8b4
+  EXFont: 1fb13af43dc517c01c0ff21a6e32f9f9bf2ea602
+  EXKeepAwake: b571c2ad8323b2fced6e907766e2549f75119471
+  EXLocalAuthentication: 4c7166ed3133d2c75586093833936652e7d2c7fc
+  Expo: 337c72b7e9314e93023af79c875930db8e008275
+  ExpoModulesCore: 64abda7af7cf659d2fa092934e29c6f4ea7e849f
+  EXRandom: 06978dcf45075f3c9e17ae5e726b887316ee9877
+  EXSecureStore: fa0fdde1c81ceee2a3cb0519e649feae42767969
+  EXSplashScreen: 7872675b95bb07c25f922b3d3dfae70c76fb5a00
   FBLazyVector: c71c5917ec0ad2de41d5d06a5855f6d5eda06971
   FBReactNativeSpec: 289039c27ca26d02a6683c56c6fc7868bc804c43
   Firebase: 44213362f1dcc52555b935dc925ed35ac55f1b20
@@ -690,7 +690,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 34e23860273a23695342f58eed3ffd3ba10c31e0
   react-native-config: 6502b1879f97ed5ac570a029961fc35ea606cd14
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
-  react-native-webview: 133a6a5149f963259646e710b4545c67ef35d7c9
+  react-native-webview: e89bf2dba26a04cda967814df3ed1be99f291233
   React-perflogger: cc76a4254d19640f1d8ad1c66fdee800414b805c
   React-RCTActionSheet: 7448f049318d8d7e8a9a1ebb742ada721757eea8
   React-RCTAnimation: fb9b3fa1a4a9f5e6ab01b3368693ce69860ba76a
@@ -703,12 +703,12 @@ SPEC CHECKSUMS:
   React-RCTVibration: c7f845861e79eae13dc1e8217a3cf47a3945b504
   React-runtimeexecutor: 493d9abb8b23c3f84e19ae221eeba92cadcb70dc
   ReactCommon: 8fea6422328e2fc093e25c9fac67adbcf0f04fb4
-  RNCMaskedView: b7a3b119b1d738734a9d761e4220c6850bb248a3
-  RNFBApp: 1d553b3f201e9aaeba03d777b1dea51eaacc24cc
-  RNFBCrashlytics: 5b0472223e5bfcdf5760ee787f1d114bc1cf2162
-  RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
-  RNReanimated: 024eff8202342abf4b24e11575a16afc441dabfe
-  RNScreens: 6e1ea5787989f92b0671049b808aef64fa1ef98c
+  RNCMaskedView: c298b644a10c0c142055b3ae24d83879ecb13ccd
+  RNFBApp: 6e20f07b316346d96737191f377777f61f51a8d2
+  RNFBCrashlytics: 649e0fa724d807362cb4265069fea98b2960c46b
+  RNGestureHandler: e1ad51d31a580755079d5124d3ab66f0fcaa8311
+  RNReanimated: 7f143675d94978c3555345d5bfa8ed6ae800c5d3
+  RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e
   Yoga: e6ecf3fa25af9d4c87e94ad7d5d292eedef49749
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
