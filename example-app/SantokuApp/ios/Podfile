@@ -29,7 +29,11 @@ target 'SantokuApp' do
   use_flipper!(configurations: ['Debug', 'DebugAdvanced'])
 
   post_integrate do |installer|
-    expo_patch_react_imports!(installer)
+    begin
+      expo_patch_react_imports!(installer)
+    rescue => e
+      Pod::UI.warn e
+    end
   end
 
   post_install do |installer|
