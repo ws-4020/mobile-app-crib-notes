@@ -66,31 +66,7 @@ tmpディレクトリはアプリの起動中に利用する一時的なデー�
 一般的なアプリでは、外部のサーバに対して様々なHTTPリクエストを送信し、様々なレスポンスを受け取っています。
 これらのHTTPリクエスト・レスポンスの内容は、キャッシュディレクトリ内に保存される場合があります。
 
-iOSの場合、React Nativeアプリでfetchやaxiosなどを用いてHTTPリクエストを送信すると、デフォルトでは通信内容のキャッシュが保存されます。
-
-キャッシュは、キャッシュディレクトリ内にCache.db, Cache.db-shm, Cache.db-walのようなSQLite3 Database用のファイルとして保存されます。
-このキャッシュのデータベース内には、以下のような形式でリクエストURLやレスポンスヘッダ、レスポンスボディなどが記録されています。
-
-```text
-sqlite> select * from cfurl_cache_response;
-1|0|-2528053911948506688|0|https://httpbin.org/get|2022-01-14 08:05:34|
-sqlite> select * from cfurl_cache_receiver_data;
-1|0|{
-  "args": {},
-  "headers": {
-    "Accept": "*/*"
-    "Accept-Encoding": "gzip, deflate, br",
-    "Accept-Language": "en-US,en;q=0.9",
-    "Host": "httpbin.org",
-    "User-Agent": "(アプリのUserAgent)",
-    "X-Amzn-Trace-Id": "(TraceId)",
-  },
-  "origin": "(IP Address)",
-  "url": "https://httpbin.org/get"
-}
-```
-
-Androidの場合も、React Nativeアプリでfetchやaxiosなどを用いてHTTPリクエストを送信すると、デフォルトでは通信内容のキャッシュが保存されます。
+Androidの場合、React Nativeアプリでfetchやaxiosなどを用いてHTTPリクエストを送信すると、デフォルトでは通信内容のキャッシュが保存されます。
 
 キャッシュは、キャッシュディレクトリ内のhttp-cacheディレクトリ内に、末尾に'.0'や'.1'がついたランダムなIDのファイルとして保存されています。
 ファイル内には以下のような形式でリクエストURLやレスポンスヘッダ、レスポンスボディなどが記録されています。
@@ -128,7 +104,31 @@ TLSv1.2
 }
 ```
 
-iOS、Androidのいずれの場合も、デフォルトではリクエストURLのクエリパラメータやレスポンスヘッダ、レスポンスボディなどがキャッシュとして記録されます。
+iOSの場合も同様に、デフォルトでは通信内容のキャッシュが保存されます。
+
+キャッシュは、キャッシュディレクトリ内にCache.db, Cache.db-shm, Cache.db-walのようなSQLite3 Database用のファイルとして保存されます。
+このキャッシュのデータベース内には、以下のような形式でリクエストURLやレスポンスヘッダ、レスポンスボディなどが記録されています。
+
+```text
+sqlite> select * from cfurl_cache_response;
+1|0|-2528053911948506688|0|https://httpbin.org/get|2022-01-14 08:05:34|
+sqlite> select * from cfurl_cache_receiver_data;
+1|0|{
+  "args": {},
+  "headers": {
+    "Accept": "*/*"
+    "Accept-Encoding": "gzip, deflate, br",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Host": "httpbin.org",
+    "User-Agent": "(アプリのUserAgent)",
+    "X-Amzn-Trace-Id": "(TraceId)",
+  },
+  "origin": "(IP Address)",
+  "url": "https://httpbin.org/get"
+}
+```
+
+Android、iOSのいずれの場合も、デフォルトではリクエストURLのクエリパラメータやレスポンスヘッダ、レスポンスボディなどがキャッシュとして記録されます。
 リクエストURLのクエリパラメータやレスポンスヘッダ、レスポンスボディなどに秘匿すべき情報が含まれている場合、記録されてしまうのはあまり望ましい状態ではありません。
 
 AndroidとiOSどちらの場合も、React Nativeのfetchやaxiosのパラメータ設定の範囲では、これらのキャッシュファイルの作成は無効化できなさそうです。
