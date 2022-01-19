@@ -332,6 +332,10 @@ module.exports = {
             'react-native/santoku/application-architecture/http-api/http-api-error-handling',
           ],
         },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/application-architecture/cache-management/overview',
+        },
       ],
     },
     {
