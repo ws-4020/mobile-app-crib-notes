@@ -23,7 +23,7 @@ const Screen: React.FC = () => {
   const snackbar = useSnackbar();
 
   const getFileNameFromUri = useCallback((uri: string) => {
-    return uri.split('/').slice(-1)[0];
+    return uri.endsWith('/') ? uri.split('/').slice(-2)[0] : uri.split('/').slice(-1)[0];
   }, []);
 
   const sortFileInfos = useCallback((fileInfos: FileSystem.FileInfo[]) => {
