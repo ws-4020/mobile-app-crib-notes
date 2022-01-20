@@ -54,10 +54,7 @@ IgnoreURLs:
   - https://marketplace.visualstudio.com/items\?itemName=yzhang.markdown-all-in-one
   # 403になってしまうので無視
   - https://blog.expo.dev/
-# タイムアウトでビルドが失敗して困るので、次の値をデフォルトから変更して余裕を持っておく。
-# DocumentConcurrencyLimit: 128 -> 64
-# HTTPConcurrencyLimit: 16 -> 8
-# ExternalTimeout: 15 -> 120
-DocumentConcurrencyLimit: 64
-HTTPConcurrencyLimit: 8
-ExternalTimeout: 120
+# タイムアウトでビルドが失敗するので、失敗時は手動確認とする。
+IgnoreExternalBrokenLinks: true
+# タイムアウトでビルドが失敗すると困るので、余裕を持って長めに設定しておく。
+ExternalTimeout: 60
