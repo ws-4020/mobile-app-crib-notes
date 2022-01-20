@@ -12,14 +12,14 @@ type FileInfoProps = {
 
 const maxDepth = 10;
 
+const getFileNameFromUri = (uri: string) => {
+  return uri.endsWith('/') ? uri.split('/').slice(-2)[0] : uri.split('/').slice(-1)[0];
+};
+
 const FileInfo: React.FC<FileInfoProps> = props => {
   const {fileInfo, currentDepth} = props;
   const {readDirectoryItemsFileInfoAsync} = useCacheDirectory();
   const [childFileInfos, setChildFileInfos] = useState<FileSystem.FileInfo[]>([]);
-
-  const getFileNameFromUri = useCallback((uri: string) => {
-    return uri.endsWith('/') ? uri.split('/').slice(-2)[0] : uri.split('/').slice(-1)[0];
-  }, []);
 
   const isViewChildren = fileInfo.isDirectory && currentDepth <= maxDepth;
   useEffect(() => {
