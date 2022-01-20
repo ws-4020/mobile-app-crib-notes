@@ -34,30 +34,21 @@ const FileInfo: React.FC<FileInfoProps> = props => {
     }
   }, [isViewChildren, fileInfo, readDirectoryItemsFileInfoAsync]);
 
-  if (fileInfo.isDirectory && currentDepth <= maxDepth) {
-    return (
-      <View style={styles.container}>
-        <View style={styles.item}>
-          <Icon name="file-directory" type="octicon" size={18} />
-          <Text style={styles.title}>{getFileNameFromUri(fileInfo.uri)}</Text>
-        </View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.item}>
+        <Icon name={fileInfo.isDirectory ? 'file-directory' : 'file'} type="octicon" size={18} />
+        <Text style={styles.title}>{getFileNameFromUri(fileInfo.uri)}</Text>
+      </View>
+      {isViewChildren && (
         <View style={styles.childContainer}>
           {childFileInfos.map((info, index) => {
             return <FileInfo key={index} fileInfo={info} currentDepth={currentDepth + 1} />;
           })}
         </View>
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <View style={styles.item}>
-          <Icon name={fileInfo.isDirectory ? 'file-directory' : 'file'} type="octicon" size={18} />
-          <Text style={styles.title}>{getFileNameFromUri(fileInfo.uri)}</Text>
-        </View>
-      </View>
-    );
-  }
+      )}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
