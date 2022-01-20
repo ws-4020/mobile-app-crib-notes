@@ -24,8 +24,8 @@ const Screen: React.FC = () => {
   }, [reloadCacheDirectoryItemsAsync]);
 
   useEffect(() => {
-    reloadCacheDirectoryItemsAsync().catch(e => console.log(e));
-  }, [reloadCacheDirectoryItemsAsync]);
+    onRefresh();
+  }, [onRefresh]);
 
   return (
     <View style={styles.container}>
