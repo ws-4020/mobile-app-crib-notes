@@ -2,70 +2,64 @@ import {useSnackbar} from 'components/snackbar';
 import * as FileSystem from 'expo-file-system';
 import {useCallback, useState} from 'react';
 
+const sortFileInfos = (fileInfos: FileSystem.FileInfo[]) => {
+  const copiedArray = [...fileInfos];
+  copiedArray.sort((a, b) => {
+    if (a.isDirectory && !b.isDirectory) {
+      return -1;
+    } else if (!a.isDirectory && b.isDirectory) {
+      return 1;
+    } else if (a.uri < b.uri) {
+      return -1;
+    } else if (a.uri > b.uri) {
+      return 1;
+    }
+    return 0;
+  });
+  return copiedArray;
+};
+
+const readDirectoryItemsFileInfoAsync = async (fileUri: string) => {
+  const info = await FileSystem.getInfoAsync(fileUri);
+  if (info.isDirectory) {
+    const paths = await FileSystem.readDirectoryAsync(fileUri);
+    const infos = await Promise.all(
+      paths.map(path => {
+        const fullPath = fileUri.endsWith('/') ? `${fileUri}${path}` : `${fileUri}/${path}`;
+        return FileSystem.getInfoAsync(fullPath);
+      }),
+    );
+    return sortFileInfos(infos);
+  } else {
+    return [];
+  }
+};
+
+const deleteChildItemsAsync = async (fileInfo: FileSystem.FileInfo) => {
+  if (fileInfo.exists) {
+    if (fileInfo.isDirectory) {
+      const childItemInfos = await readDirectoryItemsFileInfoAsync(fileInfo.uri);
+      await Promise.all(
+        childItemInfos.map(info => {
+          return FileSystem.deleteAsync(info.uri);
+        }),
+      );
+    } else {
+      await FileSystem.deleteAsync(fileInfo.uri);
+    }
+  }
+};
+
 const useCacheDirectory = () => {
   const [topLevelFileInfos, setTopLevelFileInfos] = useState<FileSystem.FileInfo[]>([]);
   const snackbar = useSnackbar();
-
-  const sortFileInfos = useCallback((fileInfos: FileSystem.FileInfo[]) => {
-    const copiedArray = [...fileInfos];
-    copiedArray.sort((a, b) => {
-      if (a.isDirectory && !b.isDirectory) {
-        return -1;
-      } else if (!a.isDirectory && b.isDirectory) {
-        return 1;
-      } else if (a.uri < b.uri) {
-        return -1;
-      } else if (a.uri > b.uri) {
-        return 1;
-      }
-      return 0;
-    });
-    return copiedArray;
-  }, []);
-
-  const readDirectoryItemsFileInfoAsync = useCallback(
-    async (fileUri: string) => {
-      const info = await FileSystem.getInfoAsync(fileUri);
-      if (info.isDirectory) {
-        const paths = await FileSystem.readDirectoryAsync(fileUri);
-        const infos = await Promise.all(
-          paths.map(path => {
-            const fullPath = fileUri.endsWith('/') ? `${fileUri}${path}` : `${fileUri}/${path}`;
-            return FileSystem.getInfoAsync(fullPath);
-          }),
-        );
-        return sortFileInfos(infos);
-      } else {
-        return [];
-      }
-    },
-    [sortFileInfos],
-  );
 
   const reloadCacheDirectoryItemsAsync = useCallback(async () => {
     if (FileSystem.cacheDirectory) {
       const fileInfos = await readDirectoryItemsFileInfoAsync(FileSystem.cacheDirectory);
       setTopLevelFileInfos(fileInfos);
     }
-  }, [readDirectoryItemsFileInfoAsync]);
-
-  const deleteChildItemsAsync = useCallback(
-    async (fileInfo: FileSystem.FileInfo) => {
-      if (fileInfo.exists) {
-        if (fileInfo.isDirectory) {
-          const childItemInfos = await readDirectoryItemsFileInfoAsync(fileInfo.uri);
-          await Promise.all(
-            childItemInfos.map(info => {
-              return FileSystem.deleteAsync(info.uri);
-            }),
-          );
-        } else {
-          await FileSystem.deleteAsync(fileInfo.uri);
-        }
-      }
-    },
-    [readDirectoryItemsFileInfoAsync],
-  );
+  }, []);
 
   const clearCacheDir = useCallback(async () => {
     if (FileSystem.cacheDirectory) {
@@ -84,14 +78,13 @@ const useCacheDirectory = () => {
         snackbar.showWithCloseButton(`ファイルの削除に失敗しました。`);
       }
     }
-  }, [snackbar, readDirectoryItemsFileInfoAsync, reloadCacheDirectoryItemsAsync, deleteChildItemsAsync]);
+  }, [snackbar, reloadCacheDirectoryItemsAsync]);
 
   return {
     topLevelFileInfos,
-    readDirectoryItemsFileInfoAsync,
     reloadCacheDirectoryItemsAsync,
     clearCacheDir,
   };
 };
 
-export {useCacheDirectory};
+export {useCacheDirectory, readDirectoryItemsFileInfoAsync};

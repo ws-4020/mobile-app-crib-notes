@@ -1,9 +1,9 @@
 import * as FileSystem from 'expo-file-system';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Icon, Text} from 'react-native-elements';
 
-import {useCacheDirectory} from './useCacheDirectory';
+import {readDirectoryItemsFileInfoAsync} from './useCacheDirectory';
 
 type FileInfoProps = {
   fileInfo: FileSystem.FileInfo;
@@ -18,10 +18,11 @@ const getFileNameFromUri = (uri: string) => {
 
 const FileInfo: React.FC<FileInfoProps> = props => {
   const {fileInfo, currentDepth} = props;
-  const {readDirectoryItemsFileInfoAsync} = useCacheDirectory();
   const [childFileInfos, setChildFileInfos] = useState<FileSystem.FileInfo[]>([]);
+  const isViewChildren = useMemo(() => {
+    return fileInfo.isDirectory && currentDepth <= maxDepth;
+  }, [fileInfo, currentDepth]);
 
-  const isViewChildren = fileInfo.isDirectory && currentDepth <= maxDepth;
   useEffect(() => {
     if (isViewChildren) {
       readDirectoryItemsFileInfoAsync(fileInfo.uri)
@@ -32,7 +33,7 @@ const FileInfo: React.FC<FileInfoProps> = props => {
           console.log(e);
         });
     }
-  }, [isViewChildren, fileInfo, readDirectoryItemsFileInfoAsync]);
+  }, [isViewChildren, fileInfo]);
 
   return (
     <View style={styles.container}>
