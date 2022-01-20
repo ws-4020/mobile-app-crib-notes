@@ -21,8 +21,9 @@ const FileInfo: React.FC<FileInfoProps> = props => {
     return uri.endsWith('/') ? uri.split('/').slice(-2)[0] : uri.split('/').slice(-1)[0];
   }, []);
 
+  const isViewChildren = fileInfo.isDirectory && currentDepth <= maxDepth;
   useEffect(() => {
-    if (fileInfo.isDirectory && currentDepth <= maxDepth) {
+    if (isViewChildren) {
       readDirectoryItemsFileInfoAsync(fileInfo.uri)
         .then(fileInfos => {
           setChildFileInfos(fileInfos);
@@ -31,7 +32,7 @@ const FileInfo: React.FC<FileInfoProps> = props => {
           console.log(e);
         });
     }
-  }, [currentDepth, fileInfo, readDirectoryItemsFileInfoAsync]);
+  }, [isViewChildren, fileInfo, readDirectoryItemsFileInfoAsync]);
 
   if (fileInfo.isDirectory && currentDepth <= maxDepth) {
     return (
