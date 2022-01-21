@@ -18,8 +18,8 @@ Superseded: 廃止
 多くのモバイルアプリはリモート上のサーバと連携することで各種機能を実現します。
 このアプリにおいても、REST APIを用いてバックエンドサーバと連携します。
 
-React Native公式ドキュメントの[Networking](https://reactnative.dev/docs/network)にあるとおり、React Nativeでは`Fetch API`や`XMLHttpRequest API`が用意されております。これらを用いることでHTTP API通信を実現できます。
-以下のコードは`Fetch API`で取得した映画のタイトルを一覧表示します。
+React Native公式ドキュメントの[Networking](https://reactnative.dev/docs/network)にあるとおり、React NativeではFetch APIやXMLHttpRequest APIが用意されております。これらを用いることでHTTP API通信を実現できます。
+以下のコードは、Fetch APIで取得した映画のタイトルを一覧表示します。
 
 ```typescript
 const Screen = () => {
@@ -44,7 +44,7 @@ const Screen = () => {
 };
 ```
 このコードは一見正しく（運が良ければ）正常に動作します。
-しかしながら、プロダクトコードとしては多くの考慮が足りてません。
+しかしながら、プロダクトコードとしては多くの考慮が足りていません。
 
 - コンポーネントマウント時以外の再読み込み
 - ローディング状態
@@ -80,13 +80,13 @@ const Screen = () => {
 
 ReactでHTTP API通信を実装するにあたり、次の2つの案があります。
 
-- Reduxによる非同期状態やバックエンドデータの管理
+- HTTP API通信にはFetch APIなどを利用し、その非同期状態や取得したバックエンドデータはReduxにより管理
 - データフェッチ用ライブラリの導入
 
-ReduxのStoreで非同期状態やバックエンドデータを管理する方法は、次の理由により採用しないこととします。
+Fetch APIとReduxを用いる案は、次の理由により採用しないこととします。
 
 1. ReduxのStoreはクライアントの状態を管理するものであり、バックエンドデータのキャッシュ目的に用いるのは不適切。
-2. Reduxで本格的に非同期処理を扱う場合、`redux-thunk`や`redux-saga`の導入が必要となる。
+2. Reduxで本格的に非同期処理を扱う場合、redux-thunkやredux-sagaの導入が必要となる。
 3. キャッシュデータの有効期限管理やリフェッチ、ポーリングなど、バックエンドデータ管理に必要な機能を自前で実装する必要がある。
 4. このアプリではReduxを採用していない。
 
@@ -101,9 +101,12 @@ Reactの有名なデータフェッチ用ライブラリとしては次のもの
 React Query、SWRは、Reactフックを用いたデータフェッチ用ライブラリです。
 いずれのライブラリもHTTP API通信をフックで宣言的に記述でき、通信状態に応じたレンダリング定義が可能となります。
 RTK Queryは、Reduxアプリのデータフェッチを簡素化するのに役立ちます。
-Apollo Client、URQLは、GraphQL使用したデータフェッチ用ライブラリです。
+Apollo Client、URQLは、GraphQLを使用したデータフェッチ用ライブラリです。
 
-このアプリにおいても、REST APIを用いてバックエンドサーバと通信するため、React Query、SWRに絞り比較しました。
+このアプリはREST APIを用いるため、React Query、SWRは導入候補となります。
+このアプリではReduxやGraphQLを使用していないため、RTK Query、Apollo Client、URQLは導入候補から外します。
+
+上記理由により、React Query、SWRに絞り比較しました。
 比較結果は次のとおりです。
 
 ||React Query|SWR|
@@ -114,15 +117,64 @@ Apollo Client、URQLは、GraphQL使用したデータフェッチ用ライブ�
 |機能数|◎|△|
 |コードの記述量|〇|〇|
 
-ライセンスはいずれもMIT Licenseです。
-開発母体はReact Queryが個人開発なのに対し、SWRはNext.jsを開発している会社として有名なVercel Inc.が開発しています。
-人気はGitHubのスターで確認する限りは同じくらいに見えます。
-機能数はReact Query公式ドキュメントが用意している[比較資料](https://react-query.tanstack.com/comparison)を参考にしました。
-やや公平性に欠けるかもしれませんが、内容を見る限り公平性は保てているようです。
-バンドルサイズや公式ドキュメントの量で比較しても、SWRのほうが機能が少ないです。
-コードの記述量は、SWRのほうがキャッシュキーを非同期関数の引数として用いているためシンプルに見えますが、大差はありません。
+#### ライセンス
 
-上記比較検討の結果、機能数を理由としてReact Queryを採用します。
+ライセンスはいずれもMIT Licenseです。
+
+#### 開発母体
+
+開発母体はReact Queryが個人開発なのに対し、SWRはNext.jsを開発している会社として有名なVercel Inc.が開発しています。
+SWRのほうが開発母体として安定性を感じます。
+
+#### 人気
+
+人気はGitHubのスターで確認する限りは同じくらいに見えます。
+
+#### 機能数
+
+機能数はReact Query公式ドキュメントが用意している[比較資料](https://react-query.tanstack.com/comparison)を参考にしました。
+（React Query公式ドキュメントの為）React Query側に有利に書かれている懸念はありますが、内容を確認する限り公平性は保てているようです。
+比較資料にあるとおり、SWRのほうが機能が少ないです。バンドルサイズや公式ドキュメントの量もそれを裏付けているように見えます。
+
+React QueryにありSWRにない、いくつかの機能は次の通りです。
+
+- `Devtools`
+- ミューテーションフック（`Mutation Hooks`）
+- 自動ガーベージコレクション（`Auto Garbage Collection`）と有効期間の設定（`Stale Time Configuration`）
+
+React QueryのDevtoolsは魅力的な機能ですが、React Nativeではサポートされていません。
+
+React Queryはミューテーションフックを用意しており、更新時の非同期状態も管理できます。
+SWRは標準でその機能が用意されてないみたいです。
+
+自動ガーベージコレクションと有効期間の設定は、キャッシュデータを管理する機能です。
+これらは`cacheTime`と`staleTime`で設定できます。
+
+- `staleTime`：キャッシュデータが「新しい」ものから「古くなる」までの期間です。キャッシュデータが「新しい」限り、クエリはキャッシュデータを返すため、ネットワークリクエストは発生しません。キャッシュデータが「古い」場合（デフォルトはフェッチ後すぐ）、クエリはキャッシュデータを返し、特定の条件下でバックグラウンドで再フェッチします。
+- `cacheTime`：未使用なクエリのキャッシュデータを削除するまでの期間（デフォルトで5分）です。クエリを使用するすべてのコンポーネントがアンマウントされると、そのクエリは未使用となります。
+
+詳細は[Caching Examples](https://react-query.tanstack.com/guides/caching)を参照してください。
+SWRはこの機能を備えていないようです。
+
+#### コードの記述量
+
+コードの記述量は、SWRのほうがキャッシュキーを非同期関数の引数として用いているためシンプルに見えますが、大差はありません。
+キャッシュキーと非同期関数が独立しているReact Queryのほうが、キャッシュキーの運用面で柔軟性があります。
+
+```typescript
+const { data, error } = useSWR('https://reactnative.dev/movies.json', fetcher)
+```
+
+```typescript
+const { isLoading, error, data } = useQuery('movies', () =>
+  fetch('https://reactnative.dev/movies.json')
+  .then(response => response.json())
+ )
+```
+
+#### 検討結果
+
+上記比較検討の結果、機能の充実度を主な理由としてReact Queryを採用します。
 
 ### React Queryが提供する機能群
 
