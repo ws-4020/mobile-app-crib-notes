@@ -255,13 +255,39 @@ Web アプリケーション同様に、モバイルアプリにおいても二�
 
 #### バックエンド API の定義について
 
+##### ページネーション
+
+ページネーションを実現する為には、バックエンド API のリクエスト項目にページサイズ、開始ページ番号、およびソート順が必要です。
+また、全体のページ数を表示するためにレスポンスに全体のトータル件数が必要です。
+
+リクエストにはGET メソッドを用いることからURL クエリパラメータにてリクエスト項目を指定することが望ましいです。
+また、出来るだけ一般的な方法を採用したいと思います。
+そこで、[Spring Data REST Reference Guideの 5. Paging and Sorting](https://docs.spring.io/spring-data/rest/docs/current/reference/html/#paging-and-sorting)を参考に次の通りとします。
+
+|URL クエリパラメータ|説明|
+|:--|:--|
+|size|ページサイズ|
+|page|開始ページ番号|
+|sort|ソート項目|
+
+全体トータル件数は、HTTP ヘッダとして返却することとします。
+
+|HTTP ヘッダ|説明|
+|:--|:--|
+|x-total-count|全体トータル件数|
+
+##### 無限スクロール
+
 :::note
 
 - ページネーションの方法
   - リクエスト
-    - Spring Boot の方法にあわせておけばいいかな？
+    - https://docs.spring.io/spring-data/rest/docs/3.7.x/reference/html/#paging-and-sorting
+    - ?page=${page}&size=${size}&sort=${sort}
   - レスポンス
     - RFC-5988 か RFC-8288 あたりを参考に
+    - x-total-count
+
   - 参考 URl - https://docs.spring.io/spring-data/rest/docs/3.7.x/reference/html/#paging-and-sorting - https://gist.github.com/bernardolopes8/cf04f49e1b64bd47576e7204601ef126
     :::
 
