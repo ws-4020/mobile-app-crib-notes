@@ -174,101 +174,85 @@ const {isLoading, error, data} = useQuery('movies', () =>
 
 上記比較検討の結果、機能の充実度を主な理由として React Query を採用します。
 
-### React Query が提供する機能群
-
-React Query が提供する代表的な機能を次に示します。
-
-- クエリ
-  - パラレルクエリ
-  - 他のクエリに依存したクエリ
-  - ページング
-  - 無限スクロール
-  - プリフェッチ
-  - クエリのキャンセル
-  - ポーリング・再フェッチ
-- キャッシュ管理
-  - キャッシュの有効期間設定
-  - キャッシュの自動ガーベージコレクション
-- ミューテーション
-- 効率的な画面レンダリング
-- 開発者ツール
-
-:::
-
-### React Query の設定項目とデフォルト値
-
-クエリオプションの設定項目
-
-|                               |     |
-| :---------------------------- | :-- |
-| queryKey                      |     |
-| queryFn                       |     |
-| enabled                       |     |
-| retry                         |     |
-| retryOnMount                  |     |
-| retryDelay                    |     |
-| staleTime                     |     |
-| cacheTime                     |     |
-| queryKeyHashFn                |     |
-| refetchInterval               |     |
-| refetchIntervalInBackground   |     |
-| refetchOnMount                |     |
-| refetchOnWindowFocus          |     |
-| refetchOnReconnect            |     |
-| notifyOnChangeProps           |     |
-| notifyOnChangePropsExclusions |     |
-| onSuccess                     |     |
-| onError                       |     |
-| onSettled                     |     |
-| select                        |     |
-| suspense                      |     |
-| initialData                   |     |
-| initialDataUpdatedAt          |     |
-| placeholderData               |     |
-| keepPreviousData              |     |
-| structuralSharing             |     |
-| useErrorBoundary              |     |
-| meta                          |     |
-
-|isDataEqual||
-|queryHash||
-|behavior||
-|getPreviousPageParam||
-|getNextPageParam||
-|optimisticResults||
-
-ミューテーションオプション
-
-|                  |     |
-| :--------------- | :-- |
-| mutationFn       |     |
-| mutationKey      |     |
-| variables        |     |
-| onMutate         |     |
-| onSuccess        |     |
-| onError          |     |
-| onSettled        |     |
-| retry            |     |
-| retryDelay       |     |
-| meta             |     |
-| useErrorBoundary |     |
-
-:::note
-
-- React Query の設定項目の簡単な説明とデフォルト値について
-- アプリで変更するデフォルト設定
-  :::
-
 ### 開発方針
 
-#### Reqct Query を用いた開発方針
+React Query を用いる上で、このアプリの開発方針について検討します。
+
+#### クエリのデフォルトオプションについて
+
+React Queryには多数のオプションが用意されております。
+これらのオプションは、全てのクエリで有効なデフォルト値を設定することが出来、かつクエリ毎にその値を上書きできます。
+ここでは、これらいくつかのオプションについてこのアプリの特性に応じた設定値を検討します。
+特に、React Query 公式ドキュメントの[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるオプションについては、デフォルト値で問題ないかを注意深く検討します。
+
+##### queryFn
+
+[Default Query Function](https://react-query.tanstack.com/guides/default-query-function)で紹介されているとおり、デフォルトのクエリ関数を定義出来ます。
+これにより、SWRに近いシンプルな記述を実現することが出来ます。
+このアプリではOpenAPI仕様からソースコードを自動生成することにより、REST APIとの整合性や開発効率性の向上を図ります。
+その為、このオプションは利用しません。
+
+##### retry
+
+クエリ失敗時のリトライ回数です。
+[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は3です。
+このアプリでは`false`をデフォルト値としてリトライせず、リトライが必要なクエリについては各クエリ毎に個別で設定することとします。
+
+##### retryOnMount
+
+マウント時にリトライするかどうかです。
+デフォルト値は`true`です。
+デフォルト値のままとします。
+
+##### retryDelay
+
+リトライ時の遅延間隔を示します。
+デフォルトでは、リトライの度に指数関数的に待ち時間が増えていきます（Exponential Backoff）。
+デフォルト値のままとします。
+
+##### staleTime
+
+キャッシュデータが「新しい」ものから「古くなる」までの期間です。
+[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は0です。
+デフォルト値のままとし、必要に応じて各クエリ毎に個別で設定することとします。
+
+##### cacheTime
+
+未使用なクエリのキャッシュデータを削除するまでの期間です。
+[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は5分です。
+デフォルト値のままとし、必要に応じて各クエリ毎に個別で設定することとします。
+
+##### refetchOnMount
+
+マウント時に再フェッチするかどうかを示します。
+デフォルト（`true`）では、データが古くなっている場合に再フェッチします。
+デフォルト値のままとします。
+
+##### refetchOnWindowFocus
+
+ウィンドウフォーカス時に再フェッチするかどうかを示します。
+デフォルト（`true`）では、データが古くなっている場合に再フェッチします。
+デフォルト値のままとします。
+
+##### refetchOnReconnect
+
+再接続時に再フェッチするかどうかを示します。
+デフォルト（`true`）では、データが古くなっている場合に再フェッチします。
+デフォルト値のままとします。
+
+
+#### ミューテーションのデフォルトオプションについて
+
+クエリ同様に、ミューテーションにおいても全てのミューテーションで有効なデフォルト値を設定することが出来ます。
+ミューテーションについては全てデフォルトのままとし、必要に応じて個別で設定することとします。
+
 
 :::note
 
 - 共通処理のためのラッパーフックを作る？
 - cache 毎 or API 毎にフックを作るのはよさげ
 - データ更新時のキャッシュの扱いを調査
-  :::
+:::
 
 #### バックエンド API の定義について
 
@@ -281,6 +265,11 @@ React Query が提供する代表的な機能を次に示します。
     - RFC-5988 か RFC-8288 あたりを参考に
   - 参考 URl - https://docs.spring.io/spring-data/rest/docs/3.7.x/reference/html/#paging-and-sorting - https://gist.github.com/bernardolopes8/cf04f49e1b64bd47576e7204601ef126
     :::
+
+#### 二重押下対応について
+
+#### 自動生成について
+
 
 #### エラーハンドリング
 
