@@ -19,7 +19,7 @@ Superseded: 廃止
 このアプリにおいても、REST API を用いてバックエンドサーバと連携します。
 
 React Native 公式ドキュメントの[Networking](https://reactnative.dev/docs/network)にあるとおり、React Native では Fetch API や XMLHttpRequest API が用意されております。これらを用いることで HTTP API 通信を実現できます。
-以下のコードは、Fetch API の使用例です。レスポンスから取得した映画のタイトルを一覧表示します。
+以下のコードは、Fetch API の使用例です。レスポンスから取得した映画のタイトルを画面に一覧表示しています。
 
 ```typescript
 const Screen = () => {
@@ -47,10 +47,10 @@ const Screen = () => {
 このコードは一見正しく（運が良ければ）正常に動作します。
 しかしながら、プロダクトコードとしては多くの考慮が足りていません。
 
-- コンポーネントマウント時以外の再読み込み
-- ローディング状態
-- エラーハンドリング
-- コンポーネントがアンマウントされた場合のキャンセル処理
+- コンポーネントマウント時以外の再フェッチが用意されていない
+- ローディング状態時は画面が真っ白となる
+- エラーハンドリングが疎か
+- コンポーネントがアンマウントされた場合のキャンセル処理がない
 
 :::note
 上記を考慮したデータ取得の方法は、（React 公式ドキュメント「[パフォーマンス最適化](https://ja.reactjs.org/docs/hooks-faq.html#performance-optimizations)」のヒント欄で紹介されている）[こちらの記事](https://www.robinwieruch.de/react-hooks-fetch-data/)をご覧ください。
@@ -78,7 +78,7 @@ const Screen = () => {
 
 ### HTTP API 通信実装に向けた技術選定
 
-React で HTTP API 通信を実装するにあたり、次の 2 つの案があります。
+このアプリで HTTP API 通信を実装するにあたり、次の 2 つの案があります。
 
 - HTTP API 通信には Fetch API などを利用し、その非同期状態や取得したバックエンドデータは Redux により管理
 - データフェッチ用ライブラリの導入
@@ -115,7 +115,7 @@ Apollo Client、URQL は、GraphQL を使用したデータフェッチ用ライ
 | ライセンス     | MIT License      | MIT License        |
 | 開発母体       | 個人             | Vercel Inc.        |
 | 人気           | 25k star(GitHub) | 20.8k star(GitHub) |
-| 機能数         | ◎               | △                 |
+| 機能数         | ◎                | △                  |
 | コードの記述量 | 〇               | 〇                 |
 
 #### ライセンス
@@ -124,7 +124,7 @@ Apollo Client、URQL は、GraphQL を使用したデータフェッチ用ライ
 
 #### 開発母体
 
-開発母体は React Query が個人開発なのに対し、SWR は Next.js を開発している会社として有名な Vercel Inc.が開発しています。
+開発母体は React Query が個人開発なのに対し、SWR は Next.js の開発元として有名な Vercel Inc.が開発しています。
 SWR のほうが開発母体として安定性を感じます。
 
 #### 人気
@@ -145,9 +145,9 @@ React Query にあり SWR にない、いくつかの機能は次の通りです
 
 React Query の Devtools は魅力的な機能ですが、React Native ではサポートされていません。
 React Query はミューテーションフックを用意しており、更新時の非同期状態も管理できます。
-SWR は標準でその機能が用意されてないです。
+SWR は標準でその機能が用意されてません。
 自動ガーベージコレクションと有効期間の設定は、キャッシュデータを管理する機能です。
-これらは`cacheTime`と`staleTime`で設定できます。
+これらは`staleTime`と`cacheTime`で設定できます。
 
 - `staleTime`：キャッシュデータが「新しい」ものから「古くなる」までの期間。キャッシュデータが「新しい」限り、クエリはキャッシュデータを返すため、ネットワークリクエストは発生しません。キャッシュデータが「古い」場合（デフォルトはフェッチ後すぐ古くなる）、クエリはキャッシュデータを返し、特定の条件下でバックグラウンドで再フェッチします。
 - `cacheTime`：未使用なクエリのキャッシュデータを削除するまでの期間（デフォルトで 5 分）。クエリを使用するすべてのコンポーネントがアンマウントされると、そのクエリは未使用となります。
@@ -172,7 +172,7 @@ const {isLoading, error, data} = useQuery('movies', () =>
 
 #### 検討結果
 
-上記比較検討の結果、機能の充実度を主な理由として React Query を採用します。
+検討の結果、機能の充実度を主な理由として React Query を採用します。
 
 ### 開発方針
 
@@ -182,30 +182,78 @@ React Query を用いる上で、このアプリの開発方針について検�
 
 React Query には多数のオプションが用意されております。
 これらのオプションは、全てのクエリで有効な値を設定することが出来、かつクエリ毎にその値を上書きできます。
-ここでは、これらいくつかのオプションについてこのアプリの特性に応じた設定値を検討します。
+ここでは、これらいくつかのオプションについて、このアプリの特性に応じた設定値を検討します。
 特に、React Query 公式ドキュメントの[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるオプションについては、デフォルトのままで問題ないかを注意深く検討します。
 
-|オプション|検討結果|
-|:--|:--|
-|queryFn|[Default Query Function](https://react-query.tanstack.com/guides/default-query-function)で紹介されているとおり、デフォルトのクエリ関数を定義出来ます。これにより、SWRに近いシンプルな記述を実現することが出来ます。このアプリではOpenAPI仕様からソースコードを自動生成することにより、REST APIとの整合性や開発効率性の向上を図ります。その為、このオプションは利用しません。|
-|retry|クエリ失敗時のリトライ回数です。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は3です。このアプリでは、[HTTP API通信のリトライ](../application-architecture/http-api/http-api-error-handling.mdx#http-api通信のリトライ)に従いリトライはユーザ自身の判断とします。`false`をデフォルト値として設定します（リトライしません）。|
-|retryOnMount|マウント時にリトライするかどうかです。デフォルト値は`true`です。デフォルト値のままとします。|
-|retryDelay|リトライ時の遅延間隔を示します。デフォルトでは、リトライの度に指数関数的に待ち時間が増えていきます（Exponential Backoff）。デフォルト値のままとします。|
-|staleTime|キャッシュデータが「新しい」ものから「古くなる」までの期間です。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は0です。デフォルト値のままとし、必要に応じて各クエリ毎に個別で設定することとします。|
-|cacheTime|未使用なクエリのキャッシュデータを削除するまでの期間です。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は5分です。デフォルト値のままとし、必要に応じて各クエリ毎に個別で設定することとします。|
-|refetchOnMount|マウント時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。デフォルト値のままとします。|
-|refetchOnWindowFocus|ウィンドウフォーカス時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。デフォルト値のままとします。|
-|refetchOnReconnect|再接続時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。デフォルト値のままとします。|
-|structuralSharing|デフォルト（`true`）では、クエリ結果のデータの中身が変更されていない場合、データの参照が変更されません。これによりアプリのパフォーマンス向上が望めます。デフォルト値のままとしますが、クエリ結果の比較がパフォーマンス上の問題を引き起こす場合は、個別で`false`に設定こととします。|
-|onError|エラーハンドリングの共通処理を設定します。|
+##### queryFn
+
+[Default Query Function](https://react-query.tanstack.com/guides/default-query-function)で紹介されているとおり、デフォルトのクエリ関数を定義出来ます。
+これにより、SWR のようなシンプルな記述を実現することが出来ます。
+しかしながら、このアプリでは OpenAPI 仕様からソースコードを自動生成することにより、REST API との整合性や開発効率性の向上を図ります。
+その為、このオプションは利用しません。
+
+##### retry
+
+クエリ失敗時のリトライ回数です。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は 3 です。
+このアプリでは、[HTTP API 通信のリトライ](../application-architecture/http-api/http-api-error-handling.mdx#http-api通信のリトライ)に従いリトライはユーザ自身の判断とします。
+`false`をデフォルト値として設定します（リトライしません）。
+
+##### retryOnMount
+
+マウント時にリトライするかどうかです。
+デフォルト値は`true`です。デフォルト値のままとします。
+
+##### retryDelay
+
+リトライ時の遅延間隔を示します。
+デフォルトでは、リトライの度に指数関数的に待ち時間が増えていきます（Exponential Backoff）。
+デフォルト値のままとします。
+
+##### staleTime
+
+キャッシュデータが「新しい」ものから「古くなる」までの期間です。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は 0 です。
+デフォルト値のままとし、必要に応じて各クエリ毎に個別で設定することとします。
+
+##### cacheTime
+
+未使用なクエリのキャッシュデータを削除するまでの期間です。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は 5 分です。
+デフォルト値のままとし、必要に応じて各クエリ毎に個別で設定することとします。
+
+##### refetchOnMount
+
+マウント時に再フェッチするかどうかを示します。
+デフォルト（`true`）では、データが古くなっている場合に再フェッチします。
+デフォルト値のままとします。
+
+##### refetchOnWindowFocus
+
+ウィンドウフォーカス時に再フェッチするかどうかを示します。
+デフォルト（`true`）では、データが古くなっている場合に再フェッチします。
+デフォルト値のままとします。
+
+##### refetchOnReconnect
+
+再接続時に再フェッチするかどうかを示します。
+デフォルト（`true`）では、データが古くなっている場合に再フェッチします。
+デフォルト値のままとします。
+
+##### structuralSharing
+
+デフォルト（`true`）では、クエリ結果のデータの中身が変更されていない場合、データの参照が変更されません。
+これによりアプリのパフォーマンス向上が望めます。
+デフォルト値のままとしますが、クエリ結果の比較がパフォーマンス上の問題を引き起こす場合は、個別で`false`に設定こととします。
+
+##### onError
+
+エラーハンドリングの共通処理を設定します。
 
 #### ミューテーションのデフォルトオプションについて
 
 クエリ同様、ミューテーションにおいても全てのミューテーションで有効な値を設定することが出来ます。
 
-|オプション|検討結果|
-|:--|:--|
-|onError|エラーハンドリングの共通処理を設定します。|
+##### onError
+
+エラーハンドリングの共通処理を設定します。
 
 #### ソースコードの自動生成について
 
@@ -214,14 +262,14 @@ OpenAPI 仕様からソースコードを自動生成
 
 - OpenAPI Generator
 - Orval
-:::
+  :::
 
 :::note
 下記項目は自動生成にやり方に応じて判断
 
 - 共通処理のためのラッパーフックを作る？
 - cache 毎 or API 毎にフックを作るのはよさげ
-:::
+  :::
 
 #### データ更新時のキャッシュの扱いについて
 
@@ -244,13 +292,14 @@ Web アプリケーション同様に、モバイルアプリにおいても二�
 一般的に参照操作に比べて更新操作はそれほど多くありません。
 その為、更新中の操作を制限することはそれほどユーザビリティに影響を与えないと判断し、このアプリにおいては次の方針とします。
 
-- データ取得などの参照操作については、一切の操作を制限しない
+- 初期ロードなどの参照操作については、一切の操作を制限しない
+- 検索ボタン押下などの参照操作については、対象ボタンのみを押下不可とする
 - ユーザ設定更新のような再実行可能な更新操作については、対象ボタンのみを押下不可とする
 - 商品購入のような重要操作については、アプリ全体を操作不可とする
 
 #### エラーハンドリング
 
-[HTTP API通信で発生するエラーのハンドリング](../application-architecture/http-api/http-api-error-handling.mdx)に従います。
+[HTTP API 通信で発生するエラーのハンドリング](../application-architecture/http-api/http-api-error-handling.mdx)に従います。
 また、エラーハンドリングの共通処理は、デフォルトオプションの`onError`にハンドラ関数を設定することで実現します。
 
 #### バックエンド API の定義について
@@ -260,31 +309,33 @@ Web アプリケーション同様に、モバイルアプリにおいても二�
 ページネーションを実現する為には、バックエンド API のリクエスト項目にページサイズ、開始ページ番号、およびソート順が必要です。
 また、全体のページ数を表示するためにレスポンスに全体のトータル件数が必要です。
 
-リクエストにはGET メソッドを用いることからURL クエリパラメータにてリクエスト項目を指定することが望ましいです。
+リクエストには GET メソッドを用いることから URL クエリパラメータにてリクエスト項目を指定することが望ましいです。
 また、出来るだけ一般的な方法を採用したいと思います。
-そこで、[Spring Data REST Reference Guideの 5. Paging and Sorting](https://docs.spring.io/spring-data/rest/docs/current/reference/html/#paging-and-sorting)を参考に次の通りとします。
+そこで、[Spring Data REST Reference Guide の 5. Paging and Sorting](https://docs.spring.io/spring-data/rest/docs/current/reference/html/#paging-and-sorting)を参考に次の通りとします。
 
-|URL クエリパラメータ|説明|
-|:--|:--|
-|size|ページサイズ|
-|page|開始ページ番号|
-|sort|ソート項目|
+| URL クエリパラメータ | 説明           |
+| :------------------- | :------------- |
+| size                 | ページサイズ   |
+| page                 | 開始ページ番号 |
+| sort                 | ソート項目     |
 
 全体トータル件数は、HTTP ヘッダとして返却することとします。
 
-|HTTP ヘッダ|説明|
-|:--|:--|
-|x-total-count|全体トータル件数|
+| HTTP ヘッダ   | 説明             |
+| :------------ | :--------------- |
+| x-total-count | 全体トータル件数 |
 
 ##### 無限スクロール
 
 :::note
 
 - ページネーションの方法
+
   - リクエスト
     - https://docs.spring.io/spring-data/rest/docs/3.7.x/reference/html/#paging-and-sorting
     - ?page=${page}&size=${size}&sort=${sort}
   - レスポンス
+
     - RFC-5988 か RFC-8288 あたりを参考に
     - x-total-count
 
