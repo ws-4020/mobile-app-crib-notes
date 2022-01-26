@@ -1,4 +1,4 @@
-package jp.fintan.mobile.santokuapp.presentation.restapi.sandbox;
+package jp.fintan.mobile.santokuapp.sandbox.presentation.restapi;
 
 import nablarch.core.log.Logger;
 import nablarch.core.log.LoggerManager;
