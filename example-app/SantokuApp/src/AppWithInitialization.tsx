@@ -14,7 +14,9 @@ export const AppWithInitialization: React.FC = () => {
     if (!isInitialized) {
       initialize().catch(e => setInitializationError(e));
     }
-  }, [initialize, isInitialized]);
+    // 初期化処理が1回だけ実行されるようにする。
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     // 初期化処理に失敗した場合はアプリをクラッシュ扱いで終了

@@ -2,8 +2,8 @@ import messaging from '@react-native-firebase/messaging';
 import axios, {AxiosError} from 'axios';
 import {useCallback, useState} from 'react';
 
-import {accountApi, AppConfig} from '../../../framework';
-import {ApiResponseError} from '../../../framework/backend';
+import {AppConfig} from '../../../framework';
+import {ApiResponseError, usePostAccountsMeDeviceToken} from '../../../framework/backend';
 import {ErrorResponse} from '../../../generated/api';
 
 type AuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
@@ -11,6 +11,7 @@ type AuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL'
 export const usePushNotification = () => {
   const [authStatus, setAuthStatus] = useState<AuthStatusType>();
   const [token, setToken] = useState<string>();
+  const postAccountsMeDeviceToken = usePostAccountsMeDeviceToken();
 
   const requestUserPermission = useCallback(async () => {
     const authStatus = await messaging().requestPermission();
@@ -37,7 +38,7 @@ export const usePushNotification = () => {
 
   const registerFcmToken = useCallback(async () => {
     try {
-      await accountApi.postAccountsMeDeviceToken({newDeviceToken: token});
+      await postAccountsMeDeviceToken.mutateAsync({newDeviceToken: token});
       alert('FCM登録トークンをバックエンドに登録しました');
     } catch (e) {
       if (e instanceof ApiResponseError) {
@@ -46,11 +47,11 @@ export const usePushNotification = () => {
       }
       alert(e);
     }
-  }, [token]);
+  }, [postAccountsMeDeviceToken, token]);
 
   const removeFcmToken = useCallback(async () => {
     try {
-      await accountApi.postAccountsMeDeviceToken({oldDeviceToken: token});
+      await postAccountsMeDeviceToken.mutateAsync({oldDeviceToken: token});
       alert('FCM登録トークンをバックエンドから削除しました');
     } catch (e) {
       if (e instanceof ApiResponseError) {
@@ -59,7 +60,7 @@ export const usePushNotification = () => {
       }
       alert(e);
     }
-  }, [token]);
+  }, [postAccountsMeDeviceToken, token]);
 
   const notifyMessageToAll = useCallback(async () => {
     try {

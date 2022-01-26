@@ -1,6 +1,8 @@
 import messaging from '@react-native-firebase/messaging';
 import {activateKeepAwake} from 'expo-keep-awake';
+import {useDefaultOptions, useGetCsrfToken} from 'framework/backend';
 import {useCallback, useMemo, useState} from 'react';
+import {useQueryClient} from 'react-query';
 
 import {
   hideSplashScreen,
@@ -45,22 +47,39 @@ const loadInitialData = async () => {
   };
 };
 
+const useInitializeQueryClient = () => {
+  const queryClient = useQueryClient();
+  const defaultOptions = useDefaultOptions();
+  const {refetch: refetchCsrfToken} = useGetCsrfToken(undefined, {enabled: false});
+
+  return useCallback(async () => {
+    // メッセージのロード後にデフォルトオプションを設定
+    queryClient.setDefaultOptions(defaultOptions);
+    // CsrfTokenを取得し、AxiosInstanceのデフォルトヘッダに設定
+    // queryOptions: {enabled: false} の状態のままでも手動refetchは実行可能
+    await refetchCsrfToken();
+  }, [defaultOptions, queryClient, refetchCsrfToken]);
+};
+
 export const useAppInitializer: () => AppInitializer = () => {
   const [initializationState, setInitializationState] = useState<{
     isInitialized: boolean;
     initialData?: AppInitialData;
   }>({isInitialized: false});
+  const initializeQueryClient = useInitializeQueryClient();
 
   const initialize = useCallback(async () => {
     await initializeCoreFeatures();
+    await initializeQueryClient();
 
+    // 初期データの読み込み
     const initialData = Object.freeze(await loadInitialData());
 
     // TODO: 読み込んだ初期データをFirebase Crashlyticsの設定に反映
 
     setInitializationState({isInitialized: true, initialData});
     await hideSplashScreen();
-  }, []);
+  }, [initializeQueryClient]);
 
   return useMemo(
     () => ({

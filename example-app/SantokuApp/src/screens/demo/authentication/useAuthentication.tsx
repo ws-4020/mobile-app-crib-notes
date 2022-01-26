@@ -1,7 +1,6 @@
 import {
+  useAuthenticationService,
   ActiveAccountIdNotFoundError,
-  AuthenticationService,
-  csrfToken,
   generatePassword,
   PasswordNotFoundError,
 } from 'framework';
@@ -12,14 +11,14 @@ import {ApiResponseError} from '../../../framework/backend';
 export const useAuthentication = () => {
   const [accountId, setAccountId] = useState<string>();
   const [accountIdInput, setAccountIdInput] = useState('');
+  const AuthenticationService = useAuthenticationService();
 
   const signup = useCallback(async () => {
     try {
-      await csrfToken();
       const password = await generatePassword();
-      const res = await AuthenticationService.signup('demoNickname', password);
-      setAccountId(res.accountId);
-      alert(`アカウントIDは${res.accountId}です`);
+      const account = await AuthenticationService.signup('demoNickname', password);
+      setAccountId(account.accountId);
+      alert(`アカウントIDは${account.accountId}です`);
     } catch (e) {
       if (e instanceof ApiResponseError) {
         alert(e.response.data.message);
@@ -27,14 +26,12 @@ export const useAuthentication = () => {
       }
       alert(e);
     }
-  }, []);
+  }, [AuthenticationService]);
 
   const changeAccount = useCallback(async () => {
     try {
-      await csrfToken();
-      const res = await AuthenticationService.changeAccount(accountIdInput);
-      await csrfToken();
-      alert(`ログイン成功しました state=${res.status}`);
+      const accountLoginResponse = await AuthenticationService.changeAccount(accountIdInput);
+      alert(`ログイン成功しました state=${accountLoginResponse.status}`);
     } catch (e) {
       if (e instanceof ApiResponseError) {
         alert(e.response.data.message);
@@ -46,7 +43,7 @@ export const useAuthentication = () => {
       }
       alert(e);
     }
-  }, [accountIdInput]);
+  }, [AuthenticationService, accountIdInput]);
 
   const canAutoLogin = useCallback(async () => {
     try {
@@ -55,14 +52,12 @@ export const useAuthentication = () => {
     } catch (e) {
       alert(e);
     }
-  }, []);
+  }, [AuthenticationService]);
 
   const autoLogin = useCallback(async () => {
     try {
-      await csrfToken();
-      const res = await AuthenticationService.autoLogin();
-      await csrfToken();
-      alert(`自動ログイン成功しました state=${res.status}`);
+      const accountLoginResponse = await AuthenticationService.autoLogin();
+      alert(`自動ログイン成功しました state=${accountLoginResponse.status}`);
     } catch (e) {
       if (e instanceof ApiResponseError) {
         alert(e.response.data.message);
@@ -78,7 +73,7 @@ export const useAuthentication = () => {
       }
       alert(e);
     }
-  }, []);
+  }, [AuthenticationService]);
 
   const logout = useCallback(async () => {
     try {
@@ -91,7 +86,7 @@ export const useAuthentication = () => {
       }
       alert(e);
     }
-  }, []);
+  }, [AuthenticationService]);
 
   const copyAccountIdInput = useCallback(() => {
     if (accountId) {

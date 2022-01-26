@@ -23,6 +23,9 @@ import {
   NavigationScreen,
   PushNotificationScreen,
   CacheScreen,
+  ReactQueryScreen,
+  ListTodoDemoScreen,
+  EditTodoDemoScreen,
 } from 'screens';
 
 import {DemoStackParamList, RootStackParamList} from './types';
@@ -62,6 +65,9 @@ export const Screen: React.FC = () => {
       <nav.Screen {...NavigationScreen} />
       <nav.Screen {...PushNotificationScreen} />
       <nav.Screen {...CacheScreen} />
+      <nav.Screen {...ReactQueryScreen} />
+      <nav.Screen {...ListTodoDemoScreen} />
+      <nav.Screen {...EditTodoDemoScreen} />
     </nav.Navigator>
   );
 };

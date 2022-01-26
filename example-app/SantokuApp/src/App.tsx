@@ -4,6 +4,7 @@ import {Platform} from 'react-native';
 import {AppWithInitialization} from './AppWithInitialization';
 import {WithSnackbar} from './components/snackbar';
 import {WithAppTheme} from './components/theme';
+import {WithReactQuery} from './framework';
 
 type AppProperties = {
   [key: string]: any;
@@ -22,7 +23,9 @@ export const App = ({isHeadless}: AppProperties) => {
   return (
     <WithAppTheme>
       <WithSnackbar>
-        <AppWithInitialization />
+        <WithReactQuery>
+          <AppWithInitialization />
+        </WithReactQuery>
       </WithSnackbar>
     </WithAppTheme>
   );

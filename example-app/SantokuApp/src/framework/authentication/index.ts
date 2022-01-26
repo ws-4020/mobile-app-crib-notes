@@ -1,1 +1,1 @@
-export {AuthenticationService, ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthenticationService';
+export {useAuthenticationService, ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthenticationService';
