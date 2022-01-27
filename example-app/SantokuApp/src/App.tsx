@@ -2,7 +2,7 @@ import React from 'react';
 import {Platform} from 'react-native';
 
 import {AppWithInitialization} from './AppWithInitialization';
-import {WithSnackbar} from './components/snackbar';
+import {WithOverlay} from './components/overlay';
 import {WithAppTheme} from './components/theme';
 import {WithReactQuery} from './framework';
 
@@ -22,11 +22,11 @@ export const App = ({isHeadless}: AppProperties) => {
 
   return (
     <WithAppTheme>
-      <WithSnackbar>
+      <WithOverlay>
         <WithReactQuery>
           <AppWithInitialization />
         </WithReactQuery>
-      </WithSnackbar>
+      </WithOverlay>
     </WithAppTheme>
   );
 };

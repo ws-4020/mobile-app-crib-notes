@@ -1,8 +1,9 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useLoadingOverlay} from 'components/overlay';
 import {useListTodoInfinite} from 'generated/sandbox/api';
 import {Todo} from 'generated/sandbox/model';
 import {DemoStackParamList} from 'navigation/types';
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {ActivityIndicator, Pressable, RefreshControl, StyleSheet, View} from 'react-native';
 import {Icon, ListItem, Text} from 'react-native-elements';
 import {FlatList} from 'react-native-gesture-handler';
@@ -11,6 +12,7 @@ import {EditTodoDemoScreen} from './EditTodoDemoScreen';
 
 const ScreenName = 'ListTodoDemo';
 const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
+  const loadingOverlay = useLoadingOverlay();
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const {status, isLoading, isFetching, isSuccess, isError, data, refetch} = useListTodoInfinite(undefined, {
     query: {
@@ -19,6 +21,14 @@ const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof 
       },
     },
   });
+
+  useEffect(() => {
+    if (isLoading) {
+      loadingOverlay.show();
+    } else {
+      loadingOverlay.hide();
+    }
+  }, [isLoading, loadingOverlay]);
 
   const todos = useMemo(() => {
     if (isSuccess && data) {
