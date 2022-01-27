@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/core';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Button} from 'components/button/Button';
-import {useGetCsrfToken} from 'framework/backend';
+import {useGetCsrfToken} from 'generated/backend/api';
 import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';

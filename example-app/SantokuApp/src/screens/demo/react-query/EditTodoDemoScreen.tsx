@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Button} from 'components/button/Button';
-import {useDeleteTodo, useGetTodo, usePutTodo} from 'framework/backend/api/sandbox';
+import {useDeleteTodo, useGetTodo, usePutTodo} from 'generated/sandbox/api';
 import {DemoStackParamList} from 'navigation/types';
 import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
@@ -8,13 +8,14 @@ import {Input, Text} from 'react-native-elements';
 
 const ScreenName = 'EditTodoDemo';
 const Screen = ({navigation, route}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
-  const todoId = route.params.todoId;
-  const {isLoading, isSuccess, data: todo} = useGetTodo(todoId);
-  const putTodo = usePutTodo(todoId);
-  const deleteTodo = useDeleteTodo(todoId);
+  const todoId = route.params.todoId.toString();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
+
+  const {isLoading, isSuccess, data: todo} = useGetTodo(todoId);
+  const putTodo = usePutTodo();
+  const deleteTodo = useDeleteTodo();
 
   const onEdit = useCallback(() => {
     setIsEdit(true);
@@ -31,18 +32,18 @@ const Screen = ({navigation, route}: NativeStackScreenProps<DemoStackParamList, 
   const onSave = useCallback(() => {
     if (title && description) {
       const data = {title, description};
-      putTodo.mutateAsync(data).finally(() => setIsEdit(false));
+      putTodo.mutateAsync({todoId, data}).finally(() => setIsEdit(false));
     }
-  }, [title, description, putTodo]);
+  }, [title, description, putTodo, todoId]);
 
   const onDelete = useCallback(() => {
     deleteTodo
-      .mutateAsync()
+      .mutateAsync({todoId})
       .then(() => {
         navigation.goBack();
       })
       .catch(() => {});
-  }, [deleteTodo, navigation]);
+  }, [deleteTodo, navigation, todoId]);
 
   useEffect(() => {
     if (!isEdit && todo) {

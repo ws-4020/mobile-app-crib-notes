@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useListTodoInfinite} from 'framework/backend/api/sandbox';
-import {Todo} from 'generated/sandboxApi';
+import {useListTodoInfinite} from 'generated/sandbox/api';
+import {Todo} from 'generated/sandbox/model';
 import {DemoStackParamList} from 'navigation/types';
 import React, {useCallback, useMemo, useState} from 'react';
 import {ActivityIndicator, Pressable, RefreshControl, StyleSheet, View} from 'react-native';
@@ -12,7 +12,13 @@ import {EditTodoDemoScreen} from './EditTodoDemoScreen';
 const ScreenName = 'ListTodoDemo';
 const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
-  const {status, isLoading, isFetching, isSuccess, isError, data, refetch} = useListTodoInfinite();
+  const {status, isLoading, isFetching, isSuccess, isError, data, refetch} = useListTodoInfinite(undefined, {
+    query: {
+      getNextPageParam: lastPage => {
+        return lastPage.nextPage;
+      },
+    },
+  });
 
   const todos = useMemo(() => {
     if (isSuccess && data) {

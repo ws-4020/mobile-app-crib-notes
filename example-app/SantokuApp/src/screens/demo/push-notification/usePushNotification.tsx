@@ -1,10 +1,10 @@
 import messaging from '@react-native-firebase/messaging';
 import axios, {AxiosError} from 'axios';
+import {usePostAccountsMeDeviceToken} from 'generated/backend/api';
+import {ErrorResponse} from 'generated/backend/model';
 import {useCallback, useState} from 'react';
 
 import {AppConfig} from '../../../framework';
-import {ApiResponseError, usePostAccountsMeDeviceToken} from '../../../framework/backend';
-import {ErrorResponse} from '../../../generated/api';
 
 type AuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
 
@@ -38,27 +38,33 @@ export const usePushNotification = () => {
 
   const registerFcmToken = useCallback(async () => {
     try {
-      await postAccountsMeDeviceToken.mutateAsync({newDeviceToken: token});
+      await postAccountsMeDeviceToken.mutateAsync({data: {newDeviceToken: token}});
       alert('FCM登録トークンをバックエンドに登録しました');
     } catch (e) {
-      if (e instanceof ApiResponseError) {
-        alert(e.response.data.message);
-        return;
+      if (axios.isAxiosError(e)) {
+        const axiosError = e as AxiosError<ErrorResponse>;
+        if (axiosError.response) {
+          alert(axiosError.response.data.message);
+          return;
+        }
+        alert(e);
       }
-      alert(e);
     }
   }, [postAccountsMeDeviceToken, token]);
 
   const removeFcmToken = useCallback(async () => {
     try {
-      await postAccountsMeDeviceToken.mutateAsync({oldDeviceToken: token});
+      await postAccountsMeDeviceToken.mutateAsync({data: {oldDeviceToken: token}});
       alert('FCM登録トークンをバックエンドから削除しました');
     } catch (e) {
-      if (e instanceof ApiResponseError) {
-        alert(e.response.data.message);
-        return;
+      if (axios.isAxiosError(e)) {
+        const axiosError = e as AxiosError<ErrorResponse>;
+        if (axiosError.response) {
+          alert(axiosError.response.data.message);
+          return;
+        }
+        alert(e);
       }
-      alert(e);
     }
   }, [postAccountsMeDeviceToken, token]);
 

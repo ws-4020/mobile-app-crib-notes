@@ -4,18 +4,20 @@ import {AppState, Platform} from 'react-native';
 import {focusManager, onlineManager, QueryClient, QueryClientProvider} from 'react-query';
 
 import {useDefaultQueryCache, useDefaultMutaitonCache} from './useDefaultCache';
+import {useDefaultOptions} from './useDefaultOptions';
 
 const WithReactQuery: React.FC = ({children}) => {
   const queryCache = useDefaultQueryCache();
   const mutationCache = useDefaultMutaitonCache();
+  const defaultOptions = useDefaultOptions();
 
   const queryClient = useMemo(() => {
-    // defaultOptionsは初期化処理(メッセージのロードとFirebase Clashlytics接続)完了後に設定する
     return new QueryClient({
       queryCache,
       mutationCache,
+      defaultOptions,
     });
-  }, [queryCache, mutationCache]);
+  }, [queryCache, mutationCache, defaultOptions]);
 
   useEffect(() => {
     // アプリがバックグラウンドからアクティブに変化した際にrefetchできるようにする

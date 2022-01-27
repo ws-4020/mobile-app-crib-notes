@@ -1,25 +1,29 @@
+import axios from 'axios';
+import {ErrorResponse} from 'generated/backend/model';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
 import {Mutation, Query, QueryKey} from 'react-query';
 
-import {useSnackbar} from '../../components/snackbar';
+import {useSnackbar} from '../../components/overlay';
 import {log} from '../logging';
 import {m} from '../message';
-import {ApiResourceAccessError, ApiResponseError} from './api';
 
 const useBaseErrorHandler = () => {
   const snackbar = useSnackbar();
 
   const sendErrorLogToClashlytics = useCallback((error: unknown) => {
     try {
-      if (error instanceof ApiResponseError) {
-        const status = error.response.status;
-        const statusText = error.response.statusText;
-        const errorCode = error.response.data?.code ?? 'NoErrorCode';
-        const errorMessage = error.response.data?.message ?? 'NoErrorMessage';
-        log.warn(`Backend API Request Error (${status} ${statusText}): [${errorCode}] ${errorMessage}`);
-      } else if (error instanceof ApiResourceAccessError) {
-        log.warn('Backend API Request Error: Could not receive response from server.');
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          const status = error.response.status;
+          const statusText = error.response.statusText;
+          const data = error.response.data as ErrorResponse | undefined;
+          const errorCode = data?.code ?? 'NoErrorCode';
+          const errorMessage = data?.message ?? 'NoErrorMessage';
+          log.warn(`Backend API Request Error (${status} ${statusText}): [${errorCode}] ${errorMessage}`);
+        } else {
+          log.warn('Backend API Request Error: Could not receive response from server.');
+        }
       } else {
         log.warn('Backend API Request Error: Unexpected error.');
       }
@@ -60,8 +64,8 @@ const useBaseErrorHandler = () => {
 
   return useCallback(
     (error: unknown) => {
-      if (error instanceof ApiResponseError) {
-        const statusCode = error.response.status;
+      if (axios.isAxiosError(error)) {
+        const statusCode = error.response?.status;
         switch (statusCode) {
           case 400: // Bad Request
             // デフォルトの動作としては特に処理を実施しない
