@@ -216,6 +216,9 @@ React Queryにはページネーションや無限スクロールの仕組みが
 | empty | ページが0件かどうか |
 | first | 最初のページかどうか |
 | last | 最後のページかどうか |
+| number | 何ページ目か |
+| size | ページサイズ |
+| sort | ソート項目 |
 | numberOfElements | ページに含まれる要素の件数 |
 | pageable | リクエストで指定した`page`、`size`、`sort`を保持するオブジェクト |
 | totalElements | 全要素数 |
@@ -242,9 +245,9 @@ React Queryにはページネーションや無限スクロールの仕組みが
 | HTTPボディの項目 | 説明 |
 | :-- | :-- |
 | content | レスポンスデータ |
-| previous | 前のデータがあるかどうか |
+| hasPrevious | 前のデータがあるかどうか |
 | previousCursor | 前のカーソル |
-| next | 次のデータがあるかどうか |
+| hasNext | 次のデータがあるかどうか |
 | nextCursor | 次のカーソル |
 
 それぞれの項目は、ページネーションを実現するすべてのバックエンドAPIに必要ではなく、APIにより必要な項目を採用することとします。
