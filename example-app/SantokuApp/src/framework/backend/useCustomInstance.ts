@@ -1,12 +1,13 @@
-import Axios, {AxiosError, AxiosInstance, AxiosPromise, AxiosRequestConfig} from 'axios';
+import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {applicationName, nativeApplicationVersion} from 'expo-application';
 import {Platform} from 'react-native';
 
-import {SecureStorageAdapter} from '../authentication/SecureStorageAdapter';
 import {AppConfig} from '../config';
-import {ApplicationError} from '../error/ApplicationError';
 
 export type ErrorType<Error> = AxiosError<Error>;
+
+const CONNECTION_TIMEOUT = 60000;
+const REQUEST_TIMEOUT = 60000; // TODO: load from config
 
 const backendUrl = `${AppConfig.santokuAppBackendUrl}/api`;
 const BACKEND_AXIOS_INSTANCE = Axios.create({baseURL: backendUrl});
@@ -28,7 +29,9 @@ const getDefaultAxiosConfig = () => {
       Accept: 'application/json',
       UserAgent: getUserAgent(),
     },
-  };
+    // Android/iOSの場合、Connection Timeoutとしては適用されるが、データ送受信中のTimeoutとしては適用されない
+    timeout: CONNECTION_TIMEOUT, // default is 0 (no timeout)
+  } as AxiosRequestConfig;
 };
 
 // orvalの依存関係にないライブラリやファイルをこのファイル内でimportしていると、
@@ -38,33 +41,31 @@ const getDefaultAxiosConfig = () => {
 const useCustomInstance = <T>(axiosInstance: AxiosInstance): ((config: AxiosRequestConfig) => Promise<T>) => {
   const defaultAxiosConfig = getDefaultAxiosConfig();
   return async (config: AxiosRequestConfig) => {
-    const source = Axios.CancelToken.source();
-    const axiosPromise = axiosInstance({
+    const abortController = new AbortController();
+    const requestConfig = {
       ...defaultAxiosConfig,
       ...config,
-      cancelToken: source.token,
-    }) as AxiosPromise<T>;
+      signal: abortController.signal,
+    };
+    const axiosPromise = axiosInstance(requestConfig);
+    // AxiosResponse内のデータだけを返すようにする
+    const promise = axiosPromise.then((response: AxiosResponse<T>) => response.data);
 
     // @ts-ignore
-    axiosPromise.cancel = () => {
-      source.cancel('Query was cancelled by React Query');
+    promise.cancel = () => {
+      abortController.abort();
     };
 
+    const timeoutId = setTimeout(() => {
+      abortController.abort();
+    }, REQUEST_TIMEOUT);
+
     try {
-      const response = await axiosPromise;
-      return response.data;
+      return await promise;
     } catch (error) {
-      if (Axios.isAxiosError(error) && error.response?.status === 401) {
-        // Refresh session and retry
-        await refreshSession();
-        try {
-          const retryResponse = await axiosPromise;
-          return retryResponse.data;
-        } catch (retryError) {
-          throw error;
-        }
-      }
       throw error;
+    } finally {
+      clearTimeout(timeoutId);
     }
   };
 };
@@ -77,36 +78,25 @@ const useSandboxCustomInstance = <T>(): ((config: AxiosRequestConfig) => Promise
   return useCustomInstance(SANDBOX_AXIOS_INSTANCE);
 };
 
-// 共通リトライ処理に必要なAPI呼び出しだけは、自動生成コードに依存しない形で用意する
-type CsrfTokenResponse = {
-  csrfTokenHeaderName: string;
-  csrfTokenValue: string;
-};
-
 const setCsrfTokenHeader = (csrfTokenHeaderName: string, csrfTokenValue: string) => {
   BACKEND_AXIOS_INSTANCE.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
+  SANDBOX_AXIOS_INSTANCE.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
 };
 
-const refreshCsrfToken = async () => {
-  const axiosResponse = await BACKEND_AXIOS_INSTANCE.get<CsrfTokenResponse>('/csrf_token');
-  setCsrfTokenHeader(axiosResponse.data.csrfTokenHeaderName, axiosResponse.data.csrfTokenValue);
+const setAxiosResponseInterceptor = (
+  onFullfilled: (
+    value: AxiosResponse<any, any>,
+  ) => (AxiosResponse<any, any> | Promise<AxiosResponse<any, any>>) | undefined,
+  onRejected: (error: any) => any | undefined,
+) => {
+  BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFullfilled, onRejected);
+  SANDBOX_AXIOS_INSTANCE.interceptors.response.use(onFullfilled, onRejected);
 };
 
-const autoLogin = async () => {
-  const accountId = await SecureStorageAdapter.loadActiveAccountId();
-  if (!accountId) {
-    throw new ApplicationError('There is no auto-login enabled account.');
-  }
-  const password = await SecureStorageAdapter.loadPassword(accountId);
-  if (!password) {
-    throw new ApplicationError('The password for the account ID does not exist.');
-  }
-  await BACKEND_AXIOS_INSTANCE.post('/login', {accountId, password});
+export {
+  useBackendCustomInstance,
+  useSandboxCustomInstance,
+  setCsrfTokenHeader,
+  setAxiosResponseInterceptor,
+  BACKEND_AXIOS_INSTANCE,
 };
-
-const refreshSession = async () => {
-  await autoLogin();
-  await refreshCsrfToken();
-};
-
-export {useBackendCustomInstance, useSandboxCustomInstance, refreshCsrfToken};

@@ -1,3 +1,4 @@
 export * from './WithReactQuery';
 export * from './useDefaultOptions';
-export {refreshCsrfToken} from './useCustomInstance';
+export * from './refreshCsrfToken';
+export * from './refreshSession';

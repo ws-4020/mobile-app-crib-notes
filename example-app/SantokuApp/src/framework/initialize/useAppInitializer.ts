@@ -1,6 +1,6 @@
 import messaging from '@react-native-firebase/messaging';
 import {activateKeepAwake} from 'expo-keep-awake';
-import {refreshCsrfToken} from 'framework/backend';
+import {refreshCsrfToken, setRefreshSessionInterceptor} from 'framework/backend';
 import {useCallback, useMemo, useState} from 'react';
 
 import {
@@ -56,6 +56,8 @@ export const useAppInitializer: () => AppInitializer = () => {
     await initializeCoreFeatures();
     // CsrfTokenを取得し、AxiosInstanceのデフォルトヘッダに設定
     await refreshCsrfToken();
+    // AxiosInstanceに401の時のリトライ処理を追加
+    setRefreshSessionInterceptor();
 
     // 初期データの読み込み
     const initialData = Object.freeze(await loadInitialData());

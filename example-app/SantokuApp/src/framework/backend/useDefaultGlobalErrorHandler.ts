@@ -124,8 +124,6 @@ const useDefaultGlobalQueryErrorHandler = () => {
   const defaultErrorHandler = useBaseErrorHandler();
   return useCallback(
     (error: unknown, query: Query<unknown, unknown, unknown, QueryKey>) => {
-      // このグローバルエラーハンドラーの中ではuseQueryやuseMutationは利用できないため、
-      // 401 Unauthorized 応答時の自動再ログインなどはDefaultOptionsのonErrorで設定する
       defaultErrorHandler(error);
     },
     [defaultErrorHandler],
