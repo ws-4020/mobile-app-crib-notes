@@ -54,6 +54,11 @@
   - Decision Records
     - [キャッシュの取り扱いに関する方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-011-cache-management)
 
+#### 🌿 更新コンテンツ（2022/02/17）
+
+- アプリケーション方式
+  - [アプリのライフサイクル管理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/life-cycle-management/overview)
+
 ### 2022/01/12
 
 #### 🌱 新規コンテンツ（2022/01/12）
