@@ -6,4 +6,4 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export type ListTodoParams = {page?: number; size?: number; sort?: string};
+export type ListTodoByCursorParams = {cursor?: number; limit?: number};

@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useLoadingOverlay} from 'components/overlay';
-import {useListTodoInfinite} from 'generated/sandbox/api';
+import {useListTodoByCursorInfinite} from 'generated/sandbox/api';
 import {Todo} from 'generated/sandbox/model';
 import {DemoStackParamList} from 'navigation/types';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
@@ -14,10 +14,10 @@ const ScreenName = 'ListTodoDemo';
 const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
   const loadingOverlay = useLoadingOverlay();
   const [refreshing, setRefreshing] = useState<boolean>(false);
-  const {status, isLoading, isFetching, isSuccess, isError, data, refetch} = useListTodoInfinite(undefined, {
+  const {status, isLoading, isFetching, isSuccess, isError, data, refetch} = useListTodoByCursorInfinite(undefined, {
     query: {
       getNextPageParam: lastPage => {
-        return lastPage.nextPage;
+        return lastPage.nextCursor;
       },
     },
   });
@@ -32,7 +32,7 @@ const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof 
 
   const todos = useMemo(() => {
     if (isSuccess && data) {
-      return data.pages.map(page => page.data).flat();
+      return data.pages.map(page => page.content).flat();
     } else {
       return [];
     }

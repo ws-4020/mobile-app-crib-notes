@@ -24,6 +24,8 @@ import type {
   ListTodoParams,
   Todo,
   TodoRegistration,
+  ListTodoInfiniteResponse,
+  ListTodoByCursorParams,
   NotFoundResponse,
 } from './model';
 import {useSandboxCustomInstance, ErrorType} from '../../framework/backend/useCustomInstance';
@@ -44,27 +46,26 @@ export const useListTodoHook = () => {
 
 export const getListTodoQueryKey = (params?: ListTodoParams) => [`/todos`, ...(params ? [params] : [])];
 
-export const useListTodoInfinite = <
+export const useListTodo = <
   TData = AsyncReturnType<ReturnType<typeof useListTodoHook>>,
   TError = ErrorType<BadRequestResponse>,
 >(
   params?: ListTodoParams,
-  options?: {query?: UseInfiniteQueryOptions<AsyncReturnType<ReturnType<typeof useListTodoHook>>, TError, TData>},
-): UseInfiniteQueryResult<TData, TError> & {queryKey: QueryKey} => {
+  options?: {query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useListTodoHook>>, TError, TData>},
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getListTodoQueryKey(params);
 
   const listTodo = useListTodoHook();
 
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useListTodoHook>>> = ({pageParam}) =>
-    listTodo({page: pageParam, ...params});
+  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useListTodoHook>>> = () => listTodo(params);
 
-  const query = useInfiniteQuery<AsyncReturnType<ReturnType<typeof useListTodoHook>>, TError, TData>(
-    queryKey,
-    queryFn,
-    queryOptions,
-  );
+  const query = useQuery<AsyncReturnType<ReturnType<typeof useListTodoHook>>, TError, TData>(queryKey, queryFn, {
+    cacheTime: 1000,
+    staleTime: 1000,
+    ...queryOptions,
+  });
 
   return {
     queryKey,
@@ -109,6 +110,53 @@ export const usePostTodo = <TError = ErrorType<BadRequestResponse>, TContext = u
     mutationFn,
     mutationOptions,
   );
+};
+
+/**
+ * List todo by cursor
+ * @summary List todo by cursor
+ */
+export const useListTodoByCursorHook = () => {
+  const listTodoByCursor = useSandboxCustomInstance<ListTodoInfiniteResponse>();
+
+  return (params?: ListTodoByCursorParams) => {
+    return listTodoByCursor({url: `/todos/infinite`, method: 'get', params});
+  };
+};
+
+export const getListTodoByCursorQueryKey = (params?: ListTodoByCursorParams) => [
+  `/todos/infinite`,
+  ...(params ? [params] : []),
+];
+
+export const useListTodoByCursorInfinite = <
+  TData = AsyncReturnType<ReturnType<typeof useListTodoByCursorHook>>,
+  TError = ErrorType<BadRequestResponse>,
+>(
+  params?: ListTodoByCursorParams,
+  options?: {
+    query?: UseInfiniteQueryOptions<AsyncReturnType<ReturnType<typeof useListTodoByCursorHook>>, TError, TData>;
+  },
+): UseInfiniteQueryResult<TData, TError> & {queryKey: QueryKey} => {
+  const {query: queryOptions} = options || {};
+
+  const queryKey = queryOptions?.queryKey ?? getListTodoByCursorQueryKey(params);
+
+  const listTodoByCursor = useListTodoByCursorHook();
+
+  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useListTodoByCursorHook>>> = ({pageParam}) =>
+    listTodoByCursor({cursor: pageParam, ...params});
+
+  const query = useInfiniteQuery<AsyncReturnType<ReturnType<typeof useListTodoByCursorHook>>, TError, TData>(
+    queryKey,
+    queryFn,
+    queryOptions,
+  );
+
+  return {
+    queryKey,
+    ...query,
+  };
 };
 
 /**

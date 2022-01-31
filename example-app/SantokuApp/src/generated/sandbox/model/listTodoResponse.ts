@@ -12,8 +12,22 @@ import type {Todo} from './todo';
  */
 export interface ListTodoResponse {
   /** Current page number */
-  currentPage: number;
-  /** Next page number (return null if not exists) */
-  nextPage: number | null;
-  data: Todo[];
+  number?: number;
+  /** Page size */
+  size?: number;
+  /** Sort key */
+  sort?: string;
+  /** Number of current page elements. */
+  numberOfElements?: number | null;
+  /** Total elements */
+  totalElements?: number;
+  /** Total pages */
+  totalPages?: number;
+  contents?: Todo[];
+  /** Whether the content is empty */
+  empty?: boolean;
+  /** Whether this page is the first page */
+  first?: boolean;
+  /** Whether this page is the last page */
+  last?: boolean;
 }

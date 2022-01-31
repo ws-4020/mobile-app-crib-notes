@@ -22,6 +22,16 @@ paths:
           description: ページ番号
           schema:
             type: number
+        - name: size
+          in: query
+          description: ページサイズ
+          schema:
+            type: number
+        - name: sort
+          in: query
+          description: ソート順
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -68,6 +78,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Todo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /todos/infinite:
+    get:
+      summary: List todo by cursor
+      description: List todo by cursor
+      tags: []
+      operationId: list-todo-by-cursor
+      parameters:
+        - name: cursor
+          in: query
+          description: |-
+            取得開始位置
+            TodoIdを指定し、指定したIdの次のアイテムから取得
+          schema:
+            type: number
+        - name: limit
+          in: query
+          description: 最大取得件数
+          schema:
+            type: number
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTodoInfiniteResponse'
+              examples:
+                firstPage:
+                  value:
+                    currentPage: 1
+                    nextPage: 2
+                    data:
+                      - id: 1
+                        title: Title 1
+                        description: Description 2
+                      - id: 2
+                        title: Title 2
+                        description: Description 2
+                lastPage:
+                  value:
+                    currentPage: 25
+                    nextPage: null
+                    data:
+                      - id: 500
+                        title: Title 500
+                        description: Description 500
         '400':
           $ref: '#/components/responses/BadRequest'
   '/todos/{todoId}':
@@ -162,21 +220,62 @@ components:
       type: object
       description: ListTodoResponse
       properties:
-        currentPage:
+        number:
           type: number
           description: Current page number
-        nextPage:
+        size:
           type: number
-          description: Next page number (return null if not exists)
+          description: Page size
+        sort:
+          type: string
+          description: Sort key
+        numberOfElements:
+          type: number
+          description: Number of current page elements.
           nullable: true
-        data:
+        totalElements:
+          type: number
+          description: Total elements
+        totalPages:
+          type: number
+          description: Total pages
+        contents:
           type: array
           items:
             $ref: '#/components/schemas/Todo'
+        empty:
+          type: boolean
+          description: Whether the content is empty
+        first:
+          type: boolean
+          description: Whether this page is the first page
+        last:
+          type: boolean
+          description: Whether this page is the last page
       required:
         - currentPage
         - nextPage
         - data
+    ListTodoInfiniteResponse:
+      title: ListTodoInfiniteResponse
+      type: object
+      description: ListTodoInfiniteResponse
+      properties:
+        hasNext:
+          type: boolean
+          description: Whether the next data exists
+        nextCursor:
+          type: number
+          description: Next cursor
+          nullable: true
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Todo'
+      required:
+        - hasNext
+        - nextCursor
+        - content
     ErrorResponse:
       title: Error
       type: object

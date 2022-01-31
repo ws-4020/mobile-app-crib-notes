@@ -48,11 +48,11 @@ export default defineConfig({
           name: 'useSandboxCustomInstance',
         },
         operations: {
-          'list-todo': {
+          'list-todo-by-cursor': {
             query: {
               useQuery: false,
               useInfinite: true,
-              useInfiniteQueryParam: 'page',
+              useInfiniteQueryParam: 'cursor',
             },
           },
         },
