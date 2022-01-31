@@ -48,6 +48,7 @@ export type DemoStackParamList = {
   Cache: undefined;
   ReactQuery: undefined;
   ListTodoDemo: undefined;
+  CreateTodoDemo: undefined;
   EditTodoDemo: {
     todoId: number;
   };

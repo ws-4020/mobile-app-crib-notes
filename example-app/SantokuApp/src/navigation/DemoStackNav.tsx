@@ -25,6 +25,7 @@ import {
   CacheScreen,
   ReactQueryScreen,
   ListTodoDemoScreen,
+  CreateTodoDemoScreen,
   EditTodoDemoScreen,
 } from 'screens';
 
@@ -67,6 +68,7 @@ export const Screen: React.FC = () => {
       <nav.Screen {...CacheScreen} />
       <nav.Screen {...ReactQueryScreen} />
       <nav.Screen {...ListTodoDemoScreen} />
+      <nav.Screen {...CreateTodoDemoScreen} />
       <nav.Screen {...EditTodoDemoScreen} />
     </nav.Navigator>
   );
