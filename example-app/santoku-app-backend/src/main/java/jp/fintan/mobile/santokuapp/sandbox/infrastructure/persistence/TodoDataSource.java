@@ -16,7 +16,7 @@ import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.Todos;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.cursor.TodoLimit;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.cursor.TodoListByCursor;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoListByPage;
-import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoSortKey;
+import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoSort;
 import jp.fintan.mobile.santokuapp.sandbox.domain.repository.TodoRepository;
 import jp.fintan.mobile.santokuapp.sandbox.infrastructure.persistence.entity.TodoEntity;
 import nablarch.common.dao.EntityList;
@@ -58,16 +58,13 @@ public class TodoDataSource implements TodoRepository {
   }
 
   @Override
-  public TodoListByPage listByPage(PageNumber page, PageSize size, TodoSortKey sort) {
+  public TodoListByPage listByPage(PageNumber page, PageSize size, TodoSort sort) {
+    String sqlId = String.format("db.sql.sandbox.todo#find_all_order_by_%s_%s", sort.key.value(), sort.order.value());
     EntityList<TodoEntity> todoEntities = UniversalDao
       .page(page.value())
       .per(size.value())
-      .findAllBySqlFile(
-        TodoEntity.class,
-        "db.sql.sandbox.todo#find_all_order_by",
-        Map.of("sort", sort.value())
-      );
-    return toTodoListPage(todoEntities);
+      .findAllBySqlFile(TodoEntity.class, sqlId);
+    return toTodoListPage(todoEntities, page, size, sort);
   }
 
   @Override
@@ -76,11 +73,14 @@ public class TodoDataSource implements TodoRepository {
     if (Objects.nonNull(cursor)) {
       todoEntities = UniversalDao.page(1).per(limit.value()).findAllBySqlFile(
         TodoEntity.class,
-        "db.sql.sandbox.todo#find_all_by_cursor",
+        "db.sql.sandbox.todo#find_all_from_cursor",
         Map.of("todoId", cursor.value())
       );
     } else {
-      todoEntities = UniversalDao.page(1).per(limit.value()).findAll(TodoEntity.class);
+      todoEntities = UniversalDao.page(1).per(limit.value()).findAllBySqlFile(
+        TodoEntity.class,
+        "db.sql.sandbox.todo#find_all"
+      );
     }
     return toTodoListCursor(todoEntities);
   }
@@ -113,11 +113,8 @@ public class TodoDataSource implements TodoRepository {
     return new Todo(id, title, description);
   }
 
-  private TodoListByPage toTodoListPage(EntityList<TodoEntity> entities) {
+  private TodoListByPage toTodoListPage(EntityList<TodoEntity> entities, PageNumber page, PageSize size, TodoSort sort) {
     Pagination pagination = entities.getPagination();
-    PageNumber page = new PageNumber((long)pagination.getPageNumber());
-    PageSize size = new PageSize((long)pagination.getMax());
-    TodoSortKey sort = new TodoSortKey(pagination.getSortId());
     TotalElements totalElements = new TotalElements((long)pagination.getMaxResultCount());
     TotalPages totalPages = new TotalPages((long)pagination.getPageCount());
     Todos content = new Todos(entities.stream().map(this::toTodo).collect(Collectors.toList()));

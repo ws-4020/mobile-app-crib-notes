@@ -10,7 +10,7 @@ import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.Todos;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.cursor.TodoLimit;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.cursor.TodoListByCursor;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoListByPage;
-import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoSortKey;
+import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoSort;
 import jp.fintan.mobile.santokuapp.sandbox.domain.repository.TodoRepository;
 import nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;
 
@@ -42,7 +42,7 @@ public class TodoService {
     todoRepository.remove(todoId);
   }
 
-  public TodoListByPage listByPage(PageNumber page, PageSize size, TodoSortKey sort) {
+  public TodoListByPage listByPage(PageNumber page, PageSize size, TodoSort sort) {
     return todoRepository.listByPage(page, size, sort);
   }
 

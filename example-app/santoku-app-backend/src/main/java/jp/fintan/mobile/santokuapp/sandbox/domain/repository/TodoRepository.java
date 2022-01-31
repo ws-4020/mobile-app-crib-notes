@@ -7,7 +7,7 @@ import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.TodoId;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.cursor.TodoLimit;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.cursor.TodoListByCursor;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoListByPage;
-import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoSortKey;
+import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoSort;
 
 public interface TodoRepository {
 
@@ -17,7 +17,7 @@ public interface TodoRepository {
 
   void remove(TodoId todoId);
 
-  TodoListByPage listByPage(PageNumber page, PageSize size, TodoSortKey sort);
+  TodoListByPage listByPage(PageNumber page, PageSize size, TodoSort sort);
 
   TodoListByCursor listByCursor(TodoId cursor, TodoLimit limit);
 

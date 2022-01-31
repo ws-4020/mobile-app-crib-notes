@@ -27,7 +27,7 @@ import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.TodoTitle;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.cursor.TodoLimit;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.cursor.TodoListByCursor;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoListByPage;
-import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoSortKey;
+import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoSort;
 
 import java.util.List;
 import java.util.Objects;
@@ -50,7 +50,7 @@ public class TodoAction {
   public ListTodoByPageResponse list(HttpRequest request, ExecutionContext context) {
     PageNumber page = new PageNumber(getLongParamFromRequest(request, "page"));
     PageSize size = new PageSize(getLongParamFromRequest(request, "size"));
-    TodoSortKey sort = new TodoSortKey(getStringParamFromRequest(request, "sort"));
+    TodoSort sort = new TodoSort(getStringParamFromRequest(request, "sort"));
     TodoListByPage todoListPage = todoService.listByPage(page, size, sort);
     return new ListTodoByPageResponse(todoListPage);
   }

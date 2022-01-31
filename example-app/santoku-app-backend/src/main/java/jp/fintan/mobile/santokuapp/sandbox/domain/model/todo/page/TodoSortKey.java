@@ -1,18 +1,28 @@
 package jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page;
 
-import java.util.Objects;
+import java.util.Optional;
 
-import jp.fintan.mobile.santokuapp.domain.model.core.StringValue;
+public enum TodoSortKey {
+  ID("id"),
+  TITLE("title");
 
-public class TodoSortKey extends StringValue {
-  public static final String DEFAULT_SORT_KEY = "id";
+  private final String value;
 
-  public TodoSortKey() {
-    super(DEFAULT_SORT_KEY);
+  TodoSortKey(String value) {
+    this.value = value;
   }
 
-  public TodoSortKey(String value) {
-    // TODO: validate and set input value.
-    super(DEFAULT_SORT_KEY);
+  public String value() {
+    return value;
+  }
+
+  public static Optional<TodoSortKey> fromString(String str) {
+    if (str.equalsIgnoreCase("id")) {
+      return Optional.of(TodoSortKey.ID);
+    } else if (str.equalsIgnoreCase("title")) {
+      return Optional.of(TodoSortKey.TITLE);
+    } else {
+      return Optional.empty();
+    }
   }
 }

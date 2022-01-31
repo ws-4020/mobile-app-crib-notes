@@ -1,4 +1,36 @@
-find_all_order_by =
+find_all_order_by_id_asc =
+SELECT
+  *
+FROM
+  sandbox_todo
+ORDER BY
+  id ASC
+
+find_all_order_by_id_desc =
+SELECT
+  *
+FROM
+  sandbox_todo
+ORDER BY
+  id DESC
+
+find_all_order_by_title_asc =
+SELECT
+  *
+FROM
+  sandbox_todo
+ORDER BY
+  title ASC
+
+find_all_order_by_title_desc =
+SELECT
+  *
+FROM
+  sandbox_todo
+ORDER BY
+  title DESC
+
+find_all =
 SELECT
   *
 FROM
@@ -6,7 +38,7 @@ FROM
 ORDER BY
   id
 
-find_all_by_cursor =
+find_all_from_cursor =
 SELECT
   *
 FROM

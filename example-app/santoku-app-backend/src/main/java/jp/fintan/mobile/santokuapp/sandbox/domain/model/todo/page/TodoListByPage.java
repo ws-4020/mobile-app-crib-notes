@@ -10,13 +10,13 @@ import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.Todos;
 public class TodoListByPage {
   public final PageNumber number;
   public final PageSize size;
-  public final TodoSortKey sort;
+  public final TodoSort sort;
   public final TotalElements totalElements;
   public final TotalPages totalPages;
   public final Todos content;
   public final NumberOfElements numberOfElements;
 
-  public TodoListByPage(PageNumber number, PageSize size, TodoSortKey sort, TotalElements totalElements, TotalPages totalPages, Todos todos) {
+  public TodoListByPage(PageNumber number, PageSize size, TodoSort sort, TotalElements totalElements, TotalPages totalPages, Todos todos) {
     this.number = number;
     this.size = size;
     this.sort = sort;
@@ -34,7 +34,7 @@ public class TodoListByPage {
     return size;
   }
 
-  public TodoSortKey sort() {
+  public TodoSort sort() {
     return sort;
   }
 
