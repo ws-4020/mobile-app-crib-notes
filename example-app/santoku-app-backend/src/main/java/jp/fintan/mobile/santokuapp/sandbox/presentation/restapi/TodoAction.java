@@ -18,22 +18,25 @@ import javax.ws.rs.core.MediaType;
 
 import jp.fintan.mobile.santokuapp.sandbox.application.TodoNotFoundException;
 import jp.fintan.mobile.santokuapp.sandbox.application.service.todo.TodoService;
+import jp.fintan.mobile.santokuapp.sandbox.domain.model.paging.PageNumber;
+import jp.fintan.mobile.santokuapp.sandbox.domain.model.paging.PageSize;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.Todo;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.TodoDescription;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.TodoId;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.TodoTitle;
-import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.Todos;
+import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.cursor.TodoLimit;
+import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.cursor.TodoListByCursor;
+import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoListByPage;
+import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoSortKey;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @SystemRepositoryComponent
 @Path("/sandbox/todos")
 public class TodoAction {
   private static final Logger LOGGER = LoggerManager.get(TodoAction.class);
-  private static final Integer PAGE_SIZE = 20;
-  private static final Integer MAX_ITEMS = 200;
 
   private final TodoService todoService;
 
@@ -44,18 +47,23 @@ public class TodoAction {
   @GET
   @Path("/")
   @Produces(MediaType.APPLICATION_JSON)
-  public ListTodoResponse list(HttpRequest request, ExecutionContext context) {
-    Integer page;
-    try {
-      String[] pageParameter = request.getParam("page");
-      page = Integer.parseInt(pageParameter[0]);
-    } catch (Exception e) {
-      page = 1;
-    }
-    Integer lastPage = (int)Math.ceil((double)MAX_ITEMS / PAGE_SIZE);
-    Integer nextPage = lastPage > page ? page + 1 : null;
-    Todos todos = todoService.listTodo(page);
-    return new ListTodoResponse(page, nextPage, todos);
+  public ListTodoByPageResponse list(HttpRequest request, ExecutionContext context) {
+    PageNumber page = new PageNumber(getLongParamFromRequest(request, "page"));
+    PageSize size = new PageSize(getLongParamFromRequest(request, "size"));
+    TodoSortKey sort = new TodoSortKey(getStringParamFromRequest(request, "sort"));
+    TodoListByPage todoListPage = todoService.listByPage(page, size, sort);
+    return new ListTodoByPageResponse(todoListPage);
+  }
+
+  @GET
+  @Path("/infinite")
+  @Produces(MediaType.APPLICATION_JSON)
+  public ListTodoByCursorResponse listByCursor(HttpRequest request, ExecutionContext context) {
+    Long cursor = getLongParamFromRequest(request, "cursor");
+    TodoId todoId = Objects.nonNull(cursor) ? new TodoId(cursor) : null;
+    TodoLimit limit = new TodoLimit(getLongParamFromRequest(request, "limit"));
+    TodoListByCursor todoListCursor = todoService.listByCursor(todoId, limit);
+    return new ListTodoByCursorResponse(todoListCursor);
   }
 
   @POST
@@ -73,7 +81,8 @@ public class TodoAction {
   @Path("/{id:\\d+}")
   @Produces(MediaType.APPLICATION_JSON)
   public TodoResponse get(HttpRequest request, ExecutionContext context) {
-    TodoId todoId = new TodoId(request.getParam("id")[0]);
+    Long id = getLongParamFromRequest(request, "id");
+    TodoId todoId = new TodoId(id);
     Todo todo = todoService.findById(todoId);
     if (todo == null) {
       throw new TodoNotFoundException();
@@ -87,7 +96,8 @@ public class TodoAction {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public TodoResponse put(HttpRequest request, ExecutionContext context, PutTodoRequest requestBody) {
-    TodoId todoId = new TodoId(request.getParam("id")[0]);
+    Long id = getLongParamFromRequest(request, "id");
+    TodoId todoId = new TodoId(id);
     Todo todo = todoService.findById(todoId);
     Todo newTodo = new Todo(
       todo.todoId(),
@@ -101,9 +111,31 @@ public class TodoAction {
   @DELETE
   @Path("/{id:\\d+}")
   public void delete(HttpRequest request, ExecutionContext context) {
-    TodoId todoId = new TodoId(request.getParam("id")[0]);
+    Long id = getLongParamFromRequest(request, "id");
+    TodoId todoId = new TodoId(id);
     todoService.deleteTodo(todoId);
     return;
+  }
+
+  private static String getStringParamFromRequest(HttpRequest request, String key) {
+    try {
+      return request.getParam(key)[0];
+    } catch (Exception e) {
+      return null;
+    }
+  }
+
+  private static Long getLongParamFromRequest(HttpRequest request, String key) {
+    try {
+      String param = getStringParamFromRequest(request, key);
+      if (param != null) {
+        return Long.parseLong(param);
+      } else {
+        return null;
+      }
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   public static class PostTodoRequest {
@@ -121,7 +153,7 @@ public class TodoAction {
   }
 
   public static class TodoResponse {
-    public final String id;
+    public final Long id;
     public final String title;
     public final String description;
 
@@ -132,15 +164,41 @@ public class TodoAction {
     }
   }
 
-  public static class ListTodoResponse {
-    public final Integer currentPage;
-    public final Integer nextPage;
-    public final List<TodoResponse> data;
+  public static class ListTodoByPageResponse {
+    public final Long number;
+    public final Long size;
+    public final String sort;
+    public final Long totalElements;
+    public final Long totalPages;
+    public final List<TodoResponse> content;
+    public final Long numberOfElements;
+    public final Boolean empty;
+    public final Boolean first;
+    public final Boolean last;
 
-    public ListTodoResponse(Integer currentPage, Integer nextPage, Todos todos) {
-      this.currentPage = currentPage;
-      this.nextPage = nextPage;
-      this.data = todos.value().stream().map(TodoResponse::new).collect(Collectors.toList());
+    public ListTodoByPageResponse(TodoListByPage page) {
+      this.number = page.number.value();
+      this.size = page.size.value();
+      this.sort = page.sort.value();
+      this.totalElements = page.totalElements.value();
+      this.totalPages = page.totalPages.value();
+      this.content = page.content.value().stream().map(TodoResponse::new).collect(Collectors.toList());
+      this.numberOfElements = page.numberOfElements.value();
+      this.empty = page.empty();
+      this.first = page.first();
+      this.last = page.last();
+    }
+  }
+
+  public static class ListTodoByCursorResponse {
+    public final Boolean hasNext;
+    public final Long nextCursor;
+    public final List<TodoResponse> content;
+
+    public ListTodoByCursorResponse(TodoListByCursor cursor) {
+      this.hasNext = cursor.hasNext();
+      this.nextCursor = Objects.nonNull(cursor.nextCursor) ? cursor.nextCursor.value() : null;
+      this.content = cursor.content.value().stream().map(TodoResponse::new).collect(Collectors.toList());
     }
   }
 }

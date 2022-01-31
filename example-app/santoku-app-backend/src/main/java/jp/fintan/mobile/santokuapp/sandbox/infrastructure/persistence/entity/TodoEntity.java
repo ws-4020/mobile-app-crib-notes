@@ -11,17 +11,17 @@ import javax.persistence.Table;
 @Access(AccessType.FIELD)
 public class TodoEntity {
 
-  @Id private String id;
+  @Id private Long id;
 
   private String title;
 
   private String description;
 
-  public String getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(String todoId) {
+  public void setId(Long todoId) {
     this.id = todoId;
   }
 
