@@ -1,6 +1,7 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Button} from 'components/button/Button';
 import {useLoadingOverlay} from 'components/overlay';
+import {useMutationWithResetQueries} from 'framework/backend';
 import {
   getGetTodoQueryKey,
   getListTodoByCursorQueryKey,
@@ -12,7 +13,6 @@ import {DemoStackParamList} from 'navigation/types';
 import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {Input, Text} from 'react-native-elements';
-import {useQueryClient} from 'react-query';
 
 const ScreenName = 'EditTodoDemo';
 const Screen = ({navigation, route}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
@@ -21,24 +21,10 @@ const Screen = ({navigation, route}: NativeStackScreenProps<DemoStackParamList, 
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
 
-  const queryClient = useQueryClient();
   const loadingOverlay = useLoadingOverlay();
   const {isLoading, isSuccess, data: todo} = useGetTodo(todoId);
-  const putTodo = usePutTodo({
-    mutation: {
-      onSuccess: async (_data, variables, _context) => {
-        await queryClient.resetQueries(getListTodoByCursorQueryKey());
-        await queryClient.resetQueries(getGetTodoQueryKey(variables.todoId));
-      },
-    },
-  });
-  const deleteTodo = useDeleteTodo({
-    mutation: {
-      onSuccess: async (_data, _variables, _context) => {
-        await queryClient.resetQueries(getListTodoByCursorQueryKey());
-      },
-    },
-  });
+  const putTodo = useMutationWithResetQueries(usePutTodo, [getListTodoByCursorQueryKey(), getGetTodoQueryKey(todoId)]);
+  const deleteTodo = useMutationWithResetQueries(useDeleteTodo, [getListTodoByCursorQueryKey()]);
 
   const onEdit = useCallback(() => {
     setIsEdit(true);

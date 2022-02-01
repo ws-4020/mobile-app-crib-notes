@@ -1,12 +1,12 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Button} from 'components/button/Button';
 import {useLoadingOverlay} from 'components/overlay';
+import {useMutationWithResetQueries} from 'framework/backend';
 import {getListTodoByCursorQueryKey, usePostTodo} from 'generated/sandbox/api';
 import {DemoStackParamList} from 'navigation/types';
 import React, {useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input} from 'react-native-elements';
-import {useQueryClient} from 'react-query';
 
 import {EditTodoDemoScreen} from './EditTodoDemoScreen';
 
@@ -14,15 +14,8 @@ const ScreenName = 'CreateTodoDemo';
 const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
-  const queryClient = useQueryClient();
   const loadingOverlay = useLoadingOverlay();
-  const postTodo = usePostTodo({
-    mutation: {
-      onSuccess: async (_data, _variables, _context) => {
-        await queryClient.resetQueries(getListTodoByCursorQueryKey());
-      },
-    },
-  });
+  const postTodo = useMutationWithResetQueries(usePostTodo, [getListTodoByCursorQueryKey()]);
 
   const onChangeTitle = useCallback((newTitle: string) => {
     setTitle(newTitle);
