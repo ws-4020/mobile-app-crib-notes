@@ -11,9 +11,7 @@ const REQUEST_TIMEOUT = AppConfig.requestTimeout;
 
 const backendUrl = `${AppConfig.santokuAppBackendUrl}/api`;
 const BACKEND_AXIOS_INSTANCE = Axios.create({baseURL: backendUrl});
-
-const sandboxUrl = `http://10.0.2.2:9080/api/sandbox`;
-const SANDBOX_AXIOS_INSTANCE = Axios.create({baseURL: sandboxUrl});
+const SANDBOX_AXIOS_INSTANCE = Axios.create({baseURL: backendUrl});
 
 const getUserAgent = () => {
   const appName = applicationName ?? 'unknown';

@@ -39,6 +39,7 @@ const loadInitialData = async () => {
   // TODO: キャッシュの削除
 
   // バックエンドから初期データを取得
+  // この時点ではReact QueryのQueryClientProviderはマウントされていないため、useQueryは使わずにデータを取得する
   const account = await loadInitialDataAsync();
   return {
     notification,
