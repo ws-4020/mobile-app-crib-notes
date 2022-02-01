@@ -343,9 +343,11 @@ React Queryはクエリキーに基づいてクエリキャッシュを管理し
 
 クエリキーの命名ルールとして、当初は次の3案を検討する予定でした。
 
-1. React Queryの公式ドキュメントで紹介されている[Effective React Query Keys](https://tkdodo.eu/blog/effective-react-query-keys)に従いクエリキーを（`['todos', 'list']`や`['todos', 'detail', 1]`のように）階層化して定義する
+1. React Queryの公式ドキュメントで紹介されている[Effective React Query Keys](https://tkdodo.eu/blog/effective-react-query-keys)に従いクエリキーを階層化（※1）して定義する
 2. REST APIのURL内のPathとQuery部をクエリキーとして用いる
 3. OpenAPIのoperationIdをクエリキーとして用いる
+
+（※1）`['todos', 'list']`や`['todos', 'detail', 1]`のような階層構造。
 
 しかしながら、クエリキーもOrvalの自動生成コードに含まれます。
 Orvalは案2の命名ルールでクエリキーを生成します。
