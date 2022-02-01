@@ -36,8 +36,6 @@ import java.util.stream.Collectors;
 @SystemRepositoryComponent
 @Path("/sandbox/todos")
 public class TodoAction {
-  private static final Logger LOGGER = LoggerManager.get(TodoAction.class);
-
   private final TodoService todoService;
 
   public TodoAction(TodoService todoService) {

@@ -6,7 +6,6 @@ import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.Todo;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.TodoDescription;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.TodoId;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.TodoTitle;
-import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.Todos;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.cursor.TodoLimit;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.cursor.TodoListByCursor;
 import jp.fintan.mobile.santokuapp.sandbox.domain.model.todo.page.TodoListByPage;
