@@ -70,8 +70,7 @@ export const useGetCsrfToken = <
   const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetCsrfTokenHook>>> = () => getCsrfToken();
 
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetCsrfTokenHook>>, TError, TData>(queryKey, queryFn, {
-    cacheTime: 1000,
-    staleTime: 1000,
+    retry: false,
     ...queryOptions,
   });
 
@@ -227,7 +226,7 @@ export const useGetAccountsAccountId = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsAccountIdHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {enabled: !!accountId, cacheTime: 1000, staleTime: 1000, ...queryOptions},
+    {enabled: !!accountId, retry: false, ...queryOptions},
   );
 
   return {
@@ -272,7 +271,7 @@ export const useGetAccountsAccountIdAvatar = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsAccountIdAvatarHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {enabled: !!accountId, cacheTime: 1000, staleTime: 1000, ...queryOptions},
+    {enabled: !!accountId, retry: false, ...queryOptions},
   );
 
   return {
@@ -311,8 +310,7 @@ export const useGetAccountsMe = <
   const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetAccountsMeHook>>> = () => getAccountsMe();
 
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsMeHook>>, TError, TData>(queryKey, queryFn, {
-    cacheTime: 1000,
-    staleTime: 1000,
+    retry: false,
     ...queryOptions,
   });
 
@@ -355,7 +353,7 @@ export const useGetAccountsMeAvatar = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsMeAvatarHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {cacheTime: 1000, staleTime: 1000, ...queryOptions},
+    {retry: false, ...queryOptions},
   );
 
   return {
@@ -482,7 +480,7 @@ export const useGetAccountsMeTerms = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsMeTermsHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {cacheTime: 1000, staleTime: 1000, ...queryOptions},
+    {retry: false, ...queryOptions},
   );
 
   return {
@@ -614,8 +612,7 @@ export const useGetTerms = <
   const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetTermsHook>>> = () => getTerms();
 
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTermsHook>>, TError, TData>(queryKey, queryFn, {
-    cacheTime: 1000,
-    staleTime: 1000,
+    retry: false,
     ...queryOptions,
   });
 
@@ -687,8 +684,7 @@ export const useGetTeamsTeamId = <
 
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdHook>>, TError, TData>(queryKey, queryFn, {
     enabled: !!teamId,
-    cacheTime: 1000,
-    staleTime: 1000,
+    retry: false,
     ...queryOptions,
   });
 
@@ -820,7 +816,7 @@ export const useGetTeamsTeamIdTimetableTemplates = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetableTemplatesHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {enabled: !!teamId, cacheTime: 1000, staleTime: 1000, ...queryOptions},
+    {enabled: !!teamId, retry: false, ...queryOptions},
   );
 
   return {
@@ -923,7 +919,7 @@ export const useGetTeamsTeamIdTimetableTemplatesTemplateId = <
     AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetableTemplatesTemplateIdHook>>,
     TError,
     TData
-  >(queryKey, queryFn, {enabled: !!(teamId && templateId), cacheTime: 1000, staleTime: 1000, ...queryOptions});
+  >(queryKey, queryFn, {enabled: !!(teamId && templateId), retry: false, ...queryOptions});
 
   return {
     queryKey,
@@ -1023,7 +1019,7 @@ export const useGetTeamsTeamIdTimetablesTimetableId = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetablesTimetableIdHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {enabled: !!(teamId && timetableId), cacheTime: 1000, staleTime: 1000, ...queryOptions},
+    {enabled: !!(teamId && timetableId), retry: false, ...queryOptions},
   );
 
   return {
@@ -1113,7 +1109,7 @@ export const useGetTeamsTeamIdTimetables = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetablesHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {enabled: !!teamId, cacheTime: 1000, staleTime: 1000, ...queryOptions},
+    {enabled: !!teamId, retry: false, ...queryOptions},
   );
 
   return {

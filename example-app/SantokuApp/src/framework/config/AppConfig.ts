@@ -29,4 +29,8 @@ export abstract class AppConfig {
   static get santokuAppBackendUrl(): string {
     return Config.SANTOKU_APP_BACKEND_URL;
   }
+
+  static get requestTimeout(): number {
+    return 60000; // milliseconds
+  }
 }

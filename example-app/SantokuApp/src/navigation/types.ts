@@ -46,7 +46,6 @@ export type DemoStackParamList = {
   Navigation: undefined;
   PushNotification: undefined;
   Cache: undefined;
-  ReactQuery: undefined;
   ListTodoDemo: undefined;
   CreateTodoDemo: undefined;
   EditTodoDemo: {

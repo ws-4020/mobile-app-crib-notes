@@ -23,7 +23,6 @@ import {
   NavigationScreen,
   PushNotificationScreen,
   CacheScreen,
-  ReactQueryScreen,
   ListTodoDemoScreen,
   CreateTodoDemoScreen,
   EditTodoDemoScreen,
@@ -66,7 +65,6 @@ export const Screen: React.FC = () => {
       <nav.Screen {...NavigationScreen} />
       <nav.Screen {...PushNotificationScreen} />
       <nav.Screen {...CacheScreen} />
-      <nav.Screen {...ReactQueryScreen} />
       <nav.Screen {...ListTodoDemoScreen} />
       <nav.Screen {...CreateTodoDemoScreen} />
       <nav.Screen {...EditTodoDemoScreen} />

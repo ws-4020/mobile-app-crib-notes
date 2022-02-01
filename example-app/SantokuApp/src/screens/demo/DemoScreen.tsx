@@ -19,7 +19,7 @@ import {LogScreen} from './log';
 import {MessageScreen} from './message';
 import {NavigationScreen} from './navigation';
 import {PushNotificationScreen} from './push-notification';
-import {ReactQueryScreen} from './react-query';
+import {ListTodoDemoScreen} from './react-query';
 import {SnackbarScreen} from './snackbar';
 
 type ScreenList = {
@@ -90,7 +90,7 @@ const demoScreenList: ScreenList[] = [
   },
   {
     title: 'ReactQuery',
-    to: ReactQueryScreen.name,
+    to: ListTodoDemoScreen.name,
   },
 ];
 

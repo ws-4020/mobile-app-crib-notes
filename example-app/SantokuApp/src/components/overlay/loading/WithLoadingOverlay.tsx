@@ -16,17 +16,13 @@ const WithLoadingOverlay: React.FC = ({children}) => {
   const loadingOverlayContext = useMemo<LoadingOverlayContextType>(
     () => ({
       show: () => {
-        if (!isVisible) {
-          setIsVisible(true);
-        }
+        setIsVisible(true);
       },
       hide: () => {
-        if (isVisible) {
-          setIsVisible(false);
-        }
+        setIsVisible(false);
       },
     }),
-    [isVisible],
+    [],
   );
   return (
     <LoadingOverlayContextProvider value={loadingOverlayContext}>

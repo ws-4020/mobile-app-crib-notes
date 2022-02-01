@@ -1,5 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Button} from 'components/button/Button';
+import {useLoadingOverlay} from 'components/overlay';
 import {usePostTodo} from 'generated/sandbox/api';
 import {DemoStackParamList} from 'navigation/types';
 import React, {useCallback, useState} from 'react';
@@ -12,6 +13,7 @@ const ScreenName = 'CreateTodoDemo';
 const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
+  const loadingOverlay = useLoadingOverlay();
   const postTodo = usePostTodo();
 
   const onChangeTitle = useCallback((newTitle: string) => {
@@ -24,17 +26,20 @@ const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof 
 
   const onSubmit = useCallback(() => {
     if (title && description) {
+      loadingOverlay.show();
       const data = {title, description};
       postTodo
         .mutateAsync({data})
         .then(todo => {
+          loadingOverlay.hide();
           navigation.replace(EditTodoDemoScreen.name, {todoId: todo.id});
         })
         .catch(e => {
+          loadingOverlay.hide();
           console.log(e);
         });
     }
-  }, [title, description, postTodo, navigation]);
+  }, [title, description, loadingOverlay, postTodo, navigation]);
 
   return (
     <View style={styles.container}>
@@ -45,7 +50,7 @@ const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof 
         {description}
       </Input>
       <View style={styles.buttons}>
-        <Button title="Submit" onPress={onSubmit} containerStyle={styles.button} />
+        <Button title="Submit" onPress={onSubmit} loading={postTodo.isLoading} containerStyle={styles.button} />
       </View>
     </View>
   );

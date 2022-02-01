@@ -1,5 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Button} from 'components/button/Button';
+import { useLoadingOverlay } from 'components/overlay';
 import {useDeleteTodo, useGetTodo, usePutTodo} from 'generated/sandbox/api';
 import {DemoStackParamList} from 'navigation/types';
 import React, {useCallback, useEffect, useState} from 'react';
@@ -13,6 +14,7 @@ const Screen = ({navigation, route}: NativeStackScreenProps<DemoStackParamList, 
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
 
+  const loadingOverlay = useLoadingOverlay();
   const {isLoading, isSuccess, data: todo} = useGetTodo(todoId);
   const putTodo = usePutTodo();
   const deleteTodo = useDeleteTodo();
@@ -31,19 +33,28 @@ const Screen = ({navigation, route}: NativeStackScreenProps<DemoStackParamList, 
 
   const onSave = useCallback(() => {
     if (title && description) {
+      loadingOverlay.show();
       const data = {title, description};
-      putTodo.mutateAsync({todoId, data}).finally(() => setIsEdit(false));
+      putTodo.mutateAsync({todoId, data}).finally(() => {
+        loadingOverlay.hide();
+        setIsEdit(false);
+      });
     }
-  }, [title, description, putTodo, todoId]);
+  }, [title, description, loadingOverlay, putTodo, todoId]);
 
   const onDelete = useCallback(() => {
+    loadingOverlay.show();
     deleteTodo
       .mutateAsync({todoId})
       .then(() => {
+        loadingOverlay.hide();
         navigation.goBack();
       })
-      .catch(() => {});
-  }, [deleteTodo, navigation, todoId]);
+      .catch(e => {
+        loadingOverlay.hide();
+        console.log(e);
+      });
+  }, [deleteTodo, loadingOverlay, navigation, todoId]);
 
   useEffect(() => {
     if (!isEdit && todo) {
@@ -70,11 +81,11 @@ const Screen = ({navigation, route}: NativeStackScreenProps<DemoStackParamList, 
         </Input>
         <View style={styles.buttons}>
           {isEdit ? (
-            <Button title="Save" onPress={onSave} containerStyle={styles.button} />
+            <Button title="Save" onPress={onSave} loading={putTodo.isLoading} containerStyle={styles.button} />
           ) : (
             <Button title="Edit" onPress={onEdit} containerStyle={styles.button} />
           )}
-          <Button title="Delete" onPress={onDelete} containerStyle={styles.button} />
+          <Button title="Delete" onPress={onDelete} loading={deleteTodo.isLoading} containerStyle={styles.button} />
         </View>
       </View>
     );

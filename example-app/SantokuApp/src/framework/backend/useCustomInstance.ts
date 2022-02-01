@@ -1,18 +1,18 @@
 import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {applicationName, nativeApplicationVersion} from 'expo-application';
+import {ApplicationError} from 'framework/error/ApplicationError';
 import {Platform} from 'react-native';
 
 import {AppConfig} from '../config';
 
 export type ErrorType<Error> = AxiosError<Error>;
 
-const CONNECTION_TIMEOUT = 60000;
-const REQUEST_TIMEOUT = 60000; // TODO: load from config
+const REQUEST_TIMEOUT = AppConfig.requestTimeout;
 
 const backendUrl = `${AppConfig.santokuAppBackendUrl}/api`;
 const BACKEND_AXIOS_INSTANCE = Axios.create({baseURL: backendUrl});
 
-const sandboxUrl = `http://10.0.2.2:9080/api/sandbox`; // DEBUG
+const sandboxUrl = `http://10.0.2.2:9080/api/sandbox`;
 const SANDBOX_AXIOS_INSTANCE = Axios.create({baseURL: sandboxUrl});
 
 const getUserAgent = () => {
@@ -29,8 +29,6 @@ const getDefaultAxiosConfig = () => {
       Accept: 'application/json',
       UserAgent: getUserAgent(),
     },
-    // Android/iOSの場合、Connection Timeoutとしては適用されるが、データ送受信中のTimeoutとしては適用されない
-    timeout: CONNECTION_TIMEOUT, // default is 0 (no timeout)
   } as AxiosRequestConfig;
 };
 
@@ -48,8 +46,14 @@ const useCustomInstance = <T>(axiosInstance: AxiosInstance): ((config: AxiosRequ
       signal: abortController.signal,
     };
     const axiosPromise = axiosInstance(requestConfig);
-    // AxiosResponse内のデータだけを返すようにする
-    const promise = axiosPromise.then((response: AxiosResponse<T>) => response.data);
+    // AxiosResponseではなくその中のデータだけを返すようにする
+    const promise = axiosPromise.then((response: AxiosResponse<T> | undefined) => {
+      if (response) {
+        return response.data;
+      }
+      // abortControllerでabortされた場合はcatchに来るのではなくthenに来てresponseがundefinedになる
+      throw new ApplicationError('Request Timeout');
+    });
 
     // @ts-ignore
     promise.cancel = () => {

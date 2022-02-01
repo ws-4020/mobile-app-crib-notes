@@ -13,8 +13,7 @@ export default defineConfig({
         query: {
           useQuery: true,
           options: {
-            cacheTime: 1000,
-            staleTime: 1000,
+            retry: false,
           },
         },
         mutator: {
@@ -39,8 +38,7 @@ export default defineConfig({
         query: {
           useQuery: true,
           options: {
-            cacheTime: 1000,
-            staleTime: 1000,
+            retry: false,
           },
         },
         mutator: {
@@ -53,6 +51,9 @@ export default defineConfig({
               useQuery: false,
               useInfinite: true,
               useInfiniteQueryParam: 'cursor',
+              options: {
+                retry: false,
+              },
             },
           },
         },
