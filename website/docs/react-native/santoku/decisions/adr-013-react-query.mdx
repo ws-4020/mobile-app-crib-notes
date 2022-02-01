@@ -334,7 +334,7 @@ React Queryはクエリキーに基づいてクエリキャッシュを管理し
 クエリキーの命名ルールとして、当初は次の3案を検討する予定でした。
 
 1. React Queryの公式ドキュメントで紹介されている[Effective React Query Keys](https://tkdodo.eu/blog/effective-react-query-keys)に従う
-2. REST APIのURLをクエリキーとして用いる
+2. REST APIのURL内のPathとQuery部をクエリキーとして用いる
 3. OpenAPIのoperationIdをクエリキーとして用いる
 
 しかしながら、クエリキーもOrvalの自動生成コードに含まれます。
