@@ -1,8 +1,11 @@
 package jp.fintan.mobile.santokuapp.presentation.restapi.account;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jp.fintan.mobile.santokuapp.application.service.LoginAccountIdSupplier;
 import jp.fintan.mobile.santokuapp.application.service.account.AccountDeviceTokenService;
@@ -40,10 +43,41 @@ public class MyAccountDeviceTokenAction {
     }
   }
 
+  @POST
+  @Path("/add")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void add(ExecutionContext context, UpdateDeviceTokenRequest requestBody) {
+    AccountId accountId = loginAccountIdSupplier.supply();
+
+    if (requestBody.deviceToken != null) {
+      accountDeviceTokenService.deleteDevice(accountId, new DeviceToken(requestBody.deviceToken));
+      accountDeviceTokenService.registerDevice(accountId, new DeviceToken(requestBody.deviceToken));
+    }
+  }
+
+  @POST
+  @Path("/remove")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void remove(ExecutionContext context, DeleteDeviceTokenRequest requestBody) {
+    AccountId accountId = loginAccountIdSupplier.supply();
+
+    if (requestBody.deviceToken != null) {
+      accountDeviceTokenService.deleteDevice(accountId, new DeviceToken(requestBody.deviceToken));
+    }
+  }
+
   public static class DeviceTokenRequest {
 
     public String newDeviceToken;
 
     public String oldDeviceToken;
+  }
+
+  public static class UpdateDeviceTokenRequest {
+    public String deviceToken;
+  }
+
+  public static class DeleteDeviceTokenRequest {
+    public String deviceToken;
   }
 }
