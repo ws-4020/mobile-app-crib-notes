@@ -10,8 +10,10 @@ export type ErrorType<Error> = AxiosError<Error>;
 const REQUEST_TIMEOUT = AppConfig.requestTimeout;
 
 const backendUrl = `${AppConfig.santokuAppBackendUrl}/api`;
+const sandboxUrl = `${AppConfig.santokuAppBackendUrl}/api/sandbox`;
 const BACKEND_AXIOS_INSTANCE = Axios.create({baseURL: backendUrl});
-const SANDBOX_AXIOS_INSTANCE = Axios.create({baseURL: backendUrl});
+const SANDBOX_AXIOS_INSTANCE = Axios.create({baseURL: sandboxUrl});
+const BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION = Axios.create({baseURL: backendUrl});
 
 const getUserAgent = () => {
   const appName = applicationName ?? 'unknown';
@@ -88,7 +90,6 @@ const useSandboxCustomInstance = <T>(): ((config: AxiosRequestConfig) => Promise
 
 const setCsrfTokenHeader = (csrfTokenHeaderName: string, csrfTokenValue: string) => {
   BACKEND_AXIOS_INSTANCE.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
-  SANDBOX_AXIOS_INSTANCE.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
 };
 
 const setAxiosResponseInterceptor = (
@@ -98,7 +99,6 @@ const setAxiosResponseInterceptor = (
   onRejected: (error: any) => any | undefined,
 ) => {
   BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFullfilled, onRejected);
-  SANDBOX_AXIOS_INSTANCE.interceptors.response.use(onFullfilled, onRejected);
 };
 
 export {
@@ -106,5 +106,5 @@ export {
   useSandboxCustomInstance,
   setCsrfTokenHeader,
   setAxiosResponseInterceptor,
-  BACKEND_AXIOS_INSTANCE,
+  BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION,
 };

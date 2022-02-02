@@ -35,9 +35,8 @@ const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof 
           loadingOverlay.hide();
           navigation.replace(EditTodoDemoScreen.name, {todoId: todo.id});
         })
-        .catch(e => {
+        .catch(() => {
           loadingOverlay.hide();
-          console.log(e);
         });
     }
   }, [title, description, loadingOverlay, postTodo, navigation]);

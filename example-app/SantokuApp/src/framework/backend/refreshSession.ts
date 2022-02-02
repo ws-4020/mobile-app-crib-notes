@@ -3,7 +3,7 @@ import axios, {AxiosResponse} from 'axios';
 import {SecureStorageAdapter} from '../authentication/SecureStorageAdapter';
 import {ApplicationError} from '../error/ApplicationError';
 import {refreshCsrfToken} from './refreshCsrfToken';
-import {BACKEND_AXIOS_INSTANCE, setAxiosResponseInterceptor} from './useCustomInstance';
+import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, setAxiosResponseInterceptor} from './useCustomInstance';
 
 // 共通リトライ処理に必要なAPI呼び出しだけは、自動生成コードに依存しない形で用意する
 const autoLogin = async () => {
@@ -15,7 +15,7 @@ const autoLogin = async () => {
   if (!password) {
     throw new ApplicationError('The password for the account ID does not exist.');
   }
-  await BACKEND_AXIOS_INSTANCE.post('/login', {accountId, password});
+  await BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.post('/login', {accountId, password});
 };
 
 const refreshSession = async () => {
@@ -29,9 +29,16 @@ const setRefreshSessionInterceptor = () => {
   };
   const onRejected = async (error: unknown) => {
     if (axios.isAxiosError(error)) {
-      await refreshSession();
-      return await axios.request(error.config);
+      if (error.response?.status === 401) {
+        try {
+          await refreshSession();
+          return await BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.request(error.config);
+        } catch (retryError) {
+          throw error;
+        }
+      }
     }
+    throw error;
   };
   setAxiosResponseInterceptor(onFullfilled, onRejected);
 };

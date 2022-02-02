@@ -1,4 +1,4 @@
-import {BACKEND_AXIOS_INSTANCE, setCsrfTokenHeader} from './useCustomInstance';
+import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, setCsrfTokenHeader} from './useCustomInstance';
 
 type CsrfTokenResponse = {
   csrfTokenHeaderName: string;
@@ -6,7 +6,7 @@ type CsrfTokenResponse = {
 };
 
 const refreshCsrfToken = async () => {
-  const axiosResponse = await BACKEND_AXIOS_INSTANCE.get<CsrfTokenResponse>('/csrf_token');
+  const axiosResponse = await BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.get<CsrfTokenResponse>('/csrf_token');
   setCsrfTokenHeader(axiosResponse.data.csrfTokenHeaderName, axiosResponse.data.csrfTokenValue);
 };
 

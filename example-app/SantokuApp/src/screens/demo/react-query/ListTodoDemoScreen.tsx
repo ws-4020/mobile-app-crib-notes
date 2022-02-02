@@ -34,11 +34,9 @@ const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof 
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    refetch()
-      .catch(e => console.log(e))
-      .finally(() => {
-        setRefreshing(false);
-      });
+    refetch().finally(() => {
+      setRefreshing(false);
+    });
   }, [refetch]);
 
   const onPressTodoItem = useCallback(
