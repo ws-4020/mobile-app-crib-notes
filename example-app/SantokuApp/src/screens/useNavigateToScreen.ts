@@ -7,9 +7,16 @@ const useNavigateToRootStackScreen = (screen: keyof RootStackParamList) => {
   return useCallback(() => navigation.navigate(screen), [navigation, screen]);
 };
 
-const useNavigateToDemoStackScreen = (screen: keyof DemoStackParamList) => {
+const useNavigateToDemoStackScreen = (screen: keyof DemoStackParamList, params?: DemoStackParamList[typeof screen]) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  return useCallback(() => navigation.navigate('DemoStackNav', {screen}), [navigation, screen]);
+  return useCallback(() => {
+    if (screen === 'EditTodoDemo') {
+      const screenParams = params as DemoStackParamList[typeof screen];
+      return navigation.navigate('DemoStackNav', {screen, params: screenParams});
+    } else {
+      return navigation.navigate('DemoStackNav', {screen});
+    }
+  }, [navigation, screen, params]);
 };
 
 export {useNavigateToRootStackScreen, useNavigateToDemoStackScreen};
