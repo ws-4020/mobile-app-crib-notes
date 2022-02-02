@@ -1,5 +1,7 @@
 import '@testing-library/jest-native/extend-expect';
 import {render, waitFor} from '@testing-library/react-native';
+import {AppConfig} from 'framework/config';
+import nock from 'nock';
 import React from 'react';
 import {DevSettings} from 'react-native';
 
@@ -12,6 +14,9 @@ beforeEach(() => {
   // テストは成功するものの、エラーログが出力されてしまう。
   // タイマーを使わないようにして、アニメーションを動かさないことで回避しているつもり。
   jest.useFakeTimers();
+  nock(AppConfig.santokuAppBackendUrl)
+    .get('/api/csrf_token')
+    .reply(200, {csrfTokenHeaderName: 'X-CSRF-Token', csrfTokenValue: 'dummy'});
 });
 
 describe('App', () => {

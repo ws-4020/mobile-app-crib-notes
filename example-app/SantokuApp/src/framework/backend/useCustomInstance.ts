@@ -37,11 +37,12 @@ const getDefaultAxiosConfig = () => {
 const useCustomInstance = <T>(axiosInstance: AxiosInstance): ((config: AxiosRequestConfig) => Promise<T>) => {
   const defaultAxiosConfig = getDefaultAxiosConfig();
   return async (config: AxiosRequestConfig) => {
-    const abortController = new AbortController();
+    // TODO: React Native / Expo のバージョンアップ時にJestを27以降にバージョンアップできたらCancelTokenからAbortControllerへ移行する
+    const source = Axios.CancelToken.source();
     const requestConfig = {
       ...defaultAxiosConfig,
       ...config,
-      signal: abortController.signal,
+      cancelToken: source.token,
     };
     const axiosPromise = axiosInstance(requestConfig);
     // AxiosResponseではなくその中のデータだけを返すようにする
@@ -55,19 +56,24 @@ const useCustomInstance = <T>(axiosInstance: AxiosInstance): ((config: AxiosRequ
 
     // @ts-ignore
     promise.cancel = () => {
-      abortController.abort();
+      source.cancel('Query was cancelled by React Query');
     };
 
-    const timeoutId = setTimeout(() => {
-      abortController.abort();
-    }, REQUEST_TIMEOUT);
+    let timeoutId;
+    if (REQUEST_TIMEOUT) {
+      timeoutId = setTimeout(() => {
+        source.cancel('Query was cancelled by React Query');
+      }, REQUEST_TIMEOUT);
+    }
 
     try {
       return await promise;
     } catch (error) {
       throw error;
     } finally {
-      clearTimeout(timeoutId);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
     }
   };
 };

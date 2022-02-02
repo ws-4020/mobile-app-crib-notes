@@ -30,7 +30,8 @@ export abstract class AppConfig {
     return Config.SANTOKU_APP_BACKEND_URL;
   }
 
-  static get requestTimeout(): number {
-    return 60000; // milliseconds
+  static get requestTimeout(): number | undefined {
+    const timeout = Number(Config.REQUEST_TIMEOUT);
+    return isNaN(timeout) ? undefined : timeout;
   }
 }
