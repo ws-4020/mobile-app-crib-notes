@@ -3,7 +3,7 @@ import {useListTodoByCursorInfinite} from 'generated/sandbox/api';
 import {Todo} from 'generated/sandbox/model';
 import {DemoStackParamList} from 'navigation/types';
 import React, {useCallback, useMemo, useState} from 'react';
-import {ActivityIndicator, Pressable, RefreshControl, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, Pressable, RefreshControl, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Icon, ListItem, Text, FAB, Button} from 'react-native-elements';
 import {FlatList} from 'react-native-gesture-handler';
 import {useQueryClient} from 'react-query';
@@ -120,6 +120,7 @@ const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof 
         <Button title="Invalidate Queries" onPress={() => onInvalidateQueries()} style={styles.button} />
         <Button title="Reset Queries" onPress={() => onResetQueries()} style={styles.button} />
       </View>
+      <SafeAreaView />
     </View>
   );
 };
@@ -156,6 +157,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    height: 60,
     padding: 8,
   },
   button: {
