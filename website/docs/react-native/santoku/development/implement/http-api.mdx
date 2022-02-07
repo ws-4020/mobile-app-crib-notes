@@ -1,0 +1,110 @@
+---
+title: HTTP APIの呼び出し
+---
+
+このアプリケーションでは、バックエンドサーバが提供するREST APIを用いてデータの参照・更新・削除などを行います。
+その際には、[Orval](https://orval.dev/)というツールを用いてOpenAPI Specificationから自動生成したコードを用いてリクエストを送信します。
+ここではその使い方について説明します。
+
+## Backend APIの呼び出し
+
+### クライアント側コードの自動生成
+
+クライアント側のコードを自動生成するためには、まずバックエンドAPIのOpenAPI Specificationを用意する必要があります。
+
+次に、Orvalの設定ファイルを作成します。
+
+TODO: Orvalのoverride, InfiniteQueryの設定について説明する。
+TODO: OrvalのCustom Instanceの設定について説明する。
+TODO: Orvalのその他の設定についても簡単に説明する。
+
+設定が終わったら、以下のコマンドでOrvalを実行し、クライアント側コードを自動生成します。
+
+```bash
+// このアプリでは npm run orval でも実行できるようにpackage.jsonに設定済み
+npx orval --config ./orval.config.ts
+```
+
+後からAPI仕様に変更があった場合は、OpenAPI Specificationのファイルを更新した上で同じコマンドを実行します。
+
+:::note
+OrvalでCustom Instanceを利用する設定にした場合、Custom Instanceの実装によってはOrval実行時に以下のWarningが表示されます。
+
+```text
+Your mutator cannot be loaded so default setup has been applied
+```
+
+これはOrvalのdependenciesにないライブラリやファイルなどをCustom Instanceからimportしていると起こるようです。
+実際にアプリから自動生成したコードを利用する際には問題なく利用できるため、今回は特に対応しません。
+:::
+
+### 自動生成されたコードの利用
+
+Orvalを実行すると、OpenAPI Specification内に記載した各APIに対して、OperationIdに対応する名前のCustom Hookが自動生成されます。
+例えばOperationIdがget-csrf-tokenの場合、useGetCsrfTokenという名前のCustom Hookが自動生成されます。
+クライアントアプリからバックエンドAPIを利用する場合は、このCustom Hookを用いてバックエンドAPIを呼び出します。
+
+この自動生成されたCustom Hookは、APIのHTTPメソッドやOrval設定によって3種類に分けられます。
+それぞれがReact QueryのuseQuery, useInfiniteQuery, useMutationの3種類に対応しています。
+それぞれの使い方は以下のとおりです。
+
+#### データ取得 (useQuery)
+
+HTTPメソッドがGETのAPIに対しては、基本的にはuseQueryをベースとしたCustom Hookが自動生成されます。
+基本的な使い方や指定できるオプションは、React Queryの[useQuery](https://react-query.tanstack.com/reference/useQuery)とほぼ同様です。
+利用時のコード例は以下のようになります。
+
+```typescript
+// TODO: コード例
+```
+
+#### 無限スクロール用データ取得 (useInfiniteQuery)
+
+OrvalのConfigファイル内でuseInfinite:trueに設定したAPIに対しては、useInfiniteQueryをベースとしたCustom Hookが自動生成されます。
+基本的な使い方や指定できるオプションは、React Queryの[useInfiniteQuery](https://react-query.tanstack.com/reference/useInfiniteQuery)とほぼ同様です。
+利用時のコード例は以下のようになります。
+
+```typescript
+// TODO: コード例
+```
+
+:::note
+// TODO: Orvalで自動生成したコードは、InfiniteでQueryParameterの中に必須パラメータがある場合に型エラーとなる場合がある
+:::
+
+#### データ更新・削除 (useMutation)
+
+HTTPメソッドがPOST, PUT, DELETEなどのAPIに対しては、useMutationをベースとしたCustom Hookが自動生成されます。
+基本的な使い方や指定できるオプションは、React Queryの[useMutation](https://react-query.tanstack.com/reference/useMutation)とほぼ同様です。
+
+```typescript
+// TODO: コード例
+```
+
+データを更新しても、それ以前に取得したクエリのキャッシュデータは残ったままです。
+クエリのキャッシュデータは、マウントされている全ての画面で利用されなくなった後、さらにcacheTime（デフォルト5分）が経過するまではそのまま利用されます。
+このアプリではstaleTimeを0に設定しているため、こうしたデータはReact Queryによる次のrefetchのタイミングで更新されます。
+しかし古いクエリキャッシュはなるべくすぐに無効化・更新することが望ましいです。
+
+React Queryでは、クエリキャッシュを無効化する方法として、InvalidateとResetが用意されています。
+Invalidateの場合は、古いデータを画面表示したまま、最新データを取得します。
+Resetの場合は、古いデータを削除して画面表示されないようにした上で、最新データを取得します。
+このアプリでは、Resetを用いて古いクエリキャッシュを無効化します。
+
+データの更新と同時に関連するクエリの古いキャッシュをリセットする場合のコード例は以下のようになります。
+
+```typescript
+// TODO: コード例
+```
+
+### エラーハンドリング
+
+TODO: デフォルトで設定済みのエラーハンドリングについて説明。
+TODO: 各画面で個別に対応が必要なエラーハンドリングについて説明。
+TODO: リトライについて説明。
+
+## その他の外部サービスの呼び出し
+
+Orvalによって自動生成されるのは、バックエンドAPIへのリクエスト用のCustom Hookのみです。
+その他の外部サービスを利用する際には、各外部サービスが提供するSDKを別途利用します。
+外部サービスがSDKを提供していない場合は、その外部サービスのOpenAPI Specificationを作成した上でOrvalによる自動生成を別途行います。

@@ -502,6 +502,7 @@ module.exports = {
             'react-native/santoku/development/implement/app-launch-with-build-variants',
             'react-native/santoku/development/implement/cautions-on-using-firebase',
             'react-native/santoku/development/implement/configurations',
+            'react-native/santoku/development/implement/http-api',
           ],
         },
         {
