@@ -1,4 +1,3 @@
-// import {ActivityIndicator, Overlay, OverlayProps} from '@sc/react-native-components';
 import {createUseContextAndProvider} from 'framework/utilities';
 import React, {useMemo, useState} from 'react';
 
@@ -12,21 +11,21 @@ type LoadingOverlayContextType = {
 const [useLoadingOverlay, LoadingOverlayContextProvider] = createUseContextAndProvider<LoadingOverlayContextType>();
 
 const WithLoadingOverlay: React.FC = ({children}) => {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [visible, setVisible] = useState<boolean>(false);
   const loadingOverlayContext = useMemo<LoadingOverlayContextType>(
     () => ({
       show: () => {
-        setIsVisible(true);
+        setVisible(true);
       },
       hide: () => {
-        setIsVisible(false);
+        setVisible(false);
       },
     }),
     [],
   );
   return (
     <LoadingOverlayContextProvider value={loadingOverlayContext}>
-      <LoadingOverlay isVisible={isVisible}>{children}</LoadingOverlay>
+      <LoadingOverlay visible={visible}>{children}</LoadingOverlay>
     </LoadingOverlayContextProvider>
   );
 };
