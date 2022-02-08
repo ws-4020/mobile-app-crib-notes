@@ -153,21 +153,6 @@ SWRは標準でその機能が用意されてません。
 `staleTime`と`cacheTime`の詳細は[Caching Examples](https://react-query.tanstack.com/guides/caching)を参照してください。
 SWRはこの機能を備えていないようです。
 
-#### コードの記述量
-
-コードの記述量は、SWRのほうがキャッシュキーを非同期関数の引数として用いているためシンプルに見えますが、大差はありません。
-キャッシュキーと非同期関数が独立しているReact Queryのほうが、キャッシュキーの管理面で柔軟性を感じます。
-
-```typescript
-const {data, error} = useSWR('https://reactnative.dev/movies.json', fetcher);
-```
-
-```typescript
-const {isLoading, error, data} = useQuery('movies', () =>
-  fetch('https://reactnative.dev/movies.json').then((response) => response.json()),
-);
-```
-
 ## 決定
 
 HTTP API通信を実装するにあたり、いくつかのデータフェッチ用ライブラリを比較検討しました。
