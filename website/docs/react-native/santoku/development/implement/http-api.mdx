@@ -10,13 +10,29 @@ title: HTTP APIの呼び出し
 
 ### クライアント側コードの自動生成
 
-クライアント側のコードを自動生成するためには、まずバックエンドAPIのOpenAPI Specificationを用意する必要があります。
+クライアント側のコードを自動生成するためには、まずバックエンドAPIの仕様に沿ったOpenAPI定義ファイルを用意する必要があります。
+OpenAPI定義ファイルを作成したら、それに合わせてOrval実行時のInputとOutputに関する設定ファイルを作成します。
+このアプリでは、以下のように設定します。
 
-次に、Orvalの設定ファイルを作成します。
+| Key                          | 概要 | 今回設定する値 |
+|:-----------------------------|:-----|:--------------|
+| input.target                 | OpenAPI定義ファイルのPathを指定 | ../api-document/openapi.yaml |
+| output.target                | 自動生成するコードのうち、メインとなるファイルを出力するPathを指定 | src/generated/backend/api.ts |
+| output.schemas               | 自動生成するコードのうち、Modelファイルを出力するPathを指定 | src/generated/backend/model |
+| output.client                | 自動生成するコードの中でどのHTTP Clientライブラリを利用するかを指定 | react-query |
+| output.mode                  | 自動生成するコードをどの粒度でファイル分割するかを指定 | split |
+| output.prettier              | 自動生成されたコードにprettierを適用するかを指定 | true |
+| output.query.options.retry   | 自動生成されたコードで利用するReactQueryのデフォルトオプション (今回はRetryについてのみ設定) | false |
+| output.override.mutator.path | デフォルトのAxiosInstanceをカスタマイズしたい場合に、CustomInstanceが定義されているファイルのPath | src/framework/backend/useCustomInstance.ts |
+| output.override.mutator.name | 上記ファイル内でexportしているCustomInstanceのfunction名 | useBackendCustomInstance |
 
-TODO: Orvalのoverride, InfiniteQueryの設定について説明する。
-TODO: OrvalのCustom Instanceの設定について説明する。
-TODO: Orvalのその他の設定についても簡単に説明する。
+また、無限スクロールの実現のため、バックエンドAPIの中にuseQueryの代わりにuseInfiniteQueryを利用したいAPIがある場合は、
+さらに以下の設定を追加します。
+
+| Key                          | 概要 | 今回設定する値 |
+|:-----------------------------|:-----|:--------------|
+| output.override.operations.<対象APIのOperationId>.query.useInfinite | useQueryの代わりにuseInfiniteQueryを使うかどうか | true |
+| output.override.operations.<対象APIのOperationId>.query.useInfiniteQueryParam | API呼び出し時にuseInfiniteQueryのnextPageParamの値を設定するクエリパラメータ名 | cursor (対象APIのクエリパラメータ名) |
 
 設定が終わったら、以下のコマンドでOrvalを実行し、クライアント側コードを自動生成します。
 
@@ -51,21 +67,103 @@ Orvalを実行すると、OpenAPI Specification内に記載した各APIに対し
 #### データ取得 (useQuery)
 
 HTTPメソッドがGETのAPIに対しては、基本的にはuseQueryをベースとしたCustom Hookが自動生成されます。
-基本的な使い方や指定できるオプションは、React Queryの[useQuery](https://react-query.tanstack.com/reference/useQuery)とほぼ同様です。
+第一引数にはクエリパラメータ、第二引数にはオプションを設定できます。
+指定できるオプションや戻り値は、React Queryの[useQuery](https://react-query.tanstack.com/reference/useQuery)とほぼ同様です。
 利用時のコード例は以下のようになります。
 
 ```typescript
-// TODO: コード例
+import React from 'react';
+import {View, Text, Button} from 'react-native';
+import {useGetAccountsMe} from 'generated/backend/api';
+
+const SampleScreen: React.FC = () => {
+  // 以下のようなResponseBodyが返ってくるAPIの場合の例
+  // {"nickname": "NickName"}
+  const {isLoading, isError, data: account, refetch} = useGetAccountsMe();
+
+  if (isLoading) {
+    return (
+      <View>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
+  if (isError) {
+    return (
+      <View>
+        <Text>アカウント情報の取得に失敗しました。</Text>
+        <Button title="再取得" onPress={() => refetch()} />
+      </View>
+    );
+  }
+
+  return (
+    <View>
+      <Text>{account.nickname}</Text>
+    </View>
+  );
+}
 ```
 
 #### 無限スクロール用データ取得 (useInfiniteQuery)
 
 OrvalのConfigファイル内でuseInfinite:trueに設定したAPIに対しては、useInfiniteQueryをベースとしたCustom Hookが自動生成されます。
-基本的な使い方や指定できるオプションは、React Queryの[useInfiniteQuery](https://react-query.tanstack.com/reference/useInfiniteQuery)とほぼ同様です。
+第一引数にはクエリパラメータ、第二引数にはオプションを設定できます。
+指定できるオプションや戻り値は、React Queryの[useInfiniteQuery](https://react-query.tanstack.com/reference/useInfiniteQuery)とほぼ同様です。
 利用時のコード例は以下のようになります。
 
 ```typescript
-// TODO: コード例
+import React from 'react';
+import {View, Text, Button} from 'react-native';
+import {useListTodoInfinite} from 'generated/sandbox/api';
+
+const SampleScreen: React.FC = () => {
+  // 以下のようなResponseBodyが返ってくるAPIの場合の例
+  // {"hasNext": true, "nextCursor": 20, "content": {"title": "Todo Title"}}
+  const {isLoading, isSuccess, isError, data, refetch} =
+    useListTodoByCursorInfinite(undefined, {
+      query: {
+        getNextPageParam: lastPage => {
+          return lastPage.nextCursor;
+        },
+      },
+    });
+
+  const todos = useMemo(() => {
+    if (isSuccess && data) {
+      // data.pagesには、各クエリに対するレスポンスが配列で格納されている
+      return data.pages.map(page => page.content).flat();
+    } else {
+      return [];
+    }
+  }, [isSuccess, data]);
+
+  if (isLoading) {
+    return (
+      <View>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
+  if (isError) {
+    return (
+      <View>
+        <Text>TODO一覧の取得に失敗しました。</Text>
+        <Button title="再取得" onPress={() => refetch()} />
+      </View>
+    );
+  }
+
+  return (
+    <View>
+      {todos.map(todo => {
+        return <Text>{todo.title}</Text>;
+      })}
+    </View>
+  );
+}
 ```
 
 :::note
@@ -78,7 +176,37 @@ HTTPメソッドがPOST, PUT, DELETEなどのAPIに対しては、useMutationを
 基本的な使い方や指定できるオプションは、React Queryの[useMutation](https://react-query.tanstack.com/reference/useMutation)とほぼ同様です。
 
 ```typescript
-// TODO: コード例
+import {usePostTodo} from 'generated/sandbox/api';
+import React, {useCallback, useState} from 'react';
+import {View} from 'react-native';
+import {Input, Button} from 'react-native-elements';
+
+const SampleScreen: React.FC = () => {
+  const [title, setTitle] = useState<string>();
+  const postTodo = usePostTodo();
+
+  const onSubmit = useCallback(async () => {
+    if (title) {
+      try {
+        const response = await postTodo.mutateAsync({data: {title}});
+        // 成功時の処理
+      } catch (e) {
+        // 失敗時の処理
+      }
+    }
+  }, [title, postTodo]);
+
+  return (
+    <View>
+      <Input label="Title" onChangeText={value => setTitle(value)}>
+        {title}
+      </Input>
+      <View>
+        <Button title="Submit" onPress={onSubmit}} loading={postTodo.isLoading} />
+      </View>
+    </View>
+  );
+};
 ```
 
 データを更新しても、それ以前に取得したクエリのキャッシュデータは残ったままです。
@@ -91,10 +219,24 @@ Invalidateの場合は、古いデータを画面表示したまま、最新デ�
 Resetの場合は、古いデータを削除して画面表示されないようにした上で、最新データを取得します。
 このアプリでは、Resetを用いて古いクエリキャッシュを無効化します。
 
+このアプリでは、Mutation成功時に指定のQueryKeyのキャッシュをresetするWrapperを用意しています。
 データの更新と同時に関連するクエリの古いキャッシュをリセットする場合のコード例は以下のようになります。
 
 ```typescript
-// TODO: コード例
+import {useMutationWithResetQueries} from 'framework/backend';
+import {getListTodoQueryKey, useListTodo, usePostTodo} from 'generated/sandbox/api';
+import React, {useCallback, useState} from 'react';
+import {View} from 'react-native';
+import {Input, Button} from 'react-native-elements';
+
+const SampleScreen: React.FC = () => {
+  const [title, setTitle] = useState<string>();
+  const listTodoQueryKey = getListTodoQueryKey();
+  // 第一引数で指定したuseMutationの成功時に、自動的に第二引数で指定したQueryKeyのクエリキャッシュをリセットする
+  const postTodo = useMutationWithResetQueries(usePostTodo, [listTodoQueryKey]);
+
+  // (同様の処理)
+};
 ```
 
 ### エラーハンドリング
