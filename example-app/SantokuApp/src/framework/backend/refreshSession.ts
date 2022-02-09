@@ -24,7 +24,7 @@ const refreshSession = async () => {
 };
 
 const setRefreshSessionInterceptor = () => {
-  const onFullfilled = (response: AxiosResponse) => {
+  const onFulfilled = (response: AxiosResponse) => {
     return response;
   };
   const onRejected = async (error: unknown) => {
@@ -40,7 +40,7 @@ const setRefreshSessionInterceptor = () => {
     }
     throw error;
   };
-  setAxiosResponseInterceptor(onFullfilled, onRejected);
+  setAxiosResponseInterceptor(onFulfilled, onRejected);
 };
 
 export {refreshSession, setRefreshSessionInterceptor};
