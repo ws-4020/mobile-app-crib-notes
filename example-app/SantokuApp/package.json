@@ -27,8 +27,6 @@
     "bundle:ios": "mkdirp ./generated && react-native bundle --dev false --sourcemap-output ./generated/index.ios.bundle.map --entry-file index.js --bundle-output ./generated/index.ios.bundle --platform ios",
     "symbolicate:android": "npx metro-symbolicate ./generated/index.android.bundle.map",
     "symbolicate:ios": "npx metro-symbolicate ./generated/index.ios.bundle.map",
-    "generate-api": "npx @openapitools/openapi-generator-cli generate -i ../api-document/openapi.yaml -g typescript-axios -o ./src/generated/api",
-    "generate-sandbox-api": "npx @openapitools/openapi-generator-cli generate -i ../api-document/sandbox/openapi.yaml -g typescript-axios -o ./src/generated/sandboxApi",
     "orval": "npx orval --config ./orval.config.ts"
   },
   "dependencies": {
@@ -66,7 +64,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "@openapitools/openapi-generator-cli": "^2.4.14",
     "@testing-library/jest-native": "^4.0.2",
     "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/react-native": "^9.0.0",
