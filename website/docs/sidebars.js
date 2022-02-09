@@ -558,6 +558,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-010-push-notification-contents',
         'react-native/santoku/decisions/adr-011-cache-management',
         'react-native/santoku/decisions/adr-012-http-api',
+        'react-native/santoku/decisions/adr-013-react-query',
       ],
     },
   ],
