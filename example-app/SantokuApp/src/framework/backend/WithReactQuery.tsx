@@ -1,6 +1,6 @@
 import NetInfo from '@react-native-community/netinfo';
-import React, {useEffect, useMemo} from 'react';
-import {AppState, Platform} from 'react-native';
+import React, {useCallback, useEffect, useMemo} from 'react';
+import {AppState, AppStateStatus, Platform} from 'react-native';
 import {focusManager, onlineManager, QueryClient, QueryClientProvider} from 'react-query';
 
 import {useDefaultQueryCache, useDefaultMutaitonCache} from './useDefaultCache';
@@ -19,14 +19,23 @@ const WithReactQuery: React.FC = ({children}) => {
     });
   }, [queryCache, mutationCache, defaultOptions]);
 
+  const onAppStateChange = useCallback((newAppState: AppStateStatus) => {
+    if (Platform.OS !== 'web') {
+      focusManager.setFocused(newAppState === 'active');
+    }
+  }, []);
+
   useEffect(() => {
     // アプリがバックグラウンドからアクティブに変化した際にrefetchできるようにする
-    return AppState.addEventListener('change', newAppState => {
-      if (Platform.OS !== 'web') {
-        focusManager.setFocused(newAppState === 'active');
-      }
-    });
-  });
+    AppState.addEventListener('change', onAppStateChange);
+    return () => {
+      // React Native 0.65からは、addEventListenerからの返り値をそのままreturnすれば良くなっている。
+      // （以下のコードの実装時は0.64.3を利用）
+      // https://reactnative.dev/docs/0.65/appstate
+      // https://reactnative.dev/docs/0.64/appstate
+      AppState.removeEventListener('change', onAppStateChange);
+    };
+  }, [onAppStateChange]);
 
   useEffect(() => {
     // オフライン状態からオンライン状態に変化した際にrefetchできるようにする
