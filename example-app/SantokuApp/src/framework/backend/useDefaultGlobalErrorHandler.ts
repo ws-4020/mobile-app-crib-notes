@@ -124,7 +124,9 @@ const useDefaultGlobalQueryErrorHandler = () => {
   const defaultErrorHandler = useBaseErrorHandler();
   return useCallback(
     (error: unknown, query: Query<unknown, unknown, unknown, QueryKey>) => {
-      defaultErrorHandler(error);
+      if (!query.meta?.disableGlobalErrorHandler) {
+        defaultErrorHandler(error);
+      }
     },
     [defaultErrorHandler],
   );
@@ -134,7 +136,9 @@ const useDefaultGlobalMutationErrorHandler = () => {
   const defaultErrorHandler = useBaseErrorHandler();
   return useCallback(
     (error: unknown, variables: unknown, context: unknown, mutation: Mutation<unknown, unknown, unknown, unknown>) => {
-      defaultErrorHandler(error);
+      if (!mutation.meta?.disableGlobalErrorHandler) {
+        defaultErrorHandler(error);
+      }
     },
     [defaultErrorHandler],
   );
