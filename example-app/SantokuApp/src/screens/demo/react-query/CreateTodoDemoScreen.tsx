@@ -27,16 +27,16 @@ const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof 
 
   const onSubmit = useCallback(() => {
     if (title && description) {
-      loadingOverlay.show();
+      loadingOverlay.setVisible(true);
       const data = {title, description};
       postTodo
         .mutateAsync({data})
         .then(todo => {
-          loadingOverlay.hide();
+          loadingOverlay.setVisible(false);
           navigation.replace(EditTodoDemoScreen.name, {todoId: todo.id});
         })
         .catch(() => {
-          loadingOverlay.hide();
+          loadingOverlay.setVisible(false);
         });
     }
   }, [title, description, loadingOverlay, postTodo, navigation]);

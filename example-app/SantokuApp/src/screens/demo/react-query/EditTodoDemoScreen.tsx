@@ -41,25 +41,25 @@ const Screen = ({navigation, route}: NativeStackScreenProps<DemoStackParamList, 
   const onSave = useCallback(async () => {
     if (title && description) {
       try {
-        loadingOverlay.show();
+        loadingOverlay.setVisible(true);
         const data = {title, description};
         await putTodo.mutateAsync({todoId, data});
-        loadingOverlay.hide();
+        loadingOverlay.setVisible(false);
         setIsEdit(false);
       } catch (e) {
-        loadingOverlay.hide();
+        loadingOverlay.setVisible(false);
       }
     }
   }, [title, description, loadingOverlay, putTodo, todoId]);
 
   const onDelete = useCallback(async () => {
     try {
-      loadingOverlay.show();
+      loadingOverlay.setVisible(true);
       await deleteTodo.mutateAsync({todoId});
-      loadingOverlay.hide();
+      loadingOverlay.setVisible(false);
       navigation.goBack();
     } catch (e) {
-      loadingOverlay.hide();
+      loadingOverlay.setVisible(false);
     }
   }, [deleteTodo, loadingOverlay, navigation, todoId]);
 
