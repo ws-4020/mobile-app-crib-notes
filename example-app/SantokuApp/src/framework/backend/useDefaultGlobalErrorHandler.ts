@@ -11,7 +11,7 @@ import {m} from '../message';
 const useBaseErrorHandler = () => {
   const snackbar = useSnackbar();
 
-  const sendErrorLogToClashlytics = useCallback((error: unknown) => {
+  const sendErrorLog = useCallback((error: unknown) => {
     try {
       if (axios.isAxiosError(error)) {
         if (error.response) {
@@ -20,46 +20,43 @@ const useBaseErrorHandler = () => {
           const data = error.response.data as ErrorResponse | undefined;
           const errorCode = data?.code ?? 'NoErrorCode';
           const errorMessage = data?.message ?? 'NoErrorMessage';
-          log.warn(`Backend API Request Error (${status} ${statusText}): [${errorCode}] ${errorMessage}`);
+          log.error(`Backend API Request Error (${status} ${statusText}): [${errorCode}] ${errorMessage}`, errorCode);
         } else {
-          log.warn('Backend API Request Error: Could not receive response from server.');
+          log.error('Backend API Request Error: Could not receive response from server.', 'AxiosError');
         }
       } else {
-        log.warn('Backend API Request Error: Unexpected error.');
+        log.error('Backend API Request Error: Unexpected error.', 'UnexpectedRequestError');
       }
     } catch (e) {}
   }, []);
 
   const showRequireTermsOfServiceAgreementDialog = useCallback(() => {
-    Alert.alert(
-      m('msg.error.requireTermsOfServiceAgreement.title'),
-      m('msg.error.requireTermsOfServiceAgreement.message'),
-    );
+    Alert.alert(m('fw.error.利用規約未同意タイトル'), m('fw.error.利用規約未同意本文'));
   }, []);
 
   const showUpdateAppDialog = useCallback(() => {
     // TODO: ダイアログからApp Storeを開けるようにする
-    Alert.alert(m('msg.error.appVersionTooOld.title'), m('msg.error.appVersionTooOld.message'));
+    Alert.alert(m('fw.error.アプリバージョンエラータイトル'), m('fw.error.アプリバージョンエラー本文'));
   }, []);
 
   const showTooManyRequests = useCallback(() => {
-    snackbar.show(m('msg.backend.tooManyRequests'));
+    snackbar.show(m('fw.error.リクエスト過多'));
   }, [snackbar]);
 
   const showMaintenance = useCallback(() => {
-    snackbar.show(m('msg.backend.maintenance'));
+    snackbar.show(m('fw.error.システムメンテナンス'));
   }, [snackbar]);
 
   const showGatewayTimeout = useCallback(() => {
-    snackbar.show(m('msg.backend.gatewayTimeout'));
+    snackbar.show(m('fw.error.リクエストタイムアウト'));
   }, [snackbar]);
 
   const showUnexpectedError = useCallback(
     (error: unknown) => {
-      snackbar.show(m('msg.backend.unexpected'));
-      sendErrorLogToClashlytics(error);
+      snackbar.show(m('fw.error.予期せぬ通信エラー'));
+      sendErrorLog(error);
     },
-    [snackbar, sendErrorLogToClashlytics],
+    [snackbar, sendErrorLog],
   );
 
   return useCallback(
