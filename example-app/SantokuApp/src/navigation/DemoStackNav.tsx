@@ -26,6 +26,10 @@ import {
   ListTodoDemoScreen,
   CreateTodoDemoScreen,
   EditTodoDemoScreen,
+  ReactQueryDemoScreen,
+  DisabledQueryDemoScreen,
+  DependentQueryDemoScreen,
+  DisableErrorHandlerDemoScreen,
 } from 'screens';
 
 import {DemoStackParamList, RootStackParamList} from './types';
@@ -68,6 +72,10 @@ export const Screen: React.FC = () => {
       <nav.Screen {...ListTodoDemoScreen} />
       <nav.Screen {...CreateTodoDemoScreen} />
       <nav.Screen {...EditTodoDemoScreen} />
+      <nav.Screen {...ReactQueryDemoScreen} />
+      <nav.Screen {...DisabledQueryDemoScreen} />
+      <nav.Screen {...DependentQueryDemoScreen} />
+      <nav.Screen {...DisableErrorHandlerDemoScreen} />
     </nav.Navigator>
   );
 };

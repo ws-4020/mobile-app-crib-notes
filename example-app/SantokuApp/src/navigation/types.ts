@@ -51,6 +51,10 @@ export type DemoStackParamList = {
   EditTodoDemo: {
     todoId: number;
   };
+  ReactQueryDemo: undefined;
+  DisabledQueryDemo: undefined;
+  DependentQueryDemo: undefined;
+  DisableErrorHandlerDemo: undefined;
 };
 
 export type AppNavigatorOptions = {
