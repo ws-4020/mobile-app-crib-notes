@@ -52,7 +52,7 @@ const useCustomInstance = <T>(axiosInstance: AxiosInstance): ((config: AxiosRequ
       if (response) {
         return response.data;
       }
-      // abortControllerでabortされた場合はcatchに来るのではなくthenに来てresponseがundefinedになる
+      // CancelTokenでcancelした場合やAbortControllerでabortした場合はcatchに来るのではなくthenに来てresponseがundefinedになる
       throw new ApplicationError('Request Timeout');
     });
 
