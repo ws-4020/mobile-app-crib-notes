@@ -39,26 +39,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListTodoResponse'
-              examples:
-                firstPage:
-                  value:
-                    currentPage: 1
-                    nextPage: 2
-                    data:
-                      - id: 1
-                        title: Title 1
-                        description: Description 2
-                      - id: 2
-                        title: Title 2
-                        description: Description 2
-                lastPage:
-                  value:
-                    currentPage: 25
-                    nextPage: null
-                    data:
-                      - id: 500
-                        title: Title 500
-                        description: Description 500
         '400':
           $ref: '#/components/responses/BadRequest'
     post:
@@ -106,26 +86,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListTodoInfiniteResponse'
-              examples:
-                firstPage:
-                  value:
-                    currentPage: 1
-                    nextPage: 2
-                    data:
-                      - id: 1
-                        title: Title 1
-                        description: Description 2
-                      - id: 2
-                        title: Title 2
-                        description: Description 2
-                lastPage:
-                  value:
-                    currentPage: 25
-                    nextPage: null
-                    data:
-                      - id: 500
-                        title: Title 500
-                        description: Description 500
         '400':
           $ref: '#/components/responses/BadRequest'
   '/todos/{todoId}':
@@ -239,7 +199,7 @@ components:
         totalPages:
           type: number
           description: Total pages
-        contents:
+        content:
           type: array
           items:
             $ref: '#/components/schemas/Todo'

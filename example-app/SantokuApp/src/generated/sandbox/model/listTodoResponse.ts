@@ -23,7 +23,7 @@ export interface ListTodoResponse {
   totalElements?: number;
   /** Total pages */
   totalPages?: number;
-  contents?: Todo[];
+  content?: Todo[];
   /** Whether the content is empty */
   empty?: boolean;
   /** Whether this page is the first page */
