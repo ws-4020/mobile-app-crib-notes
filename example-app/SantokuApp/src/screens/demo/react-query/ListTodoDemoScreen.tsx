@@ -11,6 +11,14 @@ import {useQueryClient} from 'react-query';
 import {CreateTodoDemoScreen} from './CreateTodoDemoScreen';
 import {EditTodoDemoScreen} from './EditTodoDemoScreen';
 
+const LoadingIndicator = () => {
+  return (
+    <View style={styles.indicatorContainer}>
+      <ActivityIndicator size="large" color="blue" />
+    </View>
+  );
+};
+
 const ScreenName = 'ListTodoDemo';
 const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -82,14 +90,6 @@ const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof 
     [onPressTodoItem],
   );
 
-  const renderLoadingIndicator = useCallback(() => {
-    return (
-      <View style={styles.indicatorContainer}>
-        <ActivityIndicator size="large" color="blue" />
-      </View>
-    );
-  }, []);
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -98,7 +98,7 @@ const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof 
         <Text>isFetching: {isFetching ? 'true' : 'false'}</Text>
       </View>
       <View style={styles.body}>
-        {isLoading && renderLoadingIndicator()}
+        {isLoading && <LoadingIndicator />}
         {isSuccess && (
           <>
             {todos && (
@@ -110,7 +110,7 @@ const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof 
               />
             )}
             {!todos && <Text>Todoが登録されていません。</Text>}
-            {isFetching && renderLoadingIndicator()}
+            {isFetching && <LoadingIndicator />}
             <FAB title="Create Todo" placement="right" onPress={onCreate} />
           </>
         )}
