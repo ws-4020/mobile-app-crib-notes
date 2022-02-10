@@ -304,6 +304,14 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'HTTP API通信',
+          items: [
+            'react-native/santoku/application-architecture/http-api/overview',
+            'react-native/santoku/application-architecture/http-api/http-api-react-query',
+          ],
+        },
+        {
+          type: 'category',
           label: 'ディープリンク',
           items: [
             'react-native/santoku/application-architecture/deep-link/overview',
