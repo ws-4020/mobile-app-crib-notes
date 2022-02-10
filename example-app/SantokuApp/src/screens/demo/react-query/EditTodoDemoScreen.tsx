@@ -16,7 +16,7 @@ import {Input, Text} from 'react-native-elements';
 
 const ScreenName = 'EditTodoDemo';
 const Screen = ({navigation, route}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
-  const todoId = route.params.todoId.toString();
+  const todoId = route.params.todoId;
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();

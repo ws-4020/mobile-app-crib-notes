@@ -95,7 +95,7 @@ paths:
         description: Todo ID
         required: true
         schema:
-          type: string
+          type: number
     get:
       summary: Get todo
       description: Get todo

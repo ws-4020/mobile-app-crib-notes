@@ -165,18 +165,18 @@ export const useListTodoByCursorInfinite = <
 export const useGetTodoHook = () => {
   const getTodo = useSandboxCustomInstance<Todo>();
 
-  return (todoId: string) => {
+  return (todoId: number) => {
     return getTodo({url: `/todos/${todoId}`, method: 'get'});
   };
 };
 
-export const getGetTodoQueryKey = (todoId: string) => [`/todos/${todoId}`];
+export const getGetTodoQueryKey = (todoId: number) => [`/todos/${todoId}`];
 
 export const useGetTodo = <
   TData = AsyncReturnType<ReturnType<typeof useGetTodoHook>>,
   TError = ErrorType<NotFoundResponse>,
 >(
-  todoId: string,
+  todoId: number,
   options?: {query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useGetTodoHook>>, TError, TData>},
 ): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
@@ -206,7 +206,7 @@ export const useGetTodo = <
 export const usePutTodoHook = () => {
   const putTodo = useSandboxCustomInstance<Todo>();
 
-  return (todoId: string, todoRegistration: TodoRegistration) => {
+  return (todoId: number, todoRegistration: TodoRegistration) => {
     return putTodo({url: `/todos/${todoId}`, method: 'put', data: todoRegistration});
   };
 };
@@ -215,7 +215,7 @@ export const usePutTodo = <TError = ErrorType<BadRequestResponse | NotFoundRespo
   mutation?: UseMutationOptions<
     AsyncReturnType<ReturnType<typeof usePutTodoHook>>,
     TError,
-    {todoId: string; data: TodoRegistration},
+    {todoId: number; data: TodoRegistration},
     TContext
   >;
 }) => {
@@ -225,14 +225,14 @@ export const usePutTodo = <TError = ErrorType<BadRequestResponse | NotFoundRespo
 
   const mutationFn: MutationFunction<
     AsyncReturnType<ReturnType<typeof usePutTodoHook>>,
-    {todoId: string; data: TodoRegistration}
+    {todoId: number; data: TodoRegistration}
   > = props => {
     const {todoId, data} = props || {};
 
     return putTodo(todoId, data);
   };
 
-  return useMutation<AsyncReturnType<typeof putTodo>, TError, {todoId: string; data: TodoRegistration}, TContext>(
+  return useMutation<AsyncReturnType<typeof putTodo>, TError, {todoId: number; data: TodoRegistration}, TContext>(
     mutationFn,
     mutationOptions,
   );
@@ -245,7 +245,7 @@ export const usePutTodo = <TError = ErrorType<BadRequestResponse | NotFoundRespo
 export const useDeleteTodoHook = () => {
   const deleteTodo = useSandboxCustomInstance<void>();
 
-  return (todoId: string) => {
+  return (todoId: number) => {
     return deleteTodo({url: `/todos/${todoId}`, method: 'delete'});
   };
 };
@@ -254,7 +254,7 @@ export const useDeleteTodo = <TError = ErrorType<NotFoundResponse>, TContext = u
   mutation?: UseMutationOptions<
     AsyncReturnType<ReturnType<typeof useDeleteTodoHook>>,
     TError,
-    {todoId: string},
+    {todoId: number},
     TContext
   >;
 }) => {
@@ -264,14 +264,14 @@ export const useDeleteTodo = <TError = ErrorType<NotFoundResponse>, TContext = u
 
   const mutationFn: MutationFunction<
     AsyncReturnType<ReturnType<typeof useDeleteTodoHook>>,
-    {todoId: string}
+    {todoId: number}
   > = props => {
     const {todoId} = props || {};
 
     return deleteTodo(todoId);
   };
 
-  return useMutation<AsyncReturnType<typeof deleteTodo>, TError, {todoId: string}, TContext>(
+  return useMutation<AsyncReturnType<typeof deleteTodo>, TError, {todoId: number}, TContext>(
     mutationFn,
     mutationOptions,
   );
