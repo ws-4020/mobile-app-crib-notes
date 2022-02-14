@@ -1,17 +1,23 @@
+import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Button} from 'components/button/Button';
 import {useLoadingOverlay} from 'components/overlay';
 import {useMutationWithResetQueries} from 'framework/backend';
 import {getListTodoByCursorQueryKey, usePostTodo} from 'generated/sandbox/api';
-import {DemoStackParamList} from 'navigation/types';
+import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React, {useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input} from 'react-native-elements';
 
 import {EditTodoDemoScreen} from './EditTodoDemoScreen';
 
+type Props = CompositeScreenProps<
+  NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
 const ScreenName = 'CreateTodoDemo';
-const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
+const Screen: React.FC<Props> = ({navigation}) => {
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
   const loadingOverlay = useLoadingOverlay();

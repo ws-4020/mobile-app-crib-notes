@@ -1,12 +1,19 @@
+import {CompositeScreenProps} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useListTodo} from 'generated/sandbox/api';
-import {DemoStackParamList} from 'navigation/types';
+import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React, {useCallback, useMemo, useState} from 'react';
 import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Text, Button} from 'react-native-elements';
 import {useQueryClient} from 'react-query';
 
+type Props = CompositeScreenProps<
+  NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
 const ScreenName = 'DisabledQueryDemo';
-const Screen = () => {
+const Screen: React.FC<Props> = () => {
   const [queryEnabled, setQueryEnabled] = useState<boolean>(false);
   const [queryLog, setQueryLog] = useState<string[]>([]);
   const addQueryLog = useCallback((log: string) => {

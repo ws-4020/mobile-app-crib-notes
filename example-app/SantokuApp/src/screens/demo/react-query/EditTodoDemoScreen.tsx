@@ -1,3 +1,4 @@
+import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Button} from 'components/button/Button';
 import {useLoadingOverlay} from 'components/overlay';
@@ -9,13 +10,18 @@ import {
   useGetTodo,
   usePutTodo,
 } from 'generated/sandbox/api';
-import {DemoStackParamList} from 'navigation/types';
+import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {Input, Text} from 'react-native-elements';
 
+type Props = CompositeScreenProps<
+  NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
 const ScreenName = 'EditTodoDemo';
-const Screen = ({navigation, route}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
+const Screen: React.FC<Props> = ({navigation, route}) => {
   const todoId = route.params.todoId;
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [title, setTitle] = useState<string>();

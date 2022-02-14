@@ -1,7 +1,8 @@
+import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useListTodoByCursorInfinite} from 'generated/sandbox/api';
 import {Todo} from 'generated/sandbox/model';
-import {DemoStackParamList} from 'navigation/types';
+import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React, {useCallback, useMemo, useState} from 'react';
 import {ActivityIndicator, Pressable, RefreshControl, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Icon, ListItem, Text, FAB, Button} from 'react-native-elements';
@@ -19,8 +20,13 @@ const LoadingIndicator = () => {
   );
 };
 
+type Props = CompositeScreenProps<
+  NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
 const ScreenName = 'ListTodoDemo';
-const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
+const Screen: React.FC<Props> = ({navigation}) => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const {status, isLoading, isFetching, isSuccess, isError, data, refetch, hasNextPage, fetchNextPage} =

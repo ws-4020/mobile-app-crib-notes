@@ -1,11 +1,18 @@
-import {DemoStackParamList} from 'navigation/types';
+import {CompositeScreenProps} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React from 'react';
 import {Alert, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Text, Button} from 'react-native-elements';
 import {useQuery} from 'react-query';
 
+type Props = CompositeScreenProps<
+  NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
 const ScreenName = 'DisableErrorHandlerDemo';
-const Screen = () => {
+const Screen: React.FC<Props> = () => {
   const queryFn = () => {
     throw new Error('リクエストエラー');
   };
@@ -63,7 +70,6 @@ const styles = StyleSheet.create({
   block: {
     marginVertical: 8,
   },
-  footer: {},
   buttons: {
     flexDirection: 'row',
     alignItems: 'center',

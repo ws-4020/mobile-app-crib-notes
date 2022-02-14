@@ -1,5 +1,6 @@
+import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {DemoStackParamList} from 'navigation/types';
+import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
@@ -9,8 +10,13 @@ import {DisableErrorHandlerDemoScreen} from './DisableErrorHandlerDemoScreen';
 import {DisabledQueryDemoScreen} from './DisabledQueryDemoScreen';
 import {ListTodoDemoScreen} from './ListTodoDemoScreen';
 
+type Props = CompositeScreenProps<
+  NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
 const ScreenName = 'ReactQueryDemo';
-const Screen = ({navigation}: NativeStackScreenProps<DemoStackParamList, typeof ScreenName>) => {
+const Screen: React.FC<Props> = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.item}>
