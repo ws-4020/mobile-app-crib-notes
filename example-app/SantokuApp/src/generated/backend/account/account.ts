@@ -175,7 +175,7 @@ export const useGetAccountsAccountId = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsAccountIdHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {enabled: !!accountId, retry: false, ...queryOptions},
+    {enabled: !!accountId, ...queryOptions},
   );
 
   return {
@@ -220,7 +220,7 @@ export const useGetAccountsAccountIdAvatar = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsAccountIdAvatarHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {enabled: !!accountId, retry: false, ...queryOptions},
+    {enabled: !!accountId, ...queryOptions},
   );
 
   return {
@@ -258,10 +258,11 @@ export const useGetAccountsMe = <
 
   const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetAccountsMeHook>>> = () => getAccountsMe();
 
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsMeHook>>, TError, TData>(queryKey, queryFn, {
-    retry: false,
-    ...queryOptions,
-  });
+  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsMeHook>>, TError, TData>(
+    queryKey,
+    queryFn,
+    queryOptions,
+  );
 
   return {
     queryKey,
@@ -302,7 +303,7 @@ export const useGetAccountsMeAvatar = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsMeAvatarHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {retry: false, ...queryOptions},
+    queryOptions,
   );
 
   return {
@@ -427,7 +428,7 @@ export const useGetAccountsMeTerms = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsMeTermsHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {retry: false, ...queryOptions},
+    queryOptions,
   );
 
   return {

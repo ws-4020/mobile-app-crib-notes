@@ -39,10 +39,11 @@ export const useGetCsrfToken = <
 
   const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetCsrfTokenHook>>> = () => getCsrfToken();
 
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetCsrfTokenHook>>, TError, TData>(queryKey, queryFn, {
-    retry: false,
-    ...queryOptions,
-  });
+  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetCsrfTokenHook>>, TError, TData>(
+    queryKey,
+    queryFn,
+    queryOptions,
+  );
 
   return {
     queryKey,

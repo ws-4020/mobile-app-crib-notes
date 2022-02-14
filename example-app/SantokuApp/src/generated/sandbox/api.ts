@@ -61,10 +61,11 @@ export const useListTodo = <
 
   const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useListTodoHook>>> = () => listTodo(params);
 
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useListTodoHook>>, TError, TData>(queryKey, queryFn, {
-    retry: false,
-    ...queryOptions,
-  });
+  const query = useQuery<AsyncReturnType<ReturnType<typeof useListTodoHook>>, TError, TData>(
+    queryKey,
+    queryFn,
+    queryOptions,
+  );
 
   return {
     queryKey,
@@ -149,7 +150,7 @@ export const useListTodoByCursorInfinite = <
   const query = useInfiniteQuery<AsyncReturnType<ReturnType<typeof useListTodoByCursorHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {retry: false, ...queryOptions},
+    queryOptions,
   );
 
   return {
@@ -189,7 +190,6 @@ export const useGetTodo = <
 
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTodoHook>>, TError, TData>(queryKey, queryFn, {
     enabled: !!todoId,
-    retry: false,
     ...queryOptions,
   });
 

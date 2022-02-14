@@ -13,9 +13,6 @@ export default defineConfig({
       override: {
         query: {
           useQuery: true,
-          options: {
-            retry: false,
-          },
         },
         mutator: {
           path: 'src/framework/backend/useCustomInstance.ts',
@@ -39,9 +36,6 @@ export default defineConfig({
       override: {
         query: {
           useQuery: true,
-          options: {
-            retry: false,
-          },
         },
         mutator: {
           path: 'src/framework/backend/useCustomInstance.ts',
@@ -53,9 +47,6 @@ export default defineConfig({
               useQuery: false,
               useInfinite: true,
               useInfiniteQueryParam: 'cursor',
-              options: {
-                retry: false,
-              },
             },
           },
         },

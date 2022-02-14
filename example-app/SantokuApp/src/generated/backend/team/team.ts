@@ -89,7 +89,6 @@ export const useGetTeamsTeamId = <
 
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdHook>>, TError, TData>(queryKey, queryFn, {
     enabled: !!teamId,
-    retry: false,
     ...queryOptions,
   });
 
@@ -219,7 +218,7 @@ export const useGetTeamsTeamIdTimetableTemplates = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetableTemplatesHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {enabled: !!teamId, retry: false, ...queryOptions},
+    {enabled: !!teamId, ...queryOptions},
   );
 
   return {
@@ -321,7 +320,7 @@ export const useGetTeamsTeamIdTimetableTemplatesTemplateId = <
     AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetableTemplatesTemplateIdHook>>,
     TError,
     TData
-  >(queryKey, queryFn, {enabled: !!(teamId && templateId), retry: false, ...queryOptions});
+  >(queryKey, queryFn, {enabled: !!(teamId && templateId), ...queryOptions});
 
   return {
     queryKey,
@@ -420,7 +419,7 @@ export const useGetTeamsTeamIdTimetablesTimetableId = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetablesTimetableIdHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {enabled: !!(teamId && timetableId), retry: false, ...queryOptions},
+    {enabled: !!(teamId && timetableId), ...queryOptions},
   );
 
   return {
@@ -509,7 +508,7 @@ export const useGetTeamsTeamIdTimetables = <
   const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetablesHook>>, TError, TData>(
     queryKey,
     queryFn,
-    {enabled: !!teamId, retry: false, ...queryOptions},
+    {enabled: !!teamId, ...queryOptions},
   );
 
   return {

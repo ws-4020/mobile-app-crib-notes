@@ -40,10 +40,11 @@ export const useGetTerms = <
 
   const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetTermsHook>>> = () => getTerms();
 
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTermsHook>>, TError, TData>(queryKey, queryFn, {
-    retry: false,
-    ...queryOptions,
-  });
+  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTermsHook>>, TError, TData>(
+    queryKey,
+    queryFn,
+    queryOptions,
+  );
 
   return {
     queryKey,
