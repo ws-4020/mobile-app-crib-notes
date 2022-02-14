@@ -60,10 +60,10 @@ React Queryを使用すると、エラーのハンドリングやローディン
 
 ![React Queryの仕組み](react-query.drawio.png)
 
-- `useQuery`フックを呼びだすと、`QueryObserver`が作成されます。`QueryObserver`は、コンポーネントの`state`として管理されます。
-- `QueryObserver`は`QueryCache`から`Query`を取得します。`QueryCache`はクエリキーに対する`Query`がキャッシュにあればそれを返し、なければ生成します。
-- `QueryObserver`は`Query`の変更を観察し、変更があればそれをリスナー（`useQuery`内部の関数）に通知します。
-- リスナーは、`Query`の状態変更を受けてコンポーネントを再レンダリングします。
+`useQuery`フックを呼びだすと、`QueryObserver`が作成されます。`QueryObserver`は、コンポーネントの`state`として管理されます。
+`QueryObserver`は`QueryCache`から`Query`を取得します。`QueryCache`はクエリキーに対する`Query`がキャッシュにあればそれを返し、なければ生成します。
+`QueryObserver`は`Query`の変更を観察し、変更があればそれをリスナー（`useQuery`内部の関数）に通知します。
+リスナーは、`Query`の状態変更を受けてコンポーネントを再レンダリングします。
 
 上記説明から分かる通り、React Queryはクエリキーで`Query`を一元的に管理します。
 複数のコンポーネントから同じクエリキーを使用して`useQuery`フックを呼びだすと、1つの`Query`の状態をそれぞれのコンポーネントが共有することに注意してください。
