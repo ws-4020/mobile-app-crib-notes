@@ -5,6 +5,7 @@
     "android": "react-native run-android --appId jp.fintan.mobile.SantokuApp --variant devSantokuAppDebug --appIdSuffix dev.debug",
     "android:debugAdvanced": "react-native run-android --appId jp.fintan.mobile.SantokuApp --variant devSantokuAppDebugAdvanced --appIdSuffix dev.debugAdvanced",
     "ios": "react-native run-ios --scheme DevSantokuApp --configuration Debug",
+    "ios:debugAdvanced": "react-native run-ios --scheme DevSantokuApp --configuration DebugAdvanced",
     "web": "expo start --web",
     "start": "react-native start",
     "test": "jest --detectOpenHandles --runInBand",
