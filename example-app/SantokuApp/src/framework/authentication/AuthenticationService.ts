@@ -1,9 +1,4 @@
-import {
-  useGetCsrfTokenService,
-  usePostLoginService,
-  usePostLogoutService,
-  usePostSignupService,
-} from 'framework/backend';
+import {useGetCsrfTokenService, usePostLoginService, usePostLogoutService, usePostSignupService} from 'service/backend';
 
 import {ApplicationError} from '../error/ApplicationError';
 import {SecureStorageAdapter} from './SecureStorageAdapter';

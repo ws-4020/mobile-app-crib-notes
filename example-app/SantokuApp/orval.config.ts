@@ -3,7 +3,8 @@ import {defineConfig} from 'orval';
 export default defineConfig({
   backend: {
     output: {
-      mode: 'split',
+      mode: 'tags-split',
+      clean: true,
       target: 'src/generated/backend/api.ts',
       schemas: 'src/generated/backend/model',
       client: 'react-query',
@@ -29,6 +30,7 @@ export default defineConfig({
   sandbox: {
     output: {
       mode: 'split',
+      clean: true,
       target: 'src/generated/sandbox/api.ts',
       schemas: 'src/generated/sandbox/model',
       client: 'react-query',

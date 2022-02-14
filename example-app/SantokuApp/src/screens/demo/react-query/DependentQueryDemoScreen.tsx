@@ -1,11 +1,11 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useGetTodoDetailsService} from 'framework/backend';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React, {useCallback, useState} from 'react';
 import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 import {useQueryClient} from 'react-query';
+import {useGetTodoDetailsService} from 'service/backend';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,

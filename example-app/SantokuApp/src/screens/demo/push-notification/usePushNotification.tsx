@@ -1,8 +1,8 @@
 import messaging from '@react-native-firebase/messaging';
 import axios, {AxiosError} from 'axios';
-import {usePostAccountsMeDeviceTokenService} from 'framework/backend';
 import {ErrorResponse} from 'generated/backend/model';
 import {useCallback, useState} from 'react';
+import {usePostAccountsMeDeviceTokenService} from 'service/backend';
 
 import {AppConfig} from '../../../framework';
 
