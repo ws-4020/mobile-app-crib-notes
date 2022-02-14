@@ -36,7 +36,9 @@ const getDefaultAxiosConfig = () => {
 // orval実行時に "Your mutator cannot be loaded so default setup has been applied" の警告が出る。
 // しかし自動生成されたファイルには正しく反映され、アプリ実行時には正しく読み込まれて利用される。
 // https://github.com/anymaniax/orval/issues/257
-const useCustomInstance = <T>(axiosInstance: AxiosInstance): ((config: AxiosRequestConfig) => Promise<T>) => {
+const useCustomInstance = <T>(
+  axiosInstance: AxiosInstance,
+): ((config: AxiosRequestConfig) => Promise<AxiosResponse<T>>) => {
   const defaultAxiosConfig = getDefaultAxiosConfig();
   return async (config: AxiosRequestConfig) => {
     // TODO: React Native / Expo のバージョンアップ時にJestを27以降にバージョンアップできたらCancelTokenからAbortControllerへ移行する
@@ -47,10 +49,9 @@ const useCustomInstance = <T>(axiosInstance: AxiosInstance): ((config: AxiosRequ
       cancelToken: source.token,
     };
     const axiosPromise = axiosInstance(requestConfig);
-    // AxiosResponseではなくその中のデータだけを返すようにする
     const promise = axiosPromise.then((response: AxiosResponse<T> | undefined) => {
       if (response) {
-        return response.data;
+        return response;
       }
       // CancelTokenでcancelした場合やAbortControllerでabortした場合はcatchに来るのではなくthenに来てresponseがundefinedになる
       throw new ApplicationError('Request Timeout');
@@ -80,11 +81,11 @@ const useCustomInstance = <T>(axiosInstance: AxiosInstance): ((config: AxiosRequ
   };
 };
 
-const useBackendCustomInstance = <T>(): ((config: AxiosRequestConfig) => Promise<T>) => {
+const useBackendCustomInstance = <T>(): ((config: AxiosRequestConfig) => Promise<AxiosResponse<T>>) => {
   return useCustomInstance(BACKEND_AXIOS_INSTANCE);
 };
 
-const useSandboxCustomInstance = <T>(): ((config: AxiosRequestConfig) => Promise<T>) => {
+const useSandboxCustomInstance = <T>(): ((config: AxiosRequestConfig) => Promise<AxiosResponse<T>>) => {
   return useCustomInstance(SANDBOX_AXIOS_INSTANCE);
 };
 

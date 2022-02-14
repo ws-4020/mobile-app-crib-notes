@@ -2,14 +2,7 @@ import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Button} from 'components/button/Button';
 import {useLoadingOverlay} from 'components/overlay';
-import {useMutationWithResetQueries} from 'framework/backend';
-import {
-  getGetTodoQueryKey,
-  getListTodoByCursorQueryKey,
-  useDeleteTodo,
-  useGetTodo,
-  usePutTodo,
-} from 'generated/sandbox/api';
+import {useDeleteTodoService, useGetTodoService, usePutTodoService} from 'framework/backend';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
@@ -28,9 +21,9 @@ const Screen: React.FC<Props> = ({navigation, route}) => {
   const [description, setDescription] = useState<string>();
 
   const loadingOverlay = useLoadingOverlay();
-  const {isLoading, isSuccess, data: todo} = useGetTodo(todoId);
-  const putTodo = useMutationWithResetQueries(usePutTodo, [getListTodoByCursorQueryKey(), getGetTodoQueryKey(todoId)]);
-  const deleteTodo = useMutationWithResetQueries(useDeleteTodo, [getListTodoByCursorQueryKey()]);
+  const {isLoading, isSuccess, data: todo} = useGetTodoService(todoId);
+  const putTodo = usePutTodoService();
+  const deleteTodo = useDeleteTodoService();
 
   const onEdit = useCallback(() => {
     setIsEdit(true);

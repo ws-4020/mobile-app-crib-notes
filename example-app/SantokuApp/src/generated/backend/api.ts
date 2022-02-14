@@ -627,28 +627,28 @@ export const useGetTerms = <
 
  * @summary チーム登録
  */
-export const useGetTeamsHook = () => {
-  const getTeams = useBackendCustomInstance<Team>();
+export const usePostTeamsHook = () => {
+  const postTeams = useBackendCustomInstance<Team>();
 
   return (team: Team) => {
-    return getTeams({url: `/teams`, method: 'post', data: team});
+    return postTeams({url: `/teams`, method: 'post', data: team});
   };
 };
 
-export const useGetTeams = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<AsyncReturnType<ReturnType<typeof useGetTeamsHook>>, TError, {data: Team}, TContext>;
+export const usePostTeams = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<AsyncReturnType<ReturnType<typeof usePostTeamsHook>>, TError, {data: Team}, TContext>;
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const getTeams = useGetTeamsHook();
+  const postTeams = usePostTeamsHook();
 
-  const mutationFn: MutationFunction<AsyncReturnType<ReturnType<typeof useGetTeamsHook>>, {data: Team}> = props => {
+  const mutationFn: MutationFunction<AsyncReturnType<ReturnType<typeof usePostTeamsHook>>, {data: Team}> = props => {
     const {data} = props || {};
 
-    return getTeams(data);
+    return postTeams(data);
   };
 
-  return useMutation<AsyncReturnType<typeof getTeams>, TError, {data: Team}, TContext>(mutationFn, mutationOptions);
+  return useMutation<AsyncReturnType<typeof postTeams>, TError, {data: Team}, TContext>(mutationFn, mutationOptions);
 };
 
 /**

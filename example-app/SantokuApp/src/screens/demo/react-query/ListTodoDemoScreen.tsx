@@ -1,6 +1,6 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useListTodoByCursorInfinite} from 'generated/sandbox/api';
+import {useListTodoByCursorInfiniteService} from 'framework/backend';
 import {Todo} from 'generated/sandbox/model';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React, {useCallback, useMemo, useState} from 'react';
@@ -30,13 +30,7 @@ const Screen: React.FC<Props> = ({navigation}) => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const {status, isLoading, isFetching, isSuccess, isError, data, refetch, hasNextPage, fetchNextPage} =
-    useListTodoByCursorInfinite(undefined, {
-      query: {
-        getNextPageParam: lastPage => {
-          return lastPage.nextCursor;
-        },
-      },
-    });
+    useListTodoByCursorInfiniteService();
 
   const todos = useMemo(() => {
     if (isSuccess && data) {

@@ -1,6 +1,6 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useListTodo} from 'generated/sandbox/api';
+import {useListTodoService} from 'framework/backend';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React, {useCallback, useMemo, useState} from 'react';
 import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
@@ -15,19 +15,12 @@ type Props = CompositeScreenProps<
 const ScreenName = 'DisabledQueryDemo';
 const Screen: React.FC<Props> = () => {
   const [queryEnabled, setQueryEnabled] = useState<boolean>(false);
-  const [queryLog, setQueryLog] = useState<string[]>([]);
-  const addQueryLog = useCallback((log: string) => {
-    setQueryLog(prevLogs => [...prevLogs, log]);
-  }, []);
   const queryClient = useQueryClient();
   const queryParameters = {};
 
   // Disable auto-fetch on mount
-  const {status, isIdle, isLoading, isSuccess, isError, data, refetch} = useListTodo(queryParameters, {
-    query: {
-      enabled: queryEnabled,
-      onSettled: () => addQueryLog('Fetch finished'),
-    },
+  const {status, isIdle, isLoading, isSuccess, isError, data, refetch} = useListTodoService(queryParameters, {
+    enabled: queryEnabled,
   });
 
   const todos = useMemo(() => {
@@ -36,7 +29,6 @@ const Screen: React.FC<Props> = () => {
 
   const reset = useCallback(async () => {
     await queryClient.resetQueries();
-    setQueryLog([]);
   }, [queryClient]);
 
   return (
@@ -53,14 +45,6 @@ const Screen: React.FC<Props> = () => {
               return <Text key={index}>{todo.title}</Text>;
             })}
           {isError && <Text>Todo一覧の取得に失敗しました</Text>}
-        </ScrollView>
-      </View>
-      <View style={styles.block}>
-        <Text h4>Query Logs</Text>
-        <ScrollView>
-          {queryLog.map((log, index) => {
-            return <Text key={index}>{log}</Text>;
-          })}
         </ScrollView>
       </View>
       <View style={styles.footer}>

@@ -1,11 +1,11 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {getGetTodoQueryKey, useGetTodoHook, useListTodo} from 'generated/sandbox/api';
+import {useGetTodoDetailsService} from 'framework/backend';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
-import {useQueries, useQueryClient} from 'react-query';
+import {useQueryClient} from 'react-query';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
@@ -15,80 +15,39 @@ type Props = CompositeScreenProps<
 const ScreenName = 'DependentQueryDemo';
 const Screen: React.FC<Props> = () => {
   const [queryEnabled, setQueryEnabled] = useState<boolean>(false);
-  const [queryLog, setQueryLog] = useState<string[]>([]);
-  const addQueryLog = useCallback((log: string) => {
-    setQueryLog(prevLogs => [...prevLogs, log]);
-  }, []);
   const queryClient = useQueryClient();
   const queryParameters = {page: 1, size: 5};
 
-  const listTodoQuery = useListTodo(queryParameters, {
-    query: {
-      enabled: queryEnabled,
-      onSettled: () => addQueryLog('listTodoQuery finished.'),
-    },
-  });
-
-  const todos = useMemo(() => {
-    return listTodoQuery.isSuccess ? listTodoQuery.data.content ?? [] : [];
-  }, [listTodoQuery]);
-
-  const getTodoHook = useGetTodoHook();
-  const getTodoQueries = useQueries(
-    todos.map(todo => {
-      return {
-        queryKey: getGetTodoQueryKey(todo.id),
-        queryFn: () => getTodoHook(todo.id),
-        onSettled: () => addQueryLog(`getTodoQuery finished. (id=${todo.id})`),
-      };
-    }),
-  );
-
-  const getTodoQueriesStatus = useMemo(() => {
-    if (getTodoQueries.every(query => query.isIdle)) {
-      return 'idle';
-    } else if (getTodoQueries.some(query => query.isLoading)) {
-      return 'loading';
-    } else if (getTodoQueries.every(query => query.isSuccess)) {
-      return 'success';
-    } else {
-      return 'error';
-    }
-  }, [getTodoQueries]);
+  const {
+    isIdle,
+    isLoading,
+    isSuccess,
+    isError,
+    data: todos,
+  } = useGetTodoDetailsService(queryParameters, {enabled: queryEnabled});
 
   const reset = useCallback(async () => {
     setQueryEnabled(false);
     await queryClient.resetQueries();
-    setQueryLog([]);
   }, [queryClient]);
 
   return (
     <View style={styles.container}>
       <View>
         <Text h4>Query Status</Text>
-        <Text>listTodoQuery Status: {listTodoQuery.status}</Text>
-        <Text>getTodoQueries Status: {getTodoQueriesStatus}</Text>
+        <Text>{`isIdle: ${isIdle.toString()}, isLoading: ${isLoading.toString()}, isSuccess: ${isSuccess.toString()}, isError: ${isError.toString()}`}</Text>
       </View>
       <View style={styles.block}>
         <Text h4>Query Data</Text>
         <ScrollView>
-          {listTodoQuery.isLoading && <ActivityIndicator size="large" />}
-          {listTodoQuery.isSuccess && <Text>Todo一覧取得件数: {listTodoQuery.data.content?.length}</Text>}
-          {listTodoQuery.isError && <Text>Todo一覧の取得に失敗しました</Text>}
+          {isLoading && <ActivityIndicator size="large" />}
+          {isError && <Text>Todo一覧の取得に失敗しました</Text>}
           <Text>Todo詳細取得結果</Text>
           <View style={styles.details}>
-            {getTodoQueries.map((query, index) => {
-              return <Text key={index}>{query.data?.title}</Text>;
+            {todos.map((todo, index) => {
+              return <Text key={index}>{todo?.title}</Text>;
             })}
           </View>
-        </ScrollView>
-      </View>
-      <View style={styles.block}>
-        <Text h4>Query Logs</Text>
-        <ScrollView>
-          {queryLog.map((log, index) => {
-            return <Text key={index}>{log}</Text>;
-          })}
         </ScrollView>
       </View>
       <View style={styles.buttons}>
