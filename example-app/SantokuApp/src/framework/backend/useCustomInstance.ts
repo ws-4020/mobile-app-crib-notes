@@ -1,6 +1,6 @@
 import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {applicationName, nativeApplicationVersion} from 'expo-application';
-import {ApplicationError} from 'framework/error/ApplicationError';
+import {RequestTimeoutError} from 'framework/error/RequestTimeoutError';
 import {Platform} from 'react-native';
 
 import {AppConfig} from '../config';
@@ -48,14 +48,7 @@ const useCustomInstance = <T>(
       ...config,
       cancelToken: source.token,
     };
-    const axiosPromise = axiosInstance(requestConfig);
-    const promise = axiosPromise.then((response: AxiosResponse<T> | undefined) => {
-      if (response) {
-        return response;
-      }
-      // CancelTokenでcancelした場合やAbortControllerでabortした場合はcatchに来るのではなくthenに来てresponseがundefinedになる
-      throw new ApplicationError('Request Timeout');
-    });
+    const promise = axiosInstance(requestConfig);
 
     // @ts-ignore
     promise.cancel = () => {
@@ -65,13 +58,21 @@ const useCustomInstance = <T>(
     let timeoutId;
     if (REQUEST_TIMEOUT) {
       timeoutId = setTimeout(() => {
-        source.cancel('Query was cancelled by React Query');
+        source.cancel('Query was cancelled by Request Timeout');
       }, REQUEST_TIMEOUT);
     }
 
     try {
       return await promise;
     } catch (error) {
+      // TODO: AbortControllerへの移行時に処理を見直す
+      // AbortControllerでabortした場合はErrorにはならず、responseがundefinedになる
+      if (Axios.isCancel(error)) {
+        const cancelError = error as {message: string};
+        if (cancelError.message === 'Query was cancelled by Request Timeout') {
+          throw new RequestTimeoutError('Request Timeout');
+        }
+      }
       throw error;
     } finally {
       if (timeoutId) {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {RequestTimeoutError} from 'framework/error/RequestTimeoutError';
 import {ErrorResponse} from 'generated/backend/model';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
@@ -48,6 +49,10 @@ const useBaseErrorHandler = () => {
   }, [snackbar]);
 
   const showGatewayTimeout = useCallback(() => {
+    snackbar.show(m('fw.error.リクエストタイムアウト'));
+  }, [snackbar]);
+
+  const showRequestTimeout = useCallback(() => {
     snackbar.show(m('fw.error.リクエストタイムアウト'));
   }, [snackbar]);
 
@@ -101,6 +106,9 @@ const useBaseErrorHandler = () => {
             showUnexpectedError(error);
             break;
         }
+      } else if (error instanceof RequestTimeoutError) {
+        // 時間をおいてから再操作をするように促すスナックバーを表示
+        showRequestTimeout();
       } else {
         // 想定外のエラーが発生したことを伝えるスナックバーを表示し、Firebase Clashlyticsへログを送信
         showUnexpectedError(error);
@@ -109,6 +117,7 @@ const useBaseErrorHandler = () => {
     [
       showGatewayTimeout,
       showMaintenance,
+      showRequestTimeout,
       showRequireTermsOfServiceAgreementDialog,
       showTooManyRequests,
       showUnexpectedError,
