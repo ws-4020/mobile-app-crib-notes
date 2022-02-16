@@ -28,7 +28,7 @@ import type {
   ListTodoByCursorParams,
   NotFoundResponse,
 } from './model';
-import {useSandboxCustomInstance, ErrorType} from '../../framework/backend/useCustomInstance';
+import {sandboxCustomInstance, ErrorType} from '../../framework/backend/useCustomInstance';
 
 type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...args: any) => Promise<infer R> ? R : any;
 
@@ -36,36 +36,23 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...a
  * List todo
  * @summary List todo
  */
-export const useListTodoHook = () => {
-  const listTodo = useSandboxCustomInstance<ListTodoResponse>();
-
-  return (params?: ListTodoParams) => {
-    return listTodo({url: `/todos`, method: 'get', params});
-  };
+export const listTodo = (params?: ListTodoParams) => {
+  return sandboxCustomInstance<ListTodoResponse>({url: `/todos`, method: 'get', params});
 };
 
 export const getListTodoQueryKey = (params?: ListTodoParams) => [`/todos`, ...(params ? [params] : [])];
 
-export const useListTodo = <
-  TData = AsyncReturnType<ReturnType<typeof useListTodoHook>>,
-  TError = ErrorType<BadRequestResponse>,
->(
+export const useListTodo = <TData = AsyncReturnType<typeof listTodo>, TError = ErrorType<BadRequestResponse>>(
   params?: ListTodoParams,
-  options?: {query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useListTodoHook>>, TError, TData>},
+  options?: {query?: UseQueryOptions<AsyncReturnType<typeof listTodo>, TError, TData>},
 ): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getListTodoQueryKey(params);
 
-  const listTodo = useListTodoHook();
+  const queryFn: QueryFunction<AsyncReturnType<typeof listTodo>> = () => listTodo(params);
 
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useListTodoHook>>> = () => listTodo(params);
-
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useListTodoHook>>, TError, TData>(
-    queryKey,
-    queryFn,
-    queryOptions,
-  );
+  const query = useQuery<AsyncReturnType<typeof listTodo>, TError, TData>(queryKey, queryFn, queryOptions);
 
   return {
     queryKey,
@@ -77,30 +64,16 @@ export const useListTodo = <
  * Create todo
  * @summary Create todo
  */
-export const usePostTodoHook = () => {
-  const postTodo = useSandboxCustomInstance<Todo>();
-
-  return (todoRegistration: TodoRegistration) => {
-    return postTodo({url: `/todos`, method: 'post', data: todoRegistration});
-  };
+export const postTodo = (todoRegistration: TodoRegistration) => {
+  return sandboxCustomInstance<Todo>({url: `/todos`, method: 'post', data: todoRegistration});
 };
 
 export const usePostTodo = <TError = ErrorType<BadRequestResponse>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePostTodoHook>>,
-    TError,
-    {data: TodoRegistration},
-    TContext
-  >;
+  mutation?: UseMutationOptions<AsyncReturnType<typeof postTodo>, TError, {data: TodoRegistration}, TContext>;
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const postTodo = usePostTodoHook();
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePostTodoHook>>,
-    {data: TodoRegistration}
-  > = props => {
+  const mutationFn: MutationFunction<AsyncReturnType<typeof postTodo>, {data: TodoRegistration}> = props => {
     const {data} = props || {};
 
     return postTodo(data);
@@ -116,12 +89,8 @@ export const usePostTodo = <TError = ErrorType<BadRequestResponse>, TContext = u
  * List todo by cursor
  * @summary List todo by cursor
  */
-export const useListTodoByCursorHook = () => {
-  const listTodoByCursor = useSandboxCustomInstance<ListTodoInfiniteResponse>();
-
-  return (params?: ListTodoByCursorParams) => {
-    return listTodoByCursor({url: `/todos/infinite`, method: 'get', params});
-  };
+export const listTodoByCursor = (params?: ListTodoByCursorParams) => {
+  return sandboxCustomInstance<ListTodoInfiniteResponse>({url: `/todos/infinite`, method: 'get', params});
 };
 
 export const getListTodoByCursorQueryKey = (params?: ListTodoByCursorParams) => [
@@ -130,24 +99,20 @@ export const getListTodoByCursorQueryKey = (params?: ListTodoByCursorParams) => 
 ];
 
 export const useListTodoByCursorInfinite = <
-  TData = AsyncReturnType<ReturnType<typeof useListTodoByCursorHook>>,
+  TData = AsyncReturnType<typeof listTodoByCursor>,
   TError = ErrorType<BadRequestResponse>,
 >(
   params?: ListTodoByCursorParams,
-  options?: {
-    query?: UseInfiniteQueryOptions<AsyncReturnType<ReturnType<typeof useListTodoByCursorHook>>, TError, TData>;
-  },
+  options?: {query?: UseInfiniteQueryOptions<AsyncReturnType<typeof listTodoByCursor>, TError, TData>},
 ): UseInfiniteQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getListTodoByCursorQueryKey(params);
 
-  const listTodoByCursor = useListTodoByCursorHook();
-
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useListTodoByCursorHook>>> = ({pageParam}) =>
+  const queryFn: QueryFunction<AsyncReturnType<typeof listTodoByCursor>> = ({pageParam}) =>
     listTodoByCursor({cursor: pageParam, ...params});
 
-  const query = useInfiniteQuery<AsyncReturnType<ReturnType<typeof useListTodoByCursorHook>>, TError, TData>(
+  const query = useInfiniteQuery<AsyncReturnType<typeof listTodoByCursor>, TError, TData>(
     queryKey,
     queryFn,
     queryOptions,
@@ -163,32 +128,23 @@ export const useListTodoByCursorInfinite = <
  * Get todo
  * @summary Get todo
  */
-export const useGetTodoHook = () => {
-  const getTodo = useSandboxCustomInstance<Todo>();
-
-  return (todoId: number) => {
-    return getTodo({url: `/todos/${todoId}`, method: 'get'});
-  };
+export const getTodo = (todoId: number) => {
+  return sandboxCustomInstance<Todo>({url: `/todos/${todoId}`, method: 'get'});
 };
 
 export const getGetTodoQueryKey = (todoId: number) => [`/todos/${todoId}`];
 
-export const useGetTodo = <
-  TData = AsyncReturnType<ReturnType<typeof useGetTodoHook>>,
-  TError = ErrorType<NotFoundResponse>,
->(
+export const useGetTodo = <TData = AsyncReturnType<typeof getTodo>, TError = ErrorType<NotFoundResponse>>(
   todoId: number,
-  options?: {query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useGetTodoHook>>, TError, TData>},
+  options?: {query?: UseQueryOptions<AsyncReturnType<typeof getTodo>, TError, TData>},
 ): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetTodoQueryKey(todoId);
 
-  const getTodo = useGetTodoHook();
+  const queryFn: QueryFunction<AsyncReturnType<typeof getTodo>> = () => getTodo(todoId);
 
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetTodoHook>>> = () => getTodo(todoId);
-
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTodoHook>>, TError, TData>(queryKey, queryFn, {
+  const query = useQuery<AsyncReturnType<typeof getTodo>, TError, TData>(queryKey, queryFn, {
     enabled: !!todoId,
     ...queryOptions,
   });
@@ -203,17 +159,13 @@ export const useGetTodo = <
  * Update todo
  * @summary Update todo
  */
-export const usePutTodoHook = () => {
-  const putTodo = useSandboxCustomInstance<Todo>();
-
-  return (todoId: number, todoRegistration: TodoRegistration) => {
-    return putTodo({url: `/todos/${todoId}`, method: 'put', data: todoRegistration});
-  };
+export const putTodo = (todoId: number, todoRegistration: TodoRegistration) => {
+  return sandboxCustomInstance<Todo>({url: `/todos/${todoId}`, method: 'put', data: todoRegistration});
 };
 
 export const usePutTodo = <TError = ErrorType<BadRequestResponse | NotFoundResponse>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePutTodoHook>>,
+    AsyncReturnType<typeof putTodo>,
     TError,
     {todoId: number; data: TodoRegistration},
     TContext
@@ -221,10 +173,8 @@ export const usePutTodo = <TError = ErrorType<BadRequestResponse | NotFoundRespo
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const putTodo = usePutTodoHook();
-
   const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePutTodoHook>>,
+    AsyncReturnType<typeof putTodo>,
     {todoId: number; data: TodoRegistration}
   > = props => {
     const {todoId, data} = props || {};
@@ -242,30 +192,16 @@ export const usePutTodo = <TError = ErrorType<BadRequestResponse | NotFoundRespo
  * Delete todo
  * @summary Delete todo
  */
-export const useDeleteTodoHook = () => {
-  const deleteTodo = useSandboxCustomInstance<void>();
-
-  return (todoId: number) => {
-    return deleteTodo({url: `/todos/${todoId}`, method: 'delete'});
-  };
+export const deleteTodo = (todoId: number) => {
+  return sandboxCustomInstance<void>({url: `/todos/${todoId}`, method: 'delete'});
 };
 
 export const useDeleteTodo = <TError = ErrorType<NotFoundResponse>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof useDeleteTodoHook>>,
-    TError,
-    {todoId: number},
-    TContext
-  >;
+  mutation?: UseMutationOptions<AsyncReturnType<typeof deleteTodo>, TError, {todoId: number}, TContext>;
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const deleteTodo = useDeleteTodoHook();
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof useDeleteTodoHook>>,
-    {todoId: number}
-  > = props => {
+  const mutationFn: MutationFunction<AsyncReturnType<typeof deleteTodo>, {todoId: number}> = props => {
     const {todoId} = props || {};
 
     return deleteTodo(todoId);

@@ -16,7 +16,7 @@ export default defineConfig({
         },
         mutator: {
           path: 'src/framework/backend/useCustomInstance.ts',
-          name: 'useBackendCustomInstance',
+          name: 'backendCustomInstance',
         },
       },
     },
@@ -39,7 +39,7 @@ export default defineConfig({
         },
         mutator: {
           path: 'src/framework/backend/useCustomInstance.ts',
-          name: 'useSandboxCustomInstance',
+          name: 'sandboxCustomInstance',
         },
         operations: {
           'list-todo-by-cursor': {
