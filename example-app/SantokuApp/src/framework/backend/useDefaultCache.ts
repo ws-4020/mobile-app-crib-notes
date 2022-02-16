@@ -12,7 +12,7 @@ const useDefaultQueryCache = () => {
   }, [defaultQueryErrorHandler]);
 };
 
-const useDefaultMutaitonCache = () => {
+const useDefaultMutationCache = () => {
   const defaultMutationErrorHandler = useDefaultGlobalMutationErrorHandler();
   return useMemo(() => {
     return new MutationCache({
@@ -21,4 +21,4 @@ const useDefaultMutaitonCache = () => {
   }, [defaultMutationErrorHandler]);
 };
 
-export {useDefaultQueryCache, useDefaultMutaitonCache};
+export {useDefaultQueryCache, useDefaultMutationCache};

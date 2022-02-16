@@ -109,5 +109,6 @@ export {
   useSandboxCustomInstance,
   setCsrfTokenHeader,
   setAxiosResponseInterceptor,
+  BACKEND_AXIOS_INSTANCE,
   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION,
 };

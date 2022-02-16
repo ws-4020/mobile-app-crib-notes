@@ -3,12 +3,12 @@ import React, {useCallback, useEffect, useMemo} from 'react';
 import {AppState, AppStateStatus, Platform} from 'react-native';
 import {focusManager, onlineManager, QueryClient, QueryClientProvider} from 'react-query';
 
-import {useDefaultQueryCache, useDefaultMutaitonCache} from './useDefaultCache';
+import {useDefaultQueryCache, useDefaultMutationCache} from './useDefaultCache';
 import {useDefaultOptions} from './useDefaultOptions';
 
 const WithReactQuery: React.FC = ({children}) => {
   const queryCache = useDefaultQueryCache();
-  const mutationCache = useDefaultMutaitonCache();
+  const mutationCache = useDefaultMutationCache();
   const defaultOptions = useDefaultOptions();
 
   const queryClient = useMemo(() => {
