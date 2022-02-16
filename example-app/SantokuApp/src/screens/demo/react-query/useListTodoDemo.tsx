@@ -4,9 +4,9 @@ import {useListTodoByCursorInfinite} from 'service/backend/useSandboxService';
 
 import {CreateTodoDemoScreen} from './CreateTodoDemoScreen';
 import {EditTodoDemoScreen} from './EditTodoDemoScreen';
-import {Props} from './ListTodoDemoScreen';
+import {ListTodoDemoScreenProps} from './ListTodoDemoScreen';
 
-export const useListTodoDemo = ({navigation}: Props) => {
+export const useListTodoDemo = ({navigation}: ListTodoDemoScreenProps) => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const listTodoQuery = useListTodoByCursorInfinite();

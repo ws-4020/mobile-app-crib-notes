@@ -2,9 +2,9 @@ import {useLoadingOverlay} from 'components/overlay';
 import {useCallback, useEffect, useState} from 'react';
 import {useDeleteTodo, useGetTodo, usePutTodo} from 'service/backend/useSandboxService';
 
-import {Props} from './EditTodoDemoScreen';
+import {EditTodoDemoScreenProps} from './EditTodoDemoScreen';
 
-export const useEditTodoDemo = ({navigation, route}: Props) => {
+export const useEditTodoDemo = ({navigation, route}: EditTodoDemoScreenProps) => {
   const todoId = route.params.todoId;
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [title, setTitle] = useState<string>();

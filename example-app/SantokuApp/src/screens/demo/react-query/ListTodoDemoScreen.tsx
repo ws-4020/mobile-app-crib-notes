@@ -17,13 +17,13 @@ const LoadingIndicator = () => {
   );
 };
 
-export type Props = CompositeScreenProps<
+export type ListTodoDemoScreenProps = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
   NativeStackScreenProps<RootStackParamList>
 >;
 
 const ScreenName = 'ListTodoDemo';
-const Screen: React.FC<Props> = props => {
+const Screen: React.FC<ListTodoDemoScreenProps> = props => {
   const {
     refreshing,
     listTodoQuery,

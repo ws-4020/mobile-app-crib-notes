@@ -8,13 +8,13 @@ import {Input, Text} from 'react-native-elements';
 
 import {useEditTodoDemo} from './useEditTodoDemo';
 
-export type Props = CompositeScreenProps<
+export type EditTodoDemoScreenProps = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
   NativeStackScreenProps<RootStackParamList>
 >;
 
 const ScreenName = 'EditTodoDemo';
-const Screen: React.FC<Props> = props => {
+const Screen: React.FC<EditTodoDemoScreenProps> = props => {
   const {
     isEdit,
     title,
