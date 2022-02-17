@@ -2,9 +2,10 @@ import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React from 'react';
-import {Alert, SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Text, Button} from 'react-native-elements';
-import {useQuery} from 'react-query';
+
+import {useDisableErrorHandlerDemo} from './useDisableErrorHandlerDemo';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
@@ -13,25 +14,7 @@ type Props = CompositeScreenProps<
 
 const ScreenName = 'DisableErrorHandlerDemo';
 const Screen: React.FC<Props> = () => {
-  const queryFn = () => {
-    throw new Error('リクエストエラー');
-  };
-  const defaultQuery = useQuery('dummy1', queryFn, {
-    enabled: false,
-  });
-  const customErrorQuery = useQuery('dummy2', queryFn, {
-    enabled: false,
-    onError: () => {
-      Alert.alert('カスタムエラー処理', 'エラーが発生しました');
-    },
-  });
-  const customErrorQueryWithoutGlobalErrorHandling = useQuery('dummy3', queryFn, {
-    enabled: false,
-    meta: {disableGlobalErrorHandler: true},
-    onError: () => {
-      Alert.alert('カスタムエラー処理', 'エラーが発生しました');
-    },
-  });
+  const {defaultQuery, customErrorQuery, customErrorQueryWithoutGlobalErrorHandling} = useDisableErrorHandlerDemo();
 
   return (
     <View style={styles.container}>

@@ -1,11 +1,11 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React from 'react';
 import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
-import {useQueryClient} from 'react-query';
-import {useGetTodoDetails} from 'service/backend';
+
+import {useDependentQueryDemo} from './useDependentQueryDemo';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
@@ -14,42 +14,19 @@ type Props = CompositeScreenProps<
 
 const ScreenName = 'DependentQueryDemo';
 const Screen: React.FC<Props> = () => {
-  const [queryEnabled, setQueryEnabled] = useState<boolean>(false);
-  const queryClient = useQueryClient();
-  const queryParameters = {page: 1, size: 5};
-  const {
-    status,
-    isLoading,
-    isSuccess,
-    isError,
-    data: responses,
-  } = useGetTodoDetails(queryParameters, {enabled: queryEnabled});
-
-  const todos = useMemo(() => {
-    return isSuccess ? responses?.map(response => response.data) ?? [] : [];
-  }, [isSuccess, responses]);
-
-  const reset = useCallback(() => {
-    setQueryEnabled(false);
-  }, []);
-
-  useEffect(() => {
-    if (!queryEnabled) {
-      queryClient.resetQueries().catch(() => {});
-    }
-  }, [queryEnabled, queryClient]);
+  const {todos, isIdle, isLoading, isSuccess, isError, start, reset} = useDependentQueryDemo();
 
   return (
     <View style={styles.container}>
       <View>
         <Text h4>Query Status</Text>
-        <Text>{`Status: ${status}`}</Text>
+        <Text>{`isIdle: ${isIdle.toString()}, isLoading: ${isLoading.toString()}, isSuccess: ${isSuccess.toString()}, isError: ${isError.toString()}`}</Text>
       </View>
       <View style={styles.block}>
         <Text h4>Query Data</Text>
         <ScrollView>
           {isLoading && <ActivityIndicator size="large" />}
-          {isError && <Text>Todo一覧の取得に失敗しました</Text>}
+          {isError && <Text>データの取得に失敗しました</Text>}
           <Text>Todo詳細取得結果</Text>
           <View style={styles.details}>
             {todos?.map((todo, index) => {
@@ -59,7 +36,7 @@ const Screen: React.FC<Props> = () => {
         </ScrollView>
       </View>
       <View style={styles.buttons}>
-        <Button title="取得開始" onPress={() => setQueryEnabled(true)} />
+        <Button title="取得開始" onPress={start} />
         <Button title="Reset Queries" onPress={reset} />
       </View>
       <SafeAreaView />

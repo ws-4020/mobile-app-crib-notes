@@ -1,11 +1,11 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
-import React, {useCallback, useMemo, useState} from 'react';
+import React from 'react';
 import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Text, Button} from 'react-native-elements';
-import {useQueryClient} from 'react-query';
-import {useListTodo} from 'service/backend';
+
+import {useDisabledQueryDemo} from './useDisabledQueryDemo';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
@@ -14,22 +14,8 @@ type Props = CompositeScreenProps<
 
 const ScreenName = 'DisabledQueryDemo';
 const Screen: React.FC<Props> = () => {
-  const [queryEnabled, setQueryEnabled] = useState<boolean>(false);
-  const queryClient = useQueryClient();
-  const queryParameters = {};
-
-  // Disable auto-fetch on mount
-  const {status, isIdle, isLoading, isSuccess, isError, data, refetch} = useListTodo(queryParameters, {
-    enabled: queryEnabled,
-  });
-
-  const todos = useMemo(() => {
-    return isSuccess ? data?.data.content ?? [] : [];
-  }, [isSuccess, data]);
-
-  const reset = useCallback(async () => {
-    await queryClient.resetQueries();
-  }, [queryClient]);
+  const {todos, queryEnabled, status, isIdle, isLoading, isSuccess, isError, refetch, toggleQueryEnabled, reset} =
+    useDisabledQueryDemo();
 
   return (
     <View style={styles.container}>
@@ -51,10 +37,7 @@ const Screen: React.FC<Props> = () => {
         <Text>QueryがDisableに設定されている場合、自動refetchによるデータの更新は行われません。</Text>
         <Text>QueryがDisableに設定されている場合も、手動refetchによるデータの更新は行えます。</Text>
         <View style={styles.buttons}>
-          <Button
-            title={queryEnabled ? 'Disable query' : 'Enable query'}
-            onPress={() => setQueryEnabled(!queryEnabled)}
-          />
+          <Button title={queryEnabled ? 'Disable query' : 'Enable query'} onPress={toggleQueryEnabled} />
           <Button title="Manual fetch" onPress={() => refetch()} />
           <Button title="Reset Queries" onPress={reset} />
         </View>
