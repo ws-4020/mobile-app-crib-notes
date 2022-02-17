@@ -5,7 +5,7 @@ import React, {useCallback, useMemo, useState} from 'react';
 import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Text, Button} from 'react-native-elements';
 import {useQueryClient} from 'react-query';
-import {useListTodoService} from 'service/backend';
+import {useListTodo} from 'service/backend';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
@@ -19,12 +19,12 @@ const Screen: React.FC<Props> = () => {
   const queryParameters = {};
 
   // Disable auto-fetch on mount
-  const {status, isIdle, isLoading, isSuccess, isError, data, refetch} = useListTodoService(queryParameters, {
+  const {status, isIdle, isLoading, isSuccess, isError, data, refetch} = useListTodo(queryParameters, {
     enabled: queryEnabled,
   });
 
   const todos = useMemo(() => {
-    return isSuccess ? data?.content ?? [] : [];
+    return isSuccess ? data?.data.content ?? [] : [];
   }, [isSuccess, data]);
 
   const reset = useCallback(async () => {

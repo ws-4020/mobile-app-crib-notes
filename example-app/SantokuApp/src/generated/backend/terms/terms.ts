@@ -7,7 +7,7 @@
  */
 import {useQuery, UseQueryOptions, QueryFunction, UseQueryResult, QueryKey} from 'react-query';
 import type {TermsOfService} from '.././model';
-import {useBackendCustomInstance, ErrorType} from '../../../framework/backend/useCustomInstance';
+import {backendCustomInstance, ErrorType} from '../../../framework/backend/useCustomInstance';
 
 type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...args: any) => Promise<infer R> ? R : any;
 
@@ -16,35 +16,22 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...a
 
  * @summary 有効な利用規約の取得
  */
-export const useGetTermsHook = () => {
-  const getTerms = useBackendCustomInstance<TermsOfService>();
-
-  return () => {
-    return getTerms({url: `/terms`, method: 'get'});
-  };
+export const getTerms = () => {
+  return backendCustomInstance<TermsOfService>({url: `/terms`, method: 'get'});
 };
 
 export const getGetTermsQueryKey = () => [`/terms`];
 
-export const useGetTerms = <
-  TData = AsyncReturnType<ReturnType<typeof useGetTermsHook>>,
-  TError = ErrorType<unknown>,
->(options?: {
-  query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useGetTermsHook>>, TError, TData>;
+export const useGetTerms = <TData = AsyncReturnType<typeof getTerms>, TError = ErrorType<unknown>>(options?: {
+  query?: UseQueryOptions<AsyncReturnType<typeof getTerms>, TError, TData>;
 }): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetTermsQueryKey();
 
-  const getTerms = useGetTermsHook();
+  const queryFn: QueryFunction<AsyncReturnType<typeof getTerms>> = () => getTerms();
 
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetTermsHook>>> = () => getTerms();
-
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTermsHook>>, TError, TData>(
-    queryKey,
-    queryFn,
-    queryOptions,
-  );
+  const query = useQuery<AsyncReturnType<typeof getTerms>, TError, TData>(queryKey, queryFn, queryOptions);
 
   return {
     queryKey,

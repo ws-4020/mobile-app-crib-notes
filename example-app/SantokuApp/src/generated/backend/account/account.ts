@@ -28,7 +28,7 @@ import type {
   TermsOfServiceAgreementStatus,
   AccountDeletion,
 } from '.././model';
-import {useBackendCustomInstance, ErrorType} from '../../../framework/backend/useCustomInstance';
+import {backendCustomInstance, ErrorType} from '../../../framework/backend/useCustomInstance';
 
 type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...args: any) => Promise<infer R> ? R : any;
 
@@ -37,30 +37,16 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...a
 
  * @summary アカウントの登録
  */
-export const usePostSignupHook = () => {
-  const postSignup = useBackendCustomInstance<Account>();
-
-  return (accountRegistration: AccountRegistration) => {
-    return postSignup({url: `/signup`, method: 'post', data: accountRegistration});
-  };
+export const postSignup = (accountRegistration: AccountRegistration) => {
+  return backendCustomInstance<Account>({url: `/signup`, method: 'post', data: accountRegistration});
 };
 
 export const usePostSignup = <TError = ErrorType<BadRequestResponse>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePostSignupHook>>,
-    TError,
-    {data: AccountRegistration},
-    TContext
-  >;
+  mutation?: UseMutationOptions<AsyncReturnType<typeof postSignup>, TError, {data: AccountRegistration}, TContext>;
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const postSignup = usePostSignupHook();
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePostSignupHook>>,
-    {data: AccountRegistration}
-  > = props => {
+  const mutationFn: MutationFunction<AsyncReturnType<typeof postSignup>, {data: AccountRegistration}> = props => {
     const {data} = props || {};
 
     return postSignup(data);
@@ -76,33 +62,19 @@ export const usePostSignup = <TError = ErrorType<BadRequestResponse>, TContext =
 
  * @summary ログインする
  */
-export const usePostLoginHook = () => {
-  const postLogin = useBackendCustomInstance<AccountLoginResponse>();
-
-  return (accountLogin: AccountLogin) => {
-    return postLogin({url: `/login`, method: 'post', data: accountLogin});
-  };
+export const postLogin = (accountLogin: AccountLogin) => {
+  return backendCustomInstance<AccountLoginResponse>({url: `/login`, method: 'post', data: accountLogin});
 };
 
 export const usePostLogin = <
   TError = ErrorType<BadRequestResponse | UnauthorizedResponse>,
   TContext = unknown,
 >(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePostLoginHook>>,
-    TError,
-    {data: AccountLogin},
-    TContext
-  >;
+  mutation?: UseMutationOptions<AsyncReturnType<typeof postLogin>, TError, {data: AccountLogin}, TContext>;
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const postLogin = usePostLoginHook();
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePostLoginHook>>,
-    {data: AccountLogin}
-  > = props => {
+  const mutationFn: MutationFunction<AsyncReturnType<typeof postLogin>, {data: AccountLogin}> = props => {
     const {data} = props || {};
 
     return postLogin(data);
@@ -116,12 +88,8 @@ export const usePostLogin = <
 /**
  * @summary ログアウトする
  */
-export const usePostLogoutHook = () => {
-  const postLogout = useBackendCustomInstance<void>();
-
-  return () => {
-    return postLogout({url: `/logout`, method: 'post'});
-  };
+export const postLogout = () => {
+  return backendCustomInstance<void>({url: `/logout`, method: 'post'});
 };
 
 export const usePostLogout = <
@@ -129,13 +97,11 @@ export const usePostLogout = <
   TVariables = void,
   TContext = unknown,
 >(options?: {
-  mutation?: UseMutationOptions<AsyncReturnType<ReturnType<typeof usePostLogoutHook>>, TError, TVariables, TContext>;
+  mutation?: UseMutationOptions<AsyncReturnType<typeof postLogout>, TError, TVariables, TContext>;
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const postLogout = usePostLogoutHook();
-
-  const mutationFn: MutationFunction<AsyncReturnType<ReturnType<typeof usePostLogoutHook>>, TVariables> = () => {
+  const mutationFn: MutationFunction<AsyncReturnType<typeof postLogout>, TVariables> = () => {
     return postLogout();
   };
 
@@ -146,37 +112,29 @@ export const usePostLogout = <
 
  * @summary アカウントの取得
  */
-export const useGetAccountsAccountIdHook = () => {
-  const getAccountsAccountId = useBackendCustomInstance<Account>();
-
-  return (accountId: string) => {
-    return getAccountsAccountId({url: `/accounts/${accountId}`, method: 'get'});
-  };
+export const getAccountsAccountId = (accountId: string) => {
+  return backendCustomInstance<Account>({url: `/accounts/${accountId}`, method: 'get'});
 };
 
 export const getGetAccountsAccountIdQueryKey = (accountId: string) => [`/accounts/${accountId}`];
 
 export const useGetAccountsAccountId = <
-  TData = AsyncReturnType<ReturnType<typeof useGetAccountsAccountIdHook>>,
+  TData = AsyncReturnType<typeof getAccountsAccountId>,
   TError = ErrorType<unknown>,
 >(
   accountId: string,
-  options?: {query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useGetAccountsAccountIdHook>>, TError, TData>},
+  options?: {query?: UseQueryOptions<AsyncReturnType<typeof getAccountsAccountId>, TError, TData>},
 ): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetAccountsAccountIdQueryKey(accountId);
 
-  const getAccountsAccountId = useGetAccountsAccountIdHook();
+  const queryFn: QueryFunction<AsyncReturnType<typeof getAccountsAccountId>> = () => getAccountsAccountId(accountId);
 
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetAccountsAccountIdHook>>> = () =>
-    getAccountsAccountId(accountId);
-
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsAccountIdHook>>, TError, TData>(
-    queryKey,
-    queryFn,
-    {enabled: !!accountId, ...queryOptions},
-  );
+  const query = useQuery<AsyncReturnType<typeof getAccountsAccountId>, TError, TData>(queryKey, queryFn, {
+    enabled: !!accountId,
+    ...queryOptions,
+  });
 
   return {
     queryKey,
@@ -189,39 +147,30 @@ export const useGetAccountsAccountId = <
 
  * @summary アバターを取得する
  */
-export const useGetAccountsAccountIdAvatarHook = () => {
-  const getAccountsAccountIdAvatar = useBackendCustomInstance<AvatarImage>();
-
-  return (accountId: string) => {
-    return getAccountsAccountIdAvatar({url: `/accounts/${accountId}/avatar`, method: 'get'});
-  };
+export const getAccountsAccountIdAvatar = (accountId: string) => {
+  return backendCustomInstance<AvatarImage>({url: `/accounts/${accountId}/avatar`, method: 'get'});
 };
 
 export const getGetAccountsAccountIdAvatarQueryKey = (accountId: string) => [`/accounts/${accountId}/avatar`];
 
 export const useGetAccountsAccountIdAvatar = <
-  TData = AsyncReturnType<ReturnType<typeof useGetAccountsAccountIdAvatarHook>>,
+  TData = AsyncReturnType<typeof getAccountsAccountIdAvatar>,
   TError = ErrorType<unknown>,
 >(
   accountId: string,
-  options?: {
-    query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useGetAccountsAccountIdAvatarHook>>, TError, TData>;
-  },
+  options?: {query?: UseQueryOptions<AsyncReturnType<typeof getAccountsAccountIdAvatar>, TError, TData>},
 ): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetAccountsAccountIdAvatarQueryKey(accountId);
 
-  const getAccountsAccountIdAvatar = useGetAccountsAccountIdAvatarHook();
-
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetAccountsAccountIdAvatarHook>>> = () =>
+  const queryFn: QueryFunction<AsyncReturnType<typeof getAccountsAccountIdAvatar>> = () =>
     getAccountsAccountIdAvatar(accountId);
 
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsAccountIdAvatarHook>>, TError, TData>(
-    queryKey,
-    queryFn,
-    {enabled: !!accountId, ...queryOptions},
-  );
+  const query = useQuery<AsyncReturnType<typeof getAccountsAccountIdAvatar>, TError, TData>(queryKey, queryFn, {
+    enabled: !!accountId,
+    ...queryOptions,
+  });
 
   return {
     queryKey,
@@ -234,35 +183,25 @@ export const useGetAccountsAccountIdAvatar = <
 
  * @summary ログイン済みアカウントの取得
  */
-export const useGetAccountsMeHook = () => {
-  const getAccountsMe = useBackendCustomInstance<Account>();
-
-  return () => {
-    return getAccountsMe({url: `/accounts/me`, method: 'get'});
-  };
+export const getAccountsMe = () => {
+  return backendCustomInstance<Account>({url: `/accounts/me`, method: 'get'});
 };
 
 export const getGetAccountsMeQueryKey = () => [`/accounts/me`];
 
 export const useGetAccountsMe = <
-  TData = AsyncReturnType<ReturnType<typeof useGetAccountsMeHook>>,
+  TData = AsyncReturnType<typeof getAccountsMe>,
   TError = ErrorType<ForbiddenResponse>,
 >(options?: {
-  query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useGetAccountsMeHook>>, TError, TData>;
+  query?: UseQueryOptions<AsyncReturnType<typeof getAccountsMe>, TError, TData>;
 }): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetAccountsMeQueryKey();
 
-  const getAccountsMe = useGetAccountsMeHook();
+  const queryFn: QueryFunction<AsyncReturnType<typeof getAccountsMe>> = () => getAccountsMe();
 
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetAccountsMeHook>>> = () => getAccountsMe();
-
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsMeHook>>, TError, TData>(
-    queryKey,
-    queryFn,
-    queryOptions,
-  );
+  const query = useQuery<AsyncReturnType<typeof getAccountsMe>, TError, TData>(queryKey, queryFn, queryOptions);
 
   return {
     queryKey,
@@ -275,36 +214,25 @@ export const useGetAccountsMe = <
 
  * @summary ログイン済みアカウントのアバターを取得する
  */
-export const useGetAccountsMeAvatarHook = () => {
-  const getAccountsMeAvatar = useBackendCustomInstance<AvatarImage>();
-
-  return () => {
-    return getAccountsMeAvatar({url: `/accounts/me/avatar`, method: 'get'});
-  };
+export const getAccountsMeAvatar = () => {
+  return backendCustomInstance<AvatarImage>({url: `/accounts/me/avatar`, method: 'get'});
 };
 
 export const getGetAccountsMeAvatarQueryKey = () => [`/accounts/me/avatar`];
 
 export const useGetAccountsMeAvatar = <
-  TData = AsyncReturnType<ReturnType<typeof useGetAccountsMeAvatarHook>>,
+  TData = AsyncReturnType<typeof getAccountsMeAvatar>,
   TError = ErrorType<unknown>,
 >(options?: {
-  query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useGetAccountsMeAvatarHook>>, TError, TData>;
+  query?: UseQueryOptions<AsyncReturnType<typeof getAccountsMeAvatar>, TError, TData>;
 }): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetAccountsMeAvatarQueryKey();
 
-  const getAccountsMeAvatar = useGetAccountsMeAvatarHook();
+  const queryFn: QueryFunction<AsyncReturnType<typeof getAccountsMeAvatar>> = () => getAccountsMeAvatar();
 
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetAccountsMeAvatarHook>>> = () =>
-    getAccountsMeAvatar();
-
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsMeAvatarHook>>, TError, TData>(
-    queryKey,
-    queryFn,
-    queryOptions,
-  );
+  const query = useQuery<AsyncReturnType<typeof getAccountsMeAvatar>, TError, TData>(queryKey, queryFn, queryOptions);
 
   return {
     queryKey,
@@ -317,35 +245,21 @@ export const useGetAccountsMeAvatar = <
 
  * @summary ログイン済みアカウントのアバターを登録する
  */
-export const usePutAccountsMeAvatarHook = () => {
-  const putAccountsMeAvatar = useBackendCustomInstance<void>();
+export const putAccountsMeAvatar = (avatarImage: AvatarImage) => {
+  const formData = new FormData();
+  if (avatarImage.avatarImage !== undefined) {
+    formData.append('avatarImage', avatarImage.avatarImage);
+  }
 
-  return (avatarImage: AvatarImage) => {
-    const formData = new FormData();
-    if (avatarImage.avatarImage !== undefined) {
-      formData.append('avatarImage', avatarImage.avatarImage);
-    }
-
-    return putAccountsMeAvatar({url: `/accounts/me/avatar`, method: 'put', data: formData});
-  };
+  return backendCustomInstance<void>({url: `/accounts/me/avatar`, method: 'put', data: formData});
 };
 
 export const usePutAccountsMeAvatar = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePutAccountsMeAvatarHook>>,
-    TError,
-    {data: AvatarImage},
-    TContext
-  >;
+  mutation?: UseMutationOptions<AsyncReturnType<typeof putAccountsMeAvatar>, TError, {data: AvatarImage}, TContext>;
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const putAccountsMeAvatar = usePutAccountsMeAvatarHook();
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePutAccountsMeAvatarHook>>,
-    {data: AvatarImage}
-  > = props => {
+  const mutationFn: MutationFunction<AsyncReturnType<typeof putAccountsMeAvatar>, {data: AvatarImage}> = props => {
     const {data} = props || {};
 
     return putAccountsMeAvatar(data);
@@ -361,17 +275,13 @@ export const usePutAccountsMeAvatar = <TError = ErrorType<unknown>, TContext = u
 
  * @summary ログイン済みアカウントのデバイス登録トークンの更新
  */
-export const usePostAccountsMeDeviceTokenHook = () => {
-  const postAccountsMeDeviceToken = useBackendCustomInstance<void>();
-
-  return (updateDeviceToken: UpdateDeviceToken) => {
-    return postAccountsMeDeviceToken({url: `/accounts/me/device-token`, method: 'post', data: updateDeviceToken});
-  };
+export const postAccountsMeDeviceToken = (updateDeviceToken: UpdateDeviceToken) => {
+  return backendCustomInstance<void>({url: `/accounts/me/device-token`, method: 'post', data: updateDeviceToken});
 };
 
 export const usePostAccountsMeDeviceToken = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePostAccountsMeDeviceTokenHook>>,
+    AsyncReturnType<typeof postAccountsMeDeviceToken>,
     TError,
     {data: UpdateDeviceToken},
     TContext
@@ -379,10 +289,8 @@ export const usePostAccountsMeDeviceToken = <TError = ErrorType<unknown>, TConte
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const postAccountsMeDeviceToken = usePostAccountsMeDeviceTokenHook();
-
   const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePostAccountsMeDeviceTokenHook>>,
+    AsyncReturnType<typeof postAccountsMeDeviceToken>,
     {data: UpdateDeviceToken}
   > = props => {
     const {data} = props || {};
@@ -400,36 +308,25 @@ export const usePostAccountsMeDeviceToken = <TError = ErrorType<unknown>, TConte
 
  * @summary ログイン済みアカウントの利用規約同意状態確認
  */
-export const useGetAccountsMeTermsHook = () => {
-  const getAccountsMeTerms = useBackendCustomInstance<TermsOfServiceAgreementStatus>();
-
-  return () => {
-    return getAccountsMeTerms({url: `/accounts/me/terms`, method: 'get'});
-  };
+export const getAccountsMeTerms = () => {
+  return backendCustomInstance<TermsOfServiceAgreementStatus>({url: `/accounts/me/terms`, method: 'get'});
 };
 
 export const getGetAccountsMeTermsQueryKey = () => [`/accounts/me/terms`];
 
 export const useGetAccountsMeTerms = <
-  TData = AsyncReturnType<ReturnType<typeof useGetAccountsMeTermsHook>>,
+  TData = AsyncReturnType<typeof getAccountsMeTerms>,
   TError = ErrorType<unknown>,
 >(options?: {
-  query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useGetAccountsMeTermsHook>>, TError, TData>;
+  query?: UseQueryOptions<AsyncReturnType<typeof getAccountsMeTerms>, TError, TData>;
 }): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetAccountsMeTermsQueryKey();
 
-  const getAccountsMeTerms = useGetAccountsMeTermsHook();
+  const queryFn: QueryFunction<AsyncReturnType<typeof getAccountsMeTerms>> = () => getAccountsMeTerms();
 
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetAccountsMeTermsHook>>> = () =>
-    getAccountsMeTerms();
-
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetAccountsMeTermsHook>>, TError, TData>(
-    queryKey,
-    queryFn,
-    queryOptions,
-  );
+  const query = useQuery<AsyncReturnType<typeof getAccountsMeTerms>, TError, TData>(queryKey, queryFn, queryOptions);
 
   return {
     queryKey,
@@ -442,17 +339,17 @@ export const useGetAccountsMeTerms = <
 
  * @summary ログイン済みアカウントの利用規約同意
  */
-export const usePostAccountsMeTermsHook = () => {
-  const postAccountsMeTerms = useBackendCustomInstance<TermsOfServiceAgreementStatus>();
-
-  return (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => {
-    return postAccountsMeTerms({url: `/accounts/me/terms`, method: 'post', data: termsOfServiceAgreementStatus});
-  };
+export const postAccountsMeTerms = (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => {
+  return backendCustomInstance<TermsOfServiceAgreementStatus>({
+    url: `/accounts/me/terms`,
+    method: 'post',
+    data: termsOfServiceAgreementStatus,
+  });
 };
 
 export const usePostAccountsMeTerms = <TError = ErrorType<BadRequestResponse>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePostAccountsMeTermsHook>>,
+    AsyncReturnType<typeof postAccountsMeTerms>,
     TError,
     {data: TermsOfServiceAgreementStatus},
     TContext
@@ -460,10 +357,8 @@ export const usePostAccountsMeTerms = <TError = ErrorType<BadRequestResponse>, T
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const postAccountsMeTerms = usePostAccountsMeTermsHook();
-
   const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePostAccountsMeTermsHook>>,
+    AsyncReturnType<typeof postAccountsMeTerms>,
     {data: TermsOfServiceAgreementStatus}
   > = props => {
     const {data} = props || {};
@@ -491,12 +386,8 @@ export const usePostAccountsMeTerms = <TError = ErrorType<BadRequestResponse>, T
 
  * @summary ログイン済みアカウント削除
  */
-export const useDeleteAccountsMeDeleteHook = () => {
-  const deleteAccountsMeDelete = useBackendCustomInstance<void>();
-
-  return (accountDeletion: AccountDeletion) => {
-    return deleteAccountsMeDelete({url: `/accounts/me/delete`, method: 'post', data: accountDeletion});
-  };
+export const deleteAccountsMeDelete = (accountDeletion: AccountDeletion) => {
+  return backendCustomInstance<void>({url: `/accounts/me/delete`, method: 'post', data: accountDeletion});
 };
 
 export const useDeleteAccountsMeDelete = <
@@ -504,7 +395,7 @@ export const useDeleteAccountsMeDelete = <
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof useDeleteAccountsMeDeleteHook>>,
+    AsyncReturnType<typeof deleteAccountsMeDelete>,
     TError,
     {data: AccountDeletion},
     TContext
@@ -512,10 +403,8 @@ export const useDeleteAccountsMeDelete = <
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const deleteAccountsMeDelete = useDeleteAccountsMeDeleteHook();
-
   const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof useDeleteAccountsMeDeleteHook>>,
+    AsyncReturnType<typeof deleteAccountsMeDelete>,
     {data: AccountDeletion}
   > = props => {
     const {data} = props || {};

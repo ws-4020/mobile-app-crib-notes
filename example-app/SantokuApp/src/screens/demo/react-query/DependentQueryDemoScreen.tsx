@@ -1,11 +1,11 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 import {useQueryClient} from 'react-query';
-import {useGetTodoDetailsService} from 'service/backend';
+import {useGetTodoDetails} from 'service/backend/useSandboxService';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
@@ -18,18 +18,17 @@ const Screen: React.FC<Props> = () => {
   const queryClient = useQueryClient();
   const queryParameters = {page: 1, size: 5};
 
-  const {
-    isIdle,
-    isLoading,
-    isSuccess,
-    isError,
-    data: todos,
-  } = useGetTodoDetailsService(queryParameters, {enabled: queryEnabled});
+  const {isIdle, isLoading, isSuccess, isError, data} = useGetTodoDetails(queryParameters, {enabled: queryEnabled});
+  const todos = data?.map(d => d.data);
 
-  const reset = useCallback(async () => {
+  const reset = useCallback(() => {
     setQueryEnabled(false);
-    await queryClient.resetQueries();
-  }, [queryClient]);
+  }, []);
+  useEffect(() => {
+    if (!queryEnabled) {
+      queryClient.resetQueries().catch(() => {});
+    }
+  }, [queryEnabled, queryClient]);
 
   return (
     <View style={styles.container}>
@@ -44,7 +43,7 @@ const Screen: React.FC<Props> = () => {
           {isError && <Text>Todo一覧の取得に失敗しました</Text>}
           <Text>Todo詳細取得結果</Text>
           <View style={styles.details}>
-            {todos.map((todo, index) => {
+            {todos?.map((todo, index) => {
               return <Text key={index}>{todo?.title}</Text>;
             })}
           </View>

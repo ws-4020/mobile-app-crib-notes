@@ -1,124 +1,97 @@
 import {
   useGetTodo,
-  useListTodo,
-  useListTodoByCursorInfinite,
-  usePostTodo,
-  usePutTodo,
-  useDeleteTodo,
+  useListTodo as useListTodoApi,
+  useListTodoByCursorInfinite as useListTodoByCursorInfiniteApi,
+  usePostTodo as usePostTodoApi,
+  usePutTodo as usePutTodoApi,
+  useDeleteTodo as useDeleteTodoApi,
   getListTodoQueryKey,
   getListTodoByCursorQueryKey,
   getGetTodoQueryKey,
-  useGetTodoHook,
+  listTodo,
+  getTodo,
 } from 'generated/sandbox/api';
 import {ListTodoByCursorParams, ListTodoParams} from 'generated/sandbox/model';
-import {useMemo} from 'react';
-import {useQueries, useQueryClient} from 'react-query';
-
-import {
-  BackendServiceMutationOptions,
-  BackendServiceQueryOptions,
-  convertInfiniteQueryResult,
-  convertMutationResult,
-  convertQueriesResult,
-  convertQueryResult,
-  getMutationOptions,
-  getQueryOptions,
-} from './base';
+import {QueryClient, useQuery, useQueryClient} from 'react-query';
 
 // Sandbox API
 
-export const useGetTodoService = (todoId: number, options?: BackendServiceQueryOptions) => {
-  const query = useGetTodo(todoId, {query: getQueryOptions(options)});
-  return convertQueryResult(query);
-};
-
-export const useListTodoService = (params?: ListTodoParams, options?: BackendServiceQueryOptions) => {
-  const query = useListTodo(params, {query: getQueryOptions(options)});
-  return convertQueryResult(query);
-};
-
-export const useListTodoByCursorInfiniteService = (
-  params?: ListTodoByCursorParams,
-  options?: BackendServiceQueryOptions,
-) => {
-  const query = useListTodoByCursorInfinite(params, {
+const useListTodo = (params?: ListTodoParams, options?: {enabled: boolean}) => {
+  return useListTodoApi(params, {
     query: {
-      ...getQueryOptions(options),
+      enabled: options?.enabled,
+    },
+  });
+};
+
+const useListTodoByCursorInfinite = (params?: ListTodoByCursorParams) => {
+  return useListTodoByCursorInfiniteApi(params, {
+    query: {
       getNextPageParam: lastPage => {
         return lastPage.data.nextCursor;
       },
     },
   });
-  return convertInfiniteQueryResult(query);
 };
 
-export const usePostTodoService = (options?: BackendServiceMutationOptions) => {
+const usePostTodo = () => {
   const queryClient = useQueryClient();
-  const mutation = usePostTodo({
+  return usePostTodoApi({
     mutation: {
-      ...getMutationOptions(options),
-      onSuccess: async (data, variables, context) => {
-        await queryClient.resetQueries(getListTodoQueryKey());
-        await queryClient.resetQueries(getListTodoByCursorQueryKey());
-      },
+      onSuccess: () => resetQueries(queryClient),
     },
   });
-  return convertMutationResult(mutation);
 };
 
-export const usePutTodoService = (options?: BackendServiceMutationOptions) => {
+const usePutTodo = () => {
   const queryClient = useQueryClient();
-  const mutation = usePutTodo({
+  return usePutTodoApi({
     mutation: {
-      ...getMutationOptions(options),
-      onSuccess: async (data, variables, context) => {
-        await queryClient.resetQueries(getListTodoQueryKey());
-        await queryClient.resetQueries(getListTodoByCursorQueryKey());
-        await queryClient.resetQueries(getGetTodoQueryKey(variables.todoId));
-      },
+      onSuccess: (_, variables) => resetQueries(queryClient, variables.todoId),
     },
   });
-  return convertMutationResult(mutation);
 };
 
-export const useDeleteTodoService = (options?: BackendServiceMutationOptions) => {
+const useDeleteTodo = () => {
   const queryClient = useQueryClient();
-  const mutation = useDeleteTodo({
+  return useDeleteTodoApi({
     mutation: {
-      ...getMutationOptions(options),
-      onSuccess: async (data, variables, context) => {
-        await queryClient.resetQueries(getListTodoQueryKey());
-        await queryClient.resetQueries(getListTodoByCursorQueryKey());
-        await queryClient.resetQueries(getGetTodoQueryKey(variables.todoId));
-      },
+      onSuccess: (_, variables) => resetQueries(queryClient, variables.todoId),
     },
   });
-  return convertMutationResult(mutation);
 };
 
 // Advanced Hooks
 
 // Dependent Queries
-export const useGetTodoDetailsService = (params?: ListTodoParams, options?: BackendServiceQueryOptions) => {
-  const listTodoQuery = useListTodoService(params, options);
-  const todos = useMemo(() => {
-    return listTodoQuery.data?.content ?? [];
-  }, [listTodoQuery]);
-  const getTodoHook = useGetTodoHook();
-  const getTodoQueries = useQueries(
-    todos.map(todo => {
-      return {
-        queryKey: getGetTodoQueryKey(todo.id),
-        queryFn: () => getTodoHook(todo.id),
-      };
-    }),
-  );
-  const convertedResult = convertQueriesResult(getTodoQueries);
-  return {
-    ...convertedResult,
-    refetch: async () => {
-      await listTodoQuery.refetch();
-      await convertedResult.refetch();
-    },
-  };
+const useGetTodoDetails = (params?: ListTodoParams, options?: {enabled: boolean}) => {
+  return useQuery(['useGetTodoDetails', params], () => getTodoDetails(params), {
+    enabled: options?.enabled,
+  });
+};
+
+const resetQueries = async (queryClient: QueryClient, todoId?: number) => {
+  await queryClient.resetQueries(getListTodoQueryKey());
+  await queryClient.resetQueries(getListTodoByCursorQueryKey());
+  if (todoId) {
+    await queryClient.resetQueries(getGetTodoQueryKey(todoId));
+  }
+};
+
+const getTodoDetails = async (params?: ListTodoParams) => {
+  const response = await listTodo(params);
+  const todos = response.data.content;
+  if (todos) {
+    return Promise.all(todos.map(todo => getTodo(todo.id)));
+  }
+};
+
+export {
+  useGetTodo,
+  useListTodo,
+  useListTodoByCursorInfinite,
+  usePostTodo,
+  usePutTodo,
+  useDeleteTodo,
+  useGetTodoDetails,
 };

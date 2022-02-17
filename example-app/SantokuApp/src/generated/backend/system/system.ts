@@ -7,7 +7,7 @@
  */
 import {useQuery, UseQueryOptions, QueryFunction, UseQueryResult, QueryKey} from 'react-query';
 import type {CsrfTokenResponse} from '.././model';
-import {useBackendCustomInstance, ErrorType} from '../../../framework/backend/useCustomInstance';
+import {backendCustomInstance, ErrorType} from '../../../framework/backend/useCustomInstance';
 
 type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...args: any) => Promise<infer R> ? R : any;
 
@@ -15,35 +15,22 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...a
  * CSRFトークンを取得します。
  * @summary CSRFトークンの取得
  */
-export const useGetCsrfTokenHook = () => {
-  const getCsrfToken = useBackendCustomInstance<CsrfTokenResponse>();
-
-  return () => {
-    return getCsrfToken({url: `/csrf_token`, method: 'get'});
-  };
+export const getCsrfToken = () => {
+  return backendCustomInstance<CsrfTokenResponse>({url: `/csrf_token`, method: 'get'});
 };
 
 export const getGetCsrfTokenQueryKey = () => [`/csrf_token`];
 
-export const useGetCsrfToken = <
-  TData = AsyncReturnType<ReturnType<typeof useGetCsrfTokenHook>>,
-  TError = ErrorType<unknown>,
->(options?: {
-  query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useGetCsrfTokenHook>>, TError, TData>;
+export const useGetCsrfToken = <TData = AsyncReturnType<typeof getCsrfToken>, TError = ErrorType<unknown>>(options?: {
+  query?: UseQueryOptions<AsyncReturnType<typeof getCsrfToken>, TError, TData>;
 }): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetCsrfTokenQueryKey();
 
-  const getCsrfToken = useGetCsrfTokenHook();
+  const queryFn: QueryFunction<AsyncReturnType<typeof getCsrfToken>> = () => getCsrfToken();
 
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetCsrfTokenHook>>> = () => getCsrfToken();
-
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetCsrfTokenHook>>, TError, TData>(
-    queryKey,
-    queryFn,
-    queryOptions,
-  );
+  const query = useQuery<AsyncReturnType<typeof getCsrfToken>, TError, TData>(queryKey, queryFn, queryOptions);
 
   return {
     queryKey,

@@ -6,7 +6,7 @@ import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React, {useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input} from 'react-native-elements';
-import {usePostTodoService} from 'service/backend';
+import {usePostTodo} from 'service/backend';
 
 import {EditTodoDemoScreen} from './EditTodoDemoScreen';
 
@@ -20,7 +20,7 @@ const Screen: React.FC<Props> = ({navigation}) => {
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
   const loadingOverlay = useLoadingOverlay();
-  const postTodo = usePostTodoService();
+  const postTodo = usePostTodo();
 
   const onChangeTitle = useCallback((newTitle: string) => {
     setTitle(newTitle);
@@ -36,7 +36,8 @@ const Screen: React.FC<Props> = ({navigation}) => {
       const data = {title, description};
       postTodo
         .mutateAsync({data})
-        .then(todo => {
+        .then(data => {
+          const todo = data.data;
           loadingOverlay.setVisible(false);
           navigation.replace(EditTodoDemoScreen.name, {todoId: todo.id});
         })

@@ -24,7 +24,7 @@ import type {
   GetTeamsTeamIdTimetablesParams,
   TimetableOfDayInput,
 } from '.././model';
-import {useBackendCustomInstance, ErrorType} from '../../../framework/backend/useCustomInstance';
+import {backendCustomInstance, ErrorType} from '../../../framework/backend/useCustomInstance';
 
 type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...args: any) => Promise<infer R> ? R : any;
 
@@ -33,22 +33,16 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...a
 
  * @summary チーム登録
  */
-export const usePostTeamsHook = () => {
-  const postTeams = useBackendCustomInstance<Team>();
-
-  return (team: Team) => {
-    return postTeams({url: `/teams`, method: 'post', data: team});
-  };
+export const postTeams = (team: Team) => {
+  return backendCustomInstance<Team>({url: `/teams`, method: 'post', data: team});
 };
 
 export const usePostTeams = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<AsyncReturnType<ReturnType<typeof usePostTeamsHook>>, TError, {data: Team}, TContext>;
+  mutation?: UseMutationOptions<AsyncReturnType<typeof postTeams>, TError, {data: Team}, TContext>;
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const postTeams = usePostTeamsHook();
-
-  const mutationFn: MutationFunction<AsyncReturnType<ReturnType<typeof usePostTeamsHook>>, {data: Team}> = props => {
+  const mutationFn: MutationFunction<AsyncReturnType<typeof postTeams>, {data: Team}> = props => {
     const {data} = props || {};
 
     return postTeams(data);
@@ -61,33 +55,23 @@ export const usePostTeams = <TError = ErrorType<unknown>, TContext = unknown>(op
 
  * @summary チーム取得
  */
-export const useGetTeamsTeamIdHook = () => {
-  const getTeamsTeamId = useBackendCustomInstance<Team>();
-
-  return (teamId: string) => {
-    return getTeamsTeamId({url: `/teams/${teamId}`, method: 'get'});
-  };
+export const getTeamsTeamId = (teamId: string) => {
+  return backendCustomInstance<Team>({url: `/teams/${teamId}`, method: 'get'});
 };
 
 export const getGetTeamsTeamIdQueryKey = (teamId: string) => [`/teams/${teamId}`];
 
-export const useGetTeamsTeamId = <
-  TData = AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdHook>>,
-  TError = ErrorType<unknown>,
->(
+export const useGetTeamsTeamId = <TData = AsyncReturnType<typeof getTeamsTeamId>, TError = ErrorType<unknown>>(
   teamId: string,
-  options?: {query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdHook>>, TError, TData>},
+  options?: {query?: UseQueryOptions<AsyncReturnType<typeof getTeamsTeamId>, TError, TData>},
 ): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetTeamsTeamIdQueryKey(teamId);
 
-  const getTeamsTeamId = useGetTeamsTeamIdHook();
+  const queryFn: QueryFunction<AsyncReturnType<typeof getTeamsTeamId>> = () => getTeamsTeamId(teamId);
 
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdHook>>> = () =>
-    getTeamsTeamId(teamId);
-
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdHook>>, TError, TData>(queryKey, queryFn, {
+  const query = useQuery<AsyncReturnType<typeof getTeamsTeamId>, TError, TData>(queryKey, queryFn, {
     enabled: !!teamId,
     ...queryOptions,
   });
@@ -103,17 +87,13 @@ export const useGetTeamsTeamId = <
 
  * @summary 招待コード発行
  */
-export const usePostTeamsTeamIdInvitationCodeHook = () => {
-  const postTeamsTeamIdInvitationCode = useBackendCustomInstance<TeamInvitation>();
-
-  return (teamId: string) => {
-    return postTeamsTeamIdInvitationCode({url: `/teams/${teamId}/invitation-code`, method: 'post'});
-  };
+export const postTeamsTeamIdInvitationCode = (teamId: string) => {
+  return backendCustomInstance<TeamInvitation>({url: `/teams/${teamId}/invitation-code`, method: 'post'});
 };
 
 export const usePostTeamsTeamIdInvitationCode = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePostTeamsTeamIdInvitationCodeHook>>,
+    AsyncReturnType<typeof postTeamsTeamIdInvitationCode>,
     TError,
     {teamId: string},
     TContext
@@ -121,10 +101,8 @@ export const usePostTeamsTeamIdInvitationCode = <TError = ErrorType<unknown>, TC
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const postTeamsTeamIdInvitationCode = usePostTeamsTeamIdInvitationCodeHook();
-
   const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePostTeamsTeamIdInvitationCodeHook>>,
+    AsyncReturnType<typeof postTeamsTeamIdInvitationCode>,
     {teamId: string}
   > = props => {
     const {teamId} = props || {};
@@ -142,17 +120,13 @@ export const usePostTeamsTeamIdInvitationCode = <TError = ErrorType<unknown>, TC
 
  * @summary チーム参加
  */
-export const usePostTeamsTeamIdJoinHook = () => {
-  const postTeamsTeamIdJoin = useBackendCustomInstance<Team>();
-
-  return (teamId: string, teamInvitation: TeamInvitation) => {
-    return postTeamsTeamIdJoin({url: `/teams/${teamId}/join`, method: 'post', data: teamInvitation});
-  };
+export const postTeamsTeamIdJoin = (teamId: string, teamInvitation: TeamInvitation) => {
+  return backendCustomInstance<Team>({url: `/teams/${teamId}/join`, method: 'post', data: teamInvitation});
 };
 
 export const usePostTeamsTeamIdJoin = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePostTeamsTeamIdJoinHook>>,
+    AsyncReturnType<typeof postTeamsTeamIdJoin>,
     TError,
     {teamId: string; data: TeamInvitation},
     TContext
@@ -160,10 +134,8 @@ export const usePostTeamsTeamIdJoin = <TError = ErrorType<unknown>, TContext = u
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const postTeamsTeamIdJoin = usePostTeamsTeamIdJoinHook();
-
   const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePostTeamsTeamIdJoinHook>>,
+    AsyncReturnType<typeof postTeamsTeamIdJoin>,
     {teamId: string; data: TeamInvitation}
   > = props => {
     const {teamId, data} = props || {};
@@ -183,12 +155,12 @@ export const usePostTeamsTeamIdJoin = <TError = ErrorType<unknown>, TContext = u
 
  * @summary 時間割テンプレート一覧取得
  */
-export const useGetTeamsTeamIdTimetableTemplatesHook = () => {
-  const getTeamsTeamIdTimetableTemplates = useBackendCustomInstance<TimetableTemplate[]>();
-
-  return (teamId: string, params?: GetTeamsTeamIdTimetableTemplatesParams) => {
-    return getTeamsTeamIdTimetableTemplates({url: `/teams/${teamId}/timetable-templates`, method: 'get', params});
-  };
+export const getTeamsTeamIdTimetableTemplates = (teamId: string, params?: GetTeamsTeamIdTimetableTemplatesParams) => {
+  return backendCustomInstance<TimetableTemplate[]>({
+    url: `/teams/${teamId}/timetable-templates`,
+    method: 'get',
+    params,
+  });
 };
 
 export const getGetTeamsTeamIdTimetableTemplatesQueryKey = (
@@ -197,29 +169,24 @@ export const getGetTeamsTeamIdTimetableTemplatesQueryKey = (
 ) => [`/teams/${teamId}/timetable-templates`, ...(params ? [params] : [])];
 
 export const useGetTeamsTeamIdTimetableTemplates = <
-  TData = AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetableTemplatesHook>>,
+  TData = AsyncReturnType<typeof getTeamsTeamIdTimetableTemplates>,
   TError = ErrorType<unknown>,
 >(
   teamId: string,
   params?: GetTeamsTeamIdTimetableTemplatesParams,
-  options?: {
-    query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetableTemplatesHook>>, TError, TData>;
-  },
+  options?: {query?: UseQueryOptions<AsyncReturnType<typeof getTeamsTeamIdTimetableTemplates>, TError, TData>},
 ): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetTeamsTeamIdTimetableTemplatesQueryKey(teamId, params);
 
-  const getTeamsTeamIdTimetableTemplates = useGetTeamsTeamIdTimetableTemplatesHook();
-
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetableTemplatesHook>>> = () =>
+  const queryFn: QueryFunction<AsyncReturnType<typeof getTeamsTeamIdTimetableTemplates>> = () =>
     getTeamsTeamIdTimetableTemplates(teamId, params);
 
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetableTemplatesHook>>, TError, TData>(
-    queryKey,
-    queryFn,
-    {enabled: !!teamId, ...queryOptions},
-  );
+  const query = useQuery<AsyncReturnType<typeof getTeamsTeamIdTimetableTemplates>, TError, TData>(queryKey, queryFn, {
+    enabled: !!teamId,
+    ...queryOptions,
+  });
 
   return {
     queryKey,
@@ -232,21 +199,17 @@ export const useGetTeamsTeamIdTimetableTemplates = <
 
  * @summary 時間割テンプレート登録
  */
-export const usePostTeamsTeamIdTimetableTemplatesHook = () => {
-  const postTeamsTeamIdTimetableTemplates = useBackendCustomInstance<TimetableTemplate>();
-
-  return (teamId: string, timetableTemplate: TimetableTemplate) => {
-    return postTeamsTeamIdTimetableTemplates({
-      url: `/teams/${teamId}/timetable-templates`,
-      method: 'post',
-      data: timetableTemplate,
-    });
-  };
+export const postTeamsTeamIdTimetableTemplates = (teamId: string, timetableTemplate: TimetableTemplate) => {
+  return backendCustomInstance<TimetableTemplate>({
+    url: `/teams/${teamId}/timetable-templates`,
+    method: 'post',
+    data: timetableTemplate,
+  });
 };
 
 export const usePostTeamsTeamIdTimetableTemplates = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePostTeamsTeamIdTimetableTemplatesHook>>,
+    AsyncReturnType<typeof postTeamsTeamIdTimetableTemplates>,
     TError,
     {teamId: string; data: TimetableTemplate},
     TContext
@@ -254,10 +217,8 @@ export const usePostTeamsTeamIdTimetableTemplates = <TError = ErrorType<unknown>
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const postTeamsTeamIdTimetableTemplates = usePostTeamsTeamIdTimetableTemplatesHook();
-
   const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePostTeamsTeamIdTimetableTemplatesHook>>,
+    AsyncReturnType<typeof postTeamsTeamIdTimetableTemplates>,
     {teamId: string; data: TimetableTemplate}
   > = props => {
     const {teamId, data} = props || {};
@@ -277,15 +238,11 @@ export const usePostTeamsTeamIdTimetableTemplates = <TError = ErrorType<unknown>
 
  * @summary 時間割テンプレート取得
  */
-export const useGetTeamsTeamIdTimetableTemplatesTemplateIdHook = () => {
-  const getTeamsTeamIdTimetableTemplatesTemplateId = useBackendCustomInstance<TimetableTemplate>();
-
-  return (teamId: string, templateId: string) => {
-    return getTeamsTeamIdTimetableTemplatesTemplateId({
-      url: `/teams/${teamId}/timetable-templates/${templateId}`,
-      method: 'get',
-    });
-  };
+export const getTeamsTeamIdTimetableTemplatesTemplateId = (teamId: string, templateId: string) => {
+  return backendCustomInstance<TimetableTemplate>({
+    url: `/teams/${teamId}/timetable-templates/${templateId}`,
+    method: 'get',
+  });
 };
 
 export const getGetTeamsTeamIdTimetableTemplatesTemplateIdQueryKey = (teamId: string, templateId: string) => [
@@ -293,34 +250,27 @@ export const getGetTeamsTeamIdTimetableTemplatesTemplateIdQueryKey = (teamId: st
 ];
 
 export const useGetTeamsTeamIdTimetableTemplatesTemplateId = <
-  TData = AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetableTemplatesTemplateIdHook>>,
+  TData = AsyncReturnType<typeof getTeamsTeamIdTimetableTemplatesTemplateId>,
   TError = ErrorType<unknown>,
 >(
   teamId: string,
   templateId: string,
   options?: {
-    query?: UseQueryOptions<
-      AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetableTemplatesTemplateIdHook>>,
-      TError,
-      TData
-    >;
+    query?: UseQueryOptions<AsyncReturnType<typeof getTeamsTeamIdTimetableTemplatesTemplateId>, TError, TData>;
   },
 ): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetTeamsTeamIdTimetableTemplatesTemplateIdQueryKey(teamId, templateId);
 
-  const getTeamsTeamIdTimetableTemplatesTemplateId = useGetTeamsTeamIdTimetableTemplatesTemplateIdHook();
+  const queryFn: QueryFunction<AsyncReturnType<typeof getTeamsTeamIdTimetableTemplatesTemplateId>> = () =>
+    getTeamsTeamIdTimetableTemplatesTemplateId(teamId, templateId);
 
-  const queryFn: QueryFunction<
-    AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetableTemplatesTemplateIdHook>>
-  > = () => getTeamsTeamIdTimetableTemplatesTemplateId(teamId, templateId);
-
-  const query = useQuery<
-    AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetableTemplatesTemplateIdHook>>,
-    TError,
-    TData
-  >(queryKey, queryFn, {enabled: !!(teamId && templateId), ...queryOptions});
+  const query = useQuery<AsyncReturnType<typeof getTeamsTeamIdTimetableTemplatesTemplateId>, TError, TData>(
+    queryKey,
+    queryFn,
+    {enabled: !!(teamId && templateId), ...queryOptions},
+  );
 
   return {
     queryKey,
@@ -333,16 +283,16 @@ export const useGetTeamsTeamIdTimetableTemplatesTemplateId = <
 
  * @summary 時間割テンプレート更新
  */
-export const usePutTeamsTeamIdTimetableTemplatesTemplateIdHook = () => {
-  const putTeamsTeamIdTimetableTemplatesTemplateId = useBackendCustomInstance<TimetableTemplate>();
-
-  return (teamId: string, templateId: string, timetableTemplate: TimetableTemplate) => {
-    return putTeamsTeamIdTimetableTemplatesTemplateId({
-      url: `/teams/${teamId}/timetable-templates/${templateId}`,
-      method: 'put',
-      data: timetableTemplate,
-    });
-  };
+export const putTeamsTeamIdTimetableTemplatesTemplateId = (
+  teamId: string,
+  templateId: string,
+  timetableTemplate: TimetableTemplate,
+) => {
+  return backendCustomInstance<TimetableTemplate>({
+    url: `/teams/${teamId}/timetable-templates/${templateId}`,
+    method: 'put',
+    data: timetableTemplate,
+  });
 };
 
 export const usePutTeamsTeamIdTimetableTemplatesTemplateId = <
@@ -350,7 +300,7 @@ export const usePutTeamsTeamIdTimetableTemplatesTemplateId = <
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePutTeamsTeamIdTimetableTemplatesTemplateIdHook>>,
+    AsyncReturnType<typeof putTeamsTeamIdTimetableTemplatesTemplateId>,
     TError,
     {teamId: string; templateId: string; data: TimetableTemplate},
     TContext
@@ -358,10 +308,8 @@ export const usePutTeamsTeamIdTimetableTemplatesTemplateId = <
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const putTeamsTeamIdTimetableTemplatesTemplateId = usePutTeamsTeamIdTimetableTemplatesTemplateIdHook();
-
   const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePutTeamsTeamIdTimetableTemplatesTemplateIdHook>>,
+    AsyncReturnType<typeof putTeamsTeamIdTimetableTemplatesTemplateId>,
     {teamId: string; templateId: string; data: TimetableTemplate}
   > = props => {
     const {teamId, templateId, data} = props || {};
@@ -381,12 +329,8 @@ export const usePutTeamsTeamIdTimetableTemplatesTemplateId = <
 
  * @summary 当日の時間割取得
  */
-export const useGetTeamsTeamIdTimetablesTimetableIdHook = () => {
-  const getTeamsTeamIdTimetablesTimetableId = useBackendCustomInstance<TimetableOfDay>();
-
-  return (teamId: string, timetableId: string) => {
-    return getTeamsTeamIdTimetablesTimetableId({url: `/teams/${teamId}/timetables/${timetableId}`, method: 'get'});
-  };
+export const getTeamsTeamIdTimetablesTimetableId = (teamId: string, timetableId: string) => {
+  return backendCustomInstance<TimetableOfDay>({url: `/teams/${teamId}/timetables/${timetableId}`, method: 'get'});
 };
 
 export const getGetTeamsTeamIdTimetablesTimetableIdQueryKey = (teamId: string, timetableId: string) => [
@@ -394,29 +338,21 @@ export const getGetTeamsTeamIdTimetablesTimetableIdQueryKey = (teamId: string, t
 ];
 
 export const useGetTeamsTeamIdTimetablesTimetableId = <
-  TData = AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetablesTimetableIdHook>>,
+  TData = AsyncReturnType<typeof getTeamsTeamIdTimetablesTimetableId>,
   TError = ErrorType<unknown>,
 >(
   teamId: string,
   timetableId: string,
-  options?: {
-    query?: UseQueryOptions<
-      AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetablesTimetableIdHook>>,
-      TError,
-      TData
-    >;
-  },
+  options?: {query?: UseQueryOptions<AsyncReturnType<typeof getTeamsTeamIdTimetablesTimetableId>, TError, TData>},
 ): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetTeamsTeamIdTimetablesTimetableIdQueryKey(teamId, timetableId);
 
-  const getTeamsTeamIdTimetablesTimetableId = useGetTeamsTeamIdTimetablesTimetableIdHook();
-
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetablesTimetableIdHook>>> = () =>
+  const queryFn: QueryFunction<AsyncReturnType<typeof getTeamsTeamIdTimetablesTimetableId>> = () =>
     getTeamsTeamIdTimetablesTimetableId(teamId, timetableId);
 
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetablesTimetableIdHook>>, TError, TData>(
+  const query = useQuery<AsyncReturnType<typeof getTeamsTeamIdTimetablesTimetableId>, TError, TData>(
     queryKey,
     queryFn,
     {enabled: !!(teamId && timetableId), ...queryOptions},
@@ -432,17 +368,13 @@ export const useGetTeamsTeamIdTimetablesTimetableId = <
  * 今日の時間割を開始します。チームメンバーに今日の時間割の開始を通知します。
  * @summary 今日の時間割開始
  */
-export const usePutTeamsTeamIdTimetablesTimetableIdHook = () => {
-  const putTeamsTeamIdTimetablesTimetableId = useBackendCustomInstance<TimetableOfDay>();
-
-  return (teamId: string, timetableId: string) => {
-    return putTeamsTeamIdTimetablesTimetableId({url: `/teams/${teamId}/timetables/${timetableId}`, method: 'put'});
-  };
+export const putTeamsTeamIdTimetablesTimetableId = (teamId: string, timetableId: string) => {
+  return backendCustomInstance<TimetableOfDay>({url: `/teams/${teamId}/timetables/${timetableId}`, method: 'put'});
 };
 
 export const usePutTeamsTeamIdTimetablesTimetableId = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePutTeamsTeamIdTimetablesTimetableIdHook>>,
+    AsyncReturnType<typeof putTeamsTeamIdTimetablesTimetableId>,
     TError,
     {teamId: string; timetableId: string},
     TContext
@@ -450,10 +382,8 @@ export const usePutTeamsTeamIdTimetablesTimetableId = <TError = ErrorType<unknow
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const putTeamsTeamIdTimetablesTimetableId = usePutTeamsTeamIdTimetablesTimetableIdHook();
-
   const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePutTeamsTeamIdTimetablesTimetableIdHook>>,
+    AsyncReturnType<typeof putTeamsTeamIdTimetablesTimetableId>,
     {teamId: string; timetableId: string}
   > = props => {
     const {teamId, timetableId} = props || {};
@@ -473,12 +403,8 @@ export const usePutTeamsTeamIdTimetablesTimetableId = <TError = ErrorType<unknow
 
  * @summary 当日の時間割一覧取得
  */
-export const useGetTeamsTeamIdTimetablesHook = () => {
-  const getTeamsTeamIdTimetables = useBackendCustomInstance<TimetableOfDay[]>();
-
-  return (teamId: string, params?: GetTeamsTeamIdTimetablesParams) => {
-    return getTeamsTeamIdTimetables({url: `/teams/${teamId}/timetables`, method: 'get', params});
-  };
+export const getTeamsTeamIdTimetables = (teamId: string, params?: GetTeamsTeamIdTimetablesParams) => {
+  return backendCustomInstance<TimetableOfDay[]>({url: `/teams/${teamId}/timetables`, method: 'get', params});
 };
 
 export const getGetTeamsTeamIdTimetablesQueryKey = (teamId: string, params?: GetTeamsTeamIdTimetablesParams) => [
@@ -487,29 +413,24 @@ export const getGetTeamsTeamIdTimetablesQueryKey = (teamId: string, params?: Get
 ];
 
 export const useGetTeamsTeamIdTimetables = <
-  TData = AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetablesHook>>,
+  TData = AsyncReturnType<typeof getTeamsTeamIdTimetables>,
   TError = ErrorType<unknown>,
 >(
   teamId: string,
   params?: GetTeamsTeamIdTimetablesParams,
-  options?: {
-    query?: UseQueryOptions<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetablesHook>>, TError, TData>;
-  },
+  options?: {query?: UseQueryOptions<AsyncReturnType<typeof getTeamsTeamIdTimetables>, TError, TData>},
 ): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetTeamsTeamIdTimetablesQueryKey(teamId, params);
 
-  const getTeamsTeamIdTimetables = useGetTeamsTeamIdTimetablesHook();
-
-  const queryFn: QueryFunction<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetablesHook>>> = () =>
+  const queryFn: QueryFunction<AsyncReturnType<typeof getTeamsTeamIdTimetables>> = () =>
     getTeamsTeamIdTimetables(teamId, params);
 
-  const query = useQuery<AsyncReturnType<ReturnType<typeof useGetTeamsTeamIdTimetablesHook>>, TError, TData>(
-    queryKey,
-    queryFn,
-    {enabled: !!teamId, ...queryOptions},
-  );
+  const query = useQuery<AsyncReturnType<typeof getTeamsTeamIdTimetables>, TError, TData>(queryKey, queryFn, {
+    enabled: !!teamId,
+    ...queryOptions,
+  });
 
   return {
     queryKey,
@@ -521,17 +442,17 @@ export const useGetTeamsTeamIdTimetables = <
  * 当日の時間割を登録します。
  * @summary 当日の時間割登録
  */
-export const usePostTeamsTeamIdTimetablesHook = () => {
-  const postTeamsTeamIdTimetables = useBackendCustomInstance<TimetableOfDay>();
-
-  return (teamId: string, timetableOfDayInput: TimetableOfDayInput) => {
-    return postTeamsTeamIdTimetables({url: `/teams/${teamId}/timetables`, method: 'post', data: timetableOfDayInput});
-  };
+export const postTeamsTeamIdTimetables = (teamId: string, timetableOfDayInput: TimetableOfDayInput) => {
+  return backendCustomInstance<TimetableOfDay>({
+    url: `/teams/${teamId}/timetables`,
+    method: 'post',
+    data: timetableOfDayInput,
+  });
 };
 
 export const usePostTeamsTeamIdTimetables = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    AsyncReturnType<ReturnType<typeof usePostTeamsTeamIdTimetablesHook>>,
+    AsyncReturnType<typeof postTeamsTeamIdTimetables>,
     TError,
     {teamId: string; data: TimetableOfDayInput},
     TContext
@@ -539,10 +460,8 @@ export const usePostTeamsTeamIdTimetables = <TError = ErrorType<unknown>, TConte
 }) => {
   const {mutation: mutationOptions} = options || {};
 
-  const postTeamsTeamIdTimetables = usePostTeamsTeamIdTimetablesHook();
-
   const mutationFn: MutationFunction<
-    AsyncReturnType<ReturnType<typeof usePostTeamsTeamIdTimetablesHook>>,
+    AsyncReturnType<typeof postTeamsTeamIdTimetables>,
     {teamId: string; data: TimetableOfDayInput}
   > = props => {
     const {teamId, data} = props || {};
