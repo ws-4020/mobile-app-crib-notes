@@ -20,7 +20,7 @@ const Screen: React.FC<Props> = () => {
 
   // Disable auto-fetch on mount
   const {status, isIdle, isLoading, isSuccess, isError, data, refetch} = useListTodo(queryParameters, {
-    query: {enabled: queryEnabled},
+    enabled: queryEnabled,
   });
 
   const todos = useMemo(() => {

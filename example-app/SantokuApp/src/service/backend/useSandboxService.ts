@@ -1,96 +1,92 @@
-import {AxiosResponse} from 'axios';
-import {ErrorType} from 'framework/backend/useCustomInstance';
-import {NotFoundResponse} from 'generated/backend/model';
 import {
   useGetTodo,
-  useListTodo,
+  useListTodo as useListTodoApi,
   useListTodoByCursorInfinite as useListTodoByCursorInfiniteApi,
   usePostTodo as usePostTodoApi,
   usePutTodo as usePutTodoApi,
   useDeleteTodo as useDeleteTodoApi,
+  getListTodoQueryKey,
+  getListTodoByCursorQueryKey,
+  getGetTodoQueryKey,
+  listTodo,
+  getTodo,
 } from 'generated/sandbox/api';
-import {
-  ErrorResponse,
-  ListTodoByCursorParams,
-  ListTodoInfiniteResponse,
-  ListTodoParams,
-  Todo,
-  TodoRegistration,
-} from 'generated/sandbox/model';
-import {UseInfiniteQueryOptions, UseMutationOptions, useQuery, useQueryClient} from 'react-query';
-
-import {SandboxService} from './SandboxService';
-import {BackendServiceQueryOptions, getQueryOptions} from './base';
-
-const sandboxService = new SandboxService();
+import {ListTodoByCursorParams, ListTodoParams} from 'generated/sandbox/model';
+import {QueryClient, useQuery, useQueryClient} from 'react-query';
 
 // Sandbox API
 
-const useListTodoByCursorInfinite = (
-  params?: ListTodoByCursorParams,
-  options?: {query?: UseInfiniteQueryOptions<AxiosResponse<ListTodoInfiniteResponse>, ErrorType<ErrorResponse>>},
-) => {
+const useListTodo = (params?: ListTodoParams, options?: {enabled: boolean}) => {
+  return useListTodoApi(params, {
+    query: {
+      enabled: options?.enabled,
+    },
+  });
+};
+
+const useListTodoByCursorInfinite = (params?: ListTodoByCursorParams) => {
   return useListTodoByCursorInfiniteApi(params, {
     query: {
       getNextPageParam: lastPage => {
         return lastPage.data.nextCursor;
       },
     },
-    ...options,
   });
 };
 
-const usePostTodo = (options?: {
-  mutation?: UseMutationOptions<AxiosResponse<Todo>, ErrorType<ErrorResponse>, {data: TodoRegistration}>;
-}) => {
+const usePostTodo = () => {
   const queryClient = useQueryClient();
   return usePostTodoApi({
     mutation: {
-      onSuccess: () => sandboxService.resetQueries(queryClient),
+      onSuccess: () => resetQueries(queryClient),
     },
-    ...options,
   });
 };
 
-const usePutTodo = (options?: {
-  mutation?: UseMutationOptions<
-    AxiosResponse<Todo>,
-    ErrorType<ErrorResponse>,
-    {todoId: number; data: TodoRegistration}
-  >;
-}) => {
+const usePutTodo = () => {
   const queryClient = useQueryClient();
   return usePutTodoApi({
     mutation: {
-      onSuccess: (_, variables) => sandboxService.resetQueries(queryClient, variables.todoId),
+      onSuccess: (_, variables) => resetQueries(queryClient, variables.todoId),
     },
-    ...options,
   });
 };
 
-const useDeleteTodo = (options?: {
-  mutation?: UseMutationOptions<AxiosResponse<void>, ErrorType<NotFoundResponse>, {todoId: number}>;
-}) => {
+const useDeleteTodo = () => {
   const queryClient = useQueryClient();
   return useDeleteTodoApi({
     mutation: {
-      onSuccess: (_, variables) => sandboxService.resetQueries(queryClient, variables.todoId),
+      onSuccess: (_, variables) => resetQueries(queryClient, variables.todoId),
     },
-    ...options,
   });
 };
 
 // Advanced Hooks
 
 // Dependent Queries
-const useGetTodoDetails = (params?: ListTodoParams, options?: BackendServiceQueryOptions) => {
-  return useQuery(['useGetTodoDetails', params], () => sandboxService.getTodoDetails(params), {
-    ...getQueryOptions(options),
+const useGetTodoDetails = (params?: ListTodoParams, options?: {enabled: boolean}) => {
+  return useQuery(['useGetTodoDetails', params], () => getTodoDetails(params), {
+    enabled: options?.enabled,
   });
 };
 
+const resetQueries = async (queryClient: QueryClient, todoId?: number) => {
+  await queryClient.resetQueries(getListTodoQueryKey());
+  await queryClient.resetQueries(getListTodoByCursorQueryKey());
+  if (todoId) {
+    await queryClient.resetQueries(getGetTodoQueryKey(todoId));
+  }
+};
+
+const getTodoDetails = async (params?: ListTodoParams) => {
+  const response = await listTodo(params);
+  const todos = response.data.content;
+  if (todos) {
+    return Promise.all(todos.map(todo => getTodo(todo.id)));
+  }
+};
+
 export {
-  sandboxService,
   useGetTodo,
   useListTodo,
   useListTodoByCursorInfinite,
