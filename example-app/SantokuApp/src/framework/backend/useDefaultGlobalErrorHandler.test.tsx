@@ -42,18 +42,23 @@ describe('useDefaultGlobalQueryErrorHandler', () => {
     expect(mockSnackbarShow).not.toBeCalled();
   });
 
-  test('401 Unauthorizedの場合に何も行われない', async () => {
+  test('401 Unauthorizedの場合に再ログインを促すアラートを表示', async () => {
     const axiosError = {
       config: jest.fn(),
       response: {status: 401, data: {}},
       isAxiosError: true,
       toJSON: () => {},
     } as unknown as AxiosError;
+    const spyAlert = jest.spyOn(Alert, 'alert');
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalQueryErrorHandler());
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError, query);
     expect(mockSnackbarShow).not.toBeCalled();
+    expect(spyAlert).toBeCalledWith(
+      '再ログインが必要です',
+      'セッションの有効期限が切れました。再度ログインしてください。',
+    );
   });
 
   test('403 Forbiddenの場合に最新の利用規約への同意が必要なことを伝えるアラートを表示', async () => {

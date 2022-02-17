@@ -31,6 +31,11 @@ const useBaseErrorHandler = () => {
     } catch (e) {}
   }, []);
 
+  const showRequireLoginDialog = useCallback(() => {
+    // TODO: 認証機能の組み込みが終わったら、ダイアログから認証済状態を解除してログイン画面へ遷移できるようにする
+    Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
+  }, []);
+
   const showRequireTermsOfServiceAgreementDialog = useCallback(() => {
     Alert.alert(m('fw.error.利用規約未同意タイトル'), m('fw.error.利用規約未同意本文'));
   }, []);
@@ -76,8 +81,9 @@ const useBaseErrorHandler = () => {
             // デフォルトの動作としては特に処理を実施しない
             break;
           case 401: // Unauthorized
-            // Mutationの場合は、デフォルトの動作としては特に処理を実施しない
-            // Queryの場合は別途処理を定義
+            // 401応答が返ってきて、自動セッション更新にも失敗したケース
+            // 再ログインを促すアラートを表示
+            showRequireLoginDialog();
             break;
           case 403: // Forbidden
             // 暫定的に最新の利用規約への同意が必要なことを伝えるアラートのみ表示
@@ -121,6 +127,7 @@ const useBaseErrorHandler = () => {
       showGatewayTimeout,
       showMaintenance,
       showRequestTimeout,
+      showRequireLoginDialog,
       showRequireTermsOfServiceAgreementDialog,
       showTooManyRequests,
       showUnexpectedError,
