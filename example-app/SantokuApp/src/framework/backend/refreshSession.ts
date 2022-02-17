@@ -2,8 +2,8 @@ import axios, {AxiosResponse} from 'axios';
 
 import {SecureStorageAdapter} from '../authentication/SecureStorageAdapter';
 import {ApplicationError} from '../error/ApplicationError';
+import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, setAxiosResponseInterceptor} from './customInstance';
 import {refreshCsrfToken} from './refreshCsrfToken';
-import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, setAxiosResponseInterceptor} from './useCustomInstance';
 
 // 共通リトライ処理に必要なAPI呼び出しだけは、自動生成コードに依存しない形で用意する
 const autoLogin = async () => {

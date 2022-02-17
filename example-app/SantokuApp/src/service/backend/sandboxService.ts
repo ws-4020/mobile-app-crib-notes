@@ -14,8 +14,6 @@ import {
 import {ListTodoByCursorParams, ListTodoParams} from 'generated/sandbox/model';
 import {QueryClient, useQuery, useQueryClient} from 'react-query';
 
-// Sandbox API
-
 const useListTodo = (params?: ListTodoParams, options?: {enabled: boolean}) => {
   return useListTodoApi(params, {
     query: {
@@ -60,8 +58,6 @@ const useDeleteTodo = () => {
     },
   });
 };
-
-// Advanced Hooks
 
 // Dependent Queries
 const useGetTodoDetails = (params?: ListTodoParams, options?: {enabled: boolean}) => {

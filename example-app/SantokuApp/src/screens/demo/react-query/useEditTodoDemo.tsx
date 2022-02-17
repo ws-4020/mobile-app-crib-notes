@@ -1,6 +1,6 @@
 import {useLoadingOverlay} from 'components/overlay';
 import {useCallback, useEffect, useState} from 'react';
-import {useDeleteTodo, useGetTodo, usePutTodo} from 'service/backend/useSandboxService';
+import {useDeleteTodo, useGetTodo, usePutTodo} from 'service/backend';
 
 import {EditTodoDemoScreenProps} from './EditTodoDemoScreen';
 

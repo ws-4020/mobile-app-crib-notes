@@ -2,7 +2,7 @@ import messaging from '@react-native-firebase/messaging';
 import axios, {AxiosError} from 'axios';
 import {ErrorResponse} from 'generated/backend/model';
 import {useCallback, useState} from 'react';
-import {usePostAccountsMeDeviceTokenService} from 'service/backend';
+import {usePostAccountsMeDeviceToken} from 'service/backend';
 
 import {AppConfig} from '../../../framework';
 
@@ -11,7 +11,7 @@ type AuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL'
 export const usePushNotification = () => {
   const [authStatus, setAuthStatus] = useState<AuthStatusType>();
   const [token, setToken] = useState<string>();
-  const postAccountsMeDeviceToken = usePostAccountsMeDeviceTokenService();
+  const postAccountsMeDeviceToken = usePostAccountsMeDeviceToken();
 
   const requestUserPermission = useCallback(async () => {
     const authStatus = await messaging().requestPermission();

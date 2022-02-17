@@ -1,6 +1,6 @@
 import {useCallback, useMemo, useState} from 'react';
 import {useQueryClient} from 'react-query';
-import {useListTodoByCursorInfinite} from 'service/backend/useSandboxService';
+import {useListTodoByCursorInfinite} from 'service/backend';
 
 import {CreateTodoDemoScreen} from './CreateTodoDemoScreen';
 import {EditTodoDemoScreen} from './EditTodoDemoScreen';

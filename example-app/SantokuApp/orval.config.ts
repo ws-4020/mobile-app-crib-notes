@@ -15,7 +15,7 @@ export default defineConfig({
           useQuery: true,
         },
         mutator: {
-          path: 'src/framework/backend/useCustomInstance.ts',
+          path: 'src/framework/backend/customInstance.ts',
           name: 'backendCustomInstance',
         },
       },
@@ -38,7 +38,7 @@ export default defineConfig({
           useQuery: true,
         },
         mutator: {
-          path: 'src/framework/backend/useCustomInstance.ts',
+          path: 'src/framework/backend/customInstance.ts',
           name: 'sandboxCustomInstance',
         },
         operations: {

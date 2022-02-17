@@ -5,7 +5,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 import {useQueryClient} from 'react-query';
-import {useGetTodoDetails} from 'service/backend/useSandboxService';
+import {useGetTodoDetails} from 'service/backend';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,

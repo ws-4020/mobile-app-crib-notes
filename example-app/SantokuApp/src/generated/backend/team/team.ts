@@ -24,7 +24,7 @@ import type {
   GetTeamsTeamIdTimetablesParams,
   TimetableOfDayInput,
 } from '.././model';
-import {backendCustomInstance, ErrorType} from '../../../framework/backend/useCustomInstance';
+import {backendCustomInstance, ErrorType} from '../../../framework/backend/customInstance';
 
 type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...args: any) => Promise<infer R> ? R : any;
 

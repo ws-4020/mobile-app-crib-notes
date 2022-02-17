@@ -1,4 +1,4 @@
-import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, setCsrfTokenHeader} from './useCustomInstance';
+import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, setCsrfTokenHeader} from './customInstance';
 
 type CsrfTokenResponse = {
   csrfTokenHeaderName: string;

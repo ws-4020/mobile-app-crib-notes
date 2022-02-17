@@ -1,4 +1,4 @@
-import {useGetCsrfTokenService, usePostLoginService, usePostLogoutService, usePostSignupService} from 'service/backend';
+import {useGetCsrfToken, usePostLogin, usePostLogout, usePostSignup} from 'service/backend';
 
 import {ApplicationError} from '../error/ApplicationError';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
@@ -9,10 +9,10 @@ class ActiveAccountIdNotFoundError extends ApplicationError {}
 class PasswordNotFoundError extends ApplicationError {}
 
 const useAuthenticationService = () => {
-  const csrfTokenQuery = useGetCsrfTokenService({enabled: false});
-  const postSignup = usePostSignupService();
-  const postLogin = usePostLoginService();
-  const postLogout = usePostLogoutService();
+  const csrfTokenQuery = useGetCsrfToken({enabled: false});
+  const postSignup = usePostSignup();
+  const postLogin = usePostLogin();
+  const postLogout = usePostLogout();
 
   /**
    * サインアップします。
@@ -21,9 +21,9 @@ const useAuthenticationService = () => {
    * @returns アカウント
    */
   const signup = async (nickname: string, password: string) => {
-    const account = await postSignup.mutateAsync({data: {nickname, password}});
-    await SecureStorageAdapter.savePassword(account.accountId, password);
-    return account;
+    const response = await postSignup.mutateAsync({data: {nickname, password}});
+    await SecureStorageAdapter.savePassword(response.data.accountId, password);
+    return response.data;
   };
 
   /**
@@ -46,10 +46,10 @@ const useAuthenticationService = () => {
    * @returns アカウントの切り替え結果
    */
   const login = async (accountId: string, password: string) => {
-    const data = await postLogin.mutateAsync({data: {accountId, password}});
+    const response = await postLogin.mutateAsync({data: {accountId, password}});
     await SecureStorageAdapter.saveActiveAccountId(accountId);
     await csrfTokenQuery.refetch();
-    return data;
+    return response.data;
   };
 
   /**

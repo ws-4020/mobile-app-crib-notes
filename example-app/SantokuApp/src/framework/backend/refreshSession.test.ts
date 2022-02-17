@@ -1,5 +1,5 @@
+import {BACKEND_AXIOS_INSTANCE, BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from './customInstance';
 import {refreshSession} from './refreshSession';
-import {BACKEND_AXIOS_INSTANCE, BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from './useCustomInstance';
 
 describe('refreshSession', () => {
   test('ログインが行われ、再取得したCsrfTokenがデフォルトヘッダとして設定されること', async () => {
