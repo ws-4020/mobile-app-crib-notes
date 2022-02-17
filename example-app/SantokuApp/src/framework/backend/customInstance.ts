@@ -89,6 +89,7 @@ const sandboxCustomInstance = <T>(config: AxiosRequestConfig): Promise<AxiosResp
 
 const setCsrfTokenHeader = (csrfTokenHeaderName: string, csrfTokenValue: string) => {
   BACKEND_AXIOS_INSTANCE.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
+  BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
 };
 
 const setAxiosResponseInterceptor = (
