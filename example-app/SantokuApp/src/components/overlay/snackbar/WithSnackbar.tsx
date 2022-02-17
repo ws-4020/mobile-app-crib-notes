@@ -1,4 +1,4 @@
-import {m} from 'framework/message';
+import {m} from 'framework';
 import {createUseContextAndProvider} from 'framework/utilities';
 import React, {useMemo, useState} from 'react';
 

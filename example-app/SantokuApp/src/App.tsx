@@ -3,8 +3,8 @@ import {Platform} from 'react-native';
 
 import {AppWithInitialization} from './AppWithInitialization';
 import {WithOverlay} from './components/overlay';
+import {WithReactQuery} from './components/reactQuery';
 import {WithAppTheme} from './components/theme';
-import {WithReactQuery} from './framework';
 
 type AppProperties = {
   [key: string]: any;

@@ -1,15 +1,15 @@
 import {renderHook} from '@testing-library/react-hooks';
 import {AxiosError} from 'axios';
+import {useSnackbar, WithSnackbar} from 'components/overlay';
 import {loadBundledMessagesAsync} from 'framework/initialize/helpers';
 import React from 'react';
 import {Alert} from 'react-native';
 import {Mutation, Query, QueryKey} from 'react-query';
 
-import {useSnackbar, WithSnackbar} from '../../components/overlay';
 import {useDefaultGlobalMutationErrorHandler, useDefaultGlobalQueryErrorHandler} from './useDefaultGlobalErrorHandler';
 
-jest.mock('../../components/overlay/snackbar/WithSnackbar');
-jest.mock('../logging');
+jest.mock('components/overlay/snackbar/WithSnackbar');
+jest.mock('framework/logging');
 
 describe('useDefaultGlobalQueryErrorHandler', () => {
   const query = {} as unknown as Query<unknown, unknown, unknown, QueryKey>;

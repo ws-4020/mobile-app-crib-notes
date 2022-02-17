@@ -1,5 +1,4 @@
 export {useAuthenticationService, ActiveAccountIdNotFoundError, PasswordNotFoundError} from './authentication';
-export {WithReactQuery} from './backend';
 export {AppConfig} from './config';
 export {firebaseConfig, FirebaseConfig} from './firebase';
 export type {Logger, LoggerOptions} from './logging';
