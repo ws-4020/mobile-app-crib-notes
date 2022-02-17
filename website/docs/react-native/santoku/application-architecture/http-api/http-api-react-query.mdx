@@ -37,7 +37,7 @@ React Queryには多数のオプションが用意されています。
 |オプション|設定値|説明|
 |:--|:--|:--|
 |queryFn||[Default Query Function](https://react-query.tanstack.com/guides/default-query-function)で紹介されているとおり、デフォルトのクエリ関数を定義出来ます。|
-|retry|`false`|クエリ失敗時のリトライ回数です。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は3です。このアプリでは、[HTTP API 通信のリトライ](../application-architecture/http-api/http-api-error-handling.mdx#http-api通信のリトライ)に従いリトライはユーザ自身の判断とします。`false`をデフォルト値として設定します（リトライしません）。|
+|retry|`false`|クエリ失敗時のリトライ回数です。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は3です。このアプリでは、[HTTP API 通信のリトライ](./http-api-error-handling.mdx#http-api通信のリトライ)に従いリトライはユーザ自身の判断とします。`false`をデフォルト値として設定します（リトライしません）。|
 |retryOnMount||マウント時にリトライするかどうかを示します。デフォルト値は`true`です。|
 |retryDelay||リトライ時の遅延間隔を示します。デフォルトでは、リトライの度に指数関数的に待ち時間が増えていきます（Exponential Backoff）。|
 |staleTime||クエリが「新しい」ものから「古くなる」までの期間です。クエリが「新しい」限り、クエリは取得済みのデータを返すため、ネットワークリクエストは発生しません。クエリが「古い」場合、クエリは取得済みのデータを返し、特定の条件下にてバックグラウンドで再フェッチします。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は0です（フェッチ後すぐ古くなる）。|
