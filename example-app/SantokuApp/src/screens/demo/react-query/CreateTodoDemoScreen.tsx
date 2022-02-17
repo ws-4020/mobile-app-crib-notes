@@ -1,51 +1,21 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Button} from 'components/button/Button';
-import {useLoadingOverlay} from 'components/overlay';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
-import React, {useCallback, useState} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input} from 'react-native-elements';
-import {usePostTodo} from 'service/backend';
 
-import {EditTodoDemoScreen} from './EditTodoDemoScreen';
+import {useCreateTodoDemo} from './useCreateTodoDemo';
 
-type Props = CompositeScreenProps<
+export type CreateTodoDemoScreenProps = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
   NativeStackScreenProps<RootStackParamList>
 >;
 
 const ScreenName = 'CreateTodoDemo';
-const Screen: React.FC<Props> = ({navigation}) => {
-  const [title, setTitle] = useState<string>();
-  const [description, setDescription] = useState<string>();
-  const loadingOverlay = useLoadingOverlay();
-  const postTodo = usePostTodo();
-
-  const onChangeTitle = useCallback((newTitle: string) => {
-    setTitle(newTitle);
-  }, []);
-
-  const onChangeDescription = useCallback((newDescription: string) => {
-    setDescription(newDescription);
-  }, []);
-
-  const onSubmit = useCallback(() => {
-    if (title && description) {
-      loadingOverlay.setVisible(true);
-      const data = {title, description};
-      postTodo
-        .mutateAsync({data})
-        .then(data => {
-          const todo = data.data;
-          loadingOverlay.setVisible(false);
-          navigation.replace(EditTodoDemoScreen.name, {todoId: todo.id});
-        })
-        .catch(() => {
-          loadingOverlay.setVisible(false);
-        });
-    }
-  }, [title, description, loadingOverlay, postTodo, navigation]);
+const Screen: React.FC<CreateTodoDemoScreenProps> = props => {
+  const {title, description, isLoading, onChangeTitle, onChangeDescription, onSubmit} = useCreateTodoDemo(props);
 
   return (
     <View style={styles.container}>
@@ -56,7 +26,7 @@ const Screen: React.FC<Props> = ({navigation}) => {
         {description}
       </Input>
       <View style={styles.buttons}>
-        <Button title="Submit" onPress={onSubmit} loading={postTodo.isLoading} containerStyle={styles.button} />
+        <Button title="Submit" onPress={onSubmit} loading={isLoading} containerStyle={styles.button} />
       </View>
     </View>
   );

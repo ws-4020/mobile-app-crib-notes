@@ -1,7 +1,7 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 import {useQueryClient} from 'react-query';
@@ -17,13 +17,22 @@ const Screen: React.FC<Props> = () => {
   const [queryEnabled, setQueryEnabled] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const queryParameters = {page: 1, size: 5};
+  const {
+    status,
+    isLoading,
+    isSuccess,
+    isError,
+    data: responses,
+  } = useGetTodoDetails(queryParameters, {enabled: queryEnabled});
 
-  const {isIdle, isLoading, isSuccess, isError, data} = useGetTodoDetails(queryParameters, {enabled: queryEnabled});
-  const todos = data?.map(d => d.data);
+  const todos = useMemo(() => {
+    return isSuccess ? responses?.map(response => response.data) ?? [] : [];
+  }, [isSuccess, responses]);
 
   const reset = useCallback(() => {
     setQueryEnabled(false);
   }, []);
+
   useEffect(() => {
     if (!queryEnabled) {
       queryClient.resetQueries().catch(() => {});
@@ -34,7 +43,7 @@ const Screen: React.FC<Props> = () => {
     <View style={styles.container}>
       <View>
         <Text h4>Query Status</Text>
-        <Text>{`isIdle: ${isIdle.toString()}, isLoading: ${isLoading.toString()}, isSuccess: ${isSuccess.toString()}, isError: ${isError.toString()}`}</Text>
+        <Text>{`Status: ${status}`}</Text>
       </View>
       <View style={styles.block}>
         <Text h4>Query Data</Text>

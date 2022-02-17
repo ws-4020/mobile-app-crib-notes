@@ -29,6 +29,7 @@ const Screen: React.FC<EditTodoDemoScreenProps> = props => {
     onSave,
     onDelete,
   } = useEditTodoDemo(props);
+
   if (todoQuery.isLoading) {
     return <ActivityIndicator />;
   }
