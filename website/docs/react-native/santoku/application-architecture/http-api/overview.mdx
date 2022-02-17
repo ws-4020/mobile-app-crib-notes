@@ -29,10 +29,15 @@ export default function App() {
   );
 }
 
+type ResponseData = {
+  name: string;
+  description: string;
+};
+
 function Example() {
-  const { isLoading, error, data } = useQuery<any, AxiosError>("repoData", () =>
+  const { isLoading, error, data } = useQuery<ResponseData, AxiosError>("repoData", () =>
     axios
-      .get("https://api.github.com/repos/Fintan-contents/mobile-app-crib-notes")
+      .get<ResponseData>("https://api.github.com/repos/Fintan-contents/mobile-app-crib-notes")
       .then((res) => res.data)
   );
 
