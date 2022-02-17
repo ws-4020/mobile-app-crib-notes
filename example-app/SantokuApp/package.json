@@ -20,7 +20,6 @@
     "reset-cache:all": "node .script/runner.js reset-cache --all",
     "reset-cache:interactive": "node .script/runner.js reset-cache --interactive",
     "pod-install": "cd ios && bundle exec pod install --repo-update",
-    "preinstall": "npx npm-force-resolutions",
     "postinstall": "run-s postinstall:*",
     "postinstall:patch-package": "patch-package",
     "bundle": "run-s --print-name --continue-on-error bundle:*",
@@ -82,20 +81,12 @@
     "jest-expo": "^43.0.0",
     "jest-junit": "^13.0.0",
     "nock": "^13.2.2",
-    "npm-force-resolutions": "^0.0.10",
     "npm-run-all": "^4.1.5",
-    "orval": "^6.5.1",
+    "orval": "^6.6.1",
     "patch-package": "^6.4.7",
     "prettier": "^2.4.0",
     "react-test-renderer": "17.0.1",
     "typescript": "~4.3.5"
-  },
-  "resolutions": {
-    "immer": "^9.0.6",
-    "jsonpointer": "^5.0.0",
-    "pac-resolver": "^5.0.0",
-    "validator": "^13.7.0",
-    "nanoid": "^3.1.32"
   },
   "jest-junit": {
     "suiteNameTemplate": "{filepath}",

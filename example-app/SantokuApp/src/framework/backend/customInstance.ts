@@ -32,10 +32,6 @@ const getDefaultAxiosConfig = () => {
   } as AxiosRequestConfig;
 };
 
-// orvalの依存関係にないライブラリやファイルをこのファイル内でimportしていると、
-// orval実行時に "Your mutator cannot be loaded so default setup has been applied" の警告が出る。
-// しかし自動生成されたファイルには正しく反映され、アプリ実行時には正しく読み込まれて利用される。
-// https://github.com/anymaniax/orval/issues/257
 const customInstance = <T>(
   axiosInstance: AxiosInstance,
 ): ((config: AxiosRequestConfig) => Promise<AxiosResponse<T>>) => {
