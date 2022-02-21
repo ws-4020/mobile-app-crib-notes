@@ -10,10 +10,13 @@ sidebar_label: 概要
 
 ## React Queryとは
 
-React Queryは、Reactフックを用いたデータフェッチ用ライブラリです。
-React Queryを用いることで、Reactアプリケーションのサーバ状態の管理（フェッチ、キャッシュ、同期、更新）やエラーハンドリングを実現できます。
+React Queryとは、Reactフックを用いたデータフェッチ用ライブラリです。
+React Queryを用いることで次のことが実現できます。
 
-以下のコードはaxiosとReact Queryを用いてHTTP API通信するコードの例です。
+- サーバ状態の管理（フェッチ、キャッシュ、同期、更新）
+- 宣言的なエラーハンドリング
+
+axiosとReact Queryを用いてHTTP API通信する例は、以下のコードです。
 
 ```typescript jsx
 const queryCache = new QueryCache();
