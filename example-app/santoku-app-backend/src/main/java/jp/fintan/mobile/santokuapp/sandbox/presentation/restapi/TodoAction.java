@@ -128,7 +128,7 @@ public class TodoAction {
       } else {
         return null;
       }
-    } catch (Exception e) {
+    } catch (NumberFormatException e) {
       return null;
     }
   }
