@@ -44,6 +44,6 @@ SELECT
 FROM
   sandbox_todo
 WHERE
-  id > :todoId
+  $if (todoId) {id > :todoId}
 ORDER BY
   id
