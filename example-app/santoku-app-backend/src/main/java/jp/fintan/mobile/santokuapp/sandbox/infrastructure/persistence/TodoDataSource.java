@@ -59,11 +59,13 @@ public class TodoDataSource implements TodoRepository {
 
   @Override
   public TodoListByPage listByPage(PageNumber page, PageSize size, TodoSort sort) {
-    String sqlId = String.format("db.sql.sandbox.todo#find_all_order_by_%s_%s", sort.key.value(), sort.order.value());
     EntityList<TodoEntity> todoEntities = UniversalDao
-      .page(page.value())
-      .per(size.value())
-      .findAllBySqlFile(TodoEntity.class, sqlId);
+        .page(page.value())
+        .per(size.value())
+        .findAllBySqlFile(
+            TodoEntity.class,
+            "db.sql.sandbox.todo#find_all",
+            Map.of("sortId", String.format("%s_%s", sort.key.value(), sort.order.value())));
     return toTodoListPage(todoEntities, page, size, sort);
   }
 
