@@ -17,12 +17,8 @@ public enum TodoSortKey {
   }
 
   public static Optional<TodoSortKey> fromString(String str) {
-    if (str.equalsIgnoreCase("id")) {
-      return Optional.of(TodoSortKey.ID);
-    } else if (str.equalsIgnoreCase("title")) {
-      return Optional.of(TodoSortKey.TITLE);
-    } else {
-      return Optional.empty();
-    }
+    return Stream.of(TodoSortKey.values())
+        .filter(e -> str.equalsIgnoreCase(e.value()))
+        .findFirst();
   }
 }
