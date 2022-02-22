@@ -13,5 +13,6 @@ describe('refreshCsrfToken', () => {
     await refreshCsrfToken();
     expect(spyAxiosInstance).toBeCalledWith('/csrf_token');
     expect(BACKEND_AXIOS_INSTANCE.defaults.headers.common['X-CSRF-TOKEN']).toEqual('dummy');
+    expect(BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.defaults.headers.common['X-CSRF-TOKEN']).toEqual('dummy');
   });
 });
