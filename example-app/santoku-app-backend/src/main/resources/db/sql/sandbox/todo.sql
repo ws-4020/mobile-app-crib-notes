@@ -1,42 +1,15 @@
-find_all_order_by_id_asc =
-SELECT
-  *
-FROM
-  sandbox_todo
-ORDER BY
-  id ASC
-
-find_all_order_by_id_desc =
-SELECT
-  *
-FROM
-  sandbox_todo
-ORDER BY
-  id DESC
-
-find_all_order_by_title_asc =
-SELECT
-  *
-FROM
-  sandbox_todo
-ORDER BY
-  title ASC
-
-find_all_order_by_title_desc =
-SELECT
-  *
-FROM
-  sandbox_todo
-ORDER BY
-  title DESC
-
 find_all =
 SELECT
   *
 FROM
   sandbox_todo
-ORDER BY
-  id
+$sort(sortId) {
+  (id_asc     id ASC)
+  (id_desc    id DESC)
+  (title_asc  title ASC)
+  (title_desc title DESC)
+  (default    id)
+}
 
 find_all_from_cursor =
 SELECT
