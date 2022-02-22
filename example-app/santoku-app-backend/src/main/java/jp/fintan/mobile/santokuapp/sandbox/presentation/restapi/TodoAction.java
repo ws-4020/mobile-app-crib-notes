@@ -116,11 +116,8 @@ public class TodoAction {
   }
 
   private static String getStringParamFromRequest(HttpRequest request, String key) {
-    try {
-      return request.getParam(key)[0];
-    } catch (Exception e) {
-      return null;
-    }
+    var param = request.getParam(key);
+    return param != null && param.length > 0 ? param[0] : null;
   }
 
   private static Long getLongParamFromRequest(HttpRequest request, String key) {
