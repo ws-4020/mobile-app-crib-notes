@@ -11,11 +11,6 @@ public class TodoSort {
   public final TodoSortKey key;
   public final SortOrder order;
 
-  public TodoSort() {
-    this.key = DEFAULT_KEY;
-    this.order = DEFAULT_ORDER;
-  }
-
   public TodoSort(String commaSeparatedKey) {
     if (Objects.isNull(commaSeparatedKey)) {
       this.key = DEFAULT_KEY;

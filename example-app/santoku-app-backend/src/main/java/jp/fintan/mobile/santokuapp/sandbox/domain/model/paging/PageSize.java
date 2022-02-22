@@ -7,10 +7,6 @@ import jp.fintan.mobile.santokuapp.domain.model.core.LongValue;
 public class PageSize extends LongValue {
   private static final Long DEFAULT_SIZE = 20L;
 
-  public PageSize() {
-    super(DEFAULT_SIZE);
-  }
-
   public PageSize(Long value) {
     super(Objects.nonNull(value) ? value : DEFAULT_SIZE);
   }
