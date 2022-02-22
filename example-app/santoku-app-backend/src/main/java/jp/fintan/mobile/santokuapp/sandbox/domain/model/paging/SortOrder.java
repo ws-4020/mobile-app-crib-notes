@@ -17,12 +17,8 @@ public enum SortOrder {
   }
 
   public static Optional<SortOrder> fromString(String str) {
-    if (str.equalsIgnoreCase("asc")) {
-      return Optional.of(SortOrder.ASC);
-    } else if (str.equalsIgnoreCase("desc")) {
-      return Optional.of(SortOrder.DESC);
-    } else {
-      return Optional.empty();
-    }
+    return Stream.of(SortOrder.values())
+        .filter(e -> str.equalsIgnoreCase(e.value()))
+        .findFirst();
   }
 }
