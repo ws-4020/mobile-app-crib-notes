@@ -20,5 +20,6 @@ describe('refreshSession', () => {
     expect(spyPostRequest).toBeCalledWith('/login', {accountId: '1234567890', password: '1234567890'});
     expect(spyGetRequest).toBeCalledWith('/csrf_token');
     expect(BACKEND_AXIOS_INSTANCE.defaults.headers.common['X-CSRF-TOKEN']).toEqual('dummy');
+        expect(BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.defaults.headers.common['X-CSRF-TOKEN']).toEqual('dummy');
   });
 });
