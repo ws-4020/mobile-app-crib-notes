@@ -69,19 +69,16 @@ public class TodoDataSource implements TodoRepository {
 
   @Override
   public TodoListByCursor listByCursor(TodoId cursor, TodoLimit limit) {
-    EntityList<TodoEntity> todoEntities;
-    if (Objects.nonNull(cursor)) {
-      todoEntities = UniversalDao.page(1).per(limit.value()).findAllBySqlFile(
-        TodoEntity.class,
-        "db.sql.sandbox.todo#find_all_from_cursor",
-        Map.of("todoId", cursor.value())
+    var params = new HashMap<String, Object>();
+    params.put("todoId", Objects.nonNull(cursor) ? cursor.value() : null);
+    EntityList<TodoEntity> todoEntities = UniversalDao
+        .page(1)
+        .per(limit.value())
+        .findAllBySqlFile(
+            TodoEntity.class,
+            "db.sql.sandbox.todo#find_all_from_cursor",
+            params
       );
-    } else {
-      todoEntities = UniversalDao.page(1).per(limit.value()).findAllBySqlFile(
-        TodoEntity.class,
-        "db.sql.sandbox.todo#find_all"
-      );
-    }
     return toTodoListCursor(todoEntities);
   }
 
