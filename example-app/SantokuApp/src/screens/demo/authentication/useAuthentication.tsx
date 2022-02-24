@@ -55,7 +55,7 @@ export const useAuthentication = () => {
     } catch (e) {
       alert(e);
     }
-  }, [AuthenticationService]);
+  }, []);
 
   const autoLogin = useCallback(async () => {
     try {
