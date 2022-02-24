@@ -27,10 +27,9 @@ const useCreateTodoDemo = ({navigation, route}: CreateTodoDemoScreenProps) => {
         .mutateAsync({data})
         .then(data => {
           const todo = data.data;
-          loadingOverlay.setVisible(false);
           navigation.replace(EditTodoDemoScreen.name, {todoId: todo.id});
         })
-        .catch(() => {
+        .finally(() => {
           loadingOverlay.setVisible(false);
         });
     }

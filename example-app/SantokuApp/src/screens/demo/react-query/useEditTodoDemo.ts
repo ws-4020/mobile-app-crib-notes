@@ -45,9 +45,8 @@ export const useEditTodoDemo = ({navigation, route}: EditTodoDemoScreenProps) =>
     try {
       loadingOverlay.setVisible(true);
       await deleteTodo.mutateAsync({todoId});
-      loadingOverlay.setVisible(false);
       navigation.goBack();
-    } catch (e) {
+    } finally {
       loadingOverlay.setVisible(false);
     }
   }, [deleteTodo, loadingOverlay, navigation, todoId]);
