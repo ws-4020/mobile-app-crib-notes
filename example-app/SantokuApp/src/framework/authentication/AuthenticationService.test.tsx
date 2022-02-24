@@ -5,6 +5,7 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 import {AuthenticationService} from '.';
 import * as accountApi from '../../generated/backend/account/account';
 import {AccountLoginResponseStatus} from '../../generated/backend/model';
+import * as csrfToken from '../backend/refreshCsrfToken';
 import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthenticationService';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 
@@ -46,9 +47,11 @@ describe('AuthenticationService changeAccount', () => {
     headers: {},
     config: {},
   });
+  const spyRefreshCsrfToken = jest.spyOn(csrfToken, 'refreshCsrfToken').mockImplementation();
 
   beforeEach(() => {
     spyLoginApi.mockClear();
+    spyRefreshCsrfToken.mockClear();
   });
 
   test('セキュアストレージからパスワードを取得してログインAPIを呼び出しているかの検証', async () => {
@@ -58,6 +61,7 @@ describe('AuthenticationService changeAccount', () => {
       const res = await result.current.mutateAsync({accountId: '123456789'});
       expect(res).toEqual({status: AccountLoginResponseStatus.COMPLETE});
       expect(spyLoginApi).toHaveBeenCalledWith({accountId: '123456789', password: 'password123'});
+      expect(spyRefreshCsrfToken).toHaveBeenCalled();
       expect(spySecureStorageAdapter).toHaveBeenCalledWith('123456789');
     });
   });
@@ -80,11 +84,13 @@ describe('AuthenticationService autoLogin', () => {
     headers: {},
     config: {},
   });
+  const spyRefreshCsrfToken = jest.spyOn(csrfToken, 'refreshCsrfToken').mockImplementation();
   const spySecureStorageAdapterLoadActiveAccountId = jest.spyOn(SecureStorageAdapter, 'loadActiveAccountId');
   const spySecureStorageAdapterLoadPassword = jest.spyOn(SecureStorageAdapter, 'loadPassword');
 
   beforeEach(() => {
     spyLoginApi.mockClear();
+    spyRefreshCsrfToken.mockClear();
     spySecureStorageAdapterLoadActiveAccountId.mockClear();
     spySecureStorageAdapterLoadPassword.mockClear();
   });
@@ -97,6 +103,7 @@ describe('AuthenticationService autoLogin', () => {
       const res = await result.current.mutateAsync();
       expect(res).toEqual({status: AccountLoginResponseStatus.COMPLETE});
       expect(spyLoginApi).toHaveBeenCalledWith({accountId: '123456789', password: 'password123'});
+      expect(spyRefreshCsrfToken).toHaveBeenCalled();
       expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
       expect(spySecureStorageAdapterLoadPassword).toHaveBeenCalledWith('123456789');
     });
@@ -173,11 +180,13 @@ describe('AuthenticationService refresh', () => {
     headers: {},
     config: {},
   });
+  const spyRefreshCsrfToken = jest.spyOn(csrfToken, 'refreshCsrfToken').mockImplementation();
   const spySecureStorageAdapterLoadActiveAccountId = jest.spyOn(SecureStorageAdapter, 'loadActiveAccountId');
   const spySecureStorageAdapterLoadPassword = jest.spyOn(SecureStorageAdapter, 'loadPassword');
 
   beforeEach(() => {
     spyLoginApi.mockClear();
+    spyRefreshCsrfToken.mockClear();
     spySecureStorageAdapterLoadActiveAccountId.mockClear();
     spySecureStorageAdapterLoadPassword.mockClear();
   });
@@ -190,6 +199,7 @@ describe('AuthenticationService refresh', () => {
       const res = await result.current.mutateAsync();
       expect(res).toEqual({status: AccountLoginResponseStatus.COMPLETE});
       expect(spyLoginApi).toHaveBeenCalledWith({accountId: '123456789', password: 'password123'});
+      expect(spyRefreshCsrfToken).toHaveBeenCalled();
       expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
       expect(spySecureStorageAdapterLoadPassword).toHaveBeenCalledWith('123456789');
     });
@@ -223,12 +233,14 @@ describe('AuthenticationService logout', () => {
     headers: {},
     config: {},
   });
+  const spyRefreshCsrfToken = jest.spyOn(csrfToken, 'refreshCsrfToken').mockImplementation();
   const spySecureStorageAdapterLoadActiveAccountId = jest.spyOn(SecureStorageAdapter, 'loadActiveAccountId');
   const spySecureStorageAdapterDeleteActiveAccountId = jest.spyOn(SecureStorageAdapter, 'deleteActiveAccountId');
   const spySecureStorageAdapterDeletePassword = jest.spyOn(SecureStorageAdapter, 'deletePassword');
 
   beforeEach(() => {
     spyLogoutApi.mockClear();
+    spyRefreshCsrfToken.mockClear();
     spySecureStorageAdapterLoadActiveAccountId.mockClear();
     spySecureStorageAdapterDeleteActiveAccountId.mockClear();
     spySecureStorageAdapterDeletePassword.mockClear();
@@ -239,6 +251,7 @@ describe('AuthenticationService logout', () => {
     await act(async () => {
       await result.current.mutateAsync();
       expect(spyLogoutApi).toHaveBeenCalled();
+      expect(spyRefreshCsrfToken).toHaveBeenCalled();
       expect(spySecureStorageAdapterDeleteActiveAccountId).toHaveBeenCalled();
       expect(spySecureStorageAdapterDeletePassword).toHaveBeenCalledWith('123456789');
     });
@@ -249,6 +262,7 @@ describe('AuthenticationService logout', () => {
     await act(async () => {
       await result.current.mutateAsync();
       expect(spyLogoutApi).toHaveBeenCalled();
+      expect(spyRefreshCsrfToken).toHaveBeenCalled();
       expect(spySecureStorageAdapterDeleteActiveAccountId).not.toHaveBeenCalled();
       expect(spySecureStorageAdapterDeletePassword).not.toHaveBeenCalled();
     });
