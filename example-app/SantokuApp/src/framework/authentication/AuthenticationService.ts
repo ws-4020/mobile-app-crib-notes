@@ -1,111 +1,149 @@
-import {useGetCsrfToken, usePostLogin, usePostLogout, usePostSignup} from 'service/backend';
+import {useMutation} from 'react-query';
 
+import {postLogin, postLogout, postSignup} from '../../generated/backend/account/account';
+import {Account, AccountLoginResponse} from '../../generated/backend/model';
+import {refreshCsrfToken} from '../backend';
 import {ApplicationError} from '../error/ApplicationError';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 
 /** アクティブなアカウントIDがセキュアストレージに存在しない場合に送出するエラー */
-class ActiveAccountIdNotFoundError extends ApplicationError {}
+export class ActiveAccountIdNotFoundError extends ApplicationError {}
 /** パスワードがセキュアストレージに存在しない場合に送出するエラー */
-class PasswordNotFoundError extends ApplicationError {}
+export class PasswordNotFoundError extends ApplicationError {}
 
-const useAuthenticationService = () => {
-  const csrfTokenQuery = useGetCsrfToken({enabled: false});
-  const postSignup = usePostSignup();
-  const postLogin = usePostLogin();
-  const postLogout = usePostLogout();
+/**
+ * サインアップします。
+ * @param nickname ニックネーム
+ * @param password パスワード
+ * @returns アカウント
+ */
+async function signup(nickname: string, password: string): Promise<Account> {
+  const res = await postSignup({nickname, password});
+  const accountId = res.data.accountId;
+  await SecureStorageAdapter.savePassword(accountId, password);
+  return res.data;
+}
 
-  /**
-   * サインアップします。
-   * @param nickname ニックネーム
-   * @param password パスワード
-   * @returns アカウント
-   */
-  const signup = async (nickname: string, password: string) => {
-    const response = await postSignup.mutateAsync({data: {nickname, password}});
-    await SecureStorageAdapter.savePassword(response.data.accountId, password);
-    return response.data;
-  };
+/**
+ * サインアップします。
+ * @param nickname ニックネーム
+ * @param password パスワード
+ * @returns アカウント
+ */
+function useSignup() {
+  return useMutation((arg: {nickname: string; password: string}) => signup(arg.nickname, arg.password));
+}
 
-  /**
-   * アカウントを切り替えます。
-   * @param accountId アカウントID
-   * @returns アカウントの切り替え結果
-   */
-  const changeAccount = async (accountId: string) => {
-    const password = await SecureStorageAdapter.loadPassword(accountId);
-    if (!password) {
-      throw new PasswordNotFoundError('The password for the account ID does not exist.');
-    }
-    return login(accountId, password);
-  };
+/**
+ * アカウントを切り替えます。
+ * @param accountId アカウントID
+ * @returns アカウントの切り替え結果
+ */
+async function changeAccount(accountId: string): Promise<AccountLoginResponse> {
+  const password = await SecureStorageAdapter.loadPassword(accountId);
+  if (!password) {
+    throw new PasswordNotFoundError('The password for the account ID does not exist.');
+  }
+  return login(accountId, password);
+}
 
-  /**
-   * ログインします。
-   * @param accountId アカウントID
-   * @param password パスワード
-   * @returns アカウントの切り替え結果
-   */
-  const login = async (accountId: string, password: string) => {
-    const response = await postLogin.mutateAsync({data: {accountId, password}});
-    await SecureStorageAdapter.saveActiveAccountId(accountId);
-    await csrfTokenQuery.refetch();
-    return response.data;
-  };
+/**
+ * アカウントを切り替えます。
+ * @param accountId アカウントID
+ * @returns アカウントの切り替え結果
+ */
+function useChangeAccount() {
+  return useMutation((arg: {accountId: string}) => changeAccount(arg.accountId));
+}
 
-  /**
-   * 自動ログインします。
-   * @returns アカウントのログイン結果
-   */
-  const autoLogin = async () => {
-    const accountId = await SecureStorageAdapter.loadActiveAccountId();
-    if (!accountId) {
-      throw new ActiveAccountIdNotFoundError('There is no auto-login enabled account.');
-    }
-    return changeAccount(accountId);
-  };
+/**
+ * ログインします。
+ * @param accountId アカウントID
+ * @param password パスワード
+ * @returns アカウントの切り替え結果
+ */
+async function login(accountId: string, password: string): Promise<AccountLoginResponse> {
+  const res = await postLogin({accountId, password});
+  await refreshCsrfToken();
+  await SecureStorageAdapter.saveActiveAccountId(accountId);
 
-  /**
-   * アクティブなアカウントIDとそれに該当するパスワードがセキュアストアに存在するかをチェックします。
-   * @returns 自動ログイン可能な場合はtrue、そうでない場合はfalse
-   */
-  const canAutoLogin = async () => {
-    const accountId = await SecureStorageAdapter.loadActiveAccountId();
-    if (!accountId) {
-      return false;
-    }
-    const password = await SecureStorageAdapter.loadPassword(accountId);
-    return !!password;
-  };
+  return res.data;
+}
 
-  /**
-   * ログイン資格情報を再取得します。
-   * @returns アカウントのログイン結果
-   */
-  const refresh = async () => {
-    return autoLogin();
-  };
+/**
+ * 自動ログインします。
+ * @returns アカウントのログイン結果
+ */
+async function autoLogin(): Promise<AccountLoginResponse> {
+  const accountId = await SecureStorageAdapter.loadActiveAccountId();
+  if (!accountId) {
+    throw new ActiveAccountIdNotFoundError('There is no auto-login enabled account.');
+  }
+  return changeAccount(accountId);
+}
 
-  /**
-   * ログアウトします。
-   */
-  const logout = async () => {
-    await postLogout.mutateAsync();
-    const accountId = await SecureStorageAdapter.loadActiveAccountId();
-    if (accountId) {
-      await SecureStorageAdapter.deleteActiveAccountId();
-      await SecureStorageAdapter.deletePassword(accountId);
-    }
-    await csrfTokenQuery.refetch();
-  };
+/**
+ * 自動ログインします。
+ * @returns アカウントのログイン結果
+ */
+function useAutoLogin() {
+  return useMutation(() => autoLogin());
+}
 
-  return {
-    signup,
-    changeAccount,
-    canAutoLogin,
-    autoLogin,
-    refresh,
-    logout,
-  };
+/**
+ * アクティブなアカウントIDとそれに該当するパスワードがセキュアストアに存在するかをチェックします。
+ * @returns 自動ログイン可能な場合はtrue、そうでない場合はfalse
+ */
+async function canAutoLogin(): Promise<boolean> {
+  const accountId = await SecureStorageAdapter.loadActiveAccountId();
+  if (!accountId) {
+    return false;
+  }
+  const password = await SecureStorageAdapter.loadPassword(accountId);
+  return !!password;
+}
+
+/**
+ * ログイン資格情報を再取得します。
+ * @returns アカウントのログイン結果
+ */
+function refresh(): Promise<AccountLoginResponse> {
+  return autoLogin();
+}
+
+/**
+ * ログイン資格情報を再取得します。
+ * @returns アカウントのログイン結果
+ */
+function useRefresh() {
+  return useMutation(() => refresh());
+}
+
+/**
+ * ログアウトします。
+ */
+async function logout(): Promise<void> {
+  await postLogout();
+  await refreshCsrfToken();
+  const accountId = await SecureStorageAdapter.loadActiveAccountId();
+  if (accountId) {
+    await SecureStorageAdapter.deleteActiveAccountId();
+    await SecureStorageAdapter.deletePassword(accountId);
+  }
+}
+
+/**
+ * ログアウトします。
+ */
+function useLogout() {
+  return useMutation(() => logout());
+}
+
+export const AuthenticationService = {
+  useSignup,
+  useChangeAccount,
+  canAutoLogin,
+  useAutoLogin,
+  useRefresh,
+  useLogout,
 };
-
-export {useAuthenticationService, ActiveAccountIdNotFoundError, PasswordNotFoundError};

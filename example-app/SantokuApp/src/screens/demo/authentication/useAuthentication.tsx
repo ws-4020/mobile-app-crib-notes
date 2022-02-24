@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {useAuthenticationService, generatePassword, PasswordNotFoundError} from 'framework';
+import {AuthenticationService, generatePassword, PasswordNotFoundError} from 'framework';
 import {ApplicationError} from 'framework/error/ApplicationError';
 import {ErrorResponse} from 'generated/backend/model';
 import {useCallback, useState} from 'react';
@@ -7,12 +7,15 @@ import {useCallback, useState} from 'react';
 export const useAuthentication = () => {
   const [accountId, setAccountId] = useState<string>();
   const [accountIdInput, setAccountIdInput] = useState('');
-  const AuthenticationService = useAuthenticationService();
+  const mutationSignup = AuthenticationService.useSignup();
+  const mutationChangeAccount = AuthenticationService.useChangeAccount();
+  const mutationAutoLogin = AuthenticationService.useAutoLogin();
+  const mutationLogout = AuthenticationService.useLogout();
 
   const signup = useCallback(async () => {
     try {
       const password = await generatePassword();
-      const account = await AuthenticationService.signup('demoNickname', password);
+      const account = await mutationSignup.mutateAsync({nickname: 'demoNickname', password});
       setAccountId(account.accountId);
       alert(`アカウントIDは${account.accountId}です`);
     } catch (e) {
@@ -24,11 +27,11 @@ export const useAuthentication = () => {
       }
       alert(e);
     }
-  }, [AuthenticationService]);
+  }, [mutationSignup]);
 
   const changeAccount = useCallback(async () => {
     try {
-      const accountLoginResponse = await AuthenticationService.changeAccount(accountIdInput);
+      const accountLoginResponse = await mutationChangeAccount.mutateAsync({accountId: accountIdInput});
       alert(`ログイン成功しました state=${accountLoginResponse.status}`);
     } catch (e) {
       if (axios.isAxiosError(e) && e.response) {
@@ -43,7 +46,7 @@ export const useAuthentication = () => {
       }
       alert(e);
     }
-  }, [AuthenticationService, accountIdInput]);
+  }, [mutationChangeAccount, accountIdInput]);
 
   const canAutoLogin = useCallback(async () => {
     try {
@@ -56,7 +59,7 @@ export const useAuthentication = () => {
 
   const autoLogin = useCallback(async () => {
     try {
-      const accountLoginResponse = await AuthenticationService.autoLogin();
+      const accountLoginResponse = await mutationAutoLogin.mutateAsync();
       alert(`自動ログイン成功しました state=${accountLoginResponse.status}`);
     } catch (e) {
       if (axios.isAxiosError(e) && e.response) {
@@ -71,11 +74,11 @@ export const useAuthentication = () => {
       }
       alert(e);
     }
-  }, [AuthenticationService]);
+  }, [mutationAutoLogin]);
 
   const logout = useCallback(async () => {
     try {
-      await AuthenticationService.logout();
+      await mutationLogout.mutateAsync();
       alert(`ログアウト成功しました`);
     } catch (e) {
       if (axios.isAxiosError(e) && e.response) {
@@ -86,7 +89,7 @@ export const useAuthentication = () => {
       }
       alert(e);
     }
-  }, [AuthenticationService]);
+  }, [mutationLogout]);
 
   const copyAccountIdInput = useCallback(() => {
     if (accountId) {
