@@ -1,11 +1,10 @@
 import '@testing-library/jest-native/extend-expect';
 import {render, waitFor} from '@testing-library/react-native';
-import {AppConfig} from 'framework/config';
-import nock from 'nock';
 import React from 'react';
 import {DevSettings} from 'react-native';
 
 import {App} from './App';
+import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from './framework/backend/customInstance';
 
 jest.spyOn(DevSettings, 'addMenuItem').mockImplementation(() => {});
 
@@ -14,13 +13,17 @@ beforeEach(() => {
   // テストは成功するものの、エラーログが出力されてしまう。
   // タイマーを使わないようにして、アニメーションを動かさないことで回避しているつもり。
   jest.useFakeTimers();
-  nock(AppConfig.santokuAppBackendUrl)
-    .get('/api/csrf_token')
-    .reply(200, {csrfTokenHeaderName: 'X-CSRF-Token', csrfTokenValue: 'dummy'});
 });
 
 describe('App', () => {
   it('マウントされたときに正常にレンダリングされること', async () => {
+    jest.spyOn(BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, 'get').mockResolvedValue({
+      status: 200,
+      data: {
+        csrfTokenHeaderName: 'X-CSRF-TOKEN',
+        csrfTokenValue: 'dummy',
+      },
+    });
     const app = render(<App />);
     await waitFor(() => {
       expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
