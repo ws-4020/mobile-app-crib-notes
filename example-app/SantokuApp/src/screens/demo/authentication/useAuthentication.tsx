@@ -1,43 +1,43 @@
-import {
-  ActiveAccountIdNotFoundError,
-  AuthenticationService,
-  csrfToken,
-  generatePassword,
-  PasswordNotFoundError,
-} from 'framework';
+import axios from 'axios';
+import {AuthenticationService, generatePassword, PasswordNotFoundError} from 'framework';
+import {ApplicationError} from 'framework/error/ApplicationError';
+import {ErrorResponse} from 'generated/backend/model';
 import {useCallback, useState} from 'react';
-
-import {ApiResponseError} from '../../../framework/backend';
 
 export const useAuthentication = () => {
   const [accountId, setAccountId] = useState<string>();
   const [accountIdInput, setAccountIdInput] = useState('');
+  const mutationSignup = AuthenticationService.useSignup();
+  const mutationChangeAccount = AuthenticationService.useChangeAccount();
+  const mutationAutoLogin = AuthenticationService.useAutoLogin();
+  const mutationLogout = AuthenticationService.useLogout();
 
   const signup = useCallback(async () => {
     try {
-      await csrfToken();
       const password = await generatePassword();
-      const res = await AuthenticationService.signup('demoNickname', password);
-      setAccountId(res.accountId);
-      alert(`アカウントIDは${res.accountId}です`);
+      const account = await mutationSignup.mutateAsync({nickname: 'demoNickname', password});
+      setAccountId(account.accountId);
+      alert(`アカウントIDは${account.accountId}です`);
     } catch (e) {
-      if (e instanceof ApiResponseError) {
-        alert(e.response.data.message);
+      if (axios.isAxiosError(e) && e.response) {
+        const data = e.response.data as ErrorResponse | undefined;
+        const message = data?.message ?? '予期せぬ通信エラー';
+        alert(message);
         return;
       }
       alert(e);
     }
-  }, []);
+  }, [mutationSignup]);
 
   const changeAccount = useCallback(async () => {
     try {
-      await csrfToken();
-      const res = await AuthenticationService.changeAccount(accountIdInput);
-      await csrfToken();
-      alert(`ログイン成功しました state=${res.status}`);
+      const accountLoginResponse = await mutationChangeAccount.mutateAsync({accountId: accountIdInput});
+      alert(`ログイン成功しました state=${accountLoginResponse.status}`);
     } catch (e) {
-      if (e instanceof ApiResponseError) {
-        alert(e.response.data.message);
+      if (axios.isAxiosError(e) && e.response) {
+        const data = e.response.data as ErrorResponse | undefined;
+        const message = data?.message ?? '予期せぬ通信エラー';
+        alert(message);
         return;
       }
       if (e instanceof PasswordNotFoundError) {
@@ -46,7 +46,7 @@ export const useAuthentication = () => {
       }
       alert(e);
     }
-  }, [accountIdInput]);
+  }, [mutationChangeAccount, accountIdInput]);
 
   const canAutoLogin = useCallback(async () => {
     try {
@@ -59,39 +59,37 @@ export const useAuthentication = () => {
 
   const autoLogin = useCallback(async () => {
     try {
-      await csrfToken();
-      const res = await AuthenticationService.autoLogin();
-      await csrfToken();
-      alert(`自動ログイン成功しました state=${res.status}`);
+      const accountLoginResponse = await mutationAutoLogin.mutateAsync();
+      alert(`自動ログイン成功しました state=${accountLoginResponse.status}`);
     } catch (e) {
-      if (e instanceof ApiResponseError) {
-        alert(e.response.data.message);
+      if (axios.isAxiosError(e) && e.response) {
+        const data = e.response.data as ErrorResponse | undefined;
+        const message = data?.message ?? '予期せぬ通信エラー';
+        alert(message);
         return;
       }
-      if (e instanceof ActiveAccountIdNotFoundError) {
-        alert('自動ログイン可能なアカウントIDが見つかりません');
-        return;
-      }
-      if (e instanceof PasswordNotFoundError) {
-        alert('アカウントIDに紐づくパスワードが見つかりません');
+      if (e instanceof ApplicationError) {
+        alert(e.message);
         return;
       }
       alert(e);
     }
-  }, []);
+  }, [mutationAutoLogin]);
 
   const logout = useCallback(async () => {
     try {
-      await AuthenticationService.logout();
+      await mutationLogout.mutateAsync();
       alert(`ログアウト成功しました`);
     } catch (e) {
-      if (e instanceof ApiResponseError) {
-        alert(e.response.data.message);
+      if (axios.isAxiosError(e) && e.response) {
+        const data = e.response.data as ErrorResponse | undefined;
+        const message = data?.message ?? '予期せぬ通信エラー';
+        alert(message);
         return;
       }
       alert(e);
     }
-  }, []);
+  }, [mutationLogout]);
 
   const copyAccountIdInput = useCallback(() => {
     if (accountId) {

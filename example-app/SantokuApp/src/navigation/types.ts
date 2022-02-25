@@ -46,6 +46,15 @@ export type DemoStackParamList = {
   Navigation: undefined;
   PushNotification: undefined;
   Cache: undefined;
+  ListTodoDemo: undefined;
+  CreateTodoDemo: undefined;
+  EditTodoDemo: {
+    todoId: number;
+  };
+  ReactQueryDemo: undefined;
+  DisabledQueryDemo: undefined;
+  DependentQueryDemo: undefined;
+  DisableErrorHandlerDemo: undefined;
 };
 
 export type AppNavigatorOptions = {
