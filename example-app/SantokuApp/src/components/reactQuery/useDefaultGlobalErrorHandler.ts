@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {useSnackbar} from 'components/overlay';
 import {m, log} from 'framework';
+import {isApplicationError} from 'framework/error/ApplicationError';
 import {RequestTimeoutError} from 'framework/error/RequestTimeoutError';
 import {ErrorResponse} from 'generated/backend/model';
 import {useCallback} from 'react';
@@ -69,6 +70,10 @@ const useBaseErrorHandler = () => {
 
   return useCallback(
     (error: unknown) => {
+      if (isApplicationError(error)) {
+        // ApplicationErrorは呼出し元で処理する
+        return;
+      }
       if (axios.isCancel(error)) {
         // Timeout以外の理由でcancelされた場合 (cancelQueries呼び出し時など)
         // デフォルトの動作としては特に処理を実施しない
