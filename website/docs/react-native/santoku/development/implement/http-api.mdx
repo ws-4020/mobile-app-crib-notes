@@ -20,11 +20,12 @@ OpenAPI定義ファイルを作成したら、それに合わせてOrval実行�
 | output.target                | 自動生成するコードのうち、メインとなるファイルを出力するPathを指定 | src/generated/backend/api.ts |
 | output.schemas               | 自動生成するコードのうち、Modelファイルを出力するPathを指定 | src/generated/backend/model |
 | output.client                | 自動生成するコードの中でどのHTTP Clientライブラリを利用するかを指定 | react-query |
-| output.mode                  | 自動生成するコードをどの粒度でファイル分割するかを指定 | split |
+| output.mode                  | 自動生成するコードをどの粒度でファイル分割するかを指定 | tags-split |
 | output.prettier              | 自動生成されたコードにprettierを適用するかを指定 | true |
-| output.query.options.retry   | 自動生成されたコードで利用するReactQueryのデフォルトオプション (今回はRetryについてのみ設定) | false |
-| output.override.mutator.path | デフォルトのAxiosInstanceをカスタマイズしたい場合に、CustomInstanceが定義されているファイルのPath | src/framework/backend/useCustomInstance.ts |
-| output.override.mutator.name | 上記ファイル内でexportしているCustomInstanceのfunction名 | useBackendCustomInstance |
+| output.clean                 | 自動生成の際に古い自動生成コードを削除するかを指定 | true |
+| output.query.options.retry   | 自動生成されたコードで利用するReactQueryのデフォルトオプション (今回はRetryについてのみ設定） | false |
+| output.override.mutator.path | デフォルトのAxiosInstanceをカスタマイズしたい場合に、CustomInstanceが定義されているファイルのPath | src/framework/backend/customInstance.ts |
+| output.override.mutator.name | 上記ファイル内でexportしているCustomInstanceのfunction名 | backendCustomInstance |
 
 また、無限スクロールの実現のため、バックエンドAPIの中にuseQueryの代わりにuseInfiniteQueryを利用したいAPIがある場合は、
 さらに以下の設定を追加します。
@@ -32,7 +33,7 @@ OpenAPI定義ファイルを作成したら、それに合わせてOrval実行�
 | Key                          | 概要 | 今回設定する値 |
 |:-----------------------------|:-----|:--------------|
 | output.override.operations.<対象APIのOperationId>.query.useInfinite | useQueryの代わりにuseInfiniteQueryを使うかどうか | true |
-| output.override.operations.<対象APIのOperationId>.query.useInfiniteQueryParam | API呼び出し時にuseInfiniteQueryのnextPageParamの値を設定するクエリパラメータ名 | cursor (対象APIのクエリパラメータ名) |
+| output.override.operations.<対象APIのOperationId>.query.useInfiniteQueryParam | API呼び出し時にuseInfiniteQueryのnextPageParamの値を設定するクエリパラメータ名 | cursor (対象APIのクエリパラメータ名） |
 
 設定が終わったら、以下のコマンドでOrvalを実行し、クライアント側コードを自動生成します。
 
@@ -43,24 +44,17 @@ npx orval --config ./orval.config.ts
 
 後からAPI仕様に変更があった場合は、OpenAPI Specificationのファイルを更新した上で同じコマンドを実行します。
 
-:::note
-OrvalでCustom Instanceを利用する設定にした場合、Custom Instanceの実装によってはOrval実行時に以下のWarningが表示されます。
-
-```text
-Your mutator cannot be loaded so default setup has been applied
-```
-
-これはOrvalのdependenciesにないライブラリやファイルなどをCustom Instanceからimportしていると起こるようです。
-実際にアプリから自動生成したコードを利用する際には問題なく利用できるため、今回は特に対応しません。
-:::
-
 ### 自動生成されたコードの利用
 
 Orvalを実行すると、OpenAPI Specification内に記載した各APIに対して、OperationIdに対応する名前のCustom Hookが自動生成されます。
 例えばOperationIdがget-csrf-tokenの場合、useGetCsrfTokenという名前のCustom Hookが自動生成されます。
-クライアントアプリからバックエンドAPIを利用する場合は、このCustom Hookを用いてバックエンドAPIを呼び出します。
 
-この自動生成されたCustom Hookは、APIのHTTPメソッドやOrval設定によって3種類に分けられます。
+このアプリでは、自動生成されたCustom Hookを直接importして各所で用いるのではなく、
+必要に応じてカスタマイズした上で提供できるサービス層を設けるものとします。
+サービス層では、自動生成されたCustom Hookをもとに、API呼び出しの成功時の処理やエラー時の処理を追加したCustom Hookを提供します。
+カスタマイズする必要のないAPI呼び出しについては自動生成されたCustom Hookをimportしてそのままexportします。
+
+自動生成されたCustom Hookは、APIのHTTPメソッドやOrval設定によって3種類に分けられます。
 それぞれがReact QueryのuseQuery, useInfiniteQuery, useMutationの3種類に対応しています。
 それぞれの使い方は以下のとおりです。
 
@@ -74,12 +68,12 @@ HTTPメソッドがGETのAPIに対しては、基本的にはuseQueryをベー�
 ```typescript
 import React from 'react';
 import {View, Text, Button} from 'react-native';
-import {useGetAccountsMe} from 'generated/backend/api';
+import {useGetAccountsMe} from 'service/backend';
 
 const SampleScreen: React.FC = () => {
   // 以下のようなResponseBodyが返ってくるAPIの場合の例
   // {"nickname": "NickName"}
-  const {isLoading, isError, data: account, refetch} = useGetAccountsMe();
+  const {isLoading, isError, data: axiosResponse, refetch} = useGetAccountsMe();
 
   if (isLoading) {
     return (
@@ -100,7 +94,7 @@ const SampleScreen: React.FC = () => {
 
   return (
     <View>
-      <Text>{account.nickname}</Text>
+      <Text>{axiosResponse.data.nickname}</Text>
     </View>
   );
 }
@@ -116,7 +110,7 @@ OrvalのConfigファイル内でuseInfinite:trueに設定したAPIに対して�
 ```typescript
 import React from 'react';
 import {View, Text, Button} from 'react-native';
-import {useListTodoInfinite} from 'generated/sandbox/api';
+import {useListTodoInfinite} from 'service/backend';
 
 const SampleScreen: React.FC = () => {
   // 以下のようなResponseBodyが返ってくるAPIの場合の例
@@ -133,7 +127,7 @@ const SampleScreen: React.FC = () => {
   const todos = useMemo(() => {
     if (isSuccess && data) {
       // data.pagesには、各クエリに対するレスポンスが配列で格納されている
-      return data.pages.map(page => page.content).flat();
+      return data.pages.map(axiosResponse => axiosResponse.data.content).flat();
     } else {
       return [];
     }
@@ -166,20 +160,16 @@ const SampleScreen: React.FC = () => {
 }
 ```
 
-:::note
-// TODO: Orvalで自動生成したコードは、InfiniteでQueryParameterの中に必須パラメータがある場合に型エラーとなる場合がある
-:::
-
 #### データ更新・削除 (useMutation)
 
 HTTPメソッドがPOST, PUT, DELETEなどのAPIに対しては、useMutationをベースとしたCustom Hookが自動生成されます。
 基本的な使い方や指定できるオプションは、React Queryの[useMutation](https://react-query.tanstack.com/reference/useMutation)とほぼ同様です。
 
 ```typescript
-import {usePostTodo} from 'generated/sandbox/api';
 import React, {useCallback, useState} from 'react';
 import {View} from 'react-native';
 import {Input, Button} from 'react-native-elements';
+import {usePostTodo} from 'service/backend';
 
 const SampleScreen: React.FC = () => {
   const [title, setTitle] = useState<string>();
@@ -217,33 +207,38 @@ const SampleScreen: React.FC = () => {
 React Queryでは、クエリキャッシュを無効化する方法として、InvalidateとResetが用意されています。
 Invalidateの場合は、古いデータを画面表示したまま、最新データを取得します。
 Resetの場合は、古いデータを削除して画面表示されないようにした上で、最新データを取得します。
-このアプリでは、Resetを用いて古いクエリキャッシュを無効化します。
-
-このアプリでは、Mutation成功時に指定のQueryKeyのキャッシュをresetするWrapperを用意しています。
-データの更新と同時に関連するクエリの古いキャッシュをリセットする場合のコード例は以下のようになります。
-
-```typescript
-import {useMutationWithResetQueries} from 'framework/backend';
-import {getListTodoQueryKey, useListTodo, usePostTodo} from 'generated/sandbox/api';
-import React, {useCallback, useState} from 'react';
-import {View} from 'react-native';
-import {Input, Button} from 'react-native-elements';
-
-const SampleScreen: React.FC = () => {
-  const [title, setTitle] = useState<string>();
-  const listTodoQueryKey = getListTodoQueryKey();
-  // 第一引数で指定したuseMutationの成功時に、自動的に第二引数で指定したQueryKeyのクエリキャッシュをリセットする
-  const postTodo = useMutationWithResetQueries(usePostTodo, [listTodoQueryKey]);
-
-  // (同様の処理)
-};
-```
+このアプリでは、更新系のAPI呼び出し成功時にResetを用いて関連する古いクエリキャッシュを無効化するよう、サービス層のCustom HookでonSuccessの処理を追加します。
 
 ### エラーハンドリング
 
-TODO: デフォルトで設定済みのエラーハンドリングについて説明。
-TODO: 各画面で個別に対応が必要なエラーハンドリングについて説明。
-TODO: リトライについて説明。
+このアプリでは、HTTP API通信に関するグローバルエラーハンドリングと個別のエラーハンドリングを以下のように実装します。
+
+#### グローバルエラーハンドリング
+
+グローバルエラーハンドリングは、QueryCache/MutationCacheのオプション内で指定するonErrorを用いて実装します。
+QueryCache/MutationCacheのオプション内で指定するonErrorは、他のonErrorの指定によって上書きされず、常に実行されます。
+
+グローバルエラーハンドリングでは、以下のようなエラーに対する処理を行います。
+
+- API呼び出しに対する応答ステータスコードが4xx、5xx番台だった場合の共通処理
+  - 例： 429 Too Many Requests応答が返ってきた場合に、アクセスが集中しているためしばらく時間をおいてアクセスしてほしい旨をスナックバーで表示
+- 予期せぬエラーだった場合の処理
+  - 例： Firebase Clashlyticsへエラーログを記録した上で、予期せぬエラーが発生したことをスナックバーで表示
+
+個別にエラー処理を実施するためグローバルエラーハンドリングが不要な場合は、以下のいずれかで無効化できるようにしています。
+
+- サービス層で、queryOptionsとして```{meta: {disableGlobalErrorHandler: true}}```を指定したCustom Hookを用意して利用する
+- useQueryやuseMutationに渡す非同期関数内で、ApplicationErrorを継承したエラーをthrowする
+
+#### 個別のAPI呼び出しに関するエラーハンドリング
+
+個別のAPI呼び出しに関するエラーハンドリングは、以下のいずれかで実装します。
+
+- useQuery, useMutationのオプション内で指定するonError
+- useQuery, useMutationのResultとして取得できるisError, errorを見ての処理
+- mutateAsyncを呼び出した箇所でのtry/catch処理
+
+上記の中から、画面描画への反映が必要かどうかなどエラー処理の内容を考慮して適切なものを選択します。
 
 ## その他の外部サービスの呼び出し
 
