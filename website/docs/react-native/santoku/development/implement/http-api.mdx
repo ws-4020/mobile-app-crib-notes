@@ -110,7 +110,7 @@ OrvalのConfigファイル内でuseInfinite:trueに設定したAPIに対して�
 ```typescript
 import React from 'react';
 import {View, Text, Button} from 'react-native';
-import {useListTodoInfinite} from 'service/backend';
+import {useListTodoByCursorInfinite} from 'service/backend';
 
 const SampleScreen: React.FC = () => {
   // 以下のようなResponseBodyが返ってくるAPIの場合の例
