@@ -23,7 +23,6 @@ OpenAPI定義ファイルを作成したら、それに合わせてOrval実行�
 | output.mode                  | 自動生成するコードをどの粒度でファイル分割するかを指定 | tags-split |
 | output.prettier              | 自動生成されたコードにprettierを適用するかを指定 | true |
 | output.clean                 | 自動生成の際に古い自動生成コードを削除するかを指定 | true |
-| output.query.options.retry   | 自動生成されたコードで利用するReactQueryのデフォルトオプション (今回はRetryについてのみ設定） | false |
 | output.override.mutator.path | デフォルトのAxiosInstanceをカスタマイズしたい場合に、CustomInstanceが定義されているファイルのPath | src/framework/backend/customInstance.ts |
 | output.override.mutator.name | 上記ファイル内でexportしているCustomInstanceのfunction名 | backendCustomInstance |
 
@@ -32,6 +31,7 @@ OpenAPI定義ファイルを作成したら、それに合わせてOrval実行�
 
 | Key                          | 概要 | 今回設定する値 |
 |:-----------------------------|:-----|:--------------|
+| output.override.operations.<対象APIのOperationId>.query.useQuery | useQueryを用いたHookを生成するかどうか | false |
 | output.override.operations.<対象APIのOperationId>.query.useInfinite | useQueryの代わりにuseInfiniteQueryを使うかどうか | true |
 | output.override.operations.<対象APIのOperationId>.query.useInfiniteQueryParam | API呼び出し時にuseInfiniteQueryのnextPageParamの値を設定するクエリパラメータ名 | cursor (対象APIのクエリパラメータ名） |
 
