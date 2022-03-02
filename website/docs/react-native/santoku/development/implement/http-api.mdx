@@ -166,6 +166,10 @@ HTTPメソッドがPOST, PUT, DELETEなどのAPIに対しては、useMutationを
 基本的な使い方や指定できるオプションは、React Queryの[useMutation](https://react-query.tanstack.com/reference/useMutation)とほぼ同様です。
 
 ```typescript
+import axios from 'axios';
+import {LocalStorageError} from 'framework';
+import {isApplicationError} from 'framework/error/ApplicationError';
+import {ErrorResponse} from 'generated/backend/model';
 import React, {useCallback, useState} from 'react';
 import {View} from 'react-native';
 import {Input, Button} from 'react-native-elements';
@@ -180,8 +184,30 @@ const SampleScreen: React.FC = () => {
       try {
         const response = await postTodo.mutateAsync({data: {title}});
         // 成功時の処理
+        const todo = response.data;
+        navigation.replace(EditTodoDemoScreen.name, {todoId: todo.id});
       } catch (e) {
         // 失敗時の処理
+        // catch節に入った時点でグローバルエラーハンドリングは実施済み
+        // ここでは個別のエラーハンドリングを行う
+        if (axios.isAxiosError(error)) {
+          const statusCode = error.response?.status;
+          const data = error.response?.data as ErrorResponse | undefined;
+          const errorMessage = data?.message ?? '不明なエラーが発生しました';
+          if (statusCode === 400) {
+            // 400（Bad Request）はグローバルエラーハンドリング対象外
+            // 個別にエラーハンドリングする
+            alert(errorMessage);
+          }
+        }
+        if (isApplicationError(error)) {
+          // ApplicationErrorを継承したエラーはグローバルエラーハンドリング対象外
+            // 個別にエラーハンドリングする
+          if (error instanceof LocalStorageError) {
+            alert('ローカルストレージへの保存に失敗しました');
+            return;
+          }
+        }
       }
     }
   }, [title, postTodo]);
