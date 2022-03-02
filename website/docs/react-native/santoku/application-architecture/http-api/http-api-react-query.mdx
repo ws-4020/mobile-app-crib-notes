@@ -18,6 +18,7 @@ HTTP API通信部分に焦点を当てたアプリケーション構造を以下
 
 - 自動生成コードの手修正は禁止します。
 - 自動生成コードは各サービスを介して画面から使用します。
+  - カスタマイズする必要のない自動生成コードについては、各サービスがimportしてそのままexportします。
 - 自動生成したデータモデルはどこからでも使用できます。
 - 業務ルールの実装やデータ変換などは、サービスの役割とします。
 
@@ -96,6 +97,49 @@ const mutation = useMutation(addTodo, {
 エラーハンドリングについては、[HTTP API通信で発生するエラーのハンドリング](./http-api-error-handling.mdx)に従います。
 共通的なエラーハンドリング処理は、個別で実装せず共通化します。
 また、HTTPステータスコード401が返却された場合の通信リトライについても共通部品にて実現します。
+
+### エラーハンドリングの共通化
+
+`QueryClient`のデフォルトオプションを利用すると、各クエリ毎のエラーハンドリングをデフォルト設定できます。
+しかしながら、上記方法だと次の課題が発生します。
+
+- `useQuery`の`onError`に独自のハンドラ関数を個別設定すると、`QueryClient`のデフォルトオプションに設定したものが上書きされる
+- 同じクエリを使用した画面が複数存在すると、エラー処理も複数回実行される（例えば同じトーストが複数表示される）
+
+そこで、共通のエラーハンドラ関数は`QueryCache`の`onError`に設定します。
+
+ミューテーションについても同様の対策とします。
+詳細は次のドキュメントを参照してください。
+
+- [QueryCache - Global callbacks](https://react-query.tanstack.com/reference/QueryCache#global-callbacks)
+- [MutationCache - Global callbacks](https://react-query.tanstack.com/reference/MutationCache#global-callbacks)
+
+個別にエラー処理を実施するためグローバルエラーハンドリングが不要な場合は、以下のいずれかで無効化できます。
+
+- `useQuery`のqueryOptionsとして```{meta: {disableGlobalErrorHandler: true}}```を指定する
+- useQueryやuseMutationに渡す非同期関数内で、ApplicationErrorを継承したエラーをthrowする
+
+### HTTPステータスコード401返却時の通信リトライ
+
+HTTPステータスコード401が返却された場合、新しいセッションIDを再取得しリトライする機能が必要です。
+このアプリでは、次のようにaxiosのInterceptorsの機能を利用してセッションの再接続を実現します。
+
+```typescript
+  const onRejected = async (error: unknown) => {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 401) {
+        try {
+          await refreshSession();
+          return await BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.request(error.config);
+        } catch (retryError) {
+          throw error;
+        }
+      }
+    }
+    throw error;
+  };
+  setAxiosResponseInterceptor(onFulfilled, onRejected);
+```
 
 ## ページネーションと無限スクロール方式
 
