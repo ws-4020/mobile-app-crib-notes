@@ -10,6 +10,7 @@ import {DisableErrorHandlerDemoScreen} from './DisableErrorHandlerDemoScreen';
 import {DisabledQueryDemoScreen} from './DisabledQueryDemoScreen';
 import {GetAccountsMeDemoScreen} from './GetAccountsMeDemoScreen';
 import {ListTodoDemoScreen} from './ListTodoDemoScreen';
+import {SearchBarTodoDemoScreen} from './SearchBarTodoDemoScreen';
 import {SearchFormTodoDemoScreen} from './SearchFormTodoDemoScreen';
 
 type Props = CompositeScreenProps<
@@ -26,6 +27,9 @@ const Screen: React.FC<Props> = ({navigation}) => {
       </View>
       <View style={styles.item}>
         <Button title="検索ボタン押下でクエリ実行" onPress={() => navigation.navigate(SearchFormTodoDemoScreen.name)} />
+      </View>
+      <View style={styles.item}>
+        <Button title="検索バー入力時にクエリ実行" onPress={() => navigation.navigate(SearchBarTodoDemoScreen.name)} />
       </View>
       <View style={styles.item}>
         <Button title="無限スクロール" onPress={() => navigation.navigate(ListTodoDemoScreen.name)} />

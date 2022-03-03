@@ -7,3 +7,4 @@ export * from './DependentQueryDemoScreen';
 export * from './DisableErrorHandlerDemoScreen';
 export * from './GetAccountsMeDemoScreen';
 export * from './SearchFormTodoDemoScreen';
+export * from './SearchBarTodoDemoScreen';
