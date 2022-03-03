@@ -30,6 +30,8 @@ import {
   DisabledQueryDemoScreen,
   DependentQueryDemoScreen,
   DisableErrorHandlerDemoScreen,
+  GetAccountsMeDemoScreen,
+  SearchFormTodoDemoScreen,
 } from 'screens';
 
 import {DemoStackParamList, RootStackParamList} from './types';
@@ -76,6 +78,8 @@ export const Screen: React.FC = () => {
       <nav.Screen {...DisabledQueryDemoScreen} />
       <nav.Screen {...DependentQueryDemoScreen} />
       <nav.Screen {...DisableErrorHandlerDemoScreen} />
+      <nav.Screen {...GetAccountsMeDemoScreen} />
+      <nav.Screen {...SearchFormTodoDemoScreen} />
     </nav.Navigator>
   );
 };

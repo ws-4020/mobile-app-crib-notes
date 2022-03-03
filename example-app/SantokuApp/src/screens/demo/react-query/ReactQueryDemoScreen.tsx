@@ -8,7 +8,9 @@ import {Button} from 'react-native-elements';
 import {DependentQueryDemoScreen} from './DependentQueryDemoScreen';
 import {DisableErrorHandlerDemoScreen} from './DisableErrorHandlerDemoScreen';
 import {DisabledQueryDemoScreen} from './DisabledQueryDemoScreen';
+import {GetAccountsMeDemoScreen} from './GetAccountsMeDemoScreen';
 import {ListTodoDemoScreen} from './ListTodoDemoScreen';
+import {SearchFormTodoDemoScreen} from './SearchFormTodoDemoScreen';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
@@ -19,6 +21,12 @@ const ScreenName = 'ReactQueryDemo';
 const Screen: React.FC<Props> = ({navigation}) => {
   return (
     <View style={styles.container}>
+      <View style={styles.item}>
+        <Button title="初期表示時にクエリ実行" onPress={() => navigation.navigate(GetAccountsMeDemoScreen.name)} />
+      </View>
+      <View style={styles.item}>
+        <Button title="検索ボタン押下でクエリ実行" onPress={() => navigation.navigate(SearchFormTodoDemoScreen.name)} />
+      </View>
       <View style={styles.item}>
         <Button title="無限スクロール" onPress={() => navigation.navigate(ListTodoDemoScreen.name)} />
       </View>

@@ -55,6 +55,8 @@ export type DemoStackParamList = {
   DisabledQueryDemo: undefined;
   DependentQueryDemo: undefined;
   DisableErrorHandlerDemo: undefined;
+  GetAccountsMeDemo: undefined;
+  SearchFormTodoDemo: undefined;
 };
 
 export type AppNavigatorOptions = {
