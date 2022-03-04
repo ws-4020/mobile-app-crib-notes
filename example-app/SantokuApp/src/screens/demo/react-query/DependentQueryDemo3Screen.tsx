@@ -2,7 +2,7 @@ import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React from 'react';
-import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, RefreshControl, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 
 import {useDependentQueryDemo3} from './useDependentQueryDemo3';
@@ -14,19 +14,17 @@ type Props = CompositeScreenProps<
 
 const ScreenName = 'DependentQueryDemo3';
 const Screen: React.FC<Props> = () => {
-  const {todos, query, start, reset} = useDependentQueryDemo3();
-  const {isIdle, isLoading, isSuccess, isError} = query;
+  const {todos, isIdle, isLoading, isFetching, isSuccess, isError, refetch} = useDependentQueryDemo3();
 
   return (
-    <View style={styles.container}>
-      <View>
-        <Text h4>Query Status</Text>
-        <Text>{`isIdle: ${isIdle.toString()}, isLoading: ${isLoading.toString()}, isSuccess: ${isSuccess.toString()}, isError: ${isError.toString()}`}</Text>
-      </View>
-      <View style={styles.block}>
-        <Text h4>Query Data</Text>
-        <ScrollView>
-          {isLoading && <ActivityIndicator size="large" />}
+    <SafeAreaView style={styles.container}>
+      <ScrollView refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}>
+        <View>
+          <Text h4>Query Status</Text>
+          <Text>{`isIdle: ${isIdle.toString()}, isLoading: ${isLoading.toString()}, isSuccess: ${isSuccess.toString()}, isError: ${isError.toString()}`}</Text>
+        </View>
+        <View>
+          <Text h4>Query Data</Text>
           {isError && <Text>データの取得に失敗しました</Text>}
           <Text>Todo詳細取得結果</Text>
           <View style={styles.details}>
@@ -34,13 +32,12 @@ const Screen: React.FC<Props> = () => {
               return <Text key={index}>{todo?.title}</Text>;
             })}
           </View>
-        </ScrollView>
+        </View>
+      </ScrollView>
+      <View>
+        <Text>※画面下方向へのスワイプで画面が更新されます。</Text>
       </View>
-      <View style={styles.buttons}>
-        <Button title="取得開始" onPress={start} />
-        <Button title="Reset Queries" onPress={reset} />
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -54,16 +51,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 8,
   },
-  block: {
-    flex: 1,
-  },
   details: {
     marginLeft: 8,
-  },
-  footer: {},
-  buttons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
   },
 });

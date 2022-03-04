@@ -34,12 +34,6 @@ const Screen: React.FC<Props> = ({navigation}) => {
         <Button title="検索バー入力時にクエリ実行" onPress={() => navigation.navigate(SearchBarTodoDemoScreen.name)} />
       </View>
       <View style={styles.item}>
-        <Button title="無限スクロール" onPress={() => navigation.navigate(ListTodoDemoScreen.name)} />
-      </View>
-      <View style={styles.item}>
-        <Button title="マウント時の自動Fetch無効化" onPress={() => navigation.navigate(DisabledQueryDemoScreen.name)} />
-      </View>
-      <View style={styles.item}>
         <Button title="依存関係のあるクエリ1" onPress={() => navigation.navigate(DependentQueryDemo1Screen.name)} />
       </View>
       <View style={styles.item}>
@@ -47,6 +41,12 @@ const Screen: React.FC<Props> = ({navigation}) => {
       </View>
       <View style={styles.item}>
         <Button title="依存関係のあるクエリ3" onPress={() => navigation.navigate(DependentQueryDemo3Screen.name)} />
+      </View>
+      <View style={styles.item}>
+        <Button title="無限スクロール" onPress={() => navigation.navigate(ListTodoDemoScreen.name)} />
+      </View>
+      <View style={styles.item}>
+        <Button title="マウント時の自動Fetch無効化" onPress={() => navigation.navigate(DisabledQueryDemoScreen.name)} />
       </View>
       <View style={styles.item}>
         <Button

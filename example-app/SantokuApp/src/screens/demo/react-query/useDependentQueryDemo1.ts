@@ -5,7 +5,7 @@ const useDependentQueryDemo1 = () => {
   // 並列クエリ
   // 商品取得APIを呼び出した後、商品種別に応じて異なるAPIで割引率を取得する
   // その後、商品の価格と割引率を入力として金額計算APIを呼び出す
-  const itemQuery = useQuery<Item>(['item'], getItem);
+  const itemQuery = useQuery<Item>(['item'], () => getItem(1));
 
   const itemType0Query = useQuery<ItemRate>(['itemType0', itemQuery.data], () => getItemType0(itemQuery.data!), {
     enabled: itemQuery.isSuccess && itemQuery.data.type === 0,

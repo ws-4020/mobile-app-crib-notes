@@ -86,8 +86,6 @@ function getRandomInt(max: number) {
   return Math.floor(Math.random() * max);
 }
 
-let itemIdSeq = 0;
-
 // 商品
 type Item = {
   id: number;
@@ -100,24 +98,23 @@ type Item = {
 type ItemRate = {rate: number};
 
 // 商品取得API
-const getItem = async () => {
+const getItem = async (id: number) => {
   return new Promise<Item>(resolve => {
     setTimeout(() => {
-      itemIdSeq++;
-      resolve({id: itemIdSeq, name: `item-${itemIdSeq}`, type: getRandomInt(2), price: getRandomInt(1000)});
+      resolve({id, name: `item-${id}`, type: getRandomInt(2), price: getRandomInt(1000)});
     }, 1000);
   });
 };
 
 // 商品種別0API
-const getItemType0 = async (req: {id: number}) => {
+const getItemType0 = async (_: {id: number}) => {
   return new Promise<ItemRate>(resolve => {
     setTimeout(() => resolve({rate: 0.1}), 1000);
   });
 };
 
 // 商品種別1API
-const getItemType1 = async (req: {id: number}) => {
+const getItemType1 = async (_: {id: number}) => {
   return new Promise<ItemRate>(resolve => {
     setTimeout(() => resolve({rate: 0.2}), 1000);
   });
@@ -130,8 +127,8 @@ const getAmount = async (req: {price: number; rate: number}) => {
   });
 };
 
-const getItemInfo = async (no: number) => {
-  const item = await getItem();
+const getItemInfo = async (id: number) => {
+  const item = await getItem(id);
   const itemType = item.type === 0 ? await getItemType0({id: item.id}) : await getItemType1({id: item.id});
   const amount = await getAmount({price: item.price, rate: itemType.rate});
   return {

@@ -3,7 +3,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ListTodoParams} from 'generated/sandbox/model';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React, {useState} from 'react';
-import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
+import {View, Text, ActivityIndicator, StyleSheet, SafeAreaView} from 'react-native';
 import {Button, Input} from 'react-native-elements';
 import {useListTodo} from 'service/backend';
 
@@ -16,30 +16,34 @@ const ScreenName = 'SearchFormTodoDemo';
 const Screen: React.FC<Props> = () => {
   const [inputPage, setInputPage] = useState('');
   const [params, setParams] = useState<ListTodoParams>();
-  const {isLoading, isError, data} = useListTodo(params, {enabled: params !== undefined});
+  const {isFetching, isError, data} = useListTodo(params, {enabled: params !== undefined});
 
   const todos = data?.data.content;
   return (
-    <View style={styles.container}>
-      <Input placeholder="ページ番号" value={inputPage} onChangeText={setInputPage} />
-      <View style={styles.search}>
-        <Button
-          title="検索"
-          onPress={() => {
-            const page = Number(inputPage);
-            if (Number.isInteger(page) && page > 0) {
-              setParams({page});
-            }
-          }}
-        />
+    <SafeAreaView style={styles.container}>
+      <View>
+        <Input placeholder="ページ番号" value={inputPage} onChangeText={setInputPage} />
+        <View style={styles.search}>
+          <Button
+            title="検索"
+            onPress={() => {
+              const page = Number(inputPage);
+              if (Number.isInteger(page) && page > 0) {
+                setParams({page});
+              }
+            }}
+          />
+        </View>
+        {isFetching && <ActivityIndicator color="#0000ff" />}
+        {isError && <Text>TODO一覧の取得に失敗しました。</Text>}
+        {!isFetching && todos && todos.length === 0 && <Text>TODO一覧の検索結果が0件です。</Text>}
+        {!isFetching &&
+          todos &&
+          todos.map(todo => {
+            return <Text key={todo.id}>{todo.title}</Text>;
+          })}
       </View>
-      {isLoading && <ActivityIndicator color="#0000ff" />}
-      {isError && <Text>TODO一覧の取得に失敗しました。</Text>}
-      {todos?.length === 0 && <Text>TODO一覧の検索結果が0件です。</Text>}
-      {todos?.map(todo => {
-        return <Text key={todo.id}>{todo.title}</Text>;
-      })}
-    </View>
+    </SafeAreaView>
   );
 };
 

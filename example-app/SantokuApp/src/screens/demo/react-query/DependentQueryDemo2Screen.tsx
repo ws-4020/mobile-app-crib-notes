@@ -25,7 +25,6 @@ const Screen: React.FC<Props> = () => {
         </View>
         <View>
           <Text h4>Query Data</Text>
-          {isLoading && <ActivityIndicator size="large" color="#0000ff" />}
           {isError && <Text>データの取得に失敗しました</Text>}
           {result && (
             <>
@@ -41,10 +40,10 @@ const Screen: React.FC<Props> = () => {
             </>
           )}
         </View>
-        <View style={styles.description}>
-          <Text>※画面下方向へのスワイプで画面が更新されます。</Text>
-        </View>
       </ScrollView>
+      <View>
+        <Text>※画面下方向へのスワイプで画面が更新されます。</Text>
+      </View>
     </SafeAreaView>
   );
 };
@@ -61,8 +60,5 @@ const styles = StyleSheet.create({
   },
   details: {
     marginLeft: 8,
-  },
-  description: {
-    marginTop: 20,
   },
 });
