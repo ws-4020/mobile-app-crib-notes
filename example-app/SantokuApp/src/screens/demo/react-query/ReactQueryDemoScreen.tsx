@@ -5,13 +5,15 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
-import {DependentQueryDemoScreen} from './DependentQueryDemoScreen';
+import {DependentQueryDemo1Screen} from './DependentQueryDemo1Screen';
+import {DependentQueryDemo3Screen} from './DependentQueryDemo3Screen';
 import {DisableErrorHandlerDemoScreen} from './DisableErrorHandlerDemoScreen';
 import {DisabledQueryDemoScreen} from './DisabledQueryDemoScreen';
 import {GetAccountsMeDemoScreen} from './GetAccountsMeDemoScreen';
 import {ListTodoDemoScreen} from './ListTodoDemoScreen';
 import {SearchBarTodoDemoScreen} from './SearchBarTodoDemoScreen';
 import {SearchFormTodoDemoScreen} from './SearchFormTodoDemoScreen';
+import { DependentQueryDemo2Screen } from '.';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
@@ -38,7 +40,13 @@ const Screen: React.FC<Props> = ({navigation}) => {
         <Button title="マウント時の自動Fetch無効化" onPress={() => navigation.navigate(DisabledQueryDemoScreen.name)} />
       </View>
       <View style={styles.item}>
-        <Button title="依存関係のあるクエリ" onPress={() => navigation.navigate(DependentQueryDemoScreen.name)} />
+        <Button title="依存関係のあるクエリ1" onPress={() => navigation.navigate(DependentQueryDemo1Screen.name)} />
+      </View>
+      <View style={styles.item}>
+        <Button title="依存関係のあるクエリ2" onPress={() => navigation.navigate(DependentQueryDemo2Screen.name)} />
+      </View>
+      <View style={styles.item}>
+        <Button title="依存関係のあるクエリ3" onPress={() => navigation.navigate(DependentQueryDemo3Screen.name)} />
       </View>
       <View style={styles.item}>
         <Button

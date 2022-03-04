@@ -2,19 +2,20 @@ import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React from 'react';
-import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 
-import {useDependentQueryDemo} from './useDependentQueryDemo';
+import {useDependentQueryDemo3} from './useDependentQueryDemo3';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
   NativeStackScreenProps<RootStackParamList>
 >;
 
-const ScreenName = 'DependentQueryDemo';
+const ScreenName = 'DependentQueryDemo3';
 const Screen: React.FC<Props> = () => {
-  const {todos, isIdle, isLoading, isSuccess, isError, start, reset} = useDependentQueryDemo();
+  const {todos, query, start, reset} = useDependentQueryDemo3();
+  const {isIdle, isLoading, isSuccess, isError} = query;
 
   return (
     <View style={styles.container}>
@@ -39,12 +40,11 @@ const Screen: React.FC<Props> = () => {
         <Button title="取得開始" onPress={start} />
         <Button title="Reset Queries" onPress={reset} />
       </View>
-      <SafeAreaView />
     </View>
   );
 };
 
-export const DependentQueryDemoScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
+export const DependentQueryDemo3Screen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };
