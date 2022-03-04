@@ -27,31 +27,31 @@ export const useListTodoDemo = ({navigation}: ListTodoDemoScreenProps) => {
     [navigation],
   );
 
-  const onEndReached = useCallback(() => {
+  const fetchNext = useCallback(() => {
     if (hasNextPage) {
       fetchNextPage().catch(() => {});
     }
   }, [hasNextPage, fetchNextPage]);
 
-  const onCreate = useCallback(() => {
+  const create = useCallback(() => {
     navigation.navigate(CreateTodoDemoScreen.name);
   }, [navigation]);
 
-  const onResetQueries = useCallback(async () => {
+  const resetQueries = useCallback(async () => {
     await queryClient.resetQueries();
   }, [queryClient]);
 
-  const onInvalidateQueries = useCallback(async () => {
+  const invalidateQueries = useCallback(async () => {
     await queryClient.invalidateQueries();
   }, [queryClient]);
 
   return {
-    listTodoQuery,
+    ...listTodoQuery,
     todos,
     onPressTodoItem,
-    onEndReached,
-    onCreate,
-    onResetQueries,
-    onInvalidateQueries,
+    fetchNext,
+    create,
+    resetQueries,
+    invalidateQueries,
   };
 };

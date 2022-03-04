@@ -1,3 +1,4 @@
+import {useCallback} from 'react';
 import {useQuery} from 'react-query';
 import {getAmount, getItem, getItemType0, getItemType1, Item, ItemRate} from 'service';
 
@@ -29,9 +30,14 @@ const useDependentQueryDemo1 = () => {
   const queryResults = [itemQuery, itemType0Query, itemType1Query, amountQuery];
   const isIdle = queryResults.every(query => query.isIdle);
   const isLoading = queryResults.some(query => query.isLoading);
-  const isFetching = queryResults.some(query => query.isFetching);
+  const isRefetching = queryResults.some(query => query.isRefetching);
   const isSuccess = queryResults.every(query => query.isSuccess);
   const isError = queryResults.some(query => query.isError);
+
+  const reload = useCallback(() => {
+    itemQuery.remove();
+    itemQuery.refetch().catch(() => {});
+  }, [itemQuery]);
 
   return {
     result: {
@@ -41,10 +47,11 @@ const useDependentQueryDemo1 = () => {
     },
     isIdle,
     isLoading,
-    isFetching,
+    isRefetching,
     isSuccess,
     isError,
     refetch: itemQuery.refetch,
+    reload,
   };
 };
 

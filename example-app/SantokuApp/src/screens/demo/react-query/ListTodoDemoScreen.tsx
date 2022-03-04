@@ -23,8 +23,21 @@ export type ListTodoDemoScreenProps = CompositeScreenProps<
 
 const ScreenName = 'ListTodoDemo';
 const Screen: React.FC<ListTodoDemoScreenProps> = props => {
-  const {listTodoQuery, todos, onPressTodoItem, onEndReached, onCreate, onResetQueries, onInvalidateQueries} =
-    useListTodoDemo(props);
+  const {
+    status,
+    isSuccess,
+    isError,
+    isLoading,
+    isRefetching,
+    isFetchingNextPage,
+    todos,
+    refetch,
+    onPressTodoItem,
+    fetchNext,
+    create,
+    resetQueries,
+    invalidateQueries,
+  } = useListTodoDemo(props);
 
   const renderTodo = useCallback(
     ({item}: {item: Todo}) => {
@@ -45,41 +58,42 @@ const Screen: React.FC<ListTodoDemoScreenProps> = props => {
   );
 
   const renderFooter = useCallback(() => {
-    if (!listTodoQuery.isFetchingNextPage) return null;
+    if (!isFetchingNextPage) return null;
 
     return <LoadingIndicator />;
-  }, [listTodoQuery]);
+  }, [isFetchingNextPage]);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text h4>Todo List (InfiniteQuery)</Text>
-        <Text>Query Status: {listTodoQuery.status}</Text>
-        <Text>isFetching: {String(listTodoQuery.isFetching)}</Text>
-        <Text>isFetchingNextPage: {String(listTodoQuery.isFetchingNextPage)}</Text>
+        <Text>Query Status: {status}</Text>
+        <Text>isRefetching: {String(isRefetching)}</Text>
+        <Text>isFetchingNextPage: {String(isFetchingNextPage)}</Text>
       </View>
       <View style={styles.body}>
-        {listTodoQuery.isSuccess && (
+        {isError && <Text>List Todo APIの呼び出しに失敗しました。</Text>}
+        {isLoading && <ActivityIndicator size="large" color="blue" />}
+        {isSuccess && (
           <>
             {todos && (
               <FlatList
                 data={todos}
                 renderItem={renderTodo}
-                refreshing={listTodoQuery.isFetching && !listTodoQuery.isFetchingNextPage}
-                onRefresh={listTodoQuery.refetch}
-                onEndReached={onEndReached}
+                refreshing={isRefetching && !isFetchingNextPage}
+                onRefresh={refetch}
+                onEndReached={fetchNext}
                 ListFooterComponent={renderFooter}
               />
             )}
             {!todos && <Text>Todoが登録されていません。</Text>}
-            <FAB title="Create Todo" placement="right" onPress={onCreate} />
+            <FAB title="Create Todo" placement="right" onPress={create} />
           </>
         )}
-        {listTodoQuery.isError && <Text>List Todo APIの呼び出しに失敗しました。</Text>}
       </View>
       <View style={styles.footer}>
-        <Button title="Invalidate Queries" onPress={() => onInvalidateQueries()} style={styles.button} />
-        <Button title="Reset Queries" onPress={() => onResetQueries()} style={styles.button} />
+        <Button title="Invalidate Queries" onPress={() => invalidateQueries()} style={styles.button} />
+        <Button title="Reset Queries" onPress={() => resetQueries()} style={styles.button} />
       </View>
       <SafeAreaView />
     </View>
