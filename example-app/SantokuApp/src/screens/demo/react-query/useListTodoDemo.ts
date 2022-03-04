@@ -7,25 +7,18 @@ import {EditTodoDemoScreen} from './EditTodoDemoScreen';
 import {ListTodoDemoScreenProps} from './ListTodoDemoScreen';
 
 export const useListTodoDemo = ({navigation}: ListTodoDemoScreenProps) => {
-  const [refreshing, setRefreshing] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const listTodoQuery = useListTodoByCursorInfinite();
+  const {isSuccess, hasNextPage, fetchNextPage, data} = listTodoQuery;
 
   const todos = useMemo(() => {
-    if (listTodoQuery.isSuccess && listTodoQuery.data) {
-      const pages = listTodoQuery.data.pages;
+    if (isSuccess && data) {
+      const pages = data.pages;
       return pages.map(page => page.data.content).flat();
     } else {
       return [];
     }
-  }, [listTodoQuery]);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    listTodoQuery.refetch().finally(() => {
-      setRefreshing(false);
-    });
-  }, [listTodoQuery]);
+  }, [isSuccess, data]);
 
   const onPressTodoItem = useCallback(
     (todoId: number) => {
@@ -35,10 +28,10 @@ export const useListTodoDemo = ({navigation}: ListTodoDemoScreenProps) => {
   );
 
   const onEndReached = useCallback(() => {
-    if (listTodoQuery.hasNextPage) {
-      listTodoQuery.fetchNextPage().catch(() => {});
+    if (hasNextPage) {
+      fetchNextPage().catch(() => {});
     }
-  }, [listTodoQuery]);
+  }, [hasNextPage, fetchNextPage]);
 
   const onCreate = useCallback(() => {
     navigation.navigate(CreateTodoDemoScreen.name);
@@ -53,10 +46,8 @@ export const useListTodoDemo = ({navigation}: ListTodoDemoScreenProps) => {
   }, [queryClient]);
 
   return {
-    refreshing,
     listTodoQuery,
     todos,
-    onRefresh,
     onPressTodoItem,
     onEndReached,
     onCreate,
