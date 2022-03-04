@@ -14,7 +14,7 @@ type Props = CompositeScreenProps<
 
 const ScreenName = 'DependentQueryDemo2';
 const Screen: React.FC<Props> = () => {
-  const {data: result, isIdle, isLoading, isRefetching, isSuccess, isError, refetch, reload} = useDependentQueryDemo2();
+  const {result, isIdle, isLoading, isRefetching, isSuccess, isError, refetch, reload} = useDependentQueryDemo2();
 
   return (
     <SafeAreaView style={styles.container}>

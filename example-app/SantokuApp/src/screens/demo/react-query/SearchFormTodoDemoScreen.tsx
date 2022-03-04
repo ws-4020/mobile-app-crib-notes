@@ -2,7 +2,7 @@ import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ListTodoParams} from 'generated/sandbox/model';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {View, Text, ActivityIndicator, StyleSheet, SafeAreaView} from 'react-native';
 import {Button, Input} from 'react-native-elements';
 import {useListTodo} from 'service/backend';
@@ -17,6 +17,12 @@ const Screen: React.FC<Props> = () => {
   const [inputPage, setInputPage] = useState('');
   const [params, setParams] = useState<ListTodoParams>();
   const {isFetching, isError, data} = useListTodo(params, {enabled: params !== undefined});
+  const search = useCallback(() => {
+    const page = Number(inputPage);
+    if (Number.isInteger(page) && page > 0) {
+      setParams({page});
+    }
+  }, [inputPage]);
 
   const todos = data?.data.content;
   return (
@@ -24,15 +30,7 @@ const Screen: React.FC<Props> = () => {
       <View>
         <Input placeholder="ページ番号" value={inputPage} onChangeText={setInputPage} />
         <View style={styles.search}>
-          <Button
-            title="検索"
-            onPress={() => {
-              const page = Number(inputPage);
-              if (Number.isInteger(page) && page > 0) {
-                setParams({page});
-              }
-            }}
-          />
+          <Button title="検索" onPress={search} />
         </View>
         {isFetching && <ActivityIndicator color="#0000ff" />}
         {isError && <Text>TODO一覧の取得に失敗しました。</Text>}

@@ -14,9 +14,7 @@ const useDependentQueryDemo2 = () => {
 
   return {
     ...query,
-    result: {
-      ...query.data,
-    },
+    result: query.data,
     reload,
   };
 };
