@@ -1,4 +1,4 @@
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useMemo} from 'react';
 import {useQueryClient} from 'react-query';
 import {useListTodoByCursorInfinite} from 'service/backend';
 

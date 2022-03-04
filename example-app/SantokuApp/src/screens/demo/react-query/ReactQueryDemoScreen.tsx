@@ -6,6 +6,7 @@ import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
 import {DependentQueryDemo1Screen} from './DependentQueryDemo1Screen';
+import {DependentQueryDemo2Screen} from './DependentQueryDemo2Screen';
 import {DependentQueryDemo3Screen} from './DependentQueryDemo3Screen';
 import {DisableErrorHandlerDemoScreen} from './DisableErrorHandlerDemoScreen';
 import {DisabledQueryDemoScreen} from './DisabledQueryDemoScreen';
@@ -13,7 +14,6 @@ import {GetAccountsMeDemoScreen} from './GetAccountsMeDemoScreen';
 import {ListTodoDemoScreen} from './ListTodoDemoScreen';
 import {SearchBarTodoDemoScreen} from './SearchBarTodoDemoScreen';
 import {SearchFormTodoDemoScreen} from './SearchFormTodoDemoScreen';
-import { DependentQueryDemo2Screen } from '.';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
