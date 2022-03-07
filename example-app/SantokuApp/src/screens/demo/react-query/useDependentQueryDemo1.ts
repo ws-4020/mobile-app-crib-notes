@@ -21,9 +21,9 @@ const useDependentQueryDemo1 = () => {
       : itemQuery.isSuccess && itemType1Query.isSuccess
       ? itemType1Query.data.rate
       : undefined;
-  const amountReq = itemQuery.data && rate ? {price: itemQuery.data.price, rate} : undefined;
-  const amountQuery = useQuery(['amount', amountReq], () => getAmount(amountReq!), {
-    enabled: !!amountReq,
+  const amountQueryParams = itemQuery.data && rate ? {price: itemQuery.data.price, rate} : undefined;
+  const amountQuery = useQuery(['amount', amountQueryParams], () => getAmount(amountQueryParams!), {
+    enabled: !!amountQueryParams,
   });
 
   // 並列で実行したクエリの総合的な結果をもとに画面描画を切り替える場合はそれぞれのクエリのstatusを統合する
