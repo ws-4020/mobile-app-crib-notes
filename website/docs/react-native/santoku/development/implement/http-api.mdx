@@ -323,7 +323,7 @@ const SampleScreen: React.FC = () => {
 ```
 
 Pull To Refresh操作には、ScrollViewのrefreshControlを用います。
-onRefreshでReact Queryのrefetch関数を呼び出すことで、データを再取得します。
+onRefreshでReact Queryのrefetch関数を呼びだすことで、データを再取得します。
 データの再取得はバックグラウンドで実行され、取得完了までは取得済みのデータが表示されます。
 再取得中の状態はisRefetchingで判断します。
 このフラグは、`isFetching && !isLoading`と同じです。
@@ -352,12 +352,16 @@ const SampleScreen: React.FC = () => {
 }
 ```
 
+<!-- textlint-disable prh -->
+
 検索条件を入力して検索ボタンを押下すると、データを取得して検索結果をリスト表示します。
 ここでは、ページ番号を検索条件として用いています。
 useListTodoのenabledオプションを用いて、検索条件がない場合はクエリを無効にします。
 これにより、初期表示時に自動的にクエリが実行されるのを防ぎます。
 検索ボタンの押下で検索条件を設定します。
 このタイミングでクエリが有効となりデータを取得します。
+
+<!-- textlint-enable prh -->
 
 画面レンダリングを含めた全体のコード例はこちらです。
 
@@ -403,7 +407,7 @@ const SampleScreen: React.FC = () => {
 検索条件が変わった場合、React Queryはキャッシュがある場合はそのデータを返し、バックグラウンドでクエリを実行します。
 その場合、isLoadingではなくisFetchingで判断しないと、以前の検索結果が表示されます。
 isLoadingはまだキャッシュがないかつクエリ実行中にtrueとなります。
-一方で、isFetchingはキャッシュの有無に関係なくクエリ実行中にtrueとなります。
+一方で、isFetchingはキャッシュの有無に関係なくクエリ実行中はtrueとなります。
 ページング表示する画面などにおいては、キャッシュがあれば表示し、なければインジケータを表示するためにisLoadingを用いた方がいいでしょう。
 画面の仕様に応じて、適宜使い分けてください。
 
@@ -478,7 +482,7 @@ const useDebounce = <T,>(state: T, timeout: number) => {
 
   - 商品取得APIの呼び出しで商品を取得
   - 取得した商品の商品種別に応じて異なるAPIで割引率を取得
-  - 取得した商品の価格と割引率を用いて金額計算APIを呼び出す
+  - 取得した商品の価格と割引率を用いて金額計算APIを呼びだす
 
 クエリのenabledに呼出し条件を定義することで、どちらかのクエリが実行されます。
 商品と（いずれかのAPI呼び出しで取得した）割引率が取得できたタイミングで金額計算APIを呼び出します。
@@ -527,7 +531,7 @@ const useDependentQueryDemo = () => {
 ```
 
 上記コードから分かる通り、React Queryで複数のクエリを連結するのはやや複雑です。
-条件が複雑になる場合や、複数のAPIをループで呼び出す場合などは、非同期関数に纏めたほうが分かりやすいです。
+条件が複雑になる場合や、複数のAPIをループで呼びだす場合などは、非同期関数に纏めたほうが分かりやすいです。
 次のコードは、上記例を非同期関数に書き換えたものです。
 非同期関数に纏めることで、コードがシンプルになります。
 
@@ -624,9 +628,9 @@ const SampleScreen: React.FC = () => {
 }
 ```
 
-FlatListのonEndReachedでReact QueryのfetchNextPage関数を呼び出すことで、リストの末尾にスクロールした際にデータを追加取得します。
+FlatListのonEndReachedでReact QueryのfetchNextPage関数を呼びだすことで、リストの末尾へスクロールした際にデータを追加取得します。
 データの追加取得中は、ListFooterComponentに指定したインジケータが表示されます。
-FlatListのonRefreshでReact Queryのrefetch関数を呼び出すことで、Pull To Refresh操作でデータを再取得ができます。
+FlatListのonRefreshでReact Queryのrefetch関数を呼びだすことで、Pull To Refresh操作でデータを再取得ができます。
 refreshingの条件に注意してください。isRefetchingのみだとデータの追加読込み時も対象となるため、`isRefetching && !isFetchingNextPage`の条件で再読み込みと判断します。
 maxToRenderPerBatchはスクロールでレンダリングされる項目量です。
 APIに指定する最大取得件数（limit）と合わせておくといいでしょう。
