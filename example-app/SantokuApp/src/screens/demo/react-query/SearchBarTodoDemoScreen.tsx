@@ -19,13 +19,15 @@ const useDebounce = <T,>(state: T, timeout: number) => {
   const [value, setValue] = useState(state);
   const timerId = useRef<ReturnType<typeof setTimeout>>();
   useEffect(() => {
-    if (timerId.current) {
-      clearTimeout(timerId.current);
-    }
     timerId.current = setTimeout(() => {
       setValue(state);
       timerId.current = undefined;
     }, timeout);
+    return () => {
+      if (timerId.current) {
+        clearTimeout(timerId.current);
+      }
+    };
   }, [state, timeout]);
   return value;
 };
