@@ -82,6 +82,62 @@ const getTodoDetails = async (params?: ListTodoParams) => {
   }
 };
 
+function getRandomInt(max: number) {
+  return Math.floor(Math.random() * max);
+}
+
+// 商品
+type Item = {
+  id: number;
+  name: string;
+  type: number;
+  price: number;
+};
+
+// 商品の割引率
+type ItemRate = {rate: number};
+
+// 商品取得API
+const getItem = async (id: number) => {
+  return new Promise<Item>(resolve => {
+    setTimeout(() => {
+      resolve({id, name: `item-${id}`, type: getRandomInt(2), price: getRandomInt(1000)});
+    }, 1000);
+  });
+};
+
+// 商品種別0API
+const getItemType0 = async (_: {id: number}) => {
+  return new Promise<ItemRate>(resolve => {
+    setTimeout(() => resolve({rate: 0.1}), 1000);
+  });
+};
+
+// 商品種別1API
+const getItemType1 = async (_: {id: number}) => {
+  return new Promise<ItemRate>(resolve => {
+    setTimeout(() => resolve({rate: 0.2}), 1000);
+  });
+};
+
+// 金額計算API
+const getAmount = async (req: {price: number; rate: number}) => {
+  return new Promise<number>(resolve => {
+    setTimeout(() => resolve(Math.round(req.price * (1 - req.rate))), 1000);
+  });
+};
+
+const getItemInfo = async (id: number) => {
+  const item = await getItem(id);
+  const itemType = item.type === 0 ? await getItemType0({id: item.id}) : await getItemType1({id: item.id});
+  const amount = await getAmount({price: item.price, rate: itemType.rate});
+  return {
+    ...item,
+    rate: itemType.rate,
+    amount,
+  };
+};
+
 export {
   useGetTodo,
   useListTodo,
@@ -90,4 +146,11 @@ export {
   usePutTodo,
   useDeleteTodo,
   useGetTodoDetails,
+  getItem,
+  getItemType0,
+  getItemType1,
+  getAmount,
+  getItemInfo,
 };
+
+export type {Item, ItemRate};

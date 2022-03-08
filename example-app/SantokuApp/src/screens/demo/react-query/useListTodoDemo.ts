@@ -1,4 +1,4 @@
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useMemo} from 'react';
 import {useQueryClient} from 'react-query';
 import {useListTodoByCursorInfinite} from 'service/backend';
 
@@ -7,25 +7,18 @@ import {EditTodoDemoScreen} from './EditTodoDemoScreen';
 import {ListTodoDemoScreenProps} from './ListTodoDemoScreen';
 
 export const useListTodoDemo = ({navigation}: ListTodoDemoScreenProps) => {
-  const [refreshing, setRefreshing] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const listTodoQuery = useListTodoByCursorInfinite();
+  const {isSuccess, hasNextPage, fetchNextPage, data} = listTodoQuery;
 
   const todos = useMemo(() => {
-    if (listTodoQuery.isSuccess && listTodoQuery.data) {
-      const pages = listTodoQuery.data.pages;
+    if (isSuccess && data) {
+      const pages = data.pages;
       return pages.map(page => page.data.content).flat();
     } else {
       return [];
     }
-  }, [listTodoQuery]);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    listTodoQuery.refetch().finally(() => {
-      setRefreshing(false);
-    });
-  }, [listTodoQuery]);
+  }, [isSuccess, data]);
 
   const onPressTodoItem = useCallback(
     (todoId: number) => {
@@ -34,33 +27,31 @@ export const useListTodoDemo = ({navigation}: ListTodoDemoScreenProps) => {
     [navigation],
   );
 
-  const onEndReached = useCallback(() => {
-    if (listTodoQuery.hasNextPage) {
-      listTodoQuery.fetchNextPage().catch(() => {});
+  const fetchNext = useCallback(() => {
+    if (hasNextPage) {
+      fetchNextPage().catch(() => {});
     }
-  }, [listTodoQuery]);
+  }, [hasNextPage, fetchNextPage]);
 
-  const onCreate = useCallback(() => {
+  const create = useCallback(() => {
     navigation.navigate(CreateTodoDemoScreen.name);
   }, [navigation]);
 
-  const onResetQueries = useCallback(async () => {
+  const resetQueries = useCallback(async () => {
     await queryClient.resetQueries();
   }, [queryClient]);
 
-  const onInvalidateQueries = useCallback(async () => {
+  const invalidateQueries = useCallback(async () => {
     await queryClient.invalidateQueries();
   }, [queryClient]);
 
   return {
-    refreshing,
-    listTodoQuery,
+    ...listTodoQuery,
     todos,
-    onRefresh,
     onPressTodoItem,
-    onEndReached,
-    onCreate,
-    onResetQueries,
-    onInvalidateQueries,
+    fetchNext,
+    create,
+    resetQueries,
+    invalidateQueries,
   };
 };

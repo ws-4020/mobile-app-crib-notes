@@ -3,9 +3,8 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Todo} from 'generated/sandbox/model';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React, {useCallback} from 'react';
-import {ActivityIndicator, Pressable, RefreshControl, SafeAreaView, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, Pressable, FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Icon, ListItem, Text, FAB, Button} from 'react-native-elements';
-import {FlatList} from 'react-native-gesture-handler';
 
 import {useListTodoDemo} from './useListTodoDemo';
 
@@ -25,15 +24,19 @@ export type ListTodoDemoScreenProps = CompositeScreenProps<
 const ScreenName = 'ListTodoDemo';
 const Screen: React.FC<ListTodoDemoScreenProps> = props => {
   const {
-    refreshing,
-    listTodoQuery,
+    status,
+    isSuccess,
+    isError,
+    isLoading,
+    isRefetching,
+    isFetchingNextPage,
     todos,
-    onRefresh,
+    refetch,
     onPressTodoItem,
-    onEndReached,
-    onCreate,
-    onResetQueries,
-    onInvalidateQueries,
+    fetchNext,
+    create,
+    resetQueries,
+    invalidateQueries,
   } = useListTodoDemo(props);
 
   const renderTodo = useCallback(
@@ -54,35 +57,43 @@ const Screen: React.FC<ListTodoDemoScreenProps> = props => {
     [onPressTodoItem],
   );
 
+  const renderFooter = useCallback(() => {
+    if (!isFetchingNextPage) return null;
+
+    return <LoadingIndicator />;
+  }, [isFetchingNextPage]);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text h4>Todo List (InfiniteQuery)</Text>
-        <Text>Query Status: {listTodoQuery.status}</Text>
-        <Text>isFetching: {listTodoQuery.isFetching ? 'true' : 'false'}</Text>
+        <Text>Query Status: {status}</Text>
+        <Text>isRefetching: {String(isRefetching)}</Text>
+        <Text>isFetchingNextPage: {String(isFetchingNextPage)}</Text>
       </View>
       <View style={styles.body}>
-        {listTodoQuery.isLoading && <LoadingIndicator />}
-        {listTodoQuery.isSuccess && (
+        {isError && <Text>List Todo APIの呼び出しに失敗しました。</Text>}
+        {isLoading && <ActivityIndicator size="large" color="blue" />}
+        {isSuccess && (
           <>
             {todos && (
               <FlatList
                 data={todos}
                 renderItem={renderTodo}
-                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-                onEndReached={onEndReached}
+                refreshing={isRefetching && !isFetchingNextPage}
+                onRefresh={refetch}
+                onEndReached={fetchNext}
+                ListFooterComponent={renderFooter}
               />
             )}
             {!todos && <Text>Todoが登録されていません。</Text>}
-            {listTodoQuery.isFetching && <LoadingIndicator />}
-            <FAB title="Create Todo" placement="right" onPress={onCreate} />
+            <FAB title="Create Todo" placement="right" onPress={create} />
           </>
         )}
-        {listTodoQuery.isError && <Text>List Todo APIの呼び出しに失敗しました。</Text>}
       </View>
       <View style={styles.footer}>
-        <Button title="Invalidate Queries" onPress={() => onInvalidateQueries()} style={styles.button} />
-        <Button title="Reset Queries" onPress={() => onResetQueries()} style={styles.button} />
+        <Button title="Invalidate Queries" onPress={() => invalidateQueries()} style={styles.button} />
+        <Button title="Reset Queries" onPress={() => resetQueries()} style={styles.button} />
       </View>
       <SafeAreaView />
     </View>

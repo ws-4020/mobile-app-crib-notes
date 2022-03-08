@@ -53,8 +53,13 @@ export type DemoStackParamList = {
   };
   ReactQueryDemo: undefined;
   DisabledQueryDemo: undefined;
-  DependentQueryDemo: undefined;
+  DependentQueryDemo1: undefined;
+  DependentQueryDemo2: undefined;
+  DependentQueryDemo3: undefined;
   DisableErrorHandlerDemo: undefined;
+  GetAccountsMeDemo: undefined;
+  SearchFormTodoDemo: undefined;
+  SearchBarTodoDemo: undefined;
 };
 
 export type AppNavigatorOptions = {
