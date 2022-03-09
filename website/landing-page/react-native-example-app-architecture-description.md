@@ -33,7 +33,7 @@
 
 ## 更新履歴
 
-### 2022/02/17
+### 2022/03/31
 
 #### 🌱 新規コンテンツ（2022/03/31）
 
@@ -46,6 +46,8 @@
     - [React Queryを用いた開発方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-013-react-query)
   - 開発ガイド
     - [HTTP APIの呼び出し](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/http-api)
+
+### 2022/02/17
 
 #### 🌱 新規コンテンツ（2022/02/17）
 
