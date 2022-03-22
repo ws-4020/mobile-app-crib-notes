@@ -32,6 +32,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CsrfTokenResponse'
+  '/need-to-update/{type}/{version}':
+    parameters:
+      - schema:
+          type: string
+          pattern: ios|android
+        name: type
+        in: path
+        required: true
+        description: アプリの種別
+      - schema:
+          type: string
+        name: version
+        in: path
+        required: true
+        description: アプリのバージョン
+    get:
+      summary: アプリの要アップデート確認
+      operationId: get-need-to-update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NeedToUpdateResponse'
+              examples: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      description: 指定されたアプリのアップデートが必要かどうかを確認します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ''
+      tags:
+        - System
   /signup:
     post:
       summary: アカウントの登録
@@ -644,6 +680,25 @@ components:
         - csrfTokenValue
         - csrfTokenHeaderName
         - csrfTokenParameterName
+    NeedToUpdateResponse:
+      title: NeedToUpdateResponse
+      type: object
+      description: アプリの要アップデート確認応答
+      properties:
+        needToUpdate:
+          type: boolean
+          description: アップデートが必要かどうか
+        url:
+          type: string
+          format: uri
+          description: 遷移先URL
+        message:
+          type: string
+          description: メッセージ
+      required:
+        - needToUpdate
+        - url
+        - message
     Profile:
       title: Profile
       type: object
