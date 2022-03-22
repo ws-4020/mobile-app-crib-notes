@@ -18,7 +18,7 @@ servers:
 security:
   - Session: []
 paths:
-  /csrf_token:
+  /system/csrf-token:
     get:
       summary: CSRFトークンの取得
       tags:
@@ -32,7 +32,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CsrfTokenResponse'
-  '/need-to-update/{type}/{version}':
+  '/system/app-updates/{type}/{version}':
     parameters:
       - schema:
           type: string
@@ -46,26 +46,30 @@ paths:
         name: version
         in: path
         required: true
-        description: アプリのバージョン
+        description: アプリのバージョン番号
     get:
-      summary: アプリの要アップデート確認
-      operationId: get-need-to-update
+      summary: アプリ更新情報の取得
+      operationId: get-app-updates
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NeedToUpdateResponse'
+                $ref: '#/components/schemas/AppUpdatesResponse'
               examples: {}
         '400':
           $ref: '#/components/responses/BadRequest'
-      description: 指定されたアプリのアップデートが必要かどうかを確認します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ''
+      description: |
+        指定されたアプリの更新情報を返します。
+        指定されたバージョン番号に対し、アップデートが必要かどうかの判断結果を応答します。
+
+        サーバに設定されたバージョン番号と指定されたバージョン番号の比較でアップデートの要否が決定します。大小比較はセマンティックバージョニングのルールに沿って実施されます。
+        バージョン番号が実際に存在するかどうかは応答結果に影響しません。
+
+        - 次の場合は400（Bad Request）を応答します。
+          - アプリの種別にiosまたはandroid以外が指定された場合
+          - アプリのバージョン番号にセマンティックバージョンとして認識されない値が指定された場合
       tags:
         - System
   /signup:
@@ -680,24 +684,19 @@ components:
         - csrfTokenValue
         - csrfTokenHeaderName
         - csrfTokenParameterName
-    NeedToUpdateResponse:
-      title: NeedToUpdateResponse
+    AppUpdatesResponse:
+      title: AppUpdatesResponse
       type: object
-      description: アプリの要アップデート確認応答
+      description: アプリ更新情報のレスポンス
       properties:
-        needToUpdate:
+        updateRequired:
           type: boolean
           description: アップデートが必要かどうか
-        url:
-          type: string
-          format: uri
-          description: 遷移先URL
         message:
           type: string
           description: メッセージ
       required:
-        - needToUpdate
-        - url
+        - updateRequired
         - message
     Profile:
       title: Profile
