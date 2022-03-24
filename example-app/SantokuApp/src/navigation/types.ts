@@ -44,6 +44,22 @@ export type DemoStackParamList = {
   Authentication: undefined;
   HttpApi: undefined;
   Navigation: undefined;
+  PushNotification: undefined;
+  Cache: undefined;
+  ListTodoDemo: undefined;
+  CreateTodoDemo: undefined;
+  EditTodoDemo: {
+    todoId: number;
+  };
+  ReactQueryDemo: undefined;
+  DisabledQueryDemo: undefined;
+  DependentQueryDemo1: undefined;
+  DependentQueryDemo2: undefined;
+  DependentQueryDemo3: undefined;
+  DisableErrorHandlerDemo: undefined;
+  GetAccountsMeDemo: undefined;
+  SearchFormTodoDemo: undefined;
+  SearchBarTodoDemo: undefined;
 };
 
 export type AppNavigatorOptions = {
@@ -53,3 +69,10 @@ export type AppNavigatorOptions = {
   HomeStackNav?: DefaultRouterOptions<keyof HomeStackParamList>;
   TeamStackNav?: DefaultRouterOptions<keyof TeamStackParamList>;
 };
+
+export type NavigationParameter<
+  ParamList,
+  RouteName extends keyof ParamList = keyof ParamList,
+> = undefined extends ParamList[RouteName]
+  ? [RouteName] | [RouteName, ParamList[RouteName]]
+  : [RouteName, ParamList[RouteName]];

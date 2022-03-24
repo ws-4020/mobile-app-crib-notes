@@ -14,6 +14,9 @@
 #import <React/RCTConvert.h>
 
 #import <Firebase.h>
+// isHeadlessを取得できるようにする
+// https://rnfirebase.io/messaging/usage#background-application-state
+#import "RNFBMessagingModule.h"
 
 #if defined(FB_SONARKIT_ENABLED) && __has_include(<FlipperKit/FlipperClient.h>)
 #import <FlipperKit/FlipperClient.h>
@@ -54,7 +57,14 @@ static void InitializeFlipper(UIApplication *application) {
     [bridge moduleForClass:[RCTDevLoadingView class]];
   #endif
 
-  RCTRootView *rootView = [self.reactDelegate createRootViewWithBridge:bridge moduleName:@"main" initialProperties:nil];
+  // isHeadlessを取得できるように、launchOptionsをappPropertiesに格納
+  // https://rnfirebase.io/messaging/usage#background-application-state
+  NSDictionary *appProperties = [RNFBMessagingModule addCustomPropsToUserProps:nil withLaunchOptions:launchOptions];
+
+  // isHeadlessを取得できるように、initialPropertiesにappPropertiesを指定
+  // https://rnfirebase.io/messaging/usage#background-application-state
+  // RCTRootView *rootView = [self.reactDelegate createRootViewWithBridge:bridge moduleName:@"main" initialProperties:nil];
+  RCTRootView *rootView = [self.reactDelegate createRootViewWithBridge:bridge moduleName:@"main" initialProperties:appProperties];
   rootView.backgroundColor = [UIColor whiteColor];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

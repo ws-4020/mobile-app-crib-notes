@@ -8,6 +8,7 @@ import {DemoTemplate} from './DemoTemplate';
 import {AppStateScreen} from './app-state';
 import {AuthenticationScreen} from './authentication';
 import {ButtonScreen} from './button';
+import {CacheScreen} from './cache';
 import {ConfigScreen} from './config';
 import {ErrorCaseScreen} from './error';
 import {HttpApiScreen} from './http-api';
@@ -17,6 +18,8 @@ import {LocalAuthenticationScreen} from './local-authn';
 import {LogScreen} from './log';
 import {MessageScreen} from './message';
 import {NavigationScreen} from './navigation';
+import {PushNotificationScreen} from './push-notification';
+import {ReactQueryDemoScreen} from './react-query';
 import {SnackbarScreen} from './snackbar';
 
 type ScreenList = {
@@ -76,6 +79,18 @@ const demoScreenList: ScreenList[] = [
   {
     title: 'Navigation',
     to: NavigationScreen.name,
+  },
+  {
+    title: 'PushNotification',
+    to: PushNotificationScreen.name,
+  },
+  {
+    title: 'Cache',
+    to: CacheScreen.name,
+  },
+  {
+    title: 'ReactQuery',
+    to: ReactQueryDemoScreen.name,
   },
 ];
 
