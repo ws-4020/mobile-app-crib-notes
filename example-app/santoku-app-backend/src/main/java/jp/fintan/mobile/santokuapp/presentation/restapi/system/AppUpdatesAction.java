@@ -36,8 +36,8 @@ public class AppUpdatesAction {
       throw new InvalidAppVersionException();
     }
 
-    var appUpdatesNeeds = appUpdatesService.askAppUpdatesNeeds(appType, appVersion);
-    return new AppUpdatesResponse(appUpdatesNeeds.needUpdates(), appUpdatesNeeds.updateMessage().value());
+    var appUpdates = appUpdatesService.askAppUpdates(appType, appVersion);
+    return new AppUpdatesResponse(appUpdates.needUpdates(), appUpdates.updateMessage().value());
   }
 
   public static class AppUpdatesResponse {

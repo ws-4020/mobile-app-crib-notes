@@ -2,19 +2,24 @@ package jp.fintan.mobile.santokuapp.domain.model.system;
 
 public class AppUpdates {
 
-  private final AppType appType;
-  private final AppVersion supportedVersion;
+  private final AppSupportedVersion appSupportedVersion;
 
-  public AppUpdates(AppType appType, AppVersion supportedVersion) {
-    this.appType = appType;
-    this.supportedVersion = supportedVersion;
+  private final AppVersion appVersion;
+
+  public AppUpdates(AppSupportedVersion appSupportedVersion, AppVersion appVersion) {
+    this.appSupportedVersion = appSupportedVersion;
+    this.appVersion = appVersion;
   }
 
-  public AppType appType() {
-    return appType;
+  public boolean needUpdates() {
+    return appVersion.isLowerThan(appSupportedVersion.supportedVersion());
   }
 
-  public AppVersion supportedVersion() {
-    return supportedVersion;
+  public UpdateMessage updateMessage() {
+    if (needUpdates()) {
+      return UpdateMessage.createUpdateRequestMessage(appVersion);
+    } else {
+      return UpdateMessage.createNotNeedMessage(appVersion);
+    }
   }
 }

@@ -3,9 +3,9 @@ package jp.fintan.mobile.santokuapp.infrastructure.persistence.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "app_updates")
+@Table(name = "app_supported_version")
 @Access(AccessType.FIELD)
-public class AppUpdatesEntity {
+public class AppSupportedVersionEntity {
 
   @Id
   private String appType;
