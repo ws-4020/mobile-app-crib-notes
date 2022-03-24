@@ -1,6 +1,6 @@
 import React from 'react';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Platform} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {AppWithInitialization} from './AppWithInitialization';
 import {WithOverlay} from './components/overlay';
