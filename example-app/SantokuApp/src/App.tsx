@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {AppWithInitialization} from './AppWithInitialization';
@@ -22,7 +22,7 @@ export const App = ({isHeadless}: AppProperties) => {
   }
 
   return (
-    <GestureHandlerRootView>
+    <GestureHandlerRootView style={StyleSheet.absoluteFill}>
       <WithAppTheme>
         <WithOverlay>
           <WithReactQuery>
