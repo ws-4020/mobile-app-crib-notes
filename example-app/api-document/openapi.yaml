@@ -58,7 +58,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AppUpdatesResponse'
               examples: {}
-        '400':
+        '404':
           $ref: '#/components/responses/BadRequest'
       description: |
         指定されたアプリの種別・バージョン番号に対し、アップデートが必要かどうかの判断結果を返します。
@@ -67,7 +67,7 @@ paths:
         大小比較はセマンティックバージョニングのルールに沿って実施されます。
         実際に存在するバージョン番号かどうかは判断結果に影響しません。
 
-        次の場合はHTTPステータスコード400（Bad Request）を応答します。
+        次の場合はHTTPステータスコード404（Not Found）を応答します。
         - iosまたはandroid以外の種別が指定された場合
         - セマンティックバージョンとして認識されないバージョン番号が指定された場合
       tags:
