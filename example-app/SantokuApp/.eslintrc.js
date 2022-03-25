@@ -25,5 +25,12 @@ module.exports = {
         'jest/unbound-method': 'error',
       },
     },
+    {
+      files: ['*.tsx'],
+      rules: {
+        // PressableやTouchableOpacityのonPressにasync関数を渡せないのは制約として厳しすぎると思うので、tsxでは無効にしています。
+        '@typescript-eslint/no-misused-promises': 'off',
+      },
+    },
   ],
 };
