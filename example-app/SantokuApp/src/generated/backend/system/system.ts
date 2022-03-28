@@ -52,14 +52,16 @@ export const useGetCsrfToken = <TData = AsyncReturnType<typeof getCsrfToken>, TE
 
  * @summary アプリ更新情報の取得
  */
-export const getAppUpdates = (type: string, version: string) => {
+export const getAppUpdates = (type: 'ios' | 'android', version: string) => {
   return backendCustomInstance<AppUpdatesResponse>({url: `/system/app-updates/${type}/${version}`, method: 'get'});
 };
 
-export const getGetAppUpdatesQueryKey = (type: string, version: string) => [`/system/app-updates/${type}/${version}`];
+export const getGetAppUpdatesQueryKey = (type: 'ios' | 'android', version: string) => [
+  `/system/app-updates/${type}/${version}`,
+];
 
 export const useGetAppUpdates = <TData = AsyncReturnType<typeof getAppUpdates>, TError = ErrorType<BadRequestResponse>>(
-  type: string,
+  type: 'ios' | 'android',
   version: string,
   options?: {query?: UseQueryOptions<AsyncReturnType<typeof getAppUpdates>, TError, TData>},
 ): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {

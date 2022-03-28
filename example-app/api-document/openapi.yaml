@@ -36,7 +36,9 @@ paths:
     parameters:
       - schema:
           type: string
-          pattern: ios|android
+          enum:
+            - ios
+            - android
         name: type
         in: path
         required: true
