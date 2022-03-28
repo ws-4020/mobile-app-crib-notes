@@ -247,35 +247,19 @@ paths:
                 type: string
                 format: uri-reference
               description: アカウントのアバター画像のURL
-  /accounts/me/device-token/add:
+  /accounts/me/device-token:
     post:
-      summary: ログイン済みアカウントのデバイス登録トークンの登録・更新
+      summary: ログイン済みアカウントのデバイス登録トークンの更新
       description: |
-        ログイン済みアカウントのデバイス登録トークンを登録・更新する。
+        ログイン済みアカウントのデバイス登録トークンを更新する。
       tags:
         - Account
-      operationId: post-accounts-me-device-token-add
+      operationId: post-accounts-me-device-token
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddDeviceToken'
-      responses:
-        '204':
-          description: No Content
-  /accounts/me/device-token/remove:
-    post:
-      summary: ログイン済みアカウントのデバイス登録トークンの削除
-      description: |
-        ログイン済みアカウントのデバイス登録トークンを削除する。
-      tags:
-        - Account
-      operationId: post-accounts-me-device-token-remove
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RemoveDeviceToken'
+              $ref: '#/components/schemas/UpdateDeviceToken'
       responses:
         '204':
           description: No Content
@@ -805,20 +789,15 @@ components:
           type: string
           format: binary
           description: アバター画像
-    AddDeviceToken:
+    UpdateDeviceToken:
       title: AddDeviceToken
       type: object
-      description: 登録・更新するデバイス登録トークン
+      description: 更新するデバイス登録トークン
       properties:
-        deviceToken:
+        newDeviceToken:
           type: string
-          description: 登録・更新するデバイス登録トークン
-    RemoveDeviceToken:
-      title: RemoveDeviceToken
-      type: object
-      description: 削除するデバイス登録トークン
-      properties:
-        deviceToken:
+          description: 登録するデバイス登録トークン
+        oldDeviceToken:
           type: string
           description: 削除するデバイス登録トークン
     TermsOfService:
