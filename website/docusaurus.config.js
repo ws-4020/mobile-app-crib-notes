@@ -182,7 +182,7 @@ module.exports = {
         specs: [
           {
             spec: '../example-app/api-document/openapi.yaml',
-            routePath: '/react-native/santoku/design/api-document',
+            route: '/react-native/santoku/design/api-document',
           },
         ],
         theme: {
