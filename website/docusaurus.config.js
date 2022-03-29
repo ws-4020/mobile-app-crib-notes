@@ -166,6 +166,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./docs/sidebars.js'),
+          breadcrumbs: false,
           routeBasePath: '/',
           showLastUpdateTime: true,
           rehypePlugins: [[require('./src/plugins/literal-injector-rehype-plugin'), injectOptions]],
