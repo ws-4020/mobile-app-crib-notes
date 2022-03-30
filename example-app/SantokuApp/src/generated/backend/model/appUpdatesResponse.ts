@@ -12,6 +12,8 @@
 export interface AppUpdatesResponse {
   /** アップデートが必要かどうか */
   updateRequired: boolean;
+  /** サポートバージョン番号 */
+  supportedVersion: string;
   /** メッセージ */
   message: string;
 }
