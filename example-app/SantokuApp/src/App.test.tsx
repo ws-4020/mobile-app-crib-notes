@@ -7,6 +7,31 @@ import {App} from './App';
 import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from './framework/backend/customInstance';
 
 jest.spyOn(DevSettings, 'addMenuItem').mockImplementation(() => {});
+jest.spyOn(BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, 'get').mockResolvedValue({
+  status: 200,
+  data: {
+    csrfTokenHeaderName: 'X-CSRF-TOKEN',
+    csrfTokenValue: 'dummy',
+  },
+});
+jest.mock('service', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const originalModule = jest.requireActual('service');
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return {
+    ...originalModule,
+    getAppUpdates: jest.fn(() => {
+      return Promise.resolve({
+        status: 200,
+        data: {
+          updateRequired: false,
+          supportedVersion: 'dummy',
+          message: 'dummy',
+        },
+      });
+    }),
+  };
+});
 
 beforeEach(() => {
   // 画面遷移時のアニメーションが、コンポーネントのアンマウント後にステートを更新してしまうようで、
@@ -17,13 +42,6 @@ beforeEach(() => {
 
 describe('App', () => {
   it('マウントされたときに正常にレンダリングされること', async () => {
-    jest.spyOn(BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, 'get').mockResolvedValue({
-      status: 200,
-      data: {
-        csrfTokenHeaderName: 'X-CSRF-TOKEN',
-        csrfTokenValue: 'dummy',
-      },
-    });
     const app = render(<App />);
     await waitFor(() => {
       expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
