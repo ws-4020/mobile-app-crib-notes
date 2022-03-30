@@ -678,11 +678,15 @@ components:
         updateRequired:
           type: boolean
           description: アップデートが必要かどうか
+        supportedVersion:
+          type: string
+          description: サポートバージョン番号
         message:
           type: string
           description: メッセージ
       required:
         - updateRequired
+        - supportedVersion
         - message
     Profile:
       title: Profile

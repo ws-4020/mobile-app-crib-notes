@@ -37,18 +37,24 @@ public class AppUpdatesAction {
     }
 
     var appUpdates = appUpdatesService.askAppUpdates(appType, appVersion);
-    return new AppUpdatesResponse(appUpdates.needUpdates(), appUpdates.updateMessage().value());
+    return new AppUpdatesResponse(
+        appUpdates.needUpdates(),
+        appUpdates.supportedVersion().value(),
+        appUpdates.updateMessage().value());
   }
 
   public static class AppUpdatesResponse {
 
     public final boolean updateRequired;
 
+    public final String supportedVersion;
+
     public final String message;
 
     public AppUpdatesResponse(
-        boolean updateRequired, String message) {
+        boolean updateRequired, String supportedVersion, String message) {
       this.updateRequired = updateRequired;
+      this.supportedVersion = supportedVersion;
       this.message = message;
     }
   }

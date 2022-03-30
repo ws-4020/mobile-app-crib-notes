@@ -15,6 +15,10 @@ public class AppUpdates {
     return appVersion.isLowerThan(appSupportedVersion.supportedVersion());
   }
 
+  public AppVersion supportedVersion() {
+    return appSupportedVersion.supportedVersion();
+  };
+
   public UpdateMessage updateMessage() {
     if (needUpdates()) {
       return UpdateMessage.createUpdateRequestMessage(appVersion);
