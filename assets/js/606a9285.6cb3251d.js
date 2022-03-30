@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmobile_app_crib_notes=self.webpackChunkmobile_app_crib_notes||[]).push([[6747],{69162:function(e){e.exports=JSON.parse('{"plugin":{"name":"docusaurus-plugin-redoc","id":"plugin-redoc-0"}}')}}]);
