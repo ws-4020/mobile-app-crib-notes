@@ -30,10 +30,10 @@ function resolveApiErrorMessageWhenAxiosError(error: AxiosError) {
   return {title, message: formatMessage(content, statusCode)};
 }
 
-function resolveApiErrorMessageWhenUnexpectedError(code: string = '', msg?: string, statusCode?: number) {
+function resolveApiErrorMessageWhenUnexpectedError() {
   const title = m('システムエラー');
   const content = m('しばらく経ってからもう1度お試しください。');
-  return {title, message: formatMessage(content, statusCode)};
+  return {title, message: formatMessage(content)};
 }
 
 function formatMessage(content: string, statusCode?: number) {
