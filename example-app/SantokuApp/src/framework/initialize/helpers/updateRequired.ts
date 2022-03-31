@@ -28,7 +28,7 @@ const requestAppUpdates = (type: typeof Platform.OS, version: typeof Application
     throw new InitialDataError(`Not supported type. type=[${type}]`);
   }
   if (!version) {
-    throw new InitialDataError('Invalid version.');
+    throw new InitialDataError(`Invalid version. version=[${version}]`);
   }
 
   return getAppUpdates(type, version);
