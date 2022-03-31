@@ -41,11 +41,13 @@ describe('openStoreLink', () => {
 describe('getUpdateRequired', () => {
   it('Platformがwebの場合はInitialDataErrorがスローされること', async () => {
     await expect(() => getUpdateRequired('web', '0.0.1')).rejects.toThrow(
-      new InitialDataError('Not supported type.type=[web]'),
+      new InitialDataError('Not supported type. type=[web]'),
     );
   });
   it('nativeApplicationVersionがnullの場合はInitialDataErrorがスローされること', async () => {
-    await expect(() => getUpdateRequired('android', null)).rejects.toThrow(new InitialDataError('Invalid version.'));
+    await expect(() => getUpdateRequired('android', null)).rejects.toThrow(
+      new InitialDataError('Invalid version. version=[null]'),
+    );
   });
   it('getAppUpdatesがエラーをスローした場合はInitialDataErrorがスローされること', async () => {
     jest.mock('service', () => {
