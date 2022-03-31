@@ -1,3 +1,6 @@
+// To show all ESLint rules, run the following command.
+// npx eslint --print-config src/App.tsx
+
 module.exports = {
   root: true,
   // universe/native: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
