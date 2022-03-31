@@ -7,7 +7,7 @@ title: クライアントアプリの実装
 クライアントアプリからFirebaseのAPIを呼びだすためには、Firebase SDKを利用します。
 Firebase SDKはAndroid, iOS, Web向けのものが提供されています。
 
-サンプルアプリとして公開している[santoku-app](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/react-native-samples/santoku-app)ではReact Nativeを利用しています。
+[公開しているサンプルアプリケーション](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp)ではReact Nativeを利用しています。
 そのため、本ガイドでは[React Native Firebase](https://rnfirebase.io/)というライブラリを利用して間接的にFirebase SDKを利用する例について解説します。
 
 ### React Native Firebaseのインストール
@@ -251,12 +251,12 @@ useEffect(() => {
 このコード例では、以下の3通りの方法でメッセージを受信しています。それぞれの違いは以下のとおりです。
 
 - `messaging().setBackgroundMessageHandler`
-    - アプリを起動していない、または非アクティブな場合にバックグラウンドでメッセージを処理する
-    - iOSの場合、APNsペイロード内の`content-available`が`true`に設定されている場合のみ処理が呼ばれる
+  - アプリを起動していない、または非アクティブな場合にバックグラウンドでメッセージを処理する
+  - iOSの場合、APNsペイロード内の`content-available`が`true`に設定されている場合のみ処理が呼ばれる
 - `messaging().onNotificationOpenedApp`
-    - アプリが起動しているが非アクティブな場合に、通知領域に表示されたメッセージをタップしてアプリがアクティブになったタイミングでメッセージを処理する
+  - アプリが起動しているが非アクティブな場合に、通知領域に表示されたメッセージをタップしてアプリがアクティブになったタイミングでメッセージを処理する
 - `messaging().getInitialNotification`
-    - アプリが起動していないまたは端末がロックされている時にメッセージを受信した後、通知領域に表示されたメッセージをタップしてアプリが起動した時に未処理のメッセージが無いか確認して処理する
+  - アプリが起動していないまたは端末がロックされている時にメッセージを受信した後、通知領域に表示されたメッセージをタップしてアプリが起動した時に未処理のメッセージが無いか確認して処理する
 
 :::info
 setBackgroundMessageHandlerで設定した処理がどのように実行されるかはAndroid/iOSで異なります。iOS端末の場合、バックグラウンド処理にもかかわらずReact Componentがマウントされ、意図しないタイミングでReact Hooksなどが呼び出されてしまう可能性があります。
