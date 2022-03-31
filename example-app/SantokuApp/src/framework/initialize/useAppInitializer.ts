@@ -10,7 +10,7 @@ import {
   initializeFirebaseCrashlyticsAsync,
   loadBundledMessagesAsync,
   loadInitialDataAsync,
-  getUpdateRequired,
+  checkAppUpdates,
   isUpdateRequiredError,
   UpdateRequiredError,
   isInitialDataError,
@@ -65,7 +65,7 @@ const loadInitialData = async () => {
 
   // TODO: ディープリンクから起動した場合のパラメータ取得
 
-  const appUpdates = await getUpdateRequired(Platform.OS, Application.nativeApplicationVersion);
+  const appUpdates = await checkAppUpdates(Platform.OS, Application.nativeApplicationVersion);
   if (appUpdates.updateRequired) {
     throw new UpdateRequiredError(appUpdates.message, appUpdates.supportedVersion);
   }

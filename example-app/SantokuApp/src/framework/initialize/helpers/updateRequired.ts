@@ -36,10 +36,7 @@ const requestAppUpdates = (type: typeof Platform.OS, version: typeof Application
   return getAppUpdates(type, version);
 };
 
-export async function getUpdateRequired(
-  type: typeof Platform.OS,
-  version: typeof Application.nativeApplicationVersion,
-) {
+export async function checkAppUpdates(type: typeof Platform.OS, version: typeof Application.nativeApplicationVersion) {
   try {
     return (await requestAppUpdates(type, version)).data;
   } catch (e) {

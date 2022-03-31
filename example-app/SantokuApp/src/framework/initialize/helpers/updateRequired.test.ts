@@ -5,7 +5,7 @@ import {Alert, Linking} from 'react-native';
 
 import {InitialDataError} from './initialDataError';
 import {
-  getUpdateRequired,
+  checkAppUpdates,
   isUpdateRequiredError,
   openStoreLink,
   showUpdateRequiredDialog,
@@ -60,14 +60,14 @@ describe('openStoreLink', () => {
   });
 });
 
-describe('getUpdateRequired', () => {
+describe('checkAppUpdates', () => {
   it('Platformがwebの場合はInitialDataErrorがスローされること', async () => {
-    await expect(() => getUpdateRequired('web', '0.0.1')).rejects.toThrow(
+    await expect(() => checkAppUpdates('web', '0.0.1')).rejects.toThrow(
       new InitialDataError('Not supported type. type=[web]'),
     );
   });
   it('nativeApplicationVersionがnullの場合はInitialDataErrorがスローされること', async () => {
-    await expect(() => getUpdateRequired('android', null)).rejects.toThrow(
+    await expect(() => checkAppUpdates('android', null)).rejects.toThrow(
       new InitialDataError('Invalid version. version=[null]'),
     );
   });
@@ -79,7 +79,7 @@ describe('getUpdateRequired', () => {
         },
       };
     });
-    await expect(() => getUpdateRequired('android', '0.1.1')).rejects.toThrow(
+    await expect(() => checkAppUpdates('android', '0.1.1')).rejects.toThrow(
       new InitialDataError('Failed to verify if the app needs to be updated.', new Error('dummy')),
     );
   });
