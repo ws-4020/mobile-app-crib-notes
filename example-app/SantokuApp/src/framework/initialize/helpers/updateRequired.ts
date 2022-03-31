@@ -41,7 +41,7 @@ export async function getUpdateRequired(
   try {
     return (await requestAppUpdates(type, version)).data;
   } catch (e) {
-    if (e instanceof InitialDataError) {
+    if (isInitialDataError(e) {
       throw e;
     }
     throw new InitialDataError('Failed to verify if the app needs to be updated.', e);
