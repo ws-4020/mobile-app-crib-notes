@@ -5,7 +5,7 @@ import {Alert, Linking, Platform} from 'react-native';
 import {getAppUpdates} from 'service';
 
 import {m} from '../../message';
-import {InitialDataError} from './initialDataError';
+import {InitialDataError, isInitialDataError} from './initialDataError';
 
 export const openStoreLink = () => {
   const link = AppConfig.storeUrl;
@@ -41,7 +41,7 @@ export async function getUpdateRequired(
   try {
     return (await requestAppUpdates(type, version)).data;
   } catch (e) {
-    if (isInitialDataError(e) {
+    if (isInitialDataError(e)) {
       throw e;
     }
     throw new InitialDataError('Failed to verify if the app needs to be updated.', e);
