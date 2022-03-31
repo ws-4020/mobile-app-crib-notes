@@ -1,7 +1,9 @@
 import messaging from '@react-native-firebase/messaging';
+import * as Application from 'expo-application';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {refreshCsrfToken, setRefreshSessionInterceptor, resolveApiErrorMessage} from 'framework/backend';
 import {useCallback, useMemo, useState} from 'react';
+import {Platform} from 'react-native';
 
 import {
   hideSplashScreen,
@@ -63,7 +65,7 @@ const loadInitialData = async () => {
 
   // TODO: ディープリンクから起動した場合のパラメータ取得
 
-  const appUpdates = await getUpdateRequired();
+  const appUpdates = await getUpdateRequired(Platform.OS, Application.nativeApplicationVersion);
   if (appUpdates.updateRequired) {
     throw new UpdateRequiredError(appUpdates.message, appUpdates.supportedVersion);
   }

@@ -7,12 +7,12 @@ import {getAppUpdates} from 'service';
 import {m} from '../../message';
 import {InitialDataError} from './initialDataError';
 
-const openStoreLink = () => {
+export const openStoreLink = () => {
   const link = AppConfig.storeUrl;
   if (!link) {
     return;
   }
-  Linking.canOpenURL(link)
+  return Linking.canOpenURL(link)
     .then(() => {
       Linking.openURL(link).catch(() => {
         // ストアリンクを開けない場合は何もしない
@@ -23,9 +23,7 @@ const openStoreLink = () => {
     });
 };
 
-const requestAppUpdates = () => {
-  const type = Platform.OS;
-  const version = Application.nativeApplicationVersion;
+const requestAppUpdates = (type: typeof Platform.OS, version: typeof Application.nativeApplicationVersion) => {
   if (type !== 'ios' && type !== 'android') {
     throw new InitialDataError(`Not supported type.type=[${type}]`);
   }
@@ -36,10 +34,16 @@ const requestAppUpdates = () => {
   return getAppUpdates(type, version);
 };
 
-export async function getUpdateRequired() {
+export async function getUpdateRequired(
+  type: typeof Platform.OS,
+  version: typeof Application.nativeApplicationVersion,
+) {
   try {
-    return (await requestAppUpdates()).data;
+    return (await requestAppUpdates(type, version)).data;
   } catch (e) {
+    if (e instanceof InitialDataError) {
+      throw e;
+    }
     throw new InitialDataError('Failed to verify if the app needs to be updated.', e);
   }
 }
