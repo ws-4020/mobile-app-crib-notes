@@ -4,8 +4,7 @@
 module.exports = {
   root: true,
   // universe/native: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
-  // react-hooks: https://ja.reactjs.org/docs/hooks-rules.html
-  extends: ['universe/native', 'plugin:react-hooks/recommended'],
+  extends: ['universe/native'],
   overrides: [
     {
       files: ['*.ts', '*.tsx', '*.d.ts'],
@@ -25,6 +24,20 @@ module.exports = {
         // https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/unbound-method.md
         '@typescript-eslint/unbound-method': 'off',
         'jest/unbound-method': 'error',
+      },
+    },
+    {
+      files: ['*.tsx'],
+      rules: {
+        // It is too strict to prohibit passing async functions to `onPress`, so disable the rule in JSX.
+        '@typescript-eslint/no-misused-promises': [
+          'error',
+          {
+            checksVoidReturn: {
+              attributes: false,
+            },
+          },
+        ],
       },
     },
   ],
