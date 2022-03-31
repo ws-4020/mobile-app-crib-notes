@@ -20,7 +20,6 @@ module.exports = {
       files: ['*.test.ts', '*.test.tsx'],
       // https://github.com/jest-community/eslint-plugin-jest#shareable-configurations
       extends: ['plugin:jest/recommended'],
-      plugins: ['jest'],
       rules: {
         // you should turn the original rule off *only* for test files
         // https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/unbound-method.md
