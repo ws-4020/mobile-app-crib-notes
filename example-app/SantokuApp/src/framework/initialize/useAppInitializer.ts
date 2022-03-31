@@ -1,7 +1,8 @@
 import messaging from '@react-native-firebase/messaging';
 import * as Application from 'expo-application';
 import {activateKeepAwake} from 'expo-keep-awake';
-import {refreshCsrfToken, setRefreshSessionInterceptor, resolveApiErrorMessage} from 'framework/backend';
+import {refreshCsrfToken, setRefreshSessionInterceptor} from 'framework/backend';
+import {resolveApiErrorMessage} from 'framework/error/resolveApiErrorMessage';
 import {useCallback, useMemo, useState} from 'react';
 import {Platform} from 'react-native';
 

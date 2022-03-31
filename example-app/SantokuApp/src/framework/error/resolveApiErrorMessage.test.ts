@@ -1,7 +1,7 @@
 import {BundledMessagesLoader, loadMessages} from 'framework/message';
 
 import {createLogger, log} from '../logging';
-import {resolveApiErrorMessage} from './apiErrorMessageHandler';
+import {resolveApiErrorMessage} from './resolveApiErrorMessage';
 
 beforeAll(async () => {
   await loadMessages(new BundledMessagesLoader());
