@@ -3,7 +3,7 @@ import axios, {AxiosError} from 'axios';
 import {log} from '../logging';
 import {m} from '../message';
 
-export function resolveApiErrorMessage(error: unknown): {title: string; message: string} {
+export function resolveErrorMessage(error: unknown): {title: string; message: string} {
   if (axios.isAxiosError(error)) {
     // ログ出力用に取得しているので、any型を許容する。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
