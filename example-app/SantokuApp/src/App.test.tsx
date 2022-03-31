@@ -14,9 +14,9 @@ jest.spyOn(BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, 'get').mockResolvedVa
     csrfTokenValue: 'dummy',
   },
 });
-jest.mock('service', () => {
+jest.mock('service/backend/systemService', () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const originalModule = jest.requireActual('service');
+  const originalModule = jest.requireActual('service/backend/systemService');
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return {
     ...originalModule,
