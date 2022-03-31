@@ -1,6 +1,7 @@
 import * as Application from 'expo-application';
 import {AppConfig} from 'framework/config';
 import {ApplicationError} from 'framework/error/ApplicationError';
+import {log} from 'framework/logging';
 import {Alert, Linking, Platform} from 'react-native';
 import {getAppUpdates} from 'service';
 
@@ -10,16 +11,17 @@ import {InitialDataError, isInitialDataError} from './initialDataError';
 export const openStoreLink = () => {
   const link = AppConfig.storeUrl;
   if (!link) {
+    log.debug(`Invalid link. link=[${String(link)}]`);
     return;
   }
   return Linking.canOpenURL(link)
     .then(() => {
-      Linking.openURL(link).catch(() => {
-        // ストアリンクを開けない場合は何もしない
+      Linking.openURL(link).catch(err => {
+        log.debug(`Store open error. err=[${String(err)}]`);
       });
     })
-    .catch(() => () => {
-      // ストアリンクを開けない場合は何もしない
+    .catch(err => {
+      log.debug(`Can not store open. err=[${String(err)}]`);
     });
 };
 
