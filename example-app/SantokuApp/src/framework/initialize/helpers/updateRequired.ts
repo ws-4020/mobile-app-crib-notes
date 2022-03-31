@@ -25,7 +25,7 @@ export const openStoreLink = () => {
 
 const requestAppUpdates = (type: typeof Platform.OS, version: typeof Application.nativeApplicationVersion) => {
   if (type !== 'ios' && type !== 'android') {
-    throw new InitialDataError(`Not supported type.type=[${type}]`);
+    throw new InitialDataError(`Not supported type. type=[${type}]`);
   }
   if (!version) {
     throw new InitialDataError('Invalid version.');
