@@ -32,7 +32,6 @@ exports[`WebView WebViewSourceHtmlでも正常にレンダリングされるこ�
     onMessage={[Function]}
     onScroll={[Function]}
     onShouldStartLoadWithRequest={[Function]}
-    sharedCookiesEnabled={true}
     source={
       Object {
         "html": "<h1>test</h1>",
@@ -107,7 +106,6 @@ exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
     onMessage={[Function]}
     onScroll={[Function]}
     onShouldStartLoadWithRequest={[Function]}
-    sharedCookiesEnabled={true}
     source={
       Object {
         "uri": "https://localhost/",
