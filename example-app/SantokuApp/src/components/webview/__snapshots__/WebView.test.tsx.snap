@@ -58,9 +58,9 @@ exports[`WebView WebViewSourceHtmlでも正常にレンダリングされるこ�
   />
   <ActivityIndicator
     animating={true}
-    color="#999999"
+    color="#0000ff"
     hidesWhenStopped={true}
-    size="small"
+    size="large"
     style={
       Object {
         "alignItems": "center",
@@ -133,9 +133,9 @@ exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
   />
   <ActivityIndicator
     animating={true}
-    color="#999999"
+    color="#0000ff"
     hidesWhenStopped={true}
-    size="small"
+    size="large"
     style={
       Object {
         "alignItems": "center",
