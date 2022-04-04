@@ -42,7 +42,7 @@ const isUriSource = (source?: WebViewSource): source is WebViewSourceUri => {
  * - onScrollEnd: スクロールがページの終端に移動する度に発生
  * - onScrollEndOnce: スクロールがページの終端に移動した最初の1回のみ発生
  *
- * なお、動作確認中に発生した以下の事象に対応しています。
+ * 動作確認中に発生した以下の事象に対応しています。
  * - 発生OS
  *   - iOS
  * - 発生事象
@@ -59,6 +59,12 @@ const isUriSource = (source?: WebViewSource): source is WebViewSourceUri => {
  *   - onLoadEndがページのロードが完了する前に呼び出される不具合がある。（https://github.com/react-native-webview/react-native-webview/issues/2345）
  * - 対応方法
  *   - onLoadProgressイベント発生時に、progressが1になったらページロードが完了したと判定する。
+ *
+ * なお、本コンポーネントには以下の制約事項があります。
+ * - 対象OS
+ *   - Android
+ * - 制約事項
+ *   - スクロールが存在しないページでは、onScrollEnd/onScrollEndOnceイベントは発生しません。
  *
  */
 export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props, ref) {
