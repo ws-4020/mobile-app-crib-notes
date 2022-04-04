@@ -46,8 +46,8 @@ const isUriSource = (source?: WebViewSource): source is WebViewSourceUri => {
  * - 発生OS
  *   - iOS
  * - 発生事象
- *   - URIが変わった直後にonLoadStart->onLoadEnd->onScroll->onScrollの順で発火しているが、1回目のonScrollで渡されるcontentOffsetが、URIが変わる前のページのcontentOffsetになっている。
- *     そのため、URIが変わる前のページでスクロールを終端に移動していた場合、1回目のonScrollでスクロールが終端に移動していると判定されてしまい、onScrollEnd/onScrollOnceイベントが発生してしまう。
+ *   - URIが変わった直後にonLoadStart->onLoadEnd->onScroll->onScrollの順で発火し、1回目のonScrollで渡されるcontentOffsetが、URIが変わる前のページのcontentOffsetになっている。
+ *     そのため、URIが変わる前のページで終端までスクロールしていた場合、1回目のonScrollで終端までスクロールされていると判定されてしまい、onScrollEnd/onScrollOnceイベントが発生してしまう。
  *     なお、2回目のonScrollで渡されるcontentOffsetは0になっている
  * - 対応方法
  *   - 1回目のonScrollでonScrollEnd/onScrollEndOnceイベントが発生しないように、URIが変わったかどうかを状態として持ち、
