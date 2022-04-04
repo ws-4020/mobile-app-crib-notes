@@ -43,9 +43,12 @@ beforeEach(() => {
 describe('App', () => {
   it('マウントされたときに正常にレンダリングされること', async () => {
     const app = render(<App />);
-    await waitFor(() => {
-      expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
-      expect(app).toMatchSnapshot();
-    });
+    await waitFor(
+      () => {
+        expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
+        expect(app).toMatchSnapshot();
+      },
+      {timeout: 4500, interval: 50},
+    );
   });
 });

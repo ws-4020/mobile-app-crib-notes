@@ -2,10 +2,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
-import {WithFirebaseMessagingHandlers} from './framework/firebase/WithFirebaseMessagingHandlers';
-import {useAppInitializer} from './framework/initialize';
+import {InitialDataDependingComponent, useAppInitializer} from './framework/initialize';
 import {showUpdateRequiredDialog} from './framework/initialize/helpers';
-import {RootStackNav} from './navigation';
 
 export const AppWithInitialization: React.FC = () => {
   const {initialize, initializationResult} = useAppInitializer();
@@ -34,6 +32,14 @@ export const AppWithInitialization: React.FC = () => {
     Alert.alert(initializationResult.title, initializationResult.message);
     return null;
   } else {
+    // RootStackNav、WithFirebaseMessagingHandlersをimportしてしまうと、アプリの初期化処理が完了する前に各画面でimportしているモジュールも読み込まれてしまうため、
+    // アプリの初期化処理が完了した時点でrequireする。
+    // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    const RootStackNav = require('./navigation/RootStackNav').RootStackNav as InitialDataDependingComponent;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    const WithFirebaseMessagingHandlers = require('./framework/firebase/WithFirebaseMessagingHandlers')
+      .WithFirebaseMessagingHandlers as InitialDataDependingComponent;
     return (
       <NavigationContainer>
         <WithFirebaseMessagingHandlers initialData={initializationResult.data}>
