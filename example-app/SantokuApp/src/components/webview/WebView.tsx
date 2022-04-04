@@ -1,9 +1,17 @@
-import {useSnackbar} from 'components/overlay';
-import {m} from 'framework';
-import React, {useCallback, useState} from 'react';
+import {m} from 'framework/message';
+import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {WebView as RNWebView, WebViewProps} from 'react-native-webview';
-import {WebViewErrorEvent, WebViewNavigationEvent, WebViewScrollEvent} from 'react-native-webview/lib/WebViewTypes';
+import {
+  WebViewErrorEvent,
+  WebViewNavigationEvent,
+  WebViewProgressEvent,
+  WebViewScrollEvent,
+  WebViewSource,
+  WebViewSourceUri,
+} from 'react-native-webview/lib/WebViewTypes';
+
+import {useSnackbar} from '../overlay';
 
 type Props = WebViewProps & {
   /**
@@ -24,15 +32,48 @@ type Props = WebViewProps & {
   onScrollEndOnce?: () => void;
 };
 
+const isUriSource = (source?: WebViewSource): source is WebViewSourceUri => {
+  return source !== undefined && 'uri' in source;
+};
+
 export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props, ref) {
   const [loadEnd, setLoadEnd] = useState(false);
   const [scrollEndCalled, setScrollEndCalled] = useState(false);
-  const {onScrollEnd, onScrollEndOnce, ...webViewProps} = props;
   const snackbar = useSnackbar();
+  const {onScrollEnd, onScrollEndOnce, onLoadStart, onLoadProgress, onError, errorMessage, ...webViewProps} = props;
+
+  // onLoadStartの対応だけではうまく行かなかったので、追加で対応。
+  // iOSのシミュレータでは、URIが変わった直後にonLoadStart->onLoadEnd->onScroll->sScrollの順で発火しているが、
+  // 一回目のhandleScrollの引数として渡されるcontentOffsetが、最後までスクロールしたときのオフセットになっていて、
+  // onScrollEndが実行されてしまう。
+  // 二回目のhandleScrollではcontentOffsetは0となっているので、onScrollEndは実行されない。
+  // なので、とりあえず初回のonScrollではonScrollEndが実行されないように、URIが変わったかどうかを状態として持つようにする。
+  // （二回目のonScrollもユーザが実際にスクロールしたわけではないが、まぁいいか）
+  // Androidエミュレータでは、onLoadStart->onScroll->onLoadEndと呼ばれることもあるので、onLoadStartでsetLoadEndする
+  // ロジックは残しておく。
+  const [isUriChanged, setIsUriChanged] = useState(false);
+  const uri = isUriSource(props.source) ? props.source.uri : undefined;
+  useEffect(() => {
+    setIsUriChanged(true);
+  }, [uri]);
+
+  // uriが変わった時にWebViewがページを再ロードした場合の対応
+  // なお、WebViewで表示しているページ内リンクでページ遷移した場合は、onLoadStartイベントは再発行されません
+  const handleLoadStart = useCallback(
+    (event: WebViewNavigationEvent) => {
+      setLoadEnd(false);
+      setScrollEndCalled(false);
+      onLoadStart?.(event);
+    },
+    [onLoadStart],
+  );
 
   const handleScroll = useCallback(
     (event: WebViewScrollEvent) => {
-      if ((onScrollEnd || onScrollEndOnce) && loadEnd) {
+      if (isUriChanged && event.nativeEvent.contentOffset.y > 0) {
+        // URLが変わった直後の、オフセットが0ではないスクロールイベントでは、onScrollEndは発生させない。
+        setIsUriChanged(false);
+      } else if ((onScrollEnd || onScrollEndOnce) && loadEnd) {
         // 小数点の誤差があるため、1px分は丸め誤差として扱う
         const scrollY = event.nativeEvent.contentOffset.y + event.nativeEvent.layoutMeasurement.height + 1;
         if (event.nativeEvent.contentSize.height <= scrollY) {
@@ -46,26 +87,33 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
 
       props.onScroll?.(event);
     },
-    [loadEnd, scrollEndCalled, onScrollEnd, onScrollEndOnce, props],
+    [isUriChanged, loadEnd, scrollEndCalled, onScrollEnd, onScrollEndOnce, props],
   );
 
-  const handleLoadEnd = useCallback(
-    (event: WebViewNavigationEvent | WebViewErrorEvent) => {
-      setLoadEnd(true);
-      props.onLoadEnd?.(event);
+  // Androidの場合、onLoadEndがページのロードが完了する前に呼び出される不具合がある
+  // https://github.com/react-native-webview/react-native-webview/issues/2345
+  // そのため、onLoadProgressでprogressが1になったらロードが完了したと判定する
+  const handleLoadProgress = useCallback(
+    (event: WebViewProgressEvent) => {
+      if (event.nativeEvent.progress === 1) {
+        setLoadEnd(true);
+      } else {
+        setLoadEnd(false);
+      }
+      onLoadProgress?.(event);
     },
-    [props],
+    [onLoadProgress],
   );
 
   const handleError = useCallback(
     (event: WebViewErrorEvent) => {
-      if (props.onError) {
-        props.onError(event);
+      if (onError) {
+        onError(event);
       } else {
-        snackbar.showWithCloseButton(props.errorMessage ?? m('app.webview.onError'));
+        snackbar.showWithCloseButton(errorMessage ?? m('app.webview.onError'));
       }
     },
-    [props, snackbar],
+    [errorMessage, onError, snackbar],
   );
 
   return (
@@ -73,7 +121,8 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
       {...webViewProps}
       style={styles.container}
       onScroll={handleScroll}
-      onLoadEnd={handleLoadEnd}
+      onLoadStart={handleLoadStart}
+      onLoadProgress={handleLoadProgress}
       onError={handleError}
       ref={ref}
     />
@@ -88,7 +137,8 @@ WebView.defaultProps = {
   // iOSでスクロールしたときに滑らかにスクロールするようにしておく。
   // https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#decelerationrate
   decelerationRate: 'normal',
-  renderLoading: () => <ActivityIndicator style={styles.indicator} size="large" color="#0000ff" />,
+  sharedCookiesEnabled: true,
+  renderLoading: () => <ActivityIndicator style={styles.indicator} />,
 };
 
 const styles = StyleSheet.create({
