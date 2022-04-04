@@ -138,7 +138,7 @@ WebView.defaultProps = {
   // https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#decelerationrate
   decelerationRate: 'normal',
   sharedCookiesEnabled: true,
-  renderLoading: () => <ActivityIndicator style={styles.indicator} />,
+  renderLoading: () => <ActivityIndicator style={styles.indicator} size="large" color="#0000ff" />,
 };
 
 const styles = StyleSheet.create({
