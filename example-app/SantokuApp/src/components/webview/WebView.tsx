@@ -36,21 +36,37 @@ const isUriSource = (source?: WebViewSource): source is WebViewSourceUri => {
   return source !== undefined && 'uri' in source;
 };
 
+/**
+ * WebViewでページを表示するコンポーネント。
+ * react-native-webviewで提供されるイベントに、以下の2つのイベントを追加しています。
+ * - onScrollEnd: スクロールがページの終端に移動する度に発生
+ * - onScrollEndOnce: スクロールがページの終端に移動した最初の1回のみ発生
+ *
+ * なお、動作確認中に発生した以下の事象に対応しています。
+ * - 発生OS
+ *   - iOS
+ * - 発生事象
+ *   - URIが変わった直後にonLoadStart->onLoadEnd->onScroll->onScrollの順で発火しているが、1回目のonScrollで渡されるcontentOffsetが、URIが変わる前のページのcontentOffsetになっている。
+ *     そのため、URIが変わる前のページでスクロールを終端に移動していた場合、1回目のonScrollでスクロールが終端に移動していると判定されてしまい、onScrollEnd/onScrollOnceイベントが発生してしまう。
+ *     なお、2回目のonScrollで渡されるcontentOffsetは0になっている
+ * - 対応方法
+ *   - 1回目のonScrollでonScrollEnd/onScrollEndOnceイベントが発生しないように、URIが変わったかどうかを状態として持ち、
+ *     URIが変わった直後の、オフセットが0ではないスクロールイベントでは、onScrollEnd/onScrollEndOnceは発生させない。
+ *
+ * - 発生OS
+ *   - Android
+ * - 発生事象
+ *   - onLoadEndがページのロードが完了する前に呼び出される不具合がある。（https://github.com/react-native-webview/react-native-webview/issues/2345）
+ * - 対応方法
+ *   - onLoadProgressイベント発生時に、progressが1になったらページロードが完了したと判定する。
+ *
+ */
 export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props, ref) {
   const [loadEnd, setLoadEnd] = useState(false);
   const [scrollEndCalled, setScrollEndCalled] = useState(false);
   const snackbar = useSnackbar();
   const {onScrollEnd, onScrollEndOnce, onLoadStart, onLoadProgress, onError, errorMessage, ...webViewProps} = props;
 
-  // onLoadStartの対応だけではうまく行かなかったので、追加で対応。
-  // iOSのシミュレータでは、URIが変わった直後にonLoadStart->onLoadEnd->onScroll->sScrollの順で発火しているが、
-  // 一回目のhandleScrollの引数として渡されるcontentOffsetが、最後までスクロールしたときのオフセットになっていて、
-  // onScrollEndが実行されてしまう。
-  // 二回目のhandleScrollではcontentOffsetは0となっているので、onScrollEndは実行されない。
-  // なので、とりあえず初回のonScrollではonScrollEndが実行されないように、URIが変わったかどうかを状態として持つようにする。
-  // （二回目のonScrollもユーザが実際にスクロールしたわけではないが、まぁいいか）
-  // Androidエミュレータでは、onLoadStart->onScroll->onLoadEndと呼ばれることもあるので、onLoadStartでsetLoadEndする
-  // ロジックは残しておく。
   const [isUriChanged, setIsUriChanged] = useState(false);
   const uri = isUriSource(props.source) ? props.source.uri : undefined;
   useEffect(() => {
@@ -90,9 +106,6 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
     [isUriChanged, loadEnd, scrollEndCalled, onScrollEnd, onScrollEndOnce, props],
   );
 
-  // Androidの場合、onLoadEndがページのロードが完了する前に呼び出される不具合がある
-  // https://github.com/react-native-webview/react-native-webview/issues/2345
-  // そのため、onLoadProgressでprogressが1になったらロードが完了したと判定する
   const handleLoadProgress = useCallback(
     (event: WebViewProgressEvent) => {
       if (event.nativeEvent.progress === 1) {
