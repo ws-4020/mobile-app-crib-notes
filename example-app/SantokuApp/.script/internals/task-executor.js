@@ -13,7 +13,9 @@ const elapsedTime = (startTime) => {
 const runCommand = (task, command) => {
   return new Promise((resolve, reject) => {
     process.stdout.write(`\t${command.command} ${command.args.join(' ')} @[${command.cwd || './'}]...`);
-    const spawnedTask = spawn(command.command, command.args, {shell: true, cwd: command.cwd});
+    const spawnedTask = spawn(command.command, command.args, {shell: true, cwd: command.cwd, env: {...process.env, ...command.env}});
+    // Gradleの実行がブロックされてしまうことがあったので、stdoutを読み取るように修正
+    spawnedTask.stdout.on('data', () => {})
 
     let stderr = '';
     spawnedTask.stderr.on('data', (data) => {
