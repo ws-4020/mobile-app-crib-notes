@@ -1,12 +1,9 @@
 import {BundledMessagesLoader, loadMessages} from 'framework/message';
 
-import {createLogger, log} from '../logging';
 import {resolveErrorMessage} from './resolveErrorMessage';
 
 beforeAll(async () => {
   await loadMessages(new BundledMessagesLoader());
-  const logger = createLogger();
-  jest.spyOn(log, 'trace').mockImplementation(() => logger);
 });
 
 describe('resolveApiErrorMessage', () => {

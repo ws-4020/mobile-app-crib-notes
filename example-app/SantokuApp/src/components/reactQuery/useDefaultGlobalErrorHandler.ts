@@ -1,34 +1,15 @@
 import axios from 'axios';
 import {useSnackbar} from 'components/overlay';
-import {m, log} from 'framework';
+import {m} from 'framework';
 import {isApplicationError} from 'framework/error/ApplicationError';
 import {RequestTimeoutError} from 'framework/error/RequestTimeoutError';
-import {ErrorResponse} from 'generated/backend/model';
+import {sendErrorLog} from 'framework/error/sendErrorLog';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
 import {Mutation, Query, QueryKey} from 'react-query';
 
 const useBaseErrorHandler = () => {
   const snackbar = useSnackbar();
-
-  const sendErrorLog = useCallback((error: unknown) => {
-    try {
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          const status = error.response.status;
-          const statusText = error.response.statusText;
-          const data = error.response.data as ErrorResponse | undefined;
-          const errorCode = data?.code ?? 'NoErrorCode';
-          const errorMessage = data?.message ?? 'NoErrorMessage';
-          log.error(`Backend API Request Error (${status} ${statusText}): [${errorCode}] ${errorMessage}`, errorCode);
-        } else {
-          log.error('Backend API Request Error: Could not receive response from server.', 'AxiosError');
-        }
-      } else {
-        log.error('Backend API Request Error: Unexpected error.', 'UnexpectedRequestError');
-      }
-    } catch (e) {}
-  }, []);
 
   const showRequireLoginDialog = useCallback(() => {
     // TODO: 認証機能の組み込みが終わったら、ダイアログから認証済状態を解除してログイン画面へ遷移できるようにする
@@ -65,7 +46,7 @@ const useBaseErrorHandler = () => {
       snackbar.show(m('fw.error.予期せぬ通信エラー'));
       sendErrorLog(error);
     },
-    [snackbar, sendErrorLog],
+    [snackbar],
   );
 
   return useCallback(
