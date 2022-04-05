@@ -6,9 +6,8 @@ import {RequestTimeoutError} from 'framework/error/RequestTimeoutError';
 import {sendErrorLog} from 'framework/error/sendErrorLog';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
-import {Mutation, Query, QueryKey} from 'react-query';
 
-const useBaseErrorHandler = () => {
+export const useDefaultGlobalErrorHandler = () => {
   const snackbar = useSnackbar();
 
   const showRequireLoginDialog = useCallback(() => {
@@ -119,29 +118,3 @@ const useBaseErrorHandler = () => {
     ],
   );
 };
-
-const useDefaultGlobalQueryErrorHandler = () => {
-  const defaultErrorHandler = useBaseErrorHandler();
-  return useCallback(
-    (error: unknown, query: Query<unknown, unknown, unknown, QueryKey>) => {
-      if (!query.meta?.disableGlobalErrorHandler) {
-        defaultErrorHandler(error);
-      }
-    },
-    [defaultErrorHandler],
-  );
-};
-
-const useDefaultGlobalMutationErrorHandler = () => {
-  const defaultErrorHandler = useBaseErrorHandler();
-  return useCallback(
-    (error: unknown, variables: unknown, context: unknown, mutation: Mutation<unknown, unknown, unknown, unknown>) => {
-      if (!mutation.meta?.disableGlobalErrorHandler) {
-        defaultErrorHandler(error);
-      }
-    },
-    [defaultErrorHandler],
-  );
-};
-
-export {useDefaultGlobalQueryErrorHandler, useDefaultGlobalMutationErrorHandler};

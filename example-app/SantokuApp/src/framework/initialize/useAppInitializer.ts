@@ -3,7 +3,7 @@ import * as Application from 'expo-application';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {refreshCsrfToken, setRefreshSessionInterceptor} from 'framework/backend';
 import {resolveErrorMessage} from 'framework/error/resolveErrorMessage';
-import {sendErrorLog} from 'framework/error/sendErrorLog';
+import {useDefaultGlobalErrorHandler} from 'framework/error/useDefaultGlobalErrorHandler';
 import {useCallback, useMemo, useState} from 'react';
 import {Platform} from 'react-native';
 
@@ -85,6 +85,7 @@ const loadInitialData = async () => {
 
 export const useAppInitializer: () => AppInitializer = () => {
   const [initializationResult, setInitializationResult] = useState<InitializationResult>({code: 'Initializing'});
+  const errorHandler = useDefaultGlobalErrorHandler();
 
   const initialize = useCallback(async () => {
     await initializeCoreFeatures();
@@ -105,14 +106,14 @@ export const useAppInitializer: () => AppInitializer = () => {
       if (isUpdateRequiredError(e)) {
         setInitializationResult({code: 'UpdateRequired', message: e.message, supportedVersion: e.supportedVersion});
       } else if (isInitialDataError(e)) {
-        sendErrorLog(e);
+        errorHandler(e.cause);
         const {title, message} = resolveErrorMessage(e.cause);
         setInitializationResult({code: 'Failed', title, message});
       } else {
         throw e;
       }
     }
-  }, []);
+  }, [errorHandler]);
 
   return useMemo(
     () => ({
