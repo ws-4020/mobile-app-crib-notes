@@ -50,8 +50,8 @@ stages:
     - job: build_${{buildVariant.name}}
       displayName: 'build ${{buildVariant.name}}'
       pool:
-        # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
-        vmImage: macOS-12
+        # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
+        vmImage: macOS-11
       steps:
       - task: UseRubyVersion@0
         inputs:
@@ -142,7 +142,7 @@ stages:
       displayName: 'build ${{buildVariant.name}}'
       pool:
         # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
-        vmImage: macOS-12
+        vmImage: macOS-11
       steps:
       - task: UseRubyVersion@0
         inputs:
@@ -167,9 +167,9 @@ stages:
         inputs:
           provProfileSecureFile: $(${{buildVariant.name}}_AppleDistributionProvisioningProfileSecureFileName)
       - task: CmdLine@2
-        displayName: 'Use Xcode 13.3'
+        displayName: 'Use Xcode 13.2.1'
         inputs:
-          script: 'sudo xcode-select --switch /Applications/Xcode_13.3.app'
+          script: 'sudo xcode-select --switch /Applications/Xcode_13.2.1.app'
       - task: NodeTool@0
         displayName: 'Use Node.js 16.14.2'
         inputs:
