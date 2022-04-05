@@ -57,7 +57,7 @@ export const useDefaultGlobalErrorHandler = () => {
       if (axios.isCancel(error)) {
         // Timeout以外の理由でcancelされた場合 (cancelQueries呼び出し時など)
         // デフォルトの動作としては特に処理を実施しない
-      } else if (axios.isAxiosError(error)) {
+      } else if (error && axios.isAxiosError(error)) {
         const statusCode = error.response?.status;
         switch (statusCode) {
           case 400: // Bad Request

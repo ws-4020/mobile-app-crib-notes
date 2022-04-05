@@ -174,4 +174,14 @@ describe('useDefaultGlobalErrorHandler', () => {
       '予期せぬ通信エラーが発生しました。時間をおいてから再度お試しいただき、解決しない場合はお問い合わせください。',
     );
   });
+
+  test('nullの場合に予期せぬエラーのスナックバーを表示', async () => {
+    await loadBundledMessagesAsync();
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler());
+    expect(errorHandler.current).not.toBeUndefined();
+    errorHandler.current(null);
+    expect(mockSnackbarShow).toBeCalledWith(
+      '予期せぬ通信エラーが発生しました。時間をおいてから再度お試しいただき、解決しない場合はお問い合わせください。',
+    );
+  });
 });
