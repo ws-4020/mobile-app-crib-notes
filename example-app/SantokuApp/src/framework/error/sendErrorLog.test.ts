@@ -20,12 +20,8 @@ describe('resolveApiErrorMessage', () => {
 Backend API Request Error:
 req.url=[http://dummy]
 req.method=[get]
-req.headers=[{}]
-req.body=["request data"]
 res.status=[500]
 res.statusText=[Internal Server Error]
-res.headers=[{}]
-res.body=["response data"]
 `,
       'AxiosError',
     );
