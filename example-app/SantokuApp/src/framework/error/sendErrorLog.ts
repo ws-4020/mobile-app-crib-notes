@@ -12,12 +12,8 @@ export const sendErrorLog = (error: unknown) => {
 Backend API Request Error:
 req.url=[${error.config.url ?? ''}]
 req.method=[${error.config.method ?? ''}]
-req.headers=[${JSON.stringify(error.config.headers, null, 2)}]
-req.body=[${JSON.stringify(error.config.data, null, 2)}]
 res.status=[${error.response?.status ?? ''}]
 res.statusText=[${error.response?.statusText ?? ''}]
-res.headers=[${JSON.stringify(error.response?.headers, null, 2)}]
-res.body=[${JSON.stringify(data, null, 2)}]
 `,
         errorCode,
       );
