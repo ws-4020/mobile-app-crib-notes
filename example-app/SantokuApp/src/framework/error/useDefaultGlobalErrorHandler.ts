@@ -1,11 +1,34 @@
 import axios from 'axios';
 import {useSnackbar} from 'components/overlay';
-import {m} from 'framework';
+import {m, log} from 'framework';
 import {isApplicationError} from 'framework/error/ApplicationError';
 import {RequestTimeoutError} from 'framework/error/RequestTimeoutError';
 import {sendErrorLog} from 'framework/error/sendErrorLog';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
+
+const outDebugLog = (error: unknown) => {
+  try {
+    if (axios.isAxiosError(error)) {
+      log.debug(
+        `
+Backend API Request Error:
+req.url=[${error.config.url ?? ''}]
+req.method=[${error.config.method ?? ''}]
+req.headers=[${JSON.stringify(error.config.headers, null, 2)}]
+req.body=[${JSON.stringify(error.config.data, null, 2)}]
+res.status=[${error.response?.status ?? ''}]
+res.statusText=[${error.response?.statusText ?? ''}]
+res.headers=[${JSON.stringify(error.response?.headers, null, 2)}]
+res.body=[${JSON.stringify(error.response?.data, null, 2)}]
+`,
+      );
+    } else {
+      const errorMessage = error instanceof Error ? error.message : 'unknown';
+      log.debug(`UnexpectedError: message=[${errorMessage}]`);
+    }
+  } catch (e) {}
+};
 
 export const useDefaultGlobalErrorHandler = () => {
   const snackbar = useSnackbar();
@@ -50,6 +73,7 @@ export const useDefaultGlobalErrorHandler = () => {
 
   return useCallback(
     (error: unknown) => {
+      outDebugLog(error);
       if (isApplicationError(error)) {
         // ApplicationErrorは呼出し元で処理する
         return;
