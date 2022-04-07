@@ -48,7 +48,7 @@ describe('App', () => {
         expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
         expect(app).toMatchSnapshot();
       },
-      {timeout: 15000},
+      {timeout: 60000},
     );
-  }, 15000);
+  }, 60000);
 });
