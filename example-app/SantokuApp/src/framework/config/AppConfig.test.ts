@@ -19,8 +19,8 @@ describe('AppConfig', function () {
     expect(AppConfig.provisioningProfileFlavor).toBe('Not Available');
   });
   it('Apple StoreのURLが取得されること', () => {
-    jest.spyOn(Platform, 'select').mockReturnValue('apps://itunes.apple.com/jp/app/{AppleID}');
-    expect(AppConfig.storeUrl).toBe('apps://itunes.apple.com/jp/app/{AppleID}');
+    jest.spyOn(Platform, 'select').mockReturnValue('apps://itunes.apple.com/jp/app/{appleAppID}');
+    expect(AppConfig.storeUrl).toBe('apps://itunes.apple.com/jp/app/{appleAppID}');
   });
   it('Play StoreのURLが取得されること', () => {
     jest.spyOn(Platform, 'select').mockReturnValue('https://play.google.com/store/apps/details?id={applicationId}');
