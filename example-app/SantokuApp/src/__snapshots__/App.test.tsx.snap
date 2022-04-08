@@ -1,7 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App マウントされたときに正常にレンダリングされること 1`] = `
-Array [
+<View
+  style={
+    Object {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
   <RNCSafeAreaProvider
     onInsetsChange={[Function]}
     style={
@@ -22,6 +32,7 @@ Array [
     >
       <View
         enabled={true}
+        isNativeStack={true}
         onAppear={[Function]}
         onDisappear={[Function]}
         onDismissed={[Function]}
@@ -46,7 +57,6 @@ Array [
           disableBackButtonMenu={false}
           hidden={false}
           hideBackButton={false}
-          hideShadow={false}
           largeTitleHideShadow={false}
           title="利用規約"
           titleColor="rgb(28, 28, 30)"
@@ -98,7 +108,8 @@ Array [
                 onContentProcessDidTerminate={[Function]}
                 onError={[Function]}
                 onHttpError={[Function]}
-                onLoadEnd={[Function]}
+                onLoadProgress={[Function]}
+                onLoadStart={[Function]}
                 onLoadingError={[Function]}
                 onLoadingFinish={[Function]}
                 onLoadingProgress={[Function]}
@@ -232,9 +243,9 @@ Array [
         </View>
       </View>
     </View>
-  </RNCSafeAreaProvider>,
+  </RNCSafeAreaProvider>
   <View
     testID="FullWindowOverlay"
-  />,
-]
+  />
+</View>
 `;
