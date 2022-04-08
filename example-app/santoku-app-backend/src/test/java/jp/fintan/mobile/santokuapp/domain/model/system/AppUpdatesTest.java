@@ -8,19 +8,21 @@ class AppUpdatesTest {
 
   @Test
   void needUpdates() {
-    var appUpdatesNeeds = createAppUpdatesNeeds("ios", "1.0.0", "1.0.0-a");
-    assertTrue(appUpdatesNeeds.needUpdates());
-    assertEquals(appUpdatesNeeds.updateMessage().value(), "現在のバージョン(1.0.0-a)ではご利用いただけません。ストアより最新版アプリへのアップデートをお願いします。");
+    var appUpdates = createAppUpdates("ios", "1.0.0", "1.0.0-a");
+    assertTrue(appUpdates.needUpdates());
+    assertEquals(appUpdates.supportedVersion().value(), "1.0.0");
+    assertEquals(appUpdates.updateMessage().value(), "現在のバージョン(1.0.0-a)ではご利用いただけません。ストアより最新版アプリへのアップデートをお願いします。");
   }
 
   @Test
   void notNeedUpdates() {
-    var appUpdatesNeeds = createAppUpdatesNeeds("ios", "1.0.0", "1.0.0");
-    assertFalse(appUpdatesNeeds.needUpdates());
-    assertEquals(appUpdatesNeeds.updateMessage().value(), "現在のバージョン(1.0.0)でご利用頂けます。");
+    var appUpdates = createAppUpdates("ios", "1.0.0", "1.0.0");
+    assertFalse(appUpdates.needUpdates());
+    assertEquals(appUpdates.supportedVersion().value(), "1.0.0");
+    assertEquals(appUpdates.updateMessage().value(), "現在のバージョン(1.0.0)でご利用頂けます。");
   }
 
-  AppUpdates createAppUpdatesNeeds(String appType, String supportedVersion, String appVersion) {
+  AppUpdates createAppUpdates(String appType, String supportedVersion, String appVersion) {
     var appUpdates = new AppSupportedVersion(AppType.fromString(appType).orElseThrow(), new AppVersion(supportedVersion));
     return new AppUpdates(appUpdates, new AppVersion(appVersion));
   }
