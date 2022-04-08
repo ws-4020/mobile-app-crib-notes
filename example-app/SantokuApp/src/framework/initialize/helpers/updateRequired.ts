@@ -57,7 +57,11 @@ export function showUpdateRequiredDialog(supportedVersion: string) {
     [
       {
         text: m('OK'),
-        onPress: () => openStoreLink(),
+        onPress: () => {
+          openStoreLink()?.catch(() => {
+            // 中でハンドリングされているので、ここでは特に何もしない。
+          });
+        },
       },
     ],
   );
