@@ -1,8 +1,6 @@
 import {PressableProps, PressableStateCallbackType} from 'react-native';
 
-type PressableStyle = PressableProps['style'];
-
-export const composePressableStyles = (style: PressableStyle | PressableStyle[]) => {
+export const composePressableStyles = (style: PressableProps['style'] | PressableProps['style'][]) => {
   if (typeof style === 'function') return style;
   if (Array.isArray(style)) {
     return (state: PressableStateCallbackType) => {
