@@ -29,6 +29,7 @@ const Component: InitialDataDependingComponent = ({initialData}) => {
   } = useTermsOfServiceAgreementUseCase(initialData.accountData.terms?.termsOfService);
 
   if (!termUrl) {
+    // URLは必ず存在する想定
     return null;
   }
 
