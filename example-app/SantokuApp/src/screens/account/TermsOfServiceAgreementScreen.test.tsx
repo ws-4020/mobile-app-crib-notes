@@ -1,10 +1,21 @@
 import '@testing-library/jest-native/extend-expect';
+import {renderHook} from '@testing-library/react-hooks';
 import {render} from '@testing-library/react-native';
 import {WithSnackbar} from 'components/overlay';
 import {BundledMessagesLoader, loadMessages} from 'framework';
 import React from 'react';
+import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {TermsOfServiceAgreementScreen} from './TermsOfServiceAgreementScreen';
+import {useTermsOfServiceAgreementScreen} from './TermsOfServiceAgreementScreen';
+
+const Wrapper: React.FC = ({children}) => {
+  const queryClient = new QueryClient();
+  return (
+    <WithSnackbar>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </WithSnackbar>
+  );
+};
 
 beforeAll(async () => {
   await loadMessages(new BundledMessagesLoader());
@@ -12,9 +23,14 @@ beforeAll(async () => {
 
 describe('TermsOfServiceAgreement', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
-    const Screen = TermsOfServiceAgreementScreen.component as React.FC;
+    const termsOfServiceAgreementScreen = renderHook(() =>
+      useTermsOfServiceAgreementScreen({
+        accountData: {terms: {termsOfService: {latestTermsOfServiceVersion: '1.0.0', url: 'http://localhost'}}},
+      }),
+    ).result.current;
+    const Screen = termsOfServiceAgreementScreen.component as React.FC;
     const app = render(<Screen />, {
-      wrapper: WithSnackbar,
+      wrapper: Wrapper,
     });
     expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
     expect(app).toMatchSnapshot();

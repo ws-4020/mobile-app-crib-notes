@@ -44,7 +44,7 @@ exports[`TermsOfServiceAgreement マウントされたときに正常にレン�
       onShouldStartLoadWithRequest={[Function]}
       source={
         Object {
-          "uri": "https://www.tis.co.jp/termsofuse/",
+          "uri": "http://localhost",
         }
       }
       startInLoadingState={true}

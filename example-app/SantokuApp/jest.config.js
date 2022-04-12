@@ -3,6 +3,7 @@ module.exports = {
   // __mocks__ディレクトリをjestディレクトリ内に配置したいので、ルートディレクトリにjestを設定しています。
   roots: ['<rootDir>/src', 'jest'],
   setupFiles: [
+    '<rootDir>/jest/setup/async-storage.js',
     '<rootDir>/jest/setup/global.js',
     '<rootDir>/jest/setup/react-navigation.js',
     '<rootDir>/jest/setup/react-query.js',
