@@ -2,6 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
+import {WithAccountContext} from './context/WithUserAccountInfoContext';
 import {InitialDataDependingComponent, useAppInitializer} from './framework/initialize';
 import {showUpdateRequiredDialog} from './framework/initialize/helpers';
 
@@ -43,7 +44,9 @@ export const AppWithInitialization: React.FC = () => {
     return (
       <NavigationContainer>
         <WithFirebaseMessagingHandlers initialData={initializationResult.data}>
-          <RootStackNav initialData={initializationResult.data} />
+          <WithAccountContext initialData={initializationResult.data}>
+            <RootStackNav initialData={initializationResult.data} />
+          </WithAccountContext>
         </WithFirebaseMessagingHandlers>
       </NavigationContainer>
     );

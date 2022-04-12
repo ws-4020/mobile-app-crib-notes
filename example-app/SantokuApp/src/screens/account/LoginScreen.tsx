@@ -8,7 +8,7 @@ const ScreenName = 'Login';
 
 const Screen: React.FC = () => {
   return (
-    <View style={{flex: 1}} testID="Login">
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} testID="Login">
       <Text>Login</Text>
     </View>
   );
