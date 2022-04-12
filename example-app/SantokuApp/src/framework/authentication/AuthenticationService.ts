@@ -125,6 +125,13 @@ function useRefresh() {
 async function logout(): Promise<void> {
   await postLogout();
   await refreshCsrfToken();
+  await clientLogout();
+}
+
+/**
+ * クライアント側のログアウト処理を実施します。
+ */
+async function clientLogout(): Promise<void> {
   const accountId = await SecureStorageAdapter.loadActiveAccountId();
   if (accountId) {
     await SecureStorageAdapter.deleteActiveAccountId();
@@ -140,9 +147,11 @@ function useLogout() {
 }
 
 export const AuthenticationService = {
+  autoLogin,
+  canAutoLogin,
+  clientLogout,
   useSignup,
   useChangeAccount,
-  canAutoLogin,
   useAutoLogin,
   useRefresh,
   useLogout,

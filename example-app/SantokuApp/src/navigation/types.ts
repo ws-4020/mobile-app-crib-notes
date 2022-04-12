@@ -1,6 +1,7 @@
 import {DefaultRouterOptions, NavigatorScreenParams} from '@react-navigation/native';
 
 export type RootStackParamList = {
+  Login: undefined;
   TermsOfServiceAgreement: undefined;
   AuthenticatedStackNav: NavigatorScreenParams<AuthenticatedStackParamList> | undefined;
   DemoStackNav: NavigatorScreenParams<DemoStackParamList> | undefined;

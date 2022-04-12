@@ -1,4 +1,5 @@
 import {
+  getAccountsMe,
   useGetAccountsAccountId,
   useGetAccountsAccountIdAvatar,
   useGetAccountsMe,
@@ -14,6 +15,7 @@ import {
 } from 'generated/backend/account/account';
 
 export {
+  getAccountsMe,
   useGetAccountsAccountId,
   useGetAccountsAccountIdAvatar,
   useGetAccountsMe,

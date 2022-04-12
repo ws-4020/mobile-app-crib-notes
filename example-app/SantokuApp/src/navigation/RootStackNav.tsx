@@ -2,7 +2,7 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator, NativeStackNavigationOptions} from '@react-navigation/native-stack';
 import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
-import {TermsOfServiceAgreementScreen} from 'screens';
+import {LoginScreen, TermsOfServiceAgreementScreen} from 'screens';
 
 import {AppInitialData} from '../framework/initialize/types';
 import {AuthenticatedStackNav, useAuthenticatedStackNav} from './AuthenticatedStackNav';
@@ -16,8 +16,11 @@ const screenOptions: NativeStackNavigationOptions = {
 };
 
 const getInitialRouteName = (initialData: AppInitialData) => {
-  if (!initialData.account.terms?.hasAgreedValidTermsOfService) {
+  if (!initialData.accountData.terms?.hasAgreedValidTermsOfService) {
     return TermsOfServiceAgreementScreen.name;
+  }
+  if (!initialData.accountData.account) {
+    return LoginScreen.name;
   }
   return AuthenticatedStackNav.name;
 };
@@ -29,6 +32,7 @@ const useRootStackNavigator = (initialData: AppInitialData) => {
   return (
     <nav.Navigator screenOptions={screenOptions} initialRouteName={initialRouteName}>
       <nav.Screen {...TermsOfServiceAgreementScreen} />
+      <nav.Screen {...LoginScreen} />
       <nav.Screen {...authenticatedStackNav} />
       <nav.Screen {...DemoStackNav} />
     </nav.Navigator>
