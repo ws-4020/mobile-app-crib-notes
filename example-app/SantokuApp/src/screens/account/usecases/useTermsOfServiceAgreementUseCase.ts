@@ -24,7 +24,7 @@ export const useTermsOfServiceAgreementUseCase = (termsOfService?: TermsOfServic
 
   const onScrollEndOnce = useCallback(() => setButtonDisable(false), []);
 
-  const agree = useCallback(async () => {
+  const onAgree = useCallback(async () => {
     try {
       await callPostAccountsMeTerms({
         hasAgreedValidTermsOfService: true,
@@ -42,7 +42,7 @@ export const useTermsOfServiceAgreementUseCase = (termsOfService?: TermsOfServic
     webViewRef,
     onReload,
     onScrollEndOnce,
-    agree,
+    onAgree,
     isDisabledAgreementButton: buttonDisable || isLoading,
   };
 };

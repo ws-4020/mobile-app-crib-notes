@@ -3,8 +3,8 @@ import {useIsMounted} from 'framework/utilities';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
 import {Account} from '../generated/backend/model';
-import {SetAccountAction, SetAccountContextProvider} from './useSetUserAccountInfoContext';
-import {AccountContext, AccountContextProvider} from './useUserAccountInfoContext';
+import {AccountContext, AccountContextProvider} from './useAccountContext';
+import {SetAccountAction, SetAccountContextProvider} from './useSetAccountContext';
 
 function WithAccountContext(props: {initialData: AppInitialData; children: React.ReactNode}) {
   const isMounted = useIsMounted();

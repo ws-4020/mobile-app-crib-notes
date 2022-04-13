@@ -24,7 +24,7 @@ const Component: InitialDataDependingComponent = ({initialData}) => {
     webViewRef,
     onReload,
     onScrollEndOnce,
-    agree,
+    onAgree,
     isDisabledAgreementButton,
   } = useTermsOfServiceAgreementUseCase(initialData.accountData.terms?.termsOfService);
 
@@ -50,7 +50,7 @@ const Component: InitialDataDependingComponent = ({initialData}) => {
         />
       )}
       <View style={styles.footer}>
-        <Button title={m('同意')} onPress={agree} disabled={isDisabledAgreementButton} />
+        <Button title={m('同意')} onPress={onAgree} disabled={isDisabledAgreementButton} />
       </View>
     </View>
   );

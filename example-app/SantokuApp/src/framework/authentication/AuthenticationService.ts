@@ -26,8 +26,6 @@ async function signup(nickname: string, password: string): Promise<Account> {
 
 /**
  * サインアップします。
- * @param nickname ニックネーム
- * @param password パスワード
  * @returns アカウント
  */
 function useSignup() {
@@ -49,7 +47,6 @@ async function changeAccount(accountId: string): Promise<AccountLoginResponse> {
 
 /**
  * アカウントを切り替えます。
- * @param accountId アカウントID
  * @returns アカウントの切り替え結果
  */
 function useChangeAccount() {

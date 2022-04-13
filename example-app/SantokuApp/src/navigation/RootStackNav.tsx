@@ -4,7 +4,7 @@ import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
 import {LoginScreen, TermsOfServiceAgreementScreen, useTermsOfServiceAgreementScreen} from 'screens';
 
-import {useAccountContext} from '../context/useUserAccountInfoContext';
+import {useAccountContext} from '../context/useAccountContext';
 import {AppInitialData} from '../framework/initialize/types';
 import {AuthenticatedStackNav, useAuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
