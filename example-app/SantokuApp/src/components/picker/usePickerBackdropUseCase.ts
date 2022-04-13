@@ -1,81 +1,56 @@
 import {usePrevious, useVisibility} from 'framework/utilities';
 import {useCallback, useEffect} from 'react';
-import {cancelAnimation, Easing, runOnJS, useSharedValue, withTiming, WithTimingConfig} from 'react-native-reanimated';
+import {runOnJS} from 'react-native-reanimated';
 
 type BackdropAnimationConfig = {
   isVisible: boolean;
-  opacity: number;
-  afterFadeIn?: (finished?: boolean) => unknown;
-  afterFadeOut?: (finished?: boolean) => unknown;
-  fadeInDuration?: number;
-  fadeOutDuration?: number;
-  fadeInConfig?: WithTimingConfig;
-  fadeOutConfig?: WithTimingConfig;
+  enteringCallback?: (finished: boolean) => unknown;
+  exitingCallback?: (finished: boolean) => unknown;
 };
 
-export const usePickerBackdropUseCase = ({
-  isVisible,
-  opacity,
-  afterFadeIn,
-  afterFadeOut,
-  fadeInDuration,
-  fadeOutDuration,
-  fadeInConfig,
-  fadeOutConfig,
-}: BackdropAnimationConfig) => {
+export const usePickerBackdropUseCase = ({isVisible, enteringCallback, exitingCallback}: BackdropAnimationConfig) => {
   const {
     isVisible: isModalVisible,
     setVisible: setModalVisible,
     setInvisible: setModalInvisible,
   } = useVisibility(isVisible);
 
-  const animatedOpacity = useSharedValue(0);
-
   const show = useCallback(() => {
     setModalVisible();
-    cancelAnimation(animatedOpacity);
-    animatedOpacity.value = withTiming(
-      opacity,
-      {
-        easing: Easing.inOut(Easing.quad),
-        duration: fadeInDuration,
-        ...fadeInConfig,
-      },
-      afterFadeIn && (finished => runOnJS(afterFadeIn)(finished)),
-    );
-  }, [animatedOpacity, fadeInConfig, fadeInDuration, setModalVisible, afterFadeIn, opacity]);
+  }, [setModalVisible]);
 
-  const hide = useCallback(() => {
-    cancelAnimation(animatedOpacity);
-    animatedOpacity.value = withTiming(
-      0,
-      {
-        easing: Easing.inOut(Easing.quad),
-        duration: fadeOutDuration,
-        ...fadeOutConfig,
-      },
-      finished => {
-        if (finished) {
-          runOnJS(setModalInvisible)();
-        }
-        afterFadeOut && runOnJS(afterFadeOut)(finished);
-      },
-    );
-  }, [animatedOpacity, fadeOutConfig, fadeOutDuration, setModalInvisible, afterFadeOut]);
+  const composedEnteringCallback = useCallback(
+    (finished: boolean) => {
+      'worklet';
+      if (enteringCallback) {
+        runOnJS(enteringCallback)(finished);
+      }
+    },
+    [enteringCallback],
+  );
+
+  const composedExitingCallback = useCallback(
+    (finished: boolean) => {
+      'worklet';
+      runOnJS(setModalInvisible)();
+      if (exitingCallback) {
+        runOnJS(exitingCallback)(finished);
+      }
+    },
+    [setModalInvisible, exitingCallback],
+  );
 
   const isVisiblePrevious = usePrevious(isVisible);
   useEffect(() => {
     if (!isVisiblePrevious && isVisible) {
       show();
-    } else if (isVisiblePrevious && !isVisible) {
-      hide();
     }
-  }, [isVisiblePrevious, isVisible, show, hide]);
+  }, [isVisiblePrevious, isVisible, show, exitingCallback, composedExitingCallback]);
 
   return {
     isModalVisible,
-    animatedOpacity,
     show,
-    hide,
+    composedEnteringCallback,
+    composedExitingCallback,
   };
 };

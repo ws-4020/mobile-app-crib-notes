@@ -1,57 +1,44 @@
 import {composePressableStyles} from 'framework/utilities';
 import React, {useMemo} from 'react';
-import {Modal as RNModal, ModalProps, Pressable, PressableProps, StyleSheet, ViewProps} from 'react-native';
-import Reanimated, {useAnimatedStyle, WithTimingConfig} from 'react-native-reanimated';
+import {Modal as RNModal, ModalProps, Omit, Pressable, PressableProps, StyleSheet, Text, ViewProps} from 'react-native';
+import Reanimated, {BaseAnimationBuilder, FadeIn, FadeOut, Keyframe} from 'react-native-reanimated';
 
 import {usePickerBackdropUseCase} from './usePickerBackdropUseCase';
 
-export const DEFAULT_COLOR = 'black';
-export const DEFAULT_OPACITY = 0.4;
-export const DEFAULT_FADE_IN_DURATION = 300;
-export const DEFAULT_FADE_OUT_DURATION = 150;
+export const DEFAULT_COLOR = 'rgba(0,0,0,0.4)';
+export const DEFAULT_ENTERING = FadeIn.duration(300);
+export const DEFAULT_EXITING = FadeOut.duration(150);
 
-type Props = Reanimated.AnimateProps<ViewProps> & {
+type Props = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
   isVisible: boolean;
   onPress?: () => unknown;
-  afterFadeIn?: (finished?: boolean) => unknown;
-  afterFadeOut?: (finished?: boolean) => unknown;
-  fadeInDuration?: number;
-  fadeOutDuration?: number;
-  opacity?: number;
+  enteringCallback?: (finished: boolean) => unknown;
+  exitingCallback?: (finished: boolean) => unknown;
   pressableProps?: PressableProps;
   modalProps?: ModalProps;
-  fadeInConfig?: WithTimingConfig;
-  fadeOutConfig?: WithTimingConfig;
+  entering?: BaseAnimationBuilder | Keyframe;
+  exiting?: BaseAnimationBuilder | Keyframe;
 };
 
 export const PickerBackdrop: React.FC<Props> = ({
   isVisible,
-  opacity = DEFAULT_OPACITY,
   onPress,
-  afterFadeIn,
-  afterFadeOut,
-  fadeInDuration = DEFAULT_FADE_IN_DURATION,
-  fadeOutDuration = DEFAULT_FADE_OUT_DURATION,
+  entering = DEFAULT_ENTERING,
+  exiting = DEFAULT_EXITING,
+  enteringCallback,
+  exitingCallback,
   pressableProps: {style: pressableStyle, ...pressableProps} = {},
   modalProps: {style: modalStyle, ...modalProps} = {},
-  fadeInConfig,
-  fadeOutConfig,
   style,
   children,
   ...animatedViewProps
 }) => {
-  const {isModalVisible, animatedOpacity} = usePickerBackdropUseCase({
+  const {isModalVisible, composedEnteringCallback, composedExitingCallback} = usePickerBackdropUseCase({
     isVisible,
-    opacity,
-    afterFadeIn,
-    afterFadeOut,
-    fadeInDuration,
-    fadeOutDuration,
-    fadeInConfig,
-    fadeOutConfig,
+    enteringCallback,
+    exitingCallback,
   });
 
-  const animatedStyle = useAnimatedStyle(() => ({opacity: animatedOpacity.value}));
   const composedPressableStyles = useMemo(
     () => composePressableStyles([styles.pressable, pressableStyle]),
     [pressableStyle],
@@ -68,9 +55,17 @@ export const PickerBackdrop: React.FC<Props> = ({
       onRequestClose={onPress}
       style={modalStyle}
       {...modalProps}>
-      <Pressable onPress={onPress} style={composedPressableStyles} {...pressableProps}>
-        <Reanimated.View style={[composedBackdropStyle, animatedStyle]} {...animatedViewProps} />
-      </Pressable>
+      {isVisible && (
+        <Pressable onPress={onPress} style={composedPressableStyles} {...pressableProps}>
+          <Reanimated.View
+            entering={entering.withCallback(composedEnteringCallback)}
+            exiting={exiting.withCallback(composedExitingCallback)}
+            style={composedBackdropStyle}
+            {...animatedViewProps}>
+            <Text>test</Text>
+          </Reanimated.View>
+        </Pressable>
+      )}
       {children}
     </RNModal>
   );
