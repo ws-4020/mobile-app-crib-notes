@@ -1,0 +1,289 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PickerBackdrop only with required props renders successfully only with required props: Animating (fade in) 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  statusBarTranslucent={true}
+  transparent={true}
+  visible={true}
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "display": "flex",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      animatedStyle={
+        Object {
+          "value": Object {
+            "opacity": 0.2,
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        Object {
+          "backgroundColor": "black",
+          "flex": 1,
+          "opacity": 0,
+        }
+      }
+      testID="backdropAnimated"
+    />
+  </View>
+</Modal>
+`;
+
+exports[`PickerBackdrop only with required props renders successfully only with required props: Animating (fade out) 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  statusBarTranslucent={true}
+  transparent={true}
+  visible={true}
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "display": "flex",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      animatedStyle={
+        Object {
+          "value": Object {
+            "opacity": 0.2,
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        Object {
+          "backgroundColor": "black",
+          "flex": 1,
+          "opacity": 0,
+        }
+      }
+    />
+  </View>
+</Modal>
+`;
+
+exports[`PickerBackdrop only with required props renders successfully only with required props: Before animation started 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  statusBarTranslucent={true}
+  transparent={true}
+  visible={true}
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "display": "flex",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      animatedStyle={
+        Object {
+          "value": Object {
+            "opacity": 0,
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        Object {
+          "backgroundColor": "black",
+          "flex": 1,
+          "opacity": 0,
+        }
+      }
+      testID="backdropAnimated"
+    />
+  </View>
+</Modal>
+`;
+
+exports[`PickerBackdrop only with required props renders successfully only with required props: Just After fade in animation completed 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  statusBarTranslucent={true}
+  transparent={true}
+  visible={true}
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "display": "flex",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      animatedStyle={
+        Object {
+          "value": Object {
+            "opacity": 0.4,
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        Object {
+          "backgroundColor": "black",
+          "flex": 1,
+          "opacity": 0,
+        }
+      }
+      testID="backdropAnimated"
+    />
+  </View>
+</Modal>
+`;
+
+exports[`PickerBackdrop only with required props renders successfully only with required props: Just After fade in animation completed 2`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  statusBarTranslucent={true}
+  transparent={true}
+  visible={true}
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "display": "flex",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      animatedStyle={
+        Object {
+          "value": Object {
+            "opacity": 0.4,
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        Object {
+          "backgroundColor": "black",
+          "flex": 1,
+          "opacity": 0,
+        }
+      }
+      testID="backdropAnimated"
+    />
+  </View>
+</Modal>
+`;
+
+exports[`PickerBackdrop only with required props renders successfully only with required props: Just After fade out animation completed 1`] = `null`;
+
+exports[`PickerBackdrop only with required props renders successfully only with required props: Just After fade out animation completed 2`] = `null`;
