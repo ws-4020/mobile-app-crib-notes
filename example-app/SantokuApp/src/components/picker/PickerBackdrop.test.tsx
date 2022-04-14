@@ -1,7 +1,9 @@
-import {act, fireEvent, render} from '@testing-library/react-native';
+import {fireEvent, render} from '@testing-library/react-native';
 import React from 'react';
+import {ModalProps, PressableProps, ViewProps} from 'react-native';
+import Reanimated, {ZoomIn, ZoomOut} from 'react-native-reanimated';
 
-import {DEFAULT_FADE_IN_DURATION, DEFAULT_FADE_OUT_DURATION, DEFAULT_OPACITY, PickerBackdrop} from './PickerBackdrop';
+import {DEFAULT_ENTERING, DEFAULT_EXITING, PickerBackdrop} from './PickerBackdrop';
 
 // If advancing a timer changes the state of a component, the timer must be run within an act.
 // However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
@@ -13,12 +15,10 @@ import {DEFAULT_FADE_IN_DURATION, DEFAULT_FADE_OUT_DURATION, DEFAULT_OPACITY, Pi
 // https://jestjs.io/ja/docs/timer-mocks
 jest.useFakeTimers('modern');
 
-// コンポーネントの状態変更を契機に開始するアニメーションをテストしたい場合、アニメーションを開始するために1msだけタイマーを進める必要があります。
-// 例えば、150msで完了する想定のアニメーションは、タイマーを151ms進めないとアニメーションが完了しません。
-// この振る舞いがわかりにくかったので、この関数を用意しています。
 // TODO: Jest v27にアップデートできたら、withReanimatedTimerでテストを実装できるか検証する。
 //       （JestのバージョンはExpoに依存しているので、Expoでのアップデートを待っている状態）
-const startAnimation = () => jest.advanceTimersByTime(1);
+
+jest.runAllTimers();
 
 describe('PickerBackdrop only with required props', () => {
   it('returns null if not visible', () => {
@@ -30,187 +30,105 @@ describe('PickerBackdrop only with required props', () => {
   it('renders successfully only with required props', () => {
     const sut = render(<PickerBackdrop isVisible testID="backdropAnimated" />);
     const animatedView = sut.getByTestId('backdropAnimated');
-    //////////////////////////////////////////////////////////////////////////////////
-    // 初期表示
-    //////////////////////////////////////////////////////////////////////////////////
-    // エラーが起きずにレンダリングされること
-    expect(sut).toMatchSnapshot('Before animation started');
-    expect(animatedView).toHaveAnimatedStyle({opacity: 0});
-
-    startAnimation();
-
-    // アニメーション中は`opacity`が変化すること
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_IN_DURATION / 2));
-    expect(animatedView).toHaveAnimatedStyle({opacity: DEFAULT_OPACITY / 2});
-    expect(sut).toMatchSnapshot('Animating (fade in)');
-
-    // アニメーションが完了すると`opacity`が設定値に到達していること
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_IN_DURATION / 2));
-    expect(animatedView).toHaveAnimatedStyle({opacity: DEFAULT_OPACITY});
-    expect(sut).toMatchSnapshot('Just After fade in animation completed');
-
-    // アニメーションが完了したあとは変化しないこと
-    act(() => jest.advanceTimersByTime(10));
-    expect(animatedView).toHaveAnimatedStyle({opacity: DEFAULT_OPACITY});
-    expect(sut).toMatchSnapshot('Just After fade in animation completed');
+    const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
+    // Animated.Viewのentering/exitingをテストで実行することができなかったため、entering/exitingにデフォルトアニメーションが設定されていることのみを確認する。
+    expect(sut).toMatchSnapshot('AnimatedView with visible.');
+    expect(animatedView).not.toBeNull();
+    expect(animatedViewProps.entering).toBe(DEFAULT_ENTERING);
+    expect(animatedViewProps.exiting).toBe(DEFAULT_EXITING);
 
     //////////////////////////////////////////////////////////////////////////////////
     // 非表示にする
     //////////////////////////////////////////////////////////////////////////////////
     sut.update(<PickerBackdrop isVisible={false} />);
-
-    startAnimation();
-
-    // アニメーション中は`opacity`が変化すること
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_OUT_DURATION / 2));
-    expect(animatedView).toHaveAnimatedStyle({opacity: DEFAULT_OPACITY / 2});
-    expect(sut).toMatchSnapshot('Animating (fade out)');
-
-    // アニメーションが完了するとコンポーネントが消えること
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_OUT_DURATION / 2));
-    expect(sut.container.children).toEqual([]);
-    expect(sut).toMatchSnapshot('Just After fade out animation completed');
-
-    // アニメーションが完了した後も少し時間を進めて、何も変わらないことを確認する
-    act(() => jest.advanceTimersByTime(10));
-    expect(sut.container.children).toEqual([]);
-    expect(sut).toMatchSnapshot('Just After fade out animation completed');
-  });
-});
-
-describe('PickerBackdrop with `afterFadeIn`', () => {
-  it('should call `afterFadeIn` just after the fade in animation is completed', () => {
-    const afterFadeIn = jest.fn();
-
-    const sut = render(<PickerBackdrop isVisible={false} afterFadeIn={afterFadeIn} />);
-
-    startAnimation();
-
-    // アニメーションの完了直前では呼ばれていないこと
-    sut.update(<PickerBackdrop isVisible afterFadeIn={afterFadeIn} />);
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_IN_DURATION - 1));
-    expect(afterFadeIn).toHaveBeenCalledTimes(0);
-
-    // アニメーションが完了すると呼ばれること
-    act(() => jest.advanceTimersByTime(1));
-    expect(afterFadeIn).toHaveBeenCalledTimes(1);
-    expect(afterFadeIn).toHaveBeenCalledWith(true);
-
-    // 一度呼ばれた後は、非表示にするなどしても呼ばれないこと
-    sut.update(<PickerBackdrop isVisible={false} afterFadeIn={afterFadeIn} />);
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_OUT_DURATION + 10));
-    expect(afterFadeIn).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call `afterFadeIn` just after the fade in animation is canceled', () => {
-    const afterFadeIn = jest.fn();
-
-    const sut = render(<PickerBackdrop isVisible={false} afterFadeIn={afterFadeIn} />);
-
-    startAnimation();
-
-    // キャンセルされるまでは呼び出されないこと
-    sut.update(<PickerBackdrop isVisible afterFadeIn={afterFadeIn} />);
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_IN_DURATION - 1));
-    expect(afterFadeIn).toHaveBeenCalledTimes(0);
-
-    // キャンセルされた段階で呼び出されること
-    sut.update(<PickerBackdrop isVisible={false} afterFadeIn={afterFadeIn} />);
-    startAnimation();
-    expect(afterFadeIn).toHaveBeenCalledTimes(1);
-    expect(afterFadeIn).toHaveBeenCalledWith(false);
-
-    // キャンセル後に再表示されたときに呼び出されること
-    sut.update(<PickerBackdrop isVisible afterFadeIn={afterFadeIn} />);
-    startAnimation();
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_IN_DURATION - 1));
-    expect(afterFadeIn).toHaveBeenCalledTimes(1);
-    act(() => jest.advanceTimersByTime(1));
-    expect(afterFadeIn).toHaveBeenCalledTimes(2);
-    expect(afterFadeIn).toHaveBeenNthCalledWith(2, true);
-  });
-});
-
-describe('PickerBackdrop with `afterFadeOut', () => {
-  it('should call `afterFadeOut` just after the fade in animation is completed', () => {
-    const afterFadeOut = jest.fn();
-
-    // 初期表示時点では呼ばれないこと
-    const sut = render(<PickerBackdrop isVisible={false} afterFadeOut={afterFadeOut} />);
-    startAnimation();
-    expect(afterFadeOut).toHaveBeenCalledTimes(0);
-
-    // 表示アニメーションが完了しても呼ばれないこと
-    sut.update(<PickerBackdrop isVisible afterFadeOut={afterFadeOut} />);
-    startAnimation();
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_IN_DURATION));
-    expect(afterFadeOut).toHaveBeenCalledTimes(0);
-
-    // 非表示アニメーションの完了直前でも呼ばれていないこと
-    sut.update(<PickerBackdrop isVisible={false} afterFadeOut={afterFadeOut} />);
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_OUT_DURATION - 1));
-    expect(afterFadeOut).toHaveBeenCalledTimes(0);
-
-    // 非表示アニメーションが完了すると呼ばれること
-    act(() => jest.advanceTimersByTime(1));
-    expect(afterFadeOut).toHaveBeenCalledTimes(1);
-    expect(afterFadeOut).toHaveBeenCalledWith(true);
-
-    // 一度呼ばれた後は、再度表示にするなどしても呼ばれないこと
-    sut.update(<PickerBackdrop isVisible afterFadeOut={afterFadeOut} />);
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_OUT_DURATION + 10));
-    expect(afterFadeOut).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call `afterFadeOut` just after the fade in animation is canceled', () => {
-    const afterFadeOut = jest.fn();
-
-    const sut = render(<PickerBackdrop isVisible afterFadeOut={afterFadeOut} />);
-
-    // キャンセルされるまでは呼び出されないこと
-    sut.update(<PickerBackdrop isVisible={false} afterFadeOut={afterFadeOut} />);
-    startAnimation();
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_OUT_DURATION - 1));
-    expect(afterFadeOut).toHaveBeenCalledTimes(0);
-
-    // キャンセルされた段階で呼び出されること
-    sut.update(<PickerBackdrop isVisible afterFadeOut={afterFadeOut} />);
-    startAnimation();
-    expect(afterFadeOut).toHaveBeenCalledTimes(1);
-    expect(afterFadeOut).toHaveBeenCalledWith(false);
-
-    // キャンセル後に再度非表示にされたときに呼び出されること
-    sut.update(<PickerBackdrop isVisible={false} afterFadeOut={afterFadeOut} />);
-    startAnimation();
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_OUT_DURATION - 1));
-    expect(afterFadeOut).toHaveBeenCalledTimes(1);
-    act(() => jest.advanceTimersByTime(1));
-    expect(afterFadeOut).toHaveBeenCalledTimes(2);
-    expect(afterFadeOut).toHaveBeenNthCalledWith(2, true);
+    const animatedView2 = sut.queryByTestId('backdropAnimated');
+    expect(sut).toMatchSnapshot('AnimatedView with invisible.');
+    expect(animatedView2).toBeNull();
   });
 });
 
 describe('PickerBackdrop with `onPress', () => {
   it('should be called on pressed', () => {
     const onPress = jest.fn();
-    const sut = render(<PickerBackdrop isVisible onPress={onPress} testID="pickerBackDrop" />);
-    sut.getByTestId('pickerBackDrop');
-    fireEvent(sut.getByTestId('pickerBackDrop'), 'press');
-    // TODO: Add tests
-  });
-});
-
-describe('PickerBackdrop with all props', () => {
-  it('should be applied properly', () => {
-    // TODO: Add tests
     const sut = render(
       <PickerBackdrop
         isVisible
-        testID=""
-        modalProps={{testID: ''}}
-        pressableProps={{testID: ''}}
-        animatedProps={{testID: ''}}
+        onPress={onPress}
+        testID="pickerBackDrop"
+        pressableProps={{testID: 'pressable'}}
+        modalProps={{testID: 'modal'}}
       />,
     );
+    fireEvent.press(sut.getByTestId('pressable'));
+    expect(onPress).toHaveBeenCalledTimes(1);
+    fireEvent(sut.getByTestId('modal'), 'onRequestClose');
+    expect(onPress).toHaveBeenCalledTimes(2);
+  });
+});
+//
+describe('PickerBackdrop with all props', () => {
+  it('should be applied properly', () => {
+    const onPress = jest.fn();
+    const onLongPress = jest.fn();
+    const entering = ZoomIn.duration(500);
+    const exiting = ZoomOut.duration(300);
+    /**
+     * entering/exitingを実行できなかったため、以下のPropsは検証できていません
+     * - enteringCallback
+     * - exitingCallback
+     *
+     * animatedPropsは取得できなかったため（Snapshot上にも存在していない）、検証できていません
+     */
+    const sut = render(
+      <PickerBackdrop
+        isVisible
+        testID="animatedView"
+        onPress={onPress}
+        modalProps={{
+          testID: 'modal',
+          style: {backgroundColor: 'yellow'},
+          statusBarTranslucent: false,
+          animationType: 'fade',
+          transparent: false,
+          presentationStyle: 'fullScreen',
+        }}
+        pressableProps={{testID: 'pressable', style: {display: 'none'}, onLongPress}}
+        animatedProps={{pointerEvents: 'none'}}
+        style={{flex: 2, backgroundColor: 'green'}}
+        entering={entering}
+        exiting={exiting}
+      />,
+    );
+    expect(sut).toMatchSnapshot('PickerBackdrop with all props.');
+    const modal = sut.getByTestId('modal');
+    const pressable = sut.getByTestId('pressable');
+    const animatedView = sut.getByTestId('animatedView');
+
+    // assert modal
+    fireEvent(modal, 'onRequestClose');
+    const modalProps = modal.props as ModalProps;
+    expect(modalProps.visible).toBe(true);
+    expect(modalProps.statusBarTranslucent).toBe(false);
+    expect(modalProps.animationType).toBe('fade');
+    expect(modalProps.style).toEqual({backgroundColor: 'yellow'});
+    expect(modalProps.presentationStyle).toBe('fullScreen');
+    expect(onPress).toHaveBeenCalledTimes(1);
+
+    // assert pressable
+    fireEvent.press(pressable);
+    fireEvent(pressable, 'onLongPress');
+    const pressableProps = pressable.props as PressableProps;
+    expect(pressableProps.style).toEqual([
+      {bottom: 0, display: 'flex', left: 0, position: 'absolute', right: 0, top: 0},
+      {display: 'none'},
+    ]);
+    expect(onPress).toHaveBeenCalledTimes(2);
+    expect(onLongPress).toHaveBeenCalledTimes(1);
+
+    // assert animatedView
+    const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
+    expect(animatedViewProps.style).toEqual({flex: 2, backgroundColor: 'green'});
+    expect(animatedViewProps.entering).toBe(entering);
+    expect(animatedViewProps.exiting).toBe(exiting);
   });
 });
