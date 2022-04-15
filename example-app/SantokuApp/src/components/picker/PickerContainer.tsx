@@ -1,79 +1,68 @@
-import {usePrevious, useVisibility} from 'framework/utilities';
-import React, {useCallback, useEffect, useState} from 'react';
-import {Dimensions, LayoutChangeEvent, StyleSheet, useWindowDimensions, View} from 'react-native';
-import Reanimated, {
-  cancelAnimation,
-  Easing,
-  runOnJS,
-  useAnimatedStyle,
-  useDerivedValue,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import React, {useCallback} from 'react';
+import {StyleSheet} from 'react-native';
+import Reanimated, {BaseAnimationBuilder, runOnJS, SlideInDown, SlideOutDown, Keyframe} from 'react-native-reanimated';
 
 export type PickerContainerProps = {
   isVisible: boolean;
+  enteringCallback?: (finished: boolean) => unknown;
+  exitingCallback?: (finished: boolean) => unknown;
+  /**
+   * enteringに指定したAnimationBuilderなどでwithCallbackを指定しても、本コンポーネント内で上書きしているため実行できません。
+   * withCallbackで実行する関数は、enteringCallbackで指定してください。
+   */
+  entering?: BaseAnimationBuilder | Keyframe;
+  /**
+   * exitingに指定したAnimationBuilderなどでwithCallbackを指定しても、本コンポーネント内で上書きしているため実行できません。
+   * withCallbackで実行する関数は、exitingCallbackで指定してください。
+   */
+  exiting?: BaseAnimationBuilder | Keyframe;
 };
 
-export const PickerContainer: React.FC<PickerContainerProps> = ({isVisible, children}) => {
-  const {
-    isVisible: isPickerVisible,
-    setVisible: setPickerIsVisible,
-    setInvisible: setPickerIsNotVisible,
-  } = useVisibility(false);
+export const DEFAULT_SLIDE_IN_DURATION = 300;
+export const DEFAULT_SLIDE_OUT_DURATION = 300;
+export const DEFAULT_ENTERING = SlideInDown.duration(DEFAULT_SLIDE_IN_DURATION);
+export const DEFAULT_EXITING = SlideOutDown.duration(DEFAULT_SLIDE_OUT_DURATION);
 
-  const isVisiblePrevious = usePrevious(isVisible);
+export const PickerContainer: React.FC<PickerContainerProps> = ({
+  isVisible,
+  entering = DEFAULT_ENTERING,
+  exiting = DEFAULT_EXITING,
+  enteringCallback,
+  exitingCallback,
+  children,
+}) => {
+  const composedEnteringCallback = useCallback(
+    (finished: boolean) => {
+      'worklet';
+      if (enteringCallback) {
+        runOnJS(enteringCallback)(finished);
+      }
+    },
+    [enteringCallback],
+  );
 
-  // PickerContainerが表示された状態で、画面分割や回転などで画面サイズが変更されたときに、できるだけ違和感なく動くように調整する。
-  // TODO: これ入れないとどうなるんだったか忘れたので、動作確認して何を避けるために入れている処理なのかコメント追記。。。
-  const {height: windowHeight} = useWindowDimensions();
-  const [contentHeight, setContentHeight] = useState(Dimensions.get('screen').height);
-  const updateContentHeight = useCallback((e: LayoutChangeEvent) => {
-    setContentHeight(e.nativeEvent.layout.height);
-  }, []);
+  const composedExitingCallback = useCallback(
+    (finished: boolean) => {
+      'worklet';
+      if (exitingCallback) {
+        runOnJS(exitingCallback)(finished);
+      }
+    },
+    [exitingCallback],
+  );
 
-  const clock = useSharedValue(1);
-  const yOffset = useDerivedValue(() => {
-    return Math.max(clock.value * contentHeight, contentHeight - windowHeight);
-  }, [contentHeight, windowHeight]);
-
-  const show = useCallback(() => {
-    setPickerIsVisible();
-    cancelAnimation(clock);
-    clock.value = withTiming(0, {
-      easing: Easing.out(Easing.quad),
-      duration: 250,
-    });
-  }, [setPickerIsVisible, clock]);
-
-  const hide = useCallback(() => {
-    cancelAnimation(clock);
-    clock.value = withTiming(
-      1,
-      {
-        easing: Easing.in(Easing.quad),
-        duration: 250,
-      },
-      () => runOnJS(setPickerIsNotVisible)(),
-    );
-  }, [clock, setPickerIsNotVisible]);
-
-  const transform = useAnimatedStyle(() => ({transform: [{translateY: yOffset.value}]}));
-
-  useEffect(() => {
-    if (isVisible && !isVisiblePrevious) {
-      show();
-    } else if (!isVisible && isVisiblePrevious) {
-      hide();
-    }
-  }, [hide, isVisible, isVisiblePrevious, show]);
-
-  return !isPickerVisible ? null : (
-    <View style={[styles.container]} pointerEvents="box-none">
-      <Reanimated.View style={[{borderWidth: 1, borderColor: 'yellow'}, transform]} onLayout={updateContentHeight}>
-        {children}
-      </Reanimated.View>
-    </View>
+  return (
+    <>
+      {isVisible && (
+        <Reanimated.View
+          entering={entering.withCallback(composedEnteringCallback)}
+          exiting={exiting.withCallback(composedExitingCallback)}
+          style={styles.container}
+          pointerEvents="box-none">
+          {children}
+        </Reanimated.View>
+      )}
+    </>
   );
 };
 

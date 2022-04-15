@@ -11,7 +11,7 @@ export const DEFAULT_FADE_OUT_DURATION = 150;
 export const DEFAULT_ENTERING = FadeIn.duration(DEFAULT_FADE_IN_DURATION);
 export const DEFAULT_EXITING = FadeOut.duration(DEFAULT_FADE_OUT_DURATION);
 
-type Props = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
+export type PickerBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
   isVisible: boolean;
   onPress?: () => unknown;
   enteringCallback?: (finished: boolean) => unknown;
@@ -30,7 +30,7 @@ type Props = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & 
   exiting?: BaseAnimationBuilder | Keyframe;
 };
 
-export const PickerBackdrop: React.FC<Props> = ({
+export const PickerBackdrop: React.FC<PickerBackdropProps> = ({
   isVisible,
   onPress,
   entering = DEFAULT_ENTERING,
