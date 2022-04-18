@@ -41,7 +41,7 @@ export type SelectPickerProps<ItemT> = {
   backdropProps?: Omit<PickerBackdropProps, 'isVisible'>;
   containerProps?: Omit<PickerContainerProps, 'isVisible'>;
   pickerAccessoryProps?: Omit<PickerAccessoryProps, 'onDelete' | 'onCancel' | 'onDone'>;
-  useNativeAndroidPickerStyle: boolean;
+  useNativeAndroidPickerStyle?: boolean;
 };
 
 export const SelectPicker = <ItemT extends unknown>(props: SelectPickerProps<ItemT>) => {

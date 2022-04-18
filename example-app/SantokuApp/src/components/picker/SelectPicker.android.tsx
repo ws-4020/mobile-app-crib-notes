@@ -1,18 +1,12 @@
-import React, {useCallback, useMemo} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input} from 'react-native-elements';
 
-import {Item, ItemWithKey, SelectPickerProps} from './SelectPicker';
+import {SelectPickerProps} from './SelectPicker';
 import {SelectPickerItems} from './SelectPickerItems';
+import {useSelectPickerUseCase} from './useSelectPickerUseCase';
 
-const DEFAULT_PLACEHOLDER_COLOR = 'grey';
-export const DEFAULT_DURATION = 500;
-
-const handlePlaceholder = <ItemT extends unknown>(placeholder?: Item<ItemT>): (Item<ItemT> | ItemWithKey<ItemT>)[] => {
-  return placeholder ? [{color: DEFAULT_PLACEHOLDER_COLOR, ...placeholder}] : [];
-};
-
-type SelectPickerAndroid<ItemT> = Omit<
+type SelectPickerPropsAndroid<ItemT> = Omit<
   SelectPickerProps<ItemT>,
   | 'headerComponent'
   | 'itemsComponent'
@@ -22,41 +16,9 @@ type SelectPickerAndroid<ItemT> = Omit<
   | 'pickerItemsContainerProps'
 >;
 
-export const SelectPicker = <ItemT extends unknown>({
-  items,
-  selectedItemKey,
-  onSelectedItemChange,
-  onDone,
-  placeholder,
-  textInputProps,
-  keyExtractor,
-  pickerProps,
-  useNativeAndroidPickerStyle = false,
-}: SelectPickerAndroid<ItemT>) => {
-  const itemsWithPlaceholder = useMemo(() => handlePlaceholder(placeholder).concat(items), [items, placeholder]);
-  const getSelectedItem = useCallback(
-    (key?: React.Key) => {
-      if (key) {
-        const found = itemsWithPlaceholder.find(item => item.key === key);
-        return found ?? itemsWithPlaceholder.find(item => item.value === key);
-      }
-      if (placeholder) {
-        return placeholder;
-      }
-      return undefined;
-    },
-    [itemsWithPlaceholder, placeholder],
-  );
-  const onValueChange = useCallback(
-    (key: React.Key, index: number) => {
-      const selectedItem = getSelectedItem(key);
-      onSelectedItemChange?.(index, selectedItem?.value, key);
-      onDone?.(selectedItem);
-    },
-    [getSelectedItem, onDone, onSelectedItemChange],
-  );
-
-  const selectedItem = useMemo(() => getSelectedItem(selectedItemKey), [getSelectedItem, selectedItemKey]);
+export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsAndroid<ItemT>) => {
+  const {itemsWithPlaceholder, selectedItem, onValueChange} = useSelectPickerUseCase<ItemT>(props);
+  const {selectedItemKey, textInputProps, keyExtractor, pickerProps, useNativeAndroidPickerStyle = false} = props;
 
   return (
     <>
