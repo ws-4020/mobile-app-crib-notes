@@ -32,7 +32,7 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
     textInputProps,
     keyExtractor,
     headerComponent,
-    itemsComponent,
+    pickerItemsComponent,
     textInputComponent,
     pickerItemsContainerProps,
     pickerProps,
@@ -69,8 +69,8 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
               {...pickerAccessoryProps}
             />
           )}
-          {itemsComponent ? (
-            itemsComponent
+          {pickerItemsComponent ? (
+            pickerItemsComponent
           ) : (
             <SelectPickerItems
               selectedValue={selectedItemKey}

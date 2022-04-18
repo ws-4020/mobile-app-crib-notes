@@ -8,12 +8,7 @@ import {useSelectPickerAndroidUseCase} from './useSelectPickerAndroidUseCase';
 
 type SelectPickerPropsAndroid<ItemT> = Omit<
   SelectPickerProps<ItemT>,
-  | 'headerComponent'
-  // | 'itemsComponent'
-  | 'backdropProps'
-  | 'containerProps'
-  | 'pickerAccessoryProps'
-  | 'pickerItemsContainerProps'
+  'headerComponent' | 'backdropProps' | 'containerProps' | 'pickerAccessoryProps' | 'pickerItemsContainerProps'
 >;
 
 export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsAndroid<ItemT>) => {
@@ -22,7 +17,7 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsAndr
     selectedItemKey,
     textInputProps,
     keyExtractor,
-    itemsComponent,
+    pickerItemsComponent,
     textInputComponent,
     pickerProps,
     useNativeAndroidPickerStyle = false,
@@ -30,8 +25,8 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsAndr
 
   return (
     <>
-      {itemsComponent ? (
-        itemsComponent
+      {pickerItemsComponent ? (
+        pickerItemsComponent
       ) : useNativeAndroidPickerStyle ? (
         <SelectPickerItems
           selectedValue={selectedItemKey}

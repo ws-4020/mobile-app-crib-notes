@@ -4,6 +4,10 @@ import Reanimated, {BaseAnimationBuilder, runOnJS, SlideInDown, SlideOutDown, Ke
 
 export type PickerContainerProps = {
   isVisible: boolean;
+  /**
+   * iOSの場合、アニメーションが終わった後に呼び出されます。
+   * Androidの場合、アニメーションが始まった時に呼び出されます。
+   */
   enteringCallback?: (finished: boolean) => unknown;
   exitingCallback?: (finished: boolean) => unknown;
   /**

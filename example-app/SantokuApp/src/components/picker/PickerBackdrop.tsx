@@ -14,6 +14,10 @@ export const DEFAULT_EXITING = FadeOut.duration(DEFAULT_FADE_OUT_DURATION);
 export type PickerBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
   isVisible: boolean;
   onPress?: () => unknown;
+  /**
+   * iOSの場合、アニメーションが終わった後に呼び出されます。
+   * Androidの場合、アニメーションが始まった時に呼び出されます。
+   */
   enteringCallback?: (finished: boolean) => unknown;
   exitingCallback?: (finished: boolean) => unknown;
   pressableProps?: PressableProps;

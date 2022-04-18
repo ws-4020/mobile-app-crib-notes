@@ -2,7 +2,7 @@ import {SelectPicker} from 'components/picker/SelectPicker';
 import {m} from 'framework/message';
 import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {Icon, Input} from 'react-native-elements';
 
 import {SelectPickerItems} from '../../../components/picker/SelectPickerItems';
@@ -34,6 +34,7 @@ const Screen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <Text>■deleteLabel/cancelLabel/doneLabelを指定</Text>
       <SelectPicker
         selectedItemKey={items1Key}
         onSelectedItemChange={onSelectedItemChangeForItem1}
@@ -47,6 +48,7 @@ const Screen: React.FC = () => {
         textInputProps={{rightIcon: <Icon name="expand-more" />}}
         useNativeAndroidPickerStyle
       />
+      <Text>■useNativeAndroidPickerStyle: true</Text>
       <SelectPicker
         selectedItemKey={items2Value}
         onSelectedItemChange={onSelectedItemChangeForItem2}
@@ -55,6 +57,7 @@ const Screen: React.FC = () => {
         useNativeAndroidPickerStyle
         pickerProps={{mode: 'dropdown'}}
       />
+      <Text>■useNativeAndroidPickerStyle: false</Text>
       <SelectPicker
         selectedItemKey={items3Key}
         onSelectedItemChange={onSelectedItemChangeForItem3}
@@ -62,10 +65,11 @@ const Screen: React.FC = () => {
         placeholder={{value: undefined, label: 'please select...'}}
         useNativeAndroidPickerStyle={false}
       />
+      <Text>■年月Picker</Text>
       <SelectPicker
         pickerAccessoryProps={{doneLabel: m('完了')}}
         useNativeAndroidPickerStyle={false}
-        itemsComponent={
+        pickerItemsComponent={
           <View style={styles.dateMonthContainer}>
             <View style={styles.dateMonthPicker}>
               <SelectPickerItems
@@ -98,6 +102,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    paddingHorizontal: 20,
   },
   dateMonthContainer: {
     flexDirection: 'row',
