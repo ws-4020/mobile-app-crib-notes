@@ -1,10 +1,15 @@
+import {PickerProps} from '@react-native-picker/picker';
 import {log} from 'framework/logging';
 import React from 'react';
-import {Platform} from 'react-native';
+import {Platform, ViewProps} from 'react-native';
 
-import {SelectPickerItemsPropsIOS} from './SelectPickerItems.ios';
+import {Item, ItemWithKey} from './SelectPicker';
 
-export type SelectPickerItemsProps<ItemT> = SelectPickerItemsPropsIOS<ItemT>;
+export type SelectPickerItemsProps<ItemT> = PickerProps<React.Key> & {
+  items: (Item<ItemT> | ItemWithKey<ItemT>)[];
+  keyExtractor?: ((item: ItemT, index: number) => string) | undefined;
+  pickerItemsContainerProps?: ViewProps;
+};
 
 export const SelectPickerItems = <ItemT extends unknown>(props: SelectPickerItemsProps<ItemT>) => {
   React.useEffect(() => {

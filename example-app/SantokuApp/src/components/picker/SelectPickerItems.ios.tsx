@@ -1,25 +1,19 @@
-import {Picker, PickerProps} from '@react-native-picker/picker';
+import {Picker} from '@react-native-picker/picker';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {Item, ItemWithKey} from './SelectPicker';
-
-// TODO: 表示するItemの数を指定できるようにする
-
-export type SelectPickerItemsPropsIOS<ItemT> = PickerProps<React.Key> & {
-  items: (Item<ItemT> | ItemWithKey<ItemT>)[];
-  keyExtractor?: ((item: ItemT, index: number) => string) | undefined;
-};
+import {SelectPickerItemsProps} from './SelectPickerItems';
 
 export const SelectPickerItems = <ItemT extends unknown>({
   selectedValue,
   onValueChange,
   items,
   keyExtractor,
+  pickerItemsContainerProps: {style, ...pickerItemsContainerProps} = {},
   ...rest
-}: SelectPickerItemsPropsIOS<ItemT>) => {
+}: SelectPickerItemsProps<ItemT>) => {
   return (
-    <View style={[styles.container]}>
+    <View style={StyleSheet.flatten([styles.container, style])} {...pickerItemsContainerProps}>
       <Picker selectedValue={selectedValue} onValueChange={onValueChange} {...rest}>
         {items.map((item, index) => (
           <Picker.Item

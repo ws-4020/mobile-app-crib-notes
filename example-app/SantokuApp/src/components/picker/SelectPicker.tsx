@@ -1,7 +1,7 @@
 import {PickerProps} from '@react-native-picker/picker';
 import {log} from 'framework/logging';
 import React from 'react';
-import {Platform} from 'react-native';
+import {Platform, ViewProps} from 'react-native';
 import {Input} from 'react-native-elements';
 
 import {PickerAccessoryProps} from './PickerAccessory';
@@ -36,6 +36,7 @@ export type SelectPickerProps<ItemT> = {
   itemsComponent?: React.ReactNode;
   keyExtractor?: ((item: ItemT, index: number) => string) | undefined;
   textInputProps?: TextInputProps;
+  pickerItemsContainerProps?: ViewProps;
   pickerProps?: Omit<PickerProps<ItemT>, 'selectedValue' | 'onValueChange'>;
   backdropProps?: Omit<PickerBackdropProps, 'isVisible'>;
   containerProps?: Omit<PickerContainerProps, 'isVisible'>;

@@ -37,6 +37,7 @@ export const SelectPicker = <ItemT extends unknown>({
   keyExtractor,
   headerComponent,
   itemsComponent,
+  pickerItemsContainerProps,
   pickerProps,
   backdropProps: {entering: backdropEntering, exiting: backdropExiting, onPress, ...backdropProps} = {},
   containerProps: {entering: containerEntering, exiting: containerExiting, ...containerProps} = {},
@@ -133,6 +134,7 @@ export const SelectPicker = <ItemT extends unknown>({
               onValueChange={onValueChange}
               keyExtractor={keyExtractor}
               {...pickerProps}
+              {...pickerItemsContainerProps}
             />
           )}
         </PickerContainer>
