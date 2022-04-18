@@ -43,11 +43,11 @@ export const AppWithInitialization: React.FC = () => {
       .WithFirebaseMessagingHandlers as InitialDataDependingComponent;
     return (
       <NavigationContainer>
-        <WithFirebaseMessagingHandlers initialData={initializationResult.data}>
-          <WithAccountContext initialData={initializationResult.data}>
+        <WithAccountContext initialData={initializationResult.data}>
+          <WithFirebaseMessagingHandlers initialData={initializationResult.data}>
             <RootStackNav initialData={initializationResult.data} />
-          </WithAccountContext>
-        </WithFirebaseMessagingHandlers>
+          </WithFirebaseMessagingHandlers>
+        </WithAccountContext>
       </NavigationContainer>
     );
   }
