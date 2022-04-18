@@ -4,12 +4,12 @@ import {Input} from 'react-native-elements';
 
 import {SelectPickerProps} from './SelectPicker';
 import {SelectPickerItems} from './SelectPickerItems';
-import {useSelectPickerUseCase} from './useSelectPickerUseCase';
+import {useSelectPickerAndroidUseCase} from './useSelectPickerAndroidUseCase';
 
 type SelectPickerPropsAndroid<ItemT> = Omit<
   SelectPickerProps<ItemT>,
   | 'headerComponent'
-  | 'itemsComponent'
+  // | 'itemsComponent'
   | 'backdropProps'
   | 'containerProps'
   | 'pickerAccessoryProps'
@@ -17,12 +17,22 @@ type SelectPickerPropsAndroid<ItemT> = Omit<
 >;
 
 export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsAndroid<ItemT>) => {
-  const {itemsWithPlaceholder, selectedItem, onValueChange} = useSelectPickerUseCase<ItemT>(props);
-  const {selectedItemKey, textInputProps, keyExtractor, pickerProps, useNativeAndroidPickerStyle = false} = props;
+  const {itemsWithPlaceholder, selectedItem, onValueChange} = useSelectPickerAndroidUseCase<ItemT>(props);
+  const {
+    selectedItemKey,
+    textInputProps,
+    keyExtractor,
+    itemsComponent,
+    textInputComponent,
+    pickerProps,
+    useNativeAndroidPickerStyle = false,
+  } = props;
 
   return (
     <>
-      {useNativeAndroidPickerStyle ? (
+      {itemsComponent ? (
+        itemsComponent
+      ) : useNativeAndroidPickerStyle ? (
         <SelectPickerItems
           selectedValue={selectedItemKey}
           items={itemsWithPlaceholder}
@@ -32,8 +42,11 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsAndr
         />
       ) : (
         <View>
-          <Input value={selectedItem?.inputLabel ?? selectedItem?.label} editable={false} {...textInputProps} />
-
+          {textInputComponent ? (
+            textInputComponent
+          ) : (
+            <Input value={selectedItem?.inputLabel ?? selectedItem?.label} editable={false} {...textInputProps} />
+          )}
           <SelectPickerItems
             selectedValue={selectedItemKey}
             items={itemsWithPlaceholder}

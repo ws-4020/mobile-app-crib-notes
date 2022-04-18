@@ -25,16 +25,18 @@ export type ItemWithKey<T> = {
 };
 type TextInputProps = Omit<typeof Input.defaultProps, 'value' | 'editable'>;
 export type SelectPickerProps<ItemT> = {
-  items: Item<ItemT>[] | ItemWithKey<ItemT>[];
-  selectedItemKey: React.Key | undefined;
+  items?: Item<ItemT>[] | ItemWithKey<ItemT>[];
+  selectedItemKey?: React.Key | undefined;
   onSelectedItemChange?: (itemIndex: number, itemValue?: ItemT, itemKey?: React.Key) => void;
+  onDismiss?: (selectedItem: Item<ItemT> | ItemWithKey<ItemT> | undefined) => void;
   onDelete?: (selectedItem: Item<ItemT> | ItemWithKey<ItemT> | undefined) => void;
   onCancel?: (selectedItem: Item<ItemT> | ItemWithKey<ItemT> | undefined) => void;
   onDone?: (selectedItem: Item<ItemT> | ItemWithKey<ItemT> | undefined) => void;
   placeholder?: Item<ItemT>;
   headerComponent?: React.ReactNode;
   itemsComponent?: React.ReactNode;
-  keyExtractor?: ((item: ItemT, index: number) => string) | undefined;
+  textInputComponent?: React.ReactNode;
+  keyExtractor?: ((item: ItemT, index: number) => React.Key) | undefined;
   textInputProps?: TextInputProps;
   pickerItemsContainerProps?: ViewProps;
   pickerProps?: Omit<PickerProps<ItemT>, 'selectedValue' | 'onValueChange'>;

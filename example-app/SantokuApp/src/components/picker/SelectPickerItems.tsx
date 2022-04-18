@@ -7,7 +7,7 @@ import {Item, ItemWithKey} from './SelectPicker';
 
 export type SelectPickerItemsProps<ItemT> = PickerProps<React.Key> & {
   items: (Item<ItemT> | ItemWithKey<ItemT>)[];
-  keyExtractor?: ((item: ItemT, index: number) => string) | undefined;
+  keyExtractor?: ((item: ItemT, index: number) => React.Key) | undefined;
   pickerItemsContainerProps?: ViewProps;
 };
 

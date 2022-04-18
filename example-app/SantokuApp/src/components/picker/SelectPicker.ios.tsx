@@ -7,7 +7,7 @@ import {PickerBackdrop} from './PickerBackdrop';
 import {PickerContainer} from './PickerContainer';
 import {SelectPickerProps} from './SelectPicker';
 import {SelectPickerItems} from './SelectPickerItems';
-import {useSelectPickerUseCase} from './useSelectPickerUseCase';
+import {useSelectPickerIOSUseCase} from './useSelectPickerIOSUseCase';
 
 export type SelectPickerPropsIOS<ItemT> = Omit<SelectPickerProps<ItemT>, 'useNativeAndroidPickerStyle'>;
 
@@ -26,13 +26,14 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
     handleDelete,
     handleCancel,
     handleDone,
-  } = useSelectPickerUseCase<ItemT>(props);
+  } = useSelectPickerIOSUseCase<ItemT>(props);
   const {
     selectedItemKey,
     textInputProps,
     keyExtractor,
     headerComponent,
     itemsComponent,
+    textInputComponent,
     pickerItemsContainerProps,
     pickerProps,
     backdropProps: {
@@ -84,7 +85,11 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
       </PickerBackdrop>
       <Pressable onPress={open}>
         <View pointerEvents="box-only">
-          <Input value={selectedItem?.inputLabel ?? selectedItem?.label} editable={false} {...textInputProps} />
+          {textInputComponent ? (
+            textInputComponent
+          ) : (
+            <Input value={selectedItem?.inputLabel ?? selectedItem?.label} editable={false} {...textInputProps} />
+          )}
         </View>
       </Pressable>
     </>

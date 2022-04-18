@@ -21,6 +21,7 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
   items,
   selectedItemKey,
   onSelectedItemChange,
+  onDismiss,
   onDelete,
   onCancel,
   onDone,
@@ -50,7 +51,10 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
     () => containerExiting ?? DEFAULT_PICKER_CONTAINER_EXITING.duration(DEFAULT_DURATION),
     [containerExiting],
   );
-  const itemsWithPlaceholder = useMemo(() => handlePlaceholder(placeholder).concat(items), [items, placeholder]);
+  const itemsWithPlaceholder = useMemo(
+    () => (items ? handlePlaceholder(placeholder).concat(items) : []),
+    [items, placeholder],
+  );
   const getSelectedItem = useCallback(
     (key?: React.Key) => {
       if (key) {
@@ -77,6 +81,10 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
   const open = useCallback(() => {
     setIsVisible(true);
   }, []);
+  const handleDismiss = useCallback(() => {
+    onDismiss?.(selectedItem);
+    close();
+  }, [close, onDismiss, selectedItem]);
   const handleDelete = useCallback(() => {
     onDelete?.(selectedItem);
     close();
@@ -93,6 +101,7 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
   return {
     isVisible,
     itemsWithPlaceholder,
+    getSelectedItem,
     selectedItem,
     handleBackdropPress,
     pickerBackdropEntering,
@@ -101,6 +110,7 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
     pickerContainerExiting,
     onValueChange,
     open,
+    handleDismiss,
     handleDelete,
     handleCancel,
     handleDone,
