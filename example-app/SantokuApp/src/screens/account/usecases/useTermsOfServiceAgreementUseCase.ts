@@ -1,5 +1,5 @@
 import {TermsOfService} from 'generated/backend/model';
-import {useCallback, useMemo, useRef, useState} from 'react';
+import {useCallback, useRef, useState} from 'react';
 import {WebView as RNWebView} from 'react-native-webview';
 import {usePostAccountsMeTerms} from 'service';
 
@@ -12,7 +12,7 @@ export const useTermsOfServiceAgreementUseCase = (termsOfService?: TermsOfServic
   const onGoToHomeScreen = useNavigateToRootStackScreen('AuthenticatedStackNav');
   const {mutateAsync: callPostAccountsMeTerms, isLoading} = usePostAccountsMeTerms();
 
-  const termUrl = useMemo(() => termsOfService?.url, [termsOfService?.url]);
+  const termUrl = termsOfService?.url;
   const onWebViewError = useCallback(() => {
     setIsWebViewError(true);
   }, []);
