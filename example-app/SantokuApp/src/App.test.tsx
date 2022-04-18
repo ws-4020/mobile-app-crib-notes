@@ -33,6 +33,73 @@ jest.mock('service/backend/systemService', () => {
   };
 });
 
+jest.mock('service/backend/accountService', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const originalModule = jest.requireActual('service/backend/accountService');
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return {
+    ...originalModule,
+    getAccountsMe: jest.fn(() => {
+      return Promise.resolve({
+        status: 200,
+        data: {
+          accountId: '123456789',
+          deviceTokens: [],
+        },
+      });
+    }),
+    getAccountsMeTerms: jest.fn(() => {
+      return Promise.resolve({
+        status: 200,
+        data: {
+          hasAgreedValidTermsOfService: false,
+          agreedTermsOfServiceVersion: '1.0.0',
+        },
+      });
+    }),
+  };
+});
+
+jest.mock('service/backend/termService', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const originalModule = jest.requireActual('service/backend/termService');
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return {
+    ...originalModule,
+    getTerms: jest.fn(() => {
+      return Promise.resolve({
+        status: 200,
+        data: {
+          latestTermsOfServiceVersion: '1.0.0',
+          url: 'http://localhost',
+        },
+      });
+    }),
+  };
+});
+
+jest.mock('framework/authentication/AuthenticationService', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const originalModule = jest.requireActual('framework/authentication/AuthenticationService');
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return {
+    ...originalModule,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    AuthenticationService: {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      ...originalModule.AuthenticationService,
+      autoLogin: jest.fn(() => {
+        return Promise.resolve({
+          status: 200,
+          data: {
+            status: 'COMPLETE',
+          },
+        });
+      }),
+    },
+  };
+});
+
 beforeEach(() => {
   // 画面遷移時のアニメーションが、コンポーネントのアンマウント後にステートを更新してしまうようで、
   // テストは成功するものの、エラーログが出力されてしまう。
