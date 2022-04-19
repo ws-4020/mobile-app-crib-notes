@@ -133,12 +133,18 @@ describe('PickerAccessory with all props', () => {
         onDelete={onDelete}
         onCancel={onCancel}
         onDone={onDone}
+        deleteLabel="delete"
+        cancelLabel="cancel"
+        doneLabel="done"
+        deleteTextProps={{style: {color: 'yellow'}, testID: 'deleteText'}}
+        cancelTextProps={{style: {color: 'green'}, testID: 'cancelText'}}
+        doneTextProps={{style: {color: 'aqua'}, testID: 'doneText'}}
         deleteTouchableContainerProps={{testID: 'deleteLink'}}
         cancelTouchableContainerProps={{testID: 'cancelLink'}}
         doneTouchableContainerProps={{testID: 'doneLink'}}
-        deleteTextComponent={<RNEText>delete label with custom text component</RNEText>}
-        cancelTextComponent={<RNEText>cancel label with custom text component</RNEText>}
-        doneTextComponent={<RNEText>done label with custom text component</RNEText>}
+        deleteTextComponent={RNEText}
+        cancelTextComponent={RNEText}
+        doneTextComponent={RNEText}
       />,
     );
     expect(sut).toMatchSnapshot('PickerAccessory with all props(custom text component ).');
@@ -146,15 +152,21 @@ describe('PickerAccessory with all props', () => {
     const deleteLink = sut.getByTestId('deleteLink');
     const cancelLink = sut.getByTestId('cancelLink');
     const doneLink = sut.getByTestId('doneLink');
-    const deleteText = sut.queryByText('delete label with custom text component');
-    const cancelText = sut.queryByText('cancel label with custom text component');
-    const doneText = sut.queryByText('done label with custom text component');
+    const deleteTextComponent = sut.getByTestId('deleteText');
+    const cancelTextComponent = sut.getByTestId('cancelText');
+    const doneTextComponent = sut.getByTestId('doneText');
+    const deleteText = sut.queryByText('delete');
+    const cancelText = sut.queryByText('cancel');
+    const doneText = sut.queryByText('done');
 
     fireEvent.press(deleteLink);
     fireEvent.press(cancelLink);
     fireEvent.press(doneLink);
 
     const pickerAccessoryProps = pickerAccessory.props as ViewProps;
+    const deleteTextProps = deleteTextComponent.props as TextProps;
+    const cancelTextProps = cancelTextComponent.props as TextProps;
+    const doneTextProps = doneTextComponent.props as TextProps;
     expect(pickerAccessoryProps.style).toEqual({
       flexDirection: 'row',
       justifyContent: 'flex-end',
@@ -165,6 +177,9 @@ describe('PickerAccessory with all props', () => {
     expect(onDelete).toHaveBeenCalledTimes(1);
     expect(onCancel).toHaveBeenCalledTimes(1);
     expect(onDone).toHaveBeenCalledTimes(1);
+    expect(deleteTextProps.style).toEqual({color: 'yellow', fontWeight: 'bold', paddingHorizontal: 10});
+    expect(cancelTextProps.style).toEqual({color: 'green', fontWeight: 'bold', paddingHorizontal: 10});
+    expect(doneTextProps.style).toEqual({color: 'aqua', fontWeight: 'bold', paddingHorizontal: 10});
     expect(deleteText).not.toBeNull();
     expect(cancelText).not.toBeNull();
     expect(doneText).not.toBeNull();

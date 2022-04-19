@@ -1,24 +1,24 @@
 import React from 'react';
 import {StyleSheet, TextProps, TouchableOpacityProps, View, ViewProps} from 'react-native';
 
-import {PickerAccessoryButton} from './PickerAccessoryButton';
+import {PickerAccessoryButton, PickerAccessoryButtonProps} from './PickerAccessoryButton';
 
 export type DefaultPickerAccessoryProps = {
   pickerAccessoryContainerProps?: ViewProps;
   onDelete?: () => void;
   deleteLabel?: string;
   deleteTextProps?: TextProps;
-  deleteTextComponent?: React.ReactNode;
+  deleteTextComponent?: PickerAccessoryButtonProps['TextComponent'];
   deleteTouchableContainerProps?: TouchableOpacityProps;
   onCancel?: () => void;
   cancelLabel?: string;
   cancelTextProps?: TextProps;
-  cancelTextComponent?: React.ReactNode;
+  cancelTextComponent?: PickerAccessoryButtonProps['TextComponent'];
   cancelTouchableContainerProps?: TouchableOpacityProps;
   onDone?: () => void;
   doneLabel?: string;
   doneTextProps?: TextProps;
-  doneTextComponent?: React.ReactNode;
+  doneTextComponent?: PickerAccessoryButtonProps['TextComponent'];
   doneTouchableContainerProps?: TouchableOpacityProps;
 };
 
@@ -42,35 +42,35 @@ export const DefaultPickerAccessory: React.FC<DefaultPickerAccessoryProps> = ({
 }) => {
   return (
     <View style={StyleSheet.flatten([styles.container, style])} {...pickerAccessoryContainerProps}>
-      {(deleteLabel || deleteTextComponent) && (
+      {deleteLabel && (
         <>
           <PickerAccessoryButton
             onPress={onDelete}
-            defaultStyle={styles.deleteTextStyle}
+            defaultStyle={styles.destructiveTextStyle}
             textProps={deleteTextProps}
-            textComponent={deleteTextComponent}
+            TextComponent={deleteTextComponent}
             touchableContainerProps={deleteTouchableContainerProps}
             label={deleteLabel}
           />
           <View style={styles.flex} />
         </>
       )}
-      {(cancelLabel || cancelTextComponent) && (
+      {cancelLabel && (
         <PickerAccessoryButton
           onPress={onCancel}
           defaultStyle={styles.cancelTextStyle}
           textProps={cancelTextProps}
-          textComponent={cancelTextComponent}
+          TextComponent={cancelTextComponent}
           touchableContainerProps={cancelTouchableContainerProps}
           label={cancelLabel}
         />
       )}
-      {(doneLabel || doneTextComponent) && (
+      {doneLabel && (
         <PickerAccessoryButton
           onPress={onDone}
-          defaultStyle={styles.doneTextStyle}
+          defaultStyle={styles.okTextStyle}
           textProps={doneTextProps}
-          textComponent={doneTextComponent}
+          TextComponent={doneTextComponent}
           touchableContainerProps={doneTouchableContainerProps}
           label={doneLabel}
         />
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 8,
   },
-  deleteTextStyle: {
+  destructiveTextStyle: {
     color: '#d9545e',
     fontWeight: 'bold',
     paddingHorizontal: 10,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingHorizontal: 10,
   },
-  doneTextStyle: {
+  okTextStyle: {
     color: '#4577CC',
     fontWeight: 'bold',
     paddingHorizontal: 10,

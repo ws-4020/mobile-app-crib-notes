@@ -1,31 +1,27 @@
 import React from 'react';
-import {StyleSheet, StyleProp, Text, TextProps, TextStyle, TouchableOpacity, TouchableOpacityProps} from 'react-native';
+import {StyleProp, StyleSheet, Text, TextProps, TextStyle, TouchableOpacity, TouchableOpacityProps} from 'react-native';
 
-type PickerAccessoryButtonProps = {
+export type PickerAccessoryButtonProps = {
   onPress?: () => unknown;
   defaultStyle: StyleProp<TextStyle>;
   textProps?: TextProps;
-  textComponent?: React.ReactNode;
+  TextComponent?: React.ComponentType;
   touchableContainerProps?: Omit<TouchableOpacityProps, 'onPress'>;
-  label?: string;
+  label: string;
 };
 const PickerAccessoryButtonComponent: React.FC<PickerAccessoryButtonProps> = ({
   onPress,
   defaultStyle,
   textProps: {style: textStyle, ...textProps} = {},
-  textComponent,
+  TextComponent = Text,
   touchableContainerProps,
   label,
 }) => {
   return (
     <TouchableOpacity onPress={onPress} {...touchableContainerProps}>
-      {textComponent ? (
-        textComponent
-      ) : (
-        <Text style={StyleSheet.flatten([defaultStyle, textStyle])} {...textProps}>
-          {label}
-        </Text>
-      )}
+      <TextComponent style={StyleSheet.flatten([defaultStyle, textStyle])} {...textProps}>
+        {label}
+      </TextComponent>
     </TouchableOpacity>
   );
 };

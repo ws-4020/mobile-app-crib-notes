@@ -33,11 +33,14 @@ exports[`PickerAccessory with all props should be applied properly with custom t
     <Text
       style={
         Object {
-          "color": "#242424",
+          "color": "yellow",
+          "fontWeight": "bold",
+          "paddingHorizontal": 10,
         }
       }
+      testID="deleteText"
     >
-      delete label with custom text component
+      delete
     </Text>
   </View>
   <View
@@ -67,11 +70,14 @@ exports[`PickerAccessory with all props should be applied properly with custom t
     <Text
       style={
         Object {
-          "color": "#242424",
+          "color": "green",
+          "fontWeight": "bold",
+          "paddingHorizontal": 10,
         }
       }
+      testID="cancelText"
     >
-      cancel label with custom text component
+      cancel
     </Text>
   </View>
   <View
@@ -94,11 +100,14 @@ exports[`PickerAccessory with all props should be applied properly with custom t
     <Text
       style={
         Object {
-          "color": "#242424",
+          "color": "aqua",
+          "fontWeight": "bold",
+          "paddingHorizontal": 10,
         }
       }
+      testID="doneText"
     >
-      done label with custom text component
+      done
     </Text>
   </View>
 </View>
