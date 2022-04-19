@@ -32,7 +32,7 @@ const Screen: React.FC = () => {
         selectedItemKey={items1Key}
         onSelectedItemChange={onSelectedItemChangeForItem1}
         items={items1}
-        placeholder={{value: {a: undefined}, label: 'please select...'}}
+        placeholder={{value: {}, label: 'please select...'}}
         onDismiss={onDismissForItem1}
         onDelete={onDeleteForItem1}
         onCancel={onCancelForItem1}
