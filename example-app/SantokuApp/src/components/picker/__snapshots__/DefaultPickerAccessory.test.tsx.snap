@@ -4,7 +4,6 @@ exports[`PickerAccessory with all props should be applied properly: PickerBackdr
 <View
   style={
     Object {
-      "alignItems": "center",
       "backgroundColor": "red",
       "flexDirection": "row",
       "justifyContent": "flex-end",

@@ -4,7 +4,7 @@ import React from 'react';
 import {Platform, ViewProps} from 'react-native';
 import {Input} from 'react-native-elements';
 
-import {PickerAccessoryProps} from './PickerAccessory';
+import {DefaultPickerAccessoryProps} from './DefaultPickerAccessory';
 import {PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainerProps} from './PickerContainer';
 
@@ -72,7 +72,7 @@ export type SelectPickerProps<ItemT> = {
    * 指定しない場合は、PickerAccessoryがデフォルトで表示されます。
    * iOS Only
    */
-  headerComponent?: React.ReactNode;
+  pickerAccessoryComponent?: React.ReactNode;
   /**
    * Pickerコンポーネント
    * 指定しない場合は、SelectPickerItemsがデフォルトで表示されます。
@@ -116,7 +116,7 @@ export type SelectPickerProps<ItemT> = {
    * PickerAccessoryのProps
    * iOS Only
    */
-  pickerAccessoryProps?: Omit<PickerAccessoryProps, 'onDelete' | 'onCancel' | 'onDone'>;
+  pickerAccessoryProps?: Omit<DefaultPickerAccessoryProps, 'onDelete' | 'onCancel' | 'onDone'>;
   /**
    * NativeのPickerを使用するかどうか
    * trueの場合、選択されたアイテムを表示するテキストコンポーネントもNativeのモジュールを使用します。

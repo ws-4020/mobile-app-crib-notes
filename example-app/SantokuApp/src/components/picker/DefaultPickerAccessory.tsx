@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TextProps, TouchableOpacity, View, ViewProps} from 'react-native';
 
-export type PickerAccessoryProps = {
+export type DefaultPickerAccessoryProps = {
   pickerAccessoryContainerProps?: ViewProps;
   onDelete?: () => void;
   deleteLabel?: string;
@@ -17,7 +17,7 @@ export type PickerAccessoryProps = {
   doneTextComponent?: React.ReactNode;
 };
 
-export const PickerAccessory: React.FC<PickerAccessoryProps> = ({
+export const DefaultPickerAccessory: React.FC<DefaultPickerAccessoryProps> = ({
   pickerAccessoryContainerProps: {style, ...pickerAccessoryContainerProps} = {},
   onDelete,
   onCancel,

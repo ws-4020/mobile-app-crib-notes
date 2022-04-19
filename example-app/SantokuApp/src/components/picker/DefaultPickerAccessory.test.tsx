@@ -3,12 +3,12 @@ import React from 'react';
 import {ViewProps} from 'react-native';
 import {TextProps} from 'react-native-elements';
 
-import {PickerAccessory} from './PickerAccessory';
+import {DefaultPickerAccessory} from './DefaultPickerAccessory';
 
 describe('PickerAccessory with `xxxLabel`', () => {
   it('renders successfully only with delete link', () => {
     const onDelete = jest.fn();
-    const sut = render(<PickerAccessory deleteLabel="delete" onDelete={onDelete} />);
+    const sut = render(<DefaultPickerAccessory deleteLabel="delete" onDelete={onDelete} />);
     const deleteLink = sut.getByTestId('deleteLink');
     const cancelLink = sut.queryByTestId('cancelLink');
     const doneLink = sut.queryByTestId('doneLink');
@@ -22,7 +22,7 @@ describe('PickerAccessory with `xxxLabel`', () => {
 
   it('renders successfully only with cancel link', () => {
     const onCancel = jest.fn();
-    const sut = render(<PickerAccessory cancelLabel="cancel" onCancel={onCancel} />);
+    const sut = render(<DefaultPickerAccessory cancelLabel="cancel" onCancel={onCancel} />);
     const deleteLink = sut.queryByTestId('deleteLink');
     const cancelLink = sut.getByTestId('cancelLink');
     const doneLink = sut.queryByTestId('doneLink');
@@ -36,7 +36,7 @@ describe('PickerAccessory with `xxxLabel`', () => {
 
   it('renders successfully only with done link', () => {
     const onDone = jest.fn();
-    const sut = render(<PickerAccessory doneLabel="done" onDone={onDone} />);
+    const sut = render(<DefaultPickerAccessory doneLabel="done" onDone={onDone} />);
     const deleteLink = sut.queryByTestId('deleteLink');
     const cancelLink = sut.queryByTestId('cancelLink');
     const doneLink = sut.getByTestId('doneLink');
@@ -55,7 +55,7 @@ describe('PickerAccessory with all props', () => {
     const onCancel = jest.fn();
     const onDone = jest.fn();
     const sut = render(
-      <PickerAccessory
+      <DefaultPickerAccessory
         pickerAccessoryContainerProps={{style: {backgroundColor: 'red'}, testID: 'PickerAccessory'}}
         onDelete={onDelete}
         onCancel={onCancel}
@@ -91,7 +91,6 @@ describe('PickerAccessory with all props', () => {
     expect(pickerAccessoryProps.style).toEqual({
       flexDirection: 'row',
       justifyContent: 'flex-end',
-      alignItems: 'center',
       paddingHorizontal: 10,
       paddingVertical: 8,
       backgroundColor: 'red',

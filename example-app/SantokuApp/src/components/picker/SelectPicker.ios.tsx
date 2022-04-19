@@ -2,7 +2,7 @@ import React from 'react';
 import {Pressable, View} from 'react-native';
 import {Input} from 'react-native-elements';
 
-import {PickerAccessory} from './PickerAccessory';
+import {DefaultPickerAccessory} from './DefaultPickerAccessory';
 import {PickerBackdrop} from './PickerBackdrop';
 import {PickerContainer} from './PickerContainer';
 import {SelectPickerProps} from './SelectPicker';
@@ -31,7 +31,7 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
     selectedItemKey,
     textInputProps,
     keyExtractor,
-    headerComponent,
+    pickerAccessoryComponent,
     pickerItemsComponent,
     textInputComponent,
     pickerItemsContainerProps,
@@ -59,10 +59,10 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
           entering={pickerContainerEntering}
           exiting={pickerContainerExiting}
           {...containerProps}>
-          {headerComponent ? (
-            headerComponent
+          {pickerAccessoryComponent ? (
+            pickerAccessoryComponent
           ) : (
-            <PickerAccessory
+            <DefaultPickerAccessory
               onDelete={handleDelete}
               onCancel={handleCancel}
               onDone={handleDone}
