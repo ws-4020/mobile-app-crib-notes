@@ -20,6 +20,8 @@ export const SelectPickerItems = <ItemT extends unknown>({
           label={item.label}
           value={item.value}
           color={item.color}
+          fontFamily={item.fontFamily}
+          style={item.style}
         />
       ))}
     </Picker>

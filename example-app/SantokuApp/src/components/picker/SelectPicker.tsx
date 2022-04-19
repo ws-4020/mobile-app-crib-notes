@@ -1,7 +1,7 @@
 import {PickerProps} from '@react-native-picker/picker';
 import {log} from 'framework/logging';
 import React from 'react';
-import {Platform, ViewProps} from 'react-native';
+import {Platform, StyleProp, TextStyle, ViewProps} from 'react-native';
 import {Input} from 'react-native-elements';
 
 import {DefaultPickerAccessoryProps} from './DefaultPickerAccessory';
@@ -14,6 +14,17 @@ export type Item<T> = {
   inputLabel?: string;
   key?: never;
   color?: string;
+  fontFamily?: string;
+  /**
+   * アイテムに指定するスタイル
+   * 以下のプロパティのみ使用できます。
+   * - 'color'
+   * - 'backgroundColor'
+   * - 'fontSize'
+   * - 'fontFamily'
+   * only Android
+   */
+  style?: StyleProp<TextStyle>;
 };
 
 export type ItemWithKey<T> = {
@@ -22,6 +33,17 @@ export type ItemWithKey<T> = {
   inputLabel?: string;
   key: React.Key;
   color?: string;
+  fontFamily?: string;
+  /**
+   * アイテムに指定するスタイル
+   * 以下のプロパティのみ使用できます。
+   * - 'color'
+   * - 'backgroundColor'
+   * - 'fontSize'
+   * - 'fontFamily'
+   * only Android
+   */
+  style?: StyleProp<TextStyle>;
 };
 type TextInputProps = Omit<typeof Input.defaultProps, 'value' | 'editable'>;
 export type SelectPickerProps<ItemT> = {
