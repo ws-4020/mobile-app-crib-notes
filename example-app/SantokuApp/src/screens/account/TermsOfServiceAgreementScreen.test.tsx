@@ -2,7 +2,7 @@ import '@testing-library/jest-native/extend-expect';
 import {renderHook} from '@testing-library/react-hooks';
 import {render} from '@testing-library/react-native';
 import {WithSnackbar} from 'components/overlay';
-import {BundledMessagesLoader, loadMessages} from 'framework';
+import {AppConfig, BundledMessagesLoader, loadMessages} from 'framework';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
@@ -25,7 +25,7 @@ describe('TermsOfServiceAgreement', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
     const termsOfServiceAgreementScreen = renderHook(() =>
       useTermsOfServiceAgreementScreen({
-        accountData: {terms: {termsOfService: {latestTermsOfServiceVersion: '1.0.0', url: 'http://localhost'}}},
+        accountData: {terms: {termsOfService: {latestTermsOfServiceVersion: '1.0.0', url: AppConfig.termsUrl}}},
       }),
     ).result.current;
     const Screen = termsOfServiceAgreementScreen.component as React.FC;
