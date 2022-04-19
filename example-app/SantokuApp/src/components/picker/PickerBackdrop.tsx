@@ -43,6 +43,11 @@ export const PickerBackdrop: React.FC<PickerBackdropProps> = ({
   exitingCallback,
   pressableProps: {style: pressableStyle, ...pressableProps} = {},
   modalProps: {style: modalStyle, ...modalProps} = {},
+  /**
+   * このコンポーネントでは、ReanimatedのEntering/Exitingを使用してアニメーションを実現しています。
+   * Entering/Exitingを使用した場合は、opacityを設定しても反映されません。
+   * backgroundColorにrgbaで指定してください。（e.g. backgroundColor: rgba(0,0,0,0.4)）
+   */
   style,
   children,
   ...animatedViewProps
