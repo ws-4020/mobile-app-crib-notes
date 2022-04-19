@@ -1,30 +1,37 @@
 import {Button} from 'components/button/Button';
 import {WebView} from 'components/webview/WebView';
-import {m, AppConfig} from 'framework';
+import {m} from 'framework';
+import {InitialDataDependingComponent, withInitialData} from 'framework/initialize';
 import {RootStackParamList} from 'navigation/types';
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
-import {WebView as RNWebView} from 'react-native-webview';
-import {useNavigateToRootStackScreen} from 'screens/useNavigateToScreen';
+
+import {AppInitialData} from '../../framework/initialize/types';
+import {useTermsOfServiceAgreementUseCase} from './usecases/useTermsOfServiceAgreementUseCase';
 
 const ScreenName = 'TermsOfServiceAgreement';
 
-const Screen: React.FC = () => {
-  const [buttonDisable, setButtonDisable] = useState(true);
-  const [isWebViewError, setIsWebViewError] = useState(false);
-  const webViewRef = useRef<RNWebView>(null);
+export const TermsOfServiceAgreementScreen = {
+  name: ScreenName as typeof ScreenName,
+};
 
-  const onGoToHomeScreen = useNavigateToRootStackScreen('AuthenticatedStackNav');
+const Component: InitialDataDependingComponent = ({initialData}) => {
+  const {
+    termUrl,
+    isWebViewError,
+    onWebViewError,
+    webViewRef,
+    onReload,
+    onScrollEndOnce,
+    onAgree,
+    isDisabledAgreementButton,
+  } = useTermsOfServiceAgreementUseCase(initialData.accountData.terms?.termsOfService);
 
-  const onWebViewError = useCallback(() => {
-    setIsWebViewError(true);
-  }, []);
-
-  const onReload = useCallback(() => {
-    setIsWebViewError(false);
-    webViewRef.current?.reload();
-  }, []);
+  if (!termUrl) {
+    // URLは必ず存在する想定
+    return null;
+  }
 
   return (
     <View style={styles.container} testID="TermsOfServiceAgreementScreen">
@@ -35,15 +42,15 @@ const Screen: React.FC = () => {
         </View>
       ) : (
         <WebView
-          source={{uri: AppConfig.termsUrl}}
-          onScrollEndOnce={() => setButtonDisable(false)}
+          source={{uri: termUrl}}
+          onScrollEndOnce={onScrollEndOnce}
           ref={webViewRef}
           onError={onWebViewError}
           onHttpError={onWebViewError}
         />
       )}
       <View style={styles.footer}>
-        <Button title={m('同意')} onPress={onGoToHomeScreen} disabled={buttonDisable} />
+        <Button title={m('同意')} onPress={onAgree} disabled={isDisabledAgreementButton} />
       </View>
     </View>
   );
@@ -73,12 +80,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TermsOfServiceAgreementScreen: NativeStackScreenConfig<RootStackParamList, typeof ScreenName> = {
-  component: Screen,
-  name: ScreenName,
-  options: () => ({
-    headerShown: true,
-    title: m('利用規約'),
-    presentation: 'formSheet' as const,
-  }),
+export const useTermsOfServiceAgreementScreen: (
+  initialData: AppInitialData,
+) => NativeStackScreenConfig<RootStackParamList, typeof ScreenName> = initialData => {
+  return useMemo(
+    () => ({
+      component: withInitialData(initialData, Component),
+      name: ScreenName,
+      options: {
+        headerShown: true,
+        title: m('利用規約'),
+        presentation: 'formSheet' as const,
+      },
+    }),
+    [initialData],
+  );
 };

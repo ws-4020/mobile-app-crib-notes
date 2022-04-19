@@ -26,8 +26,6 @@ async function signup(nickname: string, password: string): Promise<Account> {
 
 /**
  * サインアップします。
- * @param nickname ニックネーム
- * @param password パスワード
  * @returns アカウント
  */
 function useSignup() {
@@ -49,7 +47,6 @@ async function changeAccount(accountId: string): Promise<AccountLoginResponse> {
 
 /**
  * アカウントを切り替えます。
- * @param accountId アカウントID
  * @returns アカウントの切り替え結果
  */
 function useChangeAccount() {
@@ -125,6 +122,13 @@ function useRefresh() {
 async function logout(): Promise<void> {
   await postLogout();
   await refreshCsrfToken();
+  await clientLogout();
+}
+
+/**
+ * クライアント側のログアウト処理を実施します。
+ */
+async function clientLogout(): Promise<void> {
   const accountId = await SecureStorageAdapter.loadActiveAccountId();
   if (accountId) {
     await SecureStorageAdapter.deleteActiveAccountId();
@@ -140,9 +144,11 @@ function useLogout() {
 }
 
 export const AuthenticationService = {
+  autoLogin,
+  canAutoLogin,
+  clientLogout,
   useSignup,
   useChangeAccount,
-  canAutoLogin,
   useAutoLogin,
   useRefresh,
   useLogout,
