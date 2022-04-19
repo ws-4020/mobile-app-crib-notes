@@ -62,7 +62,6 @@ export const PickerBackdrop: React.FC<PickerBackdropProps> = ({
     () => composePressableStyles([styles.pressable, pressableStyle]),
     [pressableStyle],
   );
-  const composedBackdropStyle = useMemo(() => StyleSheet.flatten([styles.backdrop, style]), [style]);
 
   return !isModalVisible ? null : (
     <RNModal
@@ -79,7 +78,7 @@ export const PickerBackdrop: React.FC<PickerBackdropProps> = ({
           <Reanimated.View
             entering={entering.withCallback(composedEnteringCallback)}
             exiting={exiting.withCallback(composedExitingCallback)}
-            style={composedBackdropStyle}
+            style={StyleSheet.flatten([styles.backdrop, style])}
             {...animatedViewProps}
           />
         </Pressable>
