@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleProp, StyleSheet, Text, TextProps, TouchableOpacity, View, ViewStyle} from 'react-native';
+import {StyleSheet, Text, TextProps, TouchableOpacity, View, ViewProps} from 'react-native';
 
 export type PickerAccessoryProps = {
+  pickerAccessoryContainerProps?: ViewProps;
   onDelete?: () => void;
   onCancel?: () => void;
   onDone?: () => void;
@@ -11,17 +12,16 @@ export type PickerAccessoryProps = {
   deleteLabel?: string;
   cancelLabel?: string;
   doneLabel?: string;
-  pickerAccessoryStyle?: StyleProp<ViewStyle>;
   deleteTextComponent?: React.ReactNode;
   cancelTextComponent?: React.ReactNode;
   doneTextComponent?: React.ReactNode;
 };
 
 export const PickerAccessory: React.FC<PickerAccessoryProps> = ({
+  pickerAccessoryContainerProps: {style, ...pickerAccessoryContainerProps} = {},
   onDelete,
   onCancel,
   onDone,
-  pickerAccessoryStyle,
   deleteTextProps: {style: deleteTextStyle, ...deleteTextProps} = {},
   cancelTextProps: {style: cancelTextStyle, ...cancelTextProps} = {},
   doneTextProps: {style: doneTextStyle, ...doneTextProps} = {},
@@ -33,7 +33,7 @@ export const PickerAccessory: React.FC<PickerAccessoryProps> = ({
   doneTextComponent,
 }) => {
   return (
-    <View style={StyleSheet.flatten([styles.container, pickerAccessoryStyle])} testID="PickerAccessory">
+    <View style={StyleSheet.flatten([styles.container, style])} {...pickerAccessoryContainerProps}>
       {deleteLabel && (
         <>
           <TouchableOpacity onPress={onDelete} testID="deleteLink">
