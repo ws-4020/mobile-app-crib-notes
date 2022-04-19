@@ -23,7 +23,7 @@ export type PickerBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'ente
   pressableProps?: PressableProps;
   modalProps?: ModalProps;
   /**
-   * enteringに指定したAnimationBuilderなどでwithCallbackを指定しても、本コンポーネント内で上書きしているため実行できません。
+   * enteringに指定したAnimationBuilderなどでwithCallbackを指定しても、このコンポーネントの中で上書きしているため実行できません。
    * withCallbackで実行する関数は、enteringCallbackで指定してください。
    */
   entering?: BaseAnimationBuilder | Keyframe;
