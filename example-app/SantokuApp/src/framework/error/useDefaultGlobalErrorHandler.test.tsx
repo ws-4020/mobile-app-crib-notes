@@ -106,8 +106,8 @@ describe('useDefaultGlobalErrorHandler', () => {
     errorHandler.current(axiosError);
     expect(mockSnackbarShow).not.toBeCalled();
     expect(spyAlert).toBeCalledWith(
-      'アプリケーションの更新が必要です',
-      'アプリケーションのバージョンが古いためこの機能を利用できません。ストアからアップデートを実施してください。',
+      'アプリの更新が必要です',
+      'アプリのバージョンが古いためこの機能を利用できません。ストアからアップデートを実施してください。',
     );
   });
 

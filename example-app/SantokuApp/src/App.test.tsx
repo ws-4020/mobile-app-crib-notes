@@ -2,8 +2,10 @@ import '@testing-library/jest-native/extend-expect';
 import {render, waitFor} from '@testing-library/react-native';
 import React from 'react';
 import {DevSettings} from 'react-native';
+import {getTerms} from 'service/backend/termService';
 
 import {App} from './App';
+import {AppConfig} from './framework';
 import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from './framework/backend/customInstance';
 
 jest.spyOn(DevSettings, 'addMenuItem').mockImplementation(() => {});
@@ -33,6 +35,65 @@ jest.mock('service/backend/systemService', () => {
   };
 });
 
+jest.mock('service/backend/accountService', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const originalModule = jest.requireActual('service/backend/accountService');
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return {
+    ...originalModule,
+    getAccountsMe: jest.fn(() => {
+      return Promise.resolve({
+        status: 200,
+        data: {
+          accountId: '123456789',
+          deviceTokens: [],
+        },
+      });
+    }),
+    getAccountsMeTerms: jest.fn(() => {
+      return Promise.resolve({
+        status: 200,
+        data: {
+          hasAgreedValidTermsOfService: false,
+          agreedTermsOfServiceVersion: '1.0.0',
+        },
+      });
+    }),
+  };
+});
+
+jest.mock('service/backend/termService', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const originalModule = jest.requireActual('service/backend/termService');
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return {
+    ...originalModule,
+    getTerms: jest.fn(),
+  };
+});
+
+jest.mock('framework/authentication/AuthenticationService', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const originalModule = jest.requireActual('framework/authentication/AuthenticationService');
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return {
+    ...originalModule,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    AuthenticationService: {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      ...originalModule.AuthenticationService,
+      autoLogin: jest.fn(() => {
+        return Promise.resolve({
+          status: 200,
+          data: {
+            status: 'COMPLETE',
+          },
+        });
+      }),
+    },
+  };
+});
+
 beforeEach(() => {
   // 画面遷移時のアニメーションが、コンポーネントのアンマウント後にステートを更新してしまうようで、
   // テストは成功するものの、エラーログが出力されてしまう。
@@ -42,6 +103,15 @@ beforeEach(() => {
 
 describe('App', () => {
   it('マウントされたときに正常にレンダリングされること', async () => {
+    (getTerms as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 200,
+        data: {
+          latestTermsOfServiceVersion: '1.0.0',
+          url: AppConfig.termsUrl,
+        },
+      }),
+    );
     const app = render(<App />);
     await waitFor(
       () => {

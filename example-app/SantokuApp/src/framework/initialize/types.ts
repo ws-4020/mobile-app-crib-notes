@@ -1,15 +1,8 @@
 import {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 
+import {AccountData} from './helpers';
+
 export interface AppInitialData {
-  account: AccountData;
+  accountData: AccountData;
   notification?: FirebaseMessagingTypes.RemoteMessage;
 }
-
-interface AccountData {
-  terms?: TermsAgreement;
-}
-
-type TermsAgreement = {
-  hasAgreedValidTermsOfService: boolean;
-  agreedTermsOfServiceVersion: string;
-};

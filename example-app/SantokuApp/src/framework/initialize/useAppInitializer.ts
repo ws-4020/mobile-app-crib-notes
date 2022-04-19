@@ -7,16 +7,18 @@ import {sendErrorLog} from 'framework/error/sendErrorLog';
 import {useCallback, useMemo, useState} from 'react';
 import {Platform} from 'react-native';
 
+import {AuthenticationService, isUnauthorizedError} from '../authentication';
 import {
   hideSplashScreen,
   initializeFirebaseCrashlyticsAsync,
   loadBundledMessagesAsync,
-  loadInitialDataAsync,
+  loadInitialAccountDataAsync,
   checkAppUpdates,
   isUpdateRequiredError,
   UpdateRequiredError,
   isInitialDataError,
 } from './helpers';
+import {autoLogin} from './helpers/autoLogin';
 import {AppInitialData} from './types';
 
 export interface AppInitializer {
@@ -74,12 +76,25 @@ const loadInitialData = async () => {
 
   // TODO: キャッシュの削除
 
+  if (!(await AuthenticationService.canAutoLogin())) {
+    return {accountData: {}, notification};
+  }
+
+  try {
+    await autoLogin();
+  } catch (e) {
+    if (isUnauthorizedError(e)) {
+      return {accountData: {}, notification};
+    }
+    throw e;
+  }
+
   // バックエンドから初期データを取得
   // この時点ではReact QueryのQueryClientProviderはマウントされていないため、useQueryは使わずにデータを取得する
-  const account = await loadInitialDataAsync();
+  const accountData = await loadInitialAccountDataAsync();
   return {
+    accountData,
     notification,
-    account,
   };
 };
 
