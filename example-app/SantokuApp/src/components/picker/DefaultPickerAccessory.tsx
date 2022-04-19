@@ -45,7 +45,7 @@ export const DefaultPickerAccessory: React.FC<DefaultPickerAccessoryProps> = ({
               </Text>
             )}
           </TouchableOpacity>
-          <View style={{flex: 1}} />
+          <View style={styles.flex} />
         </>
       )}
       {cancelLabel && (
@@ -96,5 +96,8 @@ const styles = StyleSheet.create({
     color: '#4577CC',
     fontWeight: 'bold',
     paddingHorizontal: 10,
+  },
+  flex: {
+    flex: 1,
   },
 });
