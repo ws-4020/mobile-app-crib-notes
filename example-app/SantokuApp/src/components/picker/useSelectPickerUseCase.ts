@@ -51,10 +51,7 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
     () => containerExiting ?? DEFAULT_PICKER_CONTAINER_EXITING.duration(DEFAULT_DURATION),
     [containerExiting],
   );
-  const itemsWithPlaceholder = useMemo(
-    () => (items ? handlePlaceholder(placeholder).concat(items) : []),
-    [items, placeholder],
-  );
+  const itemsWithPlaceholder = useMemo(() => handlePlaceholder(placeholder).concat(items), [items, placeholder]);
   const getSelectedItem = useCallback(
     (key?: React.Key) => {
       if (key) {

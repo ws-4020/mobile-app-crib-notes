@@ -28,11 +28,11 @@ export type SelectPickerProps<ItemT> = {
   /**
    * SelectPickerに表示するアイテム
    */
-  items?: Item<ItemT>[] | ItemWithKey<ItemT>[];
+  items: Item<ItemT>[] | ItemWithKey<ItemT>[];
   /**
    * 選択されたアイテムのKey
    */
-  selectedItemKey?: React.Key | undefined;
+  selectedItemKey: React.Key | undefined;
   /**
    * アイテムが選択された場合に呼び出される関数
    */

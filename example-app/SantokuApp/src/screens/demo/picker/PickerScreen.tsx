@@ -3,9 +3,8 @@ import {m} from 'framework/message';
 import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Icon, Input} from 'react-native-elements';
+import {Icon} from 'react-native-elements';
 
-import {SelectPickerItems} from '../../../components/picker/SelectPickerItems';
 import {usePickerScreenUseCase} from './usePickerScreenUseCase';
 
 const ScreenName = 'Picker';
@@ -24,12 +23,6 @@ const Screen: React.FC = () => {
     items3,
     items3Key,
     onSelectedItemChangeForItem3,
-    items4,
-    items4YearValue,
-    items4MonthValue,
-    onValueChangeYear,
-    onValueChangeMonth,
-    selectedLabelForItem4,
   } = usePickerScreenUseCase();
 
   return (
@@ -64,30 +57,6 @@ const Screen: React.FC = () => {
         items={items3}
         placeholder={{value: undefined, label: 'please select...'}}
         useNativeAndroidPickerStyle={false}
-      />
-      <Text>■年月Picker</Text>
-      <SelectPicker
-        pickerAccessoryProps={{doneLabel: m('完了')}}
-        useNativeAndroidPickerStyle={false}
-        pickerItemsComponent={
-          <View style={styles.dateMonthContainer}>
-            <View style={styles.dateMonthPicker}>
-              <SelectPickerItems
-                selectedValue={items4YearValue}
-                items={items4.yearItems}
-                onValueChange={onValueChangeYear}
-              />
-            </View>
-            <View style={styles.dateMonthPicker}>
-              <SelectPickerItems
-                selectedValue={items4MonthValue}
-                items={items4.monthItems}
-                onValueChange={onValueChangeMonth}
-              />
-            </View>
-          </View>
-        }
-        textInputComponent={<Input value={selectedLabelForItem4} editable={false} />}
       />
     </View>
   );

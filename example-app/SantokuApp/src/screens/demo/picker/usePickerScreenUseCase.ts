@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 
 import {Item, ItemWithKey} from '../../../components/picker/SelectPicker';
 
@@ -62,78 +62,6 @@ export const usePickerScreenUseCase = () => {
     setItems3Key(key);
   }, []);
 
-  //////////////////////////////////////////////////////////////////////////////////
-  // Items4
-  //////////////////////////////////////////////////////////////////////////////////
-  const now = new Date();
-  const nowYear = now.getFullYear();
-  const nowMonth = now.getMonth() + 1;
-  const nowYearMonth = useMemo(() => new Date(nowYear, nowMonth), [nowMonth, nowYear]);
-  const yearTenYearsAgo = useMemo(() => nowYear - 10, [nowYear]);
-  const yearMonthTenYearsAgo = useMemo(() => new Date(yearTenYearsAgo, nowMonth), [nowMonth, yearTenYearsAgo]);
-  const yearItems = useMemo(() => {
-    const tenYearsAgo = nowYear - 10;
-    return [...Array<number>(11)].map((_, index: number) => {
-      const y = tenYearsAgo + index;
-      return {value: y, label: `${y}年`};
-    });
-  }, [nowYear]);
-  const monthItems = useMemo(
-    () =>
-      [...Array<number>(12)].map((_, index: number) => {
-        const m = index + 1;
-        return {value: m, label: `${m}月`};
-      }),
-    [],
-  );
-  const [items4YearValue, setItems4YearValue] = useState<number>(nowYear);
-  const [items4MonthValue, setItems4MonthValue] = useState<number>(nowMonth);
-  const onValueChangeYear = useCallback(
-    (value: React.Key) => {
-      const castedValue = value as number;
-      setItems4YearValue(castedValue);
-      // 選択した日付が現在日付より未来日の場合は、現在月に設定する
-      if (nowYearMonth < new Date(castedValue, items4MonthValue)) {
-        setItems4MonthValue(nowMonth);
-        return;
-      }
-      // 選択した日付が現在日付の10年前より過去日の場合は、現在月に設定する
-      if (new Date(castedValue, items4MonthValue) < yearMonthTenYearsAgo) {
-        setItems4MonthValue(nowMonth);
-      }
-    },
-    [items4MonthValue, nowMonth, nowYearMonth, yearMonthTenYearsAgo],
-  );
-  const onValueChangeMonth = useCallback(
-    (value: React.Key) => {
-      const castedValue = value as number;
-      // 選択した日付が現在日付より未来日の場合は、現在月に設定する
-      if (nowYearMonth < new Date(items4YearValue, castedValue)) {
-        setItems4MonthValue(nowMonth);
-        return;
-      }
-      // 選択した日付が現在日付の10年前より過去日の場合は、現在月に設定する
-      if (new Date(items4YearValue, castedValue) < yearMonthTenYearsAgo) {
-        setItems4MonthValue(nowMonth);
-        return;
-      }
-      setItems4MonthValue(castedValue);
-    },
-    [items4YearValue, nowMonth, nowYearMonth, yearMonthTenYearsAgo],
-  );
-  const selectedYearLabel = useMemo(
-    () => yearItems.find(item => item.value === items4YearValue)?.label!,
-    [items4YearValue, yearItems],
-  );
-  const selectedMonthLabel = useMemo(
-    () => monthItems.find(item => item.value === items4MonthValue)?.label!,
-    [items4MonthValue, monthItems],
-  );
-  const selectedLabelForItem4 = useMemo(
-    () => `${selectedYearLabel}${selectedMonthLabel}`,
-    [selectedMonthLabel, selectedYearLabel],
-  );
-
   return {
     items1,
     items1Key,
@@ -148,11 +76,5 @@ export const usePickerScreenUseCase = () => {
     items3,
     items3Key,
     onSelectedItemChangeForItem3,
-    items4: {yearItems, monthItems},
-    items4YearValue,
-    items4MonthValue,
-    onValueChangeYear,
-    onValueChangeMonth,
-    selectedLabelForItem4,
   };
 };
