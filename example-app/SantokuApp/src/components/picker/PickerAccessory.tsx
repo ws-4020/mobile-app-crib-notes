@@ -4,14 +4,14 @@ import {StyleSheet, Text, TextProps, TouchableOpacity, View, ViewProps} from 're
 export type PickerAccessoryProps = {
   pickerAccessoryContainerProps?: ViewProps;
   onDelete?: () => void;
-  onCancel?: () => void;
-  onDone?: () => void;
-  deleteTextProps?: TextProps;
-  cancelTextProps?: TextProps;
-  doneTextProps?: TextProps;
   deleteLabel?: string;
+  deleteTextProps?: TextProps;
+  onCancel?: () => void;
   cancelLabel?: string;
+  cancelTextProps?: TextProps;
+  onDone?: () => void;
   doneLabel?: string;
+  doneTextProps?: TextProps;
   deleteTextComponent?: React.ReactNode;
   cancelTextComponent?: React.ReactNode;
   doneTextComponent?: React.ReactNode;
