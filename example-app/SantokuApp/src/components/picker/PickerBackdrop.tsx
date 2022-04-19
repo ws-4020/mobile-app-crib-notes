@@ -28,7 +28,7 @@ export type PickerBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'ente
    */
   entering?: BaseAnimationBuilder | Keyframe;
   /**
-   * exitingに指定したAnimationBuilderなどでwithCallbackを指定しても、本コンポーネント内で上書きしているため実行できません。
+   * exitingに指定したAnimationBuilderなどでwithCallbackを指定しても、このコンポーネントの中で上書きしているため実行できません。
    * withCallbackで実行する関数は、exitingCallbackで指定してください。
    */
   exiting?: BaseAnimationBuilder | Keyframe;
