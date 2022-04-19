@@ -1,74 +1,79 @@
 import React from 'react';
-import {StyleSheet, Text, TextProps, TouchableOpacity, View, ViewProps} from 'react-native';
+import {StyleSheet, TextProps, TouchableOpacityProps, View, ViewProps} from 'react-native';
+
+import {PickerAccessoryButton} from './PickerAccessoryButton';
 
 export type DefaultPickerAccessoryProps = {
   pickerAccessoryContainerProps?: ViewProps;
   onDelete?: () => void;
   deleteLabel?: string;
   deleteTextProps?: TextProps;
+  deleteTextComponent?: React.ReactNode;
+  deleteTouchableContainerProps?: TouchableOpacityProps;
   onCancel?: () => void;
   cancelLabel?: string;
   cancelTextProps?: TextProps;
+  cancelTextComponent?: React.ReactNode;
+  cancelTouchableContainerProps?: TouchableOpacityProps;
   onDone?: () => void;
   doneLabel?: string;
   doneTextProps?: TextProps;
-  deleteTextComponent?: React.ReactNode;
-  cancelTextComponent?: React.ReactNode;
   doneTextComponent?: React.ReactNode;
+  doneTouchableContainerProps?: TouchableOpacityProps;
 };
 
 export const DefaultPickerAccessory: React.FC<DefaultPickerAccessoryProps> = ({
   pickerAccessoryContainerProps: {style, ...pickerAccessoryContainerProps} = {},
   onDelete,
-  onCancel,
-  onDone,
-  deleteTextProps: {style: deleteTextStyle, ...deleteTextProps} = {},
-  cancelTextProps: {style: cancelTextStyle, ...cancelTextProps} = {},
-  doneTextProps: {style: doneTextStyle, ...doneTextProps} = {},
+  deleteTextProps,
   deleteLabel,
-  cancelLabel,
-  doneLabel,
   deleteTextComponent,
+  deleteTouchableContainerProps,
+  onCancel,
+  cancelTextProps,
+  cancelLabel,
   cancelTextComponent,
+  cancelTouchableContainerProps,
+  onDone,
+  doneTextProps,
+  doneLabel,
   doneTextComponent,
+  doneTouchableContainerProps,
 }) => {
   return (
     <View style={StyleSheet.flatten([styles.container, style])} {...pickerAccessoryContainerProps}>
-      {deleteLabel && (
+      {(deleteLabel || deleteTextComponent) && (
         <>
-          <TouchableOpacity onPress={onDelete} testID="deleteLink">
-            {deleteTextComponent ? (
-              deleteTextComponent
-            ) : (
-              <Text style={StyleSheet.flatten([styles.deleteTextStyle, deleteTextStyle])} {...deleteTextProps}>
-                {deleteLabel}
-              </Text>
-            )}
-          </TouchableOpacity>
+          <PickerAccessoryButton
+            onPress={onDelete}
+            defaultStyle={styles.deleteTextStyle}
+            textProps={deleteTextProps}
+            textComponent={deleteTextComponent}
+            touchableContainerProps={deleteTouchableContainerProps}
+            label={deleteLabel}
+          />
           <View style={styles.flex} />
         </>
       )}
-      {cancelLabel && (
-        <TouchableOpacity onPress={onCancel} testID="cancelLink">
-          {cancelTextComponent ? (
-            cancelTextComponent
-          ) : (
-            <Text style={StyleSheet.flatten([styles.cancelTextStyle, cancelTextStyle])} {...cancelTextProps}>
-              {cancelLabel}
-            </Text>
-          )}
-        </TouchableOpacity>
+      {(cancelLabel || cancelTextComponent) && (
+        <PickerAccessoryButton
+          onPress={onCancel}
+          defaultStyle={styles.cancelTextStyle}
+          textProps={cancelTextProps}
+          textComponent={cancelTextComponent}
+          touchableContainerProps={cancelTouchableContainerProps}
+          label={cancelLabel}
+        />
       )}
-      {doneLabel && (
-        <TouchableOpacity onPress={onDone} testID="doneLink">
-          {doneTextComponent ? (
-            doneTextComponent
-          ) : (
-            <Text style={StyleSheet.flatten([styles.doneTextStyle, doneTextStyle])} {...doneTextProps}>
-              {doneLabel}
-            </Text>
-          )}
-        </TouchableOpacity>
+      {(doneLabel || doneTextComponent) && (
+        <PickerAccessoryButton
+          onPress={onDone}
+          defaultStyle={styles.doneTextStyle}
+          textProps={doneTextProps}
+          textComponent={doneTextComponent}
+          touchableContainerProps={doneTouchableContainerProps}
+          label={doneLabel}
+        />
       )}
     </View>
   );
