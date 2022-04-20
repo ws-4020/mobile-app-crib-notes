@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, View} from 'react-native';
+import {StyleSheet, Pressable, View} from 'react-native';
 import {Input} from 'react-native-elements';
 
 import {DefaultPickerAccessory} from './DefaultPickerAccessory';
@@ -35,7 +35,7 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
     pickerAccessoryComponent,
     pickerItemsComponent,
     textInputComponent,
-    pickerItemsContainerProps,
+    pickerItemsContainerProps: {style: pickerItemsContainerStyle, ...pickerItemsContainerProps} = {},
     pickerProps,
     backdropProps: {entering: backdropEntering, exiting: backdropExiting, ...backdropProps} = {},
     containerProps: {entering: containerEntering, exiting: containerExiting, ...containerProps} = {},
@@ -66,16 +66,24 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
             />
           )}
           {pickerItemsComponent ? (
-            pickerItemsComponent
+            <View
+              style={StyleSheet.flatten([styles.container, pickerItemsContainerStyle])}
+              {...pickerItemsContainerProps}>
+              pickerItemsComponent
+            </View>
           ) : (
-            <SelectPickerItems
-              selectedValue={selectedItemKey}
-              items={items}
-              onValueChange={onValueChange}
-              keyExtractor={keyExtractor}
-              {...pickerProps}
-              {...pickerItemsContainerProps}
-            />
+            <View
+              style={StyleSheet.flatten([styles.container, pickerItemsContainerStyle])}
+              {...pickerItemsContainerProps}>
+              <SelectPickerItems
+                selectedValue={selectedItemKey}
+                items={items}
+                onValueChange={onValueChange}
+                keyExtractor={keyExtractor}
+                {...pickerProps}
+                {...pickerItemsContainerProps}
+              />
+            </View>
           )}
         </PickerContainer>
       </PickerBackdrop>
@@ -92,3 +100,9 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
+});
