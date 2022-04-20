@@ -8,6 +8,7 @@ import {useCallback, useMemo, useState} from 'react';
 import {Platform} from 'react-native';
 
 import {AuthenticationService, isUnauthorizedError} from '../authentication';
+import {enhanceValidator} from '../validator';
 import {
   hideSplashScreen,
   initializeFirebaseCrashlyticsAsync,
@@ -60,6 +61,8 @@ const initializeCoreFeatures = async () => {
   await initializeFirebaseCrashlyticsAsync();
   // アプリ内で使用するメッセージのロード
   await loadBundledMessagesAsync();
+  // メッセージのロード後にYupの設定をする必要がある
+  enhanceValidator();
 };
 
 const loadInitialData = async () => {

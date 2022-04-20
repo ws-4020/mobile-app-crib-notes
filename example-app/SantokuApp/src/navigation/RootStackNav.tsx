@@ -41,7 +41,7 @@ const useRootStackNavigator = (initialData: AppInitialData) => {
       <nav.Screen {...DemoStackNav} />
     </nav.Navigator>
   ) : (
-    <nav.Navigator screenOptions={screenOptions} initialRouteName={unauthorizedInitialRouteName}>
+    <nav.Navigator initialRouteName={unauthorizedInitialRouteName}>
       <nav.Screen {...LoginScreen} />
       <nav.Screen {...DemoStackNav} />
     </nav.Navigator>
