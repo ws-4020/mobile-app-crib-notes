@@ -12,39 +12,33 @@ type SelectPickerPropsAndroid<ItemT> = Omit<
 >;
 
 export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsAndroid<ItemT>) => {
-  const {itemsWithPlaceholder, selectedItem, onValueChange} = useSelectPickerAndroidUseCase<ItemT>(props);
+  const {inputValue, onValueChange} = useSelectPickerAndroidUseCase<ItemT>(props);
   const {
+    items,
     selectedItemKey,
+    placeholder,
     textInputProps,
     keyExtractor,
     pickerItemsComponent,
     textInputComponent,
     pickerProps,
-    useNativeAndroidPickerStyle = false,
   } = props;
 
   return (
     <>
       {pickerItemsComponent ? (
         pickerItemsComponent
-      ) : useNativeAndroidPickerStyle ? (
-        <SelectPickerItems
-          selectedValue={selectedItemKey}
-          items={itemsWithPlaceholder}
-          onValueChange={onValueChange}
-          keyExtractor={keyExtractor}
-          {...pickerProps}
-        />
       ) : (
         <View>
           {textInputComponent ? (
             textInputComponent
           ) : (
-            <Input value={selectedItem?.inputLabel ?? selectedItem?.label} editable={false} {...textInputProps} />
+            // テキスト入力とスタイルを合わせるために、TextではなくInputを使用する
+            <Input placeholder={placeholder} value={inputValue} editable={false} {...textInputProps} />
           )}
           <SelectPickerItems
             selectedValue={selectedItemKey}
-            items={itemsWithPlaceholder}
+            items={items}
             onValueChange={onValueChange}
             keyExtractor={keyExtractor}
             style={styles.headlessPicker}

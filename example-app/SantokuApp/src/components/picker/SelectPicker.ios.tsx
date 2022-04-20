@@ -14,8 +14,7 @@ export type SelectPickerPropsIOS<ItemT> = Omit<SelectPickerProps<ItemT>, 'useNat
 export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<ItemT>) => {
   const {
     isVisible,
-    itemsWithPlaceholder,
-    selectedItem,
+    inputValue,
     handleBackdropPress,
     pickerBackdropEntering,
     pickerBackdropExiting,
@@ -28,7 +27,9 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
     handleDone,
   } = useSelectPickerIOSUseCase<ItemT>(props);
   const {
+    items,
     selectedItemKey,
+    placeholder,
     textInputProps,
     keyExtractor,
     pickerAccessoryComponent,
@@ -36,12 +37,7 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
     textInputComponent,
     pickerItemsContainerProps,
     pickerProps,
-    backdropProps: {
-      entering: backdropEntering,
-      exiting: backdropExiting,
-      onPress: onBackdropPress,
-      ...backdropProps
-    } = {},
+    backdropProps: {entering: backdropEntering, exiting: backdropExiting, ...backdropProps} = {},
     containerProps: {entering: containerEntering, exiting: containerExiting, ...containerProps} = {},
     pickerAccessoryProps,
   } = props;
@@ -74,7 +70,7 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
           ) : (
             <SelectPickerItems
               selectedValue={selectedItemKey}
-              items={itemsWithPlaceholder}
+              items={items}
               onValueChange={onValueChange}
               keyExtractor={keyExtractor}
               {...pickerProps}
@@ -88,7 +84,8 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
           {textInputComponent ? (
             textInputComponent
           ) : (
-            <Input value={selectedItem?.inputLabel ?? selectedItem?.label} editable={false} {...textInputProps} />
+            // テキスト入力とスタイルを合わせるために、TextではなくInputを使用する
+            <Input placeholder={placeholder} value={inputValue} editable={false} {...textInputProps} />
           )}
         </View>
       </Pressable>

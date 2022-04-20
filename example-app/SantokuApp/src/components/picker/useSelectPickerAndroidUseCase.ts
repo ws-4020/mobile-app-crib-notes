@@ -4,7 +4,7 @@ import {SelectPickerProps} from './SelectPicker';
 import {useSelectPickerUseCase} from './useSelectPickerUseCase';
 
 export const useSelectPickerAndroidUseCase = <ItemT extends unknown>(props: SelectPickerProps<ItemT>) => {
-  const {itemsWithPlaceholder, getSelectedItem, selectedItem} = useSelectPickerUseCase<ItemT>(props);
+  const {getSelectedItem, inputValue} = useSelectPickerUseCase<ItemT>(props);
   const {onSelectedItemChange, onDone} = props;
   const onValueChange = useCallback(
     (key: React.Key, index: number) => {
@@ -16,8 +16,7 @@ export const useSelectPickerAndroidUseCase = <ItemT extends unknown>(props: Sele
   );
 
   return {
-    itemsWithPlaceholder,
-    selectedItem,
+    inputValue,
     onValueChange,
   };
 };

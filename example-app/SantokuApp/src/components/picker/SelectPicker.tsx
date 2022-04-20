@@ -12,7 +12,7 @@ export type Item<T> = {
   label: string;
   value: T;
   inputLabel?: string;
-  key?: never;
+  key?: React.Key;
   color?: string;
   fontFamily?: string;
   /**
@@ -27,30 +27,12 @@ export type Item<T> = {
   style?: StyleProp<TextStyle>;
 };
 
-export type ItemWithKey<T> = {
-  label: string;
-  value: T;
-  inputLabel?: string;
-  key: React.Key;
-  color?: string;
-  fontFamily?: string;
-  /**
-   * アイテムに指定するスタイル
-   * 以下のプロパティのみ使用できます。
-   * - 'color'
-   * - 'backgroundColor'
-   * - 'fontSize'
-   * - 'fontFamily'
-   * only Android
-   */
-  style?: StyleProp<TextStyle>;
-};
 type TextInputProps = Omit<typeof Input.defaultProps, 'value' | 'editable'>;
 export type SelectPickerProps<ItemT> = {
   /**
    * SelectPickerに表示するアイテム
    */
-  items: Item<ItemT>[] | ItemWithKey<ItemT>[];
+  items: Item<ItemT>[];
   /**
    * 選択されたアイテムのKey
    */
@@ -63,19 +45,19 @@ export type SelectPickerProps<ItemT> = {
    * PickerBackdropをタップして閉じた場合に呼び出される関数
    * iOS Only
    */
-  onDismiss?: (selectedItem: Item<ItemT> | ItemWithKey<ItemT> | undefined) => void;
+  onDismiss?: (selectedItem: Item<ItemT> | undefined) => void;
   /**
    * DeleteLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
    * iOS Only
    */
-  onDelete?: (selectedItem: Item<ItemT> | ItemWithKey<ItemT> | undefined) => void;
+  onDelete?: (selectedItem: Item<ItemT> | undefined) => void;
   /**
    * CancelLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
    * iOS Only
    */
-  onCancel?: (selectedItem: Item<ItemT> | ItemWithKey<ItemT> | undefined) => void;
+  onCancel?: (selectedItem: Item<ItemT> | undefined) => void;
   /**
    * [iOS]
    * DoneLabelがタップされた場合に呼び出される関数
@@ -84,11 +66,11 @@ export type SelectPickerProps<ItemT> = {
    * [Android]
    * アイテムが選択された場合に呼び出される関数
    */
-  onDone?: (selectedItem: Item<ItemT> | ItemWithKey<ItemT> | undefined) => void;
+  onDone?: (selectedItem: Item<ItemT> | undefined) => void;
   /**
    * プレースホルダ
    */
-  placeholder?: Item<ItemT>;
+  placeholder?: string;
   /**
    * ヘッダコンポーネント
    * 指定しない場合は、PickerAccessoryがデフォルトで表示されます。
@@ -128,7 +110,7 @@ export type SelectPickerProps<ItemT> = {
    * PickerBackdropのProps
    * iOS Only
    */
-  backdropProps?: Omit<PickerBackdropProps, 'isVisible'>;
+  backdropProps?: Omit<PickerBackdropProps, 'isVisible' | 'onPress'>;
   /**
    * PickerContainerのProps
    * iOS Only
@@ -139,13 +121,6 @@ export type SelectPickerProps<ItemT> = {
    * iOS Only
    */
   pickerAccessoryProps?: Omit<DefaultPickerAccessoryProps, 'onDelete' | 'onCancel' | 'onDone'>;
-  /**
-   * NativeのPickerを使用するかどうか
-   * trueの場合、選択されたアイテムを表示するテキストコンポーネントもNativeのモジュールを使用します。
-   * falseの場合、選択されたアイテムを表示するテキストコンポーネントはJavaScript側で指定したモジュールを使用します。
-   * Android Only
-   */
-  useNativeAndroidPickerStyle?: boolean;
 };
 
 export const SelectPicker = <ItemT extends unknown>(props: SelectPickerProps<ItemT>) => {

@@ -1,26 +1,27 @@
 import React, {useCallback, useState} from 'react';
 
-import {Item, ItemWithKey} from '../../../components/picker/SelectPicker';
+import {Item} from '../../../components/picker/SelectPicker';
 
 type Item1Type = {
-  a?: string;
+  a: string;
 };
-const items1: Item<Item1Type>[] | ItemWithKey<Item1Type>[] = [
+const items1: Item<Item1Type>[] = [
   {value: {a: '1'}, label: 'test1', key: '1', inputLabel: 'テスト1'},
   {value: {a: '2'}, label: 'test2', key: '2', inputLabel: 'テスト2'},
   {value: {a: '3'}, label: 'test3', key: '3', inputLabel: 'テスト3'},
 ];
 
-const items2 = [
+const items2: Item<string>[] = [
+  {value: '', label: 'please select...', color: 'grey'},
   {value: '1', label: 'test1', inputLabel: 'テスト1'},
   {value: '2', label: 'test2', inputLabel: 'テスト2'},
   {value: '3', label: 'test3', inputLabel: 'テスト3'},
 ];
 
 const items3 = [
-  {value: '1', label: 'test1', inputLabel: 'テスト1'},
-  {value: '2', label: 'test2', inputLabel: 'テスト2'},
-  {value: '3', label: 'test3', inputLabel: 'テスト3'},
+  {value: '1', label: 'test1', key: '1', inputLabel: 'テスト1'},
+  {value: '2', label: 'test2', key: '2', inputLabel: 'テスト2'},
+  {value: '3', label: 'test3', key: '3', inputLabel: 'テスト3'},
 ];
 
 export const usePickerScreenUseCase = () => {
@@ -32,7 +33,7 @@ export const usePickerScreenUseCase = () => {
   const onSelectedItemChangeForItem1 = useCallback((_, __, key?: React.Key) => {
     setItems1Key(key);
   }, []);
-  const onDismissForItem1 = useCallback((selectedItem: Item<Item1Type> | ItemWithKey<Item1Type> | undefined) => {
+  const onDismissForItem1 = useCallback((selectedItem: Item<Item1Type> | undefined) => {
     setItems1CanceledKey(selectedItem?.key);
   }, []);
   const onDeleteForItem1 = useCallback(() => {
@@ -42,7 +43,7 @@ export const usePickerScreenUseCase = () => {
   const onCancelForItem1 = useCallback(() => {
     setItems1Key(items1CanceledKey);
   }, [items1CanceledKey]);
-  const onDoneForItem1 = useCallback((selectedItem: Item<Item1Type> | ItemWithKey<Item1Type> | undefined) => {
+  const onDoneForItem1 = useCallback((selectedItem: Item<Item1Type> | undefined) => {
     setItems1CanceledKey(selectedItem?.key);
   }, []);
 
@@ -50,7 +51,7 @@ export const usePickerScreenUseCase = () => {
   // Items2
   //////////////////////////////////////////////////////////////////////////////////
   const [items2Value, setItems2Value] = useState<string>();
-  const onSelectedItemChangeForItem2 = useCallback((_, value?: string, __?) => {
+  const onSelectedItemChangeForItem2 = useCallback((_, value?: string | undefined, __?) => {
     setItems2Value(value);
   }, []);
 

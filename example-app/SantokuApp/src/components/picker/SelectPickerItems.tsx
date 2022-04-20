@@ -3,10 +3,10 @@ import {log} from 'framework/logging';
 import React from 'react';
 import {Platform, ViewProps} from 'react-native';
 
-import {Item, ItemWithKey} from './SelectPicker';
+import {Item} from './SelectPicker';
 
 export type SelectPickerItemsProps<ItemT> = PickerProps<React.Key> & {
-  items: (Item<ItemT> | ItemWithKey<ItemT>)[];
+  items: Item<ItemT>[];
   keyExtractor?: ((item: ItemT, index: number) => React.Key) | undefined;
   pickerItemsContainerProps?: ViewProps;
 };

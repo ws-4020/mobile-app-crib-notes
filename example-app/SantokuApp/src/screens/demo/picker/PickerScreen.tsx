@@ -27,37 +27,29 @@ const Screen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text>■deleteLabel/cancelLabel/doneLabelを指定</Text>
+      <Text>■deleteLabel/cancelLabel/doneLabelを指定(iOS only)</Text>
       <SelectPicker
         selectedItemKey={items1Key}
         onSelectedItemChange={onSelectedItemChangeForItem1}
         items={items1}
-        placeholder={{value: {}, label: 'please select...'}}
+        placeholder="please select..."
         onDismiss={onDismissForItem1}
         onDelete={onDeleteForItem1}
         onCancel={onCancelForItem1}
         onDone={onDoneForItem1}
         pickerAccessoryProps={{deleteLabel: m('消去'), cancelLabel: m('キャンセル'), doneLabel: m('完了')}}
         textInputProps={{rightIcon: <Icon name="expand-more" />}}
-        useNativeAndroidPickerStyle
       />
-      <Text>■useNativeAndroidPickerStyle: true</Text>
+      <Text>■Android Picker mode: dropdown(Android only)</Text>
       <SelectPicker
         selectedItemKey={items2Value}
         onSelectedItemChange={onSelectedItemChangeForItem2}
         items={items2}
-        placeholder={{value: '', label: 'please select...'}}
-        useNativeAndroidPickerStyle
+        placeholder="please select..."
         pickerProps={{mode: 'dropdown'}}
       />
-      <Text>■useNativeAndroidPickerStyle: false</Text>
-      <SelectPicker
-        selectedItemKey={items3Key}
-        onSelectedItemChange={onSelectedItemChangeForItem3}
-        items={items3}
-        placeholder={{value: undefined, label: 'please select...'}}
-        useNativeAndroidPickerStyle={false}
-      />
+      <Text>■Android Picker mode: dialog(Android only)</Text>
+      <SelectPicker selectedItemKey={items3Key} onSelectedItemChange={onSelectedItemChangeForItem3} items={items3} />
     </View>
   );
 };
