@@ -65,16 +65,12 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
               {...pickerAccessoryProps}
             />
           )}
-          {pickerItemsComponent ? (
-            <View
-              style={StyleSheet.flatten([styles.container, pickerItemsContainerStyle])}
-              {...pickerItemsContainerProps}>
+          <View
+            style={StyleSheet.flatten([styles.container, pickerItemsContainerStyle])}
+            {...pickerItemsContainerProps}>
+            {pickerItemsComponent ? (
               pickerItemsComponent
-            </View>
-          ) : (
-            <View
-              style={StyleSheet.flatten([styles.container, pickerItemsContainerStyle])}
-              {...pickerItemsContainerProps}>
+            ) : (
               <SelectPickerItems
                 selectedValue={selectedItemKey}
                 items={items}
@@ -83,8 +79,8 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
                 {...pickerProps}
                 {...pickerItemsContainerProps}
               />
-            </View>
-          )}
+            )}
+          </View>
         </PickerContainer>
       </PickerBackdrop>
       <Pressable onPress={open}>
