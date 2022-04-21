@@ -1,9 +1,11 @@
 import axios from 'axios';
 import {useSnackbar} from 'components/overlay';
-import {AuthenticationService, log, m} from 'framework';
+import {AuthenticationService} from 'framework/authentication';
 import {isApplicationError} from 'framework/error/ApplicationError';
 import {RequestTimeoutError} from 'framework/error/RequestTimeoutError';
 import {sendErrorLog} from 'framework/error/sendErrorLog';
+import {log} from 'framework/logging';
+import {m} from 'framework/message';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
 

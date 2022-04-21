@@ -1,7 +1,9 @@
-import {renderHook} from '@testing-library/react-hooks';
+import {renderHook, WrapperComponent} from '@testing-library/react-hooks';
 import {AxiosError} from 'axios';
 import {useSnackbar, WithSnackbar} from 'components/overlay';
+import {WithAccountContext} from 'context/WithAccountContext';
 import {loadBundledMessagesAsync} from 'framework/initialize/helpers';
+import {AppInitialData} from 'framework/initialize/types';
 import React from 'react';
 import {Query, QueryKey} from 'react-query';
 
@@ -9,6 +11,10 @@ import {useDefaultGlobalQueryErrorHandler} from './useDefaultGlobalQueryErrorHan
 
 jest.mock('components/overlay/snackbar/WithSnackbar');
 jest.mock('framework/logging');
+
+const wrapper: WrapperComponent<React.ProviderProps<AppInitialData>> = ({children, value}) => {
+  return <WithAccountContext initialData={value}>{children}</WithAccountContext>;
+};
 
 describe('useDefaultGlobalQueryErrorHandler', () => {
   const query = {} as unknown as Query<unknown, unknown, unknown, QueryKey>;
@@ -35,7 +41,10 @@ describe('useDefaultGlobalQueryErrorHandler', () => {
       toJSON: () => {},
     } as unknown as AxiosError;
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalQueryErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalQueryErrorHandler(), {
+      wrapper,
+      initialProps: {value: {accountData: {account: {accountId: '123456789', deviceTokens: []}}}},
+    });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError, query);
     expect(mockSnackbarShow).toBeCalledWith(
@@ -52,7 +61,10 @@ describe('useDefaultGlobalQueryErrorHandler', () => {
       toJSON: () => {},
     } as unknown as AxiosError;
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalQueryErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalQueryErrorHandler(), {
+      wrapper,
+      initialProps: {value: {accountData: {account: {accountId: '123456789', deviceTokens: []}}}},
+    });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError, query);
     expect(mockSnackbarShow).not.toBeCalled();

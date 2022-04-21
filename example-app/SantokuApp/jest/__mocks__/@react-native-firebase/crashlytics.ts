@@ -22,7 +22,9 @@ const mock: Omit<
   recordError: jest.fn(),
 };
 
-Object.defineProperty(__mocks, 'crashlytics', {value: mock});
+if (!__mocks.crashlytics) {
+  Object.defineProperty(__mocks, 'crashlytics', {value: mock});
+}
 
 // テストケースごとにモックは初期化しておく。
 beforeEach(() =>

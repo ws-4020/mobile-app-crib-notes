@@ -1,4 +1,4 @@
-import {act, renderHook, WrapperComponent} from '@testing-library/react-hooks';
+import {renderHook, WrapperComponent} from '@testing-library/react-hooks';
 import {AxiosError} from 'axios';
 import {useSnackbar, WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
@@ -6,19 +6,19 @@ import {loadBundledMessagesAsync} from 'framework/initialize/helpers';
 import React from 'react';
 import {Alert} from 'react-native';
 
+import {useSetAccountContext} from '../../context/useSetAccountContext';
 import {AuthenticationService} from '../authentication';
 import {AppInitialData} from '../initialize/types';
 import {useDefaultGlobalErrorHandler} from './useDefaultGlobalErrorHandler';
 
 jest.mock('components/overlay/snackbar/WithSnackbar');
+jest.mock('context/useSetAccountContext');
 jest.mock('framework/logging');
 
+jest.useFakeTimers();
+
 const wrapper: WrapperComponent<React.ProviderProps<AppInitialData>> = ({children, value}) => {
-  return (
-    <WithSnackbar>
-      <WithAccountContext initialData={value}>{children}</WithAccountContext>
-    </WithSnackbar>
-  );
+  return <WithAccountContext initialData={value}>{children}</WithAccountContext>;
 };
 
 describe('useDefaultGlobalErrorHandler', () => {
@@ -64,18 +64,22 @@ describe('useDefaultGlobalErrorHandler', () => {
     const spyClientLogout = jest.spyOn(AuthenticationService, 'clientLogout').mockImplementation(() => {
       return Promise.resolve();
     });
+    const mockUseSetAccountContext = (useSetAccountContext as jest.Mock).mockImplementation(() => {
+      return () => {};
+    });
     const spyAlert = jest.spyOn(Alert, 'alert');
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
+    const {result: errorHandler, waitFor} = renderHook(() => useDefaultGlobalErrorHandler(), {
       wrapper,
       initialProps: {value: {accountData: {account: {accountId: '123456789', deviceTokens: []}}}},
     });
     expect(errorHandler.current).not.toBeUndefined();
-    act(() => {
+    await waitFor(() => {
       errorHandler.current(axiosError);
     });
     expect(mockSnackbarShow).not.toBeCalled();
     expect(spyClientLogout).toHaveBeenCalled();
+    expect(mockUseSetAccountContext).toHaveBeenCalled();
     expect(spyAlert).toBeCalledWith(
       '再ログインが必要です',
       'セッションの有効期限が切れました。再度ログインしてください。',
