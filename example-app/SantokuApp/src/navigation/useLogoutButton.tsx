@@ -26,7 +26,7 @@ const HeaderRightLogoutButton: React.FC<HeaderRightLogoutButtonProps> = ({onPres
 
 const styles = StyleSheet.create({
   titleStyle: {
-    fontSize: 15,
+    fontSize: 14,
     color: '#4b6bbd',
   },
   buttonStyle: {
