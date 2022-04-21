@@ -1,3 +1,4 @@
+import crashlytics from '@react-native-firebase/crashlytics';
 import axios from 'axios';
 import {useMutation} from 'react-query';
 
@@ -66,6 +67,7 @@ async function login(accountId: string, password: string): Promise<AccountLoginR
     const res = await postLogin({accountId, password});
     await refreshCsrfToken();
     await SecureStorageAdapter.saveActiveAccountId(accountId);
+    await crashlytics().setUserId(accountId);
 
     return res.data;
   } catch (e) {
@@ -153,6 +155,7 @@ async function clientLogout(): Promise<void> {
     await SecureStorageAdapter.deleteActiveAccountId();
     await SecureStorageAdapter.deletePassword(accountId);
   }
+  await crashlytics().setUserId('');
 }
 
 /**

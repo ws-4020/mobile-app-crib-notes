@@ -5,9 +5,10 @@ export const autoLogin = async () => {
   try {
     await AuthenticationService.autoLogin();
   } catch (e) {
-    if (!isUnauthorizedError(e)) {
-      throw new InitialDataError(e);
+    if (isUnauthorizedError(e)) {
+      await AuthenticationService.clientLogout();
+      throw e;
     }
-    throw e;
+    throw new InitialDataError(e);
   }
 };

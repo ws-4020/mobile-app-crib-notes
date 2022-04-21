@@ -4,7 +4,6 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {AppWithInitialization} from './AppWithInitialization';
 import {WithOverlay} from './components/overlay';
-import {WithReactQuery} from './components/reactQuery';
 import {WithAppTheme} from './components/theme';
 
 type AppProperties = {
@@ -25,9 +24,7 @@ export const App = ({isHeadless}: AppProperties) => {
     <GestureHandlerRootView style={StyleSheet.absoluteFill}>
       <WithAppTheme>
         <WithOverlay>
-          <WithReactQuery>
-            <AppWithInitialization />
-          </WithReactQuery>
+          <AppWithInitialization />
         </WithOverlay>
       </WithAppTheme>
     </GestureHandlerRootView>

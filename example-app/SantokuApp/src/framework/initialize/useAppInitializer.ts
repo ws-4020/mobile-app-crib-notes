@@ -10,14 +10,14 @@ import {Platform} from 'react-native';
 import {AuthenticationService, isUnauthorizedError} from '../authentication';
 import {enhanceValidator} from '../validator';
 import {
+  checkAppUpdates,
   hideSplashScreen,
   initializeFirebaseCrashlyticsAsync,
+  isInitialDataError,
+  isUpdateRequiredError,
   loadBundledMessagesAsync,
   loadInitialAccountDataAsync,
-  checkAppUpdates,
-  isUpdateRequiredError,
   UpdateRequiredError,
-  isInitialDataError,
 } from './helpers';
 import {autoLogin} from './helpers/autoLogin';
 import {AppInitialData} from './types';
@@ -114,8 +114,6 @@ export const useAppInitializer: () => AppInitializer = () => {
     // 初期データの読み込み
     try {
       const data = Object.freeze(await loadInitialData());
-
-      // TODO: 読み込んだ初期データをFirebase Crashlyticsの設定に反映
 
       setInitializationResult({code: 'Success', data});
       await hideSplashScreen();

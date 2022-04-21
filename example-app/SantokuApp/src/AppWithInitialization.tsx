@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
+import {WithReactQuery} from './components/reactQuery';
 import {WithAccountContext} from './context/WithAccountContext';
 import {InitialDataDependingComponent, useAppInitializer} from './framework/initialize';
 import {showUpdateRequiredDialog} from './framework/initialize/helpers';
@@ -46,9 +47,11 @@ export const AppWithInitialization: React.FC = () => {
       <SafeAreaProvider>
         <NavigationContainer>
           <WithAccountContext initialData={initializationResult.data}>
-            <WithFirebaseMessagingHandlers initialData={initializationResult.data}>
-              <RootStackNav initialData={initializationResult.data} />
-            </WithFirebaseMessagingHandlers>
+            <WithReactQuery>
+              <WithFirebaseMessagingHandlers initialData={initializationResult.data}>
+                <RootStackNav initialData={initializationResult.data} />
+              </WithFirebaseMessagingHandlers>
+            </WithReactQuery>
           </WithAccountContext>
         </NavigationContainer>
       </SafeAreaProvider>
