@@ -21,8 +21,6 @@ const Screen: React.FC = () => {
   });
 
   const {clearAccountId, clearPassword, createAccount, login, isExecutingLogin} = useLoginUseCase(form);
-  // TODO: accountId: 095c3356-d180-40b3-9874-8c0b26a68b36
-  // TODO: password: Password4020
 
   return (
     <View style={styles.container} testID="Login">
