@@ -64,5 +64,6 @@ export const LoginScreen: NativeStackScreenConfig<RootStackParamList, typeof Scr
   name: ScreenName,
   options: {
     title: m('ログイン'),
+    animation: 'fade',
   },
 };
