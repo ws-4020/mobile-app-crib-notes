@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {useMutation} from 'react-query';
 
 import {postLogin, postLogout, postSignup} from '../../generated/backend/account/account';
@@ -5,6 +6,7 @@ import {Account, AccountLoginResponse} from '../../generated/backend/model';
 import {refreshCsrfToken} from '../backend';
 import {ApplicationError} from '../error/ApplicationError';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
+import {UnauthorizedError} from './UnauthorizedError';
 
 /** アクティブなアカウントIDがセキュアストレージに存在しない場合に送出するエラー */
 export class ActiveAccountIdNotFoundError extends ApplicationError {}
@@ -60,11 +62,28 @@ function useChangeAccount() {
  * @returns アカウントの切り替え結果
  */
 async function login(accountId: string, password: string): Promise<AccountLoginResponse> {
-  const res = await postLogin({accountId, password});
-  await refreshCsrfToken();
-  await SecureStorageAdapter.saveActiveAccountId(accountId);
+  try {
+    const res = await postLogin({accountId, password});
+    await refreshCsrfToken();
+    await SecureStorageAdapter.saveActiveAccountId(accountId);
 
-  return res.data;
+    return res.data;
+  } catch (e) {
+    if (axios.isAxiosError(e)) {
+      if (e.response?.status === 401) {
+        throw new UnauthorizedError(e);
+      }
+    }
+    throw e;
+  }
+}
+
+/**
+ * ログインします。
+ * @returns アカウントの切り替え結果
+ */
+function useLogin() {
+  return useMutation(async (arg: {accountId: string; password: string}) => login(arg.accountId, arg.password));
 }
 
 /**
@@ -151,5 +170,6 @@ export const AuthenticationService = {
   useChangeAccount,
   useAutoLogin,
   useRefresh,
+  useLogin,
   useLogout,
 };

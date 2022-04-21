@@ -8,7 +8,7 @@ import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
 import {AppInitialData} from '../../framework/initialize/types';
-import {useTermsOfServiceAgreementUseCase} from './usecases/useTermsOfServiceAgreementUseCase';
+import {useTermsOfServiceAgreementUseCase} from './usecases';
 
 const ScreenName = 'TermsOfServiceAgreement';
 

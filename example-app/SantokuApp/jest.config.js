@@ -4,6 +4,7 @@ module.exports = {
   roots: ['<rootDir>/src', 'jest'],
   setupFiles: [
     '<rootDir>/jest/setup/global.js',
+    '<rootDir>/jest/setup/react-native-safe-area-context.js',
     '<rootDir>/jest/setup/react-navigation.js',
     '<rootDir>/jest/setup/react-query.js',
   ],

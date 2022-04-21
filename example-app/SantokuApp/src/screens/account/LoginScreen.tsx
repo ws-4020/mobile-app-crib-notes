@@ -1,15 +1,14 @@
+import {FilledButton, OutlinedButton} from 'components/button';
+import {PasswordTextInput, TextInput} from 'components/input';
+import {Spacer} from 'components/spacer/Spacer';
 import {useFormik} from 'formik';
-import {m} from 'framework';
+import {m} from 'framework/message';
 import {RootStackParamList} from 'navigation/types';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Input} from 'react-native-elements';
 
-import {FilledButton} from '../../components/button/FilledButton';
-import {OutlinedButton} from '../../components/button/OutlinedButton';
-import {Spacer} from '../../components/spacer/Spacer';
-import {isValidForm} from '../../framework/validator';
-import {loginFormInitialValues, loginFormValidationSchema} from './data-types/LoginForm';
+import {loginFormInitialValues, loginFormValidationSchema} from './data-types';
+import {useLoginUseCase} from './usecases';
 
 const ScreenName = 'Login';
 
@@ -20,26 +19,35 @@ const Screen: React.FC = () => {
     validateOnChange: false,
     onSubmit: () => {},
   });
+
+  const {clearAccountId, clearPassword, createAccount, login, isExecutingLogin} = useLoginUseCase(form);
+  // TODO: accountId: 095c3356-d180-40b3-9874-8c0b26a68b36
+  // TODO: password: Password4020
+
   return (
     <View style={styles.container} testID="Login">
-      <Input
+      <TextInput
         label={m('アカウントID')}
         value={form.values.accountId}
         onChangeText={form.handleChange('accountId')}
+        showClearButton={!!form.values.accountId}
+        onClearButtonPress={clearAccountId}
         errorMessage={form.errors.accountId}
       />
-      <Spacer heightRatio={0.01} />
-      <Input
+      <Spacer heightRatio={0.03} />
+      <PasswordTextInput
         label={m('パスワード')}
         value={form.values.password}
         onChangeText={form.handleChange('password')}
+        showClearButton={!!form.values.password}
+        onClearButtonPress={clearPassword}
         errorMessage={form.errors.password}
       />
-      <Spacer heightRatio={0.03} />
+      <Spacer heightRatio={0.05} />
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-        <OutlinedButton title={m('新規登録')} />
+        <OutlinedButton title={m('新規登録')} onPress={createAccount} />
         <Spacer widthRatio={0.1} />
-        <FilledButton title={m('ログイン')} onPress={() => isValidForm(form)} />
+        <FilledButton title={m('ログイン')} onPress={login} loading={isExecutingLogin} />
       </View>
     </View>
   );
@@ -50,17 +58,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 30,
-    // TODO: これどうするかな
-    backgroundColor: 'white',
   },
 });
 
 export const LoginScreen: NativeStackScreenConfig<RootStackParamList, typeof ScreenName> = {
   component: Screen,
   name: ScreenName,
-  options: () => ({
+  options: {
     title: m('ログイン'),
-    // TODO: これどうするかな
-    headerStyle: {backgroundColor: '#fafafa'},
-  }),
+  },
 };
