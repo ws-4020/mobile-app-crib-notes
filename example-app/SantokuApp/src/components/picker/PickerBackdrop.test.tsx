@@ -110,6 +110,7 @@ describe('PickerBackdrop with all props', () => {
     expect(modalProps.visible).toBe(true);
     expect(modalProps.statusBarTranslucent).toBe(false);
     expect(modalProps.animationType).toBe('fade');
+    expect(modalProps.transparent).toBe(false);
     expect(modalProps.style).toEqual({backgroundColor: 'yellow'});
     expect(modalProps.presentationStyle).toBe('fullScreen');
     expect(onPress).toHaveBeenCalledTimes(1);
