@@ -22,7 +22,8 @@ export type Item<T> = {
    * - 'backgroundColor'
    * - 'fontSize'
    * - 'fontFamily'
-   * only Android
+   *
+   * @platform android
    */
   style?: StyleProp<Pick<TextStyle, 'color' | 'backgroundColor' | 'fontSize' | 'fontFamily'>>;
 };
@@ -43,19 +44,22 @@ export type SelectPickerProps<ItemT> = {
   onSelectedItemChange?: (itemIndex: number, itemValue?: ItemT, itemKey?: React.Key) => void;
   /**
    * PickerBackdropをタップして閉じた場合に呼び出される関数
-   * iOS Only
+   *
+   * @platform ios
    */
   onDismiss?: (selectedItem: Item<ItemT> | undefined) => void;
   /**
    * DeleteLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
-   * iOS Only
+   *
+   * @platform ios
    */
   onDelete?: (selectedItem: Item<ItemT> | undefined) => void;
   /**
    * CancelLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
-   * iOS Only
+   *
+   * @platform ios
    */
   onCancel?: (selectedItem: Item<ItemT> | undefined) => void;
   /**
@@ -74,7 +78,8 @@ export type SelectPickerProps<ItemT> = {
   /**
    * ヘッダコンポーネント
    * 指定しない場合は、PickerAccessoryがデフォルトで表示されます。
-   * iOS Only
+   *
+   * @platform ios
    */
   pickerAccessoryComponent?: React.ReactNode;
   /**
@@ -99,7 +104,8 @@ export type SelectPickerProps<ItemT> = {
   textInputProps?: TextInputProps;
   /**
    * Pickerコンポーネントを囲むContainerのProps
-   * iOS Only
+   *
+   * @platform ios
    */
   pickerItemsContainerProps?: ViewProps;
   /**
@@ -108,17 +114,20 @@ export type SelectPickerProps<ItemT> = {
   pickerProps?: Omit<PickerProps<ItemT>, 'selectedValue' | 'onValueChange'>;
   /**
    * PickerBackdropのProps
-   * iOS Only
+   *
+   * @platform ios
    */
   backdropProps?: Omit<PickerBackdropProps, 'isVisible' | 'onPress'>;
   /**
    * PickerContainerのProps
-   * iOS Only
+   *
+   * @platform ios
    */
   containerProps?: Omit<PickerContainerProps, 'isVisible'>;
   /**
    * PickerAccessoryのProps
-   * iOS Only
+   *
+   * @platform ios
    */
   pickerAccessoryProps?: Omit<DefaultPickerAccessoryProps, 'onDelete' | 'onCancel' | 'onDone'>;
 };
