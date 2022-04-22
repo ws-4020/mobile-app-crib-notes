@@ -24,7 +24,7 @@ export type Item<T> = {
    * - 'fontFamily'
    * only Android
    */
-  style?: StyleProp<TextStyle>;
+  style?: StyleProp<Pick<TextStyle, 'color' | 'backgroundColor' | 'fontSize' | 'fontFamily'>>;
 };
 
 type TextInputProps = Omit<typeof Input.defaultProps, 'value' | 'editable'>;
