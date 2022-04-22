@@ -35,7 +35,10 @@ export const usePickerScreenUseCase = () => {
   const onSelectedItemChangeForItem1 = useCallback((_, __, key?: React.Key) => {
     setItems1Key(key);
   }, []);
-  const items1InputValue = useMemo(() => (items1Key ? String(items1Key) : placeholder), [items1Key]);
+  const items1InputValue = useMemo(
+    () => items1.find(item => item.key === items1Key)?.inputLabel ?? placeholder,
+    [items1Key],
+  );
   const onDismissForItem1 = useCallback((selectedItem: Item<Item1Type> | undefined) => {
     setItems1CanceledKey(selectedItem?.key);
   }, []);
@@ -54,6 +57,10 @@ export const usePickerScreenUseCase = () => {
   // Items2
   //////////////////////////////////////////////////////////////////////////////////
   const [items2Value, setItems2Value] = useState<string>();
+  const items2InputValue = useMemo(
+    () => items2.find(item => item.value === items2Value)?.inputLabel ?? placeholder,
+    [items2Value],
+  );
   const onSelectedItemChangeForItem2 = useCallback((_, value?: string | undefined, __?) => {
     setItems2Value(value);
   }, []);
@@ -77,6 +84,7 @@ export const usePickerScreenUseCase = () => {
     onDoneForItem1,
     items2,
     items2Value,
+    items2InputValue,
     onSelectedItemChangeForItem2,
     items3,
     items3Key,

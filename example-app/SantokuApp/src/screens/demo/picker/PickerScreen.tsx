@@ -20,6 +20,7 @@ const Screen: React.FC = () => {
     onDoneForItem1,
     items2,
     items2Value,
+    items2InputValue,
     onSelectedItemChangeForItem2,
     items3,
     items3Key,
@@ -48,7 +49,7 @@ const Screen: React.FC = () => {
         items={items2}
         placeholder={placeholder}
         pickerProps={{mode: 'dropdown'}}
-        textInputComponent={<Input placeholder={placeholder} value={items2Value} editable={false} />}
+        textInputComponent={<Input placeholder={placeholder} value={items2InputValue} editable={false} />}
       />
       <Text>■Android Picker mode: dialog(Android only)</Text>
       <SelectPicker
