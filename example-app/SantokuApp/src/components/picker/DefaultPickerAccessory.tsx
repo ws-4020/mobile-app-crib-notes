@@ -4,7 +4,7 @@ import {StyleSheet, TextProps, TouchableOpacityProps, View, ViewProps} from 'rea
 import {PickerAccessoryButton, PickerAccessoryButtonProps} from './PickerAccessoryButton';
 
 export type DefaultPickerAccessoryProps = {
-  pickerAccessoryContainerProps?: ViewProps;
+  containerProps?: ViewProps;
   onDelete?: () => void;
   deleteLabel?: string;
   deleteTextProps?: TextProps;
@@ -23,7 +23,7 @@ export type DefaultPickerAccessoryProps = {
 };
 
 export const DefaultPickerAccessory: React.FC<DefaultPickerAccessoryProps> = ({
-  pickerAccessoryContainerProps: {style, ...pickerAccessoryContainerProps} = {},
+  containerProps: {style, ...containerProps} = {},
   onDelete,
   deleteTextProps,
   deleteLabel,
@@ -41,7 +41,7 @@ export const DefaultPickerAccessory: React.FC<DefaultPickerAccessoryProps> = ({
   doneTouchableContainerProps,
 }) => {
   return (
-    <View style={StyleSheet.flatten([styles.container, style])} {...pickerAccessoryContainerProps}>
+    <View style={StyleSheet.flatten([styles.container, style])} {...containerProps}>
       {deleteLabel && (
         <>
           <PickerAccessoryButton
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    backgroundColor: 'white',
     paddingHorizontal: 10,
     paddingVertical: 8,
   },

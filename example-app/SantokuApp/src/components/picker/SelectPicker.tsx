@@ -114,13 +114,13 @@ export type SelectPickerProps<ItemT> = {
    *
    * @platform ios
    */
-  backdropProps?: Omit<PickerBackdropProps, 'isVisible' | 'onPress'>;
+  pickerBackdropProps?: Omit<PickerBackdropProps, 'isVisible' | 'onPress'>;
   /**
    * PickerContainerのProps
    *
    * @platform ios
    */
-  containerProps?: Omit<PickerContainerProps, 'isVisible'>;
+  pickerContainerProps?: Omit<PickerContainerProps, 'isVisible'>;
   /**
    * PickerAccessoryのProps
    *

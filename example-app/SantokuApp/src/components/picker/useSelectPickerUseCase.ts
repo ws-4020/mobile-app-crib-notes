@@ -20,8 +20,8 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
   onDelete,
   onCancel,
   onDone,
-  backdropProps: {entering: backdropEntering, exiting: backdropExiting} = {},
-  containerProps: {entering: containerEntering, exiting: containerExiting} = {},
+  pickerBackdropProps: {entering: backdropEntering, exiting: backdropExiting} = {},
+  pickerContainerProps: {entering: containerEntering, exiting: containerExiting} = {},
 }: SelectPickerProps<ItemT>) => {
   const [isVisible, setIsVisible] = useState(false);
   const close = useCallback(() => setIsVisible(false), []);

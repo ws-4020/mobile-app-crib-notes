@@ -36,8 +36,13 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
     textInputComponent,
     pickerItemsContainerProps: {style: pickerItemsContainerStyle, ...pickerItemsContainerProps} = {},
     pickerProps,
-    backdropProps: {entering: backdropEntering, exiting: backdropExiting, ...backdropProps} = {},
-    containerProps: {entering: containerEntering, exiting: containerExiting, ...containerProps} = {},
+    pickerBackdropProps: {entering: backdropEntering, exiting: backdropExiting, ...pickerBackdropProps} = {},
+    pickerContainerProps: {
+      entering: containerEntering,
+      exiting: containerExiting,
+      style: pickerContainerStyle,
+      ...pickerContainerProps
+    } = {},
     pickerAccessoryProps,
   } = props;
 
@@ -48,12 +53,13 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
         onPress={handleBackdropPress}
         entering={pickerBackdropEntering}
         exiting={pickerBackdropExiting}
-        {...backdropProps}>
+        {...pickerBackdropProps}>
         <PickerContainer
           isVisible={isVisible}
           entering={pickerContainerEntering}
           exiting={pickerContainerExiting}
-          {...containerProps}>
+          style={StyleSheet.flatten([styles.pickerContainer, pickerContainerStyle])}
+          {...pickerContainerProps}>
           {pickerAccessoryComponent ? (
             pickerAccessoryComponent
           ) : (
@@ -64,9 +70,7 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
               {...pickerAccessoryProps}
             />
           )}
-          <View
-            style={StyleSheet.flatten([styles.container, pickerItemsContainerStyle])}
-            {...pickerItemsContainerProps}>
+          <View {...pickerItemsContainerProps}>
             {pickerItemsComponent ? (
               pickerItemsComponent
             ) : (
@@ -97,7 +101,7 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
 };
 
 const styles = StyleSheet.create({
-  container: {
+  pickerContainer: {
     backgroundColor: 'white',
   },
 });

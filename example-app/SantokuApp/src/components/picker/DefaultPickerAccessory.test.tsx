@@ -70,7 +70,7 @@ describe('PickerAccessory with all props', () => {
     const onDone = jest.fn();
     const sut = render(
       <DefaultPickerAccessory
-        pickerAccessoryContainerProps={{style: {backgroundColor: 'red'}, testID: 'PickerAccessory'}}
+        containerProps={{style: {backgroundColor: 'red'}, testID: 'PickerAccessory'}}
         onDelete={onDelete}
         onCancel={onCancel}
         onDone={onDone}
@@ -129,7 +129,7 @@ describe('PickerAccessory with all props', () => {
     const onDone = jest.fn();
     const sut = render(
       <DefaultPickerAccessory
-        pickerAccessoryContainerProps={{style: {backgroundColor: 'red'}, testID: 'PickerAccessory'}}
+        containerProps={{style: {backgroundColor: 'red'}, testID: 'PickerAccessory'}}
         onDelete={onDelete}
         onCancel={onCancel}
         onDone={onDone}

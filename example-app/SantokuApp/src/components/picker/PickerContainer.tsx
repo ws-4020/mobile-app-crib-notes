@@ -1,9 +1,9 @@
 import {useWorkletCallback} from 'framework/utilities/useWorkletCallback';
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View, ViewProps} from 'react-native';
 import Reanimated, {BaseAnimationBuilder, Keyframe, SlideInDown, SlideOutDown} from 'react-native-reanimated';
 
-export type PickerContainerProps = {
+export type PickerContainerProps = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
   isVisible: boolean;
   /**
    * iOSの場合、アニメーションが終わった後に呼び出されます。
@@ -34,7 +34,9 @@ export const PickerContainer: React.FC<PickerContainerProps> = ({
   exiting = DEFAULT_EXITING,
   enteringCallback,
   exitingCallback,
+  style,
   children,
+  ...animatedViewProps
 }) => {
   const composedEnteringCallback = useWorkletCallback(enteringCallback);
   const composedExitingCallback = useWorkletCallback(exitingCallback);
@@ -42,13 +44,16 @@ export const PickerContainer: React.FC<PickerContainerProps> = ({
   return (
     <>
       {isVisible && (
-        <Reanimated.View
-          entering={entering.withCallback(composedEnteringCallback)}
-          exiting={exiting.withCallback(composedExitingCallback)}
-          style={styles.container}
-          pointerEvents="box-none">
-          {children}
-        </Reanimated.View>
+        <View style={styles.container} pointerEvents="box-none">
+          <Reanimated.View
+            style={{backgroundColor: 'white'}}
+            entering={entering.withCallback(composedEnteringCallback)}
+            exiting={exiting.withCallback(composedExitingCallback)}
+            pointerEvents="box-none"
+            {...animatedViewProps}>
+            {children}
+          </Reanimated.View>
+        </View>
       )}
     </>
   );
