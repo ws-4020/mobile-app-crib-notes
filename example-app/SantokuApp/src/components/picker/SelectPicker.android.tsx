@@ -7,45 +7,38 @@ import {useSelectPickerAndroidUseCase} from './useSelectPickerAndroidUseCase';
 
 type SelectPickerPropsAndroid<ItemT> = Omit<
   SelectPickerProps<ItemT>,
-  'headerComponent' | 'backdropProps' | 'containerProps' | 'pickerAccessoryProps' | 'pickerItemsContainerProps'
+  | 'onDismiss'
+  | 'onDelete'
+  | 'onCancel'
+  | 'pickerAccessoryComponent'
+  | 'pickerItemsComponent'
+  | 'pickerItemsContainerProps'
+  | 'pickerBackdropProps'
+  | 'pickerContainerProps'
+  | 'pickerAccessoryProps'
 >;
 
 export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsAndroid<ItemT>) => {
   const {inputValue, onValueChange} = useSelectPickerAndroidUseCase<ItemT>(props);
-  const {
-    items,
-    selectedItemKey,
-    placeholder,
-    textInputProps,
-    keyExtractor,
-    pickerItemsComponent,
-    textInputComponent,
-    pickerProps,
-  } = props;
+  const {items, selectedItemKey, placeholder, textInputProps, keyExtractor, textInputComponent, pickerProps} = props;
 
   return (
-    <>
-      {pickerItemsComponent ? (
-        pickerItemsComponent
+    <View>
+      {textInputComponent ? (
+        textInputComponent
       ) : (
-        <View>
-          {textInputComponent ? (
-            textInputComponent
-          ) : (
-            // テキスト入力とスタイルを合わせるために、TextではなくTextInputを使用する
-            <TextInput placeholder={placeholder} value={inputValue} editable={false} {...textInputProps} />
-          )}
-          <SelectPickerItems
-            selectedValue={selectedItemKey}
-            items={items}
-            onValueChange={onValueChange}
-            keyExtractor={keyExtractor}
-            style={styles.headlessPicker}
-            {...pickerProps}
-          />
-        </View>
+        // テキスト入力とスタイルを合わせるために、TextではなくTextInputを使用する
+        <TextInput placeholder={placeholder} value={inputValue} editable={false} {...textInputProps} />
       )}
-    </>
+      <SelectPickerItems
+        selectedValue={selectedItemKey}
+        items={items}
+        onValueChange={onValueChange}
+        keyExtractor={keyExtractor}
+        style={styles.headlessPicker}
+        {...pickerProps}
+      />
+    </View>
   );
 };
 

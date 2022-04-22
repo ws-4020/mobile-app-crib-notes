@@ -80,13 +80,12 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
                 onValueChange={onValueChange}
                 keyExtractor={keyExtractor}
                 {...pickerProps}
-                {...pickerItemsContainerProps}
               />
             )}
           </View>
         </PickerContainer>
       </PickerBackdrop>
-      <Pressable onPress={open}>
+      <Pressable onPress={open} testID="pressableContainer">
         <View pointerEvents="box-only">
           {textInputComponent ? (
             textInputComponent

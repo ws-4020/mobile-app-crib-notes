@@ -50,6 +50,7 @@ export type SelectPickerProps<ItemT> = {
   /**
    * DeleteLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
+   * なお、pickerAccessoryComponentを指定した場合は使用されません。
    *
    * @platform ios
    */
@@ -57,6 +58,7 @@ export type SelectPickerProps<ItemT> = {
   /**
    * CancelLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
+   * なお、pickerAccessoryComponentを指定した場合は使用されません。
    *
    * @platform ios
    */
@@ -65,6 +67,7 @@ export type SelectPickerProps<ItemT> = {
    * [iOS]
    * DoneLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
+   * なお、pickerAccessoryComponentを指定した場合は使用されません。
    *
    * [Android]
    * アイテムが選択された場合に呼び出される関数
@@ -107,6 +110,7 @@ export type SelectPickerProps<ItemT> = {
   pickerItemsContainerProps?: ViewProps;
   /**
    * PickerのProps
+   * なお、pickerItemsComponentを指定した場合は使用されません。
    */
   pickerProps?: Omit<PickerProps<ItemT>, 'selectedValue' | 'onValueChange'>;
   /**
@@ -123,6 +127,7 @@ export type SelectPickerProps<ItemT> = {
   pickerContainerProps?: Omit<PickerContainerProps, 'isVisible'>;
   /**
    * PickerAccessoryのProps
+   * なお、pickerAccessoryComponentを指定した場合は使用されません。
    *
    * @platform ios
    */
