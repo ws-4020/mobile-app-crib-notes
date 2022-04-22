@@ -1,6 +1,7 @@
 import {usePrevious, useVisibility} from 'framework/utilities';
 import {useCallback, useEffect} from 'react';
-import {runOnJS} from 'react-native-reanimated';
+
+import {useWorkletCallback} from '../../framework/utilities/useWorkletCallback';
 
 type BackdropAnimationConfig = {
   isVisible: boolean;
@@ -19,26 +20,17 @@ export const usePickerBackdropUseCase = ({isVisible, enteringCallback, exitingCa
     setModalVisible();
   }, [setModalVisible]);
 
-  const composedEnteringCallback = useCallback(
-    (finished: boolean) => {
-      'worklet';
-      if (enteringCallback) {
-        runOnJS(enteringCallback)(finished);
-      }
-    },
-    [enteringCallback],
-  );
-
+  const composedEnteringWorkletCallback = useWorkletCallback(enteringCallback);
   const composedExitingCallback = useCallback(
     (finished: boolean) => {
-      'worklet';
-      runOnJS(setModalInvisible)();
+      setModalInvisible();
       if (exitingCallback) {
-        runOnJS(exitingCallback)(finished);
+        exitingCallback(finished);
       }
     },
     [setModalInvisible, exitingCallback],
   );
+  const composedExitingWorkletCallback = useWorkletCallback(composedExitingCallback);
 
   const isVisiblePrevious = usePrevious(isVisible);
   useEffect(() => {
@@ -50,7 +42,7 @@ export const usePickerBackdropUseCase = ({isVisible, enteringCallback, exitingCa
   return {
     isModalVisible,
     show,
-    composedEnteringCallback,
-    composedExitingCallback,
+    composedEnteringCallback: composedEnteringWorkletCallback,
+    composedExitingCallback: composedExitingWorkletCallback,
   };
 };

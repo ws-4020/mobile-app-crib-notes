@@ -1,6 +1,7 @@
-import React, {useCallback} from 'react';
+import {useWorkletCallback} from 'framework/utilities/useWorkletCallback';
+import React from 'react';
 import {StyleSheet} from 'react-native';
-import Reanimated, {BaseAnimationBuilder, runOnJS, SlideInDown, SlideOutDown, Keyframe} from 'react-native-reanimated';
+import Reanimated, {BaseAnimationBuilder, Keyframe, SlideInDown, SlideOutDown} from 'react-native-reanimated';
 
 export type PickerContainerProps = {
   isVisible: boolean;
@@ -35,25 +36,8 @@ export const PickerContainer: React.FC<PickerContainerProps> = ({
   exitingCallback,
   children,
 }) => {
-  const composedEnteringCallback = useCallback(
-    (finished: boolean) => {
-      'worklet';
-      if (enteringCallback) {
-        runOnJS(enteringCallback)(finished);
-      }
-    },
-    [enteringCallback],
-  );
-
-  const composedExitingCallback = useCallback(
-    (finished: boolean) => {
-      'worklet';
-      if (exitingCallback) {
-        runOnJS(exitingCallback)(finished);
-      }
-    },
-    [exitingCallback],
-  );
+  const composedEnteringCallback = useWorkletCallback(enteringCallback);
+  const composedExitingCallback = useWorkletCallback(exitingCallback);
 
   return (
     <>
