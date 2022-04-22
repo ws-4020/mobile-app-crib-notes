@@ -119,10 +119,7 @@ describe('PickerBackdrop with all props', () => {
     fireEvent.press(pressable);
     fireEvent(pressable, 'onLongPress');
     const pressableProps = pressable.props as PressableProps;
-    expect(pressableProps.style).toEqual([
-      {bottom: 0, display: 'flex', left: 0, position: 'absolute', right: 0, top: 0},
-      {display: 'none'},
-    ]);
+    expect(pressableProps.style).toEqual({bottom: 0, display: 'none', left: 0, position: 'absolute', right: 0, top: 0});
     expect(onPress).toHaveBeenCalledTimes(2);
     expect(onLongPress).toHaveBeenCalledTimes(1);
 
