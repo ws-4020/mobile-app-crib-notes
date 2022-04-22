@@ -94,7 +94,7 @@ describe('PickerBackdrop with all props', () => {
         }}
         pressableProps={{testID: 'pressable', style: {display: 'none'}, onLongPress}}
         animatedProps={{pointerEvents: 'none'}}
-        style={{flex: 2, backgroundColor: 'green'}}
+        style={{backgroundColor: 'green', borderColor: 'red'}}
         entering={entering}
         exiting={exiting}
       />,
@@ -127,7 +127,7 @@ describe('PickerBackdrop with all props', () => {
 
     // assert animatedView
     const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
-    expect(animatedViewProps.style).toEqual({flex: 2, backgroundColor: 'green'});
+    expect(animatedViewProps.style).toEqual({flex: 1, backgroundColor: 'green', borderColor: 'red'});
     expect(animatedViewProps.entering).toBe(entering);
     expect(animatedViewProps.exiting).toBe(exiting);
   });
