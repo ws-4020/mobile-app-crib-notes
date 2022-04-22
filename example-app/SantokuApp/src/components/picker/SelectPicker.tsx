@@ -1,8 +1,7 @@
 import {PickerProps} from '@react-native-picker/picker';
 import {log} from 'framework/logging';
 import React from 'react';
-import {Platform, StyleProp, TextStyle, ViewProps} from 'react-native';
-import {Input} from 'react-native-elements';
+import {Platform, StyleProp, TextStyle, TextInputProps as RNETextInputProps, ViewProps} from 'react-native';
 
 import {DefaultPickerAccessoryProps} from './DefaultPickerAccessory';
 import {PickerBackdropProps} from './PickerBackdrop';
@@ -28,7 +27,7 @@ export type Item<T> = {
   style?: StyleProp<Pick<TextStyle, 'color' | 'backgroundColor' | 'fontSize' | 'fontFamily'>>;
 };
 
-type TextInputProps = Omit<typeof Input.defaultProps, 'value' | 'editable'>;
+type TextInputProps = Omit<RNETextInputProps, 'value' | 'editable'>;
 export type SelectPickerProps<ItemT> = {
   /**
    * SelectPickerに表示するアイテム

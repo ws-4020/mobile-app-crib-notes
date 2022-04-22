@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 
 import {Item} from '../../../components/picker/SelectPicker';
 
@@ -24,6 +24,8 @@ const items3 = [
   {value: '3', label: 'test3', key: '3', inputLabel: 'テスト3'},
 ];
 
+const placeholder = 'please select...';
+
 export const usePickerScreenUseCase = () => {
   //////////////////////////////////////////////////////////////////////////////////
   // Items1
@@ -33,6 +35,7 @@ export const usePickerScreenUseCase = () => {
   const onSelectedItemChangeForItem1 = useCallback((_, __, key?: React.Key) => {
     setItems1Key(key);
   }, []);
+  const items1InputValue = useMemo(() => (items1Key ? String(items1Key) : placeholder), [items1Key]);
   const onDismissForItem1 = useCallback((selectedItem: Item<Item1Type> | undefined) => {
     setItems1CanceledKey(selectedItem?.key);
   }, []);
@@ -66,6 +69,7 @@ export const usePickerScreenUseCase = () => {
   return {
     items1,
     items1Key,
+    items1InputValue,
     onSelectedItemChangeForItem1,
     onDismissForItem1,
     onDeleteForItem1,
@@ -77,5 +81,6 @@ export const usePickerScreenUseCase = () => {
     items3,
     items3Key,
     onSelectedItemChangeForItem3,
+    placeholder,
   };
 };

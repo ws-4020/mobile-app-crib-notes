@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, Pressable, View} from 'react-native';
-import {Input} from 'react-native-elements';
+import {Pressable, StyleSheet, TextInput, View} from 'react-native';
 
 import {DefaultPickerAccessory} from './DefaultPickerAccessory';
 import {PickerBackdrop} from './PickerBackdrop';
@@ -88,8 +87,8 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<
           {textInputComponent ? (
             textInputComponent
           ) : (
-            // テキスト入力とスタイルを合わせるために、TextではなくInputを使用する
-            <Input placeholder={placeholder} value={inputValue} editable={false} {...textInputProps} />
+            // テキスト入力とスタイルを合わせるために、TextではなくTextInputを使用する
+            <TextInput placeholder={placeholder} value={inputValue} editable={false} {...textInputProps} />
           )}
         </View>
       </Pressable>
