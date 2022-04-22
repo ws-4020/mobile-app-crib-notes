@@ -43,11 +43,7 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
   );
   const getSelectedItem = useCallback(
     (key?: React.Key | ItemT) => {
-      let selectedItem;
-      if (key) {
-        selectedItem = items.find(item => item.key === key);
-      }
-      return selectedItem ?? items.find(item => item.value === key);
+      return items.find(item => item.key === key || item.value === key);
     },
     [items],
   );
