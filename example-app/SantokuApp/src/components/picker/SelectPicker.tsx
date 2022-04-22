@@ -88,7 +88,6 @@ export type SelectPickerProps<ItemT> = {
   pickerItemsComponent?: React.ReactNode;
   /**
    * 選択されたアイテムを表示するテキストコンポーネント
-   * Androidでは、useNativeAndroidPickerStyleがfalseの場合のみ指定できます。
    */
   textInputComponent?: React.ReactNode;
   /**
@@ -97,7 +96,6 @@ export type SelectPickerProps<ItemT> = {
   keyExtractor?: ((item: ItemT, index: number) => React.Key) | undefined;
   /**
    * 選択されたアイテムを表示するテキストコンポーネントのProps
-   * Androidでは、useNativeAndroidPickerStyleがfalseの場合のみ指定できます。
    * なお、textInputComponentを指定した場合は使用されません。
    */
   textInputProps?: TextInputProps;

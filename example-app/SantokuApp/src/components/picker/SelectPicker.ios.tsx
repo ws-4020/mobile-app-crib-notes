@@ -8,7 +8,7 @@ import {SelectPickerProps} from './SelectPicker';
 import {SelectPickerItems} from './SelectPickerItems';
 import {useSelectPickerIOSUseCase} from './useSelectPickerIOSUseCase';
 
-export type SelectPickerPropsIOS<ItemT> = Omit<SelectPickerProps<ItemT>, 'useNativeAndroidPickerStyle'>;
+export type SelectPickerPropsIOS<ItemT> = SelectPickerProps<ItemT>;
 
 export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<ItemT>) => {
   const {
