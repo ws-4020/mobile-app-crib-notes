@@ -1,7 +1,6 @@
 import {usePrevious, useVisibility} from 'framework/utilities';
+import {useWorkletCallback} from 'framework/utilities/useWorkletCallback';
 import {useCallback, useEffect} from 'react';
-
-import {useWorkletCallback} from '../../framework/utilities/useWorkletCallback';
 
 type BackdropAnimationConfig = {
   isVisible: boolean;
