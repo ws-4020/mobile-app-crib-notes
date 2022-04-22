@@ -1,26 +1,23 @@
-import {renderHook, WrapperComponent} from '@testing-library/react-hooks';
+import {renderHook} from '@testing-library/react-hooks';
 import {WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
-import {AppInitialData} from 'framework/initialize/types';
 import React from 'react';
 import {MutationCache, QueryCache} from 'react-query';
 
-import {useDefaultQueryCache, useDefaultMutationCache} from './useDefaultCache';
+import {useDefaultMutationCache, useDefaultQueryCache} from './useDefaultCache';
 
-const wrapper: WrapperComponent<React.ProviderProps<AppInitialData>> = ({children, value}) => {
+const Wrapper: React.FC = ({children}) => {
+  const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};
   return (
     <WithSnackbar>
-      <WithAccountContext initialData={value}>{children}</WithAccountContext>
+      <WithAccountContext initialData={initialData}>{children}</WithAccountContext>
     </WithSnackbar>
   );
 };
 
 describe('useDefaultQueryCache', () => {
   test('onErrorが設定されたQueryCacheを取得できること', () => {
-    const {result} = renderHook(() => useDefaultQueryCache(), {
-      wrapper,
-      initialProps: {value: {accountData: {account: {accountId: '123456789', deviceTokens: []}}}},
-    });
+    const {result} = renderHook(() => useDefaultQueryCache(), {wrapper: Wrapper});
     const defaultQueryCache = result.current;
     expect(defaultQueryCache).toBeInstanceOf(QueryCache);
     expect(defaultQueryCache.config.onError).not.toBeUndefined();
@@ -29,10 +26,7 @@ describe('useDefaultQueryCache', () => {
 
 describe('useDefaultMutationCache', () => {
   test('onErrorが設定されたMutationCacheを取得できること', () => {
-    const {result} = renderHook(() => useDefaultMutationCache(), {
-      wrapper,
-      initialProps: {value: {accountData: {account: {accountId: '123456789', deviceTokens: []}}}},
-    });
+    const {result} = renderHook(() => useDefaultMutationCache(), {wrapper: Wrapper});
     const defaultQueryCache = result.current;
     expect(defaultQueryCache).toBeInstanceOf(MutationCache);
     expect(defaultQueryCache.config.onError).not.toBeUndefined();

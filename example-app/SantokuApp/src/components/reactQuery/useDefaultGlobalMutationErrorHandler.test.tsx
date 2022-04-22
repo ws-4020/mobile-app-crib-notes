@@ -1,9 +1,8 @@
-import {renderHook, WrapperComponent} from '@testing-library/react-hooks';
+import {renderHook} from '@testing-library/react-hooks';
 import {AxiosError} from 'axios';
 import {useSnackbar, WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
 import {loadBundledMessagesAsync} from 'framework/initialize/helpers';
-import {AppInitialData} from 'framework/initialize/types';
 import React from 'react';
 import {Mutation} from 'react-query';
 
@@ -12,8 +11,9 @@ import {useDefaultGlobalMutationErrorHandler} from './useDefaultGlobalMutationEr
 jest.mock('components/overlay/snackbar/WithSnackbar');
 jest.mock('framework/logging');
 
-const wrapper: WrapperComponent<React.ProviderProps<AppInitialData>> = ({children, value}) => {
-  return <WithAccountContext initialData={value}>{children}</WithAccountContext>;
+const Wrapper: React.FC = ({children}) => {
+  const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};
+  return <WithAccountContext initialData={initialData}>{children}</WithAccountContext>;
 };
 
 describe('useDefaultGlobalMutationErrorHandler', () => {
@@ -41,10 +41,7 @@ describe('useDefaultGlobalMutationErrorHandler', () => {
       toJSON: () => {},
     } as unknown as AxiosError;
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalMutationErrorHandler(), {
-      wrapper,
-      initialProps: {value: {accountData: {account: {accountId: '123456789', deviceTokens: []}}}},
-    });
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalMutationErrorHandler(), {wrapper: Wrapper});
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError, jest.fn(), jest.fn(), mutation);
     expect(mockSnackbarShow).toBeCalledWith(
@@ -66,10 +63,7 @@ describe('useDefaultGlobalMutationErrorHandler', () => {
       toJSON: () => {},
     } as unknown as AxiosError;
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalMutationErrorHandler(), {
-      wrapper,
-      initialProps: {value: {accountData: {account: {accountId: '123456789', deviceTokens: []}}}},
-    });
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalMutationErrorHandler(), {wrapper: Wrapper});
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError, jest.fn(), jest.fn(), mutation);
     expect(mockSnackbarShow).not.toBeCalled();
