@@ -22,6 +22,7 @@ const mock: Omit<
   recordError: jest.fn(),
 };
 
+// 複数のファイルでcrashlyticsをimportしていた場合に、redefineされないようにモックが存在するか確認
 if (!__mocks.crashlytics) {
   Object.defineProperty(__mocks, 'crashlytics', {value: mock});
 }
