@@ -1,7 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {WithReactQuery} from './components/reactQuery';
 import {WithAccountContext} from './context/WithAccountContext';
@@ -44,17 +43,15 @@ export const AppWithInitialization: React.FC = () => {
     const WithFirebaseMessagingHandlers = require('./framework/firebase/WithFirebaseMessagingHandlers')
       .WithFirebaseMessagingHandlers as InitialDataDependingComponent;
     return (
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <WithAccountContext initialData={initializationResult.data}>
-            <WithReactQuery>
-              <WithFirebaseMessagingHandlers initialData={initializationResult.data}>
-                <RootStackNav initialData={initializationResult.data} />
-              </WithFirebaseMessagingHandlers>
-            </WithReactQuery>
-          </WithAccountContext>
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <NavigationContainer>
+        <WithAccountContext initialData={initializationResult.data}>
+          <WithReactQuery>
+            <WithFirebaseMessagingHandlers initialData={initializationResult.data}>
+              <RootStackNav initialData={initializationResult.data} />
+            </WithFirebaseMessagingHandlers>
+          </WithReactQuery>
+        </WithAccountContext>
+      </NavigationContainer>
     );
   }
 };
