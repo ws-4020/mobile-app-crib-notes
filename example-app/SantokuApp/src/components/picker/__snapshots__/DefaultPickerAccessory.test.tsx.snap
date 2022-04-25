@@ -33,14 +33,13 @@ exports[`PickerAccessory with all props should be applied properly with custom t
     <Text
       style={
         Object {
-          "color": "yellow",
-          "fontWeight": "bold",
-          "paddingHorizontal": 10,
+          "backgroundColor": "yellow",
+          "color": "grey",
         }
       }
       testID="deleteText"
     >
-      delete
+      deleteWithRNEText
     </Text>
   </View>
   <View
@@ -70,14 +69,13 @@ exports[`PickerAccessory with all props should be applied properly with custom t
     <Text
       style={
         Object {
-          "color": "green",
-          "fontWeight": "bold",
-          "paddingHorizontal": 10,
+          "backgroundColor": "green",
+          "color": "black",
         }
       }
       testID="cancelText"
     >
-      cancel
+      cancelWithRNEText
     </Text>
   </View>
   <View
@@ -100,14 +98,13 @@ exports[`PickerAccessory with all props should be applied properly with custom t
     <Text
       style={
         Object {
-          "color": "aqua",
-          "fontWeight": "bold",
-          "paddingHorizontal": 10,
+          "backgroundColor": "aqua",
+          "color": "blue",
         }
       }
       testID="doneText"
     >
-      done
+      doneWithRNEText
     </Text>
   </View>
 </View>

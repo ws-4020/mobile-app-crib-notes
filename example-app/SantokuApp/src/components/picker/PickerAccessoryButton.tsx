@@ -5,7 +5,7 @@ export type PickerAccessoryButtonProps = {
   onPress?: () => unknown;
   defaultStyle: StyleProp<TextStyle>;
   textProps?: TextProps;
-  TextComponent?: React.ComponentType;
+  textComponent?: React.ReactNode;
   touchableContainerProps?: Omit<TouchableOpacityProps, 'onPress'>;
   label: string;
 };
@@ -13,15 +13,19 @@ const PickerAccessoryButtonComponent: React.FC<PickerAccessoryButtonProps> = ({
   onPress,
   defaultStyle,
   textProps: {style: textStyle, ...textProps} = {},
-  TextComponent = Text,
+  textComponent,
   touchableContainerProps,
   label,
 }) => {
   return (
     <TouchableOpacity onPress={onPress} {...touchableContainerProps}>
-      <TextComponent style={StyleSheet.flatten([defaultStyle, textStyle])} {...textProps}>
-        {label}
-      </TextComponent>
+      {textComponent ? (
+        textComponent
+      ) : (
+        <Text style={StyleSheet.flatten([defaultStyle, textStyle])} {...textProps}>
+          {label}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 };

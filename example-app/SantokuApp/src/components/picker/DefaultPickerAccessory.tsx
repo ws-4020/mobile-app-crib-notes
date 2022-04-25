@@ -8,17 +8,17 @@ export type DefaultPickerAccessoryProps = {
   onDelete?: () => void;
   deleteLabel?: string;
   deleteTextProps?: TextProps;
-  deleteTextComponent?: PickerAccessoryButtonProps['TextComponent'];
+  deleteTextComponent?: PickerAccessoryButtonProps['textComponent'];
   deleteTouchableContainerProps?: TouchableOpacityProps;
   onCancel?: () => void;
   cancelLabel?: string;
   cancelTextProps?: TextProps;
-  cancelTextComponent?: PickerAccessoryButtonProps['TextComponent'];
+  cancelTextComponent?: PickerAccessoryButtonProps['textComponent'];
   cancelTouchableContainerProps?: TouchableOpacityProps;
   onDone?: () => void;
   doneLabel?: string;
   doneTextProps?: TextProps;
-  doneTextComponent?: PickerAccessoryButtonProps['TextComponent'];
+  doneTextComponent?: PickerAccessoryButtonProps['textComponent'];
   doneTouchableContainerProps?: TouchableOpacityProps;
 };
 
@@ -48,7 +48,7 @@ export const DefaultPickerAccessory: React.FC<DefaultPickerAccessoryProps> = ({
             onPress={onDelete}
             defaultStyle={styles.destructiveTextStyle}
             textProps={deleteTextProps}
-            TextComponent={deleteTextComponent}
+            textComponent={deleteTextComponent}
             touchableContainerProps={deleteTouchableContainerProps}
             label={deleteLabel}
           />
@@ -60,7 +60,7 @@ export const DefaultPickerAccessory: React.FC<DefaultPickerAccessoryProps> = ({
           onPress={onCancel}
           defaultStyle={styles.cancelTextStyle}
           textProps={cancelTextProps}
-          TextComponent={cancelTextComponent}
+          textComponent={cancelTextComponent}
           touchableContainerProps={cancelTouchableContainerProps}
           label={cancelLabel}
         />
@@ -70,7 +70,7 @@ export const DefaultPickerAccessory: React.FC<DefaultPickerAccessoryProps> = ({
           onPress={onDone}
           defaultStyle={styles.okTextStyle}
           textProps={doneTextProps}
-          TextComponent={doneTextComponent}
+          textComponent={doneTextComponent}
           touchableContainerProps={doneTouchableContainerProps}
           label={doneLabel}
         />

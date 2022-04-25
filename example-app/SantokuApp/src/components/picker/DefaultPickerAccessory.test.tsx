@@ -1,7 +1,7 @@
 import {fireEvent, render} from '@testing-library/react-native';
 import React from 'react';
 import {ViewProps} from 'react-native';
-import {Text as RNEText, TextProps} from 'react-native-elements';
+import {Text, TextProps} from 'react-native-elements';
 
 import {DefaultPickerAccessory} from './DefaultPickerAccessory';
 
@@ -127,6 +127,21 @@ describe('PickerAccessory with all props', () => {
     const onDelete = jest.fn();
     const onCancel = jest.fn();
     const onDone = jest.fn();
+    const DeleteTextComponent = (
+      <Text style={{color: 'grey', backgroundColor: 'yellow'}} testID="deleteText">
+        deleteWithRNEText
+      </Text>
+    );
+    const CancelTextComponent = (
+      <Text style={{color: 'black', backgroundColor: 'green'}} testID="cancelText">
+        cancelWithRNEText
+      </Text>
+    );
+    const DoneTextComponent = (
+      <Text style={{color: 'blue', backgroundColor: 'aqua'}} testID="doneText">
+        doneWithRNEText
+      </Text>
+    );
     const sut = render(
       <DefaultPickerAccessory
         containerProps={{style: {backgroundColor: 'red'}, testID: 'PickerAccessory'}}
@@ -142,9 +157,9 @@ describe('PickerAccessory with all props', () => {
         deleteTouchableContainerProps={{testID: 'deleteLink'}}
         cancelTouchableContainerProps={{testID: 'cancelLink'}}
         doneTouchableContainerProps={{testID: 'doneLink'}}
-        deleteTextComponent={RNEText}
-        cancelTextComponent={RNEText}
-        doneTextComponent={RNEText}
+        deleteTextComponent={DeleteTextComponent}
+        cancelTextComponent={CancelTextComponent}
+        doneTextComponent={DoneTextComponent}
       />,
     );
     expect(sut).toMatchSnapshot('PickerAccessory with all props(custom text component ).');
@@ -155,9 +170,9 @@ describe('PickerAccessory with all props', () => {
     const deleteTextComponent = sut.getByTestId('deleteText');
     const cancelTextComponent = sut.getByTestId('cancelText');
     const doneTextComponent = sut.getByTestId('doneText');
-    const deleteText = sut.queryByText('delete');
-    const cancelText = sut.queryByText('cancel');
-    const doneText = sut.queryByText('done');
+    const deleteText = sut.queryByText('deleteWithRNEText');
+    const cancelText = sut.queryByText('cancelWithRNEText');
+    const doneText = sut.queryByText('doneWithRNEText');
 
     fireEvent.press(deleteLink);
     fireEvent.press(cancelLink);
@@ -177,9 +192,9 @@ describe('PickerAccessory with all props', () => {
     expect(onDelete).toHaveBeenCalledTimes(1);
     expect(onCancel).toHaveBeenCalledTimes(1);
     expect(onDone).toHaveBeenCalledTimes(1);
-    expect(deleteTextProps.style).toEqual({color: 'yellow', fontWeight: 'bold', paddingHorizontal: 10});
-    expect(cancelTextProps.style).toEqual({color: 'green', fontWeight: 'bold', paddingHorizontal: 10});
-    expect(doneTextProps.style).toEqual({color: 'aqua', fontWeight: 'bold', paddingHorizontal: 10});
+    expect(deleteTextProps.style).toEqual({color: 'grey', backgroundColor: 'yellow'});
+    expect(cancelTextProps.style).toEqual({color: 'black', backgroundColor: 'green'});
+    expect(doneTextProps.style).toEqual({color: 'blue', backgroundColor: 'aqua'});
     expect(deleteText).not.toBeNull();
     expect(cancelText).not.toBeNull();
     expect(doneText).not.toBeNull();
