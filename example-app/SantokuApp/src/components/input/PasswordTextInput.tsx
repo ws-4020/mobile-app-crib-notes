@@ -1,5 +1,6 @@
-import React, {useCallback, useMemo, useState} from 'react';
-import {StyleSheet, View, GestureResponderEvent, Platform, ColorValue, KeyboardTypeOptions} from 'react-native';
+import {useVisibility} from 'framework/utilities';
+import React, {useMemo} from 'react';
+import {ColorValue, GestureResponderEvent, KeyboardTypeOptions, Platform, StyleSheet, View} from 'react-native';
 
 import {IconButton} from '../button';
 import {TextInput, TextInputProps} from './TextInput';
@@ -53,18 +54,6 @@ const RightIcons: React.FC<RightIconsProps> = ({
   );
 };
 
-const useTogglePasswordVisibility = () => {
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
-
-  const togglePasswordVisibility = useCallback(() => {
-    setPasswordVisibility(v => !v);
-  }, []);
-  return {
-    passwordVisible: passwordVisibility,
-    togglePasswordVisibility,
-  };
-};
-
 export type PasswordTextInputProps = Omit<TextInputProps, 'iconSize'> & {
   clearButtonSize?: number;
   passwordVisibilityButtonSize?: number;
@@ -72,7 +61,7 @@ export type PasswordTextInputProps = Omit<TextInputProps, 'iconSize'> & {
 
 export const PasswordTextInput: React.FC<PasswordTextInputProps> = React.forwardRef(
   ({showClearButton, onClearButtonPress, clearButtonSize, passwordVisibilityButtonSize, iconColor, ...props}, ref) => {
-    const {passwordVisible, togglePasswordVisibility} = useTogglePasswordVisibility();
+    const {isVisible: passwordVisible, toggleVisibility: togglePasswordVisibility} = useVisibility();
 
     const keyboardType = Platform.select<KeyboardTypeOptions>({
       ios: 'ascii-capable',
