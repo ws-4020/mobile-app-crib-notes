@@ -68,7 +68,7 @@ export const usePickerScreenUseCase = () => {
   //////////////////////////////////////////////////////////////////////////////////
   // Items3
   //////////////////////////////////////////////////////////////////////////////////
-  const [items3Key, setItems3Key] = useState<React.Key>();
+  const [items3Key, setItems3Key] = useState<React.Key | undefined>('1');
   const onSelectedItemChangeForItem3 = useCallback((_, __, key?: React.Key) => {
     setItems3Key(key);
   }, []);
