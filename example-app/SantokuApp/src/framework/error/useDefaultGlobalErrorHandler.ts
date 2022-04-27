@@ -1,11 +1,15 @@
 import axios from 'axios';
 import {useSnackbar} from 'components/overlay';
-import {m, log} from 'framework';
+import {AuthenticationService} from 'framework/authentication';
 import {isApplicationError} from 'framework/error/ApplicationError';
 import {RequestTimeoutError} from 'framework/error/RequestTimeoutError';
 import {sendErrorLog} from 'framework/error/sendErrorLog';
+import {log} from 'framework/logging';
+import {m} from 'framework/message';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
+
+import {useSetAccountContext} from '../../context/useSetAccountContext';
 
 const outDebugLog = (error: unknown) => {
   try {
@@ -32,11 +36,14 @@ res.body=[${JSON.stringify(error.response?.data, null, 2)}]
 
 export const useDefaultGlobalErrorHandler = () => {
   const snackbar = useSnackbar();
+  const setAccountContext = useSetAccountContext();
 
   const showRequireLoginDialog = useCallback(() => {
-    // TODO: 認証機能の組み込みが終わったら、ダイアログから認証済状態を解除してログイン画面へ遷移できるようにする
-    Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
-  }, []);
+    AuthenticationService.clientLogout().finally(() => {
+      setAccountContext(undefined);
+      Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
+    });
+  }, [setAccountContext]);
 
   const showRequireTermsOfServiceAgreementDialog = useCallback(() => {
     Alert.alert(m('fw.error.利用規約未同意タイトル'), m('fw.error.利用規約未同意本文'));

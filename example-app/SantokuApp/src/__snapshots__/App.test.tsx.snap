@@ -12,8 +12,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
     }
   }
 >
-  <RNCSafeAreaProvider
-    onInsetsChange={[Function]}
+  <View
     style={
       Array [
         Object {
@@ -243,7 +242,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
         </View>
       </View>
     </View>
-  </RNCSafeAreaProvider>
+  </View>
   <View
     testID="FullWindowOverlay"
   />
