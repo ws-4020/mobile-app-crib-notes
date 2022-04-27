@@ -1,7 +1,5 @@
+import {Item, YearMonth, YearMonthUtil} from 'components/picker';
 import React, {useCallback, useMemo, useState} from 'react';
-
-import {Item} from '../../../components/picker/SelectPicker';
-import {YearMonth, YearMonthUtil} from '../../../components/picker/YearMonth';
 
 type Item1Type = {
   a: string;

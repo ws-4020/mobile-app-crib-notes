@@ -1,4 +1,4 @@
-import {YearMonthUtil} from './YearMonth';
+import {YearMonthUtil} from './YearMonthUtil';
 
 describe('YearMonthUtil#now', () => {
   beforeAll(() => {
@@ -18,6 +18,18 @@ describe('YearMonthUtil#now', () => {
 describe('YearMonthUtil#fromDate', () => {
   test('should get specified year and month', () => {
     expect(YearMonthUtil.fromDate(new Date(2021, 11))).toEqual({year: 2021, month: 12});
+  });
+});
+
+describe('YearMonthUtil#toDate', () => {
+  test('should get undefined if year does not exist', () => {
+    expect(YearMonthUtil.toDate({year: undefined, month: 1})).toBeUndefined();
+  });
+  test('should get only year if month does not exist', () => {
+    expect(YearMonthUtil.toDate({year: 2022, month: undefined})).toEqual(new Date(2022));
+  });
+  test('should get year and month if year and month exists', () => {
+    expect(YearMonthUtil.toDate({year: 2022, month: 2})).toEqual(new Date(2022, 1));
   });
 });
 

@@ -10,8 +10,9 @@ import {
   DEFAULT_EXITING as DEFAULT_PICKER_CONTAINER_EXITING,
 } from './PickerContainer';
 import {Item} from './SelectPicker';
-import {YearMonth, YearMonthUtil} from './YearMonth';
+import {YearMonth} from './YearMonth';
 import {YearMonthPickerProps} from './YearMonthPicker';
+import {YearMonthUtil} from './YearMonthUtil';
 
 const DEFAULT_DURATION = 500;
 

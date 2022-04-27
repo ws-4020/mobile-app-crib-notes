@@ -6,8 +6,8 @@ import {ApplicationError} from '../../framework/error/ApplicationError';
 import {PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainerProps} from './PickerContainer';
 import {SelectPickerItemsProps} from './SelectPickerItems';
-import {YearMonthUtil} from './YearMonth';
 import {YearMonthPicker} from './YearMonthPicker.ios';
+import {YearMonthUtil} from './YearMonthUtil';
 
 describe('YearMonthPicker only with required props', () => {
   it('renders successfully if invisible', () => {

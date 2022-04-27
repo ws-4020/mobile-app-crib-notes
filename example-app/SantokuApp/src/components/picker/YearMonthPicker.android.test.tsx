@@ -4,8 +4,8 @@ import {TextInputProps, ViewProps} from 'react-native';
 
 import {ApplicationError} from '../../framework/error/ApplicationError';
 import {SelectPickerItemsProps} from './SelectPickerItems';
-import {YearMonthUtil} from './YearMonth';
 import {YearMonthPicker} from './YearMonthPicker.android';
+import {YearMonthUtil} from './YearMonthUtil';
 
 describe('YearMonthPicker only with required props', () => {
   it('renders successfully', () => {
