@@ -2,7 +2,7 @@ import {YearMonthUtil} from './YearMonth';
 
 describe('YearMonthUtil#now', () => {
   beforeAll(() => {
-    const mockDate = new Date(1643641200000);
+    const mockDate = new Date(2022, 1);
     jest.useFakeTimers('modern');
     jest.setSystemTime(mockDate);
   });
