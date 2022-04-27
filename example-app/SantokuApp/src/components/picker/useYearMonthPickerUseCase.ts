@@ -64,34 +64,6 @@ export const useYearMonthPickerUseCase = ({
     );
     return unselectItem ? [unselectItem].concat(items) : items;
   }, [itemColor, itemFontFamily, itemStyle, maximumYearMonth.year, minimumYearMonth.year, unselectItem]);
-  const monthItems = useMemo(() => {
-    const maximumYear = maximumYearMonth.year;
-    const minimumYear = minimumYearMonth.year;
-    const maximumMonth = maximumYearMonth.month;
-    const minimumMonth = minimumYearMonth.month;
-    if (maximumYear === minimumYear) {
-      const items = [...Array<number>(maximumMonth - minimumMonth + 1)].map((_, index: number) => {
-        const m = minimumMonth + index;
-        return {value: m, label: String(m), color: itemColor, fontFamily: itemFontFamily, style: itemStyle};
-      });
-      return unselectItem ? [unselectItem].concat(items) : items;
-    }
-    const items = [...Array<number>(12)].map((_, index: number) => {
-      const m = index + 1;
-      return {value: m, label: String(m), color: itemColor, fontFamily: itemFontFamily, style: itemStyle};
-    });
-
-    return unselectItem ? [unselectItem].concat(items) : items;
-  }, [
-    itemColor,
-    itemFontFamily,
-    itemStyle,
-    maximumYearMonth.month,
-    maximumYearMonth.year,
-    minimumYearMonth.month,
-    minimumYearMonth.year,
-    unselectItem,
-  ]);
   const selectedYear = selectedValue?.year;
   const selectedMonth = selectedValue?.month;
 
@@ -153,7 +125,6 @@ export const useYearMonthPickerUseCase = ({
     selectedYear,
     selectedMonth,
     yearItems,
-    monthItems,
     getSelectedYearMonth,
     onValueChangeYear,
     onValueChangeMonth,

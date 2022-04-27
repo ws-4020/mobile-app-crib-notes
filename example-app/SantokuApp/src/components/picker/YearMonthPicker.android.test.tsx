@@ -39,7 +39,7 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
   it('same yearMonth', () => {
     const yearMonth = {year: 2022, month: 4};
     const sut = render(
-      <YearMonthPicker maximumYearMonth={yearMonth} minimumYearMonth={yearMonth} selectedValue={yearMonth} />,
+      <YearMonthPicker maximumYearMonth={yearMonth} minimumYearMonth={yearMonth} selectedValue={undefined} />,
     );
 
     const yearPicker = sut.getByTestId('yearPicker');
@@ -48,6 +48,21 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
     const monthPicker = sut.getByTestId('monthPicker');
     const monthPickerProps = monthPicker.props as SelectPickerItemsProps<string>;
     expect(monthPickerProps.items).toEqual([{value: 4, label: '4'}]);
+
+    sut.update(
+      <YearMonthPicker
+        maximumYearMonth={yearMonth}
+        minimumYearMonth={yearMonth}
+        selectedValue={{year: yearMonth.year}}
+      />,
+    );
+
+    const yearPicker2 = sut.getByTestId('yearPicker');
+    const yearPickerProps2 = yearPicker2.props as SelectPickerItemsProps<string>;
+    expect(yearPickerProps2.items).toEqual([{value: 2022, label: '2022'}]);
+    const monthPicker2 = sut.getByTestId('monthPicker');
+    const monthPickerProps2 = monthPicker2.props as SelectPickerItemsProps<string>;
+    expect(monthPickerProps2.items).toEqual([{value: 4, label: '4'}]);
   });
 
   it('same year and different month', () => {
@@ -57,7 +72,7 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
       <YearMonthPicker
         maximumYearMonth={maximumYearMonth}
         minimumYearMonth={minimumYearMonth}
-        selectedValue={maximumYearMonth}
+        selectedValue={undefined}
       />,
     );
 
@@ -72,6 +87,26 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
       {value: 3, label: '3'},
       {value: 4, label: '4'},
     ]);
+
+    sut.update(
+      <YearMonthPicker
+        maximumYearMonth={maximumYearMonth}
+        minimumYearMonth={minimumYearMonth}
+        selectedValue={{year: maximumYearMonth.year}}
+      />,
+    );
+
+    const yearPicker2 = sut.getByTestId('yearPicker');
+    const yearPickerProps2 = yearPicker2.props as SelectPickerItemsProps<string>;
+    expect(yearPickerProps2.items).toEqual([{value: 2022, label: '2022'}]);
+    const monthPicker2 = sut.getByTestId('monthPicker');
+    const monthPickerProps2 = monthPicker2.props as SelectPickerItemsProps<string>;
+    expect(monthPickerProps2.items).toEqual([
+      {value: 1, label: '1'},
+      {value: 2, label: '2'},
+      {value: 3, label: '3'},
+      {value: 4, label: '4'},
+    ]);
   });
 
   it('different year', () => {
@@ -81,7 +116,7 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
       <YearMonthPicker
         maximumYearMonth={maximumYearMonth}
         minimumYearMonth={minimumYearMonth}
-        selectedValue={maximumYearMonth}
+        selectedValue={undefined}
       />,
     );
 
@@ -104,6 +139,56 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
       {value: 8, label: '8'},
       {value: 9, label: '9'},
       {value: 10, label: '10'},
+      {value: 11, label: '11'},
+      {value: 12, label: '12'},
+    ]);
+
+    // 最大年を選択
+    sut.update(
+      <YearMonthPicker
+        maximumYearMonth={maximumYearMonth}
+        minimumYearMonth={minimumYearMonth}
+        selectedValue={{year: maximumYearMonth.year}}
+      />,
+    );
+
+    const yearPicker2 = sut.getByTestId('yearPicker');
+    const yearPickerProps2 = yearPicker2.props as SelectPickerItemsProps<string>;
+
+    expect(yearPickerProps2.items).toEqual([
+      {value: 2021, label: '2021'},
+      {value: 2022, label: '2022'},
+    ]);
+
+    const monthPicker2 = sut.getByTestId('monthPicker');
+    const monthPickerProps2 = monthPicker2.props as SelectPickerItemsProps<string>;
+    expect(monthPickerProps2.items).toEqual([
+      {value: 1, label: '1'},
+      {value: 2, label: '2'},
+      {value: 3, label: '3'},
+      {value: 4, label: '4'},
+    ]);
+
+    // 最小年を選択
+    sut.update(
+      <YearMonthPicker
+        maximumYearMonth={maximumYearMonth}
+        minimumYearMonth={minimumYearMonth}
+        selectedValue={{year: minimumYearMonth.year}}
+      />,
+    );
+
+    const yearPicker3 = sut.getByTestId('yearPicker');
+    const yearPickerProps3 = yearPicker3.props as SelectPickerItemsProps<string>;
+
+    expect(yearPickerProps3.items).toEqual([
+      {value: 2021, label: '2021'},
+      {value: 2022, label: '2022'},
+    ]);
+
+    const monthPicker3 = sut.getByTestId('monthPicker');
+    const monthPickerProps3 = monthPicker3.props as SelectPickerItemsProps<string>;
+    expect(monthPickerProps3.items).toEqual([
       {value: 11, label: '11'},
       {value: 12, label: '12'},
     ]);
@@ -199,7 +284,7 @@ describe('YearMonthPicker with all props', () => {
     const monthPickerProps = monthPicker.props as SelectPickerItemsProps<string>;
     expect(monthPickerProps.numberOfLines).toBe(5);
     // itemsは、Itemの各Propを検証できなかったため、件数のみ検証する
-    expect(monthPickerProps.items.length).toBe(13);
+    expect(monthPickerProps.items.length).toBe(5);
     const yearSuffix = sut.queryByText('年');
     const monthSuffix = sut.queryByText('月');
     expect(yearSuffix).not.toBeNull();

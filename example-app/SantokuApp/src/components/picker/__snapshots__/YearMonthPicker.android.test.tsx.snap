@@ -150,54 +150,6 @@ exports[`YearMonthPicker only with required props renders successfully: YearMont
               "textColor": undefined,
               "value": 4,
             },
-            Object {
-              "label": "5",
-              "testID": undefined,
-              "textColor": undefined,
-              "value": 5,
-            },
-            Object {
-              "label": "6",
-              "testID": undefined,
-              "textColor": undefined,
-              "value": 6,
-            },
-            Object {
-              "label": "7",
-              "testID": undefined,
-              "textColor": undefined,
-              "value": 7,
-            },
-            Object {
-              "label": "8",
-              "testID": undefined,
-              "textColor": undefined,
-              "value": 8,
-            },
-            Object {
-              "label": "9",
-              "testID": undefined,
-              "textColor": undefined,
-              "value": 9,
-            },
-            Object {
-              "label": "10",
-              "testID": undefined,
-              "textColor": undefined,
-              "value": 10,
-            },
-            Object {
-              "label": "11",
-              "testID": undefined,
-              "textColor": undefined,
-              "value": 11,
-            },
-            Object {
-              "label": "12",
-              "testID": undefined,
-              "textColor": undefined,
-              "value": 12,
-            },
           ]
         }
         numberOfLines={1}
@@ -395,54 +347,6 @@ exports[`YearMonthPicker with all props should be applied all properly: YearMont
               "testID": undefined,
               "textColor": 4294967040,
               "value": 4,
-            },
-            Object {
-              "label": "5",
-              "testID": undefined,
-              "textColor": 4294967040,
-              "value": 5,
-            },
-            Object {
-              "label": "6",
-              "testID": undefined,
-              "textColor": 4294967040,
-              "value": 6,
-            },
-            Object {
-              "label": "7",
-              "testID": undefined,
-              "textColor": 4294967040,
-              "value": 7,
-            },
-            Object {
-              "label": "8",
-              "testID": undefined,
-              "textColor": 4294967040,
-              "value": 8,
-            },
-            Object {
-              "label": "9",
-              "testID": undefined,
-              "textColor": 4294967040,
-              "value": 9,
-            },
-            Object {
-              "label": "10",
-              "testID": undefined,
-              "textColor": 4294967040,
-              "value": 10,
-            },
-            Object {
-              "label": "11",
-              "testID": undefined,
-              "textColor": 4294967040,
-              "value": 11,
-            },
-            Object {
-              "label": "12",
-              "testID": undefined,
-              "textColor": 4294967040,
-              "value": 12,
             },
           ]
         }
