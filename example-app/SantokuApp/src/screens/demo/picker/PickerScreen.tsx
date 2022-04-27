@@ -1,11 +1,10 @@
-import {SelectPicker} from 'components/picker/SelectPicker';
+import {SelectPicker, YearMonthPicker} from 'components/picker';
 import {m} from 'framework/message';
 import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Input} from 'react-native-elements';
 
-import {YearMonthPicker} from '../../../components/picker/YearMonthPicker';
 import {usePickerScreenUseCase} from './usePickerScreenUseCase';
 
 const ScreenName = 'Picker';

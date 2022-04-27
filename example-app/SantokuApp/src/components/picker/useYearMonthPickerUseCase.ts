@@ -1,14 +1,8 @@
 import React, {useCallback, useMemo, useState} from 'react';
 
 import {ApplicationError} from '../../framework/error/ApplicationError';
-import {
-  DEFAULT_ENTERING as DEFAULT_PICKER_BACKDROP_ENTERING,
-  DEFAULT_EXITING as DEFAULT_PICKER_BACKDROP_EXITING,
-} from './PickerBackdrop';
-import {
-  DEFAULT_ENTERING as DEFAULT_PICKER_CONTAINER_ENTERING,
-  DEFAULT_EXITING as DEFAULT_PICKER_CONTAINER_EXITING,
-} from './PickerContainer';
+import {PICKER_BACKDROP_DEFAULT_ENTERING, PICKER_BACKDROP_DEFAULT_EXITING} from './PickerBackdrop';
+import {PICKER_CONTAINER_DEFAULT_ENTERING, PICKER_CONTAINER_DEFAULT_EXITING} from './PickerContainer';
 import {Item} from './SelectPicker';
 import {YearMonth} from './YearMonth';
 import {YearMonthPickerProps} from './YearMonthPicker';
@@ -38,19 +32,19 @@ export const useYearMonthPickerUseCase = ({
   const [isVisible, setIsVisible] = useState(false);
   const close = useCallback(() => setIsVisible(false), []);
   const pickerBackdropEntering = useMemo(
-    () => backdropEntering ?? DEFAULT_PICKER_BACKDROP_ENTERING.duration(DEFAULT_DURATION),
+    () => backdropEntering ?? PICKER_BACKDROP_DEFAULT_ENTERING.duration(DEFAULT_DURATION),
     [backdropEntering],
   );
   const pickerBackdropExiting = useMemo(
-    () => backdropExiting ?? DEFAULT_PICKER_BACKDROP_EXITING.duration(DEFAULT_DURATION),
+    () => backdropExiting ?? PICKER_BACKDROP_DEFAULT_EXITING.duration(DEFAULT_DURATION),
     [backdropExiting],
   );
   const pickerContainerEntering = useMemo(
-    () => containerEntering ?? DEFAULT_PICKER_CONTAINER_ENTERING.duration(DEFAULT_DURATION),
+    () => containerEntering ?? PICKER_CONTAINER_DEFAULT_ENTERING.duration(DEFAULT_DURATION),
     [containerEntering],
   );
   const pickerContainerExiting = useMemo(
-    () => containerExiting ?? DEFAULT_PICKER_CONTAINER_EXITING.duration(DEFAULT_DURATION),
+    () => containerExiting ?? PICKER_CONTAINER_DEFAULT_EXITING.duration(DEFAULT_DURATION),
     [containerExiting],
   );
 
