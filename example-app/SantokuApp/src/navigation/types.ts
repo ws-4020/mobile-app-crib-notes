@@ -1,10 +1,10 @@
 import {DefaultRouterOptions, NavigatorScreenParams} from '@react-navigation/native';
 
-import {Account} from '../generated/backend/model';
+import {Account, TermsOfService} from '../generated/backend/model';
 
 export type RootStackParamList = {
   Login: undefined;
-  TermsOfServiceAgreement: Account;
+  TermsOfServiceAgreement: {account: Account; termsOfService?: TermsOfService};
   ProfileRegistration: undefined;
   AuthenticatedStackNav: NavigatorScreenParams<AuthenticatedStackParamList> | undefined;
   DemoStackNav: NavigatorScreenParams<DemoStackParamList> | undefined;

@@ -4,9 +4,10 @@ import {FormikProps} from 'formik';
 import {AuthenticationService, isUnauthorizedError} from 'framework/authentication';
 import {generatePassword} from 'framework/utilities';
 import {isValidForm} from 'framework/validator';
-import {Account} from 'generated/backend/model';
+import {Account, TermsOfService} from 'generated/backend/model';
 import {RootStackParamList} from 'navigation/types';
 import {useCallback, useState} from 'react';
+import {useGetTerms} from 'service';
 
 import {ProfileForm} from '../data-types';
 
@@ -16,15 +17,16 @@ export const useProfileRegistrationUseCase = (form: FormikProps<ProfileForm>) =>
   const [isExecutingSignup, setIsExecutingSignup] = useState(false);
   const {mutateAsync: callSignup} = AuthenticationService.useSignup();
   const {mutateAsync: callLogin} = AuthenticationService.useLogin();
+  const {refetch: callGetTerms} = useGetTerms();
 
   const clearNickname = useCallback(() => form.setFieldValue('nickname', ''), [form]);
 
   const onGoToTermsOfServiceAgreementScreen = useCallback(
-    (account: Account) =>
+    (account: Account, termsOfService?: TermsOfService) =>
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
-          routes: [{name: 'TermsOfServiceAgreement', params: account}],
+          routes: [{name: 'TermsOfServiceAgreement', params: {account, termsOfService}}],
         }),
       ),
     [navigation],
@@ -38,7 +40,8 @@ export const useProfileRegistrationUseCase = (form: FormikProps<ProfileForm>) =>
         const password = await generatePassword();
         const account = await callSignup({nickname, password});
         await callLogin({accountId: account.accountId, password});
-        onGoToTermsOfServiceAgreementScreen(account);
+        const termsOfService = (await callGetTerms({throwOnError: true})).data?.data;
+        onGoToTermsOfServiceAgreementScreen(account, termsOfService);
       } catch (e) {
         // ここではサインアップに成功したaccountId、passwordを使用してログインしているため、UnauthorizedErrorが発生しない想定です。
         // もし発生した場合は、クライアント側のログアウト処理を実施後、想定外のエラーとしてアプリをクラッシュさせて、Firebase Crashlyticsにエラーログを送信します。
@@ -50,7 +53,7 @@ export const useProfileRegistrationUseCase = (form: FormikProps<ProfileForm>) =>
         setIsExecutingSignup(false);
       }
     }
-  }, [callLogin, callSignup, form, onGoToTermsOfServiceAgreementScreen]);
+  }, [callGetTerms, callLogin, callSignup, form, onGoToTermsOfServiceAgreementScreen]);
 
   return {
     clearNickname,
