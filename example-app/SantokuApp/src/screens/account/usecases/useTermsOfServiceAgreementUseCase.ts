@@ -1,18 +1,20 @@
 import {TermsOfService} from 'generated/backend/model';
-import {useCallback, useRef, useState} from 'react';
+import {useCallback, useMemo, useRef, useState} from 'react';
 import {WebView as RNWebView} from 'react-native-webview';
 import {usePostAccountsMeTerms} from 'service';
 
-import {useNavigateToRootStackScreen} from '../../useNavigateToScreen';
-
-export const useTermsOfServiceAgreementUseCase = (termsOfService?: TermsOfService) => {
+export const useTermsOfServiceAgreementUseCase = (termsOfService?: TermsOfService, onAgreed?: () => void) => {
   const [buttonDisable, setButtonDisable] = useState(true);
   const [isWebViewError, setIsWebViewError] = useState(false);
   const webViewRef = useRef<RNWebView>(null);
-  const onGoToHomeScreen = useNavigateToRootStackScreen('AuthenticatedStackNav');
   const {mutateAsync: callPostAccountsMeTerms, isLoading} = usePostAccountsMeTerms();
 
   const termUrl = termsOfService?.url;
+
+  const webViewSource = useMemo(() => {
+    return termUrl ? {uri: termUrl} : undefined;
+  }, [termUrl]);
+
   const onWebViewError = useCallback(() => {
     setIsWebViewError(true);
   }, []);
@@ -30,13 +32,13 @@ export const useTermsOfServiceAgreementUseCase = (termsOfService?: TermsOfServic
         hasAgreedValidTermsOfService: true,
         agreedTermsOfServiceVersion: termsOfService?.latestTermsOfServiceVersion,
       });
-      onGoToHomeScreen();
+      onAgreed?.();
     } catch {
       // 個別のエラーハンドリングは不要
     }
-  }, [callPostAccountsMeTerms, onGoToHomeScreen, termsOfService?.latestTermsOfServiceVersion]);
+  }, [callPostAccountsMeTerms, onAgreed, termsOfService?.latestTermsOfServiceVersion]);
   return {
-    termUrl,
+    webViewSource,
     isWebViewError,
     onWebViewError,
     webViewRef,

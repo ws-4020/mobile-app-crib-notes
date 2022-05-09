@@ -22,7 +22,7 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
   const clearAccountId = useCallback(() => form.setFieldValue('accountId', ''), [form]);
   const clearPassword = useCallback(() => form.setFieldValue('password', ''), [form]);
 
-  const createAccount = useCallback(() => navigation.navigate('Profile'), [navigation]);
+  const createAccount = useCallback(() => navigation.navigate('ProfileRegistration'), [navigation]);
   const login = useCallback(async () => {
     if (await isValidForm(form)) {
       try {

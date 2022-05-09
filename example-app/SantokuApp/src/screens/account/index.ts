@@ -1,3 +1,4 @@
 export * from './LoginScreen';
-export * from './ProfileScreen';
+export * from './ProfileRegistrationScreen';
+export * from './InitialTermsOfServiceAgreementScreen';
 export * from './TermsOfServiceAgreementScreen';

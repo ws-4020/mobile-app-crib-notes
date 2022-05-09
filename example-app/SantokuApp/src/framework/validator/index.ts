@@ -23,6 +23,9 @@ export const enhanceValidator = () => {
     mixed: {
       required: m('validation.mixed.required'),
     },
+    string: {
+      max: m('validation.string.max'),
+    },
   });
 };
 

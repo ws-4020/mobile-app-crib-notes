@@ -6,7 +6,7 @@ import {AppConfig, BundledMessagesLoader, loadMessages} from 'framework';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {useTermsOfServiceAgreementScreen} from './TermsOfServiceAgreementScreen';
+import {useInitialTermsOfServiceAgreementScreen} from './InitialTermsOfServiceAgreementScreen';
 
 const Wrapper: React.FC = ({children}) => {
   const queryClient = new QueryClient();
@@ -24,7 +24,7 @@ beforeAll(async () => {
 describe('TermsOfServiceAgreement', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
     const termsOfServiceAgreementScreen = renderHook(() =>
-      useTermsOfServiceAgreementScreen({
+      useInitialTermsOfServiceAgreementScreen({
         accountData: {terms: {termsOfService: {latestTermsOfServiceVersion: '1.0.0', url: AppConfig.termsUrl}}},
       }),
     ).result.current;
