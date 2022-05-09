@@ -28,10 +28,7 @@ const useRootStackNavigator = (initialData: AppInitialData) => {
   const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
-    <nav.Navigator
-      key="authorizedNav"
-      screenOptions={defaultScreenOptions}
-      initialRouteName={authorizedInitialRouteName}>
+    <nav.Navigator screenOptions={defaultScreenOptions} initialRouteName={authorizedInitialRouteName}>
       {account.isLoggedIn ? (
         <nav.Group screenOptions={invisibleHeaderOptions}>
           <nav.Screen {...authenticatedStackNav} />
