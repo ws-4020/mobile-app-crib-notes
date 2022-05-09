@@ -12,7 +12,7 @@ import {ProfileForm} from '../data-types';
 
 export const useProfileRegistrationUseCase = (form: FormikProps<ProfileForm>) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  // ログイン処理中状態
+  // サインアップ処理中状態
   const [isExecutingSignup, setIsExecutingSignup] = useState(false);
   const {mutateAsync: callSignup} = AuthenticationService.useSignup();
   const {mutateAsync: callLogin} = AuthenticationService.useLogin();
