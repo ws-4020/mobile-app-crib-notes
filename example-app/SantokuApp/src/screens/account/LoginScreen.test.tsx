@@ -8,6 +8,12 @@ import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
+import {WithTermsContext} from '../../context/WithTermsContext';
+import {useGetAccountsMe, useGetAccountsMeTerms, useGetTerms} from '../../service';
+
+jest.mock('service/backend/accountService');
+jest.mock('service/backend/termService');
+
 const Wrapper: React.FC = ({children}) => {
   const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};
   const queryClient = new QueryClient();
@@ -16,7 +22,9 @@ const Wrapper: React.FC = ({children}) => {
       <WithAppTheme>
         <WithSnackbar>
           <QueryClientProvider client={queryClient}>
-            <WithAccountContext initialData={initialData}>{children}</WithAccountContext>
+            <WithAccountContext initialData={initialData}>
+              <WithTermsContext initialData={initialData}>{children}</WithTermsContext>
+            </WithAccountContext>
           </QueryClientProvider>
         </WithSnackbar>
       </WithAppTheme>
@@ -31,6 +39,9 @@ beforeAll(async () => {
 
 describe('LoginScreen', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
+    (useGetAccountsMe as jest.Mock).mockReturnValue({refetch: () => {}});
+    (useGetAccountsMeTerms as jest.Mock).mockReturnValue({refetch: () => {}});
+    (useGetTerms as jest.Mock).mockReturnValue({refetch: () => {}});
     // importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

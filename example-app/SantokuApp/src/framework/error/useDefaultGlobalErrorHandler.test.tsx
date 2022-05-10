@@ -6,6 +6,7 @@ import {loadBundledMessagesAsync} from 'framework/initialize/helpers';
 import React from 'react';
 import {Alert} from 'react-native';
 
+import {WithTermsContext} from '../../context/WithTermsContext';
 import {useSetAccountContext} from '../../context/useSetAccountContext';
 import {AuthenticationService} from '../authentication';
 import {AppInitialData} from '../initialize/types';
@@ -18,7 +19,11 @@ jest.mock('framework/logging');
 jest.useFakeTimers();
 
 const wrapper: WrapperComponent<React.ProviderProps<AppInitialData>> = ({children, value}) => {
-  return <WithAccountContext initialData={value}>{children}</WithAccountContext>;
+  return (
+    <WithAccountContext initialData={value}>
+      <WithTermsContext initialData={value}>{children}</WithTermsContext>
+    </WithAccountContext>
+  );
 };
 
 describe('useDefaultGlobalErrorHandler', () => {
