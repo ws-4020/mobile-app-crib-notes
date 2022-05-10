@@ -18,7 +18,10 @@ const invisibleHeaderOptions: NativeStackNavigationOptions = {
 };
 
 const getInitialRouteName = (initialData: AppInitialData) => {
-  return AuthenticatedStackNav.name;
+  if (initialData.accountData.account) {
+    return AuthenticatedStackNav.name;
+  }
+  return LoginScreen.name;
 };
 
 const useRootStackNavigator = (initialData: AppInitialData) => {
