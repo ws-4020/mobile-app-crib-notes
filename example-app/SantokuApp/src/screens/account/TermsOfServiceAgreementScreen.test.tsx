@@ -1,13 +1,11 @@
 import '@testing-library/jest-native/extend-expect';
 import {render} from '@testing-library/react-native';
 import {WithSnackbar} from 'components/overlay';
-import {WithAppTheme} from 'components/theme';
+import {WithAccountContext} from 'context/WithAccountContext';
+import {WithTermsContext} from 'context/WithTermsContext';
 import {BundledMessagesLoader, loadMessages} from 'framework';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
-
-import {WithAccountContext} from '../../context/WithAccountContext';
-import {WithTermsContext} from '../../context/WithTermsContext';
 
 const Wrapper: React.FC = ({children}) => {
   const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};

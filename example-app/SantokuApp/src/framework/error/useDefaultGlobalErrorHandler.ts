@@ -45,7 +45,7 @@ export const useDefaultGlobalErrorHandler = () => {
       setTermsContext({});
       Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
     });
-  }, [setAccountContext]);
+  }, [setAccountContext, setTermsContext]);
 
   const showRequireTermsOfServiceAgreementDialog = useCallback(() => {
     Alert.alert(m('fw.error.利用規約未同意タイトル'), m('fw.error.利用規約未同意本文'));
