@@ -1,11 +1,11 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator, NativeStackNavigationOptions} from '@react-navigation/native-stack';
+import {useAccountContext} from 'context/useAccountContext';
+import {AppInitialData} from 'framework/initialize/types';
 import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
-import {LoginScreen, ProfileRegistrationScreen, TermsOfServiceAgreementScreen} from 'screens';
+import {LoginScreen, ProfileRegistrationScreen} from 'screens';
 
-import {useAccountContext} from '../context/useAccountContext';
-import {AppInitialData} from '../framework/initialize/types';
 import {AuthenticatedStackNav, useAuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
 import {RootStackParamList} from './types';
@@ -40,7 +40,6 @@ const useRootStackNavigator = (initialData: AppInitialData) => {
         <>
           <nav.Screen {...LoginScreen} />
           <nav.Screen {...ProfileRegistrationScreen} />
-          <nav.Screen {...TermsOfServiceAgreementScreen} />
         </>
       )}
       <nav.Group screenOptions={invisibleHeaderOptions}>

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {useSnackbar} from 'components/overlay';
+import {useSetAccountContext} from 'context/useSetAccountContext';
+import {useSetTermsContext} from 'context/useSetTermsContext';
 import {AuthenticationService} from 'framework/authentication';
 import {isApplicationError} from 'framework/error/ApplicationError';
 import {RequestTimeoutError} from 'framework/error/RequestTimeoutError';
@@ -8,8 +10,6 @@ import {log} from 'framework/logging';
 import {m} from 'framework/message';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
-
-import {useSetAccountContext} from '../../context/useSetAccountContext';
 
 const outDebugLog = (error: unknown) => {
   try {
@@ -37,10 +37,12 @@ res.body=[${JSON.stringify(error.response?.data, null, 2)}]
 export const useDefaultGlobalErrorHandler = () => {
   const snackbar = useSnackbar();
   const setAccountContext = useSetAccountContext();
+  const setTermsContext = useSetTermsContext();
 
   const showRequireLoginDialog = useCallback(() => {
     AuthenticationService.clientLogout().finally(() => {
       setAccountContext(undefined);
+      setTermsContext({});
       Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
     });
   }, [setAccountContext]);

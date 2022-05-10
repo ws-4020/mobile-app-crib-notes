@@ -6,17 +6,16 @@ import {
   useGetAccountsAccountIdAvatar,
   useGetAccountsMe,
   useGetAccountsMeAvatar,
-  useGetAccountsMeTerms,
   usePostAccountsMeDeviceToken,
   usePostLogin,
   usePostLogout,
   usePostSignup,
   usePutAccountsMeAvatar,
   useDeleteAccountsMeDelete,
+  getGetAccountsMeQueryKey,
 } from 'generated/backend/account/account';
-import {useMutation} from 'react-query';
-
-import {TermsOfServiceAgreementStatus} from '../../generated/backend/model';
+import {TermsOfServiceAgreementStatus} from 'generated/backend/model';
+import {useMutation, useQuery} from 'react-query';
 
 type TermsOfServiceAgreementStatusWithCreatedAt = TermsOfServiceAgreementStatus & {
   createdAt: string;
@@ -47,6 +46,9 @@ const getAccountsMeTerms = async (): Promise<AxiosResponse<TermsOfServiceAgreeme
     },
     ...axiosGetOkResponse,
   };
+};
+const useGetAccountsMeTerms = () => {
+  return useQuery(getGetAccountsMeQueryKey(), getAccountsMeTerms);
 };
 
 // TODO: APIが完成するまでの暫定処理
