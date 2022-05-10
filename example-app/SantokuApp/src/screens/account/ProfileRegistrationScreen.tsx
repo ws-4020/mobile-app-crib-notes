@@ -23,7 +23,7 @@ const Screen: React.FC = () => {
   const {clearNickname, signup, isExecutingSignup} = useProfileRegistrationUseCase(form);
 
   return (
-    <View style={styles.container} testID="Profile">
+    <View style={styles.container} testID="ProfileRegistration">
       <TextInput
         label={m('ニックネーム')}
         value={form.values.nickname}
