@@ -1,12 +1,11 @@
-import {CommonActions} from '@react-navigation/core';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {m} from 'framework';
 import {InitialDataDependingComponent, withInitialData} from 'framework/initialize';
 import {AppInitialData} from 'framework/initialize/types';
 import {AuthenticatedStackParamList} from 'navigation/types';
-import React, {useCallback, useMemo} from 'react';
+import React, {useMemo} from 'react';
 
 import {TermsOfServiceAgreementTemplate} from './TermsOfServiceAgreementTemplate';
+import {useOnAgreedInitialTermsOfService} from './usecases';
 
 const ScreenName = 'InitialTermsOfServiceAgreement';
 
@@ -15,22 +14,11 @@ export const InitialTermsOfServiceAgreementScreen = {
 };
 
 const Component: InitialDataDependingComponent = ({initialData}) => {
-  const navigation = useNavigation<NavigationProp<AuthenticatedStackParamList>>();
-
-  const onGoToHomeScreen = useCallback(
-    () =>
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{name: 'MainTabNav'}],
-        }),
-      ),
-    [navigation],
-  );
+  const onAgreed = useOnAgreedInitialTermsOfService();
   return (
     <TermsOfServiceAgreementTemplate
       termsOfService={initialData.accountData.terms?.termsOfService}
-      onAgreed={onGoToHomeScreen}
+      onAgreed={onAgreed}
     />
   );
 };

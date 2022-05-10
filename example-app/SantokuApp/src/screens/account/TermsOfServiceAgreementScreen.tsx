@@ -1,18 +1,15 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useSetAccountContext} from 'context/useSetAccountContext';
 import {m} from 'framework';
 import {RootStackParamList} from 'navigation/types';
-import React, {useCallback} from 'react';
+import React from 'react';
 
 import {TermsOfServiceAgreementTemplate} from './TermsOfServiceAgreementTemplate';
+import {useOnAgreedTermsOfService} from './usecases';
 
 const ScreenName = 'TermsOfServiceAgreement';
 
 const Screen: React.FC<NativeStackScreenProps<RootStackParamList, typeof ScreenName>> = ({route}) => {
-  const setAccountContext = useSetAccountContext();
-  const onAgreed = useCallback(() => {
-    setAccountContext(route.params.account);
-  }, [route.params, setAccountContext]);
+  const onAgreed = useOnAgreedTermsOfService(route.params.account);
   return <TermsOfServiceAgreementTemplate termsOfService={route.params.termsOfService} onAgreed={onAgreed} />;
 };
 
