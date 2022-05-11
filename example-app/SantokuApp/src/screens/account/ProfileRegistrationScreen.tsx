@@ -1,3 +1,4 @@
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {FilledButton} from 'components/button';
 import {TextInput} from 'components/input';
 import {Spacer} from 'components/spacer/Spacer';
@@ -8,11 +9,11 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {profileFormInitialValues, profileFormValidationSchema} from './data-types';
-import {useProfileRegistrationUseCase} from './usecases/useProfileRegistrationUseCase';
+import {useProfileRegistrationUseCase} from './usecases';
 
 const ScreenName = 'ProfileRegistration';
 
-const Screen: React.FC = () => {
+const Screen: React.FC<NativeStackScreenProps<RootStackParamList, typeof ScreenName>> = ({route}) => {
   const form = useFormik({
     initialValues: profileFormInitialValues,
     validationSchema: profileFormValidationSchema,
@@ -20,7 +21,7 @@ const Screen: React.FC = () => {
     onSubmit: () => {},
   });
 
-  const {clearNickname, signup, isExecutingSignup} = useProfileRegistrationUseCase(form);
+  const {clearNickname, signup, isExecutingSignup} = useProfileRegistrationUseCase(form, route.params);
 
   return (
     <View style={styles.container} testID="ProfileRegistration">

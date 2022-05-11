@@ -1,7 +1,6 @@
 import {render} from '@testing-library/react-native';
 import {WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
-import {WithTermsContext} from 'context/WithTermsContext';
 import React from 'react';
 import {Text} from 'react-native';
 
@@ -11,9 +10,7 @@ const Wrapper: React.FC = ({children}) => {
   const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};
   return (
     <WithSnackbar>
-      <WithAccountContext initialData={initialData}>
-        <WithTermsContext initialData={initialData}>{children}</WithTermsContext>
-      </WithAccountContext>
+      <WithAccountContext initialData={initialData}>{children}</WithAccountContext>;
     </WithSnackbar>
   );
 };

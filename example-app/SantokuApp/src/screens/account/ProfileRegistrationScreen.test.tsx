@@ -7,9 +7,7 @@ import {enhanceValidator} from 'framework/validator';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
-
-import {WithTermsContext} from '../../context/WithTermsContext';
-import {useGetTerms} from '../../service';
+import {useGetTerms} from 'service';
 
 jest.mock('service/backend/termService');
 
@@ -21,9 +19,7 @@ const Wrapper: React.FC = ({children}) => {
       <WithAppTheme>
         <WithSnackbar>
           <QueryClientProvider client={queryClient}>
-            <WithAccountContext initialData={initialData}>
-              <WithTermsContext initialData={initialData}>{children}</WithTermsContext>
-            </WithAccountContext>
+            <WithAccountContext initialData={initialData}>{children}</WithAccountContext>
           </QueryClientProvider>
         </WithSnackbar>
       </WithAppTheme>

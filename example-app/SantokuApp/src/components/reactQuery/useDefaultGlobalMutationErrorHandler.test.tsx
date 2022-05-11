@@ -6,7 +6,6 @@ import {loadBundledMessagesAsync} from 'framework/initialize/helpers';
 import React from 'react';
 import {Mutation} from 'react-query';
 
-import {WithTermsContext} from '../../context/WithTermsContext';
 import {useDefaultGlobalMutationErrorHandler} from './useDefaultGlobalMutationErrorHandler';
 
 jest.mock('components/overlay/snackbar/WithSnackbar');
@@ -14,11 +13,7 @@ jest.mock('framework/logging');
 
 const Wrapper: React.FC = ({children}) => {
   const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};
-  return (
-    <WithAccountContext initialData={initialData}>
-      <WithTermsContext initialData={initialData}>{children}</WithTermsContext>
-    </WithAccountContext>
-  );
+  return <WithAccountContext initialData={initialData}>{children}</WithAccountContext>;
 };
 
 describe('useDefaultGlobalMutationErrorHandler', () => {

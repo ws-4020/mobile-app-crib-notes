@@ -4,16 +4,13 @@ import {WithAccountContext} from 'context/WithAccountContext';
 import React from 'react';
 import {MutationCache, QueryCache} from 'react-query';
 
-import {WithTermsContext} from '../../context/WithTermsContext';
 import {useDefaultMutationCache, useDefaultQueryCache} from './useDefaultCache';
 
 const Wrapper: React.FC = ({children}) => {
   const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};
   return (
     <WithSnackbar>
-      <WithAccountContext initialData={initialData}>
-        <WithTermsContext initialData={initialData}>{children}</WithTermsContext>
-      </WithAccountContext>
+      <WithAccountContext initialData={initialData}>{children}</WithAccountContext>;
     </WithSnackbar>
   );
 };

@@ -1,15 +1,15 @@
 import {DefaultRouterOptions, NavigatorScreenParams} from '@react-navigation/native';
+import {TermsOfServiceAgreementStatus} from 'generated/backend/model';
 
 export type RootStackParamList = {
   Login: undefined;
-  ProfileRegistration: undefined;
+  ProfileRegistration: TermsOfServiceAgreementStatus;
   AuthenticatedStackNav: NavigatorScreenParams<AuthenticatedStackParamList> | undefined;
   DemoStackNav: NavigatorScreenParams<DemoStackParamList> | undefined;
 };
 
 export type AuthenticatedStackParamList = {
   MainTabNav: NavigatorScreenParams<MainTabParamList> | undefined;
-  TermsOfServiceAgreement: undefined;
 };
 
 export type MainTabParamList = {

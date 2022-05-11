@@ -10,5 +10,5 @@ export const profileFormInitialValues = {
 };
 
 export const profileFormValidationSchema = yup.object().shape({
-  nickname: yup.string().label(m('ニックネーム')).max(50),
+  nickname: yup.string().label(m('ニックネーム')).required().max(50),
 });

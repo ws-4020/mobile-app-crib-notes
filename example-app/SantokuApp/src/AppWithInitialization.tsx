@@ -2,9 +2,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
+import {WithTermsOfServiceAgreementOverlay} from './components/overlay/termsOfService';
 import {WithReactQuery} from './components/reactQuery';
 import {WithAccountContext} from './context/WithAccountContext';
-import {WithTermsContext} from './context/WithTermsContext';
 import {InitialDataDependingComponent, useAppInitializer} from './framework/initialize';
 import {showUpdateRequiredDialog} from './framework/initialize/helpers';
 
@@ -46,13 +46,13 @@ export const AppWithInitialization: React.FC = () => {
     return (
       <NavigationContainer>
         <WithAccountContext initialData={initializationResult.data}>
-          <WithTermsContext initialData={initializationResult.data}>
-            <WithReactQuery>
+          <WithReactQuery>
+            <WithTermsOfServiceAgreementOverlay initialData={initializationResult.data}>
               <WithFirebaseMessagingHandlers initialData={initializationResult.data}>
                 <RootStackNav initialData={initializationResult.data} />
               </WithFirebaseMessagingHandlers>
-            </WithReactQuery>
-          </WithTermsContext>
+            </WithTermsOfServiceAgreementOverlay>
+          </WithReactQuery>
         </WithAccountContext>
       </NavigationContainer>
     );
