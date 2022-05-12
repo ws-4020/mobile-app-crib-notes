@@ -32,7 +32,7 @@ const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({acco
   const [state, setState] = useState<TermsOfServiceAgreementProps>({
     visible: false,
     close: () => {},
-    termsOfService: {latestTermsOfServiceVersion: '', url: ''},
+    termsOfService: {version: '', url: ''},
   });
   const close = useCallback(() => setState(prevState => ({...prevState, visible: false})), []);
 
@@ -53,7 +53,7 @@ const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({acco
     const terms = accountData.terms;
     const termsOfServiceAgreementStatus = terms?.termsOfServiceAgreementStatus;
     const termsOfService = terms?.termsOfService;
-    if (termsOfServiceAgreementStatus?.hasAgreedValidTermsOfService === false && termsOfService) {
+    if (termsOfServiceAgreementStatus?.hasAgreed === false && termsOfService) {
       setState({
         visible: true,
         dismissible: false,

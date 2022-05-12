@@ -51,7 +51,7 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         // callGetAccountMe.dataは必ず存在する想定
         const account = (await callGetAccountMe({throwOnError: true})).data!.data;
         const termsOfServiceAgreementStatus = (await callGetAccountsMeTerms({throwOnError: true})).data?.data;
-        if (!termsOfServiceAgreementStatus?.hasAgreedValidTermsOfService) {
+        if (!termsOfServiceAgreementStatus?.hasAgreed) {
           // callGetTerms.dataは必ず存在する想定
           const termsOfService = (await callGetTerms({throwOnError: true})).data!.data;
           termsOverlay.show({termsOfService, dismissible: false});

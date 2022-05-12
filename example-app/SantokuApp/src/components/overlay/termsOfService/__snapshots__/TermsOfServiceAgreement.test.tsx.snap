@@ -152,7 +152,11 @@ exports[`TermsOfServiceAgreement マウントされたときに正常にレン�
               onMessage={[Function]}
               onScroll={[Function]}
               onShouldStartLoadWithRequest={[Function]}
-              source={null}
+              source={
+                Object {
+                  "uri": "https://www.tis.co.jp/termsofuse/",
+                }
+              }
               startInLoadingState={true}
               style={
                 Array [

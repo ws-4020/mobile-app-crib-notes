@@ -2,7 +2,7 @@ import '@testing-library/jest-native/extend-expect';
 import {render} from '@testing-library/react-native';
 import {WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
-import {BundledMessagesLoader, loadMessages} from 'framework';
+import {AppConfig, BundledMessagesLoader, loadMessages} from 'framework';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
@@ -33,7 +33,7 @@ describe('TermsOfServiceAgreement', () => {
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const app = render(
-      <TermsOfServiceAgreement visible close={() => {}} termsOfService={{latestTermsOfServiceVersion: '', url: ''}} />,
+      <TermsOfServiceAgreement visible close={() => {}} termsOfService={{version: '1.0.0', url: AppConfig.termsUrl}} />,
       {
         wrapper: Wrapper,
       },

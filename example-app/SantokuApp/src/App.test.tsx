@@ -52,8 +52,8 @@ jest.mock('service/backend/accountService', () => {
       return Promise.resolve({
         status: 200,
         data: {
-          hasAgreedValidTermsOfService: true,
-          agreedTermsOfServiceVersion: '1.0.0',
+          hasAgreed: true,
+          agreedVersion: '1.0.0',
         },
       });
     }),

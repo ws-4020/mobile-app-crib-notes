@@ -37,8 +37,8 @@ export const useTermsOfServiceAgreementUseCase = (
   const onAgree = useCallback(async () => {
     try {
       const termsOfServiceAgreementStatus = {
-        hasAgreedValidTermsOfService: true,
-        agreedTermsOfServiceVersion: termsOfService?.latestTermsOfServiceVersion,
+        hasAgreed: true,
+        agreedVersion: termsOfService.version,
       };
       if (accountContext.isLoggedIn) {
         await callPostAccountsMeTerms(termsOfServiceAgreementStatus);
@@ -48,7 +48,7 @@ export const useTermsOfServiceAgreementUseCase = (
     } catch {
       // 個別のエラーハンドリングは不要
     }
-  }, [accountContext.isLoggedIn, callPostAccountsMeTerms, close, termsOfService?.latestTermsOfServiceVersion]);
+  }, [accountContext.isLoggedIn, callPostAccountsMeTerms, close, termsOfService?.version]);
 
   const composeExitingCallback = useCallback(
     (finished: boolean) => {
