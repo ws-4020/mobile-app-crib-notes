@@ -40,7 +40,7 @@ export type SelectPickerProps<ItemT> = {
   /**
    * アイテムが選択された場合に呼び出される関数
    */
-  onSelectedItemChange?: (itemIndex: number, itemValue?: ItemT, itemKey?: React.Key) => void;
+  onSelectedItemChange?: (selectedItem: Item<ItemT> | undefined) => void;
   /**
    * PickerBackdropをタップして閉じた場合に呼び出される関数
    *
