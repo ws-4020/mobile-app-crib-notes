@@ -4,6 +4,7 @@ import {WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
 import {BundledMessagesLoader, loadMessages} from 'framework';
 import React from 'react';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {TermsOfServiceAgreement} from './TermsOfServiceAgreement';
@@ -12,11 +13,13 @@ const Wrapper: React.FC = ({children}) => {
   const accountData = {account: {accountId: '123456789', deviceTokens: []}};
   const queryClient = new QueryClient();
   return (
-    <WithSnackbar>
-      <QueryClientProvider client={queryClient}>
-        <WithAccountContext accountData={accountData}>{children}</WithAccountContext>
-      </QueryClientProvider>
-    </WithSnackbar>
+    <SafeAreaProvider>
+      <WithSnackbar>
+        <QueryClientProvider client={queryClient}>
+          <WithAccountContext accountData={accountData}>{children}</WithAccountContext>
+        </QueryClientProvider>
+      </WithSnackbar>
+    </SafeAreaProvider>
   );
 };
 

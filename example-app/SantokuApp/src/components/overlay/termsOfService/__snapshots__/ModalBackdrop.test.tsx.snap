@@ -5,9 +5,9 @@ exports[`ModalBackdrop only with required props renders successfully only with r
   style={
     Object {
       "bottom": 0,
-      "height": 1334,
+      "height": 640,
       "position": "absolute",
-      "width": "100%",
+      "width": 320,
     }
   }
 />
@@ -18,9 +18,9 @@ exports[`ModalBackdrop only with required props renders successfully only with r
   style={
     Object {
       "bottom": 0,
-      "height": 1334,
+      "height": 640,
       "position": "absolute",
-      "width": "100%",
+      "width": 320,
     }
   }
 >
@@ -87,9 +87,9 @@ exports[`ModalBackdrop with all props should be applied properly: ModalBackdrop 
   style={
     Object {
       "bottom": 0,
-      "height": 1334,
+      "height": 640,
       "position": "absolute",
-      "width": "100%",
+      "width": 320,
     }
   }
 >

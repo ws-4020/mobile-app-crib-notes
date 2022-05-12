@@ -2,6 +2,7 @@ import {fireEvent, render} from '@testing-library/react-native';
 import React from 'react';
 import {PressableProps, ViewProps} from 'react-native';
 import Reanimated, {ZoomIn, ZoomOut} from 'react-native-reanimated';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {MODAL_BACKDROP_DEFAULT_ENTERING, MODAL_BACKDROP_DEFAULT_EXITING, ModalBackdrop} from './ModalBackdrop';
 
@@ -20,15 +21,19 @@ jest.useFakeTimers('modern');
 
 jest.runAllTimers();
 
+const Wrapper: React.FC = ({children}) => {
+  return <SafeAreaProvider>{children}</SafeAreaProvider>;
+};
+
 describe('ModalBackdrop only with required props', () => {
   it('returns null if not visible', () => {
-    const sut = render(<ModalBackdrop isVisible={false} />);
+    const sut = render(<ModalBackdrop isVisible={false} />, {wrapper: Wrapper});
     // ModalBackdropがnullを返していることを確認したいがうまくやる方法が見当たらないので`toJSON`でnullになることを確認する。
     expect(sut.toJSON()).toBeNull();
   });
 
   it('renders successfully only with required props', () => {
-    const sut = render(<ModalBackdrop isVisible testID="backdropAnimated" />);
+    const sut = render(<ModalBackdrop isVisible testID="backdropAnimated" />, {wrapper: Wrapper});
     const animatedView = sut.getByTestId('backdropAnimated');
     const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
     // Animated.Viewのentering/exitingをテストで実行することができなかったため、entering/exitingにデフォルトアニメーションが設定されていることのみを確認する。
@@ -58,6 +63,7 @@ describe('ModalBackdrop with `onPress', () => {
         pressableProps={{testID: 'pressable'}}
         modalProps={{testID: 'modal'}}
       />,
+      {wrapper: Wrapper},
     );
     fireEvent.press(sut.getByTestId('pressable'));
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -88,6 +94,7 @@ describe('ModalBackdrop with all props', () => {
         entering={entering}
         exiting={exiting}
       />,
+      {wrapper: Wrapper},
     );
     expect(sut).toMatchSnapshot('ModalBackdrop with all props.');
     const pressable = sut.getByTestId('pressable');

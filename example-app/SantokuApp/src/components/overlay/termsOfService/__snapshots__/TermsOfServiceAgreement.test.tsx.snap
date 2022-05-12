@@ -8,9 +8,9 @@ exports[`TermsOfServiceAgreement マウントされたときに正常にレン�
     style={
       Object {
         "bottom": 0,
-        "height": 1334,
+        "height": 640,
         "position": "absolute",
-        "width": "100%",
+        "width": 320,
       }
     }
   >
