@@ -1,10 +1,18 @@
 import {AppInitialData} from 'framework/initialize/types';
 import {useIsMounted} from 'framework/utilities';
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useMemo} from 'react';
 
-import {Account} from '../generated/backend/model';
 import {AccountContext, AccountContextProvider} from './useAccountContext';
-import {SetAccountAction, SetAccountContextProvider} from './useSetAccountContext';
+import {AccountAction, DispatchAccountContextProvider} from './useDispatchAccountContext';
+
+const reducer = (prevState: AccountContext, action: AccountAction) => {
+  switch (action.type) {
+    case 'login':
+      return {...prevState, account: action.account, isLoggedIn: true};
+    case 'logout':
+      return {...prevState, account: undefined, isLoggedIn: false};
+  }
+};
 
 function WithAccountContext(props: {initialData: AppInitialData; children: React.ReactNode}) {
   const isMounted = useIsMounted();
@@ -13,21 +21,11 @@ function WithAccountContext(props: {initialData: AppInitialData; children: React
     return account ? {account, isLoggedIn: true} : {isLoggedIn: false};
   }, [props.initialData.accountData.account]);
 
-  const [state, setState] = useState<AccountContext>(initialAccount);
-  // setAccountがstateの値によって再作成されないように、Refとして持っておく
-  const ref = useRef<Account>();
-  useEffect(() => {
-    ref.current = state.account;
-  }, [state.account]);
-
-  const setAccount = useCallback(
-    (setStateAction: SetAccountAction) => {
+  const [state, dispatch] = React.useReducer(reducer, initialAccount);
+  const dispatchAccount = useCallback(
+    (action: AccountAction) => {
       if (isMounted()) {
-        const account = typeof setStateAction === 'function' ? setStateAction(ref.current) : setStateAction;
-        setState({
-          account,
-          isLoggedIn: !!account,
-        });
+        dispatch(action);
       }
     },
     [isMounted],
@@ -35,7 +33,7 @@ function WithAccountContext(props: {initialData: AppInitialData; children: React
 
   return (
     <AccountContextProvider value={state}>
-      <SetAccountContextProvider value={setAccount}>{props.children}</SetAccountContextProvider>
+      <DispatchAccountContextProvider value={dispatchAccount}>{props.children}</DispatchAccountContextProvider>
     </AccountContextProvider>
   );
 }

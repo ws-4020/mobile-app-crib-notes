@@ -47,8 +47,8 @@ const getAccountsMeTerms = async (): Promise<AxiosResponse<TermsOfServiceAgreeme
     ...axiosGetOkResponse,
   };
 };
-const useGetAccountsMeTerms = () => {
-  return useQuery(getGetAccountsMeQueryKey(), getAccountsMeTerms);
+const useGetAccountsMeTerms = (options?: {query?: {enabled?: boolean}}) => {
+  return useQuery(getGetAccountsMeQueryKey(), getAccountsMeTerms, {enabled: options?.query?.enabled});
 };
 
 // TODO: APIが完成するまでの暫定処理

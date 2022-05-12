@@ -1,6 +1,6 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {useTermsOfServiceAgreementOverlay} from 'components/overlay/termsOfService';
-import {useSetAccountContext} from 'context/useSetAccountContext';
+import {useDispatchAccountContext} from 'context/useDispatchAccountContext';
 import {FormikProps} from 'formik';
 import {AuthenticationService, isUnauthorizedError, SecureStorageAdapter} from 'framework/authentication';
 import {m} from 'framework/message';
@@ -15,14 +15,14 @@ import {LoginForm} from '../data-types';
 
 export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const setAccountContext = useSetAccountContext();
+  const dispatchAccountContext = useDispatchAccountContext();
   const termsOverlay = useTermsOfServiceAgreementOverlay();
   // ログイン処理中状態
   const [isExecutingLogin, setIsExecutingLogin] = useState(false);
-  const {refetch: getAccountMe} = useGetAccountsMe({query: {enabled: false}});
+  const {refetch: callGetAccountMe} = useGetAccountsMe({query: {enabled: false}});
   const {mutateAsync: callLogin} = AuthenticationService.useLogin();
-  const {refetch: callGetAccountsMeTerms} = useGetAccountsMeTerms();
-  const {refetch: callGetTerms, isFetching: isFetchingTerms} = useGetTerms();
+  const {refetch: callGetAccountsMeTerms} = useGetAccountsMeTerms({query: {enabled: false}});
+  const {refetch: callGetTerms, isFetching: isFetchingTerms} = useGetTerms({query: {enabled: false}});
 
   const clearAccountId = useCallback(() => form.setFieldValue('accountId', ''), [form]);
   const clearPassword = useCallback(() => form.setFieldValue('password', ''), [form]);
@@ -48,7 +48,7 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         const password = form.values.password;
         await callLogin({accountId, password});
         await SecureStorageAdapter.savePassword(accountId, password);
-        const account = (await getAccountMe({throwOnError: true})).data?.data;
+        const account = (await callGetAccountMe({throwOnError: true})).data?.data;
         const termsOfServiceAgreementStatus = (await callGetAccountsMeTerms({throwOnError: true})).data?.data;
         if (!termsOfServiceAgreementStatus?.hasAgreedValidTermsOfService) {
           const termsOfService = (await callGetTerms({throwOnError: true})).data?.data;
@@ -58,7 +58,8 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
           }
         }
         setIsExecutingLogin(false);
-        setAccountContext(account);
+        // TODO: ここどうしようかな
+        dispatchAccountContext({type: 'login', account: account!});
       } catch (e) {
         if (isUnauthorizedError(e)) {
           Alert.alert(m('ログイン失敗'), m('アカウントIDまたはパスワードに\n間違いがあります。'));
@@ -66,7 +67,7 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         setIsExecutingLogin(false);
       }
     }
-  }, [callGetAccountsMeTerms, callGetTerms, callLogin, form, getAccountMe, setAccountContext, termsOverlay]);
+  }, [callGetAccountsMeTerms, callGetTerms, callLogin, form, callGetAccountMe, dispatchAccountContext, termsOverlay]);
 
   return {
     clearAccountId,

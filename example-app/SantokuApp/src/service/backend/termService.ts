@@ -10,8 +10,8 @@ const getTerms = async () => {
   return {data: {latestTermsOfServiceVersion: '1.0.0', url: AppConfig.termsUrl}, ...axiosGetOkResponse};
 };
 
-const useGetTerms = () => {
-  return useQuery(getGetTermsQueryKey(), getTerms);
+const useGetTerms = (options?: {query?: {enabled?: boolean}}) => {
+  return useQuery(getGetTermsQueryKey(), getTerms, {enabled: options?.query?.enabled});
 };
 
 export {useGetTerms, getTerms};

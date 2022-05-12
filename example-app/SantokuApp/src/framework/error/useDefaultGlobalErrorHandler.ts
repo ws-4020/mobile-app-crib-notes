@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {useSnackbar} from 'components/overlay';
-import {useSetAccountContext} from 'context/useSetAccountContext';
+import {useDispatchAccountContext} from 'context/useDispatchAccountContext';
 import {AuthenticationService} from 'framework/authentication';
 import {isApplicationError} from 'framework/error/ApplicationError';
 import {RequestTimeoutError} from 'framework/error/RequestTimeoutError';
@@ -35,14 +35,14 @@ res.body=[${JSON.stringify(error.response?.data, null, 2)}]
 
 export const useDefaultGlobalErrorHandler = () => {
   const snackbar = useSnackbar();
-  const setAccountContext = useSetAccountContext();
+  const dispatchAccountContext = useDispatchAccountContext();
 
   const showRequireLoginDialog = useCallback(() => {
     AuthenticationService.clientLogout().finally(() => {
-      setAccountContext(undefined);
+      dispatchAccountContext({type: 'logout'});
       Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
     });
-  }, [setAccountContext]);
+  }, [dispatchAccountContext]);
 
   const showRequireTermsOfServiceAgreementDialog = useCallback(() => {
     Alert.alert(m('fw.error.利用規約未同意タイトル'), m('fw.error.利用規約未同意本文'));
