@@ -2,7 +2,6 @@ import {DefaultRouterOptions, NavigatorScreenParams} from '@react-navigation/nat
 
 export type RootStackParamList = {
   Login: undefined;
-  TermsOfServiceAgreement: undefined;
   Profile: undefined;
   AuthenticatedStackNav: NavigatorScreenParams<AuthenticatedStackParamList> | undefined;
   DemoStackNav: NavigatorScreenParams<DemoStackParamList> | undefined;

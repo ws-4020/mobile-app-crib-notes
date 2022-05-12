@@ -1,43 +1,40 @@
-import {AppInitialData} from 'framework/initialize/types';
 import {useIsMounted} from 'framework/utilities';
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {Reducer, useCallback, useMemo} from 'react';
 
-import {Account} from '../generated/backend/model';
+import {AccountDataDependingComponent} from '../framework/initialize/withAccountData';
 import {AccountContext, AccountContextProvider} from './useAccountContext';
-import {SetAccountAction, SetAccountContextProvider} from './useSetAccountContext';
+import {AccountAction, DispatchAccountContextProvider} from './useDispatchAccountContext';
 
-function WithAccountContext(props: {initialData: AppInitialData; children: React.ReactNode}) {
+const reducer: Reducer<AccountContext, AccountAction> = (prevState, action) => {
+  switch (action.type) {
+    case 'login':
+      return {account: action.account, isLoggedIn: true};
+    case 'logout':
+      return {isLoggedIn: false};
+  }
+};
+
+const WithAccountContext: AccountDataDependingComponent = ({accountData, children}) => {
   const isMounted = useIsMounted();
   const initialAccount = useMemo(() => {
-    const account = props.initialData.accountData.account;
-    return account ? {account, isLoggedIn: true} : {isLoggedIn: false};
-  }, [props.initialData.accountData.account]);
+    const account = accountData.account;
+    return account ? {account, isLoggedIn: true} : {account: undefined, isLoggedIn: false};
+  }, [accountData.account]);
 
-  const [state, setState] = useState<AccountContext>(initialAccount);
-  // setAccountがstateの値によって再作成されないように、Refとして持っておく
-  const ref = useRef<Account>();
-  useEffect(() => {
-    ref.current = state.account;
-  }, [state.account]);
-
-  const setAccount = useCallback(
-    (setStateAction: SetAccountAction) => {
+  const [state, dispatch] = React.useReducer(reducer, initialAccount);
+  const dispatchAccount = useCallback(
+    (action: AccountAction) => {
       if (isMounted()) {
-        const account = typeof setStateAction === 'function' ? setStateAction(ref.current) : setStateAction;
-        setState({
-          account,
-          isLoggedIn: !!account,
-        });
+        dispatch(action);
       }
     },
     [isMounted],
   );
-
   return (
     <AccountContextProvider value={state}>
-      <SetAccountContextProvider value={setAccount}>{props.children}</SetAccountContextProvider>
+      <DispatchAccountContextProvider value={dispatchAccount}>{children}</DispatchAccountContextProvider>
     </AccountContextProvider>
   );
-}
+};
 
 export {WithAccountContext};

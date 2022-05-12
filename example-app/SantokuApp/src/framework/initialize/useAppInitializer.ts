@@ -10,6 +10,7 @@ import {Platform} from 'react-native';
 import {AuthenticationService, isUnauthorizedError} from '../authentication';
 import {enhanceValidator} from '../validator';
 import {
+  AccountData,
   checkAppUpdates,
   hideSplashScreen,
   initializeFirebaseCrashlyticsAsync,
@@ -32,7 +33,7 @@ type Initializing = {
 };
 type InitializeSuccessResult = {
   code: 'Success';
-  data: AppInitialData;
+  data: {accountData: AccountData; initialData: AppInitialData};
 };
 type InitializeUpdateRequiredResult = {
   code: 'UpdateRequired';
@@ -65,7 +66,7 @@ const initializeCoreFeatures = async () => {
   enhanceValidator();
 };
 
-const loadInitialData = async () => {
+const loadData = async () => {
   // アプリ未起動の間に届いた通知メッセージの取得
   // このアプリでは初期画面の決定に利用するのみで、それ以外の個別の処理は行わない
   const notification = (await messaging().getInitialNotification()) ?? undefined;
@@ -78,16 +79,16 @@ const loadInitialData = async () => {
   }
 
   // TODO: キャッシュの削除
-
+  const initialData = {notification};
   if (!(await AuthenticationService.canAutoLogin())) {
-    return {accountData: {}, notification};
+    return {accountData: {}, initialData};
   }
 
   try {
     await autoLogin();
   } catch (e) {
     if (isUnauthorizedError(e)) {
-      return {accountData: {}, notification};
+      return {accountData: {}, initialData};
     }
     throw e;
   }
@@ -97,7 +98,7 @@ const loadInitialData = async () => {
   const accountData = await loadInitialAccountDataAsync();
   return {
     accountData,
-    notification,
+    initialData,
   };
 };
 
@@ -113,7 +114,7 @@ export const useAppInitializer: () => AppInitializer = () => {
 
     // 初期データの読み込み
     try {
-      const data = Object.freeze(await loadInitialData());
+      const data = await loadData();
 
       setInitializationResult({code: 'Success', data});
       await hideSplashScreen();

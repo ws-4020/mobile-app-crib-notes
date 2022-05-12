@@ -3,12 +3,12 @@ import {render} from '@testing-library/react-native';
 import React from 'react';
 import {Text} from 'react-native';
 
-import {AppInitialData} from '../framework/initialize/types';
+import {AccountData} from '../framework/initialize/helpers';
 import {WithAccountContext} from './WithAccountContext';
 import {useAccountContext} from './useAccountContext';
 
-const wrapper: WrapperComponent<React.ProviderProps<AppInitialData>> = ({children, value}) => {
-  return <WithAccountContext initialData={value}>{children}</WithAccountContext>;
+const wrapper: WrapperComponent<React.ProviderProps<AccountData>> = ({children, value}) => {
+  return <WithAccountContext accountData={value}>{children}</WithAccountContext>;
 };
 
 describe('WithAccountContext', () => {
@@ -17,9 +17,9 @@ describe('WithAccountContext', () => {
   };
 
   it('WithAccountContextを子要素を含めて正常にrenderできること', () => {
-    const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};
+    const accountData = {account: {accountId: '123456789', deviceTokens: []}};
     const withAccountContext = render(
-      <WithAccountContext initialData={initialData}>
+      <WithAccountContext accountData={accountData}>
         <ChildComponent />
       </WithAccountContext>,
     );
@@ -31,7 +31,7 @@ describe('WithAccountContext', () => {
   it('初期データにAccountが存在している場合は、AccountContextのisLoggedInがtrueで取得できること', () => {
     const {result} = renderHook(() => useAccountContext(), {
       wrapper,
-      initialProps: {value: {accountData: {account: {accountId: '123456789', deviceTokens: []}}}},
+      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
     });
     const accountContext = result.current;
     expect(accountContext).toEqual({account: {accountId: '123456789', deviceTokens: []}, isLoggedIn: true});
@@ -40,7 +40,7 @@ describe('WithAccountContext', () => {
   it('初期データにAccountが存在しない場合は、AccountContextのisLoggedInがfalseで取得できること', () => {
     const {result} = renderHook(() => useAccountContext(), {
       wrapper,
-      initialProps: {value: {accountData: {}}},
+      initialProps: {value: {}},
     });
     const accountContext = result.current;
     expect(accountContext).toEqual({isLoggedIn: false});
