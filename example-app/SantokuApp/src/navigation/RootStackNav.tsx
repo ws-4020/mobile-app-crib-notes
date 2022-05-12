@@ -1,7 +1,7 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator, NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {useAccountContext} from 'context/useAccountContext';
-import {AppInitialData} from 'framework/initialize/types';
+import {AccountContext, useAccountContext} from 'context/useAccountContext';
+import {AppInitialDataWithoutAccountData} from 'framework/initialize';
 import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
 import {LoginScreen, ProfileRegistrationScreen} from 'screens';
@@ -17,17 +17,17 @@ const invisibleHeaderOptions: NativeStackNavigationOptions = {
   headerShown: false,
 };
 
-const getInitialRouteName = (initialData: AppInitialData) => {
-  if (initialData.accountData.account) {
+const getInitialRouteName = (account: AccountContext) => {
+  if (account.isLoggedIn) {
     return AuthenticatedStackNav.name;
   }
   return LoginScreen.name;
 };
 
-const useRootStackNavigator = (initialData: AppInitialData) => {
-  const authorizedInitialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
-  const authenticatedStackNav = useAuthenticatedStackNav(initialData);
+const useRootStackNavigator = (initialData: AppInitialDataWithoutAccountData) => {
   const account = useAccountContext();
+  const authorizedInitialRouteName = useMemo(() => getInitialRouteName(account), [account]);
+  const authenticatedStackNav = useAuthenticatedStackNav(initialData);
   const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
@@ -49,7 +49,7 @@ const useRootStackNavigator = (initialData: AppInitialData) => {
   );
 };
 
-export const RootStackNav: React.FC<{initialData: AppInitialData}> = ({initialData}) => {
+export const RootStackNav: React.FC<{initialData: AppInitialDataWithoutAccountData}> = ({initialData}) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   useEffect(() => {
