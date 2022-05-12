@@ -1,7 +1,8 @@
 import {composePressableStyles} from 'framework/utilities';
 import React, {useMemo} from 'react';
-import {Dimensions, Omit, Pressable, PressableProps, StyleSheet, View, ViewProps} from 'react-native';
+import {Omit, Pressable, PressableProps, StyleSheet, View, ViewProps} from 'react-native';
 import Reanimated, {BaseAnimationBuilder, FadeIn, FadeOut, Keyframe} from 'react-native-reanimated';
+import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
 import {useModalBackdropUseCase} from './useModalBackdropUseCase';
 
@@ -58,9 +59,11 @@ export const ModalBackdrop: React.FC<ModalBackdropProps> = ({
     exitingCallback,
   });
 
+  const styles = useStyles();
+
   const composedPressableStyles = useMemo(
     () => composePressableStyles([styles.pressable, pressableStyle]),
-    [pressableStyle],
+    [pressableStyle, styles.pressable],
   );
 
   return !isModalVisible ? null : (
@@ -80,19 +83,25 @@ export const ModalBackdrop: React.FC<ModalBackdropProps> = ({
   );
 };
 
-// TODO: useSafeAreaInsetsを使用
-const styles = StyleSheet.create({
-  modal: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    height: Dimensions.get('window').height,
-  },
-  pressable: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  backdrop: {
-    flex: 1,
-    backgroundColor: MODAL_BACKDROP_DEFAULT_COLOR,
-  },
-});
+const useStyles = () => {
+  const {width, height} = useSafeAreaFrame();
+  return useMemo(
+    () =>
+      StyleSheet.create({
+        modal: {
+          position: 'absolute',
+          bottom: 0,
+          width,
+          height,
+        },
+        pressable: {
+          ...StyleSheet.absoluteFillObject,
+        },
+        backdrop: {
+          flex: 1,
+          backgroundColor: MODAL_BACKDROP_DEFAULT_COLOR,
+        },
+      } as const),
+    [height, width],
+  );
+};
