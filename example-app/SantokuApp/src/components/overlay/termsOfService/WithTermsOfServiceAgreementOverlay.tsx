@@ -53,7 +53,7 @@ const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({acco
     const terms = accountData.terms;
     const termsOfServiceAgreementStatus = terms?.termsOfServiceAgreementStatus;
     const termsOfService = terms?.termsOfService;
-    if (termsOfServiceAgreementStatus?.hasAgreed === false && termsOfService) {
+    if (termsOfService && termsOfServiceAgreementStatus?.hasAgreed === false) {
       setState({
         visible: true,
         dismissible: false,
