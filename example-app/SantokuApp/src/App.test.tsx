@@ -2,10 +2,8 @@ import '@testing-library/jest-native/extend-expect';
 import {render, waitFor} from '@testing-library/react-native';
 import React from 'react';
 import {DevSettings} from 'react-native';
-import {getTerms} from 'service/backend/termService';
 
 import {App} from './App';
-import {AppConfig} from './framework';
 import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from './framework/backend/customInstance';
 
 jest.spyOn(DevSettings, 'addMenuItem').mockImplementation(() => {});
