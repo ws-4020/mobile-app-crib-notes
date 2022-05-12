@@ -1,11 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {
-  AppInitialDataWithoutAccountData,
-  InitialDataDependingNavigationComponent,
-  withInitialDataWithoutAccountData,
-} from 'framework/initialize';
+import {InitialDataDependingComponent, withInitialData} from 'framework/initialize';
 import React, {useMemo} from 'react';
 
+import {AppInitialData} from '../framework/initialize/types';
 import {MainTabNav, useMainTabNav} from './MainTabNav';
 import {AuthenticatedStackParamList, RootStackParamList} from './types';
 
@@ -15,11 +12,11 @@ const ScreenName = 'AuthenticatedStackNav';
 export const AuthenticatedStackNav = {
   name: ScreenName as typeof ScreenName,
 };
-const getInitialRouteName = (initialData: AppInitialDataWithoutAccountData) => {
+const getInitialRouteName = (initialData: AppInitialData) => {
   return MainTabNav.name;
 };
 
-const Component: InitialDataDependingNavigationComponent = ({initialData}) => {
+const Component: InitialDataDependingComponent = ({initialData}) => {
   const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
   const mainTabNav = useMainTabNav(initialData);
 
@@ -31,11 +28,11 @@ const Component: InitialDataDependingNavigationComponent = ({initialData}) => {
 };
 
 export const useAuthenticatedStackNav: (
-  initialData: AppInitialDataWithoutAccountData,
+  initialData: AppInitialData,
 ) => NativeStackScreenConfig<RootStackParamList, typeof ScreenName> = initialData => {
   return useMemo(
     () => ({
-      component: withInitialDataWithoutAccountData(initialData, Component),
+      component: withInitialData(initialData, Component),
       name: AuthenticatedStackNav.name,
       options: {
         headerShown: false,

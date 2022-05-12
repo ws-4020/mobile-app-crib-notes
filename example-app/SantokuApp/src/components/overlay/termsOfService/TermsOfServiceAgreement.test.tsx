@@ -9,12 +9,12 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 import {TermsOfServiceAgreement} from './TermsOfServiceAgreement';
 
 const Wrapper: React.FC = ({children}) => {
-  const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};
+  const accountData = {account: {accountId: '123456789', deviceTokens: []}};
   const queryClient = new QueryClient();
   return (
     <WithSnackbar>
       <QueryClientProvider client={queryClient}>
-        <WithAccountContext initialData={initialData}>{children}</WithAccountContext>
+        <WithAccountContext accountData={accountData}>{children}</WithAccountContext>
       </QueryClientProvider>
     </WithSnackbar>
   );

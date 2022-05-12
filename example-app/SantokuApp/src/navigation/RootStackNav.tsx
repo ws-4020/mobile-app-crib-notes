@@ -1,11 +1,11 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator, NativeStackNavigationOptions} from '@react-navigation/native-stack';
 import {AccountContext, useAccountContext} from 'context/useAccountContext';
-import {AppInitialDataWithoutAccountData} from 'framework/initialize';
 import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
 import {LoginScreen, ProfileRegistrationScreen} from 'screens';
 
+import {AppInitialData} from '../framework/initialize/types';
 import {AuthenticatedStackNav, useAuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
 import {RootStackParamList} from './types';
@@ -24,7 +24,7 @@ const getInitialRouteName = (account: AccountContext) => {
   return LoginScreen.name;
 };
 
-const useRootStackNavigator = (initialData: AppInitialDataWithoutAccountData) => {
+const useRootStackNavigator = (initialData: AppInitialData) => {
   const account = useAccountContext();
   const authorizedInitialRouteName = useMemo(() => getInitialRouteName(account), [account]);
   const authenticatedStackNav = useAuthenticatedStackNav(initialData);
@@ -49,7 +49,7 @@ const useRootStackNavigator = (initialData: AppInitialDataWithoutAccountData) =>
   );
 };
 
-export const RootStackNav: React.FC<{initialData: AppInitialDataWithoutAccountData}> = ({initialData}) => {
+export const RootStackNav: React.FC<{initialData: AppInitialData}> = ({initialData}) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   useEffect(() => {

@@ -12,8 +12,8 @@ jest.mock('components/overlay/snackbar/WithSnackbar');
 jest.mock('framework/logging');
 
 const Wrapper: React.FC = ({children}) => {
-  const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};
-  return <WithAccountContext initialData={initialData}>{children}</WithAccountContext>;
+  const accountData = {account: {accountId: '123456789', deviceTokens: []}};
+  return <WithAccountContext accountData={accountData}>{children}</WithAccountContext>;
 };
 
 describe('useDefaultGlobalMutationErrorHandler', () => {

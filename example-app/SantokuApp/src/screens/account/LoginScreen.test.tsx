@@ -14,15 +14,15 @@ jest.mock('service/backend/accountService');
 jest.mock('service/backend/termService');
 
 const Wrapper: React.FC = ({children}) => {
-  const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};
+  const accountData = {account: {accountId: '123456789', deviceTokens: []}};
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>
       <WithAppTheme>
         <WithSnackbar>
           <QueryClientProvider client={queryClient}>
-            <WithAccountContext initialData={initialData}>
-              <WithTermsOfServiceAgreementOverlay initialData={initialData}>
+            <WithAccountContext accountData={accountData}>
+              <WithTermsOfServiceAgreementOverlay accountData={accountData}>
                 {children}
               </WithTermsOfServiceAgreementOverlay>
             </WithAccountContext>

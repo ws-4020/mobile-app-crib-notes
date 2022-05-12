@@ -1,8 +1,8 @@
+import {AccountDataDependingComponent} from 'framework/initialize/withAccountData';
 import {createUseContextAndProvider} from 'framework/utilities';
 import {TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/model';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 
-import {InitialDataDependingComponent} from '../../../framework/initialize';
 import {TermsOfServiceAgreement, TermsOfServiceAgreementProps} from './TermsOfServiceAgreement';
 
 type TermsOfServiceProps = {
@@ -28,7 +28,7 @@ type TermsOfServiceAgreementOverlayContextType = {
 const [useTermsOfServiceAgreementOverlay, TermsOfServiceAgreementOverlayContextProvider] =
   createUseContextAndProvider<TermsOfServiceAgreementOverlayContextType>();
 
-const WithTermsOfServiceAgreementOverlay: InitialDataDependingComponent = ({children, initialData}) => {
+const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({accountData, children}) => {
   const [state, setState] = useState<TermsOfServiceAgreementProps>({
     visible: false,
     close: () => {},
@@ -50,7 +50,7 @@ const WithTermsOfServiceAgreementOverlay: InitialDataDependingComponent = ({chil
   );
 
   useEffect(() => {
-    const terms = initialData.accountData.terms;
+    const terms = accountData.terms;
     const termsOfServiceAgreementStatus = terms?.termsOfServiceAgreementStatus;
     const termsOfService = terms?.termsOfService;
     if (termsOfServiceAgreementStatus?.hasAgreedValidTermsOfService === false && termsOfService) {
@@ -61,7 +61,7 @@ const WithTermsOfServiceAgreementOverlay: InitialDataDependingComponent = ({chil
         close,
       });
     }
-  }, [close, initialData.accountData.terms]);
+  }, [close, accountData.terms]);
 
   return (
     <TermsOfServiceAgreementOverlayContextProvider value={termsOfServiceAgreementOverlayContext}>

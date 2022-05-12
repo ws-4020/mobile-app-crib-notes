@@ -1,25 +1,25 @@
-import {AppInitialData} from 'framework/initialize/types';
 import {useIsMounted} from 'framework/utilities';
-import React, {useCallback, useMemo} from 'react';
+import React, {Reducer, useCallback, useMemo} from 'react';
 
+import {AccountDataDependingComponent} from '../framework/initialize/withAccountData';
 import {AccountContext, AccountContextProvider} from './useAccountContext';
 import {AccountAction, DispatchAccountContextProvider} from './useDispatchAccountContext';
 
-const reducer = (prevState: AccountContext, action: AccountAction) => {
+const reducer: Reducer<AccountContext, AccountAction> = (prevState, action) => {
   switch (action.type) {
     case 'login':
-      return {...prevState, account: action.account, isLoggedIn: true};
+      return {account: action.account, isLoggedIn: true};
     case 'logout':
-      return {...prevState, account: undefined, isLoggedIn: false};
+      return {isLoggedIn: false};
   }
 };
 
-function WithAccountContext(props: {initialData: AppInitialData; children: React.ReactNode}) {
+const WithAccountContext: AccountDataDependingComponent = ({accountData, children}) => {
   const isMounted = useIsMounted();
   const initialAccount = useMemo(() => {
-    const account = props.initialData.accountData.account;
-    return account ? {account, isLoggedIn: true} : {isLoggedIn: false};
-  }, [props.initialData.accountData.account]);
+    const account = accountData.account;
+    return account ? {account, isLoggedIn: true} : {account: undefined, isLoggedIn: false};
+  }, [accountData.account]);
 
   const [state, dispatch] = React.useReducer(reducer, initialAccount);
   const dispatchAccount = useCallback(
@@ -30,12 +30,11 @@ function WithAccountContext(props: {initialData: AppInitialData; children: React
     },
     [isMounted],
   );
-
   return (
     <AccountContextProvider value={state}>
-      <DispatchAccountContextProvider value={dispatchAccount}>{props.children}</DispatchAccountContextProvider>
+      <DispatchAccountContextProvider value={dispatchAccount}>{children}</DispatchAccountContextProvider>
     </AccountContextProvider>
   );
-}
+};
 
 export {WithAccountContext};

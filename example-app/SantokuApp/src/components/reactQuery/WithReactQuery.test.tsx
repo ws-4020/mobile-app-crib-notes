@@ -7,10 +7,10 @@ import {Text} from 'react-native';
 import {WithReactQuery} from './WithReactQuery';
 
 const Wrapper: React.FC = ({children}) => {
-  const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};
+  const accountData = {account: {accountId: '123456789', deviceTokens: []}};
   return (
     <WithSnackbar>
-      <WithAccountContext initialData={initialData}>{children}</WithAccountContext>;
+      <WithAccountContext accountData={accountData}>{children}</WithAccountContext>;
     </WithSnackbar>
   );
 };

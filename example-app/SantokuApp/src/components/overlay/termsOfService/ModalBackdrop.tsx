@@ -64,7 +64,7 @@ export const ModalBackdrop: React.FC<ModalBackdropProps> = ({
   );
 
   return !isModalVisible ? null : (
-    <View style={StyleSheet.flatten([styles.modal, modalStyle])} {...modalProps}>
+    <View style={styles.modal}>
       {isVisible && (
         <Pressable onPress={onPress} style={composedPressableStyles} {...pressableProps}>
           <Reanimated.View
@@ -80,6 +80,7 @@ export const ModalBackdrop: React.FC<ModalBackdropProps> = ({
   );
 };
 
+// TODO: useSafeAreaInsetsを使用
 const styles = StyleSheet.create({
   modal: {
     position: 'absolute',

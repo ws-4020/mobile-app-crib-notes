@@ -1,17 +1,17 @@
-import messaging from '@react-native-firebase/messaging';
 import type {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useSnackbar} from 'components/overlay';
+import {AuthenticatedStackNav} from 'navigation/AuthenticatedStackNav';
+import {HomeStackNav} from 'navigation/HomeStackNav';
+import {MainTabNav} from 'navigation/MainTabNav';
+import {NavigationParameter, RootStackParamList} from 'navigation/types';
 import React, {useCallback, useEffect} from 'react';
+import {HomeScreen} from 'screens';
 
-import {useSnackbar} from '../../components/overlay';
-import {AuthenticatedStackNav} from '../../navigation/AuthenticatedStackNav';
-import {HomeStackNav} from '../../navigation/HomeStackNav';
-import {MainTabNav} from '../../navigation/MainTabNav';
-import {NavigationParameter, RootStackParamList} from '../../navigation/types';
-import {HomeScreen} from '../../screens';
-import {AppInitialData} from '../initialize/types';
-import {InitialDataDependingComponent} from '../initialize/withInitialData';
+import {AccountData} from '../initialize/helpers';
+import {AccountDataDependingComponent} from '../initialize/withAccountData';
 
 const showMessageOnSnackbar = (
   message: FirebaseMessagingTypes.RemoteMessage,
@@ -28,7 +28,7 @@ const showMessageOnSnackbar = (
 
 const getNavigateToScreen = (
   message: FirebaseMessagingTypes.RemoteMessage,
-  initialData: AppInitialData,
+  accountData: AccountData,
 ): NavigationParameter<RootStackParamList> => {
   return [
     AuthenticatedStackNav.name,
@@ -38,14 +38,14 @@ const getNavigateToScreen = (
 
 const navigateIfRequired = (
   message: FirebaseMessagingTypes.RemoteMessage,
-  initialData: AppInitialData,
+  accountData: AccountData,
   navigation: NativeStackNavigationProp<RootStackParamList>,
 ) => {
-  const to = getNavigateToScreen(message, initialData);
+  const to = getNavigateToScreen(message, accountData);
   navigation.navigate(...to);
 };
 
-export const WithFirebaseMessagingHandlers: InitialDataDependingComponent = ({children, initialData}) => {
+export const WithFirebaseMessagingHandlers: AccountDataDependingComponent = ({accountData, children}) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const snackbar = useSnackbar();
 
@@ -60,8 +60,8 @@ export const WithFirebaseMessagingHandlers: InitialDataDependingComponent = ({ch
 
   // アプリがバックグラウンド状態の時に通知を受信し、通知領域から通知をタップしてアプリが前面に移動した際に行う処理
   const onNotificationOpenedApp = useCallback(
-    (message: FirebaseMessagingTypes.RemoteMessage) => navigateIfRequired(message, initialData, navigation),
-    [initialData, navigation],
+    (message: FirebaseMessagingTypes.RemoteMessage) => navigateIfRequired(message, accountData, navigation),
+    [accountData, navigation],
   );
   useEffect(() => {
     return messaging().onNotificationOpenedApp(onNotificationOpenedApp);

@@ -2,6 +2,7 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {useTermsOfServiceAgreementOverlay} from 'components/overlay/termsOfService';
 import {useDispatchAccountContext} from 'context/useDispatchAccountContext';
 import {FormikProps} from 'formik';
+import {useIsMounted} from 'framework';
 import {AuthenticationService, isUnauthorizedError, SecureStorageAdapter} from 'framework/authentication';
 import {m} from 'framework/message';
 import {isValidForm} from 'framework/validator';
@@ -14,6 +15,7 @@ import {useGetAccountsMe, useGetAccountsMeTerms, useGetTerms} from 'service';
 import {LoginForm} from '../data-types';
 
 export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
+  const isMounted = useIsMounted();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const dispatchAccountContext = useDispatchAccountContext();
   const termsOverlay = useTermsOfServiceAgreementOverlay();
@@ -28,17 +30,15 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
   const clearPassword = useCallback(() => form.setFieldValue('password', ''), [form]);
 
   const createAccount = useCallback(async () => {
-    const termsOfService = (await callGetTerms()).data?.data;
-    // termsOfServiceは必ず返却される想定
-    if (termsOfService) {
-      termsOverlay.show({
-        termsOfService,
-        exitingCallbackOnAgreed: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => {
-          navigation.navigate('ProfileRegistration', termsOfServiceAgreementStatus);
-        },
-        dismissible: true,
-      });
-    }
+    // callGetTerms.dataは必ず存在する想定
+    const termsOfService = (await callGetTerms()).data!.data;
+    termsOverlay.show({
+      termsOfService,
+      exitingCallbackOnAgreed: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => {
+        navigation.navigate('ProfileRegistration', termsOfServiceAgreementStatus);
+      },
+      dismissible: true,
+    });
   }, [callGetTerms, navigation, termsOverlay]);
   const login = useCallback(async () => {
     if (await isValidForm(form)) {
@@ -48,26 +48,35 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         const password = form.values.password;
         await callLogin({accountId, password});
         await SecureStorageAdapter.savePassword(accountId, password);
-        const account = (await callGetAccountMe({throwOnError: true})).data?.data;
+        // callGetAccountMe.dataは必ず存在する想定
+        const account = (await callGetAccountMe({throwOnError: true})).data!.data;
         const termsOfServiceAgreementStatus = (await callGetAccountsMeTerms({throwOnError: true})).data?.data;
         if (!termsOfServiceAgreementStatus?.hasAgreedValidTermsOfService) {
-          const termsOfService = (await callGetTerms({throwOnError: true})).data?.data;
-          // termsOfServiceは必ず返却される想定
-          if (termsOfService) {
-            termsOverlay.show({termsOfService, dismissible: false});
-          }
+          // callGetTerms.dataは必ず存在する想定
+          const termsOfService = (await callGetTerms({throwOnError: true})).data!.data;
+          termsOverlay.show({termsOfService, dismissible: false});
         }
-        setIsExecutingLogin(false);
-        // TODO: ここどうしようかな
-        dispatchAccountContext({type: 'login', account: account!});
+        dispatchAccountContext({type: 'login', account});
       } catch (e) {
         if (isUnauthorizedError(e)) {
           Alert.alert(m('ログイン失敗'), m('アカウントIDまたはパスワードに\n間違いがあります。'));
         }
-        setIsExecutingLogin(false);
+      } finally {
+        if (isMounted()) {
+          setIsExecutingLogin(false);
+        }
       }
     }
-  }, [callGetAccountsMeTerms, callGetTerms, callLogin, form, callGetAccountMe, dispatchAccountContext, termsOverlay]);
+  }, [
+    form,
+    callLogin,
+    callGetAccountMe,
+    callGetAccountsMeTerms,
+    dispatchAccountContext,
+    callGetTerms,
+    termsOverlay,
+    isMounted,
+  ]);
 
   return {
     clearAccountId,
