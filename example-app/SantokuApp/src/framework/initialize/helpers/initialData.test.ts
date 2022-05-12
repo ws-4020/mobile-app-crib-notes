@@ -21,8 +21,8 @@ describe('loadInitialAccountDataAsync', () => {
     (getAccountsMeTerms as jest.Mock).mockReturnValue(
       Promise.resolve({
         data: {
-          hasAgreedValidTermsOfService: true,
-          agreedTermsOfServiceVersion: '1.0.0',
+          hasAgreed: true,
+          agreedVersion: '1.0.0',
         },
         ...axiosGetOkResponse,
       }),
@@ -30,7 +30,7 @@ describe('loadInitialAccountDataAsync', () => {
     (getTerms as jest.Mock).mockReturnValue(
       Promise.resolve({
         data: {
-          latestTermsOfServiceVersion: '1.0.0',
+          version: '1.0.0',
           url: 'http://localhost',
         },
         ...axiosGetOkResponse,
@@ -43,8 +43,8 @@ describe('loadInitialAccountDataAsync', () => {
       },
       terms: {
         termsOfServiceAgreementStatus: {
-          hasAgreedValidTermsOfService: true,
-          agreedTermsOfServiceVersion: '1.0.0',
+          hasAgreed: true,
+          agreedVersion: '1.0.0',
         },
         termsOfService: undefined,
       },
@@ -58,8 +58,8 @@ describe('loadInitialAccountDataAsync', () => {
     (getAccountsMeTerms as jest.Mock).mockReturnValue(
       Promise.resolve({
         data: {
-          hasAgreedValidTermsOfService: false,
-          agreedTermsOfServiceVersion: '1.0.0',
+          hasAgreed: false,
+          agreedVersion: '1.0.0',
         },
         ...axiosGetOkResponse,
       }),
@@ -67,7 +67,7 @@ describe('loadInitialAccountDataAsync', () => {
     (getTerms as jest.Mock).mockReturnValue(
       Promise.resolve({
         data: {
-          latestTermsOfServiceVersion: '1.0.1',
+          version: '1.0.1',
           url: 'http://localhost',
         },
         ...axiosGetOkResponse,
@@ -80,11 +80,11 @@ describe('loadInitialAccountDataAsync', () => {
       },
       terms: {
         termsOfServiceAgreementStatus: {
-          hasAgreedValidTermsOfService: false,
-          agreedTermsOfServiceVersion: '1.0.0',
+          hasAgreed: false,
+          agreedVersion: '1.0.0',
         },
         termsOfService: {
-          latestTermsOfServiceVersion: '1.0.1',
+          version: '1.0.1',
           url: 'http://localhost',
         },
       },

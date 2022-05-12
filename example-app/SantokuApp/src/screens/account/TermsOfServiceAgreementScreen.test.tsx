@@ -25,7 +25,7 @@ describe('TermsOfServiceAgreement', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
     const termsOfServiceAgreementScreen = renderHook(() =>
       useTermsOfServiceAgreementScreen({
-        accountData: {terms: {termsOfService: {latestTermsOfServiceVersion: '1.0.0', url: AppConfig.termsUrl}}},
+        accountData: {terms: {termsOfService: {version: '1.0.0', url: AppConfig.termsUrl}}},
       }),
     ).result.current;
     const Screen = termsOfServiceAgreementScreen.component as React.FC;
