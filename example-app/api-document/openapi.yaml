@@ -834,7 +834,6 @@ components:
           description: 同意した利用規約のバージョン
       required:
         - hasAgreedValidTermsOfService
-        - agreedTermsOfServiceVersion
     Team:
       title: Team
       type: object

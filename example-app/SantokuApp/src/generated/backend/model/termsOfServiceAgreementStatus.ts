@@ -13,5 +13,5 @@ export interface TermsOfServiceAgreementStatus {
   /** 有効な利用規約に同意済みかどうか */
   readonly hasAgreedValidTermsOfService: boolean;
   /** 同意した利用規約のバージョン */
-  agreedTermsOfServiceVersion: string;
+  agreedTermsOfServiceVersion?: string;
 }
