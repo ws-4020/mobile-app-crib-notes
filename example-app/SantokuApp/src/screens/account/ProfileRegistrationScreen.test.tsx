@@ -1,5 +1,8 @@
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {ParamListBase} from '@react-navigation/routers';
 import {render} from '@testing-library/react-native';
 import {WithSnackbar} from 'components/overlay';
+import {WithTermsOfServiceAgreementOverlay} from 'components/overlay/termsOfService';
 import {WithAppTheme} from 'components/theme';
 import {WithAccountContext} from 'context/WithAccountContext';
 import {BundledMessagesLoader, loadMessages} from 'framework/message';
@@ -19,7 +22,11 @@ const Wrapper: React.FC = ({children}) => {
       <WithAppTheme>
         <WithSnackbar>
           <QueryClientProvider client={queryClient}>
-            <WithAccountContext initialData={initialData}>{children}</WithAccountContext>
+            <WithAccountContext initialData={initialData}>
+              <WithTermsOfServiceAgreementOverlay initialData={initialData}>
+                {children}
+              </WithTermsOfServiceAgreementOverlay>
+            </WithAccountContext>
           </QueryClientProvider>
         </WithSnackbar>
       </WithAppTheme>
@@ -38,10 +45,23 @@ describe('ProfileRegistrationScreen', () => {
     // importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const Screen = require('./ProfileRegistrationScreen').ProfileRegistrationScreen.component as React.FC;
-    const app = render(<Screen />, {
-      wrapper: Wrapper,
-    });
+    const Screen = require('./ProfileRegistrationScreen').ProfileRegistrationScreen.component as React.FC<
+      NativeStackScreenProps<ParamListBase>
+    >;
+    const app = render(
+      <Screen
+        navigation={__mocks.navigation}
+        route={{
+          params: {hasAgreedValidTermsOfService: true, agreedTermsOfServiceVersion: '1.0.0'},
+          key: '',
+          path: '',
+          name: 'ProfileRegistration',
+        }}
+      />,
+      {
+        wrapper: Wrapper,
+      },
+    );
     expect(app.queryByTestId('ProfileRegistration')).not.toBeNull();
     expect(app).toMatchSnapshot();
   });

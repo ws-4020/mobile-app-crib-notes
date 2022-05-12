@@ -6,13 +6,13 @@ import {loadBundledMessagesAsync} from 'framework/initialize/helpers';
 import React from 'react';
 import {Alert} from 'react-native';
 
-import {useSetAccountContext} from '../../context/useSetAccountContext';
+import {useDispatchAccountContext} from '../../context/useDispatchAccountContext';
 import {AuthenticationService} from '../authentication';
 import {AppInitialData} from '../initialize/types';
 import {useDefaultGlobalErrorHandler} from './useDefaultGlobalErrorHandler';
 
 jest.mock('components/overlay/snackbar/WithSnackbar');
-jest.mock('context/useSetAccountContext');
+jest.mock('context/useDispatchAccountContext');
 jest.mock('framework/logging');
 
 jest.useFakeTimers();
@@ -64,7 +64,7 @@ describe('useDefaultGlobalErrorHandler', () => {
     const spyClientLogout = jest.spyOn(AuthenticationService, 'clientLogout').mockImplementation(() => {
       return Promise.resolve();
     });
-    const mockUseSetAccountContext = (useSetAccountContext as jest.Mock).mockImplementation(() => {
+    const mockUseSetAccountContext = (useDispatchAccountContext as jest.Mock).mockImplementation(() => {
       return () => {};
     });
     const spyAlert = jest.spyOn(Alert, 'alert');

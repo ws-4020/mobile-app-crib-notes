@@ -54,7 +54,7 @@ jest.mock('service/backend/accountService', () => {
       return Promise.resolve({
         status: 200,
         data: {
-          hasAgreedValidTermsOfService: false,
+          hasAgreedValidTermsOfService: true,
           agreedTermsOfServiceVersion: '1.0.0',
         },
       });
@@ -103,19 +103,10 @@ beforeEach(() => {
 
 describe('App', () => {
   it('マウントされたときに正常にレンダリングされること', async () => {
-    (getTerms as jest.Mock).mockReturnValue(
-      Promise.resolve({
-        status: 200,
-        data: {
-          latestTermsOfServiceVersion: '1.0.0',
-          url: AppConfig.termsUrl,
-        },
-      }),
-    );
     const app = render(<App />);
     await waitFor(
       () => {
-        expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
+        expect(app.queryByTestId('HomeScreen')).not.toBeNull();
         expect(app).toMatchSnapshot();
       },
       {timeout: 60000},
