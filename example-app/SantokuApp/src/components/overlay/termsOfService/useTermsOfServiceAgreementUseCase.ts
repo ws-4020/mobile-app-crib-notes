@@ -6,7 +6,7 @@ import {usePostAccountsMeTerms} from 'service';
 
 export const useTermsOfServiceAgreementUseCase = (
   close: () => void,
-  termsOfService?: TermsOfService,
+  termsOfService: TermsOfService,
   exitingCallback?: (finished: boolean) => unknown,
   exitingCallbackOnAgreed?: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => unknown,
 ) => {

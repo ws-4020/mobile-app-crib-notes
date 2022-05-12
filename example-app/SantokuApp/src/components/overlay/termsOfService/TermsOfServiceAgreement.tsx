@@ -14,7 +14,7 @@ import {useTermsOfServiceAgreementUseCase} from './useTermsOfServiceAgreementUse
 export type TermsOfServiceAgreementProps = {
   visible: boolean;
   close: () => void;
-  termsOfService?: TermsOfService;
+  termsOfService: TermsOfService;
   /**
    * Overlayの背景をタップした時に閉じるかどうかの設定。
    * デフォルトはtrue（閉じる）です。

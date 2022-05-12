@@ -22,20 +22,23 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
   const {refetch: getAccountMe} = useGetAccountsMe({query: {enabled: false}});
   const {mutateAsync: callLogin} = AuthenticationService.useLogin();
   const {refetch: callGetAccountsMeTerms} = useGetAccountsMeTerms();
-  const {refetch: callGetTerms} = useGetTerms();
+  const {refetch: callGetTerms, isFetching: isFetchingTerms} = useGetTerms();
 
   const clearAccountId = useCallback(() => form.setFieldValue('accountId', ''), [form]);
   const clearPassword = useCallback(() => form.setFieldValue('password', ''), [form]);
 
   const createAccount = useCallback(async () => {
     const termsOfService = (await callGetTerms()).data?.data;
-    termsOverlay.show({
-      termsOfService,
-      exitingCallbackOnAgreed: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => {
-        navigation.navigate('ProfileRegistration', termsOfServiceAgreementStatus);
-      },
-      dismissible: true,
-    });
+    // termsOfServiceは必ず返却される想定
+    if (termsOfService) {
+      termsOverlay.show({
+        termsOfService,
+        exitingCallbackOnAgreed: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => {
+          navigation.navigate('ProfileRegistration', termsOfServiceAgreementStatus);
+        },
+        dismissible: true,
+      });
+    }
   }, [callGetTerms, navigation, termsOverlay]);
   const login = useCallback(async () => {
     if (await isValidForm(form)) {
@@ -47,10 +50,12 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         await SecureStorageAdapter.savePassword(accountId, password);
         const account = (await getAccountMe({throwOnError: true})).data?.data;
         const termsOfServiceAgreementStatus = (await callGetAccountsMeTerms({throwOnError: true})).data?.data;
-        let termsOfService;
         if (!termsOfServiceAgreementStatus?.hasAgreedValidTermsOfService) {
-          termsOfService = (await callGetTerms({throwOnError: true})).data?.data;
-          termsOverlay.show({termsOfService, dismissible: false});
+          const termsOfService = (await callGetTerms({throwOnError: true})).data?.data;
+          // termsOfServiceは必ず返却される想定
+          if (termsOfService) {
+            termsOverlay.show({termsOfService, dismissible: false});
+          }
         }
         setIsExecutingLogin(false);
         setAccountContext(account);
@@ -69,5 +74,6 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
     createAccount,
     login,
     isExecutingLogin,
+    isExecutingCreateAccount: isFetchingTerms,
   };
 };

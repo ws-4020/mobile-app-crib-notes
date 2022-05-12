@@ -6,7 +6,7 @@ import {InitialDataDependingComponent} from '../../../framework/initialize';
 import {TermsOfServiceAgreement, TermsOfServiceAgreementProps} from './TermsOfServiceAgreement';
 
 type TermsOfServiceProps = {
-  termsOfService?: TermsOfService;
+  termsOfService: TermsOfService;
   /**
    * Overlayの背景をタップした時に閉じるかどうかの設定。
    * デフォルトはtrue（閉じる）です。
@@ -29,7 +29,11 @@ const [useTermsOfServiceAgreementOverlay, TermsOfServiceAgreementOverlayContextP
   createUseContextAndProvider<TermsOfServiceAgreementOverlayContextType>();
 
 const WithTermsOfServiceAgreementOverlay: InitialDataDependingComponent = ({children, initialData}) => {
-  const [state, setState] = useState<TermsOfServiceAgreementProps>({visible: false, close: () => {}});
+  const [state, setState] = useState<TermsOfServiceAgreementProps>({
+    visible: false,
+    close: () => {},
+    termsOfService: {latestTermsOfServiceVersion: '', url: ''},
+  });
   const close = useCallback(() => setState(prevState => ({...prevState, visible: false})), []);
 
   const termsOfServiceAgreementOverlayContext = useMemo<TermsOfServiceAgreementOverlayContextType>(
@@ -46,19 +50,18 @@ const WithTermsOfServiceAgreementOverlay: InitialDataDependingComponent = ({chil
   );
 
   useEffect(() => {
-    if (initialData.accountData.terms?.termsOfServiceAgreementStatus?.hasAgreedValidTermsOfService === false) {
+    const terms = initialData.accountData.terms;
+    const termsOfServiceAgreementStatus = terms?.termsOfServiceAgreementStatus;
+    const termsOfService = terms?.termsOfService;
+    if (termsOfServiceAgreementStatus?.hasAgreedValidTermsOfService === false && termsOfService) {
       setState({
         visible: true,
         dismissible: false,
-        termsOfService: initialData.accountData.terms.termsOfService,
+        termsOfService,
         close,
       });
     }
-  }, [
-    close,
-    initialData.accountData.terms?.termsOfService,
-    initialData.accountData.terms?.termsOfServiceAgreementStatus?.hasAgreedValidTermsOfService,
-  ]);
+  }, [close, initialData.accountData.terms]);
 
   return (
     <TermsOfServiceAgreementOverlayContextProvider value={termsOfServiceAgreementOverlayContext}>

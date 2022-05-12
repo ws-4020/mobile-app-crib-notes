@@ -817,6 +817,9 @@ components:
         url:
           type: string
           description: 利用規約のURL
+      required:
+        - latestTermsOfServiceVersion
+        - url
     TermsOfServiceAgreementStatus:
       title: TermsOfServiceAgreementStatus
       type: object
@@ -829,6 +832,9 @@ components:
         agreedTermsOfServiceVersion:
           type: string
           description: 同意した利用規約のバージョン
+      required:
+        - hasAgreedValidTermsOfService
+        - agreedTermsOfServiceVersion
     Team:
       title: Team
       type: object

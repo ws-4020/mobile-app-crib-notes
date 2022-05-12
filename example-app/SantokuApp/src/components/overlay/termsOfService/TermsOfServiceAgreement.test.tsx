@@ -29,9 +29,12 @@ describe('TermsOfServiceAgreement', () => {
     // importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const app = render(<TermsOfServiceAgreement visible close={() => {}} />, {
-      wrapper: Wrapper,
-    });
+    const app = render(
+      <TermsOfServiceAgreement visible close={() => {}} termsOfService={{latestTermsOfServiceVersion: '', url: ''}} />,
+      {
+        wrapper: Wrapper,
+      },
+    );
     expect(app.queryByTestId('TermsOfServiceAgreement')).not.toBeNull();
     expect(app).toMatchSnapshot();
   });
