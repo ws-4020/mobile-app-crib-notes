@@ -11,7 +11,7 @@
  */
 export interface TermsOfService {
   /** 最新の利用規約のバージョン */
-  latestTermsOfServiceVersion: string;
+  version: string;
   /** 利用規約のURL */
   url: string;
 }
