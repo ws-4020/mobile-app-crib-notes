@@ -18,7 +18,7 @@ const invisibleHeaderOptions: NativeStackNavigationOptions = {
 };
 
 const getAuthorizedInitialRouteName = (initialData: AppInitialData) => {
-  if (!initialData.accountData.terms?.termsOfServiceAgreementStatus?.hasAgreedValidTermsOfService) {
+  if (!initialData.accountData.terms?.termsOfServiceAgreementStatus?.hasAgreed) {
     return TermsOfServiceAgreementScreen.name;
   }
   return AuthenticatedStackNav.name;

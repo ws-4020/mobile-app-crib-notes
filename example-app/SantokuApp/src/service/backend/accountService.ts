@@ -42,8 +42,8 @@ const getAccountsMeTerms = async (): Promise<AxiosResponse<TermsOfServiceAgreeme
 
   return {
     data: {
-      hasAgreedValidTermsOfService: false,
-      agreedTermsOfServiceVersion: '1.0.0',
+      hasAgreed: false,
+      agreedVersion: '1.0.0',
     },
     ...axiosGetOkResponse,
   };

@@ -18,7 +18,7 @@ const loadInitialAccountDataAsync = async (): Promise<AccountData> => {
     const account = (await getAccountsMe()).data;
     const termsOfServiceAgreementStatus = (await getAccountsMeTerms()).data;
     let termsOfService;
-    if (!termsOfServiceAgreementStatus.hasAgreedValidTermsOfService) {
+    if (!termsOfServiceAgreementStatus.hasAgreed) {
       termsOfService = (await getTerms()).data;
     }
     return {

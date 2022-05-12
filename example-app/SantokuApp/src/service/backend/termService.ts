@@ -6,7 +6,7 @@ const sleep = () => new Promise(resolve => setTimeout(resolve, 100));
 const axiosGetOkResponse = {status: 200, statusText: 'OK', config: {}, request: {}, headers: {}};
 const getTerms = async () => {
   await sleep();
-  return {data: {latestTermsOfServiceVersion: '1.0.0', url: AppConfig.termsUrl}, ...axiosGetOkResponse};
+  return {data: {version: '1.0.0', url: AppConfig.termsUrl}, ...axiosGetOkResponse};
 };
 
 export {useGetTerms, getTerms};

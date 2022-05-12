@@ -26,7 +26,7 @@ const Component: InitialDataDependingComponent = ({initialData}) => {
     onScrollEndOnce,
     onAgree,
     isDisabledAgreementButton,
-  } = useTermsOfServiceAgreementUseCase(initialData.accountData.terms?.termsOfService);
+  } = useTermsOfServiceAgreementUseCase(initialData.accountData.terms?.termsOfService!);
 
   if (!termUrl) {
     // URLは必ず存在する想定

@@ -5,7 +5,7 @@ import {usePostAccountsMeTerms} from 'service';
 
 import {useNavigateToRootStackScreen} from '../../useNavigateToScreen';
 
-export const useTermsOfServiceAgreementUseCase = (termsOfService?: TermsOfService) => {
+export const useTermsOfServiceAgreementUseCase = (termsOfService: TermsOfService) => {
   const [buttonDisable, setButtonDisable] = useState(true);
   const [isWebViewError, setIsWebViewError] = useState(false);
   const webViewRef = useRef<RNWebView>(null);
@@ -27,14 +27,14 @@ export const useTermsOfServiceAgreementUseCase = (termsOfService?: TermsOfServic
   const onAgree = useCallback(async () => {
     try {
       await callPostAccountsMeTerms({
-        hasAgreedValidTermsOfService: true,
-        agreedTermsOfServiceVersion: termsOfService?.latestTermsOfServiceVersion,
+        hasAgreed: true,
+        agreedVersion: termsOfService?.version,
       });
       onGoToHomeScreen();
     } catch {
       // 個別のエラーハンドリングは不要
     }
-  }, [callPostAccountsMeTerms, onGoToHomeScreen, termsOfService?.latestTermsOfServiceVersion]);
+  }, [callPostAccountsMeTerms, onGoToHomeScreen, termsOfService?.version]);
   return {
     termUrl,
     isWebViewError,
