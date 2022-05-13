@@ -2,16 +2,16 @@ import {renderHook, WrapperComponent} from '@testing-library/react-hooks';
 import {AxiosError} from 'axios';
 import {useSnackbar, WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
-import {useDispatchAccountContext} from 'context/useDispatchAccountContext';
 import {AccountData, loadBundledMessagesAsync} from 'framework/initialize/helpers';
 import React from 'react';
 import {Alert} from 'react-native';
 
+import {useAccountContextOperation} from '../../context/useAccountContextOperation';
 import {AuthenticationService} from '../authentication';
 import {useDefaultGlobalErrorHandler} from './useDefaultGlobalErrorHandler';
 
 jest.mock('components/overlay/snackbar/WithSnackbar');
-jest.mock('context/useDispatchAccountContext');
+jest.mock('context/useAccountContextOperation');
 jest.mock('framework/logging');
 
 jest.useFakeTimers();
@@ -63,8 +63,9 @@ describe('useDefaultGlobalErrorHandler', () => {
     const spyClientLogout = jest.spyOn(AuthenticationService, 'clientLogout').mockImplementation(() => {
       return Promise.resolve();
     });
-    const mockUseSetAccountContext = (useDispatchAccountContext as jest.Mock).mockImplementation(() => {
-      return () => {};
+    const logout = jest.fn();
+    (useAccountContextOperation as jest.Mock).mockImplementation(() => {
+      return {logout};
     });
     const spyAlert = jest.spyOn(Alert, 'alert');
     await loadBundledMessagesAsync();
@@ -78,7 +79,7 @@ describe('useDefaultGlobalErrorHandler', () => {
     });
     expect(mockSnackbarShow).not.toBeCalled();
     expect(spyClientLogout).toHaveBeenCalled();
-    expect(mockUseSetAccountContext).toHaveBeenCalled();
+    expect(logout).toHaveBeenCalled();
     expect(spyAlert).toBeCalledWith(
       '再ログインが必要です',
       'セッションの有効期限が切れました。再度ログインしてください。',

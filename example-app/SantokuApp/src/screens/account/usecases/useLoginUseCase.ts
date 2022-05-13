@@ -1,5 +1,5 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {useDispatchAccountContext} from 'context/useDispatchAccountContext';
+import {useAccountContextOperation} from 'context/useAccountContextOperation';
 import {FormikProps} from 'formik';
 import {AuthenticationService, isUnauthorizedError, SecureStorageAdapter} from 'framework/authentication';
 import {m} from 'framework/message';
@@ -13,7 +13,7 @@ import {LoginForm} from '../data-types';
 
 export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const dispatchAccountContext = useDispatchAccountContext();
+  const accountContextOperation = useAccountContextOperation();
   // ログイン処理中状態
   const [isExecutingLogin, setIsExecutingLogin] = useState(false);
   const {refetch: getAccountMe} = useGetAccountsMe({query: {enabled: false}});
@@ -31,8 +31,9 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         const password = form.values.password;
         await callLogin({accountId, password});
         await SecureStorageAdapter.savePassword(accountId, password);
-        const account = (await getAccountMe({throwOnError: true})).data?.data;
-        dispatchAccountContext({type: 'login', account});
+        // getAccountMe.dataは必ず存在する想定
+        const account = (await getAccountMe({throwOnError: true})).data!.data;
+        accountContextOperation.login(account);
       } catch (e) {
         if (isUnauthorizedError(e)) {
           Alert.alert(m('ログイン失敗'), m('アカウントIDまたはパスワードに\n間違いがあります。'));
@@ -41,7 +42,7 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         setIsExecutingLogin(false);
       }
     }
-  }, [callLogin, form, getAccountMe, dispatchAccountContext]);
+  }, [form, callLogin, getAccountMe, accountContextOperation]);
 
   return {
     clearAccountId,
