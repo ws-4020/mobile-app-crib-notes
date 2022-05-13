@@ -1,5 +1,5 @@
 import {Button} from 'components/button';
-import {useDispatchAccountContext} from 'context/useDispatchAccountContext';
+import {useAccountContextOperation} from 'context/useAccountContextOperation';
 import {AuthenticationService} from 'framework/authentication';
 import {m} from 'framework/message';
 import React, {useCallback} from 'react';
@@ -39,16 +39,16 @@ type CloseThisNavigatorButtonProps = {
 };
 
 export const useLogoutButton = () => {
-  const dispatchAccountContext = useDispatchAccountContext();
+  const accountContextOperation = useAccountContextOperation();
   const {mutateAsync: callLogout, isLoading} = AuthenticationService.useLogout();
   const logout = useCallback(async () => {
     try {
       await callLogout();
-      dispatchAccountContext({type: 'logout'});
+      accountContextOperation.logout();
     } catch (e) {
       // 個別のエラーハンドリングは不要
     }
-  }, [callLogout, dispatchAccountContext]);
+  }, [accountContextOperation, callLogout]);
   // NativeStackNavigatorのheaderRightに合わせたコンポーネント。
   const LogoutButton: React.FC<CloseThisNavigatorButtonProps> = () => (
     <HeaderRightLogoutButton onPress={logout} isLoading={isLoading} />
