@@ -7,10 +7,10 @@ import {MutationCache, QueryCache} from 'react-query';
 import {useDefaultMutationCache, useDefaultQueryCache} from './useDefaultCache';
 
 const Wrapper: React.FC = ({children}) => {
-  const initialData = {accountData: {account: {accountId: '123456789', deviceTokens: []}}};
+  const accountData = {account: {accountId: '123456789', deviceTokens: []}};
   return (
     <WithSnackbar>
-      <WithAccountContext initialData={initialData}>{children}</WithAccountContext>
+      <WithAccountContext accountData={accountData}>{children}</WithAccountContext>;
     </WithSnackbar>
   );
 };

@@ -1,9 +1,9 @@
 import {Button} from 'components/button';
+import {useAccountContextOperation} from 'context/useAccountContextOperation';
+import {AuthenticationService} from 'framework/authentication';
+import {m} from 'framework/message';
 import React, {useCallback} from 'react';
 import {GestureResponderEvent, StyleSheet} from 'react-native';
-
-import {useSetAccountContext} from '../context/useSetAccountContext';
-import {AuthenticationService, m} from '../framework';
 
 type HeaderRightLogoutButtonProps = {
   onPress: (event: GestureResponderEvent) => void;
@@ -39,16 +39,16 @@ type CloseThisNavigatorButtonProps = {
 };
 
 export const useLogoutButton = () => {
-  const setAccountContext = useSetAccountContext();
+  const accountContextOperation = useAccountContextOperation();
   const {mutateAsync: callLogout, isLoading} = AuthenticationService.useLogout();
   const logout = useCallback(async () => {
     try {
       await callLogout();
-      setAccountContext(undefined);
+      accountContextOperation.logout();
     } catch (e) {
       // 個別のエラーハンドリングは不要
     }
-  }, [callLogout, setAccountContext]);
+  }, [accountContextOperation, callLogout]);
   // NativeStackNavigatorのheaderRightに合わせたコンポーネント。
   const LogoutButton: React.FC<CloseThisNavigatorButtonProps> = () => (
     <HeaderRightLogoutButton onPress={logout} isLoading={isLoading} />

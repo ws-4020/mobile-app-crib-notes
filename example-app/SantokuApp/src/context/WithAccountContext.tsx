@@ -1,43 +1,25 @@
-import {AppInitialData} from 'framework/initialize/types';
-import {useIsMounted} from 'framework/utilities';
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {AccountDataDependingComponent} from 'framework/initialize/withAccountData';
+import React from 'react';
 
-import {Account} from '../generated/backend/model';
-import {AccountContext, AccountContextProvider} from './useAccountContext';
-import {SetAccountAction, SetAccountContextProvider} from './useSetAccountContext';
+import {AccountContextProvider} from './useAccountContext';
+import {
+  AccountContextOperationProvider,
+  accountContextReducer,
+  useAccountOperation,
+} from './useAccountContextOperation';
 
-function WithAccountContext(props: {initialData: AppInitialData; children: React.ReactNode}) {
-  const isMounted = useIsMounted();
-  const initialAccount = useMemo(() => {
-    const account = props.initialData.accountData.account;
-    return account ? {account, isLoggedIn: true} : {isLoggedIn: false};
-  }, [props.initialData.accountData.account]);
+const WithAccountContext: AccountDataDependingComponent = ({accountData, children}) => {
+  const account = accountData.account;
+  const initialAccountContext = account ? {account, isLoggedIn: true} : {isLoggedIn: false};
 
-  const [state, setState] = useState<AccountContext>(initialAccount);
-  // setAccountがstateの値によって再作成されないように、Refとして持っておく
-  const ref = useRef<Account>();
-  useEffect(() => {
-    ref.current = state.account;
-  }, [state.account]);
-
-  const setAccount = useCallback(
-    (setStateAction: SetAccountAction) => {
-      if (isMounted()) {
-        const account = typeof setStateAction === 'function' ? setStateAction(ref.current) : setStateAction;
-        setState({
-          account,
-          isLoggedIn: !!account,
-        });
-      }
-    },
-    [isMounted],
-  );
+  const [state, dispatch] = React.useReducer(accountContextReducer, initialAccountContext);
+  const operations = useAccountOperation(initialAccountContext, dispatch);
 
   return (
     <AccountContextProvider value={state}>
-      <SetAccountContextProvider value={setAccount}>{props.children}</SetAccountContextProvider>
+      <AccountContextOperationProvider value={operations}>{children}</AccountContextOperationProvider>
     </AccountContextProvider>
   );
-}
+};
 
 export {WithAccountContext};
