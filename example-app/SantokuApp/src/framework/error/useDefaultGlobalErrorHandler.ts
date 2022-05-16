@@ -38,9 +38,7 @@ export const useDefaultGlobalErrorHandler = () => {
   const accountContextOperation = useAccountContextOperation();
 
   const showRequireLoginDialog = useCallback(() => {
-    console.log('showRequireLoginDialog');
     AuthenticationService.clientLogout().finally(() => {
-      console.log('finally');
       accountContextOperation.logout();
       Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
     });
