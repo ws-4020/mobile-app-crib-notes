@@ -11,7 +11,7 @@ type SelectPickerItemsUseCaseTypes<ItemT> = {
   itemHeight: number;
   numberOfLines: number;
   onValueChange?: (itemValue: ItemT, itemIndex: number) => void;
-  flatListRef: React.RefObject<FlatList | undefined>;
+  flatListRef: React.RefObject<FlatList<ItemT> | undefined>;
 };
 
 export const useSelectPickerItemsUseCase = <ItemT extends unknown>({

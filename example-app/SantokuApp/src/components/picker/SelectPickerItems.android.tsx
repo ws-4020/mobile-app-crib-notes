@@ -19,6 +19,11 @@ const FaderBottom: React.FC = () => <Fader visible position={FaderPosition.BOTTO
 
 const DECELERATION_RATE = 0.98;
 
+const defaultKeyExtractor = <ItemT extends unknown>(item: Item<ItemT>, index: number) =>
+  `${String(item.key ?? item.value)}.${index}`;
+
+const AnimatedFlatList = Reanimated.createAnimatedComponent<FlatListProps<Item<any>>>(FlatList);
+
 type SelectPickerItemsAndroid<ItemT> = Omit<SelectPickerItemsProps<ItemT>, 'style'>;
 
 export const SelectPickerItems = <ItemT extends unknown>({
@@ -34,14 +39,12 @@ export const SelectPickerItems = <ItemT extends unknown>({
   inactiveColor,
   ...rest
 }: SelectPickerItemsAndroid<ItemT>) => {
+  // const flatListRef2 = useAnimatedRef<FlatList<Item<ItemT>>>();
   const flatListRef = useAnimatedRef<FlatList>();
   const offset = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler(e => {
     offset.value = e.contentOffset.y;
   });
-
-  const AnimatedFlatList = Reanimated.createAnimatedComponent<FlatListProps<Item<ItemT>>>(FlatList);
-  const defaultKeyExtractor = (item: Item<ItemT>, index: number) => `${String(item.key ?? item.value)}.${index}`;
 
   const {height, handleValueChange, scrollToPassedIndex, currentIndex, selectItem, getItemLayout} =
     useSelectPickerItemsUseCase<ItemT>({
