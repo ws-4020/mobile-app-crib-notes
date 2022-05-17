@@ -1,12 +1,9 @@
-import {Picker, PickerProps} from '@react-native-picker/picker';
+import {Picker} from '@react-native-picker/picker';
 import React from 'react';
 
-import {Item} from './SelectPicker';
+import {SelectPickerItemsProps} from './SelectPickerItems';
 
-export type SelectPickerItemsProps<ItemT> = PickerProps<React.Key> & {
-  items: Item<ItemT>[];
-  keyExtractor?: ((item: ItemT, index: number) => React.Key) | undefined;
-};
+type SelectPickerItemsIOS<ItemT> = Omit<SelectPickerItemsProps<ItemT>, 'itemHeight' | 'activeColor' | 'inactiveColor'>;
 
 export const SelectPickerItems = <ItemT extends unknown>({
   selectedValue,
@@ -14,12 +11,12 @@ export const SelectPickerItems = <ItemT extends unknown>({
   items,
   keyExtractor,
   ...rest
-}: SelectPickerItemsProps<ItemT>) => {
+}: SelectPickerItemsIOS<ItemT>) => {
   return (
     <Picker selectedValue={selectedValue} onValueChange={onValueChange} {...rest}>
       {items.map((item, index) => (
         <Picker.Item
-          key={keyExtractor ? keyExtractor(item.value, index) : item.key ?? item.label}
+          key={keyExtractor ? keyExtractor(item, index) : item.key ?? item.label}
           label={item.label}
           value={item.key ?? item.value}
           color={item.color}

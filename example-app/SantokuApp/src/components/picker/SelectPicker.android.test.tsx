@@ -2,6 +2,7 @@ import {render} from '@testing-library/react-native';
 import React from 'react';
 import {TextInputProps, View} from 'react-native';
 
+import {Item} from './SelectPicker';
 import {SelectPicker} from './SelectPicker.android';
 import {SelectPickerItemsProps} from './SelectPickerItems';
 
@@ -37,7 +38,7 @@ describe('SelectPicker with all props', () => {
     ];
     const onSelectedItemChange = jest.fn();
     const onDone = jest.fn();
-    const keyExtractor = jest.fn((value: string, index: number) => `${value}-${index}`);
+    const keyExtractor = jest.fn((item: Item<string>, index: number) => `${String(item.key ?? item.value)}-${index}`);
     /**
      * onDoneは自動テストではイベント発火できませんでした
      */

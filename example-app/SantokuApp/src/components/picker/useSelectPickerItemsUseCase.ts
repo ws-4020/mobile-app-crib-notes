@@ -4,24 +4,24 @@ import {FlatList, NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
 import {Item} from './SelectPicker';
 import {useListMiddleIndex} from './useListMiddleIndex';
 
-type SelectPickerItemsUseCaseTypes = {
-  selectedValue?: React.Key;
+type SelectPickerItemsUseCaseTypes<ItemT> = {
+  selectedValue?: React.Key | ItemT;
   children?: JSX.Element | JSX.Element[];
-  items: Item<React.Key>[];
+  items: Item<ItemT>[];
   itemHeight: number;
-  preferredNumVisibleRows: number;
-  onValueChange?: (itemValue: React.Key, itemIndex: number) => void;
+  numberOfLines: number;
+  onValueChange?: (itemValue: ItemT, itemIndex: number) => void;
   flatListRef: React.RefObject<FlatList | undefined>;
 };
 
-export const useSelectPickerItemsUseCase = ({
+export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
   selectedValue,
   items,
   itemHeight,
-  preferredNumVisibleRows,
+  numberOfLines,
   onValueChange,
   flatListRef,
-}: SelectPickerItemsUseCaseTypes) => {
+}: SelectPickerItemsUseCaseTypes<ItemT>) => {
   const middleIndex = useListMiddleIndex({itemHeight, listSize: items.length});
 
   const currentIndex = useMemo(() => {
@@ -30,7 +30,7 @@ export const useSelectPickerItemsUseCase = ({
 
   const prevIndex = useRef(currentIndex);
   const _onChange = useCallback(
-    (value: string | number, index: number) => {
+    (value: ItemT, index: number) => {
       onValueChange?.(value, index);
     },
     [onValueChange],
@@ -48,7 +48,6 @@ export const useSelectPickerItemsUseCase = ({
   const handleValueChange = useCallback(
     (event: NativeSyntheticEvent<NativeScrollEvent>) => {
       const {index, value} = getRowItemAtOffset(event.nativeEvent.contentOffset.y);
-      // setTimeout(() => scrollToOffset(index, true), 100);
       _onChange(value, index);
     },
     [_onChange, getRowItemAtOffset],
@@ -91,7 +90,7 @@ export const useSelectPickerItemsUseCase = ({
     scrollToIndex(currentIndex, false);
   }, [currentIndex, scrollToIndex]);
 
-  const height = useMemo(() => itemHeight * preferredNumVisibleRows, [itemHeight, preferredNumVisibleRows]);
+  const height = useMemo(() => itemHeight * numberOfLines, [itemHeight, numberOfLines]);
 
   const getItemLayout = useCallback(
     (_data: any, index: number) => {

@@ -1,6 +1,7 @@
 import {fireEvent, render} from '@testing-library/react-native';
 import React from 'react';
 
+import {Item} from './SelectPicker';
 import {SelectPickerItems, SelectPickerItemsProps} from './SelectPickerItems';
 
 describe('SelectPickerItems only with required props', () => {
@@ -30,7 +31,7 @@ describe('SelectPickerItems with all props', () => {
       {value: '2', label: 'test2', color: 'yellow', fontFamily: 'SFProText', style: {fontSize: 14}},
     ];
     const onValueChange = jest.fn();
-    const keyExtractor = jest.fn((value: string, index: number) => `${value}-${index}`);
+    const keyExtractor = jest.fn((item: Item<string>, index: number) => `${String(item.key ?? item.value)}-${index}`);
     /**
      * 以下のPropは自動テストで検証できなかったため除外
      * - style

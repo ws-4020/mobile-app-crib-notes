@@ -8,14 +8,10 @@ import {SelectPickerItem} from './SelectPickerItem';
 import {SelectPickerItemsProps} from './SelectPickerItems';
 import {useSelectPickerItemsUseCase} from './useSelectPickerItemsUseCase';
 
-const AnimatedFlatList = Reanimated.createAnimatedComponent<FlatListProps<Item<React.Key>>>(FlatList);
-
 const Separator: React.FC<{height: number}> = React.memo(({height}) => {
   const separatorHeightStyle = useMemo(() => ({height}), [height]);
   return <View pointerEvents="none" style={StyleSheet.flatten([styles.separators, separatorHeightStyle])} />;
 });
-
-const defaultKeyExtractor = (item: Item<React.Key>, index: number) => `${String(item.key ?? item.value)}.${index}`;
 
 const FADER_SIZE = 60;
 const FaderTop: React.FC = () => <Fader visible position={FaderPosition.TOP} size={FADER_SIZE} />;
@@ -23,27 +19,36 @@ const FaderBottom: React.FC = () => <Fader visible position={FaderPosition.BOTTO
 
 const DECELERATION_RATE = 0.98;
 
-export const SelectPickerItems = ({
+type SelectPickerItemsAndroid<ItemT> = Omit<SelectPickerItemsProps<ItemT>, 'style'>;
+
+export const SelectPickerItems = <ItemT extends unknown>({
   selectedValue,
   onValueChange,
   items,
   keyExtractor,
   itemHeight = 44,
-  preferredNumVisibleRows = 5,
+  numberOfLines = 5,
+  itemStyle,
+  accessibilityLabel,
+  activeColor,
+  inactiveColor,
   ...rest
-}: SelectPickerItemsProps) => {
+}: SelectPickerItemsAndroid<ItemT>) => {
   const flatListRef = useAnimatedRef<FlatList>();
   const offset = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler(e => {
     offset.value = e.contentOffset.y;
   });
 
+  const AnimatedFlatList = Reanimated.createAnimatedComponent<FlatListProps<Item<ItemT>>>(FlatList);
+  const defaultKeyExtractor = (item: Item<ItemT>, index: number) => `${String(item.key ?? item.value)}.${index}`;
+
   const {height, handleValueChange, scrollToPassedIndex, currentIndex, selectItem, getItemLayout} =
-    useSelectPickerItemsUseCase({
+    useSelectPickerItemsUseCase<ItemT>({
       selectedValue,
       items,
       itemHeight,
-      preferredNumVisibleRows,
+      numberOfLines,
       onValueChange,
       flatListRef,
     });
@@ -59,22 +64,26 @@ export const SelectPickerItems = ({
   }, [height, itemHeight]);
 
   const renderItem = useCallback(
-    (info: ListRenderItemInfo<Item<React.Key>>) => {
+    (info: ListRenderItemInfo<Item<ItemT>>) => {
       return (
         <SelectPickerItem
-          value={info.item.label}
+          item={info.item}
           offset={offset}
           index={info.index}
           itemHeight={itemHeight}
           selectItem={selectItem}
+          accessibilityLabel={accessibilityLabel}
+          itemStyle={itemStyle}
+          activeColor={activeColor}
+          inactiveColor={inactiveColor}
         />
       );
     },
-    [itemHeight, offset, selectItem],
+    [accessibilityLabel, activeColor, inactiveColor, itemHeight, itemStyle, offset, selectItem],
   );
 
   return (
-    <View style={styles.container} pointerEvents="box-none">
+    <View style={styles.container} pointerEvents="box-none" {...rest}>
       <AnimatedFlatList
         data={items}
         keyExtractor={keyExtractor ?? defaultKeyExtractor}

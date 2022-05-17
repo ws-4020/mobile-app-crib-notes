@@ -1,21 +1,39 @@
 import {PickerProps} from '@react-native-picker/picker';
 import {log} from 'framework/logging';
 import React from 'react';
-import {Platform} from 'react-native';
+import {Platform, StyleProp, TextStyle} from 'react-native';
 
 import {Item} from './SelectPicker';
 
-export type SelectPickerItemsProps = PickerProps<React.Key> & {
-  items: Item<React.Key>[];
-  keyExtractor?: ((item: Item<React.Key>, index: number) => string) | undefined;
-
-  // android
-  initialValue?: React.Key;
+export type SelectPickerItemsProps<ItemT> = Omit<
+  PickerProps<React.Key | ItemT>,
+  'enabled' | 'mode' | 'prompt' | 'dropdownIconColor' | 'dropdownIconRippleColor' | 'onFocus' | 'onBlur' | 'style'
+> & {
+  items: Item<ItemT>[];
+  keyExtractor?: ((item: Item<ItemT>, index: number) => string) | undefined;
+  /**
+   * Pickerのスタイル
+   * @platform ios
+   */
+  style?: StyleProp<TextStyle>;
+  /**
+   * アイテムの高さ
+   * @platform android
+   */
   itemHeight?: number;
-  preferredNumVisibleRows?: number;
+  /**
+   * 選択状態のアイテムのテキストカラー
+   * @platform android
+   */
+  activeColor?: '#000000';
+  /**
+   * 未選択状態のアイテムのテキストカラー
+   * @platform android
+   */
+  inactiveColor?: '#999999';
 };
 
-export const SelectPickerItems = (props: SelectPickerItemsProps) => {
+export const SelectPickerItems = <ItemT extends unknown>(props: SelectPickerItemsProps<ItemT>) => {
   React.useEffect(() => {
     log.warn(`SelectPickerItems is not supported on: ${Platform.OS}`);
   }, []);

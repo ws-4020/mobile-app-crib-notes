@@ -4,6 +4,7 @@ import {TextInputProps, View, ViewProps} from 'react-native';
 
 import {PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainerProps} from './PickerContainer';
+import {Item} from './SelectPicker';
 import {SelectPicker} from './SelectPicker.ios';
 import {SelectPickerItemsProps} from './SelectPickerItems';
 
@@ -84,7 +85,7 @@ describe('SelectPicker with all props', () => {
     const onDelete = jest.fn();
     const onCancel = jest.fn();
     const onDone = jest.fn();
-    const keyExtractor = jest.fn((value: string, index: number) => `${value}-${index}`);
+    const keyExtractor = jest.fn((item: Item<string>, index: number) => `${String(item.key ?? item.value)}-${index}`);
     const sut = render(
       <SelectPicker
         items={items}

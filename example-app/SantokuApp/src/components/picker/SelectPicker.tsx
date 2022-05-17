@@ -36,7 +36,7 @@ export type SelectPickerProps<ItemT> = {
   /**
    * 選択されたアイテムのKey
    */
-  selectedItemKey?: React.Key;
+  selectedItemKey?: React.Key | ItemT;
   /**
    * アイテムが選択された場合に呼び出される関数
    */
@@ -96,7 +96,7 @@ export type SelectPickerProps<ItemT> = {
   /**
    * Keyを作成する関数
    */
-  keyExtractor?: ((item: ItemT, index: number) => React.Key) | undefined;
+  keyExtractor?: ((item: Item<ItemT>, index: number) => string) | undefined;
   /**
    * 選択されたアイテムを表示するテキストコンポーネントのProps
    * なお、textInputComponentを指定した場合は使用されません。

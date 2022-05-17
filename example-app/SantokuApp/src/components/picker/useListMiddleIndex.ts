@@ -5,7 +5,7 @@ type ItemType = {
 
 export const useListMiddleIndex = ({itemHeight, listSize}: ItemType) => {
   const valueInRange = (value: number, min: number, max: number): number => {
-    if (value < min || value === -0) {
+    if (value < min || value === 0) {
       return min;
     }
     if (value > max) {
