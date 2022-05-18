@@ -10,7 +10,8 @@ import {
 
 const WithAccountContext: AccountDataDependingComponent = ({accountData, children}) => {
   const account = accountData.account;
-  const initialAccountContext = account ? {account, isLoggedIn: true} : {isLoggedIn: false};
+  const terms = accountData.terms;
+  const initialAccountContext = account ? {account, terms, isLoggedIn: true} : {isLoggedIn: false};
 
   const [state, dispatch] = React.useReducer(accountContextReducer, initialAccountContext);
   const operations = useAccountOperation(initialAccountContext, dispatch);

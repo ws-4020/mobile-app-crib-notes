@@ -1,7 +1,6 @@
 import {FullWindowOverlay} from 'components/overlay/FullWindowOverlay';
-import {AccountDataDependingComponent} from 'framework/initialize/withAccountData';
 import {TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/model';
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 
 import {TermsAgreementOverlay, TermsAgreementOverlayProps} from './TermsAgreementOverlay';
 import {TermsAgreementOverlayContextType, TermsAgreementOverlayProvider} from './useTermsAgreementOverlayContext';
@@ -23,15 +22,13 @@ export type TermsAgreementOverlayShowProps = {
 };
 
 /**
- * 利用規約をOverlay表示するコンポーネント
- * 初期データのtermsOfServiceAgreementStatus?.hasAgreedがfalseの場合は、アプリ起動時に利用規約を表示します。
- * 任意のタイミングで利用規約を表示したい場合は、以下のように使用してください。
+ * 利用規約をOverlay表示するコンポーネント。
  *
  * @example
  * const termsOfServiceAgreementOverlay = useTermsOfServiceAgreementOverlay();
  * termsOfServiceAgreementOverlay.show({termsOfService: {version: '1.0.0', url: AppConfig.termsUrl, ...}})
  */
-const WithTermsAgreementOverlay: AccountDataDependingComponent = ({accountData, children}) => {
+const WithTermsAgreementOverlay: React.FC = ({children}) => {
   const [state, setState] = useState<
     Omit<TermsAgreementOverlayProps, 'termsOfService'> & Partial<Pick<TermsAgreementOverlayProps, 'termsOfService'>>
   >({
@@ -57,20 +54,6 @@ const WithTermsAgreementOverlay: AccountDataDependingComponent = ({accountData, 
     }),
     [close, show],
   );
-
-  useEffect(() => {
-    const terms = accountData.terms;
-    const termsAgreementStatus = terms?.termsAgreementStatus;
-    const termsOfService = terms?.termsOfService;
-    if (termsOfService && termsAgreementStatus?.hasAgreed === false) {
-      setState({
-        visible: true,
-        dismissible: false,
-        termsOfService,
-        close,
-      });
-    }
-  }, [close, accountData.terms]);
 
   return (
     <TermsAgreementOverlayProvider value={termsOfServiceAgreementOverlayContext}>

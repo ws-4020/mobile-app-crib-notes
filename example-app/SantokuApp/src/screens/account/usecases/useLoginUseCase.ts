@@ -33,7 +33,7 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         await SecureStorageAdapter.savePassword(accountId, password);
         // getAccountMe.dataは必ず存在する想定
         const account = (await getAccountMe({throwOnError: true})).data!.data;
-        accountContextOperation.login(account);
+        accountContextOperation.login(account, {});
       } catch (e) {
         if (isUnauthorizedError(e)) {
           Alert.alert(m('ログイン失敗'), m('アカウントIDまたはパスワードに\n間違いがあります。'));

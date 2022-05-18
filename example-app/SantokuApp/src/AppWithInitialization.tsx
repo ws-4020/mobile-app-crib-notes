@@ -47,7 +47,7 @@ export const AppWithInitialization: React.FC = () => {
       <NavigationContainer>
         <WithAccountContext accountData={initializationResult.data.accountData}>
           <WithReactQuery>
-            <WithTermsAgreementOverlay accountData={initializationResult.data.accountData}>
+            <WithTermsAgreementOverlay>
               <WithFirebaseMessagingHandlers initialData={initializationResult.data.initialData}>
                 <RootStackNav initialData={initializationResult.data.initialData} />
               </WithFirebaseMessagingHandlers>
