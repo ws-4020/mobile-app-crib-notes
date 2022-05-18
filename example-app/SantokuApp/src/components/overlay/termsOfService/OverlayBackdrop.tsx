@@ -4,15 +4,15 @@ import {Omit, Pressable, PressableProps, StyleSheet, View, ViewProps} from 'reac
 import Reanimated, {BaseAnimationBuilder, FadeIn, FadeOut, Keyframe} from 'react-native-reanimated';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
-import {useModalBackdropUseCase} from './useModalBackdropUseCase';
+import {useOverlayBackdropUseCase} from './useOverlayBackdropUseCase';
 
-export const MODAL_BACKDROP_DEFAULT_COLOR = 'rgba(0,0,0,0.4)';
-export const MODAL_BACKDROP_DEFAULT_FADE_IN_DURATION = 300;
-export const MODAL_BACKDROP_DEFAULT_FADE_OUT_DURATION = 300;
-export const MODAL_BACKDROP_DEFAULT_ENTERING = FadeIn.duration(MODAL_BACKDROP_DEFAULT_FADE_IN_DURATION);
-export const MODAL_BACKDROP_DEFAULT_EXITING = FadeOut.duration(MODAL_BACKDROP_DEFAULT_FADE_OUT_DURATION);
+export const OVERLAY_BACKDROP_DEFAULT_COLOR = 'rgba(0,0,0,0.4)';
+export const OVERLAY_BACKDROP_DEFAULT_FADE_IN_DURATION = 300;
+export const OVERLAY_BACKDROP_DEFAULT_FADE_OUT_DURATION = 300;
+export const OVERLAY_BACKDROP_DEFAULT_ENTERING = FadeIn.duration(OVERLAY_BACKDROP_DEFAULT_FADE_IN_DURATION);
+export const OVERLAY_BACKDROP_DEFAULT_EXITING = FadeOut.duration(OVERLAY_BACKDROP_DEFAULT_FADE_OUT_DURATION);
 
-export type ModalBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
+export type OverlayBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
   isVisible: boolean;
   onPress?: () => unknown;
   /**
@@ -22,7 +22,7 @@ export type ModalBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'enter
   enteringCallback?: (finished: boolean) => unknown;
   exitingCallback?: (finished: boolean) => unknown;
   pressableProps?: PressableProps;
-  modalProps?: ViewProps;
+  backdropViewProps?: ViewProps;
   /**
    * enteringに指定したAnimationBuilderなどでwithCallbackを指定しても、このコンポーネントの中で上書きしているため実行できません。
    * withCallbackで実行する関数は、enteringCallbackで指定してください。
@@ -35,15 +35,21 @@ export type ModalBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'enter
   exiting?: BaseAnimationBuilder | Keyframe;
 };
 
-export const ModalBackdrop: React.FC<ModalBackdropProps> = ({
+/**
+ * Overlayで表示するレイヤー。
+ * 同じようなコンポーネントとして{@link PickerBackdrop}がありますが、スプラッシュを表示中にPickerBackdropを表示してしまうと、
+ * スプラッシュを非表示にできない問題があります。
+ * OverlayBackdropでは、react-nativeのModalを利用しないでOverlay表示することにより、上記問題に対応しています。
+ */
+export const OverlayBackdrop: React.FC<OverlayBackdropProps> = ({
   isVisible,
   onPress,
-  entering = MODAL_BACKDROP_DEFAULT_ENTERING,
-  exiting = MODAL_BACKDROP_DEFAULT_EXITING,
+  entering = OVERLAY_BACKDROP_DEFAULT_ENTERING,
+  exiting = OVERLAY_BACKDROP_DEFAULT_EXITING,
   enteringCallback,
   exitingCallback,
   pressableProps: {style: pressableStyle, ...pressableProps} = {},
-  modalProps: {style: modalStyle, ...modalProps} = {},
+  backdropViewProps: {style: modalStyle, ...modalProps} = {},
   /**
    * このコンポーネントでは、ReanimatedのEntering/Exitingを使用してアニメーションを実現しています。
    * Entering/Exitingを使用した場合は、opacityを設定しても反映されません。
@@ -53,7 +59,7 @@ export const ModalBackdrop: React.FC<ModalBackdropProps> = ({
   children,
   ...animatedViewProps
 }) => {
-  const {isModalVisible, composedEnteringCallback, composedExitingCallback} = useModalBackdropUseCase({
+  const {isOverlayVisible, composedEnteringCallback, composedExitingCallback} = useOverlayBackdropUseCase({
     isVisible,
     enteringCallback,
     exitingCallback,
@@ -66,8 +72,8 @@ export const ModalBackdrop: React.FC<ModalBackdropProps> = ({
     [pressableStyle, styles.pressable],
   );
 
-  return !isModalVisible ? null : (
-    <View style={StyleSheet.flatten([styles.modal, modalStyle])} {...modalProps}>
+  return !isOverlayVisible ? null : (
+    <View style={StyleSheet.flatten([styles.overlay, modalStyle])} {...modalProps}>
       {isVisible && (
         <Pressable onPress={onPress} style={composedPressableStyles} {...pressableProps}>
           <Reanimated.View
@@ -88,7 +94,7 @@ const useStyles = () => {
   return useMemo(
     () =>
       StyleSheet.create({
-        modal: {
+        overlay: {
           position: 'absolute',
           bottom: 0,
           width,
@@ -99,7 +105,7 @@ const useStyles = () => {
         },
         backdrop: {
           flex: 1,
-          backgroundColor: MODAL_BACKDROP_DEFAULT_COLOR,
+          backgroundColor: OVERLAY_BACKDROP_DEFAULT_COLOR,
         },
       } as const),
     [height, width],

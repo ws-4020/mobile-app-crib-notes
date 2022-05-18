@@ -3,7 +3,7 @@ import React from 'react';
 import {ViewProps} from 'react-native';
 import Reanimated, {ZoomIn, ZoomOut} from 'react-native-reanimated';
 
-import {MODAL_CONTAINER_DEFAULT_ENTERING, MODAL_CONTAINER_DEFAULT_EXITING, ModalContainer} from './ModalContainer';
+import {MODAL_CONTAINER_DEFAULT_ENTERING, MODAL_CONTAINER_DEFAULT_EXITING, OverlayContainer} from './OverlayContainer';
 
 // If advancing a timer changes the state of a component, the timer must be run within an act.
 // However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
@@ -20,15 +20,15 @@ jest.useFakeTimers('modern');
 
 jest.runAllTimers();
 
-describe('ModalContainer only with required props', () => {
+describe('OverlayContainer only with required props', () => {
   it('returns null if not visible', () => {
-    const sut = render(<ModalContainer isVisible={false} />);
-    // ModalContainerがnullを返していることを確認したいがうまくやる方法が見当たらないので`toJSON`でnullになることを確認する。
+    const sut = render(<OverlayContainer isVisible={false} />);
+    // OverlayContainerがnullを返していることを確認したいがうまくやる方法が見当たらないので`toJSON`でnullになることを確認する。
     expect(sut.toJSON()).toBeNull();
   });
 
   it('renders successfully only with required props', () => {
-    const sut = render(<ModalContainer isVisible testID="containerAnimated" />);
+    const sut = render(<OverlayContainer isVisible testID="containerAnimated" />);
     const animatedView = sut.getByTestId('containerAnimated');
     const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
     // Animated.Viewのentering/exitingをテストで実行することができなかったため、entering/exitingにデフォルトアニメーションが設定されていることのみを確認する。
@@ -40,14 +40,14 @@ describe('ModalContainer only with required props', () => {
     //////////////////////////////////////////////////////////////////////////////////
     // 非表示にする
     //////////////////////////////////////////////////////////////////////////////////
-    sut.update(<ModalContainer isVisible={false} />);
+    sut.update(<OverlayContainer isVisible={false} />);
     const animatedView2 = sut.queryByTestId('containerAnimated');
     expect(sut).toMatchSnapshot('AnimatedView with invisible.');
     expect(animatedView2).toBeNull();
   });
 });
 
-describe('ModalContainer with all props', () => {
+describe('OverlayContainer with all props', () => {
   it('should be applied properly', () => {
     const entering = ZoomIn.duration(500);
     const exiting = ZoomOut.duration(300);
@@ -59,7 +59,7 @@ describe('ModalContainer with all props', () => {
      * animatedPropsは取得できなかったため（Snapshot上にも存在していない）、検証できていません
      */
     const sut = render(
-      <ModalContainer
+      <OverlayContainer
         isVisible
         testID="animatedView"
         animatedProps={{pointerEvents: 'none'}}
@@ -68,7 +68,7 @@ describe('ModalContainer with all props', () => {
         exiting={exiting}
       />,
     );
-    expect(sut).toMatchSnapshot('ModalContainer with all props.');
+    expect(sut).toMatchSnapshot('OverlayContainer with all props.');
     const animatedView = sut.getByTestId('animatedView');
 
     // assert animatedView

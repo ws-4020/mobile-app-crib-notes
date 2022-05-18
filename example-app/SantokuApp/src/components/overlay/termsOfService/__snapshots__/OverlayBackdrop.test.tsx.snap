@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ModalBackdrop only with required props renders successfully only with required props: AnimatedView with invisible. 1`] = `
+exports[`OverlayBackdrop only with required props renders successfully only with required props: AnimatedView with invisible. 1`] = `
 <View
   style={
     Object {
@@ -13,7 +13,7 @@ exports[`ModalBackdrop only with required props renders successfully only with r
 />
 `;
 
-exports[`ModalBackdrop only with required props renders successfully only with required props: AnimatedView with visible. 1`] = `
+exports[`OverlayBackdrop only with required props renders successfully only with required props: AnimatedView with visible. 1`] = `
 <View
   style={
     Object {
@@ -82,7 +82,7 @@ exports[`ModalBackdrop only with required props renders successfully only with r
 </View>
 `;
 
-exports[`ModalBackdrop with all props should be applied properly: ModalBackdrop with all props. 1`] = `
+exports[`OverlayBackdrop with all props should be applied properly: OverlayBackdrop with all props. 1`] = `
 <View
   pointerEvents="box-none"
   style={

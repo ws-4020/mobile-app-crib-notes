@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ModalContainer only with required props renders successfully only with required props: AnimatedView with invisible. 1`] = `null`;
+exports[`OverlayContainer only with required props renders successfully only with required props: AnimatedView with invisible. 1`] = `null`;
 
-exports[`ModalContainer only with required props renders successfully only with required props: AnimatedView with visible. 1`] = `
+exports[`OverlayContainer only with required props renders successfully only with required props: AnimatedView with visible. 1`] = `
 <View
   pointerEvents="box-none"
   style={
@@ -42,7 +42,7 @@ exports[`ModalContainer only with required props renders successfully only with 
 </View>
 `;
 
-exports[`ModalContainer with all props should be applied properly: ModalContainer with all props. 1`] = `
+exports[`OverlayContainer with all props should be applied properly: OverlayContainer with all props. 1`] = `
 <View
   pointerEvents="box-none"
   style={

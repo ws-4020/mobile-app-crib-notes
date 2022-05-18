@@ -6,8 +6,8 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
-import {ModalBackdrop} from './ModalBackdrop';
-import {ModalContainer} from './ModalContainer';
+import {OverlayBackdrop} from './OverlayBackdrop';
+import {OverlayContainer} from './OverlayContainer';
 import {useTermsOfServiceAgreementUseCase} from './useTermsOfServiceAgreementUseCase';
 
 export type TermsOfServiceAgreementProps = {
@@ -50,12 +50,12 @@ export const TermsOfServiceAgreement: React.FC<TermsOfServiceAgreementProps> = (
   } = useTermsOfServiceAgreementUseCase(close, termsOfService, exitingCallback, exitingCallbackOnAgreed);
 
   return (
-    <ModalBackdrop
+    <OverlayBackdrop
       isVisible={visible}
       onPress={dismissible ? close : undefined}
       enteringCallback={enteringCallback}
       exitingCallback={composeExitingCallback}>
-      <ModalContainer isVisible={visible} style={styles.modalContainer}>
+      <OverlayContainer isVisible={visible} style={styles.modalContainer}>
         <View style={styles.container} testID="TermsOfServiceAgreement">
           <View style={styles.header}>
             <Text style={styles.headerText}>{m('利用規約')}</Text>
@@ -78,8 +78,8 @@ export const TermsOfServiceAgreement: React.FC<TermsOfServiceAgreementProps> = (
             <Button title={m('同意')} onPress={onAgree} disabled={isDisabledAgreementButton} />
           </View>
         </View>
-      </ModalContainer>
-    </ModalBackdrop>
+      </OverlayContainer>
+    </OverlayBackdrop>
   );
 };
 
