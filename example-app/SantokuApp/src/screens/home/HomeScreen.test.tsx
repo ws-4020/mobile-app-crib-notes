@@ -1,8 +1,8 @@
 import '@testing-library/jest-native/extend-expect';
 import {NavigationContainer} from '@react-navigation/native';
 import {render, RenderAPI} from '@testing-library/react-native';
+import {WithTermsAgreementOverlay} from 'context/WithTermsAgreementOverlay';
 import React from 'react';
-import {WithTermsAgreementOverlay} from 'screens/terms/WithTermsAgreementOverlay';
 
 import {WithAccountContext} from '../../context/WithAccountContext';
 import {AppConfig} from '../../framework';

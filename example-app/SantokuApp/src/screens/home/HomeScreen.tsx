@@ -5,7 +5,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
-import {useShowTermsAgreementOverlay} from '../terms/usecases/useShowTermsAgreementOverlay';
+import {useShowTermsAgreementOverlay} from '../../context/useShowTermsAgreementOverlay';
 
 const ScreenName = 'Home';
 const Screen: React.FC = () => {

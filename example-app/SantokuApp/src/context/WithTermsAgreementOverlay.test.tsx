@@ -6,9 +6,9 @@ import {Text} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {WithSnackbar} from '../../components/overlay';
+import {WithSnackbar} from '../components/overlay';
 import {WithTermsAgreementOverlay} from './WithTermsAgreementOverlay';
-import {useTermsAgreementOverlay} from './usecases/useTermsAgreementOverlayContext';
+import {useTermsAgreementOverlay} from './useTermsAgreementOverlayContext';
 
 jest.useFakeTimers();
 

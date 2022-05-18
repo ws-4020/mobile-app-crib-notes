@@ -2,11 +2,8 @@ import {FullWindowOverlay} from 'components/overlay/FullWindowOverlay';
 import {TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/model';
 import React, {useCallback, useMemo, useState} from 'react';
 
-import {TermsAgreementOverlay, TermsAgreementOverlayProps} from './TermsAgreementOverlay';
-import {
-  TermsAgreementOverlayContextType,
-  TermsAgreementOverlayProvider,
-} from './usecases/useTermsAgreementOverlayContext';
+import {TermsAgreementOverlay, TermsAgreementOverlayProps} from '../screens/terms/TermsAgreementOverlay';
+import {TermsAgreementOverlayContextType, TermsAgreementOverlayProvider} from './useTermsAgreementOverlayContext';
 
 export type TermsAgreementOverlayShowProps = {
   termsOfService: TermsOfService;
