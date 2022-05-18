@@ -49,7 +49,7 @@ export const useTermsAgreementOverlayUseCase = (
     }
   }, [accountContext.isLoggedIn, callPostAccountsMeTerms, close, termsOfService?.version]);
 
-  const composeExitingCallback = useCallback(
+  const composedExitingCallback = useCallback(
     (finished: boolean) => {
       try {
         exitingCallback?.(finished);
@@ -80,7 +80,7 @@ export const useTermsAgreementOverlayUseCase = (
     resetWebViewError,
     onScrollEndOnce,
     onAgree,
-    composeExitingCallback,
+    composedExitingCallback,
     isDisabledAgreementButton: buttonDisable || isLoading,
   };
 };

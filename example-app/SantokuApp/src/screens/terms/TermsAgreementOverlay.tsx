@@ -33,7 +33,7 @@ export const TermsAgreementOverlay: React.FC<TermsAgreementOverlayProps> = ({
     resetWebViewError,
     onScrollEndOnce,
     onAgree,
-    composeExitingCallback,
+    composedExitingCallback,
     isDisabledAgreementButton,
   } = useTermsAgreementOverlayUseCase(close, termsOfService, exitingCallback, exitingCallbackOnAgreed);
 
@@ -42,7 +42,7 @@ export const TermsAgreementOverlay: React.FC<TermsAgreementOverlayProps> = ({
       isVisible={visible}
       onPress={dismissible ? close : undefined}
       enteringCallback={enteringCallback}
-      exitingCallback={composeExitingCallback}>
+      exitingCallback={composedExitingCallback}>
       <OverlayContainer isVisible={visible} style={styles.modalContainer}>
         <View style={styles.container} testID={contentViewTestID}>
           <View style={styles.header}>
