@@ -12,17 +12,18 @@ type BackdropAnimationConfig = {
 export const useOverlayBackdropUseCase = ({isVisible, enteringCallback, exitingCallback}: BackdropAnimationConfig) => {
   const {isVisible: isOverlayVisible, setVisible: show, setInvisible: setOverlayInvisible} = useVisibility(isVisible);
 
-  const composedEnteringWorkletCallback = useWorkletCallback(enteringCallback);
-  const composedExitingCallback = useCallback(
-    (finished: boolean) => {
-      setOverlayInvisible();
-      if (exitingCallback) {
-        exitingCallback(finished);
-      }
-    },
-    [setOverlayInvisible, exitingCallback],
+  const composedEnteringCallback = useWorkletCallback(enteringCallback);
+  const composedExitingCallback = useWorkletCallback(
+    useCallback(
+      (finished: boolean) => {
+        setOverlayInvisible();
+        if (exitingCallback) {
+          exitingCallback(finished);
+        }
+      },
+      [setOverlayInvisible, exitingCallback],
+    ),
   );
-  const composedExitingWorkletCallback = useWorkletCallback(composedExitingCallback);
 
   const isVisiblePrevious = usePrevious(isVisible);
   useEffect(() => {
@@ -46,7 +47,7 @@ export const useOverlayBackdropUseCase = ({isVisible, enteringCallback, exitingC
   return {
     isOverlayVisible,
     show,
-    composedEnteringCallback: composedEnteringWorkletCallback,
-    composedExitingCallback: composedExitingWorkletCallback,
+    composedEnteringCallback,
+    composedExitingCallback,
   };
 };
