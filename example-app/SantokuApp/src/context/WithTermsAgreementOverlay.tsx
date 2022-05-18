@@ -3,7 +3,7 @@ import {TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/m
 import React, {useCallback, useMemo, useState} from 'react';
 
 import {TermsAgreementOverlay, TermsAgreementOverlayProps} from '../screens/terms/TermsAgreementOverlay';
-import {TermsAgreementOverlayContextType, TermsAgreementOverlayProvider} from './useTermsAgreementOverlayContext';
+import {TermsAgreementOverlayContextType, TermsAgreementOverlayProvider} from './useTermsAgreementOverlay';
 
 export type TermsAgreementOverlayShowProps = {
   termsOfService: TermsOfService;
@@ -23,10 +23,6 @@ export type TermsAgreementOverlayShowProps = {
 
 /**
  * 利用規約をOverlay表示するコンポーネント。
- *
- * @example
- * const termsOfServiceAgreementOverlay = useTermsOfServiceAgreementOverlay();
- * termsOfServiceAgreementOverlay.show({termsOfService: {version: '1.0.0', url: AppConfig.termsUrl, ...}})
  */
 const WithTermsAgreementOverlay: React.FC = ({children}) => {
   const [state, setState] = useState<

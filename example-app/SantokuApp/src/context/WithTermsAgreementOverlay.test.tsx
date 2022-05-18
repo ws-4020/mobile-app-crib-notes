@@ -8,7 +8,7 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {WithSnackbar} from '../components/overlay';
 import {WithTermsAgreementOverlay} from './WithTermsAgreementOverlay';
-import {useTermsAgreementOverlay} from './useTermsAgreementOverlayContext';
+import {useTermsAgreementOverlay} from './useTermsAgreementOverlay';
 
 jest.useFakeTimers();
 
