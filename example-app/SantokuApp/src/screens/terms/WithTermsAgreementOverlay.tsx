@@ -1,12 +1,12 @@
+import {FullWindowOverlay} from 'components/overlay/FullWindowOverlay';
 import {AccountDataDependingComponent} from 'framework/initialize/withAccountData';
-import {createUseContextAndProvider} from 'framework/utilities';
 import {TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/model';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 
-import {FullWindowOverlay} from '../FullWindowOverlay';
-import {TermsOfServiceAgreement, TermsOfServiceAgreementProps} from './TermsOfServiceAgreement';
+import {TermsAgreementOverlay, TermsAgreementOverlayProps} from './TermsAgreementOverlay';
+import {TermsAgreementOverlayContextType, TermsAgreementOverlayProvider} from './useTermsAgreementOverlayContext';
 
-type TermsOfServiceProps = {
+export type TermsAgreementOverlayShowProps = {
   termsOfService: TermsOfService;
   /**
    * Overlayの背景をタップした時に閉じるかどうかの設定。
@@ -22,14 +22,6 @@ type TermsOfServiceProps = {
   exitingCallbackOnAgreed?: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => unknown;
 };
 
-type TermsOfServiceAgreementOverlayContextType = {
-  show: (props: TermsOfServiceProps) => void;
-  close: () => void;
-};
-
-const [useTermsOfServiceAgreementOverlay, TermsOfServiceAgreementOverlayContextProvider] =
-  createUseContextAndProvider<TermsOfServiceAgreementOverlayContextType>();
-
 /**
  * 利用規約をOverlay表示するコンポーネント
  * 初期データのtermsOfServiceAgreementStatus?.hasAgreedがfalseの場合は、アプリ起動時に利用規約を表示します。
@@ -39,15 +31,16 @@ const [useTermsOfServiceAgreementOverlay, TermsOfServiceAgreementOverlayContextP
  * const termsOfServiceAgreementOverlay = useTermsOfServiceAgreementOverlay();
  * termsOfServiceAgreementOverlay.show({termsOfService: {version: '1.0.0', url: AppConfig.termsUrl, ...}})
  */
-const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({accountData, children}) => {
-  const [state, setState] = useState<TermsOfServiceAgreementProps>({
+const WithTermsAgreementOverlay: AccountDataDependingComponent = ({accountData, children}) => {
+  const [state, setState] = useState<
+    Omit<TermsAgreementOverlayProps, 'termsOfService'> & Partial<Pick<TermsAgreementOverlayProps, 'termsOfService'>>
+  >({
     visible: false,
     close: () => {},
-    termsOfService: {version: '', url: ''},
   });
   const close = useCallback(() => setState(prevState => ({...prevState, visible: false})), []);
   const show = useCallback(
-    (props: TermsOfServiceProps) => {
+    (props: Omit<TermsAgreementOverlayProps, 'visible' | 'close'>) => {
       setState({
         ...props,
         visible: true,
@@ -57,7 +50,7 @@ const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({acco
     [close],
   );
 
-  const termsOfServiceAgreementOverlayContext = useMemo<TermsOfServiceAgreementOverlayContextType>(
+  const termsOfServiceAgreementOverlayContext = useMemo<TermsAgreementOverlayContextType>(
     () => ({
       show,
       close,
@@ -67,9 +60,9 @@ const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({acco
 
   useEffect(() => {
     const terms = accountData.terms;
-    const termsOfServiceAgreementStatus = terms?.termsOfServiceAgreementStatus;
+    const termsAgreementStatus = terms?.termsAgreementStatus;
     const termsOfService = terms?.termsOfService;
-    if (termsOfService && termsOfServiceAgreementStatus?.hasAgreed === false) {
+    if (termsOfService && termsAgreementStatus?.hasAgreed === false) {
       setState({
         visible: true,
         dismissible: false,
@@ -80,13 +73,13 @@ const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({acco
   }, [close, accountData.terms]);
 
   return (
-    <TermsOfServiceAgreementOverlayContextProvider value={termsOfServiceAgreementOverlayContext}>
+    <TermsAgreementOverlayProvider value={termsOfServiceAgreementOverlayContext}>
       {children}
       <FullWindowOverlay>
-        <TermsOfServiceAgreement {...state} />
+        {state.termsOfService && <TermsAgreementOverlay {...state} termsOfService={state.termsOfService} />}
       </FullWindowOverlay>
-    </TermsOfServiceAgreementOverlayContextProvider>
+    </TermsAgreementOverlayProvider>
   );
 };
 
-export {WithTermsOfServiceAgreementOverlay, useTermsOfServiceAgreementOverlay};
+export {WithTermsAgreementOverlay};

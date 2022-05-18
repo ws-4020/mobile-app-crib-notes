@@ -4,7 +4,7 @@ import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {WebView as RNWebView} from 'react-native-webview';
 import {usePostAccountsMeTerms} from 'service';
 
-export const useTermsOfServiceAgreementUseCase = (
+export const useTermsAgreementOverlayUseCase = (
   close: () => void,
   termsOfService: TermsOfService,
   exitingCallback?: (finished: boolean) => unknown,

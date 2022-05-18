@@ -1,35 +1,21 @@
 import {Button} from 'components/button/Button';
+import {OverlayBackdrop, OverlayContainer} from 'components/overlay';
 import {WebView} from 'components/webview/WebView';
 import {m} from 'framework';
-import {TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/model';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
-import {OverlayBackdrop} from './OverlayBackdrop';
-import {OverlayContainer} from './OverlayContainer';
-import {useTermsOfServiceAgreementUseCase} from './useTermsOfServiceAgreementUseCase';
+import {TermsAgreementOverlayShowProps} from './WithTermsAgreementOverlay';
+import {useTermsAgreementOverlayUseCase} from './usecases';
 
-export type TermsOfServiceAgreementProps = {
+export type TermsAgreementOverlayProps = TermsAgreementOverlayShowProps & {
   visible: boolean;
   close: () => void;
-  termsOfService: TermsOfService;
-  /**
-   * Overlayの背景をタップした時に閉じるかどうかの設定。
-   * デフォルトはtrue（閉じる）です。
-   */
-  dismissible?: boolean;
-  /**
-   * iOSの場合、アニメーションが終わった後に呼び出されます。
-   * Androidの場合、アニメーションが始まった時に呼び出されます。
-   */
-  enteringCallback?: (finished: boolean) => unknown;
-  exitingCallback?: (finished: boolean) => unknown;
-  exitingCallbackOnAgreed?: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => unknown;
   contentViewTestID?: string;
 };
 
-export const TermsOfServiceAgreement: React.FC<TermsOfServiceAgreementProps> = ({
+export const TermsAgreementOverlay: React.FC<TermsAgreementOverlayProps> = ({
   visible,
   close,
   termsOfService,
@@ -49,7 +35,7 @@ export const TermsOfServiceAgreement: React.FC<TermsOfServiceAgreementProps> = (
     onAgree,
     composeExitingCallback,
     isDisabledAgreementButton,
-  } = useTermsOfServiceAgreementUseCase(close, termsOfService, exitingCallback, exitingCallbackOnAgreed);
+  } = useTermsAgreementOverlayUseCase(close, termsOfService, exitingCallback, exitingCallbackOnAgreed);
 
   return (
     <OverlayBackdrop

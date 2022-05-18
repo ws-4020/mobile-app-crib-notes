@@ -1,7 +1,7 @@
 import {usePrevious, useVisibility} from 'framework/utilities';
 import {useWorkletCallback} from 'framework/utilities/useWorkletCallback';
 import {useCallback, useEffect} from 'react';
-import {BackHandler} from 'react-native';
+import {BackHandler, NativeEventSubscription} from 'react-native';
 
 type BackdropAnimationConfig = {
   isVisible: boolean;
@@ -41,10 +41,13 @@ export const useOverlayBackdropUseCase = ({isVisible, enteringCallback, exitingC
 
   useEffect(() => {
     // Androidの仮想バックキーの制御
-    // ローディングオーバレイ表示中は仮想バックキーをタップしても何も動作しないようにする
-    const subscription = BackHandler.addEventListener('hardwareBackPress', () => isOverlayVisible);
+    // オーバレイ表示中は仮想バックキーをタップしても何も動作しないようにする
+    let subscription: NativeEventSubscription | undefined;
+    if (isOverlayVisible) {
+      subscription = BackHandler.addEventListener('hardwareBackPress', () => true);
+    }
     return () => {
-      subscription.remove();
+      subscription?.remove();
     };
   }, [isOverlayVisible]);
 

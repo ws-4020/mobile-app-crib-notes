@@ -6,11 +6,9 @@ import {Text} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {WithSnackbar} from '../snackbar';
-import {
-  useTermsOfServiceAgreementOverlay,
-  WithTermsOfServiceAgreementOverlay,
-} from './WithTermsOfServiceAgreementOverlay';
+import {WithSnackbar} from '../../components/overlay';
+import {WithTermsAgreementOverlay} from './WithTermsAgreementOverlay';
+import {useTermsAgreementOverlay} from './useTermsAgreementOverlayContext';
 
 jest.useFakeTimers();
 
@@ -33,7 +31,7 @@ beforeAll(async () => {
 });
 
 const ChildComponent: React.FC = () => {
-  const termsOverlay = useTermsOfServiceAgreementOverlay();
+  const termsOverlay = useTermsAgreementOverlay();
 
   useEffect(() => {
     termsOverlay.show({termsOfService: {version: '1.0.0', url: AppConfig.termsUrl}});
@@ -45,9 +43,9 @@ const ChildComponent: React.FC = () => {
 describe('WithTermsOfServiceAgreementOverlay', () => {
   it('useTermsOfServiceAgreementOverlayのshowで、利用規約が正常に表示されることを確認', () => {
     const renderResult = render(
-      <WithTermsOfServiceAgreementOverlay accountData={{terms: {}}}>
+      <WithTermsAgreementOverlay accountData={{terms: {}}}>
         <ChildComponent />
-      </WithTermsOfServiceAgreementOverlay>,
+      </WithTermsAgreementOverlay>,
       {wrapper: Wrapper},
     );
 
@@ -56,11 +54,11 @@ describe('WithTermsOfServiceAgreementOverlay', () => {
 
   it('利用規約に同意済の場合は、利用規約が表示されないことを確認', () => {
     const renderResult = render(
-      <WithTermsOfServiceAgreementOverlay
+      <WithTermsAgreementOverlay
         accountData={{
           terms: {
             termsOfService: {version: '1.0.0', url: AppConfig.termsUrl},
-            termsOfServiceAgreementStatus: {hasAgreed: true, agreedVersion: '0.9.0'},
+            termsAgreementStatus: {hasAgreed: true, agreedVersion: '0.9.0'},
           },
         }}
       />,
@@ -72,11 +70,11 @@ describe('WithTermsOfServiceAgreementOverlay', () => {
 
   it('利用規約に同意済ではない場合は、利用規約が正常に表示されることを確認', () => {
     const renderResult = render(
-      <WithTermsOfServiceAgreementOverlay
+      <WithTermsAgreementOverlay
         accountData={{
           terms: {
             termsOfService: {version: '1.0.0', url: AppConfig.termsUrl},
-            termsOfServiceAgreementStatus: {hasAgreed: false, agreedVersion: '0.9.0'},
+            termsAgreementStatus: {hasAgreed: false, agreedVersion: '0.9.0'},
           },
         }}
       />,

@@ -4,7 +4,7 @@ import {getAccountsMe, getAccountsMeTerms, getTerms} from 'service';
 import {InitialDataError} from './initialDataError';
 
 type Terms = {
-  termsOfServiceAgreementStatus?: TermsOfServiceAgreementStatus;
+  termsAgreementStatus?: TermsOfServiceAgreementStatus;
   termsOfService?: TermsOfService;
 };
 
@@ -16,14 +16,14 @@ export type AccountData = {
 const loadInitialAccountDataAsync = async (): Promise<AccountData> => {
   try {
     const account = (await getAccountsMe()).data;
-    const termsOfServiceAgreementStatus = (await getAccountsMeTerms()).data;
+    const termsAgreementStatus = (await getAccountsMeTerms()).data;
     let termsOfService;
-    if (!termsOfServiceAgreementStatus.hasAgreed) {
+    if (!termsAgreementStatus.hasAgreed) {
       termsOfService = (await getTerms()).data;
     }
     return {
       account,
-      terms: {termsOfServiceAgreementStatus, termsOfService},
+      terms: {termsAgreementStatus, termsOfService},
     };
   } catch (e) {
     throw new InitialDataError('Failed to load initial account data.', e);

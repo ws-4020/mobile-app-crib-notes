@@ -7,7 +7,7 @@ import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {TermsOfServiceAgreement} from './TermsOfServiceAgreement';
+import {TermsAgreementOverlay} from './TermsAgreementOverlay';
 
 const Wrapper: React.FC = ({children}) => {
   const accountData = {account: {accountId: '123456789', deviceTokens: []}};
@@ -33,7 +33,7 @@ describe('TermsOfServiceAgreement', () => {
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const app = render(
-      <TermsOfServiceAgreement
+      <TermsAgreementOverlay
         visible
         close={() => {}}
         termsOfService={{version: '1.0.0', url: AppConfig.termsUrl}}
