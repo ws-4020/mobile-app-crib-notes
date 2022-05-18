@@ -32,7 +32,6 @@ const items3 = [
 ];
 
 const placeholder = 'please select...';
-const unselectedItemForYearMonthPicker = {value: undefined, label: placeholder, color: 'grey'};
 
 export const usePickerScreenUseCase = () => {
   //////////////////////////////////////////////////////////////////////////////////
@@ -123,7 +122,6 @@ export const usePickerScreenUseCase = () => {
     minimumYearMonth,
     yearMonth,
     onSelectedItemChangeForYearMonth,
-    unselectedItem: unselectedItemForYearMonthPicker,
     onDismissForYearMonthPicker,
     onDeleteForYearMonthPicker,
     onCancelForYearMonthPicker,

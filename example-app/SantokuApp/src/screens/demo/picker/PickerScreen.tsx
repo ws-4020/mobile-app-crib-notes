@@ -29,7 +29,6 @@ const Screen: React.FC = () => {
     minimumYearMonth,
     yearMonth,
     onSelectedItemChangeForYearMonth,
-    unselectedItem,
     onDismissForYearMonthPicker,
     onDeleteForYearMonthPicker,
     onCancelForYearMonthPicker,
@@ -57,7 +56,6 @@ const Screen: React.FC = () => {
         onSelectedItemChange={onSelectedItemChangeForItem2}
         items={items2}
         placeholder={placeholder}
-        pickerProps={{mode: 'dropdown'}}
         textInputComponent={<Input placeholder={placeholder} value={items2InputValue} editable={false} />}
       />
       <View style={styles.space} />
@@ -77,7 +75,6 @@ const Screen: React.FC = () => {
         yearSuffixLabel={m('年')}
         monthSuffixLabel={m('月')}
         placeholder={placeholder}
-        unselectItem={unselectedItem}
         onSelectedItemChange={onSelectedItemChangeForYearMonth}
         onDismiss={onDismissForYearMonthPicker}
         onDelete={onDeleteForYearMonthPicker}
