@@ -2,7 +2,7 @@ import {useAccountContext} from 'context/useAccountContext';
 import {useCallback} from 'react';
 
 import {TermsAgreementOverlayShowProps} from '../WithTermsAgreementOverlay';
-import {useTermsAgreementOverlay} from '../useTermsAgreementOverlayContext';
+import {useTermsAgreementOverlay} from './useTermsAgreementOverlayContext';
 
 export const useShowTermsAgreementOverlay = () => {
   const accountContext = useAccountContext();

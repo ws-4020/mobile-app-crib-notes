@@ -3,7 +3,10 @@ import {TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/m
 import React, {useCallback, useMemo, useState} from 'react';
 
 import {TermsAgreementOverlay, TermsAgreementOverlayProps} from './TermsAgreementOverlay';
-import {TermsAgreementOverlayContextType, TermsAgreementOverlayProvider} from './useTermsAgreementOverlayContext';
+import {
+  TermsAgreementOverlayContextType,
+  TermsAgreementOverlayProvider,
+} from './usecases/useTermsAgreementOverlayContext';
 
 export type TermsAgreementOverlayShowProps = {
   termsOfService: TermsOfService;
