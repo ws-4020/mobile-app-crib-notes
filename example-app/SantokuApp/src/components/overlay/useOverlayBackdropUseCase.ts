@@ -10,15 +10,7 @@ type BackdropAnimationConfig = {
 };
 
 export const useOverlayBackdropUseCase = ({isVisible, enteringCallback, exitingCallback}: BackdropAnimationConfig) => {
-  const {
-    isVisible: isOverlayVisible,
-    setVisible: setOverlayVisible,
-    setInvisible: setOverlayInvisible,
-  } = useVisibility(isVisible);
-
-  const show = useCallback(() => {
-    setOverlayVisible();
-  }, [setOverlayVisible]);
+  const {isVisible: isOverlayVisible, setVisible: show, setInvisible: setOverlayInvisible} = useVisibility(isVisible);
 
   const composedEnteringWorkletCallback = useWorkletCallback(enteringCallback);
   const composedExitingCallback = useCallback(
