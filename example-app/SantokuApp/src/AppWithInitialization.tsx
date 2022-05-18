@@ -4,6 +4,7 @@ import {Alert} from 'react-native';
 
 import {WithReactQuery} from './components/reactQuery';
 import {WithAccountContext} from './context/WithAccountContext';
+import {WithTermsAgreementOverlay} from './context/WithTermsAgreementOverlay';
 import {InitialDataDependingComponent, useAppInitializer} from './framework/initialize';
 import {showUpdateRequiredDialog} from './framework/initialize/helpers';
 
@@ -46,9 +47,11 @@ export const AppWithInitialization: React.FC = () => {
       <NavigationContainer>
         <WithAccountContext accountData={initializationResult.data.accountData}>
           <WithReactQuery>
-            <WithFirebaseMessagingHandlers initialData={initializationResult.data.initialData}>
-              <RootStackNav initialData={initializationResult.data.initialData} />
-            </WithFirebaseMessagingHandlers>
+            <WithTermsAgreementOverlay>
+              <WithFirebaseMessagingHandlers initialData={initializationResult.data.initialData}>
+                <RootStackNav initialData={initializationResult.data.initialData} />
+              </WithFirebaseMessagingHandlers>
+            </WithTermsAgreementOverlay>
           </WithReactQuery>
         </WithAccountContext>
       </NavigationContainer>
