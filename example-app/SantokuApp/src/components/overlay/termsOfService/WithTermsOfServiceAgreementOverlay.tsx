@@ -29,6 +29,15 @@ type TermsOfServiceAgreementOverlayContextType = {
 const [useTermsOfServiceAgreementOverlay, TermsOfServiceAgreementOverlayContextProvider] =
   createUseContextAndProvider<TermsOfServiceAgreementOverlayContextType>();
 
+/**
+ * 利用規約をOverlay表示するコンポーネント
+ * 初期データのtermsOfServiceAgreementStatus?.hasAgreedがfalseの場合は、アプリ起動時に利用規約を表示します。
+ * 任意のタイミングで利用規約を表示したい場合は、以下のように使用してください。
+ *
+ * @example
+ * const terms = useTermsOfServiceAgreementOverlay();
+ * terms.show({termsOfService: {version: '1.0.0', url: AppConfig.termsUrl, ...}})
+ */
 const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({accountData, children}) => {
   const [state, setState] = useState<TermsOfServiceAgreementProps>({
     visible: false,
