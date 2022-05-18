@@ -13,8 +13,6 @@ export const useShowTermsAgreementOverlay = () => {
       const terms = accountContext.terms;
       const termsAgreementStatus = terms?.termsAgreementStatus;
       const termsOfService = terms?.termsOfService;
-      console.log(termsOfService);
-      console.log(termsAgreementStatus?.hasAgreed);
       if (termsOfService && termsAgreementStatus?.hasAgreed === false) {
         termsAgreementOverlay.show({termsOfService, exitingCallbackOnAgreed: onAgree});
       }
