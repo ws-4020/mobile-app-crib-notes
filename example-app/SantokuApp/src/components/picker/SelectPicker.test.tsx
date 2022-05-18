@@ -4,8 +4,7 @@ import {TextInputProps, View, ViewProps} from 'react-native';
 
 import {PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainerProps} from './PickerContainer';
-import {Item} from './SelectPicker';
-import {SelectPicker} from './SelectPicker.ios';
+import {Item, SelectPicker} from './SelectPicker';
 import {SelectPickerItemsProps} from './SelectPickerItems';
 
 describe('SelectPicker only with required props', () => {

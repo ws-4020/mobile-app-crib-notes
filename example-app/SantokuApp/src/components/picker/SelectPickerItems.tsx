@@ -25,12 +25,12 @@ export type SelectPickerItemsProps<ItemT> = Omit<
    * 選択状態のアイテムのテキストカラー
    * @platform android
    */
-  activeColor?: '#000000';
+  activeColor?: string;
   /**
    * 未選択状態のアイテムのテキストカラー
    * @platform android
    */
-  inactiveColor?: '#999999';
+  inactiveColor?: string;
 };
 
 export const SelectPickerItems = <ItemT extends unknown>(props: SelectPickerItemsProps<ItemT>) => {
