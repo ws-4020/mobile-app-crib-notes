@@ -29,7 +29,7 @@ export const useOverlayBackdropUseCase = ({isVisible, enteringCallback, exitingC
     if (!isVisiblePrevious && isVisible) {
       show();
     }
-  }, [isVisiblePrevious, isVisible, show, exitingCallback, composedExitingCallback]);
+  }, [isVisible, isVisiblePrevious, show]);
 
   useEffect(() => {
     // Androidの仮想バックキーの制御
