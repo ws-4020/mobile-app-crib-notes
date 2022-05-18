@@ -1,6 +1,6 @@
 import React, {useCallback, useMemo} from 'react';
 import {FlatList, FlatListProps, ListRenderItemInfo, StyleSheet, View} from 'react-native';
-import Reanimated, {useAnimatedRef, useAnimatedScrollHandler, useSharedValue} from 'react-native-reanimated';
+import Reanimated from 'react-native-reanimated';
 
 import {Fader, FaderPosition} from './Fader';
 import {Item} from './SelectPicker';
@@ -39,32 +39,26 @@ export const SelectPickerItems = <ItemT extends unknown>({
   inactiveColor,
   ...rest
 }: SelectPickerItemsAndroid<ItemT>) => {
-  // const flatListRef2 = useAnimatedRef<FlatList<Item<ItemT>>>();
-  const flatListRef = useAnimatedRef<FlatList>();
-  const offset = useSharedValue(0);
-  const scrollHandler = useAnimatedScrollHandler(e => {
-    offset.value = e.contentOffset.y;
+  const {
+    offset,
+    height,
+    handleValueChange,
+    scrollToPassedIndex,
+    currentIndex,
+    selectItem,
+    getItemLayout,
+    flatListRef,
+    scrollHandler,
+  } = useSelectPickerItemsUseCase<ItemT>({
+    selectedValue,
+    items,
+    itemHeight,
+    numberOfLines,
+    onValueChange,
   });
 
-  const {height, handleValueChange, scrollToPassedIndex, currentIndex, selectItem, getItemLayout} =
-    useSelectPickerItemsUseCase<ItemT>({
-      selectedValue,
-      items,
-      itemHeight,
-      numberOfLines,
-      onValueChange,
-      flatListRef,
-    });
-
   const itemsHeightStyle = useMemo(() => ({height}), [height]);
-
-  const contentContainerStyle = useMemo(() => {
-    return [
-      {
-        paddingVertical: height / 2 - itemHeight / 2,
-      },
-    ];
-  }, [height, itemHeight]);
+  const contentContainerStyle = useMemo(() => ({paddingVertical: height / 2 - itemHeight / 2}), [height, itemHeight]);
 
   const renderItem = useCallback(
     (info: ListRenderItemInfo<Item<ItemT>>) => {

@@ -1,5 +1,6 @@
 import React, {useCallback, useMemo, useRef} from 'react';
 import {FlatList, NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
+import {useAnimatedRef, useAnimatedScrollHandler, useSharedValue} from 'react-native-reanimated';
 
 import {Item} from './SelectPicker';
 import {useListMiddleIndex} from './useListMiddleIndex';
@@ -11,7 +12,6 @@ type SelectPickerItemsUseCaseTypes<ItemT> = {
   itemHeight: number;
   numberOfLines: number;
   onValueChange?: (itemValue: ItemT, itemIndex: number) => void;
-  flatListRef: React.RefObject<FlatList<ItemT> | undefined>;
 };
 
 export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
@@ -20,8 +20,13 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
   itemHeight,
   numberOfLines,
   onValueChange,
-  flatListRef,
 }: SelectPickerItemsUseCaseTypes<ItemT>) => {
+  const flatListRef = useAnimatedRef<FlatList>();
+  const offset = useSharedValue(0);
+  const scrollHandler = useAnimatedScrollHandler(e => {
+    offset.value = e.contentOffset.y;
+  });
+
   const middleIndex = useListMiddleIndex({itemHeight, listSize: items.length});
 
   const currentIndex = useMemo(() => {
@@ -100,8 +105,11 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
   );
 
   return {
+    offset,
+    flatListRef,
     handleValueChange,
     scrollToPassedIndex,
+    scrollHandler,
     currentIndex,
     height,
     selectItem,
