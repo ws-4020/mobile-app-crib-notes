@@ -36,7 +36,10 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
   const prevIndex = useRef(currentIndex);
   const _onChange = useCallback(
     (value: ItemT, index: number) => {
-      onValueChange?.(value, index);
+      if (prevIndex.current !== index) {
+        prevIndex.current = index;
+        onValueChange?.(value, index);
+      }
     },
     [onValueChange],
   );
