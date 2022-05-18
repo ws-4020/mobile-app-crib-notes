@@ -27,9 +27,8 @@ export const useTermsOfServiceAgreementUseCase = (
     setIsWebViewError(true);
   }, []);
 
-  const onReload = useCallback(() => {
+  const resetWebViewError = useCallback(() => {
     setIsWebViewError(false);
-    webViewRef.current?.reload();
   }, []);
 
   const onScrollEndOnce = useCallback(() => setButtonDisable(false), []);
@@ -78,7 +77,7 @@ export const useTermsOfServiceAgreementUseCase = (
     isWebViewError,
     onWebViewError,
     webViewRef,
-    onReload,
+    resetWebViewError,
     onScrollEndOnce,
     onAgree,
     composeExitingCallback,

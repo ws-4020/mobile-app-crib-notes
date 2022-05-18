@@ -33,7 +33,12 @@ describe('TermsOfServiceAgreement', () => {
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const app = render(
-      <TermsOfServiceAgreement visible close={() => {}} termsOfService={{version: '1.0.0', url: AppConfig.termsUrl}} />,
+      <TermsOfServiceAgreement
+        visible
+        close={() => {}}
+        termsOfService={{version: '1.0.0', url: AppConfig.termsUrl}}
+        contentViewTestID="TermsOfServiceAgreement"
+      />,
       {
         wrapper: Wrapper,
       },

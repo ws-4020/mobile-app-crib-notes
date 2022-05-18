@@ -55,6 +55,13 @@ const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({acco
           close,
         });
       },
+      close: (props: TermsOfServiceProps) => {
+        setState({
+          ...props,
+          visible: false,
+          close,
+        });
+      },
     }),
     [close],
   );

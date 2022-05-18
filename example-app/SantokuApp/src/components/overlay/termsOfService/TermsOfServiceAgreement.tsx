@@ -26,6 +26,7 @@ export type TermsOfServiceAgreementProps = {
   enteringCallback?: (finished: boolean) => unknown;
   exitingCallback?: (finished: boolean) => unknown;
   exitingCallbackOnAgreed?: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => unknown;
+  contentViewTestID?: string;
 };
 
 export const TermsOfServiceAgreement: React.FC<TermsOfServiceAgreementProps> = ({
@@ -36,13 +37,14 @@ export const TermsOfServiceAgreement: React.FC<TermsOfServiceAgreementProps> = (
   enteringCallback,
   exitingCallback,
   exitingCallbackOnAgreed,
+  contentViewTestID,
 }) => {
   const {
     webViewSource,
     isWebViewError,
     onWebViewError,
     webViewRef,
-    onReload,
+    resetWebViewError,
     onScrollEndOnce,
     onAgree,
     composeExitingCallback,
@@ -56,14 +58,14 @@ export const TermsOfServiceAgreement: React.FC<TermsOfServiceAgreementProps> = (
       enteringCallback={enteringCallback}
       exitingCallback={composeExitingCallback}>
       <OverlayContainer isVisible={visible} style={styles.modalContainer}>
-        <View style={styles.container} testID="TermsOfServiceAgreement">
+        <View style={styles.container} testID={contentViewTestID}>
           <View style={styles.header}>
             <Text style={styles.headerText}>{m('利用規約')}</Text>
           </View>
           {isWebViewError ? (
             <View style={styles.errorView}>
               <Text style={styles.errorText}>{m('app.terms.有効な利用規約の取得エラー')}</Text>
-              <Button title={m('リロード')} size="full" onPress={onReload} />
+              <Button title={m('リロード')} size="full" onPress={resetWebViewError} />
             </View>
           ) : (
             <WebView
