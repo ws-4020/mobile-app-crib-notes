@@ -8,7 +8,7 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {WithSnackbar} from '../../components/overlay';
 import {WithTermsAgreementOverlay} from './WithTermsAgreementOverlay';
-import {useTermsAgreementOverlay} from './useTermsAgreementOverlayContext';
+import {useTermsAgreementOverlay} from './usecases/useTermsAgreementOverlayContext';
 
 jest.useFakeTimers();
 
@@ -41,46 +41,13 @@ const ChildComponent: React.FC = () => {
 };
 
 describe('WithTermsOfServiceAgreementOverlay', () => {
-  it('useTermsOfServiceAgreementOverlayのshowで、利用規約が正常に表示されることを確認', () => {
+  it('useTermsAgreementOverlayのshowで、利用規約が正常に表示されることを確認', () => {
     const renderResult = render(
-      <WithTermsAgreementOverlay accountData={{terms: {}}}>
+      <WithTermsAgreementOverlay>
         <ChildComponent />
       </WithTermsAgreementOverlay>,
       {wrapper: Wrapper},
     );
-
-    expect(renderResult.queryByTestId('TermsOfServiceAgreement')).not.toBeNull();
-  });
-
-  it('利用規約に同意済の場合は、利用規約が表示されないことを確認', () => {
-    const renderResult = render(
-      <WithTermsAgreementOverlay
-        accountData={{
-          terms: {
-            termsOfService: {version: '1.0.0', url: AppConfig.termsUrl},
-            termsAgreementStatus: {hasAgreed: true, agreedVersion: '0.9.0'},
-          },
-        }}
-      />,
-      {wrapper: Wrapper},
-    );
-
-    expect(renderResult.queryByTestId('TermsOfServiceAgreement')).toBeNull();
-  });
-
-  it('利用規約に同意済ではない場合は、利用規約が正常に表示されることを確認', () => {
-    const renderResult = render(
-      <WithTermsAgreementOverlay
-        accountData={{
-          terms: {
-            termsOfService: {version: '1.0.0', url: AppConfig.termsUrl},
-            termsAgreementStatus: {hasAgreed: false, agreedVersion: '0.9.0'},
-          },
-        }}
-      />,
-      {wrapper: Wrapper},
-    );
-
-    expect(renderResult.queryByTestId('TermsOfServiceAgreement')).not.toBeNull();
+    expect(renderResult.queryByText('利用規約')).not.toBeNull();
   });
 });

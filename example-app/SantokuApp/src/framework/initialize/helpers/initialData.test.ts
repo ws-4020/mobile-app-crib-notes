@@ -42,7 +42,7 @@ describe('loadInitialAccountDataAsync', () => {
         deviceTokens: [],
       },
       terms: {
-        termsOfServiceAgreementStatus: {
+        termsAgreementStatus: {
           hasAgreed: true,
           agreedVersion: '1.0.0',
         },
@@ -79,7 +79,7 @@ describe('loadInitialAccountDataAsync', () => {
         deviceTokens: [],
       },
       terms: {
-        termsOfServiceAgreementStatus: {
+        termsAgreementStatus: {
           hasAgreed: false,
           agreedVersion: '1.0.0',
         },
