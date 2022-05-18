@@ -6,7 +6,6 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
-import {FullWindowOverlay} from '../FullWindowOverlay';
 import {ModalBackdrop} from './ModalBackdrop';
 import {ModalContainer} from './ModalContainer';
 import {useTermsOfServiceAgreementUseCase} from './useTermsOfServiceAgreementUseCase';
@@ -37,7 +36,6 @@ export const TermsOfServiceAgreement: React.FC<TermsOfServiceAgreementProps> = (
   enteringCallback,
   exitingCallback,
   exitingCallbackOnAgreed,
-  children,
 }) => {
   const {
     webViewSource,
@@ -52,41 +50,36 @@ export const TermsOfServiceAgreement: React.FC<TermsOfServiceAgreementProps> = (
   } = useTermsOfServiceAgreementUseCase(close, termsOfService, exitingCallback, exitingCallbackOnAgreed);
 
   return (
-    <>
-      {children}
-      <FullWindowOverlay>
-        <ModalBackdrop
-          isVisible={visible}
-          onPress={dismissible ? close : undefined}
-          enteringCallback={enteringCallback}
-          exitingCallback={composeExitingCallback}>
-          <ModalContainer isVisible={visible} style={styles.modalContainer}>
-            <View style={styles.container} testID="TermsOfServiceAgreement">
-              <View style={styles.header}>
-                <Text style={styles.headerText}>{m('利用規約')}</Text>
-              </View>
-              {isWebViewError ? (
-                <View style={styles.errorView}>
-                  <Text style={styles.errorText}>{m('app.terms.有効な利用規約の取得エラー')}</Text>
-                  <Button title={m('リロード')} size="full" onPress={onReload} />
-                </View>
-              ) : (
-                <WebView
-                  source={webViewSource}
-                  onScrollEndOnce={onScrollEndOnce}
-                  ref={webViewRef}
-                  onError={onWebViewError}
-                  onHttpError={onWebViewError}
-                />
-              )}
-              <View style={styles.footer}>
-                <Button title={m('同意')} onPress={onAgree} disabled={isDisabledAgreementButton} />
-              </View>
+    <ModalBackdrop
+      isVisible={visible}
+      onPress={dismissible ? close : undefined}
+      enteringCallback={enteringCallback}
+      exitingCallback={composeExitingCallback}>
+      <ModalContainer isVisible={visible} style={styles.modalContainer}>
+        <View style={styles.container} testID="TermsOfServiceAgreement">
+          <View style={styles.header}>
+            <Text style={styles.headerText}>{m('利用規約')}</Text>
+          </View>
+          {isWebViewError ? (
+            <View style={styles.errorView}>
+              <Text style={styles.errorText}>{m('app.terms.有効な利用規約の取得エラー')}</Text>
+              <Button title={m('リロード')} size="full" onPress={onReload} />
             </View>
-          </ModalContainer>
-        </ModalBackdrop>
-      </FullWindowOverlay>
-    </>
+          ) : (
+            <WebView
+              source={webViewSource}
+              onScrollEndOnce={onScrollEndOnce}
+              ref={webViewRef}
+              onError={onWebViewError}
+              onHttpError={onWebViewError}
+            />
+          )}
+          <View style={styles.footer}>
+            <Button title={m('同意')} onPress={onAgree} disabled={isDisabledAgreementButton} />
+          </View>
+        </View>
+      </ModalContainer>
+    </ModalBackdrop>
   );
 };
 

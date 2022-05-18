@@ -3,6 +3,7 @@ import {createUseContextAndProvider} from 'framework/utilities';
 import {TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/model';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 
+import {FullWindowOverlay} from '../FullWindowOverlay';
 import {TermsOfServiceAgreement, TermsOfServiceAgreementProps} from './TermsOfServiceAgreement';
 
 type TermsOfServiceProps = {
@@ -65,7 +66,10 @@ const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({acco
 
   return (
     <TermsOfServiceAgreementOverlayContextProvider value={termsOfServiceAgreementOverlayContext}>
-      <TermsOfServiceAgreement {...state}>{children}</TermsOfServiceAgreement>
+      {children}
+      <FullWindowOverlay>
+        <TermsOfServiceAgreement {...state} />
+      </FullWindowOverlay>
     </TermsOfServiceAgreementOverlayContextProvider>
   );
 };
