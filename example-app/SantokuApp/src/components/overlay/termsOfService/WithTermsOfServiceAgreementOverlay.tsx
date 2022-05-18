@@ -24,6 +24,7 @@ type TermsOfServiceProps = {
 
 type TermsOfServiceAgreementOverlayContextType = {
   show: (props: TermsOfServiceProps) => void;
+  close: () => void;
 };
 
 const [useTermsOfServiceAgreementOverlay, TermsOfServiceAgreementOverlayContextProvider] =
@@ -35,8 +36,8 @@ const [useTermsOfServiceAgreementOverlay, TermsOfServiceAgreementOverlayContextP
  * 任意のタイミングで利用規約を表示したい場合は、以下のように使用してください。
  *
  * @example
- * const terms = useTermsOfServiceAgreementOverlay();
- * terms.show({termsOfService: {version: '1.0.0', url: AppConfig.termsUrl, ...}})
+ * const termsOfServiceAgreementOverlay = useTermsOfServiceAgreementOverlay();
+ * termsOfServiceAgreementOverlay.show({termsOfService: {version: '1.0.0', url: AppConfig.termsUrl, ...}})
  */
 const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({accountData, children}) => {
   const [state, setState] = useState<TermsOfServiceAgreementProps>({
@@ -45,25 +46,23 @@ const WithTermsOfServiceAgreementOverlay: AccountDataDependingComponent = ({acco
     termsOfService: {version: '', url: ''},
   });
   const close = useCallback(() => setState(prevState => ({...prevState, visible: false})), []);
+  const show = useCallback(
+    (props: TermsOfServiceProps) => {
+      setState({
+        ...props,
+        visible: true,
+        close,
+      });
+    },
+    [close],
+  );
 
   const termsOfServiceAgreementOverlayContext = useMemo<TermsOfServiceAgreementOverlayContextType>(
     () => ({
-      show: (props: TermsOfServiceProps) => {
-        setState({
-          ...props,
-          visible: true,
-          close,
-        });
-      },
-      close: (props: TermsOfServiceProps) => {
-        setState({
-          ...props,
-          visible: false,
-          close,
-        });
-      },
+      show,
+      close,
     }),
-    [close],
+    [close, show],
   );
 
   useEffect(() => {
