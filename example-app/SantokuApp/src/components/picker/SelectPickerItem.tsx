@@ -54,9 +54,7 @@ export const SelectPickerItem = <ItemT extends unknown>({
       style={StyleSheet.flatten([pressableHeightStyle, styles.pressable])}
       accessibilityLabel={accessibilityLabel}>
       {/* AnimatedStyleの場合はStyleSheet.flattenだとマージされないため、配列で指定 */}
-      <AnimatedText style={[animatedTextStyle, styles.text, itemStyle, item.style, itemPropsStyle]}>
-        {item.label}
-      </AnimatedText>
+      <AnimatedText style={[animatedTextStyle, styles.text, itemStyle, itemPropsStyle]}>{item.label}</AnimatedText>
     </AnimatedPressable>
   );
 };

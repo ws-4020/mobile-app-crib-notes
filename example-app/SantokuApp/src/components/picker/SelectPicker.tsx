@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Pressable,
-  StyleProp,
-  StyleSheet,
-  TextInput,
-  TextInputProps as RNETextInputProps,
-  TextStyle,
-  View,
-  ViewProps,
-} from 'react-native';
+import {Pressable, StyleSheet, TextInput, TextInputProps as RNETextInputProps, View, ViewProps} from 'react-native';
 
 import {DefaultPickerAccessory, DefaultPickerAccessoryProps} from './DefaultPickerAccessory';
 import {PickerBackdrop, PickerBackdropProps} from './PickerBackdrop';
@@ -23,17 +14,6 @@ export type Item<T> = {
   key?: React.Key;
   color?: string;
   fontFamily?: string;
-  /**
-   * アイテムに指定するスタイル
-   * 以下のプロパティのみ使用できます。
-   * - 'color'
-   * - 'backgroundColor'
-   * - 'fontSize'
-   * - 'fontFamily'
-   *
-   * @platform android
-   */
-  style?: StyleProp<Pick<TextStyle, 'color' | 'backgroundColor' | 'fontSize' | 'fontFamily'>>;
 };
 
 type TextInputProps = Omit<RNETextInputProps, 'value' | 'editable'>;
@@ -52,34 +32,24 @@ export type SelectPickerProps<ItemT> = {
   onSelectedItemChange?: (selectedItem?: Item<ItemT>) => void;
   /**
    * PickerBackdropをタップして閉じた場合に呼び出される関数
-   *
-   * @platform ios
    */
   onDismiss?: (selectedItem?: Item<ItemT>) => void;
   /**
    * DeleteLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
    * なお、pickerAccessoryComponentを指定した場合は使用されません。
-   *
-   * @platform ios
    */
   onDelete?: (selectedItem?: Item<ItemT>) => void;
   /**
    * CancelLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
    * なお、pickerAccessoryComponentを指定した場合は使用されません。
-   *
-   * @platform ios
    */
   onCancel?: (selectedItem?: Item<ItemT>) => void;
   /**
-   * [iOS]
    * DoneLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
    * なお、pickerAccessoryComponentを指定した場合は使用されません。
-   *
-   * [Android]
-   * アイテムが選択された場合に呼び出される関数
    */
   onDone?: (selectedItem?: Item<ItemT>) => void;
   /**
@@ -89,8 +59,6 @@ export type SelectPickerProps<ItemT> = {
   /**
    * ヘッダコンポーネント
    * 指定しない場合は、PickerAccessoryがデフォルトで表示されます。
-   *
-   * @platform ios
    */
   pickerAccessoryComponent?: React.ReactNode;
   /**
@@ -113,8 +81,6 @@ export type SelectPickerProps<ItemT> = {
   textInputProps?: TextInputProps;
   /**
    * Pickerコンポーネントを囲むContainerのProps
-   *
-   * @platform ios
    */
   pickerItemsContainerProps?: ViewProps;
   /**
@@ -124,21 +90,15 @@ export type SelectPickerProps<ItemT> = {
   pickerProps?: Omit<SelectPickerItemsProps<ItemT>, 'items' | 'selectedValue' | 'onValueChange' | 'keyExtractor'>;
   /**
    * PickerBackdropのProps
-   *
-   * @platform ios
    */
   pickerBackdropProps?: Omit<PickerBackdropProps, 'isVisible' | 'onPress'>;
   /**
    * PickerContainerのProps
-   *
-   * @platform ios
    */
   pickerContainerProps?: Omit<PickerContainerProps, 'isVisible'>;
   /**
    * PickerAccessoryのProps
    * なお、pickerAccessoryComponentを指定した場合は使用されません。
-   *
-   * @platform ios
    */
   pickerAccessoryProps?: Omit<DefaultPickerAccessoryProps, 'onDelete' | 'onCancel' | 'onDone'>;
 };
