@@ -141,8 +141,8 @@ describe('SelectPicker with all props', () => {
     const textInput = sut.getByTestId('textInput');
     const textInputProps = textInput.props as TextInputProps;
     expect(textInputProps.style).toEqual({color: 'red'});
-    expect(keyExtractor).toHaveBeenNthCalledWith(1, '1', 0);
-    expect(keyExtractor).toHaveBeenNthCalledWith(2, '2', 1);
+    expect(keyExtractor).toHaveBeenNthCalledWith(1, {value: '1', label: 'test1'}, 0);
+    expect(keyExtractor).toHaveBeenNthCalledWith(2, {value: '2', label: 'test2'}, 1);
 
     // assert pickerBackdrop
     const pickerBackdrop = sut.getByTestId('pickerBackdrop');
