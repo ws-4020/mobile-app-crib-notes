@@ -21,7 +21,7 @@ export const useShowTermsAgreementOverlay = () => {
       const termsAgreementStatus = terms?.termsAgreementStatus;
       const termsOfService = terms?.termsOfService;
       if (termsOfService && termsAgreementStatus?.hasAgreed === false) {
-        termsAgreementOverlay.show({termsOfService, exitingCallbackOnAgreed: onAgree});
+        termsAgreementOverlay.show({termsOfService, exitingCallbackOnAgreed: onAgree, dismissible: false});
       }
     },
     [accountContext.terms, termsAgreementOverlay],
