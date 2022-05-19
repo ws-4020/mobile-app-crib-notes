@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useRef} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {FlatList, NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
 import {useAnimatedRef, useAnimatedScrollHandler, useSharedValue} from 'react-native-reanimated';
 
@@ -29,13 +29,16 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
 
   const middleIndex = useListMiddleIndex({itemHeight, listSize: items.length});
 
-  const currentIndex = useMemo(() => {
+  const selectedIndex = useMemo(() => {
     return items.findIndex(item => item.key === selectedValue || item.value === selectedValue);
   }, [items, selectedValue]);
 
-  const prevIndex = useRef(currentIndex);
+  const [currentIndex, setCurrentIndex] = useState<number>();
+  const prevIndex = useRef(selectedIndex);
+
   const _onChange = useCallback(
     (value: ItemT, index: number) => {
+      setCurrentIndex(index);
       if (prevIndex.current !== index) {
         prevIndex.current = index;
         onValueChange?.(value, index);
@@ -64,10 +67,8 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
   const onMomentumScrollEndAndroid = useCallback(
     (index: number) => {
       // handle Android bug: ScrollView does not call 'onMomentumScrollEnd' when scrolled programmatically (https://github.com/facebook/react-native/issues/26661)
-      if (prevIndex.current !== index) {
-        prevIndex.current = index;
-        _onChange(items?.[index]?.value, index);
-      }
+      _onChange(items?.[index]?.value, index);
+      // }
     },
     [_onChange, items],
   );
@@ -95,8 +96,8 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
   );
 
   const scrollToPassedIndex = useCallback(() => {
-    scrollToIndex(currentIndex, false);
-  }, [currentIndex, scrollToIndex]);
+    scrollToIndex(selectedIndex, false);
+  }, [selectedIndex, scrollToIndex]);
 
   const height = useMemo(() => itemHeight * numberOfLines, [itemHeight, numberOfLines]);
 
@@ -108,8 +109,14 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
   );
 
   useEffect(() => {
-    currentIndex !== undefined && scrollToIndex(currentIndex, true);
-  }, [currentIndex, scrollToIndex]);
+    if (selectedIndex !== currentIndex) {
+      setCurrentIndex(selectedIndex);
+      currentIndex !== undefined &&
+        setTimeout(() => {
+          scrollToOffset(selectedIndex, true);
+        }, 100);
+    }
+  }, [selectedIndex, currentIndex, scrollToOffset]);
 
   return {
     offset,
@@ -117,7 +124,7 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
     handleValueChange,
     scrollToPassedIndex,
     scrollHandler,
-    currentIndex,
+    selectedIndex,
     height,
     selectItem,
     getItemLayout,

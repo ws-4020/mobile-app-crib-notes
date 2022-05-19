@@ -44,7 +44,7 @@ export const SelectPickerItems = <ItemT extends unknown>({
     height,
     handleValueChange,
     scrollToPassedIndex,
-    currentIndex,
+    selectedIndex,
     selectItem,
     getItemLayout,
     flatListRef,
@@ -95,7 +95,7 @@ export const SelectPickerItems = <ItemT extends unknown>({
         renderItem={renderItem}
         decelerationRate={DECELERATION_RATE}
         getItemLayout={getItemLayout}
-        initialScrollIndex={currentIndex}
+        initialScrollIndex={selectedIndex}
         centerContent
       />
       <FaderBottom />
