@@ -1,4 +1,3 @@
-import {PickerProps} from '@react-native-picker/picker';
 import React from 'react';
 import {
   Pressable,
@@ -13,7 +12,7 @@ import {
 import {DefaultPickerAccessory, DefaultPickerAccessoryProps} from './DefaultPickerAccessory';
 import {PickerBackdrop, PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainer, PickerContainerProps} from './PickerContainer';
-import {SelectPickerItems} from './SelectPickerItems';
+import {SelectPickerItems, SelectPickerItemsProps} from './SelectPickerItems';
 import {RequiredYearMonth, YearMonth} from './YearMonth';
 import {useYearMonthPickerUseCase} from './useYearMonthPickerUseCase';
 
@@ -82,7 +81,7 @@ export type YearMonthPickerProps = {
    * PickerのProps
    * なお、pickerItemsComponentを指定した場合は使用されません。
    */
-  pickerProps?: Omit<PickerProps<Date>, 'selectedValue' | 'onValueChange'>;
+  pickerProps?: Omit<SelectPickerItemsProps<YearMonth>, 'items' | 'selectedValue' | 'onValueChange' | 'keyExtractor'>;
   /**
    * PickerBackdropのProps
    */
