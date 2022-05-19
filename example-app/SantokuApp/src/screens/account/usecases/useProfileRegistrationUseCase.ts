@@ -1,10 +1,12 @@
 import {useAccountContextOperation} from 'context/useAccountContextOperation';
 import {FormikProps} from 'formik';
+import {log, m} from 'framework';
 import {AuthenticationService, isUnauthorizedError} from 'framework/authentication';
 import {generatePassword} from 'framework/utilities';
 import {isValidForm} from 'framework/validator';
 import {TermsOfServiceAgreementStatus} from 'generated/backend/model';
 import {useCallback, useState} from 'react';
+import {Alert} from 'react-native';
 import {usePostAccountsMeTerms} from 'service';
 
 import {ProfileForm} from '../data-types';
@@ -35,10 +37,11 @@ export const useProfileRegistrationUseCase = (
         accountContextOperation.login(account, {termsAgreementStatus});
       } catch (e) {
         // ここではサインアップに成功したaccountId、passwordを使用してログインしているため、UnauthorizedErrorが発生しない想定です。
-        // もし発生した場合は、クライアント側のログアウト処理を実施後、想定外のエラーとしてアプリをクラッシュさせて、Firebase Crashlyticsにエラーログを送信します。
+        // もし発生した場合は、クライアント側のログアウト処理を実施後、Firebase Crashlyticsにエラーログを送信します。
         if (isUnauthorizedError(e)) {
           await AuthenticationService.clientLogout();
-          throw e;
+          log.error(m('app.account.signupError', String(e)), 'app.account.signupError');
+          Alert.alert(m('app.account.サインアップエラータイトル'), m('app.account.サインアップエラー本文'));
         }
         setIsExecutingSignup(false);
       }
