@@ -1,3 +1,5 @@
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {ParamListBase} from '@react-navigation/routers';
 import {render} from '@testing-library/react-native';
 import {WithSnackbar} from 'components/overlay';
 import {WithAppTheme} from 'components/theme';
@@ -8,9 +10,8 @@ import {enhanceValidator} from 'framework/validator';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
-import {useGetAccountsMe, useGetAccountsMeTerms, useGetTerms, usePostAccountsMeTerms} from 'service';
+import {useGetTerms} from 'service';
 
-jest.mock('service/backend/accountService');
 jest.mock('service/backend/termService');
 
 const Wrapper: React.FC = ({children}) => {
@@ -36,20 +37,30 @@ beforeAll(async () => {
   enhanceValidator();
 });
 
-describe('LoginScreen', () => {
+describe('ProfileRegistrationScreen', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
-    (useGetAccountsMe as jest.Mock).mockReturnValue({refetch: () => {}});
-    (useGetAccountsMeTerms as jest.Mock).mockReturnValue({refetch: () => {}});
     (useGetTerms as jest.Mock).mockReturnValue({refetch: () => {}});
-    (usePostAccountsMeTerms as jest.Mock).mockReturnValue({mutateAsync: () => {}});
     // importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const Screen = require('./LoginScreen').LoginScreen.component as React.FC;
-    const app = render(<Screen />, {
-      wrapper: Wrapper,
-    });
-    expect(app.queryByTestId('Login')).not.toBeNull();
+    const Screen = require('./ProfileRegistrationScreen').ProfileRegistrationScreen.component as React.FC<
+      NativeStackScreenProps<ParamListBase>
+    >;
+    const app = render(
+      <Screen
+        navigation={__mocks.navigation}
+        route={{
+          params: {hasAgreedValidTermsOfService: true, agreedTermsOfServiceVersion: '1.0.0'},
+          key: '',
+          path: '',
+          name: 'ProfileRegistration',
+        }}
+      />,
+      {
+        wrapper: Wrapper,
+      },
+    );
+    expect(app.queryByTestId('ProfileRegistration')).not.toBeNull();
     expect(app).toMatchSnapshot();
   });
 });

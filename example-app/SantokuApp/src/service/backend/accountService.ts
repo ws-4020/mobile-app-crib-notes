@@ -6,15 +6,15 @@ import {
   useGetAccountsAccountIdAvatar,
   useGetAccountsMe,
   useGetAccountsMeAvatar,
-  useGetAccountsMeTerms,
   usePostAccountsMeDeviceToken,
   usePostLogin,
   usePostLogout,
   usePostSignup,
   usePutAccountsMeAvatar,
   useDeleteAccountsMeDelete,
+  getGetAccountsMeQueryKey,
 } from 'generated/backend/account/account';
-import {useMutation} from 'react-query';
+import {useMutation, useQuery} from 'react-query';
 
 import {TermsOfServiceAgreementStatus} from '../../generated/backend/model';
 
@@ -47,6 +47,10 @@ const getAccountsMeTerms = async (): Promise<AxiosResponse<TermsOfServiceAgreeme
     },
     ...axiosGetOkResponse,
   };
+};
+
+const useGetAccountsMeTerms = (options?: {query?: {enabled?: boolean}}) => {
+  return useQuery(getGetAccountsMeQueryKey(), getAccountsMeTerms, {enabled: options?.query?.enabled});
 };
 
 // TODO: APIが完成するまでの暫定処理
