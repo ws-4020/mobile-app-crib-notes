@@ -53,5 +53,6 @@ export const ProfileRegistrationScreen: NativeStackScreenConfig<RootStackParamLi
   name: ScreenName,
   options: {
     title: m('プロフィール登録'),
+    animation: 'slide_from_bottom',
   },
 };
