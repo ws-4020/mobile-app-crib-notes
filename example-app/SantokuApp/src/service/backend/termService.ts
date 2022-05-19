@@ -10,8 +10,11 @@ const getTerms = async () => {
   return {data: {version: '1.0.0', url: AppConfig.termsUrl}, ...axiosGetOkResponse};
 };
 
-const useGetTerms = (options?: {query?: {enabled?: boolean}}) => {
-  return useQuery(getGetTermsQueryKey(), getTerms, {enabled: options?.query?.enabled});
+const useGetTerms = (options?: {query?: {enabled?: boolean; refetchInterval?: number}}) => {
+  return useQuery(getGetTermsQueryKey(), getTerms, {
+    enabled: options?.query?.enabled,
+    refetchInterval: options?.query?.refetchInterval,
+  });
 };
 
 export {useGetTerms, getTerms};

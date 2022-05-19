@@ -14,6 +14,9 @@ import {useGetAccountsMe, useGetAccountsMeTerms, useGetTerms} from 'service';
 
 import {LoginForm} from '../data-types';
 
+// 30分間隔で利用規約情報を取得する
+const termsRefetchInterval = 1000 * 60 * 30;
+
 export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
   const isMounted = useIsMounted();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -24,22 +27,27 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
   const {refetch: callGetAccountMe} = useGetAccountsMe({query: {enabled: false}});
   const {mutateAsync: callLogin} = AuthenticationService.useLogin();
   const {refetch: callGetAccountsMeTerms} = useGetAccountsMeTerms({query: {enabled: false}});
-  const {refetch: callGetTerms, isFetching: isFetchingTerms} = useGetTerms({query: {enabled: false}});
+  const {
+    data: termsOfService,
+    isFetched: isFetchedTerms,
+    isLoadingError: isTermsLoadingError,
+  } = useGetTerms({
+    query: {refetchInterval: termsRefetchInterval},
+  });
 
   const clearAccountId = useCallback(() => form.setFieldValue('accountId', ''), [form]);
   const clearPassword = useCallback(() => form.setFieldValue('password', ''), [form]);
 
-  const createAccount = useCallback(async () => {
-    // callGetTerms.dataは必ず存在する想定
-    const termsOfService = (await callGetTerms()).data!.data;
+  const createAccount = useCallback(() => {
     termsAgreementOverlay.show({
-      termsOfService,
+      // 利用規約を取得できていない場合はボタンを非活性にしているので、ここでは必ず存在する想定
+      termsOfService: termsOfService!.data,
       exitingCallbackOnAgreed: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => {
         navigation.navigate('ProfileRegistration', termsOfServiceAgreementStatus);
       },
       dismissible: true,
     });
-  }, [callGetTerms, navigation, termsAgreementOverlay]);
+  }, [termsAgreementOverlay, termsOfService, navigation]);
   const login = useCallback(async () => {
     if (await isValidForm(form)) {
       try {
@@ -51,12 +59,8 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         // callGetAccountMe.dataは必ず存在する想定
         const account = (await callGetAccountMe({throwOnError: true})).data!.data;
         const termsAgreementStatus = (await callGetAccountsMeTerms({throwOnError: true})).data?.data;
-        let termsOfService;
-        if (!termsAgreementStatus?.hasAgreed) {
-          // callGetTerms.dataは必ず存在する想定
-          termsOfService = (await callGetTerms({throwOnError: true})).data!.data;
-        }
-        accountContextOperation.login(account, {termsAgreementStatus, termsOfService});
+        // 利用規約を取得できていない場合はボタンを非活性にしているので、termsOfServiceは必ず存在する想定
+        accountContextOperation.login(account, {termsAgreementStatus, termsOfService: termsOfService!.data});
       } catch (e) {
         if (isUnauthorizedError(e)) {
           Alert.alert(m('ログイン失敗'), m('アカウントIDまたはパスワードに\n間違いがあります。'));
@@ -67,7 +71,7 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         }
       }
     }
-  }, [form, callLogin, callGetAccountMe, callGetAccountsMeTerms, accountContextOperation, callGetTerms, isMounted]);
+  }, [form, callLogin, callGetAccountMe, callGetAccountsMeTerms, accountContextOperation, termsOfService, isMounted]);
 
   return {
     clearAccountId,
@@ -75,6 +79,6 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
     createAccount,
     login,
     isExecutingLogin,
-    isExecutingCreateAccount: isFetchingTerms,
+    isFetchedTerms: isFetchedTerms && !isTermsLoadingError,
   };
 };

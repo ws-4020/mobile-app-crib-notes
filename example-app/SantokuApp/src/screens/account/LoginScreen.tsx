@@ -20,8 +20,7 @@ const Screen: React.FC = () => {
     onSubmit: () => {},
   });
 
-  const {clearAccountId, clearPassword, createAccount, login, isExecutingLogin, isExecutingCreateAccount} =
-    useLoginUseCase(form);
+  const {clearAccountId, clearPassword, createAccount, login, isExecutingLogin, isFetchedTerms} = useLoginUseCase(form);
 
   return (
     <View style={styles.container} testID="Login">
@@ -44,9 +43,9 @@ const Screen: React.FC = () => {
       />
       <Spacer heightRatio={0.05} />
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-        <OutlinedButton title={m('新規登録')} onPress={createAccount} loading={isExecutingCreateAccount} />
+        <OutlinedButton title={m('新規登録')} onPress={createAccount} disabled={!isFetchedTerms} />
         <Spacer widthRatio={0.1} />
-        <FilledButton title={m('ログイン')} onPress={login} loading={isExecutingLogin} />
+        <FilledButton title={m('ログイン')} onPress={login} loading={isExecutingLogin} disabled={!isFetchedTerms} />
       </View>
     </View>
   );
