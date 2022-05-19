@@ -1,5 +1,5 @@
-import React, {useCallback, useMemo} from 'react';
-import {Pressable, StyleProp, StyleSheet, Text, TextProps} from 'react-native';
+import React, {useMemo} from 'react';
+import {Pressable, PressableProps, StyleSheet, Text, TextProps} from 'react-native';
 import Animated, {interpolateColor, useAnimatedStyle} from 'react-native-reanimated';
 
 import {Item} from './SelectPicker';
@@ -9,30 +9,26 @@ export type SelectPickerItemType<ItemT extends unknown> = {
   index: number;
   offset: Animated.SharedValue<number>;
   itemHeight: number;
-  selectItem: (index: number) => void;
   activeColor?: string;
   inactiveColor?: string;
-  itemStyle?: StyleProp<TextProps>;
-  accessibilityLabel?: string;
+  pressableProps?: PressableProps;
+  textProps?: TextProps;
 };
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
 export const SelectPickerItem = <ItemT extends unknown>({
-  item,
+  item: {label, inputLabel, key, value, ...itemPropsStyle},
   index,
   offset,
   activeColor = '#000000',
   inactiveColor = '#999999',
   itemHeight,
-  selectItem,
-  itemStyle,
-  accessibilityLabel,
+  pressableProps: {onPress, accessibilityLabel, ...pressableProps} = {},
+  textProps: {style: textStyle, ...textProps} = {},
 }: SelectPickerItemType<ItemT>) => {
   const itemOffset = index * itemHeight;
-
-  const onPress = useCallback(() => selectItem(index), [index, selectItem]);
   const animatedTextStyle = useAnimatedStyle(() => {
     const color = interpolateColor(
       offset.value,
@@ -43,18 +39,17 @@ export const SelectPickerItem = <ItemT extends unknown>({
   }, [itemHeight]);
 
   const pressableHeightStyle = useMemo(() => ({height: itemHeight}), [itemHeight]);
-  const itemPropsStyle = useMemo(
-    () => ({color: item.color, fontFamily: item.fontFamily}),
-    [item.color, item.fontFamily],
-  );
 
   return (
     <AnimatedPressable
       onPress={onPress}
       style={StyleSheet.flatten([pressableHeightStyle, styles.pressable])}
-      accessibilityLabel={accessibilityLabel}>
+      accessibilityLabel={accessibilityLabel}
+      {...pressableProps}>
       {/* AnimatedStyleの場合はStyleSheet.flattenだとマージされないため、配列で指定 */}
-      <AnimatedText style={[animatedTextStyle, styles.text, itemStyle, itemPropsStyle]}>{item.label}</AnimatedText>
+      <AnimatedText style={[animatedTextStyle, styles.text, textStyle, itemPropsStyle]} {...textProps}>
+        {label}
+      </AnimatedText>
     </AnimatedPressable>
   );
 };

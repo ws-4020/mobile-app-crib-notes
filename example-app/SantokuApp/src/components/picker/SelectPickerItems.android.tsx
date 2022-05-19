@@ -8,9 +8,11 @@ import {SelectPickerItem} from './SelectPickerItem';
 import {SelectPickerItemsProps} from './SelectPickerItems';
 import {useSelectPickerItemsUseCase} from './useSelectPickerItemsUseCase';
 
-const Separator: React.FC<{height: number}> = React.memo(({height}) => {
+const Separator: React.FC<{height: number; testID?: string}> = React.memo(({height, testID}) => {
   const separatorHeightStyle = useMemo(() => ({height}), [height]);
-  return <View pointerEvents="none" style={StyleSheet.flatten([styles.separators, separatorHeightStyle])} />;
+  return (
+    <View pointerEvents="none" style={StyleSheet.flatten([styles.separators, separatorHeightStyle])} testID={testID} />
+  );
 });
 
 const FADER_SIZE = 60;
@@ -37,6 +39,10 @@ export const SelectPickerItems = <ItemT extends unknown>({
   accessibilityLabel,
   activeColor,
   inactiveColor,
+  flatListTestID,
+  separatorTestID,
+  itemPressableTestIDPrefix,
+  itemTextTestIDPrefix,
   ...rest
 }: SelectPickerItemsAndroid<ItemT>) => {
   const {
@@ -62,21 +68,31 @@ export const SelectPickerItems = <ItemT extends unknown>({
 
   const renderItem = useCallback(
     (info: ListRenderItemInfo<Item<ItemT>>) => {
+      const onPress = () => selectItem(info.index);
       return (
         <SelectPickerItem
           item={info.item}
           offset={offset}
           index={info.index}
           itemHeight={itemHeight}
-          selectItem={selectItem}
-          accessibilityLabel={accessibilityLabel}
-          itemStyle={itemStyle}
           activeColor={activeColor}
           inactiveColor={inactiveColor}
+          pressableProps={{onPress, accessibilityLabel, testID: `${itemPressableTestIDPrefix ?? ''}-${info.index}`}}
+          textProps={{style: itemStyle, testID: `${itemTextTestIDPrefix ?? ''}-${info.index}`}}
         />
       );
     },
-    [accessibilityLabel, activeColor, inactiveColor, itemHeight, itemStyle, offset, selectItem],
+    [
+      accessibilityLabel,
+      activeColor,
+      inactiveColor,
+      itemHeight,
+      itemPressableTestIDPrefix,
+      itemStyle,
+      itemTextTestIDPrefix,
+      offset,
+      selectItem,
+    ],
   );
 
   return (
@@ -97,10 +113,11 @@ export const SelectPickerItems = <ItemT extends unknown>({
         getItemLayout={getItemLayout}
         initialScrollIndex={selectedIndex}
         centerContent
+        testID={flatListTestID}
       />
       <FaderBottom />
       <FaderTop />
-      <Separator height={itemHeight} />
+      <Separator height={itemHeight} testID={separatorTestID} />
     </View>
   );
 };

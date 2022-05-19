@@ -3,7 +3,16 @@ import React from 'react';
 
 import {SelectPickerItemsProps} from './SelectPickerItems';
 
-type SelectPickerItemsIOS<ItemT> = Omit<SelectPickerItemsProps<ItemT>, 'itemHeight' | 'activeColor' | 'inactiveColor'>;
+type SelectPickerItemsIOS<ItemT> = Omit<
+  SelectPickerItemsProps<ItemT>,
+  | 'itemHeight'
+  | 'activeColor'
+  | 'inactiveColor'
+  | 'flatListTestID'
+  | 'separatorTestID'
+  | 'itemPressableTestIDPrefix'
+  | 'itemTextTestIDPrefix'
+>;
 
 export const SelectPickerItems = <ItemT extends unknown>({
   selectedValue,

@@ -31,6 +31,26 @@ export type SelectPickerItemsProps<ItemT> = Omit<
    * @platform android
    */
   inactiveColor?: string;
+  /**
+   * FlatListのtestID
+   * @platform android
+   */
+  flatListTestID?: string;
+  /**
+   * SeparatorのtestID
+   * @platform android
+   */
+  separatorTestID?: string;
+  /**
+   * SelectPickerItemのPressableのtestIDプレフィックス
+   * @platform android
+   */
+  itemPressableTestIDPrefix?: string;
+  /**
+   * SelectPickerItemのTextのtestIDプレフィックス
+   * @platform android
+   */
+  itemTextTestIDPrefix?: string;
 };
 
 export const SelectPickerItems = <ItemT extends unknown>(props: SelectPickerItemsProps<ItemT>) => {
