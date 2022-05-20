@@ -39,6 +39,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
     onContentSizeChange={[Function]}
     onEndReachedThreshold={2}
     onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
@@ -171,6 +172,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
     onContentSizeChange={[Function]}
     onEndReachedThreshold={2}
     onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
@@ -427,6 +429,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
     onContentSizeChange={[Function]}
     onEndReachedThreshold={2}
     onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}

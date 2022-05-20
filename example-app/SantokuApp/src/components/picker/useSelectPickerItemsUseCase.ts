@@ -26,6 +26,10 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
   const scrollHandler = useAnimatedScrollHandler(e => {
     offset.value = e.contentOffset.y;
   });
+  // // 1回のスクロールで、onMomentumScrollEndが複数回実行されてしまう事象に対応
+  // https://github.com/facebook/react-native/issues/32696
+  const canMomentum = useRef(false);
+  const onMomentumScrollBegin = useCallback(() => (canMomentum.current = true), []);
 
   const middleIndex = useListMiddleIndex({itemHeight, listSize: items.length});
 
@@ -55,8 +59,11 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
 
   const handleValueChange = useCallback(
     (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      const {index, value} = getRowItemAtOffset(event.nativeEvent.contentOffset.y);
-      _onChange(value, index);
+      if (canMomentum.current) {
+        canMomentum.current = false;
+        const {index, value} = getRowItemAtOffset(event.nativeEvent.contentOffset.y);
+        _onChange(value, index);
+      }
     },
     [_onChange, getRowItemAtOffset],
   );
@@ -108,8 +115,8 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
   );
 
   useEffect(() => {
-    selectedIndex !== undefined && scrollToIndex(selectedIndex, true);
-  }, [selectedIndex, scrollToIndex]);
+    selectedValue !== undefined && scrollToIndex(selectedIndex, true);
+  });
 
   return {
     offset,
@@ -121,5 +128,6 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
     height,
     selectItem,
     getItemLayout,
+    onMomentumScrollBegin,
   };
 };

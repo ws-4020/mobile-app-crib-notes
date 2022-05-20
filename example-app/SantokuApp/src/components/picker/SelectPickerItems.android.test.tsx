@@ -96,6 +96,7 @@ describe('SelectPickerItems with all props', () => {
       {value: '5', label: 'test5'},
       {value: '6', label: 'test6'},
     ]);
+    fireEvent(flatList, 'onMomentumScrollBegin');
     fireEvent(flatList, 'onMomentumScrollEnd', {
       nativeEvent: {contentOffset: {y: 180}, layoutMeasurement, contentSize},
     });

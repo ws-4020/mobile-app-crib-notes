@@ -56,13 +56,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
 `;
 
 exports[`SelectPickerItems with all props should be applied properly: SelectPickerItems with all props. 1`] = `
-<View
-  style={
-    Object {
-      "fontSize": 12,
-    }
-  }
->
+<View>
   <RNCPicker
     items={
       Array [
@@ -88,9 +82,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         Object {
           "height": 216,
         },
-        Object {
-          "backgroundColor": "red",
-        },
+        undefined,
       ]
     }
     testID="SelectPickerItems"

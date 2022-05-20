@@ -1,5 +1,5 @@
 import {Item, YearMonth, YearMonthUtil} from 'components/picker';
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useMemo, useRef, useState} from 'react';
 
 type Item1Type = {
   a: string;
@@ -83,8 +83,8 @@ export const usePickerScreenUseCase = () => {
   //////////////////////////////////////////////////////////////////////////////////
   // YearMonthPicker
   //////////////////////////////////////////////////////////////////////////////////
-  const maximumYearMonth = YearMonthUtil.now();
-  const minimumYearMonth = YearMonthUtil.addMonth(maximumYearMonth, -60);
+  const maximumYearMonth = useRef(YearMonthUtil.now()).current;
+  const minimumYearMonth = useRef(YearMonthUtil.addMonth(maximumYearMonth, -60)).current;
   const [yearMonth, setYearMonth] = useState<YearMonth>();
   const [yearMonthCanceledKey, setYearMonthCanceledKey] = useState<YearMonth>();
   const onSelectedItemChangeForYearMonth = useCallback((yearMonth?: YearMonth) => setYearMonth(yearMonth), []);
