@@ -342,7 +342,7 @@ Array [
           accessibilityState={
             Object {
               "busy": false,
-              "disabled": false,
+              "disabled": true,
             }
           }
           accessible={true}
@@ -364,10 +364,10 @@ Array [
             style={
               Object {
                 "alignItems": "center",
-                "backgroundColor": "white",
+                "backgroundColor": "hsl(208, 8%, 90%)",
                 "borderColor": "#3a6be8",
                 "borderRadius": 8,
-                "borderWidth": 1,
+                "borderWidth": 0,
                 "flexDirection": "row",
                 "height": 50,
                 "justifyContent": "center",
@@ -379,7 +379,7 @@ Array [
             <Text
               style={
                 Object {
-                  "color": "#3a6be8",
+                  "color": "hsl(208, 8%, 63%)",
                   "fontSize": 18,
                   "paddingVertical": 1,
                   "textAlign": "center",
@@ -423,7 +423,7 @@ Array [
           accessibilityState={
             Object {
               "busy": false,
-              "disabled": false,
+              "disabled": true,
             }
           }
           accessible={true}
@@ -445,7 +445,7 @@ Array [
             style={
               Object {
                 "alignItems": "center",
-                "backgroundColor": "#3a6be8",
+                "backgroundColor": "hsl(208, 8%, 90%)",
                 "borderColor": "#2089dc",
                 "borderRadius": 8,
                 "borderWidth": 0,
@@ -460,7 +460,7 @@ Array [
             <Text
               style={
                 Object {
-                  "color": "white",
+                  "color": "hsl(208, 8%, 63%)",
                   "fontSize": 18,
                   "paddingVertical": 1,
                   "textAlign": "center",
