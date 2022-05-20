@@ -49,19 +49,16 @@ export type YearMonthPickerProps = {
   /**
    * DeleteLabelがタップされた場合に呼び出される関数
    * タップ後、YearMonthPickerは自動で閉じます。
-   * なお、pickerAccessoryComponentを指定した場合は使用されません。
    */
   onDelete?: (yearMonth?: YearMonth) => void;
   /**
    * CancelLabelがタップされた場合に呼び出される関数
    * タップ後、YearMonthPickerは自動で閉じます。
-   * なお、pickerAccessoryComponentを指定した場合は使用されません。
    */
   onCancel?: (yearMonth?: YearMonth) => void;
   /**
    * DoneLabelがタップされた場合に呼び出される関数
    * タップ後、YearMonthPickerは自動で閉じます。
-   * なお、pickerAccessoryComponentを指定した場合は使用されません。
    */
   onDone?: (yearMonth?: YearMonth) => void;
   /**
@@ -70,7 +67,6 @@ export type YearMonthPickerProps = {
   placeholder?: string;
   /**
    * 選択されたアイテムを表示するテキストコンポーネントのProps
-   * なお、textInputComponentを指定した場合は使用されません。
    */
   textInputProps?: TextInputProps;
   /**
@@ -92,7 +88,6 @@ export type YearMonthPickerProps = {
   pickerContainerProps?: Omit<PickerContainerProps, 'isVisible'>;
   /**
    * PickerAccessoryのProps
-   * なお、pickerAccessoryComponentを指定した場合は使用されません。
    */
   pickerAccessoryProps?: Omit<DefaultPickerAccessoryProps, 'onDelete' | 'onCancel' | 'onDone'>;
   /**

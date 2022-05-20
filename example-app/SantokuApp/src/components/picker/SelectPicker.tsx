@@ -58,12 +58,12 @@ export type SelectPickerProps<ItemT> = {
   placeholder?: string;
   /**
    * ヘッダコンポーネント
-   * 指定しない場合は、PickerAccessoryがデフォルトで表示されます。
+   * 指定しない場合は、{@link DefaultPickerAccessory}がデフォルトで表示されます。
    */
   pickerAccessoryComponent?: React.ReactNode;
   /**
    * Pickerコンポーネント
-   * 指定しない場合は、SelectPickerItemsがデフォルトで表示されます。
+   * 指定しない場合は、{@link SelectPickerItems}がデフォルトで表示されます。
    */
   pickerItemsComponent?: React.ReactNode;
   /**
