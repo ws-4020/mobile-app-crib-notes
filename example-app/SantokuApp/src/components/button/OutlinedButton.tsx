@@ -6,7 +6,15 @@ import {Button, ButtonProps} from './Button';
 
 export const OutlinedButton: React.FC<ButtonProps> = props => {
   const styles = useStyles();
-  return <Button titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle} raised={false} {...props} />;
+  return (
+    <Button
+      titleStyle={styles.titleStyle}
+      buttonStyle={styles.buttonStyle}
+      disabledStyle={styles.buttonDisabledStyle}
+      raised={false}
+      {...props}
+    />
+  );
 };
 
 const useStyles = () => {
@@ -21,6 +29,9 @@ const useStyles = () => {
           backgroundColor: 'white',
           borderColor: appTheme.colors.primary,
           borderWidth: 1,
+        },
+        buttonDisabledStyle: {
+          borderWidth: 0,
         },
       }),
     [appTheme.colors.primary],
