@@ -54,6 +54,7 @@ export const useTermsAgreementOverlayUseCase = (
       try {
         exitingCallback?.(finished);
       } finally {
+        setButtonDisable(true);
         setIsExited(true);
       }
     },
