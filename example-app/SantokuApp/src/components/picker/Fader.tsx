@@ -30,9 +30,7 @@ export type FaderProps = {
 
 const DEFAULT_FADE_SIZE = 50;
 
-export const Fader: React.FC<FaderProps> = props => {
-  const {size = DEFAULT_FADE_SIZE, position = FaderPosition.TOP, visible} = props;
-
+export const Fader: React.FC<FaderProps> = ({size = DEFAULT_FADE_SIZE, position = FaderPosition.TOP, visible}) => {
   const styles = useMemo(() => {
     switch (position) {
       case FaderPosition.TOP:
