@@ -30,7 +30,11 @@ export type FaderProps = {
 
 const DEFAULT_FADE_SIZE = 50;
 
-export const Fader: React.FC<FaderProps> = ({size = DEFAULT_FADE_SIZE, position = FaderPosition.TOP, visible}) => {
+export const Fader: React.FC<FaderProps> = ({
+  size = DEFAULT_FADE_SIZE,
+  position = FaderPosition.TOP,
+  visible = true,
+}) => {
   const styles = useMemo(() => {
     switch (position) {
       case FaderPosition.TOP:
@@ -53,9 +57,7 @@ export const Fader: React.FC<FaderProps> = ({size = DEFAULT_FADE_SIZE, position 
 
   return (
     <View pointerEvents="none" style={styles.containerStyle}>
-      {(visible || visible === undefined) && (
-        <Image source={styles.imageSource} style={styles.imageStyle} resizeMode="stretch" />
-      )}
+      {visible && <Image source={styles.imageSource} style={styles.imageStyle} resizeMode="stretch" />}
     </View>
   );
 };
