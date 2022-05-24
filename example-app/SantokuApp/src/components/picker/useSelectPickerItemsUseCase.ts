@@ -96,9 +96,11 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
 
   const selectItem = useCallback(
     (index: number) => {
-      scrollToIndex(index, true);
+      if (prevIndex.current !== index) {
+        _onChange(items?.[index]?.value, index);
+      }
     },
-    [scrollToIndex],
+    [_onChange, items],
   );
 
   const scrollToPassedIndex = useCallback(() => {
