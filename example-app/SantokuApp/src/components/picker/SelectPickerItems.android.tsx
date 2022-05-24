@@ -78,7 +78,11 @@ export const SelectPickerItems = <ItemT extends unknown>({
           itemHeight={itemHeight}
           activeColor={activeColor}
           inactiveColor={inactiveColor}
-          pressableProps={{onPress, accessibilityLabel, testID: `${itemPressableTestIDPrefix ?? ''}-${info.index}`}}
+          pressableProps={{
+            onPress,
+            accessibilityLabel,
+            testID: itemPressableTestIDPrefix === undefined ? undefined : `${itemPressableTestIDPrefix}-${info.index}`,
+          }}
           textProps={{style: itemStyle, testID: `${itemTextTestIDPrefix ?? ''}-${info.index}`}}
         />
       );
