@@ -114,6 +114,12 @@ export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
     [itemHeight],
   );
 
+  // ユーザがスクロールする以外に、プログラムによってselectedValueを変更した場合の対応
+  // プログラムによってselectedValueを変更した場合は、選択した値が表示されるように自動でスクロールします。
+  // 全てのレンダリングで実行しているのは、selectedValueが前回の値と同じ場合でも、スクロール位置を動かしたいためです。
+  // 例えば、[a,b,c,d,e]というアイテムがあった場合に、ユーザ操作でc -> aに変更した時は、プログラムで強制的にcに戻すような仕様があったとします。
+  // useEffectのdepsにselectedValueを設定してしまうと、selectedValueはc->cと変化がないため、スクロール位置を自動で動かすことができなくなってしまいます。
+  // そのため、ここでは全てのレンダリングでスクロール位置を変更するようにしています。
   useEffect(() => {
     selectedValue !== undefined && scrollToIndex(selectedIndex, true);
   });
