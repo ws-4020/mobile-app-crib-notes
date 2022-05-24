@@ -222,7 +222,6 @@ exports[`SelectPickerItems only with required props renders successfully with mo
               "justifyContent": "center",
             }
           }
-          testID="-0"
         >
           <Text
             animatedStyle={
@@ -273,7 +272,6 @@ exports[`SelectPickerItems only with required props renders successfully with mo
               "justifyContent": "center",
             }
           }
-          testID="-1"
         >
           <Text
             animatedStyle={
