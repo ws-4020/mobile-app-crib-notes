@@ -34,7 +34,7 @@ export const usePickerScreenUseCase = () => {
     () => items1.find(item => item.key === items1Key)?.inputLabel ?? placeholder,
     [items1Key],
   );
-  const onDismissForItem1 = useCallback((selectedItem: Item<Item1Type> | undefined) => {
+  const onDismissForItem1 = useCallback((selectedItem?: Item<Item1Type>) => {
     items1CanceledKey.current = selectedItem?.key;
   }, []);
   const onDeleteForItem1 = useCallback(() => {
@@ -44,7 +44,7 @@ export const usePickerScreenUseCase = () => {
   const onCancelForItem1 = useCallback(() => {
     setItems1Key(items1CanceledKey.current);
   }, [items1CanceledKey]);
-  const onDoneForItem1 = useCallback((selectedItem: Item<Item1Type> | undefined) => {
+  const onDoneForItem1 = useCallback((selectedItem?: Item<Item1Type>) => {
     items1CanceledKey.current = selectedItem?.key;
   }, []);
 
