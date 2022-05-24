@@ -25,7 +25,7 @@ export const SelectPickerItem = <ItemT extends unknown>({
   activeColor = '#000000',
   inactiveColor = '#999999',
   itemHeight,
-  pressableProps: {onPress, accessibilityLabel, ...pressableProps} = {},
+  pressableProps,
   textProps: {style: textStyle, ...textProps} = {},
 }: SelectPickerItemType<ItemT>) => {
   const itemOffset = index * itemHeight;
@@ -41,11 +41,7 @@ export const SelectPickerItem = <ItemT extends unknown>({
   const pressableHeightStyle = useMemo(() => ({height: itemHeight}), [itemHeight]);
 
   return (
-    <AnimatedPressable
-      onPress={onPress}
-      style={StyleSheet.flatten([pressableHeightStyle, styles.pressable])}
-      accessibilityLabel={accessibilityLabel}
-      {...pressableProps}>
+    <AnimatedPressable style={StyleSheet.flatten([pressableHeightStyle, styles.pressable])} {...pressableProps}>
       {/* AnimatedStyleの場合はStyleSheet.flattenだとマージされないため、配列で指定 */}
       <AnimatedText style={[animatedTextStyle, styles.text, textStyle, itemPropsStyle]} {...textProps}>
         {label}
