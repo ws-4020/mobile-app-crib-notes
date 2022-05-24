@@ -16,8 +16,8 @@ const Separator: React.FC<{height: number; testID?: string}> = React.memo(({heig
 });
 
 const FADER_SIZE = 60;
-const FaderTop: React.FC = () => <Fader visible position={FaderPosition.TOP} size={FADER_SIZE} />;
-const FaderBottom: React.FC = () => <Fader visible position={FaderPosition.BOTTOM} size={FADER_SIZE} />;
+const FaderTop = React.memo(() => <Fader visible position={FaderPosition.TOP} size={FADER_SIZE} />);
+const FaderBottom = React.memo(() => <Fader visible position={FaderPosition.BOTTOM} size={FADER_SIZE} />);
 
 const DECELERATION_RATE = 0.98;
 
