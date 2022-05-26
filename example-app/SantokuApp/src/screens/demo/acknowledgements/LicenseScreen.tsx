@@ -38,30 +38,13 @@ const Screen: React.FC<NativeStackScreenProps<DemoStackParamList, typeof ScreenN
         {dependency.licenseContentModuleId && (
           <>
             <FileName fileName={dependency.licenseFileName} />
-            <View style={styles.fileContentContainer}>
-              {isLoadingLicenseContentText ? (
-                <View style={styles.contentLoadingIndicator}>
-                  <ActivityIndicator color="rgba(50,50,50,0.65)" />
-                </View>
-              ) : (
-                <Text style={styles.fileContentText}>{licenseContentText}</Text>
-              )}
-            </View>
+            <FileContent isLoading={isLoadingLicenseContentText} content={licenseContentText} />
           </>
         )}
         {dependency.noticeContentModuleId && (
           <>
             <FileName fileName={dependency.noticeFileName} />
             <FileContent isLoading={isLoadingNoticeContentText} content={noticeContentText} />
-            <View style={styles.fileContentContainer}>
-              {isLoadingNoticeContentText ? (
-                <View style={styles.contentLoadingIndicator}>
-                  <ActivityIndicator color="rgba(50,50,50,0.65)" />
-                </View>
-              ) : (
-                <Text style={styles.fileContentText}>{noticeContentText}</Text>
-              )}
-            </View>
           </>
         )}
       </ScrollView>
