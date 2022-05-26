@@ -1,6 +1,6 @@
 import {DefaultRouterOptions, NavigatorScreenParams} from '@react-navigation/native';
-import {TermsOfServiceAgreementStatus} from 'generated/backend/model';
 import type {ThirdPartyDependency} from 'generated/ThirdPartyDependencies';
+import {TermsOfServiceAgreementStatus} from 'generated/backend/model';
 
 export type RootStackParamList = {
   Login: undefined;
