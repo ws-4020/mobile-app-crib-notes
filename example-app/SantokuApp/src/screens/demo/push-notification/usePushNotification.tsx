@@ -3,7 +3,6 @@ import axios, {AxiosError} from 'axios';
 import {ErrorResponse} from 'generated/backend/model';
 import {useCallback, useState} from 'react';
 import {Linking, Platform} from 'react-native';
-import {usePostAccountsMeDeviceToken} from 'service/backend';
 
 import {AppConfig} from '../../../framework';
 
@@ -25,7 +24,6 @@ const settings = async () => {
 export const usePushNotification = () => {
   const [authStatus, setAuthStatus] = useState<AuthStatusType>();
   const [token, setToken] = useState<string>();
-  const postAccountsMeDeviceToken = usePostAccountsMeDeviceToken();
 
   const requestUserPermission = useCallback(async () => {
     const authStatus = await messaging().requestPermission();
@@ -49,38 +47,6 @@ export const usePushNotification = () => {
     const fcmToken = await messaging().getToken();
     setToken(fcmToken);
   }, []);
-
-  const registerFcmToken = useCallback(async () => {
-    try {
-      await postAccountsMeDeviceToken.mutateAsync({data: {newDeviceToken: token}});
-      alert('FCM登録トークンをバックエンドに登録しました');
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        const axiosError = e as AxiosError<ErrorResponse>;
-        if (axiosError.response) {
-          alert(axiosError.response.data.message);
-          return;
-        }
-        alert(e);
-      }
-    }
-  }, [postAccountsMeDeviceToken, token]);
-
-  const removeFcmToken = useCallback(async () => {
-    try {
-      await postAccountsMeDeviceToken.mutateAsync({data: {oldDeviceToken: token}});
-      alert('FCM登録トークンをバックエンドから削除しました');
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        const axiosError = e as AxiosError<ErrorResponse>;
-        if (axiosError.response) {
-          alert(axiosError.response.data.message);
-          return;
-        }
-        alert(e);
-      }
-    }
-  }, [postAccountsMeDeviceToken, token]);
 
   const notifyMessageToAll = useCallback(async () => {
     try {
@@ -121,8 +87,6 @@ export const usePushNotification = () => {
     token,
     requestUserPermission,
     getToken,
-    registerFcmToken,
-    removeFcmToken,
     notifyMessageToAll,
     notifyMessageToMe,
     settings,

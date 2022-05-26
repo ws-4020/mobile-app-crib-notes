@@ -14,17 +14,8 @@ type Props = CompositeScreenProps<
 
 const ScreenName = 'PushNotification';
 const Screen: React.FC<Props> = ({navigation}) => {
-  const {
-    authStatus,
-    token,
-    requestUserPermission,
-    getToken,
-    registerFcmToken,
-    removeFcmToken,
-    notifyMessageToAll,
-    notifyMessageToMe,
-    settings,
-  } = usePushNotification();
+  const {authStatus, token, requestUserPermission, getToken, notifyMessageToAll, notifyMessageToMe, settings} =
+    usePushNotification();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,12 +34,6 @@ const Screen: React.FC<Props> = ({navigation}) => {
         </View>
         <View style={styles.buttonContainer}>
           <Button onPress={getToken} title="FCM登録トークンの取得" />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button onPress={registerFcmToken} title="FCM登録トークンをバックエンドに登録" />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button onPress={removeFcmToken} title="FCM登録トークンをバックエンドから削除" />
         </View>
         <Divider orientation="vertical" style={styles.divider} />
         <View>
