@@ -75,7 +75,6 @@ export type YearMonthPickerProps = {
   pickerItemsContainerProps?: ViewProps;
   /**
    * PickerのProps
-   * なお、pickerItemsComponentを指定した場合は使用されません。
    */
   pickerProps?: Omit<SelectPickerItemsProps<YearMonth>, 'items' | 'selectedValue' | 'onValueChange' | 'keyExtractor'>;
   /**
