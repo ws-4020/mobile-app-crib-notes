@@ -23,6 +23,7 @@ const Screen: React.FC<Props> = ({navigation}) => {
     removeFcmToken,
     notifyMessageToAll,
     notifyMessageToMe,
+    settings,
   } = usePushNotification();
 
   return (
@@ -57,6 +58,12 @@ const Screen: React.FC<Props> = ({navigation}) => {
           </View>
           <View style={styles.buttonContainer}>
             <Button onPress={notifyMessageToMe} title="Pushメッセージを自分に送信" />
+          </View>
+        </View>
+        <View>
+          <Text>【通知設定】</Text>
+          <View style={styles.buttonContainer}>
+            <Button onPress={settings} title="Push通知の設定" />
           </View>
         </View>
       </ScrollView>

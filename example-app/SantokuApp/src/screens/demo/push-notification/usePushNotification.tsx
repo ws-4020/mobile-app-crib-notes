@@ -2,11 +2,25 @@ import messaging from '@react-native-firebase/messaging';
 import axios, {AxiosError} from 'axios';
 import {ErrorResponse} from 'generated/backend/model';
 import {useCallback, useState} from 'react';
+import {Linking, Platform} from 'react-native';
 import {usePostAccountsMeDeviceToken} from 'service/backend';
 
 import {AppConfig} from '../../../framework';
 
 type AuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
+
+const settings = async () => {
+  if (Platform.OS === 'ios') {
+    // アプリの設定画面を開く
+    await Linking.openSettings();
+  } else if (Platform.OS === 'android') {
+    // sendIntentでエラーが発生するためアプリの通知設定画面を表示することができない
+    // React Nativeの0.67で修正版がリリースされている
+    // https://github.com/facebook/react-native/pull/29000
+    // そのため、アプリの設定画面を開く
+    await Linking.openSettings();
+  }
+};
 
 export const usePushNotification = () => {
   const [authStatus, setAuthStatus] = useState<AuthStatusType>();
@@ -111,5 +125,6 @@ export const usePushNotification = () => {
     removeFcmToken,
     notifyMessageToAll,
     notifyMessageToMe,
+    settings,
   };
 };
