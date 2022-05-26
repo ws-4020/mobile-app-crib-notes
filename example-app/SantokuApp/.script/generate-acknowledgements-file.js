@@ -28,9 +28,9 @@ const listDependencies = () => new Promise((resolve, reject) => {
     // なので、ここで各ライセンスファイルのハッシュ値を計算しておく。
     Promise.all(Object.entries(packages).map(async ([id, info]) => {
         const licenseFileDigest = await getLicenseFileHashDigest(id, info.licenseFile);
-        const licenseFileAssetPath = getAssetPath(licenseFileDigest, 'license');
+        const licenseFileAssetPath = getAssetPath(licenseFileDigest, 'license.txt');
         const noticeFileDigest = await getFileHashDigest(id, info.noticeFile);
-        const noticeFileAssetPath = getAssetPath(noticeFileDigest, 'notice');
+        const noticeFileAssetPath = getAssetPath(noticeFileDigest, 'notice.txt');
         return {...info, id, licenseFileDigest, licenseFileAssetPath, noticeFileDigest, noticeFileAssetPath}
       })
     ).then(dependencies => resolve(dependencies)).catch(e => reject(e));

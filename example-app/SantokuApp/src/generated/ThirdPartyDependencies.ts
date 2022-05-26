@@ -19,9 +19,9 @@ const generateDummyDependency = (num: number) => {
       repository: `https://example.com/repository/dummy-dependency-${index}`,
       licenses: 'Apache-2.0',
       licenseFileName: 'LICENSE',
-      licenseContentModuleId: require('../../assets/dummy/dummy.license'),
+      licenseContentModuleId: require('../../assets/dummy/dummy.license.txt'),
       noticeFileName: 'NOTICE',
-      noticeContentModuleId: require('../../assets/dummy/dummy.notice'),
+      noticeContentModuleId: require('../../assets/dummy/dummy.notice.txt'),
     }
   })
 }
