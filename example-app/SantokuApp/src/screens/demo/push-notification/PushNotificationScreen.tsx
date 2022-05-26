@@ -14,7 +14,7 @@ type Props = CompositeScreenProps<
 
 const ScreenName = 'PushNotification';
 const Screen: React.FC<Props> = ({navigation}) => {
-  const {authStatus, token, requestUserPermission, getToken, notifyMessageToAll, notifyMessageToMe, settings} =
+  const {authStatus, token, requestUserPermission, getToken, notifyMessageToAll, notifyMessageToMe, openSettings} =
     usePushNotification();
 
   return (
@@ -48,7 +48,7 @@ const Screen: React.FC<Props> = ({navigation}) => {
         <View>
           <Text>【通知設定】</Text>
           <View style={styles.buttonContainer}>
-            <Button onPress={settings} title="Push通知の設定" />
+            <Button onPress={openSettings} title="Push通知の設定" />
           </View>
         </View>
       </ScrollView>

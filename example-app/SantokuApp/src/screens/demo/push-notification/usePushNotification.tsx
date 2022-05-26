@@ -1,22 +1,22 @@
 import messaging from '@react-native-firebase/messaging';
 import axios, {AxiosError} from 'axios';
+import {AppConfig} from 'framework/config';
 import {ErrorResponse} from 'generated/backend/model';
 import {useCallback, useState} from 'react';
 import {Linking, Platform} from 'react-native';
 
-import {AppConfig} from '../../../framework';
-
 type AuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
 
-const settings = async () => {
+const openSettings = async () => {
   if (Platform.OS === 'ios') {
-    // アプリの設定画面を開く
+    // アプリの設定画面を開きます。
     await Linking.openSettings();
   } else if (Platform.OS === 'android') {
-    // sendIntentでエラーが発生するためアプリの通知設定画面を表示することができない
-    // React Nativeの0.67で修正版がリリースされている
+    // 以下のようにLinking.sendIntentを使用することで、アプリの通知設定画面を表示できる想定でした。
+    // https://reactnative.dev/docs/linking#send-intents-android
+    // しかし、React Nativeの0.67未満では、Linking.sendIntentの不具合により、インテントを実行できないようです。
     // https://github.com/facebook/react-native/pull/29000
-    // そのため、アプリの設定画面を開く
+    // そのため、アプリの設定画面を開きます。
     await Linking.openSettings();
   }
 };
@@ -89,6 +89,6 @@ export const usePushNotification = () => {
     getToken,
     notifyMessageToAll,
     notifyMessageToMe,
-    settings,
+    openSettings,
   };
 };
