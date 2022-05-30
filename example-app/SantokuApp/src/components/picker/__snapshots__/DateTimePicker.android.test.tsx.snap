@@ -56,12 +56,12 @@ Array [
         rejectResponderTermination={true}
         testID="textInput"
         underlineColorAndroid="transparent"
-        value="2022-06-30T15:00:00.000Z"
+        value="2022-05-30T00:00:00.000Z"
       />
     </View>
   </View>,
   <RNDateTimePicker
-    date={1656601200000}
+    date={1653868800000}
     displayIOS="calendar"
     enabled={true}
     mode="date"
@@ -104,11 +104,11 @@ Array [
     </View>
   </View>,
   <RNDateTimePicker
-    date={1643641200000}
+    date={1640995200000}
     displayIOS="calendar"
     enabled={true}
-    maximumDate={1656601200000}
-    minimumDate={1612105200000}
+    maximumDate={1653955200000}
+    minimumDate={1483228800000}
     mode="date"
     onChange={[Function]}
     onResponderTerminationRequest={[Function]}
@@ -164,11 +164,11 @@ Array [
     </View>
   </View>,
   <RNDateTimePicker
-    date={1643641200000}
+    date={1640995200000}
     displayIOS="calendar"
     enabled={true}
-    maximumDate={1656601200000}
-    minimumDate={1612105200000}
+    maximumDate={1653955200000}
+    minimumDate={1483228800000}
     mode="date"
     onChange={[Function]}
     onResponderTerminationRequest={[Function]}

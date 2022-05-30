@@ -21,7 +21,7 @@ describe('DateTimePicker only with required props', () => {
 
   it('renders successfully if visible', () => {
     // selectedValueに固定値を入れないと、Snapshot取得時に毎回値が変わってしまうので、OptionalPropsですが指定しています。
-    const selectedValue = new Date(1656601200000);
+    const selectedValue = new Date('2022-05-30T00:00:00.000Z');
     // 自動テストだと、displayを指定しないとレンダリングされなかったため、OptionalPropsですがdisplayAndroidを指定してます。
     const displayAndroid = 'calendar';
     // formatTextを指定しないと、タイムゾーンの表記が環境によって違うので、どの環境でも変わらないように指定しています。
@@ -49,7 +49,7 @@ describe('DateTimePicker only with required props', () => {
 
 describe('DateTimePicker with default value', () => {
   it('defaultValue should be set at open if selectedValue does not exist,', () => {
-    const defaultValue = new Date(1654786800000);
+    const defaultValue = new Date('2022-05-10T00:00:00.000Z');
     const sut = render(
       <DateTimePicker
         defaultValue={defaultValue}
@@ -68,9 +68,9 @@ describe('DateTimePicker with all props', () => {
     const onSelectedItemChange = jest.fn();
     const onDone = jest.fn();
     const formatText = jest.fn();
-    const selectedValue = new Date(1643641200000);
-    const maximumDate = new Date(1656601200000);
-    const minimumDate = new Date(1612105200000);
+    const selectedValue = new Date('2022-01-01T00:00:00.000Z');
+    const maximumDate = new Date('2022-05-31T00:00:00.000Z');
+    const minimumDate = new Date('2017-01-01T00:00:00.000Z');
     /**
      * onDoneは自動テストではイベント発火できませんでした
      */
@@ -124,9 +124,9 @@ describe('DateTimePicker with all props', () => {
     const onSelectedItemChange = jest.fn();
     const onDone = jest.fn();
     const formatText = jest.fn();
-    const selectedValue = new Date(1643641200000);
-    const maximumDate = new Date(1656601200000);
-    const minimumDate = new Date(1612105200000);
+    const selectedValue = new Date('2022-01-01T00:00:00.000Z');
+    const maximumDate = new Date('2022-05-31T00:00:00.000Z');
+    const minimumDate = new Date('2017-01-01T00:00:00.000Z');
     /**
      * onDoneは自動テストではイベント発火できませんでした
      */
