@@ -9,7 +9,6 @@ export const useDateTimePickerAndroidUseCase = (props: DateTimePickerProps) => {
 
   const onValueChange = useCallback(
     (_, date?: Date) => {
-      console.log(date);
       onSelectedItemChange?.(date);
       handleDone();
     },
