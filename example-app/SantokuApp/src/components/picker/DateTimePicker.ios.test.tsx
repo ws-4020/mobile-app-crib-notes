@@ -35,7 +35,7 @@ describe('DateTimePicker only with required props', () => {
 
   it('renders successfully if visible', () => {
     // selectedValueに固定値を入れないと、Snapshot取得時に毎回値が変わってしまうので、OptionalPropsですが指定しています。
-    const selectedValue = new Date(2022, 5, 31, 0, 0, 0, 0);
+    const selectedValue = new Date('2022-05-30T00:00:00.000Z');
     // formatTextを指定しないと、タイムゾーンの表記が環境によって違うので、どの環境でも変わらないように指定しています。
     const formatText = (date?: Date) => (date ? date.toISOString() : '');
     const sut = render(
@@ -70,7 +70,7 @@ describe('DateTimePicker only with required props', () => {
 
 describe('DateTimePicker with default value', () => {
   it('defaultValue should be set at open if selectedValue does not exist,', () => {
-    const defaultValue = new Date(2022, 5, 10);
+    const defaultValue = new Date('2022-05-10T00:00:00.000Z');
     const sut = render(<DateTimePicker defaultValue={defaultValue} pickerItemsProps={{testID: 'pickerItems'}} />);
     const pressableContainer = sut.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
@@ -86,9 +86,9 @@ describe('DateTimePicker with all props', () => {
     const onCancel = jest.fn();
     const onDone = jest.fn();
     const formatText = jest.fn();
-    const selectedValue = new Date(2022, 1, 1, 0, 0, 0, 0);
-    const maximumDate = new Date(2022, 5, 31, 0, 0, 0, 0);
-    const minimumDate = new Date(maximumDate.getFullYear() - 1, 1, 1, 0, 0, 0, 0);
+    const selectedValue = new Date('2022-01-01T00:00:00.000Z');
+    const maximumDate = new Date('2022-05-31T00:00:00.000Z');
+    const minimumDate = new Date('2017-01-01T00:00:00.000Z');
     const sut = render(
       <DateTimePicker
         selectedValue={selectedValue}
@@ -206,9 +206,9 @@ describe('DateTimePicker with all props', () => {
     const CustomPickerAccessory = <View testID="customPickerAccessory" />;
     const CustomPicker = <View testID="customPicker" />;
     const CustomTextInput = <View testID="customTextInput" />;
-    const selectedValue = new Date(2022, 1, 1, 0, 0, 0, 0);
-    const maximumDate = new Date(2022, 5, 31, 0, 0, 0, 0);
-    const minimumDate = new Date(maximumDate.getFullYear() - 1, 1, 1, 0, 0, 0, 0);
+    const selectedValue = new Date('2022-01-01T00:00:00.000Z');
+    const maximumDate = new Date('2022-05-31T00:00:00.000Z');
+    const minimumDate = new Date('2017-01-01T00:00:00.000Z');
     const onSelectedItemChange = jest.fn();
     const onDismiss = jest.fn();
     const formatText = jest.fn();
