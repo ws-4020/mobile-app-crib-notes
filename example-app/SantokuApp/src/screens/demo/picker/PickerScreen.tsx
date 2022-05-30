@@ -118,6 +118,7 @@ const Screen: React.FC = () => {
         mode="time"
         displayIOS="spinner"
         displayAndroid="clock"
+        pickerAccessoryProps={{doneLabel: m('完了')}}
         textInputProps={{style: styles.pickerTextInputStyle}}
         placeholder={`mode:date,${Platform.OS === 'ios' ? 'display: spinner' : 'display: clock'}`}
       />
