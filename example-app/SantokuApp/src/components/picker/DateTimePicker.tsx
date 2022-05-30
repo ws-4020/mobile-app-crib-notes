@@ -88,11 +88,13 @@ export type DateTimePickerProps = {
   /**
    * ヘッダコンポーネント
    * 指定しない場合は、{@link DefaultPickerAccessory}がデフォルトで表示されます。
+   * @platform ios
    */
   pickerAccessoryComponent?: React.ReactNode;
   /**
    * Pickerコンポーネント
    * 指定しない場合は、{@link SelectPickerItems}がデフォルトで表示されます。
+   * @platform ios
    */
   pickerItemsComponent?: React.ReactNode;
   /**

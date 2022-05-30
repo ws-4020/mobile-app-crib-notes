@@ -8,8 +8,8 @@ import {PickerBackdrop} from './PickerBackdrop';
 import {PickerContainer} from './PickerContainer';
 import {useDateTimePickerUseCase} from './useDateTimePickerUseCase';
 
-type DateTimePickerIOSProps = Omit<DateTimePickerProps, 'pickerItemsProps'> & {
-  pickerItemsProps: Omit<
+type DateTimePickerIOSProps = Omit<DateTimePickerProps, 'displayAndroid' | 'pickerItemsProps'> & {
+  pickerItemsProps?: Omit<
     DateTimePickerItemsIOSProps,
     'value' | 'onChange' | 'mode' | 'display' | 'maximumDate' | 'minimumDate'
   >;
@@ -34,7 +34,7 @@ export const DateTimePicker = (props: DateTimePickerIOSProps) => {
     maximumDate,
     minimumDate,
     mode,
-    displayIOS,
+    displayIOS = 'spinner',
     placeholder,
     textInputProps,
     pickerAccessoryComponent,

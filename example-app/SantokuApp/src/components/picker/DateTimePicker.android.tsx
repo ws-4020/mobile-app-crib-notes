@@ -11,6 +11,7 @@ type DateTimePickerAndroidProps = Omit<
   | 'onDelete'
   | 'onCancel'
   | 'mode'
+  | 'displayIOS'
   | 'pickerAccessoryComponent'
   | 'pickerItemsComponent'
   | 'pickerItemsContainerProps'
@@ -19,11 +20,11 @@ type DateTimePickerAndroidProps = Omit<
   | 'pickerContainerProps'
   | 'pickerAccessoryProps'
 > & {
-  pickerItemsProps: Omit<
+  pickerItemsProps?: Omit<
     DateTimePickerItemsAndroidProps,
     'value' | 'onChange' | 'mode' | 'display' | 'maximumDate' | 'minimumDate'
   >;
-  mode: Exclude<DateTimePickerItemsProps['mode'], 'countdown' | 'datetime'>;
+  mode?: Exclude<DateTimePickerItemsProps['mode'], 'countdown' | 'datetime'>;
 };
 export const DateTimePicker = (props: DateTimePickerAndroidProps) => {
   const {isVisible, requiredSelectedValue, inputValue, onValueChange, open} = useDateTimePickerAndroidUseCase(props);
@@ -37,7 +38,6 @@ export const DateTimePicker = (props: DateTimePickerAndroidProps) => {
     textInputComponent,
     pickerItemsProps,
   } = props;
-
   return (
     <>
       <Pressable onPress={open} testID="pressableContainer">
