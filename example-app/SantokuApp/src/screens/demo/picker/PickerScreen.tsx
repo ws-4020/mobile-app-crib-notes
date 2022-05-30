@@ -94,7 +94,7 @@ const Screen: React.FC = () => {
         placeholder={`mode:date,${Platform.OS === 'ios' ? 'display: spinner' : 'display: calendar'}`}
       />
       <View style={styles.space} />
-      <Text>■DateTimePicker</Text>
+      <Text>■DateTimePicker2</Text>
       <DateTimePicker
         selectedValue={selectedDate2}
         maximumDate={maximumDate}
@@ -105,11 +105,12 @@ const Screen: React.FC = () => {
         mode="date"
         displayIOS="inline"
         displayAndroid="spinner"
+        pickerAccessoryProps={{doneLabel: m('完了')}}
         textInputProps={{style: styles.pickerTextInputStyle}}
         placeholder={`mode:date,${Platform.OS === 'ios' ? 'display: inline' : 'display: spinner'}`}
       />
       <View style={styles.space} />
-      <Text>■DateTimePicker</Text>
+      <Text>■DateTimePicker3</Text>
       <DateTimePicker
         selectedValue={selectedDate3}
         defaultValue={maximumDate}
