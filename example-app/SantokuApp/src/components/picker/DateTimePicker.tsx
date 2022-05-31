@@ -2,12 +2,20 @@ import {log} from 'framework/logging';
 import React from 'react';
 import {Platform, TextInputProps as RNETextInputProps, ViewProps} from 'react-native';
 
-import {DateTimePickerItemsProps} from './DateTimePickerItems';
+import {
+  DateTimePickerItemsAndroidProps,
+  DateTimePickerItemsIOSProps,
+  DateTimePickerItemsProps,
+} from './DateTimePickerItems';
 import {DefaultPickerAccessoryProps} from './DefaultPickerAccessory';
 import {PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainerProps} from './PickerContainer';
 
 type TextInputProps = Omit<RNETextInputProps, 'value' | 'editable'>;
+
+export type PickerItemsProps =
+  | Omit<DateTimePickerItemsIOSProps, 'value' | 'onChange' | 'mode' | 'display' | 'maximumDate' | 'minimumDate'>
+  | Omit<DateTimePickerItemsAndroidProps, 'value' | 'onChange' | 'mode' | 'display' | 'maximumDate' | 'minimumDate'>;
 
 export type DateTimePickerProps = {
   /**
@@ -118,10 +126,7 @@ export type DateTimePickerProps = {
    * なお、pickerItemsComponentを指定した場合は使用されません。
    * @see https://github.com/react-native-datetimepicker/datetimepicker#component-props--params-of-the-android-imperative-api
    */
-  pickerItemsProps?: Omit<
-    DateTimePickerItemsProps,
-    'value' | 'onChange' | 'mode' | 'display' | 'maximumDate' | 'minimumDate'
-  >;
+  pickerItemsProps?: PickerItemsProps;
   /**
    * PickerBackdropのProps
    * @platform ios

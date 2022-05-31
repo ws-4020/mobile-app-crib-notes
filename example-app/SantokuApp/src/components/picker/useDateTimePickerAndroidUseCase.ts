@@ -1,4 +1,4 @@
-import {Event, AndroidEvent} from '@react-native-community/datetimepicker';
+import {AndroidEvent, Event} from '@react-native-community/datetimepicker';
 import {useCallback} from 'react';
 
 import {DateTimePickerProps} from './DateTimePicker';
@@ -14,16 +14,16 @@ export const useDateTimePickerAndroidUseCase = (props: DateTimePickerProps) => {
 
   const handleDismiss = useCallback(
     (selectedValue?: Date) => {
-      onDismiss?.(selectedValue);
       close();
+      onDismiss?.(selectedValue);
     },
     [close, onDismiss],
   );
 
   const handleDone = useCallback(
     (selectedValue?: Date) => {
-      onDone?.(selectedValue);
       close();
+      onDone?.(selectedValue);
     },
     [close, onDone],
   );

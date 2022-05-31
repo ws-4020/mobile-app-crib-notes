@@ -49,17 +49,31 @@ export const DateTimePicker = (props: DateTimePickerAndroidProps) => {
           )}
         </View>
       </Pressable>
-      {isVisible && (
-        <DateTimePickerItems
-          value={requiredSelectedValue}
-          onChange={onValueChange}
-          mode={mode}
-          display={displayAndroid}
-          maximumDate={maximumDate}
-          minimumDate={minimumDate}
-          {...pickerItemsProps}
-        />
-      )}
+      <DateTimePickerItemsComponent
+        isVisible={isVisible}
+        value={requiredSelectedValue}
+        onChange={onValueChange}
+        mode={mode}
+        display={displayAndroid}
+        maximumDate={maximumDate}
+        minimumDate={minimumDate}
+        {...pickerItemsProps}
+      />
     </>
   );
 };
+
+type DateTimePickerItemsComponentProps = DateTimePickerItemsProps & {isVisible: boolean};
+
+// Memo workaround for https://github.com/react-native-community/datetimepicker/issues/54
+const areEqual = (prevProps: DateTimePickerItemsComponentProps, nextProps: DateTimePickerItemsComponentProps) => {
+  return prevProps.isVisible === nextProps.isVisible && prevProps.value.getTime() === nextProps.value.getTime();
+};
+
+const DateTimePickerItemsComponent = React.memo((props: DateTimePickerItemsProps & {isVisible: boolean}) => {
+  const {isVisible, ...pickerItemsProps} = props;
+  if (!isVisible) {
+    return null;
+  }
+  return <DateTimePickerItems {...pickerItemsProps} />;
+}, areEqual);

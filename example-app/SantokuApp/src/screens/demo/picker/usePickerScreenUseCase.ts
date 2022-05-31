@@ -98,9 +98,7 @@ export const usePickerScreenUseCase = () => {
   // キャンセルをタップした時に、Pickerを開く前の値に戻せるようにRefで保持しておく
   const canceledDate1 = useRef<Date>();
   const onSelectedItemChangeForDate1 = useCallback((selectedValue?: Date) => {
-    if (Platform.OS === 'ios') {
-      setSelectedDate1(selectedValue);
-    }
+    setSelectedDate1(selectedValue);
   }, []);
   const onDismissForDate1 = useCallback((selectedValue?: Date) => {
     if (Platform.OS === 'android') {
