@@ -13,6 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		6909A3A626E1EC0000F9111D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6909A3A526E1EC0000F9111D /* GoogleService-Info.plist */; };
+		69506AA92845DE0200FCFD34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 69506AAB2845DE0200FCFD34 /* InfoPlist.strings */; };
 		699A764426E6E48500D48F9D /* RCTThrowErrorModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 699A764326E6E48500D48F9D /* RCTThrowErrorModule.m */; };
 		96905EF65AED1B983A6B3ABC /* libPods-SantokuApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-SantokuApp.a */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,8 @@
 		3280BADF6F7E2E51C7BC7D30 /* Pods-SantokuApp.releaseinhouse.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SantokuApp.releaseinhouse.xcconfig"; path = "Target Support Files/Pods-SantokuApp/Pods-SantokuApp.releaseinhouse.xcconfig"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-SantokuApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SantokuApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6909A3A526E1EC0000F9111D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		69506AAA2845DE0200FCFD34 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		69506AAC2845DE0700FCFD34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		699A764226E6E45C00D48F9D /* RCTThrowErrorModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTThrowErrorModule.h; sourceTree = "<group>"; };
 		699A764326E6E48500D48F9D /* RCTThrowErrorModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTThrowErrorModule.m; sourceTree = "<group>"; };
 		69DBD4902763515A006D47A1 /* SantokuAppReleaseInHouse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SantokuAppReleaseInHouse.entitlements; path = SantokuApp/SantokuAppReleaseInHouse.entitlements; sourceTree = "<group>"; };
@@ -70,6 +73,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
+				69506AAB2845DE0200FCFD34 /* InfoPlist.strings */,
 			);
 			name = SantokuApp;
 			sourceTree = "<group>";
@@ -205,7 +209,7 @@
 			knownRegions = (
 				en,
 				Base,
-				"ja-JP",
+				ja,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
@@ -223,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				69506AA92845DE0200FCFD34 /* InfoPlist.strings in Resources */,
 				6909A3A626E1EC0000F9111D /* GoogleService-Info.plist in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
 			);
@@ -362,6 +367,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		69506AAB2845DE0200FCFD34 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69506AAA2845DE0200FCFD34 /* ja */,
+				69506AAC2845DE0700FCFD34 /* en */,
+			);
+			name = InfoPlist.strings;
+			path = SantokuApp;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
