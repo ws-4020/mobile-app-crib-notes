@@ -103,8 +103,6 @@ const Screen: React.FC = () => {
         onSelectedItemChange={onSelectedItemChangeForDate2}
         formatText={formatDate}
         mode="date"
-        displayIOS="inline"
-        displayAndroid="spinner"
         pickerAccessoryProps={{doneLabel: m('完了')}}
         textInputProps={{style: styles.pickerTextInputStyle}}
         placeholder={`mode:date,${Platform.OS === 'ios' ? 'display: inline' : 'display: spinner'}`}

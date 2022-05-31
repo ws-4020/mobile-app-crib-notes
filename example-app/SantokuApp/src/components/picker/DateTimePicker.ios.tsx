@@ -19,7 +19,7 @@ export const DateTimePicker = (props: DateTimePickerIOSProps) => {
     isVisible,
     requiredSelectedValue,
     inputValue,
-    handleBackdropPress,
+    handleDismiss,
     pickerBackdropEntering,
     pickerBackdropExiting,
     pickerContainerEntering,
@@ -56,7 +56,7 @@ export const DateTimePicker = (props: DateTimePickerIOSProps) => {
     <>
       <PickerBackdrop
         isVisible={isVisible}
-        onPress={handleBackdropPress}
+        onPress={handleDismiss}
         entering={pickerBackdropEntering}
         exiting={pickerBackdropExiting}
         {...pickerBackdropProps}>

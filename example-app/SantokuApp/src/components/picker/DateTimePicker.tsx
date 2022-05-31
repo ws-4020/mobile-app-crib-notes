@@ -30,12 +30,14 @@ export type DateTimePickerProps = {
    * DeleteLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
    * なお、pickerAccessoryComponentを指定した場合は使用されません。
+   * @platform ios
    */
   onDelete?: (date?: Date) => void;
   /**
    * CancelLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
    * なお、pickerAccessoryComponentを指定した場合は使用されません。
+   * @platform ios
    */
   onCancel?: (date?: Date) => void;
   /**
@@ -108,6 +110,7 @@ export type DateTimePickerProps = {
   textInputProps?: TextInputProps;
   /**
    * Pickerコンポーネントを囲むContainerのProps
+   * @platform ios
    */
   pickerItemsContainerProps?: ViewProps;
   /**
@@ -121,15 +124,18 @@ export type DateTimePickerProps = {
   >;
   /**
    * PickerBackdropのProps
+   * @platform ios
    */
   pickerBackdropProps?: Omit<PickerBackdropProps, 'isVisible' | 'onPress'>;
   /**
    * PickerContainerのProps
+   * @platform ios
    */
   pickerContainerProps?: Omit<PickerContainerProps, 'isVisible'>;
   /**
    * PickerAccessoryのProps
    * なお、pickerAccessoryComponentを指定した場合は使用されません。
+   * @platform ios
    */
   pickerAccessoryProps?: Omit<DefaultPickerAccessoryProps, 'onDelete' | 'onCancel' | 'onDone'>;
 };

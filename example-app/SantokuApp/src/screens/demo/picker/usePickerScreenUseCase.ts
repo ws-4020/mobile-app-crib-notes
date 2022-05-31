@@ -1,5 +1,6 @@
 import {Item, YearMonth, YearMonthUtil} from 'components/picker';
 import React, {useCallback, useMemo, useRef, useState} from 'react';
+import {Platform} from 'react-native';
 
 type Item1Type = {
   a: string;
@@ -19,6 +20,10 @@ const items1: Item<Item1Type>[] = [
 ];
 
 const placeholder = 'please select...';
+
+const formatDate = (date?: Date) => {
+  return date ? `${date.getUTCFullYear()}/${date.getMonth() + 1}/${date.getDate()}` : '';
+};
 
 export const usePickerScreenUseCase = () => {
   //////////////////////////////////////////////////////////////////////////////////
@@ -85,9 +90,6 @@ export const usePickerScreenUseCase = () => {
   const minimumDate = useRef(
     new Date(maximumDate.getFullYear() - 5, maximumDate.getMonth(), maximumDate.getDate()),
   ).current;
-  const formatDate = useCallback((date?: Date) => {
-    return date ? `${date.getUTCFullYear()}/${date.getMonth() + 1}/${date.getDate()}` : '';
-  }, []);
 
   //////////////////////////////////////////////////////////////////////////////////
   // DateTimePicker1
@@ -96,10 +98,16 @@ export const usePickerScreenUseCase = () => {
   // キャンセルをタップした時に、Pickerを開く前の値に戻せるようにRefで保持しておく
   const canceledDate1 = useRef<Date>();
   const onSelectedItemChangeForDate1 = useCallback((selectedValue?: Date) => {
-    setSelectedDate1(selectedValue);
+    if (Platform.OS === 'ios') {
+      setSelectedDate1(selectedValue);
+    }
   }, []);
   const onDismissForDate1 = useCallback((selectedValue?: Date) => {
-    canceledDate1.current = selectedValue;
+    if (Platform.OS === 'android') {
+      setSelectedDate1(canceledDate1.current);
+    } else if (Platform.OS === 'ios') {
+      canceledDate1.current = selectedValue;
+    }
   }, []);
   const onDeleteForDate1 = useCallback(() => {
     setSelectedDate1(undefined);

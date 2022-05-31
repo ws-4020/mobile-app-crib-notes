@@ -7,7 +7,6 @@ import {useDateTimePickerAndroidUseCase} from './useDateTimePickerAndroidUseCase
 
 type DateTimePickerAndroidProps = Omit<
   DateTimePickerProps,
-  | 'onDismiss'
   | 'onDelete'
   | 'onCancel'
   | 'mode'

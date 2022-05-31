@@ -19,7 +19,9 @@ export const useDateTimePickerUseCase = ({
   pickerContainerProps: {entering: containerEntering, exiting: containerExiting} = {},
 }: DateTimePickerProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const close = useCallback(() => setIsVisible(false), []);
+  const close = useCallback(() => {
+    setIsVisible(false);
+  }, []);
   const pickerBackdropEntering = useMemo(
     () => backdropEntering ?? PICKER_BACKDROP_DEFAULT_ENTERING.duration(DEFAULT_DURATION),
     [backdropEntering],
@@ -42,7 +44,7 @@ export const useDateTimePickerUseCase = ({
     },
     [onSelectedItemChange],
   );
-  const requiredSelectedValue = selectedValue ?? defaultValue;
+  const requiredSelectedValue = useMemo(() => selectedValue ?? defaultValue, [defaultValue, selectedValue]);
   const inputValue = useMemo(() => {
     if (formatText) {
       return formatText(selectedValue);
@@ -59,7 +61,7 @@ export const useDateTimePickerUseCase = ({
     }
     setIsVisible(true);
   }, [defaultValue, onSelectedItemChange, selectedValue]);
-  const handleBackdropPress = useCallback(() => {
+  const handleDismiss = useCallback(() => {
     onDismiss?.(selectedValue);
     close();
   }, [close, onDismiss, selectedValue]);
@@ -78,15 +80,17 @@ export const useDateTimePickerUseCase = ({
 
   return {
     isVisible,
+    setIsVisible,
     requiredSelectedValue,
     inputValue,
-    handleBackdropPress,
+    handleDismiss,
     pickerBackdropEntering,
     pickerBackdropExiting,
     pickerContainerEntering,
     pickerContainerExiting,
     onValueChange,
     open,
+    close,
     handleDelete,
     handleCancel,
     handleDone,
