@@ -40,6 +40,7 @@ Array [
           ニックネーム
         </Text>
         <View
+          collapsable={false}
           style={
             Object {
               "alignItems": "center",
@@ -57,13 +58,11 @@ Array [
           }
         >
           <TextInput
-            allowFontScaling={true}
             autoCapitalize="none"
             autoCorrect={false}
             editable={true}
             onChangeText={[Function]}
             placeholderTextColor="#86939e"
-            rejectResponderTermination={true}
             style={
               Object {
                 "color": "#212935",
@@ -129,6 +128,7 @@ Array [
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
