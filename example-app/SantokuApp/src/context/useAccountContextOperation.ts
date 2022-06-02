@@ -1,5 +1,5 @@
 import {createUseContextAndProvider, useIsMounted} from 'framework/utilities';
-import {Account, TermsOfServiceAgreementStatus} from 'generated/backend/model';
+import {Account} from 'generated/backend/model';
 import React, {Reducer, useMemo} from 'react';
 
 import {AccountContext, Terms} from './useAccountContext';
@@ -10,7 +10,7 @@ export const [useAccountContextOperation, AccountContextOperationProvider] =
 export type AccountAction =
   | {type: 'login'; payload: {account: Account; terms: Terms}}
   | {type: 'logout'}
-  | {type: 'agreedTerms'; payload: {termsAgreementStatus: TermsOfServiceAgreementStatus}};
+  | {type: 'agreedToTerms'; payload: {agreedVersion: string}};
 export type AccountDispatch = React.Dispatch<AccountAction>;
 
 export const accountContextReducer: Reducer<AccountContext, AccountAction> = (prevState, action) => {
@@ -19,10 +19,10 @@ export const accountContextReducer: Reducer<AccountContext, AccountAction> = (pr
       return {account: action.payload.account, terms: action.payload.terms, isLoggedIn: true};
     case 'logout':
       return {isLoggedIn: false};
-    case 'agreedTerms':
+    case 'agreedToTerms':
       return {
         ...prevState,
-        terms: {termsAgreementStatus: action.payload.termsAgreementStatus},
+        terms: {termsAgreementStatus: {hasAgreed: true, agreedVersion: action.payload.agreedVersion}},
       };
   }
 };
@@ -45,12 +45,11 @@ const createLogoutAction = (dispatch: AccountDispatch, isMounted: () => boolean)
   }
 };
 
-const createAgreedTermsAction =
-  (dispatch: AccountDispatch, isMounted: () => boolean) => (termsAgreementStatus: TermsOfServiceAgreementStatus) => {
-    if (isMounted()) {
-      dispatch({type: 'agreedTerms', payload: {termsAgreementStatus}});
-    }
-  };
+const createAgreedTermsAction = (dispatch: AccountDispatch, isMounted: () => boolean) => (agreedVersion: string) => {
+  if (isMounted()) {
+    dispatch({type: 'agreedToTerms', payload: {agreedVersion}});
+  }
+};
 
 export const useAccountOperation = (initialAccountContext: AccountContext, dispatch: AccountDispatch) => {
   const isMounted = useIsMounted();
@@ -58,7 +57,7 @@ export const useAccountOperation = (initialAccountContext: AccountContext, dispa
     () => ({
       login: createLoginAction(dispatch, isMounted),
       logout: createLogoutAction(dispatch, isMounted),
-      didAgreeToTerms: createAgreedTermsAction(dispatch, isMounted),
+      agreedToTerms: createAgreedTermsAction(dispatch, isMounted),
     }),
     [dispatch, isMounted],
   );
