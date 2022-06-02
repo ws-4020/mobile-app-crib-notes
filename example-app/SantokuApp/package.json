@@ -92,7 +92,7 @@
     "orval": "^6.6.1",
     "patch-package": "^6.4.7",
     "prettier": "^2.4.0",
-    "react-test-renderer": "17.0.1",
+    "react-test-renderer": "17.0.2",
     "typescript": "~4.3.5"
   },
   "jest-junit": {
