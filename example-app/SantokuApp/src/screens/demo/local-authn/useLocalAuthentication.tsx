@@ -26,6 +26,7 @@ export const useLocalAuthentication = () => {
       promptMessage: 'Test Message',
       disableDeviceFallback: true,
       cancelLabel: 'キャンセル', // FallbackをOFFにしている場合は必須
+      requireConfirmation: true,
     });
     alert(JSON.stringify(result));
   };
