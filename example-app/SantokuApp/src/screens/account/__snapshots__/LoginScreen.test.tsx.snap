@@ -146,7 +146,7 @@ Array [
         >
           <TextInput
             autoCapitalize="none"
-            autoCompleteType="password"
+            autoComplete="password"
             autoCorrect={false}
             editable={true}
             keyboardType="ascii-capable"
