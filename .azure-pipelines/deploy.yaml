@@ -50,8 +50,8 @@ stages:
     - job: build_${{buildVariant.name}}
       displayName: 'build ${{buildVariant.name}}'
       pool:
-        # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
-        vmImage: macOS-11
+        # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
+        vmImage: macOS-12
       steps:
       - task: UseRubyVersion@0
         inputs:
@@ -147,7 +147,7 @@ stages:
       displayName: 'build ${{buildVariant.name}}'
       pool:
         # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
-        vmImage: macOS-11
+        vmImage: macOS-12
       steps:
       - task: UseRubyVersion@0
         inputs:
