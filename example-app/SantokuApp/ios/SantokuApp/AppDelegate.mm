@@ -1,12 +1,5 @@
 #import "AppDelegate.h"
 
-// アプリ起動時に、以下の警告メッセージが表示されるため、RCTDevLoadingViewをimportします
-// 「RCTBridge required dispatch_sync to load RCTDevLoadingView. This may lead to deadlocks」
-// https://github.com/facebook/react-native/issues/16376
-#if RCT_DEV
-#import <React/RCTDevLoadingView.h>
-#endif
-
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -57,13 +50,6 @@
   _bridgeAdapter = [[RCTSurfacePresenterBridgeAdapter alloc] initWithBridge:bridge contextContainer:_contextContainer];
   bridge.surfacePresenter = _bridgeAdapter.surfacePresenter;
 #endif
-
-  // アプリ起動時に、以下の警告メッセージが表示されるため、RCTDevLoadingViewをロードします
-  // 「RCTBridge required dispatch_sync to load RCTDevLoadingView. This may lead to deadlocks」
-  // https://github.com/facebook/react-native/issues/16376
-  #if RCT_DEV
-    [bridge moduleForClass:[RCTDevLoadingView class]];
-  #endif
 
   // isHeadlessを取得できるように、launchOptionsをappPropertiesに格納
   // https://rnfirebase.io/messaging/usage#background-application-state
