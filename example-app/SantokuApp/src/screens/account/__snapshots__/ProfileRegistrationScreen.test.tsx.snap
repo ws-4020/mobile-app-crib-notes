@@ -71,7 +71,6 @@ Array [
                 "includeFontPadding": false,
                 "lineHeight": 24,
                 "minHeight": 0,
-                "paddingVertical": 0,
               }
             }
             testID="RNE__Input__text-input"
