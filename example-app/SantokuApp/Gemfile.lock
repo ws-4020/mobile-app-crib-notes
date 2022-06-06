@@ -276,6 +276,7 @@ GEM
 PLATFORMS
   ruby
   x86_64-darwin-21
+  arm64-darwin-21
 
 DEPENDENCIES
   cocoapods (= 1.11.3)
@@ -283,4 +284,4 @@ DEPENDENCIES
   rexml (~> 3.2)
 
 BUNDLED WITH
-   2.2.32
+   2.3.7
