@@ -55,12 +55,12 @@ stages:
       steps:
       - task: UseRubyVersion@0
         inputs:
-          versionSpec: '3.0.x'
+          versionSpec: '3.1.x'
           addToPath: true
       - task: NodeTool@0
-        displayName: 'Use Node.js 16.14.2'
+        displayName: 'Use Node.js 16.15.1'
         inputs:
-          versionSpec: '16.14.2'
+          versionSpec: '16.15.1'
       - task: JavaToolInstaller@0
         inputs:
           versionSpec: '11'
@@ -151,7 +151,7 @@ stages:
       steps:
       - task: UseRubyVersion@0
         inputs:
-          versionSpec: '3.0.x'
+          versionSpec: '3.1.x'
           addToPath: true
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
@@ -176,9 +176,9 @@ stages:
         inputs:
           script: 'sudo xcode-select --switch /Applications/Xcode_13.2.1.app'
       - task: NodeTool@0
-        displayName: 'Use Node.js 16.14.2'
+        displayName: 'Use Node.js 16.15.1'
         inputs:
-          versionSpec: '16.14.2'
+          versionSpec: '16.15.1'
       - task: Cache@2
         displayName: Cache npm
         inputs:
