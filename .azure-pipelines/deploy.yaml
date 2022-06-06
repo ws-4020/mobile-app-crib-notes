@@ -55,7 +55,7 @@ stages:
       steps:
       - task: UseRubyVersion@0
         inputs:
-          versionSpec: '3.1.x'
+          versionSpec: '3.1.2'
           addToPath: true
       - task: NodeTool@0
         displayName: 'Use Node.js 16.15.1'
@@ -151,7 +151,7 @@ stages:
       steps:
       - task: UseRubyVersion@0
         inputs:
-          versionSpec: '3.1.x'
+          versionSpec: '3.1.2'
           addToPath: true
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
