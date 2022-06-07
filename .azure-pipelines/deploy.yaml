@@ -210,8 +210,6 @@ stages:
         displayName: Cache Pods
         inputs:
           key: 'pods | "$(Agent.OS)" | $(appDir)/ios/Podfile.lock'
-          restoreKeys: |
-            pods | "$(Agent.OS)"
           path: $(appDir)/ios/Pods
       - task: CmdLine@2
         displayName: 'Build iOS app for ${{buildVariant.name}}'
