@@ -13,6 +13,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.soloader.SoLoader;
 import jp.fintan.mobile.santokuapp.demo.throwerror.ThrowErrorPackage;
+import jp.fintan.mobile.santokuapp.newarchitecture.MainApplicationReactNativeHost;
 
 import expo.modules.ApplicationLifecycleDispatcher;
 import expo.modules.ReactNativeHostWrapper;
@@ -53,9 +54,16 @@ public class MainApplication extends Application implements ReactApplication {
         }
       });
 
+  private final ReactNativeHost mNewArchitectureNativeHost =
+      new ReactNativeHostWrapper(this, new MainApplicationReactNativeHost(this));
+
   @Override
   public ReactNativeHost getReactNativeHost() {
-    return mReactNativeHost;
+    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
+      return mNewArchitectureNativeHost;
+    } else {
+      return mReactNativeHost;
+    }
   }
 
   @Override
