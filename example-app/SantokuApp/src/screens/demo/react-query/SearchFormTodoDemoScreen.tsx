@@ -3,7 +3,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ListTodoParams} from 'generated/sandbox/model';
 import {DemoStackParamList, RootStackParamList} from 'navigation/types';
 import React, {useCallback, useState} from 'react';
-import {View, Text, ActivityIndicator, StyleSheet, SafeAreaView, TextInput} from 'react-native';
+import {View, Text, ActivityIndicator, StyleSheet, SafeAreaView} from 'react-native';
 import {Button, Input} from 'react-native-elements';
 import {useListTodo} from 'service/backend';
 
@@ -28,7 +28,6 @@ const Screen: React.FC<Props> = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <TextInput />
         <Input placeholder="ページ番号" value={inputPage} onChangeText={setInputPage} />
         <View style={styles.search}>
           <Button title="検索" onPress={search} />
