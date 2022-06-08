@@ -26,7 +26,6 @@ export const useLocalAuthentication = () => {
       promptMessage: 'Test Message',
       disableDeviceFallback: true,
       cancelLabel: 'キャンセル', // FallbackをOFFにしている場合は必須
-      requireConfirmation: true,
     });
     alert(JSON.stringify(result));
   };
@@ -37,6 +36,7 @@ export const useLocalAuthentication = () => {
       cancelLabel: 'キャンセル',
       fallbackLabel: '失敗時の基本認証',
       disableDeviceFallback: false,
+      requireConfirmation: false,
     });
     alert(JSON.stringify(result));
   };
