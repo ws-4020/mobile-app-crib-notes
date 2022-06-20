@@ -22,7 +22,7 @@ const items1: Item<Item1Type>[] = [
 const placeholder = 'please select...';
 
 const formatDate = (date?: Date) => {
-  return date ? `${date.getUTCFullYear()}/${date.getMonth() + 1}/${date.getDate()}` : '';
+  return date ? `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` : '';
 };
 
 export const usePickerScreenUseCase = () => {
