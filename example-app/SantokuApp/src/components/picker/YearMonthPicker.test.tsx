@@ -9,6 +9,13 @@ import {SelectPickerItemsProps} from './SelectPickerItems';
 import {YearMonthPicker} from './YearMonthPicker';
 import {YearMonthUtil} from './YearMonthUtil';
 
+jest.doMock('react-native/Libraries/Utilities/Dimensions', () => ({
+  get: jest.fn().mockReturnValue({width: 400, height: 1000}),
+  set: jest.fn(),
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
+}));
+
 describe('YearMonthPicker only with required props', () => {
   beforeAll(() => {
     const mockDate = new Date(2022, 3);
@@ -233,7 +240,11 @@ describe('YearMonthPicker with all props', () => {
     // assert pickerContainer
     const pickerContainer = sut.getByTestId('pickerContainer');
     const pickerContainerProps = pickerContainer.props as PickerContainerProps;
-    expect(pickerContainerProps.style).toEqual({backgroundColor: 'yellow', borderColor: 'black'});
+    expect(pickerContainerProps.style).toEqual({
+      backgroundColor: 'yellow',
+      borderColor: 'black',
+      transform: [{translateY: 1000}],
+    });
 
     // assert pickerItemsContainer
     const pickerItemsContainer = sut.getByTestId('pickerItemsContainer');
@@ -267,7 +278,7 @@ describe('YearMonthPicker with all props', () => {
     const modal = sut.getByTestId('modal');
     const pickerBackdropProps = pickerBackdrop.props as PickerBackdropProps;
     fireEvent(modal, 'onRequestClose');
-    expect(pickerBackdropProps.style).toEqual({flex: 1, backgroundColor: 'green', borderColor: 'red'});
+    expect(pickerBackdropProps.style).toEqual({flex: 1, backgroundColor: 'green', borderColor: 'red', opacity: 0});
     expect(onDismiss).toHaveBeenCalledTimes(1);
 
     fireEvent.press(pressableContainer);
