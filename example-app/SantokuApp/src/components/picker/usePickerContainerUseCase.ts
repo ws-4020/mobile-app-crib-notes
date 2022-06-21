@@ -49,7 +49,7 @@ export const usePickerContainerUseCase = ({
 
   const clock = useSharedValue(1);
   const yOffset = useDerivedValue(() => {
-    return Math.max(clock.value * contentHeight, contentHeight - windowHeight);
+    return clock.value * contentHeight;
   }, [contentHeight, windowHeight]);
 
   const show = useCallback(() => {
