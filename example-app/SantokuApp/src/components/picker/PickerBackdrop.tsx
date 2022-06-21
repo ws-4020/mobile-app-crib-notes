@@ -1,7 +1,7 @@
 import {composePressableStyles} from 'framework/utilities';
 import React, {useMemo} from 'react';
 import {Modal as RNModal, ModalProps, Pressable, PressableProps, StyleSheet, ViewProps} from 'react-native';
-import Reanimated, {useAnimatedStyle, WithTimingConfig} from 'react-native-reanimated';
+import Reanimated, {WithTimingConfig} from 'react-native-reanimated';
 
 import {usePickerBackdropUseCase} from './usePickerBackdropUseCase';
 
@@ -38,11 +38,9 @@ export const PickerBackdrop: React.FC<PickerBackdropProps> = ({
   modalProps: {style: modalStyle, ...modalProps} = {},
   fadeInConfig,
   fadeOutConfig,
-  style,
   children,
-  ...animatedViewProps
 }) => {
-  const {isModalVisible, animatedOpacity} = usePickerBackdropUseCase({
+  const {isModalVisible} = usePickerBackdropUseCase({
     isVisible,
     opacity,
     afterFadeIn,
@@ -53,26 +51,22 @@ export const PickerBackdrop: React.FC<PickerBackdropProps> = ({
     fadeOutConfig,
   });
 
-  const animatedStyle = useAnimatedStyle(() => ({opacity: animatedOpacity.value}));
   const composedPressableStyles = useMemo(
     () => composePressableStyles([styles.pressable, pressableStyle]),
     [pressableStyle],
   );
-  const composedBackdropStyle = useMemo(() => StyleSheet.flatten([styles.backdrop, style]), [style]);
 
   return !isModalVisible ? null : (
     <RNModal
       visible
       statusBarTranslucent
-      animationType="none"
+      animationType="fade"
       transparent
       // 戻るボタンが押されたとき（onRequestClose）は、背景がタップされたときと同じ振る舞いになるようにしておく。
       onRequestClose={onPress}
       style={modalStyle}
       {...modalProps}>
-      <Pressable onPress={onPress} style={composedPressableStyles} {...pressableProps}>
-        <Reanimated.View style={[composedBackdropStyle, animatedStyle]} {...animatedViewProps} />
-      </Pressable>
+      <Pressable onPress={onPress} style={composedPressableStyles} {...pressableProps} />
       {children}
     </RNModal>
   );
@@ -82,9 +76,10 @@ const styles = StyleSheet.create({
   pressable: {
     ...StyleSheet.absoluteFillObject,
     display: 'flex',
+    opacity: 0.4,
+    backgroundColor: DEFAULT_BACKGROUND_COLOR,
   },
   backdrop: {
     flex: 1,
-    backgroundColor: DEFAULT_BACKGROUND_COLOR,
   },
 });
