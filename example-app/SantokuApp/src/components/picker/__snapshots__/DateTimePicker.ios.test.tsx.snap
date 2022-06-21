@@ -64,30 +64,17 @@ Array [
       <View
         animatedStyle={
           Object {
-            "value": Object {},
+            "value": Object {
+              "opacity": 0,
+            },
           }
         }
         collapsable={false}
-        entering={
-          FadeIn {
-            "build": [Function],
-            "callbackV": [Function],
-            "durationV": 500,
-            "randomizeDelay": false,
-          }
-        }
-        exiting={
-          FadeOut {
-            "build": [Function],
-            "callbackV": [Function],
-            "durationV": 500,
-            "randomizeDelay": false,
-          }
-        }
         style={
           Object {
-            "backgroundColor": "rgba(0,0,0,0.4)",
+            "backgroundColor": "black",
             "flex": 1,
+            "opacity": 0,
           }
         }
         testID="pickerBackdrop"
@@ -96,81 +83,69 @@ Array [
     <View
       pointerEvents="box-none"
       style={
-        Object {
-          "flex": 1,
-          "justifyContent": "flex-end",
-        }
+        Array [
+          Object {
+            "flex": 1,
+            "justifyContent": "flex-end",
+          },
+        ]
       }
     >
       <View
         animatedStyle={
           Object {
-            "value": Object {},
+            "value": Object {
+              "transform": Array [
+                Object {
+                  "translateY": 1000,
+                },
+              ],
+            },
           }
         }
         collapsable={false}
+        onLayout={[Function]}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "transform": Array [
+              Object {
+                "translateY": 1000,
+              },
+            ],
+          }
+        }
+        testID="pickerContainer"
       >
         <View
-          animatedStyle={
-            Object {
-              "value": Object {},
-            }
-          }
-          collapsable={false}
-          entering={
-            SlideInDown {
-              "build": [Function],
-              "callbackV": [Function],
-              "durationV": 500,
-              "randomizeDelay": false,
-            }
-          }
-          exiting={
-            SlideOutDown {
-              "build": [Function],
-              "callbackV": [Function],
-              "durationV": 500,
-              "randomizeDelay": false,
-            }
-          }
-          pointerEvents="box-none"
           style={
             Object {
-              "backgroundColor": "white",
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+              "paddingHorizontal": 10,
+              "paddingVertical": 8,
             }
           }
-          testID="pickerContainer"
+          testID="pickerAccessory"
+        />
+        <View
+          testID="pickerItemsContainer"
         >
-          <View
+          <RNDateTimePicker
+            date={1653868800000}
+            displayIOS="spinner"
+            enabled={true}
+            mode="date"
+            onChange={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
               Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-end",
-                "paddingHorizontal": 10,
-                "paddingVertical": 8,
+                "height": 216,
               }
             }
-            testID="pickerAccessory"
+            testID="pickerItems"
           />
-          <View
-            testID="pickerItemsContainer"
-          >
-            <RNDateTimePicker
-              date={1653868800000}
-              displayIOS="spinner"
-              enabled={true}
-              mode="date"
-              onChange={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "height": 216,
-                }
-              }
-              testID="pickerItems"
-            />
-          </View>
         </View>
       </View>
     </View>
@@ -241,31 +216,18 @@ Array [
       <View
         animatedStyle={
           Object {
-            "value": Object {},
+            "value": Object {
+              "opacity": 0,
+            },
           }
         }
         collapsable={false}
-        entering={
-          FadeIn {
-            "build": [Function],
-            "callbackV": [Function],
-            "durationV": 500,
-            "randomizeDelay": false,
-          }
-        }
-        exiting={
-          FadeOut {
-            "build": [Function],
-            "callbackV": [Function],
-            "durationV": 500,
-            "randomizeDelay": false,
-          }
-        }
         style={
           Object {
             "backgroundColor": "green",
             "borderColor": "red",
             "flex": 1,
+            "opacity": 0,
           }
         }
         testID="pickerBackdrop"
@@ -274,63 +236,51 @@ Array [
     <View
       pointerEvents="box-none"
       style={
-        Object {
-          "flex": 1,
-          "justifyContent": "flex-end",
-        }
+        Array [
+          Object {
+            "flex": 1,
+            "justifyContent": "flex-end",
+          },
+        ]
       }
     >
       <View
         animatedStyle={
           Object {
-            "value": Object {},
+            "value": Object {
+              "transform": Array [
+                Object {
+                  "translateY": 1000,
+                },
+              ],
+            },
           }
         }
         collapsable={false}
+        onLayout={[Function]}
+        style={
+          Object {
+            "backgroundColor": "yellow",
+            "borderColor": "black",
+            "transform": Array [
+              Object {
+                "translateY": 1000,
+              },
+            ],
+          }
+        }
+        testID="pickerContainer"
       >
         <View
-          animatedStyle={
-            Object {
-              "value": Object {},
-            }
-          }
-          collapsable={false}
-          entering={
-            SlideInDown {
-              "build": [Function],
-              "callbackV": [Function],
-              "durationV": 500,
-              "randomizeDelay": false,
-            }
-          }
-          exiting={
-            SlideOutDown {
-              "build": [Function],
-              "callbackV": [Function],
-              "durationV": 500,
-              "randomizeDelay": false,
-            }
-          }
-          pointerEvents="box-none"
-          style={
-            Object {
-              "backgroundColor": "yellow",
-              "borderColor": "black",
-            }
-          }
-          testID="pickerContainer"
+          testID="customPickerAccessory"
+        />
+        <View
+          pointerEvents="none"
+          testID="pickerItemsContainer"
         >
           <View
-            testID="customPickerAccessory"
+            testID="customPicker"
           />
-          <View
-            pointerEvents="none"
-            testID="pickerItemsContainer"
-          >
-            <View
-              testID="customPicker"
-            />
-          </View>
         </View>
       </View>
     </View>
@@ -399,31 +349,18 @@ Array [
       <View
         animatedStyle={
           Object {
-            "value": Object {},
+            "value": Object {
+              "opacity": 0,
+            },
           }
         }
         collapsable={false}
-        entering={
-          FadeIn {
-            "build": [Function],
-            "callbackV": [Function],
-            "durationV": 500,
-            "randomizeDelay": false,
-          }
-        }
-        exiting={
-          FadeOut {
-            "build": [Function],
-            "callbackV": [Function],
-            "durationV": 500,
-            "randomizeDelay": false,
-          }
-        }
         style={
           Object {
             "backgroundColor": "green",
             "borderColor": "red",
             "flex": 1,
+            "opacity": 0,
           }
         }
         testID="pickerBackdrop"
@@ -432,189 +369,177 @@ Array [
     <View
       pointerEvents="box-none"
       style={
-        Object {
-          "flex": 1,
-          "justifyContent": "flex-end",
-        }
+        Array [
+          Object {
+            "flex": 1,
+            "justifyContent": "flex-end",
+          },
+        ]
       }
     >
       <View
         animatedStyle={
           Object {
-            "value": Object {},
+            "value": Object {
+              "transform": Array [
+                Object {
+                  "translateY": 1000,
+                },
+              ],
+            },
           }
         }
         collapsable={false}
+        onLayout={[Function]}
+        style={
+          Object {
+            "backgroundColor": "yellow",
+            "borderColor": "black",
+            "transform": Array [
+              Object {
+                "translateY": 1000,
+              },
+            ],
+          }
+        }
+        testID="pickerContainer"
       >
         <View
-          animatedStyle={
-            Object {
-              "value": Object {},
-            }
-          }
-          collapsable={false}
-          entering={
-            SlideInDown {
-              "build": [Function],
-              "callbackV": [Function],
-              "durationV": 500,
-              "randomizeDelay": false,
-            }
-          }
-          exiting={
-            SlideOutDown {
-              "build": [Function],
-              "callbackV": [Function],
-              "durationV": 500,
-              "randomizeDelay": false,
-            }
-          }
-          pointerEvents="box-none"
           style={
             Object {
-              "backgroundColor": "yellow",
-              "borderColor": "black",
+              "backgroundColor": "blue",
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+              "paddingHorizontal": 10,
+              "paddingVertical": 8,
             }
           }
-          testID="pickerContainer"
+          testID="pickerAccessory"
         >
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID="deleteLink"
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#d9545e",
+                  "fontWeight": "bold",
+                  "paddingHorizontal": 10,
+                }
+              }
+            >
+              delete
+            </Text>
+          </View>
           <View
             style={
               Object {
-                "backgroundColor": "blue",
-                "flexDirection": "row",
-                "justifyContent": "flex-end",
-                "paddingHorizontal": 10,
-                "paddingVertical": 8,
+                "flex": 1,
               }
             }
-            testID="pickerAccessory"
+          />
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID="cancelLink"
           >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
+            <Text
               style={
                 Object {
-                  "opacity": 1,
+                  "color": "#4577CC",
+                  "fontWeight": "bold",
+                  "paddingHorizontal": 10,
                 }
               }
-              testID="deleteLink"
             >
-              <Text
-                style={
-                  Object {
-                    "color": "#d9545e",
-                    "fontWeight": "bold",
-                    "paddingHorizontal": 10,
-                  }
-                }
-              >
-                delete
-              </Text>
-            </View>
-            <View
-              style={
-                Object {
-                  "flex": 1,
-                }
-              }
-            />
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "opacity": 1,
-                }
-              }
-              testID="cancelLink"
-            >
-              <Text
-                style={
-                  Object {
-                    "color": "#4577CC",
-                    "fontWeight": "bold",
-                    "paddingHorizontal": 10,
-                  }
-                }
-              >
-                cancel
-              </Text>
-            </View>
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "opacity": 1,
-                }
-              }
-              testID="doneLink"
-            >
-              <Text
-                style={
-                  Object {
-                    "color": "#4577CC",
-                    "fontWeight": "bold",
-                    "paddingHorizontal": 10,
-                  }
-                }
-              >
-                done
-              </Text>
-            </View>
+              cancel
+            </Text>
           </View>
           <View
-            pointerEvents="none"
-            testID="pickerItemsContainer"
-          >
-            <RNDateTimePicker
-              date={1640995200000}
-              displayIOS="spinner"
-              enabled={true}
-              maximumDate={1653955200000}
-              minimumDate={1483228800000}
-              mode="date"
-              onChange={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Array [
-                  Object {
-                    "height": 216,
-                  },
-                  Object {
-                    "backgroundColor": "yellow",
-                  },
-                ]
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
               }
-              testID="pickerItems"
-            />
+            }
+            testID="doneLink"
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#4577CC",
+                  "fontWeight": "bold",
+                  "paddingHorizontal": 10,
+                }
+              }
+            >
+              done
+            </Text>
           </View>
+        </View>
+        <View
+          pointerEvents="none"
+          testID="pickerItemsContainer"
+        >
+          <RNDateTimePicker
+            date={1640995200000}
+            displayIOS="spinner"
+            enabled={true}
+            maximumDate={1653955200000}
+            minimumDate={1483228800000}
+            mode="date"
+            onChange={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Array [
+                Object {
+                  "height": 216,
+                },
+                Object {
+                  "backgroundColor": "yellow",
+                },
+              ]
+            }
+            testID="pickerItems"
+          />
         </View>
       </View>
     </View>
