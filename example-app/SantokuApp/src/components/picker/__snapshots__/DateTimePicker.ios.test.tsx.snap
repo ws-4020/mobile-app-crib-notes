@@ -30,7 +30,7 @@ exports[`DateTimePicker only with required props renders successfully if invisib
 exports[`DateTimePicker only with required props renders successfully if visible: DateTimePicker if visible. 1`] = `
 Array [
   <Modal
-    animationType="none"
+    animationType="fade"
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     statusBarTranslucent={true}
@@ -52,34 +52,18 @@ Array [
       onStartShouldSetResponder={[Function]}
       style={
         Object {
+          "backgroundColor": "black",
           "bottom": 0,
           "display": "flex",
           "left": 0,
+          "opacity": 0.4,
           "position": "absolute",
           "right": 0,
           "top": 0,
         }
       }
-    >
-      <View
-        animatedStyle={
-          Object {
-            "value": Object {
-              "opacity": 0,
-            },
-          }
-        }
-        collapsable={false}
-        style={
-          Object {
-            "backgroundColor": "black",
-            "flex": 1,
-            "opacity": 0,
-          }
-        }
-        testID="pickerBackdrop"
-      />
-    </View>
+      testID="pickerBackdrop"
+    />
     <View
       pointerEvents="box-none"
       style={
@@ -181,11 +165,11 @@ Array [
 exports[`DateTimePicker with all props should be applied all properly with custom xxx component: DateTimePicker all properly with custom xxx component. 1`] = `
 Array [
   <Modal
-    animationType="none"
+    animationType="fade"
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     statusBarTranslucent={true}
-    testID="modal"
+    testID="pickerBackdropModal"
     transparent={true}
     visible={true}
   >
@@ -204,35 +188,19 @@ Array [
       onStartShouldSetResponder={[Function]}
       style={
         Object {
+          "backgroundColor": "green",
+          "borderColor": "red",
           "bottom": 0,
           "display": "flex",
           "left": 0,
+          "opacity": 0.4,
           "position": "absolute",
           "right": 0,
           "top": 0,
         }
       }
-    >
-      <View
-        animatedStyle={
-          Object {
-            "value": Object {
-              "opacity": 0,
-            },
-          }
-        }
-        collapsable={false}
-        style={
-          Object {
-            "backgroundColor": "green",
-            "borderColor": "red",
-            "flex": 1,
-            "opacity": 0,
-          }
-        }
-        testID="pickerBackdrop"
-      />
-    </View>
+      testID="pickerBackdropPressable"
+    />
     <View
       pointerEvents="box-none"
       style={
@@ -314,11 +282,11 @@ Array [
 exports[`DateTimePicker with all props should be applied all properly with default xxx component: DateTimePicker all properly with default xxx component. 1`] = `
 Array [
   <Modal
-    animationType="none"
+    animationType="fade"
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     statusBarTranslucent={true}
-    testID="modal"
+    testID="pickerBackdropModal"
     transparent={true}
     visible={true}
   >
@@ -337,35 +305,19 @@ Array [
       onStartShouldSetResponder={[Function]}
       style={
         Object {
+          "backgroundColor": "green",
+          "borderColor": "red",
           "bottom": 0,
           "display": "flex",
           "left": 0,
+          "opacity": 0.4,
           "position": "absolute",
           "right": 0,
           "top": 0,
         }
       }
-    >
-      <View
-        animatedStyle={
-          Object {
-            "value": Object {
-              "opacity": 0,
-            },
-          }
-        }
-        collapsable={false}
-        style={
-          Object {
-            "backgroundColor": "green",
-            "borderColor": "red",
-            "flex": 1,
-            "opacity": 0,
-          }
-        }
-        testID="pickerBackdrop"
-      />
-    </View>
+      testID="pickerBackdropPressable"
+    />
     <View
       pointerEvents="box-none"
       style={

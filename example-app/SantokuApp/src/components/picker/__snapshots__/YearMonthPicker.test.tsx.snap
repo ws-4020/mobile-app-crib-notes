@@ -31,7 +31,7 @@ exports[`YearMonthPicker only with required props renders successfully if invisi
 exports[`YearMonthPicker only with required props renders successfully if visible: YearMonthPicker if visible. 1`] = `
 Array [
   <Modal
-    animationType="none"
+    animationType="fade"
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     statusBarTranslucent={true}
@@ -53,34 +53,18 @@ Array [
       onStartShouldSetResponder={[Function]}
       style={
         Object {
+          "backgroundColor": "black",
           "bottom": 0,
           "display": "flex",
           "left": 0,
+          "opacity": 0.4,
           "position": "absolute",
           "right": 0,
           "top": 0,
         }
       }
-    >
-      <View
-        animatedStyle={
-          Object {
-            "value": Object {
-              "opacity": 0,
-            },
-          }
-        }
-        collapsable={false}
-        style={
-          Object {
-            "backgroundColor": "black",
-            "flex": 1,
-            "opacity": 0,
-          }
-        }
-        testID="pickerBackdrop"
-      />
-    </View>
+      testID="pickerBackdrop"
+    />
     <View
       pointerEvents="box-none"
       style={
@@ -341,11 +325,11 @@ Array [
 exports[`YearMonthPicker with all props should be applied all properly: YearMonthPicker all properly. 1`] = `
 Array [
   <Modal
-    animationType="none"
+    animationType="fade"
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     statusBarTranslucent={true}
-    testID="modal"
+    testID="pickerBackdropModal"
     transparent={true}
     visible={true}
   >
@@ -364,35 +348,19 @@ Array [
       onStartShouldSetResponder={[Function]}
       style={
         Object {
+          "backgroundColor": "green",
+          "borderColor": "red",
           "bottom": 0,
           "display": "flex",
           "left": 0,
+          "opacity": 0.4,
           "position": "absolute",
           "right": 0,
           "top": 0,
         }
       }
-    >
-      <View
-        animatedStyle={
-          Object {
-            "value": Object {
-              "opacity": 0,
-            },
-          }
-        }
-        collapsable={false}
-        style={
-          Object {
-            "backgroundColor": "green",
-            "borderColor": "red",
-            "flex": 1,
-            "opacity": 0,
-          }
-        }
-        testID="pickerBackdrop"
-      />
-    </View>
+      testID="pickerBackdropPressable"
+    />
     <View
       pointerEvents="box-none"
       style={
