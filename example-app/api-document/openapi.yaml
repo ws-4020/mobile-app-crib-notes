@@ -669,8 +669,6 @@ paths:
       responses:
         '204':
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
       description: イベントに対するいいねを行います。
       tags:
         - Event
@@ -680,8 +678,6 @@ paths:
       responses:
         '204':
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
       description: イベントに対するいいねを取り消します。
       tags:
         - Event
@@ -699,8 +695,6 @@ paths:
       responses:
         '204':
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
       description: 質問に対するいいねを行います。
       tags:
         - Question
@@ -710,8 +704,6 @@ paths:
       responses:
         '204':
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
       description: 質問に対するいいねを取り消します。
       tags:
         - Question
@@ -735,8 +727,6 @@ paths:
       responses:
         '204':
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
       description: 質問のコメントに対するいいねを行います。
       tags:
         - Question
@@ -746,8 +736,6 @@ paths:
       responses:
         '204':
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
       description: 質問のコメントに対するいいねを取り消します。
       tags:
         - Question
@@ -771,8 +759,6 @@ paths:
       responses:
         '204':
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
       description: 回答に対するいいねを行います。
       tags:
         - Question
@@ -782,8 +768,6 @@ paths:
       responses:
         '204':
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
       description: 回答に対するいいねを取り消します。
       tags:
         - Question
@@ -813,8 +797,6 @@ paths:
       responses:
         '204':
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
       description: 回答のコメントに対するいいねを行います。
       tags:
         - Question
@@ -824,8 +806,6 @@ paths:
       responses:
         '204':
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
       description: 回答のコメントに対するいいねを取り消します。
       tags:
         - Question
@@ -1337,8 +1317,6 @@ components:
           description: 回答内容
     Like:
       title: Like
-      x-stoplight:
-        id: pplzhy7tksz4g
       description: いいね済の質問、回答、コメント
       type: array
       items:
