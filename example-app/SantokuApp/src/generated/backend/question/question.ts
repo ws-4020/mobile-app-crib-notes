@@ -298,7 +298,7 @@ export const usePostQuestionsQuestionIdAnswersAnswerIdComments = <
  * @summary いいねの実施（質問）
  */
 export const putQuestionsQuestionIdLike = (questionId: string) => {
-  return backendCustomInstance<void>({url: `/questions/${questionId}/like`, method: 'put'});
+  return backendCustomInstance<void>({url: `/accounts/me/likes/questions/${questionId}`, method: 'put'});
 };
 
 export type PutQuestionsQuestionIdLikeMutationResult = NonNullable<
@@ -336,7 +336,7 @@ export const usePutQuestionsQuestionIdLike = <TError = ErrorType<BadRequestRespo
  * @summary いいねの取消（質問）
  */
 export const deleteQuestionsQuestionIdLike = (questionId: string) => {
-  return backendCustomInstance<void>({url: `/questions/${questionId}/like`, method: 'delete'});
+  return backendCustomInstance<void>({url: `/accounts/me/likes/questions/${questionId}`, method: 'delete'});
 };
 
 export type DeleteQuestionsQuestionIdLikeMutationResult = NonNullable<
@@ -374,7 +374,10 @@ export const useDeleteQuestionsQuestionIdLike = <TError = ErrorType<BadRequestRe
  * @summary いいねの実施（質問コメント）
  */
 export const putQuestionsQuestionIdCommentCommentIdLike = (questionId: string, commentId: string) => {
-  return backendCustomInstance<void>({url: `/questions/${questionId}/comments/${commentId}/like`, method: 'put'});
+  return backendCustomInstance<void>({
+    url: `/accounts/me/likes/questions/${questionId}/comments/${commentId}`,
+    method: 'put',
+  });
 };
 
 export type PutQuestionsQuestionIdCommentCommentIdLikeMutationResult = NonNullable<
@@ -417,7 +420,10 @@ export const usePutQuestionsQuestionIdCommentCommentIdLike = <
  * @summary いいねの取消（質問コメント）
  */
 export const deleteQuestionsQuestionIdCommentsCommentIdLike = (questionId: string, commentId: string) => {
-  return backendCustomInstance<void>({url: `/questions/${questionId}/comments/${commentId}/like`, method: 'delete'});
+  return backendCustomInstance<void>({
+    url: `/accounts/me/likes/questions/${questionId}/comments/${commentId}`,
+    method: 'delete',
+  });
 };
 
 export type DeleteQuestionsQuestionIdCommentsCommentIdLikeMutationResult = NonNullable<
@@ -460,7 +466,10 @@ export const useDeleteQuestionsQuestionIdCommentsCommentIdLike = <
  * @summary いいねの実施（回答）
  */
 export const putQuestionsQuestionIdAnswerAnswerIdLike = (questionId: string, answerId: string) => {
-  return backendCustomInstance<void>({url: `/questions/${questionId}/answers/${answerId}/like`, method: 'put'});
+  return backendCustomInstance<void>({
+    url: `/accounts/me/likes/questions/${questionId}/answers/${answerId}`,
+    method: 'put',
+  });
 };
 
 export type PutQuestionsQuestionIdAnswerAnswerIdLikeMutationResult = NonNullable<
@@ -503,7 +512,10 @@ export const usePutQuestionsQuestionIdAnswerAnswerIdLike = <
  * @summary いいねの取消（回答）
  */
 export const deleteQuestionsQuestionIdAnswersAnswerIdLike = (questionId: string, answerId: string) => {
-  return backendCustomInstance<void>({url: `/questions/${questionId}/answers/${answerId}/like`, method: 'delete'});
+  return backendCustomInstance<void>({
+    url: `/accounts/me/likes/questions/${questionId}/answers/${answerId}`,
+    method: 'delete',
+  });
 };
 
 export type DeleteQuestionsQuestionIdAnswersAnswerIdLikeMutationResult = NonNullable<
@@ -551,7 +563,7 @@ export const putQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLike = (
   commentId: string,
 ) => {
   return backendCustomInstance<void>({
-    url: `/questions/${questionId}/answers/${answerId}/comments/${commentId}/like`,
+    url: `/accounts/me/likes/questions/${questionId}/answers/${answerId}/comments/${commentId}`,
     method: 'put',
   });
 };
@@ -601,7 +613,7 @@ export const deleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLike = (
   commentId: string,
 ) => {
   return backendCustomInstance<void>({
-    url: `/questions/${questionId}/answers/${answerId}/comments/${commentId}/like`,
+    url: `/accounts/me/likes/questions/${questionId}/answers/${answerId}/comments/${commentId}`,
     method: 'delete',
   });
 };

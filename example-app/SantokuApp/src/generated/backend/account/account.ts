@@ -27,6 +27,7 @@ import type {
   UpdateDeviceToken,
   TermsOfServiceAgreementStatus,
   AccountDeletion,
+  Like,
 } from '.././model';
 import {backendCustomInstance, ErrorType} from '../../../framework/backend/customInstance';
 
@@ -505,4 +506,43 @@ export const useDeleteAccountsMeDelete = <
     mutationFn,
     mutationOptions,
   );
+};
+/**
+ * いいね済の質問と回答およびコメントを取得します。
+ * @summary いいね済の取得
+ */
+export const getAccountsMeLikesEventsEventId = (signal?: AbortSignal) => {
+  return backendCustomInstance<Like>({url: `/accounts/me/likes`, method: 'get', signal});
+};
+
+export const getGetAccountsMeLikesEventsEventIdQueryKey = () => [`/accounts/me/likes`];
+
+export type GetAccountsMeLikesEventsEventIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>
+>;
+export type GetAccountsMeLikesEventsEventIdQueryError = ErrorType<unknown>;
+
+export const useGetAccountsMeLikesEventsEventId = <
+  TData = Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>, TError, TData>;
+}): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
+  const {query: queryOptions} = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetAccountsMeLikesEventsEventIdQueryKey();
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>> = ({signal}) =>
+    getAccountsMeLikesEventsEventId(signal);
+
+  const query = useQuery<Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>, TError, TData>(
+    queryKey,
+    queryFn,
+    queryOptions,
+  );
+
+  return {
+    queryKey,
+    ...query,
+  };
 };

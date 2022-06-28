@@ -18,6 +18,4 @@ export interface Comment {
   readonly datetime: string;
   /** いいね数 */
   readonly likes: number;
-  /** いいね済か否か */
-  readonly liked: boolean;
 }

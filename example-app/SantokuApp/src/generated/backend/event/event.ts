@@ -126,7 +126,7 @@ export const useGetEventsEventId = <TData = Awaited<ReturnType<typeof getEventsE
  * @summary いいねの実施（イベント）
  */
 export const putEventsEventIdLike = (eventId: string) => {
-  return backendCustomInstance<void>({url: `/events/${eventId}/like`, method: 'put'});
+  return backendCustomInstance<void>({url: `/accounts/me/likes/events/${eventId}`, method: 'put'});
 };
 
 export type PutEventsEventIdLikeMutationResult = NonNullable<Awaited<ReturnType<typeof putEventsEventIdLike>>>;
@@ -154,7 +154,7 @@ export const usePutEventsEventIdLike = <TError = ErrorType<BadRequestResponse>, 
  * @summary いいねの取消（イベント）
  */
 export const deleteEventsEventIdLike = (eventId: string) => {
-  return backendCustomInstance<void>({url: `/events/${eventId}/like`, method: 'delete'});
+  return backendCustomInstance<void>({url: `/accounts/me/likes/events/${eventId}`, method: 'delete'});
 };
 
 export type DeleteEventsEventIdLikeMutationResult = NonNullable<Awaited<ReturnType<typeof deleteEventsEventIdLike>>>;

@@ -655,7 +655,7 @@ paths:
               $ref: '#/components/schemas/CommentRegistration'
       tags:
         - Question
-  '/events/{eventId}/like':
+  '/accounts/me/likes/events/{eventId}':
     parameters:
       - schema:
           type: string
@@ -685,7 +685,7 @@ paths:
       description: イベントに対するいいねを取り消します。
       tags:
         - Event
-  '/questions/{questionId}/like':
+  '/accounts/me/likes/questions/{questionId}':
     parameters:
       - schema:
           type: string
@@ -715,7 +715,7 @@ paths:
       description: 質問に対するいいねを取り消します。
       tags:
         - Question
-  '/questions/{questionId}/comments/{commentId}/like':
+  '/accounts/me/likes/questions/{questionId}/comments/{commentId}':
     parameters:
       - schema:
           type: string
@@ -751,7 +751,7 @@ paths:
       description: 質問のコメントに対するいいねを取り消します。
       tags:
         - Question
-  '/questions/{questionId}/answers/{answerId}/like':
+  '/accounts/me/likes/questions/{questionId}/answers/{answerId}':
     parameters:
       - schema:
           type: string
@@ -787,7 +787,7 @@ paths:
       description: 回答に対するいいねを取り消します。
       tags:
         - Question
-  '/questions/{questionId}/answers/{answerId}/comments/{commentId}/like':
+  '/accounts/me/likes/questions/{questionId}/answers/{answerId}/comments/{commentId}':
     parameters:
       - schema:
           type: string
@@ -829,6 +829,21 @@ paths:
       description: 回答のコメントに対するいいねを取り消します。
       tags:
         - Question
+  /accounts/me/likes:
+    parameters: []
+    get:
+      summary: いいね済の取得
+      tags:
+        - Account
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Like'
+      operationId: get-accounts-me-likes-events-eventId
+      description: いいね済の質問と回答およびコメントを取得します。
 components:
   schemas:
     CsrfTokenResponse:
@@ -1047,14 +1062,9 @@ components:
           type: integer
           description: いいね数
           readOnly: true
-        liked:
-          type: boolean
-          description: いいね済か否か
-          readOnly: true
       required:
         - eventId
         - likes
-        - liked
     Question:
       type: object
       title: Question
@@ -1103,10 +1113,6 @@ components:
           type: integer
           description: コメント数
           readOnly: true
-        liked:
-          type: boolean
-          description: いいね済か否か
-          readOnly: true
       required:
         - questionId
         - datetime
@@ -1116,7 +1122,6 @@ components:
         - answers
         - likes
         - comments
-        - liked
     Notification:
       type: object
       title: Notification
@@ -1215,15 +1220,10 @@ components:
           type: integer
           description: いいね数
           readOnly: true
-        liked:
-          type: boolean
-          description: いいね済か否か
-          readOnly: true
       required:
         - commentId
         - datetime
         - likes
-        - liked
     Template:
       type: object
       title: Template
@@ -1335,6 +1335,39 @@ components:
         content:
           type: string
           description: 回答内容
+    Like:
+      title: Like
+      x-stoplight:
+        id: pplzhy7tksz4g
+      description: いいね済の質問、回答、コメント
+      type: array
+      items:
+        type: object
+        description: 特定の質問に紐づくいいね済の質問、回答、コメント
+        properties:
+          questionId:
+            type: string
+            description: いいね済の質問ID
+          commentId:
+            type: array
+            description: 質問に対するいいね済のコメントID
+            items:
+              type: string
+          answer:
+            type: array
+            description: いいね済の回答とコメント
+            items:
+              type: object
+              description: 特定の回答に紐づくいいね済の回答、コメント
+              properties:
+                answerId:
+                  type: string
+                  description: いいね済の回答ID
+                commentId:
+                  type: array
+                  description: 回答に対するいいね済のコメントID
+                  items:
+                    type: string
   responses:
     BadRequest:
       description: Bad Request

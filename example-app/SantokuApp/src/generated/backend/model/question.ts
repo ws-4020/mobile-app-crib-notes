@@ -32,6 +32,4 @@ export interface Question {
   readonly likes: number;
   /** コメント数 */
   readonly comments: number;
-  /** いいね済か否か */
-  readonly liked: boolean;
 }
