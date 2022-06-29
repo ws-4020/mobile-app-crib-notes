@@ -15,7 +15,7 @@ export interface Comment {
   /** コメント内容 */
   content?: string;
   /** コメント日時 */
-  readonly datetime: string;
+  datetime: string;
   /** いいね数 */
-  readonly likes: number;
+  likes: number;
 }

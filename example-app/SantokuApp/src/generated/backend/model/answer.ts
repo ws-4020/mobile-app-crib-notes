@@ -15,9 +15,9 @@ export interface Answer {
   /** 回答内容 */
   content?: string;
   /** 回答日時 */
-  readonly datetime: string;
+  datetime: string;
   /** いいね数 */
-  readonly likes: number;
+  likes: number;
   /** コメント数 */
-  readonly comments: number;
+  comments: number;
 }

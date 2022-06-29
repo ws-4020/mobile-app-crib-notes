@@ -1041,7 +1041,6 @@ components:
         likes:
           type: integer
           description: いいね数
-          readOnly: true
       required:
         - eventId
         - likes
@@ -1065,12 +1064,10 @@ components:
           description: 質問に設定されているタグ
           items:
             type: string
-            readOnly: true
         datetime:
           type: string
           description: 質問日時
           format: date-time
-          readOnly: true
         beginner:
           type: boolean
           description: 初心者か否か
@@ -1080,19 +1077,15 @@ components:
         views:
           type: integer
           description: 閲覧数
-          readOnly: true
         answers:
           type: integer
           description: 回答数
-          readOnly: true
         likes:
           type: integer
           description: いいね数
-          readOnly: true
         comments:
           type: integer
           description: コメント数
-          readOnly: true
       required:
         - questionId
         - datetime
@@ -1114,17 +1107,14 @@ components:
         title:
           type: string
           description: お知らせのタイトル
-          readOnly: true
         datetime:
           type: string
           description: 発行日時
           format: date-time
-          readOnly: true
         contentUrl:
           type: string
           description: お知らせページのURL
           format: uri-reference
-          readOnly: true
       required:
         - notificationId
         - datetime
@@ -1141,11 +1131,9 @@ components:
         tagName:
           type: string
           description: タグ名
-          readOnly: true
         questions:
           type: integer
           description: 設定されている質問数
-          readOnly: true
       required:
         - tagId
         - questions
@@ -1165,15 +1153,12 @@ components:
           type: string
           description: 回答日時
           format: date-time
-          readOnly: true
         likes:
           type: integer
           description: いいね数
-          readOnly: true
         comments:
           type: integer
           description: コメント数
-          readOnly: true
       required:
         - answerId
         - datetime
@@ -1195,11 +1180,9 @@ components:
           type: string
           description: コメント日時
           format: date-time
-          readOnly: true
         likes:
           type: integer
           description: いいね数
-          readOnly: true
       required:
         - commentId
         - datetime
@@ -1216,7 +1199,6 @@ components:
         content:
           type: string
           description: テンプレート内容
-          readOnly: true
       required:
         - templateId
     QuestionAndAnswer:

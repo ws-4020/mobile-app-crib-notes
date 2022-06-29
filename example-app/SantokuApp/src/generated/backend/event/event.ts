@@ -131,9 +131,9 @@ export const putEventsEventIdLike = (eventId: string) => {
 
 export type PutEventsEventIdLikeMutationResult = NonNullable<Awaited<ReturnType<typeof putEventsEventIdLike>>>;
 
-export type PutEventsEventIdLikeMutationError = ErrorType<BadRequestResponse>;
+export type PutEventsEventIdLikeMutationError = ErrorType<unknown>;
 
-export const usePutEventsEventIdLike = <TError = ErrorType<BadRequestResponse>, TContext = unknown>(options?: {
+export const usePutEventsEventIdLike = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof putEventsEventIdLike>>, TError, {eventId: string}, TContext>;
 }) => {
   const {mutation: mutationOptions} = options ?? {};
@@ -159,9 +159,9 @@ export const deleteEventsEventIdLike = (eventId: string) => {
 
 export type DeleteEventsEventIdLikeMutationResult = NonNullable<Awaited<ReturnType<typeof deleteEventsEventIdLike>>>;
 
-export type DeleteEventsEventIdLikeMutationError = ErrorType<BadRequestResponse>;
+export type DeleteEventsEventIdLikeMutationError = ErrorType<unknown>;
 
-export const useDeleteEventsEventIdLike = <TError = ErrorType<BadRequestResponse>, TContext = unknown>(options?: {
+export const useDeleteEventsEventIdLike = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteEventsEventIdLike>>,
     TError,

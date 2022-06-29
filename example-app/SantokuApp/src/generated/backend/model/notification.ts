@@ -13,9 +13,9 @@ export interface Notification {
   /** お知らせID */
   readonly notificationId: string;
   /** お知らせのタイトル */
-  readonly title?: string;
+  title?: string;
   /** 発行日時 */
-  readonly datetime: string;
+  datetime: string;
   /** お知らせページのURL */
-  readonly contentUrl: string;
+  contentUrl: string;
 }

@@ -19,17 +19,17 @@ export interface Question {
   /** 質問に設定されているタグ */
   tags?: string[];
   /** 質問日時 */
-  readonly datetime: string;
+  datetime: string;
   /** 初心者か否か */
   beginner: boolean;
   /** 解決済か否か */
   resolved: boolean;
   /** 閲覧数 */
-  readonly views: number;
+  views: number;
   /** 回答数 */
-  readonly answers: number;
+  answers: number;
   /** いいね数 */
-  readonly likes: number;
+  likes: number;
   /** コメント数 */
-  readonly comments: number;
+  comments: number;
 }

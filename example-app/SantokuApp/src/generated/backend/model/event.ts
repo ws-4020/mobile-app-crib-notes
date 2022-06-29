@@ -17,5 +17,5 @@ export interface Event {
   /** 掲載終了日 */
   endDate?: string;
   /** いいね数 */
-  readonly likes: number;
+  likes: number;
 }

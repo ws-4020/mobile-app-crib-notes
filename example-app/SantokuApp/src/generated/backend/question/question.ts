@@ -305,9 +305,9 @@ export type PutQuestionsQuestionIdLikeMutationResult = NonNullable<
   Awaited<ReturnType<typeof putQuestionsQuestionIdLike>>
 >;
 
-export type PutQuestionsQuestionIdLikeMutationError = ErrorType<BadRequestResponse>;
+export type PutQuestionsQuestionIdLikeMutationError = ErrorType<unknown>;
 
-export const usePutQuestionsQuestionIdLike = <TError = ErrorType<BadRequestResponse>, TContext = unknown>(options?: {
+export const usePutQuestionsQuestionIdLike = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof putQuestionsQuestionIdLike>>,
     TError,
@@ -343,9 +343,9 @@ export type DeleteQuestionsQuestionIdLikeMutationResult = NonNullable<
   Awaited<ReturnType<typeof deleteQuestionsQuestionIdLike>>
 >;
 
-export type DeleteQuestionsQuestionIdLikeMutationError = ErrorType<BadRequestResponse>;
+export type DeleteQuestionsQuestionIdLikeMutationError = ErrorType<unknown>;
 
-export const useDeleteQuestionsQuestionIdLike = <TError = ErrorType<BadRequestResponse>, TContext = unknown>(options?: {
+export const useDeleteQuestionsQuestionIdLike = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteQuestionsQuestionIdLike>>,
     TError,
@@ -384,10 +384,10 @@ export type PutQuestionsQuestionIdCommentCommentIdLikeMutationResult = NonNullab
   Awaited<ReturnType<typeof putQuestionsQuestionIdCommentCommentIdLike>>
 >;
 
-export type PutQuestionsQuestionIdCommentCommentIdLikeMutationError = ErrorType<BadRequestResponse>;
+export type PutQuestionsQuestionIdCommentCommentIdLikeMutationError = ErrorType<unknown>;
 
 export const usePutQuestionsQuestionIdCommentCommentIdLike = <
-  TError = ErrorType<BadRequestResponse>,
+  TError = ErrorType<unknown>,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
@@ -430,10 +430,10 @@ export type DeleteQuestionsQuestionIdCommentsCommentIdLikeMutationResult = NonNu
   Awaited<ReturnType<typeof deleteQuestionsQuestionIdCommentsCommentIdLike>>
 >;
 
-export type DeleteQuestionsQuestionIdCommentsCommentIdLikeMutationError = ErrorType<BadRequestResponse>;
+export type DeleteQuestionsQuestionIdCommentsCommentIdLikeMutationError = ErrorType<unknown>;
 
 export const useDeleteQuestionsQuestionIdCommentsCommentIdLike = <
-  TError = ErrorType<BadRequestResponse>,
+  TError = ErrorType<unknown>,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
@@ -476,12 +476,9 @@ export type PutQuestionsQuestionIdAnswerAnswerIdLikeMutationResult = NonNullable
   Awaited<ReturnType<typeof putQuestionsQuestionIdAnswerAnswerIdLike>>
 >;
 
-export type PutQuestionsQuestionIdAnswerAnswerIdLikeMutationError = ErrorType<BadRequestResponse>;
+export type PutQuestionsQuestionIdAnswerAnswerIdLikeMutationError = ErrorType<unknown>;
 
-export const usePutQuestionsQuestionIdAnswerAnswerIdLike = <
-  TError = ErrorType<BadRequestResponse>,
-  TContext = unknown,
->(options?: {
+export const usePutQuestionsQuestionIdAnswerAnswerIdLike = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof putQuestionsQuestionIdAnswerAnswerIdLike>>,
     TError,
@@ -522,10 +519,10 @@ export type DeleteQuestionsQuestionIdAnswersAnswerIdLikeMutationResult = NonNull
   Awaited<ReturnType<typeof deleteQuestionsQuestionIdAnswersAnswerIdLike>>
 >;
 
-export type DeleteQuestionsQuestionIdAnswersAnswerIdLikeMutationError = ErrorType<BadRequestResponse>;
+export type DeleteQuestionsQuestionIdAnswersAnswerIdLikeMutationError = ErrorType<unknown>;
 
 export const useDeleteQuestionsQuestionIdAnswersAnswerIdLike = <
-  TError = ErrorType<BadRequestResponse>,
+  TError = ErrorType<unknown>,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
@@ -572,10 +569,10 @@ export type PutQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLikeMutationResu
   Awaited<ReturnType<typeof putQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLike>>
 >;
 
-export type PutQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLikeMutationError = ErrorType<BadRequestResponse>;
+export type PutQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLikeMutationError = ErrorType<unknown>;
 
 export const usePutQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLike = <
-  TError = ErrorType<BadRequestResponse>,
+  TError = ErrorType<unknown>,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
@@ -622,10 +619,10 @@ export type DeleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLikeMutatio
   Awaited<ReturnType<typeof deleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLike>>
 >;
 
-export type DeleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLikeMutationError = ErrorType<BadRequestResponse>;
+export type DeleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLikeMutationError = ErrorType<unknown>;
 
 export const useDeleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLike = <
-  TError = ErrorType<BadRequestResponse>,
+  TError = ErrorType<unknown>,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
