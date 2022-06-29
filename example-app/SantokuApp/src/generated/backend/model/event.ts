@@ -5,17 +5,10 @@
  * SantokuAppのREST API。
  * OpenAPI spec version: 1.0.0
  */
+import type {ContentOfEvent} from './contentOfEvent';
+import type {AccountProfile} from './accountProfile';
 
 /**
- * イベント情報
+ * イベント
  */
-export interface Event {
-  /** イベントID */
-  readonly eventId: string;
-  /** イベントのタイトル */
-  title?: string;
-  /** 掲載終了日 */
-  endDate?: string;
-  /** いいね数 */
-  likes: number;
-}
+export type Event = ContentOfEvent & AccountProfile;

@@ -15,7 +15,7 @@ import {
   UseQueryResult,
   QueryKey,
 } from 'react-query';
-import type {GetEvents200Item, BadRequestResponse, GetEventsParams, Event, EventRegistration} from '.././model';
+import type {Event, BadRequestResponse, GetEventsParams, ContentOfEvent, EventRegistration} from '.././model';
 import {backendCustomInstance, ErrorType} from '../../../framework/backend/customInstance';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
@@ -27,7 +27,7 @@ type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
  * @summary イベント一覧取得
  */
 export const getEvents = (params?: GetEventsParams, signal?: AbortSignal) => {
-  return backendCustomInstance<GetEvents200Item[]>({url: `/events`, method: 'get', signal, params});
+  return backendCustomInstance<Event[]>({url: `/events`, method: 'get', signal, params});
 };
 
 export const getGetEventsQueryKey = (params?: GetEventsParams) => [`/events`, ...(params ? [params] : [])];
@@ -58,7 +58,7 @@ export const useGetEvents = <TData = Awaited<ReturnType<typeof getEvents>>, TErr
  * @summary イベント登録
  */
 export const postEvents = (eventRegistration: EventRegistration) => {
-  return backendCustomInstance<Event>({
+  return backendCustomInstance<ContentOfEvent>({
     url: `/events`,
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -91,7 +91,7 @@ export const usePostEvents = <TError = ErrorType<BadRequestResponse>, TContext =
  * @summary イベント取得
  */
 export const getEventsEventId = (eventId: string, signal?: AbortSignal) => {
-  return backendCustomInstance<unknown>({url: `/events/${eventId}`, method: 'get', signal});
+  return backendCustomInstance<Event>({url: `/events/${eventId}`, method: 'get', signal});
 };
 
 export const getGetEventsEventIdQueryKey = (eventId: string) => [`/events/${eventId}`];

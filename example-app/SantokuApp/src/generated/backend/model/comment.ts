@@ -5,17 +5,10 @@
  * SantokuAppのREST API。
  * OpenAPI spec version: 1.0.0
  */
+import type {ContentOfComment} from './contentOfComment';
+import type {AccountProfile} from './accountProfile';
 
 /**
- * コメント情報
+ * コメント
  */
-export interface Comment {
-  /** コメントID */
-  readonly commentId: string;
-  /** コメント内容 */
-  content?: string;
-  /** コメント日時 */
-  datetime: string;
-  /** いいね数 */
-  likes: number;
-}
+export type Comment = ContentOfComment & AccountProfile;

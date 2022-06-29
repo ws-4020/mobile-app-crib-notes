@@ -16,15 +16,15 @@ import {
   QueryKey,
 } from 'react-query';
 import type {
-  GetListQuestions200Item,
+  Question,
   BadRequestResponse,
   GetListQuestionsParams,
-  Question,
+  ContentOfQuestion,
   QuestionRegistration,
   QuestionAndAnswer,
-  Answer,
+  ContentOfAnswer,
   AnswerRegistration,
-  Comment,
+  ContentOfComment,
   CommentRegistration,
 } from '.././model';
 import {backendCustomInstance, ErrorType} from '../../../framework/backend/customInstance';
@@ -38,7 +38,7 @@ type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
  * @summary 質問一覧取得
  */
 export const getListQuestions = (params?: GetListQuestionsParams, signal?: AbortSignal) => {
-  return backendCustomInstance<GetListQuestions200Item[]>({url: `/questions`, method: 'get', signal, params});
+  return backendCustomInstance<Question[]>({url: `/questions`, method: 'get', signal, params});
 };
 
 export const getGetListQuestionsQueryKey = (params?: GetListQuestionsParams) => [
@@ -76,7 +76,7 @@ export const useGetListQuestions = <
  * @summary 質問登録
  */
 export const postQuestions = (questionRegistration: QuestionRegistration) => {
-  return backendCustomInstance<Question>({
+  return backendCustomInstance<ContentOfQuestion>({
     url: `/questions`,
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -155,7 +155,7 @@ export const useGetDetailQuestion = <
  * @summary 回答登録
  */
 export const postQuestionsQuestionIdAnswers = (questionId: string, answerRegistration: AnswerRegistration) => {
-  return backendCustomInstance<Answer>({
+  return backendCustomInstance<ContentOfAnswer>({
     url: `/questions/${questionId}/answers`,
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -203,7 +203,7 @@ export const usePostQuestionsQuestionIdAnswers = <
  * @summary コメント登録（質問）
  */
 export const postDetailComment = (questionId: string, commentRegistration: CommentRegistration) => {
-  return backendCustomInstance<Comment>({
+  return backendCustomInstance<ContentOfComment>({
     url: `/questions/${questionId}/comments`,
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -250,7 +250,7 @@ export const postQuestionsQuestionIdAnswersAnswerIdComments = (
   answerId: string,
   commentRegistration: CommentRegistration,
 ) => {
-  return backendCustomInstance<Comment>({
+  return backendCustomInstance<ContentOfComment>({
     url: `/questions/${questionId}/answers/${answerId}/comments`,
     method: 'post',
     headers: {'Content-Type': 'application/json'},

@@ -362,9 +362,7 @@ paths:
               schema:
                 type: array
                 items:
-                  allOf:
-                    - $ref: '#/components/schemas/Event'
-                    - $ref: '#/components/schemas/AccountProfile'
+                  $ref: '#/components/schemas/Event'
         '400':
           $ref: '#/components/responses/BadRequest'
       operationId: get-events
@@ -391,7 +389,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Event'
+                $ref: '#/components/schemas/ContentOfEvent'
         '400':
           $ref: '#/components/responses/BadRequest'
       description: イベントを登録します。
@@ -415,9 +413,7 @@ paths:
               schema:
                 type: array
                 items:
-                  allOf:
-                    - $ref: '#/components/schemas/Question'
-                    - $ref: '#/components/schemas/AccountProfile'
+                  $ref: '#/components/schemas/Question'
         '400':
           $ref: '#/components/responses/BadRequest'
       operationId: get-list-questions
@@ -461,7 +457,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Question'
+                $ref: '#/components/schemas/ContentOfQuestion'
         '400':
           $ref: '#/components/responses/BadRequest'
       requestBody:
@@ -541,7 +537,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ''
+                $ref: '#/components/schemas/Event'
       operationId: get-events-eventId
       description: 特定のイベントを取得します。
   '/questions/{questionId}':
@@ -581,7 +577,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Answer'
+                $ref: '#/components/schemas/ContentOfAnswer'
         '400':
           $ref: '#/components/responses/BadRequest'
       description: 回答を登録します。
@@ -603,7 +599,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Comment'
+                $ref: '#/components/schemas/ContentOfComment'
         '400':
           $ref: '#/components/responses/BadRequest'
       description: 質問に対するコメントを登録します。
@@ -644,7 +640,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Comment'
+                $ref: '#/components/schemas/ContentOfComment'
         '400':
           $ref: '#/components/responses/BadRequest'
       description: 回答に対するコメントを登録します。
@@ -655,6 +651,21 @@ paths:
               $ref: '#/components/schemas/CommentRegistration'
       tags:
         - Question
+  /accounts/me/likes:
+    parameters: []
+    get:
+      summary: いいね済の取得
+      tags:
+        - Account
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Like'
+      operationId: get-accounts-me-likes-events-eventId
+      description: いいね済の質問と回答およびコメントを取得します。
   '/accounts/me/likes/events/{eventId}':
     parameters:
       - schema:
@@ -809,21 +820,6 @@ paths:
       description: 回答のコメントに対するいいねを取り消します。
       tags:
         - Question
-  /accounts/me/likes:
-    parameters: []
-    get:
-      summary: いいね済の取得
-      tags:
-        - Account
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Like'
-      operationId: get-accounts-me-likes-events-eventId
-      description: いいね済の質問と回答およびコメントを取得します。
 components:
   schemas:
     CsrfTokenResponse:
@@ -1023,9 +1019,39 @@ components:
         - code
         - message
     Event:
-      type: object
+      allOf:
+        - $ref: '#/components/schemas/ContentOfEvent'
+        - $ref: '#/components/schemas/AccountProfile'
       title: Event
-      description: イベント情報
+      description: イベント
+    Question:
+      title: Question
+      x-stoplight:
+        id: ru7aaxsjxy28i
+      description: 質問
+      allOf:
+        - $ref: '#/components/schemas/ContentOfQuestion'
+        - $ref: '#/components/schemas/AccountProfile'
+    Answer:
+      title: Answer
+      x-stoplight:
+        id: 2g09s46j6l7zg
+      description: 回答
+      allOf:
+        - $ref: '#/components/schemas/ContentOfAnswer'
+        - $ref: '#/components/schemas/AccountProfile'
+    Comment:
+      title: Comment
+      x-stoplight:
+        id: hnfaraz5hrr47
+      description: コメント
+      allOf:
+        - $ref: '#/components/schemas/ContentOfComment'
+        - $ref: '#/components/schemas/AccountProfile'
+    ContentOfEvent:
+      type: object
+      title: ContentOfEvent
+      description: イベント内容
       properties:
         eventId:
           type: string
@@ -1044,10 +1070,10 @@ components:
       required:
         - eventId
         - likes
-    Question:
+    ContentOfQuestion:
       type: object
-      title: Question
-      description: 質問情報
+      title: ContentOfQuestion
+      description: 質問内容
       properties:
         questionId:
           type: string
@@ -1095,6 +1121,56 @@ components:
         - answers
         - likes
         - comments
+    ContentOfAnswer:
+      type: object
+      title: ContentOfAnswer
+      description: 回答内容
+      properties:
+        answerId:
+          type: string
+          description: 回答ID
+          readOnly: true
+        content:
+          type: string
+          description: 回答内容
+        datetime:
+          type: string
+          description: 回答日時
+          format: date-time
+        likes:
+          type: integer
+          description: いいね数
+        comments:
+          type: integer
+          description: コメント数
+      required:
+        - answerId
+        - datetime
+        - likes
+        - comments
+    ContentOfComment:
+      type: object
+      title: ContentOfComment
+      description: コメント内容
+      properties:
+        commentId:
+          type: string
+          description: コメントID
+          readOnly: true
+        content:
+          type: string
+          description: コメント内容
+        datetime:
+          type: string
+          description: コメント日時
+          format: date-time
+        likes:
+          type: integer
+          description: いいね数
+      required:
+        - commentId
+        - datetime
+        - likes
     Notification:
       type: object
       title: Notification
@@ -1137,56 +1213,6 @@ components:
       required:
         - tagId
         - questions
-    Answer:
-      type: object
-      title: Answer
-      description: 回答情報
-      properties:
-        answerId:
-          type: string
-          description: 回答ID
-          readOnly: true
-        content:
-          type: string
-          description: 回答内容
-        datetime:
-          type: string
-          description: 回答日時
-          format: date-time
-        likes:
-          type: integer
-          description: いいね数
-        comments:
-          type: integer
-          description: コメント数
-      required:
-        - answerId
-        - datetime
-        - likes
-        - comments
-    Comment:
-      type: object
-      title: Comment
-      description: コメント情報
-      properties:
-        commentId:
-          type: string
-          description: コメントID
-          readOnly: true
-        content:
-          type: string
-          description: コメント内容
-        datetime:
-          type: string
-          description: コメント日時
-          format: date-time
-        likes:
-          type: integer
-          description: いいね数
-      required:
-        - commentId
-        - datetime
-        - likes
     Template:
       type: object
       title: Template
@@ -1213,18 +1239,12 @@ components:
             - question
           properties:
             question:
-              allOf:
-                - $ref: '#/components/schemas/Question'
-                - $ref: '#/components/schemas/AccountProfile'
-              description: 質問
+              $ref: '#/components/schemas/Question'
             commentList:
               type: array
               description: 質問に対するコメントのリスト
               items:
-                allOf:
-                  - $ref: '#/components/schemas/Comment'
-                  - $ref: '#/components/schemas/AccountProfile'
-                description: 質問に対するコメント
+                $ref: '#/components/schemas/Comment'
         answerInfoList:
           type: array
           description: 回答とコメントのリスト
@@ -1233,18 +1253,12 @@ components:
             description: 回答とコメント
             properties:
               answer:
-                allOf:
-                  - $ref: '#/components/schemas/Answer'
-                  - $ref: '#/components/schemas/AccountProfile'
-                description: 回答
+                $ref: '#/components/schemas/Answer'
               commentList:
                 type: array
                 description: 回答に対するコメントのリスト
                 items:
-                  allOf:
-                    - $ref: '#/components/schemas/Comment'
-                    - $ref: '#/components/schemas/AccountProfile'
-                  description: 回答に対するコメント
+                  $ref: '#/components/schemas/Comment'
       required:
         - questionInfo
     CommentRegistration:
