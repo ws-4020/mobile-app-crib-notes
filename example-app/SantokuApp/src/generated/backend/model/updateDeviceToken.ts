@@ -11,7 +11,7 @@
  */
 export interface UpdateDeviceToken {
   /** 登録するデバイス登録トークン */
-  newDeviceToken?: string;
+  newDeviceToken: string;
   /** 削除するデバイス登録トークン */
-  oldDeviceToken?: string;
+  oldDeviceToken: string;
 }

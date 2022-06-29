@@ -11,5 +11,5 @@
  */
 export interface AnswerRegistration {
   /** 回答内容 */
-  content?: string;
+  content: string;
 }

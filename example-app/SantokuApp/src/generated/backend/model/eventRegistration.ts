@@ -11,9 +11,9 @@
  */
 export interface EventRegistration {
   /** イベントのタイトル */
-  title?: string;
+  title: string;
   /** イベント内容 */
-  content?: string;
+  content: string;
   /** 掲載終了日 */
-  endDate?: string;
+  endDate: string;
 }

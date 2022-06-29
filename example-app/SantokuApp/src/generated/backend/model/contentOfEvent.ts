@@ -13,9 +13,9 @@ export interface ContentOfEvent {
   /** イベントID */
   readonly eventId: string;
   /** イベントのタイトル */
-  title?: string;
+  title: string;
   /** 掲載終了日 */
-  endDate?: string;
+  endDate: string;
   /** いいね数 */
   likes: number;
 }

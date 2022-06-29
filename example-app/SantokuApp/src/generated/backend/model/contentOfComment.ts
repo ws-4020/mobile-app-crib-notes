@@ -13,7 +13,7 @@ export interface ContentOfComment {
   /** コメントID */
   readonly commentId: string;
   /** コメント内容 */
-  content?: string;
+  content: string;
   /** コメント日時 */
   datetime: string;
   /** いいね数 */

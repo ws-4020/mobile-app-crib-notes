@@ -13,5 +13,5 @@ export interface Template {
   /** テンプレートID */
   readonly templateId: string;
   /** テンプレート内容 */
-  content?: string;
+  content: string;
 }

@@ -11,5 +11,5 @@
  */
 export interface CommentRegistration {
   /** コメント内容 */
-  content?: string;
+  content: string;
 }

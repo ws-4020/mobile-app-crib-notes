@@ -13,7 +13,7 @@ export interface Tag {
   /** タグID */
   readonly tagId: string;
   /** タグ名 */
-  tagName?: string;
+  tagName: string;
   /** 設定されている質問数 */
   questions: number;
 }

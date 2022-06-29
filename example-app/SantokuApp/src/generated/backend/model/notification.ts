@@ -13,7 +13,7 @@ export interface Notification {
   /** お知らせID */
   readonly notificationId: string;
   /** お知らせのタイトル */
-  title?: string;
+  title: string;
   /** 発行日時 */
   datetime: string;
   /** お知らせページのURL */

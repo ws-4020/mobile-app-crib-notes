@@ -12,13 +12,13 @@ import type {ProfileType} from './profileType';
  */
 export interface Profile {
   /** アカウントのニックネーム */
-  nickname?: string;
+  nickname: string;
   /** アカウントのアバター画像のURL */
   avatarImageUrl?: string;
   /** アカウントの種類 */
-  type?: ProfileType;
+  type: ProfileType;
   /** 今期ポイント数 */
-  points?: number;
+  points: number;
   /** 累積ポイント数 */
-  totalPoints?: number;
+  totalPoints: number;
 }

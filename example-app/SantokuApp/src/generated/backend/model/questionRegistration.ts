@@ -11,11 +11,11 @@
  */
 export interface QuestionRegistration {
   /** 質問のタイトル */
-  title?: string;
+  title: string;
   /** 質問内容 */
-  content?: string;
+  content: string;
   /** 質問の設定するタグ */
   tags?: string[];
   /** 初心者か否か */
-  beginner?: boolean;
+  beginner: boolean;
 }

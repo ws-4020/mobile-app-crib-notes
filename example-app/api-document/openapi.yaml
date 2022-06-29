@@ -883,6 +883,11 @@ components:
         totalPoints:
           type: integer
           description: 累積ポイント数
+      required:
+        - nickname
+        - type
+        - points
+        - totalPoints
     Account:
       title: Account
       description: アカウント
@@ -902,7 +907,6 @@ components:
           $ref: '#/components/schemas/Profile'
       required:
         - accountId
-        - nickname
     AccountDeviceTokens:
       title: AccountDeviceTokens
       type: object
@@ -926,6 +930,9 @@ components:
         password:
           type: string
           description: パスワード
+      required:
+        - nickname
+        - password
     AccountLogin:
       title: AccountLogin
       type: object
@@ -937,6 +944,9 @@ components:
         password:
           type: string
           description: パスワード
+      required:
+        - accountId
+        - password
     AccountLoginResponse:
       title: AccountLoginResponse
       type: object
@@ -966,7 +976,7 @@ components:
           format: binary
           description: アバター画像
     UpdateDeviceToken:
-      title: AddDeviceToken
+      title: UpdateDeviceToken
       type: object
       description: 更新するデバイス登録トークン
       properties:
@@ -976,6 +986,9 @@ components:
         oldDeviceToken:
           type: string
           description: 削除するデバイス登録トークン
+      required:
+        - newDeviceToken
+        - oldDeviceToken
     TermsOfService:
       title: TermsOfService
       type: object
@@ -1063,6 +1076,8 @@ components:
           description: いいね数
       required:
         - eventId
+        - title
+        - endDate
         - likes
     ContentOfQuestion:
       type: object
@@ -1108,6 +1123,8 @@ components:
           description: コメント数
       required:
         - questionId
+        - title
+        - content
         - datetime
         - beginner
         - resolved
@@ -1139,6 +1156,7 @@ components:
           description: コメント数
       required:
         - answerId
+        - content
         - datetime
         - likes
         - comments
@@ -1163,6 +1181,7 @@ components:
           description: いいね数
       required:
         - commentId
+        - content
         - datetime
         - likes
     Notification:
@@ -1187,6 +1206,7 @@ components:
           format: uri-reference
       required:
         - notificationId
+        - title
         - datetime
         - contentUrl
     Tag:
@@ -1206,6 +1226,7 @@ components:
           description: 設定されている質問数
       required:
         - tagId
+        - tagName
         - questions
     Template:
       type: object
@@ -1221,6 +1242,7 @@ components:
           description: テンプレート内容
       required:
         - templateId
+        - content
     QuestionAndAnswer:
       type: object
       title: QuestionAndAnswer
@@ -1263,6 +1285,8 @@ components:
         content:
           type: string
           description: コメント内容
+      required:
+        - content
     EventRegistration:
       title: EventRegistration
       type: object
@@ -1278,6 +1302,10 @@ components:
           type: string
           description: 掲載終了日
           format: date
+      required:
+        - title
+        - content
+        - endDate
     QuestionRegistration:
       title: QuestionRegistration
       type: object
@@ -1297,6 +1325,10 @@ components:
         beginner:
           type: boolean
           description: 初心者か否か
+      required:
+        - title
+        - content
+        - beginner
     AnswerRegistration:
       title: AnswerRegistration
       type: object
@@ -1305,6 +1337,8 @@ components:
         content:
           type: string
           description: 回答内容
+      required:
+        - content
     Like:
       title: Like
       description: いいね済の質問、回答、コメント

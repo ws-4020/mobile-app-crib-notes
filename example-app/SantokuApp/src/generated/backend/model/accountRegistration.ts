@@ -11,7 +11,7 @@
  */
 export interface AccountRegistration {
   /** アカウントのニックネーム */
-  nickname?: string;
+  nickname: string;
   /** パスワード */
-  password?: string;
+  password: string;
 }

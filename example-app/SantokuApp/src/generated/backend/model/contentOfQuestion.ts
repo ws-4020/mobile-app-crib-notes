@@ -13,9 +13,9 @@ export interface ContentOfQuestion {
   /** 質問ID */
   readonly questionId: string;
   /** 質問のタイトル */
-  title?: string;
+  title: string;
   /** 質問内容 */
-  content?: string;
+  content: string;
   /** 質問に設定されているタグ */
   tags?: string[];
   /** 質問日時 */

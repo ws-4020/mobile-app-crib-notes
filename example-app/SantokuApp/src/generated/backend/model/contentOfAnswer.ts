@@ -13,7 +13,7 @@ export interface ContentOfAnswer {
   /** 回答ID */
   readonly answerId: string;
   /** 回答内容 */
-  content?: string;
+  content: string;
   /** 回答日時 */
   datetime: string;
   /** いいね数 */
