@@ -1026,24 +1026,18 @@ components:
       description: イベント
     Question:
       title: Question
-      x-stoplight:
-        id: ru7aaxsjxy28i
       description: 質問
       allOf:
         - $ref: '#/components/schemas/ContentOfQuestion'
         - $ref: '#/components/schemas/AccountProfile'
     Answer:
       title: Answer
-      x-stoplight:
-        id: 2g09s46j6l7zg
       description: 回答
       allOf:
         - $ref: '#/components/schemas/ContentOfAnswer'
         - $ref: '#/components/schemas/AccountProfile'
     Comment:
       title: Comment
-      x-stoplight:
-        id: hnfaraz5hrr47
       description: コメント
       allOf:
         - $ref: '#/components/schemas/ContentOfComment'
@@ -1232,7 +1226,7 @@ components:
       title: QuestionAndAnswer
       description: 質問と回答およびコメント
       properties:
-        questionInfo:
+        question:
           type: object
           description: 質問とコメント
           required:
@@ -1245,7 +1239,7 @@ components:
               description: 質問に対するコメントのリスト
               items:
                 $ref: '#/components/schemas/Comment'
-        answerInfoList:
+        answerList:
           type: array
           description: 回答とコメントのリスト
           items:
@@ -1260,7 +1254,7 @@ components:
                 items:
                   $ref: '#/components/schemas/Comment'
       required:
-        - questionInfo
+        - question
     CommentRegistration:
       title: CommentRegistration
       type: object

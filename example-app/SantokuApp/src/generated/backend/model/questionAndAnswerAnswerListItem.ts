@@ -5,14 +5,14 @@
  * SantokuAppのREST API。
  * OpenAPI spec version: 1.0.0
  */
-import type {Question} from './question';
+import type {Answer} from './answer';
 import type {Comment} from './comment';
 
 /**
- * 質問とコメント
+ * 回答とコメント
  */
-export type QuestionAndAnswerQuestionInfo = {
-  question: Question;
-  /** 質問に対するコメントのリスト */
+export type QuestionAndAnswerAnswerListItem = {
+  answer?: Answer;
+  /** 回答に対するコメントのリスト */
   commentList?: Comment[];
 };
