@@ -20,7 +20,7 @@ const HIDE_FADE_OUT_DURATION = 300;
 
 describe('Snackbar', () => {
   it('Snackbarが正常にrenderできることを確認', () => {
-    render(<Snackbar message="テストメッセージ" messageTextStyle={{testID: 'text'}} />);
+    render(<Snackbar message="テストメッセージ" />);
 
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 
