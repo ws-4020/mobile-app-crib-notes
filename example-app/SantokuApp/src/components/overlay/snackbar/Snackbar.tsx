@@ -1,8 +1,6 @@
 import React, {useCallback, useRef, useState} from 'react';
 import {Animated, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle} from 'react-native';
 
-import {FullWindowOverlay} from '../FullWindowOverlay';
-
 import CompositeAnimation = Animated.CompositeAnimation;
 
 export type SnackbarShowProps = {
@@ -203,30 +201,25 @@ export const Snackbar: React.FC<SnackbarProps> = props => {
   const messageTextStyle = StyleSheet.flatten([styles.messageText, props.messageTextStyle]);
   const actionTextStyle = StyleSheet.flatten([styles.actionText, props.actionTextStyle]);
 
+  if (!visibleSnackbarProps) {
+    return null;
+  }
+
   return (
-    <>
-      {props.children}
-      {visibleSnackbarProps && (
-        <FullWindowOverlay>
-          <Animated.View
-            style={StyleSheet.flatten([{opacity: fadeAnim}, animatedViewStyle])}
-            testID="snackbarAnimatedView">
-            <View style={snackbarStyle} testID="snackbarStyleView">
-              <View style={styles.messageContainer}>
-                <Text style={messageTextStyle}>{visibleSnackbarProps.message}</Text>
-              </View>
-              {visibleSnackbarProps.actionText && visibleSnackbarProps.actionHandler && (
-                <View style={styles.actionContainer}>
-                  <TouchableOpacity onPress={visibleSnackbarProps.actionHandler}>
-                    <Text style={actionTextStyle}>{visibleSnackbarProps.actionText}</Text>
-                  </TouchableOpacity>
-                </View>
-              )}
-            </View>
-          </Animated.View>
-        </FullWindowOverlay>
-      )}
-    </>
+    <Animated.View style={StyleSheet.flatten([{opacity: fadeAnim}, animatedViewStyle])} testID="snackbarAnimatedView">
+      <View style={snackbarStyle} testID="snackbarStyleView">
+        <View style={styles.messageContainer}>
+          <Text style={messageTextStyle}>{visibleSnackbarProps.message}</Text>
+        </View>
+        {visibleSnackbarProps.actionText && visibleSnackbarProps.actionHandler && (
+          <View style={styles.actionContainer}>
+            <TouchableOpacity onPress={visibleSnackbarProps.actionHandler}>
+              <Text style={actionTextStyle}>{visibleSnackbarProps.actionText}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+    </Animated.View>
   );
 };
 
