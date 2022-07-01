@@ -17,7 +17,7 @@ const WithLoadingOverlay: React.FC = ({children}) => {
     <LoadingOverlayContextProvider value={loadingOverlayContext}>
       {children}
       <FullWindowOverlay>
-        <LoadingOverlay visible={visible}>{children}</LoadingOverlay>
+        <LoadingOverlay visible={visible} />
       </FullWindowOverlay>
     </LoadingOverlayContextProvider>
   );
