@@ -986,9 +986,6 @@ components:
         oldDeviceToken:
           type: string
           description: 削除するデバイス登録トークン
-      required:
-        - newDeviceToken
-        - oldDeviceToken
     TermsOfService:
       title: TermsOfService
       type: object
