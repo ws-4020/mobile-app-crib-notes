@@ -12,9 +12,9 @@ import type {LikedQuestionResponseAnswerItem} from './likedQuestionResponseAnswe
  */
 export interface LikedQuestionResponse {
   /** いいね済の質問ID */
-  questionId?: string;
+  questionId: string;
   /** いいね済の質問コメントID */
-  commentId?: string[];
+  commentId: string[];
   /** いいね済の質問に紐づく回答 */
-  answer?: LikedQuestionResponseAnswerItem[];
+  answer: LikedQuestionResponseAnswerItem[];
 }

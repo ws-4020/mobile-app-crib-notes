@@ -17,7 +17,7 @@ export interface ContentOfQuestion {
   /** 質問内容 */
   content: string;
   /** 質問に設定されているタグ */
-  tags?: string[];
+  tags: string[];
   /** 質問日時 */
   datetime: string;
   /** 初心者か否か */

@@ -14,5 +14,5 @@ import type {Comment} from './comment';
 export type QuestionAndAnswerQuestion = {
   question: Question;
   /** 質問に対するコメントのリスト */
-  commentList?: Comment[];
+  commentList: Comment[];
 };

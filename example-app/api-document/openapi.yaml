@@ -1149,6 +1149,7 @@ components:
         - questionId
         - title
         - content
+        - tags
         - datetime
         - beginner
         - resolved
@@ -1277,6 +1278,7 @@ components:
           description: 質問とコメント
           required:
             - question
+            - commentList
           properties:
             question:
               $ref: '#/components/schemas/Question'
@@ -1301,6 +1303,7 @@ components:
                   $ref: '#/components/schemas/Comment'
       required:
         - question
+        - answerList
     CommentRegistration:
       title: CommentRegistration
       type: object
@@ -1371,6 +1374,8 @@ components:
         eventId:
           type: string
           description: いいね済のイベントID
+      required:
+        - eventId
     LikedQuestionResponse:
       title: LikedQuestionResponse
       description: いいね済の質問IDと紐づく回答ID、コメントID
@@ -1399,6 +1404,10 @@ components:
                 description: いいね済の回答コメントID
                 items:
                   type: string
+      required:
+        - questionId
+        - commentId
+        - answer
     LikesResponse:
       allOf:
         - description: いいね済のイベントID

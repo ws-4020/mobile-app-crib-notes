@@ -11,5 +11,5 @@
  */
 export interface LikedEventResponse {
   /** いいね済のイベントID */
-  eventId?: string;
+  eventId: string;
 }

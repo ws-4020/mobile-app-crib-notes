@@ -15,5 +15,5 @@ export interface QuestionAndAnswer {
   /** 質問とコメント */
   question: QuestionAndAnswerQuestion;
   /** 回答とコメントのリスト */
-  answerList?: QuestionAndAnswerAnswerListItem[];
+  answerList: QuestionAndAnswerAnswerListItem[];
 }
