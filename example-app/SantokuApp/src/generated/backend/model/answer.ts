@@ -5,10 +5,10 @@
  * SantokuAppのREST API。
  * OpenAPI spec version: 1.0.0
  */
-import type {ContentOfAnswer} from './contentOfAnswer';
+import type {AnswerContent} from './answerContent';
 import type {AccountProfile} from './accountProfile';
 
 /**
  * 回答
  */
-export type Answer = ContentOfAnswer & AccountProfile;
+export type Answer = AnswerContent & AccountProfile;

@@ -15,7 +15,7 @@ import {
   UseQueryResult,
   QueryKey,
 } from 'react-query';
-import type {Event, BadRequestResponse, GetEventsParams, ContentOfEvent, EventRegistration} from '.././model';
+import type {Event, BadRequestResponse, GetEventsParams, EventContent, EventRegistration} from '.././model';
 import {backendCustomInstance, ErrorType} from '../../../framework/backend/customInstance';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
@@ -58,7 +58,7 @@ export const useGetEvents = <TData = Awaited<ReturnType<typeof getEvents>>, TErr
  * @summary イベント登録
  */
 export const postEvents = (eventRegistration: EventRegistration) => {
-  return backendCustomInstance<ContentOfEvent>({
+  return backendCustomInstance<EventContent>({
     url: `/events`,
     method: 'post',
     headers: {'Content-Type': 'application/json'},

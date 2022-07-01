@@ -9,7 +9,7 @@
 /**
  * 質問内容
  */
-export interface ContentOfQuestion {
+export interface QuestionContent {
   /** 質問ID */
   readonly questionId: string;
   /** 質問のタイトル */

@@ -9,7 +9,7 @@
 /**
  * 回答内容
  */
-export interface ContentOfAnswer {
+export interface AnswerContent {
   /** 回答ID */
   readonly answerId: string;
   /** 回答内容 */

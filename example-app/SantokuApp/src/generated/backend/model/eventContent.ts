@@ -9,7 +9,7 @@
 /**
  * イベント内容
  */
-export interface ContentOfEvent {
+export interface EventContent {
   /** イベントID */
   readonly eventId: string;
   /** イベントのタイトル */

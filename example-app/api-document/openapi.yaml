@@ -389,7 +389,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContentOfEvent'
+                $ref: '#/components/schemas/EventContent'
         '400':
           $ref: '#/components/responses/BadRequest'
       description: イベントを登録します。
@@ -457,7 +457,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContentOfQuestion'
+                $ref: '#/components/schemas/QuestionContent'
         '400':
           $ref: '#/components/responses/BadRequest'
       requestBody:
@@ -577,7 +577,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContentOfAnswer'
+                $ref: '#/components/schemas/AnswerContent'
         '400':
           $ref: '#/components/responses/BadRequest'
       description: 回答を登録します。
@@ -599,7 +599,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContentOfComment'
+                $ref: '#/components/schemas/CommentContent'
         '400':
           $ref: '#/components/responses/BadRequest'
       description: 質問に対するコメントを登録します。
@@ -640,7 +640,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContentOfComment'
+                $ref: '#/components/schemas/CommentContent'
         '400':
           $ref: '#/components/responses/BadRequest'
       description: 回答に対するコメントを登録します。
@@ -1057,7 +1057,7 @@ components:
         - message
     Event:
       allOf:
-        - $ref: '#/components/schemas/ContentOfEvent'
+        - $ref: '#/components/schemas/EventContent'
         - $ref: '#/components/schemas/AccountProfile'
       title: Event
       description: イベント
@@ -1065,23 +1065,23 @@ components:
       title: Question
       description: 質問
       allOf:
-        - $ref: '#/components/schemas/ContentOfQuestion'
+        - $ref: '#/components/schemas/QuestionContent'
         - $ref: '#/components/schemas/AccountProfile'
     Answer:
       title: Answer
       description: 回答
       allOf:
-        - $ref: '#/components/schemas/ContentOfAnswer'
+        - $ref: '#/components/schemas/AnswerContent'
         - $ref: '#/components/schemas/AccountProfile'
     Comment:
       title: Comment
       description: コメント
       allOf:
-        - $ref: '#/components/schemas/ContentOfComment'
+        - $ref: '#/components/schemas/CommentContent'
         - $ref: '#/components/schemas/AccountProfile'
-    ContentOfEvent:
+    EventContent:
       type: object
-      title: ContentOfEvent
+      title: EventContent
       description: イベント内容
       properties:
         eventId:
@@ -1103,9 +1103,9 @@ components:
         - title
         - endDate
         - likes
-    ContentOfQuestion:
+    QuestionContent:
       type: object
-      title: ContentOfQuestion
+      title: QuestionContent
       description: 質問内容
       properties:
         questionId:
@@ -1157,9 +1157,9 @@ components:
         - answers
         - likes
         - comments
-    ContentOfAnswer:
+    AnswerContent:
       type: object
-      title: ContentOfAnswer
+      title: AnswerContent
       description: 回答内容
       properties:
         answerId:
@@ -1185,9 +1185,9 @@ components:
         - datetime
         - likes
         - comments
-    ContentOfComment:
+    CommentContent:
       type: object
-      title: ContentOfComment
+      title: CommentContent
       description: コメント内容
       properties:
         commentId:

@@ -5,10 +5,10 @@
  * SantokuAppのREST API。
  * OpenAPI spec version: 1.0.0
  */
-import type {ContentOfEvent} from './contentOfEvent';
+import type {EventContent} from './eventContent';
 import type {AccountProfile} from './accountProfile';
 
 /**
  * イベント
  */
-export type Event = ContentOfEvent & AccountProfile;
+export type Event = EventContent & AccountProfile;

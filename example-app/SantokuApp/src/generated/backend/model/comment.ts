@@ -5,10 +5,10 @@
  * SantokuAppのREST API。
  * OpenAPI spec version: 1.0.0
  */
-import type {ContentOfComment} from './contentOfComment';
+import type {CommentContent} from './commentContent';
 import type {AccountProfile} from './accountProfile';
 
 /**
  * コメント
  */
-export type Comment = ContentOfComment & AccountProfile;
+export type Comment = CommentContent & AccountProfile;

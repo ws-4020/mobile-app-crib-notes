@@ -9,7 +9,7 @@
 /**
  * コメント内容
  */
-export interface ContentOfComment {
+export interface CommentContent {
   /** コメントID */
   readonly commentId: string;
   /** コメント内容 */

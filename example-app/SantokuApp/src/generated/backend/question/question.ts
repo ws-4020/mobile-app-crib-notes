@@ -19,12 +19,12 @@ import type {
   Question,
   BadRequestResponse,
   GetListQuestionsParams,
-  ContentOfQuestion,
+  QuestionContent,
   QuestionRegistration,
   QuestionAndAnswer,
-  ContentOfAnswer,
+  AnswerContent,
   AnswerRegistration,
-  ContentOfComment,
+  CommentContent,
   CommentRegistration,
 } from '.././model';
 import {backendCustomInstance, ErrorType} from '../../../framework/backend/customInstance';
@@ -76,7 +76,7 @@ export const useGetListQuestions = <
  * @summary 質問登録
  */
 export const postQuestions = (questionRegistration: QuestionRegistration) => {
-  return backendCustomInstance<ContentOfQuestion>({
+  return backendCustomInstance<QuestionContent>({
     url: `/questions`,
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -155,7 +155,7 @@ export const useGetDetailQuestion = <
  * @summary 回答登録
  */
 export const postQuestionsQuestionIdAnswers = (questionId: string, answerRegistration: AnswerRegistration) => {
-  return backendCustomInstance<ContentOfAnswer>({
+  return backendCustomInstance<AnswerContent>({
     url: `/questions/${questionId}/answers`,
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -203,7 +203,7 @@ export const usePostQuestionsQuestionIdAnswers = <
  * @summary コメント登録（質問）
  */
 export const postDetailComment = (questionId: string, commentRegistration: CommentRegistration) => {
-  return backendCustomInstance<ContentOfComment>({
+  return backendCustomInstance<CommentContent>({
     url: `/questions/${questionId}/comments`,
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -250,7 +250,7 @@ export const postQuestionsQuestionIdAnswersAnswerIdComments = (
   answerId: string,
   commentRegistration: CommentRegistration,
 ) => {
-  return backendCustomInstance<ContentOfComment>({
+  return backendCustomInstance<CommentContent>({
     url: `/questions/${questionId}/answers/${answerId}/comments`,
     method: 'post',
     headers: {'Content-Type': 'application/json'},
