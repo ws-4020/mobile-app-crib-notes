@@ -13,6 +13,7 @@ const Screen: React.FC = () => {
   const {
     items1,
     items1Key,
+    item1DefaultItemKey,
     items1InputValue,
     onSelectedItemChangeForItem1,
     onDismissForItem1,
@@ -49,6 +50,7 @@ const Screen: React.FC = () => {
       <Text>■SelectPicker</Text>
       <SelectPicker
         selectedItemKey={items1Key}
+        defaultItemKey={item1DefaultItemKey}
         onSelectedItemChange={onSelectedItemChangeForItem1}
         items={items1}
         onDismiss={onDismissForItem1}

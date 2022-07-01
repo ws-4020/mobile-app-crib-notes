@@ -5,6 +5,7 @@ import {SelectPickerProps} from './SelectPicker';
 export const useSelectPickerUseCase = <ItemT extends unknown>({
   items,
   selectedItemKey,
+  defaultItemKey,
   onSelectedItemChange,
   onDismiss,
   onDelete,
@@ -39,8 +40,11 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
   }, [selectedItem]);
 
   const open = useCallback(() => {
+    if (selectedItem == null && defaultItemKey) {
+      onValueChange?.(defaultItemKey);
+    }
     setIsVisible(true);
-  }, []);
+  }, [defaultItemKey, onValueChange, selectedItem]);
   const handleBackdropPress = useCallback(() => {
     onDismiss?.(selectedItem);
     close();
