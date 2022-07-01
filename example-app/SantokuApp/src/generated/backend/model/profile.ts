@@ -5,7 +5,7 @@
  * SantokuAppのREST API。
  * OpenAPI spec version: 1.0.0
  */
-import type {ProfileType} from './profileType';
+import type {ProfileTypeItem} from './profileTypeItem';
 
 /**
  * プロフィール情報
@@ -15,8 +15,8 @@ export interface Profile {
   nickname: string;
   /** アカウントのアバター画像のURL */
   avatarImageUrl?: string;
-  /** アカウントの種類 */
-  type: ProfileType;
+  /** 該当する場合に付与されるアカウントの種類 */
+  type: ProfileTypeItem[];
   /** 今期ポイント数 */
   points: number;
   /** 累積ポイント数 */

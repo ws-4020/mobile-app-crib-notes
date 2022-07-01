@@ -6,14 +6,10 @@
  * OpenAPI spec version: 1.0.0
  */
 
-/**
- * アカウントの種類
- */
-export type ProfileType = typeof ProfileType[keyof typeof ProfileType];
+export type ProfileTypeItem = typeof ProfileTypeItem[keyof typeof ProfileTypeItem];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const ProfileType = {
-  general: 'general',
+export const ProfileTypeItem = {
   partner: 'partner',
   techlead: 'techlead',
   administrator: 'administrator',

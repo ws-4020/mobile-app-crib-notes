@@ -896,13 +896,14 @@ components:
           type: string
           description: アカウントのアバター画像のURL
         type:
-          type: string
-          description: アカウントの種類
-          enum:
-            - general
-            - partner
-            - techlead
-            - administrator
+          type: array
+          description: 該当する場合に付与されるアカウントの種類
+          items:
+            type: string
+            enum:
+              - partner
+              - techlead
+              - administrator
         points:
           type: integer
           description: 今期ポイント数
