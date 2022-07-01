@@ -43,7 +43,6 @@ exports[`Snackbar Snackbarが正常にrenderできることを確認: render直�
         style={
           Object {
             "color": "white",
-            "testID": "text",
           }
         }
       >
@@ -99,7 +98,6 @@ exports[`Snackbar Snackbarが正常にrenderできることを確認: フェー�
         style={
           Object {
             "color": "white",
-            "testID": "text",
           }
         }
       >
