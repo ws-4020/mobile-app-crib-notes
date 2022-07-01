@@ -1,7 +1,9 @@
 import axios, {AxiosResponse} from 'axios';
 
-import {SecureStorageAdapter} from '../authentication/SecureStorageAdapter';
+import {SecureStorageAdapter} from '../authentication';
 import {ApplicationError} from '../error/ApplicationError';
+import {log} from '../logging';
+import {m} from '../message';
 import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, setAxiosResponseInterceptor} from './customInstance';
 import {refreshCsrfToken} from './refreshCsrfToken';
 
@@ -33,7 +35,8 @@ const setRefreshSessionInterceptor = () => {
         try {
           await refreshSession();
           return await BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.request(error.config);
-        } catch {
+        } catch (e) {
+          log.error(m('fw.error.refreshSessionError', String(e)), 'refreshSessionError');
           throw error;
         }
       }
