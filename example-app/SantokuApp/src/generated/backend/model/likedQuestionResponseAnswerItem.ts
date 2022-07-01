@@ -7,11 +7,11 @@
  */
 
 /**
- * 特定の回答に紐づくいいね済の回答、コメント
+ * いいね済の質問に紐づく回答
  */
-export type LikeItemAnswerItem = {
+export type LikedQuestionResponseAnswerItem = {
   /** いいね済の回答ID */
   answerId?: string;
-  /** 回答に対するいいね済のコメントID */
+  /** いいね済の回答コメントID */
   commentId?: string[];
 };

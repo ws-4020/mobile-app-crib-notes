@@ -5,9 +5,5 @@
  * SantokuAppのREST API。
  * OpenAPI spec version: 1.0.0
  */
-import type {LikeItem} from './likeItem';
 
-/**
- * いいね済の質問、回答、コメント
- */
-export type Like = LikeItem[];
+export type LikesResponseItem = {[key: string]: any};

@@ -663,9 +663,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Like'
-      operationId: get-accounts-me-likes-events-eventId
-      description: いいね済の質問と回答およびコメントを取得します。
+                $ref: '#/components/schemas/LikesResponse'
+      operationId: get-accounts-me-likes
+      description: いいね済のイベント、質問、回答、コメントを取得します。
   '/accounts/me/likes/events/{eventId}':
     parameters:
       - schema:
@@ -682,7 +682,7 @@ paths:
           description: No Content
       description: イベントに対するいいねを行います。
       tags:
-        - Event
+        - Account
     delete:
       summary: いいねの取消（イベント）
       operationId: delete-events-eventId-like
@@ -691,7 +691,20 @@ paths:
           description: No Content
       description: イベントに対するいいねを取り消します。
       tags:
-        - Event
+        - Account
+    get:
+      summary: いいね済の取得（イベント）
+      operationId: get-accounts-me-likes-events-eventId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LikedEventResponse'
+      description: 特定のイベントについていいね済のイベントを取得します。いいね済の場合はイベントIDが返ります。
+      tags:
+        - Account
   '/accounts/me/likes/questions/{questionId}':
     parameters:
       - schema:
@@ -708,7 +721,7 @@ paths:
           description: No Content
       description: 質問に対するいいねを行います。
       tags:
-        - Question
+        - Account
     delete:
       summary: いいねの取消（質問）
       operationId: delete-questions-questionId-like
@@ -717,7 +730,20 @@ paths:
           description: No Content
       description: 質問に対するいいねを取り消します。
       tags:
-        - Question
+        - Account
+    get:
+      summary: いいね済の取得（質問）
+      operationId: get-accounts-me-likes-questions-questionId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LikedQuestionResponse'
+      description: 特定の質問についていいね済の質問および紐づく回答、コメントを取得します。いいね済の場合はIDが返ります。
+      tags:
+        - Account
   '/accounts/me/likes/questions/{questionId}/comments/{commentId}':
     parameters:
       - schema:
@@ -740,7 +766,7 @@ paths:
           description: No Content
       description: 質問のコメントに対するいいねを行います。
       tags:
-        - Question
+        - Account
     delete:
       summary: いいねの取消（質問コメント）
       operationId: delete-questions-questionId-comments-commentId-like
@@ -749,7 +775,7 @@ paths:
           description: No Content
       description: 質問のコメントに対するいいねを取り消します。
       tags:
-        - Question
+        - Account
   '/accounts/me/likes/questions/{questionId}/answers/{answerId}':
     parameters:
       - schema:
@@ -772,7 +798,7 @@ paths:
           description: No Content
       description: 回答に対するいいねを行います。
       tags:
-        - Question
+        - Account
     delete:
       summary: いいねの取消（回答）
       operationId: delete-questions-questionId-answers-answerId-like
@@ -781,7 +807,7 @@ paths:
           description: No Content
       description: 回答に対するいいねを取り消します。
       tags:
-        - Question
+        - Account
   '/accounts/me/likes/questions/{questionId}/answers/{answerId}/comments/{commentId}':
     parameters:
       - schema:
@@ -810,7 +836,7 @@ paths:
           description: No Content
       description: 回答のコメントに対するいいねを行います。
       tags:
-        - Question
+        - Account
     delete:
       summary: いいねの取消（回答コメント）
       operationId: delete-questions-questionId-answers-answerId-comments-commentId-like
@@ -819,7 +845,7 @@ paths:
           description: No Content
       description: 回答のコメントに対するいいねを取り消します。
       tags:
-        - Question
+        - Account
 components:
   schemas:
     CsrfTokenResponse:
@@ -1336,37 +1362,55 @@ components:
           description: 回答内容
       required:
         - content
-    Like:
-      title: Like
-      description: いいね済の質問、回答、コメント
+    LikedEventResponse:
+      title: LikedEventResponse
+      type: object
+      description: いいね済のイベントID
+      properties:
+        eventId:
+          type: string
+          description: いいね済のイベントID
+    LikedQuestionResponse:
+      title: LikedQuestionResponse
+      description: いいね済の質問IDと紐づく回答ID、コメントID
+      type: object
+      properties:
+        questionId:
+          type: string
+          description: いいね済の質問ID
+        commentId:
+          type: array
+          description: いいね済の質問コメントID
+          items:
+            type: string
+        answer:
+          type: array
+          description: いいね済の質問に紐づく回答
+          items:
+            type: object
+            description: いいね済の質問に紐づく回答
+            properties:
+              answerId:
+                type: string
+                description: いいね済の回答ID
+              commentId:
+                type: array
+                description: いいね済の回答コメントID
+                items:
+                  type: string
+    LikesResponse:
+      allOf:
+        - description: いいね済のイベントID
+          items:
+            $ref: '#/components/schemas/LikedEventResponse'
+        - description: いいね済の質問ID、回答ID、コメントID
+          items:
+            $ref: '#/components/schemas/LikedQuestionResponse'
+      title: LikesResponse
+      description: いいね済のイベントID、質問ID、回答ID、コメントID
       type: array
       items:
         type: object
-        description: 特定の質問に紐づくいいね済の質問、回答、コメント
-        properties:
-          questionId:
-            type: string
-            description: いいね済の質問ID
-          commentId:
-            type: array
-            description: 質問に対するいいね済のコメントID
-            items:
-              type: string
-          answer:
-            type: array
-            description: いいね済の回答とコメント
-            items:
-              type: object
-              description: 特定の回答に紐づくいいね済の回答、コメント
-              properties:
-                answerId:
-                  type: string
-                  description: いいね済の回答ID
-                commentId:
-                  type: array
-                  description: 回答に対するいいね済のコメントID
-                  items:
-                    type: string
   responses:
     BadRequest:
       description: Bad Request

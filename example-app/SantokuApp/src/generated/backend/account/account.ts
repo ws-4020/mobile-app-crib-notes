@@ -27,7 +27,9 @@ import type {
   UpdateDeviceToken,
   TermsOfServiceAgreementStatus,
   AccountDeletion,
-  Like,
+  LikesResponse,
+  LikedEventResponse,
+  LikedQuestionResponse,
 } from '.././model';
 import {backendCustomInstance, ErrorType} from '../../../framework/backend/customInstance';
 
@@ -508,34 +510,32 @@ export const useDeleteAccountsMeDelete = <
   );
 };
 /**
- * いいね済の質問と回答およびコメントを取得します。
+ * いいね済のイベント、質問、回答、コメントを取得します。
  * @summary いいね済の取得
  */
-export const getAccountsMeLikesEventsEventId = (signal?: AbortSignal) => {
-  return backendCustomInstance<Like>({url: `/accounts/me/likes`, method: 'get', signal});
+export const getAccountsMeLikes = (signal?: AbortSignal) => {
+  return backendCustomInstance<LikesResponse>({url: `/accounts/me/likes`, method: 'get', signal});
 };
 
-export const getGetAccountsMeLikesEventsEventIdQueryKey = () => [`/accounts/me/likes`];
+export const getGetAccountsMeLikesQueryKey = () => [`/accounts/me/likes`];
 
-export type GetAccountsMeLikesEventsEventIdQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>
->;
-export type GetAccountsMeLikesEventsEventIdQueryError = ErrorType<unknown>;
+export type GetAccountsMeLikesQueryResult = NonNullable<Awaited<ReturnType<typeof getAccountsMeLikes>>>;
+export type GetAccountsMeLikesQueryError = ErrorType<unknown>;
 
-export const useGetAccountsMeLikesEventsEventId = <
-  TData = Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>,
+export const useGetAccountsMeLikes = <
+  TData = Awaited<ReturnType<typeof getAccountsMeLikes>>,
   TError = ErrorType<unknown>,
 >(options?: {
-  query?: UseQueryOptions<Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>, TError, TData>;
+  query?: UseQueryOptions<Awaited<ReturnType<typeof getAccountsMeLikes>>, TError, TData>;
 }): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const {query: queryOptions} = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetAccountsMeLikesEventsEventIdQueryKey();
+  const queryKey = queryOptions?.queryKey ?? getGetAccountsMeLikesQueryKey();
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>> = ({signal}) =>
-    getAccountsMeLikesEventsEventId(signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getAccountsMeLikes>>> = ({signal}) =>
+    getAccountsMeLikes(signal);
 
-  const query = useQuery<Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>, TError, TData>(
+  const query = useQuery<Awaited<ReturnType<typeof getAccountsMeLikes>>, TError, TData>(
     queryKey,
     queryFn,
     queryOptions,
@@ -545,4 +545,518 @@ export const useGetAccountsMeLikesEventsEventId = <
     queryKey,
     ...query,
   };
+};
+
+/**
+ * イベントに対するいいねを行います。
+ * @summary いいねの実施（イベント）
+ */
+export const putEventsEventIdLike = (eventId: string) => {
+  return backendCustomInstance<void>({url: `/accounts/me/likes/events/${eventId}`, method: 'put'});
+};
+
+export type PutEventsEventIdLikeMutationResult = NonNullable<Awaited<ReturnType<typeof putEventsEventIdLike>>>;
+
+export type PutEventsEventIdLikeMutationError = ErrorType<unknown>;
+
+export const usePutEventsEventIdLike = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof putEventsEventIdLike>>, TError, {eventId: string}, TContext>;
+}) => {
+  const {mutation: mutationOptions} = options ?? {};
+
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof putEventsEventIdLike>>, {eventId: string}> = props => {
+    const {eventId} = props ?? {};
+
+    return putEventsEventIdLike(eventId);
+  };
+
+  return useMutation<Awaited<ReturnType<typeof putEventsEventIdLike>>, TError, {eventId: string}, TContext>(
+    mutationFn,
+    mutationOptions,
+  );
+};
+/**
+ * イベントに対するいいねを取り消します。
+ * @summary いいねの取消（イベント）
+ */
+export const deleteEventsEventIdLike = (eventId: string) => {
+  return backendCustomInstance<void>({url: `/accounts/me/likes/events/${eventId}`, method: 'delete'});
+};
+
+export type DeleteEventsEventIdLikeMutationResult = NonNullable<Awaited<ReturnType<typeof deleteEventsEventIdLike>>>;
+
+export type DeleteEventsEventIdLikeMutationError = ErrorType<unknown>;
+
+export const useDeleteEventsEventIdLike = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteEventsEventIdLike>>,
+    TError,
+    {eventId: string},
+    TContext
+  >;
+}) => {
+  const {mutation: mutationOptions} = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteEventsEventIdLike>>,
+    {eventId: string}
+  > = props => {
+    const {eventId} = props ?? {};
+
+    return deleteEventsEventIdLike(eventId);
+  };
+
+  return useMutation<Awaited<ReturnType<typeof deleteEventsEventIdLike>>, TError, {eventId: string}, TContext>(
+    mutationFn,
+    mutationOptions,
+  );
+};
+/**
+ * 特定のイベントについていいね済のイベントを取得します。いいね済の場合はイベントIDが返ります。
+ * @summary いいね済の取得（イベント）
+ */
+export const getAccountsMeLikesEventsEventId = (eventId: string, signal?: AbortSignal) => {
+  return backendCustomInstance<LikedEventResponse>({
+    url: `/accounts/me/likes/events/${eventId}`,
+    method: 'get',
+    signal,
+  });
+};
+
+export const getGetAccountsMeLikesEventsEventIdQueryKey = (eventId: string) => [`/accounts/me/likes/events/${eventId}`];
+
+export type GetAccountsMeLikesEventsEventIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>
+>;
+export type GetAccountsMeLikesEventsEventIdQueryError = ErrorType<unknown>;
+
+export const useGetAccountsMeLikesEventsEventId = <
+  TData = Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>,
+  TError = ErrorType<unknown>,
+>(
+  eventId: string,
+  options?: {query?: UseQueryOptions<Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>, TError, TData>},
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
+  const {query: queryOptions} = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetAccountsMeLikesEventsEventIdQueryKey(eventId);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>> = ({signal}) =>
+    getAccountsMeLikesEventsEventId(eventId, signal);
+
+  const query = useQuery<Awaited<ReturnType<typeof getAccountsMeLikesEventsEventId>>, TError, TData>(
+    queryKey,
+    queryFn,
+    {enabled: !!eventId, ...queryOptions},
+  );
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * 質問に対するいいねを行います。
+ * @summary いいねの実施（質問）
+ */
+export const putQuestionsQuestionIdLike = (questionId: string) => {
+  return backendCustomInstance<void>({url: `/accounts/me/likes/questions/${questionId}`, method: 'put'});
+};
+
+export type PutQuestionsQuestionIdLikeMutationResult = NonNullable<
+  Awaited<ReturnType<typeof putQuestionsQuestionIdLike>>
+>;
+
+export type PutQuestionsQuestionIdLikeMutationError = ErrorType<unknown>;
+
+export const usePutQuestionsQuestionIdLike = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof putQuestionsQuestionIdLike>>,
+    TError,
+    {questionId: string},
+    TContext
+  >;
+}) => {
+  const {mutation: mutationOptions} = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof putQuestionsQuestionIdLike>>,
+    {questionId: string}
+  > = props => {
+    const {questionId} = props ?? {};
+
+    return putQuestionsQuestionIdLike(questionId);
+  };
+
+  return useMutation<Awaited<ReturnType<typeof putQuestionsQuestionIdLike>>, TError, {questionId: string}, TContext>(
+    mutationFn,
+    mutationOptions,
+  );
+};
+/**
+ * 質問に対するいいねを取り消します。
+ * @summary いいねの取消（質問）
+ */
+export const deleteQuestionsQuestionIdLike = (questionId: string) => {
+  return backendCustomInstance<void>({url: `/accounts/me/likes/questions/${questionId}`, method: 'delete'});
+};
+
+export type DeleteQuestionsQuestionIdLikeMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteQuestionsQuestionIdLike>>
+>;
+
+export type DeleteQuestionsQuestionIdLikeMutationError = ErrorType<unknown>;
+
+export const useDeleteQuestionsQuestionIdLike = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteQuestionsQuestionIdLike>>,
+    TError,
+    {questionId: string},
+    TContext
+  >;
+}) => {
+  const {mutation: mutationOptions} = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteQuestionsQuestionIdLike>>,
+    {questionId: string}
+  > = props => {
+    const {questionId} = props ?? {};
+
+    return deleteQuestionsQuestionIdLike(questionId);
+  };
+
+  return useMutation<Awaited<ReturnType<typeof deleteQuestionsQuestionIdLike>>, TError, {questionId: string}, TContext>(
+    mutationFn,
+    mutationOptions,
+  );
+};
+/**
+ * 特定の質問についていいね済の質問および紐づく回答、コメントを取得します。いいね済の場合はIDが返ります。
+ * @summary いいね済の取得（質問）
+ */
+export const getAccountsMeLikesQuestionsQuestionId = (questionId: string, signal?: AbortSignal) => {
+  return backendCustomInstance<LikedQuestionResponse>({
+    url: `/accounts/me/likes/questions/${questionId}`,
+    method: 'get',
+    signal,
+  });
+};
+
+export const getGetAccountsMeLikesQuestionsQuestionIdQueryKey = (questionId: string) => [
+  `/accounts/me/likes/questions/${questionId}`,
+];
+
+export type GetAccountsMeLikesQuestionsQuestionIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getAccountsMeLikesQuestionsQuestionId>>
+>;
+export type GetAccountsMeLikesQuestionsQuestionIdQueryError = ErrorType<unknown>;
+
+export const useGetAccountsMeLikesQuestionsQuestionId = <
+  TData = Awaited<ReturnType<typeof getAccountsMeLikesQuestionsQuestionId>>,
+  TError = ErrorType<unknown>,
+>(
+  questionId: string,
+  options?: {query?: UseQueryOptions<Awaited<ReturnType<typeof getAccountsMeLikesQuestionsQuestionId>>, TError, TData>},
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
+  const {query: queryOptions} = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetAccountsMeLikesQuestionsQuestionIdQueryKey(questionId);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getAccountsMeLikesQuestionsQuestionId>>> = ({signal}) =>
+    getAccountsMeLikesQuestionsQuestionId(questionId, signal);
+
+  const query = useQuery<Awaited<ReturnType<typeof getAccountsMeLikesQuestionsQuestionId>>, TError, TData>(
+    queryKey,
+    queryFn,
+    {enabled: !!questionId, ...queryOptions},
+  );
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * 質問のコメントに対するいいねを行います。
+ * @summary いいねの実施（質問コメント）
+ */
+export const putQuestionsQuestionIdCommentCommentIdLike = (questionId: string, commentId: string) => {
+  return backendCustomInstance<void>({
+    url: `/accounts/me/likes/questions/${questionId}/comments/${commentId}`,
+    method: 'put',
+  });
+};
+
+export type PutQuestionsQuestionIdCommentCommentIdLikeMutationResult = NonNullable<
+  Awaited<ReturnType<typeof putQuestionsQuestionIdCommentCommentIdLike>>
+>;
+
+export type PutQuestionsQuestionIdCommentCommentIdLikeMutationError = ErrorType<unknown>;
+
+export const usePutQuestionsQuestionIdCommentCommentIdLike = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof putQuestionsQuestionIdCommentCommentIdLike>>,
+    TError,
+    {questionId: string; commentId: string},
+    TContext
+  >;
+}) => {
+  const {mutation: mutationOptions} = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof putQuestionsQuestionIdCommentCommentIdLike>>,
+    {questionId: string; commentId: string}
+  > = props => {
+    const {questionId, commentId} = props ?? {};
+
+    return putQuestionsQuestionIdCommentCommentIdLike(questionId, commentId);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof putQuestionsQuestionIdCommentCommentIdLike>>,
+    TError,
+    {questionId: string; commentId: string},
+    TContext
+  >(mutationFn, mutationOptions);
+};
+/**
+ * 質問のコメントに対するいいねを取り消します。
+ * @summary いいねの取消（質問コメント）
+ */
+export const deleteQuestionsQuestionIdCommentsCommentIdLike = (questionId: string, commentId: string) => {
+  return backendCustomInstance<void>({
+    url: `/accounts/me/likes/questions/${questionId}/comments/${commentId}`,
+    method: 'delete',
+  });
+};
+
+export type DeleteQuestionsQuestionIdCommentsCommentIdLikeMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteQuestionsQuestionIdCommentsCommentIdLike>>
+>;
+
+export type DeleteQuestionsQuestionIdCommentsCommentIdLikeMutationError = ErrorType<unknown>;
+
+export const useDeleteQuestionsQuestionIdCommentsCommentIdLike = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteQuestionsQuestionIdCommentsCommentIdLike>>,
+    TError,
+    {questionId: string; commentId: string},
+    TContext
+  >;
+}) => {
+  const {mutation: mutationOptions} = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteQuestionsQuestionIdCommentsCommentIdLike>>,
+    {questionId: string; commentId: string}
+  > = props => {
+    const {questionId, commentId} = props ?? {};
+
+    return deleteQuestionsQuestionIdCommentsCommentIdLike(questionId, commentId);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof deleteQuestionsQuestionIdCommentsCommentIdLike>>,
+    TError,
+    {questionId: string; commentId: string},
+    TContext
+  >(mutationFn, mutationOptions);
+};
+/**
+ * 回答に対するいいねを行います。
+ * @summary いいねの実施（回答）
+ */
+export const putQuestionsQuestionIdAnswerAnswerIdLike = (questionId: string, answerId: string) => {
+  return backendCustomInstance<void>({
+    url: `/accounts/me/likes/questions/${questionId}/answers/${answerId}`,
+    method: 'put',
+  });
+};
+
+export type PutQuestionsQuestionIdAnswerAnswerIdLikeMutationResult = NonNullable<
+  Awaited<ReturnType<typeof putQuestionsQuestionIdAnswerAnswerIdLike>>
+>;
+
+export type PutQuestionsQuestionIdAnswerAnswerIdLikeMutationError = ErrorType<unknown>;
+
+export const usePutQuestionsQuestionIdAnswerAnswerIdLike = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof putQuestionsQuestionIdAnswerAnswerIdLike>>,
+    TError,
+    {questionId: string; answerId: string},
+    TContext
+  >;
+}) => {
+  const {mutation: mutationOptions} = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof putQuestionsQuestionIdAnswerAnswerIdLike>>,
+    {questionId: string; answerId: string}
+  > = props => {
+    const {questionId, answerId} = props ?? {};
+
+    return putQuestionsQuestionIdAnswerAnswerIdLike(questionId, answerId);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof putQuestionsQuestionIdAnswerAnswerIdLike>>,
+    TError,
+    {questionId: string; answerId: string},
+    TContext
+  >(mutationFn, mutationOptions);
+};
+/**
+ * 回答に対するいいねを取り消します。
+ * @summary いいねの取消（回答）
+ */
+export const deleteQuestionsQuestionIdAnswersAnswerIdLike = (questionId: string, answerId: string) => {
+  return backendCustomInstance<void>({
+    url: `/accounts/me/likes/questions/${questionId}/answers/${answerId}`,
+    method: 'delete',
+  });
+};
+
+export type DeleteQuestionsQuestionIdAnswersAnswerIdLikeMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteQuestionsQuestionIdAnswersAnswerIdLike>>
+>;
+
+export type DeleteQuestionsQuestionIdAnswersAnswerIdLikeMutationError = ErrorType<unknown>;
+
+export const useDeleteQuestionsQuestionIdAnswersAnswerIdLike = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteQuestionsQuestionIdAnswersAnswerIdLike>>,
+    TError,
+    {questionId: string; answerId: string},
+    TContext
+  >;
+}) => {
+  const {mutation: mutationOptions} = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteQuestionsQuestionIdAnswersAnswerIdLike>>,
+    {questionId: string; answerId: string}
+  > = props => {
+    const {questionId, answerId} = props ?? {};
+
+    return deleteQuestionsQuestionIdAnswersAnswerIdLike(questionId, answerId);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof deleteQuestionsQuestionIdAnswersAnswerIdLike>>,
+    TError,
+    {questionId: string; answerId: string},
+    TContext
+  >(mutationFn, mutationOptions);
+};
+/**
+ * 回答のコメントに対するいいねを行います。
+ * @summary いいねの実施（回答コメント）
+ */
+export const putQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLike = (
+  questionId: string,
+  answerId: string,
+  commentId: string,
+) => {
+  return backendCustomInstance<void>({
+    url: `/accounts/me/likes/questions/${questionId}/answers/${answerId}/comments/${commentId}`,
+    method: 'put',
+  });
+};
+
+export type PutQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLikeMutationResult = NonNullable<
+  Awaited<ReturnType<typeof putQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLike>>
+>;
+
+export type PutQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLikeMutationError = ErrorType<unknown>;
+
+export const usePutQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLike = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof putQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLike>>,
+    TError,
+    {questionId: string; answerId: string; commentId: string},
+    TContext
+  >;
+}) => {
+  const {mutation: mutationOptions} = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof putQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLike>>,
+    {questionId: string; answerId: string; commentId: string}
+  > = props => {
+    const {questionId, answerId, commentId} = props ?? {};
+
+    return putQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLike(questionId, answerId, commentId);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof putQuestionsQuestionIdAnswerAnswerIdCommentCommentIdLike>>,
+    TError,
+    {questionId: string; answerId: string; commentId: string},
+    TContext
+  >(mutationFn, mutationOptions);
+};
+/**
+ * 回答のコメントに対するいいねを取り消します。
+ * @summary いいねの取消（回答コメント）
+ */
+export const deleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLike = (
+  questionId: string,
+  answerId: string,
+  commentId: string,
+) => {
+  return backendCustomInstance<void>({
+    url: `/accounts/me/likes/questions/${questionId}/answers/${answerId}/comments/${commentId}`,
+    method: 'delete',
+  });
+};
+
+export type DeleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLikeMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLike>>
+>;
+
+export type DeleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLikeMutationError = ErrorType<unknown>;
+
+export const useDeleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLike = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLike>>,
+    TError,
+    {questionId: string; answerId: string; commentId: string},
+    TContext
+  >;
+}) => {
+  const {mutation: mutationOptions} = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLike>>,
+    {questionId: string; answerId: string; commentId: string}
+  > = props => {
+    const {questionId, answerId, commentId} = props ?? {};
+
+    return deleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLike(questionId, answerId, commentId);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof deleteQuestionsQuestionIdAnswersAnswerIdCommentsCommentIdLike>>,
+    TError,
+    {questionId: string; answerId: string; commentId: string},
+    TContext
+  >(mutationFn, mutationOptions);
 };
