@@ -89,7 +89,6 @@ export const usePickerContainerUseCase = ({
   const transform = useAnimatedStyle(() => {
     // WORKAROUND: [iOS] Animations don't always run on component initialization
     // https://github.com/software-mansion/react-native-reanimated/issues/3296
-    console.log('workaround log in picker container.');
     nop();
     return {transform: [{translateY: yOffset.value}]};
   });
