@@ -23,6 +23,8 @@ type ContainerAnimationConfig = {
   slideOutConfig?: WithTimingConfig;
 };
 
+const nop = () => {};
+
 export const usePickerContainerUseCase = ({
   isVisible,
   afterSlideIn,
@@ -84,7 +86,12 @@ export const usePickerContainerUseCase = ({
     );
   }, [afterSlideOut, clock, setPickerIsNotVisible, slideOutConfig, slideOutDuration]);
 
-  const transform = useAnimatedStyle(() => ({transform: [{translateY: yOffset.value}]}));
+  const transform = useAnimatedStyle(() => {
+    // WORKAROUND: [iOS] Animations don't always run on component initialization
+    // https://github.com/software-mansion/react-native-reanimated/issues/3296
+    nop();
+    return {transform: [{translateY: yOffset.value}]};
+  });
 
   useEffect(() => {
     if (isVisible && !isVisiblePrevious) {
