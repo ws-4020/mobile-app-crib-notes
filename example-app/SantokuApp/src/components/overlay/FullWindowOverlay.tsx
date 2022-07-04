@@ -5,7 +5,7 @@ import {Platform, View} from 'react-native';
  * [使用時の注意点]
  * NavigationContainerの中でFullWindowOverlayを使用すると、アンマウント時にアプリがクラッシュします。
  * https://github.com/software-mansion/react-native-screens/pull/1375
- * 上記対応は、React Native Screens 3.14.0でリリースされています。
+ * この不具合への対応は、React Native Screens 3.14.0でリリースされています。
  */
 export const FullWindowOverlay = (props: {children: React.ReactNode}) => {
   if (Platform.OS === 'ios') {
