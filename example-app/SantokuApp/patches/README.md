@@ -30,7 +30,7 @@ React Native Elementsの3系ではこの変更に追従できていなかった�
 * `ListItem.XXX`のPropsから`tvParallaxProperties`を削除
 * `Input`のPropsの`autoCompleteType`を`autoComplete`に変更
 
-## React Native Reanimatedのアニメーションが発生しない事象に対処するパッチ
+## React Native ReanimatedのuseAnimatedStyleを利用した際に、アニメーションが発生しない事象に対処するパッチ
 
 `useAnimatedStyle`を利用した際に、アニメーションが実行されない事象が発生しました。
 
