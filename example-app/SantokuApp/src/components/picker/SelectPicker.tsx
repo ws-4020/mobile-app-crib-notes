@@ -27,10 +27,6 @@ export type SelectPickerProps<ItemT> = {
    */
   selectedItemKey?: React.Key | ItemT;
   /**
-   * 選択されたアイテムが存在しない場合のデフォルトKey
-   */
-  defaultItemKey?: React.Key | ItemT;
-  /**
    * アイテムが選択された場合に呼び出される関数
    */
   onSelectedItemChange?: (selectedItem?: Item<ItemT>) => void;

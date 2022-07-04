@@ -216,7 +216,7 @@ describe('SelectPicker with all props', () => {
     render(
       <SelectPicker
         items={items}
-        defaultItemKey="1"
+        selectedItemKey="1"
         onSelectedItemChange={onSelectedItemChange}
         onDismiss={onDismiss}
         placeholder="please select..."

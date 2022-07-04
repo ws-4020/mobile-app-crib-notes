@@ -19,8 +19,6 @@ const items1: Item<Item1Type>[] = [
   {value: {a: '11'}, label: 'test11', key: '11', inputLabel: 'テスト11'},
 ];
 
-const item1DefaultItemKey = '1';
-
 const placeholder = 'please select...';
 
 const formatDate = (date?: Date) => {
@@ -145,7 +143,6 @@ export const usePickerScreenUseCase = () => {
   return {
     items1,
     items1Key,
-    item1DefaultItemKey,
     items1InputValue,
     onSelectedItemChangeForItem1,
     onDismissForItem1,
