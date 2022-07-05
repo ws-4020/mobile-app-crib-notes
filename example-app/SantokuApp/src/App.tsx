@@ -1,7 +1,7 @@
 import React from 'react';
 import {Platform, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {initialWindowMetrics, SafeAreaProvider} from 'react-native-safe-area-context';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {AppWithInitialization} from './AppWithInitialization';
 import {WithOverlay} from './components/overlay';
@@ -23,7 +23,7 @@ export const App = ({isHeadless}: AppProperties) => {
 
   return (
     <GestureHandlerRootView style={StyleSheet.absoluteFill}>
-      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      <SafeAreaProvider>
         <WithAppTheme>
           <WithOverlay>
             <AppWithInitialization />
