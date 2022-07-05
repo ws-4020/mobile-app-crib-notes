@@ -49,7 +49,7 @@ export const OverlayContainer: React.FC<ModalContainerProps> = ({
         styles.container,
         // WORKAROUND: FullWindowOverlayを使用した場合に、iOSでSafeAreaViewが正常に動作しない事象の対応
         // FullWindowOverlayのwidth/heightにスクリーンサイズを設定することでSafeAreaViewが動作するようにはなりますが、
-        // width/heightを指定した場合は、PickerBackdrop/PickerContainerがアウンマウントされたタイミングでFullWindowOverlayもアンマウントする必要があります。
+        // width/heightを指定した場合は、OverlayContainerがアウンマウントされたタイミングでFullWindowOverlayもアンマウントする必要があります。
         // （FullWindowOverlayをアンマウントしないと、画面全体にFullWindowOverlayが残ってしまい、真っ白な画面が表示されてしまいます。）
         // しかし、FullWindowOverlayはNavigationContainerの中でアンマウントすると、クラッシュする不具合があります。
         // そのため、ここではuseSafeAreaInsetsから取得したInsetsをpaddingに設定することで回避しています。
