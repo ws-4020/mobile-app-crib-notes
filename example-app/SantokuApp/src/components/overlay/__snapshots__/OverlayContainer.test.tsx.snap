@@ -3,12 +3,16 @@
 exports[`OverlayContainer only with required props renders successfully only with required props: AnimatedView with invisible. 1`] = `null`;
 
 exports[`OverlayContainer only with required props renders successfully only with required props: AnimatedView with visible. 1`] = `
-<RNCSafeAreaView
+<View
   pointerEvents="box-none"
   style={
     Object {
       "flex": 1,
       "justifyContent": "flex-end",
+      "paddingBottom": 0,
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 0,
     }
   }
 >
@@ -39,16 +43,20 @@ exports[`OverlayContainer only with required props renders successfully only wit
     style={Object {}}
     testID="containerAnimated"
   />
-</RNCSafeAreaView>
+</View>
 `;
 
 exports[`OverlayContainer with all props should be applied properly: OverlayContainer with all props. 1`] = `
-<RNCSafeAreaView
+<View
   pointerEvents="box-none"
   style={
     Object {
       "flex": 1,
       "justifyContent": "flex-end",
+      "paddingBottom": 0,
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 0,
     }
   }
 >
@@ -83,5 +91,5 @@ exports[`OverlayContainer with all props should be applied properly: OverlayCont
     }
     testID="animatedView"
   />
-</RNCSafeAreaView>
+</View>
 `;

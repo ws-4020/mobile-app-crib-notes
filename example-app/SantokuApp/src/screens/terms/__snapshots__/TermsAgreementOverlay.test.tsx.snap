@@ -65,12 +65,16 @@ exports[`TermsOfServiceAgreement マウントされたときに正常にレン�
       }
     />
   </View>
-  <RNCSafeAreaView
+  <View
     pointerEvents="box-none"
     style={
       Object {
         "flex": 1,
         "justifyContent": "flex-end",
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "paddingTop": 0,
       }
     }
   >
@@ -294,6 +298,6 @@ exports[`TermsOfServiceAgreement マウントされたときに正常にレン�
         </View>
       </View>
     </View>
-  </RNCSafeAreaView>
+  </View>
 </View>
 `;
