@@ -65,7 +65,7 @@ exports[`TermsOfServiceAgreement マウントされたときに正常にレン�
       }
     />
   </View>
-  <View
+  <RNCSafeAreaView
     pointerEvents="box-none"
     style={
       Object {
@@ -294,6 +294,6 @@ exports[`TermsOfServiceAgreement マウントされたときに正常にレン�
         </View>
       </View>
     </View>
-  </View>
+  </RNCSafeAreaView>
 </View>
 `;

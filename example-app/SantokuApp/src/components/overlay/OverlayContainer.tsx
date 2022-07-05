@@ -1,7 +1,8 @@
 import {useWorkletCallback} from 'framework/utilities/useWorkletCallback';
 import React from 'react';
-import {StyleSheet, View, ViewProps} from 'react-native';
+import {StyleSheet, ViewProps} from 'react-native';
 import Reanimated, {BaseAnimationBuilder, FadeIn, FadeOut, Keyframe} from 'react-native-reanimated';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export type ModalContainerProps = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
   isVisible: boolean;
@@ -44,7 +45,7 @@ export const OverlayContainer: React.FC<ModalContainerProps> = ({
   return (
     <>
       {isVisible && (
-        <View style={styles.container} pointerEvents="box-none">
+        <SafeAreaView style={styles.container} pointerEvents="box-none">
           <Reanimated.View
             style={style}
             entering={entering.withCallback(composedEnteringCallback)}
@@ -53,7 +54,7 @@ export const OverlayContainer: React.FC<ModalContainerProps> = ({
             {...animatedViewProps}>
             {children}
           </Reanimated.View>
-        </View>
+        </SafeAreaView>
       )}
     </>
   );
