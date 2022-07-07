@@ -1,3 +1,4 @@
+import notifee, {AndroidImportance} from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import * as Application from 'expo-application';
 import {activateKeepAwake} from 'expo-keep-awake';
@@ -11,7 +12,7 @@ import {AuthenticationService, isUnauthorizedError} from '../authentication';
 import {enhanceValidator} from '../validator';
 import {
   AccountData,
-  checkAppUpdates,
+  checkAppUpdates, createMessagingChannels,
   hideSplashScreen,
   initializeFirebaseCrashlyticsAsync,
   isInitialDataError,
@@ -64,6 +65,8 @@ const initializeCoreFeatures = async () => {
   await loadBundledMessagesAsync();
   // メッセージのロード後にYupの設定をする必要がある
   enhanceValidator();
+  // Push通知受信用のチャンネルを作成
+  await createMessagingChannels();
 };
 
 const loadData = async () => {

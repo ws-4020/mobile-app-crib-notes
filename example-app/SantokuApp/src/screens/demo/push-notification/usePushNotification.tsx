@@ -1,4 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
+import type {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import axios, {AxiosError} from 'axios';
 import {AppConfig} from 'framework/config';
 import {ErrorResponse} from 'generated/backend/model';
@@ -35,23 +36,44 @@ export const usePushNotification = () => {
   const [authStatus, setAuthStatus] = useState<AuthStatusType>();
   const [token, setToken] = useState<string>();
 
-  const requestUserPermission = useCallback(async () => {
-    const authStatus = await messaging().requestPermission();
+  const [channelId, setChannelId] = useState<string>();
+  const onSelectedChannelChange = useCallback((selectedItem?: Item<string | undefined>) => {
+    setChannelId(selectedItem?.value);
+  }, []);
+
+  const getPermissionStatusForDisplay = useCallback((authStatus: FirebaseMessagingTypes.AuthorizationStatus) => {
     switch (authStatus) {
       case messaging.AuthorizationStatus.NOT_DETERMINED:
-        setAuthStatus('NOT_DETERMINED');
-        break;
+        return 'NOT_DETERMINED';
       case messaging.AuthorizationStatus.DENIED:
-        setAuthStatus('DENIED');
-        break;
+        return 'DENIED';
       case messaging.AuthorizationStatus.AUTHORIZED:
-        setAuthStatus('AUTHORIZED');
-        break;
+        return 'AUTHORIZED';
       case messaging.AuthorizationStatus.PROVISIONAL:
-        setAuthStatus('PROVISIONAL');
-        break;
+        return 'PROVISIONAL';
     }
   }, []);
+
+  const getPermissionStatus = useCallback(async () => {
+    const authStatus = await messaging().hasPermission();
+    setAuthStatus(getPermissionStatusForDisplay(authStatus));
+  }, [getPermissionStatusForDisplay]);
+
+  const requestUserPermission = useCallback(
+    async (options?: FirebaseMessagingTypes.IOSPermissions) => {
+      const authStatus = await messaging().requestPermission(options);
+      setAuthStatus(getPermissionStatusForDisplay(authStatus));
+    },
+    [getPermissionStatusForDisplay],
+  );
+
+  const requestUserPermissionWithoutOptions = useCallback(async () => {
+    await requestUserPermission();
+  }, [requestUserPermission]);
+
+  const requestUserPermissionWithProvisional = useCallback(async () => {
+    await requestUserPermission({provisional: true});
+  }, [requestUserPermission]);
 
   const getToken = useCallback(async () => {
     const fcmToken = await messaging().getToken();
@@ -60,7 +82,7 @@ export const usePushNotification = () => {
 
   const notifyMessageToAll = useCallback(async () => {
     try {
-      await axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/all`);
+      await axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/all`, {channelId});
     } catch (e) {
       if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<ErrorResponse>;
@@ -71,12 +93,12 @@ export const usePushNotification = () => {
         alert(e);
       }
     }
-  }, []);
+  }, [channelId]);
 
   const notifyMessageToMe = useCallback(async () => {
     if (token) {
       try {
-        await axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/single/${token}`);
+        await axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/single/${token}`, {channelId});
       } catch (e) {
         if (axios.isAxiosError(e)) {
           const axiosError = e as AxiosError<ErrorResponse>;
@@ -90,23 +112,20 @@ export const usePushNotification = () => {
       return;
     }
     alert('FCM登録トークンを取得してください');
-  }, [token]);
-
-  const [channelKey, setChannelKey] = useState<string>();
-  const onSelectedChannelChange = useCallback((selectedItem?: Item<string | undefined>) => {
-    setChannelKey(selectedItem?.value);
-  }, []);
+  }, [channelId, token]);
 
   return {
     authStatus,
     token,
-    requestUserPermission,
+    getPermissionStatus,
+    requestUserPermissionWithoutOptions,
+    requestUserPermissionWithProvisional,
     getToken,
     notifyMessageToAll,
     notifyMessageToMe,
     openSettings,
     channels,
-    channelKey,
+    channelKey: channelId,
     onSelectedChannelChange,
   };
 };

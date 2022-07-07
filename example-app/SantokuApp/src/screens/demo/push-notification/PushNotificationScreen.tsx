@@ -1,30 +1,21 @@
-import {useNavigation} from '@react-navigation/native';
 import {DemoStackParamList} from 'navigation/types';
 import React, {useEffect} from 'react';
-import {Linking, SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {Button, Divider, Icon, Text} from 'react-native-elements';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import {Button, Divider, Text} from 'react-native-elements';
 
 import {SelectPicker} from '../../../components/picker';
+import {log} from '../../../framework';
+import {useSpecAndSourceCodeLink} from '../useSpecAndSouceCodeLink';
 import {usePushNotification} from './usePushNotification';
-
-const openReadme = async () => {
-  await Linking.openURL(
-    'https://github.com/ws-4020/mobile-app-crib-notes/blob/feature/add-readme-for-push-notification-demo/example-app/SantokuApp/src/screens/demo/push-notification',
-  );
-};
-
-const ReadmeButton = () => (
-  <TouchableOpacity onPress={openReadme}>
-    <Icon name="launch" color="rgba(50,50,50,0.5)" size={15} />
-  </TouchableOpacity>
-);
 
 const ScreenName = 'PushNotification';
 const Screen: React.FC = () => {
   const {
     authStatus,
     token,
-    requestUserPermission,
+    getPermissionStatus,
+    requestUserPermissionWithoutOptions,
+    requestUserPermissionWithProvisional,
     getToken,
     notifyMessageToAll,
     notifyMessageToMe,
@@ -34,34 +25,33 @@ const Screen: React.FC = () => {
     onSelectedChannelChange,
   } = usePushNotification();
 
-  const navigation = useNavigation();
   useEffect(() => {
-    navigation.setOptions({headerRight: ReadmeButton});
-  }, [navigation]);
+    getPermissionStatus().catch(e => log.trace(`Failed to get permission status. cause=[${String(e)}]`));
+    getToken().catch(e => log.trace(`Failed to get token. cause=[${String(e)}]`));
+  }, [getPermissionStatus, getToken]);
+
+  const {SpecAndSourceCodeLink} = useSpecAndSourceCodeLink('push-notification');
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <SpecAndSourceCodeLink />
+        <Divider orientation="vertical" style={styles.divider} />
         <View>
           <Text>【現在のPermissionのステータス】</Text>
           <Text>{authStatus ?? 'Permissionのステータスが表示されます'}</Text>
         </View>
         <View style={styles.elementContainer}>
-          <Button onPress={requestUserPermission} title="Permissionのステータス表示" />
+          <Button onPress={requestUserPermissionWithoutOptions} title="Permissionの許可" />
         </View>
+        <Text>一度でも許可ダイアログで許可、もしくは拒否をすると仮許可はできません</Text>
         <View style={styles.elementContainer}>
-          <Button onPress={requestUserPermission} title="Permissionの許可" />
-        </View>
-        <View style={styles.elementContainer}>
-          <Button onPress={requestUserPermission} title="Permissionの仮許可" />
+          <Button onPress={requestUserPermissionWithProvisional} title="Permissionの仮許可" />
         </View>
         <Divider orientation="vertical" style={styles.divider} />
         <View>
           <Text>【FCM登録トークン】</Text>
-          <Text selectable>{token ?? 'FCM登録トークンが表示されます'}</Text>
-        </View>
-        <View style={styles.elementContainer}>
-          <Button onPress={getToken} title="FCM登録トークンの取得" />
+          <Text selectable>{token ?? ''}</Text>
         </View>
         <Divider orientation="vertical" style={styles.divider} />
         <View>
@@ -84,6 +74,7 @@ const Screen: React.FC = () => {
         </View>
         <View>
           <Text>【通知設定】</Text>
+          <Text>OSのPush通知設定画面に遷移します</Text>
           <View style={styles.elementContainer}>
             <Button onPress={openSettings} title="Push通知の設定" />
           </View>

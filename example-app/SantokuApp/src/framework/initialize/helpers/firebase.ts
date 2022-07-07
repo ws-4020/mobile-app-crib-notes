@@ -1,4 +1,5 @@
 // import時の副作用を防ぐためにimport typeにしてます。
+import notifee, {AndroidImportance} from '@notifee/react-native';
 import type crashlyticsModule from '@react-native-firebase/crashlytics';
 import {firebaseConfig, launchedId} from 'framework';
 
@@ -18,4 +19,33 @@ const initializeFirebaseCrashlyticsAsync = async () => {
   }
 };
 
-export {initializeFirebaseCrashlyticsAsync};
+const createMessagingChannels = async () => {
+  await notifee.createChannels([
+    {
+      id: 'emergencyChannel',
+      name: 'Emergency notification',
+      sound: 'default',
+      importance: AndroidImportance.HIGH,
+    },
+    {
+      id: 'highChannel',
+      name: 'High notification',
+      sound: 'default',
+      importance: AndroidImportance.DEFAULT,
+    },
+    {
+      id: 'middleChannel',
+      name: 'Middle notification',
+      sound: 'default',
+      importance: AndroidImportance.LOW,
+    },
+    {
+      id: 'lowChannel',
+      name: 'Low notification',
+      sound: 'default',
+      importance: AndroidImportance.MIN,
+    },
+  ]);
+};
+
+export {initializeFirebaseCrashlyticsAsync, createMessagingChannels};

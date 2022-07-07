@@ -1,0 +1,94 @@
+# Push Notification
+
+## 概要
+
+Push通知の以下機能を検証するデモページです。
+
+- Permissionのステータス取得
+- Permissionの許可ダイアログの表示
+- Permissionの仮許可
+- FCM登録トークンの取得
+- Push通知の送信
+- Push通知の設定画面への遷移
+
+このページのソースコードは[こちら](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp/src/screens/demo/push-notification)です。
+
+### Permissionのステータス取得
+
+現在のPermissionのステータスを取得します。
+
+iOSの場合は、以下4つのステータスが存在します。
+
+| ステータス | 説明 |
+|:--|:--|
+| NOT_DETERMINED | ユーザが許可ダイアログでPermissionを許可、許可しないを選択していない状態 |
+| DENIED | ユーザが許可ダイアログでPermissionを許可しなかった場合 |
+| AUTHORIZED | ユーザが許可ダイアログでPermissionを許可した場合 |
+| PROVISIONAL | アプリがPROVISIONALとしてPermissionの許可リクエストを実施した場合 |
+
+Androidの場合は、常に`AUTHORIZED`となります。
+
+### Permissionの許可ダイアログの表示
+
+iOSの場合は、ダイアログを表示してユーザにPermissionの許可を確認する必要があります。
+Permissionの確認をする前にPush通知を送信しても、ユーザはその通知を受信できません。
+
+なお、一度でもPermissionの許可、もしくは拒否を実施した場合は、以降許可ダイアログは表示されません。
+
+#### 許可ダイアログのイメージ
+
+![permission-dialog](./ios-permission-dialog.png)
+
+### Permissionの仮許可
+
+iOS12以降の場合は、上述した許可ダイアログでユーザが許可をしなくても、Push通知を受信できる機能があります。
+Permissionのリクエスト時（許可ダイアログ表示リクエスト時）に[provisional](https://rnfirebase.io/messaging/ios-permissions#permission-settings)を設定すると、
+許可ダイアログは表示されずステータスが`PROVISIONAL`になります。
+
+ステータスが`PROVISIONAL`の場合はPush通知を受信できます。Push通知を受信した際にヘッドアップ通知は表示されませんが、通知センターには表示されるようになります。
+なお、一度でもユーザが許可ダイアログで許可、もしくは拒否を実施した場合は、ステータスを`PROVISIONAL`に変更できません。
+
+### FCM登録トークンの取得
+
+FCM登録トークンを取得します。
+
+### Push通知の送信
+
+バックエンドのAPIを実行してPush通知を送信します。
+Push通知を送信するバックエンドのソースコードは[こちら](https://github.com/ws-4020/mobile-app-crib-notes/blob/feature/add-readme-for-push-notification-demo/example-app/santoku-app-backend/src/main/java/jp/fintan/mobile/santokuapp/infrastructure/service/FcmPushNotifier.java)です。
+
+アプリがフォアグラウンドにある場合は、スナックバーに通知内容が表示されます。
+アプリがバックグラウンドにある場合、もしくはアプリを起動していない場合は、OSによって挙動が変わります。
+
+iOSの場合は、ヘッドアップ通知が表示され、音が鳴ります。
+
+Androidの場合は、チャンネルの重要度によって挙動が変わります。このアプリが用意しているチャンネルと重要度は以下になります。
+
+| チャンネル | 重要度 | 通知の動作 |
+|:--|:--|:--|
+| emergencyChannel | 緊急 | 音が鳴り、ヘッドアップ通知として表示されます。 |
+| highChannel | 高 | 音が鳴ります。 |
+| middleChannel | 中 | 音が鳴りません。 |
+| lowChannel | 低 | 音が鳴らず、ステータスバーにも表示されません。 |
+
+なお、チャンネルを指定しないでPush通知を送信した場合は、`emergencyChannel`に通知されます。
+
+#### 受信時のイメージ
+
+TODO: iOSのキャプチャ
+
+| アプリの状態 | iOS | Android |
+|:--|:--|:--|
+|アプリがフォアグラウンドにある場合のPush通知受信|![ios-foreground](./ios-foreground.png)|![android-foreground](./android-foreground.png)|
+|アプリがバックグラウンドにある場合、もしくはアプリが停止中の場合のPush通知受信<br/>（Androidは`emergencyChannel`に送信）|![ios-background](./ios-background.png)|![andorid-background-emergency-channel](./android-background-emergency-channel.png)|
+|アプリがバックグラウンドにある場合、もしくはアプリが停止中の場合のPush通知受信<br/>（Androidの`highChannel`に送信）|-|![android-background-high-channel](./android-background-high-channel.png)|
+
+### Push通知の設定画面への遷移
+
+OSのPush通知の設定画面を表示します。
+
+#### 設定画面のイメージ
+
+| iOS | Android |
+|:--|:--|
+|![ios-foreground](./ios-settings.png)|![android-foreground](./android-settings.png)|
