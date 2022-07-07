@@ -8,7 +8,9 @@ import {SelectPicker} from '../../../components/picker';
 import {usePushNotification} from './usePushNotification';
 
 const openReadme = async () => {
-  await Linking.openURL('https://www.tis.co.jp');
+  await Linking.openURL(
+    'https://github.com/ws-4020/mobile-app-crib-notes/blob/feature/add-readme-for-push-notification-demo/example-app/SantokuApp/src/screens/demo/push-notification',
+  );
 };
 
 const ReadmeButton = () => (

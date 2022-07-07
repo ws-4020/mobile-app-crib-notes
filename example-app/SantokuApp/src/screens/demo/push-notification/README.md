@@ -50,6 +50,27 @@ FCM登録トークンを取得します。
 
 ### Push通知の送信
 
-TODO: Androidの場合はチャンネルを指定してPush通知を送信する旨を記載。チャンネルはデフォルトの`aaa`チャンネルとそうではない`bbb`チャンネルの作成
+バックエンドのAPIを実行してPush通知を送信します。
+Push通知を送信するバックエンドのソースコードは[こちら](https://github.com/ws-4020/mobile-app-crib-notes/blob/feature/add-readme-for-push-notification-demo/example-app/santoku-app-backend/src/main/java/jp/fintan/mobile/santokuapp/infrastructure/service/FcmPushNotifier.java)です。
+
+アプリがフォアグラウンドにある場合は、スナックバーに通知内容が表示されます。
+アプリがバックグラウンドにある場合、もしくはアプリを起動していない場合は、OSによって挙動が変わります。
+
+iOSの場合は、ヘッドアップ通知が表示され、音が鳴ります。
+Androidの場合は、チャンネルの重要度によって挙動が変わります。以下は、Androidの[ドキュメント](https://developer.android.com/guide/topics/ui/notifiers/notifications?hl=ja#importance)にも記載されている重要度に応じた動作の違いです。
+- 緊急: 音が鳴り、ヘッドアップ通知として表示されます。
+- 高: 音が鳴ります。
+- 中: 音が鳴りません。
+- 低: 音が鳴らず、ステータスバーにも表示されません。
+
+このアプリでは、重要度に応じた動作の検証をするために、以下4つのチャンネルを用意しています。
+- emergencyChannel - 重要度:緊急
+- highChannel - 重要度:高
+- middleChannel - 重要度:中
+- lowChannel - 重要度:低
+
+チャンネルの指定をしないでPush通知を送信した場合は、emergencyChannelにPushが通知されます。
 
 ### Push通知の設定画面への遷移
+
+OSのPush通知の設定画面を表示します。
