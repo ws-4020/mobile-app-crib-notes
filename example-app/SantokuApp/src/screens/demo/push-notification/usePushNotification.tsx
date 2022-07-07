@@ -5,6 +5,8 @@ import {ErrorResponse} from 'generated/backend/model';
 import {useCallback, useState} from 'react';
 import {Linking, Platform} from 'react-native';
 
+import {Item} from '../../../components/picker';
+
 type AuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
 
 const openSettings = async () => {
@@ -20,6 +22,14 @@ const openSettings = async () => {
     await Linking.openSettings();
   }
 };
+
+const channels = [
+  {value: undefined, label: 'チャンネル指定なし'},
+  {value: 'emergencyChannel', label: '重要度:緊急チャンネル'},
+  {value: 'highChannel', label: '重要度:高チャンネル'},
+  {value: 'middleChannel', label: '重要度:中チャンネル'},
+  {value: 'lowChannel', label: '重要度:低チャンネル'},
+];
 
 export const usePushNotification = () => {
   const [authStatus, setAuthStatus] = useState<AuthStatusType>();
@@ -82,6 +92,11 @@ export const usePushNotification = () => {
     alert('FCM登録トークンを取得してください');
   }, [token]);
 
+  const [channelKey, setChannelKey] = useState<string>();
+  const onSelectedChannelChange = useCallback((selectedItem?: Item<string | undefined>) => {
+    setChannelKey(selectedItem?.value);
+  }, []);
+
   return {
     authStatus,
     token,
@@ -90,5 +105,8 @@ export const usePushNotification = () => {
     notifyMessageToAll,
     notifyMessageToMe,
     openSettings,
+    channels,
+    channelKey,
+    onSelectedChannelChange,
   };
 };
