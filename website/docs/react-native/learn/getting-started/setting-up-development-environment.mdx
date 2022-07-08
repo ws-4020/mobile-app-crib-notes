@@ -58,10 +58,12 @@ Android StudioでSDK Managerを開き、SDK Toolsタブで以下のツールに�
 
 次に、[環境変数`ANDROID_SDK_ROOT`、`ANDROID_HOME`](https://developer.android.com/studio/command-line/variables)を設定します。
 
+Windowsはユーザー環境変数に設定してください。また、`%USERPROFILE%`などの変数を使用するとアプリ実行時に変数が値に置き換わらずエラーが発生することがあるため、変数は使用せず値を直接設定してください。
+
 | 環境変数            | 設定例（macOS）                  | 設定例（Windows）                              |
 |:-------------------|:----------------------------|:------------------------------------------|
-| `ANDROID_SDK_ROOT` | `$HOME/Library/Android/sdk` | `%USERPROFILE%\AppData\Local\Android\Sdk` |
-| `ANDROID_HOME`[^1] | `$ANDROID_SDK_ROOT`         | `%ANDROID_SDK_ROOT%`                      |
+| `ANDROID_SDK_ROOT` | `/Users/ユーザー名/Library/Android/sdk` | `C:\Users\ユーザー名\AppData\Local\Android\Sdk` |
+| `ANDROID_HOME`[^1] | `/Users/ユーザー名/Library/Android/sdk` | `C:\Users\ユーザー名\AppData\Local\Android\Sdk` |
 
 [^1]: `ANDROID_HOME`という環境変数はすでに非推奨となっています。そのため、設定しなくても基本的に問題ないはずですが、メンテナンスされていないツールがこの環境変数を参照している可能性などもあるので、念のため設定しています。
 
