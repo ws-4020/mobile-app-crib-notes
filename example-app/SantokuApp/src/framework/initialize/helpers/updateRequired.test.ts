@@ -2,6 +2,7 @@ import {AppConfig} from 'framework/config';
 import {log} from 'framework/logging';
 import {BundledMessagesLoader, loadMessages} from 'framework/message';
 import {Alert, Linking} from 'react-native';
+import {getAppUpdates} from 'service/backend/systemService';
 
 import {InitialDataError} from './initialDataError';
 import {
@@ -18,6 +19,8 @@ beforeAll(async () => {
 beforeEach(() => {
   jest.resetAllMocks();
 });
+
+jest.mock('service/backend/systemService');
 
 describe('openStoreLink', () => {
   it('storeUrlが空文字の場合は何もしない', async () => {
@@ -72,12 +75,8 @@ describe('checkAppUpdates', () => {
     );
   });
   it('getAppUpdatesがエラーをスローした場合はInitialDataErrorがスローされること', async () => {
-    jest.mock('service', () => {
-      return {
-        getAppUpdates: () => {
-          throw new Error('dummy');
-        },
-      };
+    (getAppUpdates as jest.Mock).mockImplementation(() => {
+      throw new Error('dummy');
     });
     await expect(() => checkAppUpdates('android', '0.1.1')).rejects.toThrow(
       new InitialDataError('Failed to verify if the app needs to be updated.', new Error('dummy')),
