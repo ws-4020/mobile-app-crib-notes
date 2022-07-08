@@ -52,7 +52,7 @@ Push通知受信のリクエスト時（許可ダイアログ表示リクエス�
 バックエンドのAPIを実行してPush通知を送信します。
 Push通知を送信するバックエンドのソースコードは[こちら](https://github.com/ws-4020/mobile-app-crib-notes/blob/master/example-app/santoku-app-backend/src/main/java/jp/fintan/mobile/santokuapp/infrastructure/service/FcmPushNotifier.java)です。
 
-アプリがフォアグラウンドにある場合は、スナックバーに通知内容が表示されます。
+アプリがフォアグラウンドにある場合は、アプリが用意しているスナックバーに通知内容を表示します。
 アプリがバックグラウンドにある場合、もしくはアプリを起動していない場合は、OSによって挙動が変わります。
 
 iOSの場合は、ヘッドアップ通知が表示され、音が鳴ります。
@@ -69,10 +69,6 @@ Androidの場合は、チャンネルの重要度によって挙動が変わり�
 なお、チャンネルを指定しないでPush通知を送信した場合は、`emergencyChannel`に通知されます。
 
 #### 受信時のイメージ
-
-<!--
-TODO: iOSのキャプチャ。
--->
 
 | アプリの状態 | iOS | Android |
 |:--|:--|:--|
