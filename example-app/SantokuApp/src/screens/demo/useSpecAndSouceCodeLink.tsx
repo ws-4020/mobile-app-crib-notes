@@ -13,7 +13,9 @@ export const useSpecAndSourceCodeLink = (feature: string) => {
     await openUrl(`${AppConfig.mobileAppCribNotesWebsiteUrl}/react-native/santoku/design/demo/${feature}/overview`);
   }, [feature]);
   const openSourceCode = useCallback(async () => {
-    await openUrl(`${AppConfig.mobileAppCribNotesRepositoryUrl}/example-app/SantokuApp/src/screens/demo/${feature}`);
+    await openUrl(
+      `${AppConfig.mobileAppCribNotesRepositoryUrl}/tree/master/example-app/SantokuApp/src/screens/demo/${feature}`,
+    );
   }, [feature]);
 
   const SpecAndSourceCodeLink: React.FC = () => (
