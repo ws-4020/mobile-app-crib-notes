@@ -62,8 +62,8 @@ Windowsは`ユーザー環境変数`に設定してください。また、`%USE
 
 | 環境変数            | 設定例（macOS）                  | 設定例（Windows）                              |
 |:-------------------|:----------------------------|:------------------------------------------|
-| `ANDROID_SDK_ROOT` | `/Users/ユーザー名/Library/Android/sdk` | `C:\Users\ユーザー名\AppData\Local\Android\Sdk` |
-| `ANDROID_HOME`[^1] | `/Users/ユーザー名/Library/Android/sdk` | `C:\Users\ユーザー名\AppData\Local\Android\Sdk` |
+| `ANDROID_SDK_ROOT` | `$HOME/Library/Android/sdk` | `C:\Users\ユーザー名\AppData\Local\Android\Sdk` |
+| `ANDROID_HOME`[^1] | `$ANDROID_SDK_ROOT`         | `C:\Users\ユーザー名\AppData\Local\Android\Sdk` |
 
 [^1]: `ANDROID_HOME`という環境変数はすでに非推奨となっています。そのため、設定しなくても基本的に問題ないはずですが、メンテナンスされていないツールがこの環境変数を参照している可能性などもあるので、念のため設定しています。
 
