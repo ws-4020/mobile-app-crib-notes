@@ -248,7 +248,7 @@ module.exports = {
                 'react-native/learn/qa-app/exercise-basic-input-screen',
                 'react-native/learn/qa-app/exercise-basic-input-api',
               ],
-            }
+            },
           ],
         },
         'react-native/learn/qa-app/exercise-advanced',

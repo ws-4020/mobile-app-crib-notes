@@ -8,9 +8,9 @@ hide_table_of_contents: true
 
 ### 開発環境の構築
 
-React Nativeでの開発環境が未構築の場合は、[開発環境の構築](https://fintan-contents.github.io/mobile-app-crib-notes/react-native/learn/getting-started/setting-up-development-environment)を参照して環境構築を行ってください。
+[開発環境の構築](https://fintan-contents.github.io/mobile-app-crib-notes/react-native/learn/getting-started/setting-up-development-environment)が未実施の場合は、実施してください。
 
-【TODO：MSW関連で追記することがあれば追記する】
+【TODO】：MSW関連で追記することがあれば追記する。
 
 ### プロジェクトの作成
 
@@ -20,9 +20,9 @@ React Nativeでの開発環境が未構築の場合は、[開発環境の構築]
 
 ディレクトリ構成は以下とします。
 
-【TODO：SantokuAppの新ディレクトリ構成が決まりしだい記載する】
+【TODO】：SantokuAppの新ディレクトリ構成が決まりしだい記載する。
 
-```
+```console
 src
 ├─・・・
 ```
@@ -36,7 +36,7 @@ src
 
 以下のライブラリを使用してQAアプリが作成可能なことを確認しています。ライブラリ選定で迷う場合は以下を使用してください。
 
-【TODO：使用ライブラリについて追記する】
+【TODO】：使用ライブラリについて追記する。
 
 | ライブラリ名 | 説明 |
 |--|--|
@@ -47,12 +47,13 @@ src
 
 [アプリの実行](https://fintan-contents.github.io/mobile-app-crib-notes/react-native/learn/getting-started/launch-created-app)を参照してください。
 
-【TODO：MSW関連で追記することがあれば追記する】
+【TODO】：MSW関連で追記することがあれば追記する。
 
 ### プロジェクトの設定
+
 初期プロジェクトの作成をした直後は、最低限のファイルしかない状態です。
 QAアプリの実装に必要な共通処理をサンプルアプリ（SantokuApp）からコピーします。以下のファイルを作成したプロジェクトにコピーしてください。
-一部のファイルについてはコピー後、不要な処理の削除やアプリ名の変更などの修正が必要です。以下の説明を参考に、実際のファイルの内容を把握しながら必要な修正を行ってください。
+一部のファイルについてはコピー後、不要な処理の削除やアプリ名の変更などの修正が必要です。以下の説明を参考に、ファイルの内容を把握しながら修正してください。
 
 | コピー元（[SantokuApp](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp "SantokuApp")） | 修正必要 | 説明 |
 |--|--|--|
