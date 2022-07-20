@@ -77,7 +77,7 @@ QAアプリの実装に必要な共通処理をサンプルアプリ（SantokuAp
 | src/framework/utilities/index.ts | ○ |  |
 | src/framework/utilities/useIsMounted.ts |  | コンポーネントがマウントされているかを確認するためのユーティリティ |
 | src/framework/utilities/useVisibility.ts |  | picker部品の中でstate管理に使用。 |
-| src/framework/utilities/useWorkletCallback.ts |  | react-native-reanimatedを使用する際に使用。 |
+| src/framework/utilities/useWorkletCallback.ts |  | React Native Reanimatedの[Worklets](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/worklets)を使用する際に便利なユーティリティ |
 | src/generated/BundledMessages.ts | ○ | アプリ内にバンドルするメッセージの一覧。 |
 | src/AppWithInitialization.tsx | ○ | アプリ起動時に必要な設定。 |
 | package.json ※ファイルの内容を一部コピー | ○ | `"orval": "npx orval --config ./orval.config.ts"`<br />OpenAPI specificationからソースコードを自動生成するために必要。 |
