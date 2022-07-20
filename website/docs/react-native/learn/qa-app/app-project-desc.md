@@ -76,7 +76,7 @@ QAアプリの実装に必要な共通処理をサンプルアプリ（SantokuAp
 | src/framework/utilities/composePressableStyles.ts |  | picker部品の中でreact-native-reanimatedを使用する際に使用。 |
 | src/framework/utilities/index.ts | ○ |  |
 | src/framework/utilities/useIsMounted.ts |  | コンポーネントがマウントされているかを確認するためのユーティリティ |
-| src/framework/utilities/useVisibility.ts |  | picker部品の中でstate管理に使用。 |
+| src/framework/utilities/useVisibility.ts |  | 表示・非表示の状態管理を簡単に使うためのユーティリティ |
 | src/framework/utilities/useWorkletCallback.ts |  | React Native Reanimatedの[Worklets](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/worklets)を使用する際に便利なユーティリティ |
 | src/generated/BundledMessages.ts | ○ | アプリ内にバンドルするメッセージの一覧。 |
 | src/AppWithInitialization.tsx | ○ | アプリ起動時に必要な設定。 |
