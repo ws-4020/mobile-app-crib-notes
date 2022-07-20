@@ -24,7 +24,7 @@ const overviews = [
   },
   {
     title: 'QAアプリの実装（基本編）',
-    to: '/react-native/learn/qa-app/exercise-basic',
+    to: '/react-native/learn/qa-app/exercise-basic-home-components',
     summary: <>QAアプリの各画面と画面遷移、API呼び出しを実装します。</>
   },
   {
