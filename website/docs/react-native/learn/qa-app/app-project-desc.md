@@ -55,6 +55,8 @@ src
 QAアプリの実装に必要な共通処理をサンプルアプリ（SantokuApp）からコピーします。以下のファイルを作成したプロジェクトにコピーしてください。
 一部のファイルについてはコピー後、不要な処理の削除やアプリ名の変更などの修正が必要です。以下の説明を参考に、ファイルの内容を把握しながら修正してください。
 
+【TODO】：コピー元のディレクトリ構成は変更予定（構成検討中）のため、構成が決まり次第コピー元のパスを修正する。
+
 | コピー元（[SantokuApp](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp "SantokuApp")） | 修正必要 | 説明 |
 |--|--|--|
 | src/components/reactQuery配下 | | reactQueryを使用するために必要な設定。 |
