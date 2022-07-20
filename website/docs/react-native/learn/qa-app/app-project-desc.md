@@ -75,7 +75,7 @@ QAアプリの実装に必要な共通処理をサンプルアプリ（SantokuAp
 | src/framework/message/Message.ts |  | アプリ内で使用するメッセージで必要な設定。 |
 | src/framework/utilities/composePressableStyles.ts |  | picker部品の中でreact-native-reanimatedを使用する際に使用。 |
 | src/framework/utilities/index.ts | ○ |  |
-| src/framework/utilities/useIsMounted.ts |  | アプリの状態管理に使用。 |
+| src/framework/utilities/useIsMounted.ts |  | コンポーネントがマウントされているかを確認するためのユーティリティ |
 | src/framework/utilities/useVisibility.ts |  | picker部品の中でstate管理に使用。 |
 | src/framework/utilities/useWorkletCallback.ts |  | react-native-reanimatedを使用する際に使用。 |
 | src/generated/BundledMessages.ts | ○ | アプリ内にバンドルするメッセージの一覧。 |
