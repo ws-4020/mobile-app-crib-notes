@@ -1,11 +1,11 @@
+import {SelectPicker} from 'components/picker';
+import {log} from 'framework/logging';
 import {DemoStackParamList} from 'navigation/types';
 import React, {useEffect} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Divider, Text} from 'react-native-elements';
 
-import {SelectPicker} from '../../../components/picker';
-import {log} from '../../../framework';
-import {useSpecAndSourceCodeLink} from '../useSpecAndSouceCodeLink';
+import {SpecAndSourceCodeLink} from '../useSpecAndSouceCodeLink';
 import {usePushNotification} from './usePushNotification';
 
 const ScreenName = 'PushNotification';
@@ -30,12 +30,10 @@ const Screen: React.FC = () => {
     getToken().catch(e => log.trace(`Failed to get token. cause=[${String(e)}]`));
   }, [getPermissionStatus, getToken]);
 
-  const {SpecAndSourceCodeLink} = useSpecAndSourceCodeLink('push-notification');
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <SpecAndSourceCodeLink />
+        <SpecAndSourceCodeLink feature="push-notification" />
         <Divider orientation="vertical" style={styles.divider} />
         <View>
           <Text>【現在のPermissionのステータス】</Text>
