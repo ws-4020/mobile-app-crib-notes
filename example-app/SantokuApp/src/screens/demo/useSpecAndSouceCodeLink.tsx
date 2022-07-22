@@ -22,7 +22,7 @@ export const SpecAndSourceCodeLink: React.VFC<Props> = ({feature}) => {
 
   return (
     <View style={styles.container}>
-      <Button title="・デモページの仕様" type="clear" onPress={openSpec} />
+      <Button title="・デモページの説明" type="clear" onPress={openSpec} />
       <Button title="・デモページのソースコード" type="clear" onPress={openSourceCode} />
     </View>
   );
