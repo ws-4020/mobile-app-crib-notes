@@ -36,9 +36,9 @@ export const usePushNotification = () => {
   const [authStatus, setAuthStatus] = useState<AuthStatusType>();
   const [token, setToken] = useState<string>();
 
-  const [channelId, setChannelId] = useState<string>();
+  const [channelKey, setChannelKey] = useState<string>();
   const onSelectedChannelChange = useCallback((selectedItem?: Item<string | undefined>) => {
-    setChannelId(selectedItem?.value);
+    setChannelKey(selectedItem?.value);
   }, []);
 
   const getPermissionStatusForDisplay = useCallback((authStatus: FirebaseMessagingTypes.AuthorizationStatus) => {
@@ -82,7 +82,7 @@ export const usePushNotification = () => {
 
   const notifyMessageToAll = useCallback(async () => {
     try {
-      await axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/all`, {channelId});
+      await axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/all`, {channelId: channelKey});
     } catch (e) {
       if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<ErrorResponse>;
@@ -93,12 +93,14 @@ export const usePushNotification = () => {
         alert(e);
       }
     }
-  }, [channelId]);
+  }, [channelKey]);
 
   const notifyMessageToMe = useCallback(async () => {
     if (token) {
       try {
-        await axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/single/${token}`, {channelId});
+        await axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/single/${token}`, {
+          channelId: channelKey,
+        });
       } catch (e) {
         if (axios.isAxiosError(e)) {
           const axiosError = e as AxiosError<ErrorResponse>;
@@ -112,7 +114,7 @@ export const usePushNotification = () => {
       return;
     }
     alert('FCM登録トークンを取得してください');
-  }, [channelId, token]);
+  }, [channelKey, token]);
 
   return {
     authStatus,
@@ -125,7 +127,7 @@ export const usePushNotification = () => {
     notifyMessageToMe,
     openSettings,
     channels,
-    channelKey: channelId,
+    channelKey,
     onSelectedChannelChange,
   };
 };
