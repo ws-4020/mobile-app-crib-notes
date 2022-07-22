@@ -42,7 +42,9 @@ const Screen: React.FC = () => {
         <View style={styles.elementContainer}>
           <Button onPress={requestUserPermissionWithoutOptions} title="Permissionの許可" />
         </View>
-        <Text>一度でも許可ダイアログで許可、もしくは拒否をすると仮許可はできません</Text>
+        <Text>
+          一度でも許可ダイアログで許可もしくは拒否すると、それ以降はステータスを`PROVISIONAL`に変更できなくなります
+        </Text>
         <View style={styles.elementContainer}>
           <Button onPress={requestUserPermissionWithProvisional} title="Permissionの仮許可" />
         </View>
