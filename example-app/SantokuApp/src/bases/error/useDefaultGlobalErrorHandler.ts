@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {isApplicationError} from 'bases/core/error/ApplicationError';
-import {RequestTimeoutError} from 'bases/core/error/RequestTimeoutError';
+import {RequestTimeoutError} from 'features/backend/error/RequestTimeoutError';
 import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {log} from 'bases/logging';
 import {m} from 'bases/message';
