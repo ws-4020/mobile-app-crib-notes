@@ -2,7 +2,7 @@ import {FullWindowOverlay} from 'bases/ui/components/overlay/FullWindowOverlay';
 import {TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/model';
 import React, {useCallback, useMemo, useState} from 'react';
 
-import {TermsAgreementOverlay, TermsAgreementOverlayProps} from '../screens/terms/TermsAgreementOverlay';
+import {TermsAgreementOverlay, TermsAgreementOverlayProps} from '../features/terms/TermsAgreementOverlay';
 import {TermsAgreementOverlayContextType, TermsAgreementOverlayProvider} from './useTermsAgreementOverlay';
 
 export type TermsAgreementOverlayShowProps = {

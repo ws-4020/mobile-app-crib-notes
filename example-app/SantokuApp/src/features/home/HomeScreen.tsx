@@ -6,7 +6,7 @@ import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
-import {useRequestPermissionAndRegisterToken} from '../useRequestPermissionAndRegisterToken';
+import {useRequestPermissionAndRegisterToken} from './useRequestPermissionAndRegisterToken';
 
 const ScreenName = 'Home';
 const Screen: React.FC = () => {

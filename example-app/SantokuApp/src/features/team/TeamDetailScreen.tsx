@@ -3,7 +3,7 @@ import {m} from 'bases';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
-import {useNavigateToDemoStackScreen} from 'screens/useNavigateToScreen';
+import {useNavigateToDemoStackScreen} from 'features/useNavigateToScreen';
 
 const ScreenName = 'TeamDetail';
 const Screen: React.FC = () => {

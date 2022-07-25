@@ -3,7 +3,7 @@ import {createNativeStackNavigator, NativeStackNavigationOptions} from '@react-n
 import {AccountContext, useAccountContext} from 'context/useAccountContext';
 import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
-import {LoginScreen, ProfileRegistrationScreen} from 'screens';
+import {LoginScreen, ProfileRegistrationScreen} from 'features';
 
 import {AppInitialData} from '../../../bases/initialize/types';
 import {AuthenticatedStackNav, useAuthenticatedStackNav} from './AuthenticatedStackNav';

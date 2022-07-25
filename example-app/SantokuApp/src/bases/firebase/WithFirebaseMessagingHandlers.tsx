@@ -8,7 +8,7 @@ import {AuthenticatedStackNav} from '../../apps/app/navigators/AuthenticatedStac
 import {HomeStackNav} from '../../apps/app/navigators/HomeStackNav';
 import {MainTabNav} from '../../apps/app/navigators/MainTabNav';
 import {NavigationParameter, RootStackParamList} from '../../apps/app/navigators/types';
-import {HomeScreen} from '../../screens';
+import {HomeScreen} from '../../features';
 import {AppInitialData} from '../initialize/types';
 import {InitialDataDependingComponent} from '../initialize/withInitialData';
 import {useSnackbar} from '../ui/components/overlay';

@@ -38,7 +38,7 @@ import {
   PickerScreen,
   AcknowledgementsScreen,
   LicenseScreen,
-} from 'screens';
+} from 'features';
 
 import {DemoStackParamList, RootStackParamList} from './types';
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
