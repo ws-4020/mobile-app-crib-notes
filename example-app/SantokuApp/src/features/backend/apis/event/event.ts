@@ -15,8 +15,8 @@ import {
   UseQueryResult,
   QueryKey,
 } from 'react-query';
-import type {Event, BadRequestResponse, GetEventsParams, EventContent, EventRegistration} from '.././model';
-import {backendCustomInstance, ErrorType} from '../../../bases/backend/customInstance';
+import type {Event, BadRequestResponse, GetEventsParams, EventContent, EventRegistration} from '../model';
+import {backendCustomInstance, ErrorType} from '../../../../bases/backend/customInstance';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 

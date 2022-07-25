@@ -1,5 +1,5 @@
 import {createUseContextAndProvider} from 'bases/utilities';
-import {Account, TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/model';
+import {Account, TermsOfService, TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 
 export type Terms = {
   termsAgreementStatus?: TermsOfServiceAgreementStatus;

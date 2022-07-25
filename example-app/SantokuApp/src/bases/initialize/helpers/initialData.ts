@@ -1,4 +1,4 @@
-import {Account, TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/model';
+import {Account, TermsOfService, TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import {getAccountsMe, getAccountsMeTerms, getTerms} from 'service';
 
 import {InitialDataError} from './initialDataError';

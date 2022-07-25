@@ -4,8 +4,8 @@ import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {AuthenticationService} from '.';
-import * as accountApi from '../../generated/backend/account/account';
-import {AccountLoginResponseStatus} from '../../generated/backend/model';
+import * as accountApi from '../../features/backend/apis/account/account';
+import {AccountLoginResponseStatus} from '../../features/backend/apis/model';
 import * as csrfToken from '../backend/refreshCsrfToken';
 import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthenticationService';
 import {SecureStorageAdapter} from './SecureStorageAdapter';

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {log} from 'bases';
-import {ErrorResponse} from 'generated/backend/model';
+import {ErrorResponse} from 'features/backend/apis/model';
 
 export const sendErrorLog = (error: unknown) => {
   try {

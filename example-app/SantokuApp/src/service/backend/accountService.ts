@@ -13,10 +13,10 @@ import {
   usePutAccountsMeAvatar,
   useDeleteAccountsMeDelete,
   getGetAccountsMeQueryKey,
-} from 'generated/backend/account/account';
+} from 'features/backend/apis/account/account';
 import {useMutation, useQuery} from 'react-query';
 
-import {TermsOfServiceAgreementStatus} from '../../generated/backend/model';
+import {TermsOfServiceAgreementStatus} from '../../features/backend/apis/model';
 
 type TermsOfServiceAgreementStatusWithCreatedAt = TermsOfServiceAgreementStatus & {
   createdAt: string;

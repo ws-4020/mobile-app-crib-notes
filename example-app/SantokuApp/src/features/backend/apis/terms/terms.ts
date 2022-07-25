@@ -6,8 +6,8 @@
  * OpenAPI spec version: 1.0.0
  */
 import {useQuery, UseQueryOptions, QueryFunction, UseQueryResult, QueryKey} from 'react-query';
-import type {TermsOfService} from '.././model';
-import {backendCustomInstance, ErrorType} from '../../../bases/backend/customInstance';
+import type {TermsOfService} from '../model';
+import {backendCustomInstance, ErrorType} from '../../../../bases/backend/customInstance';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 

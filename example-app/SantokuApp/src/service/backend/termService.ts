@@ -1,5 +1,5 @@
 import {AppConfig} from 'bases';
-import {getGetTermsQueryKey} from 'generated/backend/terms/terms';
+import {getGetTermsQueryKey} from 'features/backend/apis/terms/terms';
 import {useQuery} from 'react-query';
 
 // TODO: APIが完成するまでの暫定処理

@@ -1,5 +1,5 @@
 import {createUseContextAndProvider, useIsMounted} from 'bases/utilities';
-import {Account} from 'generated/backend/model';
+import {Account} from 'features/backend/apis/model';
 import React, {Reducer, useMemo} from 'react';
 
 import {AccountContext, Terms} from './useAccountContext';

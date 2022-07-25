@@ -30,8 +30,8 @@ import type {
   LikesResponse,
   LikedEventResponse,
   LikedQuestionResponse,
-} from '.././model';
-import {backendCustomInstance, ErrorType} from '../../../bases/backend/customInstance';
+} from '../model';
+import {backendCustomInstance, ErrorType} from '../../../../bases/backend/customInstance';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 

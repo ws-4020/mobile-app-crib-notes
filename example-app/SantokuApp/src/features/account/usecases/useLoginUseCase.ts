@@ -7,7 +7,7 @@ import {isValidForm} from 'bases/validator';
 import {useAccountContextOperation} from 'context/useAccountContextOperation';
 import {useTermsAgreementOverlay} from 'context/useTermsAgreementOverlay';
 import {FormikProps} from 'formik';
-import {TermsOfServiceAgreementStatus} from 'generated/backend/model';
+import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import {useCallback, useState} from 'react';
 import {Alert} from 'react-native';
 import {useGetAccountsMe, useGetAccountsMeTerms, useGetTerms} from 'service';
