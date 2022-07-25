@@ -1,4 +1,5 @@
-import {BundledMessagesLoader, loadMessages} from 'bases';
+import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
+import {loadMessages} from 'bases/message/utils/Message';
 
 const loadBundledMessagesAsync = async () => {
   try {
