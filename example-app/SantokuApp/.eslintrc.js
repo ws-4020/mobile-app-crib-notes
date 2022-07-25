@@ -58,4 +58,27 @@ module.exports = {
     },
   ],
   ignorePatterns: ['src/generated/**/*.ts'],
+  rules: {
+    'strict-dependencies/strict-dependencies': [
+      'error',
+      [
+        {
+          module: 'apps/**',
+          allowReferenceFrom: ['src/apps/**'],
+        },
+        {
+          module: 'features/**',
+          allowReferenceFrom: ['src/app/**', 'src/features/**'],
+        },
+        {
+          module: 'bases/**',
+          allowReferenceFrom: ['src/apps/**', 'src/features/**', 'src/bases/**'],
+        },
+        {
+          module: '@react-navigation/**',
+          allowReferenceFrom: ['src/apps/**', 'jest/types/global.d.ts', 'src/@types/**'],
+        },
+      ],
+    ],
+  },
 };
