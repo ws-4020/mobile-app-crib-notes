@@ -1,4 +1,4 @@
-import {bundledMessages, BundledMessagesType} from '../../generated/BundledMessages';
+import {bundledMessages, BundledMessagesType} from './BundledMessages';
 import {MessagesLoader} from './Message';
 
 /**

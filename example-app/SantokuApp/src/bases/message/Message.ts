@@ -1,4 +1,4 @@
-import {MessageKey} from '../../generated/BundledMessages';
+import {MessageKey} from './BundledMessages';
 import {log} from '../logging';
 
 /**
