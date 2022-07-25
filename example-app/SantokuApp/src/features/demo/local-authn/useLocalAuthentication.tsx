@@ -1,4 +1,4 @@
-import {LocalAuthentication} from 'bases';
+import {LocalAuthentication} from 'bases/local-authentication/utils/LocalAuthentication';
 
 export const useLocalAuthentication = () => {
   const isEnrolled = async () => {
