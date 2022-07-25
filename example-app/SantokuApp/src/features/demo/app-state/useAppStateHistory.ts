@@ -1,4 +1,4 @@
-import {useIsMounted} from 'bases/utilities/useIsMounted';
+import {useIsMounted} from 'bases/core/utils/useIsMounted';
 import {useCallback, useState} from 'react';
 import {AppState, AppStateEvent, AppStateStatus, Platform} from 'react-native';
 

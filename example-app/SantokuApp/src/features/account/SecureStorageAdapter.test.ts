@@ -1,6 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 
-import * as Crypto from '../../bases/utilities/crypto';
+import * as Crypto from '../../bases/crypto/utils/crypto';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 
 describe('SecureStorageAdapter saveActiveAccountId', () => {

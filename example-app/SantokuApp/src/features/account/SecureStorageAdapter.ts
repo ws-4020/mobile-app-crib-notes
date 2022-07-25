@@ -1,6 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 
-import {sha256} from '../../bases/utilities/crypto';
+import {sha256} from '../../bases/crypto/utils/crypto';
 
 const STORED_ITEM_KEYS = {
   ACTIVE_ACCOUNT_ID: 'activeAccountId',
