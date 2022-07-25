@@ -1,5 +1,5 @@
 import {DefaultRouterOptions, NavigatorScreenParams} from '@react-navigation/native';
-import type {ThirdPartyDependency} from 'generated/ThirdPartyDependencies';
+import type {ThirdPartyDependency} from 'features/demo/acknowledgements/ThirdPartyDependencies';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 
 export type RootStackParamList = {

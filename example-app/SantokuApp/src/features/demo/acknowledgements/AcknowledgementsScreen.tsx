@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList} from 'apps/app/navigators/types';
-import type {ThirdPartyDependency} from 'generated/ThirdPartyDependencies';
+import type {ThirdPartyDependency} from 'features/demo/acknowledgements/ThirdPartyDependencies';
 import React, {useMemo} from 'react';
 import {FlatList, ListRenderItem, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Icon, Text} from 'react-native-elements';
@@ -19,7 +19,7 @@ const Screen: React.FC<NativeStackScreenProps<DemoStackParamList, typeof ScreenN
   // 依存パッケージの一覧は表示されるときに読み込むようにしたいので、importではなく必要に応じてrequireしています。
   // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  const thirdPartyDependencies = require('generated/ThirdPartyDependencies')
+  const thirdPartyDependencies = require('features/demo/acknowledgements/ThirdPartyDependencies')
     .ThirdPartyDependencies as ThirdPartyDependency[];
   const thirdPartyDependenciesWithAction = useMemo(() => {
     return thirdPartyDependencies.map(dependency => {

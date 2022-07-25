@@ -1,7 +1,7 @@
 import {log, useIsMounted} from 'bases';
 import {Asset} from 'expo-asset';
 import * as FileSystem from 'expo-file-system';
-import type {ThirdPartyDependency} from 'generated/ThirdPartyDependencies';
+import type {ThirdPartyDependency} from 'features/demo/acknowledgements/ThirdPartyDependencies';
 import {useCallback, useEffect, useState} from 'react';
 import {Linking} from 'react-native';
 
