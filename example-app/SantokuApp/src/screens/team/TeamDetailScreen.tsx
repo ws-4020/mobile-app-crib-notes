@@ -1,5 +1,5 @@
+import {TeamStackParamList} from 'apps/navigation/types';
 import {m} from 'bases';
-import {TeamStackParamList} from 'navigation/types';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';

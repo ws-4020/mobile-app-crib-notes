@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {DemoStackParamList} from 'apps/navigation/types';
 import type {ThirdPartyDependency} from 'generated/ThirdPartyDependencies';
-import {DemoStackParamList} from 'navigation/types';
 import React, {useMemo} from 'react';
 import {FlatList, ListRenderItem, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Icon, Text} from 'react-native-elements';

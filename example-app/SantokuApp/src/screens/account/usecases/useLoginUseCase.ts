@@ -1,4 +1,5 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from 'apps/navigation/types';
 import {useIsMounted} from 'bases';
 import {AuthenticationService, isUnauthorizedError, SecureStorageAdapter} from 'bases/authentication';
 import {m} from 'bases/message';
@@ -7,7 +8,6 @@ import {useAccountContextOperation} from 'context/useAccountContextOperation';
 import {useTermsAgreementOverlay} from 'context/useTermsAgreementOverlay';
 import {FormikProps} from 'formik';
 import {TermsOfServiceAgreementStatus} from 'generated/backend/model';
-import {RootStackParamList} from 'navigation/types';
 import {useCallback, useState} from 'react';
 import {Alert} from 'react-native';
 import {useGetAccountsMe, useGetAccountsMeTerms, useGetTerms} from 'service';

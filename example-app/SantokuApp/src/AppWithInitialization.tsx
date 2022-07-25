@@ -39,7 +39,7 @@ export const AppWithInitialization: React.FC = () => {
     // アプリの初期化処理が完了した時点でrequireする。
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const RootStackNav = require('./navigation/RootStackNav').RootStackNav as InitialDataDependingComponent;
+    const RootStackNav = require('./apps/navigation/RootStackNav').RootStackNav as InitialDataDependingComponent;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const WithFirebaseMessagingHandlers = require('./bases/firebase/WithFirebaseMessagingHandlers')
       .WithFirebaseMessagingHandlers as InitialDataDependingComponent;

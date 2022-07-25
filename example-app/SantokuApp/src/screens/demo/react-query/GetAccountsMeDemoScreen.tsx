@@ -1,6 +1,6 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {DemoStackParamList, RootStackParamList} from 'navigation/types';
+import {DemoStackParamList, RootStackParamList} from 'apps/navigation/types';
 import React from 'react';
 import {View, Text, StyleSheet, SafeAreaView, RefreshControl, ActivityIndicator} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';

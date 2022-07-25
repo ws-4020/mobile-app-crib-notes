@@ -1,4 +1,4 @@
-import {DemoStackParamList} from 'navigation/types';
+import {DemoStackParamList} from 'apps/navigation/types';
 import React, {useCallback} from 'react';
 import {NativeModules, StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';

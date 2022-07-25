@@ -1,4 +1,4 @@
-import {DemoStackParamList} from 'navigation/types';
+import {DemoStackParamList} from 'apps/navigation/types';
 import React from 'react';
 import {StyleSheet, View, ScrollView, TextInput} from 'react-native';
 import {Button, ButtonGroup, CheckBox, Divider, Text} from 'react-native-elements';

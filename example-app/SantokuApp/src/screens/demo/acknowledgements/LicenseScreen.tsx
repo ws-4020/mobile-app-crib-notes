@@ -1,5 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {DemoStackParamList} from 'navigation/types';
+import {DemoStackParamList} from 'apps/navigation/types';
 import React from 'react';
 import {ActivityIndicator, ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Icon, Text} from 'react-native-elements';

@@ -1,4 +1,4 @@
-import {DemoStackParamList} from 'navigation/types';
+import {DemoStackParamList} from 'apps/navigation/types';
 import React from 'react';
 
 import {LogTemplate} from './LogTemplate';
