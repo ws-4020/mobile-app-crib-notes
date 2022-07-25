@@ -1,8 +1,8 @@
 import '@testing-library/jest-native/extend-expect';
 import {render, screen} from '@testing-library/react-native';
+import {AppConfig, BundledMessagesLoader, loadMessages} from 'bases';
 import {WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
-import {AppConfig, BundledMessagesLoader, loadMessages} from 'framework';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';

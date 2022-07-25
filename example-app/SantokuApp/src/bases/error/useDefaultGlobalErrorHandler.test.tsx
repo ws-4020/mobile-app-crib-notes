@@ -1,8 +1,8 @@
 import {act, renderHook} from '@testing-library/react-native';
 import {AxiosError} from 'axios';
+import {AccountData, loadBundledMessagesAsync} from 'bases/initialize/helpers';
 import {useSnackbar, WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
-import {AccountData, loadBundledMessagesAsync} from 'framework/initialize/helpers';
 import React from 'react';
 import {Alert} from 'react-native';
 
@@ -12,7 +12,7 @@ import {useDefaultGlobalErrorHandler} from './useDefaultGlobalErrorHandler';
 
 jest.mock('components/overlay/snackbar/WithSnackbar');
 jest.mock('context/useAccountContextOperation');
-jest.mock('framework/logging');
+jest.mock('bases/logging');
 
 jest.useFakeTimers();
 

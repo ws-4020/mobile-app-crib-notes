@@ -1,15 +1,15 @@
 import {renderHook} from '@testing-library/react-native';
 import {AxiosError} from 'axios';
+import {loadBundledMessagesAsync} from 'bases/initialize/helpers';
 import {useSnackbar, WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
-import {loadBundledMessagesAsync} from 'framework/initialize/helpers';
 import React from 'react';
 import {Query, QueryKey} from 'react-query';
 
 import {useDefaultGlobalQueryErrorHandler} from './useDefaultGlobalQueryErrorHandler';
 
 jest.mock('components/overlay/snackbar/WithSnackbar');
-jest.mock('framework/logging');
+jest.mock('bases/logging');
 
 const Wrapper: React.FC = ({children}) => {
   const accountData = {account: {accountId: '123456789', deviceTokens: []}};

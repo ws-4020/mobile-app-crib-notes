@@ -1,7 +1,7 @@
+import {m} from 'bases';
 import {Button} from 'components/button/Button';
 import {OverlayBackdrop, OverlayContainer} from 'components/overlay';
 import {WebView} from 'components/webview/WebView';
-import {m} from 'framework';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';

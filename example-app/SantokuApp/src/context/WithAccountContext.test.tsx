@@ -2,7 +2,7 @@ import {render, renderHook, screen} from '@testing-library/react-native';
 import React from 'react';
 import {Text} from 'react-native';
 
-import {AccountData} from '../framework/initialize/helpers';
+import {AccountData} from '../bases/initialize/helpers';
 import {WithAccountContext} from './WithAccountContext';
 import {useAccountContext} from './useAccountContext';
 

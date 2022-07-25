@@ -1,4 +1,4 @@
-import {createUseContextAndProvider} from 'framework/utilities';
+import {createUseContextAndProvider} from 'bases/utilities';
 import React, {useMemo} from 'react';
 import {ColorSchemeName, useColorScheme} from 'react-native';
 import {ThemeProvider} from 'react-native-elements';

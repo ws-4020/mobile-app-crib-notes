@@ -11,7 +11,7 @@ import {
   WithTimingConfig,
 } from 'react-native-reanimated';
 
-import {usePrevious, useVisibility} from '../../framework/utilities';
+import {usePrevious, useVisibility} from '../../bases/utilities';
 
 type ContainerAnimationConfig = {
   isVisible: boolean;

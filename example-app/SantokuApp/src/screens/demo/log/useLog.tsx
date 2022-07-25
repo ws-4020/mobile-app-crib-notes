@@ -1,4 +1,4 @@
-import {log} from '../../../framework';
+import {log} from '../../../bases';
 
 const traceLog = () => log.trace('デモ用Traceログ');
 const debugLog = () => log.debug('デモ用Debugログ');

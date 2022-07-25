@@ -1,9 +1,9 @@
 import messaging from '@react-native-firebase/messaging';
+import {refreshCsrfToken, setRefreshSessionInterceptor} from 'bases/backend';
+import {resolveErrorMessage} from 'bases/error/resolveErrorMessage';
+import {sendErrorLog} from 'bases/error/sendErrorLog';
 import * as Application from 'expo-application';
 import {activateKeepAwake} from 'expo-keep-awake';
-import {refreshCsrfToken, setRefreshSessionInterceptor} from 'framework/backend';
-import {resolveErrorMessage} from 'framework/error/resolveErrorMessage';
-import {sendErrorLog} from 'framework/error/sendErrorLog';
 import {useCallback, useMemo, useState} from 'react';
 import {Platform} from 'react-native';
 

@@ -7,7 +7,7 @@
  */
 import {useQuery, UseQueryOptions, QueryFunction, UseQueryResult, QueryKey} from 'react-query';
 import type {Notification} from '.././model';
-import {backendCustomInstance, ErrorType} from '../../../framework/backend/customInstance';
+import {backendCustomInstance, ErrorType} from '../../../bases/backend/customInstance';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 

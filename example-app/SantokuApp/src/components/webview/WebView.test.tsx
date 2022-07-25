@@ -1,5 +1,5 @@
 import {fireEvent, render, screen} from '@testing-library/react-native';
-import {BundledMessagesLoader, loadMessages} from 'framework';
+import {BundledMessagesLoader, loadMessages} from 'bases';
 import React from 'react';
 
 import {WebView} from './WebView';

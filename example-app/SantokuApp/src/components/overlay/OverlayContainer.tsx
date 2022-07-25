@@ -1,4 +1,4 @@
-import {useWorkletCallback} from 'framework/utilities/useWorkletCallback';
+import {useWorkletCallback} from 'bases/utilities/useWorkletCallback';
 import React, {useMemo} from 'react';
 import {StyleSheet, View, ViewProps} from 'react-native';
 import Reanimated, {BaseAnimationBuilder, FadeIn, FadeOut, Keyframe} from 'react-native-reanimated';

@@ -1,6 +1,6 @@
+import {m} from 'bases/message';
 import {SelectPicker, YearMonthPicker} from 'components/picker';
 import {DateTimePicker} from 'components/picker/DateTimePicker';
-import {m} from 'framework/message';
 import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 import {Platform, StyleSheet, View} from 'react-native';

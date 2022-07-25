@@ -1,4 +1,4 @@
-import {useVisibility} from 'framework/utilities';
+import {useVisibility} from 'bases/utilities';
 import React, {useMemo} from 'react';
 import {ColorValue, GestureResponderEvent, KeyboardTypeOptions, Platform, StyleSheet, View} from 'react-native';
 

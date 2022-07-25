@@ -1,9 +1,9 @@
+import {log, m, useIsMounted} from 'bases';
+import {AuthenticationService, isUnauthorizedError} from 'bases/authentication';
+import {generatePassword} from 'bases/utilities';
+import {isValidForm} from 'bases/validator';
 import {useAccountContextOperation} from 'context/useAccountContextOperation';
 import {FormikProps} from 'formik';
-import {log, m, useIsMounted} from 'framework';
-import {AuthenticationService, isUnauthorizedError} from 'framework/authentication';
-import {generatePassword} from 'framework/utilities';
-import {isValidForm} from 'framework/validator';
 import {TermsOfServiceAgreementStatus} from 'generated/backend/model';
 import {useCallback, useState} from 'react';
 import {Alert} from 'react-native';

@@ -1,9 +1,9 @@
+import {AuthenticationService} from 'bases/authentication';
+import {isGetFcmTokenError} from 'bases/firebase';
+import {log} from 'bases/logging';
+import {m} from 'bases/message';
 import {Button} from 'components/button';
 import {useAccountContextOperation} from 'context/useAccountContextOperation';
-import {AuthenticationService} from 'framework/authentication';
-import {isGetFcmTokenError} from 'framework/firebase';
-import {log} from 'framework/logging';
-import {m} from 'framework/message';
 import React, {useCallback} from 'react';
 import {Alert, GestureResponderEvent, StyleSheet} from 'react-native';
 

@@ -1,4 +1,4 @@
-import {createUseContextAndProvider} from 'framework/utilities';
+import {createUseContextAndProvider} from 'bases/utilities';
 
 import {TermsAgreementOverlayShowProps} from './WithTermsAgreementOverlay';
 

@@ -2,11 +2,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
+import {InitialDataDependingComponent, useAppInitializer} from './bases/initialize';
+import {showUpdateRequiredDialog} from './bases/initialize/helpers';
 import {WithReactQuery} from './components/reactQuery';
 import {WithAccountContext} from './context/WithAccountContext';
 import {WithTermsAgreementOverlay} from './context/WithTermsAgreementOverlay';
-import {InitialDataDependingComponent, useAppInitializer} from './framework/initialize';
-import {showUpdateRequiredDialog} from './framework/initialize/helpers';
 
 export const AppWithInitialization: React.FC = () => {
   const {initialize, initializationResult} = useAppInitializer();
@@ -41,7 +41,7 @@ export const AppWithInitialization: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const RootStackNav = require('./navigation/RootStackNav').RootStackNav as InitialDataDependingComponent;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const WithFirebaseMessagingHandlers = require('./framework/firebase/WithFirebaseMessagingHandlers')
+    const WithFirebaseMessagingHandlers = require('./bases/firebase/WithFirebaseMessagingHandlers')
       .WithFirebaseMessagingHandlers as InitialDataDependingComponent;
     return (
       <NavigationContainer>

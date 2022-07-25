@@ -1,4 +1,4 @@
-import {useDefaultGlobalErrorHandler} from 'framework/error/useDefaultGlobalErrorHandler';
+import {useDefaultGlobalErrorHandler} from 'bases/error/useDefaultGlobalErrorHandler';
 import {useCallback} from 'react';
 import {Query, QueryKey} from 'react-query';
 

@@ -1,4 +1,4 @@
-import {m} from 'framework';
+import {m} from 'bases';
 import {TeamStackParamList} from 'navigation/types';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';

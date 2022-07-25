@@ -1,5 +1,5 @@
-import {m} from 'framework';
-import {createUseContextAndProvider} from 'framework/utilities';
+import {m} from 'bases';
+import {createUseContextAndProvider} from 'bases/utilities';
 import React, {useMemo, useState} from 'react';
 
 import {FullWindowOverlay} from '../FullWindowOverlay';

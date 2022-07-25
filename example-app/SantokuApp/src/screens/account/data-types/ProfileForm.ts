@@ -1,5 +1,5 @@
-import {m} from 'framework/message';
-import {yup} from 'framework/validator';
+import {m} from 'bases/message';
+import {yup} from 'bases/validator';
 
 export type ProfileForm = {
   nickname: string;

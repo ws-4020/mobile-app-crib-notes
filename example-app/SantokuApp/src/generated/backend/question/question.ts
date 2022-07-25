@@ -27,7 +27,7 @@ import type {
   CommentContent,
   CommentRegistration,
 } from '.././model';
-import {backendCustomInstance, ErrorType} from '../../../framework/backend/customInstance';
+import {backendCustomInstance, ErrorType} from '../../../bases/backend/customInstance';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 

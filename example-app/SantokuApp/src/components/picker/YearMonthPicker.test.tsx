@@ -2,7 +2,7 @@ import {fireEvent, render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {TextInputProps, ViewProps} from 'react-native';
 
-import {ApplicationError} from '../../framework/error/ApplicationError';
+import {ApplicationError} from '../../bases/error/ApplicationError';
 import {PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainerProps} from './PickerContainer';
 import {SelectPickerItemsProps} from './SelectPickerItems';

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AppConfig} from 'framework/config';
+import {AppConfig} from 'bases/config';
 import {useCallback, useState} from 'react';
 
 const redirectOptions: ['follow', 'error', 'manual'] = ['follow', 'error', 'manual'];

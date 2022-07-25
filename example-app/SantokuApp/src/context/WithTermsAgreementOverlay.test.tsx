@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react-native';
+import {AppConfig, BundledMessagesLoader, loadMessages} from 'bases';
 import {WithAccountContext} from 'context/WithAccountContext';
-import {AppConfig, BundledMessagesLoader, loadMessages} from 'framework';
 import React, {useEffect} from 'react';
 import {Text} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';

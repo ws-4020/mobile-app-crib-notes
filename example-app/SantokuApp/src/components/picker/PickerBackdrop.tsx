@@ -1,4 +1,4 @@
-import {composePressableStyles} from 'framework/utilities';
+import {composePressableStyles} from 'bases/utilities';
 import React, {useMemo} from 'react';
 import {Modal as RNModal, ModalProps, Pressable, PressableProps, StyleSheet, ViewProps} from 'react-native';
 import Reanimated, {WithTimingConfig} from 'react-native-reanimated';

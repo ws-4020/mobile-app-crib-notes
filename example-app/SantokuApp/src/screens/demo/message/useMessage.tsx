@@ -1,4 +1,4 @@
-import {m} from 'framework';
+import {m} from 'bases';
 
 const infoKeyExtractor = (_: unknown, index: number) => index.toString();
 

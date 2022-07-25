@@ -3,7 +3,7 @@ import {render, screen, waitFor} from '@testing-library/react-native';
 import React from 'react';
 
 import {App} from './App';
-import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from './framework/backend/customInstance';
+import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from './bases/backend/customInstance';
 
 jest.mock('react-native/Libraries/Utilities/DevSettings.js', () => {
   return {addMenuItem: jest.fn};
@@ -71,9 +71,9 @@ jest.mock('service/backend/termService', () => {
   };
 });
 
-jest.mock('framework/authentication/AuthenticationService', () => {
+jest.mock('bases/authentication/AuthenticationService', () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const originalModule = jest.requireActual('framework/authentication/AuthenticationService');
+  const originalModule = jest.requireActual('bases/authentication/AuthenticationService');
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return {
     ...originalModule,

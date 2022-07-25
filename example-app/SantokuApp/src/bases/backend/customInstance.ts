@@ -1,6 +1,6 @@
 import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+import {RequestTimeoutError} from 'bases/error/RequestTimeoutError';
 import {applicationName, nativeApplicationVersion} from 'expo-application';
-import {RequestTimeoutError} from 'framework/error/RequestTimeoutError';
 import {Platform} from 'react-native';
 
 import {AppConfig} from '../config';

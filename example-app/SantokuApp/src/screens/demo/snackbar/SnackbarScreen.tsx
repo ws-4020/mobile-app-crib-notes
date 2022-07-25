@@ -1,5 +1,5 @@
+import {m} from 'bases';
 import {useSnackbar} from 'components/overlay';
-import {m} from 'framework';
 import {DemoStackParamList} from 'navigation/types';
 import React, {useCallback} from 'react';
 

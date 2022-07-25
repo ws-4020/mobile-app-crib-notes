@@ -1,4 +1,4 @@
-import {AppConfig} from 'framework';
+import {AppConfig} from 'bases';
 
 const info = [
   {

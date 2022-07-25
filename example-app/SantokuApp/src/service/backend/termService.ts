@@ -1,4 +1,4 @@
-import {AppConfig} from 'framework';
+import {AppConfig} from 'bases';
 import {getGetTermsQueryKey} from 'generated/backend/terms/terms';
 import {useQuery} from 'react-query';
 

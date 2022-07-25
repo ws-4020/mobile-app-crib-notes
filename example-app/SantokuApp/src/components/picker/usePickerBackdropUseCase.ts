@@ -1,4 +1,4 @@
-import {usePrevious, useVisibility} from 'framework/utilities';
+import {usePrevious, useVisibility} from 'bases/utilities';
 import {useCallback, useEffect} from 'react';
 import {cancelAnimation, Easing, runOnJS, useSharedValue, withTiming, WithTimingConfig} from 'react-native-reanimated';
 

@@ -1,7 +1,7 @@
+import {AppConfig} from 'bases/config';
+import {ApplicationError} from 'bases/error/ApplicationError';
+import {log} from 'bases/logging';
 import * as Application from 'expo-application';
-import {AppConfig} from 'framework/config';
-import {ApplicationError} from 'framework/error/ApplicationError';
-import {log} from 'framework/logging';
 import {Alert, Linking, Platform} from 'react-native';
 import {getAppUpdates} from 'service';
 

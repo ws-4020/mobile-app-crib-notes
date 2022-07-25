@@ -1,4 +1,4 @@
-import {ApplicationError} from 'framework/error/ApplicationError';
+import {ApplicationError} from 'bases/error/ApplicationError';
 
 export class InitialDataError extends ApplicationError {}
 

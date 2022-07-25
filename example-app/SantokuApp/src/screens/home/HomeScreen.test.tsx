@@ -1,10 +1,10 @@
 import '@testing-library/jest-native/extend-expect';
 import {NavigationContainer} from '@react-navigation/native';
 import {render, screen} from '@testing-library/react-native';
+import {AppConfig} from 'bases/config';
 import {WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
 import {WithTermsAgreementOverlay} from 'context/WithTermsAgreementOverlay';
-import {AppConfig} from 'framework/config';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
