@@ -1,5 +1,5 @@
 import {renderHook} from '@testing-library/react-native';
-import {WithSnackbar} from 'components/overlay';
+import {WithSnackbar} from 'bases/ui/components/overlay';
 
 import {useDefaultOptions} from './useDefaultOptions';
 

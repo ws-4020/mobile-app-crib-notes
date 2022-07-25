@@ -8,10 +8,10 @@ import {AuthenticatedStackNav} from '../../apps/navigators/AuthenticatedStackNav
 import {HomeStackNav} from '../../apps/navigators/HomeStackNav';
 import {MainTabNav} from '../../apps/navigators/MainTabNav';
 import {NavigationParameter, RootStackParamList} from '../../apps/navigators/types';
-import {useSnackbar} from '../../components/overlay';
 import {HomeScreen} from '../../screens';
 import {AppInitialData} from '../initialize/types';
 import {InitialDataDependingComponent} from '../initialize/withInitialData';
+import {useSnackbar} from '../ui/components/overlay';
 
 const showMessageOnSnackbar = (
   message: FirebaseMessagingTypes.RemoteMessage,

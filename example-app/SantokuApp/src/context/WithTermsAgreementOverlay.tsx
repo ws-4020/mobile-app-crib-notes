@@ -1,4 +1,4 @@
-import {FullWindowOverlay} from 'components/overlay/FullWindowOverlay';
+import {FullWindowOverlay} from 'bases/ui/components/overlay/FullWindowOverlay';
 import {TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/model';
 import React, {useCallback, useMemo, useState} from 'react';
 

@@ -1,7 +1,7 @@
 import {act, renderHook} from '@testing-library/react-native';
 import {AxiosError} from 'axios';
 import {AccountData, loadBundledMessagesAsync} from 'bases/initialize/helpers';
-import {useSnackbar, WithSnackbar} from 'components/overlay';
+import {useSnackbar, WithSnackbar} from 'bases/ui/components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
 import React from 'react';
 import {Alert} from 'react-native';

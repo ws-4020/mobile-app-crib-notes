@@ -1,4 +1,4 @@
-import {m} from 'bases';
+import {m} from 'bases/index';
 import {createUseContextAndProvider} from 'bases/utilities';
 import React, {useMemo, useState} from 'react';
 

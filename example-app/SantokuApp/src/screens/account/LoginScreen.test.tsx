@@ -1,8 +1,8 @@
 import {render, screen} from '@testing-library/react-native';
 import {BundledMessagesLoader, loadMessages} from 'bases/message';
+import {WithSnackbar} from 'bases/ui/components/overlay';
+import {WithAppTheme} from 'bases/ui/components/theme';
 import {enhanceValidator} from 'bases/validator';
-import {WithSnackbar} from 'components/overlay';
-import {WithAppTheme} from 'components/theme';
 import {WithAccountContext} from 'context/WithAccountContext';
 import {WithTermsAgreementOverlay} from 'context/WithTermsAgreementOverlay';
 import React from 'react';

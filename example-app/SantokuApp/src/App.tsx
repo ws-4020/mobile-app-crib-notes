@@ -4,8 +4,8 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {AppWithInitialization} from './AppWithInitialization';
-import {WithOverlay} from './components/overlay';
-import {WithAppTheme} from './components/theme';
+import {WithOverlay} from './bases/ui/components/overlay';
+import {WithAppTheme} from './bases/ui/components/theme';
 
 type AppProperties = {
   [key: string]: any;

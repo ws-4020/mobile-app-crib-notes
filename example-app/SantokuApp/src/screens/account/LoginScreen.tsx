@@ -1,8 +1,8 @@
 import {RootStackParamList} from 'apps/navigators/types';
 import {m} from 'bases/message';
-import {FilledButton, OutlinedButton} from 'components/button';
-import {PasswordTextInput, TextInput} from 'components/input';
-import {Spacer} from 'components/spacer/Spacer';
+import {FilledButton, OutlinedButton} from 'bases/ui/components/button';
+import {PasswordTextInput, TextInput} from 'bases/ui/components/input';
+import {Spacer} from 'bases/ui/components/spacer/Spacer';
 import {useFormik} from 'formik';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';

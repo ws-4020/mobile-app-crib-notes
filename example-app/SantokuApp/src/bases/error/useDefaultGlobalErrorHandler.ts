@@ -5,7 +5,7 @@ import {RequestTimeoutError} from 'bases/error/RequestTimeoutError';
 import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {log} from 'bases/logging';
 import {m} from 'bases/message';
-import {useSnackbar} from 'components/overlay';
+import {useSnackbar} from 'bases/ui/components/overlay';
 import {useAccountContextOperation} from 'context/useAccountContextOperation';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';

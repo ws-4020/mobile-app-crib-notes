@@ -1,4 +1,4 @@
-import {useLoadingOverlay} from 'components/overlay';
+import {useLoadingOverlay} from 'bases/ui/components/overlay';
 import {useCallback, useEffect, useState} from 'react';
 import {useDeleteTodo, useGetTodo, usePutTodo} from 'service/backend';
 

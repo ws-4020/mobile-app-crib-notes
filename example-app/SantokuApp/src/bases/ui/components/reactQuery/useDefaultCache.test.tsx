@@ -1,5 +1,5 @@
 import {renderHook} from '@testing-library/react-native';
-import {WithSnackbar} from 'components/overlay';
+import {WithSnackbar} from 'bases/ui/components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
 import React from 'react';
 import {MutationCache, QueryCache} from 'react-query';

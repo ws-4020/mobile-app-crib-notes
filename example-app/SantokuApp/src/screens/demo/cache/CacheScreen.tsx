@@ -3,7 +3,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View, RefreshControl} from 'react-native';
 import {Text} from 'react-native-elements';
 
-import {Button} from '../../../components/button/Button';
+import {Button} from '../../../bases/ui/components/button/Button';
 import {FileInfo} from './FileInfo';
 import {useCacheDirectory} from './useCacheDirectory';
 

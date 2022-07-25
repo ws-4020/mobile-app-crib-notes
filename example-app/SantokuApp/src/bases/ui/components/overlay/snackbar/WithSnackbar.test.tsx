@@ -1,5 +1,5 @@
 import {render, screen, waitFor} from '@testing-library/react-native';
-import {BundledMessagesLoader, loadMessages} from 'bases';
+import {BundledMessagesLoader, loadMessages} from 'bases/index';
 import React, {useEffect} from 'react';
 import {Text, TextStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';

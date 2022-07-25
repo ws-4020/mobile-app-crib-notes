@@ -1,5 +1,5 @@
 import {DemoStackParamList} from 'apps/navigators/types';
-import {Button} from 'components/button/Button';
+import {Button} from 'bases/ui/components/button/Button';
 import React from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 

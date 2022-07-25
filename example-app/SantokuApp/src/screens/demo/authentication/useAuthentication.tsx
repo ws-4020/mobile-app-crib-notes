@@ -1,6 +1,6 @@
 import {ActiveAccountIdNotFoundError, AuthenticationService, generatePassword, PasswordNotFoundError} from 'bases';
 import {isApplicationError} from 'bases/error/ApplicationError';
-import {useLoadingOverlay} from 'components/overlay';
+import {useLoadingOverlay} from 'bases/ui/components/overlay';
 import {useCallback, useEffect, useState} from 'react';
 
 export const useAuthentication = () => {
