@@ -1,6 +1,6 @@
 import messaging from '@react-native-firebase/messaging';
 
-import {ApplicationError} from '../../error/ApplicationError';
+import {ApplicationError} from '../../core/error/ApplicationError';
 import {firebaseConfig} from '../FirebaseConfig';
 
 export const getFcmToken = async () => {

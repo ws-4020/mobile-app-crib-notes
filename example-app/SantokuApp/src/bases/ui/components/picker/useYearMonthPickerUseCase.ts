@@ -1,6 +1,6 @@
 import React, {useCallback, useMemo, useState} from 'react';
 
-import {ApplicationError} from '../../../error/ApplicationError';
+import {ApplicationError} from '../../../core/error/ApplicationError';
 import {YearMonth} from './YearMonth';
 import {YearMonthPickerProps} from './YearMonthPicker';
 import {YearMonthUtil} from './YearMonthUtil';

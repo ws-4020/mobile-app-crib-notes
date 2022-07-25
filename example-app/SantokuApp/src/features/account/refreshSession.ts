@@ -5,7 +5,7 @@ import {
   setAxiosResponseInterceptor,
 } from '../../bases/backend/customInstance';
 import {refreshCsrfToken} from '../../bases/backend/refreshCsrfToken';
-import {ApplicationError} from '../../bases/error/ApplicationError';
+import {ApplicationError} from '../../bases/core/error/ApplicationError';
 import {sendErrorLog} from '../../bases/error/sendErrorLog';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 

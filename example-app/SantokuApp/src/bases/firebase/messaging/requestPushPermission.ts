@@ -1,6 +1,6 @@
 import messaging from '@react-native-firebase/messaging';
 
-import {ApplicationError} from '../../error/ApplicationError';
+import {ApplicationError} from '../../core/error/ApplicationError';
 
 export const requestPushPermission = async () => {
   try {

@@ -5,7 +5,7 @@ import {Account, AccountLoginResponse} from 'features/backend/apis/model';
 import {useMutation} from 'react-query';
 
 import {refreshCsrfToken} from '../../bases/backend';
-import {ApplicationError} from '../../bases/error/ApplicationError';
+import {ApplicationError} from '../../bases/core/error/ApplicationError';
 import {getFcmToken} from '../../bases/firebase';
 import {deleteFcmToken} from '../../bases/firebase/messaging/deleteFcmToken';
 import {log} from '../../bases/logging';

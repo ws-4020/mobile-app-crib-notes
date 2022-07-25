@@ -1,5 +1,5 @@
 import {ActiveAccountIdNotFoundError, AuthenticationService, generatePassword, PasswordNotFoundError} from 'bases';
-import {isApplicationError} from 'bases/error/ApplicationError';
+import {isApplicationError} from 'bases/core/error/ApplicationError';
 import {useLoadingOverlay} from 'bases/ui/components/overlay';
 import {useCallback, useEffect, useState} from 'react';
 
