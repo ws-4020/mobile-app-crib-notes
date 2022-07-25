@@ -1,14 +1,15 @@
 import axios from 'axios';
-import {AuthenticationService} from 'bases/authentication';
 import {isApplicationError} from 'bases/error/ApplicationError';
 import {RequestTimeoutError} from 'bases/error/RequestTimeoutError';
 import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {log} from 'bases/logging';
 import {m} from 'bases/message';
 import {useSnackbar} from 'bases/ui/components/overlay';
-import {useAccountContextOperation} from 'features/account/useAccountContextOperation';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
+
+import {useAccountContextOperation} from '../../features/account/useAccountContextOperation';
+import {AuthenticationService} from '../../features/account/AuthenticationService';
 
 const outDebugLog = (error: unknown) => {
   try {

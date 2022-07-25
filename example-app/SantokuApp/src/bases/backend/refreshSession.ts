@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from 'axios';
 
-import {SecureStorageAdapter} from '../authentication';
+import {SecureStorageAdapter} from '../../features/account/SecureStorageAdapter';
 import {ApplicationError} from '../error/ApplicationError';
 import {sendErrorLog} from '../error/sendErrorLog';
 import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, setAxiosResponseInterceptor} from './customInstance';

@@ -2,6 +2,7 @@
 // npx eslint --print-config src/App.tsx
 
 module.exports = {
+  plugins: ['strict-dependencies'],
   root: true,
   // universe/native: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
   extends: ['universe/native', 'plugin:react-hooks/recommended'],

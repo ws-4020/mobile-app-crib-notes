@@ -1,4 +1,5 @@
-import {AuthenticationService, isUnauthorizedError} from '../../authentication';
+import {AuthenticationService} from '../../../features/account/AuthenticationService';
+import {isUnauthorizedError} from '../../../features/account/UnauthorizedError';
 import {InitialDataError} from './initialDataError';
 
 export const autoLogin = async () => {

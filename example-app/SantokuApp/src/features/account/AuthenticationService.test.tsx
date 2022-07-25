@@ -3,10 +3,10 @@ import {renderHook} from '@testing-library/react-native';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {AuthenticationService} from '.';
-import * as accountApi from '../../features/backend/apis/account/account';
-import {AccountLoginResponseStatus} from '../../features/backend/apis/model';
-import * as csrfToken from '../backend/refreshCsrfToken';
+import {AuthenticationService} from '../../bases/authentication';
+import * as accountApi from '../backend/apis/account/account';
+import {AccountLoginResponseStatus} from '../backend/apis/model';
+import * as csrfToken from '../../bases/backend/refreshCsrfToken';
 import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthenticationService';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 

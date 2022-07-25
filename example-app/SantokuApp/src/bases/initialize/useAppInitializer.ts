@@ -7,7 +7,8 @@ import {activateKeepAwake} from 'expo-keep-awake';
 import {useCallback, useMemo, useState} from 'react';
 import {Platform} from 'react-native';
 
-import {AuthenticationService, isUnauthorizedError} from '../authentication';
+import {AuthenticationService} from '../../features/account/AuthenticationService';
+import {isUnauthorizedError} from '../../features/account/UnauthorizedError';
 import {enhanceValidator} from '../validator';
 import {
   AccountData,

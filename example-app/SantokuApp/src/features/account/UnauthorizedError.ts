@@ -1,4 +1,4 @@
-import {ApplicationError} from '../error/ApplicationError';
+import {ApplicationError} from '../../bases/error/ApplicationError';
 
 export class UnauthorizedError extends ApplicationError {}
 

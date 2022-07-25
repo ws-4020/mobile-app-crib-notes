@@ -1,4 +1,4 @@
-import {AuthenticationService} from 'bases/authentication';
+import {AuthenticationService} from 'features/account/AuthenticationService';
 import {isGetFcmTokenError} from 'bases/firebase';
 import {log} from 'bases/logging';
 import {m} from 'bases/message';

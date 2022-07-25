@@ -4,12 +4,12 @@ import {postAccountsMeDeviceToken, postLogin, postLogout, postSignup} from 'feat
 import {Account, AccountLoginResponse} from 'features/backend/apis/model';
 import {useMutation} from 'react-query';
 
-import {refreshCsrfToken} from '../backend';
-import {ApplicationError} from '../error/ApplicationError';
-import {getFcmToken} from '../firebase';
-import {deleteFcmToken} from '../firebase/messaging/deleteFcmToken';
-import {log} from '../logging';
-import {m} from '../message';
+import {refreshCsrfToken} from '../../bases/backend';
+import {ApplicationError} from '../../bases/error/ApplicationError';
+import {getFcmToken} from '../../bases/firebase';
+import {deleteFcmToken} from '../../bases/firebase/messaging/deleteFcmToken';
+import {log} from '../../bases/logging';
+import {m} from '../../bases/message';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 import {UnauthorizedError} from './UnauthorizedError';
 
