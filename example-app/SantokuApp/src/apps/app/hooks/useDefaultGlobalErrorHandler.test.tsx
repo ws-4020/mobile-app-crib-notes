@@ -2,12 +2,13 @@ import {act, renderHook} from '@testing-library/react-native';
 import {AccountData, loadBundledMessagesAsync} from 'apps/app/initialize/helpers';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {AxiosError} from 'axios';
-import {useSnackbar, WithSnackbar} from 'bases/ui/components/overlay';
+import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
+import {AuthenticationService} from 'features/account/AuthenticationService';
+import {useAccountContextOperation} from 'features/account/useAccountContextOperation';
 import React from 'react';
 import {Alert} from 'react-native';
 
-import {useAccountContextOperation} from '../../../features/account/useAccountContextOperation';
-import {AuthenticationService} from '../authentication';
+import {WithSnackbar} from '../providers/WithSnackbar';
 import {useDefaultGlobalErrorHandler} from './useDefaultGlobalErrorHandler';
 
 jest.mock('components/overlay/snackbar/WithSnackbar');

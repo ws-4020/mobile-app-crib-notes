@@ -1,6 +1,7 @@
 import {m} from 'bases/message/utils/Message';
 import {Button} from 'bases/ui/components/button/Button';
-import {OverlayBackdrop, OverlayContainer} from 'bases/ui/components/overlay';
+import {OverlayBackdrop} from 'bases/ui/components/overlay/OverlayBackdrop';
+import {OverlayContainer} from 'bases/ui/components/overlay/OverlayContainer';
 import {WebView} from 'bases/ui/components/webview/WebView';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';

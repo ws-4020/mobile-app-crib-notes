@@ -3,7 +3,7 @@ import {isApplicationError} from 'bases/core/error/ApplicationError';
 import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
-import {useSnackbar} from 'bases/ui/components/overlay';
+import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import {RequestTimeoutError} from 'features/backend/error/RequestTimeoutError';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';

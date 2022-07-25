@@ -1,4 +1,4 @@
-import {AppTheme} from './AppTheme';
+import {AppTheme} from 'bases/ui/types/AppTheme';
 
 export const getReactNativeElementsTheme = (appTheme: AppTheme) => {
   const colors = appTheme.colors;

@@ -1,12 +1,12 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ParamListBase} from '@react-navigation/routers';
 import {render, screen} from '@testing-library/react-native';
+import {WithAppTheme} from 'apps/app/providers/AppThemeContext';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
+import {WithSnackbar} from 'apps/app/providers/WithSnackbar';
 import {WithTermsAgreementOverlay} from 'apps/app/providers/WithTermsAgreementOverlay';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
-import {WithSnackbar} from 'bases/ui/components/overlay';
-import {WithAppTheme} from 'bases/ui/components/theme';
 import {enhanceValidator} from 'bases/validator';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';

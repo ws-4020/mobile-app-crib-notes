@@ -1,9 +1,9 @@
 import {renderHook} from '@testing-library/react-native';
-import {WithSnackbar} from 'bases/ui/components/overlay';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import React from 'react';
 import {MutationCache, QueryCache} from 'react-query';
 
+import {WithSnackbar} from '../providers/WithSnackbar';
 import {useDefaultMutationCache, useDefaultQueryCache} from './useDefaultCache';
 
 const Wrapper: React.FC = ({children}) => {

@@ -1,13 +1,13 @@
 import '@testing-library/jest-native/extend-expect';
 import {NavigationContainer} from '@react-navigation/native';
 import {render, screen} from '@testing-library/react-native';
-import {AppConfig} from 'bases/config';
-import {WithSnackbar} from 'bases/ui/components/overlay';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {WithTermsAgreementOverlay} from 'apps/app/providers/WithTermsAgreementOverlay';
+import {AppConfig} from 'bases/config';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
+import {WithSnackbar} from '../../apps/app/providers/WithSnackbar';
 import {HomeScreen} from './HomeScreen';
 
 const Wrapper: React.FC = ({children}) => {

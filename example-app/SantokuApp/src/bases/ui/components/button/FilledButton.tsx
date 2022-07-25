@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import {StyleSheet} from 'react-native';
 
-import {useAppTheme} from '../theme';
+import {useAppTheme} from '../../contexts/useAppTheme';
 import {Button, ButtonProps} from './Button';
 
 export const FilledButton: React.FC<ButtonProps> = props => {

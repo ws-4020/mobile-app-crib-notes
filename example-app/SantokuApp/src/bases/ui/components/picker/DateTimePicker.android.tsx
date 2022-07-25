@@ -1,9 +1,9 @@
 import React from 'react';
 import {Pressable, TextInput, View} from 'react-native';
 
+import {useDateTimePickerAndroidUseCase} from '../../hooks/useDateTimePickerAndroidUseCase';
 import {DateTimePickerProps} from './DateTimePicker';
 import {DateTimePickerItemsAndroidProps, DateTimePickerItemsProps} from './DateTimePickerItems';
-import {useDateTimePickerAndroidUseCase} from './useDateTimePickerAndroidUseCase';
 
 export type DateTimePickerAndroidProps = Omit<
   DateTimePickerProps,

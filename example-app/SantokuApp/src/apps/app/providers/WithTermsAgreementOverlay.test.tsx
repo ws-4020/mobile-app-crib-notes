@@ -1,14 +1,16 @@
 import {render, screen} from '@testing-library/react-native';
-import {AppConfig, BundledMessagesLoader, loadMessages} from 'bases';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
+import {AppConfig} from 'bases/config';
+import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
+import {loadMessages} from 'bases/message/utils/Message';
 import React, {useEffect} from 'react';
 import {Text} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {WithSnackbar} from '../../../bases/ui/components/overlay';
-import {WithTermsAgreementOverlay} from './WithTermsAgreementOverlay';
 import {useTermsAgreementOverlay} from '../../../features/terms/useTermsAgreementOverlay';
+import {WithSnackbar} from './WithSnackbar';
+import {WithTermsAgreementOverlay} from './WithTermsAgreementOverlay';
 
 jest.useFakeTimers();
 

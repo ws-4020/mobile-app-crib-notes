@@ -3,11 +3,11 @@ import React from 'react';
 import {TextInputProps, ViewProps} from 'react-native';
 
 import {ApplicationError} from '../../../core/error/ApplicationError';
+import {YearMonthUtil} from '../../utils/YearMonthUtil';
 import {PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainerProps} from './PickerContainer';
 import {SelectPickerItemsProps} from './SelectPickerItems';
 import {YearMonthPicker} from './YearMonthPicker';
-import {YearMonthUtil} from './YearMonthUtil';
 
 jest.doMock('react-native/Libraries/Utilities/Dimensions', () => ({
   get: jest.fn().mockReturnValue({width: 400, height: 1000}),

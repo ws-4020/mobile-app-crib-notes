@@ -2,10 +2,11 @@ import {renderHook} from '@testing-library/react-native';
 import {loadBundledMessagesAsync} from 'apps/app/initialize/helpers';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {AxiosError} from 'axios';
-import {useSnackbar, WithSnackbar} from 'bases/ui/components/overlay';
+import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import React from 'react';
 import {Query, QueryKey} from 'react-query';
 
+import {WithSnackbar} from '../providers/WithSnackbar';
 import {useDefaultGlobalQueryErrorHandler} from './useDefaultGlobalQueryErrorHandler';
 
 jest.mock('components/overlay/snackbar/WithSnackbar');

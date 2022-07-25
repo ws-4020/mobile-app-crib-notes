@@ -1,14 +1,8 @@
-import {createUseContextAndProvider} from 'bases/utilities';
 import React, {useMemo, useState} from 'react';
 
-import {FullWindowOverlay} from '../FullWindowOverlay';
-import {LoadingOverlay} from './LoadingOverlay';
-
-type LoadingOverlayContextType = {
-  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const [useLoadingOverlay, LoadingOverlayContextProvider] = createUseContextAndProvider<LoadingOverlayContextType>();
+import {FullWindowOverlay} from '../../../bases/ui/components/overlay/FullWindowOverlay';
+import {LoadingOverlay} from '../../../bases/ui/components/overlay/loading/LoadingOverlay';
+import {LoadingOverlayContextProvider, LoadingOverlayContextType} from '../../../bases/ui/contexts/useLoadingOverlay';
 
 const WithLoadingOverlay: React.FC = ({children}) => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -23,4 +17,4 @@ const WithLoadingOverlay: React.FC = ({children}) => {
   );
 };
 
-export {WithLoadingOverlay, useLoadingOverlay};
+export {WithLoadingOverlay};

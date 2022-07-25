@@ -11,7 +11,7 @@ import {
   WebViewSourceUri,
 } from 'react-native-webview/lib/WebViewTypes';
 
-import {useSnackbar} from '../overlay';
+import {useSnackbar} from '../../contexts/useSnackbar';
 
 type Props = WebViewProps & {
   /**

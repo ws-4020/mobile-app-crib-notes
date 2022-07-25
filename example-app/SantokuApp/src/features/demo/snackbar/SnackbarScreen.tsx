@@ -1,6 +1,6 @@
 import {DemoStackParamList} from 'apps/app/navigators/types';
-import {m} from 'bases';
-import {useSnackbar} from 'bases/ui/components/overlay';
+import {m} from 'bases/message/utils/Message';
+import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import React, {useCallback} from 'react';
 
 import {SnackbarTemplate} from './SnackbarTemplate';

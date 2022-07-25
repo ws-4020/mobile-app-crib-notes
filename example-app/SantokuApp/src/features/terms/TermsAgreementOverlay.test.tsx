@@ -1,12 +1,14 @@
 import '@testing-library/jest-native/extend-expect';
 import {render, screen} from '@testing-library/react-native';
-import {AppConfig, BundledMessagesLoader, loadMessages} from 'bases';
-import {WithSnackbar} from 'bases/ui/components/overlay';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
+import {AppConfig} from 'bases/config';
+import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
+import {loadMessages} from 'bases/message/utils/Message';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
+import {WithSnackbar} from '../../apps/app/providers/WithSnackbar';
 import {TermsAgreementOverlay} from './TermsAgreementOverlay';
 
 const Wrapper: React.FC = ({children}) => {

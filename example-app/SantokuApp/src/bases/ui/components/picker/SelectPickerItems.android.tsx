@@ -2,11 +2,11 @@ import React, {useCallback, useMemo} from 'react';
 import {FlatList, FlatListProps, ListRenderItemInfo, StyleSheet, View} from 'react-native';
 import Reanimated from 'react-native-reanimated';
 
+import {useSelectPickerItemsUseCase} from '../../hooks/useSelectPickerItemsUseCase';
 import {Fader, FaderPosition} from './Fader';
 import {Item} from './SelectPicker';
 import {SelectPickerItem} from './SelectPickerItem';
 import {SelectPickerItemsProps} from './SelectPickerItems';
-import {useSelectPickerItemsUseCase} from './useSelectPickerItemsUseCase';
 
 const Separator: React.FC<{height: number; testID?: string}> = React.memo(({height, testID}) => {
   const separatorHeightStyle = useMemo(() => ({height}), [height]);

@@ -1,5 +1,5 @@
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {useAppTheme} from 'bases/ui/components/theme';
+import {useAppTheme} from 'bases/ui/contexts/useAppTheme';
 import {useMemo} from 'react';
 
 export const useDefaultScreenOptions: () => NativeStackNavigationOptions = () => {

@@ -1,12 +1,12 @@
 import React from 'react';
 import {Pressable, StyleSheet, TextInput, View} from 'react-native';
 
+import {useDateTimePickerIOSUseCase} from '../../hooks/useDateTimePickerIOSUseCase';
 import {DateTimePickerProps} from './DateTimePicker';
 import {DateTimePickerItems, DateTimePickerItemsIOSProps} from './DateTimePickerItems';
 import {DefaultPickerAccessory} from './DefaultPickerAccessory';
 import {PickerBackdrop} from './PickerBackdrop';
 import {PickerContainer} from './PickerContainer';
-import {useDateTimePickerIOSUseCase} from './useDateTimePickerIOSUseCase';
 
 export type DateTimePickerIOSProps = Omit<DateTimePickerProps, 'displayAndroid' | 'pickerItemsProps'> & {
   pickerItemsProps?: Omit<
