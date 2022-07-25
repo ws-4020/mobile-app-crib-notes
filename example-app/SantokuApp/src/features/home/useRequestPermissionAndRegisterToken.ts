@@ -4,9 +4,9 @@ import {isRequestPushPermissionError, requestPushPermission} from 'bases/firebas
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
-import {useAccountContext} from 'features/account/useAccountContext';
+import {usePostAccountsMeDeviceToken} from 'features//backend/apis/account/account';
+import {useAccountContext} from 'features/account/contexts/useAccountContext';
 import {useCallback} from 'react';
-import {usePostAccountsMeDeviceToken} from 'service';
 
 export const useRequestPermissionAndRegisterToken = () => {
   const {mutateAsync: callPostAccountsMeDeviceToken} = usePostAccountsMeDeviceToken();

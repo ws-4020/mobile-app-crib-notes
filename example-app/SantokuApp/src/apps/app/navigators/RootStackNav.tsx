@@ -1,7 +1,7 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator, NativeStackNavigationOptions} from '@react-navigation/native-stack';
 import {LoginScreen, ProfileRegistrationScreen} from 'features';
-import {AccountContext, useAccountContext} from 'features/account/useAccountContext';
+import {AccountContext, useAccountContext} from 'features/account/contexts/useAccountContext';
 import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
 

@@ -1,13 +1,15 @@
-import {AuthenticationService} from '../../../../features/account/AuthenticationService';
-import {isUnauthorizedError} from '../../../../features/account/UnauthorizedError';
+import {isUnauthorizedError} from 'features/account/errors/UnauthorizedError';
+import {autoLogin as accountAutoLogin} from 'features/account/utils/autoLogin';
+import {clientLogout} from 'features/account/utils/clientLogout';
+
 import {InitialDataError} from './initialDataError';
 
 export const autoLogin = async () => {
   try {
-    await AuthenticationService.autoLogin();
+    return await accountAutoLogin();
   } catch (e) {
     if (isUnauthorizedError(e)) {
-      await AuthenticationService.clientLogout();
+      await clientLogout();
       throw e;
     }
     throw new InitialDataError(e);

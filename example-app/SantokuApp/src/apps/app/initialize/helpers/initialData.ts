@@ -1,5 +1,7 @@
+import {getAccountsMeTerms} from 'features/account/utils/getAccountsMeTerms';
+import {getAccountsMe} from 'features/backend/apis/account/account';
 import {Account, TermsOfService, TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
-import {getAccountsMe, getAccountsMeTerms, getTerms} from 'service';
+import {getTerms} from 'features/terms/termService';
 
 import {InitialDataError} from './initialDataError';
 

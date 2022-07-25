@@ -1,10 +1,10 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList, RootStackParamList} from 'apps/app/navigators/types';
+import {useGetAccountsMeService} from 'features/account/hooks/useGetAccountsMeService';
 import React from 'react';
 import {View, Text, StyleSheet, SafeAreaView, RefreshControl, ActivityIndicator} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {useGetAccountsMe} from 'service/backend';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,
@@ -13,7 +13,7 @@ type Props = CompositeScreenProps<
 
 const ScreenName = 'GetAccountsMeDemo';
 const Screen: React.FC<Props> = () => {
-  const {isLoading, isRefetching, isError, data: axiosResponse, refetch} = useGetAccountsMe();
+  const {isLoading, isRefetching, isError, data: axiosResponse, refetch} = useGetAccountsMeService();
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}>

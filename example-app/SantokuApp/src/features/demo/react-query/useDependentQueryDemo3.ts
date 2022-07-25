@@ -1,5 +1,5 @@
+import {useGetTodoDetails} from 'features/sandbox/sandboxService';
 import {useCallback, useMemo} from 'react';
-import {useGetTodoDetails} from 'service/backend';
 
 const useDependentQueryDemo3 = () => {
   const queryParameters = {page: 1, size: 5};

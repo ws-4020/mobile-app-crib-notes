@@ -8,9 +8,8 @@ import {useCallback, useMemo, useState} from 'react';
 import {Platform} from 'react-native';
 
 import {enhanceValidator} from '../../../bases/validator';
-import {AuthenticationService} from '../../../features/account/AuthenticationService';
-import {isUnauthorizedError} from '../../../features/account/UnauthorizedError';
-import {setRefreshSessionInterceptor} from '../../../features/account/refreshSession';
+import {isUnauthorizedError} from '../../../features/account/errors/UnauthorizedError';
+import {setRefreshSessionInterceptor} from '../../../features/account/utils/refreshSession';
 import {
   AccountData,
   checkAppUpdates,
@@ -82,7 +81,7 @@ const loadData = async () => {
 
   // TODO: キャッシュの削除
   const initialData = {notification};
-  if (!(await AuthenticationService.canAutoLogin())) {
+  if (!(await autoLogin())) {
     return {accountData: {}, initialData};
   }
 

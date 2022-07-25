@@ -1,6 +1,6 @@
 import {useLoadingOverlay} from 'bases/ui/contexts/useLoadingOverlay';
+import {useDeleteTodo, useGetTodo, usePutTodo} from 'features/sandbox/sandboxService';
 import {useCallback, useEffect, useState} from 'react';
-import {useDeleteTodo, useGetTodo, usePutTodo} from 'service/backend';
 
 import {EditTodoDemoScreenProps} from './EditTodoDemoScreen';
 

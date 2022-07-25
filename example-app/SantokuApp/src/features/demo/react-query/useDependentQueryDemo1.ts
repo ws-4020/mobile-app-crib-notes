@@ -1,6 +1,6 @@
+import {getAmount, getItem, getItemType0, getItemType1, Item, ItemRate} from 'features/sandbox/sandboxService';
 import {useCallback} from 'react';
 import {useQuery} from 'react-query';
-import {getAmount, getItem, getItemType0, getItemType1, Item, ItemRate} from 'service';
 
 const useDependentQueryDemo1 = () => {
   // 並列クエリ

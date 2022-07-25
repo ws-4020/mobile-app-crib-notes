@@ -1,9 +1,9 @@
-import {useAccountContext} from 'features/account/useAccountContext';
-import {useAccountContextOperation} from 'features/account/useAccountContextOperation';
+import {useAccountContext} from 'features/account/contexts/useAccountContext';
+import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
+import {usePostAccountsMeTermsService} from 'features/account/hooks/usePostAccountsMeTermsService';
 import {TermsOfService, TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {WebView as RNWebView} from 'react-native-webview';
-import {usePostAccountsMeTerms} from 'service';
 
 export const useTermsAgreementOverlayUseCase = (
   close: () => void,
@@ -14,7 +14,7 @@ export const useTermsAgreementOverlayUseCase = (
   const [buttonDisable, setButtonDisable] = useState(true);
   const [isWebViewError, setIsWebViewError] = useState(false);
   const webViewRef = useRef<RNWebView>(null);
-  const {mutateAsync: callPostAccountsMeTerms, isLoading} = usePostAccountsMeTerms();
+  const {mutateAsync: callPostAccountsMeTerms, isLoading} = usePostAccountsMeTermsService();
   const accountContext = useAccountContext();
   const accountContextOperation = useAccountContextOperation();
   const [agreedStatus, setAgreedStatus] = useState<TermsOfServiceAgreementStatus>();

@@ -4,12 +4,12 @@ import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
+import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
 import {RequestTimeoutError} from 'features/backend/error/RequestTimeoutError';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
 
-import {AuthenticationService} from '../../../features/account/AuthenticationService';
-import {useAccountContextOperation} from '../../../features/account/useAccountContextOperation';
+import {clientLogout} from '../../../features/account/utils/clientLogout';
 
 const outDebugLog = (error: unknown) => {
   try {
@@ -39,7 +39,7 @@ export const useDefaultGlobalErrorHandler = () => {
   const accountContextOperation = useAccountContextOperation();
 
   const showRequireLoginDialog = useCallback(() => {
-    AuthenticationService.clientLogout().finally(() => {
+    clientLogout().finally(() => {
       accountContextOperation.logout();
       Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
     });

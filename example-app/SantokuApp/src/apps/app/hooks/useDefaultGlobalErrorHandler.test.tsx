@@ -4,7 +4,7 @@ import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {AxiosError} from 'axios';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import {AuthenticationService} from 'features/account/AuthenticationService';
-import {useAccountContextOperation} from 'features/account/useAccountContextOperation';
+import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
 import React from 'react';
 import {Alert} from 'react-native';
 

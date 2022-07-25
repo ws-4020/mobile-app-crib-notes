@@ -1,6 +1,6 @@
+import {getItemInfo} from 'features/sandbox/sandboxService';
 import {useCallback} from 'react';
 import {useQuery} from 'react-query';
-import {getItemInfo} from 'service';
 
 const useDependentQueryDemo2 = () => {
   // 並列クエリ

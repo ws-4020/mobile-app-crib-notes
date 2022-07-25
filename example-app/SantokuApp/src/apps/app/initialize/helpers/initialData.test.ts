@@ -1,6 +1,7 @@
-import {getAccountsMe, getAccountsMeTerms} from 'features/account/accountService';
+import {getAccountsMeTerms} from 'features/account/utils/getAccountsMeTerms';
 import {getTerms} from 'features/terms/termService';
 
+import {getAccountsMe} from '../../../../features/backend/apis/account/account';
 import {loadInitialAccountDataAsync} from './initialData';
 import {InitialDataError} from './initialDataError';
 

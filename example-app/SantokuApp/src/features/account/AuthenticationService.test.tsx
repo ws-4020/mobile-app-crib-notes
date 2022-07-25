@@ -4,11 +4,11 @@ import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {AuthenticationService} from '../../bases/authentication';
+import * as csrfToken from '../../bases/backend/refreshCsrfToken';
 import * as accountApi from '../backend/apis/account/account';
 import {AccountLoginResponseStatus} from '../backend/apis/model';
-import * as csrfToken from '../../bases/backend/refreshCsrfToken';
 import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthenticationService';
-import {SecureStorageAdapter} from './SecureStorageAdapter';
+import {SecureStorageAdapter} from './utils/SecureStorageAdapter';
 
 const wrapper: React.ComponentType<React.ProviderProps<void>> = ({children}) => {
   const queryClient = new QueryClient();

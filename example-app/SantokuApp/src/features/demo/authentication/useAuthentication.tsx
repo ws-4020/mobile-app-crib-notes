@@ -1,22 +1,23 @@
 import {isApplicationError} from 'bases/core/error/ApplicationError';
 import {useLoadingOverlay} from 'bases/ui/contexts/useLoadingOverlay';
 import {generatePassword} from 'bases/utilities';
+import {ActiveAccountIdNotFoundError} from 'features/account/errors/ActiveAccountIdNotFoundError';
+import {PasswordNotFoundError} from 'features/account/errors/PasswordNotFoundError';
+import {useAutoLoginService} from 'features/account/hooks/useAutoLoginService';
+import {useChangeAccountService} from 'features/account/hooks/useChangeAccountService';
+import {useLogoutService} from 'features/account/hooks/useLogoutService';
+import {useSignupService} from 'features/account/hooks/useSignupService';
+import {canAutoLogin as accountCanAutoLogin} from 'features/account/utils/canAutoLogin';
 import {useCallback, useEffect, useState} from 'react';
-
-import {
-  ActiveAccountIdNotFoundError,
-  AuthenticationService,
-  PasswordNotFoundError,
-} from '../../account/AuthenticationService';
 
 export const useAuthentication = () => {
   const [accountId, setAccountId] = useState<string>();
   const [accountIdInput, setAccountIdInput] = useState('');
   const loadingOverlay = useLoadingOverlay();
-  const mutationSignup = AuthenticationService.useSignup();
-  const mutationChangeAccount = AuthenticationService.useChangeAccount();
-  const mutationAutoLogin = AuthenticationService.useAutoLogin();
-  const mutationLogout = AuthenticationService.useLogout();
+  const mutationSignup = useSignupService();
+  const mutationChangeAccount = useChangeAccountService();
+  const mutationAutoLogin = useAutoLoginService();
+  const mutationLogout = useLogoutService();
 
   const isProcessing =
     mutationSignup.isLoading ||
@@ -64,7 +65,7 @@ export const useAuthentication = () => {
 
   const canAutoLogin = useCallback(async () => {
     try {
-      const res = await AuthenticationService.canAutoLogin();
+      const res = await accountCanAutoLogin();
       alert(res ? '自動ログイン可能です' : '自動ログインできません');
     } catch (e) {
       handleError(e);

@@ -5,7 +5,8 @@ import {ListTodoParams} from 'features/sandbox/apis/model';
 import React, {useCallback, useState} from 'react';
 import {View, Text, ActivityIndicator, StyleSheet, SafeAreaView} from 'react-native';
 import {Button, Input} from 'react-native-elements';
-import {useListTodo} from 'service/backend';
+
+import {useListTodo} from '../../sandbox/sandboxService';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, typeof ScreenName>,

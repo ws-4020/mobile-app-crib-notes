@@ -2,10 +2,11 @@ import {isGetFcmTokenError} from 'bases/firebase/utils/getFcmToken';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
 import {Button} from 'bases/ui/components/button';
-import {AuthenticationService} from 'features/account/AuthenticationService';
-import {useAccountContextOperation} from 'features/account/useAccountContextOperation';
+import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
 import React, {useCallback} from 'react';
 import {Alert, GestureResponderEvent, StyleSheet} from 'react-native';
+
+import {useLogoutService} from '../../../features/account/hooks/useLogoutService';
 
 type HeaderRightLogoutButtonProps = {
   onPress: (event: GestureResponderEvent) => void;
@@ -42,7 +43,7 @@ type CloseThisNavigatorButtonProps = {
 
 export const useLogoutButton = () => {
   const accountContextOperation = useAccountContextOperation();
-  const {mutateAsync: callLogout, isLoading} = AuthenticationService.useLogout();
+  const {mutateAsync: callLogout, isLoading} = useLogoutService();
   const logout = useCallback(async () => {
     try {
       await callLogout();

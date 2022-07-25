@@ -3,8 +3,8 @@ import {ApplicationError} from 'bases/core/error/ApplicationError';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
 import * as Application from 'expo-application';
+import {getAppUpdates} from 'features/system/systemService';
 import {Alert, Linking, Platform} from 'react-native';
-import {getAppUpdates} from 'service';
 
 import {InitialDataError, isInitialDataError} from './initialDataError';
 
