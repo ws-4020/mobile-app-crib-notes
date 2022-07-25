@@ -1,4 +1,4 @@
-import {RootStackParamList} from 'apps/navigation/types';
+import {RootStackParamList} from 'apps/navigators/types';
 import {m} from 'bases/message';
 import {FilledButton, OutlinedButton} from 'components/button';
 import {PasswordTextInput, TextInput} from 'components/input';

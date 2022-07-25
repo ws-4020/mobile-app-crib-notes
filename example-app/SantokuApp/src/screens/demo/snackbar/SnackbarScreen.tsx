@@ -1,4 +1,4 @@
-import {DemoStackParamList} from 'apps/navigation/types';
+import {DemoStackParamList} from 'apps/navigators/types';
 import {m} from 'bases';
 import {useSnackbar} from 'components/overlay';
 import React, {useCallback} from 'react';

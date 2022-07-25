@@ -1,4 +1,4 @@
-import {DemoStackParamList} from 'apps/navigation/types';
+import {DemoStackParamList} from 'apps/navigators/types';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';

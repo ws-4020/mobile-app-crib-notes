@@ -1,4 +1,4 @@
-import {DemoStackParamList} from 'apps/navigation/types';
+import {DemoStackParamList} from 'apps/navigators/types';
 import {useEffect} from 'react';
 
 const ScreenName = 'ErrorInUseEffectAsyncProcess';

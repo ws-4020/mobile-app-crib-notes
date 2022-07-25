@@ -24,7 +24,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {DemoStackParamList} from 'apps/navigation/types';
+import {DemoStackParamList} from 'apps/navigators/types';
 import React from 'react';
 import {ScrollView, StyleSheet, View, Text} from 'react-native';
 import {

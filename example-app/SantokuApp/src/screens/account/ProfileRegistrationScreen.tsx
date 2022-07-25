@@ -1,5 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from 'apps/navigation/types';
+import {RootStackParamList} from 'apps/navigators/types';
 import {m} from 'bases/message';
 import {FilledButton} from 'components/button';
 import {TextInput} from 'components/input';

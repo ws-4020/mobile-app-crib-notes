@@ -1,5 +1,5 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from 'apps/navigation/types';
+import {RootStackParamList} from 'apps/navigators/types';
 import {useIsMounted} from 'bases';
 import {AuthenticationService, isUnauthorizedError, SecureStorageAdapter} from 'bases/authentication';
 import {m} from 'bases/message';
