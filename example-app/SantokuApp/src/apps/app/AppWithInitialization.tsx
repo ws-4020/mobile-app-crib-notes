@@ -4,8 +4,8 @@ import {Alert} from 'react-native';
 
 import {InitialDataDependingComponent, useAppInitializer} from '../../bases/initialize';
 import {showUpdateRequiredDialog} from '../../bases/initialize/helpers';
-import {WithReactQuery} from '../../bases/ui/components/reactQuery';
 import {WithAccountContext} from './providers/WithAccountContext';
+import {WithReactQuery} from './providers/WithReactQuery';
 import {WithTermsAgreementOverlay} from './providers/WithTermsAgreementOverlay';
 
 export const AppWithInitialization: React.FC = () => {

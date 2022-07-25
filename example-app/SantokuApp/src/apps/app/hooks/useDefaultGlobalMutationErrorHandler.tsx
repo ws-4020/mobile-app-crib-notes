@@ -1,4 +1,4 @@
-import {useDefaultGlobalErrorHandler} from 'bases/error/useDefaultGlobalErrorHandler';
+import {useDefaultGlobalErrorHandler} from 'apps/app/hooks/useDefaultGlobalErrorHandler';
 import {useCallback} from 'react';
 import {Mutation} from 'react-query';
 

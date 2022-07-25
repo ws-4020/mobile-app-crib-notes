@@ -3,8 +3,8 @@ import React, {useCallback, useEffect, useMemo} from 'react';
 import {AppState, AppStateStatus, Platform} from 'react-native';
 import {focusManager, onlineManager, QueryClient, QueryClientProvider} from 'react-query';
 
-import {useDefaultQueryCache, useDefaultMutationCache} from './useDefaultCache';
-import {useDefaultOptions} from './useDefaultOptions';
+import {useDefaultQueryCache, useDefaultMutationCache} from '../hooks/useDefaultCache';
+import {useDefaultOptions} from '../hooks/useDefaultOptions';
 
 const WithReactQuery: React.FC = ({children}) => {
   const queryCache = useDefaultQueryCache();
