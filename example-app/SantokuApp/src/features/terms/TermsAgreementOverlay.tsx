@@ -6,7 +6,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
-import {TermsAgreementOverlayShowProps} from '../../context/WithTermsAgreementOverlay';
+import {TermsAgreementOverlayShowProps} from '../../apps/app/providers/WithTermsAgreementOverlay';
 import {useTermsAgreementOverlayUseCase} from './usecases';
 
 export type TermsAgreementOverlayProps = TermsAgreementOverlayShowProps & {

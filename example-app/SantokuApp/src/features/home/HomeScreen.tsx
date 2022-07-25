@@ -1,7 +1,7 @@
 import {useFocusEffect} from '@react-navigation/core';
 import {HomeStackParamList} from 'apps/app/navigators/types';
 import {m} from 'bases';
-import {useShowTermsAgreementOverlay} from 'context/useShowTermsAgreementOverlay';
+import {useShowTermsAgreementOverlay} from 'features/terms/useShowTermsAgreementOverlay';
 import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';

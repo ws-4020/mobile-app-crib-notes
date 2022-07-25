@@ -3,8 +3,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {render, screen} from '@testing-library/react-native';
 import {AppConfig} from 'bases/config';
 import {WithSnackbar} from 'bases/ui/components/overlay';
-import {WithAccountContext} from 'context/WithAccountContext';
-import {WithTermsAgreementOverlay} from 'context/WithTermsAgreementOverlay';
+import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
+import {WithTermsAgreementOverlay} from 'apps/app/providers/WithTermsAgreementOverlay';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 

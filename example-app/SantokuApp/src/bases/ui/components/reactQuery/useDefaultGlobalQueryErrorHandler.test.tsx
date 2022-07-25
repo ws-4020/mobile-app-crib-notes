@@ -2,7 +2,7 @@ import {renderHook} from '@testing-library/react-native';
 import {AxiosError} from 'axios';
 import {loadBundledMessagesAsync} from 'bases/initialize/helpers';
 import {useSnackbar, WithSnackbar} from 'bases/ui/components/overlay';
-import {WithAccountContext} from 'context/WithAccountContext';
+import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import React from 'react';
 import {Query, QueryKey} from 'react-query';
 

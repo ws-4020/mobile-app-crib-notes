@@ -1,5 +1,5 @@
-import {useAccountContext} from 'context/useAccountContext';
-import {useAccountContextOperation} from 'context/useAccountContextOperation';
+import {useAccountContext} from 'features/account/useAccountContext';
+import {useAccountContextOperation} from 'features/account/useAccountContextOperation';
 import {TermsOfService, TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {WebView as RNWebView} from 'react-native-webview';

@@ -2,9 +2,9 @@ import {render, renderHook, screen} from '@testing-library/react-native';
 import React from 'react';
 import {Text} from 'react-native';
 
-import {AccountData} from '../bases/initialize/helpers';
+import {AccountData} from '../../../bases/initialize/helpers';
 import {WithAccountContext} from './WithAccountContext';
-import {useAccountContext} from './useAccountContext';
+import {useAccountContext} from '../../../features/account/useAccountContext';
 
 const wrapper = (value: AccountData) => {
   return ({children}: {children: React.ReactNode}) => {

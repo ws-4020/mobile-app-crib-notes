@@ -1,7 +1,7 @@
-import {useAccountContext} from 'context/useAccountContext';
+import {useAccountContext} from 'features/account/useAccountContext';
 import {useCallback} from 'react';
 
-import {TermsAgreementOverlayShowProps} from './WithTermsAgreementOverlay';
+import {TermsAgreementOverlayShowProps} from '../../apps/app/providers/WithTermsAgreementOverlay';
 import {useTermsAgreementOverlay} from './useTermsAgreementOverlay';
 
 /**

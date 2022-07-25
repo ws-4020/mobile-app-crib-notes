@@ -3,7 +3,7 @@ import {getFcmToken, isGetFcmTokenError, isRequestPushPermissionError, requestPu
 import {log} from 'bases/logging';
 import {m} from 'bases/message';
 import {useSnackbar} from 'bases/ui/components/overlay';
-import {useAccountContext} from 'context/useAccountContext';
+import {useAccountContext} from 'features/account/useAccountContext';
 import {useCallback} from 'react';
 import {usePostAccountsMeDeviceToken} from 'service';
 
