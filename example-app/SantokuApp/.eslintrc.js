@@ -68,12 +68,12 @@ module.exports = {
           allowReferenceFrom: ['src/apps/**'],
         },
         {
-          module: 'features/**',
-          allowReferenceFrom: ['src/app/**', 'src/features/**'],
+          module: 'features/***',
+          allowReferenceFrom: ['src/app/**', 'src/features/***'],
         },
         {
           module: 'bases/**',
-          allowReferenceFrom: ['src/apps/**', 'src/features/**', 'src/bases/**'],
+          allowReferenceFrom: ['src/apps/**', 'src/features/***', 'src/bases/***'],
         },
         {
           module: '@react-navigation/**',
