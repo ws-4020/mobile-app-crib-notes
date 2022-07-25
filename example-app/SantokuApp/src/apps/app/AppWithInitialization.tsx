@@ -2,8 +2,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
-import {InitialDataDependingComponent, useAppInitializer} from '../../bases/initialize';
-import {showUpdateRequiredDialog} from '../../bases/initialize/helpers';
+import {InitialDataDependingComponent, useAppInitializer} from './initialize';
+import {showUpdateRequiredDialog} from './initialize/helpers';
 import {WithAccountContext} from './providers/WithAccountContext';
 import {WithReactQuery} from './providers/WithReactQuery';
 import {WithTermsAgreementOverlay} from './providers/WithTermsAgreementOverlay';

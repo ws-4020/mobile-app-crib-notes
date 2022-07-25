@@ -4,10 +4,10 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useCallback, useEffect} from 'react';
 
-import {AppInitialData} from '../../../bases/initialize/types';
-import {InitialDataDependingComponent} from '../../../bases/initialize/withInitialData';
 import {useSnackbar} from '../../../bases/ui/components/overlay';
 import {HomeScreen} from '../../../features';
+import {AppInitialData} from '../initialize/types';
+import {InitialDataDependingComponent} from '../initialize/withInitialData';
 import {AuthenticatedStackNav} from '../navigators/AuthenticatedStackNav';
 import {HomeStackNav} from '../navigators/HomeStackNav';
 import {MainTabNav} from '../navigators/MainTabNav';

@@ -5,7 +5,7 @@ import * as Application from 'expo-application';
 import {Alert, Linking, Platform} from 'react-native';
 import {getAppUpdates} from 'service';
 
-import {m} from '../../message';
+import {m} from '../../../../bases/message';
 import {InitialDataError, isInitialDataError} from './initialDataError';
 
 export const openStoreLink = () => {

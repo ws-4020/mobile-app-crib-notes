@@ -1,4 +1,4 @@
-import {AccountDataDependingComponent} from 'bases/initialize/withAccountData';
+import {AccountDataDependingComponent} from 'apps/app/initialize/withAccountData';
 import React from 'react';
 
 import {AccountContextProvider} from '../../../features/account/useAccountContext';
