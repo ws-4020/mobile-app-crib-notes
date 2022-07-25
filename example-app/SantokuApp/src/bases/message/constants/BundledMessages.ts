@@ -37,10 +37,12 @@ export const bundledMessages = {
   'app.account.ログアウトエラータイトル': 'ログアウトに失敗しました',
   'app.account.ログアウトエラー本文': '時間をおいてから再度お試しください。',
   'app.terms.有効な利用規約の取得エラー': '利用規約の取得に失敗しました。画面をリロードして再度お試しください。',
-  'app.push.notification.requestPushPermissionError': 'プッシュ通知のパーミッションリクエストに失敗しました。cause=[{0}]',
+  'app.push.notification.requestPushPermissionError':
+    'プッシュ通知のパーミッションリクエストに失敗しました。cause=[{0}]',
   'app.push.notification.getFcmTokenError': 'FCM登録トークンの取得に失敗しました。cause=[{0}]',
   'app.push.notification.deleteFcmTokenError': 'FCM登録トークンの削除に失敗しました。cause=[{0}]',
-  'app.push.notification.プッシュ通知の設定エラー': 'プッシュ通知の設定に失敗しました。\n現在、プッシュ通知を受信できません。',
+  'app.push.notification.プッシュ通知の設定エラー':
+    'プッシュ通知の設定に失敗しました。\n現在、プッシュ通知を受信できません。',
   'fw.error.通信エラー': 'ページの表示中にエラーが発生しました。ネットワーク環境を確認してください。',
   'fw.error.再ログインタイトル': '再ログインが必要です',
   'fw.error.再ログイン本文': 'セッションの有効期限が切れました。再度ログインしてください。',
@@ -56,6 +58,3 @@ export const bundledMessages = {
   'fw.error.予期せぬ通信エラー':
     '予期せぬ通信エラーが発生しました。時間をおいてから再度お試しいただき、解決しない場合はお問い合わせください。',
 } as const;
-
-export type BundledMessagesType = typeof bundledMessages;
-export type MessageKey = keyof typeof bundledMessages;

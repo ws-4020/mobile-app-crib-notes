@@ -1,5 +1,5 @@
 import {RootStackParamList} from 'apps/app/navigators/types';
-import {m} from 'bases/message';
+import {m} from 'bases/message/utils/Message';
 import {FilledButton, OutlinedButton} from 'bases/ui/components/button';
 import {PasswordTextInput, TextInput} from 'bases/ui/components/input';
 import {Spacer} from 'bases/ui/components/spacer/Spacer';

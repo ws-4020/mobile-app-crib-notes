@@ -1,6 +1,7 @@
 import {AppConfig} from 'bases/config';
 import {log} from 'bases/logging/utils';
-import {BundledMessagesLoader, loadMessages} from 'bases/message';
+import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
+import {loadMessages} from 'bases/message/utils/Message';
 import {Alert, Linking} from 'react-native';
 
 import {InitialDataError} from './initialDataError';

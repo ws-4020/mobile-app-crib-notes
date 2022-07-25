@@ -1,4 +1,4 @@
-import {m} from 'bases/message';
+import {m} from 'bases/message/utils/Message';
 import * as Yup from 'yup';
 import {AnyObject, Maybe, Message} from 'yup/lib/types';
 

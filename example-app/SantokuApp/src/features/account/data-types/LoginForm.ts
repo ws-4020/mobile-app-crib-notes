@@ -1,4 +1,4 @@
-import {m} from 'bases/message';
+import {m} from 'bases/message/utils/Message';
 import {yup} from 'bases/validator';
 
 export type LoginForm = {

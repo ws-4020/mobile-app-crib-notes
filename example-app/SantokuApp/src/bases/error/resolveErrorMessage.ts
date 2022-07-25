@@ -1,6 +1,6 @@
 import axios, {AxiosError} from 'axios';
 
-import {m} from '../message';
+import {m} from '../message/utils/Message';
 
 export function resolveErrorMessage(error: unknown): {title: string; message: string} {
   if (axios.isAxiosError(error)) {

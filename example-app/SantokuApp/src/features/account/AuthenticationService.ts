@@ -1,15 +1,15 @@
 import crashlytics from '@react-native-firebase/crashlytics';
 import axios from 'axios';
+import {refreshCsrfToken} from 'bases/backend';
+import {ApplicationError} from 'bases/core/error/ApplicationError';
+import {deleteFcmToken} from 'bases/firebase/utils/deleteFcmToken';
+import {getFcmToken} from 'bases/firebase/utils/getFcmToken';
+import {log} from 'bases/logging/utils';
+import {m} from 'bases/message/utils/Message';
 import {postAccountsMeDeviceToken, postLogin, postLogout, postSignup} from 'features/backend/apis/account/account';
 import {Account, AccountLoginResponse} from 'features/backend/apis/model';
 import {useMutation} from 'react-query';
 
-import {refreshCsrfToken} from '../../bases/backend';
-import {ApplicationError} from '../../bases/core/error/ApplicationError';
-import {deleteFcmToken} from '../../bases/firebase/utils/deleteFcmToken';
-import {getFcmToken} from '../../bases/firebase/utils/getFcmToken';
-import {log} from '../../bases/logging/utils';
-import {m} from '../../bases/message';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 import {UnauthorizedError} from './UnauthorizedError';
 

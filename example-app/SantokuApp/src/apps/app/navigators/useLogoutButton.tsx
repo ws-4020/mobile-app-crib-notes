@@ -1,6 +1,6 @@
 import {isGetFcmTokenError} from 'bases/firebase/utils/getFcmToken';
 import {log} from 'bases/logging/utils';
-import {m} from 'bases/message';
+import {m} from 'bases/message/utils/Message';
 import {Button} from 'bases/ui/components/button';
 import {AuthenticationService} from 'features/account/AuthenticationService';
 import {useAccountContextOperation} from 'features/account/useAccountContextOperation';

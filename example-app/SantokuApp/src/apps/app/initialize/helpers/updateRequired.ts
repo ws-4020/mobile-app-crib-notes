@@ -1,11 +1,11 @@
 import {AppConfig} from 'bases/config';
 import {ApplicationError} from 'bases/core/error/ApplicationError';
 import {log} from 'bases/logging/utils';
+import {m} from 'bases/message/utils/Message';
 import * as Application from 'expo-application';
 import {Alert, Linking, Platform} from 'react-native';
 import {getAppUpdates} from 'service';
 
-import {m} from '../../../../bases/message';
 import {InitialDataError, isInitialDataError} from './initialDataError';
 
 export const openStoreLink = () => {

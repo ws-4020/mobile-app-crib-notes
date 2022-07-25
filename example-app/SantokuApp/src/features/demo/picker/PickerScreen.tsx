@@ -1,5 +1,5 @@
 import {DemoStackParamList} from 'apps/app/navigators/types';
-import {m} from 'bases/message';
+import {m} from 'bases/message/utils/Message';
 import {SelectPicker, YearMonthPicker} from 'bases/ui/components/picker';
 import {DateTimePicker} from 'bases/ui/components/picker/DateTimePicker';
 import React from 'react';

@@ -1,11 +1,11 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from 'apps/app/navigators/types';
 import {useIsMounted} from 'bases';
+import {m} from 'bases/message/utils/Message';
+import {isValidForm} from 'bases/validator';
 import {AuthenticationService} from 'features/account/AuthenticationService';
 import {SecureStorageAdapter} from 'features/account/SecureStorageAdapter';
 import {isUnauthorizedError} from 'features/account/UnauthorizedError';
-import {m} from 'bases/message';
-import {isValidForm} from 'bases/validator';
 import {useAccountContextOperation} from 'features/account/useAccountContextOperation';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import {useTermsAgreementOverlay} from 'features/terms/useTermsAgreementOverlay';

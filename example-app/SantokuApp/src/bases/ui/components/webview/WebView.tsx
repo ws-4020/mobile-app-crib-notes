@@ -1,4 +1,4 @@
-import {m} from 'bases/message';
+import {m} from 'bases/message/utils/Message';
 import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {WebView as RNWebView, WebViewProps} from 'react-native-webview';
