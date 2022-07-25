@@ -6,8 +6,8 @@ import {useMutation} from 'react-query';
 
 import {refreshCsrfToken} from '../../bases/backend';
 import {ApplicationError} from '../../bases/core/error/ApplicationError';
-import {getFcmToken} from '../../bases/firebase';
-import {deleteFcmToken} from '../../bases/firebase/messaging/deleteFcmToken';
+import {deleteFcmToken} from '../../bases/firebase/utils/deleteFcmToken';
+import {getFcmToken} from '../../bases/firebase/utils/getFcmToken';
 import {log} from '../../bases/logging';
 import {m} from '../../bases/message';
 import {SecureStorageAdapter} from './SecureStorageAdapter';

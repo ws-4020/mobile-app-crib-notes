@@ -1,5 +1,4 @@
 export {AppConfig} from './config';
-export {firebaseConfig, FirebaseConfig} from './firebase';
 export type {Logger, LoggerOptions} from './logging';
 export {log, createLogger} from './logging';
 export {m, loadMessages, BundledMessagesLoader} from './message';

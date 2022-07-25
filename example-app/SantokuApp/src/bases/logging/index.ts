@@ -1,4 +1,4 @@
-import {firebaseConfig} from '../firebase';
+import {firebaseConfig} from '../firebase/configs/FirebaseConfig';
 import {FirebaseCrashlyticsTransport} from './FirebaseCrashlyticsTransport';
 import {createLogger, Logger, LoggerOptions} from './Logger';
 

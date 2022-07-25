@@ -1,5 +1,6 @@
 import messaging from '@react-native-firebase/messaging';
-import {getFcmToken, isGetFcmTokenError, isRequestPushPermissionError, requestPushPermission} from 'bases/firebase';
+import {getFcmToken, isGetFcmTokenError} from 'bases/firebase/utils/getFcmToken';
+import {isRequestPushPermissionError, requestPushPermission} from 'bases/firebase/utils/requestPushPermission';
 import {log} from 'bases/logging';
 import {m} from 'bases/message';
 import {useSnackbar} from 'bases/ui/components/overlay';

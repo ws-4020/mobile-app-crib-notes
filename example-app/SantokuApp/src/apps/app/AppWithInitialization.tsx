@@ -41,7 +41,7 @@ export const AppWithInitialization: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const RootStackNav = require('./navigators/RootStackNav').RootStackNav as InitialDataDependingComponent;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const WithFirebaseMessagingHandlers = require('../../bases/firebase/WithFirebaseMessagingHandlers')
+    const WithFirebaseMessagingHandlers = require('./providers/WithFirebaseMessagingHandlers')
       .WithFirebaseMessagingHandlers as InitialDataDependingComponent;
     return (
       <NavigationContainer>
