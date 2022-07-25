@@ -1,5 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
-import {refreshCsrfToken, setRefreshSessionInterceptor} from 'bases/backend';
+import {refreshCsrfToken} from 'bases/backend';
 import {resolveErrorMessage} from 'bases/error/resolveErrorMessage';
 import {sendErrorLog} from 'bases/error/sendErrorLog';
 import * as Application from 'expo-application';
@@ -9,6 +9,7 @@ import {Platform} from 'react-native';
 
 import {AuthenticationService} from '../../features/account/AuthenticationService';
 import {isUnauthorizedError} from '../../features/account/UnauthorizedError';
+import {setRefreshSessionInterceptor} from '../../features/account/refreshSession';
 import {enhanceValidator} from '../validator';
 import {
   AccountData,

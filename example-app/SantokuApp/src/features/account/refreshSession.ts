@@ -1,10 +1,13 @@
 import axios, {AxiosResponse} from 'axios';
 
-import {SecureStorageAdapter} from '../../features/account/SecureStorageAdapter';
-import {ApplicationError} from '../error/ApplicationError';
-import {sendErrorLog} from '../error/sendErrorLog';
-import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, setAxiosResponseInterceptor} from './customInstance';
-import {refreshCsrfToken} from './refreshCsrfToken';
+import {
+  BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION,
+  setAxiosResponseInterceptor,
+} from '../../bases/backend/customInstance';
+import {refreshCsrfToken} from '../../bases/backend/refreshCsrfToken';
+import {ApplicationError} from '../../bases/error/ApplicationError';
+import {sendErrorLog} from '../../bases/error/sendErrorLog';
+import {SecureStorageAdapter} from './SecureStorageAdapter';
 
 // 共通リトライ処理に必要なAPI呼び出しだけは、自動生成コードに依存しない形で用意する
 const autoLogin = async () => {
