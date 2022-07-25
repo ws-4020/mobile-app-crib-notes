@@ -1,4 +1,4 @@
-import {log} from 'bases/logging';
+import {log} from 'bases/logging/utils';
 import React from 'react';
 import {Platform, TextInputProps as RNETextInputProps, ViewProps} from 'react-native';
 

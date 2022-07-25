@@ -1,6 +1,6 @@
 import {AppConfig} from 'bases/config';
 import {ApplicationError} from 'bases/core/error/ApplicationError';
-import {log} from 'bases/logging';
+import {log} from 'bases/logging/utils';
 import * as Application from 'expo-application';
 import {Alert, Linking, Platform} from 'react-native';
 import {getAppUpdates} from 'service';

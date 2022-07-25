@@ -1,15 +1,24 @@
+import {firebaseConfig} from 'bases/firebase/configs/FirebaseConfig';
+import {createLogger, setLogger} from 'bases/logging/utils';
+import {FirebaseCrashlyticsTransport} from 'bases/logging/utils/FirebaseCrashlyticsTransport';
 import React from 'react';
 import {Platform, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import {AppWithInitialization} from './AppWithInitialization';
 import {WithOverlay} from '../../bases/ui/components/overlay';
 import {WithAppTheme} from '../../bases/ui/components/theme';
+import {AppWithInitialization} from './AppWithInitialization';
 
 type AppProperties = {
   [key: string]: any;
 };
+
+setLogger(
+  __DEV__ || firebaseConfig.isDummy
+    ? createLogger({level: 'trace'})
+    : createLogger({level: 'error', transports: [new FirebaseCrashlyticsTransport()]}),
+);
 
 export const App = ({isHeadless}: AppProperties) => {
   // isHeadlessを取得するためにはAppDelegate.mに変更が必要

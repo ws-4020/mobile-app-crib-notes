@@ -1,7 +1,7 @@
 import {AxiosError} from 'axios';
 import {BundledMessagesLoader, loadMessages} from 'bases/message';
 
-import {log} from '../logging';
+import {log} from '../logging/utils';
 import {sendErrorLog} from './sendErrorLog';
 
 beforeAll(async () => {

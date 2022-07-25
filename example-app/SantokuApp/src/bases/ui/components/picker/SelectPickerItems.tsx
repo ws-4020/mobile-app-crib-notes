@@ -1,5 +1,5 @@
 import {PickerProps} from '@react-native-picker/picker';
-import {log} from 'bases/logging';
+import {log} from 'bases/logging/utils';
 import React from 'react';
 import {Platform, StyleProp, TextStyle} from 'react-native';
 

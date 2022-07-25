@@ -1,4 +1,4 @@
-import {log} from '../logging';
+import {log} from '../logging/utils';
 import {loadMessages, m} from './Message';
 
 describe('Message message', () => {

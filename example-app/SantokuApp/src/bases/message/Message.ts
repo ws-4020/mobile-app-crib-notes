@@ -1,5 +1,5 @@
+import {log} from '../logging/utils';
 import {MessageKey} from './BundledMessages';
-import {log} from '../logging';
 
 /**
  * メッセージをロードします。

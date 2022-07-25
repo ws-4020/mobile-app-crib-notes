@@ -1,5 +1,5 @@
 import {AppConfig} from 'bases/config';
-import {log} from 'bases/logging';
+import {log} from 'bases/logging/utils';
 import {BundledMessagesLoader, loadMessages} from 'bases/message';
 import {Alert, Linking} from 'react-native';
 
