@@ -10,8 +10,8 @@ import {
   getGetTodoQueryKey,
   listTodo,
   getTodo,
-} from 'generated/sandbox/api';
-import {ListTodoByCursorParams, ListTodoParams} from 'generated/sandbox/model';
+} from 'features/sandbox/apis/api';
+import {ListTodoByCursorParams, ListTodoParams} from 'features/sandbox/apis/model';
 import {QueryClient, useQuery, useQueryClient} from 'react-query';
 
 const useListTodo = (params?: ListTodoParams, options?: {enabled: boolean}) => {

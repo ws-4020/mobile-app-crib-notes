@@ -28,7 +28,7 @@ import type {
   ListTodoByCursorParams,
   NotFoundResponse,
 } from './model';
-import {sandboxCustomInstance, ErrorType} from '../../bases/backend/customInstance';
+import {sandboxCustomInstance, ErrorType} from '../../../bases/backend/customInstance';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 
