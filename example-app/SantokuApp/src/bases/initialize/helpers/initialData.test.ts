@@ -1,5 +1,5 @@
-import {getAccountsMe, getAccountsMeTerms} from 'service/backend/accountService';
-import {getTerms} from 'service/backend/termService';
+import {getAccountsMe, getAccountsMeTerms} from 'features/account/accountService';
+import {getTerms} from 'features/terms/termService';
 
 import {loadInitialAccountDataAsync} from './initialData';
 import {InitialDataError} from './initialDataError';

@@ -16,7 +16,7 @@ import {
 } from 'features/backend/apis/account/account';
 import {useMutation, useQuery} from 'react-query';
 
-import {TermsOfServiceAgreementStatus} from '../../features/backend/apis/model';
+import {TermsOfServiceAgreementStatus} from '../backend/apis/model';
 
 type TermsOfServiceAgreementStatusWithCreatedAt = TermsOfServiceAgreementStatus & {
   createdAt: string;
