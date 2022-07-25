@@ -1,4 +1,4 @@
-import {DemoStackParamList} from 'apps/navigators/types';
+import {DemoStackParamList} from 'apps/app/navigators/types';
 import React from 'react';
 
 import {ConfigTemplate} from './ConfigTemplate';

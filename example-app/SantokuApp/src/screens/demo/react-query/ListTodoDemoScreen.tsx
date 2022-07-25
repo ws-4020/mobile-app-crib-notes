@@ -1,6 +1,6 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {DemoStackParamList, RootStackParamList} from 'apps/navigators/types';
+import {DemoStackParamList, RootStackParamList} from 'apps/app/navigators/types';
 import {Todo} from 'generated/sandbox/model';
 import React, {useCallback} from 'react';
 import {ActivityIndicator, Pressable, FlatList, SafeAreaView, StyleSheet, View} from 'react-native';

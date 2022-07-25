@@ -4,10 +4,10 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useCallback, useEffect} from 'react';
 
-import {AuthenticatedStackNav} from '../../apps/navigators/AuthenticatedStackNav';
-import {HomeStackNav} from '../../apps/navigators/HomeStackNav';
-import {MainTabNav} from '../../apps/navigators/MainTabNav';
-import {NavigationParameter, RootStackParamList} from '../../apps/navigators/types';
+import {AuthenticatedStackNav} from '../../apps/app/navigators/AuthenticatedStackNav';
+import {HomeStackNav} from '../../apps/app/navigators/HomeStackNav';
+import {MainTabNav} from '../../apps/app/navigators/MainTabNav';
+import {NavigationParameter, RootStackParamList} from '../../apps/app/navigators/types';
 import {HomeScreen} from '../../screens';
 import {AppInitialData} from '../initialize/types';
 import {InitialDataDependingComponent} from '../initialize/withInitialData';

@@ -1,5 +1,5 @@
 import {useFocusEffect} from '@react-navigation/core';
-import {HomeStackParamList} from 'apps/navigators/types';
+import {HomeStackParamList} from 'apps/app/navigators/types';
 import {m} from 'bases';
 import {useShowTermsAgreementOverlay} from 'context/useShowTermsAgreementOverlay';
 import React, {useEffect} from 'react';

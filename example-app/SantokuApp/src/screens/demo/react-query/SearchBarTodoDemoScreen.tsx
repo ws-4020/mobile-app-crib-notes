@@ -1,6 +1,6 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {DemoStackParamList, RootStackParamList} from 'apps/navigators/types';
+import {DemoStackParamList, RootStackParamList} from 'apps/app/navigators/types';
 import React, {useEffect, useRef, useState} from 'react';
 import {Text, ActivityIndicator, StyleSheet, SafeAreaView, View} from 'react-native';
 import {SearchBar as DefaultSearchBar} from 'react-native-elements';

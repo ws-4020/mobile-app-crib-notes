@@ -1,6 +1,6 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {DemoStackParamList, RootStackParamList} from 'apps/navigators/types';
+import {DemoStackParamList, RootStackParamList} from 'apps/app/navigators/types';
 import {Button} from 'bases/ui/components/button/Button';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';

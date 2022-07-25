@@ -1,4 +1,4 @@
-import {DemoStackParamList} from 'apps/navigators/types';
+import {DemoStackParamList} from 'apps/app/navigators/types';
 import {m} from 'bases/message';
 import {SelectPicker, YearMonthPicker} from 'bases/ui/components/picker';
 import {DateTimePicker} from 'bases/ui/components/picker/DateTimePicker';

@@ -1,5 +1,5 @@
 import {NavigationProp, NavigatorScreenParams, useNavigation} from '@react-navigation/native';
-import {DemoStackParamList, RootStackParamList} from 'apps/navigators/types';
+import {DemoStackParamList, RootStackParamList} from 'apps/app/navigators/types';
 import {useCallback} from 'react';
 
 const useNavigateToRootStackScreen = (screen: keyof RootStackParamList) => {

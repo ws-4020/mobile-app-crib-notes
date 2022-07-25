@@ -5,7 +5,7 @@ import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
 import {LoginScreen, ProfileRegistrationScreen} from 'screens';
 
-import {AppInitialData} from '../../bases/initialize/types';
+import {AppInitialData} from '../../../bases/initialize/types';
 import {AuthenticatedStackNav, useAuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
 import {RootStackParamList} from './types';

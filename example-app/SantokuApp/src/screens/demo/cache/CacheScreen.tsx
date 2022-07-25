@@ -1,4 +1,4 @@
-import {DemoStackParamList} from 'apps/navigators/types';
+import {DemoStackParamList} from 'apps/app/navigators/types';
 import React, {useCallback, useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View, RefreshControl} from 'react-native';
 import {Text} from 'react-native-elements';
