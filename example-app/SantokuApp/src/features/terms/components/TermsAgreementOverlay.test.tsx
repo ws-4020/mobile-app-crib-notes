@@ -8,7 +8,7 @@ import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {WithSnackbar} from '../../apps/app/providers/WithSnackbar';
+import {WithSnackbar} from '../../../apps/app/providers/WithSnackbar';
 import {TermsAgreementOverlay} from './TermsAgreementOverlay';
 
 const Wrapper: React.FC = ({children}) => {

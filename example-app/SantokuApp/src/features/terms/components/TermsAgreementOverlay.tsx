@@ -1,3 +1,4 @@
+import {TermsAgreementOverlayShowProps} from 'apps/app/providers/WithTermsAgreementOverlay';
 import {m} from 'bases/message/utils/Message';
 import {Button} from 'bases/ui/components/button/Button';
 import {OverlayBackdrop} from 'bases/ui/components/overlay/OverlayBackdrop';
@@ -7,8 +8,14 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
-import {TermsAgreementOverlayShowProps} from '../../apps/app/providers/WithTermsAgreementOverlay';
-import {useTermsAgreementOverlayUseCase} from './usecases';
+import {useButtonDisableClientState} from '../hooks/useButtonDisableClientState';
+import {useComposedExitingCallbackUseCase} from '../hooks/useComposedExitingCallbackUseCase';
+import {useIsWebViewErrorClientState} from '../hooks/useIsWebViewErrorClientState';
+import {useOnAgreeUseCase} from '../hooks/useOnAgreeUseCase';
+import {useOnScrollEndOnceUseCase} from '../hooks/useOnScrollEndOnceUseCase';
+import {useOnWebViewErrorUseCase} from '../hooks/useOnWebViewErrorUseCase';
+import {useResetWebViewErrorUseCase} from '../hooks/useResetWebViewErrorUseCase';
+import {useWebViewSource} from '../hooks/useWebViewSource';
 
 export type TermsAgreementOverlayProps = TermsAgreementOverlayShowProps & {
   visible: boolean;
@@ -26,17 +33,14 @@ export const TermsAgreementOverlay: React.FC<TermsAgreementOverlayProps> = ({
   exitingCallbackOnAgreed,
   contentViewTestID,
 }) => {
-  const {
-    webViewSource,
-    isWebViewError,
-    onWebViewError,
-    webViewRef,
-    resetWebViewError,
-    onScrollEndOnce,
-    onAgree,
-    composedExitingCallback,
-    isDisabledAgreementButton,
-  } = useTermsAgreementOverlayUseCase(close, termsOfService, exitingCallback, exitingCallbackOnAgreed);
+  const [isWebViewError] = useIsWebViewErrorClientState();
+  const [buttonDisable] = useButtonDisableClientState();
+  const {webViewSource} = useWebViewSource(termsOfService);
+  const {composedExitingCallback} = useComposedExitingCallbackUseCase();
+  const {resetWebViewError} = useResetWebViewErrorUseCase();
+  const {onScrollEndOnce} = useOnScrollEndOnceUseCase();
+  const {onWebViewError} = useOnWebViewErrorUseCase();
+  const {onAgree, isLoading} = useOnAgreeUseCase(termsOfService);
 
   return (
     <OverlayBackdrop
@@ -58,13 +62,12 @@ export const TermsAgreementOverlay: React.FC<TermsAgreementOverlayProps> = ({
             <WebView
               source={webViewSource}
               onScrollEndOnce={onScrollEndOnce}
-              ref={webViewRef}
               onError={onWebViewError}
               onHttpError={onWebViewError}
             />
           )}
           <View style={styles.footer}>
-            <Button title={m('同意')} onPress={onAgree} disabled={isDisabledAgreementButton} />
+            <Button title={m('同意')} onPress={onAgree} disabled={buttonDisable || isLoading} />
           </View>
         </View>
       </OverlayContainer>

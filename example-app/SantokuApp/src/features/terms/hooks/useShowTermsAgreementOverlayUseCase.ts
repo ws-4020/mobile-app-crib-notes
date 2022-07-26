@@ -1,17 +1,17 @@
 import {useAccountContext} from 'features/account/contexts/useAccountContext';
 import {useCallback} from 'react';
 
-import {TermsAgreementOverlayShowProps} from '../../apps/app/providers/WithTermsAgreementOverlay';
-import {useTermsAgreementOverlay} from './useTermsAgreementOverlay';
+import {TermsAgreementOverlayShowProps} from '../../../apps/app/providers/WithTermsAgreementOverlay';
+import {useTermsAgreementOverlay} from '../contexts/useTermsAgreementOverlay';
 
 /**
  * AccountContextから利用規約情報を取得して、未同意の場合は利用規約を表示します。
  *
  * @example
- * const showTermsAgreementOverlay = useShowTermsAgreementOverlay();
+ * const showTermsAgreementOverlay = useShowTermsAgreementOverlayUseCase();
  * showTermsAgreementOverlay(onAgree);
  */
-export const useShowTermsAgreementOverlay = () => {
+export const useShowTermsAgreementOverlayUseCase = () => {
   const accountContext = useAccountContext();
   const termsAgreementOverlay = useTermsAgreementOverlay();
 

@@ -1,7 +1,7 @@
 import {useFocusEffect} from '@react-navigation/core';
 import {HomeStackParamList} from 'apps/app/navigators/types';
 import {m} from 'bases/message/utils/Message';
-import {useShowTermsAgreementOverlay} from 'features/terms/useShowTermsAgreementOverlay';
+import {useShowTermsAgreementOverlayUseCase} from 'features/terms/hooks/useShowTermsAgreementOverlayUseCase';
 import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
@@ -18,7 +18,7 @@ const Screen: React.FC = () => {
     });
   }, [requestPermissionAndRegisterToken]);
   // 利用規約に未同意の場合は、利用規約を表示します。
-  const showTermsAgreementOverlay = useShowTermsAgreementOverlay();
+  const showTermsAgreementOverlay = useShowTermsAgreementOverlayUseCase();
   useFocusEffect(showTermsAgreementOverlay);
 
   return (

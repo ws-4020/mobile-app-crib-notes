@@ -8,7 +8,7 @@ import {Text} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {useTermsAgreementOverlay} from '../../../features/terms/useTermsAgreementOverlay';
+import {useTermsAgreementOverlay} from '../../../features/terms/contexts/useTermsAgreementOverlay';
 import {WithSnackbar} from './WithSnackbar';
 import {WithTermsAgreementOverlay} from './WithTermsAgreementOverlay';
 
