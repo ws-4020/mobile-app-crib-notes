@@ -60,26 +60,32 @@ QAアプリの実装に必要な共通処理をサンプルアプリ（SantokuAp
 | コピー元（[SantokuApp](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp "SantokuApp")） | 修正必要 | 説明 |
 |--|--|--|
 | src/components/reactQuery配下 | | reactQueryを使用するために必要な設定。 |
+| src/framework/index.ts | ○ | エントリポイント。 |
 | src/framework/backend/customInstance.ts | ○ | API通信をする際に必要な設定。 |
 | src/framework/config/AppConfig.ts | ○ | アプリで使用する環境設定値の設定。 |
-| src/framework/config/index.ts |  |  |
-| src/framework/initialize/helpers/bundledMessage.ts |  | アプリ内にバンドルされたメッセージをロードする。 |
-| src/framework/initialize/helpers/index.ts | ○ |  |
-| src/framework/initialize/index.ts | ○ |  |
+| src/framework/config/index.ts |  | エントリポイント。 |
+| src/framework/error/RequestTimeoutError.ts |  | API呼び出しでのタイムアウト時に使用。 |
+| src/framework/initialize/helpers/bundledMessage.ts |  | アプリ内にバンドルされたメッセージのロードに使用。 |
+| src/framework/initialize/helpers/index.ts | ○ | エントリポイント。 |
+| src/framework/initialize/index.ts | ○ | エントリポイント。 |
 | src/framework/initialize/useAppInitializer.ts | ○ | アプリ起動時の初期化処理について記述している。<br />（参考）[アプリ起動後の初期化処理](https://fintan-contents.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/life-cycle-management/initialization "アプリ起動後の初期化処理") |
 | src/framework/logging/ConsoleTransport.ts |  | ログ出力で使用する設定。 |
-| src/framework/logging/index.ts | ○ |  |
+| src/framework/logging/index.ts | ○ | エントリポイント。 |
 | src/framework/logging/Logger.ts |  | ログ出力で使用する設定。 |
 | src/framework/logging/SimpleLogFormatter.ts |  | ログ出力で使用する設定。 |
 | src/framework/logging/Transport.ts |  | ログ出力で使用する設定。 |
-| src/framework/message/BundledMessageLoader.ts |  | アプリ内にバンドルされたメッセージをロードする。 |
-| src/framework/message/index.ts |  |  |
+| src/framework/message/BundledMessageLoader.ts |  | アプリ内にバンドルされたメッセージのロードに使用。 |
+| src/framework/message/index.ts |  | エントリポイント。 |
 | src/framework/message/Message.ts |  | アプリ内で使用するメッセージで必要な設定。 |
-| src/framework/utilities/composePressableStyles.ts |  | picker部品の中でreact-native-reanimatedを使用する際に使用。 |
-| src/framework/utilities/index.ts | ○ |  |
-| src/framework/utilities/useIsMounted.ts |  | コンポーネントがマウントされているかを確認するためのユーティリティ |
-| src/framework/utilities/useVisibility.ts |  | 表示・非表示の状態管理を簡単に使うためのユーティリティ |
-| src/framework/utilities/useWorkletCallback.ts |  | React Native Reanimatedの[Worklets](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/worklets)を使用する際に便利なユーティリティ |
+| src/framework/utilities/composePressableStyles.ts |  | SantokuAppのpicker部品の中でstyleの制御に使用。 |
+| src/framework/utilities/index.ts | ○ | エントリポイント。 |
+| src/framework/utilities/useIsMounted.ts |  | コンポーネントがマウントされているかを確認するためのユーティリティ。 |
+| src/framework/utilities/useVisibility.ts |  | 表示・非表示の状態管理を簡単に使うためのユーティリティ。 |
+| src/framework/utilities/useWorkletCallback.ts |  | React Native Reanimatedの[Worklets](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/worklets)を使用する際に便利なユーティリティ。 |
+| src/framework/validator/index.ts |  | エントリポイント。 |
+| src/framework/validator/isValidForm.ts |  | 入力内容のバリデーションに必要。 |
 | src/generated/BundledMessages.ts | ○ | アプリ内にバンドルするメッセージの一覧。 |
 | src/AppWithInitialization.tsx | ○ | アプリ起動時に必要な設定。 |
-| package.json ※ファイルの内容を一部コピー | ○ | `"orval": "npx orval --config ./orval.config.ts"`<br />OpenAPI specificationからソースコードを自動生成するために必要。 |
+| orval.config.ts | ○ | orvalの設定。 |
+| .env.development | ○ | アプリで使用する環境設定値の設定。 |
+| package.json ※ファイルの内容を一部コピー | ○ | `"orval": "npx orval --config ./orval.config.ts"`<br />`"orval": "^6.6.1",`<br />OpenAPI specificationからソースコードを自動生成するために必要。<br />`"react-native-config": "~1.4.0"`<br />AppConfig.tsで変数を定義するために必要。<br />`"formik": "~2.2.9"`<br />`"yup": "~0.32.11"`<br />メッセージのバリデーションに必要。<br />`"axios": "^0.27.0"`<br />API呼び出し時に必要。 |
