@@ -1,9 +1,9 @@
 import {TeamStackParamList} from 'apps/app/navigators/types';
-import {m} from 'bases';
+import {m} from 'bases/message/utils/Message';
+import {useNavigateToDemoStackScreen} from 'features/useNavigateToScreen';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
-import {useNavigateToDemoStackScreen} from 'features/useNavigateToScreen';
 
 const ScreenName = 'TeamDetail';
 const Screen: React.FC = () => {
