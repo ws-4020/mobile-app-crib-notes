@@ -66,14 +66,17 @@ module.exports = {
         {
           module: 'apps/**',
           allowReferenceFrom: ['src/apps/**'],
+          allowSameFolder: true,
         },
         {
-          module: 'features/***',
-          allowReferenceFrom: ['src/app/**', 'src/features/***'],
+          module: 'features/**',
+          allowReferenceFrom: ['src/apps/**'],
+          allowSameFolder: true,
         },
         {
           module: 'bases/**',
-          allowReferenceFrom: ['src/apps/**', 'src/features/***', 'src/bases/***'],
+          allowReferenceFrom: ['src/apps/**', 'src/features/**'],
+          allowSameFolder: true,
         },
         {
           module: '@react-navigation/**',
