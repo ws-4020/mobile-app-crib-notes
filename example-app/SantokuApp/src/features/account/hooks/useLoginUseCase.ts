@@ -1,6 +1,6 @@
 import {useIsMounted} from 'bases/core/utils/useIsMounted';
 import {m} from 'bases/message/utils/Message';
-import {isValidForm} from 'bases/validator';
+import {isValidForm} from 'bases/validator/utils';
 import {FormikProps} from 'formik';
 import {useCallback, useState} from 'react';
 import {Alert} from 'react-native';

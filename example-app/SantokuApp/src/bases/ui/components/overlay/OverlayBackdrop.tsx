@@ -1,4 +1,4 @@
-import {composePressableStyles} from 'bases/utilities';
+import {composePressableStyles} from 'bases/core/utils/composePressableStyles';
 import React, {useMemo} from 'react';
 import {Omit, Pressable, PressableProps, StyleSheet, View, ViewProps} from 'react-native';
 import Reanimated, {BaseAnimationBuilder, FadeIn, FadeOut, Keyframe} from 'react-native-reanimated';

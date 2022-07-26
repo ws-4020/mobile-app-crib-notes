@@ -1,6 +1,8 @@
 import {m} from 'bases/message/utils/Message';
-import {FilledButton, OutlinedButton} from 'bases/ui/components/button';
-import {PasswordTextInput, TextInput} from 'bases/ui/components/input';
+import {FilledButton} from 'bases/ui/components/button/FilledButton';
+import {OutlinedButton} from 'bases/ui/components/button/OutlinedButton';
+import {PasswordTextInput} from 'bases/ui/components/input/PasswordTextInput';
+import {TextInput} from 'bases/ui/components/input/TextInput';
 import {Spacer} from 'bases/ui/components/spacer/Spacer';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';

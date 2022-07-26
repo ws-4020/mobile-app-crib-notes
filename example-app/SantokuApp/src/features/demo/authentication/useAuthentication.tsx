@@ -1,6 +1,6 @@
 import {isApplicationError} from 'bases/core/error/ApplicationError';
+import {generatePassword} from 'bases/id/utils/id';
 import {useLoadingOverlay} from 'bases/ui/contexts/useLoadingOverlay';
-import {generatePassword} from 'bases/utilities';
 import {ActiveAccountIdNotFoundError} from 'features/account/errors/ActiveAccountIdNotFoundError';
 import {PasswordNotFoundError} from 'features/account/errors/PasswordNotFoundError';
 import {useAutoLoginService} from 'features/account/hooks/useAutoLoginService';

@@ -1,4 +1,4 @@
-import {createUseContextAndProvider} from '../../utilities';
+import {createUseContextAndProvider} from '../../core/contexts/createUseContextAndProvider';
 import {SnackbarHideProps, SnackbarShowProps} from '../components/overlay/snackbar/Snackbar';
 
 export type SnackbarShowContextProps = Omit<SnackbarShowProps, 'message'>;

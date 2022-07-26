@@ -6,7 +6,7 @@
  */
 import crashlytics from '@react-native-firebase/crashlytics';
 import axios from 'axios';
-import {refreshCsrfToken} from 'bases/backend';
+import {refreshCsrfToken} from 'bases/backend/refreshCsrfToken';
 import {postLogin} from 'features/backend/apis/account/account';
 import {AccountLoginResponse} from 'features/backend/apis/model';
 

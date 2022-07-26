@@ -1,4 +1,5 @@
-import {log, useIsMounted} from 'bases';
+import {useIsMounted} from 'bases/core/utils/useIsMounted';
+import {log} from 'bases/logging/utils';
 import {Asset} from 'expo-asset';
 import * as FileSystem from 'expo-file-system';
 import type {ThirdPartyDependency} from 'features/demo/acknowledgements/ThirdPartyDependencies';

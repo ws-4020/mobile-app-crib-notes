@@ -2,7 +2,7 @@ import React from 'react';
 import {GestureResponderEvent, StyleProp, StyleSheet, TextStyle, View} from 'react-native';
 import {Input, InputProps, Text} from 'react-native-elements';
 
-import {IconButton} from '../button';
+import {IconButton} from '../button/IconButton';
 
 export type TextInputProps = InputProps & {
   iconSize?: number;

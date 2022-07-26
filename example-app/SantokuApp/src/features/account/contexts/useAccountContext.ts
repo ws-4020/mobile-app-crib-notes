@@ -1,4 +1,4 @@
-import {createUseContextAndProvider} from 'bases/utilities';
+import {createUseContextAndProvider} from 'bases/core/contexts/createUseContextAndProvider';
 import {Account, TermsOfService, TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 
 export type Terms = {

@@ -2,7 +2,7 @@ import {m} from 'bases/message/utils/Message';
 import * as Yup from 'yup';
 import {AnyObject, Maybe, Message} from 'yup/lib/types';
 
-import {loginPasswordValidator} from './utils/loginPasswordValidator';
+import {loginPasswordValidator} from './loginPasswordValidator';
 
 declare module 'yup' {
   interface StringSchema<
@@ -31,4 +31,4 @@ export const enhanceValidator = () => {
 
 export const yup = Yup;
 
-export * from './utils/isValidForm';
+export * from './isValidForm';

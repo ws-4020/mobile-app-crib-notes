@@ -1,7 +1,7 @@
 import {isGetFcmTokenError} from 'bases/firebase/utils/getFcmToken';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
-import {Button} from 'bases/ui/components/button';
+import {Button} from 'bases/ui/components/button/Button';
 import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
 import React, {useCallback} from 'react';
 import {Alert, GestureResponderEvent, StyleSheet} from 'react-native';

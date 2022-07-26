@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createUseContextAndProvider} from '../../utilities';
+import {createUseContextAndProvider} from '../../core/contexts/createUseContextAndProvider';
 
 export type LoadingOverlayContextType = {
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;

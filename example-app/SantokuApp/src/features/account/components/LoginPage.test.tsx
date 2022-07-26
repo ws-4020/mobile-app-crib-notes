@@ -3,7 +3,7 @@ import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
 import {WithAppThemeMock} from 'bases/tests/WithAppThemeMock.test';
 import {WithSnackbarMock} from 'bases/tests/WithSnackbarMock.test';
-import {enhanceValidator} from 'bases/validator';
+import {enhanceValidator} from 'bases/validator/utils';
 import {useGetAccountsMe, useGetAccountsMeTerms, usePostAccountsMeTerms} from 'features/backend/apis/account/account';
 import {useGetTerms} from 'features/backend/apis/terms/terms';
 import {WithAccountContextMock} from 'features/tests/WithAccountContextMock.test';

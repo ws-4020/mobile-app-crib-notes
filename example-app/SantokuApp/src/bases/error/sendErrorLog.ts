@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {log} from 'bases';
+import {log} from 'bases/logging/utils';
 import {ErrorResponse} from 'features/backend/apis/model';
 
 export const sendErrorLog = (error: unknown) => {
