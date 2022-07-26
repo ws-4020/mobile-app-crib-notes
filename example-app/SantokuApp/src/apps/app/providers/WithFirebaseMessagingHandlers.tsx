@@ -5,8 +5,8 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import React, {useCallback, useEffect} from 'react';
 
-import {InitialDataDependingComponent} from '../initialize';
 import {AppInitialData} from '../initialize/types';
+import {InitialDataDependingComponent} from '../initialize/withInitialData';
 import {AuthenticatedStackNav} from '../navigators/AuthenticatedStackNav';
 import {HomeStackNav} from '../navigators/HomeStackNav';
 import {MainTabNav} from '../navigators/MainTabNav';
