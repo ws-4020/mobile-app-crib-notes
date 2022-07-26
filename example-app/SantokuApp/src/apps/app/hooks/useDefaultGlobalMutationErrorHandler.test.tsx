@@ -1,5 +1,5 @@
 import {renderHook} from '@testing-library/react-native';
-import {loadBundledMessagesAsync} from 'apps/app/initialize/helpers';
+import {loadBundledMessagesAsync} from 'apps/app/initialize/helpers/bundledMessage';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {AxiosError} from 'axios';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';

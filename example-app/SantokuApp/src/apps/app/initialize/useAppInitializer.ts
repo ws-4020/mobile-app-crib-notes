@@ -5,23 +5,18 @@ import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {enhanceValidator} from 'bases/validator/utils';
 import * as Application from 'expo-application';
 import {activateKeepAwake} from 'expo-keep-awake';
+import {isUnauthorizedError} from 'features/account/errors/UnauthorizedError';
+import {setRefreshSessionInterceptor} from 'features/account/utils/refreshSession';
 import {useCallback, useMemo, useState} from 'react';
 import {Platform} from 'react-native';
 
-import {isUnauthorizedError} from '../../../features/account/errors/UnauthorizedError';
-import {setRefreshSessionInterceptor} from '../../../features/account/utils/refreshSession';
-import {
-  AccountData,
-  checkAppUpdates,
-  hideSplashScreen,
-  initializeFirebaseCrashlyticsAsync,
-  isInitialDataError,
-  isUpdateRequiredError,
-  loadBundledMessagesAsync,
-  loadInitialAccountDataAsync,
-  UpdateRequiredError,
-} from './helpers';
 import {autoLogin} from './helpers/autoLogin';
+import {loadBundledMessagesAsync} from './helpers/bundledMessage';
+import {initializeFirebaseCrashlyticsAsync} from './helpers/firebase';
+import {AccountData, loadInitialAccountDataAsync} from './helpers/initialData';
+import {isInitialDataError} from './helpers/initialDataError';
+import {hideSplashScreen} from './helpers/splashScreen';
+import {checkAppUpdates, isUpdateRequiredError, UpdateRequiredError} from './helpers/updateRequired';
 import {AppInitialData} from './types';
 
 export interface AppInitializer {

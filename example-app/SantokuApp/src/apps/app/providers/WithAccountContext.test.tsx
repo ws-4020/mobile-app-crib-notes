@@ -1,9 +1,9 @@
 import {render, renderHook, screen} from '@testing-library/react-native';
+import {useAccountContext} from 'features/account/contexts/useAccountContext';
 import React from 'react';
 import {Text} from 'react-native';
 
-import {useAccountContext} from '../../../features/account/contexts/useAccountContext';
-import {AccountData} from '../initialize/helpers';
+import {AccountData} from '../initialize/helpers/initialData';
 import {WithAccountContext} from './WithAccountContext';
 
 const wrapper = (value: AccountData) => {
