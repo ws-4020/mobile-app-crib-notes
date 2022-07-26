@@ -66,21 +66,23 @@ module.exports = {
         {
           module: 'apps/**',
           allowReferenceFrom: ['src/apps/**'],
-          allowSameFolder: true,
         },
         {
           module: 'features/**',
-          allowReferenceFrom: ['src/apps/**'],
-          allowSameFolder: true,
+          allowReferenceFrom: ['src/apps/**', 'src/features/**'],
         },
         {
           module: 'bases/**',
-          allowReferenceFrom: ['src/apps/**', 'src/features/**'],
-          allowSameFolder: true,
+          allowReferenceFrom: ['src/apps/**', 'src/features/**', 'src/bases/**'],
         },
         {
           module: '@react-navigation/**',
-          allowReferenceFrom: ['src/apps/**', 'jest/types/global.d.ts', 'src/@types/**'],
+          allowReferenceFrom: [
+            'src/apps/**',
+            'jest/types/global.d.ts',
+            'jest/__mocks__/@react-navigation/**',
+            'src/@types/**',
+          ],
         },
       ],
     ],
