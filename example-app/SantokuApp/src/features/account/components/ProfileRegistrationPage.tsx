@@ -1,9 +1,8 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from 'apps/app/navigators/types';
 import {m} from 'bases/message/utils/Message';
 import {FilledButton} from 'bases/ui/components/button';
 import {TextInput} from 'bases/ui/components/input';
 import {Spacer} from 'bases/ui/components/spacer/Spacer';
+import {TermsOfServiceAgreementStatus} from 'features//backend/apis/model';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
@@ -11,11 +10,12 @@ import {useClearNicknameUseCase} from '../hooks/useClearNicknameUseCase';
 import {useProfileRegistrationForm} from '../hooks/useProfileRegistrationForm';
 import {useSignupUseCase} from '../hooks/useSignupUseCase';
 
-const ScreenName = 'ProfileRegistration';
-
-const Screen: React.FC<NativeStackScreenProps<RootStackParamList, typeof ScreenName>> = ({route}) => {
+export type ProfileRegistrationPageProps = {
+  termsAgreementStatus: TermsOfServiceAgreementStatus;
+};
+export const ProfileRegistrationPage: React.VFC<ProfileRegistrationPageProps> = ({termsAgreementStatus}) => {
   const {form} = useProfileRegistrationForm();
-  const {signup, isExecutingSignup} = useSignupUseCase(form, route.params);
+  const {signup, isExecutingSignup} = useSignupUseCase(form, termsAgreementStatus);
   const {clearNickname} = useClearNicknameUseCase(form);
 
   return (
@@ -42,12 +42,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
 });
-
-export const ProfileRegistrationScreen: NativeStackScreenConfig<RootStackParamList, typeof ScreenName> = {
-  component: Screen,
-  name: ScreenName,
-  options: {
-    title: m('プロフィール登録'),
-    animation: 'slide_from_bottom',
-  },
-};

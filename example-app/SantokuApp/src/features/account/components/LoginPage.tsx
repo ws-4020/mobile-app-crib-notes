@@ -1,14 +1,11 @@
-import {RootStackParamList} from 'apps/app/navigators/types';
 import {m} from 'bases/message/utils/Message';
 import {FilledButton, OutlinedButton} from 'bases/ui/components/button';
 import {PasswordTextInput, TextInput} from 'bases/ui/components/input';
 import {Spacer} from 'bases/ui/components/spacer/Spacer';
-import {useFormik} from 'formik';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {loginFormInitialValues} from '../constants/loginFormInitialValues';
-import {loginFormValidationSchema} from '../constants/loginFormValidationSchema';
+import {TermsOfServiceAgreementStatus} from '../../backend/apis/model';
 import {useClearAccountIdUseCase} from '../hooks/useClearAccountIdUseCase';
 import {useClearPasswordUseCase} from '../hooks/useClearPasswordUseCase';
 import {useCreateAccountUseCase} from '../hooks/useCreateAccountUseCase';
@@ -16,12 +13,16 @@ import {useLoginForm} from '../hooks/useLoginForm';
 import {useLoginUseCase} from '../hooks/useLoginUseCase';
 import {useTerms} from '../hooks/useTerms';
 
-const ScreenName = 'Login';
+export type LoginPageProps = {
+  navigation: {
+    createAccount: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => void;
+  };
+};
 
-const Screen: React.FC = () => {
+export const LoginPage: React.VFC<LoginPageProps> = ({navigation}) => {
   const {form} = useLoginForm();
   const {isFetchedTerms} = useTerms();
-  const {createAccount} = useCreateAccountUseCase();
+  const {createAccount} = useCreateAccountUseCase(navigation);
   const {login, isExecutingLogin} = useLoginUseCase(form);
   const {clearAccountId} = useClearAccountIdUseCase(form);
   const {clearPassword} = useClearPasswordUseCase(form);
@@ -62,12 +63,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
 });
-
-export const LoginScreen: NativeStackScreenConfig<RootStackParamList, typeof ScreenName> = {
-  component: Screen,
-  name: ScreenName,
-  options: {
-    title: m('ログイン'),
-    animation: 'fade',
-  },
-};

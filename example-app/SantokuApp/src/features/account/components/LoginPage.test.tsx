@@ -1,5 +1,3 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {ParamListBase} from '@react-navigation/routers';
 import {render, screen} from '@testing-library/react-native';
 import {WithAppTheme} from 'apps/app/providers/AppThemeContext';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
@@ -8,11 +6,15 @@ import {WithTermsAgreementOverlay} from 'apps/app/providers/WithTermsAgreementOv
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
 import {enhanceValidator} from 'bases/validator';
+import {useGetAccountsMe, useGetAccountsMeTerms, usePostAccountsMeTerms} from 'features/backend/apis/account/account';
+import {useGetTerms} from 'features/backend/apis/terms/terms';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
-import {useGetTerms} from 'service';
 
+import {LoginPageProps} from './LoginPage';
+
+jest.mock('service/backend/accountService');
 jest.mock('service/backend/termService');
 
 const Wrapper: React.FC = ({children}) => {
@@ -38,30 +40,20 @@ beforeAll(async () => {
   enhanceValidator();
 });
 
-describe('ProfileRegistrationScreen', () => {
+describe('LoginScreen', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
+    (useGetAccountsMe as jest.Mock).mockReturnValue({refetch: () => {}});
+    (useGetAccountsMeTerms as jest.Mock).mockReturnValue({refetch: () => {}});
     (useGetTerms as jest.Mock).mockReturnValue({refetch: () => {}});
+    (usePostAccountsMeTerms as jest.Mock).mockReturnValue({mutateAsync: () => {}});
     // importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const Screen = require('./ProfileRegistrationScreen').ProfileRegistrationScreen.component as React.FC<
-      NativeStackScreenProps<ParamListBase>
-    >;
-    render(
-      <Screen
-        navigation={__mocks.navigation}
-        route={{
-          params: {hasAgreedValidTermsOfService: true, agreedTermsOfServiceVersion: '1.0.0'},
-          key: '',
-          path: '',
-          name: 'ProfileRegistration',
-        }}
-      />,
-      {
-        wrapper: Wrapper,
-      },
-    );
-    expect(screen.queryByTestId('ProfileRegistration')).not.toBeNull();
+    const Screen = require('./LoginPage').LoginPage.component as React.FC<LoginPageProps>;
+    render(<Screen navigation={{createAccount: jest.fn}} />, {
+      wrapper: Wrapper,
+    });
+    expect(screen.queryByTestId('Login')).not.toBeNull();
     expect(screen).toMatchSnapshot();
   });
 });

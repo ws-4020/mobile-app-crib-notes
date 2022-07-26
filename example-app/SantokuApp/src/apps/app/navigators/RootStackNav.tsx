@@ -1,11 +1,12 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator, NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {LoginScreen, ProfileRegistrationScreen} from 'features';
 import {AccountContext, useAccountContext} from 'features/account/contexts/useAccountContext';
 import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
 
 import {AppInitialData} from '../initialize/types';
+import {LoginScreen} from '../screens/account/LoginScreen';
+import {ProfileRegistrationScreen} from '../screens/account/ProfileRegistrationScreen';
 import {AuthenticatedStackNav, useAuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
 import {RootStackParamList} from './types';
