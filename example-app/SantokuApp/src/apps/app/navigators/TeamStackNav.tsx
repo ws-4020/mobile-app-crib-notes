@@ -1,8 +1,8 @@
 import {MaterialIcons} from '@expo/vector-icons';
 import {createStackNavigator} from '@react-navigation/stack';
-import {TeamDetailScreen} from 'features/team/components/TeamDetailScreen';
 import React from 'react';
 
+import {TeamDetailScreen} from '../screens/team/TeamDetailScreen';
 import {MainTabParamList, TeamStackParamList} from './types';
 import {useLogoutButton} from './useLogoutButton';
 
