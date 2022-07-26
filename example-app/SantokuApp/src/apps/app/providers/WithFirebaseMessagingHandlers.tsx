@@ -3,7 +3,7 @@ import type {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
-import {HomeScreen} from 'features/home/components/HomeScreen';
+import {HomePage} from 'features/home/components/HomeScreen';
 import React, {useCallback, useEffect} from 'react';
 
 import {InitialDataDependingComponent} from '../initialize';

@@ -1,6 +1,6 @@
 import {Ionicons} from '@expo/vector-icons';
 import {createStackNavigator} from '@react-navigation/stack';
-import {HomeScreen} from 'features/home/components/HomeScreen';
+import {HomePage} from 'features/home/components/HomeScreen';
 import React from 'react';
 
 import {HomeStackParamList, MainTabParamList} from './types';

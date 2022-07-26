@@ -7,7 +7,7 @@ import {WithTermsAgreementOverlayMock} from 'features/tests/WithTermsAgreementOv
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {HomeScreen} from './HomeScreen';
+import {HomePage} from './HomePage';
 
 const Wrapper: React.FC = ({children}) => {
   const queryClient = new QueryClient();
@@ -34,7 +34,7 @@ const Wrapper: React.FC = ({children}) => {
 
 describe('Home', () => {
   beforeEach(() => {
-    const Screen = HomeScreen.component as React.FC;
+    const Screen = HomePage.component as React.FC;
     render(<Screen />, {wrapper: Wrapper});
   });
 

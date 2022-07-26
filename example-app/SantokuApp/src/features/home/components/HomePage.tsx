@@ -1,15 +1,10 @@
-import {useFocusEffect} from '@react-navigation/core';
-import {HomeStackParamList} from 'apps/app/navigators/types';
-import {m} from 'bases/message/utils/Message';
-import {useShowTermsAgreementOverlayUseCase} from 'features/terms/hooks/useShowTermsAgreementOverlayUseCase';
 import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
 import {useRequestPermissionAndRegisterToken} from '../hooks/useRequestPermissionAndRegisterToken';
 
-const ScreenName = 'Home';
-const Screen: React.FC = () => {
+export const HomePage: React.VFC = () => {
   // Push通知の許可ダイアログ表示とFCM登録トークンの登録・更新
   const {requestPermissionAndRegisterToken} = useRequestPermissionAndRegisterToken();
   useEffect(() => {
@@ -17,12 +12,9 @@ const Screen: React.FC = () => {
       // requestPermissionAndRegisterTokenでエラーハンドリングを実施しているので、ここでは特に何もしない
     });
   }, [requestPermissionAndRegisterToken]);
-  // 利用規約に未同意の場合は、利用規約を表示します。
-  const showTermsAgreementOverlay = useShowTermsAgreementOverlayUseCase();
-  useFocusEffect(showTermsAgreementOverlay);
 
   return (
-    <View style={styles.container} testID="HomeScreen">
+    <View style={styles.container} testID="HomePage">
       <Text h2>開発中</Text>
     </View>
   );
@@ -35,12 +27,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-// Navigatorに登録する情報
-export const HomeScreen: StackScreenConfig<HomeStackParamList, typeof ScreenName> = {
-  component: Screen,
-  name: ScreenName,
-  options: () => ({
-    title: m('ホーム'),
-  }),
-};
