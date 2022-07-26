@@ -3,11 +3,11 @@ import type {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
+import {HomeScreen} from 'features/home/components/HomeScreen';
 import React, {useCallback, useEffect} from 'react';
 
-import {HomeScreen} from '../../../features';
+import {InitialDataDependingComponent} from '../initialize';
 import {AppInitialData} from '../initialize/types';
-import {InitialDataDependingComponent} from '../initialize/withInitialData';
 import {AuthenticatedStackNav} from '../navigators/AuthenticatedStackNav';
 import {HomeStackNav} from '../navigators/HomeStackNav';
 import {MainTabNav} from '../navigators/MainTabNav';

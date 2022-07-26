@@ -1,5 +1,4 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React from 'react';
 import {
   DemoScreen,
   AppStateScreen,
@@ -39,6 +38,7 @@ import {
   AcknowledgementsScreen,
   LicenseScreen,
 } from 'features';
+import React from 'react';
 
 import {DemoStackParamList, RootStackParamList} from './types';
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';

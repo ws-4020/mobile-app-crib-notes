@@ -1,14 +1,20 @@
 import {act} from '@testing-library/react-hooks';
 import {renderHook} from '@testing-library/react-native';
+import * as csrfToken from 'bases/backend/refreshCsrfToken';
+import * as accountApi from 'features/backend/apis/account/account';
+import {AccountLoginResponseStatus} from 'features/backend/apis/model';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {AuthenticationService} from '../../bases/authentication';
-import * as csrfToken from '../../bases/backend/refreshCsrfToken';
-import * as accountApi from '../backend/apis/account/account';
-import {AccountLoginResponseStatus} from '../backend/apis/model';
-import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthenticationService';
+import {ActiveAccountIdNotFoundError} from './errors/ActiveAccountIdNotFoundError';
+import {PasswordNotFoundError} from './errors/PasswordNotFoundError';
+import {useAutoLoginService} from './hooks/useAutoLoginService';
+import {useChangeAccountService} from './hooks/useChangeAccountService';
+import {useLogoutService} from './hooks/useLogoutService';
+import {useRefreshService} from './hooks/useRefreshService';
+import {useSignupService} from './hooks/useSignupService';
 import {SecureStorageAdapter} from './utils/SecureStorageAdapter';
+import {canAutoLogin} from './utils/canAutoLogin';
 
 const wrapper: React.ComponentType<React.ProviderProps<void>> = ({children}) => {
   const queryClient = new QueryClient();
@@ -30,7 +36,7 @@ describe('AuthenticationService signup', () => {
       config: {},
     });
     const spySecureStorageAdapterSavePassword = jest.spyOn(SecureStorageAdapter, 'savePassword');
-    const {result} = renderHook(() => AuthenticationService.useSignup(), {wrapper});
+    const {result} = renderHook(() => useSignupService(), {wrapper});
     await act(async () => {
       const res = await result.current.mutateAsync({nickname: 'testNickName', password: 'password123'});
       expect(res).toEqual({
@@ -61,7 +67,7 @@ describe('AuthenticationService changeAccount', () => {
 
   test('セキュアストレージからパスワードを取得してログインAPIを呼び出しているかの検証', async () => {
     const spySecureStorageAdapter = jest.spyOn(SecureStorageAdapter, 'loadPassword').mockResolvedValue('password123');
-    const {result} = renderHook(() => AuthenticationService.useChangeAccount(), {wrapper});
+    const {result} = renderHook(() => useChangeAccountService(), {wrapper});
     await act(async () => {
       const res = await result.current.mutateAsync({accountId: '123456789'});
       expect(res).toEqual({status: AccountLoginResponseStatus.COMPLETE});
@@ -73,7 +79,7 @@ describe('AuthenticationService changeAccount', () => {
 
   test('セキュアストレージからパスワードを取得できなかった場合の検証', async () => {
     jest.spyOn(SecureStorageAdapter, 'loadPassword').mockResolvedValue(null);
-    const {result} = renderHook(() => AuthenticationService.useChangeAccount(), {wrapper});
+    const {result} = renderHook(() => useChangeAccountService(), {wrapper});
     await act(async () => {
       const changeAccount = result.current.mutateAsync({accountId: '123456789'});
       await expect(changeAccount).rejects.toThrowError(PasswordNotFoundError);
@@ -103,7 +109,7 @@ describe('AuthenticationService autoLogin', () => {
   test('セキュアストレージからクレデンシャルを取得してログインAPIを呼び出しているかの検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue('password123');
-    const {result} = renderHook(() => AuthenticationService.useAutoLogin(), {wrapper});
+    const {result} = renderHook(() => useAutoLoginService(), {wrapper});
     await act(async () => {
       const res = await result.current.mutateAsync();
       expect(res).toEqual({status: AccountLoginResponseStatus.COMPLETE});
@@ -117,7 +123,7 @@ describe('AuthenticationService autoLogin', () => {
 
   test('セキュアストレージからアクティブなアカウントIDを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
-    const {result} = renderHook(() => AuthenticationService.useAutoLogin(), {wrapper});
+    const {result} = renderHook(() => useAutoLoginService(), {wrapper});
     await act(async () => {
       const autoLogin = result.current.mutateAsync();
       await expect(autoLogin).rejects.toThrowError(ActiveAccountIdNotFoundError);
@@ -127,7 +133,7 @@ describe('AuthenticationService autoLogin', () => {
   test('セキュアストレージかパスワードを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue(null);
-    const {result} = renderHook(() => AuthenticationService.useAutoLogin(), {wrapper});
+    const {result} = renderHook(() => useAutoLoginService(), {wrapper});
     await act(async () => {
       const autoLogin = result.current.mutateAsync();
       await expect(autoLogin).rejects.toThrowError(PasswordNotFoundError);
@@ -148,7 +154,7 @@ describe('AuthenticationService canAutoLogin', () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue('password123');
     await act(async () => {
-      const res = await AuthenticationService.canAutoLogin();
+      const res = await canAutoLogin();
       expect(res).toBeTruthy();
       expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
       expect(spySecureStorageAdapterLoadPassword).toHaveBeenCalledWith('123456789');
@@ -159,7 +165,7 @@ describe('AuthenticationService canAutoLogin', () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
     spySecureStorageAdapterLoadPassword.mockResolvedValue(null);
     await act(async () => {
-      const res = await AuthenticationService.canAutoLogin();
+      const res = await canAutoLogin();
       expect(res).toBeFalsy();
       expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
       expect(spySecureStorageAdapterLoadPassword).not.toHaveBeenCalled();
@@ -170,7 +176,7 @@ describe('AuthenticationService canAutoLogin', () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue(null);
     await act(async () => {
-      const res = await AuthenticationService.canAutoLogin();
+      const res = await canAutoLogin();
       expect(res).toBeFalsy();
       expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
       expect(spySecureStorageAdapterLoadPassword).toHaveBeenCalledWith('123456789');
@@ -200,7 +206,7 @@ describe('AuthenticationService refresh', () => {
   test('セキュアストレージからクレデンシャルを取得してログインAPIを呼び出しているかの検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue('password123');
-    const {result} = renderHook(() => AuthenticationService.useRefresh(), {wrapper});
+    const {result} = renderHook(() => useRefreshService(), {wrapper});
     await act(async () => {
       const res = await result.current.mutateAsync();
       expect(res).toEqual({status: AccountLoginResponseStatus.COMPLETE});
@@ -213,7 +219,7 @@ describe('AuthenticationService refresh', () => {
 
   test('セキュアストレージからアクティブなアカウントIDを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
-    const {result} = renderHook(() => AuthenticationService.useRefresh(), {wrapper});
+    const {result} = renderHook(() => useRefreshService(), {wrapper});
     await act(async () => {
       const refresh = result.current.mutateAsync();
       await expect(refresh).rejects.toThrowError(ActiveAccountIdNotFoundError);
@@ -223,7 +229,7 @@ describe('AuthenticationService refresh', () => {
   test('セキュアストレージかパスワードを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue(null);
-    const {result} = renderHook(() => AuthenticationService.useRefresh(), {wrapper});
+    const {result} = renderHook(() => useRefreshService(), {wrapper});
     await act(async () => {
       const refresh = result.current.mutateAsync();
       await expect(refresh).rejects.toThrowError(PasswordNotFoundError);
@@ -254,7 +260,7 @@ describe('AuthenticationService logout', () => {
   });
   test('ログアウトAPIを呼び出して、セキュアストレージからアクティブアカウントを削除しているかの検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
-    const {result} = renderHook(() => AuthenticationService.useLogout(), {wrapper});
+    const {result} = renderHook(() => useLogoutService(), {wrapper});
     await act(async () => {
       await result.current.mutateAsync();
       expect(spyAccountsMeDeviceTokenApi).toHaveBeenCalled();
@@ -267,7 +273,7 @@ describe('AuthenticationService logout', () => {
   });
   test('ログインしたアカウントIDがnullの場合はセキュアストレージの削除が呼ばれないことを確認', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
-    const {result} = renderHook(() => AuthenticationService.useLogout(), {wrapper});
+    const {result} = renderHook(() => useLogoutService(), {wrapper});
     await act(async () => {
       await result.current.mutateAsync();
       expect(spyAccountsMeDeviceTokenApi).toHaveBeenCalled();

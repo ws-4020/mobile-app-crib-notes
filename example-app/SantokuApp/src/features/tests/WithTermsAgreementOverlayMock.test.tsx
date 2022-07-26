@@ -9,7 +9,7 @@ import React, {useCallback, useMemo, useState} from 'react';
 /**
  * 利用規約をOverlay表示するコンポーネント。
  */
-const WithTermsAgreementOverlay: React.FC = ({children}) => {
+const WithTermsAgreementOverlayMock: React.FC = ({children}) => {
   const [state, setState] = useState<
     Omit<TermsAgreementOverlayProps, 'termsOfService'> & Partial<Pick<TermsAgreementOverlayProps, 'termsOfService'>>
   >({
@@ -46,4 +46,4 @@ const WithTermsAgreementOverlay: React.FC = ({children}) => {
   );
 };
 
-export {WithTermsAgreementOverlay};
+export {WithTermsAgreementOverlayMock};

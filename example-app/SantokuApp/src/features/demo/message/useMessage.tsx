@@ -1,4 +1,4 @@
-import {m} from 'bases';
+import {m} from 'bases/message/utils/Message';
 
 const infoKeyExtractor = (_: unknown, index: number) => index.toString();
 

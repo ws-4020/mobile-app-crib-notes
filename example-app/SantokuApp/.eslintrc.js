@@ -58,7 +58,11 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ['src/generated/**/*.ts'],
+  ignorePatterns: [
+    'src/features/backend/apis/**/*.ts',
+    'src/features/sandbox/apis/**/*.ts',
+    'src/features/demo/acknowledgements/ThirdPartyDependencies.ts',
+  ],
   rules: {
     'strict-dependencies/strict-dependencies': [
       'error',

@@ -18,6 +18,8 @@ import {
   UseInfiniteQueryResult,
   QueryKey,
 } from 'react-query';
+
+import {sandboxCustomInstance, ErrorType} from '../../backend/utils/customInstance';
 import type {
   ListTodoResponse,
   BadRequestResponse,
@@ -28,7 +30,6 @@ import type {
   ListTodoByCursorParams,
   NotFoundResponse,
 } from './model';
-import {sandboxCustomInstance, ErrorType} from '../../../bases/backend/customInstance';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 

@@ -1,6 +1,6 @@
 import {createUseContextAndProvider} from 'bases/utilities';
 
-import {TermsAgreementOverlayShowProps} from '../../../apps/app/providers/WithTermsAgreementOverlay';
+import {TermsAgreementOverlayShowProps} from '../components/TermsAgreementOverlay';
 
 export type TermsAgreementOverlayContextType = {
   show: (props: TermsAgreementOverlayShowProps) => void;

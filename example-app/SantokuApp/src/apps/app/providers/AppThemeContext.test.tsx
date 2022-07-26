@@ -1,9 +1,11 @@
 import {render, renderHook, screen} from '@testing-library/react-native';
+import {AppThemeContextProvider, useAppTheme} from 'bases/ui/contexts/useAppTheme';
+import {AppTheme} from 'bases/ui/types/AppTheme';
 import React from 'react';
 import {Text} from 'react-native';
 
-import {AppTheme, darkModeAppTheme, lightModeAppTheme} from '../constants/AppTheme';
-import {AppThemeContextProvider, useAppTheme, WithAppTheme} from './AppThemeContext';
+import {darkModeAppTheme, lightModeAppTheme} from '../constants/AppTheme';
+import {WithAppTheme} from './AppThemeContext';
 
 const wrapper = (value: AppTheme) => {
   return ({children}: {children: React.ReactNode}) => {

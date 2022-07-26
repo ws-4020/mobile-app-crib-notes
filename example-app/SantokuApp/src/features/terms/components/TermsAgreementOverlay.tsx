@@ -1,9 +1,10 @@
-import {TermsAgreementOverlayShowProps} from 'apps/app/providers/WithTermsAgreementOverlay';
 import {m} from 'bases/message/utils/Message';
 import {Button} from 'bases/ui/components/button/Button';
 import {OverlayBackdrop} from 'bases/ui/components/overlay/OverlayBackdrop';
 import {OverlayContainer} from 'bases/ui/components/overlay/OverlayContainer';
 import {WebView} from 'bases/ui/components/webview/WebView';
+import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
+import {TermsOfService} from 'features/backend/apis/model/termsOfService';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
@@ -16,6 +17,22 @@ import {useOnScrollEndOnceUseCase} from '../hooks/useOnScrollEndOnceUseCase';
 import {useOnWebViewErrorUseCase} from '../hooks/useOnWebViewErrorUseCase';
 import {useResetWebViewErrorUseCase} from '../hooks/useResetWebViewErrorUseCase';
 import {useWebViewSource} from '../hooks/useWebViewSource';
+
+export type TermsAgreementOverlayShowProps = {
+  termsOfService: TermsOfService;
+  /**
+   * Overlayの背景をタップした時に閉じるかどうかの設定。
+   * デフォルトはtrue（閉じる）です。
+   */
+  dismissible?: boolean;
+  /**
+   * iOSの場合、アニメーションが終わった後に呼び出されます。
+   * Androidの場合、アニメーションが始まった時に呼び出されます。
+   */
+  enteringCallback?: (finished: boolean) => unknown;
+  exitingCallback?: (finished: boolean) => unknown;
+  exitingCallbackOnAgreed?: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => unknown;
+};
 
 export type TermsAgreementOverlayProps = TermsAgreementOverlayShowProps & {
   visible: boolean;

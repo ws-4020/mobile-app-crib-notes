@@ -1,13 +1,12 @@
 import '@testing-library/jest-native/extend-expect';
-import {NavigationContainer} from '@react-navigation/native';
 import {render, screen} from '@testing-library/react-native';
-import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
-import {WithTermsAgreementOverlay} from 'apps/app/providers/WithTermsAgreementOverlay';
 import {AppConfig} from 'bases/config';
+import {WithSnackbarMock} from 'bases/tests/WithSnackbarMock.test';
+import {WithAccountContextMock} from 'features/tests/WithAccountContextMock.test';
+import {WithTermsAgreementOverlayMock} from 'features/tests/WithTermsAgreementOverlayMock.test';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {WithSnackbar} from '../../../apps/app/providers/WithSnackbar';
 import {HomeScreen} from './HomeScreen';
 
 const Wrapper: React.FC = ({children}) => {
@@ -23,15 +22,13 @@ const Wrapper: React.FC = ({children}) => {
     },
   };
   return (
-    <WithSnackbar>
+    <WithSnackbarMock>
       <QueryClientProvider client={queryClient}>
-        <NavigationContainer>
-          <WithAccountContext accountData={accountData}>
-            <WithTermsAgreementOverlay>{children}</WithTermsAgreementOverlay>
-          </WithAccountContext>
-        </NavigationContainer>
+        <WithAccountContextMock accountData={accountData}>
+          <WithTermsAgreementOverlayMock>{children}</WithTermsAgreementOverlayMock>
+        </WithAccountContextMock>
       </QueryClientProvider>
-    </WithSnackbar>
+    </WithSnackbarMock>
   );
 };
 

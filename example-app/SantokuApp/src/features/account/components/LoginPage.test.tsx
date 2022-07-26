@@ -1,13 +1,13 @@
 import {render, screen} from '@testing-library/react-native';
-import {WithAppTheme} from 'apps/app/providers/AppThemeContext';
-import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
-import {WithSnackbar} from 'apps/app/providers/WithSnackbar';
-import {WithTermsAgreementOverlay} from 'apps/app/providers/WithTermsAgreementOverlay';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
+import {WithAppThemeMock} from 'bases/tests/WithAppThemeMock.test';
+import {WithSnackbarMock} from 'bases/tests/WithSnackbarMock.test';
 import {enhanceValidator} from 'bases/validator';
 import {useGetAccountsMe, useGetAccountsMeTerms, usePostAccountsMeTerms} from 'features/backend/apis/account/account';
 import {useGetTerms} from 'features/backend/apis/terms/terms';
+import {WithAccountContextMock} from 'features/tests/WithAccountContextMock.test';
+import {WithTermsAgreementOverlayMock} from 'features/tests/WithTermsAgreementOverlayMock.test';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
@@ -22,15 +22,15 @@ const Wrapper: React.FC = ({children}) => {
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>
-      <WithAppTheme>
-        <WithSnackbar>
+      <WithAppThemeMock>
+        <WithSnackbarMock>
           <QueryClientProvider client={queryClient}>
-            <WithAccountContext accountData={accountData}>
-              <WithTermsAgreementOverlay>{children}</WithTermsAgreementOverlay>
-            </WithAccountContext>
+            <WithAccountContextMock accountData={accountData}>
+              <WithTermsAgreementOverlayMock>{children}</WithTermsAgreementOverlayMock>
+            </WithAccountContextMock>
           </QueryClientProvider>
-        </WithSnackbar>
-      </WithAppTheme>
+        </WithSnackbarMock>
+      </WithAppThemeMock>
     </SafeAreaProvider>
   );
 };

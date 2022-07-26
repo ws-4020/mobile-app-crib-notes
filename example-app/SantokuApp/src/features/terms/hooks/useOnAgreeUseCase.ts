@@ -1,5 +1,5 @@
-import {useAccountContextOperation} from 'account/contexts/useAccountContextOperation';
 import {useAccountContext} from 'features/account/contexts/useAccountContext';
+import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
 import {usePostAccountsMeTermsService} from 'features/account/hooks/usePostAccountsMeTermsService';
 import {TermsOfService} from 'features/backend/apis/model';
 import {useCallback} from 'react';

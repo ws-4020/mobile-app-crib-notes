@@ -1,7 +1,7 @@
 import {
   BACKEND_AXIOS_INSTANCE,
   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION,
-} from '../../../bases/backend/customInstance';
+} from '../../backend/utils/customInstance';
 import {refreshSession} from './refreshSession';
 
 describe('refreshSession', () => {

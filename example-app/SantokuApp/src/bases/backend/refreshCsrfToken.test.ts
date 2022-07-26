@@ -1,4 +1,7 @@
-import {BACKEND_AXIOS_INSTANCE, BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from './customInstance';
+import {
+  BACKEND_AXIOS_INSTANCE,
+  BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION,
+} from '../../features/backend/utils/customInstance';
 import {refreshCsrfToken} from './refreshCsrfToken';
 
 describe('refreshCsrfToken', () => {
