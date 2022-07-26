@@ -7,7 +7,7 @@ import {AppConfig} from 'bases/config';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {WithSnackbar} from '../../apps/app/providers/WithSnackbar';
+import {WithSnackbar} from '../../../apps/app/providers/WithSnackbar';
 import {HomeScreen} from './HomeScreen';
 
 const Wrapper: React.FC = ({children}) => {
