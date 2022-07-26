@@ -3,12 +3,12 @@ import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {AppConfig} from 'bases/core/config/AppConfig';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
+import {useTermsAgreementOverlay} from 'features/terms/contexts/useTermsAgreementOverlay';
 import React, {useEffect} from 'react';
 import {Text} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {useTermsAgreementOverlay} from '../../../features/terms/contexts/useTermsAgreementOverlay';
 import {WithSnackbar} from './WithSnackbar';
 import {WithTermsAgreementOverlay} from './WithTermsAgreementOverlay';
 

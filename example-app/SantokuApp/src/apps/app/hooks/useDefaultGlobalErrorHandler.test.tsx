@@ -5,10 +5,10 @@ import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {AxiosError} from 'axios';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
+import * as clientLogout from 'features/account/utils/clientLogout';
 import React from 'react';
 import {Alert} from 'react-native';
 
-import * as clientLogout from '../../../features/account/utils/clientLogout';
 import {WithSnackbar} from '../providers/WithSnackbar';
 import {useDefaultGlobalErrorHandler} from './useDefaultGlobalErrorHandler';
 

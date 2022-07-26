@@ -3,10 +3,9 @@ import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
 import {Button} from 'bases/ui/components/button/Button';
 import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
+import {useLogoutService} from 'features/account/hooks/useLogoutService';
 import React, {useCallback} from 'react';
 import {Alert, GestureResponderEvent, StyleSheet} from 'react-native';
-
-import {useLogoutService} from '../../../features/account/hooks/useLogoutService';
 
 type HeaderRightLogoutButtonProps = {
   onPress: (event: GestureResponderEvent) => void;

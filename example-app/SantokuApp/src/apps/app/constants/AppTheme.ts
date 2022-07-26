@@ -1,4 +1,4 @@
-import {AppTheme} from '../../../bases/ui/types/AppTheme';
+import {AppTheme} from 'bases/ui/types/AppTheme';
 
 export const lightModeAppTheme: AppTheme = {
   name: 'lightTheme',

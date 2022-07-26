@@ -1,4 +1,4 @@
-import {TermsOfServiceAgreementStatus} from '../../backend/apis/model';
+import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 
 export type TermsOfServiceAgreementStatusWithCreatedAt = TermsOfServiceAgreementStatus & {
   createdAt: string;

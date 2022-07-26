@@ -1,8 +1,8 @@
 import '@testing-library/jest-native/extend-expect';
 import {render, screen, waitFor} from '@testing-library/react-native';
+import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from 'features/backend/utils/customInstance';
 import React from 'react';
 
-import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from '../../features/backend/utils/customInstance';
 import {App} from './App';
 
 jest.mock('react-native/Libraries/Utilities/DevSettings.js', () => {

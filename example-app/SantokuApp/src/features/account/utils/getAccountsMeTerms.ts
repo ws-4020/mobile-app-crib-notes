@@ -3,8 +3,8 @@
 //       ただし、利用規約に同意後3日経過した場合は未同意状態とする
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AxiosResponse} from 'axios';
+import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 
-import {TermsOfServiceAgreementStatus} from '../../backend/apis/model';
 import {TermsOfServiceAgreementStatusWithCreatedAt} from '../types/TermsOfServiceAgreementStatusWithCreatedAt';
 
 const sleep = () => new Promise(resolve => setTimeout(resolve, 100));

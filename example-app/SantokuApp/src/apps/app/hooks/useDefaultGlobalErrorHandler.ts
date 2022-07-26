@@ -5,11 +5,10 @@ import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
+import {clientLogout} from 'features/account/utils/clientLogout';
 import {RequestTimeoutError} from 'features/backend/error/RequestTimeoutError';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
-
-import {clientLogout} from '../../../features/account/utils/clientLogout';
 
 const outDebugLog = (error: unknown) => {
   try {

@@ -1,8 +1,7 @@
 import {AppThemeContextProvider} from 'bases/ui/contexts/useAppTheme';
+import {AppTheme} from 'bases/ui/types/AppTheme';
 import React from 'react';
 import {ThemeProvider} from 'react-native-elements';
-
-import {AppTheme} from '../ui/types/AppTheme';
 
 const appTheme: AppTheme = {
   name: 'lightTheme',

@@ -4,10 +4,10 @@ import {OutlinedButton} from 'bases/ui/components/button/OutlinedButton';
 import {PasswordTextInput} from 'bases/ui/components/input/PasswordTextInput';
 import {TextInput} from 'bases/ui/components/input/TextInput';
 import {Spacer} from 'bases/ui/components/spacer/Spacer';
+import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {TermsOfServiceAgreementStatus} from '../../backend/apis/model';
 import {useClearAccountIdUseCase} from '../hooks/useClearAccountIdUseCase';
 import {useClearPasswordUseCase} from '../hooks/useClearPasswordUseCase';
 import {useCreateAccountUseCase} from '../hooks/useCreateAccountUseCase';
