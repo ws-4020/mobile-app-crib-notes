@@ -1,6 +1,6 @@
 import messaging from '@react-native-firebase/messaging';
 import axios, {AxiosError} from 'axios';
-import {AppConfig} from 'bases/config';
+import {AppConfig} from 'bases/core/config/AppConfig';
 import {ErrorResponse} from 'features/backend/apis/model';
 import {useCallback, useState} from 'react';
 import {Linking, Platform} from 'react-native';

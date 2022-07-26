@@ -1,4 +1,4 @@
-import {AppConfig} from 'bases/config';
+import {AppConfig} from 'bases/core/config/AppConfig';
 import {log} from 'bases/logging/utils';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';

@@ -1,6 +1,6 @@
 import '@testing-library/jest-native/extend-expect';
 import {render, screen} from '@testing-library/react-native';
-import {AppConfig} from 'bases/config';
+import {AppConfig} from 'bases/core/config/AppConfig';
 import {WithSnackbarMock} from 'bases/tests/WithSnackbarMock.test';
 import {WithAccountContextMock} from 'features/tests/WithAccountContextMock.test';
 import {WithTermsAgreementOverlayMock} from 'features/tests/WithTermsAgreementOverlayMock.test';

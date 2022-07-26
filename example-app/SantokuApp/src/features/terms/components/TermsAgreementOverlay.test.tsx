@@ -1,6 +1,6 @@
 import '@testing-library/jest-native/extend-expect';
 import {render, screen} from '@testing-library/react-native';
-import {AppConfig} from 'bases/config';
+import {AppConfig} from 'bases/core/config/AppConfig';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
 import {WithSnackbarMock} from 'bases/tests/WithSnackbarMock.test';

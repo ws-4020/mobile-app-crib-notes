@@ -1,4 +1,4 @@
-import {AppConfig} from 'bases';
+import {AppConfig} from 'bases/core/config/AppConfig';
 
 const info = [
   {

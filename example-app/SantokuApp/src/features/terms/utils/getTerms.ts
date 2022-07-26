@@ -1,5 +1,5 @@
 // TODO: APIが完成するまでの暫定処理
-import {AppConfig} from 'bases/config/AppConfig';
+import {AppConfig} from 'bases/core/config/AppConfig';
 
 const sleep = () => new Promise(resolve => setTimeout(resolve, 100));
 const axiosGetOkResponse = {status: 200, statusText: 'OK', config: {}, request: {}, headers: {}};

@@ -1,4 +1,4 @@
-import {AppConfig} from 'bases/config';
+import {AppConfig} from 'bases/core/config/AppConfig';
 import {ApplicationError} from 'bases/core/error/ApplicationError';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
