@@ -1,11 +1,11 @@
 import axios, {AxiosResponse} from 'axios';
-import {refreshCsrfToken} from 'bases/backend/refreshCsrfToken';
 import {ApplicationError} from 'bases/core/error/ApplicationError';
 import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {
   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION,
   setAxiosResponseInterceptor,
 } from 'features/backend/utils/customInstance';
+import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 

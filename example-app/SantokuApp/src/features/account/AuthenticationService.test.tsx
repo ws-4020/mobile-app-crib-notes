@@ -1,8 +1,8 @@
 import {act} from '@testing-library/react-hooks';
 import {renderHook} from '@testing-library/react-native';
-import * as csrfToken from 'bases/backend/refreshCsrfToken';
 import * as accountApi from 'features/backend/apis/account/account';
 import {AccountLoginResponseStatus} from 'features/backend/apis/model';
+import * as csrfToken from 'features/backend/utils/refreshCsrfToken';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
