@@ -34,7 +34,7 @@ const Wrapper: React.FC = ({children}) => {
 
 describe('Home', () => {
   beforeEach(() => {
-    const Screen = HomePage.component as React.FC;
+    const Screen = HomePage as React.FC;
     render(<Screen />, {wrapper: Wrapper});
   });
 
