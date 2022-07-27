@@ -1,4 +1,4 @@
-import {ErrorInUseEffectSyncProcessPage} from 'features/demo/components/ErrorInUseEffectSyncProcessPage';
+import {ErrorInUseEffectSyncProcessPage} from 'features/demo-error/components/ErrorInUseEffectSyncProcessPage';
 
 export const ErrorInUseEffectSyncProcessScreen = () => {
   return <ErrorInUseEffectSyncProcessPage />;

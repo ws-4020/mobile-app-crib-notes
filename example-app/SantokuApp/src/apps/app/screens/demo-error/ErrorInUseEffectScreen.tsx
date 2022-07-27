@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList} from 'apps/app/navigators/types';
-import {ErrorInUseEffectPage} from 'features/demo/components/ErrorInUseEffectPage';
+import {ErrorInUseEffectPage} from 'features/demo-error/components/ErrorInUseEffectPage';
 import React, {useCallback} from 'react';
 
 export const ErrorInUseEffectScreen: React.FC<NativeStackScreenProps<DemoStackParamList>> = ({navigation}) => {

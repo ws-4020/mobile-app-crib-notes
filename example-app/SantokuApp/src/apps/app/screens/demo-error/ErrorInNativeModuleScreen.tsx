@@ -1,4 +1,4 @@
-import {ErrorInNativeModulePage} from 'features/demo/components/ErrorInNativeModulePage';
+import {ErrorInNativeModulePage} from 'features/demo-error/components/ErrorInNativeModulePage';
 import React from 'react';
 
 export const ErrorInNativeModuleScreen = () => {
