@@ -1,5 +1,5 @@
 import {useIsMounted} from 'bases/core/utils/useIsMounted';
-import {useCallback, useEffect} from 'react';
+import {useCallback} from 'react';
 import {AppState, AppStateEvent, AppStateStatus, Platform} from 'react-native';
 
 import {useAppStateHistory} from './useAppStateHistory';
@@ -39,5 +39,5 @@ export const useRegisterEventListenersUseCase = () => {
     };
   }, [registerEventListener]);
 
-  useEffect(() => registerEventListeners(), [registerEventListeners]);
+  return {registerEventListeners};
 };

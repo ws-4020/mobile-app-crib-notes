@@ -1,4 +1,5 @@
-import React from 'react';
+import {useLoadingOverlay} from 'bases/ui/contexts/useLoadingOverlay';
+import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Input, Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -9,6 +10,7 @@ import {useAutoLoginUseCase} from '../hooks/useAutoLoginUseCase';
 import {useCanAutoLoginUseCase} from '../hooks/useCanAutoLoginUseCase';
 import {useChangeAccountUseCase} from '../hooks/useChangeAccountUseCase';
 import {useCopyAccountIdInputUseCase} from '../hooks/useCopyAccountIdInputUseCase';
+import {useIsLoading} from '../hooks/useIsLoading';
 import {useLogoutUseCase} from '../hooks/useLogoutUseCase';
 import {useSignupUseCase} from '../hooks/useSignupUseCase';
 
@@ -21,6 +23,12 @@ export const AuthenticationPage = () => {
   const {canAutoLogin} = useCanAutoLoginUseCase();
   const {autoLogin} = useAutoLoginUseCase();
   const {logout} = useLogoutUseCase();
+  const {isLoading} = useIsLoading();
+
+  const loadingOverlay = useLoadingOverlay();
+  useEffect(() => {
+    loadingOverlay.setVisible(isLoading);
+  }, [isLoading, loadingOverlay]);
 
   return (
     <View style={styles.container}>
