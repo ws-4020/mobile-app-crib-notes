@@ -3,6 +3,9 @@ import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
 
 import {checkAppUpdates} from './checkAppUpdates';
+import {getAppUpdates} from 'features/backend/apis/system/system';
+
+jest.mock('features/backend/apis/system/system');
 
 beforeAll(async () => {
   await loadMessages(new BundledMessagesLoader());
@@ -23,13 +26,10 @@ describe('checkAppUpdates', () => {
     );
   });
   it('getAppUpdatesがエラーをスローした場合はそのエラーがスローされること', async () => {
-    jest.mock('features/backend/apis/system/system', () => {
-      return {
-        getAppUpdates: () => {
-          throw new Error('dummy');
-        },
-      };
+    (getAppUpdates as jest.Mock).mockImplementation(() => {
+      throw new Error('dummy');
     });
+
     await expect(() => checkAppUpdates('android', '0.1.1')).rejects.toThrow(new Error('dummy'));
   });
 });
