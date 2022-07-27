@@ -1,4 +1,3 @@
-import {AccountDataDependingComponent} from 'apps/app/initialize/withAccountData';
 import {AccountContextProvider} from 'features/account/contexts/useAccountContext';
 import {
   AccountContextOperationProvider,
@@ -6,6 +5,8 @@ import {
   useAccountOperation,
 } from 'features/account/contexts/useAccountContextOperation';
 import React from 'react';
+
+import {AccountDataDependingComponent} from '../components/withAccountData';
 
 const WithAccountContext: AccountDataDependingComponent = ({accountData, children}) => {
   const account = accountData.account;

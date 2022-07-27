@@ -1,6 +1,4 @@
 import {act, renderHook} from '@testing-library/react-native';
-import {loadBundledMessagesAsync} from 'apps/app/initialize/helpers/bundledMessage';
-import {AccountData} from 'apps/app/initialize/helpers/initialData';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {AxiosError} from 'axios';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
@@ -10,6 +8,8 @@ import React from 'react';
 import {Alert} from 'react-native';
 
 import {WithSnackbar} from '../providers/WithSnackbar';
+import {AccountData} from '../types/AccountData';
+import {loadBundledMessagesAsync} from '../utils/loadBundledMessagesAsync';
 import {useDefaultGlobalErrorHandler} from './useDefaultGlobalErrorHandler';
 
 jest.mock('components/overlay/snackbar/WithSnackbar');

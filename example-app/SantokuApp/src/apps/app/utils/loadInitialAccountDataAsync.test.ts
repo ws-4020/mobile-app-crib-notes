@@ -2,8 +2,8 @@ import {getAccountsMeTerms} from 'features/account/utils/getAccountsMeTerms';
 import {getAccountsMe} from 'features/backend/apis/account/account';
 import {getTerms} from 'features/backend/apis/terms/terms';
 
-import {loadInitialAccountDataAsync} from './initialData';
-import {InitialDataError} from './initialDataError';
+import {InitialDataError} from '../errors/initialDataError';
+import {loadInitialAccountDataAsync} from './loadInitialAccountDataAsync';
 
 const axiosGetOkResponse = {status: 200, statusText: 'OK', config: {}, request: {}, headers: {}};
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {AccountData} from './helpers/initialData';
+import {AccountData} from '../types/AccountData';
 
 export interface AccountDataProps {
   accountData: AccountData;
