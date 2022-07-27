@@ -6,7 +6,7 @@ import React, {useMemo} from 'react';
 
 const ScreenName = 'TeamDetail';
 const Screen: React.FC = () => {
-  const onGoToDemoScreen = useNavigateToDemoStackScreen('Demo');
+  const onGoToDemoScreen = useNavigateToDemoStackScreen('DemoMenu');
   const navigation = useMemo(() => ({goToDemo: onGoToDemoScreen}), [onGoToDemoScreen]);
   return <TeamDetailPage navigation={navigation} />;
 };

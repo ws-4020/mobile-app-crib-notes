@@ -2,10 +2,7 @@ import {useLoadingOverlay} from 'bases/ui/contexts/useLoadingOverlay';
 import {usePostTodo} from 'features/sandbox/sandboxService';
 import {useCallback, useState} from 'react';
 
-import {CreateTodoDemoScreenProps} from './CreateTodoDemoScreen';
-import {EditTodoDemoScreen} from './EditTodoDemoScreen';
-
-const useCreateTodoDemo = ({navigation, route}: CreateTodoDemoScreenProps) => {
+const useCreateTodoDemo = (replaceToEditTodoDemo: (todoId: number) => void) => {
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
   const loadingOverlay = useLoadingOverlay();
@@ -26,13 +23,13 @@ const useCreateTodoDemo = ({navigation, route}: CreateTodoDemoScreenProps) => {
         .mutateAsync({data: {title, description}})
         .then(data => {
           const todo = data.data;
-          navigation.replace(EditTodoDemoScreen.name, {todoId: todo.id});
+          replaceToEditTodoDemo(todo.id);
         })
         .finally(() => {
           loadingOverlay.setVisible(false);
         });
     }
-  }, [title, description, loadingOverlay, postTodo, navigation]);
+  }, [title, description, loadingOverlay, postTodo, replaceToEditTodoDemo]);
 
   return {
     title,

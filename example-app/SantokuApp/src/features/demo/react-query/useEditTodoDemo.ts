@@ -2,10 +2,7 @@ import {useLoadingOverlay} from 'bases/ui/contexts/useLoadingOverlay';
 import {useDeleteTodo, useGetTodo, usePutTodo} from 'features/sandbox/sandboxService';
 import {useCallback, useEffect, useState} from 'react';
 
-import {EditTodoDemoScreenProps} from './EditTodoDemoScreen';
-
-export const useEditTodoDemo = ({navigation, route}: EditTodoDemoScreenProps) => {
-  const todoId = route.params.todoId;
+export const useEditTodoDemo = ({goBack, todoId}: {goBack: () => void; todoId: number}) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
@@ -45,11 +42,11 @@ export const useEditTodoDemo = ({navigation, route}: EditTodoDemoScreenProps) =>
     try {
       loadingOverlay.setVisible(true);
       await deleteTodo.mutateAsync({todoId});
-      navigation.goBack();
+      goBack();
     } finally {
       loadingOverlay.setVisible(false);
     }
-  }, [deleteTodo, loadingOverlay, navigation, todoId]);
+  }, [deleteTodo, goBack, loadingOverlay, todoId]);
 
   useEffect(() => {
     if (!isEdit && todo) {

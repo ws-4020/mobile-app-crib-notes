@@ -1,5 +1,6 @@
 import {Ionicons} from '@expo/vector-icons';
 import {createStackNavigator} from '@react-navigation/stack';
+import {m} from 'bases/message/utils/Message';
 import React from 'react';
 
 import {HomeScreen} from '../screens/home/HomeScreen';
@@ -18,7 +19,7 @@ const Screen: React.FC = () => {
   const {LogoutButton} = useLogoutButton();
   return (
     <nav.Navigator screenOptions={{headerRight: LogoutButton}}>
-      <nav.Screen {...HomeScreen} />
+      <nav.Screen component={HomeScreen} name="Home" options={{title: m('ホーム')}} />
     </nav.Navigator>
   );
 };

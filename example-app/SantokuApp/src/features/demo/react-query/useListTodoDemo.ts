@@ -2,11 +2,17 @@ import {useListTodoByCursorInfinite} from 'features/sandbox/sandboxService';
 import {useCallback, useMemo} from 'react';
 import {useQueryClient} from 'react-query';
 
-import {CreateTodoDemoScreen} from './CreateTodoDemoScreen';
-import {EditTodoDemoScreen} from './EditTodoDemoScreen';
-import {ListTodoDemoScreenProps} from './ListTodoDemoScreen';
-
-export const useListTodoDemo = ({navigation}: ListTodoDemoScreenProps) => {
+export type ListTodoDemoPageProps = {
+  navigateToCreateTodoDemo: () => void;
+  navigateToEditTodoDemo: (todoId: number) => void;
+};
+export const useListTodoDemo = ({
+  navigateToCreateTodoDemo,
+  navigateToEditTodoDemo,
+}: {
+  navigateToCreateTodoDemo: () => void;
+  navigateToEditTodoDemo: (todoId: number) => void;
+}) => {
   const queryClient = useQueryClient();
   const listTodoQuery = useListTodoByCursorInfinite();
   const {isSuccess, hasNextPage, fetchNextPage, data} = listTodoQuery;
@@ -22,9 +28,9 @@ export const useListTodoDemo = ({navigation}: ListTodoDemoScreenProps) => {
 
   const onPressTodoItem = useCallback(
     (todoId: number) => {
-      navigation.navigate(EditTodoDemoScreen.name, {todoId});
+      navigateToEditTodoDemo(todoId);
     },
-    [navigation],
+    [navigateToEditTodoDemo],
   );
 
   const fetchNext = useCallback(() => {
@@ -34,8 +40,8 @@ export const useListTodoDemo = ({navigation}: ListTodoDemoScreenProps) => {
   }, [hasNextPage, fetchNextPage]);
 
   const create = useCallback(() => {
-    navigation.navigate(CreateTodoDemoScreen.name);
-  }, [navigation]);
+    navigateToCreateTodoDemo();
+  }, [navigateToCreateTodoDemo]);
 
   const resetQueries = useCallback(async () => {
     await queryClient.resetQueries(`/todos/infinite`);

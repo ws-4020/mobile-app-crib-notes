@@ -1,6 +1,6 @@
 import {DefaultRouterOptions, NavigatorScreenParams} from '@react-navigation/native';
+import {ThirdPartyDependency} from 'features/acknowledgements/types/ThirdPartyDependency';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
-import type {ThirdPartyDependency} from 'features/demo/acknowledgements/ThirdPartyDependencies';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -31,7 +31,7 @@ export type DemoStackParamList = {
   AppInfo: undefined;
   AppState: undefined;
   Config: undefined;
-  Demo: undefined;
+  DemoMenu: undefined;
   ErrorCase: undefined;
   ErrorInEventHandler: undefined;
   ErrorInNativeModule: undefined;

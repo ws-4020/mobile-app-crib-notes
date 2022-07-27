@@ -1,5 +1,5 @@
-import messaging from '@react-native-firebase/messaging';
 import type {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
@@ -11,7 +11,6 @@ import {AuthenticatedStackNav} from '../navigators/AuthenticatedStackNav';
 import {HomeStackNav} from '../navigators/HomeStackNav';
 import {MainTabNav} from '../navigators/MainTabNav';
 import {NavigationParameter, RootStackParamList} from '../navigators/types';
-import {HomeScreen} from '../screens/home/HomeScreen';
 
 const showMessageOnSnackbar = (
   message: FirebaseMessagingTypes.RemoteMessage,
@@ -32,7 +31,7 @@ const getNavigateToScreen = (
 ): NavigationParameter<RootStackParamList> => {
   return [
     AuthenticatedStackNav.name,
-    {screen: MainTabNav.name, params: {screen: HomeStackNav.name, params: {screen: HomeScreen.name}}},
+    {screen: MainTabNav.name, params: {screen: HomeStackNav.name, params: {screen: 'Home'}}},
   ];
 };
 

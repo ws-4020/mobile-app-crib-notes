@@ -56,7 +56,7 @@ export const RootStackNav: React.FC<{initialData: AppInitialData}> = ({initialDa
   useEffect(() => {
     if (__DEV__) {
       DevSettings.addMenuItem('Go to Demo', () => {
-        navigation.navigate('DemoStackNav', {screen: 'Demo'});
+        navigation.navigate('DemoStackNav', {screen: 'DemoMenu'});
       });
     }
   }, [navigation]);
