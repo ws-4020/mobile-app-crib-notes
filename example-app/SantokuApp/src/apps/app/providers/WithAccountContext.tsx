@@ -6,7 +6,6 @@ import {
 } from 'features/account/contexts/useAccountContextOperation';
 import React from 'react';
 
-import {AccountDataDependingComponent} from '../components/withAccountData';
 import { AccountData } from '../types/AccountData';
 
 type Props = {
