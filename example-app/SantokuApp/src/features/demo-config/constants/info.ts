@@ -1,6 +1,6 @@
 import {AppConfig} from 'bases/core/config/AppConfig';
 
-const info = [
+export const info = [
   {
     name: 'APP_ID_FLAVOR_SUFFIX',
     value: AppConfig.appIdFlavorSuffix,
@@ -14,9 +14,3 @@ const info = [
     value: AppConfig.provisioningProfileFlavor,
   },
 ];
-
-const infoKeyExtractor = (_: unknown, index: number) => index.toString();
-
-export const useConfig = () => {
-  return {info, infoKeyExtractor};
-};

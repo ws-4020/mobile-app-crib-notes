@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {ConfigTemplate} from '../config/ConfigTemplate';
-import {useConfig} from '../config/useConfig';
+import {info} from '../constants/info';
+import {infoKeyExtractor} from '../utils/infoKeyExtractor';
+import {ConfigTemplate} from './ConfigTemplate';
 
 export const ConfigPage: React.FC = () => {
-  const {info, infoKeyExtractor} = useConfig();
   return <ConfigTemplate testID="ConfigScreen" items={info} keyExtractor={infoKeyExtractor} />;
 };
