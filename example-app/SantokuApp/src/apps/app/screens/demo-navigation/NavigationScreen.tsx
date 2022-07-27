@@ -1,7 +1,7 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList, RootStackParamList} from 'apps/app/navigators/types';
-import {NavigationPage} from 'features/demo/components/NavigationPage';
+import {NavigationPage} from 'features/demo-navigation/components/NavigationPage';
 import React, {useCallback} from 'react';
 
 type NavigationScreenProps = CompositeScreenProps<
