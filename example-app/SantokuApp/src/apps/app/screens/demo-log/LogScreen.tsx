@@ -1,4 +1,4 @@
-import {LogPage} from 'features/demo/components/LogPage';
+import {LogPage} from 'features/demo-log/components/LogPage';
 import React from 'react';
 
 export const LogScreen: React.FC = () => {

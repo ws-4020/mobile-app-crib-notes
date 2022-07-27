@@ -1,10 +1,13 @@
 import React from 'react';
 
-import {LogTemplate} from '../log/LogTemplate';
-import {useLog} from '../log/useLog';
+import {debugLog} from '../utils/debugLog';
+import {errorLog} from '../utils/errorLog';
+import {infoLog} from '../utils/infoLog';
+import {traceLog} from '../utils/traceLog';
+import {warnLog} from '../utils/warnLog';
+import {LogTemplate} from './LogTemplate';
 
 export const LogPage: React.FC = () => {
-  const {traceLog, debugLog, infoLog, warnLog, errorLog} = useLog();
   return (
     <LogTemplate
       testID="LogScreen"
