@@ -1,4 +1,4 @@
-import {MessagePage} from 'features/demo/components/MessagePage';
+import {MessagePage} from 'features/demo-message/components/MessagePage';
 import React from 'react';
 
 export const MessageScreen: React.FC = () => {
