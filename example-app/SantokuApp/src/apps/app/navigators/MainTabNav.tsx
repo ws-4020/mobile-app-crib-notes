@@ -2,7 +2,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
 import React, {useMemo} from 'react';
 
-import {InitialDataDependingComponent, withInitialData} from '../components/withInitialData';
 import {HomeStackNav} from './HomeStackNav';
 import {TeamStackNav} from './TeamStackNav';
 import {AuthenticatedStackParamList, MainTabParamList} from './types';
@@ -16,7 +15,10 @@ export const MainTabNav = {
 const getInitialRouteName = (initialData: AppInitialData) => {
   return HomeStackNav.name;
 };
-const Component: InitialDataDependingComponent = ({initialData}) => {
+type Props = {
+  initialData: AppInitialData;
+}
+const Component: React.FC<Props> = ({initialData}) => {
   const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
 
   return (
@@ -32,7 +34,7 @@ export const useMainTabNav: (
 ) => NativeStackScreenConfig<AuthenticatedStackParamList, typeof ScreenName> = initialData => {
   return useMemo(
     () => ({
-      component: withInitialData(initialData, Component),
+      component: (props: any) => <Component initialData={initialData} {...props} />,
       name: MainTabNav.name,
       options: {
         headerShown: false,

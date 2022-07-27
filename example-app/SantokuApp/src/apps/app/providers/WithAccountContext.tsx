@@ -7,8 +7,13 @@ import {
 import React from 'react';
 
 import {AccountDataDependingComponent} from '../components/withAccountData';
+import { AccountData } from '../types/AccountData';
 
-const WithAccountContext: AccountDataDependingComponent = ({accountData, children}) => {
+type Props = {
+  accountData: AccountData;
+};
+
+const WithAccountContext: React.FC<Props> = ({accountData, children}) => {
   const account = accountData.account;
   const terms = accountData.terms;
   const initialAccountContext = account ? {account, terms, isLoggedIn: true} : {isLoggedIn: false};

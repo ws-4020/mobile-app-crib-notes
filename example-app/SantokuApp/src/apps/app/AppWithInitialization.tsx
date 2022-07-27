@@ -3,11 +3,11 @@ import {showUpdateRequiredDialog} from 'features/app-updates/utils/showUpdateReq
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
-import {InitialDataDependingComponent} from '../app/components/withInitialData';
 import {useAppInitializer} from './hooks/useAppInitializer';
 import {WithAccountContext} from './providers/WithAccountContext';
 import {WithReactQuery} from './providers/WithReactQuery';
 import {WithTermsAgreementOverlay} from './providers/WithTermsAgreementOverlay';
+import { AppInitialData } from './types/AppInitialData';
 
 export const AppWithInitialization: React.FC = () => {
   const {initialize, initializationResult} = useAppInitializer();
@@ -40,10 +40,10 @@ export const AppWithInitialization: React.FC = () => {
     // アプリの初期化処理が完了した時点でrequireする。
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const RootStackNav = require('./navigators/RootStackNav').RootStackNav as InitialDataDependingComponent;
+    const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC<{initialData: AppInitialData}>;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const WithFirebaseMessagingHandlers = require('./providers/WithFirebaseMessagingHandlers')
-      .WithFirebaseMessagingHandlers as InitialDataDependingComponent;
+      .WithFirebaseMessagingHandlers as React.FC<{initialData: AppInitialData}>;
     return (
       <NavigationContainer>
         <WithAccountContext accountData={initializationResult.data.accountData}>
