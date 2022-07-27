@@ -15,8 +15,8 @@ export const SnackbarTemplate: React.FC<SnackbarTemplateProps> = ({
 }) => {
   return (
     <View style={styles.container} testID={testID}>
-      <Button onPress={() => showSnackbar()} title="スナックバーを表示" />
-      <Button onPress={() => showSnackbarWithCloseButton()} title="閉じるボタン付きのスナックバーを表示" />
+      <Button onPress={showSnackbar} title="スナックバーを表示" />
+      <Button onPress={showSnackbarWithCloseButton} title="閉じるボタン付きのスナックバーを表示" />
     </View>
   );
 };
