@@ -73,12 +73,11 @@ const loadData = async () => {
   // TODO: ディープリンクから起動した場合のパラメータ取得
 
   try {
-    const appUpdates = await checkAppUpdates(Platform.OS, Application.nativeApplicationVersion);
-    if (appUpdates.updateRequired) {
-      throw new UpdateRequiredError(appUpdates.message, appUpdates.supportedVersion);
-    }
+    await checkAppUpdates(Platform.OS, Application.nativeApplicationVersion);
   } catch (e) {
-    throw new InitialDataError(e);
+    if (!isUpdateRequiredError(e)) {
+      throw new InitialDataError(e);
+    }
   }
 
   // TODO: キャッシュの削除
