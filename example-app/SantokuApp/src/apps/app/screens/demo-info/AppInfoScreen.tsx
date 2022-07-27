@@ -1,4 +1,4 @@
-import {AppInfoPage} from 'features/demo/components/AppInfoPage';
+import {AppInfoPage} from 'features/demo-app-info/components/AppInfoPage';
 import React from 'react';
 
 export const AppInfoScreen: React.FC = () => {

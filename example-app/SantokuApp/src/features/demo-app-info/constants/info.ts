@@ -2,7 +2,7 @@ import firebase from '@react-native-firebase/app';
 import * as Application from 'expo-application';
 import {Platform} from 'react-native';
 
-const info = [
+export const info = [
   {
     name: 'Application Name',
     value: Application.applicationName,
@@ -36,9 +36,3 @@ const info = [
     value: firebase.app().options.appId,
   },
 ];
-
-const infoKeyExtractor = (_: unknown, index: number) => index.toString();
-
-export const useAppInfo = () => {
-  return {info, infoKeyExtractor};
-};
