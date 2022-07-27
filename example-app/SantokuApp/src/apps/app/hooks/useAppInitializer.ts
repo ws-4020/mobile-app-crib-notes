@@ -6,18 +6,20 @@ import * as Application from 'expo-application';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {isUnauthorizedError} from 'features/account/errors/UnauthorizedError';
 import {setRefreshSessionInterceptor} from 'features/account/utils/refreshSession';
+import {isUpdateRequiredError, UpdateRequiredError} from 'features/app-updates/errors/UpdateRequiredError';
+import {checkAppUpdates} from 'features/app-updates/utils/checkAppUpdates';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {useCallback, useMemo, useState} from 'react';
 import {Platform} from 'react-native';
 
-import {autoLogin} from './helpers/autoLogin';
-import {loadBundledMessagesAsync} from './helpers/bundledMessage';
-import {initializeFirebaseCrashlyticsAsync} from './helpers/firebase';
-import {AccountData, loadInitialAccountDataAsync} from './helpers/initialData';
-import {isInitialDataError} from './helpers/initialDataError';
-import {hideSplashScreen} from './helpers/splashScreen';
-import {checkAppUpdates, isUpdateRequiredError, UpdateRequiredError} from './helpers/updateRequired';
-import {AppInitialData} from './types';
+import {InitialDataError, isInitialDataError} from '../errors/initialDataError';
+import {AccountData} from '../types/AccountData';
+import {AppInitialData} from '../types/AppInitialData';
+import {autoLogin} from '../utils/autoLogin';
+import {hideSplashScreen} from '../utils/hideSplashScreen';
+import {initializeFirebaseCrashlyticsAsync} from '../utils/initializeFirebaseCrashlyticsAsync';
+import {loadBundledMessagesAsync} from '../utils/loadBundledMessagesAsync';
+import {loadInitialAccountDataAsync} from '../utils/loadInitialAccountDataAsync';
 
 export interface AppInitializer {
   initialize: () => Promise<void>;
@@ -69,9 +71,13 @@ const loadData = async () => {
 
   // TODO: ディープリンクから起動した場合のパラメータ取得
 
-  const appUpdates = await checkAppUpdates(Platform.OS, Application.nativeApplicationVersion);
-  if (appUpdates.updateRequired) {
-    throw new UpdateRequiredError(appUpdates.message, appUpdates.supportedVersion);
+  try {
+    const appUpdates = await checkAppUpdates(Platform.OS, Application.nativeApplicationVersion);
+    if (appUpdates.updateRequired) {
+      throw new UpdateRequiredError(appUpdates.message, appUpdates.supportedVersion);
+    }
+  } catch (e) {
+    throw new InitialDataError(e);
   }
 
   // TODO: キャッシュの削除

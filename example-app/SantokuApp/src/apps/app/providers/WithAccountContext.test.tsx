@@ -3,7 +3,7 @@ import {useAccountContext} from 'features/account/contexts/useAccountContext';
 import React from 'react';
 import {Text} from 'react-native';
 
-import {AccountData} from '../initialize/helpers/initialData';
+import {AccountData} from '../types/AccountData';
 import {WithAccountContext} from './WithAccountContext';
 
 const wrapper = (value: AccountData) => {

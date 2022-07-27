@@ -1,8 +1,8 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {AppInitialData} from 'apps/app/initialize/types';
-import {InitialDataDependingComponent, withInitialData} from 'apps/app/initialize/withInitialData';
+import {AppInitialData} from 'apps/app/types/AppInitialData';
 import React, {useMemo} from 'react';
 
+import {InitialDataDependingComponent, withInitialData} from '../components/withInitialData';
 import {HomeStackNav} from './HomeStackNav';
 import {TeamStackNav} from './TeamStackNav';
 import {AuthenticatedStackParamList, MainTabParamList} from './types';

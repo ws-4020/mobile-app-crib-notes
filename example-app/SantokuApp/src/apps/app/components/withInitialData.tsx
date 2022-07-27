@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {AppInitialData} from './types';
+import {AppInitialData} from '../types/AppInitialData';
 
 export interface InitialDataProps {
   initialData: AppInitialData;
