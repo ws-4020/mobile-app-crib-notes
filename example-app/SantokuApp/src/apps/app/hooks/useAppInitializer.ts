@@ -5,6 +5,7 @@ import {enhanceValidator} from 'bases/validator/utils';
 import * as Application from 'expo-application';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {isUnauthorizedError} from 'features/account/errors/UnauthorizedError';
+import {canAutoLogin} from 'features/account/utils/canAutoLogin';
 import {setRefreshSessionInterceptor} from 'features/account/utils/refreshSession';
 import {isUpdateRequiredError, UpdateRequiredError} from 'features/app-updates/errors/UpdateRequiredError';
 import {checkAppUpdates} from 'features/app-updates/utils/checkAppUpdates';
@@ -82,7 +83,7 @@ const loadData = async () => {
 
   // TODO: キャッシュの削除
   const initialData = {notification};
-  if (!(await autoLogin())) {
+  if (!(await canAutoLogin())) {
     return {accountData: {}, initialData};
   }
 
