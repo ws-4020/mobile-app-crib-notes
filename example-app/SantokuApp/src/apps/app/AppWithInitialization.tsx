@@ -5,8 +5,8 @@ import {WithTermsAgreementOverlay} from 'features/terms/contexts/WithTermsAgreem
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
+import {WithReactQuery} from './contexts/WithReactQuery';
 import {useAppInitializer} from './hooks/useAppInitializer';
-import {WithReactQuery} from './providers/WithReactQuery';
 import {AppInitialData} from './types/AppInitialData';
 
 export const AppWithInitialization: React.FC = () => {
@@ -39,7 +39,7 @@ export const AppWithInitialization: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC<{initialData: AppInitialData}>;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const WithFirebaseMessagingHandlers = require('./providers/WithFirebaseMessagingHandlers')
+    const WithFirebaseMessagingHandlers = require('./contexts/WithFirebaseMessagingHandlers')
       .WithFirebaseMessagingHandlers as React.FC<{initialData: AppInitialData}>;
     return (
       <WithCheckAppUpdates>
