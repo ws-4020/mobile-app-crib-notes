@@ -1,10 +1,10 @@
-import {AppThemeContextProvider} from 'bases/ui/contexts/useAppTheme';
 import React, {useMemo} from 'react';
 import {ColorSchemeName, useColorScheme} from 'react-native';
 import {ThemeProvider} from 'react-native-elements';
 
 import {darkModeAppTheme, lightModeAppTheme} from '../constants/AppTheme';
 import {getReactNativeElementsTheme} from '../utils/ReactNativeElementsTheme';
+import {AppThemeContextProvider} from './useAppTheme';
 
 const getAppTheme = (colorScheme: ColorSchemeName) => (colorScheme === 'dark' ? darkModeAppTheme : lightModeAppTheme);
 

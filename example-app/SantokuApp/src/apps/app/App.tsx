@@ -2,13 +2,13 @@ import {setErrorSender} from 'bases/error/sendErrorLog';
 import {firebaseConfig} from 'bases/firebase/configs/FirebaseConfig';
 import {createLogger, setLogger} from 'bases/logging/utils';
 import {FirebaseCrashlyticsTransport} from 'bases/logging/utils/FirebaseCrashlyticsTransport';
+import {WithAppTheme} from 'bases/ui/contexts/AppThemeContext';
 import React from 'react';
 import {Platform, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {AppWithInitialization} from './AppWithInitialization';
-import {WithAppTheme} from './providers/AppThemeContext';
 import {WithOverlay} from './providers/WithOverlay';
 import {sendErrorLog} from './utils/sendErrorLog';
 
