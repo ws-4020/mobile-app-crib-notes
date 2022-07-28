@@ -2,11 +2,22 @@ import React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Divider, Text} from 'react-native-elements';
 
-import {usePushNotification} from '../push-notification/usePushNotification';
+import {useAuthStatus} from '../hooks/useAuthStatus';
+import {useGetTokenUseCase} from '../hooks/useGetTokenUseCase';
+import {useNotifyMessageToAllUseCase} from '../hooks/useNotifyMessageToAllUseCase';
+import {useNotifyMessageToMeUseCase} from '../hooks/useNotifyMessageToMeUseCase';
+import {useOpenSettingsUseCase} from '../hooks/useOpenSettingsUseCase';
+import {useRequestUserPermissionUseCase} from '../hooks/useRequestUserPermissionUseCase';
+import {useToken} from '../hooks/useToken';
 
 export const PushNotificationPage: React.FC = () => {
-  const {authStatus, token, requestUserPermission, getToken, notifyMessageToAll, notifyMessageToMe, openSettings} =
-    usePushNotification();
+  const [authStatus] = useAuthStatus();
+  const [token] = useToken();
+  const {requestUserPermission} = useRequestUserPermissionUseCase();
+  const {getToken} = useGetTokenUseCase();
+  const {notifyMessageToAll} = useNotifyMessageToAllUseCase();
+  const {notifyMessageToMe} = useNotifyMessageToMeUseCase();
+  const {openSettings} = useOpenSettingsUseCase();
 
   return (
     <SafeAreaView style={styles.container}>
