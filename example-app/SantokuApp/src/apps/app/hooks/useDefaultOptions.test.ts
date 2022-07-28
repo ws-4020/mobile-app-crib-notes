@@ -1,6 +1,6 @@
 import {renderHook} from '@testing-library/react-native';
+import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
 
-import {WithSnackbar} from '../providers/WithSnackbar';
 import {useDefaultOptions} from './useDefaultOptions';
 
 describe('useDefaultOptions', () => {

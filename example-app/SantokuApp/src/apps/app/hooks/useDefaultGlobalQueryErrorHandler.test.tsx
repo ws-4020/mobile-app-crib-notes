@@ -1,11 +1,11 @@
 import {renderHook} from '@testing-library/react-native';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {AxiosError} from 'axios';
+import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import React from 'react';
 import {Query, QueryKey} from 'react-query';
 
-import {WithSnackbar} from '../providers/WithSnackbar';
 import {loadBundledMessagesAsync} from '../utils/loadBundledMessagesAsync';
 import {useDefaultGlobalQueryErrorHandler} from './useDefaultGlobalQueryErrorHandler';
 

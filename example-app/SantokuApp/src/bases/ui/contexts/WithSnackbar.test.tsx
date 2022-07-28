@@ -1,12 +1,12 @@
 import {render, screen, waitFor} from '@testing-library/react-native';
-import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
-import {loadMessages} from 'bases/message/utils/Message';
-import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import React, {useEffect} from 'react';
 import {Text, TextStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';
 
+import {BundledMessagesLoader} from '../../message/utils/BundledMessageLoader';
+import {loadMessages} from '../../message/utils/Message';
 import {WithSnackbar} from './WithSnackbar';
+import {useSnackbar} from './useSnackbar';
 
 function getStyle<T>(instance: ReactTestInstance) {
   return instance.props.style as T;

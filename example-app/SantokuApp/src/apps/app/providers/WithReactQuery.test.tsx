@@ -1,10 +1,10 @@
 import {render, screen} from '@testing-library/react-native';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
+import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
 import React from 'react';
 import {Text} from 'react-native';
 
 import {WithReactQuery} from './WithReactQuery';
-import {WithSnackbar} from './WithSnackbar';
 
 const Wrapper: React.FC = ({children}) => {
   const accountData = {account: {accountId: '123456789', deviceTokens: []}};
