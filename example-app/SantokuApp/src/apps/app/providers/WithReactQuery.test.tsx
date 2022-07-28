@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react-native';
-import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
+import {WithAccountContext} from 'features/account/contexts/WithAccountContext';
 import React from 'react';
 import {Text} from 'react-native';
 

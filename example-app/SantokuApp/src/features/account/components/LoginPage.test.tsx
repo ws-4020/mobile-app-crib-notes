@@ -6,12 +6,12 @@ import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
 import {enhanceValidator} from 'bases/validator/utils';
 import {useGetAccountsMe, useGetAccountsMeTerms, usePostAccountsMeTerms} from 'features/backend/apis/account/account';
 import {useGetTerms} from 'features/backend/apis/terms/terms';
-import {WithAccountContextMock} from 'features/tests/WithAccountContextMock.test';
-import {WithTermsAgreementOverlayMock} from 'features/tests/WithTermsAgreementOverlayMock.test';
+import {WithTermsAgreementOverlay} from 'features/terms/contexts/WithTermsAgreementOverlay';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
+import {WithAccountContext} from '../contexts/WithAccountContext';
 import {LoginPageProps} from './LoginPage';
 
 jest.mock('service/backend/accountService');
@@ -25,9 +25,9 @@ const Wrapper: React.FC = ({children}) => {
       <WithAppTheme>
         <WithSnackbar>
           <QueryClientProvider client={queryClient}>
-            <WithAccountContextMock accountData={accountData}>
-              <WithTermsAgreementOverlayMock>{children}</WithTermsAgreementOverlayMock>
-            </WithAccountContextMock>
+            <WithAccountContext accountData={accountData}>
+              <WithTermsAgreementOverlay>{children}</WithTermsAgreementOverlay>
+            </WithAccountContext>
           </QueryClientProvider>
         </WithSnackbar>
       </WithAppTheme>

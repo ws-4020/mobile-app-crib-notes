@@ -1,15 +1,15 @@
 import {act, renderHook} from '@testing-library/react-native';
-import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {AxiosError} from 'axios';
 import {setErrorSender} from 'bases/error/sendErrorLog';
 import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
+import {WithAccountContext} from 'features/account/contexts/WithAccountContext';
 import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
 import * as clientLogout from 'features/account/utils/auth/clientLogout';
 import React from 'react';
 import {Alert} from 'react-native';
 
-import {AccountData} from '../types/AccountData';
+import {AccountData} from '../../../features/account/types/AccountData';
 import {loadBundledMessagesAsync} from '../utils/loadBundledMessagesAsync';
 import {useDefaultGlobalErrorHandler} from './useDefaultGlobalErrorHandler';
 

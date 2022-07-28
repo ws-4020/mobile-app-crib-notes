@@ -4,7 +4,7 @@ import {AppConfig} from 'bases/core/config/AppConfig';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
 import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
-import {WithAccountContextMock} from 'features/tests/WithAccountContextMock.test';
+import {WithAccountContext} from 'features/account/contexts/WithAccountContext';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
@@ -18,7 +18,7 @@ const Wrapper: React.FC = ({children}) => {
     <SafeAreaProvider>
       <WithSnackbar>
         <QueryClientProvider client={queryClient}>
-          <WithAccountContextMock accountData={accountData}>{children}</WithAccountContextMock>
+          <WithAccountContext accountData={accountData}>{children}</WithAccountContext>
         </QueryClientProvider>
       </WithSnackbar>
     </SafeAreaProvider>

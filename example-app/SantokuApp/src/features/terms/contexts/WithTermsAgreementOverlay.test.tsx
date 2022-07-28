@@ -1,9 +1,9 @@
 import {render, screen} from '@testing-library/react-native';
-import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {AppConfig} from 'bases/core/config/AppConfig';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
 import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
+import {WithAccountContext} from 'features/account/contexts/WithAccountContext';
 import {useTermsAgreementOverlay} from 'features/terms/contexts/useTermsAgreementOverlay';
 import React, {useEffect} from 'react';
 import {Text} from 'react-native';

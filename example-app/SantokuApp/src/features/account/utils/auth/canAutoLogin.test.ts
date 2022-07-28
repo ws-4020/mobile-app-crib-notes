@@ -1,5 +1,4 @@
 import {act} from '@testing-library/react-hooks';
-import React from 'react';
 
 import * as loadActiveAccountId from '../secure-storage/loadActiveAccountId';
 import * as loadPassword from '../secure-storage/loadPassword';

@@ -9,8 +9,8 @@ import {setRefreshSessionInterceptor} from 'features/account/utils/auth/refreshS
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {useCallback, useMemo, useState} from 'react';
 
+import {AccountData} from '../../../features/account/types/AccountData';
 import {isInitialDataError} from '../errors/initialDataError';
-import {AccountData} from '../types/AccountData';
 import {AppInitialData} from '../types/AppInitialData';
 import {autoLogin} from '../utils/autoLogin';
 import {hideSplashScreen} from '../utils/hideSplashScreen';

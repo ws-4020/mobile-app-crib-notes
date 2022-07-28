@@ -2,8 +2,8 @@ import '@testing-library/jest-native/extend-expect';
 import {render, screen} from '@testing-library/react-native';
 import {AppConfig} from 'bases/core/config/AppConfig';
 import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
-import {WithAccountContextMock} from 'features/tests/WithAccountContextMock.test';
-import {WithTermsAgreementOverlayMock} from 'features/tests/WithTermsAgreementOverlayMock.test';
+import {WithAccountContext} from 'features/account/contexts/WithAccountContext';
+import {WithTermsAgreementOverlay} from 'features/terms/contexts/WithTermsAgreementOverlay';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
@@ -24,9 +24,9 @@ const Wrapper: React.FC = ({children}) => {
   return (
     <WithSnackbar>
       <QueryClientProvider client={queryClient}>
-        <WithAccountContextMock accountData={accountData}>
-          <WithTermsAgreementOverlayMock>{children}</WithTermsAgreementOverlayMock>
-        </WithAccountContextMock>
+        <WithAccountContext accountData={accountData}>
+          <WithTermsAgreementOverlay>{children}</WithTermsAgreementOverlay>
+        </WithAccountContext>
       </QueryClientProvider>
     </WithSnackbar>
   );

@@ -1,11 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native';
+import {WithAccountContext} from 'features/account/contexts/WithAccountContext';
 import {WithCheckAppUpdates} from 'features/app-updates/components/WithCheckAppUpdates';
 import {WithTermsAgreementOverlay} from 'features/terms/contexts/WithTermsAgreementOverlay';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
 import {useAppInitializer} from './hooks/useAppInitializer';
-import {WithAccountContext} from './providers/WithAccountContext';
 import {WithReactQuery} from './providers/WithReactQuery';
 import {AppInitialData} from './types/AppInitialData';
 
