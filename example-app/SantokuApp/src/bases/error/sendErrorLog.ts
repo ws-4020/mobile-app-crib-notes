@@ -1,7 +1,7 @@
 let sendErrorLog = (error: unknown) => console.log(String(error));
 
-const setErrorSender = (a: (error: unknown) => void) => {
-  sendErrorLog = a;
+const setErrorSender = (e: (error: unknown) => void) => {
+  sendErrorLog = e;
 };
 
 export {sendErrorLog, setErrorSender};

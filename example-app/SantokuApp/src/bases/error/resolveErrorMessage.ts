@@ -1,13 +1,13 @@
 import axios, {AxiosError} from 'axios';
 import {m} from 'bases/message/utils/Message';
 
-export function resolveErrorMessage(error: unknown): {title: string; message: string} {
+let resolveErrorMessage = (error: unknown): {title: string; message: string} => {
   if (axios.isAxiosError(error)) {
     return resolveErrorMessageWhenAxiosError(error);
   }
   // 想定外のエラー
   return resolveErrorMessageWhenUnexpectedError();
-}
+};
 
 function resolveErrorMessageWhenAxiosError(error: AxiosError) {
   const statusCode = error.response?.status;
@@ -28,3 +28,9 @@ function formatMessage(content: string, statusCode?: number) {
   }
   return `${content}\n${statusCode}`;
 }
+
+const setErrorMessageResolver = (e: (error: unknown) => {title: string; message: string}) => {
+  resolveErrorMessage = e;
+};
+
+export {resolveErrorMessage, setErrorMessageResolver};
