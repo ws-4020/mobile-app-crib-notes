@@ -1,4 +1,4 @@
-import {GetAccountsMeDemoPage} from 'features/demo/components/GetAccountsMeDemoPage';
+import {GetAccountsMeDemoPage} from 'features/demo-react-query/components/GetAccountsMeDemoPage';
 import React from 'react';
 
 export const GetAccountsMeDemoScreen: React.FC = () => {

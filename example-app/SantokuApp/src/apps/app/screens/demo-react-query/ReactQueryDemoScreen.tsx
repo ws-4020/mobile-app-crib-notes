@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList} from 'apps/app/navigators/types';
-import {ReactQueryDemoPage} from 'features/demo/components/ReactQueryDemoPage';
+import {ReactQueryDemoPage} from 'features/demo-react-query/components/ReactQueryDemoPage';
 import React, {useCallback} from 'react';
 
 export const ReactQueryDemoScreen: React.FC<NativeStackScreenProps<DemoStackParamList, 'ReactQueryDemo'>> = ({

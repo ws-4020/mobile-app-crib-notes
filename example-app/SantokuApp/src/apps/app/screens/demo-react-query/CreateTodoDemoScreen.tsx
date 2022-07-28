@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList} from 'apps/app/navigators/types';
-import {CreateTodoDemoPage} from 'features/demo/components/CreateTodoDemoPage';
+import {CreateTodoDemoPage} from 'features/demo-react-query/components/CreateTodoDemoPage';
 import React, {useCallback} from 'react';
 
 export const CreateTodoDemoScreen: React.FC<NativeStackScreenProps<DemoStackParamList, 'CreateTodoDemo'>> = ({
