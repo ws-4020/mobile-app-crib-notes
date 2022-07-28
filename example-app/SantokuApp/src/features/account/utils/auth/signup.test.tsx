@@ -4,7 +4,7 @@ import * as accountApi from 'features/backend/apis/account/account';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {useSignupService} from '../../hooks/useSignupService';
+import {useSignup} from '../../hooks/useSignup';
 import * as savePassword from '../../utils/secure-storage/savePassword';
 
 const wrapper: React.ComponentType<React.ProviderProps<void>> = ({children}) => {
@@ -27,7 +27,7 @@ describe('signup', () => {
       config: {},
     });
     const spySecureStorageAdapterSavePassword = jest.spyOn(savePassword, 'savePassword');
-    const {result} = renderHook(() => useSignupService(), {wrapper});
+    const {result} = renderHook(() => useSignup(), {wrapper});
     await act(async () => {
       const res = await result.current.mutateAsync({nickname: 'testNickName', password: 'password123'});
       expect(res).toEqual({

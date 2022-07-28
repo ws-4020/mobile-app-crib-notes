@@ -5,7 +5,7 @@ import * as csrfToken from 'features/backend/utils/refreshCsrfToken';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {useLogoutService} from '../../hooks/useLogoutService';
+import {useLogout} from '../../hooks/useLogout';
 import * as deleteActiveAccountId from '../secure-storage/deleteActiveAccountId';
 import * as deletePassword from '../secure-storage/deletePassword';
 import * as loadActiveAccountId from '../secure-storage/loadActiveAccountId';
@@ -38,7 +38,7 @@ describe('AuthenticationService logout', () => {
   });
   test('ログアウトAPIを呼び出して、セキュアストレージからアクティブアカウントを削除しているかの検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
-    const {result} = renderHook(() => useLogoutService(), {wrapper});
+    const {result} = renderHook(() => useLogout(), {wrapper});
     await act(async () => {
       await result.current.mutateAsync();
       expect(spyAccountsMeDeviceTokenApi).toHaveBeenCalled();
@@ -51,7 +51,7 @@ describe('AuthenticationService logout', () => {
   });
   test('ログインしたアカウントIDがnullの場合はセキュアストレージの削除が呼ばれないことを確認', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
-    const {result} = renderHook(() => useLogoutService(), {wrapper});
+    const {result} = renderHook(() => useLogout(), {wrapper});
     await act(async () => {
       await result.current.mutateAsync();
       expect(spyAccountsMeDeviceTokenApi).toHaveBeenCalled();

@@ -8,7 +8,7 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {ActiveAccountIdNotFoundError} from '../../errors/ActiveAccountIdNotFoundError';
 import {PasswordNotFoundError} from '../../errors/PasswordNotFoundError';
-import {useRefreshService} from '../../hooks/useRefreshService';
+import {useRefresh} from '../../hooks/useRefresh';
 import * as loadActiveAccountId from '../secure-storage/loadActiveAccountId';
 import * as loadPassword from '../secure-storage/loadPassword';
 
@@ -39,7 +39,7 @@ describe('refresh', () => {
   test('セキュアストレージからクレデンシャルを取得してログインAPIを呼び出しているかの検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue('password123');
-    const {result} = renderHook(() => useRefreshService(), {wrapper});
+    const {result} = renderHook(() => useRefresh(), {wrapper});
     await act(async () => {
       const res = await result.current.mutateAsync();
       expect(res).toEqual({status: AccountLoginResponseStatus.COMPLETE});
@@ -52,7 +52,7 @@ describe('refresh', () => {
 
   test('セキュアストレージからアクティブなアカウントIDを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
-    const {result} = renderHook(() => useRefreshService(), {wrapper});
+    const {result} = renderHook(() => useRefresh(), {wrapper});
     await act(async () => {
       const refresh = result.current.mutateAsync();
       await expect(refresh).rejects.toThrowError(ActiveAccountIdNotFoundError);
@@ -62,7 +62,7 @@ describe('refresh', () => {
   test('セキュアストレージかパスワードを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue(null);
-    const {result} = renderHook(() => useRefreshService(), {wrapper});
+    const {result} = renderHook(() => useRefresh(), {wrapper});
     await act(async () => {
       const refresh = result.current.mutateAsync();
       await expect(refresh).rejects.toThrowError(PasswordNotFoundError);

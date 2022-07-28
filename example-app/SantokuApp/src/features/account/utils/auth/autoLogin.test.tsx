@@ -8,7 +8,7 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {ActiveAccountIdNotFoundError} from '../../errors/ActiveAccountIdNotFoundError';
 import {PasswordNotFoundError} from '../../errors/PasswordNotFoundError';
-import {useAutoLoginService} from '../../hooks/useAutoLoginService';
+import {useAutoLogin} from '../../hooks/useAutoLogin';
 import * as loadActiveAccountId from '../secure-storage/loadActiveAccountId';
 import * as loadPassword from '../secure-storage/loadPassword';
 
@@ -39,7 +39,7 @@ describe('autoLogin', () => {
   test('セキュアストレージからクレデンシャルを取得してログインAPIを呼び出しているかの検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue('password123');
-    const {result} = renderHook(() => useAutoLoginService(), {wrapper});
+    const {result} = renderHook(() => useAutoLogin(), {wrapper});
     await act(async () => {
       const res = await result.current.mutateAsync();
       expect(res).toEqual({status: AccountLoginResponseStatus.COMPLETE});
@@ -53,7 +53,7 @@ describe('autoLogin', () => {
 
   test('セキュアストレージからアクティブなアカウントIDを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
-    const {result} = renderHook(() => useAutoLoginService(), {wrapper});
+    const {result} = renderHook(() => useAutoLogin(), {wrapper});
     await act(async () => {
       const autoLogin = result.current.mutateAsync();
       await expect(autoLogin).rejects.toThrowError(ActiveAccountIdNotFoundError);
@@ -63,7 +63,7 @@ describe('autoLogin', () => {
   test('セキュアストレージかパスワードを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue(null);
-    const {result} = renderHook(() => useAutoLoginService(), {wrapper});
+    const {result} = renderHook(() => useAutoLogin(), {wrapper});
     await act(async () => {
       const autoLogin = result.current.mutateAsync();
       await expect(autoLogin).rejects.toThrowError(PasswordNotFoundError);

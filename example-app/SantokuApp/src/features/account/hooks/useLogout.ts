@@ -5,6 +5,6 @@ import {useMutation} from 'react-query';
 
 import {logout} from '../utils/auth/logout';
 
-export const useLogoutService = () => {
+export const useLogout = () => {
   return useMutation(() => logout());
 };

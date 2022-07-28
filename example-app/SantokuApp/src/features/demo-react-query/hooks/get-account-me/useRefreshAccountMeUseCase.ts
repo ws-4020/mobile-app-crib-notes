@@ -1,6 +1,6 @@
-import {useGetAccountsMeService} from 'features/account/hooks/useGetAccountsMeService';
+import {useGetAccountsMe} from 'features/account/hooks/useGetAccountsMe';
 
 export const useRefreshAccountMeUseCase = () => {
-  const {refetch} = useGetAccountsMeService();
+  const {refetch} = useGetAccountsMe();
   return {refreshAccountMe: refetch};
 };

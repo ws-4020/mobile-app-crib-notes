@@ -9,19 +9,19 @@ import {useAccountContextOperation} from '../contexts/useAccountContextOperation
 import {isUnauthorizedError} from '../errors/UnauthorizedError';
 import {LoginForm} from '../types/LoginForm';
 import {savePassword} from '../utils/secure-storage/savePassword';
-import {useGetAccountsMeService} from './useGetAccountsMeService';
-import {useGetAccountsMeTermsService} from './useGetAccountsMeTermsService';
-import {useLoginService} from './useLoginService';
+import {useGetAccountsMe} from './useGetAccountsMe';
+import {useGetAccountsMeTerms} from './useGetAccountsMeTerms';
+import {useLogin} from './useLogin';
 import {useTerms} from './useTerms';
 
 export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
   const isMounted = useIsMounted();
   const [isExecutingLogin, setIsExecutingLogin] = useState(false);
   const {termsOfService} = useTerms();
-  const {mutateAsync: callLogin} = useLoginService();
+  const {mutateAsync: callLogin} = useLogin();
   const accountContextOperation = useAccountContextOperation();
-  const {refetch: callGetAccountMe} = useGetAccountsMeService({query: {enabled: false}});
-  const {refetch: callGetAccountsMeTerms} = useGetAccountsMeTermsService({query: {enabled: false}});
+  const {refetch: callGetAccountMe} = useGetAccountsMe({query: {enabled: false}});
+  const {refetch: callGetAccountsMeTerms} = useGetAccountsMeTerms({query: {enabled: false}});
   const login = useCallback(async () => {
     if (await isValidForm(form)) {
       try {

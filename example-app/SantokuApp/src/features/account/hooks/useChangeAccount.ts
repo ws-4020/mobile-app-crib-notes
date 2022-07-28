@@ -6,6 +6,6 @@ import {useMutation} from 'react-query';
 
 import {changeAccount} from '../utils/auth/changeAccount';
 
-export const useChangeAccountService = () => {
+export const useChangeAccount = () => {
   return useMutation((arg: {accountId: string}) => changeAccount(arg.accountId));
 };

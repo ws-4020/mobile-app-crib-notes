@@ -12,9 +12,9 @@ import {Alert} from 'react-native';
 
 import {ProfileForm} from '../types/ProfileForm';
 import {clientLogout} from '../utils/auth/clientLogout';
-import {useLoginService} from './useLoginService';
-import {usePostAccountsMeTermsService} from './usePostAccountsMeTermsService';
-import {useSignupService} from './useSignupService';
+import {useLogin} from './useLogin';
+import {usePostAccountsMeTerms} from './usePostAccountsMeTerms';
+import {useSignup} from './useSignup';
 
 export const useSignupUseCase = (
   form: FormikProps<ProfileForm>,
@@ -22,9 +22,9 @@ export const useSignupUseCase = (
 ) => {
   // サインアップ処理中状態
   const [isExecutingSignup, setIsExecutingSignup] = useState(false);
-  const {mutateAsync: callSignup} = useSignupService();
-  const {mutateAsync: callLogin} = useLoginService();
-  const {mutateAsync: callPostAccountsMeTerms} = usePostAccountsMeTermsService();
+  const {mutateAsync: callSignup} = useSignup();
+  const {mutateAsync: callLogin} = useLogin();
+  const {mutateAsync: callPostAccountsMeTerms} = usePostAccountsMeTerms();
   const accountContextOperation = useAccountContextOperation();
   const isMounted = useIsMounted();
 

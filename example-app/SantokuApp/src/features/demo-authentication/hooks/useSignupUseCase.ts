@@ -1,5 +1,5 @@
 import {generatePassword} from 'bases/id/utils/id';
-import {useSignupService} from 'features/account/hooks/useSignupService';
+import {useSignup} from 'features/account/hooks/useSignup';
 import {useCallback} from 'react';
 
 import {handleError} from '../utils/handleError';
@@ -7,7 +7,7 @@ import {useAccountId} from './useAccountId';
 
 export const useSignupUseCase = () => {
   const [, setAccountId] = useAccountId();
-  const mutationSignup = useSignupService();
+  const mutationSignup = useSignup();
   const signup = useCallback(async () => {
     try {
       const password = await generatePassword();

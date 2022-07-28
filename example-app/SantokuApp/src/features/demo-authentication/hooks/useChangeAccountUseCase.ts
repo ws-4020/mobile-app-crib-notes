@@ -1,4 +1,4 @@
-import {useChangeAccountService} from 'features/account/hooks/useChangeAccountService';
+import {useChangeAccount} from 'features/account/hooks/useChangeAccount';
 import {useCallback} from 'react';
 
 import {handleError} from '../utils/handleError';
@@ -6,7 +6,7 @@ import {useAccountIdInput} from './useAccountIdInput';
 
 export const useChangeAccountUseCase = () => {
   const [accountIdInput] = useAccountIdInput();
-  const mutationChangeAccount = useChangeAccountService();
+  const mutationChangeAccount = useChangeAccount();
   const changeAccount = useCallback(async () => {
     try {
       const accountLoginResponse = await mutationChangeAccount.mutateAsync({accountId: accountIdInput});

@@ -3,7 +3,7 @@ import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
 import {Button} from 'bases/ui/components/button/Button';
 import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
-import {useLogoutService} from 'features/account/hooks/useLogoutService';
+import {useLogout} from 'features/account/hooks/useLogout';
 import React, {useCallback} from 'react';
 import {Alert, GestureResponderEvent, StyleSheet} from 'react-native';
 
@@ -42,7 +42,7 @@ type CloseThisNavigatorButtonProps = {
 
 export const useLogoutButton = () => {
   const accountContextOperation = useAccountContextOperation();
-  const {mutateAsync: callLogout, isLoading} = useLogoutService();
+  const {mutateAsync: callLogout, isLoading} = useLogout();
   const logout = useCallback(async () => {
     try {
       await callLogout();

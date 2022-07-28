@@ -1,6 +1,6 @@
 import {useAccountContext} from 'features/account/contexts/useAccountContext';
 import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
-import {usePostAccountsMeTermsService} from 'features/account/hooks/usePostAccountsMeTermsService';
+import {usePostAccountsMeTerms} from 'features/account/hooks/usePostAccountsMeTerms';
 import {TermsOfService} from 'features/backend/apis/model';
 import {useCallback} from 'react';
 
@@ -10,7 +10,7 @@ export const useOnAgreeUseCase = (termsOfService: TermsOfService) => {
   const [, setAgreedStatus] = useAgreedClientState();
   const accountContext = useAccountContext();
   const accountContextOperation = useAccountContextOperation();
-  const {mutateAsync: callPostAccountsMeTerms, isLoading} = usePostAccountsMeTermsService();
+  const {mutateAsync: callPostAccountsMeTerms, isLoading} = usePostAccountsMeTerms();
   const onAgree = useCallback(async () => {
     try {
       const termsAgreementStatus = {

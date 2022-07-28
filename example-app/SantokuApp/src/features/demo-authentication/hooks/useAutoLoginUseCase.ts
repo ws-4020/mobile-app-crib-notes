@@ -1,10 +1,10 @@
-import {useAutoLoginService} from 'features/account/hooks/useAutoLoginService';
+import {useAutoLogin} from 'features/account/hooks/useAutoLogin';
 import {useCallback} from 'react';
 
 import {handleError} from '../utils/handleError';
 
 export const useAutoLoginUseCase = () => {
-  const mutationAutoLogin = useAutoLoginService();
+  const mutationAutoLogin = useAutoLogin();
   const autoLogin = useCallback(async () => {
     try {
       const accountLoginResponse = await mutationAutoLogin.mutateAsync();

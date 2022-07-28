@@ -7,7 +7,7 @@ import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {PasswordNotFoundError} from '../../errors/PasswordNotFoundError';
-import {useChangeAccountService} from '../../hooks/useChangeAccountService';
+import {useChangeAccount} from '../../hooks/useChangeAccount';
 import * as loadPassword from '../secure-storage/loadPassword';
 
 const wrapper: React.ComponentType<React.ProviderProps<void>> = ({children}) => {
@@ -32,7 +32,7 @@ describe('changeAccount', () => {
 
   test('セキュアストレージからパスワードを取得してログインAPIを呼び出しているかの検証', async () => {
     const spySecureStorageAdapter = jest.spyOn(loadPassword, 'loadPassword').mockResolvedValue('password123');
-    const {result} = renderHook(() => useChangeAccountService(), {wrapper});
+    const {result} = renderHook(() => useChangeAccount(), {wrapper});
     await act(async () => {
       const res = await result.current.mutateAsync({accountId: '123456789'});
       expect(res).toEqual({status: AccountLoginResponseStatus.COMPLETE});
@@ -44,7 +44,7 @@ describe('changeAccount', () => {
 
   test('セキュアストレージからパスワードを取得できなかった場合の検証', async () => {
     jest.spyOn(loadPassword, 'loadPassword').mockResolvedValue(null);
-    const {result} = renderHook(() => useChangeAccountService(), {wrapper});
+    const {result} = renderHook(() => useChangeAccount(), {wrapper});
     await act(async () => {
       const changeAccount = result.current.mutateAsync({accountId: '123456789'});
       await expect(changeAccount).rejects.toThrowError(PasswordNotFoundError);

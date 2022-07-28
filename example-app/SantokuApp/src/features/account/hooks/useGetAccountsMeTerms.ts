@@ -3,6 +3,6 @@ import {useQuery} from 'react-query';
 
 import {getAccountsMeTerms} from '../utils/auth/getAccountsMeTerms';
 
-export const useGetAccountsMeTermsService = (options?: {query?: {enabled?: boolean}}) => {
+export const useGetAccountsMeTerms = (options?: {query?: {enabled?: boolean}}) => {
   return useQuery(getGetAccountsMeQueryKey(), getAccountsMeTerms, {enabled: options?.query?.enabled});
 };

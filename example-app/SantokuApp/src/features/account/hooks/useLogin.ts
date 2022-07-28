@@ -6,6 +6,6 @@ import {useMutation} from 'react-query';
 
 import {login} from '../utils/auth/login';
 
-export const useLoginService = () => {
+export const useLogin = () => {
   return useMutation(async (arg: {accountId: string; password: string}) => login(arg.accountId, arg.password));
 };

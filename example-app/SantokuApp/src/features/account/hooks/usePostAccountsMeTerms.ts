@@ -6,7 +6,7 @@ import {useMutation} from 'react-query';
 //       利用規約の同意状態をローカルストレージに保存する。
 const axiosPostOkResponse = {status: 201, statusText: 'Created', config: {}, request: {}, headers: {}};
 const sleep = () => new Promise(resolve => setTimeout(resolve, 100));
-export const usePostAccountsMeTermsService = () => {
+export const usePostAccountsMeTerms = () => {
   return useMutation('accountService#usePostAccountsMeTerms', async (data: TermsOfServiceAgreementStatus) => {
     await sleep();
     await AsyncStorage.setItem(
