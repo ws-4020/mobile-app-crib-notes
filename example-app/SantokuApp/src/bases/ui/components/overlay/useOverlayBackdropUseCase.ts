@@ -1,6 +1,6 @@
 import {usePrevious} from 'bases/core/utils/usePrevious';
 import {useVisibility} from 'bases/core/utils/useVisibility';
-import {useWorkletCallback} from 'bases/utilities/useWorkletCallback';
+import {useWorkletCallback} from 'bases/core/utils/useWorkletCallback';
 import {useCallback, useEffect} from 'react';
 import {BackHandler, NativeEventSubscription} from 'react-native';
 
