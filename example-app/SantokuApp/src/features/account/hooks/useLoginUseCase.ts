@@ -25,7 +25,6 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
   const login = useCallback(async () => {
     if (await isValidForm(form)) {
       try {
-        // TODO: ここはもっとServiceに寄せても良さそう
         setIsExecutingLogin(true);
         const accountId = form.values.accountId;
         const password = form.values.password;

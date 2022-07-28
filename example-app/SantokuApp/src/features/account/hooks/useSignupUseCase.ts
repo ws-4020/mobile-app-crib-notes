@@ -31,7 +31,6 @@ export const useSignupUseCase = (
   const signup = useCallback(async () => {
     if (await isValidForm(form)) {
       try {
-        // TODO: もうちょっとserviceに移動できそう
         setIsExecutingSignup(true);
         const nickname = form.values.nickname;
         const password = await generatePassword();
