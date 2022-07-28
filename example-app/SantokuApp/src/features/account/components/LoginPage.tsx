@@ -16,15 +16,13 @@ import {useLoginUseCase} from '../hooks/useLoginUseCase';
 import {useTerms} from '../hooks/useTerms';
 
 export type LoginPageProps = {
-  navigation: {
-    createAccount: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => void;
-  };
+  navigateToCreateAccount: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => void;
 };
 
-export const LoginPage: React.VFC<LoginPageProps> = ({navigation}) => {
+export const LoginPage: React.VFC<LoginPageProps> = ({navigateToCreateAccount}) => {
   const {form} = useLoginForm();
   const {isFetchedTerms} = useTerms();
-  const {createAccount} = useCreateAccountUseCase(navigation);
+  const {createAccount} = useCreateAccountUseCase(navigateToCreateAccount);
   const {login, isExecutingLogin} = useLoginUseCase(form);
   const {clearAccountId} = useClearAccountIdUseCase(form);
   const {clearPassword} = useClearPasswordUseCase(form);

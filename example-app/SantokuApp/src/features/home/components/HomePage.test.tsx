@@ -34,8 +34,7 @@ const Wrapper: React.FC = ({children}) => {
 
 describe('Home', () => {
   beforeEach(() => {
-    const Screen = HomePage as React.FC;
-    render(<Screen />, {wrapper: Wrapper});
+    render(<HomePage />, {wrapper: Wrapper});
   });
 
   it('マウントされたときに正常にレンダリングされること', () => {

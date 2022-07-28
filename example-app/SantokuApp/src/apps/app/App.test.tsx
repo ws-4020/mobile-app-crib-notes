@@ -15,9 +15,9 @@ jest.spyOn(BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, 'get').mockResolvedVa
     csrfTokenValue: 'dummy',
   },
 });
-jest.mock('service/backend/systemService', () => {
+jest.mock('features/backend/apis/system/system', () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const originalModule = jest.requireActual('service/backend/systemService');
+  const originalModule = jest.requireActual('features/backend/apis/system/system');
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return {
     ...originalModule,
@@ -34,9 +34,9 @@ jest.mock('service/backend/systemService', () => {
   };
 });
 
-jest.mock('service/backend/accountService', () => {
+jest.mock('features/backend/apis/account/account', () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const originalModule = jest.requireActual('service/backend/accountService');
+  const originalModule = jest.requireActual('features/backend/apis/account/account');
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return {
     ...originalModule,
@@ -61,9 +61,9 @@ jest.mock('service/backend/accountService', () => {
   };
 });
 
-jest.mock('service/backend/termService', () => {
+jest.mock('features/backend/apis/terms/terms', () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const originalModule = jest.requireActual('service/backend/termService');
+  const originalModule = jest.requireActual('features/backend/apis/terms/terms');
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return {
     ...originalModule,
@@ -71,25 +71,16 @@ jest.mock('service/backend/termService', () => {
   };
 });
 
-jest.mock('bases/authentication/AuthenticationService', () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const originalModule = jest.requireActual('bases/authentication/AuthenticationService');
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+jest.mock('features/account/utils/auth/autoLogin', () => {
   return {
-    ...originalModule,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    AuthenticationService: {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      ...originalModule.AuthenticationService,
-      autoLogin: jest.fn(() => {
-        return Promise.resolve({
-          status: 200,
-          data: {
-            status: 'COMPLETE',
-          },
-        });
-      }),
-    },
+    autoLogin: jest.fn(() => {
+      return Promise.resolve({
+        status: 200,
+        data: {
+          status: 'COMPLETE',
+        },
+      });
+    }),
   };
 });
 
@@ -105,7 +96,7 @@ describe('App', () => {
     render(<App />);
     await waitFor(
       () => {
-        expect(screen.queryByTestId('HomeScreen')).not.toBeNull();
+        expect(screen.queryByTestId('HomePage')).not.toBeNull();
         expect(screen).toMatchSnapshot();
       },
       {timeout: 60000},

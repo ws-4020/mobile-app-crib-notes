@@ -1,4 +1,4 @@
-import {render, screen} from '@testing-library/react-native';
+import {render, screen, waitFor} from '@testing-library/react-native';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
 import {WithAppTheme} from 'bases/ui/contexts/AppThemeContext';
@@ -14,8 +14,8 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 import {WithAccountContext} from '../contexts/WithAccountContext';
 import {LoginPageProps} from './LoginPage';
 
-jest.mock('service/backend/accountService');
-jest.mock('service/backend/termService');
+jest.mock('features/backend/apis/account/account');
+jest.mock('features/backend/apis/terms/terms');
 
 const Wrapper: React.FC = ({children}) => {
   const accountData = {account: {accountId: '123456789', deviceTokens: []}};
@@ -41,7 +41,7 @@ beforeAll(async () => {
 });
 
 describe('LoginScreen', () => {
-  it('マウントされたときに正常にレンダリングされること', () => {
+  it('マウントされたときに正常にレンダリングされること', async () => {
     (useGetAccountsMe as jest.Mock).mockReturnValue({refetch: () => {}});
     (useGetAccountsMeTerms as jest.Mock).mockReturnValue({refetch: () => {}});
     (useGetTerms as jest.Mock).mockReturnValue({refetch: () => {}});
@@ -49,11 +49,13 @@ describe('LoginScreen', () => {
     // importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const Screen = require('./LoginPage').LoginPage.component as React.FC<LoginPageProps>;
-    render(<Screen navigation={{createAccount: jest.fn}} />, {
+    const Page = require('./LoginPage').LoginPage as React.FC<LoginPageProps>;
+    render(<Page navigateToCreateAccount={() => {}} />, {
       wrapper: Wrapper,
     });
-    expect(screen.queryByTestId('Login')).not.toBeNull();
-    expect(screen).toMatchSnapshot();
+    await waitFor(() => {
+      expect(screen.queryByTestId('Login')).not.toBeNull();
+      expect(screen).toMatchSnapshot();
+    });
   });
 });

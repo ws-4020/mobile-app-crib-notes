@@ -4,9 +4,9 @@ import {useCallback} from 'react';
 
 import {useTerms} from './useTerms';
 
-export const useCreateAccountUseCase = (navigation: {
-  createAccount: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => void;
-}) => {
+export const useCreateAccountUseCase = (
+  navigateToCreateAccount: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => void,
+) => {
   const termsAgreementOverlay = useTermsAgreementOverlay();
   const {termsOfService} = useTerms();
   const createAccount = useCallback(() => {
@@ -14,10 +14,10 @@ export const useCreateAccountUseCase = (navigation: {
       // 利用規約を取得できていない場合はボタンを非活性にしているので、ここでは必ず存在する想定
       termsOfService: termsOfService!.data,
       exitingCallbackOnAgreed: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => {
-        navigation.createAccount(termsOfServiceAgreementStatus);
+        navigateToCreateAccount(termsOfServiceAgreementStatus);
       },
       dismissible: true,
     });
-  }, [navigation, termsAgreementOverlay, termsOfService]);
+  }, [navigateToCreateAccount, termsAgreementOverlay, termsOfService]);
   return {createAccount};
 };
