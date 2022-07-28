@@ -6,7 +6,7 @@ import {useCallback} from 'react';
 
 import {useAgreedClientState} from './useAgreedClientState';
 
-export const useOnAgreeUseCase = (termsOfService: TermsOfService) => {
+export const useOnAgreeUseCase = (close: () => void, termsOfService: TermsOfService) => {
   const [, setAgreedStatus] = useAgreedClientState();
   const accountContext = useAccountContext();
   const accountContextOperation = useAccountContextOperation();
@@ -30,6 +30,7 @@ export const useOnAgreeUseCase = (termsOfService: TermsOfService) => {
     accountContext.isLoggedIn,
     accountContextOperation,
     callPostAccountsMeTerms,
+    close,
     setAgreedStatus,
     termsOfService.version,
   ]);

@@ -5,12 +5,13 @@ import {OverlayContainer} from 'bases/ui/components/overlay/OverlayContainer';
 import {WebView} from 'bases/ui/components/webview/WebView';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import {TermsOfService} from 'features/backend/apis/model/termsOfService';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
 import {useButtonDisableClientState} from '../hooks/useButtonDisableClientState';
 import {useComposedExitingCallbackUseCase} from '../hooks/useComposedExitingCallbackUseCase';
+import {useExitingCallbackOnAgreedUseCase} from '../hooks/useExitingCallbackOnAgreedUseCase';
 import {useIsWebViewErrorClientState} from '../hooks/useIsWebViewErrorClientState';
 import {useOnAgreeUseCase} from '../hooks/useOnAgreeUseCase';
 import {useOnScrollEndOnceUseCase} from '../hooks/useOnScrollEndOnceUseCase';
@@ -53,11 +54,14 @@ export const TermsAgreementOverlay: React.FC<TermsAgreementOverlayProps> = ({
   const [isWebViewError] = useIsWebViewErrorClientState();
   const [buttonDisable] = useButtonDisableClientState();
   const {webViewSource} = useWebViewSource(termsOfService);
-  const {composedExitingCallback} = useComposedExitingCallbackUseCase();
+  const {composedExitingCallback} = useComposedExitingCallbackUseCase(exitingCallback);
+  const {exitOnAgreed} = useExitingCallbackOnAgreedUseCase(exitingCallbackOnAgreed);
   const {resetWebViewError} = useResetWebViewErrorUseCase();
   const {onScrollEndOnce} = useOnScrollEndOnceUseCase();
   const {onWebViewError} = useOnWebViewErrorUseCase();
-  const {onAgree, isLoading} = useOnAgreeUseCase(termsOfService);
+  const {onAgree, isLoading} = useOnAgreeUseCase(close, termsOfService);
+
+  useEffect(() => exitOnAgreed(), [exitOnAgreed]);
 
   return (
     <OverlayBackdrop
