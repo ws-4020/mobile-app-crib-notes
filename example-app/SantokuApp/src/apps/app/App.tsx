@@ -1,3 +1,4 @@
+import {setErrorSender} from 'bases/error/sendErrorLog';
 import {firebaseConfig} from 'bases/firebase/configs/FirebaseConfig';
 import {createLogger, setLogger} from 'bases/logging/utils';
 import {FirebaseCrashlyticsTransport} from 'bases/logging/utils/FirebaseCrashlyticsTransport';
@@ -9,6 +10,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {AppWithInitialization} from './AppWithInitialization';
 import {WithAppTheme} from './providers/AppThemeContext';
 import {WithOverlay} from './providers/WithOverlay';
+import {sendErrorLog} from './utils/sendErrorLog';
 
 type AppProperties = {
   [key: string]: any;
@@ -19,6 +21,8 @@ setLogger(
     ? createLogger({level: 'trace'})
     : createLogger({level: 'error', transports: [new FirebaseCrashlyticsTransport()]}),
 );
+
+setErrorSender(sendErrorLog);
 
 export const App = ({isHeadless}: AppProperties) => {
   // isHeadlessを取得するためにはAppDelegate.mに変更が必要
