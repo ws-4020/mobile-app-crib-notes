@@ -1,9 +1,9 @@
-import {MaterialIcons} from '@expo/vector-icons';
 import {createStackNavigator} from '@react-navigation/stack';
+import {m} from 'bases/message/utils/Message';
 import React from 'react';
 
 import {TeamDetailScreen} from '../screens/team/TeamDetailScreen';
-import {MainTabParamList, TeamStackParamList} from './types';
+import {TeamStackParamList} from './types';
 import {useLogoutButton} from './useLogoutButton';
 
 // FIXME: Bottom Tabs + Native Stackでは、Androidで画面がチカチカする事象が発生したため、Stackを使用しています。
@@ -13,23 +13,17 @@ import {useLogoutButton} from './useLogoutButton';
 // https://github.com/software-mansion/react-native-screens/issues/1251
 const nav = createStackNavigator<TeamStackParamList>();
 
-const ScreenName = 'TeamStackNav';
-const Screen: React.FC = () => {
+export const TeamStackNav: React.FC = () => {
   const {LogoutButton} = useLogoutButton();
   return (
     <nav.Navigator screenOptions={{headerRight: LogoutButton}}>
-      <nav.Screen {...TeamDetailScreen} />
+      <nav.Screen
+        name="TeamDetail"
+        component={TeamDetailScreen}
+        options={{
+          title: m('チーム詳細'),
+        }}
+      />
     </nav.Navigator>
   );
-};
-
-export const TeamStackNav: TabScreenConfig<MainTabParamList, typeof ScreenName> = {
-  component: Screen,
-  name: ScreenName,
-  options: {
-    tabBarAccessibilityLabel: 'Team',
-    tabBarShowLabel: false,
-    headerShown: false,
-    tabBarIcon: ({color}) => <MaterialIcons name="groups" size={30} color={color} />,
-  },
 };

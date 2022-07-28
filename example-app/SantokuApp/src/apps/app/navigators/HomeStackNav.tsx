@@ -1,10 +1,9 @@
-import {Ionicons} from '@expo/vector-icons';
 import {createStackNavigator} from '@react-navigation/stack';
 import {m} from 'bases/message/utils/Message';
 import React from 'react';
 
 import {HomeScreen} from '../screens/home/HomeScreen';
-import {HomeStackParamList, MainTabParamList} from './types';
+import {HomeStackParamList} from './types';
 import {useLogoutButton} from './useLogoutButton';
 
 // FIXME: Bottom Tabs + Native Stackでは、Androidで画面がチカチカする事象が発生したため、Stackを使用しています。
@@ -14,23 +13,11 @@ import {useLogoutButton} from './useLogoutButton';
 // https://github.com/software-mansion/react-native-screens/issues/1251
 const nav = createStackNavigator<HomeStackParamList>();
 
-const ScreenName = 'HomeStackNav';
-const Screen: React.FC = () => {
+export const HomeStackNav: React.FC = () => {
   const {LogoutButton} = useLogoutButton();
   return (
     <nav.Navigator screenOptions={{headerRight: LogoutButton}}>
       <nav.Screen component={HomeScreen} name="Home" options={{title: m('ホーム')}} />
     </nav.Navigator>
   );
-};
-
-export const HomeStackNav: TabScreenConfig<MainTabParamList, typeof ScreenName> = {
-  component: Screen,
-  name: ScreenName,
-  options: {
-    tabBarAccessibilityLabel: 'Home',
-    tabBarShowLabel: false,
-    headerShown: false,
-    tabBarIcon: ({color}) => <Ionicons name="md-home" size={30} color={color} />,
-  },
 };

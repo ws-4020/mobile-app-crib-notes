@@ -38,13 +38,12 @@ import {SearchFormTodoDemoScreen} from 'apps/app/screens/demo-react-query/Search
 import {SnackbarScreen} from 'apps/app/screens/demo-snackbar/SnackbarScreen';
 import React from 'react';
 
-import {DemoStackParamList, RootStackParamList} from './types';
+import {DemoStackParamList} from './types';
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
 
 const nav = createNativeStackNavigator<DemoStackParamList>();
 
-const name = 'DemoStackNav';
-export const Screen: React.FC = () => {
+export const DemoStackNav: React.FC = () => {
   const {CloseThisNavigatorButton} = useCloseThisNavigatorButton();
 
   return (
@@ -154,12 +153,4 @@ export const Screen: React.FC = () => {
       />
     </nav.Navigator>
   );
-};
-
-export const DemoStackNav: NativeStackScreenConfig<RootStackParamList, typeof name> = {
-  component: Screen,
-  name,
-  options: {
-    presentation: 'formSheet' as const,
-  },
 };
