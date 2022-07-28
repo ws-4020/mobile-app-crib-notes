@@ -11,13 +11,13 @@ import {AccountLoginResponse} from 'features/backend/apis/model';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 
 import {UnauthorizedError} from '../../errors/UnauthorizedError';
-import {SecureStorageAdapter} from '../SecureStorageAdapter';
+import {saveActiveAccountId} from '../secure-storage/saveActiveAccountId';
 
 export const login = async (accountId: string, password: string): Promise<AccountLoginResponse> => {
   try {
     const res = await postLogin({accountId, password});
     await refreshCsrfToken();
-    await SecureStorageAdapter.saveActiveAccountId(accountId);
+    await saveActiveAccountId(accountId);
     await crashlytics().setUserId(accountId);
 
     return res.data;

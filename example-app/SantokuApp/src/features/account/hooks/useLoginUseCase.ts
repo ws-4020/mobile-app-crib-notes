@@ -8,7 +8,7 @@ import {Alert} from 'react-native';
 import {useAccountContextOperation} from '../contexts/useAccountContextOperation';
 import {isUnauthorizedError} from '../errors/UnauthorizedError';
 import {LoginForm} from '../types/LoginForm';
-import {SecureStorageAdapter} from '../utils/SecureStorageAdapter';
+import {savePassword} from '../utils/secure-storage/savePassword';
 import {useGetAccountsMeService} from './useGetAccountsMeService';
 import {useGetAccountsMeTermsService} from './useGetAccountsMeTermsService';
 import {useLoginService} from './useLoginService';
@@ -30,7 +30,7 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         const accountId = form.values.accountId;
         const password = form.values.password;
         await callLogin({accountId, password});
-        await SecureStorageAdapter.savePassword(accountId, password);
+        await savePassword(accountId, password);
         // callGetAccountMe.dataは必ず存在する想定
         const account = (await callGetAccountMe({throwOnError: true})).data!.data;
         const termsAgreementStatus = (await callGetAccountsMeTerms({throwOnError: true})).data?.data;

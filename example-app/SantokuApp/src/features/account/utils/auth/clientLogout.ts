@@ -6,13 +6,15 @@ import {deleteFcmToken} from 'bases/firebase/utils/deleteFcmToken';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
 
-import {SecureStorageAdapter} from '../SecureStorageAdapter';
+import {deleteActiveAccountId} from '../secure-storage/deleteActiveAccountId';
+import {deletePassword} from '../secure-storage/deletePassword';
+import {loadActiveAccountId} from '../secure-storage/loadActiveAccountId';
 
 export const clientLogout = async (): Promise<void> => {
-  const accountId = await SecureStorageAdapter.loadActiveAccountId();
+  const accountId = await loadActiveAccountId();
   if (accountId) {
-    await SecureStorageAdapter.deleteActiveAccountId();
-    await SecureStorageAdapter.deletePassword(accountId);
+    await deleteActiveAccountId();
+    await deletePassword(accountId);
   }
   await crashlytics().setUserId('');
   try {

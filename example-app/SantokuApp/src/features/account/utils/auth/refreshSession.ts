@@ -7,15 +7,16 @@ import {
 } from 'features/backend/utils/customInstance';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 
-import {SecureStorageAdapter} from '../SecureStorageAdapter';
+import {loadActiveAccountId} from '../secure-storage/loadActiveAccountId';
+import {loadPassword} from '../secure-storage/loadPassword';
 
 // 共通リトライ処理に必要なAPI呼び出しだけは、自動生成コードに依存しない形で用意する
 const autoLogin = async () => {
-  const accountId = await SecureStorageAdapter.loadActiveAccountId();
+  const accountId = await loadActiveAccountId();
   if (!accountId) {
     throw new ApplicationError('There is no auto-login enabled account.');
   }
-  const password = await SecureStorageAdapter.loadPassword(accountId);
+  const password = await loadPassword(accountId);
   if (!password) {
     throw new ApplicationError('The password for the account ID does not exist.');
   }
