@@ -1,5 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {showUpdateRequiredDialog} from 'features/app-updates/utils/showUpdateRequiredDialog';
+import {WithCheckAppUpdates} from 'features/app-updates/components/WithCheckAppUpdates';
 import {WithTermsAgreementOverlay} from 'features/terms/contexts/WithTermsAgreementOverlay';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
@@ -29,9 +29,6 @@ export const AppWithInitialization: React.FC = () => {
 
   if (initializationResult.code === 'Initializing') {
     return null;
-  } else if (initializationResult.code === 'UpdateRequired') {
-    showUpdateRequiredDialog(initializationResult.supportedVersion);
-    return null;
   } else if (initializationResult.code === 'Failed') {
     Alert.alert(initializationResult.title, initializationResult.message);
     return null;
@@ -45,17 +42,19 @@ export const AppWithInitialization: React.FC = () => {
     const WithFirebaseMessagingHandlers = require('./providers/WithFirebaseMessagingHandlers')
       .WithFirebaseMessagingHandlers as React.FC<{initialData: AppInitialData}>;
     return (
-      <NavigationContainer>
-        <WithAccountContext accountData={initializationResult.data.accountData}>
-          <WithReactQuery>
-            <WithTermsAgreementOverlay>
-              <WithFirebaseMessagingHandlers initialData={initializationResult.data.initialData}>
-                <RootStackNav initialData={initializationResult.data.initialData} />
-              </WithFirebaseMessagingHandlers>
-            </WithTermsAgreementOverlay>
-          </WithReactQuery>
-        </WithAccountContext>
-      </NavigationContainer>
+      <WithCheckAppUpdates>
+        <NavigationContainer>
+          <WithAccountContext accountData={initializationResult.data.accountData}>
+            <WithReactQuery>
+              <WithTermsAgreementOverlay>
+                <WithFirebaseMessagingHandlers initialData={initializationResult.data.initialData}>
+                  <RootStackNav initialData={initializationResult.data.initialData} />
+                </WithFirebaseMessagingHandlers>
+              </WithTermsAgreementOverlay>
+            </WithReactQuery>
+          </WithAccountContext>
+        </NavigationContainer>
+      </WithCheckAppUpdates>
     );
   }
 };

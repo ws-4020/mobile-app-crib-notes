@@ -3,7 +3,7 @@ import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
 import {getAppUpdates} from 'features/backend/apis/system/system';
 
-import {checkAppUpdates} from './checkAppUpdates';
+import {requestAppUpdates} from './requestAppUpdates';
 
 jest.mock('features/backend/apis/system/system');
 
@@ -16,12 +16,12 @@ beforeEach(() => {
 
 describe('checkAppUpdates', () => {
   it('Platformがwebの場合はApplicationErrorがスローされること', async () => {
-    await expect(() => checkAppUpdates('web', '0.0.1')).rejects.toThrow(
+    await expect(() => requestAppUpdates('web', '0.0.1')).rejects.toThrow(
       new ApplicationError('Not supported type. type=[web]'),
     );
   });
   it('nativeApplicationVersionがnullの場合はApplicationErrorがスローされること', async () => {
-    await expect(() => checkAppUpdates('android', null)).rejects.toThrow(
+    await expect(() => requestAppUpdates('android', null)).rejects.toThrow(
       new ApplicationError('Invalid version. version=[null]'),
     );
   });
@@ -30,6 +30,6 @@ describe('checkAppUpdates', () => {
       throw new Error('dummy');
     });
 
-    await expect(() => checkAppUpdates('android', '0.1.1')).rejects.toThrow(new Error('dummy'));
+    await expect(() => requestAppUpdates('android', '0.1.1')).rejects.toThrow(new Error('dummy'));
   });
 });

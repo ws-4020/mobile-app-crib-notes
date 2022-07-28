@@ -2,15 +2,12 @@ import messaging from '@react-native-firebase/messaging';
 import {resolveErrorMessage} from 'bases/error/resolveErrorMessage';
 import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {enhanceValidator} from 'bases/validator/utils';
-import * as Application from 'expo-application';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {isUnauthorizedError} from 'features/account/errors/UnauthorizedError';
 import {canAutoLogin} from 'features/account/utils/canAutoLogin';
 import {setRefreshSessionInterceptor} from 'features/account/utils/refreshSession';
-import {checkAppUpdates} from 'features/app-updates/utils/checkAppUpdates';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {useCallback, useMemo, useState} from 'react';
-import {Platform} from 'react-native';
 
 import {isInitialDataError} from '../errors/initialDataError';
 import {AccountData} from '../types/AccountData';
@@ -33,22 +30,13 @@ type InitializeSuccessResult = {
   code: 'Success';
   data: {accountData: AccountData; initialData: AppInitialData};
 };
-type InitializeUpdateRequiredResult = {
-  code: 'UpdateRequired';
-  message: string;
-  supportedVersion: string;
-};
 type InitializeFailedResult = {
   code: 'Failed';
   title: string;
   message: string;
 };
 
-type InitializationResult =
-  | Initializing
-  | InitializeSuccessResult
-  | InitializeUpdateRequiredResult
-  | InitializeFailedResult;
+type InitializationResult = Initializing | InitializeSuccessResult | InitializeFailedResult;
 
 const initializeCoreFeatures = async () => {
   // 開発中は画面がスリープしないように設定
@@ -104,17 +92,6 @@ export const useAppInitializer: () => AppInitializer = () => {
     await refreshCsrfToken();
     // AxiosInstanceに401の時のリトライ処理を追加
     setRefreshSessionInterceptor();
-
-    // アプリ更新チェック
-    const appUpdates = await checkAppUpdates(Platform.OS, Application.nativeApplicationVersion);
-    if (appUpdates.updateRequired) {
-      setInitializationResult({
-        code: 'UpdateRequired',
-        message: appUpdates.message,
-        supportedVersion: appUpdates.supportedVersion,
-      });
-      return;
-    }
 
     // 初期データの読み込み
     try {
