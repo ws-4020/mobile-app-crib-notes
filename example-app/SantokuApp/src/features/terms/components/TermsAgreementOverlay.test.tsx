@@ -3,7 +3,7 @@ import {render, screen} from '@testing-library/react-native';
 import {AppConfig} from 'bases/core/config/AppConfig';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
-import {WithSnackbarMock} from 'bases/tests/WithSnackbarMock.test';
+import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
 import {WithAccountContextMock} from 'features/tests/WithAccountContextMock.test';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -16,11 +16,11 @@ const Wrapper: React.FC = ({children}) => {
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>
-      <WithSnackbarMock>
+      <WithSnackbar>
         <QueryClientProvider client={queryClient}>
           <WithAccountContextMock accountData={accountData}>{children}</WithAccountContextMock>
         </QueryClientProvider>
-      </WithSnackbarMock>
+      </WithSnackbar>
     </SafeAreaProvider>
   );
 };

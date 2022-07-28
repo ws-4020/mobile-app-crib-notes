@@ -1,6 +1,7 @@
 import {renderHook} from '@testing-library/react-native';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {AxiosError} from 'axios';
+import {setErrorSender} from 'bases/error/sendErrorLog';
 import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import React from 'react';
@@ -9,8 +10,11 @@ import {Mutation} from 'react-query';
 import {loadBundledMessagesAsync} from '../utils/loadBundledMessagesAsync';
 import {useDefaultGlobalMutationErrorHandler} from './useDefaultGlobalMutationErrorHandler';
 
-jest.mock('components/overlay/snackbar/WithSnackbar');
-jest.mock('bases/logging');
+setErrorSender(jest.fn());
+
+jest.mock('bases/ui/contexts/WithSnackbar');
+jest.mock('bases/ui/contexts/useSnackbar');
+jest.mock('bases/logging/utils');
 
 const Wrapper: React.FC = ({children}) => {
   const accountData = {account: {accountId: '123456789', deviceTokens: []}};

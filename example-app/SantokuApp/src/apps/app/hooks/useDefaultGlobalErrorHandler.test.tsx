@@ -1,6 +1,7 @@
 import {act, renderHook} from '@testing-library/react-native';
 import {WithAccountContext} from 'apps/app/providers/WithAccountContext';
 import {AxiosError} from 'axios';
+import {setErrorSender} from 'bases/error/sendErrorLog';
 import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
@@ -12,11 +13,14 @@ import {AccountData} from '../types/AccountData';
 import {loadBundledMessagesAsync} from '../utils/loadBundledMessagesAsync';
 import {useDefaultGlobalErrorHandler} from './useDefaultGlobalErrorHandler';
 
-jest.mock('components/overlay/snackbar/WithSnackbar');
-jest.mock('context/useAccountContextOperation');
-jest.mock('bases/logging');
+jest.mock('bases/ui/contexts/WithSnackbar');
+jest.mock('bases/ui/contexts/useSnackbar');
+jest.mock('features/account/contexts/useAccountContextOperation');
+jest.mock('bases/logging/utils');
 
 jest.useFakeTimers();
+
+setErrorSender(jest.fn());
 
 const wrapper = (value: AccountData) => {
   return ({children}: {children: React.ReactNode}) => {
