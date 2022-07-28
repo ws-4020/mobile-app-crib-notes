@@ -1,7 +1,7 @@
 // import時の副作用を防ぐためにimport typeにしてます。
 import type crashlyticsModule from '@react-native-firebase/crashlytics';
+import {launchedId} from 'bases/core/utils/launchedId';
 import {firebaseConfig} from 'bases/firebase/configs/FirebaseConfig';
-import {launchedId} from 'bases/id/utils/id';
 
 const initializeFirebaseCrashlyticsAsync = async () => {
   if (!firebaseConfig.isDummy) {

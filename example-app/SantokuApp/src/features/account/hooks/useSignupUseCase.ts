@@ -1,5 +1,5 @@
+import {generatePassword} from 'bases/core/utils/generatePassword';
 import {useIsMounted} from 'bases/core/utils/useIsMounted';
-import {generatePassword} from 'bases/id/utils/id';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
 import {isValidForm} from 'bases/validator/utils';

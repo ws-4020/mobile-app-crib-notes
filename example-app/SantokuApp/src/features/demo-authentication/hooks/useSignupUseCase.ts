@@ -1,4 +1,4 @@
-import {generatePassword} from 'bases/id/utils/id';
+import {generatePassword} from 'bases/core/utils/generatePassword';
 import {useSignup} from 'features/account/hooks/useSignup';
 import {useCallback} from 'react';
 
