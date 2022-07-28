@@ -6,49 +6,74 @@ import React from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
 import {Input, Text} from 'react-native-elements';
 
-import {usePickerScreenUseCase} from '../picker/usePickerScreenUseCase';
+import {items1} from '../constants/items1';
+import {placeholder} from '../constants/placeholder';
+import {useCancelDate1UseCase} from '../hooks/useCancelDate1UseCase';
+import {useCancelItem1UseCase} from '../hooks/useCancelItem1UseCase';
+import {useCancelYearMonthUseCase} from '../hooks/useCancelYearMonthUseCase';
+import {useChangeSelectedDate1UseCase} from '../hooks/useChangeSelectedDate1UseCase';
+import {useChangeSelectedDate2UseCase} from '../hooks/useChangeSelectedDate2UseCase';
+import {useChangeSelectedDate3UseCase} from '../hooks/useChangeSelectedDate3UseCase';
+import {useChangeSelectedItem1UseCase} from '../hooks/useChangeSelectedItem1UseCase';
+import {useChangeSelectedYearMonthUseCase} from '../hooks/useChangeSelectedYearMonthUseCase';
+import {useDeleteDate1UseCase} from '../hooks/useDeleteDate1UseCase';
+import {useDeleteItem1UseCase} from '../hooks/useDeleteItem1UseCase';
+import {useDeleteYearMonthUseCase} from '../hooks/useDeleteYearMonthUseCase';
+import {useDismissDate1UseCase} from '../hooks/useDismissDate1UseCase';
+import {useDismissItem1UseCase} from '../hooks/useDismissItem1UseCase';
+import {useDismissYearMonthUseCase} from '../hooks/useDismissYearMonthUseCase';
+import {useDoneDate1UseCase} from '../hooks/useDoneDate1UseCase';
+import {useDoneItem1UseCase} from '../hooks/useDoneItem1UseCase';
+import {useDoneYearMonthUseCase} from '../hooks/useDoneYearMonthUseCase';
+import {useItems1InputValue} from '../hooks/useItems1InputValue';
+import {useItems1Key} from '../hooks/useItems1Key';
+import {useMaximumDate} from '../hooks/useMaximumDate';
+import {useMaximumYearMonth} from '../hooks/useMaximumYearMonth';
+import {useMinimumDate} from '../hooks/useMinimumDate';
+import {useMinimumYearMonth} from '../hooks/useMinimumYearMonth';
+import {useNeutralButtonPressedDate1UseCase} from '../hooks/useNeutralButtonPressedDate1UseCase';
+import {useSelectedDate1} from '../hooks/useSelectedDate1';
+import {useSelectedDate2} from '../hooks/useSelectedDate2';
+import {useSelectedDate3} from '../hooks/useSelectedDate3';
+import {useYearMonth} from '../hooks/useYearMonth';
+import {formatDate} from '../utils/formatDate';
 
 export const PickerPage: React.FC = () => {
-  const {
-    items1,
-    items1Key,
-    items1InputValue,
-    onSelectedItemChangeForItem1,
-    onDismissForItem1,
-    onDeleteForItem1,
-    onCancelForItem1,
-    onDoneForItem1,
-    maximumYearMonth,
-    minimumYearMonth,
-    yearMonth,
-    onSelectedItemChangeForYearMonth,
-    onDismissForYearMonthPicker,
-    onDeleteForYearMonthPicker,
-    onCancelForYearMonthPicker,
-    onDoneForYearMonthPicker,
-    maximumDate,
-    minimumDate,
-    formatDate,
-    selectedDate1,
-    onSelectedItemChangeForDate1,
-    onDismissForDate1,
-    onDeleteForDate1,
-    onCancelForDate1,
-    onDoneForDate1,
-    onNeutralButtonPressedForDate1,
-    selectedDate2,
-    onSelectedItemChangeForDate2,
-    selectedDate3,
-    onSelectedItemChangeForDate3,
-    placeholder,
-  } = usePickerScreenUseCase();
+  const [items1Key] = useItems1Key();
+  const {items1InputValue} = useItems1InputValue();
+  const {onSelectedItem1Change} = useChangeSelectedItem1UseCase();
+  const {onDismissForItem1} = useDismissItem1UseCase();
+  const {onDeleteForItem1} = useDeleteItem1UseCase();
+  const {onCancelForItem1} = useCancelItem1UseCase();
+  const {onDoneForItem1} = useDoneItem1UseCase();
+  const maximumYearMonth = useMaximumYearMonth();
+  const minimumYearMonth = useMinimumYearMonth();
+  const [yearMonth] = useYearMonth();
+  const {onSelectedYearMonthChange} = useChangeSelectedYearMonthUseCase();
+  const {onDismissForYearMonthPicker} = useDismissYearMonthUseCase();
+  const {onDeleteForYearMonthPicker} = useDeleteYearMonthUseCase();
+  const {onCancelForYearMonthPicker} = useCancelYearMonthUseCase();
+  const {onDoneForYearMonthPicker} = useDoneYearMonthUseCase();
+  const maximumDate = useMaximumDate();
+  const minimumDate = useMinimumDate();
+  const [selectedDate1] = useSelectedDate1();
+  const {onSelectedItemChangeForDate1} = useChangeSelectedDate1UseCase();
+  const {onDismissForDate1} = useDismissDate1UseCase();
+  const {onDeleteForDate1} = useDeleteDate1UseCase();
+  const {onCancelForDate1} = useCancelDate1UseCase();
+  const {onDoneForDate1} = useDoneDate1UseCase();
+  const {onNeutralButtonPressedForDate1} = useNeutralButtonPressedDate1UseCase();
+  const [selectedDate2] = useSelectedDate2();
+  const {onSelectedItemChangeForDate2} = useChangeSelectedDate2UseCase();
+  const [selectedDate3] = useSelectedDate3();
+  const {onSelectedItemChangeForDate3} = useChangeSelectedDate3UseCase();
 
   return (
     <View style={styles.container}>
       <Text>■SelectPicker</Text>
       <SelectPicker
         selectedItemKey={items1Key}
-        onSelectedItemChange={onSelectedItemChangeForItem1}
+        onSelectedItemChange={onSelectedItem1Change}
         items={items1}
         onDismiss={onDismissForItem1}
         onDelete={onDeleteForItem1}
@@ -65,7 +90,7 @@ export const PickerPage: React.FC = () => {
         yearSuffixLabel={m('年')}
         monthSuffixLabel={m('月')}
         placeholder={placeholder}
-        onSelectedItemChange={onSelectedItemChangeForYearMonth}
+        onSelectedItemChange={onSelectedYearMonthChange}
         onDismiss={onDismissForYearMonthPicker}
         onDelete={onDeleteForYearMonthPicker}
         onCancel={onCancelForYearMonthPicker}
