@@ -1,12 +1,12 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {showUpdateRequiredDialog} from 'features/app-updates/utils/showUpdateRequiredDialog';
+import {WithTermsAgreementOverlay} from 'features/terms/contexts/WithTermsAgreementOverlay';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
 import {useAppInitializer} from './hooks/useAppInitializer';
 import {WithAccountContext} from './providers/WithAccountContext';
 import {WithReactQuery} from './providers/WithReactQuery';
-import {WithTermsAgreementOverlay} from './providers/WithTermsAgreementOverlay';
 import {AppInitialData} from './types/AppInitialData';
 
 export const AppWithInitialization: React.FC = () => {
