@@ -5,7 +5,6 @@ import {getAppUpdates} from 'features/backend/apis/system/system';
 
 import {checkAppUpdates} from './checkAppUpdates';
 
-
 jest.mock('features/backend/apis/system/system');
 
 beforeAll(async () => {
