@@ -6,7 +6,7 @@ import {
 } from 'features/account/contexts/useAccountContextOperation';
 import React from 'react';
 
-import { AccountData } from '../types/AccountData';
+import {AccountData} from '../types/AccountData';
 
 type Props = {
   accountData: AccountData;
