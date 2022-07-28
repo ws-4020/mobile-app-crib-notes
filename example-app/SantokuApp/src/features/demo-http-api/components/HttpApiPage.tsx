@@ -2,24 +2,24 @@ import React from 'react';
 import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
 import {Button, ButtonGroup, CheckBox, Divider, Text} from 'react-native-elements';
 
-import {useHttpApi} from '../http-api/useHttpApi';
+import {credentialsOptions} from '../constants/credentialsOptions';
+import {redirectOptions} from '../constants/redirectOptions';
+import {useAxiosUseCase} from '../hooks/useAxiosUseCase';
+import {useCredentialsOptionIndex} from '../hooks/useCredentialsOptionIndex';
+import {useFetchApiUseCase} from '../hooks/useFetchApiUseCase';
+import {useMaxRedirectsOption} from '../hooks/useMaxRedirectsOption';
+import {useRedirectOptionIndex} from '../hooks/useRedirectOptionIndex';
+import {useResponseInfo} from '../hooks/useResponseInfo';
+import {useWithCredentialsOption} from '../hooks/useWithCredentialsOption';
 
 export const HttpApiPage = () => {
-  const {
-    redirectOptions,
-    credentialsOptions,
-    redirectOptionIndex,
-    credentialsOptionIndex,
-    maxRedirectsOption,
-    withCredentialsOption,
-    responseInfo,
-    setRedirectOptionIndex,
-    setCredentialsOptionIndex,
-    setMaxRedirectsOption,
-    setWithCredentialsOption,
-    callFetch,
-    callAxios,
-  } = useHttpApi();
+  const [redirectOptionIndex, setRedirectOptionIndex] = useRedirectOptionIndex();
+  const [credentialsOptionIndex, setCredentialsOptionIndex] = useCredentialsOptionIndex();
+  const [maxRedirectsOption, setMaxRedirectsOption] = useMaxRedirectsOption();
+  const [withCredentialsOption, setWithCredentialsOption] = useWithCredentialsOption();
+  const [responseInfo] = useResponseInfo();
+  const {callFetchApi} = useFetchApiUseCase();
+  const {callAxiosApi} = useAxiosUseCase();
 
   return (
     <View style={styles.container}>
@@ -43,7 +43,7 @@ export const HttpApiPage = () => {
           />
           <View style={styles.actionBar}>
             <Text>Fetch APIを呼び出します。</Text>
-            <Button onPress={callFetch} title="fetch" />
+            <Button onPress={callFetchApi} title="fetch" />
           </View>
         </View>
         <Divider orientation="vertical" style={styles.divider} />
@@ -65,7 +65,7 @@ export const HttpApiPage = () => {
           />
           <View style={styles.actionBar}>
             <Text>axios getを呼び出します。</Text>
-            <Button onPress={callAxios} title="axios" />
+            <Button onPress={callAxiosApi} title="axios" />
           </View>
         </View>
       </ScrollView>
