@@ -1,4 +1,3 @@
-import {AccountDataDependingComponent} from 'apps/app/initialize/withAccountData';
 import {AccountContextProvider} from 'features/account/contexts/useAccountContext';
 import {
   AccountContextOperationProvider,
@@ -7,7 +6,13 @@ import {
 } from 'features/account/contexts/useAccountContextOperation';
 import React from 'react';
 
-const WithAccountContext: AccountDataDependingComponent = ({accountData, children}) => {
+import {AccountData} from '../types/AccountData';
+
+type Props = {
+  accountData: AccountData;
+};
+
+const WithAccountContext: React.FC<Props> = ({accountData, children}) => {
   const account = accountData.account;
   const terms = accountData.terms;
   const initialAccountContext = account ? {account, terms, isLoggedIn: true} : {isLoggedIn: false};

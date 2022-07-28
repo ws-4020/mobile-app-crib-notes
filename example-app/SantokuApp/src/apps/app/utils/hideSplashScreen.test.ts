@@ -1,6 +1,6 @@
 import {waitFor} from '@testing-library/react-native';
 
-import {hideSplashScreen} from './splashScreen';
+import {hideSplashScreen} from './hideSplashScreen';
 
 describe('hideSplashScreen', () => {
   beforeEach(() => {

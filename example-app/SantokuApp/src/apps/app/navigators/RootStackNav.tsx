@@ -4,9 +4,9 @@ import {AccountContext, useAccountContext} from 'features/account/contexts/useAc
 import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
 
-import {AppInitialData} from '../initialize/types';
 import {LoginScreen} from '../screens/account/LoginScreen';
 import {ProfileRegistrationScreen} from '../screens/account/ProfileRegistrationScreen';
+import {AppInitialData} from '../types/AppInitialData';
 import {AuthenticatedStackNav, useAuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
 import {RootStackParamList} from './types';

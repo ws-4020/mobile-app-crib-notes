@@ -5,12 +5,11 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import React, {useCallback, useEffect} from 'react';
 
-import {AppInitialData} from '../initialize/types';
-import {InitialDataDependingComponent} from '../initialize/withInitialData';
 import {AuthenticatedStackNav} from '../navigators/AuthenticatedStackNav';
 import {HomeStackNav} from '../navigators/HomeStackNav';
 import {MainTabNav} from '../navigators/MainTabNav';
 import {NavigationParameter, RootStackParamList} from '../navigators/types';
+import {AppInitialData} from '../types/AppInitialData';
 
 const showMessageOnSnackbar = (
   message: FirebaseMessagingTypes.RemoteMessage,
@@ -44,7 +43,10 @@ const navigateIfRequired = (
   navigation.navigate(...to);
 };
 
-export const WithFirebaseMessagingHandlers: InitialDataDependingComponent = ({children, initialData}) => {
+type Props = {
+  initialData: AppInitialData;
+}
+export const WithFirebaseMessagingHandlers: React.FC<Props> = ({children, initialData}) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const snackbar = useSnackbar();
 
