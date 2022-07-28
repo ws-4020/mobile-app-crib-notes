@@ -10,8 +10,8 @@ import {postLogin} from 'features/backend/apis/account/account';
 import {AccountLoginResponse} from 'features/backend/apis/model';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 
-import {UnauthorizedError} from '../errors/UnauthorizedError';
-import {SecureStorageAdapter} from './SecureStorageAdapter';
+import {UnauthorizedError} from '../../errors/UnauthorizedError';
+import {SecureStorageAdapter} from '../SecureStorageAdapter';
 
 export const login = async (accountId: string, password: string): Promise<AccountLoginResponse> => {
   try {

@@ -7,7 +7,7 @@ import {
 } from 'features/backend/utils/customInstance';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 
-import {SecureStorageAdapter} from './SecureStorageAdapter';
+import {SecureStorageAdapter} from '../SecureStorageAdapter';
 
 // 共通リトライ処理に必要なAPI呼び出しだけは、自動生成コードに依存しない形で用意する
 const autoLogin = async () => {

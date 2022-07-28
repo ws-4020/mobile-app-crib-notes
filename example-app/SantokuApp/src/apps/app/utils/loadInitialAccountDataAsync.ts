@@ -1,4 +1,4 @@
-import {getAccountsMeTerms} from 'features/account/utils/getAccountsMeTerms';
+import {getAccountsMeTerms} from 'features/account/utils/auth/getAccountsMeTerms';
 import {getAccountsMe} from 'features/backend/apis/account/account';
 import {getTerms} from 'features/terms/utils/getTerms';
 

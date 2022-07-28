@@ -4,7 +4,7 @@
  */
 import {useMutation} from 'react-query';
 
-import {login} from '../utils/login';
+import {login} from '../utils/auth/login';
 
 export const useLoginService = () => {
   return useMutation(async (arg: {accountId: string; password: string}) => login(arg.accountId, arg.password));

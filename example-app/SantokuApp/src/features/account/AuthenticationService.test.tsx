@@ -14,7 +14,7 @@ import {useLogoutService} from './hooks/useLogoutService';
 import {useRefreshService} from './hooks/useRefreshService';
 import {useSignupService} from './hooks/useSignupService';
 import {SecureStorageAdapter} from './utils/SecureStorageAdapter';
-import {canAutoLogin} from './utils/canAutoLogin';
+import {canAutoLogin} from './utils/auth/canAutoLogin';
 
 const wrapper: React.ComponentType<React.ProviderProps<void>> = ({children}) => {
   const queryClient = new QueryClient();

@@ -1,7 +1,7 @@
 import {AccountLoginResponse} from 'features/backend/apis/model';
 
-import {ActiveAccountIdNotFoundError} from '../errors/ActiveAccountIdNotFoundError';
-import {SecureStorageAdapter} from './SecureStorageAdapter';
+import {ActiveAccountIdNotFoundError} from '../../errors/ActiveAccountIdNotFoundError';
+import {SecureStorageAdapter} from '../SecureStorageAdapter';
 import {changeAccount} from './changeAccount';
 
 /**

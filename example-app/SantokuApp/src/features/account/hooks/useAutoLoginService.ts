@@ -4,7 +4,7 @@
  */
 import {useMutation} from 'react-query';
 
-import {autoLogin} from '../utils/autoLogin';
+import {autoLogin} from '../utils/auth/autoLogin';
 
 export const useAutoLoginService = () => {
   return useMutation(() => autoLogin());

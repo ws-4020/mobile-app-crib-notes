@@ -4,7 +4,7 @@
  */
 import {useMutation} from 'react-query';
 
-import {refresh} from '../utils/refresh';
+import {refresh} from '../utils/auth/refresh';
 
 export const useRefreshService = () => {
   return useMutation(() => refresh());

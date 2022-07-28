@@ -11,7 +11,7 @@ import {useCallback, useState} from 'react';
 import {Alert} from 'react-native';
 
 import {ProfileForm} from '../types/ProfileForm';
-import {clientLogout} from '../utils/clientLogout';
+import {clientLogout} from '../utils/auth/clientLogout';
 import {useLoginService} from './useLoginService';
 import {usePostAccountsMeTermsService} from './usePostAccountsMeTermsService';
 import {useSignupService} from './useSignupService';

@@ -4,8 +4,8 @@ import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {enhanceValidator} from 'bases/validator/utils';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {isUnauthorizedError} from 'features/account/errors/UnauthorizedError';
-import {canAutoLogin} from 'features/account/utils/canAutoLogin';
-import {setRefreshSessionInterceptor} from 'features/account/utils/refreshSession';
+import {canAutoLogin} from 'features/account/utils/auth/canAutoLogin';
+import {setRefreshSessionInterceptor} from 'features/account/utils/auth/refreshSession';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {useCallback, useMemo, useState} from 'react';
 

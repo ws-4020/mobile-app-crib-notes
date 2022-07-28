@@ -6,7 +6,7 @@ import {deleteFcmToken} from 'bases/firebase/utils/deleteFcmToken';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
 
-import {SecureStorageAdapter} from './SecureStorageAdapter';
+import {SecureStorageAdapter} from '../SecureStorageAdapter';
 
 export const clientLogout = async (): Promise<void> => {
   const accountId = await SecureStorageAdapter.loadActiveAccountId();

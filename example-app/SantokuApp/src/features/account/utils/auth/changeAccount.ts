@@ -5,8 +5,8 @@
  */
 import {AccountLoginResponse} from 'features/backend/apis/model';
 
-import {PasswordNotFoundError} from '../errors/PasswordNotFoundError';
-import {SecureStorageAdapter} from './SecureStorageAdapter';
+import {PasswordNotFoundError} from '../../errors/PasswordNotFoundError';
+import {SecureStorageAdapter} from '../SecureStorageAdapter';
 import {login} from './login';
 
 export const changeAccount = async (accountId: string): Promise<AccountLoginResponse> => {

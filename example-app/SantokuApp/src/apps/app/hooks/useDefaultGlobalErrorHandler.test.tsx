@@ -5,7 +5,7 @@ import {setErrorSender} from 'bases/error/sendErrorLog';
 import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
 import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
-import * as clientLogout from 'features/account/utils/clientLogout';
+import * as clientLogout from 'features/account/utils/auth/clientLogout';
 import React from 'react';
 import {Alert} from 'react-native';
 

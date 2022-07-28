@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AxiosResponse} from 'axios';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 
-import {TermsOfServiceAgreementStatusWithCreatedAt} from '../types/TermsOfServiceAgreementStatusWithCreatedAt';
+import {TermsOfServiceAgreementStatusWithCreatedAt} from '../../types/TermsOfServiceAgreementStatusWithCreatedAt';
 
 const sleep = () => new Promise(resolve => setTimeout(resolve, 100));
 const axiosGetOkResponse = {status: 200, statusText: 'OK', config: {}, request: {}, headers: {}};

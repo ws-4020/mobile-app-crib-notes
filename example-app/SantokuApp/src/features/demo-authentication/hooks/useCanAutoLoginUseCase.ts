@@ -1,4 +1,4 @@
-import {canAutoLogin as accountCanAutoLogin} from 'features/account/utils/canAutoLogin';
+import {canAutoLogin as accountCanAutoLogin} from 'features/account/utils/auth/canAutoLogin';
 import {useCallback} from 'react';
 
 import {handleError} from '../utils/handleError';
