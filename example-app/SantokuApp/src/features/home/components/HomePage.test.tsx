@@ -39,7 +39,7 @@ describe('Home', () => {
   });
 
   it('マウントされたときに正常にレンダリングされること', () => {
-    expect(screen.queryByTestId('HomeScreen')).toHaveTextContent('開発中');
+    expect(screen.queryByTestId('HomePage')).toHaveTextContent('開発中');
     expect(screen).toMatchSnapshot();
   });
 });
