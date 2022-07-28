@@ -1,9 +1,10 @@
 import {ApplicationError} from 'bases/core/error/ApplicationError';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
+import {getAppUpdates} from 'features/backend/apis/system/system';
 
 import {checkAppUpdates} from './checkAppUpdates';
-import {getAppUpdates} from 'features/backend/apis/system/system';
+
 
 jest.mock('features/backend/apis/system/system');
 

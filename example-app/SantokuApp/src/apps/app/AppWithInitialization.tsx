@@ -7,7 +7,7 @@ import {useAppInitializer} from './hooks/useAppInitializer';
 import {WithAccountContext} from './providers/WithAccountContext';
 import {WithReactQuery} from './providers/WithReactQuery';
 import {WithTermsAgreementOverlay} from './providers/WithTermsAgreementOverlay';
-import { AppInitialData } from './types/AppInitialData';
+import {AppInitialData} from './types/AppInitialData';
 
 export const AppWithInitialization: React.FC = () => {
   const {initialize, initializationResult} = useAppInitializer();

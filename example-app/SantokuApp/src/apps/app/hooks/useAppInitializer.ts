@@ -7,13 +7,12 @@ import {activateKeepAwake} from 'expo-keep-awake';
 import {isUnauthorizedError} from 'features/account/errors/UnauthorizedError';
 import {canAutoLogin} from 'features/account/utils/canAutoLogin';
 import {setRefreshSessionInterceptor} from 'features/account/utils/refreshSession';
-import {isUpdateRequiredError, UpdateRequiredError} from 'features/app-updates/errors/UpdateRequiredError';
 import {checkAppUpdates} from 'features/app-updates/utils/checkAppUpdates';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {useCallback, useMemo, useState} from 'react';
 import {Platform} from 'react-native';
 
-import {InitialDataError, isInitialDataError} from '../errors/initialDataError';
+import {isInitialDataError} from '../errors/initialDataError';
 import {AccountData} from '../types/AccountData';
 import {AppInitialData} from '../types/AppInitialData';
 import {autoLogin} from '../utils/autoLogin';
@@ -72,14 +71,6 @@ const loadData = async () => {
 
   // TODO: ディープリンクから起動した場合のパラメータ取得
 
-  try {
-    await checkAppUpdates(Platform.OS, Application.nativeApplicationVersion);
-  } catch (e) {
-    if (!isUpdateRequiredError(e)) {
-      throw new InitialDataError(e);
-    }
-  }
-
   // TODO: キャッシュの削除
   const initialData = {notification};
   if (!(await canAutoLogin())) {
@@ -114,6 +105,17 @@ export const useAppInitializer: () => AppInitializer = () => {
     // AxiosInstanceに401の時のリトライ処理を追加
     setRefreshSessionInterceptor();
 
+    // アプリ更新チェック
+    const appUpdates = await checkAppUpdates(Platform.OS, Application.nativeApplicationVersion);
+    if (appUpdates.updateRequired) {
+      setInitializationResult({
+        code: 'UpdateRequired',
+        message: appUpdates.message,
+        supportedVersion: appUpdates.supportedVersion,
+      });
+      return;
+    }
+
     // 初期データの読み込み
     try {
       const data = await loadData();
@@ -121,9 +123,7 @@ export const useAppInitializer: () => AppInitializer = () => {
       setInitializationResult({code: 'Success', data});
       await hideSplashScreen();
     } catch (e) {
-      if (isUpdateRequiredError(e)) {
-        setInitializationResult({code: 'UpdateRequired', message: e.message, supportedVersion: e.supportedVersion});
-      } else if (isInitialDataError(e)) {
+      if (isInitialDataError(e)) {
         const {title, message} = resolveErrorMessage(e.cause);
         sendErrorLog(e.cause);
         setInitializationResult({code: 'Failed', title, message});
