@@ -1,19 +1,18 @@
-import {useLoadingOverlay} from 'bases/ui/contexts/useLoadingOverlay';
+import {LoadingOverlay} from 'bases/ui/components/overlay/loading/LoadingOverlay';
 import {useCallback} from 'react';
 
 import {useDeleteTodo} from '../todo/useDeleteTodo';
 
 export const useRemoveUseCase = (todoId: number, goBack: () => void) => {
-  const loadingOverlay = useLoadingOverlay();
   const deleteTodo = useDeleteTodo();
   const remove = useCallback(async () => {
     try {
-      loadingOverlay.setVisible(true);
+      LoadingOverlay.visible(true);
       await deleteTodo.mutateAsync({todoId});
       goBack();
     } finally {
-      loadingOverlay.setVisible(false);
+      LoadingOverlay.visible(false);
     }
-  }, [deleteTodo, goBack, loadingOverlay, todoId]);
+  }, [deleteTodo, goBack, todoId]);
   return {remove, isLoading: deleteTodo.isLoading};
 };

@@ -1,4 +1,4 @@
-import {useLoadingOverlay} from 'bases/ui/contexts/useLoadingOverlay';
+import {LoadingOverlay} from 'bases/ui/components/overlay/loading/LoadingOverlay';
 import {useCallback} from 'react';
 
 import {usePostTodo} from '../todo/usePostTodo';
@@ -8,11 +8,10 @@ import {useTitle} from './useTitle';
 export const useRegisterTodoUseCase = (replaceToEditTodoDemo: (todoId: number) => void) => {
   const [title] = useTitle();
   const [description] = useDescription();
-  const loadingOverlay = useLoadingOverlay();
   const postTodo = usePostTodo();
   const registerTodo = useCallback(() => {
     if (title && description) {
-      loadingOverlay.setVisible(true);
+      LoadingOverlay.visible(true);
       postTodo
         .mutateAsync({data: {title, description}})
         .then(data => {
@@ -20,10 +19,10 @@ export const useRegisterTodoUseCase = (replaceToEditTodoDemo: (todoId: number) =
           replaceToEditTodoDemo(todo.id);
         })
         .finally(() => {
-          loadingOverlay.setVisible(false);
+          LoadingOverlay.visible(false);
         });
     }
-  }, [title, description, loadingOverlay, postTodo, replaceToEditTodoDemo]);
+  }, [title, description, postTodo, replaceToEditTodoDemo]);
 
   return {registerTodo, isLoading: postTodo.isLoading};
 };

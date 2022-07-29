@@ -1,4 +1,4 @@
-import {useLoadingOverlay} from 'bases/ui/contexts/useLoadingOverlay';
+import {LoadingOverlay} from 'bases/ui/components/overlay/loading/LoadingOverlay';
 import {useCallback} from 'react';
 
 import {usePutTodo} from '../todo/usePutTodo';
@@ -10,19 +10,18 @@ export const useSaveUseCase = (todoId: number) => {
   const [title] = useTitle();
   const [description] = useDescription();
   const [, setIsEdit] = useIsEdit();
-  const loadingOverlay = useLoadingOverlay();
   const putTodo = usePutTodo();
   const save = useCallback(async () => {
     if (title && description) {
       try {
-        loadingOverlay.setVisible(true);
+        LoadingOverlay.visible(true);
         const data = {title, description};
         await putTodo.mutateAsync({todoId, data});
         setIsEdit(false);
       } finally {
-        loadingOverlay.setVisible(false);
+        LoadingOverlay.visible(false);
       }
     }
-  }, [title, description, loadingOverlay, putTodo, todoId, setIsEdit]);
+  }, [title, description, putTodo, todoId, setIsEdit]);
   return {save, isLoading: putTodo.isLoading};
 };

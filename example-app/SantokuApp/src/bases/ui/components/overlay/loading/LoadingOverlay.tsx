@@ -1,14 +1,29 @@
-import React from 'react';
-import {ActivityIndicator} from 'react-native';
+import React, {useMemo, useState} from 'react';
 
-import {Overlay, OverlayProps} from './Overlay';
+import {FullWindowOverlay} from '../FullWindowOverlay';
+import {LoadingOverlayComponent} from './LoadingOverlayComponent';
 
-const LoadingOverlay: React.VFC<OverlayProps> = ({...props}) => {
+type LoadingOverlayType = {
+  visible: (visible: boolean) => void;
+};
+
+let LoadingOverlay: LoadingOverlayType = {
+  visible: () => {
+    throw new Error('WithSnackbar is required.');
+  },
+};
+
+const WithLoadingOverlay: React.FC = ({children}) => {
+  const [visible, setVisible] = useState<boolean>(false);
+  LoadingOverlay = useMemo<LoadingOverlayType>(() => ({visible: (visible: boolean) => setVisible(visible)}), []);
   return (
-    <Overlay {...props}>
-      <ActivityIndicator size="large" color="#0000ff" />
-    </Overlay>
+    <>
+      {children}
+      <FullWindowOverlay>
+        <LoadingOverlayComponent visible={visible} />
+      </FullWindowOverlay>
+    </>
   );
 };
 
-export {LoadingOverlay};
+export {WithLoadingOverlay, LoadingOverlay};

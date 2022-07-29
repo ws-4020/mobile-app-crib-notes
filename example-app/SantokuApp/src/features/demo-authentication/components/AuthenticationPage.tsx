@@ -1,4 +1,4 @@
-import {useLoadingOverlay} from 'bases/ui/contexts/useLoadingOverlay';
+import {LoadingOverlay} from 'bases/ui/components/overlay/loading/LoadingOverlay';
 import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Input, Text} from 'react-native-elements';
@@ -25,10 +25,9 @@ export const AuthenticationPage = () => {
   const {logout} = useLogoutUseCase();
   const {isLoading} = useIsLoading();
 
-  const loadingOverlay = useLoadingOverlay();
   useEffect(() => {
-    loadingOverlay.setVisible(isLoading);
-  }, [isLoading, loadingOverlay]);
+    LoadingOverlay.visible(isLoading);
+  }, [isLoading]);
 
   return (
     <View style={styles.container}>
