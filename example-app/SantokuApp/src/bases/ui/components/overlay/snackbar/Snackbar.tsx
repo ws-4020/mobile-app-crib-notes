@@ -1,17 +1,41 @@
 import {m} from 'bases/message/utils/Message';
-import {FullWindowOverlay} from 'bases/ui/components/overlay/FullWindowOverlay';
-import {
-  SnackbarComponent,
-  SnackbarProps,
-  SnackbarShowProps,
-} from 'bases/ui/components/overlay/snackbar/SnackbarComponent';
-import {
-  SnackbarContextType,
-  SnackbarHideContextProps,
-  SnackbarShowCloseButtonContextProps,
-  SnackbarShowContextProps,
-} from 'bases/ui/contexts/useSnackbar';
 import React, {useMemo, useState} from 'react';
+
+import {FullWindowOverlay} from '../FullWindowOverlay';
+import {SnackbarComponent, SnackbarHideProps, SnackbarProps, SnackbarShowProps} from './SnackbarComponent';
+
+export type SnackbarShowContextProps = Omit<SnackbarShowProps, 'message'>;
+export type SnackbarShowCloseButtonContextProps = Omit<
+  SnackbarShowContextProps,
+  'actionText' | 'actionHandler' | 'actionTextStyle'
+>;
+export type SnackbarHideContextProps = Omit<SnackbarHideProps, 'hide'>;
+
+export type SnackbarContextType = {
+  /**
+   * Show snackbar.
+   *
+   * @param message - Displayed message.
+   * @param showProps - Snackbar props(SnackbarShowContextProps).
+   */
+  show: (message: string, showProps?: SnackbarShowContextProps) => void;
+
+  /**
+   * Show the snackbar with the close button.
+   * The close button is placed to the right of the message.
+   *
+   * @param message - Displayed message.
+   * @param showProps - Snackbar props(SnackbarShowCloseButtonContextProps).
+   */
+  showWithCloseButton: (message: string, showProps?: SnackbarShowCloseButtonContextProps) => void;
+
+  /**
+   * Hide snackbar.
+   *
+   * @param hideProps - Snackbar props(SnackbarHideContextProps).
+   */
+  hide: (hideProps?: SnackbarHideContextProps) => void;
+};
 
 let Snackbar: SnackbarContextType = {
   show: () => {
@@ -66,4 +90,4 @@ function WithSnackbar(props: {initialState?: SnackbarShowProps; children: React.
   );
 }
 
-export {WithSnackbar, Snackbar};
+export {Snackbar, WithSnackbar};

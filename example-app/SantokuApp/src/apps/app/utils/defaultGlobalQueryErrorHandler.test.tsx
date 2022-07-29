@@ -1,6 +1,6 @@
 import {AxiosError} from 'axios';
 import {setErrorSender} from 'bases/error/sendErrorLog';
-import {Snackbar} from 'bases/ui/components/overlay/snackbar/WithSnackbar';
+import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
 import {Query, QueryClient, QueryKey} from 'react-query';
 
 import {defaultGlobalQueryErrorHandler} from './defaultGlobalQueryErrorHandler';

@@ -1,7 +1,7 @@
 import {render, screen, waitFor} from '@testing-library/react-native';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
-import {WithSnackbar} from 'bases/ui/components/overlay/snackbar/WithSnackbar';
+import {WithSnackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
 import {WithAppTheme} from 'bases/ui/contexts/AppThemeContext';
 import {enhanceValidator} from 'bases/validator/utils';
 import {useGetAccountsMe, useGetAccountsMeTerms, usePostAccountsMeTerms} from 'features/backend/apis/account/account';

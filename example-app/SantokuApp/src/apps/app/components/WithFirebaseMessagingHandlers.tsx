@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useCallback, useEffect} from 'react';
 
-import {Snackbar} from '../../../bases/ui/components/overlay/snackbar/WithSnackbar';
+import {Snackbar} from '../../../bases/ui/components/overlay/snackbar/Snackbar';
 import {NavigationParameter, RootStackParamList} from '../navigators/types';
 import {AppInitialData} from '../types/AppInitialData';
 

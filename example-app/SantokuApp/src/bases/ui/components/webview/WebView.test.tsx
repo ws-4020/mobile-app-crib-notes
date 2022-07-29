@@ -3,7 +3,7 @@ import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
 import React from 'react';
 
-import {Snackbar} from '../overlay/snackbar/WithSnackbar';
+import {Snackbar} from '../overlay/snackbar/Snackbar';
 import {WebView} from './WebView';
 
 describe('WebView', () => {

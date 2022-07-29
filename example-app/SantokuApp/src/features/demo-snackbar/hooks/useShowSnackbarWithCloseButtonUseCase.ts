@@ -1,5 +1,5 @@
 import {m} from 'bases/message/utils/Message';
-import {Snackbar} from 'bases/ui/components/overlay/snackbar/WithSnackbar';
+import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
 import {useCallback} from 'react';
 
 export const useShowSnackbarWithCloseButtonUseCase = () => {

@@ -1,176 +1,85 @@
-import {act} from '@testing-library/react-hooks';
 import {render, screen, waitFor} from '@testing-library/react-native';
-import React from 'react';
-import {TextStyle, ViewStyle} from 'react-native';
+import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
+import {loadMessages} from 'bases/message/utils/Message';
+import React, {useEffect} from 'react';
+import {Text, TextStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';
 
-import {SnackbarComponent} from './SnackbarComponent';
-
-jest.useFakeTimers();
+import {Snackbar, WithSnackbar} from './Snackbar';
 
 function getStyle<T>(instance: ReactTestInstance) {
   return instance.props.style as T;
 }
 
-const AUTO_HIDE_DURATION = 4000;
-const FADE_IN_DURATION = 1000;
-const FADE_OUT_DURATION = 1000;
-const FORCE_FADE_OUT_DURATION = 300;
-const HIDE_FADE_OUT_DURATION = 300;
+jest.useFakeTimers();
 
-describe('Snackbar', () => {
-  it('Snackbarが正常にrenderできることを確認', () => {
-    render(<SnackbarComponent message="テストメッセージ" />);
+type UseSnackbarType = 'show' | 'showWithCloseButton' | 'hide';
 
-    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
+const ChildComponent: React.FC<{type: UseSnackbarType}> = ({type}) => {
+  useEffect(() => {
+    switch (type) {
+      case 'show':
+        Snackbar.show('テストメッセージ', {messageTextStyle: {color: 'blue'}});
+        break;
+      case 'showWithCloseButton':
+        Snackbar.showWithCloseButton('テストメッセージ', {messageTextStyle: {color: 'red'}});
+        break;
+      case 'hide':
+        Snackbar.hide();
+    }
+  }, [type]);
 
-    expect(getStyle<ViewStyle>(screen.getByTestId('snackbarAnimatedView')).opacity).toBe(0);
-    expect(screen).toMatchSnapshot('render直後');
+  return <Text testID="text">test</Text>;
+};
 
-    act(() => {
-      jest.advanceTimersByTime(FADE_IN_DURATION);
-    });
-    expect(getStyle<ViewStyle>(screen.getByTestId('snackbarAnimatedView')).opacity).toBe(1);
-    expect(screen).toMatchSnapshot('フェードイン後');
-
-    act(() => {
-      jest.advanceTimersByTime(AUTO_HIDE_DURATION + FADE_OUT_DURATION);
-    });
-    expect(screen.queryByTestId('snackbarAnimatedView')).toBeNull();
-    expect(screen).toMatchSnapshot('フェードアウト後');
-  });
-
-  it('Snackbar表示中にpropsが更新された場合、フェードアウト後に更新後のpropsでSnackbarが表示されることを確認', async () => {
-    render(<SnackbarComponent message="初回" />);
-
-    expect(screen.queryByText('初回')).not.toBeNull();
-
-    screen.update(<SnackbarComponent message="２回目" />);
-
-    expect(screen.queryByText('初回')).not.toBeNull();
-
-    await waitFor(() => {
-      jest.advanceTimersByTime(FORCE_FADE_OUT_DURATION);
-
-      expect(screen.queryByText('初回')).toBeNull();
-      expect(screen.queryByText('２回目')).not.toBeNull();
-    });
-  });
-
-  it('Snackbarの表示中に２連続propsが更新された場合、後で更新した方のpropsでSnackbarが表示されることを確認', async () => {
-    render(<SnackbarComponent message="初回" />);
-
-    expect(screen.queryByText('初回')).not.toBeNull();
-
-    screen.update(<SnackbarComponent message="２回目" />);
-
-    screen.update(<SnackbarComponent message="３回目" />);
-
-    await waitFor(() => {
-      jest.advanceTimersByTime(FORCE_FADE_OUT_DURATION);
-
-      expect(screen.queryByText('３回目')).not.toBeNull();
-    });
-  });
-
-  it('Snackbarの表示後に同一のpropsを指定した場合、Snackbarが表示されないことを確認', () => {
-    const props = {
-      message: 'テストメッセージ',
-      messageTextStyle: {color: 'white'},
-      style: {backgroundColor: 'aqua'},
-      positionStyle: {minHeight: 60},
-      actionText: 'close',
-      actionHandler: jest.fn(),
-      actionTextStyle: {color: 'red'},
-      autoHideDuration: 100,
-      fadeInDuration: 200,
-      fadeOutDuration: 300,
-      forceFadeOutDuration: 400,
-      timestamp: Date.now(),
-    };
-    render(<SnackbarComponent {...props} />);
-
-    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
-
-    act(() => {
-      jest.advanceTimersByTime(FADE_IN_DURATION + AUTO_HIDE_DURATION + FADE_OUT_DURATION);
-    });
-
-    screen.update(<SnackbarComponent {...props} />);
-
-    expect(screen.queryByText('テストメッセージ')).toBeNull();
-  });
-
-  it('Snackbarの表示後にTimestamp以外同一のpropsを指定した場合、Snackbarが表示されることを確認', () => {
-    const props = {
-      message: 'テストメッセージ',
-      messageTextStyle: {color: 'white'},
-      style: {backgroundColor: 'aqua'},
-      positionStyle: {minHeight: 60},
-      actionText: 'close',
-      actionHandler: jest.fn(),
-      actionTextStyle: {color: 'red'},
-      autoHideDuration: 100,
-      fadeInDuration: 200,
-      fadeOutDuration: 300,
-      forceFadeOutDuration: 400,
-    };
-    render(<SnackbarComponent {...props} timestamp={Date.now()} />);
-
-    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
-
-    act(() => {
-      jest.advanceTimersByTime(FADE_IN_DURATION + AUTO_HIDE_DURATION + FADE_OUT_DURATION);
-    });
-
-    screen.update(<SnackbarComponent {...props} timestamp={Date.now()} />);
-
-    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
-  });
-
-  it('Snackbar表示中にpropsでhideを指定した場合、Snackbarが消えることを確認', async () => {
-    render(<SnackbarComponent message="テストメッセージ" />);
-
-    jest.advanceTimersByTime(FADE_IN_DURATION);
-    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
-
-    screen.update(<SnackbarComponent message="テストメッセージ" hide />);
-
-    await waitFor(() => {
-      jest.advanceTimersByTime(HIDE_FADE_OUT_DURATION);
-      expect(screen.queryByText('テストメッセージ')).toBeNull();
-    });
-  });
-
-  it('Snackbarに指定したpropsがrenderに反映されていることを確認', () => {
-    /**
-     * 下記項目は対象外
-     * - autoHideDuration / fadeInDuration / fadeOutDuration / forceFadeOutDuration / hideFadeOutDuration
-     *     テストコードでアニメーション時間を調整できない
-     * - actionHandler
-     *     setVisibleSnackbarProps()でpropsをセットした時点で、指定したモック関数ではなくなっており、追跡できない
-     * - hide
-     *     テスト済
-     */
+describe('WithSnackbar', () => {
+  it('useSnackbarのshowで、Snackbarが正常に表示されることを確認', () => {
     render(
-      <SnackbarComponent
-        message="テストメッセージ"
-        messageTextStyle={{color: 'black'}}
-        style={{backgroundColor: 'red'}}
-        positionStyle={{bottom: 50}}
-        actionText="閉じる"
-        actionHandler={() => {}}
-        actionTextStyle={{color: 'blue'}}
-      />,
+      <WithSnackbar>
+        <ChildComponent type="show" />
+      </WithSnackbar>,
     );
 
-    jest.advanceTimersByTime(FADE_IN_DURATION);
+    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
+    expect(getStyle<TextStyle>(screen.getByText('テストメッセージ')).color).toBe('blue');
+    expect(screen.queryByText('閉じる')).toBeNull();
+    expect(screen).toMatchSnapshot();
+  });
+
+  it('useSnackbarのshowWithCloseButtonで、ボタン付きSnackbarが正常に表示されることを確認', async () => {
+    await loadMessages(new BundledMessagesLoader());
+
+    render(
+      <WithSnackbar>
+        <ChildComponent type="showWithCloseButton" />
+      </WithSnackbar>,
+    );
 
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
-    expect(getStyle<TextStyle>(screen.getByText('テストメッセージ')).color).toBe('black');
-    expect(getStyle<ViewStyle>(screen.getByTestId('snackbarStyleView')).backgroundColor).toBe('red');
-    expect(getStyle<ViewStyle>(screen.getByTestId('snackbarAnimatedView')).bottom).toBe(50);
+    expect(getStyle<TextStyle>(screen.getByText('テストメッセージ')).color).toBe('red');
     expect(screen.queryByText('閉じる')).not.toBeNull();
-    expect(getStyle<TextStyle>(screen.getByText('閉じる')).color).toBe('blue');
+    expect(screen).toMatchSnapshot();
+  });
+
+  it('useSnackbarのhideで、Snackbarが消えることを確認', async () => {
+    render(
+      <WithSnackbar>
+        <ChildComponent type="show" />
+      </WithSnackbar>,
+    );
+
+    screen.update(
+      <WithSnackbar>
+        <ChildComponent type="hide" />
+      </WithSnackbar>,
+    );
+
+    await waitFor(() => {
+      const HIDE_FADE_OUT_DURATION = 300;
+      jest.advanceTimersByTime(HIDE_FADE_OUT_DURATION);
+      expect(screen.queryByText('テストメッセージ')).toBeNull();
+      expect(screen.queryByText('閉じる')).toBeNull();
+      expect(screen).toMatchSnapshot();
+    });
   });
 });

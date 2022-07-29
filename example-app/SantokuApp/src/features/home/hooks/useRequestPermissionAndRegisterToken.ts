@@ -3,7 +3,7 @@ import {getFcmToken, isGetFcmTokenError} from 'bases/firebase/utils/getFcmToken'
 import {isRequestPushPermissionError, requestPushPermission} from 'bases/firebase/utils/requestPushPermission';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
-import {Snackbar} from 'bases/ui/components/overlay/snackbar/WithSnackbar';
+import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
 import {usePostAccountsMeDeviceToken} from 'features//backend/apis/account/account';
 import {useAccountData} from 'features/account/hooks/useAccountData';
 import {useCallback} from 'react';

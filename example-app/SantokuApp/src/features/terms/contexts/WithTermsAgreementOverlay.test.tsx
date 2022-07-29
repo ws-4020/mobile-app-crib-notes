@@ -2,7 +2,7 @@ import {render, screen} from '@testing-library/react-native';
 import {AppConfig} from 'bases/core/config/AppConfig';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
-import {WithSnackbar} from 'bases/ui/components/overlay/snackbar/WithSnackbar';
+import {WithSnackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
 import {useTermsAgreementOverlay} from 'features/terms/contexts/useTermsAgreementOverlay';
 import React, {useEffect} from 'react';
 import {Text} from 'react-native';

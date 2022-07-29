@@ -1,7 +1,7 @@
 import {act} from '@testing-library/react-native';
 import {AxiosError} from 'axios';
 import {setErrorSender} from 'bases/error/sendErrorLog';
-import {Snackbar} from 'bases/ui/components/overlay/snackbar/WithSnackbar';
+import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
 import * as clientLogout from 'features/account/utils/auth/clientLogout';
 import {Alert} from 'react-native';
 import {QueryClient} from 'react-query';
