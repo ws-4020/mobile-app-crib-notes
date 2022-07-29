@@ -2,23 +2,25 @@ import {m} from 'bases/message/utils/Message';
 import React, {useMemo, useState} from 'react';
 
 import {FullWindowOverlay} from '../FullWindowOverlay';
-import {SnackbarComponent, SnackbarHideProps, SnackbarProps, SnackbarShowProps} from './SnackbarComponent';
+import {
+  SnackbarComponent,
+  SnackbarHideProps as SnackbarComponentHideProps,
+  SnackbarProps as SnackbarComponentProps,
+  SnackbarShowProps as SnackbarComponentShowProps,
+} from './SnackbarComponent';
 
-export type SnackbarShowContextProps = Omit<SnackbarShowProps, 'message'>;
-export type SnackbarShowCloseButtonContextProps = Omit<
-  SnackbarShowContextProps,
-  'actionText' | 'actionHandler' | 'actionTextStyle'
->;
-export type SnackbarHideContextProps = Omit<SnackbarHideProps, 'hide'>;
+type SnackbarShowProps = Omit<SnackbarComponentShowProps, 'message'>;
+type SnackbarShowCloseButtonProps = Omit<SnackbarShowProps, 'actionText' | 'actionHandler' | 'actionTextStyle'>;
+type SnackbarHideProps = Omit<SnackbarComponentHideProps, 'hide'>;
 
-export type SnackbarContextType = {
+type SnackbarType = {
   /**
    * Show snackbar.
    *
    * @param message - Displayed message.
    * @param showProps - Snackbar props(SnackbarShowContextProps).
    */
-  show: (message: string, showProps?: SnackbarShowContextProps) => void;
+  show: (message: string, showProps?: SnackbarShowProps) => void;
 
   /**
    * Show the snackbar with the close button.
@@ -27,17 +29,17 @@ export type SnackbarContextType = {
    * @param message - Displayed message.
    * @param showProps - Snackbar props(SnackbarShowCloseButtonContextProps).
    */
-  showWithCloseButton: (message: string, showProps?: SnackbarShowCloseButtonContextProps) => void;
+  showWithCloseButton: (message: string, showProps?: SnackbarShowCloseButtonProps) => void;
 
   /**
    * Hide snackbar.
    *
    * @param hideProps - Snackbar props(SnackbarHideContextProps).
    */
-  hide: (hideProps?: SnackbarHideContextProps) => void;
+  hide: (hideProps?: SnackbarHideProps) => void;
 };
 
-let Snackbar: SnackbarContextType = {
+let Snackbar: SnackbarType = {
   show: () => {
     throw new Error('WithSnackbar is required.');
   },
@@ -49,23 +51,23 @@ let Snackbar: SnackbarContextType = {
   },
 };
 
-function WithSnackbar(props: {initialState?: SnackbarShowProps; children: React.ReactNode}) {
-  const [state, setState] = useState<SnackbarProps>(
+function WithSnackbar(props: {initialState?: SnackbarComponentShowProps; children: React.ReactNode}) {
+  const [state, setState] = useState<SnackbarComponentProps>(
     props.initialState ?? {
       message: '',
     },
   );
   // const snackbarContext = useMemo<SnackbarContextType>(
-  Snackbar = useMemo<SnackbarContextType>(
+  Snackbar = useMemo<SnackbarType>(
     () => ({
-      show: (message: string, showProps?: SnackbarShowContextProps) => {
+      show: (message: string, showProps?: SnackbarShowProps) => {
         setState({
           timestamp: Date.now(),
           ...showProps,
           message,
         });
       },
-      showWithCloseButton: (message: string, showProps?: SnackbarShowCloseButtonContextProps) => {
+      showWithCloseButton: (message: string, showProps?: SnackbarShowCloseButtonProps) => {
         setState({
           timestamp: Date.now(),
           ...showProps,
@@ -74,7 +76,7 @@ function WithSnackbar(props: {initialState?: SnackbarShowProps; children: React.
           message,
         });
       },
-      hide: (hideProps?: SnackbarHideContextProps) => {
+      hide: (hideProps?: SnackbarHideProps) => {
         setState(prevState => ({...prevState, ...hideProps, hide: true}));
       },
     }),
