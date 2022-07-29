@@ -11,6 +11,7 @@ import {savePassword} from '../utils/secure-storage/savePassword';
 import {useAccountDataOperation} from './useAccountDataOperation';
 import {useGetAccountsMe} from './useGetAccountsMe';
 import {useGetAccountsMeTerms} from './useGetAccountsMeTerms';
+import {useIsLoggedIn} from './useIsLoggedIn';
 import {useLogin} from './useLogin';
 import {useTerms} from './useTerms';
 
@@ -22,6 +23,7 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
   const accountDataOperation = useAccountDataOperation();
   const {refetch: callGetAccountMe} = useGetAccountsMe({query: {enabled: false}});
   const {refetch: callGetAccountsMeTerms} = useGetAccountsMeTerms({query: {enabled: false}});
+  const [, setIsLoggedIn] = useIsLoggedIn();
   const login = useCallback(async () => {
     if (await isValidForm(form)) {
       try {
@@ -35,6 +37,7 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         const termsAgreementStatus = (await callGetAccountsMeTerms({throwOnError: true})).data?.data;
         // 利用規約を取得できていない場合はボタンを非活性にしているので、termsOfServiceは必ず存在する想定
         accountDataOperation.login({account, terms: {termsAgreementStatus, termsOfService: termsOfService!.data}});
+        setIsLoggedIn(true);
       } catch (e) {
         if (isUnauthorizedError(e)) {
           Alert.alert(m('ログイン失敗'), m('アカウントIDまたはパスワードに\n間違いがあります。'));
@@ -45,6 +48,15 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         }
       }
     }
-  }, [form, callLogin, callGetAccountMe, callGetAccountsMeTerms, accountDataOperation, termsOfService, isMounted]);
+  }, [
+    form,
+    callLogin,
+    callGetAccountMe,
+    callGetAccountsMeTerms,
+    accountDataOperation,
+    termsOfService,
+    setIsLoggedIn,
+    isMounted,
+  ]);
   return {login, isExecutingLogin};
 };
