@@ -1,16 +1,7 @@
-import {act} from '@testing-library/react-hooks';
-import {renderHook} from '@testing-library/react-native';
 import * as accountApi from 'features/backend/apis/account/account';
-import React from 'react';
-import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {useSignup} from '../../hooks/useSignup';
 import * as savePassword from '../../utils/secure-storage/savePassword';
-
-const wrapper: React.ComponentType<React.ProviderProps<void>> = ({children}) => {
-  const queryClient = new QueryClient();
-  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
-};
+import {signup} from './signup';
 
 describe('signup', () => {
   test('サインアップAPIを呼び出して、クレデシャルをセキュアストレージに格納しているかの検証', async () => {
@@ -27,16 +18,13 @@ describe('signup', () => {
       config: {},
     });
     const spySecureStorageAdapterSavePassword = jest.spyOn(savePassword, 'savePassword');
-    const {result} = renderHook(() => useSignup(), {wrapper});
-    await act(async () => {
-      const res = await result.current.mutateAsync({nickname: 'testNickName', password: 'password123'});
-      expect(res).toEqual({
-        accountId: '123456789',
-        profile: {nickname: 'testNickName', type: ['partner'], points: 0, totalPoints: 0},
-        deviceTokens: [],
-      });
-      expect(spySignupApi).toHaveBeenCalledWith({nickname: 'testNickName', password: 'password123'});
-      expect(spySecureStorageAdapterSavePassword).toHaveBeenCalledWith('123456789', 'password123');
+    const res = await signup('testNickName', 'password123');
+    expect(res).toEqual({
+      accountId: '123456789',
+      profile: {nickname: 'testNickName', type: ['partner'], points: 0, totalPoints: 0},
+      deviceTokens: [],
     });
+    expect(spySignupApi).toHaveBeenCalledWith({nickname: 'testNickName', password: 'password123'});
+    expect(spySecureStorageAdapterSavePassword).toHaveBeenCalledWith('123456789', 'password123');
   });
 });
