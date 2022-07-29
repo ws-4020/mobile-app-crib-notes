@@ -5,16 +5,24 @@ import crashlytics from '@react-native-firebase/crashlytics';
 import {deleteFcmToken} from 'bases/firebase/utils/deleteFcmToken';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
+import {hashQueryKey, Query, QueryClient} from 'react-query';
+import {QueryFilters} from 'react-query/types/core/utils';
 
 import {deleteActiveAccountId} from '../secure-storage/deleteActiveAccountId';
 import {deletePassword} from '../secure-storage/deletePassword';
 import {loadActiveAccountId} from '../secure-storage/loadActiveAccountId';
 
-export const clientLogout = async (): Promise<void> => {
+const defaultQueryFilters = {predicate: (query: Query) => query.queryHash !== hashQueryKey(['account', 'isLoggedIn'])};
+
+export const clientLogout = async (queryClient?: QueryClient, queryRemovalFilters?: QueryFilters): Promise<void> => {
   const accountId = await loadActiveAccountId();
   if (accountId) {
     await deleteActiveAccountId();
     await deletePassword(accountId);
+  }
+  if (queryClient) {
+    queryClient.setQueryData(['account', 'isLoggedIn'], false);
+    queryClient.removeQueries(queryRemovalFilters ?? defaultQueryFilters);
   }
   await crashlytics().setUserId('');
   try {

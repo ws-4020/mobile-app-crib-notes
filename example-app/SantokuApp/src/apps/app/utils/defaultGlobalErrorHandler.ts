@@ -7,8 +7,7 @@ import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
 import {clientLogout} from 'features/account/utils/auth/clientLogout';
 import {RequestTimeoutError} from 'features/backend/error/RequestTimeoutError';
 import {Alert} from 'react-native';
-import {hashQueryKey, Query, QueryClient} from 'react-query';
-import {QueryFilters} from 'react-query/types/core/utils';
+import {QueryClient} from 'react-query';
 
 const outDebugLog = (error: unknown) => {
   try {
@@ -33,17 +32,13 @@ res.body=[${JSON.stringify(error.response?.data, null, 2)}]
   } catch {}
 };
 
-const defaultQueryFilters = {predicate: (query: Query) => query.queryHash !== hashQueryKey(['account', 'isLoggedIn'])};
-
-const showRequireLoginDialog = (queryClient: QueryClient, queryRemovalFilters: QueryFilters = defaultQueryFilters) => {
-  clientLogout().finally(() => {
-    queryClient.setQueryData(['account', 'isLoggedIn'], false);
-    queryClient.removeQueries(queryRemovalFilters);
+const showRequireLoginDialog = (queryClient: QueryClient) => {
+  clientLogout(queryClient).finally(() => {
     Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
   });
 };
 
-export const defaultGlobalErrorHandler = (queryClient: QueryClient, queryRemovalFilters?: QueryFilters) => {
+export const defaultGlobalErrorHandler = (queryClient: QueryClient) => {
   return (error: unknown) => {
     outDebugLog(error);
     if (isApplicationError(error)) {
@@ -62,7 +57,7 @@ export const defaultGlobalErrorHandler = (queryClient: QueryClient, queryRemoval
         case 401: // Unauthorized
           // 401応答が返ってきて、自動セッション更新にも失敗したケース
           // 再ログインを促すアラートを表示
-          showRequireLoginDialog(queryClient, queryRemovalFilters);
+          showRequireLoginDialog(queryClient);
           break;
         case 403: // Forbidden
           // 暫定的に最新の利用規約への同意が必要なことを伝えるアラートのみ表示
