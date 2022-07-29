@@ -1,7 +1,7 @@
-import {useLogout} from 'features/account/hooks/useLogout';
 import {useCallback} from 'react';
 
 import {handleError} from '../utils/handleError';
+import {useLogout} from './useLogout';
 
 export const useLogoutUseCase = () => {
   const mutationLogout = useLogout();

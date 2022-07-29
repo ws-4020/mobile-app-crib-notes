@@ -1,12 +1,11 @@
 import {render, screen, waitFor} from '@testing-library/react-native';
+import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
+import {loadMessages} from 'bases/message/utils/Message';
 import React, {useEffect} from 'react';
 import {Text, TextStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';
 
-import {BundledMessagesLoader} from '../../message/utils/BundledMessageLoader';
-import {loadMessages} from '../../message/utils/Message';
-import {WithSnackbar} from './WithSnackbar';
-import {useSnackbar} from './useSnackbar';
+import {Snackbar, WithSnackbar} from './WithSnackbar';
 
 function getStyle<T>(instance: ReactTestInstance) {
   return instance.props.style as T;
@@ -17,20 +16,18 @@ jest.useFakeTimers();
 type UseSnackbarType = 'show' | 'showWithCloseButton' | 'hide';
 
 const ChildComponent: React.FC<{type: UseSnackbarType}> = ({type}) => {
-  const snackbar = useSnackbar();
-
   useEffect(() => {
     switch (type) {
       case 'show':
-        snackbar.show('テストメッセージ', {messageTextStyle: {color: 'blue'}});
+        Snackbar.show('テストメッセージ', {messageTextStyle: {color: 'blue'}});
         break;
       case 'showWithCloseButton':
-        snackbar.showWithCloseButton('テストメッセージ', {messageTextStyle: {color: 'red'}});
+        Snackbar.showWithCloseButton('テストメッセージ', {messageTextStyle: {color: 'red'}});
         break;
       case 'hide':
-        snackbar.hide();
+        Snackbar.hide();
     }
-  }, [snackbar, type]);
+  }, [type]);
 
   return <Text testID="text">test</Text>;
 };

@@ -3,20 +3,14 @@ import {resolveErrorMessage} from 'bases/error/resolveErrorMessage';
 import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {enhanceValidator} from 'bases/validator/utils';
 import {activateKeepAwake} from 'expo-keep-awake';
-import {isUnauthorizedError} from 'features/account/errors/UnauthorizedError';
-import {AccountData} from 'features/account/types/AccountData';
-import {canAutoLogin} from 'features/account/utils/auth/canAutoLogin';
 import {setRefreshSessionInterceptor} from 'features/account/utils/auth/refreshSession';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {useCallback, useMemo, useState} from 'react';
 
 import {isInitialDataError} from '../errors/initialDataError';
 import {AppInitialData} from '../types/AppInitialData';
-import {autoLogin} from '../utils/autoLogin';
-import {hideSplashScreen} from '../utils/hideSplashScreen';
 import {initializeFirebaseCrashlyticsAsync} from '../utils/initializeFirebaseCrashlyticsAsync';
 import {loadBundledMessagesAsync} from '../utils/loadBundledMessagesAsync';
-import {loadInitialAccountDataAsync} from '../utils/loadInitialAccountDataAsync';
 
 export interface AppInitializer {
   initialize: () => Promise<void>;
@@ -28,7 +22,7 @@ type Initializing = {
 };
 type InitializeSuccessResult = {
   code: 'Success';
-  data: {accountData: AccountData; initialData: AppInitialData};
+  data: {initialData: AppInitialData};
 };
 type InitializeFailedResult = {
   code: 'Failed';
@@ -61,26 +55,7 @@ const loadData = async () => {
 
   // TODO: キャッシュの削除
   const initialData = {notification};
-  if (!(await canAutoLogin())) {
-    return {accountData: {}, initialData};
-  }
-
-  try {
-    await autoLogin();
-  } catch (e) {
-    if (isUnauthorizedError(e)) {
-      return {accountData: {}, initialData};
-    }
-    throw e;
-  }
-
-  // バックエンドから初期データを取得
-  // この時点ではReact QueryのQueryClientProviderはマウントされていないため、useQueryは使わずにデータを取得する
-  const accountData = await loadInitialAccountDataAsync();
-  return {
-    accountData,
-    initialData,
-  };
+  return {initialData};
 };
 
 export const useAppInitializer: () => AppInitializer = () => {
@@ -98,7 +73,7 @@ export const useAppInitializer: () => AppInitializer = () => {
       const data = await loadData();
 
       setInitializationResult({code: 'Success', data});
-      await hideSplashScreen();
+      // await hideSplashScreen();
     } catch (e) {
       if (isInitialDataError(e)) {
         const {title, message} = resolveErrorMessage(e.cause);

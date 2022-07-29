@@ -2,21 +2,21 @@ import type {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import messaging from '@react-native-firebase/messaging';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
 import React, {useCallback, useEffect} from 'react';
 
+import {Snackbar} from '../../../bases/ui/components/overlay/snackbar/WithSnackbar';
 import {NavigationParameter, RootStackParamList} from '../navigators/types';
 import {AppInitialData} from '../types/AppInitialData';
 
 const showMessageOnSnackbar = (
   message: FirebaseMessagingTypes.RemoteMessage,
-  snackbar: ReturnType<typeof useSnackbar>,
+  // snackbar: ReturnType<typeof useSnackbar>,
 ) => {
   if (message.notification) {
     // アプリ操作中に受信した場合は通知内容をスナックバーに表示し、通知データに応じた処理は行わない
     const snackBarText = message.notification.body ?? message.notification.title;
     if (snackBarText) {
-      snackbar.show(snackBarText);
+      Snackbar.show(snackBarText);
     }
   }
 };
@@ -42,13 +42,10 @@ type Props = {
 };
 export const WithFirebaseMessagingHandlers: React.FC<Props> = ({children, initialData}) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const snackbar = useSnackbar();
+  // const snackbar = useSnackbar();
 
   // アプリを前面で操作中に通知を受信した際に行う処理
-  const onMessage = useCallback(
-    (message: FirebaseMessagingTypes.RemoteMessage) => showMessageOnSnackbar(message, snackbar),
-    [snackbar],
-  );
+  const onMessage = useCallback((message: FirebaseMessagingTypes.RemoteMessage) => showMessageOnSnackbar(message), []);
   useEffect(() => {
     return messaging().onMessage(onMessage);
   }, [onMessage]);

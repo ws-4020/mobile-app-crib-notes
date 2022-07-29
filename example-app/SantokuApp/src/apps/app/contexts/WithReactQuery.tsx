@@ -3,21 +3,17 @@ import React, {useCallback, useEffect, useMemo} from 'react';
 import {AppState, AppStateStatus, Platform} from 'react-native';
 import {focusManager, onlineManager, QueryClient, QueryClientProvider} from 'react-query';
 
-import {useDefaultQueryCache, useDefaultMutationCache} from '../hooks/useDefaultCache';
-import {useDefaultOptions} from '../hooks/useDefaultOptions';
+import {defaultQueryCache, defaultMutationCache} from '../utils/defaultCache';
+import {defaultOptions} from '../utils/defaultOptions';
 
 const WithReactQuery: React.FC = ({children}) => {
-  const queryCache = useDefaultQueryCache();
-  const mutationCache = useDefaultMutationCache();
-  const defaultOptions = useDefaultOptions();
-
-  const queryClient = useMemo(() => {
+  const queryClient: QueryClient = useMemo(() => {
     return new QueryClient({
-      queryCache,
-      mutationCache,
+      queryCache: defaultQueryCache(queryClient),
+      mutationCache: defaultMutationCache(queryClient),
       defaultOptions,
     });
-  }, [queryCache, mutationCache, defaultOptions]);
+  }, []);
 
   const onAppStateChange = useCallback((newAppState: AppStateStatus) => {
     if (Platform.OS !== 'web') {

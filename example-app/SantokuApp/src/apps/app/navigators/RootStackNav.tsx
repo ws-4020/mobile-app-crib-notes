@@ -1,13 +1,15 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator, NativeStackNavigationOptions} from '@react-navigation/native-stack';
+import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {m} from 'bases/message/utils/Message';
-import {AccountContext, useAccountContext} from 'features/account/contexts/useAccountContext';
+import {useIsLoggedIn} from 'features/account/hooks/useIsLoggedIn';
 import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
 
 import {LoginScreen} from '../screens/account/LoginScreen';
 import {ProfileRegistrationScreen} from '../screens/account/ProfileRegistrationScreen';
 import {AppInitialData} from '../types/AppInitialData';
+import {hideSplashScreen} from '../utils/hideSplashScreen';
 import {useAuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
 import {RootStackParamList} from './types';
@@ -19,22 +21,28 @@ const invisibleHeaderOptions: NativeStackNavigationOptions = {
   headerShown: false,
 };
 
-const getInitialRouteName = (account: AccountContext) => {
-  if (account.isLoggedIn) {
+const getInitialRouteName = (isLoggedIn?: boolean) => {
+  if (isLoggedIn) {
     return 'AuthenticatedStackNav';
   }
   return 'Login';
 };
 
 const useRootStackNavigator = (initialData: AppInitialData) => {
-  const account = useAccountContext();
-  const initialRouteName = useMemo(() => getInitialRouteName(account), [account]);
+  const [isLoggedIn] = useIsLoggedIn();
+  const initialRouteName = useMemo(() => getInitialRouteName(isLoggedIn), [isLoggedIn]);
   const authenticatedStackNav = useAuthenticatedStackNav(initialData);
   const defaultScreenOptions = useDefaultScreenOptions();
 
+  useEffect(() => {
+    hideSplashScreen().catch(e => {
+      sendErrorLog(e);
+    });
+  }, []);
+
   return (
     <nav.Navigator screenOptions={defaultScreenOptions} initialRouteName={initialRouteName}>
-      {account.isLoggedIn ? (
+      {isLoggedIn ? (
         <nav.Group screenOptions={invisibleHeaderOptions}>
           <nav.Screen
             name="AuthenticatedStackNav"

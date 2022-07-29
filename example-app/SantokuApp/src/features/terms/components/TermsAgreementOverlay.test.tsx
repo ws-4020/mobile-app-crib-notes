@@ -3,8 +3,7 @@ import {render, screen} from '@testing-library/react-native';
 import {AppConfig} from 'bases/core/config/AppConfig';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
-import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
-import {WithAccountContext} from 'features/account/contexts/WithAccountContext';
+import {WithSnackbar} from 'bases/ui/components/overlay/snackbar/WithSnackbar';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
@@ -12,14 +11,11 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 import {TermsAgreementOverlay} from './TermsAgreementOverlay';
 
 const Wrapper: React.FC = ({children}) => {
-  const accountData = {account: {accountId: '123456789', deviceTokens: []}};
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>
       <WithSnackbar>
-        <QueryClientProvider client={queryClient}>
-          <WithAccountContext accountData={accountData}>{children}</WithAccountContext>
-        </QueryClientProvider>
+        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
       </WithSnackbar>
     </SafeAreaProvider>
   );

@@ -40,7 +40,7 @@ describe('AuthenticationService logout', () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     const {result} = renderHook(() => useLogout(), {wrapper});
     await act(async () => {
-      await result.current.mutateAsync();
+      await result.current.logout();
       expect(spyAccountsMeDeviceTokenApi).toHaveBeenCalled();
       expect(spyLogoutApi).toHaveBeenCalled();
       expect(spyRefreshCsrfToken).toHaveBeenCalled();
@@ -53,7 +53,7 @@ describe('AuthenticationService logout', () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
     const {result} = renderHook(() => useLogout(), {wrapper});
     await act(async () => {
-      await result.current.mutateAsync();
+      await result.current.logout();
       expect(spyAccountsMeDeviceTokenApi).toHaveBeenCalled();
       expect(spyLogoutApi).toHaveBeenCalled();
       expect(spyRefreshCsrfToken).toHaveBeenCalled();

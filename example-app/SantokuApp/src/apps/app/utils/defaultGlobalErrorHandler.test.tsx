@@ -1,49 +1,26 @@
-import {act, renderHook} from '@testing-library/react-native';
+import {act} from '@testing-library/react-native';
 import {AxiosError} from 'axios';
 import {setErrorSender} from 'bases/error/sendErrorLog';
-import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
-import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
-import {WithAccountContext} from 'features/account/contexts/WithAccountContext';
-import {useAccountContextOperation} from 'features/account/contexts/useAccountContextOperation';
-import {AccountData} from 'features/account/types/AccountData';
+import {Snackbar} from 'bases/ui/components/overlay/snackbar/WithSnackbar';
 import * as clientLogout from 'features/account/utils/auth/clientLogout';
-import React from 'react';
 import {Alert} from 'react-native';
+import {QueryClient} from 'react-query';
 
-import {loadBundledMessagesAsync} from '../utils/loadBundledMessagesAsync';
-import {useDefaultGlobalErrorHandler} from './useDefaultGlobalErrorHandler';
+import {defaultGlobalErrorHandler} from './defaultGlobalErrorHandler';
+import {loadBundledMessagesAsync} from './loadBundledMessagesAsync';
 
-jest.mock('bases/ui/contexts/WithSnackbar');
-jest.mock('bases/ui/contexts/useSnackbar');
-jest.mock('features/account/contexts/useAccountContextOperation');
 jest.mock('bases/logging/utils');
 
 jest.useFakeTimers();
 
+afterEach(() => {
+  // restore the spy created with spyOn
+  jest.restoreAllMocks();
+});
+
 setErrorSender(jest.fn());
 
-const wrapper = (value: AccountData) => {
-  return ({children}: {children: React.ReactNode}) => {
-    return <WithAccountContext accountData={value}>{children}</WithAccountContext>;
-  };
-};
-
-describe('useDefaultGlobalErrorHandler', () => {
-  const mockSnackbarShow = jest.fn();
-
-  beforeAll(() => {
-    (useSnackbar as jest.Mock).mockImplementation(() => ({
-      show: mockSnackbarShow,
-    }));
-    (WithSnackbar as jest.Mock).mockReturnValue(<></>);
-  });
-
-  beforeEach(() => {
-    mockSnackbarShow.mockClear();
-    (useSnackbar as jest.Mock).mockClear();
-    (WithSnackbar as jest.Mock).mockClear();
-  });
-
+describe('defaultGlobalErrorHandler', () => {
   test('400 Bad Requestの場合に何も行われない', async () => {
     const axiosError = new AxiosError(
       'error',
@@ -58,13 +35,12 @@ describe('useDefaultGlobalErrorHandler', () => {
         config: {},
       },
     );
+    const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
-    });
-    expect(errorHandler.current).not.toBeUndefined();
-    errorHandler.current(axiosError);
-    expect(mockSnackbarShow).not.toBeCalled();
+    const errorHandler = defaultGlobalErrorHandler(new QueryClient());
+    expect(errorHandler).not.toBeUndefined();
+    errorHandler(axiosError);
+    expect(spySnackbar).not.toBeCalled();
   });
 
   test('401 Unauthorizedの場合に再ログインを促すアラートを表示', async () => {
@@ -84,24 +60,19 @@ describe('useDefaultGlobalErrorHandler', () => {
     const spyClientLogout = jest.spyOn(clientLogout, 'clientLogout').mockImplementation(() => {
       return Promise.resolve();
     });
-    const logout = jest.fn();
-    (useAccountContextOperation as jest.Mock).mockImplementation(() => {
-      return {logout};
-    });
     const spyAlert = jest.spyOn(Alert, 'alert');
+    const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
-    });
-    expect(errorHandler.current).not.toBeUndefined();
+    const errorHandler = defaultGlobalErrorHandler(new QueryClient());
+    expect(errorHandler).not.toBeUndefined();
+    errorHandler(axiosError);
     await act(async () => {
       await new Promise(resolve => {
-        resolve(errorHandler.current(axiosError));
+        resolve(errorHandler(axiosError));
       });
     });
-    expect(mockSnackbarShow).not.toBeCalled();
+    expect(spySnackbar).not.toBeCalled();
     expect(spyClientLogout).toHaveBeenCalled();
-    expect(logout).toHaveBeenCalled();
     expect(spyAlert).toBeCalledWith(
       '再ログインが必要です',
       'セッションの有効期限が切れました。再度ログインしてください。',
@@ -123,13 +94,12 @@ describe('useDefaultGlobalErrorHandler', () => {
       },
     );
     const spyAlert = jest.spyOn(Alert, 'alert');
+    const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
-    });
-    expect(errorHandler.current).not.toBeUndefined();
-    errorHandler.current(axiosError);
-    expect(mockSnackbarShow).not.toBeCalled();
+    const errorHandler = defaultGlobalErrorHandler(new QueryClient());
+    expect(errorHandler).not.toBeUndefined();
+    errorHandler(axiosError);
+    expect(spySnackbar).not.toBeCalled();
     expect(spyAlert).toBeCalledWith(
       '新しい利用規約への同意',
       'この機能を利用するためには最新の利用規約への同意が必要です。',
@@ -150,13 +120,12 @@ describe('useDefaultGlobalErrorHandler', () => {
         config: {},
       },
     );
+    const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
-    });
-    expect(errorHandler.current).not.toBeUndefined();
-    errorHandler.current(axiosError);
-    expect(mockSnackbarShow).not.toBeCalled();
+    const errorHandler = defaultGlobalErrorHandler(new QueryClient());
+    expect(errorHandler).not.toBeUndefined();
+    errorHandler(axiosError);
+    expect(spySnackbar).not.toBeCalled();
   });
 
   test('412 Precondition Failedの場合にアプリを新しいバージョンにアップデートするように促すダイアログを表示', async () => {
@@ -174,13 +143,12 @@ describe('useDefaultGlobalErrorHandler', () => {
       },
     );
     const spyAlert = jest.spyOn(Alert, 'alert');
+    const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
-    });
-    expect(errorHandler.current).not.toBeUndefined();
-    errorHandler.current(axiosError);
-    expect(mockSnackbarShow).not.toBeCalled();
+    const errorHandler = defaultGlobalErrorHandler(new QueryClient());
+    expect(errorHandler).not.toBeUndefined();
+    errorHandler(axiosError);
+    expect(spySnackbar).not.toBeCalled();
     expect(spyAlert).toBeCalledWith(
       'アプリの更新が必要です',
       'アプリのバージョンが古いためこの機能を利用できません。ストアからアップデートを実施してください。',
@@ -201,13 +169,12 @@ describe('useDefaultGlobalErrorHandler', () => {
         config: {},
       },
     );
+    const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
-    });
-    expect(errorHandler.current).not.toBeUndefined();
-    errorHandler.current(axiosError);
-    expect(mockSnackbarShow).toBeCalledWith(
+    const errorHandler = defaultGlobalErrorHandler(new QueryClient());
+    expect(errorHandler).not.toBeUndefined();
+    errorHandler(axiosError);
+    expect(spySnackbar).toBeCalledWith(
       'ただいまリクエストが集中しており混雑しております。時間をおいてから再度お試しください。',
     );
   });
@@ -226,13 +193,12 @@ describe('useDefaultGlobalErrorHandler', () => {
         config: {},
       },
     );
+    const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
-    });
-    expect(errorHandler.current).not.toBeUndefined();
-    errorHandler.current(axiosError);
-    expect(mockSnackbarShow).toBeCalledWith(
+    const errorHandler = defaultGlobalErrorHandler(new QueryClient());
+    expect(errorHandler).not.toBeUndefined();
+    errorHandler(axiosError);
+    expect(spySnackbar).toBeCalledWith(
       'ただいまシステムメンテナンスを実施しております。時間をおいてから再度お試しください。',
     );
   });
@@ -251,15 +217,12 @@ describe('useDefaultGlobalErrorHandler', () => {
         config: {},
       },
     );
+    const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
-    });
-    expect(errorHandler.current).not.toBeUndefined();
-    errorHandler.current(axiosError);
-    expect(mockSnackbarShow).toBeCalledWith(
-      'サーバへの接続がタイムアウトしました。時間をおいてから再度お試しください。',
-    );
+    const errorHandler = defaultGlobalErrorHandler(new QueryClient());
+    expect(errorHandler).not.toBeUndefined();
+    errorHandler(axiosError);
+    expect(spySnackbar).toBeCalledWith('サーバへの接続がタイムアウトしました。時間をおいてから再度お試しください。');
   });
 
   test('500 Internal Server Errorの場合に予期せぬエラーのスナックバーを表示', async () => {
@@ -276,25 +239,23 @@ describe('useDefaultGlobalErrorHandler', () => {
         config: {},
       },
     );
+    const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
-    });
-    expect(errorHandler.current).not.toBeUndefined();
-    errorHandler.current(axiosError);
-    expect(mockSnackbarShow).toBeCalledWith(
+    const errorHandler = defaultGlobalErrorHandler(new QueryClient());
+    expect(errorHandler).not.toBeUndefined();
+    errorHandler(axiosError);
+    expect(spySnackbar).toBeCalledWith(
       '予期せぬ通信エラーが発生しました。時間をおいてから再度お試しいただき、解決しない場合はお問い合わせください。',
     );
   });
 
   test('nullの場合に予期せぬエラーのスナックバーを表示', async () => {
+    const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
-    });
-    expect(errorHandler.current).not.toBeUndefined();
-    errorHandler.current(null);
-    expect(mockSnackbarShow).toBeCalledWith(
+    const errorHandler = defaultGlobalErrorHandler(new QueryClient());
+    expect(errorHandler).not.toBeUndefined();
+    errorHandler(null);
+    expect(spySnackbar).toBeCalledWith(
       '予期せぬ通信エラーが発生しました。時間をおいてから再度お試しいただき、解決しない場合はお問い合わせください。',
     );
   });

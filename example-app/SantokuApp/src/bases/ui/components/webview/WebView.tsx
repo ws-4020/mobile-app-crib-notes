@@ -11,7 +11,7 @@ import {
   WebViewSourceUri,
 } from 'react-native-webview/lib/WebViewTypes';
 
-import {useSnackbar} from '../../contexts/useSnackbar';
+import {Snackbar} from '../overlay/snackbar/WithSnackbar';
 
 type Props = WebViewProps & {
   /**
@@ -70,7 +70,6 @@ const isUriSource = (source?: WebViewSource): source is WebViewSourceUri => {
 export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props, ref) {
   const [loadEnd, setLoadEnd] = useState(false);
   const [scrollEndCalled, setScrollEndCalled] = useState(false);
-  const snackbar = useSnackbar();
   const {onScrollEnd, onScrollEndOnce, onLoadStart, onLoadProgress, onError, errorMessage, ...webViewProps} = props;
 
   const [isUriChanged, setIsUriChanged] = useState(false);
@@ -129,10 +128,10 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
       if (onError) {
         onError(event);
       } else {
-        snackbar.showWithCloseButton(errorMessage ?? m('app.webview.onError'));
+        Snackbar.showWithCloseButton(errorMessage ?? m('app.webview.onError'));
       }
     },
-    [errorMessage, onError, snackbar],
+    [errorMessage, onError],
   );
 
   return (

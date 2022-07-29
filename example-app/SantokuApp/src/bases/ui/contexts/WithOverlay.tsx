@@ -1,7 +1,7 @@
 import React from 'react';
 
+import {WithSnackbar} from '../components/overlay/snackbar/WithSnackbar';
 import {WithLoadingOverlay} from './WithLoadingOverlay';
-import {WithSnackbar} from './WithSnackbar';
 
 export const WithOverlay: React.FC = ({children}) => {
   return (

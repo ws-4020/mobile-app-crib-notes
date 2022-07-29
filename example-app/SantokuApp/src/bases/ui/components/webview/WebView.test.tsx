@@ -3,15 +3,8 @@ import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
 import React from 'react';
 
+import {Snackbar} from '../overlay/snackbar/WithSnackbar';
 import {WebView} from './WebView';
-
-const mockedShowWithCloseButton = jest.fn();
-
-jest.mock('bases/ui/contexts/useSnackbar', () => ({
-  useSnackbar: () => ({
-    showWithCloseButton: mockedShowWithCloseButton,
-  }),
-}));
 
 describe('WebView', () => {
   it('WebViewが正常にrenderできることを確認', () => {
@@ -222,13 +215,14 @@ describe('WebView', () => {
   });
 
   it('WebViewのonErrorイベントで、親からonErrorを指定してない場合はSnackbar表示関数をコールすることを確認', async () => {
+    const spySnackbar = jest.spyOn(Snackbar, 'showWithCloseButton').mockImplementation(() => {});
     await loadMessages(new BundledMessagesLoader());
 
     render(<WebView source={{uri: 'https://localhost/'}} testID="webview" />);
     const webview = screen.getByTestId('webview');
 
     fireEvent(webview, 'onError');
-    expect(mockedShowWithCloseButton).toHaveBeenCalledTimes(1);
+    expect(spySnackbar).toHaveBeenCalledTimes(1);
   });
 
   it('WebViewのonErrorイベントで、親からonErrorを指定した場合は親へイベント通知することを確認', () => {

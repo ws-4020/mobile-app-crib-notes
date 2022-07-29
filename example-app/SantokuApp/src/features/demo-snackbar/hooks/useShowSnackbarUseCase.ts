@@ -1,12 +1,12 @@
 import {m} from 'bases/message/utils/Message';
-import {useSnackbar} from 'bases/ui/contexts/useSnackbar';
+import {Snackbar} from 'bases/ui/components/overlay/snackbar/WithSnackbar';
 import {useCallback} from 'react';
 
 export const useShowSnackbarUseCase = () => {
-  const snackbar = useSnackbar();
+  // const snackbar = useSnackbar();
 
   const showSnackbar = useCallback(() => {
-    snackbar.show(m('app.webview.onError'));
-  }, [snackbar]);
+    Snackbar.show(m('app.webview.onError'));
+  }, []);
   return {showSnackbar};
 };

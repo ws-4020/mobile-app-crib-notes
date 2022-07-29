@@ -1,10 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {WithAccountContext} from 'features/account/contexts/WithAccountContext';
 import {WithCheckAppUpdates} from 'features/app-updates/components/WithCheckAppUpdates';
 import {WithTermsAgreementOverlay} from 'features/terms/contexts/WithTermsAgreementOverlay';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
+import {WithAccountData} from '../../features/account/components/WithAccountData';
+import {WithAutoLogin} from '../../features/account/components/WithAutoLogin';
 import {WithReactQuery} from './contexts/WithReactQuery';
 import {useAppInitializer} from './hooks/useAppInitializer';
 import {AppInitialData} from './types/AppInitialData';
@@ -44,15 +45,17 @@ export const AppWithInitialization: React.FC = () => {
     return (
       <WithCheckAppUpdates>
         <NavigationContainer>
-          <WithAccountContext accountData={initializationResult.data.accountData}>
-            <WithReactQuery>
-              <WithTermsAgreementOverlay>
-                <WithFirebaseMessagingHandlers initialData={initializationResult.data.initialData}>
-                  <RootStackNav initialData={initializationResult.data.initialData} />
-                </WithFirebaseMessagingHandlers>
-              </WithTermsAgreementOverlay>
-            </WithReactQuery>
-          </WithAccountContext>
+          <WithReactQuery>
+            <WithAutoLogin>
+              <WithAccountData>
+                <WithTermsAgreementOverlay>
+                  <WithFirebaseMessagingHandlers initialData={initializationResult.data.initialData}>
+                    <RootStackNav initialData={initializationResult.data.initialData} />
+                  </WithFirebaseMessagingHandlers>
+                </WithTermsAgreementOverlay>
+              </WithAccountData>
+            </WithAutoLogin>
+          </WithReactQuery>
         </NavigationContainer>
       </WithCheckAppUpdates>
     );

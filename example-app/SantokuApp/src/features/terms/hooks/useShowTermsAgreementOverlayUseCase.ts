@@ -1,4 +1,4 @@
-import {useAccountContext} from 'features/account/contexts/useAccountContext';
+import {useAccountData} from 'features/account/hooks/useAccountData';
 import {useCallback} from 'react';
 
 import {TermsAgreementOverlayShowProps} from '../components/TermsAgreementOverlay';
@@ -12,18 +12,18 @@ import {useTermsAgreementOverlay} from '../contexts/useTermsAgreementOverlay';
  * showTermsAgreementOverlay(onAgree);
  */
 export const useShowTermsAgreementOverlayUseCase = () => {
-  const accountContext = useAccountContext();
+  const {data: accountData} = useAccountData();
   const termsAgreementOverlay = useTermsAgreementOverlay();
 
   return useCallback(
     (onAgree?: TermsAgreementOverlayShowProps['exitingCallbackOnAgreed']) => {
-      const terms = accountContext.terms;
+      const terms = accountData?.terms;
       const termsAgreementStatus = terms?.termsAgreementStatus;
       const termsOfService = terms?.termsOfService;
       if (termsOfService && termsAgreementStatus?.hasAgreed === false) {
         termsAgreementOverlay.show({termsOfService, exitingCallbackOnAgreed: onAgree, dismissible: false});
       }
     },
-    [accountContext.terms, termsAgreementOverlay],
+    [accountData?.terms, termsAgreementOverlay],
   );
 };

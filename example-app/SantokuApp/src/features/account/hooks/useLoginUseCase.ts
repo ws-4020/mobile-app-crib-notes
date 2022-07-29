@@ -5,10 +5,10 @@ import {FormikProps} from 'formik';
 import {useCallback, useState} from 'react';
 import {Alert} from 'react-native';
 
-import {useAccountContextOperation} from '../contexts/useAccountContextOperation';
 import {isUnauthorizedError} from '../errors/UnauthorizedError';
 import {LoginForm} from '../types/LoginForm';
 import {savePassword} from '../utils/secure-storage/savePassword';
+import {useAccountDataOperation} from './useAccountDataOperation';
 import {useGetAccountsMe} from './useGetAccountsMe';
 import {useGetAccountsMeTerms} from './useGetAccountsMeTerms';
 import {useLogin} from './useLogin';
@@ -19,7 +19,7 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
   const [isExecutingLogin, setIsExecutingLogin] = useState(false);
   const {termsOfService} = useTerms();
   const {mutateAsync: callLogin} = useLogin();
-  const accountContextOperation = useAccountContextOperation();
+  const accountDataOperation = useAccountDataOperation();
   const {refetch: callGetAccountMe} = useGetAccountsMe({query: {enabled: false}});
   const {refetch: callGetAccountsMeTerms} = useGetAccountsMeTerms({query: {enabled: false}});
   const login = useCallback(async () => {
@@ -34,7 +34,7 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         const account = (await callGetAccountMe({throwOnError: true})).data!.data;
         const termsAgreementStatus = (await callGetAccountsMeTerms({throwOnError: true})).data?.data;
         // 利用規約を取得できていない場合はボタンを非活性にしているので、termsOfServiceは必ず存在する想定
-        accountContextOperation.login(account, {termsAgreementStatus, termsOfService: termsOfService!.data});
+        accountDataOperation.login({account, terms: {termsAgreementStatus, termsOfService: termsOfService!.data}});
       } catch (e) {
         if (isUnauthorizedError(e)) {
           Alert.alert(m('ログイン失敗'), m('アカウントIDまたはパスワードに\n間違いがあります。'));
@@ -45,6 +45,6 @@ export const useLoginUseCase = (form: FormikProps<LoginForm>) => {
         }
       }
     }
-  }, [form, callLogin, callGetAccountMe, callGetAccountsMeTerms, accountContextOperation, termsOfService, isMounted]);
+  }, [form, callLogin, callGetAccountMe, callGetAccountsMeTerms, accountDataOperation, termsOfService, isMounted]);
   return {login, isExecutingLogin};
 };

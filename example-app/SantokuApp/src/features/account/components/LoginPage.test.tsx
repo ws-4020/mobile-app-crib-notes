@@ -1,8 +1,8 @@
 import {render, screen, waitFor} from '@testing-library/react-native';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
+import {WithSnackbar} from 'bases/ui/components/overlay/snackbar/WithSnackbar';
 import {WithAppTheme} from 'bases/ui/contexts/AppThemeContext';
-import {WithSnackbar} from 'bases/ui/contexts/WithSnackbar';
 import {enhanceValidator} from 'bases/validator/utils';
 import {useGetAccountsMe, useGetAccountsMeTerms, usePostAccountsMeTerms} from 'features/backend/apis/account/account';
 import {useGetTerms} from 'features/backend/apis/terms/terms';
@@ -11,23 +11,19 @@ import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {WithAccountContext} from '../contexts/WithAccountContext';
 import {LoginPageProps} from './LoginPage';
 
 jest.mock('features/backend/apis/account/account');
 jest.mock('features/backend/apis/terms/terms');
 
 const Wrapper: React.FC = ({children}) => {
-  const accountData = {account: {accountId: '123456789', deviceTokens: []}};
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>
       <WithAppTheme>
         <WithSnackbar>
           <QueryClientProvider client={queryClient}>
-            <WithAccountContext accountData={accountData}>
-              <WithTermsAgreementOverlay>{children}</WithTermsAgreementOverlay>
-            </WithAccountContext>
+            <WithTermsAgreementOverlay>{children}</WithTermsAgreementOverlay>
           </QueryClientProvider>
         </WithSnackbar>
       </WithAppTheme>
