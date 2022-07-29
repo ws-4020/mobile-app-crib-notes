@@ -2,9 +2,9 @@ import type {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import messaging from '@react-native-firebase/messaging';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
 import React, {useCallback, useEffect} from 'react';
 
-import {Snackbar} from '../../../bases/ui/components/overlay/snackbar/Snackbar';
 import {NavigationParameter, RootStackParamList} from '../navigators/types';
 import {AppInitialData} from '../types/AppInitialData';
 

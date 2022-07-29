@@ -1,3 +1,5 @@
+import {usePrevious} from 'bases/core/utils/usePrevious';
+import {useVisibility} from 'bases/core/utils/useVisibility';
 import {useCallback, useEffect, useState} from 'react';
 import {Dimensions, LayoutChangeEvent, useWindowDimensions} from 'react-native';
 import {
@@ -10,9 +12,6 @@ import {
   withTiming,
   WithTimingConfig,
 } from 'react-native-reanimated';
-
-import {usePrevious} from '../../core/utils/usePrevious';
-import {useVisibility} from '../../core/utils/useVisibility';
 
 type ContainerAnimationConfig = {
   isVisible: boolean;

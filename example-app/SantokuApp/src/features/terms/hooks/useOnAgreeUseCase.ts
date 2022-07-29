@@ -1,9 +1,9 @@
 import {useAccountDataOperation} from 'features/account/hooks/useAccountDataOperation';
+import {useIsLoggedIn} from 'features/account/hooks/useIsLoggedIn';
 import {usePostAccountsMeTerms} from 'features/account/hooks/usePostAccountsMeTerms';
 import {TermsOfService} from 'features/backend/apis/model';
 import {useCallback} from 'react';
 
-import {useIsLoggedIn} from '../../account/hooks/useIsLoggedIn';
 import {useAgreedClientState} from './useAgreedClientState';
 
 export const useOnAgreeUseCase = (close: () => void, termsOfService: TermsOfService) => {
