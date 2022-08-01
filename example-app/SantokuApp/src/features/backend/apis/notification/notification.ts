@@ -6,9 +6,8 @@
  * OpenAPI spec version: 1.0.0
  */
 import {useQuery, UseQueryOptions, QueryFunction, UseQueryResult, QueryKey} from 'react-query';
-
+import type {Notification} from '.././model';
 import {backendCustomInstance, ErrorType} from '../../utils/customInstance';
-import type {Notification} from '../model';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 

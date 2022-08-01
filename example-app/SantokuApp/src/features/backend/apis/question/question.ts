@@ -15,8 +15,6 @@ import {
   UseQueryResult,
   QueryKey,
 } from 'react-query';
-
-import {backendCustomInstance, ErrorType} from '../../utils/customInstance';
 import type {
   Question,
   BadRequestResponse,
@@ -28,7 +26,8 @@ import type {
   AnswerRegistration,
   CommentContent,
   CommentRegistration,
-} from '../model';
+} from '.././model';
+import {backendCustomInstance, ErrorType} from '../../utils/customInstance';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 
