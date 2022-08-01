@@ -10,8 +10,12 @@ type LicensePageProps = {
   dependency: ThirdPartyDependency;
 };
 export const LicensePage: React.VFC<LicensePageProps> = ({dependency}) => {
-  const [licenseContentText, isLoadingLicenseContentText] = useAssetContent(dependency.licenseContentModuleId);
-  const [noticeContentText, isLoadingNoticeContentText] = useAssetContent(dependency.noticeContentModuleId);
+  const {data: licenseContentText, isLoading: isLoadingLicenseContentText} = useAssetContent(
+    dependency.licenseContentModuleId,
+  );
+  const {data: noticeContentText, isLoading: isLoadingNoticeContentText} = useAssetContent(
+    dependency.noticeContentModuleId,
+  );
   const {openRepositoryLink} = useOpenRepositoryLinkUseCase(dependency);
 
   return (
