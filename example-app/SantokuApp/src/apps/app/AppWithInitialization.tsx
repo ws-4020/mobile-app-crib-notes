@@ -43,9 +43,9 @@ export const AppWithInitialization: React.FC = () => {
     const WithFirebaseMessagingHandlers = require('./components/WithFirebaseMessagingHandlers')
       .WithFirebaseMessagingHandlers as React.FC<{initialData: AppInitialData}>;
     return (
-      <WithCheckAppUpdates>
-        <NavigationContainer>
-          <WithReactQuery>
+      <NavigationContainer>
+        <WithReactQuery>
+          <WithCheckAppUpdates>
             <WithAutoLogin>
               <WithAccountData>
                 <WithTermsAgreementOverlay>
@@ -55,9 +55,9 @@ export const AppWithInitialization: React.FC = () => {
                 </WithTermsAgreementOverlay>
               </WithAccountData>
             </WithAutoLogin>
-          </WithReactQuery>
-        </NavigationContainer>
-      </WithCheckAppUpdates>
+          </WithCheckAppUpdates>
+        </WithReactQuery>
+      </NavigationContainer>
     );
   }
 };
