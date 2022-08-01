@@ -64,3 +64,96 @@ iOS向けのネイティブモジュールを含むライブラリを依存関�
 代わりに、npmスクリプトとして`pod-install`というコマンドを用意しているので、`npm run pod-install`を実行してください。
 
 > Note: [Support Gemfile for pod-install](https://github.com/expo/expo-cli/issues/2206) という要望は上がっているのですが、対応されていません。
+
+## アプリの責務配置
+
+### アプリのレイヤー
+
+アプリは汎用的な機能からアプリ固有の機能まで、さまざま種類の機能によって構成されます。
+このアプリでは、機能の種類に応じて3つのレイヤー分類します。
+
+| レイヤー名 | 概要 |
+|:--|:--|
+| apps | アプリのトップレベルのレイヤーです。通常ここには`app`という1つのアプリ機能のみ存在します。アプリ起動時の初期化処理やコンテキスト（プロバイダー）、テーマ機能などアプリ全般をコントロールします。 |
+| features | 画面や、インタラクションに応じたユースケース、APIの呼び出しといったアプリ固有の機能を提供します。 |
+| bases | アプリの基盤レイヤーです。このレイヤーでは、画面やAPIの呼び出しといったアプリ固有の機能は持ちません。横断的な非機能のみを提供します。 |
+
+#### レイヤーの依存関係
+
+レイヤーは1方向に依存関係を持ちます。下の図では、左から右に向かって依存を持ち、右から左に依存があってはいけません。
+
+![layer-dependence.drawio.png](/.attachments/layer-dependence.drawio.png)
+
+### 機能モジュール
+
+React Nativeを使用したアプリでは、JSXやReact Hooks、型定義や定数定義など、いくつかの要素によって機能が構成されます。
+このアプリでは、これらの要素の組み合わせを**機能モジュール**と呼びます。
+
+上述したアプリのレイヤーは、必ず機能モジュールを持ちます。
+機能モジュールを構成する要素は以下になります。
+
+| 要素名 | 概要 |
+|:--|:--|
+| navigators | React Navigationを利用したナビゲータの定義。この要素はappsレイヤーのみで使用できます。 |
+| screens | このアプリで表示する全ての画面。ナビゲーションの定義と、componentsの呼び出しのみを実施します。この要素は、appsレイヤーのみで使用できます。 |
+| components | 画面を構成するコンポーネント。 |
+| hooks | インタラクションに応じたユースケースや、API呼び出しなどのReact Hooks。 |
+| contexts | React Contextを生成するReact Hooks。 |
+| providers | React ContextのProvider。この要素は、appsレイヤーのみで使用できます。 |
+| types | 型定義。 |
+| constants | 定数定義。 |
+| utils | ユーティリティ関数。 |
+| errors | エラークラス。 |
+| configs | 環境によって変わる設定値。 |
+| apis | Orvalなどのツールによって自動生成されたAPIクライアント。 |
+
+#### ステレオタイプ
+
+| 要素名 | ステレオタイプ | 概要 |
+|:--|:--|:--|
+| components | |ユーザインタラクションや状態の変更によるイベント（useEffect/useFocusEffectなど）が発生した場合のふるまいはcomponentsでは実施しません。ふるまいは、hooksで実装するので、componentsからはイベントに応じたhooks/usecaseを呼び出すのみです。|
+|| page | Screenから呼びだされるコンポーネントです。pageでは、partを組み合わせて画面を作成します。 |
+|| part | partはpageを構成する画面部品です。|
+| hooks      | view data | serviceからデータを取得して、画面表示用に編集します。 |
+| | use case | ユーザインタラクションなど、componentsで発生したイベントに対するふるまいを実装します。usecaseの主な役割は以下になります。<br><br>・serviceの呼び出し<br>・serviceからthrowされるエラーに応じたUI（AlertやSnackbar）の表示<br>・ナビゲーションの呼び出し<br>・一つのインタラクション内のみで使用する状態の管理<br>・client stateで管理している状態の変更<br><br>usecaseでは、上記以外の処理は実施しません。そのほかのロジックなどはserviceで実施します。|
+|| client state | 複数の画面や、usecaseに跨った状態 |
+|| form | ユーザが入力した値の保持やバリデーション定義などを実施します。 |
+|| service | APIの呼び出しや、その他のロジックなど |
+|| other | usecase/serviceで使用するロジックなど。共通的に使用するロジックや、処理が長くなり見通しが悪くなりそうな場合、またはひとまとまりの処理としてusecaseやserviceから切り離せそうな場合に適宜作成します。|
+
+![stereotype.drawio.png](/.attachments/stereotype.drawio.png)
+
+### ディレクトリ構成
+
+アプリのレイヤーや、機能モジュールを反映したディレクトリ構成は以下になります。
+
+```
+src
+├── @types（※１）
+├── apps
+│   └── app
+├── assets（※２）
+├── bases
+│   ├── core
+│   ├── crypto
+│   ├── firebase
+│   ├── local-authentication
+│   ├── logging
+│   ├── message
+│   ├── react-query
+│   ├── ui
+│   └── validator
+└── features
+    ├── account
+    ├── acknowledgements
+    ├── app-updates
+    ├── backend
+    ├── demo-**
+    ├── home
+    ├── sandbox
+    ├── team
+    └── terms
+```
+
+（※１）使用しているライブラリで不足している型定義や、自身で作成したNative Modulesの型定義など
+（※２）アプリで使用する画像ファイルやフォントファイルなど
