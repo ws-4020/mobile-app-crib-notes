@@ -119,7 +119,6 @@ React Nativeを使用したアプリでは、JSXやReact Hooks、型定義や定
 || use case | ユーザインタラクションなど、componentsで発生したイベントに対するふるまいを実装します。usecaseの主な役割は以下になります。<br><br>・serviceの呼び出し<br>・serviceからthrowされるエラーに応じたUI（AlertやSnackbar）の表示<br>・ナビゲーションの呼び出し<br>・一つのインタラクション内のみで使用する状態の管理<br>・client stateで管理している状態の変更<br><br>usecaseでは、上記以外の処理は実施しません。そのほかのロジックなどはserviceで実施します。|
 || service | APIの呼び出しや、その他のロジックなど |
 || pipe | serviceからデータを取得して、画面表示用に編集します。 |
-|| other | usecase/serviceで使用するロジックなど。共通的に使用するロジックや、処理が長くなり見通しが悪くなりそうな場合、またはひとまとまりの処理としてusecaseやserviceから切り離せそうな場合に適宜作成します。|
 
 ![stereotype.drawio.png](/.attachments/stereotype.drawio.png)
 
