@@ -5,7 +5,7 @@ import {Button, FAB, Icon, ListItem, Text} from 'react-native-elements';
 
 import {useNextUseCase} from '../hooks/list-todo/useNextUseCase';
 import {useRefreshTodoUseCase} from '../hooks/list-todo/useRefreshTodoUseCase';
-import {useTodos} from '../hooks/list-todo/useTodos';
+import {useTodosUseCase} from '../hooks/list-todo/useTodosUseCase';
 import {useInvalidateTodos} from '../hooks/todo/useInvalidateTodos';
 import {useResetTodos} from '../hooks/todo/useResetTodos';
 
@@ -25,7 +25,7 @@ export const ListTodoDemoPage: React.FC<ListTodoDemoPageProps> = ({
   navigateToCreateTodoDemo,
   navigateToEditTodoDemo,
 }) => {
-  const {todos, status, isSuccess, isError, isLoading, isRefetching, isFetchingNextPage} = useTodos();
+  const {todos, status, isSuccess, isError, isLoading, isRefetching, isFetchingNextPage} = useTodosUseCase();
   const {resetTodos} = useResetTodos();
   const {invalidateTodos} = useInvalidateTodos();
   const {refreshTodo} = useRefreshTodoUseCase();

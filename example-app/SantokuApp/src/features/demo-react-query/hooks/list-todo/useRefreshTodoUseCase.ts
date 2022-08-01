@@ -1,6 +1,6 @@
-import {useTodos} from './useTodos';
+import {useTodosUseCase} from './useTodosUseCase';
 
 export const useRefreshTodoUseCase = () => {
-  const {refetch} = useTodos();
+  const {refetch} = useTodosUseCase();
   return {refreshTodo: refetch};
 };

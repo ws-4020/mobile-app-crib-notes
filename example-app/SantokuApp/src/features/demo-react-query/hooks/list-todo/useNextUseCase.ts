@@ -1,9 +1,9 @@
 import {useCallback} from 'react';
 
-import {useTodos} from './useTodos';
+import {useTodosUseCase} from './useTodosUseCase';
 
 export const useNextUseCase = () => {
-  const {hasNextPage, fetchNextPage} = useTodos();
+  const {hasNextPage, fetchNextPage} = useTodosUseCase();
   const next = useCallback(() => {
     if (hasNextPage) {
       fetchNextPage().catch(() => {});

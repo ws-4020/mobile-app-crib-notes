@@ -4,14 +4,14 @@ import {Button, Text} from 'react-native-elements';
 
 import {useRefreshUseCase} from '../hooks/dependent-query3/useRefreshUseCase';
 import {useReloadUseCase} from '../hooks/dependent-query3/useReloadUseCase';
-import {useTodos} from '../hooks/dependent-query3/useTodos';
+import {useTodosUseCase} from '../hooks/list-todo/useTodosUseCase';
 import {useTodoDetails} from '../hooks/todo/useTodoDetails';
 
 export const DependentQueryDemo3Page: React.FC = () => {
   const {isIdle, isLoading, isRefetching, isSuccess, isError} = useTodoDetails();
   const {refresh} = useRefreshUseCase();
   const {reload} = useReloadUseCase();
-  const {todos} = useTodos();
+  const {todos} = useTodosUseCase();
 
   return (
     <SafeAreaView style={styles.container}>
