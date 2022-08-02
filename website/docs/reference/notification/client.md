@@ -96,6 +96,7 @@ Firebaseへのアクセスに必要な認証情報ファイルを適切なフォ
 本ガイドでは、クライアントアプリに以下の機能を組み込む時の流れについて説明します。
 
 - リモート通知の宛先指定に必要な登録トークンの取得
+- 通知チャンネルの作成
 - アプリがアクティブな時にメッセージを受信した場合の処理
 - アプリがアクティブでない時にメッセージを受信した場合の処理
 - トピックの購読
@@ -172,6 +173,50 @@ export default PushNotification;
 
 そのため登録トークンが再生成された場合は、再度バックエンドサーバへそのことを共有しておく必要があります。
 登録トークンに変更が無いか、アプリケーションを起動するたびに確認しておくとよいでしょう。
+
+
+### 通知チャンネルの作成
+
+Android8.0（APIレベル26）以降では、プッシュ通知はすべて通知チャンネルに割り当てる必要があります。通知チャンネルごとに、[重要度](https://developer.android.com/training/notify-user/channels?hl=ja#importance)や表示・鳴動動作などを設定できます。
+
+React Native Firebaseは、デフォルトで`Miscellaneous`というチャンネルを作成します。このチャンネルは、デフォルトの重要度が高（IMPORTANCE_HIGH）となっており、そのままではヘッドアップ通知が表示されません。
+そのため、ヘッドアップ通知を表示したい場合などは、クライアントアプリ側で通知チャンネルを作成する必要があります。
+
+React Native Firebaseには、通知チャンネルを作成する機能がないため、[Notifee](https://notifee.app/)というライブラリをインストールします。
+
+#### npmの場合
+
+```bash
+npm install --save @notifee/react-native
+```
+
+#### yarnの場合
+
+```bash
+yarn add @notifee/react-native
+```
+
+通知チャンネルを作成するコードは以下のとおりです。
+
+```typescript jsx
+
+import notifee, {AndroidImportance} from '@notifee/react-native';
+
+const createNotificationChannel = async () => {
+  await notifee.createChannel({
+    id: 'weatherChannel',
+    name: 'Weather notification',
+    sound: 'default',
+    importance: AndroidImportance.HIGH,
+  });
+};
+
+```
+
+バックエンドでチャンネルに`weatherChannel`を指定してプッシュ通知を送信することで、クライアント側では`weatherChannel`でプッシュ通知を受信することができます。
+
+なお、React Native Firebaseではバックエンドから送信されたプッシュ通知にチャンネルの指定がなかった場合、デフォルトで受信するチャンネルを設定することができます。
+`firebase.json`の[messaging_android_notification_channel_id](https://rnfirebase.io/messaging/usage#notification-channel-id)にデフォルトの通知チャンネルを指定します。
 
 ### アプリがアクティブな時にメッセージを受信した場合の処理
 
