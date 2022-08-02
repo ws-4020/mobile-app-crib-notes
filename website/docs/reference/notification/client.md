@@ -174,7 +174,6 @@ export default PushNotification;
 そのため登録トークンが再生成された場合は、再度バックエンドサーバへそのことを共有しておく必要があります。
 登録トークンに変更が無いか、アプリケーションを起動するたびに確認しておくとよいでしょう。
 
-
 ### 通知チャンネルの作成
 
 Android8.0（APIレベル26）以降では、プッシュ通知はすべて通知チャンネルに割り当てる必要があります。通知チャンネルごとに、[重要度](https://developer.android.com/training/notify-user/channels?hl=ja#importance)や表示・鳴動動作などを設定できます。
@@ -184,13 +183,21 @@ React Native Firebaseは、デフォルトで`Miscellaneous`というチャン�
 
 React Native Firebaseには、通知チャンネルを作成する機能がないため、[Notifee](https://notifee.app/)というライブラリをインストールします。
 
+<!-- markdownlint-disable MD024 -->
+
 #### npmの場合
+
+<!-- markdownlint-enable MD024 -->
 
 ```bash
 npm install --save @notifee/react-native
 ```
 
+<!-- markdownlint-disable MD024 -->
+
 #### yarnの場合
+
+<!-- markdownlint-enable MD024 -->
 
 ```bash
 yarn add @notifee/react-native
@@ -213,9 +220,9 @@ const createNotificationChannel = async () => {
 
 ```
 
-バックエンドでチャンネルに`weatherChannel`を指定してプッシュ通知を送信することで、クライアント側では`weatherChannel`でプッシュ通知を受信することができます。
+バックエンドでチャンネルに`weatherChannel`を指定してプッシュ通知を送信することで、クライアント側では`weatherChannel`でプッシュ通知を受信できます。
 
-なお、React Native Firebaseではバックエンドから送信されたプッシュ通知にチャンネルの指定がなかった場合、デフォルトで受信するチャンネルを設定することができます。
+なお、React Native Firebaseではバックエンドから送信されたプッシュ通知にチャンネルの指定がなかった場合、デフォルトで受信するチャンネルを設定できます。
 `firebase.json`の[messaging_android_notification_channel_id](https://rnfirebase.io/messaging/usage#notification-channel-id)にデフォルトの通知チャンネルを指定します。
 
 ### アプリがアクティブな時にメッセージを受信した場合の処理
