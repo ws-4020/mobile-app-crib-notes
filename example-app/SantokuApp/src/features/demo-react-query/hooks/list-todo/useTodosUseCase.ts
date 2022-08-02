@@ -1,8 +1,8 @@
-import {todosPipe} from 'features/demo-react-query/utils/todosPipe';
+import {translateTodos} from 'features/demo-react-query/utils/translateTodos';
 
 import {useListTodoByCursorInfinite} from '../todo/useListTodoByCursorInfinite';
 
 export const useTodosUseCase = () => {
   const {data, ...rest} = useListTodoByCursorInfinite();
-  return {todos: todosPipe(data), ...rest};
+  return {todos: translateTodos(data), ...rest};
 };
