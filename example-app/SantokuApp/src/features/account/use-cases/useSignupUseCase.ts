@@ -27,7 +27,7 @@ export const useSignupUseCase = (
       try {
         const nickname = form.values.nickname;
         const accountData = await callSignup({nickname, termsAgreementStatus});
-        accountDataOperation.login(accountData);
+        accountDataOperation.signup(accountData);
         setIsLoggedIn(true);
       } catch (e) {
         // ここではサインアップに成功したaccountId、passwordを使用してログインしているため、UnauthorizedErrorが発生しない想定です。

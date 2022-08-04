@@ -5,6 +5,12 @@ import {AccountData} from '../types/AccountData';
 
 export const useAccountDataOperation = () => {
   const queryClient = useQueryClient();
+  const signup = useCallback(
+    (accountData: AccountData) => {
+      queryClient.setQueryData<AccountData>(['account', 'accountData'], accountData);
+    },
+    [queryClient],
+  );
   const login = useCallback(
     (accountData: AccountData) => {
       queryClient.setQueryData<AccountData>(['account', 'accountData'], accountData);
@@ -20,5 +26,5 @@ export const useAccountDataOperation = () => {
     },
     [queryClient],
   );
-  return {login, agreedToTerms};
+  return {signup, login, agreedToTerms};
 };
