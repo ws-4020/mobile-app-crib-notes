@@ -3,7 +3,7 @@ import {resolveErrorMessage} from 'bases/error/resolveErrorMessage';
 import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {enhanceValidator} from 'bases/validator/utils';
 import {activateKeepAwake} from 'expo-keep-awake';
-import {setRefreshSessionInterceptor} from 'features/account/utils/auth/refreshSession';
+import {setRefreshSessionInterceptor} from 'features/account/services/auth/refreshSession';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {useCallback, useMemo, useState} from 'react';
 

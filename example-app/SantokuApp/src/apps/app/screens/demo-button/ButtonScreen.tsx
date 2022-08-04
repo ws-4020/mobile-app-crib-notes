@@ -1,4 +1,4 @@
-import {ButtonPage} from 'features/demo-button/components/ButtonPage';
+import {ButtonPage} from 'features/demo-button/pages/ButtonPage';
 import React from 'react';
 
 export const ButtonScreen: React.FC = () => {

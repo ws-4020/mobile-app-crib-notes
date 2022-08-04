@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList} from 'apps/app/navigators/types';
-import {ErrorCasePage} from 'features/demo-error/components/ErrorCasePage';
+import {ErrorCasePage} from 'features/demo-error/pages/ErrorCasePage';
 import React, {useCallback} from 'react';
 
 export const ErrorCaseScreen: React.FC<NativeStackScreenProps<DemoStackParamList>> = ({navigation}) => {

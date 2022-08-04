@@ -4,7 +4,7 @@ import {sendErrorLog} from 'bases/error/sendErrorLog';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
 import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
-import {clientLogout} from 'features/account/utils/auth/clientLogout';
+import {clientLogout} from 'features/account/services/auth/clientLogout';
 import {RequestTimeoutError} from 'features/backend/error/RequestTimeoutError';
 import {Alert} from 'react-native';
 import {QueryClient} from 'react-query';

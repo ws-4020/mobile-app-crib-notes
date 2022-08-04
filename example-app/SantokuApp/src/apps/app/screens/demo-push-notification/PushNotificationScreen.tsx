@@ -1,4 +1,4 @@
-import {PushNotificationPage} from 'features/demo-push-notification/components/PushNotificationPage';
+import {PushNotificationPage} from 'features/demo-push-notification/pages/PushNotificationPage';
 import React from 'react';
 
 export const PushNotificationScreen: React.FC = () => {

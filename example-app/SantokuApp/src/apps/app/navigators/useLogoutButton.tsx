@@ -1,6 +1,6 @@
 import {m} from 'bases/message/utils/Message';
 import {Button} from 'bases/ui/components/button/Button';
-import {useLogoutUseCase} from 'features/account/hooks/useLogoutUseCase';
+import {useLogoutUseCase} from 'features/account/use-cases/useLogoutUseCase';
 import React from 'react';
 import {GestureResponderEvent, StyleSheet} from 'react-native';
 

@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 
-import {useIsLoggedIn} from '../hooks/useIsLoggedIn';
-import {useLoadAccountDataUseCase} from '../hooks/useLoadAccountDataUseCase';
+import {useIsLoggedIn} from '../client-states/useIsLoggedIn';
+import {useLoadAccountDataUseCase} from '../use-cases/useLoadAccountDataUseCase';
 
 export const AccountDataLoader: React.FC = ({children}) => {
   const [isLoggedIn] = useIsLoggedIn();

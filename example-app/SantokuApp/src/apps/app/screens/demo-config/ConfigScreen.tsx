@@ -1,4 +1,4 @@
-import {ConfigPage} from 'features/demo-config/components/ConfigPage';
+import {ConfigPage} from 'features/demo-config/pages/ConfigPage';
 import React from 'react';
 
 export const ConfigScreen: React.FC = () => {

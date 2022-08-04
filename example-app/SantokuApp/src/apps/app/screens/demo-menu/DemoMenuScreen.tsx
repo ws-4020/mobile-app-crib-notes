@@ -1,7 +1,7 @@
 import {NavigationProp} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList} from 'apps/app/navigators/types';
-import {DemoMenuPage} from 'features/demo-menu/components/DemoMenuPage';
+import {DemoMenuPage} from 'features/demo-menu/pages/DemoMenuPage';
 import React, {useMemo} from 'react';
 
 type ScreenList = {

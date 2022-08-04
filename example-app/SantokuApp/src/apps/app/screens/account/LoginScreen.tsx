@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'apps/app/navigators/types';
-import {LoginPage} from 'features/account/components/LoginPage';
+import {LoginPage} from 'features/account/pages/LoginPage';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import React, {useCallback} from 'react';
 

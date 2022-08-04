@@ -1,6 +1,6 @@
-import {getAccountsMeTerms} from 'features/account/utils/auth/getAccountsMeTerms';
+import {getAccountsMeTerms} from 'features/account/services/getAccountsMeTerms';
 import {getAccountsMe} from 'features/backend/apis/account/account';
-import {getTerms} from 'features/terms/utils/getTerms';
+import {getTerms} from 'features/terms/services/getTerms';
 
 import {InitialDataError} from '../errors/initialDataError';
 import {loadInitialAccountDataAsync} from './loadInitialAccountDataAsync';
@@ -8,8 +8,8 @@ import {loadInitialAccountDataAsync} from './loadInitialAccountDataAsync';
 const axiosGetOkResponse = {status: 200, statusText: 'OK', config: {}, request: {}, headers: {}};
 
 jest.mock('features/backend/apis/account/account');
-jest.mock('features/account/utils/auth/getAccountsMeTerms');
-jest.mock('features/terms/utils/getTerms');
+jest.mock('features/account/services/getAccountsMeTerms');
+jest.mock('features/terms/services/getTerms');
 
 beforeEach(() => {
   jest.resetAllMocks();

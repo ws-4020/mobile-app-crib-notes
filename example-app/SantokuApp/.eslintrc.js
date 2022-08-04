@@ -61,7 +61,7 @@ module.exports = {
   ignorePatterns: [
     'src/features/backend/apis/**/*.ts',
     'src/features/sandbox/apis/**/*.ts',
-    'src/features/acknowledgements/utils/ThirdPartyDependencies.ts',
+    'src/features/acknowledgements/services/ThirdPartyDependencies.ts',
   ],
   rules: {
     'strict-dependencies/strict-dependencies': [

@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList} from 'apps/app/navigators/types';
-import {AcknowledgementsPage} from 'features/acknowledgements/components/AcknowledgementsPage';
+import {AcknowledgementsPage} from 'features/acknowledgements/pages/AcknowledgementsPage';
 import {ThirdPartyDependency} from 'features/acknowledgements/types/ThirdPartyDependency';
 import React, {useCallback} from 'react';
 

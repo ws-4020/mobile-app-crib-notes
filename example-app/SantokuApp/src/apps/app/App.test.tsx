@@ -71,7 +71,7 @@ jest.mock('features/backend/apis/terms/terms', () => {
   };
 });
 
-jest.mock('features/account/utils/auth/autoLogin', () => {
+jest.mock('features/account/services/auth/autoLogin', () => {
   return {
     autoLogin: jest.fn(() => {
       return Promise.resolve({

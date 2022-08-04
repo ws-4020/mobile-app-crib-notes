@@ -1,15 +1,15 @@
 import * as Application from 'expo-application';
 import React, {useEffect} from 'react';
 
-import {useAppUpdates} from '../hooks/useAppUpdates';
-import {showUpdateRequiredDialog} from '../utils/showUpdateRequiredDialog';
+import {useAppUpdates} from '../services/useAppUpdates';
+import {showUpdateRequiredDialogUseCase} from '../use-cases/showUpdateRequiredDialogUseCase';
 
 const AppUpdatesChecker: React.FC = ({children}) => {
   const {data: appUpdates} = useAppUpdates();
 
   useEffect(() => {
     if (appUpdates?.updateRequired) {
-      showUpdateRequiredDialog(Application.nativeApplicationVersion!);
+      showUpdateRequiredDialogUseCase(Application.nativeApplicationVersion!);
     }
   }, [appUpdates]);
   if (appUpdates === undefined || appUpdates.updateRequired) {

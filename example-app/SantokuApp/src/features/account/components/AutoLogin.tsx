@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 
-import {useAutoLoginUseCase} from '../hooks/useAutoLoginUseCase';
-import {useIsLoggedIn} from '../hooks/useIsLoggedIn';
+import {useIsLoggedIn} from '../client-states/useIsLoggedIn';
+import {useAutoLoginUseCase} from '../use-cases/useAutoLoginUseCase';
 
 export const AutoLogin: React.FC = ({children}) => {
   const [isLoggedIn] = useIsLoggedIn();

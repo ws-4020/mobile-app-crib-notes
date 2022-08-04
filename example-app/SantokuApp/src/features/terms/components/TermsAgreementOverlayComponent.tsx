@@ -9,15 +9,15 @@ import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
-import {useButtonDisableClientState} from '../hooks/useButtonDisableClientState';
-import {useComposedExitingCallbackUseCase} from '../hooks/useComposedExitingCallbackUseCase';
-import {useExitingCallbackOnAgreedUseCase} from '../hooks/useExitingCallbackOnAgreedUseCase';
-import {useIsWebViewErrorClientState} from '../hooks/useIsWebViewErrorClientState';
-import {useOnAgreeUseCase} from '../hooks/useOnAgreeUseCase';
-import {useOnScrollEndOnceUseCase} from '../hooks/useOnScrollEndOnceUseCase';
-import {useOnWebViewErrorUseCase} from '../hooks/useOnWebViewErrorUseCase';
-import {useResetWebViewErrorUseCase} from '../hooks/useResetWebViewErrorUseCase';
-import {useWebViewSource} from '../hooks/useWebViewSource';
+import {useButtonDisable} from '../client-states/useButtonDisable';
+import {useIsWebViewError} from '../client-states/useIsWebViewError';
+import {useComposedExitingCallbackUseCase} from '../use-cases/useComposedExitingCallbackUseCase';
+import {useExitingCallbackOnAgreedUseCase} from '../use-cases/useExitingCallbackOnAgreedUseCase';
+import {useOnAgreeUseCase} from '../use-cases/useOnAgreeUseCase';
+import {useOnScrollEndOnceUseCase} from '../use-cases/useOnScrollEndOnceUseCase';
+import {useOnWebViewErrorUseCase} from '../use-cases/useOnWebViewErrorUseCase';
+import {useResetWebViewErrorUseCase} from '../use-cases/useResetWebViewErrorUseCase';
+import {useWebViewSourceUseCase} from '../use-cases/useWebViewSourceUseCase';
 
 export type TermsAgreementOverlayShowProps = {
   termsOfService: TermsOfService;
@@ -51,9 +51,9 @@ export const TermsAgreementOverlayComponent: React.FC<TermsAgreementOverlayProps
   exitingCallbackOnAgreed,
   contentViewTestID,
 }) => {
-  const [isWebViewError] = useIsWebViewErrorClientState();
-  const [buttonDisable] = useButtonDisableClientState();
-  const {webViewSource} = useWebViewSource(termsOfService);
+  const [isWebViewError] = useIsWebViewError();
+  const [buttonDisable] = useButtonDisable();
+  const {webViewSource} = useWebViewSourceUseCase(termsOfService);
   const {composedExitingCallback} = useComposedExitingCallbackUseCase(exitingCallback);
   const {exitOnAgreed} = useExitingCallbackOnAgreedUseCase(exitingCallbackOnAgreed);
   const {resetWebViewError} = useResetWebViewErrorUseCase();

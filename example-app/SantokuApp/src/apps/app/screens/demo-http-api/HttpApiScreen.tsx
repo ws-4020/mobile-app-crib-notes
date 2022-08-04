@@ -1,4 +1,4 @@
-import {HttpApiPage} from 'features/demo-http-api/components/HttpApiPage';
+import {HttpApiPage} from 'features/demo-http-api/pages/HttpApiPage';
 import React from 'react';
 
 export const HttpApiScreen = () => {

@@ -1,4 +1,4 @@
-import {DisabledQueryDemoPage} from 'features/demo-react-query/components/DisabledQueryDemoPage';
+import {DisabledQueryDemoPage} from 'features/demo-react-query/pages/DisabledQueryDemoPage';
 import React from 'react';
 
 export const DisabledQueryDemoScreen: React.FC = () => {

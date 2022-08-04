@@ -1,6 +1,6 @@
 import {useFocusEffect} from '@react-navigation/core';
-import {HomePage} from 'features/home/components/HomePage';
-import {useShowTermsAgreementOverlayUseCase} from 'features/terms/hooks/useShowTermsAgreementOverlayUseCase';
+import {HomePage} from 'features/home/pages/HomePage';
+import {useShowTermsAgreementOverlayUseCase} from 'features/terms/use-cases/useShowTermsAgreementOverlayUseCase';
 import React from 'react';
 
 export const HomeScreen: React.FC = () => {
