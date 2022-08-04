@@ -1,9 +1,9 @@
 import {generatePassword} from 'bases/core/utils/generatePassword';
-import {useSignup} from 'features/account/hooks/useSignup';
 import {useCallback} from 'react';
 
 import {handleError} from '../utils/handleError';
 import {useAccountId} from './useAccountId';
+import {useSignup} from './useSignup';
 
 export const useSignupUseCase = () => {
   const [, setAccountId] = useAccountId();
