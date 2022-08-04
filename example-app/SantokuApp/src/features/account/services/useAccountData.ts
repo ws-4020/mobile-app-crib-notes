@@ -6,11 +6,10 @@ import {getAccountsMeTerms} from './getAccountsMeTerms';
 
 const queryKey = ['account', 'accountData'];
 
-export const useAccountData = (options?: {
-  enabled?: boolean;
-  staleTime?: number;
-  meta?: {disableGlobalErrorHandler?: boolean};
-}) => {
+export const useAccountData = ({
+  enabled,
+  meta,
+}: {enabled?: boolean; meta?: {disableGlobalErrorHandler?: boolean}} = {}) => {
   return useQuery(
     queryKey,
     async () => {
@@ -25,6 +24,6 @@ export const useAccountData = (options?: {
         terms: {termsAgreementStatus, termsOfService},
       };
     },
-    options,
+    {enabled, meta, staleTime: Infinity},
   );
 };
