@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WithSnackbar useSnackbarのhideで、Snackbarが消えることを確認 1`] = `
+exports[`Snackbar Snackbarのhideで、Snackbarが消えることを確認 1`] = `
 Array [
   <Text
     testID="text"
@@ -13,7 +13,7 @@ Array [
 ]
 `;
 
-exports[`WithSnackbar useSnackbarのshowWithCloseButtonで、ボタン付きSnackbarが正常に表示されることを確認 1`] = `
+exports[`Snackbar SnackbarのshowWithCloseButtonで、ボタン付きSnackbarが正常に表示されることを確認 1`] = `
 Array [
   <Text
     testID="text"
@@ -117,7 +117,7 @@ Array [
 ]
 `;
 
-exports[`WithSnackbar useSnackbarのshowで、Snackbarが正常に表示されることを確認 1`] = `
+exports[`Snackbar Snackbarのshowで、Snackbarが正常に表示されることを確認 1`] = `
 Array [
   <Text
     testID="text"

@@ -1,7 +1,7 @@
-import {setErrorSender} from 'bases/error/sendErrorLog';
 import {firebaseConfig} from 'bases/firebase/configs/FirebaseConfig';
 import {createLogger, setLogger} from 'bases/logging/utils';
 import {FirebaseCrashlyticsTransport} from 'bases/logging/utils/FirebaseCrashlyticsTransport';
+import {setErrorSender} from 'bases/logging/utils/sendErrorLog';
 import {LoadingOverlay} from 'bases/ui/components/overlay/loading/LoadingOverlay';
 import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
 import {WithAppTheme} from 'bases/ui/contexts/AppThemeContext';

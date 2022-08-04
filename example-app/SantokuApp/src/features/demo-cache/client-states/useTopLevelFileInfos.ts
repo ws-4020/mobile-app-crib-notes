@@ -1,4 +1,4 @@
-import {useClientState} from 'bases/react-query/hooks/useClientState';
+import {useClientState} from 'bases/react-query/utils/useClientState';
 import * as FileSystem from 'expo-file-system';
 
 export const useTopLevelFileInfos = () => {

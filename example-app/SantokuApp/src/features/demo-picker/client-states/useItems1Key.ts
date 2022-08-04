@@ -1,4 +1,4 @@
-import {useClientState} from 'bases/react-query/hooks/useClientState';
+import {useClientState} from 'bases/react-query/utils/useClientState';
 import React from 'react';
 
 export const useItems1Key = () => {

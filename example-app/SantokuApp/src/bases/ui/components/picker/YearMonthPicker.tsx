@@ -9,7 +9,7 @@ import {
   ViewProps,
 } from 'react-native';
 
-import {useYearMonthPickerUseCase} from '../../hooks/useYearMonthPickerUseCase';
+import {useYearMonthPickerUseCase} from '../../use-cases/useYearMonthPickerUseCase';
 import {RequiredYearMonth, YearMonth} from '../../utils/YearMonth';
 import {DefaultPickerAccessory, DefaultPickerAccessoryProps} from './DefaultPickerAccessory';
 import {PickerBackdrop, PickerBackdropProps} from './PickerBackdrop';

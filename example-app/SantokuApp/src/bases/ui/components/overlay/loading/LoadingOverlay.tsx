@@ -25,7 +25,7 @@ const Component: React.VFC = () => {
 
 let LoadingOverlay: LoadingOverlayType = {
   visible: () => {
-    throw new Error('WithLoadingOverlay is required.');
+    throw new Error('LoadingOverlay.Component is required.');
   },
   Component,
 };

@@ -32,8 +32,8 @@ const ChildComponent: React.FC<{type: UseSnackbarType}> = ({type}) => {
   return <Text testID="text">test</Text>;
 };
 
-describe('WithSnackbar', () => {
-  it('useSnackbarのshowで、Snackbarが正常に表示されることを確認', () => {
+describe('Snackbar', () => {
+  it('Snackbarのshowで、Snackbarが正常に表示されることを確認', () => {
     render(
       <>
         <ChildComponent type="show" />
@@ -47,7 +47,7 @@ describe('WithSnackbar', () => {
     expect(screen).toMatchSnapshot();
   });
 
-  it('useSnackbarのshowWithCloseButtonで、ボタン付きSnackbarが正常に表示されることを確認', async () => {
+  it('SnackbarのshowWithCloseButtonで、ボタン付きSnackbarが正常に表示されることを確認', async () => {
     await loadMessages(new BundledMessagesLoader());
 
     render(
@@ -63,7 +63,7 @@ describe('WithSnackbar', () => {
     expect(screen).toMatchSnapshot();
   });
 
-  it('useSnackbarのhideで、Snackbarが消えることを確認', async () => {
+  it('Snackbarのhideで、Snackbarが消えることを確認', async () => {
     render(
       <>
         <ChildComponent type="show" />

@@ -3,7 +3,7 @@ import React, {useMemo} from 'react';
 import {Modal as RNModal, ModalProps, Pressable, PressableProps, StyleSheet, ViewProps} from 'react-native';
 import Reanimated, {WithTimingConfig} from 'react-native-reanimated';
 
-import {usePickerBackdropUseCase} from '../../hooks/usePickerBackdropUseCase';
+import {usePickerBackdropUseCase} from '../../use-cases/usePickerBackdropUseCase';
 
 export const DEFAULT_BACKGROUND_COLOR = 'black';
 export const DEFAULT_OPACITY = 0.4;

@@ -42,13 +42,13 @@ type SnackbarType = {
 
 let Snackbar: SnackbarType = {
   show: () => {
-    throw new Error('WithSnackbar is required.');
+    throw new Error('Snackbar.Component is required.');
   },
   showWithCloseButton: () => {
-    throw new Error('WithSnackbar is required.');
+    throw new Error('Snackbar.Component is required.');
   },
   hide: () => {
-    throw new Error('WithSnackbar is required.');
+    throw new Error('Snackbar.Component is required.');
   },
   Component,
 };

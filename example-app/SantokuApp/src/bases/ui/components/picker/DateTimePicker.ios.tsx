@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pressable, StyleSheet, TextInput, View} from 'react-native';
 
-import {useDateTimePickerIOSUseCase} from '../../hooks/useDateTimePickerIOSUseCase';
+import {useDateTimePickerIOSUseCase} from '../../use-cases/useDateTimePickerIOSUseCase';
 import {DateTimePickerProps} from './DateTimePicker';
 import {DateTimePickerItems, DateTimePickerItemsIOSProps} from './DateTimePickerItems';
 import {DefaultPickerAccessory} from './DefaultPickerAccessory';

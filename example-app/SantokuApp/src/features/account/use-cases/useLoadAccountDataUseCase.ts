@@ -1,5 +1,5 @@
-import {resolveErrorMessage} from 'bases/error/resolveErrorMessage';
-import {sendErrorLog} from 'bases/error/sendErrorLog';
+import {sendErrorLog} from 'bases/logging/utils/sendErrorLog';
+import {resolveErrorMessage} from 'bases/message/utils/resolveErrorMessage';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
 
