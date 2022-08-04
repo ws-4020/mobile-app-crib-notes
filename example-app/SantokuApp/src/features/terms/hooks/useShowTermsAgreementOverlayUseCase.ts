@@ -1,8 +1,8 @@
 import {useAccountData} from 'features/account/hooks/useAccountData';
 import {useCallback} from 'react';
 
-import {TermsAgreementOverlayShowProps} from '../components/TermsAgreementOverlay';
-import {useTermsAgreementOverlay} from '../contexts/useTermsAgreementOverlay';
+import {TermsAgreementOverlay} from '../components/TermsAgreementOverlay';
+import {TermsAgreementOverlayShowProps} from '../components/TermsAgreementOverlayComponent';
 
 /**
  * AccountContextから利用規約情報を取得して、未同意の場合は利用規約を表示します。
@@ -13,7 +13,6 @@ import {useTermsAgreementOverlay} from '../contexts/useTermsAgreementOverlay';
  */
 export const useShowTermsAgreementOverlayUseCase = () => {
   const {data: accountData} = useAccountData();
-  const termsAgreementOverlay = useTermsAgreementOverlay();
 
   return useCallback(
     (onAgree?: TermsAgreementOverlayShowProps['exitingCallbackOnAgreed']) => {
@@ -21,9 +20,9 @@ export const useShowTermsAgreementOverlayUseCase = () => {
       const termsAgreementStatus = terms?.termsAgreementStatus;
       const termsOfService = terms?.termsOfService;
       if (termsOfService && termsAgreementStatus?.hasAgreed === false) {
-        termsAgreementOverlay.show({termsOfService, exitingCallbackOnAgreed: onAgree, dismissible: false});
+        TermsAgreementOverlay.show({termsOfService, exitingCallbackOnAgreed: onAgree, dismissible: false});
       }
     },
-    [accountData?.terms, termsAgreementOverlay],
+    [accountData?.terms],
   );
 };

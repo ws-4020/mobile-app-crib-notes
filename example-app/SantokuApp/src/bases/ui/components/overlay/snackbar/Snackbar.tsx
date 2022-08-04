@@ -37,6 +37,7 @@ type SnackbarType = {
    * @param hideProps - Snackbar props(SnackbarHideContextProps).
    */
   hide: (hideProps?: SnackbarHideProps) => void;
+  Component: typeof Component;
 };
 
 let Snackbar: SnackbarType = {
@@ -49,9 +50,10 @@ let Snackbar: SnackbarType = {
   hide: () => {
     throw new Error('WithSnackbar is required.');
   },
+  Component,
 };
 
-function WithSnackbar(props: {initialState?: SnackbarComponentShowProps; children: React.ReactNode}) {
+function Component(props: {initialState?: SnackbarComponentShowProps}) {
   const [state, setState] = useState<SnackbarComponentProps>(
     props.initialState ?? {
       message: '',
@@ -60,6 +62,7 @@ function WithSnackbar(props: {initialState?: SnackbarComponentShowProps; childre
   // const snackbarContext = useMemo<SnackbarContextType>(
   Snackbar = useMemo<SnackbarType>(
     () => ({
+      ...Snackbar,
       show: (message: string, showProps?: SnackbarShowProps) => {
         setState({
           timestamp: Date.now(),
@@ -84,7 +87,6 @@ function WithSnackbar(props: {initialState?: SnackbarComponentShowProps; childre
   );
   return (
     <>
-      {props.children}
       <FullWindowOverlay>
         <SnackbarComponent {...state} />
       </FullWindowOverlay>
@@ -92,4 +94,4 @@ function WithSnackbar(props: {initialState?: SnackbarComponentShowProps; childre
   );
 }
 
-export {Snackbar, WithSnackbar};
+export {Snackbar};

@@ -1,12 +1,12 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {WithAccountData} from 'features/account/components/WithAccountData';
-import {WithAutoLogin} from 'features/account/components/WithAutoLogin';
-import {WithCheckAppUpdates} from 'features/app-updates/components/WithCheckAppUpdates';
-import {WithTermsAgreementOverlay} from 'features/terms/contexts/WithTermsAgreementOverlay';
+import {AccountDataLoader} from 'features/account/components/AccountDataLoader';
+import {AutoLogin} from 'features/account/components/AutoLogin';
+import {AppUpdatesChecker} from 'features/app-updates/components/AppUpdatesChecker';
+import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOverlay';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
-import {WithReactQuery} from './contexts/WithReactQuery';
+import {ReactQueryProvider} from './contexts/ReactQueryProvider';
 import {useAppInitializer} from './hooks/useAppInitializer';
 import {AppInitialData} from './types/AppInitialData';
 
@@ -40,23 +40,22 @@ export const AppWithInitialization: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC<{initialData: AppInitialData}>;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const WithFirebaseMessagingHandlers = require('./screens/firebase/WithFirebaseMessagingHandlers')
-      .WithFirebaseMessagingHandlers as React.FC<{initialData: AppInitialData}>;
+    const FirebaseMessagingHandlers = require('./screens/firebase/FirebaseMessagingHandlers')
+      .FirebaseMessagingHandlers as React.FC<{initialData: AppInitialData}>;
     return (
       <NavigationContainer>
-        <WithReactQuery>
-          <WithCheckAppUpdates>
-            <WithAutoLogin>
-              <WithAccountData>
-                <WithTermsAgreementOverlay>
-                  <WithFirebaseMessagingHandlers initialData={initializationResult.data.initialData}>
-                    <RootStackNav initialData={initializationResult.data.initialData} />
-                  </WithFirebaseMessagingHandlers>
-                </WithTermsAgreementOverlay>
-              </WithAccountData>
-            </WithAutoLogin>
-          </WithCheckAppUpdates>
-        </WithReactQuery>
+        <ReactQueryProvider>
+          <AppUpdatesChecker>
+            <AutoLogin>
+              <AccountDataLoader>
+                <FirebaseMessagingHandlers initialData={initializationResult.data.initialData}>
+                  <RootStackNav initialData={initializationResult.data.initialData} />
+                </FirebaseMessagingHandlers>
+                <TermsAgreementOverlay.Component />
+              </AccountDataLoader>
+            </AutoLogin>
+          </AppUpdatesChecker>
+        </ReactQueryProvider>
       </NavigationContainer>
     );
   }

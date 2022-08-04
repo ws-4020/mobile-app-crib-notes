@@ -9,11 +9,7 @@ type Props = {
   initialData: AppInitialData;
   navigateIfRequired: (message: FirebaseMessagingTypes.RemoteMessage, initialData: AppInitialData) => void;
 };
-export const WithFirebaseMessagingHandlersComponent: React.FC<Props> = ({
-  children,
-  initialData,
-  navigateIfRequired,
-}) => {
+export const FirebaseMessagingHandlersComponent: React.FC<Props> = ({children, initialData, navigateIfRequired}) => {
   const {registerNotificationMessageListener} = useRegisterNotificationMessageListener();
   const {registerNotificationOnOpenedAppListener} = useRegisterNotificationOnOpenedAppListener(
     initialData,

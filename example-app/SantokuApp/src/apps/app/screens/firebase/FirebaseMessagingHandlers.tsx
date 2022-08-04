@@ -5,7 +5,7 @@ import {NavigationParameter, RootStackParamList} from 'apps/app/navigators/types
 import {AppInitialData} from 'apps/app/types/AppInitialData';
 import React, {useCallback} from 'react';
 
-import {WithFirebaseMessagingHandlersComponent} from '../../components/WithFirebaseMessagingHandlersComponent';
+import {FirebaseMessagingHandlersComponent} from '../../components/FirebaseMessagingHandlersComponent';
 
 type Props = {
   initialData: AppInitialData;
@@ -18,7 +18,7 @@ const getNavigateToScreen = (
   return ['AuthenticatedStackNav', {screen: 'MainTabNav', params: {screen: 'HomeStackNav', params: {screen: 'Home'}}}];
 };
 
-export const WithFirebaseMessagingHandlers: React.FC<Props> = ({children, initialData}) => {
+export const FirebaseMessagingHandlers: React.FC<Props> = ({children, initialData}) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const navigateIfRequired = useCallback(
     (message: FirebaseMessagingTypes.RemoteMessage, initialData: AppInitialData) => {
@@ -28,8 +28,8 @@ export const WithFirebaseMessagingHandlers: React.FC<Props> = ({children, initia
     [navigation],
   );
   return (
-    <WithFirebaseMessagingHandlersComponent initialData={initialData} navigateIfRequired={navigateIfRequired}>
+    <FirebaseMessagingHandlersComponent initialData={initialData} navigateIfRequired={navigateIfRequired}>
       {children}
-    </WithFirebaseMessagingHandlersComponent>
+    </FirebaseMessagingHandlersComponent>
   );
 };

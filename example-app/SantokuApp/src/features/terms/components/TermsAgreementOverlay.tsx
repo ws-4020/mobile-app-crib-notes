@@ -1,137 +1,64 @@
-import {m} from 'bases/message/utils/Message';
-import {Button} from 'bases/ui/components/button/Button';
-import {OverlayBackdrop} from 'bases/ui/components/overlay/OverlayBackdrop';
-import {OverlayContainer} from 'bases/ui/components/overlay/OverlayContainer';
-import {WebView} from 'bases/ui/components/webview/WebView';
-import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
-import {TermsOfService} from 'features/backend/apis/model/termsOfService';
-import React, {useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-elements';
+import {FullWindowOverlay} from 'bases/ui/components/overlay/FullWindowOverlay';
+import React, {useCallback, useMemo, useState} from 'react';
 
-import {useButtonDisableClientState} from '../hooks/useButtonDisableClientState';
-import {useComposedExitingCallbackUseCase} from '../hooks/useComposedExitingCallbackUseCase';
-import {useExitingCallbackOnAgreedUseCase} from '../hooks/useExitingCallbackOnAgreedUseCase';
-import {useIsWebViewErrorClientState} from '../hooks/useIsWebViewErrorClientState';
-import {useOnAgreeUseCase} from '../hooks/useOnAgreeUseCase';
-import {useOnScrollEndOnceUseCase} from '../hooks/useOnScrollEndOnceUseCase';
-import {useOnWebViewErrorUseCase} from '../hooks/useOnWebViewErrorUseCase';
-import {useResetWebViewErrorUseCase} from '../hooks/useResetWebViewErrorUseCase';
-import {useWebViewSource} from '../hooks/useWebViewSource';
+import {
+  TermsAgreementOverlayComponent,
+  TermsAgreementOverlayProps,
+  TermsAgreementOverlayShowProps,
+} from './TermsAgreementOverlayComponent';
 
-export type TermsAgreementOverlayShowProps = {
-  termsOfService: TermsOfService;
-  /**
-   * Overlayの背景をタップした時に閉じるかどうかの設定。
-   * デフォルトはtrue（閉じる）です。
-   */
-  dismissible?: boolean;
-  /**
-   * iOSの場合、アニメーションが終わった後に呼び出されます。
-   * Androidの場合、アニメーションが始まった時に呼び出されます。
-   */
-  enteringCallback?: (finished: boolean) => unknown;
-  exitingCallback?: (finished: boolean) => unknown;
-  exitingCallbackOnAgreed?: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => unknown;
-};
-
-export type TermsAgreementOverlayProps = TermsAgreementOverlayShowProps & {
-  visible: boolean;
+type TermsAgreementOverlayType = {
+  show: (props: TermsAgreementOverlayShowProps) => void;
   close: () => void;
-  contentViewTestID?: string;
+  Component: typeof Component;
 };
 
-export const TermsAgreementOverlay: React.FC<TermsAgreementOverlayProps> = ({
-  visible,
-  close,
-  termsOfService,
-  dismissible = true,
-  enteringCallback,
-  exitingCallback,
-  exitingCallbackOnAgreed,
-  contentViewTestID,
-}) => {
-  const [isWebViewError] = useIsWebViewErrorClientState();
-  const [buttonDisable] = useButtonDisableClientState();
-  const {webViewSource} = useWebViewSource(termsOfService);
-  const {composedExitingCallback} = useComposedExitingCallbackUseCase(exitingCallback);
-  const {exitOnAgreed} = useExitingCallbackOnAgreedUseCase(exitingCallbackOnAgreed);
-  const {resetWebViewError} = useResetWebViewErrorUseCase();
-  const {onScrollEndOnce} = useOnScrollEndOnceUseCase();
-  const {onWebViewError} = useOnWebViewErrorUseCase();
-  const {onAgree, isLoading} = useOnAgreeUseCase(close, termsOfService);
+/**
+ * 利用規約をOverlay表示するコンポーネント。
+ */
+const Component: React.FC = ({children}) => {
+  const [state, setState] = useState<
+    Omit<TermsAgreementOverlayProps, 'termsOfService'> & Partial<Pick<TermsAgreementOverlayProps, 'termsOfService'>>
+  >({
+    visible: false,
+    close: () => {},
+  });
+  const close = useCallback(() => setState(prevState => ({...prevState, visible: false})), []);
+  const show = useCallback(
+    (props: Omit<TermsAgreementOverlayProps, 'visible' | 'close'>) => {
+      setState({
+        ...props,
+        visible: true,
+        close,
+      });
+    },
+    [close],
+  );
 
-  useEffect(() => exitOnAgreed(), [exitOnAgreed]);
+  TermsAgreementOverlay = useMemo(
+    () => ({
+      ...TermsAgreementOverlay,
+      show,
+      close,
+    }),
+    [close, show],
+  );
 
   return (
-    <OverlayBackdrop
-      isVisible={visible}
-      onPress={dismissible ? close : undefined}
-      enteringCallback={enteringCallback}
-      exitingCallback={composedExitingCallback}>
-      <OverlayContainer isVisible={visible} style={styles.modalContainer}>
-        <View style={styles.container} testID={contentViewTestID}>
-          <View style={styles.header}>
-            <Text style={styles.headerText}>{m('利用規約')}</Text>
-          </View>
-          {isWebViewError ? (
-            <View style={styles.errorView}>
-              <Text style={styles.errorText}>{m('app.terms.有効な利用規約の取得エラー')}</Text>
-              <Button title={m('リロード')} size="full" onPress={resetWebViewError} />
-            </View>
-          ) : (
-            <WebView
-              source={webViewSource}
-              onScrollEndOnce={onScrollEndOnce}
-              onError={onWebViewError}
-              onHttpError={onWebViewError}
-            />
-          )}
-          <View style={styles.footer}>
-            <Button title={m('同意')} onPress={onAgree} disabled={buttonDisable || isLoading} />
-          </View>
-        </View>
-      </OverlayContainer>
-    </OverlayBackdrop>
+    <FullWindowOverlay>
+      {state.termsOfService && <TermsAgreementOverlayComponent {...state} termsOfService={state.termsOfService} />}
+    </FullWindowOverlay>
   );
 };
 
-const styles = StyleSheet.create({
-  modalContainer: {
-    paddingHorizontal: 15,
-    paddingVertical: 50,
+let TermsAgreementOverlay: TermsAgreementOverlayType = {
+  show: (props: TermsAgreementOverlayShowProps) => {
+    throw new Error('TermsAgreementOverlay.Component is required.');
   },
-  container: {
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-    borderRadius: 10,
+  close: () => {
+    throw new Error('TermsAgreementOverlay.Component is required.');
   },
-  header: {
-    alignSelf: 'center',
-    paddingVertical: 10,
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  errorView: {
-    flex: 1,
-    padding: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  errorText: {
-    fontSize: 14,
-    marginBottom: 20,
-  },
-  footer: {
-    flex: 0,
-    flexDirection: 'row-reverse',
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-  },
-});
+  Component,
+};
+
+export {TermsAgreementOverlay};

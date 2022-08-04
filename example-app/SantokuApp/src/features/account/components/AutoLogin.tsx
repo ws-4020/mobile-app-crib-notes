@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import {useAutoLoginUseCase} from '../hooks/useAutoLoginUseCase';
 import {useIsLoggedIn} from '../hooks/useIsLoggedIn';
 
-export const WithAutoLogin: React.FC = ({children}) => {
+export const AutoLogin: React.FC = ({children}) => {
   const [isLoggedIn] = useIsLoggedIn();
   const {autoLogin} = useAutoLoginUseCase();
   useEffect(() => {

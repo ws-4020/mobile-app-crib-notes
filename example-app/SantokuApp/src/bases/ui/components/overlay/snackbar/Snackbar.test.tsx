@@ -5,7 +5,7 @@ import React, {useEffect} from 'react';
 import {Text, TextStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';
 
-import {Snackbar, WithSnackbar} from './Snackbar';
+import {Snackbar} from './Snackbar';
 
 function getStyle<T>(instance: ReactTestInstance) {
   return instance.props.style as T;
@@ -35,9 +35,10 @@ const ChildComponent: React.FC<{type: UseSnackbarType}> = ({type}) => {
 describe('WithSnackbar', () => {
   it('useSnackbarのshowで、Snackbarが正常に表示されることを確認', () => {
     render(
-      <WithSnackbar>
+      <>
         <ChildComponent type="show" />
-      </WithSnackbar>,
+        <Snackbar.Component />
+      </>,
     );
 
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
@@ -50,9 +51,10 @@ describe('WithSnackbar', () => {
     await loadMessages(new BundledMessagesLoader());
 
     render(
-      <WithSnackbar>
+      <>
         <ChildComponent type="showWithCloseButton" />
-      </WithSnackbar>,
+        <Snackbar.Component />
+      </>,
     );
 
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
@@ -63,15 +65,17 @@ describe('WithSnackbar', () => {
 
   it('useSnackbarのhideで、Snackbarが消えることを確認', async () => {
     render(
-      <WithSnackbar>
+      <>
         <ChildComponent type="show" />
-      </WithSnackbar>,
+        <Snackbar.Component />
+      </>,
     );
 
     screen.update(
-      <WithSnackbar>
+      <>
         <ChildComponent type="hide" />
-      </WithSnackbar>,
+        <Snackbar.Component />
+      </>,
     );
 
     await waitFor(() => {

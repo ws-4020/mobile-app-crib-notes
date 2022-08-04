@@ -1,5 +1,5 @@
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
-import {useTermsAgreementOverlay} from 'features/terms/contexts/useTermsAgreementOverlay';
+import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOverlay';
 import {useCallback} from 'react';
 
 import {useTerms} from './useTerms';
@@ -7,10 +7,9 @@ import {useTerms} from './useTerms';
 export const useCreateAccountUseCase = (
   navigateToCreateAccount: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => void,
 ) => {
-  const termsAgreementOverlay = useTermsAgreementOverlay();
   const {termsOfService} = useTerms();
   const createAccount = useCallback(() => {
-    termsAgreementOverlay.show({
+    TermsAgreementOverlay.show({
       // 利用規約を取得できていない場合はボタンを非活性にしているので、ここでは必ず存在する想定
       termsOfService: termsOfService!.data,
       exitingCallbackOnAgreed: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => {
@@ -18,6 +17,6 @@ export const useCreateAccountUseCase = (
       },
       dismissible: true,
     });
-  }, [navigateToCreateAccount, termsAgreementOverlay, termsOfService]);
+  }, [navigateToCreateAccount, termsOfService]);
   return {createAccount};
 };

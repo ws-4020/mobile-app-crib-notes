@@ -1,7 +1,7 @@
 import '@testing-library/jest-native/extend-expect';
 import {render, screen} from '@testing-library/react-native';
-import {WithSnackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
-import {WithTermsAgreementOverlay} from 'features/terms/contexts/WithTermsAgreementOverlay';
+import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
+import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOverlay';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
@@ -10,11 +10,11 @@ import {HomePage} from './HomePage';
 const Wrapper: React.FC = ({children}) => {
   const queryClient = new QueryClient();
   return (
-    <WithSnackbar>
-      <QueryClientProvider client={queryClient}>
-        <WithTermsAgreementOverlay>{children}</WithTermsAgreementOverlay>
-      </QueryClientProvider>
-    </WithSnackbar>
+    <>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <TermsAgreementOverlay.Component />
+      <Snackbar.Component />
+    </>
   );
 };
 

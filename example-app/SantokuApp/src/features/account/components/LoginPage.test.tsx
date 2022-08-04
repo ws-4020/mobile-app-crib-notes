@@ -1,12 +1,12 @@
 import {render, screen, waitFor} from '@testing-library/react-native';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
-import {WithSnackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
+import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
 import {WithAppTheme} from 'bases/ui/contexts/AppThemeContext';
 import {enhanceValidator} from 'bases/validator/utils';
 import {useGetAccountsMe, useGetAccountsMeTerms, usePostAccountsMeTerms} from 'features/backend/apis/account/account';
 import {useGetTerms} from 'features/backend/apis/terms/terms';
-import {WithTermsAgreementOverlay} from 'features/terms/contexts/WithTermsAgreementOverlay';
+import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOverlay';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
@@ -21,11 +21,9 @@ const Wrapper: React.FC = ({children}) => {
   return (
     <SafeAreaProvider>
       <WithAppTheme>
-        <WithSnackbar>
-          <QueryClientProvider client={queryClient}>
-            <WithTermsAgreementOverlay>{children}</WithTermsAgreementOverlay>
-          </QueryClientProvider>
-        </WithSnackbar>
+        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        <TermsAgreementOverlay.Component />
+        <Snackbar.Component />
       </WithAppTheme>
     </SafeAreaProvider>
   );

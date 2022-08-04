@@ -2,7 +2,8 @@ import {setErrorSender} from 'bases/error/sendErrorLog';
 import {firebaseConfig} from 'bases/firebase/configs/FirebaseConfig';
 import {createLogger, setLogger} from 'bases/logging/utils';
 import {FirebaseCrashlyticsTransport} from 'bases/logging/utils/FirebaseCrashlyticsTransport';
-import {WithOverlay} from 'bases/ui/components/overlay/loading/WithOverlay';
+import {LoadingOverlay} from 'bases/ui/components/overlay/loading/LoadingOverlay';
+import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
 import {WithAppTheme} from 'bases/ui/contexts/AppThemeContext';
 import React from 'react';
 import {Platform, StyleSheet} from 'react-native';
@@ -38,9 +39,9 @@ export const App = ({isHeadless}: AppProperties) => {
     <GestureHandlerRootView style={StyleSheet.absoluteFill}>
       <SafeAreaProvider>
         <WithAppTheme>
-          <WithOverlay>
-            <AppWithInitialization />
-          </WithOverlay>
+          <AppWithInitialization />
+          <LoadingOverlay.Component />
+          <Snackbar.Component />
         </WithAppTheme>
       </SafeAreaProvider>
     </GestureHandlerRootView>

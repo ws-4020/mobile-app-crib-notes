@@ -5,20 +5,17 @@ import {LoadingOverlayComponent} from './LoadingOverlayComponent';
 
 type LoadingOverlayType = {
   visible: (visible: boolean) => void;
+  Component: typeof Component;
 };
 
-let LoadingOverlay: LoadingOverlayType = {
-  visible: () => {
-    throw new Error('WithSnackbar is required.');
-  },
-};
-
-const WithLoadingOverlay: React.FC = ({children}) => {
+const Component: React.VFC = () => {
   const [visible, setVisible] = useState<boolean>(false);
-  LoadingOverlay = useMemo<LoadingOverlayType>(() => ({visible: (visible: boolean) => setVisible(visible)}), []);
+  LoadingOverlay = useMemo<LoadingOverlayType>(
+    () => ({...LoadingOverlay, visible: (visible: boolean) => setVisible(visible)}),
+    [],
+  );
   return (
     <>
-      {children}
       <FullWindowOverlay>
         <LoadingOverlayComponent visible={visible} />
       </FullWindowOverlay>
@@ -26,4 +23,11 @@ const WithLoadingOverlay: React.FC = ({children}) => {
   );
 };
 
-export {WithLoadingOverlay, LoadingOverlay};
+let LoadingOverlay: LoadingOverlayType = {
+  visible: () => {
+    throw new Error('WithLoadingOverlay is required.');
+  },
+  Component,
+};
+
+export {LoadingOverlay};

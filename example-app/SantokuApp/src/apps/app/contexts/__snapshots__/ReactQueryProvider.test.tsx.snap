@@ -7,7 +7,6 @@ Array [
   >
     test
   </Text>,
-  ";",
   <View
     testID="FullWindowOverlay"
   />,

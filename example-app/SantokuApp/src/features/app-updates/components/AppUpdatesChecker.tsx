@@ -4,7 +4,7 @@ import React, {useEffect} from 'react';
 import {useAppUpdates} from '../hooks/useAppUpdates';
 import {showUpdateRequiredDialog} from '../utils/showUpdateRequiredDialog';
 
-const WithCheckAppUpdates: React.FC = ({children}) => {
+const AppUpdatesChecker: React.FC = ({children}) => {
   const {data: appUpdates} = useAppUpdates();
 
   useEffect(() => {
@@ -19,4 +19,4 @@ const WithCheckAppUpdates: React.FC = ({children}) => {
   return <>{children}</>;
 };
 
-export {WithCheckAppUpdates};
+export {AppUpdatesChecker};
