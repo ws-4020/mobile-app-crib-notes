@@ -1,9 +1,10 @@
-import {useNavigateToDemoStackScreen} from 'apps/app/use-cases/useNavigateToScreenUseCase';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {TeamDetailPage} from 'features/team/pages/TeamDetailPage';
-import React, {useMemo} from 'react';
+import React, {useCallback} from 'react';
 
-export const TeamDetailScreen: React.FC = () => {
-  const onGoToDemoScreen = useNavigateToDemoStackScreen('DemoMenu');
-  const navigation = useMemo(() => ({goToDemo: onGoToDemoScreen}), [onGoToDemoScreen]);
-  return <TeamDetailPage navigation={navigation} />;
+import {RootStackParamList} from '../../navigators/types';
+
+export const TeamDetailScreen: React.FC<NativeStackScreenProps<RootStackParamList>> = ({navigation}) => {
+  const navigateToDemo = useCallback(() => navigation.navigate('DemoStackNav', {screen: 'DemoMenu'}), [navigation]);
+  return <TeamDetailPage navigateToDemo={navigateToDemo} />;
 };

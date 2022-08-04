@@ -3,15 +3,13 @@ import {StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 
 export type TeamDetailPageProps = {
-  navigation: {
-    goToDemo: () => void;
-  };
+  navigateToDemo: () => void;
 };
-export const TeamDetailPage: React.VFC<TeamDetailPageProps> = ({navigation}) => {
+export const TeamDetailPage: React.VFC<TeamDetailPageProps> = ({navigateToDemo}) => {
   return (
     <View style={styles.container} testID="TeamDetailPage">
       <Text h2>開発中</Text>
-      <Button title="Go to Demo" onPress={navigation.goToDemo} />
+      <Button title="Go to Demo" onPress={navigateToDemo} />
     </View>
   );
 };
