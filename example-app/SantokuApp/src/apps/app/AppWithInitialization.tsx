@@ -7,11 +7,11 @@ import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
 import {ReactQueryProvider} from './contexts/ReactQueryProvider';
-import {useAppInitializer} from './hooks/useAppInitializer';
 import {AppInitialData} from './types/AppInitialData';
+import {useAppInitializeUseCase} from './use-cases/useAppInitializeUseCase';
 
 export const AppWithInitialization: React.FC = () => {
-  const {initialize, initializationResult} = useAppInitializer();
+  const {initialize, initializationResult} = useAppInitializeUseCase();
   const [initializationError, setInitializationError] = useState<unknown>();
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const AppWithInitialization: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC<{initialData: AppInitialData}>;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const FirebaseMessagingHandlers = require('./screens/firebase/FirebaseMessagingHandlers')
+    const FirebaseMessagingHandlers = require('./components/FirebaseMessagingHandlers')
       .FirebaseMessagingHandlers as React.FC<{initialData: AppInitialData}>;
     return (
       <NavigationContainer>

@@ -8,8 +8,8 @@ import {DevSettings} from 'react-native';
 
 import {LoginScreen} from '../screens/account/LoginScreen';
 import {ProfileRegistrationScreen} from '../screens/account/ProfileRegistrationScreen';
+import {hideSplashScreen} from '../services/hideSplashScreen';
 import {AppInitialData} from '../types/AppInitialData';
-import {hideSplashScreen} from '../utils/hideSplashScreen';
 import {useAuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
 import {RootStackParamList} from './types';

@@ -1,11 +1,12 @@
 import {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {NavigationParameter, RootStackParamList} from 'apps/app/navigators/types';
-import {AppInitialData} from 'apps/app/types/AppInitialData';
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 
-import {FirebaseMessagingHandlersComponent} from '../../components/FirebaseMessagingHandlersComponent';
+import {NavigationParameter, RootStackParamList} from '../navigators/types';
+import {AppInitialData} from '../types/AppInitialData';
+import {useRegisterNotificationMessageListenerUseCase} from '../use-cases/useRegisterNotificationMessageListenerUseCase';
+import {useRegisterNotificationOnOpenedAppListenerUseCase} from '../use-cases/useRegisterNotificationOnOpenedAppListenerUseCase';
 
 type Props = {
   initialData: AppInitialData;
@@ -27,9 +28,20 @@ export const FirebaseMessagingHandlers: React.FC<Props> = ({children, initialDat
     },
     [navigation],
   );
-  return (
-    <FirebaseMessagingHandlersComponent initialData={initialData} navigateIfRequired={navigateIfRequired}>
-      {children}
-    </FirebaseMessagingHandlersComponent>
+
+  const {registerNotificationMessageListener} = useRegisterNotificationMessageListenerUseCase();
+  const {registerNotificationOnOpenedAppListener} = useRegisterNotificationOnOpenedAppListenerUseCase(
+    initialData,
+    navigateIfRequired,
   );
+
+  useEffect(() => {
+    return registerNotificationMessageListener();
+  }, [registerNotificationMessageListener]);
+
+  useEffect(() => {
+    return registerNotificationOnOpenedAppListener();
+  }, [registerNotificationOnOpenedAppListener]);
+
+  return <>{children}</>;
 };

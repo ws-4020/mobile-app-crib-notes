@@ -1,4 +1,4 @@
-import {defaultGlobalErrorHandler} from 'apps/app/utils/defaultGlobalErrorHandler';
+import {defaultGlobalErrorHandler} from 'apps/app/services/defaultGlobalErrorHandler';
 import {Query, QueryClient, QueryKey} from 'react-query';
 
 export const defaultGlobalQueryErrorHandler = (queryClient: QueryClient) => {

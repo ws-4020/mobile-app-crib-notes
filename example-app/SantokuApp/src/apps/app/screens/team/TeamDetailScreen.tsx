@@ -1,4 +1,4 @@
-import {useNavigateToDemoStackScreen} from 'apps/app/hooks/useNavigateToScreen';
+import {useNavigateToDemoStackScreen} from 'apps/app/use-cases/useNavigateToScreenUseCase';
 import {TeamDetailPage} from 'features/team/components/TeamDetailPage';
 import React, {useMemo} from 'react';
 

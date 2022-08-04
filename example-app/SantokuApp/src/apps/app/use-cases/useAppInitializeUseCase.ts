@@ -8,14 +8,9 @@ import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {useCallback, useMemo, useState} from 'react';
 
 import {isInitialDataError} from '../errors/initialDataError';
+import {initializeFirebaseCrashlyticsAsync} from '../services/initializeFirebaseCrashlyticsAsync';
+import {loadBundledMessagesAsync} from '../services/loadBundledMessagesAsync';
 import {AppInitialData} from '../types/AppInitialData';
-import {initializeFirebaseCrashlyticsAsync} from '../utils/initializeFirebaseCrashlyticsAsync';
-import {loadBundledMessagesAsync} from '../utils/loadBundledMessagesAsync';
-
-export interface AppInitializer {
-  initialize: () => Promise<void>;
-  initializationResult: InitializationResult;
-}
 
 type Initializing = {
   code: 'Initializing';
@@ -58,7 +53,7 @@ const loadData = async () => {
   return {initialData};
 };
 
-export const useAppInitializer: () => AppInitializer = () => {
+export const useAppInitializeUseCase = () => {
   const [initializationResult, setInitializationResult] = useState<InitializationResult>({code: 'Initializing'});
 
   const initialize = useCallback(async () => {

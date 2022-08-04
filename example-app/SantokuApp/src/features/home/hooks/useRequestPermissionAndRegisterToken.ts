@@ -10,7 +10,6 @@ import {useCallback} from 'react';
 
 export const useRequestPermissionAndRegisterToken = () => {
   const {mutateAsync: callPostAccountsMeDeviceToken} = usePostAccountsMeDeviceToken();
-  // const snackbar = useSnackbar();
   const {data: accountData} = useAccountData();
 
   const requestPermissionAndRegisterToken = useCallback(async () => {

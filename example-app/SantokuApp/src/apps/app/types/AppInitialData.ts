@@ -1,5 +1,5 @@
 import {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 
-export interface AppInitialData {
+export type AppInitialData = {
   notification?: FirebaseMessagingTypes.RemoteMessage;
-}
+};

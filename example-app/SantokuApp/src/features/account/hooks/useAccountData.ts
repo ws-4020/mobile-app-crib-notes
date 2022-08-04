@@ -4,9 +4,15 @@ import {useQuery} from 'react-query';
 
 import {getAccountsMeTerms} from '../utils/auth/getAccountsMeTerms';
 
-export const useAccountData = (options?: {enabled?: boolean; meta?: {disableGlobalErrorHandler?: boolean}}) => {
+const queryKey = ['account', 'accountData'];
+
+export const useAccountData = (options?: {
+  enabled?: boolean;
+  staleTime?: number;
+  meta?: {disableGlobalErrorHandler?: boolean};
+}) => {
   return useQuery(
-    ['account', 'accountData'],
+    queryKey,
     async () => {
       const account = (await getAccountsMe()).data;
       const termsAgreementStatus = (await getAccountsMeTerms()).data;

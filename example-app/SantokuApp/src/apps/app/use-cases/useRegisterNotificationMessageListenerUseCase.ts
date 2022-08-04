@@ -15,7 +15,7 @@ const showMessageOnSnackbar = (
   }
 };
 
-export const useRegisterNotificationMessageListener = () => {
+export const useRegisterNotificationMessageListenerUseCase = () => {
   // アプリを前面で操作中に通知を受信した際に行う処理
   const listener = useCallback((message: FirebaseMessagingTypes.RemoteMessage) => showMessageOnSnackbar(message), []);
   const registerNotificationMessageListener = useCallback(() => {
