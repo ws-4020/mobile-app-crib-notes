@@ -102,7 +102,7 @@ React Nativeのアプリは、JSXやReact Hooks、型定義や定数定義など
 | Form | ユーザが入力した値の保持やバリデーション定義です。 |
 | Use Case | ユーザインタラクションなど、Componentで発生したイベントに対するふるまいをhookで実装します。Use Caseの主な役割は以下になります。<br><br>・serviceの呼び出し<br>・serviceからthrowされるエラーに応じたUI（AlertやSnackbar）の表示<br>・ナビゲーションの呼び出し<br>・一つのインタラクション内のみで使用する状態の管理<br>・client stateで管理している状態の変更<br><br>usecaseでは、上記以外の処理は実施しません。そのほかのロジックなどはserviceで実施します。|
 | Service | APIの呼び出しや、その他のロジックなどを実装したReact Hooksまたは関数。 |
-| Client State | 複数の画面や、Use Caseに跨った状態。 |
+| Client State | 複数のPageやComponent、Use Caseをまたがって維持する必要のあるState |
 | Context | React Contextを生成するReact Hooks。 |
 | Type | 型定義。 |
 | Constant | 定数定義。 |
