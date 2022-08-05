@@ -1,10 +1,16 @@
 import NetInfo from '@react-native-community/netinfo';
-import React, {useCallback, useEffect, useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {AppState, AppStateStatus, Platform} from 'react-native';
 import {focusManager, onlineManager, QueryClient, QueryClientProvider} from 'react-query';
 
-import {defaultQueryCache, defaultMutationCache} from '../services/defaultCache';
+import {defaultMutationCache, defaultQueryCache} from '../services/defaultCache';
 import {defaultOptions} from '../services/defaultOptions';
+
+const onAppStateChange = (newAppState: AppStateStatus) => {
+  if (Platform.OS !== 'web') {
+    focusManager.setFocused(newAppState === 'active');
+  }
+};
 
 export const ReactQueryProvider: React.FC = ({children}) => {
   const queryClient: QueryClient = useMemo(() => {
@@ -15,17 +21,11 @@ export const ReactQueryProvider: React.FC = ({children}) => {
     });
   }, []);
 
-  const onAppStateChange = useCallback((newAppState: AppStateStatus) => {
-    if (Platform.OS !== 'web') {
-      focusManager.setFocused(newAppState === 'active');
-    }
-  }, []);
-
   useEffect(() => {
     // アプリがバックグラウンドからアクティブに変化した際にrefetchできるようにする
     const subscription = AppState.addEventListener('change', onAppStateChange);
     return () => subscription.remove();
-  }, [onAppStateChange]);
+  }, []);
 
   useEffect(() => {
     // オフライン状態からオンライン状態に変化した際にrefetchできるようにする
