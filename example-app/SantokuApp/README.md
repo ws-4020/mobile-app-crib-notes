@@ -103,7 +103,7 @@ iOS向けのネイティブモジュールを含むライブラリを依存関�
 | Use Case | ユーザインタラクションなど、Componentで発生したイベントに対するふるまいをhookで実装します。Use Caseの主な役割は以下になります。<br><br>・serviceの呼び出し<br>・serviceからthrowされるエラーに応じたUI（AlertやSnackbar）の表示<br>・ナビゲーションの呼び出し<br>・一つのインタラクション内のみで使用する状態の管理<br>・client stateで管理している状態の変更<br><br>usecaseでは、上記以外の処理は実施しません。そのほかのロジックなどはserviceで実施します。|
 | Service | APIの呼び出しや、その他のロジックなどを実装したReact Hooksまたは関数。 |
 | Client State | 複数のPageやComponent、Use Caseをまたがって維持する必要のあるState |
-| Context | Reactコンテキストやプロバイダの値を提供するコンポーネント。 |
+| Context | Reactコンテキストやプロバイダの値、およびプロバイダの値を提供するコンポーネントなど。 |
 | Type | 型定義。 |
 | Constant | 定数定義。 |
 | Util | ユーティリティ関数やクラス。 |
