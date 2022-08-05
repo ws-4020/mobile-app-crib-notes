@@ -6,7 +6,7 @@ import {focusManager, onlineManager, QueryClient, QueryClientProvider} from 'rea
 import {defaultQueryCache, defaultMutationCache} from '../services/defaultCache';
 import {defaultOptions} from '../services/defaultOptions';
 
-const ReactQueryProvider: React.FC = ({children}) => {
+export const ReactQueryProvider: React.FC = ({children}) => {
   const queryClient: QueryClient = useMemo(() => {
     return new QueryClient({
       queryCache: defaultQueryCache(queryClient),
@@ -38,5 +38,3 @@ const ReactQueryProvider: React.FC = ({children}) => {
 
   return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 };
-
-export {ReactQueryProvider};
