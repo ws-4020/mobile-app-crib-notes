@@ -6,7 +6,7 @@ import {TermsOfServiceAgreementStatus} from 'features//backend/apis/model';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {useProfileRegistrationForm} from '../services/useProfileRegistrationForm';
+import {useProfileRegistrationForm} from '../forms/useProfileRegistrationForm';
 import {useClearNicknameUseCase} from '../use-cases/useClearNicknameUseCase';
 import {useSignupUseCase} from '../use-cases/useSignupUseCase';
 

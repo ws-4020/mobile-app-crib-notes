@@ -8,7 +8,7 @@ import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {useLoginForm} from '../services/useLoginForm';
+import {useLoginForm} from '../forms/useLoginForm';
 import {useTerms} from '../services/useTerms';
 import {useClearAccountIdUseCase} from '../use-cases/useClearAccountIdUseCase';
 import {useClearPasswordUseCase} from '../use-cases/useClearPasswordUseCase';
