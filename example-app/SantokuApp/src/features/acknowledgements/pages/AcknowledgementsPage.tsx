@@ -6,12 +6,13 @@ import {Icon, Text} from 'react-native-elements';
 import {ACKNOWLEDGEMENT_ITEM_HEIGHT} from '../constants/AcknowledgementItemHeight';
 import {DependencyWithAction} from '../types/DependencyWithAction';
 import {useThirdPartyDependenciesWithActionUseCase} from '../use-cases/useThirdPartyDependenciesWithActionUseCase';
-import {acknowledgementKeyExtractor} from '../utils/acknowledgementKeyExtractor';
 import {getItemLayout} from '../utils/getItemLayout';
 
 type AcknowledgementsPageProps = {
   navigateToLicense: (dependency: ThirdPartyDependency) => void;
 };
+
+export const keyExtractor = ({id}: DependencyWithAction) => id;
 
 export const AcknowledgementsPage: React.VFC<AcknowledgementsPageProps> = ({navigateToLicense}) => {
   const {thirdPartyDependenciesWithAction} = useThirdPartyDependenciesWithActionUseCase(navigateToLicense);
@@ -20,7 +21,7 @@ export const AcknowledgementsPage: React.VFC<AcknowledgementsPageProps> = ({navi
       style={styles.container}
       data={thirdPartyDependenciesWithAction}
       renderItem={renderItem}
-      keyExtractor={acknowledgementKeyExtractor}
+      keyExtractor={keyExtractor}
       getItemLayout={getItemLayout}
     />
   );
