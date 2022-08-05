@@ -98,7 +98,7 @@ React Nativeのアプリは、JSXやReact Hooks、型定義や定数定義など
 | Navigator | React Navigationのナビゲータの定義。このステレオタイプはAppsレイヤーでのみ使用できます。 |
 | Screen | React NavigationのScreenで定義するコンポーネント。ナビゲーションの定義と、Pageの呼び出しを実施します。このステレオタイプは、Appsレイヤーのみで使用できます。 |
 | Page | 画面を表すコンポーネント。Screenコンポーネントから呼び出されます。PageはComponentを組み合わせて画面を作成します。ユーザインタラクションや状態の変更によるイベント（useEffect/useFocusEffectなど）が発生した場合のふるまいはPageでは実施しません。ふるまいは、Use Caseで実装します。Pageはイベントに応じたUse Caseを呼び出します。 |
-| Component | pageを構成する画面部品です。|
+| Component | Pageを構成する画面部品です。|
 | Form | ユーザが入力した値の保持やバリデーション定義です。 |
 | Use Case | ユーザインタラクションなど、Componentで発生したイベントに対するふるまいをhookで実装します。Use Caseの主な役割は以下になります。<br><br>・serviceの呼び出し<br>・serviceからthrowされるエラーに応じたUI（AlertやSnackbar）の表示<br>・ナビゲーションの呼び出し<br>・一つのインタラクション内のみで使用する状態の管理<br>・client stateで管理している状態の変更<br><br>usecaseでは、上記以外の処理は実施しません。そのほかのロジックなどはserviceで実施します。|
 | Service | APIの呼び出しや、その他のロジックなどを実装したReact Hooksまたは関数。 |
