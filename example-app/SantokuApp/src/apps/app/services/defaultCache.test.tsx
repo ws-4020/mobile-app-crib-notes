@@ -2,7 +2,7 @@ import {MutationCache, QueryCache, QueryClient} from 'react-query';
 
 import {defaultMutationCache, defaultQueryCache} from './defaultCache';
 
-describe('useDefaultQueryCache', () => {
+describe('defaultQueryCache', () => {
   test('onErrorが設定されたQueryCacheを取得できること', () => {
     const queryCache = defaultQueryCache(new QueryClient());
     expect(queryCache).toBeInstanceOf(QueryCache);
@@ -10,7 +10,7 @@ describe('useDefaultQueryCache', () => {
   });
 });
 
-describe('useDefaultMutationCache', () => {
+describe('defaultMutationCache', () => {
   test('onErrorが設定されたMutationCacheを取得できること', () => {
     const mutationCache = defaultMutationCache(new QueryClient());
     expect(mutationCache).toBeInstanceOf(MutationCache);

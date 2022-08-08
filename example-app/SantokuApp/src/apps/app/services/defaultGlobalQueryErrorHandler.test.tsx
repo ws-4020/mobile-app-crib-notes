@@ -15,7 +15,7 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
-describe('useDefaultGlobalQueryErrorHandler', () => {
+describe('defaultGlobalQueryErrorHandler', () => {
   const query = {} as unknown as Query<unknown, unknown, unknown, QueryKey>;
   const axiosError = new AxiosError(
     'error',

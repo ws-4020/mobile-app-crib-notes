@@ -9,7 +9,7 @@ beforeAll(async () => {
   await loadMessages(new BundledMessagesLoader());
 });
 
-describe('resolveApiErrorMessage', () => {
+describe('sendErrorLog', () => {
   test('AxiosErrorの場合', () => {
     const spyError = jest.spyOn(log, 'error').mockImplementation();
     const error = new AxiosError(

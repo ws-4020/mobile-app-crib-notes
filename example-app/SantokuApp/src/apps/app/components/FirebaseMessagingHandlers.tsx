@@ -5,8 +5,8 @@ import React, {useCallback, useEffect} from 'react';
 
 import {NavigationParameter, RootStackParamList} from '../navigators/types';
 import {AppInitialData} from '../types/AppInitialData';
-import {useRegisterNotificationMessageListenerUseCase} from '../use-cases/useRegisterNotificationMessageListenerUseCase';
-import {useRegisterNotificationOnOpenedAppListenerUseCase} from '../use-cases/useRegisterNotificationOnOpenedAppListenerUseCase';
+import {useRegisterNotificationMessageListener} from '../use-cases/useRegisterNotificationMessageListener';
+import {useRegisterNotificationOnOpenedAppListener} from '../use-cases/useRegisterNotificationOnOpenedAppListener';
 
 type Props = {
   initialData: AppInitialData;
@@ -29,8 +29,8 @@ export const FirebaseMessagingHandlers: React.FC<Props> = ({children, initialDat
     [navigation],
   );
 
-  const {registerNotificationMessageListener} = useRegisterNotificationMessageListenerUseCase();
-  const {registerNotificationOnOpenedAppListener} = useRegisterNotificationOnOpenedAppListenerUseCase(
+  const {registerNotificationMessageListener} = useRegisterNotificationMessageListener();
+  const {registerNotificationOnOpenedAppListener} = useRegisterNotificationOnOpenedAppListener(
     initialData,
     navigateIfRequired,
   );

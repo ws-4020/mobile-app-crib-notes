@@ -3,7 +3,7 @@ import {useCallback} from 'react';
 
 import {AppInitialData} from '../types/AppInitialData';
 
-export const useRegisterNotificationOnOpenedAppListenerUseCase = (
+export const useRegisterNotificationOnOpenedAppListener = (
   initialData: AppInitialData,
   navigateIfRequired: (message: FirebaseMessagingTypes.RemoteMessage, initialData: AppInitialData) => void,
 ) => {

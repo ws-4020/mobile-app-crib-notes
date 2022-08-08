@@ -53,7 +53,7 @@ const loadData = async () => {
   return {initialData};
 };
 
-export const useAppInitializeUseCase = () => {
+export const useAppInitialize = () => {
   const [initializationResult, setInitializationResult] = useState<InitializationResult>({code: 'Initializing'});
 
   const initialize = useCallback(async () => {

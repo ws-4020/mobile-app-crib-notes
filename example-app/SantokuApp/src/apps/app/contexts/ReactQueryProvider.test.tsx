@@ -16,7 +16,7 @@ const Wrapper: React.FC = ({children}) => {
   );
 };
 
-describe('WithReactQuery', () => {
+describe('ReactQueryProvider', () => {
   test('子要素を正常にrenderできること', () => {
     const children = <Text testID="test">test</Text>;
     render(<ReactQueryProvider>{children}</ReactQueryProvider>, {wrapper: Wrapper});

@@ -14,7 +14,7 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
-describe('useDefaultGlobalMutationErrorHandler', () => {
+describe('defaultGlobalMutationErrorHandler', () => {
   const axiosError = new AxiosError(
     'error',
     '',

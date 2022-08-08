@@ -8,10 +8,10 @@ import {Alert} from 'react-native';
 
 import {ReactQueryProvider} from './contexts/ReactQueryProvider';
 import {AppInitialData} from './types/AppInitialData';
-import {useAppInitializeUseCase} from './use-cases/useAppInitializeUseCase';
+import {useAppInitialize} from './use-cases/useAppInitialize';
 
 export const AppWithInitialization: React.FC = () => {
-  const {initialize, initializationResult} = useAppInitializeUseCase();
+  const {initialize, initializationResult} = useAppInitialize();
   const [initializationError, setInitializationError] = useState<unknown>();
 
   useEffect(() => {
