@@ -2,11 +2,11 @@ import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
-import {useRequestPermissionAndRegisterTokenUseCase} from '../use-cases/useRequestPermissionAndRegisterTokenUseCase';
+import {useRequestPermissionAndRegisterToken} from '../use-cases/useRequestPermissionAndRegisterToken';
 
 export const HomePage: React.VFC = () => {
   // Push通知の許可ダイアログ表示とFCM登録トークンの登録・更新
-  const {requestPermissionAndRegisterToken} = useRequestPermissionAndRegisterTokenUseCase();
+  const {requestPermissionAndRegisterToken} = useRequestPermissionAndRegisterToken();
   useEffect(() => {
     requestPermissionAndRegisterToken().catch(() => {
       // requestPermissionAndRegisterTokenでエラーハンドリングを実施しているので、ここでは特に何もしない

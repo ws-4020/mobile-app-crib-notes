@@ -10,10 +10,10 @@ import {StyleSheet, View} from 'react-native';
 
 import {useLoginForm} from '../forms/useLoginForm';
 import {useTerms} from '../services/useTerms';
-import {useClearAccountIdUseCase} from '../use-cases/useClearAccountIdUseCase';
-import {useClearPasswordUseCase} from '../use-cases/useClearPasswordUseCase';
-import {useCreateAccountUseCase} from '../use-cases/useCreateAccountUseCase';
-import {useLoginUseCase} from '../use-cases/useLoginUseCase';
+import {useClearAccountId} from '../use-cases/useClearAccountId';
+import {useClearPassword} from '../use-cases/useClearPassword';
+import {useCreateAccount} from '../use-cases/useCreateAccount';
+import {useLogin} from '../use-cases/useLogin';
 
 export type LoginPageProps = {
   navigateToCreateAccount: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => void;
@@ -22,10 +22,10 @@ export type LoginPageProps = {
 export const LoginPage: React.VFC<LoginPageProps> = ({navigateToCreateAccount}) => {
   const {form} = useLoginForm();
   const {isFetchedTerms} = useTerms();
-  const {createAccount} = useCreateAccountUseCase(navigateToCreateAccount);
-  const {login, isExecutingLogin} = useLoginUseCase(form);
-  const {clearAccountId} = useClearAccountIdUseCase(form);
-  const {clearPassword} = useClearPasswordUseCase(form);
+  const {createAccount} = useCreateAccount(navigateToCreateAccount);
+  const {login, isExecutingLogin} = useLogin(form);
+  const {clearAccountId} = useClearAccountId(form);
+  const {clearPassword} = useClearPassword(form);
 
   return (
     <View style={styles.container} testID="Login">

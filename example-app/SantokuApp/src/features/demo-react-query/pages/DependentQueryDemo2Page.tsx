@@ -3,13 +3,13 @@ import {ActivityIndicator, RefreshControl, SafeAreaView, ScrollView, StyleSheet,
 import {Button, Text} from 'react-native-elements';
 
 import {useDependentQuery2ItemInfo} from '../services/useDependentQuery2ItemInfo';
-import {useDependentQuery2RefreshUseCase} from '../use-cases/useDependentQuery2RefreshUseCase';
-import {useDependentQuery2ReloadUseCase} from '../use-cases/useDependentQuery2ReloadUseCase';
+import {useDependentQuery2Refresh} from '../use-cases/useDependentQuery2Refresh';
+import {useDependentQuery2Reload} from '../use-cases/useDependentQuery2Reload';
 
 export const DependentQueryDemo2Page: React.FC = () => {
   const {data: itemInfo, isIdle, isLoading, isRefetching, isSuccess, isError} = useDependentQuery2ItemInfo();
-  const {refresh} = useDependentQuery2RefreshUseCase();
-  const {reload} = useDependentQuery2ReloadUseCase();
+  const {refresh} = useDependentQuery2Refresh();
+  const {reload} = useDependentQuery2Reload();
 
   return (
     <SafeAreaView style={styles.container}>

@@ -1,20 +1,20 @@
 import React from 'react';
 
 import {LogTemplate} from '../components/LogTemplate';
-import {debugLogUseCase} from '../use-cases/debugLogUseCase';
-import {errorLogUseCase} from '../use-cases/errorLogUseCase';
-import {infoLogUseCase} from '../use-cases/infoLogUseCase';
-import {traceLogUseCase} from '../use-cases/traceLogUseCase';
-import {warnLogUseCase} from '../use-cases/warnLogUseCase';
+import {debugLog} from '../use-cases/debugLog';
+import {errorLogUseCase} from '../use-cases/errorLog';
+import {infoLog} from '../use-cases/infoLog';
+import {traceLog} from '../use-cases/traceLog';
+import {warnLog} from '../use-cases/warnLog';
 
 export const LogPage: React.FC = () => {
   return (
     <LogTemplate
       testID="LogScreen"
-      traceLog={traceLogUseCase}
-      debugLog={debugLogUseCase}
-      infoLog={infoLogUseCase}
-      warnLog={warnLogUseCase}
+      traceLog={traceLog}
+      debugLog={debugLog}
+      infoLog={infoLog}
+      warnLog={warnLog}
       errorLog={errorLogUseCase}
     />
   );

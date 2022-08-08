@@ -1,12 +1,12 @@
 import React from 'react';
 
 import {SnackbarTemplate} from '../components/SnackbarTemplate';
-import {useShowSnackbarUseCase} from '../use-cases/useShowSnackbarUseCase';
-import {useShowSnackbarWithCloseButtonUseCase} from '../use-cases/useShowSnackbarWithCloseButtonUseCase';
+import {useShowSnackbar} from '../use-cases/useShowSnackbar';
+import {useShowSnackbarWithCloseButton} from '../use-cases/useShowSnackbarWithCloseButton';
 
 export const SnackbarPage: React.FC = () => {
-  const {showSnackbar} = useShowSnackbarUseCase();
-  const {showSnackbarWithCloseButton} = useShowSnackbarWithCloseButtonUseCase();
+  const {showSnackbar} = useShowSnackbar();
+  const {showSnackbarWithCloseButton} = useShowSnackbarWithCloseButton();
   return (
     <SnackbarTemplate
       testID="SnackbarScreen"

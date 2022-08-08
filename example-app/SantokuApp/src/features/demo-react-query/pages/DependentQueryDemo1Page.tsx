@@ -4,26 +4,26 @@ import {Button, Text} from 'react-native-elements';
 
 import {useDependentQuery1AmountQuery} from '../services/useDependentQuery1AmountQuery';
 import {useDependentQuery1ItemQuery} from '../services/useDependentQuery1ItemQuery';
-import {useDependentQuery1IsErrorUseCase} from '../use-cases/useDependentQuery1IsErrorUseCase';
-import {useDependentQuery1IsIdleUseCase} from '../use-cases/useDependentQuery1IsIdleUseCase';
-import {useDependentQuery1IsLoadingUseCase} from '../use-cases/useDependentQuery1IsLoadingUseCase';
-import {useDependentQuery1IsRefetchingUseCase} from '../use-cases/useDependentQuery1IsRefetchingUseCase';
-import {useDependentQuery1IsSuccessUseCase} from '../use-cases/useDependentQuery1IsSuccessUseCase';
-import {useDependentQuery1RateUseCase} from '../use-cases/useDependentQuery1RateUseCase';
-import {useDependentQuery1RefreshUseCase} from '../use-cases/useDependentQuery1RefreshUseCase';
-import {useDependentQuery1ReloadUseCase} from '../use-cases/useDependentQuery1ReloadUseCase';
+import {useDependentQuery1IsError} from '../use-cases/useDependentQuery1IsError';
+import {useDependentQuery1IsIdle} from '../use-cases/useDependentQuery1IsIdle';
+import {useDependentQuery1IsLoading} from '../use-cases/useDependentQuery1IsLoading';
+import {useDependentQuery1IsRefetching} from '../use-cases/useDependentQuery1IsRefetching';
+import {useDependentQuery1IsSuccess} from '../use-cases/useDependentQuery1IsSuccess';
+import {useDependentQuery1Rate} from '../use-cases/useDependentQuery1Rate';
+import {useDependentQuery1Refresh} from '../use-cases/useDependentQuery1Refresh';
+import {useDependentQuery1Reload} from '../use-cases/useDependentQuery1Reload';
 
 export const DependentQueryDemo1Page: React.FC = () => {
   const {data: item} = useDependentQuery1ItemQuery();
-  const {rate} = useDependentQuery1RateUseCase();
+  const {rate} = useDependentQuery1Rate();
   const {data: amount} = useDependentQuery1AmountQuery();
-  const {isIdle} = useDependentQuery1IsIdleUseCase();
-  const {isLoading} = useDependentQuery1IsLoadingUseCase();
-  const {isRefetching} = useDependentQuery1IsRefetchingUseCase();
-  const {isSuccess} = useDependentQuery1IsSuccessUseCase();
-  const {isError} = useDependentQuery1IsErrorUseCase();
-  const {refresh} = useDependentQuery1RefreshUseCase();
-  const {reload} = useDependentQuery1ReloadUseCase();
+  const {isIdle} = useDependentQuery1IsIdle();
+  const {isLoading} = useDependentQuery1IsLoading();
+  const {isRefetching} = useDependentQuery1IsRefetching();
+  const {isSuccess} = useDependentQuery1IsSuccess();
+  const {isError} = useDependentQuery1IsError();
+  const {refresh} = useDependentQuery1Refresh();
+  const {reload} = useDependentQuery1Reload();
 
   return (
     <SafeAreaView style={styles.container}>

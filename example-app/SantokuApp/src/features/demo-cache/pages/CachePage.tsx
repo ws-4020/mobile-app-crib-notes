@@ -5,13 +5,13 @@ import {Text} from 'react-native-elements';
 
 import {useTopLevelFileInfos} from '../client-states/useTopLevelFileInfos';
 import {FileInfo} from '../components/FileInfo';
-import {useClearUseCase} from '../use-cases/useClearUseCase';
-import {useRefreshUseCase} from '../use-cases/useRefreshUseCase';
+import {useClear} from '../use-cases/useClear';
+import {useRefresh} from '../use-cases/useRefresh';
 
 export const CachePage: React.FC = () => {
   const [topLevelFileInfos] = useTopLevelFileInfos();
-  const {clear} = useClearUseCase();
-  const {refresh, refreshing} = useRefreshUseCase();
+  const {clear} = useClear();
+  const {refresh, refreshing} = useRefresh();
 
   useEffect(() => {
     refresh().catch(() => {

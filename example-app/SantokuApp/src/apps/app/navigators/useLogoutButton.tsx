@@ -1,6 +1,6 @@
 import {m} from 'bases/message/Message';
 import {Button} from 'bases/ui/button/Button';
-import {useLogoutUseCase} from 'features/account/use-cases/useLogoutUseCase';
+import {useLogout} from 'features/account/use-cases/useLogout';
 import React from 'react';
 import {GestureResponderEvent, StyleSheet} from 'react-native';
 
@@ -38,7 +38,7 @@ type CloseThisNavigatorButtonProps = {
 };
 
 export const useLogoutButton = () => {
-  const {logout, isLoading} = useLogoutUseCase();
+  const {logout, isLoading} = useLogout();
   // NativeStackNavigatorのheaderRightに合わせたコンポーネント。
   const LogoutButton: React.FC<CloseThisNavigatorButtonProps> = () => (
     <HeaderRightLogoutButton onPress={logout} isLoading={isLoading} />

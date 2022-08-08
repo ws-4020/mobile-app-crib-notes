@@ -2,14 +2,14 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
-import {throwJsErrorInAsyncProcessUseCase} from '../use-cases/throwJsErrorInAsyncProcessUseCase';
-import {throwJsErrorInSyncProcessUseCase} from '../use-cases/throwJsErrorInSyncProcessUseCase';
+import {throwJsErrorInAsyncProcess} from '../use-cases/throwJsErrorInAsyncProcess';
+import {throwJsErrorInSyncProcess} from '../use-cases/throwJsErrorInSyncProcess';
 
 export const ErrorInEventHandlerPage = () => {
   return (
     <View style={styles.container}>
-      <Button onPress={throwJsErrorInSyncProcessUseCase} title="同期処理でエラー発生" />
-      <Button onPress={throwJsErrorInAsyncProcessUseCase} title="非同期処理でエラー発生" />
+      <Button onPress={throwJsErrorInSyncProcess} title="同期処理でエラー発生" />
+      <Button onPress={throwJsErrorInAsyncProcess} title="非同期処理でエラー発生" />
     </View>
   );
 };

@@ -4,20 +4,20 @@ import {Button, Divider, Text} from 'react-native-elements';
 
 import {useAuthStatus} from '../client-states/useAuthStatus';
 import {useToken} from '../client-states/useToken';
-import {useGetTokenUseCase} from '../use-cases/useGetTokenUseCase';
-import {useNotifyMessageToAllUseCase} from '../use-cases/useNotifyMessageToAllUseCase';
-import {useNotifyMessageToMeUseCase} from '../use-cases/useNotifyMessageToMeUseCase';
-import {useOpenSettingsUseCase} from '../use-cases/useOpenSettingsUseCase';
-import {useRequestUserPermissionUseCase} from '../use-cases/useRequestUserPermissionUseCase';
+import {useGetToken} from '../use-cases/useGetToken';
+import {useNotifyMessageToAll} from '../use-cases/useNotifyMessageToAll';
+import {useNotifyMessageToMe} from '../use-cases/useNotifyMessageToMe';
+import {useOpenSettings} from '../use-cases/useOpenSettings';
+import {useRequestUserPermission} from '../use-cases/useRequestUserPermission';
 
 export const PushNotificationPage: React.FC = () => {
   const [authStatus] = useAuthStatus();
   const [token] = useToken();
-  const {requestUserPermission} = useRequestUserPermissionUseCase();
-  const {getToken} = useGetTokenUseCase();
-  const {notifyMessageToAll} = useNotifyMessageToAllUseCase();
-  const {notifyMessageToMe} = useNotifyMessageToMeUseCase();
-  const {openSettings} = useOpenSettingsUseCase();
+  const {requestUserPermission} = useRequestUserPermission();
+  const {getToken} = useGetToken();
+  const {notifyMessageToAll} = useNotifyMessageToAll();
+  const {notifyMessageToMe} = useNotifyMessageToMe();
+  const {openSettings} = useOpenSettings();
 
   return (
     <SafeAreaView style={styles.container}>

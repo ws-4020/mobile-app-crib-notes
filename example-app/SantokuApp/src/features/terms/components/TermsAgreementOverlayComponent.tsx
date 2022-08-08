@@ -11,13 +11,13 @@ import {Text} from 'react-native-elements';
 
 import {useButtonDisable} from '../client-states/useButtonDisable';
 import {useIsWebViewError} from '../client-states/useIsWebViewError';
-import {useComposedExitingCallbackUseCase} from '../use-cases/useComposedExitingCallbackUseCase';
-import {useExitingCallbackOnAgreedUseCase} from '../use-cases/useExitingCallbackOnAgreedUseCase';
-import {useOnAgreeUseCase} from '../use-cases/useOnAgreeUseCase';
-import {useOnScrollEndOnceUseCase} from '../use-cases/useOnScrollEndOnceUseCase';
-import {useOnWebViewErrorUseCase} from '../use-cases/useOnWebViewErrorUseCase';
-import {useResetWebViewErrorUseCase} from '../use-cases/useResetWebViewErrorUseCase';
-import {useWebViewSourceUseCase} from '../use-cases/useWebViewSourceUseCase';
+import {useComposedExitingCallback} from '../use-cases/useComposedExitingCallback';
+import {useExitingCallbackOnAgreed} from '../use-cases/useExitingCallbackOnAgreed';
+import {useOnAgree} from '../use-cases/useOnAgree';
+import {useOnScrollEndOnce} from '../use-cases/useOnScrollEndOnce';
+import {useOnWebViewError} from '../use-cases/useOnWebViewError';
+import {useResetWebViewError} from '../use-cases/useResetWebViewError';
+import {useWebViewSource} from '../use-cases/useWebViewSource';
 
 export type TermsAgreementOverlayShowProps = {
   termsOfService: TermsOfService;
@@ -53,13 +53,13 @@ export const TermsAgreementOverlayComponent: React.FC<TermsAgreementOverlayProps
 }) => {
   const [isWebViewError] = useIsWebViewError();
   const [buttonDisable] = useButtonDisable();
-  const {webViewSource} = useWebViewSourceUseCase(termsOfService);
-  const {composedExitingCallback} = useComposedExitingCallbackUseCase(exitingCallback);
-  const {exitOnAgreed} = useExitingCallbackOnAgreedUseCase(exitingCallbackOnAgreed);
-  const {resetWebViewError} = useResetWebViewErrorUseCase();
-  const {onScrollEndOnce} = useOnScrollEndOnceUseCase();
-  const {onWebViewError} = useOnWebViewErrorUseCase();
-  const {onAgree, isLoading} = useOnAgreeUseCase(close, termsOfService);
+  const {webViewSource} = useWebViewSource(termsOfService);
+  const {composedExitingCallback} = useComposedExitingCallback(exitingCallback);
+  const {exitOnAgreed} = useExitingCallbackOnAgreed(exitingCallbackOnAgreed);
+  const {resetWebViewError} = useResetWebViewError();
+  const {onScrollEndOnce} = useOnScrollEndOnce();
+  const {onWebViewError} = useOnWebViewError();
+  const {onAgree, isLoading} = useOnAgree(close, termsOfService);
 
   useEffect(() => exitOnAgreed(), [exitOnAgreed]);
 

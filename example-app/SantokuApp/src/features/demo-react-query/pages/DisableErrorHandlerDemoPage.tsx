@@ -2,15 +2,15 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 
-import {useDisableErrorHandlerRefreshCustomErrorQueryUseCase} from '../use-cases/useDisableErrorHandlerRefreshCustomErrorQueryUseCase';
-import {useDisableErrorHandlerRefreshCustomErrorQueryWithoutGlobalErrorHandlingUseCase} from '../use-cases/useDisableErrorHandlerRefreshCustomErrorQueryWithoutGlobalErrorHandlingUseCase';
-import {useDisableErrorHandlerRefreshDefaultQueryUseCase} from '../use-cases/useDisableErrorHandlerRefreshDefaultQueryUseCase';
+import {useDisableErrorHandlerRefreshCustomErrorQuery} from '../use-cases/useDisableErrorHandlerRefreshCustomErrorQuery';
+import {useDisableErrorHandlerRefreshCustomErrorQueryWithoutGlobalErrorHandling} from '../use-cases/useDisableErrorHandlerRefreshCustomErrorQueryWithoutGlobalErrorHandling';
+import {useDisableErrorHandlerRefreshDefaultQuery} from '../use-cases/useDisableErrorHandlerRefreshDefaultQuery';
 
 export const DisableErrorHandlerDemoPage: React.FC = () => {
-  const {refresh: refreshDefaultQuery} = useDisableErrorHandlerRefreshDefaultQueryUseCase();
-  const {refresh: refreshCustomQuery} = useDisableErrorHandlerRefreshCustomErrorQueryUseCase();
+  const {refresh: refreshDefaultQuery} = useDisableErrorHandlerRefreshDefaultQuery();
+  const {refresh: refreshCustomQuery} = useDisableErrorHandlerRefreshCustomErrorQuery();
   const {refresh: refreshCustomErrorQueryWithoutGlobalErrorHandling} =
-    useDisableErrorHandlerRefreshCustomErrorQueryWithoutGlobalErrorHandlingUseCase();
+    useDisableErrorHandlerRefreshCustomErrorQueryWithoutGlobalErrorHandling();
 
   return (
     <View style={styles.container}>

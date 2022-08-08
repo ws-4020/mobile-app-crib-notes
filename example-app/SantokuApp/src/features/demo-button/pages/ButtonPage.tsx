@@ -2,12 +2,12 @@ import {Button} from 'bases/ui/button/Button';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {handlePressUseCase} from '../use-cases/handlePressUseCase';
+import {handlePress} from '../use-cases/handlePress';
 
 export const ButtonPage: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Button title="Small" onPress={handlePressUseCase} />
+      <Button title="Small" onPress={handlePress} />
       <Button title="Middle" size="middle" />
       <Button title="Large" size="large" />
       <Button title="Full" size="full" />

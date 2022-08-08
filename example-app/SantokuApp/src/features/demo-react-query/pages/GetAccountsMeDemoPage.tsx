@@ -2,12 +2,12 @@ import React from 'react';
 import {ActivityIndicator, RefreshControl, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
-import {useGetAccountMeUseCase} from '../use-cases/useGetAccountMeUseCase';
-import {useListTodoRefreshTodoUseCase} from '../use-cases/useListTodoRefreshTodoUseCase';
+import {useGetAccountMe} from '../use-cases/useGetAccountMe';
+import {useListTodoRefreshTodo} from '../use-cases/useListTodoRefreshTodo';
 
 export const GetAccountsMeDemoPage: React.FC = () => {
-  const {refreshTodo} = useListTodoRefreshTodoUseCase();
-  const {isLoading, isRefetching, isError, data: axiosResponse} = useGetAccountMeUseCase();
+  const {refreshTodo} = useListTodoRefreshTodo();
+  const {isLoading, isRefetching, isError, data: axiosResponse} = useGetAccountMe();
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refreshTodo} />}>

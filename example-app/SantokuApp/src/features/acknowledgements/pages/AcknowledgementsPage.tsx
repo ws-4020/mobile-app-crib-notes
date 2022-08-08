@@ -5,8 +5,8 @@ import {Icon, Text} from 'react-native-elements';
 
 import {ACKNOWLEDGEMENT_ITEM_HEIGHT} from '../constants/AcknowledgementItemHeight';
 import {DependencyWithAction} from '../types/DependencyWithAction';
-import {getItemLayoutUseCase} from '../use-cases/getItemLayoutUseCase';
-import {useThirdPartyDependenciesWithActionUseCase} from '../use-cases/useThirdPartyDependenciesWithActionUseCase';
+import {getItemLayout} from '../use-cases/getItemLayout';
+import {useThirdPartyDependenciesWithAction} from '../use-cases/useThirdPartyDependenciesWithAction';
 
 type AcknowledgementsPageProps = {
   navigateToLicense: (dependency: ThirdPartyDependency) => void;
@@ -15,14 +15,14 @@ type AcknowledgementsPageProps = {
 export const keyExtractor = ({id}: DependencyWithAction) => id;
 
 export const AcknowledgementsPage: React.VFC<AcknowledgementsPageProps> = ({navigateToLicense}) => {
-  const {thirdPartyDependenciesWithAction} = useThirdPartyDependenciesWithActionUseCase(navigateToLicense);
+  const {thirdPartyDependenciesWithAction} = useThirdPartyDependenciesWithAction(navigateToLicense);
   return (
     <FlatList
       style={styles.container}
       data={thirdPartyDependenciesWithAction}
       renderItem={renderItem}
       keyExtractor={keyExtractor}
-      getItemLayout={getItemLayoutUseCase}
+      getItemLayout={getItemLayout}
     />
   );
 };

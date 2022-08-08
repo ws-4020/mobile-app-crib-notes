@@ -3,15 +3,15 @@ import {ActivityIndicator, RefreshControl, SafeAreaView, ScrollView, StyleSheet,
 import {Button, Text} from 'react-native-elements';
 
 import {useTodoDetails} from '../services/useTodoDetails';
-import {useDependentQuery3RefreshUseCase} from '../use-cases/useDependentQuery3RefreshUseCase';
-import {useDependentQuery3ReloadUseCase} from '../use-cases/useDependentQuery3ReloadUseCase';
-import {useListTodoTodosUseCase} from '../use-cases/useListTodoTodosUseCase';
+import {useDependentQuery3Refresh} from '../use-cases/useDependentQuery3Refresh';
+import {useDependentQuery3Reload} from '../use-cases/useDependentQuery3Reload';
+import {useListTodoTodos} from '../use-cases/useListTodoTodos';
 
 export const DependentQueryDemo3Page: React.FC = () => {
   const {isIdle, isLoading, isRefetching, isSuccess, isError} = useTodoDetails();
-  const {refresh} = useDependentQuery3RefreshUseCase();
-  const {reload} = useDependentQuery3ReloadUseCase();
-  const {todos} = useListTodoTodosUseCase();
+  const {refresh} = useDependentQuery3Refresh();
+  const {reload} = useDependentQuery3Reload();
+  const {todos} = useListTodoTodos();
 
   return (
     <SafeAreaView style={styles.container}>

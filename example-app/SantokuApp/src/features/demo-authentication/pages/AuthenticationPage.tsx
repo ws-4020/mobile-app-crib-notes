@@ -6,24 +6,24 @@ import {ScrollView} from 'react-native-gesture-handler';
 
 import {useAccountId} from '../client-states/useAccountId';
 import {useAccountIdInput} from '../client-states/useAccountIdInput';
-import {useAutoLoginUseCase} from '../use-cases/useAutoLoginUseCase';
-import {useCanAutoLoginUseCase} from '../use-cases/useCanAutoLoginUseCase';
-import {useChangeAccountUseCase} from '../use-cases/useChangeAccountUseCase';
-import {useCopyAccountIdInputUseCase} from '../use-cases/useCopyAccountIdInputUseCase';
-import {useIsLoadingUseCase} from '../use-cases/useIsLoadingUseCase';
-import {useLogoutUseCase} from '../use-cases/useLogoutUseCase';
-import {useSignupUseCase} from '../use-cases/useSignupUseCase';
+import {useAutoLogin} from '../use-cases/useAutoLogin';
+import {useCanAutoLogin} from '../use-cases/useCanAutoLogin';
+import {useChangeAccount} from '../use-cases/useChangeAccount';
+import {useCopyAccountIdInput} from '../use-cases/useCopyAccountIdInput';
+import {useIsLoading} from '../use-cases/useIsLoading';
+import {useLogout} from '../use-cases/useLogout';
+import {useSignup} from '../use-cases/useSignup';
 
 export const AuthenticationPage = () => {
   const [accountId] = useAccountId();
   const [accountIdInput, setAccountIdInput] = useAccountIdInput();
-  const {copyAccountIdInput} = useCopyAccountIdInputUseCase();
-  const {signup} = useSignupUseCase();
-  const {changeAccount} = useChangeAccountUseCase();
-  const {canAutoLogin} = useCanAutoLoginUseCase();
-  const {autoLogin} = useAutoLoginUseCase();
-  const {logout} = useLogoutUseCase();
-  const {isLoading} = useIsLoadingUseCase();
+  const {copyAccountIdInput} = useCopyAccountIdInput();
+  const {signup} = useSignup();
+  const {changeAccount} = useChangeAccount();
+  const {canAutoLogin} = useCanAutoLogin();
+  const {autoLogin} = useAutoLogin();
+  const {logout} = useLogout();
+  const {isLoading} = useIsLoading();
 
   useEffect(() => {
     LoadingOverlay.visible(isLoading);

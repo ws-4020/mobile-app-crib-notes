@@ -5,9 +5,9 @@ import {Input} from 'react-native-elements';
 
 import {useCreateTodoDescription} from '../client-states/useCreateTodoDescription';
 import {useCreateTodoTitle} from '../client-states/useCreateTodoTitle';
-import {useCreateTodoChangeDescriptionUseCase} from '../use-cases/useCreateTodoChangeDescriptionUseCase';
-import {useCreateTodoChangeTitleUseCase} from '../use-cases/useCreateTodoChangeTitleUseCase';
-import {useCreateTodoRegisterTodoUseCase} from '../use-cases/useCreateTodoRegisterTodoUseCase';
+import {useCreateTodoChangeDescription} from '../use-cases/useCreateTodoChangeDescription';
+import {useCreateTodoChangeTitle} from '../use-cases/useCreateTodoChangeTitle';
+import {useCreateTodoRegisterTodo} from '../use-cases/useCreateTodoRegisterTodo';
 
 export type CreateTodoDemoPageProps = {
   replaceToEditTodoDemo: (todoId: number) => void;
@@ -15,9 +15,9 @@ export type CreateTodoDemoPageProps = {
 export const CreateTodoDemoPage: React.FC<CreateTodoDemoPageProps> = ({replaceToEditTodoDemo}) => {
   const [title] = useCreateTodoTitle();
   const [description] = useCreateTodoDescription();
-  const {changeTitle} = useCreateTodoChangeTitleUseCase();
-  const {changeDescription} = useCreateTodoChangeDescriptionUseCase();
-  const {registerTodo, isLoading} = useCreateTodoRegisterTodoUseCase(replaceToEditTodoDemo);
+  const {changeTitle} = useCreateTodoChangeTitle();
+  const {changeDescription} = useCreateTodoChangeDescription();
+  const {registerTodo, isLoading} = useCreateTodoRegisterTodo(replaceToEditTodoDemo);
 
   return (
     <View style={styles.container}>

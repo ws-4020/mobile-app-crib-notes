@@ -9,8 +9,8 @@ import {useResponseInfo} from '../client-states/useResponseInfo';
 import {useWithCredentialsOption} from '../client-states/useWithCredentialsOption';
 import {credentialsOptions} from '../constants/credentialsOptions';
 import {redirectOptions} from '../constants/redirectOptions';
-import {useAxiosUseCase} from '../use-cases/useAxiosUseCase';
-import {useFetchApiUseCase} from '../use-cases/useFetchApiUseCase';
+import {useAxios} from '../use-cases/useAxios';
+import {useFetchApi} from '../use-cases/useFetchApi';
 
 export const HttpApiPage = () => {
   const [redirectOptionIndex, setRedirectOptionIndex] = useRedirectOptionIndex();
@@ -18,8 +18,8 @@ export const HttpApiPage = () => {
   const [maxRedirectsOption, setMaxRedirectsOption] = useMaxRedirectsOption();
   const [withCredentialsOption, setWithCredentialsOption] = useWithCredentialsOption();
   const [responseInfo] = useResponseInfo();
-  const {callFetchApi} = useFetchApiUseCase();
-  const {callAxiosApi} = useAxiosUseCase();
+  const {callFetchApi} = useFetchApi();
+  const {callAxiosApi} = useAxios();
 
   return (
     <View style={styles.container}>

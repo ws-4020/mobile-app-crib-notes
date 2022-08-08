@@ -34,8 +34,8 @@ const ChildComponent: React.FC = () => {
   return <Text testID="text">test</Text>;
 };
 
-describe('WithTermsOfServiceAgreementOverlay', () => {
-  it('useTermsAgreementOverlayのshowで、利用規約が正常に表示されることを確認', () => {
+describe('TermsAgreementOverlay', () => {
+  it('TermsAgreementOverlayのshowで、利用規約が正常に表示されることを確認', () => {
     render(
       <>
         <ChildComponent />

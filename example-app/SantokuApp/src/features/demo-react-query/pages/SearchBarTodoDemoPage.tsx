@@ -4,9 +4,9 @@ import {SearchBar as DefaultSearchBar} from 'react-native-elements';
 
 import {useSearchBarTodoInputPage} from '../client-states/useSearchBarTodoInputPage';
 import {useListTodo} from '../services/useListTodo';
-import {useSearchBarTodoDebounceUseCase} from '../use-cases/useSearchBarTodoDebounceUseCase';
-import {useSearchBarTodoEnabledUseCase} from '../use-cases/useSearchBarTodoEnabledUseCase';
-import {useSearchBarTodoPageUseCase} from '../use-cases/useSearchBarTodoPageUseCase';
+import {useSearchBarTodoDebounce} from '../use-cases/useSearchBarTodoDebounce';
+import {useSearchBarTodoEnabled} from '../use-cases/useSearchBarTodoEnabled';
+import {useSearchBarTodoPage} from '../use-cases/useSearchBarTodoPage';
 
 // 次の不具合で型エラーがでるため暫定対処
 // https://stackoverflow.com/questions/68401996/typescript-error-when-using-searchbar-from-react-native-elements
@@ -14,9 +14,9 @@ const SearchBar = DefaultSearchBar as unknown as React.FC<any>;
 
 export const SearchBarTodoDemoPage: React.FC = () => {
   const [inputPage, setInputPage] = useSearchBarTodoInputPage();
-  const inputPageDebounce = useSearchBarTodoDebounceUseCase(inputPage, 500);
-  const {page} = useSearchBarTodoPageUseCase(inputPageDebounce);
-  const {enabled} = useSearchBarTodoEnabledUseCase(page);
+  const inputPageDebounce = useSearchBarTodoDebounce(inputPage, 500);
+  const {page} = useSearchBarTodoPage(inputPageDebounce);
+  const {enabled} = useSearchBarTodoEnabled(page);
   const {isFetching, isError, data} = useListTodo({page}, {enabled});
   const todos = data?.data.content;
   return (

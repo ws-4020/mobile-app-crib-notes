@@ -6,30 +6,30 @@ import {Input, Text} from 'react-native-elements';
 import {useEditTodoDescription} from '../client-states/useEditTodoDescription';
 import {useEditTodoIsEdit} from '../client-states/useEditTodoIsEdit';
 import {useEditTodoTitle} from '../client-states/useEditTodoTitle';
-import {useEditTodoChangeDescriptionUseCase} from '../use-cases/useEditTodoChangeDescriptionUseCase';
-import {useEditTodoChangeTitleUseCase} from '../use-cases/useEditTodoChangeTitleUseCase';
-import {useEditTodoEditUseCase} from '../use-cases/useEditTodoEditUseCase';
-import {useEditTodoRemoveUseCase} from '../use-cases/useEditTodoRemoveUseCase';
-import {useEditTodoSaveUseCase} from '../use-cases/useEditTodoSaveUseCase';
-import {useEditTodoSetTodoUseCase} from '../use-cases/useEditTodoSetTodoUseCase';
-import {useEditTodoTodoUseCase} from '../use-cases/useEditTodoTodoUseCase';
+import {useEditTodoChangeDescription} from '../use-cases/useEditTodoChangeDescription';
+import {useEditTodoChangeTitle} from '../use-cases/useEditTodoChangeTitle';
+import {useEditTodoEdit} from '../use-cases/useEditTodoEdit';
+import {useEditTodoRemove} from '../use-cases/useEditTodoRemove';
+import {useEditTodoSave} from '../use-cases/useEditTodoSave';
+import {useEditTodoSetTodo} from '../use-cases/useEditTodoSetTodo';
+import {useEditTodoTodo} from '../use-cases/useEditTodoTodo';
 
 export type EditTodoDemoPageType = {
   goBack: () => void;
   todoId: number;
 };
 export const EditTodoDemoPage: React.FC<EditTodoDemoPageType> = ({goBack, todoId}) => {
-  const {save, isLoading: isSaving} = useEditTodoSaveUseCase(todoId);
-  const {edit} = useEditTodoEditUseCase();
-  const {remove, isLoading: isRemoving} = useEditTodoRemoveUseCase(todoId, goBack);
+  const {save, isLoading: isSaving} = useEditTodoSave(todoId);
+  const {edit} = useEditTodoEdit();
+  const {remove, isLoading: isRemoving} = useEditTodoRemove(todoId, goBack);
   const [title] = useEditTodoTitle();
   const [description] = useEditTodoDescription();
   const [isEdit] = useEditTodoIsEdit();
-  const {changeTitle} = useEditTodoChangeTitleUseCase();
-  const {changeDescription} = useEditTodoChangeDescriptionUseCase();
-  const {data: todo, isLoading, isSuccess} = useEditTodoTodoUseCase(todoId);
+  const {changeTitle} = useEditTodoChangeTitle();
+  const {changeDescription} = useEditTodoChangeDescription();
+  const {data: todo, isLoading, isSuccess} = useEditTodoTodo(todoId);
 
-  const {setTodo} = useEditTodoSetTodoUseCase(todoId);
+  const {setTodo} = useEditTodoSetTodo(todoId);
   useEffect(() => {
     setTodo();
   }, [isEdit, setTodo, todo]);

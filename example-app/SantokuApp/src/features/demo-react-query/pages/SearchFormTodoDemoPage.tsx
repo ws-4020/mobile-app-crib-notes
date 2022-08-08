@@ -3,13 +3,13 @@ import {ActivityIndicator, SafeAreaView, StyleSheet, Text, View} from 'react-nat
 import {Button, Input} from 'react-native-elements';
 
 import {useSearchFormTodoInputPage} from '../client-states/useSearchFormTodoInputPage';
-import {useSearchFormTodoSearchTodoUseCase} from '../use-cases/useSearchFormTodoSearchTodoUseCase';
-import {useSearchFormTodoTodosUseCase} from '../use-cases/useSearchFormTodoTodosUseCase';
+import {useSearchFormTodoSearchTodo} from '../use-cases/useSearchFormTodoSearchTodo';
+import {useSearchFormTodoTodos} from '../use-cases/useSearchFormTodoTodos';
 
 export const SearchFormTodoDemoPage: React.FC = () => {
-  const {isFetching, isError, data} = useSearchFormTodoTodosUseCase();
+  const {isFetching, isError, data} = useSearchFormTodoTodos();
   const [inputPage, setInputPage] = useSearchFormTodoInputPage();
-  const {searchTodo} = useSearchFormTodoSearchTodoUseCase();
+  const {searchTodo} = useSearchFormTodoSearchTodo();
 
   const todos = data?.data.content;
   return (

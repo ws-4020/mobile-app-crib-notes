@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 
 import {useIsLoggedIn} from '../client-states/useIsLoggedIn';
-import {useAutoLoginUseCase} from '../use-cases/useAutoLoginUseCase';
+import {useAutoLogin} from '../use-cases/useAutoLogin';
 
 export const AutoLogin: React.FC = ({children}) => {
   const [isLoggedIn] = useIsLoggedIn();
-  const {autoLogin} = useAutoLoginUseCase();
+  const {autoLogin} = useAutoLogin();
   useEffect(() => {
     autoLogin().catch(() => {
       // ユースケースでエラーをハンドリングしているので、ここでは何もしない

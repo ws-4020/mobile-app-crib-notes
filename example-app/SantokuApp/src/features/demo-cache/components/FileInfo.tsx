@@ -4,8 +4,8 @@ import {StyleSheet, View} from 'react-native';
 import {Icon, Text} from 'react-native-elements';
 
 import {useChildFileInfos} from '../client-states/useChildFileInfos';
-import {useIsViewChildrenUseCase} from '../use-cases/useIsViewChildrenUseCase';
-import {useReadChildDirectoryUseCase} from '../use-cases/useReadChildDirectoryUseCase';
+import {useIsViewChildren} from '../use-cases/useIsViewChildren';
+import {useReadChildDirectory} from '../use-cases/useReadChildDirectory';
 
 type FileInfoProps = {
   fileInfo: FileSystem.FileInfo;
@@ -17,8 +17,8 @@ const getFileNameFromUri = (uri: string) => {
 };
 
 const FileInfo: React.FC<FileInfoProps> = ({fileInfo, currentDepth}) => {
-  const {isViewChildren} = useIsViewChildrenUseCase({fileInfo, currentDepth});
-  const {readChildDirectory} = useReadChildDirectoryUseCase({fileInfo, currentDepth});
+  const {isViewChildren} = useIsViewChildren({fileInfo, currentDepth});
+  const {readChildDirectory} = useReadChildDirectory({fileInfo, currentDepth});
   const [childFileInfos] = useChildFileInfos(currentDepth);
 
   useEffect(() => {

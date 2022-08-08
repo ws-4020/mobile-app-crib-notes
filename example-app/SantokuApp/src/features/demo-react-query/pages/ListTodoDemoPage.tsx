@@ -5,9 +5,9 @@ import {Button, FAB, Icon, ListItem, Text} from 'react-native-elements';
 
 import {useInvalidateTodos} from '../services/useInvalidateTodos';
 import {useResetTodos} from '../services/useResetTodos';
-import {useListTodoNextUseCase} from '../use-cases/useListTodoNextUseCase';
-import {useListTodoRefreshTodoUseCase} from '../use-cases/useListTodoRefreshTodoUseCase';
-import {useListTodoTodosUseCase} from '../use-cases/useListTodoTodosUseCase';
+import {useListTodoNext} from '../use-cases/useListTodoNext';
+import {useListTodoRefreshTodo} from '../use-cases/useListTodoRefreshTodo';
+import {useListTodoTodos} from '../use-cases/useListTodoTodos';
 
 const LoadingIndicator = () => {
   return (
@@ -25,11 +25,11 @@ export const ListTodoDemoPage: React.FC<ListTodoDemoPageProps> = ({
   navigateToCreateTodoDemo,
   navigateToEditTodoDemo,
 }) => {
-  const {todos, status, isSuccess, isError, isLoading, isRefetching, isFetchingNextPage} = useListTodoTodosUseCase();
+  const {todos, status, isSuccess, isError, isLoading, isRefetching, isFetchingNextPage} = useListTodoTodos();
   const {resetTodos} = useResetTodos();
   const {invalidateTodos} = useInvalidateTodos();
-  const {refreshTodo} = useListTodoRefreshTodoUseCase();
-  const {next} = useListTodoNextUseCase();
+  const {refreshTodo} = useListTodoRefreshTodo();
+  const {next} = useListTodoNext();
 
   const renderTodo = useCallback(
     ({item}: {item: Todo}) => {

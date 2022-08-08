@@ -4,7 +4,7 @@ import {Icon, Text} from 'react-native-elements';
 
 import {useAssetContent} from '../services/useAssetContent';
 import {ThirdPartyDependency} from '../types/ThirdPartyDependency';
-import {useOpenRepositoryLinkUseCase} from '../use-cases/useOpenRepositoryLinkUseCase';
+import {useOpenRepositoryLink} from '../use-cases/useOpenRepositoryLink';
 
 type LicensePageProps = {
   dependency: ThirdPartyDependency;
@@ -16,7 +16,7 @@ export const LicensePage: React.VFC<LicensePageProps> = ({dependency}) => {
   const {data: noticeContentText, isLoading: isLoadingNoticeContentText} = useAssetContent(
     dependency.noticeContentModuleId,
   );
-  const {openRepositoryLink} = useOpenRepositoryLinkUseCase(dependency);
+  const {openRepositoryLink} = useOpenRepositoryLink(dependency);
 
   return (
     <View style={styles.container}>

@@ -24,7 +24,7 @@ beforeAll(async () => {
   await loadMessages(new BundledMessagesLoader());
 });
 
-describe('TermsOfServiceAgreement', () => {
+describe('TermsAgreementOverlayComponent', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
     // importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
@@ -34,13 +34,13 @@ describe('TermsOfServiceAgreement', () => {
         visible
         close={() => {}}
         termsOfService={{version: '1.0.0', url: AppConfig.termsUrl}}
-        contentViewTestID="TermsOfServiceAgreement"
+        contentViewTestID="TermsAgreementOverlay"
       />,
       {
         wrapper: Wrapper,
       },
     );
-    expect(screen.queryByTestId('TermsOfServiceAgreement')).not.toBeNull();
+    expect(screen.queryByTestId('TermsAgreementOverlay')).not.toBeNull();
     expect(screen).toMatchSnapshot();
   });
 });

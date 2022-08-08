@@ -7,16 +7,16 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {useProfileRegistrationForm} from '../forms/useProfileRegistrationForm';
-import {useClearNicknameUseCase} from '../use-cases/useClearNicknameUseCase';
-import {useSignupUseCase} from '../use-cases/useSignupUseCase';
+import {useClearNickname} from '../use-cases/useClearNickname';
+import {useSignup} from '../use-cases/useSignup';
 
 export type ProfileRegistrationPageProps = {
   termsAgreementStatus: TermsOfServiceAgreementStatus;
 };
 export const ProfileRegistrationPage: React.VFC<ProfileRegistrationPageProps> = ({termsAgreementStatus}) => {
   const {form} = useProfileRegistrationForm();
-  const {signup, isExecutingSignup} = useSignupUseCase(form, termsAgreementStatus);
-  const {clearNickname} = useClearNicknameUseCase(form);
+  const {signup, isExecutingSignup} = useSignup(form, termsAgreementStatus);
+  const {clearNickname} = useClearNickname(form);
 
   return (
     <View style={styles.container} testID="ProfileRegistration">

@@ -3,17 +3,17 @@ import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, View} from 'rea
 import {Button, Text} from 'react-native-elements';
 
 import {useDisabledQueryEnabled} from '../client-states/useDisabledQueryEnabled';
-import {useDisabledQueryRefreshUseCase} from '../use-cases/useDisabledQueryRefreshUseCase';
-import {useDisabledQueryResetUseCase} from '../use-cases/useDisabledQueryResetUseCase';
-import {useDisabledQueryTodosUseCase} from '../use-cases/useDisabledQueryTodosUseCase';
-import {useDisabledQueryToggleQueryEnabledUseCase} from '../use-cases/useDisabledQueryToggleQueryEnabledUseCase';
+import {useDisabledQueryRefresh} from '../use-cases/useDisabledQueryRefresh';
+import {useDisabledQueryReset} from '../use-cases/useDisabledQueryReset';
+import {useDisabledQueryTodos} from '../use-cases/useDisabledQueryTodos';
+import {useDisabledQueryToggleQueryEnabled} from '../use-cases/useDisabledQueryToggleQueryEnabled';
 
 export const DisabledQueryDemoPage: React.FC = () => {
-  const {todos, status, isIdle, isLoading, isSuccess, isError} = useDisabledQueryTodosUseCase();
+  const {todos, status, isIdle, isLoading, isSuccess, isError} = useDisabledQueryTodos();
   const [queryEnabled] = useDisabledQueryEnabled();
-  const {refresh} = useDisabledQueryRefreshUseCase();
-  const {toggleQueryEnabled} = useDisabledQueryToggleQueryEnabledUseCase();
-  const {reset} = useDisabledQueryResetUseCase();
+  const {refresh} = useDisabledQueryRefresh();
+  const {toggleQueryEnabled} = useDisabledQueryToggleQueryEnabled();
+  const {reset} = useDisabledQueryReset();
 
   return (
     <View style={styles.container}>
