@@ -4,7 +4,7 @@ import {Omit, Pressable, PressableProps, StyleSheet, View, ViewProps} from 'reac
 import Reanimated, {BaseAnimationBuilder, FadeIn, FadeOut, Keyframe} from 'react-native-reanimated';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
-import {useOverlayBackdropUseCase} from './useOverlayBackdropUseCase';
+import {useOverlayBackdrop} from './useOverlayBackdrop';
 
 export const OVERLAY_BACKDROP_DEFAULT_COLOR = 'rgba(0,0,0,0.4)';
 export const OVERLAY_BACKDROP_DEFAULT_FADE_IN_DURATION = 300;
@@ -59,7 +59,7 @@ export const OverlayBackdrop: React.FC<OverlayBackdropProps> = ({
   children,
   ...animatedViewProps
 }) => {
-  const {isOverlayVisible, composedEnteringCallback, composedExitingCallback} = useOverlayBackdropUseCase({
+  const {isOverlayVisible, composedEnteringCallback, composedExitingCallback} = useOverlayBackdrop({
     isVisible,
     enteringCallback,
     exitingCallback,
