@@ -1,7 +1,7 @@
 import messaging from '@react-native-firebase/messaging';
 import {ApplicationError} from 'bases/core/error/ApplicationError';
 
-import {firebaseConfig} from '../configs/FirebaseConfig';
+import {firebaseConfig} from '../FirebaseConfig';
 
 export const deleteFcmToken = async () => {
   if (!firebaseConfig.isDummy) {

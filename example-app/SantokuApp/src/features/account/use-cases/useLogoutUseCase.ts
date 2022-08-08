@@ -1,6 +1,6 @@
-import {isGetFcmTokenError} from 'bases/firebase/utils/getFcmToken';
-import {log} from 'bases/logging/utils';
-import {m} from 'bases/message/utils/Message';
+import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
+import {log} from 'bases/logging';
+import {m} from 'bases/message/Message';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
 

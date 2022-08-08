@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Snackbar Snackbarが正常にrenderできることを確認: render直後 1`] = `
+exports[`SnackbarComponent SnackbarComponentが正常にrenderできることを確認: render直後 1`] = `
 <View
   collapsable={false}
   style={
@@ -53,9 +53,9 @@ exports[`Snackbar Snackbarが正常にrenderできることを確認: render直�
 </View>
 `;
 
-exports[`Snackbar Snackbarが正常にrenderできることを確認: フェードアウト後 1`] = `null`;
+exports[`SnackbarComponent SnackbarComponentが正常にrenderできることを確認: フェードアウト後 1`] = `null`;
 
-exports[`Snackbar Snackbarが正常にrenderできることを確認: フェードイン後 1`] = `
+exports[`SnackbarComponent SnackbarComponentが正常にrenderできることを確認: フェードイン後 1`] = `
 <View
   collapsable={false}
   style={

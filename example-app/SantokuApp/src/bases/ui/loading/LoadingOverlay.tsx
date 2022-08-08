@@ -1,6 +1,6 @@
 import React, {useMemo, useState} from 'react';
 
-import {FullWindowOverlay} from '../FullWindowOverlay';
+import {FullWindowOverlay} from '../overlay/FullWindowOverlay';
 import {LoadingOverlayComponent} from './LoadingOverlayComponent';
 
 type LoadingOverlayType = {

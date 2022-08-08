@@ -1,2 +1,2 @@
-import {log} from 'bases/logging/utils';
+import {log} from 'bases/logging';
 export const debugLogUseCase = () => log.debug('デモ用Debugログ');

@@ -1,5 +1,5 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import {m} from 'bases/message/utils/Message';
+import {m} from 'bases/message/Message';
 import React from 'react';
 
 import {HomeScreen} from '../screens/home/HomeScreen';

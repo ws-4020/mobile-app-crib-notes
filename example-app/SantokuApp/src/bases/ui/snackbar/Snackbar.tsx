@@ -1,7 +1,7 @@
-import {m} from 'bases/message/utils/Message';
+import {m} from 'bases/message/Message';
 import React, {useMemo, useState} from 'react';
 
-import {FullWindowOverlay} from '../FullWindowOverlay';
+import {FullWindowOverlay} from '../overlay/FullWindowOverlay';
 import {
   SnackbarComponent,
   SnackbarHideProps as SnackbarComponentHideProps,

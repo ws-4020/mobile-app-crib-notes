@@ -18,8 +18,8 @@ const FADE_OUT_DURATION = 1000;
 const FORCE_FADE_OUT_DURATION = 300;
 const HIDE_FADE_OUT_DURATION = 300;
 
-describe('Snackbar', () => {
-  it('Snackbarが正常にrenderできることを確認', () => {
+describe('SnackbarComponent', () => {
+  it('SnackbarComponentが正常にrenderできることを確認', () => {
     render(<SnackbarComponent message="テストメッセージ" />);
 
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
@@ -40,7 +40,7 @@ describe('Snackbar', () => {
     expect(screen).toMatchSnapshot('フェードアウト後');
   });
 
-  it('Snackbar表示中にpropsが更新された場合、フェードアウト後に更新後のpropsでSnackbarが表示されることを確認', async () => {
+  it('SnackbarComponent表示中にpropsが更新された場合、フェードアウト後に更新後のpropsでSnackbarComponentが表示されることを確認', async () => {
     render(<SnackbarComponent message="初回" />);
 
     expect(screen.queryByText('初回')).not.toBeNull();
@@ -57,7 +57,7 @@ describe('Snackbar', () => {
     });
   });
 
-  it('Snackbarの表示中に２連続propsが更新された場合、後で更新した方のpropsでSnackbarが表示されることを確認', async () => {
+  it('SnackbarComponentの表示中に２連続propsが更新された場合、後で更新した方のpropsでSnackbarComponentが表示されることを確認', async () => {
     render(<SnackbarComponent message="初回" />);
 
     expect(screen.queryByText('初回')).not.toBeNull();
@@ -73,7 +73,7 @@ describe('Snackbar', () => {
     });
   });
 
-  it('Snackbarの表示後に同一のpropsを指定した場合、Snackbarが表示されないことを確認', () => {
+  it('SnackbarComponentの表示後に同一のpropsを指定した場合、SnackbarComponentが表示されないことを確認', () => {
     const props = {
       message: 'テストメッセージ',
       messageTextStyle: {color: 'white'},
@@ -101,7 +101,7 @@ describe('Snackbar', () => {
     expect(screen.queryByText('テストメッセージ')).toBeNull();
   });
 
-  it('Snackbarの表示後にTimestamp以外同一のpropsを指定した場合、Snackbarが表示されることを確認', () => {
+  it('SnackbarComponentの表示後にTimestamp以外同一のpropsを指定した場合、SnackbarComponentが表示されることを確認', () => {
     const props = {
       message: 'テストメッセージ',
       messageTextStyle: {color: 'white'},
@@ -128,7 +128,7 @@ describe('Snackbar', () => {
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
   });
 
-  it('Snackbar表示中にpropsでhideを指定した場合、Snackbarが消えることを確認', async () => {
+  it('SnackbarComponent表示中にpropsでhideを指定した場合、SnackbarComponentが消えることを確認', async () => {
     render(<SnackbarComponent message="テストメッセージ" />);
 
     jest.advanceTimersByTime(FADE_IN_DURATION);
@@ -142,7 +142,7 @@ describe('Snackbar', () => {
     });
   });
 
-  it('Snackbarに指定したpropsがrenderに反映されていることを確認', () => {
+  it('SnackbarComponentに指定したpropsがrenderに反映されていることを確認', () => {
     /**
      * 下記項目は対象外
      * - autoHideDuration / fadeInDuration / fadeOutDuration / forceFadeOutDuration / hideFadeOutDuration

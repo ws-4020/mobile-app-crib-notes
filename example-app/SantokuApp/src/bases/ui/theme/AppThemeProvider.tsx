@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 import {ColorSchemeName, useColorScheme} from 'react-native';
 import {ThemeProvider} from 'react-native-elements';
 
-import {getReactNativeElementsTheme} from '../utils/ReactNativeElementsTheme';
+import {getReactNativeElementsTheme} from './ReactNativeElementsTheme';
 import {darkModeAppTheme} from './darkModeAppTheme';
 import {lightModeAppTheme} from './lightModeAppTheme';
 import {AppThemeContextProvider} from './useAppTheme';

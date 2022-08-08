@@ -58,3 +58,6 @@ export const bundledMessages = {
   'fw.error.予期せぬ通信エラー':
     '予期せぬ通信エラーが発生しました。時間をおいてから再度お試しいただき、解決しない場合はお問い合わせください。',
 } as const;
+
+export type BundledMessagesType = typeof bundledMessages;
+export type MessageKey = keyof typeof bundledMessages;

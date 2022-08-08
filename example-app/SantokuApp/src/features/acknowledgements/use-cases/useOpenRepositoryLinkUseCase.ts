@@ -1,4 +1,4 @@
-import {log} from 'bases/logging/utils';
+import {log} from 'bases/logging';
 import {useCallback} from 'react';
 import {Linking} from 'react-native';
 

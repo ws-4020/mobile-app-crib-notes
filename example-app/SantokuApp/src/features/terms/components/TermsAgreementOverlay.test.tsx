@@ -1,8 +1,8 @@
 import {render, screen} from '@testing-library/react-native';
 import {AppConfig} from 'bases/core/config/AppConfig';
-import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
-import {loadMessages} from 'bases/message/utils/Message';
-import {Snackbar} from 'bases/ui/overlay/snackbar/Snackbar';
+import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
+import {loadMessages} from 'bases/message/Message';
+import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import React, {useEffect} from 'react';
 import {Text} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';

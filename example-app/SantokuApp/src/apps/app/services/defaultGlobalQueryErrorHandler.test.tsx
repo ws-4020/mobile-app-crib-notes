@@ -1,6 +1,6 @@
 import {AxiosError} from 'axios';
-import {setErrorSender} from 'bases/logging/utils/sendErrorLog';
-import {Snackbar} from 'bases/ui/overlay/snackbar/Snackbar';
+import {setErrorSender} from 'bases/logging/sendErrorLog';
+import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {Query, QueryClient, QueryKey} from 'react-query';
 
 import {defaultGlobalQueryErrorHandler} from './defaultGlobalQueryErrorHandler';
@@ -8,7 +8,7 @@ import {loadBundledMessagesAsync} from './loadBundledMessagesAsync';
 
 setErrorSender(jest.fn());
 
-jest.mock('bases/logging/utils');
+jest.mock('bases/logging');
 
 afterEach(() => {
   // restore the spy created with spyOn

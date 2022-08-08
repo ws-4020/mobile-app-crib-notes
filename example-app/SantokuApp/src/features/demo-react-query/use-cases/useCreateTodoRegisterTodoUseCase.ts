@@ -1,4 +1,4 @@
-import {LoadingOverlay} from 'bases/ui/overlay/loading/LoadingOverlay';
+import {LoadingOverlay} from 'bases/ui/loading/LoadingOverlay';
 import {useCallback} from 'react';
 
 import {useCreateTodoDescription} from '../client-states/useCreateTodoDescription';

@@ -1,7 +1,7 @@
 /**
  * ログアウトします。
  */
-import {getFcmToken} from 'bases/firebase/utils/getFcmToken';
+import {getFcmToken} from 'bases/firebase/messaging/getFcmToken';
 import {postAccountsMeDeviceToken, postLogout} from 'features/backend/apis/account/account';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {QueryClient} from 'react-query';

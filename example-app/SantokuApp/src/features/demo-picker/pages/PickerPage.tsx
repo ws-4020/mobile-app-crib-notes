@@ -1,4 +1,4 @@
-import {m} from 'bases/message/utils/Message';
+import {m} from 'bases/message/Message';
 import {DateTimePicker} from 'bases/ui/picker/DateTimePicker';
 import {SelectPicker} from 'bases/ui/picker/SelectPicker';
 import {YearMonthPicker} from 'bases/ui/picker/YearMonthPicker';

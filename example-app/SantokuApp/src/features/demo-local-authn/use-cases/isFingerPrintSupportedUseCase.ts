@@ -1,4 +1,4 @@
-import {LocalAuthentication} from 'bases/local-authentication/utils/LocalAuthentication';
+import {LocalAuthentication} from 'bases/local-authentication/LocalAuthentication';
 
 export const isFingerPrintSupportedUseCase = async () => {
   const isSupported = await LocalAuthentication.isFingerPrintSupported();

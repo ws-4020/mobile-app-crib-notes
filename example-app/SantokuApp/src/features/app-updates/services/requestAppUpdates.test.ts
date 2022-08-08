@@ -1,6 +1,6 @@
 import {ApplicationError} from 'bases/core/error/ApplicationError';
-import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
-import {loadMessages} from 'bases/message/utils/Message';
+import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
+import {loadMessages} from 'bases/message/Message';
 import {getAppUpdates} from 'features/backend/apis/system/system';
 
 import {requestAppUpdates} from './requestAppUpdates';

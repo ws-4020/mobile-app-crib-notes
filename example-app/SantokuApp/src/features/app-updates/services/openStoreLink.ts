@@ -1,5 +1,5 @@
 import {AppConfig} from 'bases/core/config/AppConfig';
-import {log} from 'bases/logging/utils';
+import {log} from 'bases/logging';
 import {Linking} from 'react-native';
 
 export const openStoreLink = () => {

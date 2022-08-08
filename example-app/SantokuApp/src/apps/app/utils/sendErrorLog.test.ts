@@ -1,7 +1,7 @@
 import {AxiosError} from 'axios';
-import {log} from 'bases/logging/utils';
-import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
-import {loadMessages} from 'bases/message/utils/Message';
+import {log} from 'bases/logging';
+import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
+import {loadMessages} from 'bases/message/Message';
 
 import {sendErrorLog} from './sendErrorLog';
 

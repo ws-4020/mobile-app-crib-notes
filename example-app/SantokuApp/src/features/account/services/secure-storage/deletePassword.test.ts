@@ -1,4 +1,4 @@
-import * as Crypto from 'bases/crypto/utils/crypto';
+import * as Crypto from 'bases/crypto/crypto';
 import * as SecureStore from 'expo-secure-store';
 
 import {deletePassword} from './deletePassword';

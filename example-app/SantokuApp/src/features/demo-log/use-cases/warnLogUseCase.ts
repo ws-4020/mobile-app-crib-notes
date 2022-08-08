@@ -1,2 +1,2 @@
-import {log} from 'bases/logging/utils';
+import {log} from 'bases/logging';
 export const warnLogUseCase = () => log.warn('デモ用Warnログ');

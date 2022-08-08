@@ -1,5 +1,5 @@
 import axios, {AxiosError} from 'axios';
-import {m} from 'bases/message/utils/Message';
+import {m} from 'bases/message/Message';
 
 let resolveErrorMessage = (error: unknown): {title: string; message: string} => {
   if (axios.isAxiosError(error)) {

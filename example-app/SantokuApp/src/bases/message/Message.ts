@@ -1,6 +1,6 @@
-import {log} from 'bases/logging/utils';
+import {log} from 'bases/logging';
 
-import {MessageKey} from '../types';
+import {MessageKey} from './BundledMessages';
 
 /**
  * メッセージをロードします。

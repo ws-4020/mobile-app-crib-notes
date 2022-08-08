@@ -1,9 +1,9 @@
-import {firebaseConfig} from 'bases/firebase/configs/FirebaseConfig';
-import {createLogger, setLogger} from 'bases/logging/utils';
-import {FirebaseCrashlyticsTransport} from 'bases/logging/utils/FirebaseCrashlyticsTransport';
-import {setErrorSender} from 'bases/logging/utils/sendErrorLog';
-import {LoadingOverlay} from 'bases/ui/overlay/loading/LoadingOverlay';
-import {Snackbar} from 'bases/ui/overlay/snackbar/Snackbar';
+import {firebaseConfig} from 'bases/firebase/FirebaseConfig';
+import {createLogger, setLogger} from 'bases/logging';
+import {FirebaseCrashlyticsTransport} from 'bases/logging/FirebaseCrashlyticsTransport';
+import {setErrorSender} from 'bases/logging/sendErrorLog';
+import {LoadingOverlay} from 'bases/ui/loading/LoadingOverlay';
+import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {AppThemeProvider} from 'bases/ui/theme/AppThemeProvider';
 import React from 'react';
 import {Platform, StyleSheet} from 'react-native';

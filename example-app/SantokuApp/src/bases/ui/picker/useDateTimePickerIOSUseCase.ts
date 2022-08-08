@@ -1,6 +1,6 @@
 import {useCallback, useState} from 'react';
 
-import {DateTimePickerIOSProps} from '../picker/DateTimePicker.ios';
+import {DateTimePickerIOSProps} from './DateTimePicker.ios';
 import {useDateTimePickerUseCase} from './useDateTimePickerUseCase';
 
 export const useDateTimePickerIOSUseCase = (props: DateTimePickerIOSProps) => {

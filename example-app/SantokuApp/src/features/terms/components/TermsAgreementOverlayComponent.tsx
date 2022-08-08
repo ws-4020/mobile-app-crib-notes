@@ -1,4 +1,4 @@
-import {m} from 'bases/message/utils/Message';
+import {m} from 'bases/message/Message';
 import {Button} from 'bases/ui/button/Button';
 import {OverlayBackdrop} from 'bases/ui/overlay/OverlayBackdrop';
 import {OverlayContainer} from 'bases/ui/overlay/OverlayContainer';

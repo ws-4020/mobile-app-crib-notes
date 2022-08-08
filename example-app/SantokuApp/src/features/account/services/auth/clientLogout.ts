@@ -2,9 +2,9 @@
  * クライアント側のログアウト処理を実施します。
  */
 import crashlytics from '@react-native-firebase/crashlytics';
-import {deleteFcmToken} from 'bases/firebase/utils/deleteFcmToken';
-import {log} from 'bases/logging/utils';
-import {m} from 'bases/message/utils/Message';
+import {deleteFcmToken} from 'bases/firebase/messaging/deleteFcmToken';
+import {log} from 'bases/logging';
+import {m} from 'bases/message/Message';
 import {hashQueryKey, Query, QueryClient} from 'react-query';
 import {QueryFilters} from 'react-query/types/core/utils';
 

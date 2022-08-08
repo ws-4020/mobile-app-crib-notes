@@ -1,4 +1,4 @@
-import {log} from 'bases/logging/utils';
+import {log} from 'bases/logging';
 import {useCallback, useState} from 'react';
 
 import {useTopLevelFileInfos} from '../client-states/useTopLevelFileInfos';

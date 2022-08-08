@@ -1,5 +1,5 @@
-import {m} from 'bases/message/utils/Message';
-import {yup} from 'bases/validator/utils';
+import {m} from 'bases/message/Message';
+import {yup} from 'bases/validator';
 
 export const loginFormValidationSchema = yup.object().shape({
   accountId: yup.string().label(m('アカウントID')).required(),

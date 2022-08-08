@@ -1,5 +1,5 @@
 import {ApplicationError} from 'bases/core/error/ApplicationError';
-import {m} from 'bases/message/utils/Message';
+import {m} from 'bases/message/Message';
 
 export const messages = [
   {

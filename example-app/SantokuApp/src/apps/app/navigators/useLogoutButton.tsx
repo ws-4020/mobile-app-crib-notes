@@ -1,4 +1,4 @@
-import {m} from 'bases/message/utils/Message';
+import {m} from 'bases/message/Message';
 import {Button} from 'bases/ui/button/Button';
 import {useLogoutUseCase} from 'features/account/use-cases/useLogoutUseCase';
 import React from 'react';

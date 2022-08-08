@@ -1,4 +1,4 @@
-import {m} from 'bases/message/utils/Message';
+import {m} from 'bases/message/Message';
 import {Alert} from 'react-native';
 
 import {openStoreLink} from '../services/openStoreLink';

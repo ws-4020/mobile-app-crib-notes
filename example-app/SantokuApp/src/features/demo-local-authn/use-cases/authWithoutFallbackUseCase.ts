@@ -1,4 +1,4 @@
-import {LocalAuthentication} from 'bases/local-authentication/utils/LocalAuthentication';
+import {LocalAuthentication} from 'bases/local-authentication/LocalAuthentication';
 
 export const authWithoutFallbackUseCase = async () => {
   const result = await LocalAuthentication.authenticate({

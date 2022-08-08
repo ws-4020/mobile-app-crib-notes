@@ -1,4 +1,4 @@
-import {log} from 'bases/logging/utils';
+import {log} from 'bases/logging';
 import * as FileSystem from 'expo-file-system';
 import {useCallback} from 'react';
 

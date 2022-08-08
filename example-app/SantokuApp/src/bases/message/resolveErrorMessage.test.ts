@@ -1,6 +1,6 @@
 import {AxiosError} from 'axios';
-import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
-import {loadMessages} from 'bases/message/utils/Message';
+import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
+import {loadMessages} from 'bases/message/Message';
 
 import {resolveErrorMessage} from './resolveErrorMessage';
 

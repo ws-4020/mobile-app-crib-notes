@@ -1,8 +1,8 @@
-import {isGetFcmTokenError} from 'bases/firebase/utils/getFcmToken';
-import {isRequestPushPermissionError} from 'bases/firebase/utils/requestPushPermission';
-import {log} from 'bases/logging/utils';
-import {m} from 'bases/message/utils/Message';
-import {Snackbar} from 'bases/ui/overlay/snackbar/Snackbar';
+import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
+import {isRequestPushPermissionError} from 'bases/firebase/messaging/requestPushPermission';
+import {log} from 'bases/logging';
+import {m} from 'bases/message/Message';
+import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {useCallback} from 'react';
 
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';

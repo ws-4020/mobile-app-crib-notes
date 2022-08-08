@@ -1,4 +1,4 @@
-import {resolveErrorMessage} from 'bases/message/utils/resolveErrorMessage';
+import {resolveErrorMessage} from 'bases/message/resolveErrorMessage';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
 

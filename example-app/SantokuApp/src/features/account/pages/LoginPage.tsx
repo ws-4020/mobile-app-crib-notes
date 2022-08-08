@@ -1,4 +1,4 @@
-import {m} from 'bases/message/utils/Message';
+import {m} from 'bases/message/Message';
 import {FilledButton} from 'bases/ui/button/FilledButton';
 import {OutlinedButton} from 'bases/ui/button/OutlinedButton';
 import {PasswordTextInput} from 'bases/ui/input/PasswordTextInput';

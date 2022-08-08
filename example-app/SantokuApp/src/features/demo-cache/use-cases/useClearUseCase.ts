@@ -1,5 +1,5 @@
-import {log} from 'bases/logging/utils';
-import {Snackbar} from 'bases/ui/overlay/snackbar/Snackbar';
+import {log} from 'bases/logging';
+import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {useCallback} from 'react';
 
 import {clearCacheDir} from '../services/clearCacheDir';

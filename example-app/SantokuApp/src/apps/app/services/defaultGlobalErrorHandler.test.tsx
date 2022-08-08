@@ -1,7 +1,7 @@
 import {act} from '@testing-library/react-native';
 import {AxiosError} from 'axios';
-import {setErrorSender} from 'bases/logging/utils/sendErrorLog';
-import {Snackbar} from 'bases/ui/overlay/snackbar/Snackbar';
+import {setErrorSender} from 'bases/logging/sendErrorLog';
+import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import * as clientLogout from 'features/account/services/auth/clientLogout';
 import {Alert} from 'react-native';
 import {QueryClient} from 'react-query';
@@ -9,7 +9,7 @@ import {QueryClient} from 'react-query';
 import {defaultGlobalErrorHandler} from './defaultGlobalErrorHandler';
 import {loadBundledMessagesAsync} from './loadBundledMessagesAsync';
 
-jest.mock('bases/logging/utils');
+jest.mock('bases/logging');
 
 jest.useFakeTimers();
 

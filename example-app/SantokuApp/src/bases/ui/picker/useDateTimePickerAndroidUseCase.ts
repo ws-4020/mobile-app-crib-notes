@@ -1,7 +1,7 @@
 import {DateTimePickerAndroid, DateTimePickerEvent} from '@react-native-community/datetimepicker';
 import {useCallback} from 'react';
 
-import {DateTimePickerAndroidProps} from '../picker/DateTimePicker.android';
+import {DateTimePickerAndroidProps} from './DateTimePicker.android';
 import {useDateTimePickerUseCase} from './useDateTimePickerUseCase';
 
 export const useDateTimePickerAndroidUseCase = (props: DateTimePickerAndroidProps) => {

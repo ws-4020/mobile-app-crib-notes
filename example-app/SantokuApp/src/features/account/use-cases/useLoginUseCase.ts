@@ -1,5 +1,5 @@
-import {m} from 'bases/message/utils/Message';
-import {isValidForm} from 'bases/validator/utils';
+import {m} from 'bases/message/Message';
+import {isValidForm} from 'bases/validator';
 import {FormikProps} from 'formik';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';

@@ -1,4 +1,4 @@
-import {useClientState} from 'bases/react-query/utils/useClientState';
+import {useClientState} from 'bases/react-query/useClientState';
 
 import {StateChangedEventRecord} from '../types/StateChangedEventRecord';
 

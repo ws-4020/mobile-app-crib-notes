@@ -1,4 +1,4 @@
-import {m} from 'bases/message/utils/Message';
+import {m} from 'bases/message/Message';
 import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {WebView as RNWebView, WebViewProps} from 'react-native-webview';
@@ -11,7 +11,7 @@ import {
   WebViewSourceUri,
 } from 'react-native-webview/lib/WebViewTypes';
 
-import {Snackbar} from '../overlay/snackbar/Snackbar';
+import {Snackbar} from '../snackbar/Snackbar';
 
 type Props = WebViewProps & {
   /**

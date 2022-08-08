@@ -1,4 +1,4 @@
-import {YearMonthUtil} from 'bases/ui/utils/YearMonthUtil';
+import {YearMonthUtil} from 'bases/ui/picker/YearMonthUtil';
 import {useRef} from 'react';
 
 import {useMaximumYearMonthUseCase} from './useMaximumYearMonthUseCase';

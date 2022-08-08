@@ -1,9 +1,9 @@
 import {fireEvent, render, screen} from '@testing-library/react-native';
-import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
-import {loadMessages} from 'bases/message/utils/Message';
+import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
+import {loadMessages} from 'bases/message/Message';
 import React from 'react';
 
-import {Snackbar} from '../overlay/snackbar/Snackbar';
+import {Snackbar} from '../snackbar/Snackbar';
 import {WebView} from './WebView';
 
 describe('WebView', () => {

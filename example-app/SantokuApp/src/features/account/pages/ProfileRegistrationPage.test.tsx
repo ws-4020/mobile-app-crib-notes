@@ -1,9 +1,9 @@
 import {render, screen} from '@testing-library/react-native';
-import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
-import {loadMessages} from 'bases/message/utils/Message';
-import {Snackbar} from 'bases/ui/overlay/snackbar/Snackbar';
+import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
+import {loadMessages} from 'bases/message/Message';
+import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {AppThemeProvider} from 'bases/ui/theme/AppThemeProvider';
-import {enhanceValidator} from 'bases/validator/utils';
+import {enhanceValidator} from 'bases/validator';
 import {useGetTerms} from 'features/backend/apis/terms/terms';
 import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOverlay';
 import React from 'react';
