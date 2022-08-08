@@ -14,7 +14,7 @@ type BackdropAnimationConfig = {
   fadeOutConfig?: WithTimingConfig;
 };
 
-export const usePickerBackdropUseCase = ({
+export const usePickerBackdrop = ({
   isVisible,
   opacity,
   afterFadeIn,

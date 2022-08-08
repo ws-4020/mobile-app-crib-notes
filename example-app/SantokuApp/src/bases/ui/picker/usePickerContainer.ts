@@ -23,7 +23,7 @@ type ContainerAnimationConfig = {
   slideOutConfig?: WithTimingConfig;
 };
 
-export const usePickerContainerUseCase = ({
+export const usePickerContainer = ({
   isVisible,
   afterSlideIn,
   afterSlideOut,

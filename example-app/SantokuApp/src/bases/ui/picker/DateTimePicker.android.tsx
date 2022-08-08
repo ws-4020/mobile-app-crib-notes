@@ -3,7 +3,7 @@ import {Pressable, TextInput, View} from 'react-native';
 
 import {DateTimePickerProps} from './DateTimePicker';
 import {DateTimePickerItemsAndroidProps, DateTimePickerItemsProps} from './DateTimePickerItems';
-import {useDateTimePickerAndroidUseCase} from './useDateTimePickerAndroidUseCase';
+import {useDateTimePickerAndroid} from './useDateTimePickerAndroid';
 
 export type DateTimePickerAndroidProps = Omit<
   DateTimePickerProps,
@@ -26,7 +26,7 @@ export type DateTimePickerAndroidProps = Omit<
   mode?: Exclude<DateTimePickerItemsProps['mode'], 'countdown' | 'datetime'>;
 };
 export const DateTimePicker = (props: DateTimePickerAndroidProps) => {
-  const {inputValue, open} = useDateTimePickerAndroidUseCase(props);
+  const {inputValue, open} = useDateTimePickerAndroid(props);
   const {placeholder, textInputProps, textInputComponent} = props;
   return (
     <Pressable onPress={open} testID="pressableContainer">

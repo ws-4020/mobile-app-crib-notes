@@ -1,10 +1,9 @@
 import {useCallback, useState} from 'react';
 
 import {DateTimePickerIOSProps} from './DateTimePicker.ios';
-import {useDateTimePickerUseCase} from './useDateTimePickerUseCase';
+import {useDateTimePicker} from './useDateTimePicker';
 
-export const useDateTimePickerIOSUseCase = (props: DateTimePickerIOSProps) => {
-  const useCase = useDateTimePickerUseCase(props);
+export const useDateTimePickerIOS = (props: DateTimePickerIOSProps) => {
   const {selectedValue, defaultValue = new Date(), onSelectedItemChange, onDismiss, onDelete, onCancel, onDone} = props;
 
   const [isVisible, setIsVisible] = useState(false);
@@ -41,7 +40,7 @@ export const useDateTimePickerIOSUseCase = (props: DateTimePickerIOSProps) => {
   }, [close, onDone, selectedValue]);
 
   return {
-    ...useCase,
+    ...useDateTimePicker(props),
     isVisible,
     setIsVisible,
     onValueChange,

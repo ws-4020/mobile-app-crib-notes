@@ -5,7 +5,7 @@ import {useAnimatedRef, useAnimatedScrollHandler, useSharedValue} from 'react-na
 import {Item} from './SelectPicker';
 import {useListMiddleIndex} from './useListMiddleIndex';
 
-type SelectPickerItemsUseCaseTypes<ItemT> = {
+type SelectPickerItemsTypes<ItemT> = {
   selectedValue?: React.Key | ItemT;
   children?: JSX.Element | JSX.Element[];
   items: Item<ItemT>[];
@@ -14,13 +14,13 @@ type SelectPickerItemsUseCaseTypes<ItemT> = {
   onValueChange?: (itemValue: ItemT, itemIndex: number) => void;
 };
 
-export const useSelectPickerItemsUseCase = <ItemT extends unknown>({
+export const useSelectPickerItems = <ItemT extends unknown>({
   selectedValue,
   items,
   itemHeight,
   numberOfLines,
   onValueChange,
-}: SelectPickerItemsUseCaseTypes<ItemT>) => {
+}: SelectPickerItemsTypes<ItemT>) => {
   const flatListRef = useAnimatedRef<FlatList>();
   const offset = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler(e => {

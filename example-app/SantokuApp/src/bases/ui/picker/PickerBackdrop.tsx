@@ -3,7 +3,7 @@ import React, {useMemo} from 'react';
 import {Modal as RNModal, ModalProps, Pressable, PressableProps, StyleSheet, ViewProps} from 'react-native';
 import Reanimated, {WithTimingConfig} from 'react-native-reanimated';
 
-import {usePickerBackdropUseCase} from './usePickerBackdropUseCase';
+import {usePickerBackdrop} from './usePickerBackdrop';
 
 export const DEFAULT_BACKGROUND_COLOR = 'black';
 export const DEFAULT_OPACITY = 0.4;
@@ -40,7 +40,7 @@ export const PickerBackdrop: React.FC<PickerBackdropProps> = ({
   fadeOutConfig,
   children,
 }) => {
-  const {isModalVisible} = usePickerBackdropUseCase({
+  const {isModalVisible} = usePickerBackdrop({
     isVisible,
     opacity,
     afterFadeIn,

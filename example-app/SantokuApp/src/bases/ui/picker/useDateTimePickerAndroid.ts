@@ -2,10 +2,10 @@ import {DateTimePickerAndroid, DateTimePickerEvent} from '@react-native-communit
 import {useCallback} from 'react';
 
 import {DateTimePickerAndroidProps} from './DateTimePicker.android';
-import {useDateTimePickerUseCase} from './useDateTimePickerUseCase';
+import {useDateTimePicker} from './useDateTimePicker';
 
-export const useDateTimePickerAndroidUseCase = (props: DateTimePickerAndroidProps) => {
-  const {requiredSelectedValue, ...useCase} = useDateTimePickerUseCase(props);
+export const useDateTimePickerAndroid = (props: DateTimePickerAndroidProps) => {
+  const {requiredSelectedValue, ...rest} = useDateTimePicker(props);
   const {
     mode,
     displayAndroid,
@@ -49,7 +49,7 @@ export const useDateTimePickerAndroidUseCase = (props: DateTimePickerAndroidProp
   }, [displayAndroid, maximumDate, minimumDate, mode, onValueChange, pickerItemsProps, requiredSelectedValue]);
 
   return {
-    ...useCase,
+    ...rest,
     onValueChange,
     open,
   };

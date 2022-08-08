@@ -14,7 +14,7 @@ import {PickerBackdrop, PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainer, PickerContainerProps} from './PickerContainer';
 import {SelectPickerItems, SelectPickerItemsProps} from './SelectPickerItems';
 import {RequiredYearMonth, YearMonth} from './YearMonth';
-import {useYearMonthPickerUseCase} from './useYearMonthPickerUseCase';
+import {useYearMonthPicker} from './useYearMonthPicker';
 
 type TextInputProps = Omit<RNETextInputProps, 'value' | 'editable'>;
 export type YearMonthPickerProps = {
@@ -116,7 +116,7 @@ export const YearMonthPicker = (props: YearMonthPickerProps) => {
     handleDelete,
     handleCancel,
     handleDone,
-  } = useYearMonthPickerUseCase(props);
+  } = useYearMonthPicker(props);
   const {
     yearSuffixLabel,
     monthSuffixLabel,

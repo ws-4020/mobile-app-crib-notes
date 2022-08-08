@@ -5,7 +5,7 @@ import {DefaultPickerAccessory, DefaultPickerAccessoryProps} from './DefaultPick
 import {PickerBackdrop, PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainer, PickerContainerProps} from './PickerContainer';
 import {SelectPickerItems, SelectPickerItemsProps} from './SelectPickerItems';
-import {useSelectPickerUseCase} from './useSelectPickerUseCase';
+import {useSelectPicker} from './useSelectPicker';
 
 export type Item<T> = {
   label: string;
@@ -107,7 +107,7 @@ const DEFAULT_DURATION = 300;
 
 export const SelectPicker = <ItemT extends unknown>(props: SelectPickerProps<ItemT>) => {
   const {isVisible, inputValue, handleBackdropPress, onValueChange, open, handleDelete, handleCancel, handleDone} =
-    useSelectPickerUseCase<ItemT>(props);
+    useSelectPicker<ItemT>(props);
   const {
     items,
     selectedItemKey,

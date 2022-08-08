@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ViewProps} from 'react-native';
 import Reanimated, {WithTimingConfig} from 'react-native-reanimated';
 
-import {usePickerContainerUseCase} from './usePickerContainerUseCase';
+import {usePickerContainer} from './usePickerContainer';
 
 export const DEFAULT_SLIDE_IN_DURATION = 300;
 export const DEFAULT_SLIDE_OUT_DURATION = 300;
@@ -31,7 +31,7 @@ export const PickerContainer: React.FC<PickerContainerProps> = ({
   children,
   ...animatedViewProps
 }) => {
-  const {isPickerVisible, transform, updateContentHeight} = usePickerContainerUseCase({
+  const {isPickerVisible, transform, updateContentHeight} = usePickerContainer({
     isVisible,
     afterSlideIn,
     afterSlideOut,

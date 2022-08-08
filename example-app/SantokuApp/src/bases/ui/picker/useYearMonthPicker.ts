@@ -5,7 +5,7 @@ import {YearMonth} from './YearMonth';
 import {YearMonthPickerProps} from './YearMonthPicker';
 import {YearMonthUtil} from './YearMonthUtil';
 
-export const useYearMonthPickerUseCase = ({
+export const useYearMonthPicker = ({
   selectedValue,
   maximumYearMonth,
   minimumYearMonth,
