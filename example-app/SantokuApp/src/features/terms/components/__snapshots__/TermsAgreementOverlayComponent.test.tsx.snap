@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TermsOfServiceAgreement マウントされたときに正常にレンダリングされること 1`] = `
+exports[`TermsAgreementOverlayComponent マウントされたときに正常にレンダリングされること 1`] = `
 Array [
   <View
     style={
@@ -122,7 +122,7 @@ Array [
               "width": "100%",
             }
           }
-          testID="TermsOfServiceAgreement"
+          testID="TermsAgreementOverlay"
         >
           <View
             style={
