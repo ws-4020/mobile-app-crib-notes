@@ -1,9 +1,9 @@
 import {m} from 'bases/message/utils/Message';
-import {FilledButton} from 'bases/ui/components/button/FilledButton';
-import {OutlinedButton} from 'bases/ui/components/button/OutlinedButton';
-import {PasswordTextInput} from 'bases/ui/components/input/PasswordTextInput';
-import {TextInput} from 'bases/ui/components/input/TextInput';
-import {Spacer} from 'bases/ui/components/spacer/Spacer';
+import {FilledButton} from 'bases/ui/button/FilledButton';
+import {OutlinedButton} from 'bases/ui/button/OutlinedButton';
+import {PasswordTextInput} from 'bases/ui/input/PasswordTextInput';
+import {TextInput} from 'bases/ui/input/TextInput';
+import {Spacer} from 'bases/ui/spacer/Spacer';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';

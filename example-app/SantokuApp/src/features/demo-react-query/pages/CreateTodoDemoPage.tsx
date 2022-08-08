@@ -1,4 +1,4 @@
-import {Button} from 'bases/ui/components/button/Button';
+import {Button} from 'bases/ui/button/Button';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input} from 'react-native-elements';

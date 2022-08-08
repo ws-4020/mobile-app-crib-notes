@@ -1,5 +1,5 @@
 import {createUseContextAndProvider} from 'bases/core/contexts/createUseContextAndProvider';
 
-import {AppTheme} from '../types/AppTheme';
+import {AppTheme} from './AppTheme';
 
 export const [useAppTheme, AppThemeContextProvider] = createUseContextAndProvider<AppTheme>();

@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import {FlatList, NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
 import {useAnimatedRef, useAnimatedScrollHandler, useSharedValue} from 'react-native-reanimated';
 
-import {Item} from '../components/picker/SelectPicker';
+import {Item} from '../picker/SelectPicker';
 import {useListMiddleIndex} from '../utils/useListMiddleIndex';
 
 type SelectPickerItemsUseCaseTypes<ItemT> = {

@@ -1,7 +1,7 @@
 import {m} from 'bases/message/utils/Message';
-import {FilledButton} from 'bases/ui/components/button/FilledButton';
-import {TextInput} from 'bases/ui/components/input/TextInput';
-import {Spacer} from 'bases/ui/components/spacer/Spacer';
+import {FilledButton} from 'bases/ui/button/FilledButton';
+import {TextInput} from 'bases/ui/input/TextInput';
+import {Spacer} from 'bases/ui/spacer/Spacer';
 import {TermsOfServiceAgreementStatus} from 'features//backend/apis/model';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';

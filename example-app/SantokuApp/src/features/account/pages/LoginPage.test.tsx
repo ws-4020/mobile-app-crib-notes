@@ -1,8 +1,8 @@
 import {render, screen, waitFor} from '@testing-library/react-native';
 import {BundledMessagesLoader} from 'bases/message/utils/BundledMessageLoader';
 import {loadMessages} from 'bases/message/utils/Message';
-import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
-import {WithAppTheme} from 'bases/ui/contexts/AppThemeContext';
+import {Snackbar} from 'bases/ui/overlay/snackbar/Snackbar';
+import {AppThemeProvider} from 'bases/ui/theme/AppThemeProvider';
 import {enhanceValidator} from 'bases/validator/utils';
 import {useGetAccountsMe, useGetAccountsMeTerms, usePostAccountsMeTerms} from 'features/backend/apis/account/account';
 import {useGetTerms} from 'features/backend/apis/terms/terms';
@@ -20,11 +20,11 @@ const Wrapper: React.FC = ({children}) => {
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>
-      <WithAppTheme>
+      <AppThemeProvider>
         <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
         <TermsAgreementOverlay.Component />
         <Snackbar.Component />
-      </WithAppTheme>
+      </AppThemeProvider>
     </SafeAreaProvider>
   );
 };

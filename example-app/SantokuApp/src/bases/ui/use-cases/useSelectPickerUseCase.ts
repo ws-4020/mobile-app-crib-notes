@@ -1,6 +1,6 @@
 import React, {useCallback, useMemo, useState} from 'react';
 
-import {SelectPickerProps} from '../components/picker/SelectPicker';
+import {SelectPickerProps} from '../picker/SelectPicker';
 
 export const useSelectPickerUseCase = <ItemT extends unknown>({
   items,

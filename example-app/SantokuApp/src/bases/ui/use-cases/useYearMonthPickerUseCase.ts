@@ -1,7 +1,7 @@
 import {ApplicationError} from 'bases/core/error/ApplicationError';
 import React, {useCallback, useMemo, useState} from 'react';
 
-import {YearMonthPickerProps} from '../components/picker/YearMonthPicker';
+import {YearMonthPickerProps} from '../picker/YearMonthPicker';
 import {YearMonth} from '../utils/YearMonth';
 import {YearMonthUtil} from '../utils/YearMonthUtil';
 

@@ -1,11 +1,12 @@
 import {render, renderHook, screen} from '@testing-library/react-native';
-import {AppThemeContextProvider, useAppTheme} from 'bases/ui/contexts/useAppTheme';
-import {AppTheme} from 'bases/ui/types/AppTheme';
+import {AppTheme} from 'bases/ui/theme/AppTheme';
+import {AppThemeContextProvider, useAppTheme} from 'bases/ui/theme/useAppTheme';
 import React from 'react';
 import {Text} from 'react-native';
 
-import {darkModeAppTheme, lightModeAppTheme} from '../constants/AppTheme';
-import {WithAppTheme} from './AppThemeContext';
+import {AppThemeProvider} from './AppThemeProvider';
+import {darkModeAppTheme} from './darkModeAppTheme';
+import {lightModeAppTheme} from './lightModeAppTheme';
 
 const wrapper = (value: AppTheme) => {
   return ({children}: {children: React.ReactNode}) => {
@@ -13,16 +14,16 @@ const wrapper = (value: AppTheme) => {
   };
 };
 
-describe('WithAppTheme', () => {
+describe('AppThemeProvider', () => {
   const ChildComponent: React.FC = () => {
     return <Text testID="test">test</Text>;
   };
 
-  it('WithAppThemeを子要素を含めて正常にrenderできること', () => {
+  it('AppThemeProviderを子要素を含めて正常にrenderできること', () => {
     render(
-      <WithAppTheme>
+      <AppThemeProvider>
         <ChildComponent />
-      </WithAppTheme>,
+      </AppThemeProvider>,
     );
     expect(screen.queryByTestId('test')).not.toBeNull();
     expect(screen).toMatchSnapshot();
@@ -30,13 +31,13 @@ describe('WithAppTheme', () => {
 });
 
 describe('useAppTheme', () => {
-  it('AppThemeContextのテーマがlight用の場合にlight用のAppThemeが取得できること', () => {
+  it('AppThemeProviderのテーマがlight用の場合にlight用のAppThemeが取得できること', () => {
     const {result} = renderHook(() => useAppTheme(), {wrapper: wrapper(lightModeAppTheme)});
     const appTheme = result.current;
     expect(appTheme).toEqual(lightModeAppTheme);
   });
 
-  it('AppThemeContextのテーマがdark用の場合にdark用のAppThemeが取得できること', () => {
+  it('AppThemeProviderのテーマがdark用の場合にdark用のAppThemeが取得できること', () => {
     const {result} = renderHook(() => useAppTheme(), {wrapper: wrapper(darkModeAppTheme)});
     const appTheme = result.current;
     expect(appTheme).toEqual(darkModeAppTheme);

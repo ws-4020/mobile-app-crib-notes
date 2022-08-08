@@ -1,6 +1,6 @@
 import '@testing-library/jest-native/extend-expect';
 import {render, screen} from '@testing-library/react-native';
-import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
+import {Snackbar} from 'bases/ui/overlay/snackbar/Snackbar';
 import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOverlay';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';

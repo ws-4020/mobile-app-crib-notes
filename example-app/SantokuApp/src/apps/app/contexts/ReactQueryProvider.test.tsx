@@ -1,5 +1,5 @@
 import {render, screen} from '@testing-library/react-native';
-import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
+import {Snackbar} from 'bases/ui/overlay/snackbar/Snackbar';
 import React from 'react';
 import {Text} from 'react-native';
 import {QueryClient, QueryClientProvider} from 'react-query';

@@ -1,4 +1,4 @@
-import {LoadingOverlay} from 'bases/ui/components/overlay/loading/LoadingOverlay';
+import {LoadingOverlay} from 'bases/ui/overlay/loading/LoadingOverlay';
 import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Input, Text} from 'react-native-elements';

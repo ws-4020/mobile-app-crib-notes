@@ -1,4 +1,4 @@
-import {AppTheme} from '../types/AppTheme';
+import {AppTheme} from './AppTheme';
 
 export const lightModeAppTheme: AppTheme = {
   name: 'lightTheme',
@@ -22,9 +22,4 @@ export const lightModeAppTheme: AppTheme = {
     error: '#d33246',
     warning: '#e8b73a',
   },
-};
-
-export const darkModeAppTheme: AppTheme = {
-  ...lightModeAppTheme,
-  name: 'darkTheme',
 };

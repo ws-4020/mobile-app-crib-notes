@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pressable, StyleSheet, TextInput, TextInputProps as RNETextInputProps, View, ViewProps} from 'react-native';
 
-import {useSelectPickerUseCase} from '../../use-cases/useSelectPickerUseCase';
+import {useSelectPickerUseCase} from '../use-cases/useSelectPickerUseCase';
 import {DefaultPickerAccessory, DefaultPickerAccessoryProps} from './DefaultPickerAccessory';
 import {PickerBackdrop, PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainer, PickerContainerProps} from './PickerContainer';

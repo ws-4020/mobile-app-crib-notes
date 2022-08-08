@@ -1,6 +1,6 @@
 import {useMemo} from 'react';
 
-import {DateTimePickerProps} from '../components/picker/DateTimePicker';
+import {DateTimePickerProps} from '../picker/DateTimePicker';
 
 export const useDateTimePickerUseCase = ({
   selectedValue,

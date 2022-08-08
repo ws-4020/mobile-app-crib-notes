@@ -2,7 +2,7 @@ import React, {useCallback, useMemo} from 'react';
 import {FlatList, FlatListProps, ListRenderItemInfo, StyleSheet, View} from 'react-native';
 import Reanimated from 'react-native-reanimated';
 
-import {useSelectPickerItemsUseCase} from '../../use-cases/useSelectPickerItemsUseCase';
+import {useSelectPickerItemsUseCase} from '../use-cases/useSelectPickerItemsUseCase';
 import {Fader, FaderPosition} from './Fader';
 import {Item} from './SelectPicker';
 import {SelectPickerItem} from './SelectPickerItem';

@@ -1,4 +1,4 @@
-import {Item} from 'bases/ui/components/picker/SelectPicker';
+import {Item} from 'bases/ui/picker/SelectPicker';
 
 import {Item1Type} from '../types/Item1Type';
 

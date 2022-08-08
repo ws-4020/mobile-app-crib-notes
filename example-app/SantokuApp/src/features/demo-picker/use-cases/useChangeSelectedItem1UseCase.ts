@@ -1,4 +1,4 @@
-import {Item} from 'bases/ui/components/picker/SelectPicker';
+import {Item} from 'bases/ui/picker/SelectPicker';
 import {useCallback} from 'react';
 
 import {useItems1Key} from '../client-states/useItems1Key';

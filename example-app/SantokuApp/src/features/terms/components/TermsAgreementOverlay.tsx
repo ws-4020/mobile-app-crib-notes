@@ -1,4 +1,4 @@
-import {FullWindowOverlay} from 'bases/ui/components/overlay/FullWindowOverlay';
+import {FullWindowOverlay} from 'bases/ui/overlay/FullWindowOverlay';
 import React, {useCallback, useMemo, useState} from 'react';
 
 import {

@@ -3,7 +3,7 @@ import {ApplicationError} from 'bases/core/error/ApplicationError';
 import React from 'react';
 import {TextInputProps, ViewProps} from 'react-native';
 
-import {YearMonthUtil} from '../../utils/YearMonthUtil';
+import {YearMonthUtil} from '../utils/YearMonthUtil';
 import {PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainerProps} from './PickerContainer';
 import {SelectPickerItemsProps} from './SelectPickerItems';

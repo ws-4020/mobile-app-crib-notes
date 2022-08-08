@@ -2,7 +2,7 @@ import {isGetFcmTokenError} from 'bases/firebase/utils/getFcmToken';
 import {isRequestPushPermissionError} from 'bases/firebase/utils/requestPushPermission';
 import {log} from 'bases/logging/utils';
 import {m} from 'bases/message/utils/Message';
-import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
+import {Snackbar} from 'bases/ui/overlay/snackbar/Snackbar';
 import {useCallback} from 'react';
 
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';

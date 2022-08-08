@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ViewProps} from 'react-native';
 import Reanimated, {WithTimingConfig} from 'react-native-reanimated';
 
-import {usePickerContainerUseCase} from '../../use-cases/usePickerContainerUseCase';
+import {usePickerContainerUseCase} from '../use-cases/usePickerContainerUseCase';
 
 export const DEFAULT_SLIDE_IN_DURATION = 300;
 export const DEFAULT_SLIDE_OUT_DURATION = 300;

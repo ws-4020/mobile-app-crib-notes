@@ -1,8 +1,8 @@
 import {m} from 'bases/message/utils/Message';
-import {Button} from 'bases/ui/components/button/Button';
-import {OverlayBackdrop} from 'bases/ui/components/overlay/OverlayBackdrop';
-import {OverlayContainer} from 'bases/ui/components/overlay/OverlayContainer';
-import {WebView} from 'bases/ui/components/webview/WebView';
+import {Button} from 'bases/ui/button/Button';
+import {OverlayBackdrop} from 'bases/ui/overlay/OverlayBackdrop';
+import {OverlayContainer} from 'bases/ui/overlay/OverlayContainer';
+import {WebView} from 'bases/ui/webview/WebView';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import {TermsOfService} from 'features/backend/apis/model/termsOfService';
 import React, {useEffect} from 'react';

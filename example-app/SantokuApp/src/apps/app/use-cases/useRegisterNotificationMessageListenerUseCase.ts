@@ -1,5 +1,5 @@
 import messaging, {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
-import {Snackbar} from 'bases/ui/components/overlay/snackbar/Snackbar';
+import {Snackbar} from 'bases/ui/overlay/snackbar/Snackbar';
 import {useCallback} from 'react';
 
 const showMessageOnSnackbar = (
