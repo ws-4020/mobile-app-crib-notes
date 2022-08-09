@@ -16,5 +16,5 @@ const generateDummyDependency = (num: number) => {
   });
 };
 
-// `npm run generate-license`でこの定義は更新されることを想定しています。
+// `.script/generate-acknowledgements-file.js`の実行でこの定義は更新されることを想定しています。
 export const ThirdPartyDependencies: ThirdPartyDependency[] = generateDummyDependency(400);

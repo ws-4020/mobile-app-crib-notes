@@ -27,8 +27,7 @@
     "bundle:ios": "mkdirp ./generated && react-native bundle --dev false --sourcemap-output ./generated/index.ios.bundle.map --entry-file index.js --bundle-output ./generated/index.ios.bundle --platform ios",
     "symbolicate:android": "npx metro-symbolicate ./generated/index.android.bundle.map",
     "symbolicate:ios": "npx metro-symbolicate ./generated/index.ios.bundle.map",
-    "orval": "npx orval --config ./orval.config.ts",
-    "generate-license": "node .script/generate-acknowledgements-file.js"
+    "orval": "npx orval --config ./orval.config.ts"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "~1.17.3",
