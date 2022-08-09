@@ -2,18 +2,14 @@ import React from 'react';
 import {ActivityIndicator, RefreshControl, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 
-import {useDependentQuery2ItemInfo} from '../services/useDependentQuery2ItemInfo';
-import {useDependentQuery2Refresh} from '../use-cases/useDependentQuery2Refresh';
-import {useDependentQuery2Reload} from '../use-cases/useDependentQuery2Reload';
+import {useItemInfo} from '../services/item/useItemInfo';
 
 export const DependentQueryDemo2Page: React.FC = () => {
-  const {data: itemInfo, isIdle, isLoading, isRefetching, isSuccess, isError} = useDependentQuery2ItemInfo();
-  const {refresh} = useDependentQuery2Refresh();
-  const {reload} = useDependentQuery2Reload();
+  const {data: itemInfo, isIdle, isLoading, isRefetching, isSuccess, isError, refetch, reload} = useItemInfo(1);
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refresh} />}>
+      <ScrollView refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}>
         <View>
           <Text h4>Query Status</Text>
           <Text>{`isIdle: ${isIdle.toString()}, isLoading: ${isLoading.toString()}, isFetching: ${isRefetching.toString()}, isSuccess: ${isSuccess.toString()}, isError: ${isError.toString()}`}</Text>

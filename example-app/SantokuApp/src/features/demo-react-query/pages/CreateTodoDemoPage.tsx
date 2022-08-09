@@ -1,34 +1,62 @@
+import {m} from 'bases/message/Message';
 import {Button} from 'bases/ui/button/Button';
-import React from 'react';
+import {TextInput} from 'bases/ui/input/TextInput';
+import {useLoadingOverlay} from 'bases/ui/loading/useLoadingOverlay';
+import React, {useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Input} from 'react-native-elements';
 
-import {useCreateTodoDescription} from '../client-states/useCreateTodoDescription';
-import {useCreateTodoTitle} from '../client-states/useCreateTodoTitle';
-import {useCreateTodoChangeDescription} from '../use-cases/useCreateTodoChangeDescription';
-import {useCreateTodoChangeTitle} from '../use-cases/useCreateTodoChangeTitle';
-import {useCreateTodoRegisterTodo} from '../use-cases/useCreateTodoRegisterTodo';
+import {useTodoEditForm, TodoEditFormValues} from '../forms/useTodoEditForm';
+import {useTodoCommands} from '../services/todo/useTodoCommands';
 
-export type CreateTodoDemoPageProps = {
+type Props = {
   replaceToEditTodoDemo: (todoId: number) => void;
 };
-export const CreateTodoDemoPage: React.FC<CreateTodoDemoPageProps> = ({replaceToEditTodoDemo}) => {
-  const [title] = useCreateTodoTitle();
-  const [description] = useCreateTodoDescription();
-  const {changeTitle} = useCreateTodoChangeTitle();
-  const {changeDescription} = useCreateTodoChangeDescription();
-  const {registerTodo, isLoading} = useCreateTodoRegisterTodo(replaceToEditTodoDemo);
+export const CreateTodoDemoPage: React.FC<Props> = ({replaceToEditTodoDemo}) => {
+  const {create, isCreating} = useTodoCommands();
+  const onSubmit = useCallback(
+    (values: TodoEditFormValues) => {
+      const request = {
+        data: {
+          title: values.title,
+          description: values.description,
+        },
+      };
+      return create(request, {
+        onSuccess: response => {
+          replaceToEditTodoDemo(response.data.id);
+        },
+      });
+    },
+    [create, replaceToEditTodoDemo],
+  );
+  const {form, clearTitle, clearDescription} = useTodoEditForm({
+    onSubmit,
+  });
+
+  useLoadingOverlay(isCreating);
 
   return (
     <View style={styles.container}>
-      <Input label="Title" onChangeText={changeTitle}>
-        {title}
-      </Input>
-      <Input label="Description" onChangeText={changeDescription}>
-        {description}
-      </Input>
+      <TextInput
+        label={m('タイトル')}
+        placeholder="タイトル"
+        value={form.values.title}
+        onChangeText={form.handleChange('title')}
+        showClearButton={!!form.values.title}
+        onClearButtonPress={clearTitle}
+        errorMessage={form.errors.title}
+      />
+      <TextInput
+        label={m('説明')}
+        placeholder="説明"
+        value={form.values.description}
+        onChangeText={form.handleChange('description')}
+        showClearButton={!!form.values.description}
+        onClearButtonPress={clearDescription}
+        errorMessage={form.errors.description}
+      />
       <View style={styles.buttons}>
-        <Button title="Submit" onPress={registerTodo} loading={isLoading} containerStyle={styles.button} />
+        <Button title="Submit" onPress={form.submitForm} loading={isCreating} containerStyle={styles.button} />
       </View>
     </View>
   );

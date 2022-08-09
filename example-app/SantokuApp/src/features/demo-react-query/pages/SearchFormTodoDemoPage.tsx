@@ -1,23 +1,36 @@
-import React from 'react';
+import {m} from 'bases/message/Message';
+import {TextInput} from 'bases/ui/input/TextInput';
+import React, {useCallback} from 'react';
 import {ActivityIndicator, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {Button, Input} from 'react-native-elements';
+import {Button} from 'react-native-elements';
 
-import {useSearchFormTodoInputPage} from '../client-states/useSearchFormTodoInputPage';
-import {useSearchFormTodoSearchTodo} from '../use-cases/useSearchFormTodoSearchTodo';
-import {useSearchFormTodoTodos} from '../use-cases/useSearchFormTodoTodos';
+import {useTodoSearchForm, TodoSearchFormValues} from '../forms/useTodoSearchForm';
+import {useTodosPage} from '../services/todo/useTodosPage';
 
 export const SearchFormTodoDemoPage: React.FC = () => {
-  const {isFetching, isError, data} = useSearchFormTodoTodos();
-  const [inputPage, setInputPage] = useSearchFormTodoInputPage();
-  const {searchTodo} = useSearchFormTodoSearchTodo();
+  const {isFetching, isError, todos, setPageParams} = useTodosPage();
+  const onSubmit = useCallback(
+    (values: TodoSearchFormValues) => setPageParams({page: Number(values.pageNo)}),
+    [setPageParams],
+  );
+  const {form, clearPageNo} = useTodoSearchForm({
+    onSubmit,
+  });
 
-  const todos = data?.data.content;
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Input placeholder="ページ番号" value={inputPage} onChangeText={setInputPage} />
+        <TextInput
+          label={m('ページ番号')}
+          placeholder="ページ番号"
+          value={form.values.pageNo}
+          onChangeText={form.handleChange('pageNo')}
+          showClearButton={!!form.values.pageNo}
+          onClearButtonPress={clearPageNo}
+          errorMessage={form.errors.pageNo}
+        />
         <View style={styles.search}>
-          <Button title="検索" onPress={searchTodo} />
+          <Button title="検索" onPress={form.submitForm} />
         </View>
         {isFetching && <ActivityIndicator color="#0000ff" />}
         {isError && <Text>TODO一覧の取得に失敗しました。</Text>}

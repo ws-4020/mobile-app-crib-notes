@@ -3,11 +3,7 @@ import React, {useCallback} from 'react';
 import {ActivityIndicator, FlatList, Pressable, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button, FAB, Icon, ListItem, Text} from 'react-native-elements';
 
-import {useInvalidateTodos} from '../services/useInvalidateTodos';
-import {useResetTodos} from '../services/useResetTodos';
-import {useListTodoNext} from '../use-cases/useListTodoNext';
-import {useListTodoRefreshTodo} from '../use-cases/useListTodoRefreshTodo';
-import {useListTodoTodos} from '../use-cases/useListTodoTodos';
+import {useTodosInfinite} from '../services/todo/ useTodosInfinite';
 
 const LoadingIndicator = () => {
   return (
@@ -17,19 +13,24 @@ const LoadingIndicator = () => {
   );
 };
 
-export type ListTodoDemoPageProps = {
+type Props = {
   navigateToCreateTodoDemo: () => void;
   navigateToEditTodoDemo: (todoId: number) => void;
 };
-export const ListTodoDemoPage: React.FC<ListTodoDemoPageProps> = ({
-  navigateToCreateTodoDemo,
-  navigateToEditTodoDemo,
-}) => {
-  const {todos, status, isSuccess, isError, isLoading, isRefetching, isFetchingNextPage} = useListTodoTodos();
-  const {resetTodos} = useResetTodos();
-  const {invalidateTodos} = useInvalidateTodos();
-  const {refreshTodo} = useListTodoRefreshTodo();
-  const {next} = useListTodoNext();
+export const ListTodoDemoPage: React.FC<Props> = ({navigateToCreateTodoDemo, navigateToEditTodoDemo}) => {
+  const {
+    todos,
+    status,
+    isSuccess,
+    isError,
+    isLoading,
+    isRefetching,
+    isFetchingNextPage,
+    refetch,
+    invalidate,
+    reset,
+    next,
+  } = useTodosInfinite();
 
   const renderTodo = useCallback(
     ({item}: {item: Todo}) => {
@@ -73,7 +74,7 @@ export const ListTodoDemoPage: React.FC<ListTodoDemoPageProps> = ({
                 data={todos}
                 renderItem={renderTodo}
                 refreshing={isRefetching && !isFetchingNextPage}
-                onRefresh={refreshTodo}
+                onRefresh={refetch}
                 onEndReached={next}
                 ListFooterComponent={renderFooter}
               />
@@ -84,8 +85,8 @@ export const ListTodoDemoPage: React.FC<ListTodoDemoPageProps> = ({
         )}
       </View>
       <View style={styles.footer}>
-        <Button title="Invalidate Queries" onPress={invalidateTodos} style={styles.button} />
-        <Button title="Reset Queries" onPress={resetTodos} style={styles.button} />
+        <Button title="Invalidate Queries" onPress={invalidate} style={styles.button} />
+        <Button title="Reset Queries" onPress={reset} style={styles.button} />
       </View>
       <SafeAreaView />
     </View>

@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
-export type ReactQueryDemoPageProps = {
+type Props = {
   navigateToGetAccountsMeDemo: () => void;
   navigateToSearchFormTodoDemo: () => void;
   navigateToSearchBarTodoDemo: () => void;
@@ -13,7 +13,7 @@ export type ReactQueryDemoPageProps = {
   navigateToDisabledQueryDemo: () => void;
   navigateToDisableErrorHandlerDemo: () => void;
 };
-export const ReactQueryDemoPage: React.FC<ReactQueryDemoPageProps> = ({
+export const ReactQueryDemoPage: React.FC<Props> = ({
   navigateToGetAccountsMeDemo,
   navigateToSearchFormTodoDemo,
   navigateToSearchBarTodoDemo,

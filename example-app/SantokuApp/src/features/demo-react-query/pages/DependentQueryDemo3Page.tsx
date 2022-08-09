@@ -2,20 +2,14 @@ import React from 'react';
 import {ActivityIndicator, RefreshControl, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 
-import {useTodoDetails} from '../services/useTodoDetails';
-import {useDependentQuery3Refresh} from '../use-cases/useDependentQuery3Refresh';
-import {useDependentQuery3Reload} from '../use-cases/useDependentQuery3Reload';
-import {useListTodoTodos} from '../use-cases/useListTodoTodos';
+import {useTodoDetails} from '../services/todo/useTodoDetails';
 
 export const DependentQueryDemo3Page: React.FC = () => {
-  const {isIdle, isLoading, isRefetching, isSuccess, isError} = useTodoDetails();
-  const {refresh} = useDependentQuery3Refresh();
-  const {reload} = useDependentQuery3Reload();
-  const {todos} = useListTodoTodos();
+  const {todoDetails, isIdle, isLoading, isRefetching, isSuccess, isError, refetch, reload} = useTodoDetails();
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refresh} />}>
+      <ScrollView refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}>
         <View>
           <Text h4>Query Status</Text>
           <Text>{`isIdle: ${isIdle.toString()}, isLoading: ${isLoading.toString()}, isFetching: ${isRefetching.toString()}, isSuccess: ${isSuccess.toString()}, isError: ${isError.toString()}`}</Text>
@@ -26,8 +20,8 @@ export const DependentQueryDemo3Page: React.FC = () => {
           {isError && <Text>データの取得に失敗しました</Text>}
           {isLoading && <ActivityIndicator size="large" color="blue" />}
           <View style={styles.details}>
-            {todos?.map((todo, index) => {
-              return <Text key={index}>{todo?.title}</Text>;
+            {todoDetails?.map((todoDetail, index) => {
+              return <Text key={index}>{todoDetail?.title}</Text>;
             })}
           </View>
         </View>

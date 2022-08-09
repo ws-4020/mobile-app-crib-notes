@@ -1,16 +1,13 @@
+import {useGetAccountsMe} from 'features/account/services/useGetAccountsMe';
 import React from 'react';
 import {ActivityIndicator, RefreshControl, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
-import {useGetAccountMe} from '../use-cases/useGetAccountMe';
-import {useListTodoRefreshTodo} from '../use-cases/useListTodoRefreshTodo';
-
 export const GetAccountsMeDemoPage: React.FC = () => {
-  const {refreshTodo} = useListTodoRefreshTodo();
-  const {isLoading, isRefetching, isError, data: axiosResponse} = useGetAccountMe();
+  const {isLoading, isRefetching, isError, data: axiosResponse, refetch} = useGetAccountsMe();
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refreshTodo} />}>
+      <ScrollView refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}>
         {isError && <Text>アカウント情報の取得に失敗しました。</Text>}
         {isLoading && <ActivityIndicator size="large" color="blue" />}
         {axiosResponse && <Text>{axiosResponse.data.accountId}</Text>}

@@ -1,16 +1,32 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import React, {useCallback} from 'react';
+import {Alert, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
+import {useQuery} from 'react-query';
 
-import {useDisableErrorHandlerRefreshCustomErrorQuery} from '../use-cases/useDisableErrorHandlerRefreshCustomErrorQuery';
-import {useDisableErrorHandlerRefreshCustomErrorQueryWithoutGlobalErrorHandling} from '../use-cases/useDisableErrorHandlerRefreshCustomErrorQueryWithoutGlobalErrorHandling';
-import {useDisableErrorHandlerRefreshDefaultQuery} from '../use-cases/useDisableErrorHandlerRefreshDefaultQuery';
+const queryErrorFn = () => {
+  throw new Error('リクエストエラー');
+};
+
+const onError = () => {
+  Alert.alert('カスタムエラー処理', 'エラーが発生しました');
+};
 
 export const DisableErrorHandlerDemoPage: React.FC = () => {
-  const {refresh: refreshDefaultQuery} = useDisableErrorHandlerRefreshDefaultQuery();
-  const {refresh: refreshCustomQuery} = useDisableErrorHandlerRefreshCustomErrorQuery();
-  const {refresh: refreshCustomErrorQueryWithoutGlobalErrorHandling} =
-    useDisableErrorHandlerRefreshCustomErrorQueryWithoutGlobalErrorHandling();
+  const query1 = useQuery('dummy1', queryErrorFn, {
+    enabled: false,
+  });
+  const query2 = useQuery('dummy2', queryErrorFn, {
+    enabled: false,
+    onError,
+  });
+  const query3 = useQuery('dummy3', queryErrorFn, {
+    enabled: false,
+    meta: {disableGlobalErrorHandler: true},
+    onError,
+  });
+  const refreshDefaultQuery = useCallback(() => query1.refetch(), [query1]);
+  const refreshCustomQuery = useCallback(() => query2.refetch(), [query2]);
+  const refreshCustomErrorQueryWithoutGlobalErrorHandling = useCallback(() => query3.refetch(), [query3]);
 
   return (
     <View style={styles.container}>
