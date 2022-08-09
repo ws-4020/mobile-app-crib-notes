@@ -30,7 +30,7 @@ export const keyExtractor = ({id}: DependencyWithAction) => id;
 export const AcknowledgementsPage: React.VFC<AcknowledgementsPageProps> = ({navigateToLicense}) => {
   const thirdPartyDependenciesWithAction = useMemo(
     () => requireThirdPartyDependenciesWithAction(navigateToLicense),
-    [],
+    [navigateToLicense],
   );
   return (
     <FlatList
