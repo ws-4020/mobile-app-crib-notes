@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {ActivityIndicator, ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Icon, Text} from 'react-native-elements';
 
 import {useAssetContent} from '../services/useAssetContent';
 import {ThirdPartyDependency} from '../types/ThirdPartyDependency';
-import {useOpenRepositoryLink} from '../use-cases/useOpenRepositoryLink';
+import {openRepositoryLink} from '../utils/openRepositoryLink';
 
 type LicensePageProps = {
   dependency: ThirdPartyDependency;
@@ -16,7 +16,7 @@ export const LicensePage: React.VFC<LicensePageProps> = ({dependency}) => {
   const {data: noticeContentText, isLoading: isLoadingNoticeContentText} = useAssetContent(
     dependency.noticeContentModuleId,
   );
-  const {openRepositoryLink} = useOpenRepositoryLink(dependency);
+  const onOpenRepositoryLink = useCallback(() => openRepositoryLink(dependency), [dependency]);
 
   return (
     <View style={styles.container}>
@@ -30,7 +30,7 @@ export const LicensePage: React.VFC<LicensePageProps> = ({dependency}) => {
           </Text>
         </View>
         {dependency.repository?.startsWith('https://') && (
-          <TouchableOpacity style={styles.externalLinkTouchable} onPress={openRepositoryLink}>
+          <TouchableOpacity style={styles.externalLinkTouchable} onPress={onOpenRepositoryLink}>
             <Icon name="launch" color="rgba(50,50,50,0.5)" size={15} />
           </TouchableOpacity>
         )}

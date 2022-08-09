@@ -1,12 +1,25 @@
 import type {ThirdPartyDependency} from 'features/acknowledgements/types/ThirdPartyDependency';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {FlatList, ListRenderItem, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Icon, Text} from 'react-native-elements';
 
-import {ACKNOWLEDGEMENT_ITEM_HEIGHT} from '../constants/AcknowledgementItemHeight';
 import {DependencyWithAction} from '../types/DependencyWithAction';
-import {getItemLayout} from '../use-cases/getItemLayout';
-import {useThirdPartyDependenciesWithAction} from '../use-cases/useThirdPartyDependenciesWithAction';
+import {requireThirdPartyDependenciesWithAction} from '../utils/requireThirdPartyDependenciesWithAction';
+
+/**
+ * 要素の高さを固定し、getItemLayoutで各要素の高さとオフセットを返却できるようにしています。
+ * そうしないと、各要素をレンダリングしないと高さを計算できず、数百件程度のリストでもスクロール中に引っかかりが発生してしまいます。
+ *
+ * @see getItemLayout
+ * @see styles.listItemTouchable
+ */
+const ACKNOWLEDGEMENT_ITEM_HEIGHT = 70;
+
+const getItemLayout = (_: unknown, index: number) => ({
+  length: ACKNOWLEDGEMENT_ITEM_HEIGHT,
+  offset: ACKNOWLEDGEMENT_ITEM_HEIGHT * index,
+  index,
+});
 
 type AcknowledgementsPageProps = {
   navigateToLicense: (dependency: ThirdPartyDependency) => void;
@@ -15,7 +28,10 @@ type AcknowledgementsPageProps = {
 export const keyExtractor = ({id}: DependencyWithAction) => id;
 
 export const AcknowledgementsPage: React.VFC<AcknowledgementsPageProps> = ({navigateToLicense}) => {
-  const {thirdPartyDependenciesWithAction} = useThirdPartyDependenciesWithAction(navigateToLicense);
+  const thirdPartyDependenciesWithAction = useMemo(
+    () => requireThirdPartyDependenciesWithAction(navigateToLicense),
+    [],
+  );
   return (
     <FlatList
       style={styles.container}

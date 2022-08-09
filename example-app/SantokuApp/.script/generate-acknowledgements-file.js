@@ -6,7 +6,7 @@ const licenseChecker = require("license-checker");
 
 const rootDir = path.resolve(__dirname, '..');
 
-const DEPENDENCIES_OUTPUT_FILE = path.resolve(rootDir, 'src/features/acknowledgements/services/ThirdPartyDependencies.ts');
+const DEPENDENCIES_OUTPUT_FILE = path.resolve(rootDir, 'src/features/acknowledgements/constants/ThirdPartyDependencies.ts');
 const LICENSE_FILE_OUTPUT_DIR = path.resolve(rootDir, 'src/assets/licenses');
 
 const listDependencies = () => new Promise((resolve, reject) => {

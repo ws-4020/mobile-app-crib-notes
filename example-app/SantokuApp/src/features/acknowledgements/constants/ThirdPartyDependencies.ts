@@ -1,4 +1,4 @@
-import { ThirdPartyDependency } from "../types/ThirdPartyDependency"
+import {ThirdPartyDependency} from '../types/ThirdPartyDependency';
 
 const generateDummyDependency = (num: number) => {
   return [...Array(num)].map((_, index) => {
@@ -12,8 +12,9 @@ const generateDummyDependency = (num: number) => {
       licenseContentModuleId: require('../../../assets/dummy/dummy.license.txt'),
       noticeFileName: 'NOTICE',
       noticeContentModuleId: require('../../../assets/dummy/dummy.notice.txt'),
-    }
-  })
-}
+    };
+  });
+};
 
-export const ThirdPartyDependencies: ThirdPartyDependency[] = generateDummyDependency(400)
+// `npm run generate-license`でこの定義は更新されることを想定しています。
+export const ThirdPartyDependencies: ThirdPartyDependency[] = generateDummyDependency(400);
