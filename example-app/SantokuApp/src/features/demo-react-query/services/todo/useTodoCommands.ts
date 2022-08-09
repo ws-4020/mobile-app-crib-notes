@@ -16,7 +16,7 @@ export const useTodoCommands = () => {
       onSuccess: async () => {
         await queryClient.resetQueries(getListTodoQueryKey());
         await queryClient.resetQueries(getListTodoByCursorQueryKey());
-        await queryClient.resetQueries('Todo#useListDetails');
+        await queryClient.resetQueries(['todo', 'todoDetails']);
       },
     },
   });
@@ -26,7 +26,7 @@ export const useTodoCommands = () => {
       onSuccess: async response => {
         await queryClient.resetQueries(getListTodoQueryKey());
         await queryClient.resetQueries(getListTodoByCursorQueryKey());
-        await queryClient.resetQueries('Todo#useListDetails');
+        await queryClient.resetQueries(['todo', 'todoDetails']);
         await queryClient.resetQueries(getGetTodoQueryKey(response.data.id));
       },
     },
@@ -37,7 +37,7 @@ export const useTodoCommands = () => {
       onSuccess: async () => {
         await queryClient.resetQueries(getListTodoQueryKey());
         await queryClient.resetQueries(getListTodoByCursorQueryKey());
-        await queryClient.resetQueries('Todo#useListDetails');
+        await queryClient.resetQueries(['todo', 'todoDetails']);
       },
     },
   });
