@@ -1,7 +1,7 @@
 import {sendErrorLog} from 'bases/logging/sendErrorLog';
 import {resolveErrorMessage} from 'bases/message/resolveErrorMessage';
-import React, {useCallback, useEffect, useRef} from 'react';
-import { Alert } from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {Alert} from 'react-native';
 
 import {useIsLoggedIn} from '../client-states/useIsLoggedIn';
 import {useAccountData} from '../services/account/useAccountData';

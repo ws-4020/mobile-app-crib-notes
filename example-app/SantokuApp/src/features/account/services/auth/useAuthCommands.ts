@@ -7,7 +7,7 @@ import {Query, useMutation, useQueryClient, hashQueryKey} from 'react-query';
 import {QueryFilters} from 'react-query/types/core/utils';
 
 import {useIsLoggedIn} from '../../client-states/useIsLoggedIn';
-import {isUnauthorizedError, UnauthorizedError} from '../../errors/UnauthorizedError';
+import {isUnauthorizedError} from '../../errors/UnauthorizedError';
 import {AccountData} from '../../types/AccountData';
 import {getAccountsMeTerms} from '../account/getAccountsMeTerms';
 import {postAccountsMeTerms} from '../account/postAccountsMeTerms';
