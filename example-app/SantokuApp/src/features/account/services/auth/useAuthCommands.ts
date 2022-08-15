@@ -1,15 +1,13 @@
 import {generatePassword} from 'bases/core/utils/generatePassword';
-import {getAccountsMe} from 'features/backend/apis/account/account';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import {savePassword} from 'features/secure-storage/services/savePassword';
-import {useTerms} from 'features/terms/services/useTerms';
 import {Query, useMutation, useQueryClient, hashQueryKey} from 'react-query';
 import {QueryFilters} from 'react-query/types/core/utils';
 
 import {useIsLoggedIn} from '../../client-states/useIsLoggedIn';
 import {isUnauthorizedError} from '../../errors/UnauthorizedError';
 import {AccountData} from '../../types/AccountData';
-import {getAccountsMeTerms} from '../account/getAccountsMeTerms';
+import {getAccuontData} from '../account/getAccuontData';
 import {postAccountsMeTerms} from '../account/postAccountsMeTerms';
 import {autoLogin} from './autoLogin';
 import {canAutoLogin} from './canAutoLogin';
@@ -22,7 +20,6 @@ const defaultQueryFilters = {predicate: (query: Query) => query.queryHash !== ha
 
 export const useAuthCommands = () => {
   const queryClient = useQueryClient();
-  const {termsOfService} = useTerms();
   const [, setIsLoggedIn] = useIsLoggedIn();
 
   /**
@@ -34,10 +31,7 @@ export const useAuthCommands = () => {
       const password = arg.password;
       await login(accountId, password);
       await savePassword(accountId, password);
-      // callGetAccountMe.dataは必ず存在する想定
-      const account = (await getAccountsMe()).data;
-      const termsAgreementStatus = (await getAccountsMeTerms()).data;
-      return {account, terms: {termsAgreementStatus, termsOfService: termsOfService?.data}};
+      return getAccuontData();
     },
     {
       onSuccess: accountData => {
