@@ -89,9 +89,9 @@ export const useAuthCommands = () => {
       const termsAgreementStatus = arg.termsAgreementStatus;
       const password = await generatePassword();
       const account = await signup(nickname, password);
-      const accountData = await loginMutation.mutateAsync({accountId: account.accountId, password});
+      await login(account.accountId, password);
       await postAccountsMeTerms(termsAgreementStatus);
-      return accountData;
+      return getAccountData();
     },
     {
       onSuccess: accountData => {
