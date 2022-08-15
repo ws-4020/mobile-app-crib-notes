@@ -1,11 +1,10 @@
+import {log} from 'bases/logging';
 import * as FileSystem from 'expo-file-system';
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Icon, Text} from 'react-native-elements';
 
-import {useChildFileInfos} from '../client-states/useChildFileInfos';
-import {useIsViewChildren} from '../use-cases/useIsViewChildren';
-import {useReadChildDirectory} from '../use-cases/useReadChildDirectory';
+import {readDirectoryItemsFileInfoAsync} from '../services/readDirectoryItemsFileInfoAsync';
 
 type FileInfoProps = {
   fileInfo: FileSystem.FileInfo;
@@ -16,10 +15,25 @@ const getFileNameFromUri = (uri: string) => {
   return uri.endsWith('/') ? uri.split('/').slice(-2)[0] : uri.split('/').slice(-1)[0];
 };
 
+const maxDepth = 10;
+
 const FileInfo: React.FC<FileInfoProps> = ({fileInfo, currentDepth}) => {
-  const {isViewChildren} = useIsViewChildren({fileInfo, currentDepth});
-  const {readChildDirectory} = useReadChildDirectory({fileInfo, currentDepth});
-  const [childFileInfos] = useChildFileInfos(currentDepth);
+  const [childFileInfos, setChildFileInfos] = useState<FileSystem.FileInfo[]>([]);
+
+  const isViewChildren = useMemo(() => {
+    return fileInfo.isDirectory && currentDepth <= maxDepth;
+  }, [fileInfo, currentDepth]);
+
+  const readChildDirectory = useCallback(async () => {
+    if (isViewChildren) {
+      try {
+        const fileInfos = await readDirectoryItemsFileInfoAsync(fileInfo.uri);
+        setChildFileInfos(fileInfos);
+      } catch (e) {
+        log.debug(String(e));
+      }
+    }
+  }, [fileInfo.uri, isViewChildren, setChildFileInfos]);
 
   useEffect(() => {
     readChildDirectory().catch(() => {
