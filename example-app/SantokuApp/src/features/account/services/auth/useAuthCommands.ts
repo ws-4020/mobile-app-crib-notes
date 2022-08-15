@@ -16,7 +16,6 @@ import {canAutoLogin} from './canAutoLogin';
 import {changeAccount} from './changeAccount';
 import {login} from './login';
 import {logout} from './logout';
-import {refresh} from './refresh';
 import {signup} from './signup';
 
 const defaultQueryFilters = {predicate: (query: Query) => query.queryHash !== hashQueryKey(['account', 'isLoggedIn'])};
@@ -58,8 +57,8 @@ export const useAuthCommands = () => {
           return autoLogin();
         } catch (e) {
           if (isUnauthorizedError(e)) {
-            // 認証エラーは処理成功として扱うためここでキャッチする
-            setIsLoggedIn(false);
+            // 認証エラーは処理成功として扱う
+            return undefined;
           } else {
             throw e;
           }
@@ -79,6 +78,11 @@ export const useAuthCommands = () => {
   const logoutMutation = useMutation(
     async (arg: {queryRemovalFilters?: QueryFilters} = {queryRemovalFilters: defaultQueryFilters}) => {
       return logout(queryClient, arg.queryRemovalFilters);
+    },
+    {
+      onSuccess: () => {
+        setIsLoggedIn(false);
+      },
     },
   );
 
@@ -104,11 +108,6 @@ export const useAuthCommands = () => {
   );
 
   /**
-   * ログイン資格情報を再取得します。
-   */
-  const refreshMutation = useMutation(refresh);
-
-  /**
    * アカウントを切り替えます。
    */
   const changeAccountMutation = useMutation((arg: {accountId: string}) => changeAccount(arg.accountId));
@@ -118,21 +117,18 @@ export const useAuthCommands = () => {
     autoLogin: autoLoginMutation.mutateAsync,
     logout: logoutMutation.mutateAsync,
     signup: signupMutation.mutateAsync,
-    refresh: refreshMutation.mutateAsync,
     changeAccount: changeAccountMutation.mutateAsync,
     isLoggingIn: loginMutation.isLoading,
     isAutoLoggingIn: autoLoginMutation.isLoading,
     isAutoLoginSuccess: autoLoginMutation.isSuccess,
     isLoggingOut: logoutMutation.isLoading,
     isSigningUp: signupMutation.isLoading,
-    isRefreshing: refreshMutation.isLoading,
     isChangingAccount: changeAccountMutation.isLoading,
     isProcessing:
       loginMutation.isLoading ||
       autoLoginMutation.isLoading ||
       logoutMutation.isLoading ||
       signupMutation.isLoading ||
-      refreshMutation.isLoading ||
       changeAccountMutation.isLoading,
     isSuccessAutoLogin: autoLoginMutation.isSuccess,
   };
