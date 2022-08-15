@@ -7,7 +7,7 @@ import {QueryFilters} from 'react-query/types/core/utils';
 import {useIsLoggedIn} from '../../client-states/useIsLoggedIn';
 import {isUnauthorizedError} from '../../errors/UnauthorizedError';
 import {AccountData} from '../../types/AccountData';
-import {getAccuontData} from '../account/getAccuontData';
+import {getAccountData} from '../account/getAccountData';
 import {postAccountsMeTerms} from '../account/postAccountsMeTerms';
 import {autoLogin} from './autoLogin';
 import {canAutoLogin} from './canAutoLogin';
@@ -31,7 +31,7 @@ export const useAuthCommands = () => {
       const password = arg.password;
       await login(accountId, password);
       await savePassword(accountId, password);
-      return getAccuontData();
+      return getAccountData();
     },
     {
       onSuccess: accountData => {
