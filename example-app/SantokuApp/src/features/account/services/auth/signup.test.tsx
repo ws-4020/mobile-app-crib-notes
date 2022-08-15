@@ -1,11 +1,15 @@
+import * as generatePassword from 'bases/core/utils/generatePassword';
 import * as accountApi from 'features/backend/apis/account/account';
-import * as savePassword from 'features/secure-storage/services/savePassword';
 
+import * as login from './login';
 import {signup} from './signup';
 
 describe('signup', () => {
-  test('サインアップAPIを呼び出して、クレデシャルをセキュアストレージに格納しているかの検証', async () => {
+  test('サインアップAPIを呼び出して、パスワードを自動生成した後にログインを呼び出しているかの検証', async () => {
+    jest.mock('./login');
+    jest.mock('bases/core/utils/generatePassword');
     jest.mock('features/backend/apis/account/account');
+    const spyGeneratePassword = jest.spyOn(generatePassword, 'generatePassword').mockResolvedValue('password123');
     const spySignupApi = jest.spyOn(accountApi, 'postSignup').mockResolvedValue({
       data: {
         accountId: '123456789',
@@ -17,14 +21,18 @@ describe('signup', () => {
       headers: {},
       config: {},
     });
-    const spySecureStorageAdapterSavePassword = jest.spyOn(savePassword, 'savePassword');
+    const spyLogin = jest.spyOn(login, 'login').mockResolvedValue({
+      account: {accountId: '123456789', deviceTokens: []},
+      terms: {},
+    });
+
     const res = await signup('testNickName');
     expect(res).toEqual({
-      accountId: '123456789',
-      profile: {nickname: 'testNickName', type: ['partner'], points: 0, totalPoints: 0},
-      deviceTokens: [],
+      account: {accountId: '123456789', deviceTokens: []},
+      terms: {},
     });
+    expect(spyGeneratePassword).toHaveBeenCalled();
     expect(spySignupApi).toHaveBeenCalledWith({nickname: 'testNickName', password: 'password123'});
-    expect(spySecureStorageAdapterSavePassword).toHaveBeenCalledWith('123456789', 'password123');
+    expect(spyLogin).toHaveBeenCalledWith('123456789', 'password123');
   });
 });
