@@ -1,8 +1,10 @@
 import {Button} from 'bases/ui/button/Button';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 
-import {handlePress} from '../use-cases/handlePress';
+const handlePress = () => {
+  Alert.alert('clicked');
+};
 
 export const ButtonPage: React.FC = () => {
   return (
