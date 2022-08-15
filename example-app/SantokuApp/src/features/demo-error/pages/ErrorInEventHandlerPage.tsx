@@ -2,8 +2,16 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
-import {throwJsErrorInAsyncProcess} from '../use-cases/throwJsErrorInAsyncProcess';
-import {throwJsErrorInSyncProcess} from '../use-cases/throwJsErrorInSyncProcess';
+const throwJsErrorInSyncProcess = () => {
+  throw new Error('Error has occurred in synchronous process of EventHandler.');
+};
+
+const throwJsErrorInAsyncProcess = () => {
+  // eslint-disable-next-line no-void
+  void new Promise(() => {
+    throw new Error('Error has occurred in asynchronous process of EventHandler.');
+  });
+};
 
 export const ErrorInEventHandlerPage = () => {
   return (

@@ -1,9 +1,17 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, NativeModules} from 'react-native';
 import {Button} from 'react-native-elements';
+const {ThrowErrorModule} = NativeModules;
 
-import {throwNativeErrorInAsyncProcess} from '../use-cases/throwNativeErrorInAsyncProcess';
-import {throwNativeErrorInSyncProcess} from '../use-cases/throwNativeErrorInSyncProcess';
+const throwNativeErrorInSyncProcess = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
+  await ThrowErrorModule.throwErrorSyncProcess();
+};
+
+const throwNativeErrorInAsyncProcess = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
+  await ThrowErrorModule.throwErrorAsyncProcess();
+};
 
 export const ErrorInNativeModulePage = () => {
   return (
