@@ -1,25 +1,49 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
 import {Button, ButtonGroup, CheckBox, Divider, Text} from 'react-native-elements';
 
-import {useCredentialsOptionIndex} from '../client-states/useCredentialsOptionIndex';
-import {useMaxRedirectsOption} from '../client-states/useMaxRedirectsOption';
-import {useRedirectOptionIndex} from '../client-states/useRedirectOptionIndex';
-import {useResponseInfo} from '../client-states/useResponseInfo';
-import {useWithCredentialsOption} from '../client-states/useWithCredentialsOption';
 import {credentialsOptions} from '../constants/credentialsOptions';
 import {redirectOptions} from '../constants/redirectOptions';
-import {useAxios} from '../use-cases/useAxios';
-import {useFetchApi} from '../use-cases/useFetchApi';
+import {fetchWithAxios} from '../services/fetchWithAxios';
+import {fetchWithFetchApi} from '../services/fetchWithFetchApi';
 
 export const HttpApiPage = () => {
-  const [redirectOptionIndex, setRedirectOptionIndex] = useRedirectOptionIndex();
-  const [credentialsOptionIndex, setCredentialsOptionIndex] = useCredentialsOptionIndex();
-  const [maxRedirectsOption, setMaxRedirectsOption] = useMaxRedirectsOption();
-  const [withCredentialsOption, setWithCredentialsOption] = useWithCredentialsOption();
-  const [responseInfo] = useResponseInfo();
-  const {callFetchApi} = useFetchApi();
-  const {callAxiosApi} = useAxios();
+  const [redirectOptionIndex, setRedirectOptionIndex] = useState(0);
+  const [credentialsOptionIndex, setCredentialsOptionIndex] = useState(0);
+  const [maxRedirectsOption, setMaxRedirectsOption] = useState('5');
+  const [withCredentialsOption, setWithCredentialsOption] = useState(true);
+  const [responseInfo, setResponseInfo] = useState('');
+
+  const callAxiosApi = useCallback(async () => {
+    const maxRedirects = isNaN(Number(maxRedirectsOption)) ? undefined : Number(maxRedirectsOption);
+    try {
+      const response = await fetchWithAxios(withCredentialsOption, maxRedirects);
+      setResponseInfo(`maxRedirects option:${String(maxRedirects)}
+withCredentials option:${String(withCredentialsOption)}
+${response.data.message}`);
+    } catch (e) {
+      setResponseInfo('Error occurred\n' + JSON.stringify(e));
+      console.error(e);
+    }
+  }, [maxRedirectsOption, withCredentialsOption, setResponseInfo]);
+
+  const callFetchApi = useCallback(async () => {
+    try {
+      const response = await fetchWithFetchApi(
+        redirectOptions[redirectOptionIndex],
+        credentialsOptions[credentialsOptionIndex],
+      );
+      const json = (await response.json()) as {message: string};
+      setResponseInfo(`redirect option:${redirectOptions[redirectOptionIndex]}
+credentials option:${credentialsOptions[credentialsOptionIndex]}
+response.uri:${response.url}
+response.redirected:${String(response.redirected)}
+${json.message}`);
+    } catch (e) {
+      setResponseInfo('Error occurred\n' + JSON.stringify(e));
+      console.error(e);
+    }
+  }, [redirectOptionIndex, credentialsOptionIndex, setResponseInfo]);
 
   return (
     <View style={styles.container}>
