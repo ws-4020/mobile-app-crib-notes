@@ -9,6 +9,7 @@ import {Alert, StyleSheet, View} from 'react-native';
 
 import {isUnauthorizedError} from '../errors/UnauthorizedError';
 import {ProfileFormValues, useProfileRegistrationForm} from '../forms/useProfileRegistrationForm';
+import {useAccountCommands} from '../services/account/useAccountCommands';
 import {clientLogout} from '../services/auth/clientLogout';
 import {useAuthCommands} from '../services/auth/useAuthCommands';
 
@@ -17,10 +18,12 @@ export type ProfileRegistrationPageProps = {
 };
 export const ProfileRegistrationPage: React.VFC<ProfileRegistrationPageProps> = ({termsAgreementStatus}) => {
   const {signup, isSigningUp} = useAuthCommands();
+  const {agreeTerms, isaAgreeingTerms} = useAccountCommands();
   const onSubmit = useCallback(
     async (values: ProfileFormValues) => {
       try {
-        await signup({nickname: values.nickname, termsAgreementStatus});
+        await signup({nickname: values.nickname});
+        await agreeTerms(termsAgreementStatus);
       } catch (e) {
         // ここではサインアップに成功したaccountId、passwordを使用してログインしているため、UnauthorizedErrorが発生しない想定です。
         // もし発生した場合は、クライアント側のログアウト処理を実施後、Firebase Crashlyticsにエラーログを送信します。
@@ -31,7 +34,7 @@ export const ProfileRegistrationPage: React.VFC<ProfileRegistrationPageProps> = 
         }
       }
     },
-    [signup, termsAgreementStatus],
+    [agreeTerms, signup, termsAgreementStatus],
   );
   const {form, clearNickname} = useProfileRegistrationForm({
     onSubmit,
@@ -48,7 +51,7 @@ export const ProfileRegistrationPage: React.VFC<ProfileRegistrationPageProps> = 
         errorMessage={form.errors.nickname}
       />
       <Spacer heightRatio={0.05} />
-      <FilledButton title={m('登録')} onPress={form.submitForm} loading={isSigningUp} />
+      <FilledButton title={m('登録')} onPress={form.submitForm} loading={isSigningUp || isaAgreeingTerms} />
     </View>
   );
 };

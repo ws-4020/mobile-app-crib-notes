@@ -1,16 +1,9 @@
-import {generatePassword} from 'bases/core/utils/generatePassword';
-import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
-import {savePassword} from 'features/secure-storage/services/savePassword';
 import {Query, useMutation, useQueryClient, hashQueryKey} from 'react-query';
 import {QueryFilters} from 'react-query/types/core/utils';
 
 import {useIsLoggedIn} from '../../client-states/useIsLoggedIn';
-import {isUnauthorizedError} from '../../errors/UnauthorizedError';
 import {AccountData} from '../../types/AccountData';
-import {getAccountData} from '../account/getAccountData';
-import {postAccountsMeTerms} from '../account/postAccountsMeTerms';
 import {autoLogin} from './autoLogin';
-import {canAutoLogin} from './canAutoLogin';
 import {changeAccount} from './changeAccount';
 import {login} from './login';
 import {logout} from './logout';
@@ -26,13 +19,7 @@ export const useAuthCommands = () => {
    * ログインします。
    */
   const loginMutation = useMutation(
-    async (arg: {accountId: string; password: string}) => {
-      const accountId = arg.accountId;
-      const password = arg.password;
-      await login(accountId, password);
-      await savePassword(accountId, password);
-      return getAccountData();
-    },
+    async (arg: {accountId: string; password: string}) => login(arg.accountId, arg.password),
     {
       onSuccess: accountData => {
         queryClient.setQueryData<AccountData>(['account', 'accountData'], accountData);
@@ -44,35 +31,21 @@ export const useAuthCommands = () => {
   /**
    * 自動ログインします。
    */
-  const autoLoginMutation = useMutation(
-    async () => {
-      if (await canAutoLogin()) {
-        try {
-          return autoLogin();
-        } catch (e) {
-          if (isUnauthorizedError(e)) {
-            // 認証エラーは処理成功として扱う
-            return undefined;
-          } else {
-            throw e;
-          }
-        }
+  const autoLoginMutation = useMutation(autoLogin, {
+    onSuccess: accountData => {
+      if (accountData) {
+        queryClient.setQueryData<AccountData>(['account', 'accountData'], accountData);
       }
+      setIsLoggedIn(!!accountData);
     },
-    {
-      onSuccess: response => {
-        setIsLoggedIn(response && response.status === 'COMPLETE');
-      },
-    },
-  );
+  });
 
   /**
    * ログアウトします。
    */
   const logoutMutation = useMutation(
-    async (arg: {queryRemovalFilters?: QueryFilters} = {queryRemovalFilters: defaultQueryFilters}) => {
-      return logout(queryClient, arg.queryRemovalFilters);
-    },
+    async (arg: {queryRemovalFilters?: QueryFilters} = {queryRemovalFilters: defaultQueryFilters}) =>
+      logout(queryClient, arg.queryRemovalFilters),
     {
       onSuccess: () => {
         setIsLoggedIn(false);
@@ -83,23 +56,12 @@ export const useAuthCommands = () => {
   /**
    * サインアップします。
    */
-  const signupMutation = useMutation(
-    async (arg: {nickname: string; termsAgreementStatus: TermsOfServiceAgreementStatus}) => {
-      const nickname = arg.nickname;
-      const termsAgreementStatus = arg.termsAgreementStatus;
-      const password = await generatePassword();
-      const account = await signup(nickname, password);
-      await login(account.accountId, password);
-      await postAccountsMeTerms(termsAgreementStatus);
-      return getAccountData();
+  const signupMutation = useMutation(async (arg: {nickname: string}) => signup(arg.nickname), {
+    onSuccess: accountData => {
+      queryClient.setQueryData<AccountData>(['account', 'accountData'], accountData);
+      setIsLoggedIn(true);
     },
-    {
-      onSuccess: accountData => {
-        queryClient.setQueryData<AccountData>(['account', 'accountData'], accountData);
-        setIsLoggedIn(true);
-      },
-    },
-  );
+  });
 
   /**
    * アカウントを切り替えます。

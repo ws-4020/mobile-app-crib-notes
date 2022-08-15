@@ -8,7 +8,7 @@ import {useAgreed} from '../client-states/useAgreed';
 export const useOnAgree = (close: () => void, termsOfService: TermsOfService) => {
   const [, setAgreedStatus] = useAgreed();
   const [isLoggedIn] = useIsLoggedIn();
-  const accountCommands = useAccountCommands();
+  const {agreeTerms, isaAgreeingTerms} = useAccountCommands();
   const onAgree = useCallback(async () => {
     try {
       const termsAgreementStatus = {
@@ -16,13 +16,13 @@ export const useOnAgree = (close: () => void, termsOfService: TermsOfService) =>
         agreedVersion: termsOfService.version,
       };
       if (isLoggedIn) {
-        await accountCommands.agreeTerms(termsAgreementStatus);
+        await agreeTerms(termsAgreementStatus);
       }
       setAgreedStatus(termsAgreementStatus);
       close();
     } catch {
       // 個別のエラーハンドリングは不要
     }
-  }, [accountCommands, close, isLoggedIn, setAgreedStatus, termsOfService.version]);
-  return {onAgree, isLoading: accountCommands.isaAgreeingTerms};
+  }, [agreeTerms, close, isLoggedIn, setAgreedStatus, termsOfService.version]);
+  return {onAgree, isLoading: isaAgreeingTerms};
 };

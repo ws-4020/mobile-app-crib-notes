@@ -18,7 +18,7 @@ describe('signup', () => {
       config: {},
     });
     const spySecureStorageAdapterSavePassword = jest.spyOn(savePassword, 'savePassword');
-    const res = await signup('testNickName', 'password123');
+    const res = await signup('testNickName');
     expect(res).toEqual({
       accountId: '123456789',
       profile: {nickname: 'testNickName', type: ['partner'], points: 0, totalPoints: 0},

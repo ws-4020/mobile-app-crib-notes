@@ -6,6 +6,6 @@ type Terms = {
 };
 
 export type AccountData = {
-  account?: Account;
-  terms?: Terms;
+  account: Account;
+  terms: Terms;
 };
