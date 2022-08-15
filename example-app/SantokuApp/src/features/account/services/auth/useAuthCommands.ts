@@ -7,7 +7,7 @@ import {Query, useMutation, useQueryClient, hashQueryKey} from 'react-query';
 import {QueryFilters} from 'react-query/types/core/utils';
 
 import {useIsLoggedIn} from '../../client-states/useIsLoggedIn';
-import {isUnauthorizedError} from '../../errors/UnauthorizedError';
+import {isUnauthorizedError, UnauthorizedError} from '../../errors/UnauthorizedError';
 import {AccountData} from '../../types/AccountData';
 import {getAccountsMeTerms} from '../account/getAccountsMeTerms';
 import {postAccountsMeTerms} from '../account/postAccountsMeTerms';
@@ -58,14 +58,17 @@ export const useAuthCommands = () => {
           return autoLogin();
         } catch (e) {
           if (isUnauthorizedError(e)) {
+            // 認証エラーは処理成功として扱うためここでキャッチする
             setIsLoggedIn(false);
+          } else {
+            throw e;
           }
         }
       }
     },
     {
       onSuccess: response => {
-        setIsLoggedIn(!!response);
+        setIsLoggedIn(response && response.status === 'COMPLETE');
       },
     },
   );
@@ -119,6 +122,7 @@ export const useAuthCommands = () => {
     changeAccount: changeAccountMutation.mutateAsync,
     isLoggingIn: loginMutation.isLoading,
     isAutoLoggingIn: autoLoginMutation.isLoading,
+    isAutoLoginSuccess: autoLoginMutation.isSuccess,
     isLoggingOut: logoutMutation.isLoading,
     isSigningUp: signupMutation.isLoading,
     isRefreshing: refreshMutation.isLoading,
