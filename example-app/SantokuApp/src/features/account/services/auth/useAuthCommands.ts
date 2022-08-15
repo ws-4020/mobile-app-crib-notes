@@ -76,7 +76,6 @@ export const useAuthCommands = () => {
     changeAccount: changeAccountMutation.mutateAsync,
     isLoggingIn: loginMutation.isLoading,
     isAutoLoggingIn: autoLoginMutation.isLoading,
-    isAutoLoginSuccess: autoLoginMutation.isSuccess,
     isLoggingOut: logoutMutation.isLoading,
     isSigningUp: signupMutation.isLoading,
     isChangingAccount: changeAccountMutation.isLoading,
