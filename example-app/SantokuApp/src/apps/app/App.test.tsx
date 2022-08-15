@@ -58,6 +58,14 @@ jest.mock('features/backend/apis/account/account', () => {
         },
       });
     }),
+    postLogin: jest.fn(() => {
+      return Promise.resolve({
+        status: 200,
+        data: {
+          status: 'COMPLETE',
+        },
+      });
+    }),
   };
 });
 
@@ -68,19 +76,6 @@ jest.mock('features/backend/apis/terms/terms', () => {
   return {
     ...originalModule,
     getTerms: jest.fn(),
-  };
-});
-
-jest.mock('features/account/services/auth/autoLogin', () => {
-  return {
-    autoLogin: jest.fn(() => {
-      return Promise.resolve({
-        status: 200,
-        data: {
-          status: 'COMPLETE',
-        },
-      });
-    }),
   };
 });
 
