@@ -1,12 +1,12 @@
 import messaging from '@react-native-firebase/messaging';
 import {getFcmToken} from 'bases/firebase/messaging/getFcmToken';
 import {requestPushPermission} from 'bases/firebase/messaging/requestPushPermission';
-import {useAccountData} from 'features/account/services/useAccountData';
+import {useAccountData} from 'features/account/services/account/useAccountData';
 import {postAccountsMeDeviceToken} from 'features/backend/apis/account/account';
 import {useCallback} from 'react';
 
 export const useRequestPermissionAndRegisterToken = () => {
-  const {data: accountData} = useAccountData();
+  const {accountData} = useAccountData();
   const requestPermissionAndRegisterToken = useCallback(async () => {
     const authStatus = await requestPushPermission();
     if (authStatus === messaging.AuthorizationStatus.AUTHORIZED) {

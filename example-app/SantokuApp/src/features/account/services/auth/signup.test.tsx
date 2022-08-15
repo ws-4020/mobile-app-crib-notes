@@ -1,6 +1,6 @@
 import * as accountApi from 'features/backend/apis/account/account';
+import * as savePassword from 'features/secure-storage/services/savePassword';
 
-import * as savePassword from '../secure-storage/savePassword';
 import {signup} from './signup';
 
 describe('signup', () => {

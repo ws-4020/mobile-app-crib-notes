@@ -1,8 +1,8 @@
 import {sha256} from 'bases/crypto/crypto';
 import * as SecureStore from 'expo-secure-store';
 
-import {KEY_CHAIN_ACCESSIBILITY} from '../../constants/keyChainAccessibility';
-import {STORED_ITEM_KEYS} from '../../constants/storedItemKeys';
+import {KEY_CHAIN_ACCESSIBILITY} from '../constants/keyChainAccessibility';
+import {STORED_ITEM_KEYS} from '../constants/storedItemKeys';
 
 /**
  * 指定されたパスワードをセキュアストレージに格納します。

@@ -1,6 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 
-import {STORED_ITEM_KEYS} from '../../constants/storedItemKeys';
+import {STORED_ITEM_KEYS} from '../constants/storedItemKeys';
 
 /**
  * セキュアストレージからアクティブなアカウントのIDを削除します。

@@ -1,8 +1,10 @@
+import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
+import {log} from 'bases/logging';
 import {m} from 'bases/message/Message';
 import {Button} from 'bases/ui/button/Button';
-import {useLogout} from 'features/account/use-cases/useLogout';
-import React from 'react';
-import {GestureResponderEvent, StyleSheet} from 'react-native';
+import {useAuthCommands} from 'features/account/services/auth/useAuthCommands';
+import React, {useCallback} from 'react';
+import {Alert, GestureResponderEvent, StyleSheet} from 'react-native';
 
 type HeaderRightLogoutButtonProps = {
   onPress: (event: GestureResponderEvent) => void;
@@ -38,10 +40,21 @@ type CloseThisNavigatorButtonProps = {
 };
 
 export const useLogoutButton = () => {
-  const {logout, isLoading} = useLogout();
+  const {logout, isLoggingOut} = useAuthCommands();
+  const onLogout = useCallback(async () => {
+    try {
+      await logout(undefined);
+    } catch (e) {
+      // 基本的にはFCM登録トークンの取得は失敗しない想定ですが、もし失敗した場合は、Firebase Crashlyticsにログを送信してアラートを表示します。
+      if (isGetFcmTokenError(e)) {
+        log.error(m('app.push.notification.getFcmTokenError', String(e)), 'app.push.notification.getFcmTokenError');
+        Alert.alert(m('app.account.ログアウトエラータイトル'), m('app.account.ログアウトエラー本文'));
+      }
+    }
+  }, [logout]);
   // NativeStackNavigatorのheaderRightに合わせたコンポーネント。
   const LogoutButton: React.FC<CloseThisNavigatorButtonProps> = () => (
-    <HeaderRightLogoutButton onPress={logout} isLoading={isLoading} />
+    <HeaderRightLogoutButton onPress={onLogout} isLoading={isLoggingOut} />
   );
 
   return {LogoutButton};

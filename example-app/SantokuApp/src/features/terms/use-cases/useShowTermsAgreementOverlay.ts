@@ -1,4 +1,4 @@
-import {useAccountData} from 'features/account/services/useAccountData';
+import {useAccountData} from 'features/account/services/account/useAccountData';
 import {useCallback} from 'react';
 
 import {TermsAgreementOverlay} from '../components/TermsAgreementOverlay';
@@ -12,7 +12,7 @@ import {TermsAgreementOverlayShowProps} from '../components/TermsAgreementOverla
  * showTermsAgreementOverlay(onAgree);
  */
 export const useShowTermsAgreementOverlay = () => {
-  const {data: accountData} = useAccountData();
+  const {accountData} = useAccountData();
 
   return useCallback(
     (onAgree?: TermsAgreementOverlayShowProps['exitingCallbackOnAgreed']) => {

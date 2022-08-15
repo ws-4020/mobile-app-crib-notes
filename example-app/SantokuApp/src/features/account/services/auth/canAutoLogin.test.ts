@@ -1,5 +1,6 @@
-import * as loadActiveAccountId from '../secure-storage/loadActiveAccountId';
-import * as loadPassword from '../secure-storage/loadPassword';
+import * as loadActiveAccountId from 'features/secure-storage/services/loadActiveAccountId';
+import * as loadPassword from 'features/secure-storage/services/loadPassword';
+
 import {canAutoLogin} from './canAutoLogin';
 
 describe('canAutoLogin', () => {

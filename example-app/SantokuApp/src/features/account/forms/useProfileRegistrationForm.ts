@@ -1,14 +1,31 @@
-import {useFormik} from 'formik';
+import {m} from 'bases/message/Message';
+import {yup} from 'bases/validator';
+import {FormikHelpers, useFormik} from 'formik';
+import {useCallback} from 'react';
 
-import {profileFormInitialValues} from '../constants/profileFormInitialValues';
-import {profileFormValidationSchema} from '../constants/profileFormValidationSchema';
+export type ProfileFormValues = {
+  nickname: string;
+};
 
-export const useProfileRegistrationForm = () => {
+const profileFormInitialValues = {
+  nickname: '',
+};
+
+const profileFormValidationSchema = yup.object().shape({
+  nickname: yup.string().label(m('ニックネーム')).required().max(50),
+});
+
+type ProfileFormParams = {
+  onSubmit: (values: ProfileFormValues, formikHelpers: FormikHelpers<ProfileFormValues>) => void | Promise<any>;
+};
+export const useProfileRegistrationForm = (params: ProfileFormParams = {onSubmit: () => {}}) => {
   const form = useFormik({
     initialValues: profileFormInitialValues,
     validationSchema: profileFormValidationSchema,
     validateOnChange: false,
-    onSubmit: () => {},
+    onSubmit: params.onSubmit,
   });
-  return {form};
+
+  const clearNickname = useCallback(() => form.setFieldValue('nickname', ''), [form]);
+  return {form, clearNickname};
 };

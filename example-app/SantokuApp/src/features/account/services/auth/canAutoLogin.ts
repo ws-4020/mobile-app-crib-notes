@@ -2,14 +2,18 @@
  * アクティブなアカウントIDとそれに該当するパスワードがセキュアストアに存在するかをチェックします。
  * @returns 自動ログイン可能な場合はtrue、そうでない場合はfalse
  */
-import {loadActiveAccountId} from '../secure-storage/loadActiveAccountId';
-import {loadPassword} from '../secure-storage/loadPassword';
+import {loadActiveAccountId} from 'features/secure-storage/services/loadActiveAccountId';
+import {loadPassword} from 'features/secure-storage/services/loadPassword';
 
 export const canAutoLogin = async (): Promise<boolean> => {
-  const accountId = await loadActiveAccountId();
-  if (!accountId) {
+  try {
+    const accountId = await loadActiveAccountId();
+    if (!accountId) {
+      return false;
+    }
+    const password = await loadPassword(accountId);
+    return !!password;
+  } catch {
     return false;
   }
-  const password = await loadPassword(accountId);
-  return !!password;
 };

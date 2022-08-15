@@ -6,9 +6,8 @@ import {
   setAxiosResponseInterceptor,
 } from 'features/backend/utils/customInstance';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
-
-import {loadActiveAccountId} from '../secure-storage/loadActiveAccountId';
-import {loadPassword} from '../secure-storage/loadPassword';
+import {loadActiveAccountId} from 'features/secure-storage/services/loadActiveAccountId';
+import {loadPassword} from 'features/secure-storage/services/loadPassword';
 
 // 共通リトライ処理に必要なAPI呼び出しだけは、自動生成コードに依存しない形で用意する
 const autoLogin = async () => {

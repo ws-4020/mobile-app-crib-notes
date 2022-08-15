@@ -4,9 +4,9 @@
  * @returns アカウントの切り替え結果
  */
 import {AccountLoginResponse} from 'features/backend/apis/model';
+import {loadPassword} from 'features/secure-storage/services/loadPassword';
 
 import {PasswordNotFoundError} from '../../errors/PasswordNotFoundError';
-import {loadPassword} from '../secure-storage/loadPassword';
 import {login} from './login';
 
 export const changeAccount = async (accountId: string): Promise<AccountLoginResponse> => {

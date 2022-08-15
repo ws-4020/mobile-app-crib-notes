@@ -9,9 +9,9 @@ import axios from 'axios';
 import {postLogin} from 'features/backend/apis/account/account';
 import {AccountLoginResponse} from 'features/backend/apis/model';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
+import {saveActiveAccountId} from 'features/secure-storage/services/saveActiveAccountId';
 
 import {UnauthorizedError} from '../../errors/UnauthorizedError';
-import {saveActiveAccountId} from '../secure-storage/saveActiveAccountId';
 
 export const login = async (accountId: string, password: string): Promise<AccountLoginResponse> => {
   try {

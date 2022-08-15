@@ -1,9 +1,9 @@
 import * as accountApi from 'features/backend/apis/account/account';
 import * as csrfToken from 'features/backend/utils/refreshCsrfToken';
+import * as deleteActiveAccountId from 'features/secure-storage/services/deleteActiveAccountId';
+import * as deletePassword from 'features/secure-storage/services/deletePassword';
+import * as loadActiveAccountId from 'features/secure-storage/services/loadActiveAccountId';
 
-import * as deleteActiveAccountId from '../secure-storage/deleteActiveAccountId';
-import * as deletePassword from '../secure-storage/deletePassword';
-import * as loadActiveAccountId from '../secure-storage/loadActiveAccountId';
 import {logout} from './logout';
 
 describe('AuthenticationService logout', () => {

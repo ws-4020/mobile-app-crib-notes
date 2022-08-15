@@ -1,22 +1,41 @@
+import {log} from 'bases/logging';
 import {m} from 'bases/message/Message';
 import {FilledButton} from 'bases/ui/button/FilledButton';
 import {TextInput} from 'bases/ui/input/TextInput';
 import {Spacer} from 'bases/ui/spacer/Spacer';
 import {TermsOfServiceAgreementStatus} from 'features//backend/apis/model';
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useCallback} from 'react';
+import {Alert, StyleSheet, View} from 'react-native';
 
-import {useProfileRegistrationForm} from '../forms/useProfileRegistrationForm';
-import {useClearNickname} from '../use-cases/useClearNickname';
-import {useSignup} from '../use-cases/useSignup';
+import {isUnauthorizedError} from '../errors/UnauthorizedError';
+import {ProfileFormValues, useProfileRegistrationForm} from '../forms/useProfileRegistrationForm';
+import {clientLogout} from '../services/auth/clientLogout';
+import {useAuthCommands} from '../services/auth/useAuthCommands';
 
 export type ProfileRegistrationPageProps = {
   termsAgreementStatus: TermsOfServiceAgreementStatus;
 };
 export const ProfileRegistrationPage: React.VFC<ProfileRegistrationPageProps> = ({termsAgreementStatus}) => {
-  const {form} = useProfileRegistrationForm();
-  const {signup, isExecutingSignup} = useSignup(form, termsAgreementStatus);
-  const {clearNickname} = useClearNickname(form);
+  const {signup, isSigningUp} = useAuthCommands();
+  const onSubmit = useCallback(
+    async (values: ProfileFormValues) => {
+      try {
+        await signup({nickname: values.nickname, termsAgreementStatus});
+      } catch (e) {
+        // ここではサインアップに成功したaccountId、passwordを使用してログインしているため、UnauthorizedErrorが発生しない想定です。
+        // もし発生した場合は、クライアント側のログアウト処理を実施後、Firebase Crashlyticsにエラーログを送信します。
+        if (isUnauthorizedError(e)) {
+          await clientLogout();
+          log.error(m('app.account.signupError', String(e)), 'app.account.signupError');
+          Alert.alert(m('app.account.サインアップエラータイトル'), m('app.account.サインアップエラー本文'));
+        }
+      }
+    },
+    [signup, termsAgreementStatus],
+  );
+  const {form, clearNickname} = useProfileRegistrationForm({
+    onSubmit,
+  });
 
   return (
     <View style={styles.container} testID="ProfileRegistration">
@@ -29,7 +48,7 @@ export const ProfileRegistrationPage: React.VFC<ProfileRegistrationPageProps> = 
         errorMessage={form.errors.nickname}
       />
       <Spacer heightRatio={0.05} />
-      <FilledButton title={m('登録')} onPress={signup} loading={isExecutingSignup} />
+      <FilledButton title={m('登録')} onPress={form.submitForm} loading={isSigningUp} />
     </View>
   );
 };

@@ -5,27 +5,48 @@ import {PasswordTextInput} from 'bases/ui/input/PasswordTextInput';
 import {TextInput} from 'bases/ui/input/TextInput';
 import {Spacer} from 'bases/ui/spacer/Spacer';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOverlay';
+import {useTerms} from 'features/terms/services/useTerms';
+import React, {useCallback} from 'react';
+import {Alert, StyleSheet, View} from 'react-native';
 
-import {useLoginForm} from '../forms/useLoginForm';
-import {useTerms} from '../services/useTerms';
-import {useClearAccountId} from '../use-cases/useClearAccountId';
-import {useClearPassword} from '../use-cases/useClearPassword';
-import {useCreateAccount} from '../use-cases/useCreateAccount';
-import {useLogin} from '../use-cases/useLogin';
+import {isUnauthorizedError} from '../errors/UnauthorizedError';
+import {LoginFormValues, useLoginForm} from '../forms/useLoginForm';
+import {useAuthCommands} from '../services/auth/useAuthCommands';
 
 export type LoginPageProps = {
   navigateToCreateAccount: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => void;
 };
 
 export const LoginPage: React.VFC<LoginPageProps> = ({navigateToCreateAccount}) => {
-  const {form} = useLoginForm();
-  const {isFetchedTerms} = useTerms();
-  const {createAccount} = useCreateAccount(navigateToCreateAccount);
-  const {login, isExecutingLogin} = useLogin(form);
-  const {clearAccountId} = useClearAccountId(form);
-  const {clearPassword} = useClearPassword(form);
+  const {login, isLoggingIn} = useAuthCommands();
+  const onSubmit = useCallback(
+    async (values: LoginFormValues) => {
+      try {
+        await login({accountId: values.accountId, password: values.password});
+      } catch (e) {
+        if (isUnauthorizedError(e)) {
+          Alert.alert(m('ログイン失敗'), m('アカウントIDまたはパスワードに\n間違いがあります。'));
+        }
+      }
+    },
+    [login],
+  );
+  const {form, clearAccountId, clearPassword} = useLoginForm({
+    onSubmit,
+  });
+  const {termsOfService, isFetchedTerms} = useTerms();
+
+  const onCreateAccount = useCallback(() => {
+    TermsAgreementOverlay.show({
+      // 利用規約を取得できていない場合はボタンを非活性にしているので、ここでは必ず存在する想定
+      termsOfService: termsOfService!.data,
+      exitingCallbackOnAgreed: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => {
+        navigateToCreateAccount(termsOfServiceAgreementStatus);
+      },
+      dismissible: true,
+    });
+  }, [navigateToCreateAccount, termsOfService]);
 
   return (
     <View style={styles.container} testID="Login">
@@ -48,9 +69,14 @@ export const LoginPage: React.VFC<LoginPageProps> = ({navigateToCreateAccount}) 
       />
       <Spacer heightRatio={0.05} />
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-        <OutlinedButton title={m('新規登録')} onPress={createAccount} disabled={!isFetchedTerms} />
+        <OutlinedButton title={m('新規登録')} onPress={onCreateAccount} disabled={!isFetchedTerms} />
         <Spacer widthRatio={0.1} />
-        <FilledButton title={m('ログイン')} onPress={login} loading={isExecutingLogin} disabled={!isFetchedTerms} />
+        <FilledButton
+          title={m('ログイン')}
+          onPress={form.submitForm}
+          loading={isLoggingIn}
+          disabled={!isFetchedTerms}
+        />
       </View>
     </View>
   );

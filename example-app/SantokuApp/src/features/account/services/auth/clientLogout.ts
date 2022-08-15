@@ -5,12 +5,11 @@ import crashlytics from '@react-native-firebase/crashlytics';
 import {deleteFcmToken} from 'bases/firebase/messaging/deleteFcmToken';
 import {log} from 'bases/logging';
 import {m} from 'bases/message/Message';
+import {deleteActiveAccountId} from 'features/secure-storage/services/deleteActiveAccountId';
+import {deletePassword} from 'features/secure-storage/services/deletePassword';
+import {loadActiveAccountId} from 'features/secure-storage/services/loadActiveAccountId';
 import {hashQueryKey, Query, QueryClient} from 'react-query';
 import {QueryFilters} from 'react-query/types/core/utils';
-
-import {deleteActiveAccountId} from '../secure-storage/deleteActiveAccountId';
-import {deletePassword} from '../secure-storage/deletePassword';
-import {loadActiveAccountId} from '../secure-storage/loadActiveAccountId';
 
 const defaultQueryFilters = {predicate: (query: Query) => query.queryHash !== hashQueryKey(['account', 'isLoggedIn'])};
 

@@ -1,7 +1,7 @@
 import * as SecureStore from 'expo-secure-store';
 
-import {KEY_CHAIN_ACCESSIBILITY} from '../../constants/keyChainAccessibility';
-import {STORED_ITEM_KEYS} from '../../constants/storedItemKeys';
+import {KEY_CHAIN_ACCESSIBILITY} from '../constants/keyChainAccessibility';
+import {STORED_ITEM_KEYS} from '../constants/storedItemKeys';
 
 /**
  * 指定されたアカウントIDを、アクティブなアカウントとしてセキュアストレージに格納します。

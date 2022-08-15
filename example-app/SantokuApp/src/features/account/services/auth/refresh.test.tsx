@@ -1,11 +1,11 @@
 import * as accountApi from 'features/backend/apis/account/account';
 import {AccountLoginResponseStatus} from 'features/backend/apis/model';
 import * as csrfToken from 'features/backend/utils/refreshCsrfToken';
+import * as loadActiveAccountId from 'features/secure-storage/services/loadActiveAccountId';
+import * as loadPassword from 'features/secure-storage/services/loadPassword';
 
 import {ActiveAccountIdNotFoundError} from '../../errors/ActiveAccountIdNotFoundError';
 import {PasswordNotFoundError} from '../../errors/PasswordNotFoundError';
-import * as loadActiveAccountId from '../secure-storage/loadActiveAccountId';
-import * as loadPassword from '../secure-storage/loadPassword';
 import {refresh} from './refresh';
 
 describe('refresh', () => {
