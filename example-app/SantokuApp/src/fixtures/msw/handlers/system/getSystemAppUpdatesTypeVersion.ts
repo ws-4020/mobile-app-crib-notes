@@ -43,7 +43,8 @@ const needsUpdate = (version?: string, appSupportedVersion?: string) => {
 
 const toNumber = (semver?: string) => {
   if (semver) {
-    return Number(semver.replaceAll('.', ''));
+    // Androidでは、string.replaceAllが使えないため、split/joinでピリオドを置換してます。
+    return Number(semver.split('.').join(''));
   }
   return NaN;
 };
