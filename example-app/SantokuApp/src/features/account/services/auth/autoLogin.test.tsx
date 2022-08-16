@@ -24,7 +24,7 @@ describe('autoLogin', () => {
     headers: {},
     config: {},
   });
-  const spyGetAccountMe = jest.spyOn(getAccountData, 'getAccountData').mockResolvedValue({
+  const spyGetAccountData = jest.spyOn(getAccountData, 'getAccountData').mockResolvedValue({
     account: {accountId: '123456789', deviceTokens: []},
     terms: {termsAgreementStatus: {hasAgreed: true, agreedVersion: '1.0.0'}, termsOfService: undefined},
   });
@@ -52,7 +52,7 @@ describe('autoLogin', () => {
     expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
     expect(spySecureStorageAdapterLoadPassword).toHaveBeenCalledWith('123456789');
     expect(__mocks.crashlytics.setUserId).toHaveBeenCalledWith('123456789');
-    expect(spyGetAccountMe).toHaveBeenCalled();
+    expect(spyGetAccountData).toHaveBeenCalled();
   });
 
   test('セキュアストレージからアクティブなアカウントIDを取得できなかった場合の検証', async () => {
