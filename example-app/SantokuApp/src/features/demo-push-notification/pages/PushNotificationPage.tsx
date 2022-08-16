@@ -10,8 +10,8 @@ import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Divider, Text} from 'react-native-elements';
 
 import {getFcmToken} from '../services/getFcmToken';
-import {notifyMessageToAll as notifyMessageToAllService} from '../services/notifyMessageToAll';
-import {notifyMessageToMe as notifyMessageToMeService} from '../services/notifyMessageToMe';
+import {notifyMessageToAll as callNotifyMessageToAll} from '../services/notifyMessageToAll';
+import {notifyMessageToMe as callNotifyMessageToMe} from '../services/notifyMessageToMe';
 import {openSettings} from '../services/openSettings';
 import {requestUserPermission as requestUserPermissionService} from '../services/requestUserPermission';
 
@@ -75,7 +75,7 @@ export const PushNotificationPage: React.FC = () => {
 
   const notifyMessageToAll = useCallback(async () => {
     try {
-      await notifyMessageToAllService();
+      await callNotifyMessageToAll(channelKey);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<ErrorResponse>;
@@ -91,7 +91,7 @@ export const PushNotificationPage: React.FC = () => {
   const notifyMessageToMe = useCallback(async () => {
     if (token) {
       try {
-        await notifyMessageToMeService(token, channelKey);
+        await callNotifyMessageToMe(token, channelKey);
       } catch (e) {
         if (axios.isAxiosError(e)) {
           const axiosError = e as AxiosError<ErrorResponse>;
