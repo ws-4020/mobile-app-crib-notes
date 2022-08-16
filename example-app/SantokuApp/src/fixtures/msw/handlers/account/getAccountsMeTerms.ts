@@ -11,7 +11,7 @@ export const getAccountsMeTerms = rest.get(`${backendUrl}/accounts/me/terms`, (r
     const accountId = getLoggedInAccountId();
     const db = getDb(accountId);
     const terms = db.accountTerms.findFirst({where: {accountId: {equals: accountId}}});
-    return delayedResponse(ctx.json(terms));
+    return delayedResponse(ctx.json(terms), ctx.delay(100));
   } catch (e) {
     return errorResponse(e, ctx);
   }
