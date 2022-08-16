@@ -143,7 +143,7 @@ src
     ├── demo-**
     ├── home
     ├── sandbox
-    ├──  secure-storage
+    ├── secure-storage
     ├── team
     └── terms
 ```
