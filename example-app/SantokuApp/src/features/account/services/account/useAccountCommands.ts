@@ -1,5 +1,8 @@
+import {AccountData} from 'features/account/types/AccountData';
+import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import {useMutation, useQueryClient} from 'react-query';
 
+import {getAccountData} from './getAccountData';
 import {postAccountsMeTerms} from './postAccountsMeTerms';
 
 export const useAccountCommands = () => {
@@ -8,11 +11,17 @@ export const useAccountCommands = () => {
   /**
    * サービス利用規約に同意します。
    */
-  const agreeTermsMutation = useMutation(postAccountsMeTerms, {
-    onSuccess: () => {
-      queryClient.resetQueries(['account', 'accountData']).catch(() => {});
+  const agreeTermsMutation = useMutation(
+    async (data: TermsOfServiceAgreementStatus) => {
+      await postAccountsMeTerms(data);
+      return getAccountData();
     },
-  });
+    {
+      onSuccess: accountData => {
+        queryClient.setQueryData<AccountData>(['account', 'accountData'], accountData);
+      },
+    },
+  );
 
   return {
     agreeTerms: agreeTermsMutation.mutateAsync,
