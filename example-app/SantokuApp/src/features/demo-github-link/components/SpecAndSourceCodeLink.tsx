@@ -16,7 +16,7 @@ export const SpecAndSourceCodeLink: React.VFC<Props> = ({feature}) => {
   }, [feature]);
   const openSourceCode = useCallback(async () => {
     await openUrl(
-      `${AppConfig.mobileAppCribNotesRepositoryUrl}/tree/master/example-app/SantokuApp/src/screens/demo/${feature}`,
+      `${AppConfig.mobileAppCribNotesRepositoryUrl}/tree/master/example-app/SantokuApp/src/features/demo-${feature}`,
     );
   }, [feature]);
 
