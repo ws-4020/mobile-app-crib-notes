@@ -50,6 +50,30 @@ MSWを有効化した場合、初期データとして以下の3つのアカウ�
 API通信のハンドラを定義しています。
 各HTTPリクエストのURLとメソッドに対応するハンドラを定義します。
 
+#### レスポンスのdelay
+
+各ハンドラが受け取ったリクエストは、デフォルトで1000ms後にレスポンスを返却します。
+特定にリクエストでdelayする値を変更したい場合は、以下のように設定してください。
+
+```typescript
+return delayedResponse(ctx.json(account), ctx.delay(100))
+```
+
+現状は、アプリ起動後のデータロードをスピーディに終えて開発効率を高めたいため、以下のハンドラのdelayを100msに設定しています。
+- getSystemCsrfToken
+- getAccountsMe
+- getAccountsMeTerms
+- postLogin
+- getSystemAppUpdatesTypeVersion
+
+#### レスポンスのステータスコード
+
+現状、レスポンスのステータスコードは2xx系のみ返却します。（一部、MSW内でエラーが発生した場合は、404や500を返却しますが、基本的には発生しない想定です。）
+特定にリクエストのエラー処理を検証したい場合などは、以下のように実装することで任意のステータスコードを返却できます。
+
+```typescript
+return delayedResponse(ctx.status(400));
+```
 
 ## ログイン時のパスワード
 
