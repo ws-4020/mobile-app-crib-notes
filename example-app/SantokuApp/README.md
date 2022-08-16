@@ -141,10 +141,8 @@ src
     ├── app-updates
     ├── backend
     ├── demo-**
-    ├── home
     ├── sandbox
     ├── secure-storage
-    ├── team
     └── terms
 ```
 
