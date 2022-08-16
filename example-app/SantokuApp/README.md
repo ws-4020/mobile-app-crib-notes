@@ -96,13 +96,13 @@ iOS向けのネイティブモジュールを含むライブラリを依存関�
 | ステレオタイプ | 概要 |
 |:--|:--|
 | Navigator | React Navigationのナビゲータの定義。このステレオタイプはAppsレイヤーでのみ使用できます。 |
-| Screen | React NavigationのScreenで定義するコンポーネント。ナビゲーションの定義と、Pageの呼び出しを実施します。このステレオタイプは、Appsレイヤーのみで使用できます。 |
-| Page | 画面を表すコンポーネント。Screenコンポーネントから呼び出されます。PageはComponentを組み合わせて画面を作成します。ユーザインタラクションや状態の変更によるイベント（useEffect/useFocusEffectなど）が発生した場合のふるまいはPageでは実施しません。ふるまいは、Use Caseで実装します。Pageはイベントに応じたUse Caseを呼び出します。 |
+| Screen | React NavigationのScreenで定義するコンポーネント。ナビゲーションの定義と、Pageの呼び出しを実施します。このステレオタイプは、Appsレイヤーでのみ使用できます。 |
+| Page | 画面を表すコンポーネント。Screenコンポーネントから呼び出されます。PageはいくつかのComponentを組み合わせて構成します。ユーザインタラクションや状態の変更によるイベント（useEffect/useFocusEffectなど）が発生した場合のふるまいも定義します。複雑なユーザインタラクションや共通処理は、Use Caseで実装します。|
 | Component | Pageを構成する画面部品です。|
-| Form | ユーザが入力した値の保持やバリデーション定義です。 |
-| Use Case | 複雑なユーザインタラクションや共通処理など、Componentで発生したイベントに対するふるまいを実装します。Use Caseの主な役割は以下になります。<br><br>・serviceの呼び出し<br>・serviceからthrowされるエラーに応じたUI（AlertやSnackbar）の表示<br>・ナビゲーションの呼び出し<br>・一つのインタラクション内のみで使用する状態の管理<br>・client stateで管理している状態の変更<br><br>usecaseでは、上記以外の処理は実施しません。そのほかのロジックなどはserviceで実施します。|
-| Service | APIの呼び出しや、その他のロジックなどを実装したReact Hooksまたは関数。 |
-| Client State | 複数のPageやComponent、Use Caseをまたがって維持する必要のあるState |
+| Form | ユーザが入力した値の保持や入力値に対するユーザインタラクション、およびバリデーション定義です。 |
+| Use Case | 複雑なユーザインタラクションや共通処理など、Componentで発生したイベントに対するふるまいを実装します。Use Caseの主な役割は以下になります。<br><br>・serviceの呼び出し<br>・serviceからthrowされるエラーに応じたUI（AlertやSnackbar）の表示<br>・ナビゲーションの呼び出し<br>・一つのインタラクション内のみで使用する状態の管理<br>・client stateで管理している状態の変更<br><br>Use Caseでは、上記以外の処理は実施しません。そのほかのロジックなどはserviceで実施します。|
+| Service | APIの呼び出しや、その他のロジックなどを実装したReact Hooksまたは関数。Serviceは大きくクエリとコマンドに分かれます。クエリは問い合わせなど副作用を起こさないAPIや処理の呼び出しです。一方、コマンドはシステム状態を変更するAPIや処理の呼び出しです。クエリは処理単位でファイルを分けますが、コマンドは複数の処理をまとめて1つのファイルで管理します。これは状態変更時のキャッシュ操作やClient Stateの操作を不整合なく定義しやすくするためです。|
+| Client State | 複数のPageやComponent、Use Caseをまたがって維持する必要のあるState。 |
 | Context | Reactコンテキストやプロバイダの値、およびプロバイダの値を提供するコンポーネントなど。 |
 | Type | 型定義。 |
 | Constant | 定数定義。 |
@@ -143,6 +143,7 @@ src
     ├── demo-**
     ├── home
     ├── sandbox
+    ├──  secure-storage
     ├── team
     └── terms
 ```
