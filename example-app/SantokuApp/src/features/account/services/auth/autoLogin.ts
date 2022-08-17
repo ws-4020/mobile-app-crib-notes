@@ -1,5 +1,5 @@
 import {isUnauthorizedError} from 'features/account/errors/UnauthorizedError';
-import {AccountData} from 'features/account/types/AccountData';
+import {AccountLoginResponse} from 'features/backend/apis/model';
 import {loadActiveAccountId} from 'features/secure-storage/services/loadActiveAccountId';
 
 import {ActiveAccountIdNotFoundError} from '../../errors/ActiveAccountIdNotFoundError';
@@ -10,7 +10,7 @@ import {changeAccount} from './changeAccount';
  * 自動ログインします。
  * @returns アカウントのログイン結果
  */
-export const autoLogin = async (): Promise<AccountData | undefined> => {
+export const autoLogin = async (): Promise<AccountLoginResponse | undefined> => {
   if (!(await canAutoLogin())) {
     return undefined;
   }
