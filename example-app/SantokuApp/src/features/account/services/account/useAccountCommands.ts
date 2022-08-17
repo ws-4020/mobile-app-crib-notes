@@ -25,7 +25,7 @@ export const useAccountCommands = () => {
 
   return {
     agreeTerms: agreeTermsMutation.mutateAsync,
-    isaAgreeingTerms: agreeTermsMutation.isLoading,
+    isAgreeingTerms: agreeTermsMutation.isLoading,
     isProcessing: agreeTermsMutation.isLoading,
   };
 };
