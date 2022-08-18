@@ -52,4 +52,8 @@ export abstract class AppConfig {
   static get mobileAppCribNotesRepositoryUrl(): string {
     return Config.MOBILE_APP_CRIB_NOTES_REPOSITORY_URL;
   }
+
+  static get mswEnabled(): boolean {
+    return Config.MSW_ENABLED === 'true';
+  }
 }
