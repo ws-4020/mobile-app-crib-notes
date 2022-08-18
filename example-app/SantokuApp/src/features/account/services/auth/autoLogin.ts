@@ -19,7 +19,7 @@ export const autoLogin = async (): Promise<AccountLoginResponse | undefined> => 
     throw new ActiveAccountIdNotFoundError('There is no auto-login enabled account.');
   }
   try {
-    return changeAccount(accountId);
+    return await changeAccount(accountId);
   } catch (e) {
     if (isUnauthorizedError(e)) {
       // 認証エラーは処理成功として扱う
