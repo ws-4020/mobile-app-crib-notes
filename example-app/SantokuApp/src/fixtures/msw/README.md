@@ -1,7 +1,7 @@
 # MSWの利用
 
 このアプリでは、API通信のデータモックとしてMSWを使用しています。
-環境設定ファイル（.env.xxx）にの`MSW_ENABLED`の値によって、MSWの有効・無効が切り替わります。
+環境設定ファイル（.env.xxx）の`MSW_ENABLED`の値によって、MSWの有効・無効が切り替わります。
 MSWが有効化された場合、API通信は全てMSWによってインターセプトされます。
 
 MSWのデータの管理は、[@mswjs/data](https://github.com/mswjs/data)を使用してます。
