@@ -1,9 +1,9 @@
 import {AccountData} from 'features/account/types/AccountData';
+import {postAccountsMeTerms} from 'features/backend/apis/account/account';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import {useMutation, useQueryClient} from 'react-query';
 
 import {getAccountData} from './getAccountData';
-import {postAccountsMeTerms} from './postAccountsMeTerms';
 
 export const useAccountCommands = () => {
   const queryClient = useQueryClient();
