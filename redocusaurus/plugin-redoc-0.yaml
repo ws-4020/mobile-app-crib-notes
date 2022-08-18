@@ -183,6 +183,13 @@ paths:
       summary: アバターを取得する
       description: |
         アバターを取得する。
+        サポートしているフォーマットは以下になります。
+        - png
+        - jpg
+        - jpeg
+        - bmp
+        - gif
+        - webp
       tags:
         - Account
       operationId: get-accounts-accountId-avatar
@@ -215,6 +222,13 @@ paths:
       summary: ログイン済みアカウントのアバターを取得する
       description: |
         ログイン済みアカウントのアバターを取得する。
+        サポートしているフォーマットは以下になります。
+        - png
+        - jpg
+        - jpeg
+        - bmp
+        - gif
+        - webp
       tags:
         - Account
       operationId: get-accounts-me-avatar
@@ -1093,6 +1107,9 @@ components:
         title:
           type: string
           description: イベントのタイトル
+        content:
+          type: string
+          description: イベントの内容
         endDate:
           type: string
           description: 掲載終了日
@@ -1103,6 +1120,7 @@ components:
       required:
         - eventId
         - title
+        - content
         - endDate
         - likes
     QuestionContent:
@@ -1147,6 +1165,10 @@ components:
         comments:
           type: integer
           description: コメント数
+        lastUpdatedAt:
+          type: string
+          format: date-time
+          description: 最終更新日
       required:
         - questionId
         - title
@@ -1264,11 +1286,15 @@ components:
           type: string
           description: テンプレートID
           readOnly: true
+        title:
+          type: string
+          description: テンプレートタイトル
         content:
           type: string
           description: テンプレート内容
       required:
         - templateId
+        - title
         - content
     QuestionAndAnswer:
       type: object
@@ -1376,8 +1402,6 @@ components:
         eventId:
           type: string
           description: いいね済のイベントID
-      required:
-        - eventId
     LikedQuestionResponse:
       title: LikedQuestionResponse
       description: いいね済の質問IDと紐づく回答ID、コメントID
@@ -1385,7 +1409,10 @@ components:
       properties:
         questionId:
           type: string
-          description: いいね済の質問ID
+          description: 質問ID
+        liked:
+          type: boolean
+          description: 質問にいいね済か
         commentId:
           type: array
           description: いいね済の質問コメントID
@@ -1401,6 +1428,9 @@ components:
               answerId:
                 type: string
                 description: いいね済の回答ID
+              liked:
+                type: boolean
+                description: 回答にいいね済か
               commentId:
                 type: array
                 description: いいね済の回答コメントID
@@ -1408,6 +1438,7 @@ components:
                   type: string
       required:
         - questionId
+        - liked
         - commentId
         - answer
     LikesResponse:
