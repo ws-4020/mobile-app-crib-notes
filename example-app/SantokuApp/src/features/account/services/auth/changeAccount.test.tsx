@@ -4,6 +4,7 @@ import * as csrfToken from 'features/backend/utils/refreshCsrfToken';
 import * as loadPassword from 'features/secure-storage/services/loadPassword';
 
 import {PasswordNotFoundError} from '../../errors/PasswordNotFoundError';
+import * as getAccountData from '../account/getAccountData';
 import {changeAccount} from './changeAccount';
 
 describe('changeAccount', () => {
