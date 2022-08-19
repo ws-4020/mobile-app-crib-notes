@@ -59,7 +59,7 @@ const useRootStackNavigator = (initialData: AppInitialData) => {
               name="DemoStackNav"
               component={DemoStackNav}
               options={{
-                presentation: 'formSheet' as const,
+                presentation: 'modal' as const,
               }}
             />
           </nav.Group>
