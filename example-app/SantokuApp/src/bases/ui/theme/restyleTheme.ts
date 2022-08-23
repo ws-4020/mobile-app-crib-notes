@@ -122,5 +122,4 @@ export const restyleTheme = createTheme({
   },
 });
 
-// TODO: QAアプリの作成後、もしくはpoc環境からの移行完了後に、Theme -> RestyleThemeに変更
-export type Theme = typeof restyleTheme;
+export type RestyleTheme = typeof restyleTheme;

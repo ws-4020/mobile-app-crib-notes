@@ -6,7 +6,7 @@ import {ThemeProvider as RNEThemeProvider} from 'react-native-elements';
 import {getReactNativeElementsTheme} from './ReactNativeElementsTheme';
 import {darkModeAppTheme} from './darkModeAppTheme';
 import {lightModeAppTheme} from './lightModeAppTheme';
-import {restyleTheme} from './theme';
+import {restyleTheme} from './restyleTheme';
 import {AppThemeContextProvider} from './useAppTheme';
 
 const getAppTheme = (colorScheme: ColorSchemeName) => (colorScheme === 'dark' ? darkModeAppTheme : lightModeAppTheme);

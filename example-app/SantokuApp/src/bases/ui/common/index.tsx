@@ -11,12 +11,12 @@ import {
   TextInputProps,
 } from 'react-native';
 
-import {Theme} from '../theme/theme';
+import {RestyleTheme} from '../theme/restyleTheme';
 
-export const Box = createBox<Theme>();
-export const Text = createText<Theme>();
-export const StyledTouchableOpacity = createBox<Theme, TouchableOpacityProps>(TouchableOpacity);
-export const StyledSafeAreaView = createBox<Theme, ViewProps>(SafeAreaView);
-export const StyledScrollView = createBox<Theme, ScrollViewProps>(ScrollView);
-export const StyledTextInputBase = createBox<Theme, TextInputProps>(TextInputBase);
-export const StyledTextInput = createBox<Theme, TextInputProps>(TextInput);
+export const Box = createBox<RestyleTheme>();
+export const Text = createText<RestyleTheme>();
+export const StyledTouchableOpacity = createBox<RestyleTheme, TouchableOpacityProps>(TouchableOpacity);
+export const StyledSafeAreaView = createBox<RestyleTheme, ViewProps>(SafeAreaView);
+export const StyledScrollView = createBox<RestyleTheme, ScrollViewProps>(ScrollView);
+export const StyledTextInputBase = createBox<RestyleTheme, TextInputProps>(TextInputBase);
+export const StyledTextInput = createBox<RestyleTheme, TextInputProps>(TextInput);
