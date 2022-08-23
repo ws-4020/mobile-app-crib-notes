@@ -1,19 +1,24 @@
 import {useNavigation} from '@react-navigation/native';
+import {CloseIllustration} from 'bases/ui/illastration/CloseIllustration';
 import React, {useCallback} from 'react';
 import {GestureResponderEvent, Platform} from 'react-native';
-import {Button} from 'react-native-elements';
+
+import {StyledTouchableOpacity} from '../../../bases/ui/common';
 
 type HeaderRightCloseButtonProps = {
-  tintColor?: string;
   onPress: (event: GestureResponderEvent) => void;
 };
 
-const HeaderRightCloseButton: React.FC<HeaderRightCloseButtonProps> = ({tintColor, onPress}) => {
+const HeaderCloseButton: React.FC<HeaderRightCloseButtonProps> = ({onPress}) => {
   if (Platform.OS === 'android') {
     return null;
   }
 
-  return <Button title="閉じる" type="clear" titleStyle={{color: tintColor}} onPress={onPress} />;
+  return (
+    <StyledTouchableOpacity onPress={onPress} p="p8">
+      <CloseIllustration />
+    </StyledTouchableOpacity>
+  );
 };
 
 type CloseThisNavigatorButtonProps = {
@@ -31,7 +36,7 @@ export const useCloseThisNavigatorButton = () => {
 
   // NativeStackNavigatorのheaderRightに合わせたコンポーネント。
   const CloseThisNavigatorButton: React.FC<CloseThisNavigatorButtonProps> = ({tintColor}: {tintColor?: string}) => (
-    <HeaderRightCloseButton tintColor={tintColor} onPress={closeThisNavigator} />
+    <HeaderCloseButton onPress={closeThisNavigator} />
   );
 
   return {CloseThisNavigatorButton};
