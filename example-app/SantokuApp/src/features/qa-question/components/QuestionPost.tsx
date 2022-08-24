@@ -58,9 +58,9 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({
         lineHeight={24}
         value={form.values.title}
         onChangeText={form.handleChange('title')}
+        errorMessage={form.errors.title}
         inputAccessoryViewID="markdown-toolbar"
       />
-      {form.errors.title && <Text color="textRed">{form.errors.title}</Text>}
       {templates.length > 0 && (
         <>
           <Box height={24} />
@@ -88,9 +88,9 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({
         lineHeight={21}
         value={form.values.content}
         onChangeText={form.handleChange('content')}
+        errorMessage={form.errors.content}
         inputAccessoryViewID="markdown-toolbar"
       />
-      {form.errors.content && <Text color="textRed">{form.errors.content}</Text>}
       <InputAccessoryView nativeID="markdown-toolbar">
         <MarkdownToolbar />
       </InputAccessoryView>
