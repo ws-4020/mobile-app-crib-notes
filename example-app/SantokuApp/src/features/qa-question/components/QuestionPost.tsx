@@ -5,7 +5,7 @@ import {BeginnerMarkIllustration} from 'bases/ui/illastration/BeginnerMarkIllust
 import {FormatAlignLeftIllustration} from 'bases/ui/illastration/FormatAlignLeftIllustration';
 import {MarkdownToolbar} from 'bases/ui/markdown/MarkdownToolbar';
 import React, {useCallback, useMemo} from 'react';
-import {InputAccessoryView} from 'react-native';
+import {InputAccessoryView, Platform} from 'react-native';
 
 import {useQuestionForm} from '../forms/useQuestionForm';
 import {useTemplates} from '../services/useTemplates';
@@ -78,9 +78,11 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({form, reset, setConte
         errorMessage={form.errors.content}
         inputAccessoryViewID="markdown-toolbar"
       />
-      <InputAccessoryView nativeID="markdown-toolbar">
-        <MarkdownToolbar />
-      </InputAccessoryView>
+      {Platform.OS === 'ios' && (
+        <InputAccessoryView nativeID="markdown-toolbar">
+          <MarkdownToolbar />
+        </InputAccessoryView>
+      )}
     </Box>
   );
 };
