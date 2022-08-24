@@ -7,26 +7,13 @@ import React, {useCallback, useState} from 'react';
 
 import {Tag} from './Tag';
 
-// TODO: Backendから取得します。
-const tags: TagType[] = [
-  {tagId: '1', tagName: '技術支援', questions: 1},
-  {tagId: '2', tagName: 'react-native', questions: 1},
-  {tagId: '3', tagName: 'typescript', questions: 1},
-  {tagId: '4', tagName: 'javascript', questions: 1},
-  {tagId: '5', tagName: 'aws', questions: 1},
-  {tagId: '6', tagName: 'nablarch', questions: 1},
-  {tagId: '7', tagName: 'flutter', questions: 1},
-  {tagId: '8', tagName: 'react', questions: 1},
-  {tagId: '9', tagName: 'mobile-application', questions: 1},
-  {tagId: '10', tagName: 'c', questions: 1},
-];
-
 type TagSheetProps = {
+  tags?: TagType[];
   isVisible: boolean;
   initialSelectedTagIds: string[];
   select: (tagIds: string[]) => void;
 };
-export const TagsSheet: React.FC<TagSheetProps> = ({isVisible, initialSelectedTagIds, select}) => {
+export const TagsSheet: React.FC<TagSheetProps> = ({tags, isVisible, initialSelectedTagIds, select}) => {
   const [selectedTagIds, setSelectedTagIds] = useState(initialSelectedTagIds);
   const selectTag = useCallback(
     (value: string) => {
@@ -65,7 +52,7 @@ export const TagsSheet: React.FC<TagSheetProps> = ({isVisible, initialSelectedTa
           </Box>
         </Box>
         <Box flex={1} marginTop="p24" flexDirection="row" flexWrap="wrap">
-          {tags.map(tag => (
+          {tags?.map(tag => (
             <StyledTouchableOpacity key={tag.tagId} marginBottom="p8" onPress={() => selectTag(tag.tagId)}>
               <Tag text={tag.tagName} isActive={isActive(tag.tagId)} />
             </StyledTouchableOpacity>

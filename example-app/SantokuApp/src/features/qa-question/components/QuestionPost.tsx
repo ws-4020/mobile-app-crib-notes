@@ -4,25 +4,20 @@ import {StyledTextInput} from 'bases/ui/common/StyledTextInput';
 import {BeginnerMarkIllustration} from 'bases/ui/illastration/BeginnerMarkIllustration';
 import {FormatAlignLeftIllustration} from 'bases/ui/illastration/FormatAlignLeftIllustration';
 import {MarkdownToolbar} from 'bases/ui/markdown/MarkdownToolbar';
-import {Template} from 'features/backend/apis/model';
 import React, {useCallback, useMemo} from 'react';
 import {InputAccessoryView} from 'react-native';
 
 import {useQuestionForm} from '../forms/useQuestionForm';
+import {useTemplates} from '../services/useTemplates';
 import {TemplateChip} from './TemplateChip';
 import {TemplateClearChip} from './TemplateClearChip';
-
-// TODO: Backendから取得します。
-const templates: Template[] = [
-  {templateId: '1', title: '技術', content: '技術コンテンツ'},
-  {templateId: '2', title: '提案', content: '提案コンテンツ'},
-];
 
 type QuestionPostProps = {
   isVisibleTagSheet: boolean;
 } & ReturnType<typeof useQuestionForm>;
 
 export const QuestionPost: React.FC<QuestionPostProps> = ({form, reset, setContent, setBeginner}) => {
+  const {data: templates} = useTemplates();
   const beginnerMarkOpacity = useMemo(() => (form.values.beginner ? 1 : 0.2), [form.values.beginner]);
   const toggleBeginner = useCallback(() => setBeginner(!form.values.beginner), [form.values.beginner, setBeginner]);
 
@@ -53,11 +48,11 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({form, reset, setConte
         errorMessage={form.errors.title}
         inputAccessoryViewID="markdown-toolbar"
       />
-      {templates.length > 0 && (
-        <>
-          <Box py="p12" />
-          <Box flexDirection="row" alignItems="center">
-            <FormatAlignLeftIllustration />
+      <Box py="p12" />
+      <Box flexDirection="row" alignItems="center" height={28}>
+        <FormatAlignLeftIllustration />
+        {templates?.length && (
+          <>
             <Box px="p4" />
             <StyledScrollView horizontal showsHorizontalScrollIndicator={false}>
               {templates.map((template, index) => (
@@ -68,11 +63,11 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({form, reset, setConte
               ))}
               <TemplateClearChip onPress={reset} />
             </StyledScrollView>
-          </Box>
-        </>
-      )}
+          </>
+        )}
+      </Box>
+      <Box py="p12" />
       <StyledTextInput
-        marginTop="p24"
         placeholder={m('コメントを入力')}
         multiline
         fontSize={14}

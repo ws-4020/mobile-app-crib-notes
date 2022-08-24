@@ -4,15 +4,17 @@ import {
   ColorProps,
   createRestyleComponent,
   createVariant,
+  ResponsiveValue,
   TextShadowProps,
   TypographyProps,
   VariantProps,
 } from '@shopify/restyle';
-import React from 'react';
-import {ActivityIndicator, TouchableOpacity, TouchableOpacityProps} from 'react-native';
+import React, {useMemo} from 'react';
+import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
 
 import {RestyleTheme} from '../theme/restyleTheme';
-import {Text} from './index';
+import {StyledActivityIndicator} from './StyledActivityIndicator';
+import {Box, Text} from './index';
 
 const variant = createVariant<RestyleTheme, 'buttonVariants'>({themeKey: 'buttonVariants'});
 type BaseButtonProps = VariantProps<RestyleTheme, 'buttonVariants'> & BoxProps<RestyleTheme> & TouchableOpacityProps;
@@ -26,6 +28,7 @@ export type ButtonProps = BaseButtonProps & {
   title?: string;
   isLoading?: boolean;
   textVariant?: TextVariantsProps;
+  activityIndicatorColor?: ResponsiveValue<keyof RestyleTheme['colors'], RestyleTheme>;
 } & ColorProps<RestyleTheme> &
   TypographyProps<RestyleTheme> &
   TextShadowProps<RestyleTheme>;
@@ -46,34 +49,43 @@ export const StyledButton: React.FC<ButtonProps> = ({
   textShadowOffset,
   textShadowRadius,
   textVariant = 'button',
+  activityIndicatorColor = 'activityIndicator',
   children,
   ...rest
 }) => {
+  const contentOpacity = useMemo(() => (isLoading ? 0 : 1), [isLoading]);
   return (
-    <BaseButton {...rest}>
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : children ? (
-        children
-      ) : (
-        <Text
-          color={color}
-          fontFamily={fontFamily}
-          fontSize={fontSize}
-          fontStyle={fontStyle}
-          fontWeight={fontWeight}
-          letterSpacing={letterSpacing}
-          lineHeight={lineHeight}
-          textAlign={textAlign}
-          textDecorationLine={textDecorationLine}
-          textDecorationStyle={textDecorationStyle}
-          textTransform={textTransform}
-          textShadowOffset={textShadowOffset}
-          textShadowRadius={textShadowRadius}
-          variant={textVariant}>
-          {title}
-        </Text>
+    <Box>
+      <BaseButton {...rest}>
+        {children ? (
+          children
+        ) : (
+          <Box opacity={contentOpacity}>
+            <Text
+              color={color}
+              fontFamily={fontFamily}
+              fontSize={fontSize}
+              fontStyle={fontStyle}
+              fontWeight={fontWeight}
+              letterSpacing={letterSpacing}
+              lineHeight={lineHeight}
+              textAlign={textAlign}
+              textDecorationLine={textDecorationLine}
+              textDecorationStyle={textDecorationStyle}
+              textTransform={textTransform}
+              textShadowOffset={textShadowOffset}
+              textShadowRadius={textShadowRadius}
+              variant={textVariant}>
+              {title}
+            </Text>
+          </Box>
+        )}
+      </BaseButton>
+      {isLoading && (
+        <Box flex={1} position="absolute" top={0} bottom={0} left={0} right={0} justifyContent="center">
+          <StyledActivityIndicator color={activityIndicatorColor} />
+        </Box>
       )}
-    </BaseButton>
+    </Box>
   );
 };

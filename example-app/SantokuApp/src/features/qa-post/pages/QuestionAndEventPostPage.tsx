@@ -2,27 +2,35 @@ import {m} from 'bases/message/Message';
 import {Box, StyledSafeAreaView, StyledTouchableOpacity} from 'bases/ui/common';
 import {StyledButton} from 'bases/ui/common/StyledButton';
 import {TagIllustration} from 'bases/ui/illastration/TagIllustration';
-import {Spacer} from 'bases/ui/spacer/Spacer';
 import {Tab} from 'bases/ui/tab/Tab';
 import {TabBar} from 'bases/ui/tab/TabBar';
 import {EventPost} from 'features/qa-event/components/EventPost';
 import {QuestionPost} from 'features/qa-question/components/QuestionPost';
 import {TagsSheet} from 'features/qa-question/components/TagsSheet';
 import {QuestionFormValues, useQuestionForm} from 'features/qa-question/forms/useQuestionForm';
+import {useQuestionCommands} from 'features/qa-question/services/useQuestionCommands';
+import {useTags} from 'features/qa-question/services/useTags';
 import React, {useCallback, useState} from 'react';
 import {Alert} from 'react-native';
 
 type QuestionAndEventPostPageProps = {
   setNavigationOptions: (options: {headerRight: () => React.ReactNode}) => void;
+  goBack: () => void;
 };
 
-export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> = ({setNavigationOptions}) => {
+export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> = ({setNavigationOptions, goBack}) => {
+  const {data: tags} = useTags();
+  const {post: postQuestion, isPosting: isQuestionPosting} = useQuestionCommands();
   const [isVisibleTagSheet, setIsVisibleTagSheet] = useState<boolean>(false);
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 
-  const postQuestion = useCallback(async (values: QuestionFormValues) => {
-    // TODO: Backendに投稿します。
-  }, []);
+  const submitQuestion = useCallback(
+    async (values: QuestionFormValues) => {
+      await postQuestion({data: values});
+      goBack();
+    },
+    [goBack, postQuestion],
+  );
 
   const {
     form: questionForm,
@@ -30,7 +38,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
     setContent: setQuestionContent,
     setTags: setQuestionTags,
     setBeginner: setQuestionBeginner,
-  } = useQuestionForm({onSubmit: postQuestion});
+  } = useQuestionForm({onSubmit: submitQuestion});
 
   const showTagsSheet = useCallback(() => {
     setIsVisibleTagSheet(true);
@@ -65,11 +73,13 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
     [resetQuestionForm, questionForm.values.content, questionForm.values.title],
   );
 
-  const post = useCallback(() => {
+  const post = useCallback(async () => {
     if (selectedTabIndex === 0) {
-      questionForm.submitForm().catch(() => {
-        // エラーハンドリングはpostQuestionで実施しているので、ここでは何もしない
-      });
+      try {
+        await questionForm.submitForm();
+      } catch {
+        // エラーハンドリングは共通で実施しているので、ここでは何もしない
+      }
     }
   }, [questionForm, selectedTabIndex]);
 
@@ -83,13 +93,13 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
                 <TagIllustration padding="p8" color="blue" />
               </StyledTouchableOpacity>
             )}
-            <Spacer widthRatio={0.05} />
-            <StyledButton title={m('投稿')} onPress={post} />
+            <Box px="p8" />
+            <StyledButton title={m('投稿')} onPress={post} isLoading={isQuestionPosting} disabled={isQuestionPosting} />
           </Box>
         );
       },
     });
-  }, [post, selectedTabIndex, setNavigationOptions, showTagsSheet]);
+  }, [isQuestionPosting, post, selectedTabIndex, setNavigationOptions, showTagsSheet]);
 
   return (
     <>
@@ -110,7 +120,12 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
           </Tab>
         </TabBar>
       </StyledSafeAreaView>
-      <TagsSheet isVisible={isVisibleTagSheet} initialSelectedTagIds={questionForm.values.tags} select={selectTags} />
+      <TagsSheet
+        tags={tags}
+        isVisible={isVisibleTagSheet}
+        initialSelectedTagIds={questionForm.values.tags}
+        select={selectTags}
+      />
     </>
   );
 };

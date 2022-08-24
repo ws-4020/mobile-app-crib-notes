@@ -11,5 +11,6 @@ export const QuestionAndEventPostScreen: React.VFC<
     (options: NativeStackNavigationOptions) => navigation.setOptions(options),
     [navigation],
   );
-  return <QuestionAndEventPostPage setNavigationOptions={setNavigationOptions} />;
+  const goBack = useCallback(() => navigation.goBack(), [navigation]);
+  return <QuestionAndEventPostPage setNavigationOptions={setNavigationOptions} goBack={goBack} />;
 };

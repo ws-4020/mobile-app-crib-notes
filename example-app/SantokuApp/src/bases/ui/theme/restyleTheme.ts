@@ -28,6 +28,7 @@ export const restyleTheme = createTheme({
     textRed: palette.textRed,
     placeholder: palette.grey4,
     errorText: palette.textRed,
+    activityIndicator: palette.grey2,
   },
   spacing: {
     s: 8,

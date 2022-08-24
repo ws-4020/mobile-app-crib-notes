@@ -9,7 +9,7 @@ type TemplateChipProps = {
 
 export const TemplateChip: React.FC<TemplateChipProps> = ({text, isActive, onPress}) => (
   <StyledTouchableOpacity onPress={onPress}>
-    <Box paddingHorizontal="p12" paddingVertical="p4" backgroundColor={isActive ? 'grey1' : 'grey2'} borderRadius="p16">
+    <Box px="p12" py="p4" backgroundColor={isActive ? 'grey1' : 'grey2'} borderRadius="p16">
       <Text fontSize={14} lineHeight={20}>
         {text}
       </Text>
