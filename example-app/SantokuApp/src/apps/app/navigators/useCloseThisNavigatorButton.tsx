@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {CloseIllustration} from 'bases/ui/illastration/CloseIllustration';
 import React, {useCallback} from 'react';
-import {GestureResponderEvent, Platform} from 'react-native';
+import {GestureResponderEvent} from 'react-native';
 
 import {StyledTouchableOpacity} from '../../../bases/ui/common';
 
@@ -10,10 +10,6 @@ type HeaderRightCloseButtonProps = {
 };
 
 const HeaderCloseButton: React.FC<HeaderRightCloseButtonProps> = ({onPress}) => {
-  if (Platform.OS === 'android') {
-    return null;
-  }
-
   return (
     <StyledTouchableOpacity onPress={onPress} p="p8">
       <CloseIllustration />
