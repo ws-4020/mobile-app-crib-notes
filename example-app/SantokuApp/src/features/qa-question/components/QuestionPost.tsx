@@ -9,7 +9,6 @@ import React, {useCallback, useMemo} from 'react';
 import {InputAccessoryView} from 'react-native';
 
 import {useQuestionForm} from '../forms/useQuestionForm';
-import {TagsSheet} from './TagsSheet';
 import {TemplateChip} from './TemplateChip';
 import {TemplateClearChip} from './TemplateClearChip';
 
@@ -23,14 +22,7 @@ type QuestionPostProps = {
   isVisibleTagSheet: boolean;
 } & ReturnType<typeof useQuestionForm>;
 
-export const QuestionPost: React.FC<QuestionPostProps> = ({
-  isVisibleTagSheet,
-  form,
-  reset,
-  setContent,
-  setTags,
-  setBeginner,
-}) => {
+export const QuestionPost: React.FC<QuestionPostProps> = ({form, reset, setContent, setBeginner}) => {
   const beginnerMarkOpacity = useMemo(() => (form.values.beginner ? 1 : 0.2), [form.values.beginner]);
   const toggleBeginner = useCallback(() => setBeginner(!form.values.beginner), [form.values.beginner, setBeginner]);
 
@@ -44,7 +36,7 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({
         <StyledTouchableOpacity onPress={toggleBeginner}>
           <BeginnerMarkIllustration opacity={beginnerMarkOpacity} />
         </StyledTouchableOpacity>
-        <Box width={8} />
+        <Box px="p4" />
         <Text fontSize={13} lineHeight={19.5}>
           {m('初歩的な質問内容の場合はチェックしてください')}
         </Text>
@@ -63,15 +55,15 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({
       />
       {templates.length > 0 && (
         <>
-          <Box height={24} />
+          <Box py="p12" />
           <Box flexDirection="row" alignItems="center">
             <FormatAlignLeftIllustration />
-            <Box width={8} />
+            <Box px="p4" />
             <StyledScrollView horizontal showsHorizontalScrollIndicator={false}>
               {templates.map((template, index) => (
                 <Box key={template.templateId} flexDirection="row">
                   <TemplateChip text={template.title} onPress={() => setContent(template.content)} />
-                  {index < templates.length - 1 && <Box width={8} />}
+                  {index < templates.length - 1 && <Box px="p4" />}
                 </Box>
               ))}
               <TemplateClearChip onPress={reset} />
@@ -94,7 +86,6 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({
       <InputAccessoryView nativeID="markdown-toolbar">
         <MarkdownToolbar />
       </InputAccessoryView>
-      <TagsSheet isVisible={isVisibleTagSheet} initialSelectedTagIds={form.values.tags} select={setTags} />
     </Box>
   );
 };

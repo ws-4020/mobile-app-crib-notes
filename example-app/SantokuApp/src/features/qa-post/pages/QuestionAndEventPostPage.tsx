@@ -7,6 +7,7 @@ import {Tab} from 'bases/ui/tab/Tab';
 import {TabBar} from 'bases/ui/tab/TabBar';
 import {EventPost} from 'features/qa-event/components/EventPost';
 import {QuestionPost} from 'features/qa-question/components/QuestionPost';
+import {TagsSheet} from 'features/qa-question/components/TagsSheet';
 import {QuestionFormValues, useQuestionForm} from 'features/qa-question/forms/useQuestionForm';
 import React, {useCallback, useState} from 'react';
 import {Alert} from 'react-native';
@@ -31,9 +32,17 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
     setBeginner: setQuestionBeginner,
   } = useQuestionForm({onSubmit: postQuestion});
 
-  const showTagSheet = useCallback(() => {
+  const showTagsSheet = useCallback(() => {
     setIsVisibleTagSheet(true);
   }, []);
+
+  const selectTags = useCallback(
+    async (tagIds: string[]) => {
+      await setQuestionTags(tagIds);
+      setIsVisibleTagSheet(false);
+    },
+    [setQuestionTags],
+  );
 
   const changeTab = useCallback(
     (index: number) => {
@@ -70,8 +79,8 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
         return (
           <Box flexDirection="row" alignItems="center">
             {selectedTabIndex === 0 && (
-              <StyledTouchableOpacity onPress={showTagSheet} p="p8">
-                <TagIllustration padding="p8" />
+              <StyledTouchableOpacity onPress={showTagsSheet} p="p8">
+                <TagIllustration padding="p8" color="blue" />
               </StyledTouchableOpacity>
             )}
             <Spacer widthRatio={0.05} />
@@ -80,25 +89,28 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
         );
       },
     });
-  }, [post, selectedTabIndex, setNavigationOptions, showTagSheet]);
+  }, [post, selectedTabIndex, setNavigationOptions, showTagsSheet]);
 
   return (
-    <StyledSafeAreaView flex={1} backgroundColor="white" testID="QuestionAndEventPostPage">
-      <TabBar selectedIndex={selectedTabIndex} onChange={changeTab}>
-        <Tab text={m('質問を投稿')}>
-          <QuestionPost
-            isVisibleTagSheet={isVisibleTagSheet}
-            form={questionForm}
-            reset={resetQuestionForm}
-            setContent={setQuestionContent}
-            setTags={setQuestionTags}
-            setBeginner={setQuestionBeginner}
-          />
-        </Tab>
-        <Tab text={m('イベントを告知')}>
-          <EventPost />
-        </Tab>
-      </TabBar>
-    </StyledSafeAreaView>
+    <>
+      <StyledSafeAreaView flex={1} backgroundColor="white" testID="QuestionAndEventPostPage">
+        <TabBar selectedIndex={selectedTabIndex} onChange={changeTab}>
+          <Tab text={m('質問を投稿')}>
+            <QuestionPost
+              isVisibleTagSheet={isVisibleTagSheet}
+              form={questionForm}
+              reset={resetQuestionForm}
+              setContent={setQuestionContent}
+              setTags={setQuestionTags}
+              setBeginner={setQuestionBeginner}
+            />
+          </Tab>
+          <Tab text={m('イベントを告知')}>
+            <EventPost />
+          </Tab>
+        </TabBar>
+      </StyledSafeAreaView>
+      <TagsSheet isVisible={isVisibleTagSheet} initialSelectedTagIds={questionForm.values.tags} select={selectTags} />
+    </>
   );
 };
