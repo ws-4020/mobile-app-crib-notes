@@ -39,6 +39,7 @@ export const useQuestionForm = (params: QuestionFormParams = {onSubmit: () => {}
   const setContent = useCallback((value: string) => form.setFieldValue('content', value), [form]);
   const setTags = useCallback((value: string[]) => form.setFieldValue('tags', value), [form]);
   const setBeginner = useCallback((value: boolean) => form.setFieldValue('beginner', value), [form]);
+  const clearContent = useCallback(() => setContent(''), [setContent]);
 
-  return {form, reset, setContent, setTags, setBeginner};
+  return {form, reset, setContent, setTags, setBeginner, clearContent};
 };

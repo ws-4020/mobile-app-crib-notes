@@ -16,7 +16,7 @@ type QuestionPostProps = {
   isVisibleTagSheet: boolean;
 } & ReturnType<typeof useQuestionForm>;
 
-export const QuestionPost: React.FC<QuestionPostProps> = ({form, reset, setContent, setBeginner}) => {
+export const QuestionPost: React.FC<QuestionPostProps> = ({form, reset, setContent, setBeginner, clearContent}) => {
   const {data: templates} = useTemplates();
   const beginnerMarkOpacity = useMemo(() => (form.values.beginner ? 1 : 0.2), [form.values.beginner]);
   const toggleBeginner = useCallback(() => setBeginner(!form.values.beginner), [form.values.beginner, setBeginner]);
@@ -61,7 +61,7 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({form, reset, setConte
                   {index < templates.length - 1 && <Box px="p4" />}
                 </Box>
               ))}
-              <TemplateClearChip onPress={reset} />
+              <TemplateClearChip onPress={clearContent} />
             </StyledScrollView>
           </>
         )}

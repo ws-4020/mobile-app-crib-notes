@@ -38,6 +38,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
     setContent: setQuestionContent,
     setTags: setQuestionTags,
     setBeginner: setQuestionBeginner,
+    clearContent: clearQuestionContent,
   } = useQuestionForm({onSubmit: submitQuestion});
 
   const showTagsSheet = useCallback(() => {
@@ -113,6 +114,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
               setContent={setQuestionContent}
               setTags={setQuestionTags}
               setBeginner={setQuestionBeginner}
+              clearContent={clearQuestionContent}
             />
           </Tab>
           <Tab text={m('イベントを告知')}>
