@@ -4,8 +4,8 @@ import {StyledTextInput} from 'bases/ui/common/StyledTextInput';
 import {BeginnerMarkIllustration} from 'bases/ui/illastration/BeginnerMarkIllustration';
 import {FormatAlignLeftIllustration} from 'bases/ui/illastration/FormatAlignLeftIllustration';
 import {MarkdownToolbar} from 'bases/ui/markdown/MarkdownToolbar';
-import React, {useCallback, useMemo} from 'react';
-import {InputAccessoryView, Platform} from 'react-native';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import {InputAccessoryView, Keyboard, Platform} from 'react-native';
 
 import {useQuestionForm} from '../forms/useQuestionForm';
 import {useTemplates} from '../services/useTemplates';
@@ -21,8 +21,19 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({form, setContent, set
   const beginnerMarkOpacity = useMemo(() => (form.values.beginner ? 1 : 0.2), [form.values.beginner]);
   const toggleBeginner = useCallback(() => setBeginner(!form.values.beginner), [form.values.beginner, setBeginner]);
 
+  const [keyboardHeight, setKeyboardHeight] = useState<number>();
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardWillShow', e => setKeyboardHeight(e.endCoordinates.height));
+    const hideSubscription = Keyboard.addListener('keyboardWillHide', () => setKeyboardHeight(0));
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
+
   return (
-    <StyledScrollView pt="p16" px="p24">
+    <StyledScrollView pt="p16" px="p24" contentInset={{bottom: Platform.select({ios: keyboardHeight})}}>
       <Text fontSize={16} lineHeight={24} color="textRed">
         {m('TISインテックグループで共同利用されるため、社外秘情報（画像含む）を投稿しないでください')}
       </Text>
@@ -73,7 +84,6 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({form, setContent, set
         fontSize={14}
         fontWeight="700"
         lineHeight={21}
-        height={Platform.select({ios: 200})}
         value={form.values.content}
         onChangeText={form.handleChange('content')}
         errorMessage={form.errors.content}
