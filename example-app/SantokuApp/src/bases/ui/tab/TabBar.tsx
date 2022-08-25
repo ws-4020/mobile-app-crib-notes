@@ -14,12 +14,13 @@ export const TabBar: React.FC<TabBarProps> = ({children: source, selectedIndex, 
     <>
       <Box flexDirection="row">
         {children.map((item, index) => {
+          const isActive = item.props.isActive ?? index === selectedIndex;
           return (
             <Tab
               key={index}
-              isActive={item.props.isActive ?? index === selectedIndex}
+              isActive={item.props.isActive ?? isActive}
               text={item.props.text}
-              onPress={item.props.onPress ?? (() => onChange(index))}
+              onPress={item.props.onPress ?? !isActive ? () => onChange(index) : undefined}
             />
           );
         })}

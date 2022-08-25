@@ -18,7 +18,8 @@ export const Tab = ({isActive, text, onPress}: TabProps) => (
     padding="p8"
     onPress={onPress}
     borderBottomColor={isActive ? 'orange1' : 'divider'}
-    borderBottomWidth={isActive ? 2 : 1}>
+    borderBottomWidth={isActive ? 2 : 1}
+    disabled={isActive}>
     <Text fontSize={16} lineHeight={24} fontWeight="700" color={isActive ? 'black' : 'grey1'}>
       {text}
     </Text>
