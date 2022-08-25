@@ -104,11 +104,9 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
     });
   }, [isQuestionPosting, post, selectedTabIndex, setNavigationOptions, showTagsSheet]);
 
-  const [pageHeight, setPageHeight] = useState(0);
-
   return (
     <>
-      <Container flex={1} onLayout={e => setPageHeight(e.nativeEvent.layout.height)} testID="QuestionAndEventPostPage">
+      <Container flex={1} testID="QuestionAndEventPostPage">
         <TabBar selectedIndex={selectedTabIndex} onChange={changeTab}>
           <Tab text={m('質問を投稿')}>
             <QuestionPost
@@ -119,7 +117,6 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
               setTags={setQuestionTags}
               setBeginner={setQuestionBeginner}
               clearContent={clearQuestionContent}
-              pageHeight={pageHeight}
             />
           </Tab>
           <Tab text={m('イベントを告知')}>
