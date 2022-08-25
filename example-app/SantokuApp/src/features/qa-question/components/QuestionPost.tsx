@@ -7,6 +7,7 @@ import {MarkdownToolbar} from 'bases/ui/markdown/MarkdownToolbar';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {InputAccessoryView, Keyboard, Platform} from 'react-native';
 
+import {StyledActivityIndicator} from '../../../bases/ui/common/StyledActivityIndicator';
 import {useQuestionForm} from '../forms/useQuestionForm';
 import {useTemplates} from '../services/useTemplates';
 import {TemplateChip} from './TemplateChip';
@@ -17,7 +18,7 @@ type QuestionPostProps = {
 } & ReturnType<typeof useQuestionForm>;
 
 export const QuestionPost: React.FC<QuestionPostProps> = ({form, setContent, setBeginner, clearContent}) => {
-  const {data: templates} = useTemplates();
+  const {data: templates, isFetching: isTemplatesFetching} = useTemplates();
   const beginnerMarkOpacity = useMemo(() => (form.values.beginner ? 1 : 0.2), [form.values.beginner]);
   const toggleBeginner = useCallback(() => setBeginner(!form.values.beginner), [form.values.beginner, setBeginner]);
 
@@ -62,19 +63,19 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({form, setContent, set
       <Box py="p12" />
       <Box flexDirection="row" alignItems="center" height={28}>
         <FormatAlignLeftIllustration />
-        {templates?.length && (
-          <>
-            <Box px="p4" />
-            <StyledScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {templates.map((template, index) => (
-                <Box key={template.templateId} flexDirection="row">
-                  <TemplateChip text={template.title} onPress={() => setContent(template.content)} />
-                  {index < templates.length - 1 && <Box px="p4" />}
-                </Box>
-              ))}
-              <TemplateClearChip onPress={clearContent} />
-            </StyledScrollView>
-          </>
+        <Box px="p4" />
+        {isTemplatesFetching ? (
+          <StyledActivityIndicator />
+        ) : (
+          <StyledScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {templates?.map((template, index) => (
+              <Box key={template.templateId} flexDirection="row">
+                <TemplateChip text={template.title} onPress={() => setContent(template.content)} />
+                {index < templates.length - 1 && <Box px="p4" />}
+              </Box>
+            ))}
+            <TemplateClearChip onPress={clearContent} />
+          </StyledScrollView>
         )}
       </Box>
       <Box py="p12" />
