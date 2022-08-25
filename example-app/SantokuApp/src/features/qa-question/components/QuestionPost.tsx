@@ -91,6 +91,7 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({form, setContent, set
         textAlignVertical="top"
       />
       <Box py="p48" />
+      {/* TODO: Androidのマークダウンツールバーは未対応 */}
       {Platform.OS === 'ios' && (
         <InputAccessoryView nativeID="markdown-toolbar">
           <MarkdownToolbar />
