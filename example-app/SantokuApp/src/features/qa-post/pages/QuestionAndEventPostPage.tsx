@@ -1,5 +1,5 @@
 import {m} from 'bases/message/Message';
-import {Box, StyledSafeAreaView, StyledTouchableOpacity} from 'bases/ui/common';
+import {Box, StyledTouchableOpacity} from 'bases/ui/common';
 import {StyledButton} from 'bases/ui/common/StyledButton';
 import {TagIllustration} from 'bases/ui/illastration/TagIllustration';
 import {Tab} from 'bases/ui/tab/Tab';
@@ -12,6 +12,8 @@ import {useQuestionCommands} from 'features/qa-question/services/useQuestionComm
 import {useTags} from 'features/qa-question/services/useTags';
 import React, {useCallback, useState} from 'react';
 import {Alert} from 'react-native';
+
+import {Container} from '../components/Container';
 
 type QuestionAndEventPostPageProps = {
   setNavigationOptions: (options: {headerRight: () => React.ReactNode}) => void;
@@ -102,9 +104,11 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
     });
   }, [isQuestionPosting, post, selectedTabIndex, setNavigationOptions, showTagsSheet]);
 
+  const [pageHeight, setPageHeight] = useState(0);
+
   return (
     <>
-      <StyledSafeAreaView flex={1} backgroundColor="white" testID="QuestionAndEventPostPage">
+      <Container flex={1} onLayout={e => setPageHeight(e.nativeEvent.layout.height)} testID="QuestionAndEventPostPage">
         <TabBar selectedIndex={selectedTabIndex} onChange={changeTab}>
           <Tab text={m('質問を投稿')}>
             <QuestionPost
@@ -115,13 +119,14 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
               setTags={setQuestionTags}
               setBeginner={setQuestionBeginner}
               clearContent={clearQuestionContent}
+              pageHeight={pageHeight}
             />
           </Tab>
           <Tab text={m('イベントを告知')}>
             <EventPost />
           </Tab>
         </TabBar>
-      </StyledSafeAreaView>
+      </Container>
       <TagsSheet
         tags={tags}
         isVisible={isVisibleTagSheet}

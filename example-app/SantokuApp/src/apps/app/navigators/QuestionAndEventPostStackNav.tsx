@@ -14,7 +14,12 @@ export const QuestionAndEventPostStackNav: React.VFC = () => {
       <nav.Screen
         name="QuestionAndEventPost"
         component={QuestionAndEventPostScreen}
-        options={{headerTitle: '', headerLeft: CloseThisNavigatorButton, headerShadowVisible: false}}
+        options={{
+          headerTitle: '',
+          headerLeft: CloseThisNavigatorButton,
+          headerShadowVisible: false,
+          contentStyle: {backgroundColor: '#fff'},
+        }}
       />
     </nav.Navigator>
   );

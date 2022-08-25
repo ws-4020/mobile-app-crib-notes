@@ -4,8 +4,8 @@ import {StyledTextInput} from 'bases/ui/common/StyledTextInput';
 import {BeginnerMarkIllustration} from 'bases/ui/illastration/BeginnerMarkIllustration';
 import {FormatAlignLeftIllustration} from 'bases/ui/illastration/FormatAlignLeftIllustration';
 import {MarkdownToolbar} from 'bases/ui/markdown/MarkdownToolbar';
-import React, {useCallback, useMemo} from 'react';
-import {InputAccessoryView, Platform} from 'react-native';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import {InputAccessoryView, Keyboard, Platform} from 'react-native';
 
 import {useQuestionForm} from '../forms/useQuestionForm';
 import {useTemplates} from '../services/useTemplates';
@@ -14,15 +14,36 @@ import {TemplateClearChip} from './TemplateClearChip';
 
 type QuestionPostProps = {
   isVisibleTagSheet: boolean;
+  pageHeight: number;
+  contentMaxHeight?: number;
 } & ReturnType<typeof useQuestionForm>;
 
-export const QuestionPost: React.FC<QuestionPostProps> = ({form, setContent, setBeginner, clearContent}) => {
+export const QuestionPost: React.FC<QuestionPostProps> = ({
+  form,
+  setContent,
+  setBeginner,
+  clearContent,
+  pageHeight,
+}) => {
   const {data: templates} = useTemplates();
   const beginnerMarkOpacity = useMemo(() => (form.values.beginner ? 1 : 0.2), [form.values.beginner]);
   const toggleBeginner = useCallback(() => setBeginner(!form.values.beginner), [form.values.beginner, setBeginner]);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const contentHeight = useMemo(
+    () => (keyboardHeight === 0 ? undefined : pageHeight - keyboardHeight),
+    [keyboardHeight, pageHeight],
+  );
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', e => setKeyboardHeight(e.endCoordinates.height));
+    const hideSubscription = Keyboard.addListener('keyboardWillHide', () => setKeyboardHeight(0));
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
   return (
-    <Box paddingTop="p16" paddingHorizontal="p24">
+    <StyledScrollView pt="p16" px="p24">
       <Text fontSize={16} lineHeight={24} color="textRed">
         {m('TISインテックグループで共同利用されるため、社外秘情報（画像含む）を投稿しないでください')}
       </Text>
@@ -73,16 +94,20 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({form, setContent, set
         fontSize={14}
         fontWeight="700"
         lineHeight={21}
+        height={Platform.select({ios: contentHeight})}
+        minHeight={Platform.select({ios: 300})}
         value={form.values.content}
         onChangeText={form.handleChange('content')}
         errorMessage={form.errors.content}
         inputAccessoryViewID="markdown-toolbar"
+        textAlignVertical="top"
       />
+      <Box py="p48" />
       {Platform.OS === 'ios' && (
         <InputAccessoryView nativeID="markdown-toolbar">
           <MarkdownToolbar />
         </InputAccessoryView>
       )}
-    </Box>
+    </StyledScrollView>
   );
 };
