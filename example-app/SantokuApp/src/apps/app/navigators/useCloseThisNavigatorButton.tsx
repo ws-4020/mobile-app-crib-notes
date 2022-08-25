@@ -1,9 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
+import {StyledTouchableOpacity} from 'bases/ui/common';
 import {CloseIllustration} from 'bases/ui/illastration/CloseIllustration';
 import React, {useCallback} from 'react';
 import {GestureResponderEvent} from 'react-native';
-
-import {StyledTouchableOpacity} from '../../../bases/ui/common';
 
 type HeaderRightCloseButtonProps = {
   onPress: (event: GestureResponderEvent) => void;
