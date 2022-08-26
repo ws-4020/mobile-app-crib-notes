@@ -178,7 +178,7 @@ export default PushNotification;
 
 Android8.0（APIレベル26）以降では、プッシュ通知はすべて通知チャンネルに割り当てる必要があります。通知チャンネルごとに、[重要度](https://developer.android.com/training/notify-user/channels?hl=ja#importance)や表示・鳴動動作などを設定できます。
 
-React Native Firebaseは、デフォルトで`Miscellaneous`というチャンネルを作成します。このチャンネルは、デフォルトの重要度が高（IMPORTANCE_HIGH）となっており、そのままではヘッドアップ通知が表示されません。
+React Native Firebaseは、デフォルトで`Miscellaneous`というチャンネルを作成します。このチャンネルは、デフォルトの重要度が高（IMPORTANCE_DEFAULT）となっており、そのままではヘッドアップ通知が表示されません。
 そのため、ヘッドアップ通知を表示したい場合などは、クライアントアプリ側で通知チャンネルを作成する必要があります。
 
 React Native Firebaseには、通知チャンネルを作成する機能がないため、[Notifee](https://notifee.app/)というライブラリをインストールします。
