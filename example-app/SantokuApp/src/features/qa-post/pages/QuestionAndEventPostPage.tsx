@@ -1,7 +1,7 @@
 import {m} from 'bases/message/Message';
 import {Box, StyledSafeAreaView, StyledTouchableOpacity} from 'bases/ui/common';
 import {StyledButton} from 'bases/ui/common/StyledButton';
-import {TagIllustration} from 'bases/ui/illastration/TagIllustration';
+import {TagIllustration} from 'bases/ui/illustration/TagIllustration';
 import {Tab} from 'bases/ui/tab/Tab';
 import {TabBar} from 'bases/ui/tab/TabBar';
 import {EventPost} from 'features/qa-event/components/EventPost';

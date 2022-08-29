@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {StyledTouchableOpacity} from 'bases/ui/common';
-import {CloseIllustration} from 'bases/ui/illastration/CloseIllustration';
+import {CloseIllustration} from 'bases/ui/illustration/CloseIllustration';
 import React, {useCallback} from 'react';
 import {GestureResponderEvent} from 'react-native';
 

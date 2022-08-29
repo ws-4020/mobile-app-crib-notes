@@ -1,7 +1,7 @@
 import {m} from 'bases/message/Message';
 import {BottomSheet} from 'bases/ui/bottom-sheet/BottomSheet';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
-import {TagIllustration} from 'bases/ui/illastration/TagIllustration';
+import {TagIllustration} from 'bases/ui/illustration/TagIllustration';
 import {Tag as TagType} from 'features/backend/apis/model';
 import React, {useCallback, useState} from 'react';
 
