@@ -156,9 +156,9 @@ export const PushNotificationPage: React.FC = () => {
         </View>
         <View>
           <Text>【通知設定】</Text>
-          <Text>OSのPush通知設定画面に遷移します</Text>
+          <Text>OSのアプリ設定画面に遷移します</Text>
           <View style={styles.elementContainer}>
-            <Button onPress={openSettings} title="Push通知の設定" />
+            <Button onPress={openSettings} title="アプリの設定画面を開く" />
           </View>
         </View>
       </ScrollView>
