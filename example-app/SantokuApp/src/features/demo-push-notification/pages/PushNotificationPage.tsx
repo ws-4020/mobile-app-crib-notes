@@ -15,7 +15,7 @@ import {notifyMessageToMe as callNotifyMessageToMe} from '../services/notifyMess
 import {openSettings} from '../services/openSettings';
 import {requestUserPermission as requestUserPermissionService} from '../services/requestUserPermission';
 
-type AuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
+type PermissionAuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
 
 const channels = [
   {value: undefined, label: 'no channel'},
@@ -26,7 +26,7 @@ const channels = [
 ];
 
 export const PushNotificationPage: React.FC = () => {
-  const [authStatus, setAuthStatus] = useState<AuthStatusType>();
+  const [permissionAuthStatus, setPermissionAuthStatus] = useState<PermissionAuthStatusType>();
   const [token, setToken] = useState<string>();
 
   const [channelKey, setChannelKey] = useState<string>();
@@ -34,30 +34,33 @@ export const PushNotificationPage: React.FC = () => {
     setChannelKey(selectedItem?.value);
   }, []);
 
-  const getPermissionStatusForDisplay = useCallback((authStatus: FirebaseMessagingTypes.AuthorizationStatus) => {
-    switch (authStatus) {
-      case messaging.AuthorizationStatus.NOT_DETERMINED:
-        return 'NOT_DETERMINED';
-      case messaging.AuthorizationStatus.DENIED:
-        return 'DENIED';
-      case messaging.AuthorizationStatus.AUTHORIZED:
-        return 'AUTHORIZED';
-      case messaging.AuthorizationStatus.PROVISIONAL:
-        return 'PROVISIONAL';
-    }
-  }, []);
+  const getPermissionAuthStatusForDisplay = useCallback(
+    (permissionAuthStatus: FirebaseMessagingTypes.AuthorizationStatus) => {
+      switch (permissionAuthStatus) {
+        case messaging.AuthorizationStatus.NOT_DETERMINED:
+          return 'NOT_DETERMINED';
+        case messaging.AuthorizationStatus.DENIED:
+          return 'DENIED';
+        case messaging.AuthorizationStatus.AUTHORIZED:
+          return 'AUTHORIZED';
+        case messaging.AuthorizationStatus.PROVISIONAL:
+          return 'PROVISIONAL';
+      }
+    },
+    [],
+  );
 
-  const getPermissionStatus = useCallback(async () => {
-    const authStatus = await messaging().hasPermission();
-    setAuthStatus(getPermissionStatusForDisplay(authStatus));
-  }, [getPermissionStatusForDisplay]);
+  const getPermissionAuthStatus = useCallback(async () => {
+    const permissionAuthStatus = await messaging().hasPermission();
+    setPermissionAuthStatus(getPermissionAuthStatusForDisplay(permissionAuthStatus));
+  }, [getPermissionAuthStatusForDisplay]);
 
   const requestUserPermission = useCallback(
     async (options?: FirebaseMessagingTypes.IOSPermissions) => {
-      const authStatus = await requestUserPermissionService(options);
-      setAuthStatus(getPermissionStatusForDisplay(authStatus));
+      const permissionAuthStatus = await requestUserPermissionService(options);
+      setPermissionAuthStatus(getPermissionAuthStatusForDisplay(permissionAuthStatus));
     },
-    [getPermissionStatusForDisplay],
+    [getPermissionAuthStatusForDisplay],
   );
 
   const requestUserPermissionWithoutOptions = useCallback(async () => {
@@ -108,9 +111,9 @@ export const PushNotificationPage: React.FC = () => {
   }, [channelKey, token]);
 
   useEffect(() => {
-    getPermissionStatus().catch(e => log.trace(`Failed to get permission status. cause=[${String(e)}]`));
+    getPermissionAuthStatus().catch(e => log.trace(`Failed to get permission status. cause=[${String(e)}]`));
     getToken().catch(e => log.trace(`Failed to get token. cause=[${String(e)}]`));
-  }, [getPermissionStatus, getToken]);
+  }, [getPermissionAuthStatus, getToken]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -119,7 +122,7 @@ export const PushNotificationPage: React.FC = () => {
         <Divider orientation="vertical" style={styles.divider} />
         <View>
           <Text>【現在のPermissionのステータス】</Text>
-          <Text>{authStatus ?? 'Permissionのステータスが表示されます'}</Text>
+          <Text>{permissionAuthStatus ?? 'Permissionのステータスが表示されます'}</Text>
         </View>
         <View style={styles.elementContainer}>
           <Button onPress={requestUserPermissionWithoutOptions} title="Permissionの許可" />
