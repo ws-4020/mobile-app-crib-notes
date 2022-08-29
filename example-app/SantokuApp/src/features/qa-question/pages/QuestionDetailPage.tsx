@@ -1,61 +1,66 @@
+import {m} from 'bases/message/Message';
 import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
 import {Fab} from 'bases/ui/fab/Fab';
-import React, {useCallback, useEffect, useRef} from 'react';
+import React, {useCallback, useRef} from 'react';
 import {ActivityIndicator, Platform, ScrollView} from 'react-native';
 
-import {PostQuestion} from '../components/PostQuestion';
+import {AnswerDetail} from '../components/AnswerDetail';
+import {QuestionDetail} from '../components/QuestionDetail';
 import {useQuestion} from '../services/useQuestion';
+import {useTags} from '../services/useTags';
 
-type QuestionDetailPageProps = {
-  setMainTabShown: (shown: boolean) => void;
-};
-export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = ({setMainTabShown}) => {
-  const {data, isFetching} = useQuestion('1');
+// TODO: QuestionId
+type QuestionDetailPageProps = object;
+export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = () => {
+  const {data: question, isFetching: isQuestionFetching} = useQuestion('1');
+  const {data: tags} = useTags();
   const ref = useRef<ScrollView>();
-  useEffect(() => {
-    setMainTabShown(false);
-    return () => setMainTabShown(true);
-  }, [setMainTabShown]);
 
   const scrollToTop = useCallback(() => ref.current?.scrollTo({y: 0, animated: true}), []);
 
-  if (isFetching) {
+  if (isQuestionFetching) {
     // TODO: StyledActivityIndicatorに変更する
-    return <ActivityIndicator />;
+    return (
+      <Box flex={1} justifyContent="center" alignItems="center">
+        <ActivityIndicator />
+      </Box>
+    );
   }
 
-  if (!data) {
+  if (!question) {
     // TODO: BundleMessageに定義
-    return <Text>質問は削除されました</Text>;
+    return <Text>{m('質問は削除されました')}</Text>;
   }
 
   return (
     <StyledSafeAreaView flex={1} backgroundColor="orange2">
       <StyledScrollView ref={ref} showsVerticalScrollIndicator={false}>
-        <PostQuestion
-          title={data.question.question.title}
-          details={data.question.question.content}
-          userNickname={data.question.question.profile?.nickname ?? ''}
-          userDetails={`${data.question.question.profile?.points ?? 0}/${
-            data.question.question.profile?.totalPoints ?? 0
-          }`}
-        />
-        <PostQuestion
-          title={data.question.question.title}
-          details={data.question.question.content}
-          userNickname={data.question.question.profile?.nickname ?? ''}
-          userDetails={`${data.question.question.profile?.points ?? 0}/${
-            data.question.question.profile?.totalPoints ?? 0
-          }`}
-        />
-        <PostQuestion
-          title={data.question.question.title}
-          details={data.question.question.content}
-          userNickname={data.question.question.profile?.nickname ?? ''}
-          userDetails={`${data.question.question.profile?.points ?? 0}/${
-            data.question.question.profile?.totalPoints ?? 0
-          }`}
-        />
+        <QuestionDetail {...question.question} tags={tags} />
+        <Box px="p24" py="p32" flexDirection="row" justifyContent="flex-start" alignItems="center">
+          <Text variant="font20Bold" lineHeight={24}>
+            {m('回答')}
+          </Text>
+          <Box px="p8" />
+          <Text variant="font14Bold" lineHeight={24}>
+            {question.answerList.length}
+            {m('件')}
+          </Text>
+        </Box>
+        {question.answerList.map(answer => {
+          return (
+            <>
+              <AnswerDetail
+                title=""
+                details={answer.answer?.content ?? ''}
+                userNickname={answer.answer?.profile?.nickname ?? ''}
+                userDetails={`${question.question.question.profile?.points ?? 0}/${
+                  question.question.question.profile?.totalPoints ?? 0
+                }`}
+              />
+              <Box py="p8" />
+            </>
+          );
+        })}
       </StyledScrollView>
       <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
         {Platform.OS === 'android' && (

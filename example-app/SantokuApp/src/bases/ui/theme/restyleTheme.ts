@@ -5,6 +5,7 @@ const palette = {
   orange2: '#FFF5E4',
   blue: '#29B6F6',
   black: '#212121',
+  black2: '#000000',
   grey1: '#9E9E9E',
   grey2: '#E0E0E0',
   grey3: '#F5F5F5',
@@ -19,6 +20,7 @@ export const restyleTheme = createTheme({
     orange2: palette.orange2,
     blue: palette.blue,
     black: palette.black,
+    black2: palette.black2,
     grey1: palette.grey1,
     grey2: palette.grey2,
     grey3: palette.grey3,
@@ -31,6 +33,7 @@ export const restyleTheme = createTheme({
     p2: 2,
     p4: 4,
     p8: 8,
+    p12: 12,
     p16: 16,
     p24: 24,
     p32: 32,
@@ -51,6 +54,10 @@ export const restyleTheme = createTheme({
     p40: {
       width: 40,
       height: 40,
+    },
+    p48: {
+      width: 48,
+      height: 48,
     },
     p120: {
       width: 120,
@@ -82,6 +89,10 @@ export const restyleTheme = createTheme({
     font14SemiBold: {
       fontSize: 14,
       fontWeight: '600',
+    },
+    font14Bold: {
+      fontSize: 14,
+      fontWeight: 'bold',
     },
     h1: {
       // fontFamily: 'ShopifySans-Bold',

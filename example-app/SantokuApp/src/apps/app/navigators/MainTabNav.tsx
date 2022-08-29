@@ -3,7 +3,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
 import React, {useMemo} from 'react';
 
-import {useMainTabShown} from '../client-states/useMainTabShown';
 import {HomeStackNav} from './HomeStackNav';
 import {TeamStackNav} from './TeamStackNav';
 import {MainTabParamList} from './types';
@@ -18,10 +17,9 @@ type Props = {
 };
 export const MainTabNav: React.FC<Props> = ({initialData}) => {
   const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
-  const [mainTabShown] = useMainTabShown();
 
   return (
-    <nav.Navigator initialRouteName={initialRouteName} tabBar={mainTabShown ? undefined : () => null}>
+    <nav.Navigator initialRouteName={initialRouteName}>
       <nav.Screen
         name="HomeStackNav"
         component={HomeStackNav}

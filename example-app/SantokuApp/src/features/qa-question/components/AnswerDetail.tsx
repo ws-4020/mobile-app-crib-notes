@@ -13,7 +13,7 @@ export type PostQuestionProps = {
   onPress?: () => void;
 };
 
-export const PostQuestion: FC<PostQuestionProps> = ({
+export const AnswerDetail: FC<PostQuestionProps> = ({
   title,
   details,
   likeCount,
@@ -26,7 +26,6 @@ export const PostQuestion: FC<PostQuestionProps> = ({
     <Box
       backgroundColor="white"
       paddingHorizontal="p24"
-      marginTop="p16"
       paddingTop="p24"
       paddingBottom="p16"
       shadowOffset={{width: 2, height: 2}}
