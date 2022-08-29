@@ -9,7 +9,11 @@ import {ThumbUpIllustration} from 'bases/ui/illustration/ThumbUpIllustration';
 import {VisibilityIllustration} from 'bases/ui/illustration/VisibilityIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {QuestionAndAnswerQuestion, Tag} from 'features/backend/apis/model';
-import React, {FC, useMemo} from 'react';
+import React, {FC, useCallback, useMemo, useState} from 'react';
+
+import {AddCommentButton} from './AddCommentButton';
+import {CommentCard} from './CommentCard';
+import {CommentDivider} from './CommentDivider';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
@@ -20,6 +24,12 @@ export const QuestionDetail: FC<PostQuestionProps> = ({
   commentList,
   tags,
 }) => {
+  const [isQuestionCommentsVisible, setIsQuestionCommentsVisible] = useState(false);
+  const toggleQuestionCommentsVisible = useCallback(() => setIsQuestionCommentsVisible(prev => !prev), []);
+  const chatBubbleOutlineIllustrationColor = useMemo(
+    () => (isQuestionCommentsVisible ? 'blue' : 'grey1'),
+    [isQuestionCommentsVisible],
+  );
   const questionTags = useMemo(() => {
     if (!tags) {
       return [];
@@ -78,6 +88,7 @@ export const QuestionDetail: FC<PostQuestionProps> = ({
       </Box>
       <Box py="p4" />
       <Box flexDirection="row" justifyContent="flex-start" alignItems="flex-end">
+        {/* TODO: タップ時のAPI通信と色変更 */}
         <StyledTouchableOpacity flexDirection="row" alignItems="center">
           <ThumbUpIllustration color="blue" />
         </StyledTouchableOpacity>
@@ -95,8 +106,9 @@ export const QuestionDetail: FC<PostQuestionProps> = ({
             </Text>
           </StyledTouchableOpacity>
           <Box px="p4" />
-          <StyledTouchableOpacity flexDirection="row" alignItems="center">
-            <ChatBubbleOutlineIllustration />
+          {/* TODO: タップ時の処理 */}
+          <StyledTouchableOpacity flexDirection="row" alignItems="center" onPress={toggleQuestionCommentsVisible}>
+            <ChatBubbleOutlineIllustration color={chatBubbleOutlineIllustrationColor} />
             <Box px="p4" />
             <Text fontSize={14} lineHeight={20}>
               {commentList.length}
@@ -120,6 +132,22 @@ export const QuestionDetail: FC<PostQuestionProps> = ({
           </Text>
         </Box>
       </Box>
+      {isQuestionCommentsVisible && (
+        <>
+          {commentList.map(comment => (
+            <>
+              <Box py="p8" />
+              <CommentDivider />
+              <Box py="p8" />
+              <CommentCard {...comment} />
+            </>
+          ))}
+          <Box py="p8" />
+          <CommentDivider />
+          <Box py="p8" />
+          <AddCommentButton onPress={showUnderDevelopment} />
+        </>
+      )}
     </Box>
   );
 };

@@ -47,6 +47,10 @@ export const restyleTheme = createTheme({
       width: 8,
       height: 8,
     },
+    p18: {
+      width: 18,
+      height: 18,
+    },
     p24: {
       width: 24,
       height: 24,
