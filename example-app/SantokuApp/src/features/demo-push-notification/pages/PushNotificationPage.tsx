@@ -18,11 +18,11 @@ import {requestUserPermission as requestUserPermissionService} from '../services
 type AuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
 
 const channels = [
-  {value: undefined, label: 'チャンネル指定なし'},
-  {value: 'emergencyChannel', label: '重要度:緊急チャンネル'},
-  {value: 'highChannel', label: '重要度:高チャンネル'},
-  {value: 'middleChannel', label: '重要度:中チャンネル'},
-  {value: 'lowChannel', label: '重要度:低チャンネル'},
+  {value: undefined, label: 'no channel'},
+  {value: 'emergencyChannel', label: 'emergencyChannel'},
+  {value: 'highChannel', label: 'highChannel'},
+  {value: 'middleChannel', label: 'middleChannel'},
+  {value: 'lowChannel', label: 'lowChannel'},
 ];
 
 export const PushNotificationPage: React.FC = () => {
