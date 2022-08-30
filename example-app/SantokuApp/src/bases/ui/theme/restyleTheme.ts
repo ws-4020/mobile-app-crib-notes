@@ -27,6 +27,7 @@ export const restyleTheme = createTheme({
     white: palette.white,
     divider: palette.divider,
     textRed: palette.textRed,
+    activityIndicator: palette.grey2,
   },
   spacing: {
     s: 8,
@@ -97,6 +98,10 @@ export const restyleTheme = createTheme({
     font14Bold: {
       fontSize: 14,
       fontWeight: 'bold',
+    },
+    font13Bold: {
+      fontSize: 13,
+      fontWeight: '500',
     },
     h1: {
       // fontFamily: 'ShopifySans-Bold',

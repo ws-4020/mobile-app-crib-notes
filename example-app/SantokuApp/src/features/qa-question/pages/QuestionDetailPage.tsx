@@ -1,41 +1,45 @@
 import {m} from 'bases/message/Message';
 import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
+import {StyledActivityIndicator} from 'bases/ui/common/StyledActivityIndicator';
 import {Fab} from 'bases/ui/fab/Fab';
+import {useAccountQuestionLikes} from 'features/account/services/account/useAccountQuestionLikes';
 import React, {useCallback, useRef} from 'react';
-import {ActivityIndicator, Platform, ScrollView} from 'react-native';
+import {Platform, ScrollView} from 'react-native';
 
 import {AnswerDetail} from '../components/AnswerDetail';
 import {QuestionDetail} from '../components/QuestionDetail';
 import {useQuestion} from '../services/useQuestion';
-import {useTags} from '../services/useTags';
 
-// TODO: QuestionId
-type QuestionDetailPageProps = object;
-export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = () => {
-  const {data: question, isFetching: isQuestionFetching} = useQuestion('1');
-  const {data: tags} = useTags();
+type QuestionDetailPageProps = {
+  questionId: string;
+};
+export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = ({questionId}) => {
+  const {data: question, isLoading: isQuestionLoading} = useQuestion(questionId);
+  const {data: questionLikes} = useAccountQuestionLikes(questionId);
   const ref = useRef<ScrollView>();
 
   const scrollToTop = useCallback(() => ref.current?.scrollTo({y: 0, animated: true}), []);
 
-  if (isQuestionFetching) {
-    // TODO: StyledActivityIndicatorに変更する
+  if (isQuestionLoading) {
     return (
-      <Box flex={1} justifyContent="center" alignItems="center">
-        <ActivityIndicator />
+      <Box flex={1} backgroundColor="orange2" justifyContent="center" alignItems="center">
+        <StyledActivityIndicator />
       </Box>
     );
   }
 
   if (!question) {
-    // TODO: BundleMessageに定義
     return <Text>{m('質問は削除されました')}</Text>;
   }
 
   return (
     <StyledSafeAreaView flex={1} backgroundColor="orange2">
       <StyledScrollView ref={ref} showsVerticalScrollIndicator={false}>
-        <QuestionDetail {...question.question} tags={tags} />
+        <QuestionDetail
+          {...question.question}
+          liked={questionLikes?.liked}
+          likedCommentIds={questionLikes?.commentId}
+        />
         <Box px="p24" py="p32" flexDirection="row" justifyContent="flex-start" alignItems="center">
           <Text variant="font20Bold" lineHeight={24}>
             {m('回答')}
@@ -48,7 +52,7 @@ export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = () => {
         </Box>
         {question.answerList.map(answer => {
           return (
-            <>
+            <Box key={answer.answer?.answerId}>
               <AnswerDetail
                 title=""
                 details={answer.answer?.content ?? ''}
@@ -58,7 +62,7 @@ export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = () => {
                 }`}
               />
               <Box py="p8" />
-            </>
+            </Box>
           );
         })}
       </StyledScrollView>
