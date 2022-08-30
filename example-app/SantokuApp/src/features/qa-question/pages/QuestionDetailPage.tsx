@@ -2,6 +2,8 @@ import {m} from 'bases/message/Message';
 import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
 import {StyledActivityIndicator} from 'bases/ui/common/StyledActivityIndicator';
 import {Fab} from 'bases/ui/fab/Fab';
+import {QuestionAnswerIllustration} from 'bases/ui/illustration/QuestionAnswerIllustration';
+import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {useAccountQuestionLikes} from 'features/account/services/account/useAccountQuestionLikes';
 import React, {useCallback, useRef} from 'react';
 import {Platform, ScrollView} from 'react-native';
@@ -9,6 +11,8 @@ import {Platform, ScrollView} from 'react-native';
 import {AnswerDetailCard} from '../components/AnswerDetailCard';
 import {QuestionDetailCard} from '../components/QuestionDetailCard';
 import {useQuestion} from '../services/useQuestion';
+
+const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
 type QuestionDetailPageProps = {
   questionId: string;
@@ -67,8 +71,8 @@ export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = ({question
             <Text>^</Text>
           </Fab>
         )}
-        <Fab>
-          <Text>c</Text>
+        <Fab onPress={showUnderDevelopment}>
+          <QuestionAnswerIllustration />
         </Fab>
       </Box>
     </StyledSafeAreaView>
