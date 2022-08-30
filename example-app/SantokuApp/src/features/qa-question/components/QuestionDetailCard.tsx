@@ -1,11 +1,9 @@
-import {formatDiffInDaysOrHours} from 'bases/date/formatDiffInDaysOrHours';
 import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {ChatBubbleOutlineIllustration} from 'bases/ui/illustration/ChatBubbleOutlineIllustration';
 import {DoneIllustration} from 'bases/ui/illustration/DoneIllustration';
 import {MoreVertIllustration} from 'bases/ui/illustration/MoreVertIllustration';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
-import {ScheduleIllustration} from 'bases/ui/illustration/ScheduleIllustration';
 import {TagIllustration} from 'bases/ui/illustration/TagIllustration';
 import {ThumbUpIllustration} from 'bases/ui/illustration/ThumbUpIllustration';
 import {VisibilityIllustration} from 'bases/ui/illustration/VisibilityIllustration';
@@ -18,6 +16,7 @@ import {useTags} from '../services/useTags';
 import {AddCommentButton} from './AddCommentButton';
 import {CommentCard} from './CommentCard';
 import {CommentDivider} from './CommentDivider';
+import {DiffDaysOrHours} from './DiffDaysOrHours';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
@@ -26,7 +25,7 @@ export type PostQuestionProps = QuestionAndAnswerQuestion & {
   likedCommentIds?: string[];
 };
 
-export const QuestionDetail: FC<PostQuestionProps> = ({
+export const QuestionDetailCard: FC<PostQuestionProps> = ({
   question: {questionId, title, content, likes, views, beginner, resolved, datetime, tags: questionTagIds, profile},
   commentList,
   liked,
@@ -51,12 +50,6 @@ export const QuestionDetail: FC<PostQuestionProps> = ({
     () => toggleQuestionLikeCommand(questionId),
     [questionId, toggleQuestionLikeCommand],
   );
-
-  const questionDatetime = useMemo(() => {
-    const now = new Date();
-    const targetDatetime = new Date(datetime);
-    return formatDiffInDaysOrHours(now, targetDatetime, {daysSuffix: m('日前'), hoursSuffix: m('時間前')});
-  }, [datetime]);
 
   return (
     <Box
@@ -104,11 +97,7 @@ export const QuestionDetail: FC<PostQuestionProps> = ({
       <Box py="p4" />
       <Box flexDirection="row" alignItems="flex-end">
         <Box flex={1} />
-        <ScheduleIllustration />
-        <Box px="p4" />
-        <Text variant="font14SemiBold" lineHeight={20} color="grey1">
-          {questionDatetime}
-        </Text>
+        <DiffDaysOrHours datetime={datetime} />
       </Box>
       <Box py="p4" />
       <Box flexDirection="row" justifyContent="flex-start" alignItems="flex-end">

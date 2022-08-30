@@ -7,7 +7,7 @@ import React, {useCallback, useRef} from 'react';
 import {Platform, ScrollView} from 'react-native';
 
 import {AnswerDetail} from '../components/AnswerDetail';
-import {QuestionDetail} from '../components/QuestionDetail';
+import {QuestionDetailCard} from '../components/QuestionDetailCard';
 import {useQuestion} from '../services/useQuestion';
 
 type QuestionDetailPageProps = {
@@ -35,7 +35,7 @@ export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = ({question
   return (
     <StyledSafeAreaView flex={1} backgroundColor="orange2">
       <StyledScrollView ref={ref} showsVerticalScrollIndicator={false}>
-        <QuestionDetail
+        <QuestionDetailCard
           {...question.question}
           liked={questionLikes?.liked}
           likedCommentIds={questionLikes?.commentId}
