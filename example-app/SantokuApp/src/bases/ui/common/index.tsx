@@ -9,6 +9,8 @@ import {
   TextInput,
   TextInputBase,
   TextInputProps,
+  Image,
+  ImageProps,
 } from 'react-native';
 
 import {RestyleTheme} from '../theme/restyleTheme';
@@ -20,3 +22,4 @@ export const StyledSafeAreaView = createBox<RestyleTheme, ViewProps>(SafeAreaVie
 export const StyledScrollView = createBox<RestyleTheme, ScrollViewProps>(ScrollView);
 export const StyledTextInputBase = createBox<RestyleTheme, TextInputProps>(TextInputBase);
 export const StyledTextInput = createBox<RestyleTheme, TextInputProps>(TextInput);
+export const StyledImage = createBox<RestyleTheme, ImageProps>(Image);

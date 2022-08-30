@@ -1,5 +1,6 @@
 import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {BeginnerMarkIllustration} from 'bases/ui/illustration/BeginnerMarkIllustration';
 import {ChatBubbleOutlineIllustration} from 'bases/ui/illustration/ChatBubbleOutlineIllustration';
 import {DoneIllustration} from 'bases/ui/illustration/DoneIllustration';
 import {MoreVertIllustration} from 'bases/ui/illustration/MoreVertIllustration';
@@ -20,13 +21,25 @@ import {DiffDaysOrHours} from './DiffDaysOrHours';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
-export type PostQuestionProps = QuestionAndAnswerQuestion & {
+export type QuestionDetailCardProps = QuestionAndAnswerQuestion & {
   liked?: boolean;
   likedCommentIds?: string[];
 };
 
-export const QuestionDetailCard: FC<PostQuestionProps> = ({
-  question: {questionId, title, content, likes, views, beginner, resolved, datetime, tags: questionTagIds, profile},
+export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
+  question: {
+    questionId,
+    title,
+    content,
+    likes,
+    views,
+    comments,
+    beginner,
+    resolved,
+    datetime,
+    tags: questionTagIds,
+    profile,
+  },
   commentList,
   liked,
   likedCommentIds,
@@ -63,35 +76,43 @@ export const QuestionDetailCard: FC<PostQuestionProps> = ({
       elevation={1}>
       <Box flexDirection="row" alignItems="center">
         <PersonIllustration />
-        <Box flexDirection="column" marginLeft="p16">
+        <Box px="p8" />
+        <Box flex={1} flexDirection="column">
           <Text lineHeight={22} fontWeight="600" fontSize={18}>
             {profile?.nickname}
           </Text>
-          <Text>
-            {profile?.points}/{profile?.totalPoints}
-          </Text>
-        </Box>
-        <Box flex={1} flexDirection="column">
-          <Box flex={1} />
-          <Box flexDirection="row" justifyContent="flex-end" alignItems="flex-end" px="p8">
-            <DoneIllustration color="blue" />
-            <Box px="p4" />
-            <Text variant="font14Bold" lineHeight={20} color="blue">
-              {m('解決済み')}
+          <Box flexDirection="row" alignItems="center" justifyContent="space-between">
+            <Text>
+              {profile?.points}/{profile?.totalPoints}
             </Text>
+            <Box py="p12" />
+            {resolved && (
+              <Box flexDirection="row" justifyContent="flex-end" alignItems="center" px="p8">
+                <DoneIllustration color="blue" />
+                <Box px="p4" />
+                <Text variant="font14Bold" lineHeight={20} color="blue">
+                  {m('解決済み')}
+                </Text>
+              </Box>
+            )}
           </Box>
         </Box>
-        <Box />
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
           <MoreVertIllustration />
         </StyledTouchableOpacity>
       </Box>
       <Box py="p12" />
-      <Text fontSize={22} fontWeight="700" lineHeight={34} textDecorationLine="underline">
+      <Text fontSize={22} fontWeight="700" lineHeight={34} letterSpacing={0.18}>
+        {beginner && (
+          <>
+            <BeginnerMarkIllustration />
+            <Box px="p4" />
+          </>
+        )}
         {title}
       </Text>
       <Box py="p8" />
-      <Text fontSize={14} lineHeight={28}>
+      <Text fontSize={14} lineHeight={28} letterSpacing={0.25}>
         {content}
       </Text>
       <Box py="p4" />
@@ -99,7 +120,6 @@ export const QuestionDetailCard: FC<PostQuestionProps> = ({
         <Box flex={1} />
         <DiffDaysOrHours datetime={datetime} />
       </Box>
-      <Box py="p4" />
       <Box flexDirection="row" justifyContent="flex-start" alignItems="flex-end">
         <StyledTouchableOpacity flexDirection="row" alignItems="center" onPress={toggleQuestionLike}>
           <ThumbUpIllustration color={likeQuestionColor} />
@@ -123,7 +143,7 @@ export const QuestionDetailCard: FC<PostQuestionProps> = ({
           </StyledTouchableOpacity>
           <Box px="p4" />
           <Text fontSize={14} lineHeight={20}>
-            {commentList.length}
+            {comments}
           </Text>
         </Box>
       </Box>
@@ -144,14 +164,17 @@ export const QuestionDetailCard: FC<PostQuestionProps> = ({
       </Box>
       {isQuestionCommentsVisible && (
         <>
-          {commentList.map(comment => (
-            <Box key={comment.commentId}>
-              <Box py="p8" />
-              <CommentDivider />
-              <Box py="p8" />
-              <CommentCard {...comment} />
-            </Box>
-          ))}
+          {commentList.map(comment => {
+            const liked = likedCommentIds?.some(v => v === comment.commentId);
+            return (
+              <Box key={comment.commentId}>
+                <Box py="p8" />
+                <CommentDivider />
+                <Box py="p8" />
+                <CommentCard {...comment} liked={liked} />
+              </Box>
+            );
+          })}
           <Box py="p8" />
           <CommentDivider />
           <Box py="p8" />

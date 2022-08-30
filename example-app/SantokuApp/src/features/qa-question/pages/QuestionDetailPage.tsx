@@ -6,7 +6,7 @@ import {useAccountQuestionLikes} from 'features/account/services/account/useAcco
 import React, {useCallback, useRef} from 'react';
 import {Platform, ScrollView} from 'react-native';
 
-import {AnswerDetail} from '../components/AnswerDetail';
+import {AnswerDetailCard} from '../components/AnswerDetailCard';
 import {QuestionDetailCard} from '../components/QuestionDetailCard';
 import {useQuestion} from '../services/useQuestion';
 
@@ -51,20 +51,15 @@ export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = ({question
           </Text>
         </Box>
         {question.answerList.map(answer => {
+          const answerLikes = questionLikes?.answer.find(v => v.answerId === answer.answer?.answerId);
           return (
             <Box key={answer.answer?.answerId}>
-              <AnswerDetail
-                title=""
-                details={answer.answer?.content ?? ''}
-                userNickname={answer.answer?.profile?.nickname ?? ''}
-                userDetails={`${question.question.question.profile?.points ?? 0}/${
-                  question.question.question.profile?.totalPoints ?? 0
-                }`}
-              />
+              <AnswerDetailCard {...answer} liked={answerLikes?.liked} likedCommentIds={answerLikes?.commentId} />
               <Box py="p8" />
             </Box>
           );
         })}
+        <Box py="p32" />
       </StyledScrollView>
       <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
         {Platform.OS === 'android' && (
