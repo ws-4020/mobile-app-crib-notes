@@ -71,10 +71,7 @@ export const restyleTheme = createTheme({
   },
   textVariants: {
     defaults: {
-      // fontFamily: 'ShopifySans-Bold',
-      // fontSize: 16,
-      // lineHeight: 24,
-      // color: 'black',
+      color: 'black',
     },
     font20Bold: {
       fontSize: 20,
@@ -99,9 +96,13 @@ export const restyleTheme = createTheme({
       fontSize: 14,
       fontWeight: 'bold',
     },
+    font13Regular: {
+      fontSize: 13,
+      fontWeight: '400',
+    },
     font13Bold: {
       fontSize: 13,
-      fontWeight: '500',
+      fontWeight: '600',
     },
     h1: {
       // fontFamily: 'ShopifySans-Bold',

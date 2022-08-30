@@ -1,8 +1,6 @@
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
-import {ChatBubbleOutlineIllustration} from 'bases/ui/illustration/ChatBubbleOutlineIllustration';
 import {MoreVertIllustration} from 'bases/ui/illustration/MoreVertIllustration';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
-import {ThumbUpIllustration} from 'bases/ui/illustration/ThumbUpIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {QuestionAndAnswerAnswerListItem} from 'features/backend/apis/model';
 import React, {FC, useCallback, useMemo, useState} from 'react';
@@ -10,7 +8,9 @@ import React, {FC, useCallback, useMemo, useState} from 'react';
 import {AddCommentButton} from './AddCommentButton';
 import {CommentCard} from './CommentCard';
 import {CommentDivider} from './CommentDivider';
+import {CommentsButtonWithCount} from './CommentsButtonWithCount';
 import {DiffDaysOrHours} from './DiffDaysOrHours';
+import {QuestionAndAnswerLikeButtonWithCount} from './QuestionAndAnswerLikeButtonWithCount';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
@@ -28,10 +28,7 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
   const [isAnswerCommentsVisible, setIsAnswerCommentsVisible] = useState(false);
   const toggleAnswerCommentsVisible = useCallback(() => setIsAnswerCommentsVisible(prev => !prev), []);
   const likeAnswerColor = useMemo(() => (liked ? 'blue' : 'grey1'), [liked]);
-  const chatBubbleOutlineIllustrationColor = useMemo(
-    () => (isAnswerCommentsVisible ? 'blue' : 'grey1'),
-    [isAnswerCommentsVisible],
-  );
+  const commentButtonColor = useMemo(() => (isAnswerCommentsVisible ? 'blue' : 'grey1'), [isAnswerCommentsVisible]);
 
   return (
     <Box
@@ -39,18 +36,18 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
       px="p24"
       pt="p24"
       pb="p16"
-      shadowOffset={{width: 2, height: 2}}
+      shadowOffset={{width: 4, height: 4}}
       shadowColor="black"
-      shadowOpacity={0.1}
+      shadowOpacity={0.25}
       elevation={1}>
       <Box flexDirection="row" alignItems="center">
         <PersonIllustration />
         <Box px="p8" />
         <Box flex={1} flexDirection="column">
-          <Text lineHeight={22} fontWeight="600" fontSize={18}>
+          <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">
             {profile?.nickname}
           </Text>
-          <Text>
+          <Text variant="font14Regular" letterSpacing={0.25} color="black2">
             {profile?.points}/{profile?.totalPoints}
           </Text>
         </Box>
@@ -59,7 +56,7 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
         </StyledTouchableOpacity>
       </Box>
       <Box py="p8" />
-      <Text fontSize={14} lineHeight={28}>
+      <Text fontSize={14} lineHeight={28} letterSpacing={0.25}>
         {content}
       </Text>
       <Box py="p4" />
@@ -68,24 +65,11 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
         <DiffDaysOrHours datetime={datetime} />
       </Box>
       <Box flexDirection="row" justifyContent="flex-start" alignItems="flex-end">
-        <StyledTouchableOpacity flexDirection="row" alignItems="center" onPress={showUnderDevelopment}>
-          <ThumbUpIllustration color={likeAnswerColor} />
-        </StyledTouchableOpacity>
-        <Box px="p8" />
-        <Text fontSize={40} fontWeight="600">
-          {likes}
-        </Text>
+        <QuestionAndAnswerLikeButtonWithCount onPress={showUnderDevelopment} count={likes} color={likeAnswerColor} />
         <Box flex={1} />
-        <Box flexDirection="row">
-          <StyledTouchableOpacity flexDirection="row" alignItems="center" onPress={toggleAnswerCommentsVisible}>
-            <ChatBubbleOutlineIllustration color={chatBubbleOutlineIllustrationColor} />
-          </StyledTouchableOpacity>
-          <Box px="p4" />
-          <Text fontSize={14} lineHeight={20}>
-            {comments}
-          </Text>
-        </Box>
+        <CommentsButtonWithCount onPress={toggleAnswerCommentsVisible} count={comments} color={commentButtonColor} />
       </Box>
+      <Box py="p4" />
       {isAnswerCommentsVisible && (
         <>
           {commentList?.map(comment => (

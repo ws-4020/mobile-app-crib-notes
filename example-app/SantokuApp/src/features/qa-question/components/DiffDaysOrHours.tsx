@@ -17,7 +17,7 @@ export const DiffDaysOrHours: React.FC<DiffDaysOrHoursProps> = ({datetime}) => {
     <Box flexDirection="row" alignItems="center">
       <ScheduleIllustration />
       <Box px="p4" />
-      <Text variant="font14SemiBold" lineHeight={20} color="grey1">
+      <Text variant="font14SemiBold" lineHeight={20} color="grey1" letterSpacing={0.25}>
         {formattedDateOrHour}
       </Text>
     </Box>
