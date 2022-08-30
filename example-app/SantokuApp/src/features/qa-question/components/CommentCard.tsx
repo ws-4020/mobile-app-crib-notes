@@ -1,5 +1,4 @@
-import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
-import {ThumbUpIllustration} from 'bases/ui/illustration/ThumbUpIllustration';
+import {Box, Text} from 'bases/ui/common';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {Comment} from 'features/backend/apis/model';
 import React, {FC, useMemo} from 'react';
