@@ -2,6 +2,7 @@ import {m} from 'bases/message/Message';
 import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
 import {StyledActivityIndicator} from 'bases/ui/common/StyledActivityIndicator';
 import {Fab} from 'bases/ui/fab/Fab';
+import {ExpandLessIllustration} from 'bases/ui/illustration/ExpandLessIllustration';
 import {QuestionAnswerIllustration} from 'bases/ui/illustration/QuestionAnswerIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {useAccountQuestionLikes} from 'features/account/services/account/useAccountQuestionLikes';
@@ -68,7 +69,7 @@ export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = ({question
       <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
         {Platform.OS === 'android' && (
           <Fab size="small" color="white" onPress={scrollToTop}>
-            <Text>^</Text>
+            <ExpandLessIllustration />
           </Fab>
         )}
         <Fab onPress={showUnderDevelopment}>
