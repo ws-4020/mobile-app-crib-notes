@@ -1,5 +1,6 @@
 import {m} from 'bases/message/Message';
 import {Box, StyledScrollView, StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {StyledActivityIndicator} from 'bases/ui/common/StyledActivityIndicator';
 import {StyledTextInput} from 'bases/ui/common/StyledTextInput';
 import {BeginnerMarkIllustration} from 'bases/ui/illustration/BeginnerMarkIllustration';
 import {FormatAlignLeftIllustration} from 'bases/ui/illustration/FormatAlignLeftIllustration';
@@ -7,7 +8,6 @@ import {MarkdownToolbar} from 'bases/ui/markdown/MarkdownToolbar';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {InputAccessoryView, Keyboard, Platform} from 'react-native';
 
-import {StyledActivityIndicator} from '../../../bases/ui/common/StyledActivityIndicator';
 import {useQuestionForm} from '../forms/useQuestionForm';
 import {useTemplates} from '../services/useTemplates';
 import {TemplateChip} from './TemplateChip';
