@@ -27,7 +27,7 @@ export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = ({question
 
   if (isQuestionLoading) {
     return (
-      <Box flex={1} backgroundColor="orange2" justifyContent="center" alignItems="center">
+      <Box flex={1} justifyContent="center" alignItems="center">
         <StyledActivityIndicator />
       </Box>
     );
@@ -38,7 +38,7 @@ export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = ({question
   }
 
   return (
-    <StyledSafeAreaView flex={1} backgroundColor="orange2">
+    <StyledSafeAreaView flex={1}>
       <StyledScrollView ref={ref} showsVerticalScrollIndicator={false}>
         <QuestionDetailCard
           {...question.question}
