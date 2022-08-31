@@ -52,8 +52,7 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({form, setContent, set
         marginTop="p24"
         placeholder={m('タイトル')}
         multiline
-        fontSize={20}
-        fontWeight="700"
+        variant="font20Bold"
         lineHeight={24}
         value={form.values.title}
         onChangeText={form.handleChange('title')}
@@ -82,8 +81,7 @@ export const QuestionPost: React.FC<QuestionPostProps> = ({form, setContent, set
       <StyledTextInput
         placeholder={m('コメントを入力')}
         multiline
-        fontSize={14}
-        fontWeight="700"
+        variant="font14Bold"
         lineHeight={21}
         value={form.values.content}
         onChangeText={form.handleChange('content')}
