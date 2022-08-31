@@ -1,4 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useTheme} from '@shopify/restyle';
+import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React from 'react';
 
 import {QuestionAndEventPostScreen} from '../screens/qa-post/QuestionAndEventPostScreen';
@@ -9,6 +11,7 @@ const nav = createNativeStackNavigator<QuestionAndEventPostStackParamList>();
 
 export const QuestionAndEventPostStackNav: React.VFC = () => {
   const {CloseThisNavigatorButton} = useCloseThisNavigatorButton();
+  const theme = useTheme<RestyleTheme>();
   return (
     <nav.Navigator>
       <nav.Screen
@@ -18,7 +21,7 @@ export const QuestionAndEventPostStackNav: React.VFC = () => {
           headerTitle: '',
           headerLeft: CloseThisNavigatorButton,
           headerShadowVisible: false,
-          contentStyle: {backgroundColor: '#fff'},
+          contentStyle: {backgroundColor: theme.colors.white},
         }}
       />
     </nav.Navigator>
