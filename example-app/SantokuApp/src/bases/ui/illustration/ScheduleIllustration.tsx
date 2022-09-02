@@ -1,5 +1,5 @@
 import {ColorProps, useResponsiveProp, useTheme} from '@shopify/restyle';
-import React, {useMemo} from 'react';
+import React from 'react';
 import {Path} from 'react-native-svg';
 
 import {StyledSvgIconBase, StyledSvgIconBaseProps} from '../common/StyledSvgIconBase';
@@ -10,7 +10,7 @@ export type ScheduleIllustrationProps = StyledSvgIconBaseProps & ColorProps<Rest
 export const ScheduleIllustration = ({color = 'grey1', size = 'p18', ...rest}: ScheduleIllustrationProps) => {
   const theme = useTheme<RestyleTheme>();
   const responsiveColor = useResponsiveProp(color);
-  const fillColor = useMemo(() => theme.colors[responsiveColor ?? 'black'], [responsiveColor, theme.colors]);
+  const fillColor = theme.colors[responsiveColor ?? 'grey1'];
   return (
     <StyledSvgIconBase size={size} viewBox="0 0 18 18" fill="none" {...rest}>
       <Path
