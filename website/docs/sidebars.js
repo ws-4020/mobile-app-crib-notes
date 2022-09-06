@@ -327,6 +327,7 @@ module.exports = {
             'react-native/santoku/application-architecture/push-notification/overview',
             'react-native/santoku/application-architecture/push-notification/register-token',
             'react-native/santoku/application-architecture/push-notification/delete-token',
+            'react-native/santoku/application-architecture/push-notification/register-notification-channels',
             'react-native/santoku/application-architecture/push-notification/send-push-notification',
             'react-native/santoku/application-architecture/push-notification/receive-push-notification',
           ],
@@ -470,6 +471,14 @@ module.exports = {
           label: 'コンテキスト設計',
           items: ['react-native/santoku/design/context/overview', 'react-native/santoku/design/context/theme'],
         },
+        {
+          type: 'category',
+          label: 'デモ機能',
+          items: [
+            'react-native/santoku/design/demo/overview',
+            'react-native/santoku/design/demo/push-notification/overview',
+          ],
+        },
       ],
     },
     {
@@ -569,6 +578,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-012-http-api',
         'react-native/santoku/decisions/adr-013-react-query',
         'react-native/santoku/decisions/adr-014-ui-libraries',
+        'react-native/santoku/decisions/adr-015-android-head-up-notification',
       ],
     },
   ],

@@ -1,11 +1,21 @@
 import {AxiosResponse} from 'axios';
 import {QuestionAndAnswer} from 'features/backend/apis/model';
-import {getGetDetailQuestionQueryKey} from 'features/backend/apis/question/question';
+import {
+  getGetDetailQuestionQueryKey,
+  getGetListQuestionsQueryKey,
+  usePostQuestions,
+} from 'features/backend/apis/question/question';
 import {useQueryClient} from 'react-query';
 
 export const useQuestionCommands = () => {
   const queryClient = useQueryClient();
-
+  const {mutateAsync: post, isLoading: isPosting} = usePostQuestions({
+    mutation: {
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(getGetListQuestionsQueryKey());
+      },
+    },
+  });
   const setQuestion = (
     questionId: string,
     updater: (data?: AxiosResponse<QuestionAndAnswer>) => AxiosResponse<QuestionAndAnswer> | undefined,
@@ -32,8 +42,9 @@ export const useQuestionCommands = () => {
       }
       return undefined;
     });
-
   return {
+    post,
+    isPosting,
     setQuestion,
     addQuestionLikes,
   };
