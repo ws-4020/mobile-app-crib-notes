@@ -1,3 +1,4 @@
+import {useVisibility} from 'bases/core/utils/useVisibility';
 import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {BeginnerMarkIllustration} from 'bases/ui/illustration/BeginnerMarkIllustration';
@@ -8,7 +9,7 @@ import {TagIllustration} from 'bases/ui/illustration/TagIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {useAccountQuestionCommands} from 'features/account/services/account/useAccountQuestionCommands';
 import {QuestionAndAnswerQuestion} from 'features/backend/apis/model';
-import React, {FC, useCallback, useMemo, useState} from 'react';
+import React, {FC, useCallback, useMemo} from 'react';
 
 import {useTags} from '../services/useTags';
 import {AddCommentButton} from './AddCommentButton';
@@ -46,8 +47,7 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
 }) => {
   const {toggleQuestionLike: toggleQuestionLikeCommand} = useAccountQuestionCommands();
   const {data: tags} = useTags();
-  const [isQuestionCommentsVisible, setIsQuestionCommentsVisible] = useState(false);
-  const toggleQuestionCommentsVisible = useCallback(() => setIsQuestionCommentsVisible(prev => !prev), []);
+  const {isVisible: isQuestionCommentsVisible, toggleVisibility: toggleQuestionCommentsVisible} = useVisibility(false);
   const likeQuestionColor = useMemo(() => (liked ? 'blue' : 'grey1'), [liked]);
   const commentButtonColor = useMemo(() => (isQuestionCommentsVisible ? 'blue' : 'grey1'), [isQuestionCommentsVisible]);
   const questionTags = useMemo(() => {

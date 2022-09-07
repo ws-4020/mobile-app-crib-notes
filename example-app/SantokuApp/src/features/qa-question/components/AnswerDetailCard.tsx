@@ -1,9 +1,10 @@
+import {useVisibility} from 'bases/core/utils/useVisibility';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {MoreVertIllustration} from 'bases/ui/illustration/MoreVertIllustration';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {QuestionAndAnswerAnswerListItem} from 'features/backend/apis/model';
-import React, {FC, useCallback, useMemo, useState} from 'react';
+import React, {FC, useMemo} from 'react';
 
 import {AddCommentButton} from './AddCommentButton';
 import {CommentCard} from './CommentCard';
@@ -25,8 +26,7 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
   liked,
   likedCommentIds,
 }) => {
-  const [isAnswerCommentsVisible, setIsAnswerCommentsVisible] = useState(false);
-  const toggleAnswerCommentsVisible = useCallback(() => setIsAnswerCommentsVisible(prev => !prev), []);
+  const {isVisible: isAnswerCommentsVisible, toggleVisibility: toggleAnswerCommentsVisible} = useVisibility(false);
   const likeAnswerColor = useMemo(() => (liked ? 'blue' : 'grey1'), [liked]);
   const commentButtonColor = useMemo(() => (isAnswerCommentsVisible ? 'blue' : 'grey1'), [isAnswerCommentsVisible]);
 

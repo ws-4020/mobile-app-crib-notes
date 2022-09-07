@@ -7,7 +7,7 @@ import React, {useMemo} from 'react';
 
 import {withInitialData} from '../components/withInitialData';
 import {QuestionDetailScreen} from '../screens/qa-question/QuestionDetailScreen';
-import {MainTabNav} from './MainTabNav';
+import {useMainTabNav} from './MainTabNav';
 import {QuestionAndEventPostStackNav} from './QuestionAndEventPostStackNav';
 import {AuthenticatedStackParamList} from './types';
 
@@ -22,13 +22,14 @@ type Props = {
 };
 const Component: React.FC<Props> = ({initialData}) => {
   const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
+  const mainTabNav = useMainTabNav(initialData);
   const theme = useTheme<RestyleTheme>();
 
   return (
     <nav.Navigator initialRouteName={initialRouteName}>
       <nav.Screen
         name="MainTabNav"
-        component={MainTabNav}
+        component={mainTabNav}
         options={{
           headerShown: false,
         }}
@@ -48,5 +49,5 @@ const Component: React.FC<Props> = ({initialData}) => {
 };
 
 export const useAuthenticatedStackNav = (initialData: AppInitialData) => {
-  return withInitialData(initialData, Component);
+  return useMemo(() => withInitialData(initialData, Component), [initialData]);
 };
