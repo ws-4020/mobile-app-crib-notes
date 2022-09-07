@@ -24,6 +24,8 @@ hide_table_of_contents: true
 
 QAアプリの作成には、以下のライブラリを使用します。その他に使用したいライブラリがあれば、適宜追加してください。
 
+> TODO: expo-installについて記載する
+
 | ライブラリ名 |
 |--|
 | @react-native-community/netinfo |
@@ -93,6 +95,7 @@ QAアプリでは、axiosとReact Queryを使用します。
 |--|
 | src/features/backend/utils/customInstance.ts |
 | src/features/backend/error/RequestTimeoutError.ts |
+| orval.config.ts |
 
 次に、`src/features/backend/utils/customInstance.ts`と`orval.config.ts`を以下のように修正してください。
 
@@ -123,36 +126,7 @@ QAアプリでは、axiosとReact Queryを使用します。
 
 ```typescript title="orval.config.ts"
 -   sandbox: {
--     output: {
--       mode: 'split',
--       clean: true,
--       target: 'src/features/sandbox/apis/api.ts',
--       schemas: 'src/features/sandbox/apis/model',
--       client: 'react-query',
--       prettier: true,
--       tsconfig: 'tsconfig.json',
--       override: {
--         query: {
--           useQuery: true,
--         },
--         mutator: {
--           path: 'src/features/backend/utils/customInstance.ts',
--           name: 'sandboxCustomInstance',
--         },
--         operations: {
--           'list-todo-by-cursor': {
--             query: {
--               useQuery: false,
--               useInfinite: true,
--               useInfiniteQueryParam: 'cursor',
--             },
--           },
--         },
--       },
--     },
--     input: {
--       target: '../api-document/sandbox/openapi.yaml',
--     },
+    /* ～省略～ */
 -   },
 ```
 
@@ -222,6 +196,8 @@ QAアプリでは、以下のファイルをコピー後、メッセージのロ
 | src/bases/validator/index.ts |
 
 次に、`src/apps/app/AppWithInitialization.tsx`、`src/apps/app/use-cases/useAppInitializer.ts`を以下の内容に差し替えてください。
+
+> TODO: 差し替えるなら、ファイル追加で良さそう。
 
 ```typescript jsx title="src/apps/app/AppWithInitialization.tsx"
 import {NavigationContainer} from '@react-navigation/native';
