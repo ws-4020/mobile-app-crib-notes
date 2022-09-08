@@ -16,15 +16,13 @@ hide_table_of_contents: true
 
 ### ディレクトリ構成
 
-ディレクトリ構成はサンプルアプリ（SantokuApp）と同様の構成とします。サンプルアプリ（SantokuApp）ではアプリの責務配置を定義しており、ディレクトリはそれに準じた構成になっています。
+ディレクトリ構成はサンプルアプリ（SantokuApp）と同様の構成とします。サンプルアプリ（SantokuApp）ではアプリの責務配置を定義しており、ディレクトリはそれに準じた構成となっています。
 
 詳細は、[SantokuApp - アプリの責務配置](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/README.md#アプリの責務配置)を参照してください。
 
 ### 使用ライブラリ
 
 QAアプリの作成には、以下のライブラリを使用します。その他に使用したいライブラリがあれば、適宜追加してください。
-
-> TODO: expo-installについて記載する
 
 | ライブラリ名 |
 |--|
@@ -36,20 +34,44 @@ QAアプリの作成には、以下のライブラリを使用します。その
 | yup |
 | orval ※`devDependencies`に追加 |
 
+ライブラリのインストールは、以下のコマンドを実行してください。
+
+```bash
+expo install <package-name>
+```
+
+`devDependencies`に追加する場合は、以下のコマンドを実行してください。
+
+```bash
+npm install -D <package-name>
+```
+
+iOSの開発をする場合は、macOSで以下のコマンドを実行する必要があります。
+
+```bash
+npm run pod-install
+```
+
+:::info
+ExpoはReactなど一部の依存パッケージについて、利用できるバージョンを管理しています。そういったライブラリについては、個別に自分たちで依存ライブラリのバージョンを管理する必要はありません。`expo install`でインストールすれば、適切なバージョンがインストールされます。
+
+一方で、`npm install <package-name>`でインストールするだけでは正しいバージョンでインストールされない可能性があるということに注意してください。
+:::
+
 ### アプリの実行方法
 
 [アプリの実行](https://fintan-contents.github.io/mobile-app-crib-notes/react-native/learn/getting-started/launch-created-app)を参照してください。
 
 ### プロジェクトの設定
 
-初期プロジェクトの作成をした直後は、最低限のファイルしかない状態です。
-QAアプリの実装に必要な共通処理をサンプルアプリ（[SantokuApp](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp))からコピーします。
+初期プロジェクトの作成をした直後は、最低限のファイルしかありません。
+QAアプリの実装に必要な共通処理をサンプルアプリ（[SantokuApp](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp)）からコピーします。
 
 #### メッセージ管理
 
 アプリ全体の文言の統一性や多言語対応の拡張性などを鑑みて、アプリ内で使用するメッセージを集約的に管理する機能を追加します。
 
-詳細は、[メッセージ管理](../../santoku/application-architecture/message-configuration/overview.mdx)を参照してください。
+機能の詳細は、[メッセージ管理](../../santoku/application-architecture/message-configuration/overview.mdx)を参照してください。
 
 | コピーファイル |
 |--|
@@ -61,7 +83,7 @@ QAアプリの実装に必要な共通処理をサンプルアプリ（[SantokuA
 
 ログの出力先や、ログの出力レベルを設定する機能を追加します。
 
-詳細は、[アプリのログ出力](../../santoku/application-architecture/logging-app/overview.mdx)を参照してください。
+機能の詳細は、[アプリのログ出力](../../santoku/application-architecture/logging-app/overview.mdx)を参照してください。
 
 | コピーファイル |
 |--|
@@ -85,9 +107,9 @@ QAアプリの実装に必要な共通処理をサンプルアプリ（[SantokuA
 #### HTTP API通信
 
 OpenAPI仕様からクライアントコードを自動生成するOrvalの設定などを追加します。
-Orvalは、React Query、SWRなど、いくつかのHTTP API通信ライブラリをサポートしており、選択したライブラリに合わせたクライアントコードを生成できます。
+[Orval](https://orval.dev/)は、React Query、SWRなど、いくつかのHTTP API通信ライブラリをサポートしており、選択したライブラリに合わせたクライアントコードを生成できます。
 
-QAアプリでは、axiosとReact Queryを使用します。
+QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://react-query-v3.tanstack.com/)を使用します。
 
 以下のファイルをコピー後、`npm run orval`を実行して、クライアントコードを生成してください。
 
@@ -100,33 +122,43 @@ QAアプリでは、axiosとReact Queryを使用します。
 次に、`src/features/backend/utils/customInstance.ts`と`orval.config.ts`を以下のように修正してください。
 
 ```typescript title="src/features/backend/utils/customInstance.ts"
+  import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 - import {AppConfig} from 'bases/core/config/AppConfig';
+  import {applicationName, nativeApplicationVersion} from 'expo-application';
+  import {RequestTimeoutError} from 'features/backend/error/RequestTimeoutError';
+  import {Platform} from 'react-native';
+
+  export type ErrorType<Error> = AxiosError<Error>;
+
+- const REQUEST_TIMEOUT = AppConfig.requestTimeout;
++ const REQUEST_TIMEOUT = 60000;
 
 - const backendUrl = `${AppConfig.santokuAppBackendUrl}/api`;
+- const sandboxUrl = `${AppConfig.santokuAppBackendUrl}/api/sandbox`;
 + const backendUrl = 'http://localhost:9090/api';
-- const sandboxUrl = 'http://localhost:9090/api/sandbox';
-
+  const BACKEND_AXIOS_INSTANCE = Axios.create({baseURL: backendUrl});
 - const SANDBOX_AXIOS_INSTANCE = Axios.create({baseURL: sandboxUrl});
+  const BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION = Axios.create({baseURL: backendUrl});
 
-/* ～省略～ */
+  /* ～省略～ */
+  const backendCustomInstance = <T>(config: AxiosRequestConfig): Promise<AxiosResp
+    return customInstance<T>(BACKEND_AXIOS_INSTANCE)(config);
+  };
 
 - const sandboxCustomInstance = <T>(config: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
 -   return customInstance<T>(SANDBOX_AXIOS_INSTANCE)(config);
 - };
 
-/* ～省略～ */
-
   export {
     backendCustomInstance,
 -   sandboxCustomInstance,
     setCsrfTokenHeader,
-
-/* ～省略～ */
+  /* ～省略～ */ 
 ```
 
 ```typescript title="orval.config.ts"
 -   sandbox: {
-    /* ～省略～ */
+-     /* ～省略～ */ 
 -   },
 ```
 
@@ -141,7 +173,7 @@ QAアプリでは、axiosとReact Queryを使用します。
 
 #### React Queryの設定
 
-HTTP API通信などの状態管理や、エラーのハンドリングとしてReact Queryを使用します。
+HTTP API通信などの状態管理や、エラーのハンドリングとして[React Query](https://react-query-v3.tanstack.com/)を使用します。
 React Queryのデフォルトオプションや、エラーハンドリングの設定処理を、サンプルアプリ（SantokuApp）からコピーします。
 
 設定内容の詳細は、以下のドキュメントを参照してください。
@@ -161,7 +193,7 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 
 次に、`src/apps/app/services/defaultGlobalErrorHandler.ts`を以下のように修正してください。
 
-```typescript
+```json title="src/apps/app/services/defaultGlobalErrorHandler.ts"
 /* ～省略～ */
 
 - import {clientLogout} from 'features/account/services/auth/clientLogout';
@@ -183,21 +215,22 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 
 #### アプリ起動後の初期化処理
 
-アプリ起動後に、アプリ内で使用するメッセージのロードや、入力画面のバリデーションで使用するYupの初期設定を実施します。
+アプリ起動後に、アプリ内で使用するメッセージのロードや、入力画面のバリデーションで使用する[Yup](https://github.com/jquense/yup)の初期設定を実施します。
 
 サンプルアプリ（SantokuApp）では、[アプリ起動後の初期化処理](../../santoku/application-architecture/life-cycle-management/initialization.mdx)に記載されている処理を実施しています。
-QAアプリでは、以下のファイルをコピー後、メッセージのロード、Yupの初期設定以外の処理は削除します。
+QAアプリでは、メッセージのロード、Yupの初期設定のみを実施します。まずは、以下のファイルをコピーしてください。
 
 | コピーファイル |
 |--|
-| src/apps/app/AppWithInitialization.tsx |
-| src/apps/app/use-cases/useAppInitializer.ts |
 | src/apps/app/services/loadBundledMessagesAsync.ts |
 | src/bases/validator/index.ts |
 
-次に、`src/apps/app/AppWithInitialization.tsx`、`src/apps/app/use-cases/useAppInitializer.ts`を以下の内容に差し替えてください。
+次に、以下のファイルを追加してください。
 
-> TODO: 差し替えるなら、ファイル追加で良さそう。
+| 追加ファイル |
+|--|
+| src/apps/app/AppWithInitialization.tsx |
+| src/apps/app/use-cases/useAppInitializer.ts |
 
 ```typescript jsx title="src/apps/app/AppWithInitialization.tsx"
 import {NavigationContainer} from '@react-navigation/native';
@@ -248,7 +281,7 @@ export const AppWithInitialization: React.FC = () => {
 };
 ```
 
-```typescript jsx title="src/apps/app/use-cases/useAppInitializer.ts"
+```typescript title="src/apps/app/use-cases/useAppInitializer.ts"
 import {enhanceValidator} from 'bases/validator';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {setRefreshSessionInterceptor} from 'features/account/services/auth/refreshSession';
@@ -307,7 +340,7 @@ export const useAppInitialize = () => {
 
 最後に、`src/App.tsx`を`src/apps/app/App.tsx`に移動して、以下の内容に差し替えてください。
 
-```typescript
+```typescript jsx title="src/apps/app/App.tsx"
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import React from 'react';
 import {StyleSheet} from 'react-native';
@@ -341,7 +374,7 @@ export const App = () => {
 
 次に、`src/fixtures/msw/utils/backendUrl.ts`を以下のように修正します。
 
-```typescript
+```typescript jsx title="src/fixtures/msw/utils/backendUrl.ts"
 /* ～省略～ */
 
 - export const backendUrl = `${AppConfig.santokuAppBackendUrl}/api`;
@@ -350,7 +383,7 @@ export const App = () => {
 
 最後に、`index.js`を以下のように修正してください。
 
-```javascript
+```javascript title="index.js"
 + import {AppWithMsw} from './src/apps/app/AppWithMsw';
 
 /* ～省略～ */
