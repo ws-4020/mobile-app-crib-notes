@@ -140,22 +140,41 @@ QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://rea
 + const backendUrl = 'http://localhost:9090/api';
   const BACKEND_AXIOS_INSTANCE = Axios.create({baseURL: backendUrl});
 - const SANDBOX_AXIOS_INSTANCE = Axios.create({baseURL: sandboxUrl});
-  const BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION = Axios.create({baseURL: backendUrl});
+- const BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION = Axios.create({baseURL: backendUrl});
 
-  /* ～省略～ */
-  const backendCustomInstance = <T>(config: AxiosRequestConfig): Promise<AxiosResp
-    return customInstance<T>(BACKEND_AXIOS_INSTANCE)(config);
-  };
+  /* ～省略～ */ 
 
 - const sandboxCustomInstance = <T>(config: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
 -   return customInstance<T>(SANDBOX_AXIOS_INSTANCE)(config);
 - };
-
+- 
+- const setCsrfTokenHeader = (csrfTokenHeaderName: string, csrfTokenValue: string) => {
+-   BACKEND_AXIOS_INSTANCE.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
+-   return customInstance<T>(SANDBOX_AXIOS_INSTANCE)(config);
+- };
+- 
+- const setCsrfTokenHeader = (csrfTokenHeaderName: string, csrfTokenValue: string) => {
+-   BACKEND_AXIOS_INSTANCE.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
+-   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
+- };
+- 
+- const setAxiosResponseInterceptor = (
+-   onFulfilled: (
+-     value: AxiosResponse<any, any>,
+-   ) => (AxiosResponse<any, any> | Promise<AxiosResponse<any, any>>) | undefined,
+-   onRejected: (error: any) => any | undefined,
+- ) => {
+-   BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
+- };
+- 
   export {
     backendCustomInstance,
 -   sandboxCustomInstance,
-    setCsrfTokenHeader,
-  /* ～省略～ */ 
+-   setCsrfTokenHeader,
+-   setAxiosResponseInterceptor,
+-   BACKEND_AXIOS_INSTANCE,
+-   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION,
+  };
 ```
 
 ```typescript title="orval.config.ts"
@@ -238,6 +257,8 @@ QAアプリでは、メッセージのロード、Yupの初期設定のみを実
 |--|
 | src/apps/app/services/loadBundledMessagesAsync.ts |
 
+次に、`src/navigation/RootStackNav.tsx`を`src/apps/app/navigators/RootStackNav.tsx`に移動してください。
+
 次に、以下のファイルを追加してください。
 
 | 追加ファイル |
@@ -262,63 +283,12 @@ export const enhanceValidator = () => {
 export const yup = Yup;
 ```
 
-```typescript jsx title="src/apps/app/AppWithInitialization.tsx"
-import {NavigationContainer} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
-import {Alert} from 'react-native';
-
-import {ReactQueryProvider} from './contexts/ReactQueryProvider';
-import {AppInitialData} from './types/AppInitialData';
-import {useAppInitialize} from './use-cases/useAppInitialize';
-
-export const AppWithInitialization: React.FC = () => {
-  const {initialize, initializationResult} = useAppInitialize();
-  const [initializationError, setInitializationError] = useState<unknown>();
-
-  useEffect(() => {
-    // 初期化処理が1回だけ実行されるようにする。
-    if (initializationResult.code === 'Initializing') {
-      initialize().catch(e => setInitializationError(e));
-    }
-  }, [initialize, initializationResult]);
-
-  useEffect(() => {
-    // 初期化処理に失敗した場合はアプリをクラッシュ扱いで終了
-    if (initializationError) {
-      throw initializationError;
-    }
-  }, [initializationError]);
-
-  if (initializationResult.code === 'Initializing') {
-    return null;
-  } else if (initializationResult.code === 'Failed') {
-    Alert.alert(initializationResult.title, initializationResult.message);
-    return null;
-  } else {
-    // RootStackNav、WithFirebaseMessagingHandlersをimportしてしまうと、アプリの初期化処理が完了する前に各画面でimportしているモジュールも読み込まれてしまうため、
-    // アプリの初期化処理が完了した時点でrequireする。
-    // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC<{initialData: AppInitialData}>;
-    return (
-      <NavigationContainer>
-        <ReactQueryProvider>
-          <RootStackNav />
-        </ReactQueryProvider>
-      </NavigationContainer>
-    );
-  }
-};
-```
-
 ```typescript title="src/apps/app/use-cases/useAppInitializer.ts"
-import {enhanceValidator} from 'bases/validator';
-import {activateKeepAwake} from 'expo-keep-awake';
-import {setRefreshSessionInterceptor} from 'features/account/services/auth/refreshSession';
-import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
-import {useCallback, useMemo, useState} from 'react';
+import { enhanceValidator } from "bases/validator";
+import { activateKeepAwake } from "expo-keep-awake";
+import { useCallback, useMemo, useState } from "react";
 
-import {loadBundledMessagesAsync} from '../services/loadBundledMessagesAsync';
+import { loadBundledMessagesAsync } from "../services/loadBundledMessagesAsync";
 
 type Initializing = {
   code: 'Initializing';
@@ -351,10 +321,6 @@ export const useAppInitialize = () => {
 
   const initialize = useCallback(async () => {
     await initializeCoreFeatures();
-    // CsrfTokenを取得し、AxiosInstanceのデフォルトヘッダに設定
-    await refreshCsrfToken();
-    // AxiosInstanceに401の時のリトライ処理を追加
-    setRefreshSessionInterceptor();
     setInitializationResult({code: 'Success'});
   }, []);
 
@@ -365,6 +331,55 @@ export const useAppInitialize = () => {
     }),
     [initializationResult, initialize],
   );
+};
+
+```
+
+```typescript jsx title="src/apps/app/AppWithInitialization.tsx"
+import {NavigationContainer} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {Alert} from 'react-native';
+
+import {ReactQueryProvider} from './contexts/ReactQueryProvider';
+import {useAppInitialize} from './use-cases/useAppInitializer';
+
+export const AppWithInitialization: React.FC = () => {
+  const {initialize, initializationResult} = useAppInitialize();
+  const [initializationError, setInitializationError] = useState<unknown>();
+
+  useEffect(() => {
+    // 初期化処理が1回だけ実行されるようにする。
+    if (initializationResult.code === 'Initializing') {
+      initialize().catch(e => setInitializationError(e));
+    }
+  }, [initialize, initializationResult]);
+
+  useEffect(() => {
+    // 初期化処理に失敗した場合はアプリをクラッシュ扱いで終了
+    if (initializationError) {
+      throw initializationError;
+    }
+  }, [initializationError]);
+
+  if (initializationResult.code === 'Initializing') {
+    return null;
+  } else if (initializationResult.code === 'Failed') {
+    Alert.alert(initializationResult.title, initializationResult.message);
+    return null;
+  } else {
+    // RootStackNav、WithFirebaseMessagingHandlersをimportしてしまうと、アプリの初期化処理が完了する前に各画面でimportしているモジュールも読み込まれてしまうため、
+    // アプリの初期化処理が完了した時点でrequireする。
+    // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC;
+    return (
+      <NavigationContainer>
+        <ReactQueryProvider>
+          <RootStackNav />
+        </ReactQueryProvider>
+      </NavigationContainer>
+    );
+  }
 };
 ```
 
