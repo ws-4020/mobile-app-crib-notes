@@ -31,6 +31,8 @@ QAアプリの作成には、以下のライブラリを使用します。その
 | react-query |
 | msw |
 | @mswjs/data |
+| react-native-url-polyfill |
+| expo-random |
 | yup |
 | orval ※`devDependencies`に追加 |
 
@@ -49,7 +51,7 @@ npm install -D <package-name>
 iOSの開発をする場合は、macOSで以下のコマンドを実行する必要があります。
 
 ```bash
-npm run pod-install
+npx pod-install
 ```
 
 :::info
@@ -67,18 +69,6 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 初期プロジェクトの作成をした直後は、最低限のファイルしかありません。
 QAアプリの実装に必要な共通処理をサンプルアプリ（[SantokuApp](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp)）からコピーします。
 
-#### メッセージ管理
-
-アプリ全体の文言の統一性や多言語対応の拡張性などを鑑みて、アプリ内で使用するメッセージを集約的に管理する機能を追加します。
-
-機能の詳細は、[メッセージ管理](../../santoku/application-architecture/message-configuration/overview.mdx)を参照してください。
-
-| コピーファイル |
-|--|
-| src/bases/message/Message.ts |
-| src/bases/message/BundledMessageLoader.ts |
-| src/bases/message/BundledMessages.ts |
-
 #### ログ出力
 
 ログの出力先や、ログの出力レベルを設定する機能を追加します。
@@ -93,6 +83,18 @@ QAアプリの実装に必要な共通処理をサンプルアプリ（[SantokuA
 | src/bases/logging/SimpleLogFormatter.ts |
 | src/bases/logging/Transport.ts |
 | src/bases/logging/sendErrorLog.ts |
+
+#### メッセージ管理
+
+アプリ全体の文言の統一性や多言語対応の拡張性などを鑑みて、アプリ内で使用するメッセージを集約的に管理する機能を追加します。
+
+機能の詳細は、[メッセージ管理](../../santoku/application-architecture/message-configuration/overview.mdx)を参照してください。
+
+| コピーファイル |
+|--|
+| src/bases/message/Message.ts |
+| src/bases/message/BundledMessageLoader.ts |
+| src/bases/message/BundledMessages.ts |
 
 #### UIコンポーネント
 
@@ -111,13 +113,13 @@ OpenAPI仕様からクライアントコードを自動生成するOrvalの設�
 
 QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://react-query-v3.tanstack.com/)を使用します。
 
-以下のファイルをコピー後、`npm run orval`を実行して、クライアントコードを生成してください。
-
 | コピーファイル |
 |--|
 | src/features/backend/utils/customInstance.ts |
 | src/features/backend/error/RequestTimeoutError.ts |
 | orval.config.ts |
+
+併せて、[OpenAPI仕様（openapi.yaml）](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/api-document/openapi.yaml)もプロジェクト直下（orval.config.tsと同じ階層）にコピーしてください。
 
 次に、`src/features/backend/utils/customInstance.ts`と`orval.config.ts`を以下のように修正してください。
 
@@ -157,19 +159,30 @@ QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://rea
 ```
 
 ```typescript title="orval.config.ts"
+    backend: {
+      /* ～省略～ */ 
+      input: {
+-       target: '../api-document/openapi.yaml',
++       target: './openapi.yaml',
+      },
+    },
 -   sandbox: {
 -     /* ～省略～ */ 
 -   },
 ```
 
-最後に、`package.json`に`orval`でクライアントコードを生成するためのスクリプトを追加します。
+次に、`package.json`に`orval`でクライアントコードを生成するためのスクリプトを追加します。
 
 ```json title="package.json"
   "scripts": {
     /* ～省略～ */
+-   "postinstall:patch-package": "patch-package"
++   "postinstall:patch-package": "patch-package",
 +   "orval": "npx orval --config ./orval.config.ts"
   }
 ```
+
+最後に、`npm run orval`を実行して、クライアントコードを生成してください。
 
 #### React Queryの設定
 
@@ -194,9 +207,10 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 次に、`src/apps/app/services/defaultGlobalErrorHandler.ts`を以下のように修正してください。
 
 ```json title="src/apps/app/services/defaultGlobalErrorHandler.ts"
-/* ～省略～ */
-
+  /* ～省略～ */
+  import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 - import {clientLogout} from 'features/account/services/auth/clientLogout';
+  import {RequestTimeoutError} from 'features/backend/error/RequestTimeoutError';
 
 /* ～省略～ */
 
@@ -223,14 +237,30 @@ QAアプリでは、メッセージのロード、Yupの初期設定のみを実
 | コピーファイル |
 |--|
 | src/apps/app/services/loadBundledMessagesAsync.ts |
-| src/bases/validator/index.ts |
 
 次に、以下のファイルを追加してください。
 
 | 追加ファイル |
 |--|
+| src/bases/validator/index.ts |
 | src/apps/app/AppWithInitialization.tsx |
 | src/apps/app/use-cases/useAppInitializer.ts |
+
+```typescript title="src/bases/validator/index.ts"
+import {m} from 'bases/message/Message';
+import * as Yup from 'yup';
+
+export const enhanceValidator = () => {
+
+  Yup.setLocale({
+    mixed: {
+      required: m('validation.mixed.required'),
+    },
+  });
+};
+
+export const yup = Yup;
+```
 
 ```typescript jsx title="src/apps/app/AppWithInitialization.tsx"
 import {NavigationContainer} from '@react-navigation/native';
@@ -367,18 +397,59 @@ export const App = () => {
 
 まず、以下のディレクトリ、ファイルをコピーしてください。
 
-| コピーディレクトリ・ファイル |
+| コピーディレクトリ |
 |--|
 | src/fixtures |
-| src/apps/app/AppWithMsw.ts |
 
-次に、`src/fixtures/msw/utils/backendUrl.ts`を以下のように修正します。
+次に、`src/fixtures/msw/utils/backendUrl.ts`、`src/fixtures/msw/datas/termsData.ts`を以下のように修正します。
 
-```typescript jsx title="src/fixtures/msw/utils/backendUrl.ts"
+```typescript title="src/fixtures/msw/utils/backendUrl.ts"
 /* ～省略～ */
 
 - export const backendUrl = `${AppConfig.santokuAppBackendUrl}/api`;
 + export const backendUrl = 'http://localhost:9090/api';
+```
+
+```typescript title="src/fixtures/msw/datas/termsData.ts"
+- import {AppConfig} from 'bases/core/config/AppConfig';
+- 
+  import {db} from '../db';
+
+  export const termsData = () => {
+-   db.terms.create({id: '1', url: AppConfig.termsUrl, version: '0.1.0'});
++   db.terms.create({id: '1', url: 'http://localhost:9090/terms', version: '0.1.0'});
+  };
+```
+
+次に、以下のファイルを追加してください。
+
+| 追加ファイル |
+|--|
+| src/apps/app/AppWithMsw.ts |
+
+```typescript title="src/apps/app/AppWithMsw.ts"
+import {initialMsw} from 'fixtures/msw';
+import React, {useEffect, useState} from 'react';
+import 'react-native-url-polyfill/auto';
+
+import {App} from './App';
+
+export const AppWithMsw = () => {
+  const [isInitializedMsw, setIsInitializedMsw] = useState(false);
+
+  useEffect(() => {
+    initialMsw()
+    .then(() => setIsInitializedMsw(true))
+    .catch(console.error);
+  }, []);
+
+  if (!isInitializedMsw) {
+    return null;
+  }
+
+  return <App />;
+};
+
 ```
 
 最後に、`index.js`を以下のように修正してください。
