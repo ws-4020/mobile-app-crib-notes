@@ -425,9 +425,9 @@ export const App = () => {
 
 | 追加ファイル |
 |--|
-| src/apps/app/AppWithMsw.ts |
+| src/apps/app/AppWithMsw.tsx |
 
-```typescript title="src/apps/app/AppWithMsw.ts"
+```typescript jsx title="src/apps/app/AppWithMsw.tsx"
 import {initialMsw} from 'fixtures/msw';
 import React, {useEffect, useState} from 'react';
 import 'react-native-url-polyfill/auto';
