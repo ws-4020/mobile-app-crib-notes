@@ -416,31 +416,12 @@ export const App = () => {
 |--|
 | src/fixtures |
 
-次に、`src/fixtures/msw/utils/backendUrl.ts`、`src/fixtures/msw/datas/termsData.ts`を以下のように修正します。
-
-```typescript title="src/fixtures/msw/utils/backendUrl.ts"
-/* ～省略～ */
-
-- export const backendUrl = `${AppConfig.santokuAppBackendUrl}/api`;
-+ export const backendUrl = 'http://localhost:9090/api';
-```
-
-```typescript title="src/fixtures/msw/datas/termsData.ts"
-- import {AppConfig} from 'bases/core/config/AppConfig';
-- 
-  import {db} from '../db';
-
-  export const termsData = () => {
--   db.terms.create({id: '1', url: AppConfig.termsUrl, version: '0.1.0'});
-+   db.terms.create({id: '1', url: 'http://localhost:9090/terms', version: '0.1.0'});
-  };
-```
-
 次に、以下のファイルを追加してください。
 
 | 追加ファイル |
 |--|
 | src/apps/app/AppWithMsw.tsx |
+| src/fixtures/msw/datas/loggedInAccountData.ts |
 
 ```typescript jsx title="src/apps/app/AppWithMsw.tsx"
 import {initialMsw} from 'fixtures/msw';
@@ -464,7 +445,48 @@ export const AppWithMsw = () => {
 
   return <App />;
 };
+```
 
+```typescript title="src/fixtures/msw/datas/loggedInAccountData.ts"
+import { db } from "../db";
+
+export const loggedInAccountData = () => {
+  db.loggedInAccount.create({accountId: 'santoku'});
+}
+```
+
+次に、`src/fixtures/msw/utils/backendUrl.ts`、`src/fixtures/msw/datas/termsData.ts`、`src/fixtures/msw/datas/index.ts`を以下のように修正します。
+
+```typescript title="src/fixtures/msw/utils/backendUrl.ts"
+/* ～省略～ */
+
+- export const backendUrl = `${AppConfig.santokuAppBackendUrl}/api`;
++ export const backendUrl = 'http://localhost:9090/api';
+```
+
+```typescript title="src/fixtures/msw/datas/termsData.ts"
+- import {AppConfig} from 'bases/core/config/AppConfig';
+- 
+  import {db} from '../db';
+
+  export const termsData = () => {
+-   db.terms.create({id: '1', url: AppConfig.termsUrl, version: '0.1.0'});
++   db.terms.create({id: '1', url: 'http://localhost:9090/terms', version: '0.1.0'});
+  };
+```
+
+```typescript title="src/fixtures/msw/datas/index.ts"
+  import {templateData} from './templateData';
+  import {templateMaxData} from './templateMaxData';
+  import {termsData} from './termsData';
++ import {loggedInAccountData} from "./loggedInAccountData";
+
+  export const initialData = async () => {
++   loggedInAccountData();
+    accountData();
+    accountMaxData();
+    accountMinData();
+  /* ～省略～ */  
 ```
 
 最後に、`index.js`を以下のように修正してください。
