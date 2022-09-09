@@ -210,8 +210,7 @@ module.exports = {
               label: '一覧画面（ホーム画面）',
               items: [
                 'react-native/learn/qa-app/exercise-basic-home-components',
-                'react-native/learn/qa-app/exercise-basic-home-event',
-                'react-native/learn/qa-app/exercise-basic-home-question',
+                'react-native/learn/qa-app/exercise-basic-home-screen',
                 'react-native/learn/qa-app/exercise-basic-home-api',
               ],
             },
