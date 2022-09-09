@@ -24,7 +24,7 @@ hide_table_of_contents: true
 | 資料名 | 説明 |
 |--|--|
 | デザインシステム | 画面デザインの完成見本や表示部品の動きなどについて記載した資料です。Figmaで開いて参照してください。【TODO：置き場所決まり次第figmaファイルへのリンクを追記】|
-| [API仕様](https://github.com/Fintan-contents/mobile-app-crib-notes/blob/master/example-app/api-document/openapi.yaml) | 使用するAPIの仕様です。OpenAPI Specificationで作成しています。必要に応じてStoplight Studioなどのツールを使用し、見やすい形式で参照してください。 【TODO：マージ後にmasterブランチを指すように修正】 |
+| [API仕様](https://github.com/Fintan-contents/mobile-app-crib-notes/blob/master/example-app/api-document/openapi.yaml) | 使用するAPIの仕様です。OpenAPI Specificationで作成しています。必要に応じてStoplight Studioなどのツールを使用し、見やすい形式で参照してください。 |
 
 また、上記に記載されていない内容については演習問題文中に仕様の補足として記載しています。参考にして実装してください。
 
