@@ -396,7 +396,6 @@ export const App = () => {
     </GestureHandlerRootView>
   );
 };
-
 ```
 
 #### MSWの設定
