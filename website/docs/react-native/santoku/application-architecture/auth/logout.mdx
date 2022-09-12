@@ -22,7 +22,7 @@ title: ログアウト
 `useAuthCommands`の戻り値の`logout`関数を使用してログアウトします。
 
 ```typescript title="ログアウトの利用方法"
-const {logout, isLoggingOut} = useAuthCommands();
+const {logout} = useAuthCommands();
 try {
   await logout(undefined);
 } catch (e) {
