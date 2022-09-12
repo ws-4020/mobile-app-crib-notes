@@ -116,7 +116,7 @@ QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://rea
 | コピーファイル |
 |--|
 | src/features/backend/utils/customInstance.ts |
-| src/features/backend/error/RequestTimeoutError.ts |
+| src/features/backend/errors/RequestTimeoutError.ts |
 | orval.config.ts |
 
 併せて、[OpenAPI仕様（openapi.yaml）](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/api-document/openapi.yaml)もプロジェクト直下（orval.config.tsと同じ階層）にコピーしてください。
@@ -129,9 +129,9 @@ QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://rea
 
 ```typescript title="src/features/backend/utils/customInstance.ts"
   import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
-- import {AppConfig} from 'bases/core/config/AppConfig';
+- import {AppConfig} from 'bases/core/configs/AppConfig';
   import {applicationName, nativeApplicationVersion} from 'expo-application';
-  import {RequestTimeoutError} from 'features/backend/error/RequestTimeoutError';
+  import {RequestTimeoutError} from 'features/backend/errors/RequestTimeoutError';
   import {Platform} from 'react-native';
 
   export type ErrorType<Error> = AxiosError<Error>;
@@ -227,7 +227,7 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 | src/apps/app/services/defaultGlobalQueryErrorHandler.tsx |
 | src/apps/app/services/defaultGlobalMutationErrorHandler.tsx |
 | src/apps/app/services/defaultOptions.ts |
-| src/bases/core/error/ApplicationError.ts |
+| src/bases/core/errors/ApplicationError.ts |
 
 次に、`src/apps/app/services/defaultGlobalErrorHandler.ts`を以下のように修正してください。
 
@@ -235,7 +235,7 @@ React Queryのデフォルトオプションや、エラーハンドリングの
   /* ～省略～ */
   import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 - import {clientLogout} from 'features/account/services/auth/clientLogout';
-  import {RequestTimeoutError} from 'features/backend/error/RequestTimeoutError';
+  import {RequestTimeoutError} from 'features/backend/errors/RequestTimeoutError';
 
 /* ～省略～ */
 
@@ -466,14 +466,14 @@ export const loggedInAccountData = () => {
 - `src/fixtures/msw/datas/index.ts`
 
 ```typescript title="src/fixtures/msw/utils/backendUrl.ts"
-- import {AppConfig} from 'bases/core/config/AppConfig';
+- import {AppConfig} from 'bases/core/configs/AppConfig';
 -
 - export const backendUrl = `${AppConfig.santokuAppBackendUrl}/api`;
 + export const backendUrl = 'http://localhost:9090/api';
 ```
 
 ```typescript title="src/fixtures/msw/datas/termsData.ts"
-- import {AppConfig} from 'bases/core/config/AppConfig';
+- import {AppConfig} from 'bases/core/configs/AppConfig';
 - 
   import {db} from '../db';
 
