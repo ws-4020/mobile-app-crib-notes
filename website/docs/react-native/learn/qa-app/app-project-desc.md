@@ -125,6 +125,7 @@ QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://rea
 
 - `src/features/backend/utils/customInstance.ts`
 - `orval.config.ts`
+- `.eslintrc.js`
 
 ```typescript title="src/features/backend/utils/customInstance.ts"
   import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
@@ -165,14 +166,15 @@ QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://rea
 -   BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
 - };
 - 
-  export {
-    backendCustomInstance,
+- export {
+-   backendCustomInstance,
 -   sandboxCustomInstance,
 -   setCsrfTokenHeader,
 -   setAxiosResponseInterceptor,
 -   BACKEND_AXIOS_INSTANCE,
 -   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION,
-  };
+- };
++ export {backendCustomInstance};
 ```
 
 ```typescript title="orval.config.ts"
@@ -186,6 +188,12 @@ QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://rea
 -   sandbox: {
 -     /* ～省略～ */ 
 -   },
+```
+
+```javascript title=".eslintrc.js"
+    ],
++   ignorePatterns: ['src/features/backend/apis/**/*.ts'],
+  };
 ```
 
 次に、`package.json`に`orval`でクライアントコードを生成するためのスクリプトを追加します。
@@ -231,11 +239,12 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 
 /* ～省略～ */
 
-  const showRequireLoginDialog = (queryClient: QueryClient) => {
+- const showRequireLoginDialog = (queryClient: QueryClient) => {
 -   clientLogout(queryClient).finally(() => {
 -     Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
 -   });
-  };
+- };
++ const showRequireLoginDialog = (queryClient: QueryClient) => {};
 
 /* ～省略～ */
 
@@ -267,7 +276,6 @@ import {m} from 'bases/message/Message';
 import * as Yup from 'yup';
 
 export const enhanceValidator = () => {
-
   Yup.setLocale({
     mixed: {
       required: m('validation.mixed.required'),
@@ -276,12 +284,13 @@ export const enhanceValidator = () => {
 };
 
 export const yup = Yup;
+
 ```
 
 ```typescript title="src/apps/app/use-cases/useAppInitializer.ts"
-import { enhanceValidator } from "bases/validator";
-import { activateKeepAwake } from "expo-keep-awake";
-import { useCallback, useMemo, useState } from "react";
+import {enhanceValidator} from "bases/validator";
+import {activateKeepAwake} from "expo-keep-awake";
+import {useCallback, useMemo, useState} from "react";
 
 import { loadBundledMessagesAsync } from "../services/loadBundledMessagesAsync";
 
@@ -406,9 +415,10 @@ export const App = () => {
 
 まず、以下のディレクトリ、ファイルをコピーしてください。
 
-| コピーディレクトリ |
+| コピーディレクトリ・ファイル |
 |--|
 | src/fixtures |
+| src/@types/image.d.ts |
 
 次に、以下のファイルを追加してください。
 
@@ -442,7 +452,7 @@ export const AppWithMsw = () => {
 ```
 
 ```typescript title="src/fixtures/msw/datas/loggedInAccountData.ts"
-import { db } from "../db";
+import {db} from "../db";
 
 export const loggedInAccountData = () => {
   db.loggedInAccount.create({accountId: 'santoku'});
@@ -474,10 +484,13 @@ export const loggedInAccountData = () => {
 ```
 
 ```typescript title="src/fixtures/msw/datas/index.ts"
-  import {templateData} from './templateData';
-  import {templateMaxData} from './templateMaxData';
-  import {termsData} from './termsData';
-+ import {loggedInAccountData} from "./loggedInAccountData";
+  /* ～省略～ */
+  import {eventLikeMaxData} from './eventLikeMaxData';
+  import {eventMaxData} from './eventMaxData';
++ import {loggedInAccountData} from './loggedInAccountData';
+  import {notificationData} from './notificationData';
+  import {notificationMaxData} from './notificationMaxData';
+  /* ～省略～ */
 
   export const initialData = async () => {
 +   loggedInAccountData();
@@ -490,6 +503,9 @@ export const loggedInAccountData = () => {
 最後に、`index.js`を以下のように修正してください。
 
 ```javascript title="index.js"
+/* ～省略～ */
+
+- import {App} from './src/apps/app/App';
 + import {AppWithMsw} from './src/apps/app/AppWithMsw';
 
 /* ～省略～ */
