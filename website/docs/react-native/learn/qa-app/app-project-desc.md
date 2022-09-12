@@ -121,7 +121,10 @@ QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://rea
 
 併せて、[OpenAPI仕様（openapi.yaml）](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/api-document/openapi.yaml)もプロジェクト直下（orval.config.tsと同じ階層）にコピーしてください。
 
-次に、`src/features/backend/utils/customInstance.ts`と`orval.config.ts`を以下のように修正してください。
+次に、以下のファイルを修正します。
+
+- `src/features/backend/utils/customInstance.ts`
+- `orval.config.ts`
 
 ```typescript title="src/features/backend/utils/customInstance.ts"
   import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
@@ -210,8 +213,8 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 
 設定内容の詳細は、以下のドキュメントを参照してください。
 
-* [React Queryを用いたHTTP API通信](../../santoku/application-architecture/http-api/overview.mdx)
-* [HTTP API通信で発生するエラーのハンドリング](../../santoku/application-architecture/http-api/http-api-error-handling.mdx)
+- [React Queryを用いたHTTP API通信](../../santoku/application-architecture/http-api/overview.mdx)
+- [HTTP API通信で発生するエラーのハンドリング](../../santoku/application-architecture/http-api/http-api-error-handling.mdx)
 
 | コピーファイル |
 |--|
@@ -455,7 +458,11 @@ export const loggedInAccountData = () => {
 }
 ```
 
-次に、`src/fixtures/msw/utils/backendUrl.ts`、`src/fixtures/msw/datas/termsData.ts`、`src/fixtures/msw/datas/index.ts`を以下のように修正します。
+次に、以下のファイルを修正します。
+
+- `src/fixtures/msw/utils/backendUrl.ts`
+- `src/fixtures/msw/datas/termsData.ts`
+- `src/fixtures/msw/datas/index.ts`
 
 ```typescript title="src/fixtures/msw/utils/backendUrl.ts"
 /* ～省略～ */
