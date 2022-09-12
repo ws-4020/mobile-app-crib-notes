@@ -235,9 +235,6 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 -   clientLogout(queryClient).finally(() => {
 -     Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
 -   });
-+   // clientLogout(queryClient).finally(() => {
-+   //   Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
-+   // });
   };
 
 /* ～省略～ */
