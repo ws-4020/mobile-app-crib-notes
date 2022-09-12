@@ -456,8 +456,8 @@ export const loggedInAccountData = () => {
 - `src/fixtures/msw/datas/index.ts`
 
 ```typescript title="src/fixtures/msw/utils/backendUrl.ts"
-/* ～省略～ */
-
+- import {AppConfig} from 'bases/core/config/AppConfig';
+-
 - export const backendUrl = `${AppConfig.santokuAppBackendUrl}/api`;
 + export const backendUrl = 'http://localhost:9090/api';
 ```
