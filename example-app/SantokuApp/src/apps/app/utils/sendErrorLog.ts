@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {RuntimeError} from 'bases/core/error/RuntimeError';
 import {log} from 'bases/logging';
 import {ErrorResponse} from 'features/backend/apis/model';
 
@@ -7,19 +8,13 @@ export const sendErrorLog = (error: unknown) => {
     if (axios.isAxiosError(error)) {
       const data = error.response?.data as ErrorResponse | undefined;
       const errorCode = data?.code ?? 'AxiosError';
-      log.error(
-        `
-Backend API Request Error:
-req.url=[${error.config.url ?? ''}]
-req.method=[${error.config.method ?? ''}]
-res.status=[${error.response?.status ?? ''}]
-res.statusText=[${error.response?.statusText ?? ''}]
-`,
-        errorCode,
-      );
+      log.error(error, errorCode);
     } else {
-      const errorMessage = error instanceof Error ? error.message : 'unknown';
-      log.error(`UnexpectedError: message=[${errorMessage}]`, 'UnexpectedRequestError');
+      if (error instanceof Error) {
+        log.error(error, 'UnexpectedRequestError');
+      } else {
+        log.error(new RuntimeError(error), 'UnexpectedRequestError');
+      }
     }
   } catch {}
 };

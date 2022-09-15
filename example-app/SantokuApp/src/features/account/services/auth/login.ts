@@ -6,6 +6,7 @@
  */
 import crashlytics from '@react-native-firebase/crashlytics';
 import axios from 'axios';
+import {RuntimeError} from 'bases/core/error/RuntimeError';
 import {postLogin} from 'features/backend/apis/account/account';
 import {AccountLoginResponse} from 'features/backend/apis/model';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
@@ -28,6 +29,6 @@ export const login = async (accountId: string, password: string): Promise<Accoun
         throw new UnauthorizedError(e);
       }
     }
-    throw e;
+    throw new RuntimeError(e);
   }
 };
