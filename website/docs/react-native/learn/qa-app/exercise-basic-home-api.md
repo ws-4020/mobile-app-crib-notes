@@ -6,15 +6,21 @@ hide_table_of_contents: true
 
 画面表示に必要な情報をAPIで取得します。
 
-【TODO】：API呼び出しについての概要や呼び出し方を書く。
+[プロジェクトの設定](https://fintan-contents.github.io/mobile-app-crib-notes/react-native/learn/qa-app/app-project-desc#%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A)が終わっていない場合は実施してください。
 
-APIが呼び出せるようになったら、APIで取得した値を画面に表示するように修正してください。
+API呼び出しの記述例はサンプルアプリのAPI呼び出し部分を参考にしてください。
 
-以下のAPIを呼び出して値を取得するようにしてください。
+（参考例）
+
+[src/features/qa-question/pages/QuestionDetailPage.tsx](https://github.com/fintan-contents/mobile-app-crib-notes/tree/master/example-app/SantokuApp/src/features/qa-question/pages/QuestionDetailPage.tsx)
+
+[src/features/qa-question/services/useQuestion.ts](https://github.com/fintan-contents/mobile-app-crib-notes/tree/master/example-app/SantokuApp/src/features/qa-question/services/useQuestion.ts)
+
+[API仕様](https://github.com/Fintan-contents/mobile-app-crib-notes/blob/master/example-app/api-document/openapi.yaml)を参照しながら以下のAPI呼び出しを追加し、ソースコードに直接値を記載していた箇所をAPIの戻り値を使用するように修正してください。
 
 | API名 | 呼び出しタイミング | 補足 |
 |--|--|--|
-| イベント一覧取得 | 画面初期表示<br />ホームボタン押下 | 掲載期間中のイベントのみ取得 |
-| 質問一覧取得 | 画面初期表示<br />ホームボタン押下<br />検索ボタン押下<br />ソートアイコン押下<br />フィルタアイコン押下<br />タグアイコン押下 | 検索、ソート、フィルタ時は条件を指定 |
-| お知らせ一覧取得 | ベルアイコン押下 |  |
-| タグ一覧取得 | タグアイコン押下 |  |
+| イベント一覧取得 | 画面初期表示 | 掲載期間中のイベントのみ取得 |
+| 質問一覧取得 | 画面初期表示<br />ソートボタン押下<br />タグボタン押下 | ソート時は条件を指定 |
+| お知らせ一覧取得 | お知らせボタン押下 |  |
+| タグ一覧取得 | タグボタン押下 |  |
