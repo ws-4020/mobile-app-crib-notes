@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from 'axios';
 import {ApplicationError} from 'bases/core/error/ApplicationError';
-import {sendErrorLog} from 'bases/logging/sendErrorLog';
+import {handleError} from 'bases/core/error/handleError';
 import {
   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION,
   setAxiosResponseInterceptor,
@@ -38,7 +38,7 @@ const setRefreshSessionInterceptor = () => {
           await refreshSession();
           return await BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.request(error.config);
         } catch (e) {
-          sendErrorLog(e);
+          handleError(e);
           throw error;
         }
       }

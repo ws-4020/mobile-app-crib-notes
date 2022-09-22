@@ -26,7 +26,7 @@ export const autoLogin = async (): Promise<AccountLoginResponse | undefined> => 
       // 認証エラーは処理成功として扱う
       return undefined;
     } else {
-      throw new RuntimeError(e);
+      throw new RuntimeError(e, 'AutoLoginError');
     }
   }
 };

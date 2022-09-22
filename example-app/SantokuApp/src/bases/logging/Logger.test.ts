@@ -114,7 +114,7 @@ describe('Logger isLevelEnabled', () => {
     log.debug('debugLog');
     log.info('infoLog');
     log.warn('warnLog');
-    log.error('errorLog', 'err0001');
+    log.error(new Error('errorLog'), 'err0001');
   };
 });
 
@@ -206,15 +206,9 @@ describe('Logger transport message and errorCode', () => {
     const log = new Logger({level: 'error', formatter, transports: [consoleTransport, firebaseCrashlyticsTransport]});
 
     mockFormat.mockReturnValue('[error] [err0001] errorLog');
-    log.error('errorLog', 'err0001');
+    log.error(new Error('errorLog'), 'err0001');
     expect(mockFormat).toHaveBeenCalledWith('error', 'errorLog', 'err0001');
     expect(mockConsoleError).toHaveBeenCalledWith('[error] [err0001] errorLog', 'err0001');
     expect(mockFirebaseCrashlyticsError).toHaveBeenCalledWith('[error] [err0001] errorLog', 'err0001');
-
-    mockFormat.mockReturnValue('[error] [err0002] errorLogMessageSupplier');
-    log.error(() => 'errorLogMessageSupplier', 'err0002');
-    expect(mockFormat).toHaveBeenCalledWith('error', 'errorLogMessageSupplier', 'err0002');
-    expect(mockConsoleError).toHaveBeenCalledWith('[error] [err0002] errorLogMessageSupplier', 'err0002');
-    expect(mockFirebaseCrashlyticsError).toHaveBeenCalledWith('[error] [err0002] errorLogMessageSupplier', 'err0002');
   });
 });

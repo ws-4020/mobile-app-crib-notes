@@ -26,9 +26,9 @@ export const login = async (accountId: string, password: string): Promise<Accoun
   } catch (e) {
     if (axios.isAxiosError(e)) {
       if (e.response?.status === 401) {
-        throw new UnauthorizedError(e);
+        throw new UnauthorizedError(e, 'UnauthorizedError');
       }
     }
-    throw new RuntimeError(e);
+    throw new RuntimeError(e, 'LoginError');
   }
 };

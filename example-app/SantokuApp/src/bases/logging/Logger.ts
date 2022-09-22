@@ -98,7 +98,7 @@ class Logger {
    * @param errorCode エラーコード
    * @returns ロガーインスタンス
    */
-  error(error: Error, errorCode: string = 'SystemError'): Logger {
+  error(error: Error, errorCode: string = 'UnexpectedError'): Logger {
     if (this.isLevelEnabled('error')) {
       this.transports.forEach(t => t.error(error, errorCode));
     }
