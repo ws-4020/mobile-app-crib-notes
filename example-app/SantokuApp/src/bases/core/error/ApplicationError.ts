@@ -4,9 +4,9 @@ export class ApplicationError extends ErrorWrapper {
   constructor();
   constructor(cause: unknown);
   constructor(message: string);
-  constructor(cause: unknown, errorCode: string);
-  constructor(message: string, errorCode: string);
-  constructor(message: string, cause: unknown, errorCode: string);
+  constructor(cause: unknown, errorCode?: string);
+  constructor(message: string, errorCode?: string);
+  constructor(message: string, cause: unknown, errorCode?: string);
   constructor(messageOrCause?: unknown, cause?: unknown, errorCode?: string) {
     if (typeof messageOrCause === 'string') {
       super(messageOrCause, cause);
