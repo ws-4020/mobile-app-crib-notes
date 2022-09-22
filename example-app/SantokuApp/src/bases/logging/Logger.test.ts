@@ -200,15 +200,15 @@ describe('Logger transport message and errorCode', () => {
     expect(mockFirebaseCrashlyticsWarn).toHaveBeenCalledWith('[warn] warnLogMessageSupplier');
   });
 
-  test('errorレベルの場合にTransportにフォーマットされたメッセージとエラーコードを正しく渡しているかの検証', () => {
+  test('errorレベルの場合にTransportにエラーとエラーコードを正しく渡しているかの検証', () => {
     const mockConsoleError = jest.spyOn(consoleTransport, 'error').mockImplementation();
     const mockFirebaseCrashlyticsError = jest.spyOn(firebaseCrashlyticsTransport, 'error').mockImplementation();
     const log = new Logger({level: 'error', formatter, transports: [consoleTransport, firebaseCrashlyticsTransport]});
 
     mockFormat.mockReturnValue('[error] [err0001] errorLog');
-    log.error(new Error('errorLog'), 'err0001');
-    expect(mockFormat).toHaveBeenCalledWith('error', 'errorLog', 'err0001');
-    expect(mockConsoleError).toHaveBeenCalledWith('[error] [err0001] errorLog', 'err0001');
-    expect(mockFirebaseCrashlyticsError).toHaveBeenCalledWith('[error] [err0001] errorLog', 'err0001');
+    const error = new Error('errorLog');
+    log.error(error, 'err0001');
+    expect(mockConsoleError).toHaveBeenCalledWith(error, 'err0001');
+    expect(mockFirebaseCrashlyticsError).toHaveBeenCalledWith(error, 'err0001');
   });
 });
