@@ -17,7 +17,7 @@ export const autoLogin = async (): Promise<AccountLoginResponse | undefined> => 
   }
   const accountId = await loadActiveAccountId();
   if (!accountId) {
-    throw new ActiveAccountIdNotFoundError('There is no auto-login enabled account.');
+    throw new ActiveAccountIdNotFoundError('There is no auto-login enabled account.', 'AutoLoginError');
   }
   try {
     return await changeAccount(accountId);
