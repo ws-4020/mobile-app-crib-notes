@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {isErrorWithErrorCode} from 'bases/core/error/ErrorWithErrorCode';
-import {RuntimeError} from 'bases/core/error/RuntimeError';
+import {isErrorWithErrorCode} from 'bases/core/errors/ErrorWithErrorCode';
+import {RuntimeError} from 'bases/core/errors/RuntimeError';
 import {log} from 'bases/logging';
 import {ErrorResponse} from 'features/backend/apis/model';
 

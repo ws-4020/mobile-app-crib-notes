@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from 'axios';
-import {ApplicationError} from 'bases/core/error/ApplicationError';
-import {handleError} from 'bases/core/error/handleError';
+import {ApplicationError} from 'bases/core/errors/ApplicationError';
+import {handleError} from 'bases/core/errors/handleError';
 import {
   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION,
   setAxiosResponseInterceptor,
