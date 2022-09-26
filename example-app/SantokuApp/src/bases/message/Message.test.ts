@@ -1,6 +1,6 @@
-import * as error from 'bases/core/error/handleError';
+import * as error from 'bases/core/errors/handleError';
 
-import {RuntimeError} from '../core/error/RuntimeError';
+import {RuntimeError} from '../core/errors/RuntimeError';
 import {loadMessages, m} from './Message';
 
 describe('Message message', () => {

@@ -1,4 +1,4 @@
-import {handleErrorWithAlert} from 'bases/core/error/handleErrorWithAlert';
+import {handleErrorWithAlert} from 'bases/core/errors/handleErrorWithAlert';
 import {m} from 'bases/message/Message';
 import {FilledButton} from 'bases/ui/button/FilledButton';
 import {TextInput} from 'bases/ui/input/TextInput';

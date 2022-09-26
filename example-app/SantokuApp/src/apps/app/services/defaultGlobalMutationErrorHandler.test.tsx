@@ -1,5 +1,5 @@
 import {AxiosError} from 'axios';
-import {setHandleError} from 'bases/core/error/handleError';
+import {setHandleError} from 'bases/core/errors/handleError';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {Mutation, QueryClient} from 'react-query';
 

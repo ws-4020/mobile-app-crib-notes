@@ -1,5 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
-import {handleError} from 'bases/core/error/handleError';
+import {handleError} from 'bases/core/errors/handleError';
 import {resolveErrorMessage} from 'bases/message/resolveErrorMessage';
 import {enhanceValidator} from 'bases/validator';
 import {activateKeepAwake} from 'expo-keep-awake';

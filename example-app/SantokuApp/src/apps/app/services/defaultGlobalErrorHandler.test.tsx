@@ -1,6 +1,6 @@
 import {act} from '@testing-library/react-native';
 import {AxiosError} from 'axios';
-import {setHandleError} from 'bases/core/error/handleError';
+import {setHandleError} from 'bases/core/errors/handleError';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import * as clientLogout from 'features/account/services/auth/clientLogout';
 import {Alert} from 'react-native';

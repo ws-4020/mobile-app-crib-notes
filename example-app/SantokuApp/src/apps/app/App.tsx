@@ -1,6 +1,6 @@
-import {setHandleError} from 'bases/core/error/handleError';
-import {setHandleErrorWithAlert} from 'bases/core/error/handleErrorWithAlert';
-import {setHandleErrorWithSnackbar} from 'bases/core/error/handleErrorWithSnackbar';
+import {setHandleError} from 'bases/core/errors/handleError';
+import {setHandleErrorWithAlert} from 'bases/core/errors/handleErrorWithAlert';
+import {setHandleErrorWithSnackbar} from 'bases/core/errors/handleErrorWithSnackbar';
 import {firebaseConfig} from 'bases/firebase/FirebaseConfig';
 import {createLogger, setLogger} from 'bases/logging';
 import {FirebaseCrashlyticsTransport} from 'bases/logging/FirebaseCrashlyticsTransport';

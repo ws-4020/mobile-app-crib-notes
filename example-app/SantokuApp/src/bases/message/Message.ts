@@ -1,6 +1,6 @@
-import {handleError} from 'bases/core/error/handleError';
+import {handleError} from 'bases/core/errors/handleError';
 
-import {RuntimeError} from '../core/error/RuntimeError';
+import {RuntimeError} from '../core/errors/RuntimeError';
 import {MessageKey} from './BundledMessages';
 
 /**

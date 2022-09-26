@@ -1,4 +1,4 @@
-import {RuntimeError} from 'bases/core/error/RuntimeError';
+import {RuntimeError} from 'bases/core/errors/RuntimeError';
 import {isUnauthorizedError} from 'features/account/errors/UnauthorizedError';
 import {AccountLoginResponse} from 'features/backend/apis/model';
 import {loadActiveAccountId} from 'features/secure-storage/services/loadActiveAccountId';

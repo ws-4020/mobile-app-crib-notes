@@ -1,4 +1,4 @@
-import {handleErrorWithSnackbar} from 'bases/core/error/handleErrorWithSnackbar';
+import {handleErrorWithSnackbar} from 'bases/core/errors/handleErrorWithSnackbar';
 import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
 import {isRequestPushPermissionError} from 'bases/firebase/messaging/requestPushPermission';
 import {Button} from 'bases/ui/button/Button';

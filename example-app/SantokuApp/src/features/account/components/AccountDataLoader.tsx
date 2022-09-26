@@ -1,4 +1,4 @@
-import {handleErrorWithAlert} from 'bases/core/error/handleErrorWithAlert';
+import {handleErrorWithAlert} from 'bases/core/errors/handleErrorWithAlert';
 import {resolveErrorMessage} from 'bases/message/resolveErrorMessage';
 import React, {useEffect, useRef} from 'react';
 

@@ -2,7 +2,7 @@
  * クライアント側のログアウト処理を実施します。
  */
 import crashlytics from '@react-native-firebase/crashlytics';
-import {handleError} from 'bases/core/error/handleError';
+import {handleError} from 'bases/core/errors/handleError';
 import {deleteFcmToken} from 'bases/firebase/messaging/deleteFcmToken';
 import {deleteActiveAccountId} from 'features/secure-storage/services/deleteActiveAccountId';
 import {deletePassword} from 'features/secure-storage/services/deletePassword';

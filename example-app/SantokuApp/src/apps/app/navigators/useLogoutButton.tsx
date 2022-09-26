@@ -1,4 +1,4 @@
-import {handleErrorWithAlert} from 'bases/core/error/handleErrorWithAlert';
+import {handleErrorWithAlert} from 'bases/core/errors/handleErrorWithAlert';
 import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
 import {m} from 'bases/message/Message';
 import {Button} from 'bases/ui/button/Button';
