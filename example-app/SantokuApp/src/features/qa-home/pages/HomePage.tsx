@@ -8,7 +8,9 @@ import {Spacer} from 'bases/ui/spacer/Spacer';
 import {EventList} from 'features/qa-event/components/EventList';
 import {QuestionList} from 'features/qa-question/components/QuestionList';
 import React, {useCallback, useEffect} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {Text} from 'react-native';
+import {StyledScrollView, Box} from 'bases/ui/common';
+import {Fab} from 'bases/ui/fab/Fab';
 
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
 
@@ -48,22 +50,23 @@ export const HomePage: React.VFC<HomePageProps> = ({navigateToQuestionAndEventPo
   }, [requestPermissionAndRegisterToken]);
 
   return (
-    <View style={styles.container} testID="HomePage">
-      <Text>開発中</Text>
-      <EventList />
-      <QuestionList />
-      <Spacer heightRatio={0.02} />
-      <Button title="Go to QuestionDetail" onPress={() => navigateToQuestionDetail('1')} size="large" />
-      <Spacer heightRatio={0.02} />
-      <Button title="Go to QuestionAndEventPost" onPress={navigateToQuestionAndEventPost} size="large" />
-    </View>
+    <Box>
+      <StyledScrollView showsVerticalScrollIndicator={false} testID="HomePage">
+        <EventList />
+        <QuestionList />
+        {/* <Spacer heightRatio={0.02} /> */}
+        {/* <Button title="Go to QuestionDetail" onPress={() => navigateToQuestionDetail('1')} size="large" /> */}
+        {/* <Spacer heightRatio={0.02} /> */}
+        {/* <Button title="Go to QuestionAndEventPost" onPress={navigateToQuestionAndEventPost} size="large" /> */}
+      </StyledScrollView>
+      <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
+        <Fab size="small" color="white">
+          <Text>^</Text>
+        </Fab>
+        <Fab onPress={navigateToQuestionAndEventPost}>
+          <Text>+</Text>
+        </Fab>
+      </Box>
+    </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
