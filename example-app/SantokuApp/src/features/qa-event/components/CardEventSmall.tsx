@@ -9,8 +9,8 @@ const screenWidth = Dimensions.get('screen').width;
 
 export type CardEventSmallProps = {
   title: string;
-  likeCount: string;
-  userNickname: string;
+  likeCount: number;
+  userNickname?: string;
   userDetails: string;
   onLike?: () => void;
 };

@@ -11,6 +11,8 @@ import React, {useCallback, useEffect} from 'react';
 import {Text} from 'react-native';
 import {StyledScrollView, Box} from 'bases/ui/common';
 import {Fab} from 'bases/ui/fab/Fab';
+import {useListQuestions} from 'features/qa-question/services/useListQuestions';
+import {useListEvents} from 'features/qa-event/services/useListEvents';
 
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
 
@@ -49,15 +51,16 @@ export const HomePage: React.VFC<HomePageProps> = ({navigateToQuestionAndEventPo
     });
   }, [requestPermissionAndRegisterToken]);
 
+  const {data: listEvents, isLoading: listEventsLoading} = useListEvents();
+  const {data: listQuestions, isLoading: listQuestionsLoading} = useListQuestions();
+
+  console.log('listEvents', listEvents);
+
   return (
-    <Box>
+    <Box flex={1}>
       <StyledScrollView showsVerticalScrollIndicator={false} testID="HomePage">
-        <EventList />
-        <QuestionList />
-        {/* <Spacer heightRatio={0.02} /> */}
-        {/* <Button title="Go to QuestionDetail" onPress={() => navigateToQuestionDetail('1')} size="large" /> */}
-        {/* <Spacer heightRatio={0.02} /> */}
-        {/* <Button title="Go to QuestionAndEventPost" onPress={navigateToQuestionAndEventPost} size="large" /> */}
+        {!listEventsLoading && <EventList data={listEvents} />}
+        {!listQuestionsLoading && <QuestionList data={listQuestions} />}
       </StyledScrollView>
       <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
         <Fab size="small" color="white">
