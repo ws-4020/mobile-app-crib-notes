@@ -8,7 +8,7 @@ hide_table_of_contents: true
 
 デザインシステムで示された各表示部品をReact Nativeで実現するために、必要であればOSSライブラリの使用を考えます。使用するコアコンポーネントまたはライブラリのドキュメントを参考に実装し、スタイルを設定して完成させます。
 
-コンポーネントの配置場所や実装例はサンプルアプリ（[SantokuApp](https://github.com/Fintan-contents/mobile-app-crib-notes/tree/master/example-app/SantokuApp)）を参考にしてください。
+コンポーネントの配置場所や実装例はサンプルアプリ（[SantokuApp](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp)）を参考にしてください。
 
 作成するコンポーネントとして、例えば以下のものがあります（一部）。
 

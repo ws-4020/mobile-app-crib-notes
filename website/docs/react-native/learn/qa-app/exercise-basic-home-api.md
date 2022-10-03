@@ -12,11 +12,11 @@ API呼び出しの記述例はサンプルアプリのAPI呼び出し部分を�
 
 （参考例）
 
-[src/features/qa-question/pages/QuestionDetailPage.tsx](https://github.com/fintan-contents/mobile-app-crib-notes/tree/master/example-app/SantokuApp/src/features/qa-question/pages/QuestionDetailPage.tsx)
+[src/features/qa-question/pages/QuestionDetailPage.tsx](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/src/features/qa-question/pages/QuestionDetailPage.tsx)
 
-[src/features/qa-question/services/useQuestion.ts](https://github.com/fintan-contents/mobile-app-crib-notes/tree/master/example-app/SantokuApp/src/features/qa-question/services/useQuestion.ts)
+[src/features/qa-question/services/useQuestion.ts](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/src/features/qa-question/services/useQuestion.ts)
 
-[API仕様](https://github.com/Fintan-contents/mobile-app-crib-notes/blob/master/example-app/api-document/openapi.yaml)を参照しながら以下のAPI呼び出しを追加し、ソースコードに直接値を記載していた箇所をAPIの戻り値を使用するように修正してください。
+[API仕様](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/api-document/openapi.yaml)を参照しながら以下のAPI呼び出しを追加し、ソースコードに直接値を記載していた箇所をAPIの戻り値を使用するように修正してください。
 
 | API名 | 呼び出しタイミング | 補足 |
 |--|--|--|
