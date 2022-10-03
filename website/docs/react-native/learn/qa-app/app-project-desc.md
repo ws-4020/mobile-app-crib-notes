@@ -8,11 +8,11 @@ hide_table_of_contents: true
 
 ### 開発環境の構築
 
-[開発環境の構築](https://fintan-contents.github.io/mobile-app-crib-notes/react-native/learn/getting-started/setting-up-development-environment)が未実施の場合は、実施してください。
+[開発環境の構築](/react-native/learn/getting-started/setting-up-development-environment)が未実施の場合は、実施してください。
 
 ### プロジェクトの作成
 
-[プロジェクトの作成](https://fintan-contents.github.io/mobile-app-crib-notes/react-native/learn/getting-started/create-project)を参照し、新たに初期プロジェクトを作成してください。
+[プロジェクトの作成](/react-native/learn/getting-started/create-project)を参照し、新たに初期プロジェクトを作成してください。
 
 ### ディレクトリ構成
 
@@ -62,7 +62,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 
 ### アプリの実行方法
 
-[アプリの実行](https://fintan-contents.github.io/mobile-app-crib-notes/react-native/learn/getting-started/launch-created-app)を参照してください。
+[アプリの実行](/react-native/learn/getting-started/launch-created-app)を参照してください。
 
 ### プロジェクトの設定
 
@@ -73,7 +73,7 @@ QAアプリの実装に必要な共通処理をサンプルアプリ（[SantokuA
 
 ログの出力先や、ログの出力レベルを設定する機能を追加します。
 
-機能の詳細は、[アプリのログ出力](../../santoku/application-architecture/logging-app/overview.mdx)を参照してください。
+機能の詳細は、[アプリのログ出力](/react-native/santoku/application-architecture/logging-app/overview.mdx)を参照してください。
 
 | コピーファイル |
 |--|

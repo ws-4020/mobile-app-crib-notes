@@ -4,7 +4,7 @@ sidebar_label: 概要
 hide_table_of_contents: true
 ---
 
-[ToDoアプリの実装](https://fintan-contents.github.io/mobile-app-crib-notes/react-native/learn/todo-app)が完了した方向けに、より実践的なアプリを作成します。
+[ToDoアプリの実装](/react-native/learn/todo-app)が完了した方向けに、より実践的なアプリを作成します。
 
 React Native未経験者でToDoアプリの実装が未実施の場合は、ToDoアプリの実装を先に実施することをお勧めします。
 

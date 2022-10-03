@@ -6,7 +6,7 @@ hide_table_of_contents: true
 
 画面表示に必要な情報をAPIで取得します。
 
-[プロジェクトの設定](https://fintan-contents.github.io/mobile-app-crib-notes/react-native/learn/qa-app/app-project-desc#%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A)が終わっていない場合は実施してください。
+[プロジェクトの設定](/react-native/learn/qa-app/app-project-desc#%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A)が終わっていない場合は実施してください。
 
 API呼び出しの記述例はサンプルアプリのAPI呼び出し部分を参考にしてください。
 
