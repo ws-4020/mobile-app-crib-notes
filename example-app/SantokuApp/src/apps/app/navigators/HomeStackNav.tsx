@@ -16,7 +16,11 @@ const nav = createStackNavigator<HomeStackParamList>();
 export const HomeStackNav: React.FC = () => {
   const theme = useTheme<RestyleTheme>();
   return (
-    <nav.Navigator screenOptions={{headerStyle: {backgroundColor: theme.colors.orange1}}}>
+    <nav.Navigator
+      screenOptions={{
+        headerStyle: {backgroundColor: theme.colors.orange1},
+        cardStyle: {backgroundColor: theme.colors.orange2},
+      }}>
       <nav.Screen component={HomeScreen} name="Home" options={{headerTitle: ''}} />
     </nav.Navigator>
   );
