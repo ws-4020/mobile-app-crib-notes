@@ -17,4 +17,3 @@ export const Text = createText<RestyleTheme>();
 export const StyledTouchableOpacity = createBox<RestyleTheme, TouchableOpacityProps>(TouchableOpacity);
 export const StyledSafeAreaView = createBox<RestyleTheme, ViewProps>(SafeAreaView);
 export const StyledScrollView = createBox<RestyleTheme, ScrollViewProps>(ScrollView);
-export const StyledImage = createBox<RestyleTheme, ImageProps>(Image);

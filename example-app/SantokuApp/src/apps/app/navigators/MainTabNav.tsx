@@ -1,8 +1,11 @@
-import {Ionicons, MaterialIcons} from '@expo/vector-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useTheme} from '@shopify/restyle';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
+import {HomeIllustration} from 'bases/ui/illustration/HomeIllustration';
+import {PeopleIllustration} from 'bases/ui/illustration/PeopleIllustration';
 import React, {useMemo} from 'react';
 
+import {RestyleTheme} from '../../../bases/ui/theme/restyleTheme';
 import {withInitialData} from '../components/withInitialData';
 import {HomeStackNav} from './HomeStackNav';
 import {TeamStackNav} from './TeamStackNav';
@@ -18,17 +21,24 @@ type Props = {
 };
 const Component: React.FC<Props> = ({initialData}) => {
   const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
+  const theme = useTheme<RestyleTheme>();
 
   return (
-    <nav.Navigator initialRouteName={initialRouteName}>
+    <nav.Navigator
+      initialRouteName={initialRouteName}
+      screenOptions={{
+        tabBarStyle: {backgroundColor: theme.colors.orange1},
+      }}>
       <nav.Screen
         name="HomeStackNav"
         component={HomeStackNav}
         options={{
           tabBarAccessibilityLabel: 'Home',
-          tabBarShowLabel: false,
+          tabBarLabel: 'ホーム',
+          tabBarActiveTintColor: theme.colors.white,
+          tabBarInactiveTintColor: theme.colors.grey2,
           headerShown: false,
-          tabBarIcon: ({color}) => <Ionicons name="md-home" size={30} color={color} />,
+          tabBarIcon: ({focused}) => <HomeIllustration tintColor={focused ? undefined : 'grey2'} />,
         }}
       />
       <nav.Screen
@@ -36,9 +46,11 @@ const Component: React.FC<Props> = ({initialData}) => {
         component={TeamStackNav}
         options={{
           tabBarAccessibilityLabel: 'Team',
-          tabBarShowLabel: false,
+          tabBarLabel: 'デモ',
+          tabBarActiveTintColor: theme.colors.white,
+          tabBarInactiveTintColor: theme.colors.grey2,
           headerShown: false,
-          tabBarIcon: ({color}) => <MaterialIcons name="groups" size={30} color={color} />,
+          tabBarIcon: ({focused}) => <PeopleIllustration color={focused ? 'white' : 'grey2'} />,
         }}
       />
     </nav.Navigator>
