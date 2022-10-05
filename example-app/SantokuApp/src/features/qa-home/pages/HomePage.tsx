@@ -56,7 +56,9 @@ export const HomePage: React.VFC<HomePageProps> = ({navigateToQuestionAndEventPo
     <Box flex={1}>
       <StyledScrollView showsVerticalScrollIndicator={false} testID="HomePage">
         {!listEventsLoading && <EventList data={listEvents} />}
-        {!listQuestionsLoading && <QuestionList data={listQuestions} />}
+        {!listQuestionsLoading && (
+          <QuestionList data={listQuestions} navigateToQuestionDetail={navigateToQuestionDetail} />
+        )}
       </StyledScrollView>
       <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
         <Fab size="small" color="white">
