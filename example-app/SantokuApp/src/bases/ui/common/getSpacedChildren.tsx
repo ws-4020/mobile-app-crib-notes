@@ -8,10 +8,10 @@ export const getSpacedChildren = (
   space: StyledSpacingKeys,
   direction: 'row' | 'column',
 ): any => {
-  let childrenArray = React.Children.toArray(children);
+  const childrenArray = React.Children.toArray(children);
 
   const spacingProp: object = direction === 'row' ? {pl: space} : {pt: space};
-  childrenArray = childrenArray.map((child, index) => {
+  return childrenArray.map((child, index) => {
     return (
       <React.Fragment key={`spaced-child-${index}`}>
         {child}
@@ -19,6 +19,4 @@ export const getSpacedChildren = (
       </React.Fragment>
     );
   });
-
-  return childrenArray;
 };
