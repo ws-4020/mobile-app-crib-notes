@@ -3,9 +3,9 @@ import {useTheme} from '@shopify/restyle';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
 import {HomeIllustration} from 'bases/ui/illustration/HomeIllustration';
 import {PeopleIllustration} from 'bases/ui/illustration/PeopleIllustration';
+import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {useMemo} from 'react';
 
-import {RestyleTheme} from '../../../bases/ui/theme/restyleTheme';
 import {withInitialData} from '../components/withInitialData';
 import {HomeStackNav} from './HomeStackNav';
 import {TeamStackNav} from './TeamStackNav';
