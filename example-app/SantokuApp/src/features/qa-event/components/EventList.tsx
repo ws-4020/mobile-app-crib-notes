@@ -5,7 +5,7 @@ import {Event} from 'features/backend/apis/model';
 import React from 'react';
 import {Dimensions} from 'react-native';
 
-import {CardEventSmall} from './CardEventSmall';
+import {EventListCard} from './EventListCard';
 
 const screenWidth = Dimensions.get('screen').width;
 
@@ -22,13 +22,11 @@ export const EventList: React.VFC<EventListProps> = ({data}) => {
       </Text>
       <StyledScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled marginTop="p24">
         {data?.map(item => (
-          <CardEventSmall
-            key={item.eventId}
-            title={item.title}
-            likeCount={item.likes}
-            userNickname={item.profile?.nickname}
-            userDetails="5/5"
-          />
+          <Box flexDirection="row" key={item.eventId}>
+            <Box px="p8" />
+            <EventListCard event={item} />
+            <Box px="p8" />
+          </Box>
         ))}
         <Box width={screenWidth - theme.spacing.p16 * 2} justifyContent="center" alignItems="center">
           <StyledTouchableOpacity>

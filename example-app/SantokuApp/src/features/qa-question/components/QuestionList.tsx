@@ -32,10 +32,10 @@ export const QuestionList: React.VFC<QuestionListProps> = ({data, navigateToQues
         </Box>
       </Box>
       {data?.map(item => (
-        <>
+        <Box key={item.questionId}>
           <QuestionListCard question={item} navigateToQuestionDetail={navigateToQuestionDetail} />
           <Box py="p8" />
-        </>
+        </Box>
       ))}
     </Box>
   );
