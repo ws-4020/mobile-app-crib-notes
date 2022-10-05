@@ -13,7 +13,7 @@ export const StyledColumn: React.FC<Omit<BoxProps<RestyleTheme>, 'flexDirection'
 }) => {
   return (
     <Box flexDirection="column" {...rest}>
-      {space ? getSpacedChildren(children, space, 'Y') : children}
+      {space ? getSpacedChildren(children, space, 'column') : children}
     </Box>
   );
 };

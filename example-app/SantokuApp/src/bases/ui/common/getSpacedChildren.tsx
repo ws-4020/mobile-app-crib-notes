@@ -6,12 +6,12 @@ import {StyledSpacingKeys} from './types';
 export const getSpacedChildren = (
   children: React.ReactNode[] | React.ReactNode,
   space: StyledSpacingKeys,
-  axis: 'X' | 'Y',
+  direction: 'row' | 'column',
 ): any => {
   let childrenArray = React.Children.toArray(children);
 
   const spacingProp: object = {
-    ...(axis === 'X' ? {pl: space} : {pt: space}),
+    ...(direction === 'row' ? {pl: space} : {pt: space}),
   };
   childrenArray = childrenArray.map((child, index) => {
     return (
