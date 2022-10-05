@@ -2,8 +2,11 @@ import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
 import {isRequestPushPermissionError} from 'bases/firebase/messaging/requestPushPermission';
 import {log} from 'bases/logging';
 import {m} from 'bases/message/Message';
-import {Box, StyledScrollView} from 'bases/ui/common';
+import {Box, StyledScrollView, StyledTouchableOpacity} from 'bases/ui/common';
 import {Fab} from 'bases/ui/fab/Fab';
+import {NotificationsIllustration} from 'bases/ui/illustration/NotificationsIllustration';
+import {SearchIllustration} from 'bases/ui/illustration/SearchIllustration';
+import {SettingsIllustration} from 'bases/ui/illustration/SettingsIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {EventList} from 'features/qa-event/components/EventList';
 import {useListEvents} from 'features/qa-event/services/useListEvents';
@@ -14,12 +17,19 @@ import {Text} from 'react-native';
 
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
 
+const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
+
 export type HomePageProps = {
   navigateToQuestionAndEventPost: () => void;
   navigateToQuestionDetail: (questionId: string) => void;
+  setNavigationOptions: (options: {headerLeft: () => React.ReactNode; headerRight: () => React.ReactNode}) => void;
 };
 
-export const HomePage: React.VFC<HomePageProps> = ({navigateToQuestionAndEventPost, navigateToQuestionDetail}) => {
+export const HomePage: React.VFC<HomePageProps> = ({
+  navigateToQuestionAndEventPost,
+  navigateToQuestionDetail,
+  setNavigationOptions,
+}) => {
   const {requestPermissionAndRegisterToken: callRequestPermissionAndRegisterToken} =
     useRequestPermissionAndRegisterToken();
   // Push通知の許可ダイアログ表示とFCM登録トークンの登録・更新
@@ -48,6 +58,37 @@ export const HomePage: React.VFC<HomePageProps> = ({navigateToQuestionAndEventPo
       // requestPermissionAndRegisterTokenでエラーハンドリングを実施しているので、ここでは特に何もしない
     });
   }, [requestPermissionAndRegisterToken]);
+
+  React.useLayoutEffect(() => {
+    setNavigationOptions({
+      headerLeft: () => {
+        return (
+          <Box px="p16">
+            <StyledTouchableOpacity onPress={showUnderDevelopment}>
+              <SearchIllustration />
+            </StyledTouchableOpacity>
+            <Box py="p4" />
+          </Box>
+        );
+      },
+      headerRight: () => {
+        return (
+          <Box px="p16">
+            <Box flexDirection="row" alignItems="center">
+              <StyledTouchableOpacity onPress={showUnderDevelopment}>
+                <NotificationsIllustration />
+              </StyledTouchableOpacity>
+              <Box px="p8" />
+              <StyledTouchableOpacity onPress={showUnderDevelopment}>
+                <SettingsIllustration />
+              </StyledTouchableOpacity>
+            </Box>
+            <Box py="p4" />
+          </Box>
+        );
+      },
+    });
+  }, [setNavigationOptions]);
 
   const {data: listEvents, isLoading: listEventsLoading} = useListEvents();
   const {data: listQuestions, isLoading: listQuestionsLoading} = useListQuestions();

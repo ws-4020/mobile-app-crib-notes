@@ -1,6 +1,6 @@
 import {useFocusEffect} from '@react-navigation/core';
 import {CompositeScreenProps} from '@react-navigation/native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {NativeStackNavigationOptions, NativeStackScreenProps} from '@react-navigation/native-stack';
 import {HomePage} from 'features/qa-home/pages/HomePage';
 import {useShowTermsAgreementOverlay} from 'features/terms/use-cases/useShowTermsAgreementOverlay';
 import React, {useCallback} from 'react';
@@ -27,10 +27,16 @@ export const HomeScreen: React.FC<
     [navigation],
   );
 
+  const setNavigationOptions = useCallback(
+    (options: NativeStackNavigationOptions) => navigation.setOptions(options),
+    [navigation],
+  );
+
   return (
     <HomePage
       navigateToQuestionAndEventPost={navigateToQuestionAndEventPost}
       navigateToQuestionDetail={navigateToQuestionDetail}
+      setNavigationOptions={setNavigationOptions}
     />
   );
 };
