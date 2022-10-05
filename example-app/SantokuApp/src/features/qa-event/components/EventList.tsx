@@ -1,10 +1,11 @@
-import React from 'react';
-import {Dimensions} from 'react-native';
 import {useTheme} from '@shopify/restyle';
 import {StyledScrollView, Text, Box, StyledTouchableOpacity} from 'bases/ui/common';
-import {CardEventSmall} from './CardEventSmall';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import {Event} from 'features/backend/apis/model';
+import React from 'react';
+import {Dimensions} from 'react-native';
+
+import {CardEventSmall} from './CardEventSmall';
 
 const screenWidth = Dimensions.get('screen').width;
 

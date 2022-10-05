@@ -1,7 +1,8 @@
-import React from 'react';
 import {Box, Text, StyledTouchableOpacity} from 'bases/ui/common';
-import {CardEvent} from './CardEvent';
 import {Question} from 'features/backend/apis/model';
+import React from 'react';
+
+import {CardEvent} from './CardEvent';
 
 type ToolbarButtonProps = {
   leftAsset?: React.ReactNode;

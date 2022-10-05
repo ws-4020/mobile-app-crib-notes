@@ -2,17 +2,15 @@ import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
 import {isRequestPushPermissionError} from 'bases/firebase/messaging/requestPushPermission';
 import {log} from 'bases/logging';
 import {m} from 'bases/message/Message';
-import {Button} from 'bases/ui/button/Button';
+import {Box, StyledScrollView} from 'bases/ui/common';
+import {Fab} from 'bases/ui/fab/Fab';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
-import {Spacer} from 'bases/ui/spacer/Spacer';
 import {EventList} from 'features/qa-event/components/EventList';
+import {useListEvents} from 'features/qa-event/services/useListEvents';
 import {QuestionList} from 'features/qa-question/components/QuestionList';
+import {useListQuestions} from 'features/qa-question/services/useListQuestions';
 import React, {useCallback, useEffect} from 'react';
 import {Text} from 'react-native';
-import {StyledScrollView, Box} from 'bases/ui/common';
-import {Fab} from 'bases/ui/fab/Fab';
-import {useListQuestions} from 'features/qa-question/services/useListQuestions';
-import {useListEvents} from 'features/qa-event/services/useListEvents';
 
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
 
@@ -53,8 +51,6 @@ export const HomePage: React.VFC<HomePageProps> = ({navigateToQuestionAndEventPo
 
   const {data: listEvents, isLoading: listEventsLoading} = useListEvents();
   const {data: listQuestions, isLoading: listQuestionsLoading} = useListQuestions();
-
-  console.log('listEvents', listEvents);
 
   return (
     <Box flex={1}>

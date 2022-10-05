@@ -1,9 +1,9 @@
 import {useTheme} from '@shopify/restyle';
 import {Box, Text, StyledTouchableOpacity} from 'bases/ui/common';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
+import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {FC, useCallback} from 'react';
 import {Dimensions} from 'react-native';
-import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 
 const screenWidth = Dimensions.get('screen').width;
 
@@ -33,7 +33,7 @@ export const CardEventSmall: FC<CardEventSmallProps> = ({
       paddingHorizontal="p24"
       paddingVertical="p16"
       flexDirection="column"
-      borderRadius={'p16'}
+      borderRadius="p16"
       shadowColor="black"
       shadowOffset={{width: 2, height: 2}}
       shadowRadius={0}

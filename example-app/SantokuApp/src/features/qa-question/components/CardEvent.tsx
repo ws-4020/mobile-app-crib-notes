@@ -1,8 +1,6 @@
-import React, {FC} from 'react';
-import {useTheme} from '@shopify/restyle';
-import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
-import {Box, Text, StyledTouchableOpacity} from 'bases/ui/common';
+import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
+import React, {FC} from 'react';
 
 export type CardEventProps = {
   title: string;
@@ -14,7 +12,6 @@ export type CardEventProps = {
 };
 
 export const CardEvent: FC<CardEventProps> = ({title, details, likeCount, userNickname, userDetails, onPress}) => {
-  const theme = useTheme<RestyleTheme>();
   return (
     <Box
       backgroundColor="white"
