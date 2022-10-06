@@ -5,8 +5,8 @@ import {TagIllustration} from 'bases/ui/illustration/TagIllustration';
 import {Tab} from 'bases/ui/tab/Tab';
 import {TabBar} from 'bases/ui/tab/TabBar';
 import {EventPost} from 'features/qa-event/components/EventPost';
+import {MultipleSelectableTagSheet} from 'features/qa-question/components/MultipleSelectableTagSheet';
 import {QuestionPost} from 'features/qa-question/components/QuestionPost';
-import {TagsMultipleSelectionSheet} from 'features/qa-question/components/TagsMultipleSelectionSheet';
 import {QuestionFormValues, useQuestionForm} from 'features/qa-question/forms/useQuestionForm';
 import {useQuestionCommands} from 'features/qa-question/services/useQuestionCommands';
 import {useTags} from 'features/qa-question/services/useTags';
@@ -41,7 +41,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
     clearContent: clearQuestionContent,
   } = useQuestionForm({onSubmit: submitQuestion});
 
-  const showTagsSheet = useCallback(() => {
+  const showTagSheet = useCallback(() => {
     setIsVisibleTagSheet(true);
   }, []);
 
@@ -90,7 +90,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
         return (
           <Box flexDirection="row" alignItems="center">
             {selectedTabIndex === 0 && (
-              <StyledTouchableOpacity onPress={showTagsSheet} p="p8">
+              <StyledTouchableOpacity onPress={showTagSheet} p="p8">
                 <TagIllustration padding="p8" color="blue" />
               </StyledTouchableOpacity>
             )}
@@ -100,7 +100,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
         );
       },
     });
-  }, [isQuestionPosting, post, selectedTabIndex, setNavigationOptions, showTagsSheet]);
+  }, [isQuestionPosting, post, selectedTabIndex, setNavigationOptions, showTagSheet]);
 
   return (
     <>
@@ -122,7 +122,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
           </Tab>
         </TabBar>
       </StyledSafeAreaView>
-      <TagsMultipleSelectionSheet
+      <MultipleSelectableTagSheet
         tags={tags}
         isVisible={isVisibleTagSheet}
         initialSelectedTagIds={questionForm.values.tags}

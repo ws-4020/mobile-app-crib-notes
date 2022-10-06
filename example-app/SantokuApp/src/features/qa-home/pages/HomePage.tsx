@@ -17,9 +17,13 @@ import {EventList} from 'features/qa-event/components/EventList';
 import {useListEvents} from 'features/qa-event/services/useListEvents';
 import {QuestionList} from 'features/qa-question/components/QuestionList';
 import {useListQuestions} from 'features/qa-question/services/useListQuestions';
-import React, {useCallback, useEffect, useRef} from 'react';
+import {useTags} from 'features/qa-question/services/useTags';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Platform, ScrollView} from 'react-native';
 
+import {GetListQuestionsSort} from '../../backend/apis/model';
+import {SingleSelectableSortSheet} from '../../qa-question/components/SingleSelectableSortSheet';
+import {SingleSelectableTagSheet} from '../../qa-question/components/SingleSelectableTagSheet';
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
@@ -95,8 +99,30 @@ export const HomePage: React.VFC<HomePageProps> = ({
     });
   }, [setNavigationOptions]);
 
-  const scrollViewRef = useRef<ScrollView>();
+  const [selectedSort, setSelectedSort] = useState<GetListQuestionsSort>();
+  const [isVisibleSortSheet, setIsVisibleSortSheet] = useState<boolean>(false);
+  const showSortSheet = useCallback(() => {
+    setIsVisibleSortSheet(true);
+  }, []);
+  const selectSort = useCallback((sort?: GetListQuestionsSort) => {
+    setSelectedSort(sort);
+    setIsVisibleSortSheet(false);
+  }, []);
+  const sortIconColor = useMemo(() => (selectedSort ? 'blue' : 'black'), [selectedSort]);
 
+  const {data: tags} = useTags();
+  const [selectedTagId, setSelectedTagId] = useState<string>();
+  const [isVisibleTagSheet, setIsVisibleTagSheet] = useState<boolean>(false);
+  const showTagSheet = useCallback(() => {
+    setIsVisibleTagSheet(true);
+  }, []);
+  const selectTag = useCallback((tagId?: string) => {
+    setSelectedTagId(tagId);
+    setIsVisibleTagSheet(false);
+  }, []);
+  const tagIconColor = useMemo(() => (selectedTagId ? 'blue' : 'black'), [selectedTagId]);
+
+  const scrollViewRef = useRef<ScrollView>();
   const scrollToTop = useCallback(() => scrollViewRef.current?.scrollTo({y: 0, animated: true}), []);
 
   const {data: listEvents, isLoading: listEventsLoading} = useListEvents();
@@ -116,11 +142,17 @@ export const HomePage: React.VFC<HomePageProps> = ({
             {m('質問')}
           </Text>
           <Box flexDirection="row" alignItems="center">
-            <SortIllustration />
+            <StyledTouchableOpacity onPress={showSortSheet}>
+              <SortIllustration color={sortIconColor} />
+            </StyledTouchableOpacity>
             <Box p="p16" />
-            <FilterAltIllustration />
+            <StyledTouchableOpacity onPress={showUnderDevelopment}>
+              <FilterAltIllustration />
+            </StyledTouchableOpacity>
             <Box p="p16" />
-            <LocalOfferIllustration />
+            <StyledTouchableOpacity onPress={showTagSheet}>
+              <LocalOfferIllustration color={tagIconColor} />
+            </StyledTouchableOpacity>
           </Box>
         </Box>
         {!listQuestionsLoading && (
@@ -137,6 +169,17 @@ export const HomePage: React.VFC<HomePageProps> = ({
           <AddIllustration />
         </Fab>
       </Box>
+      <SingleSelectableSortSheet
+        isVisible={isVisibleSortSheet}
+        initialSelectedSort={selectedSort}
+        select={selectSort}
+      />
+      <SingleSelectableTagSheet
+        tags={tags}
+        isVisible={isVisibleTagSheet}
+        initialSelectedTagId={selectedTagId}
+        select={selectTag}
+      />
     </Box>
   );
 };
