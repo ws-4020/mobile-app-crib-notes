@@ -78,7 +78,7 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
         </Text>
       </Pressable>
       <Box py="p8" />
-      <Text variant="font14Regular" lineHeight={28} letterSpacing={0.25} numberOfLines={3} ellipsizeMode="tail">
+      <Text variant="font14Regular" lineHeight={28} letterSpacing={0.25} numberOfLines={2} ellipsizeMode="tail">
         {content}
       </Text>
       <Box py="p8" />
