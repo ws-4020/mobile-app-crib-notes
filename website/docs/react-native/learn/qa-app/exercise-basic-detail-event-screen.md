@@ -8,7 +8,7 @@ hide_table_of_contents: true
 
 API呼び出しは後で実装するので、APIの戻り値は一旦、ソースコード上に直接記述して進めてください。
 
-【TODO】：画面イメージを添付。
+![イベント詳細画面](screen-detail-event.png)
 
 ## 補足
 
