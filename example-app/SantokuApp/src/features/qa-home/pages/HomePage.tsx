@@ -2,7 +2,6 @@ import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
 import {isRequestPushPermissionError} from 'bases/firebase/messaging/requestPushPermission';
 import {log} from 'bases/logging';
 import {m} from 'bases/message/Message';
-import {BottomSheet} from 'bases/ui/bottom-sheet/BottomSheet';
 import {Box, StyledScrollView, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {Fab} from 'bases/ui/fab/Fab';
 import {AddIllustration} from 'bases/ui/illustration/AddIllustration';
@@ -138,7 +137,6 @@ export const HomePage: React.VFC<HomePageProps> = ({
           <AddIllustration />
         </Fab>
       </Box>
-      <BottomSheet />
     </Box>
   );
 };

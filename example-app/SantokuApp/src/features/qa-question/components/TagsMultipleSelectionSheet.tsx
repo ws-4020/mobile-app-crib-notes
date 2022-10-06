@@ -1,6 +1,9 @@
 import {m} from 'bases/message/Message';
 import {BottomSheet} from 'bases/ui/bottom-sheet/BottomSheet';
-import {Box, StyledSafeAreaView, StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {StyledSafeAreaView, StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {StyledColumn} from 'bases/ui/common/StyledColumn';
+import {StyledRow} from 'bases/ui/common/StyledRow';
+import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {TagIllustration} from 'bases/ui/illustration/TagIllustration';
 import {Tag as TagType} from 'features/backend/apis/model';
 import React, {useCallback, useState} from 'react';
@@ -38,33 +41,33 @@ export const TagsMultipleSelectionSheet: React.FC<TagSheetProps> = ({
 
   return (
     <BottomSheet isVisible={isVisible}>
-      <Box flexDirection="column" p="p16" bg="white" borderTopLeftRadius="p16" borderTopRightRadius="p16">
+      <StyledColumn p="p16" bg="white" borderTopLeftRadius="p16" borderTopRightRadius="p16">
         <StyledSafeAreaView>
-          <Box flexDirection="row" justifyContent="space-between" alignItems="center">
+          <StyledRow justifyContent="space-between" alignItems="center">
             <TagIllustration />
-            <Box flexDirection="row">
+            <StyledRow space="p8">
               <StyledTouchableOpacity px="p8" py="p2" onPress={clear}>
                 <Text fontSize={14} lineHeight={20}>
                   {m('クリア')}
                 </Text>
               </StyledTouchableOpacity>
-              <Box px="p4" />
               <StyledTouchableOpacity px="p8" py="p2" onPress={selectTags}>
                 <Text fontSize={14} lineHeight={20} color="blue">
                   {m('決定')}
                 </Text>
               </StyledTouchableOpacity>
-            </Box>
-          </Box>
-          <Box marginTop="p24" flexDirection="row" flexWrap="wrap">
+            </StyledRow>
+          </StyledRow>
+          <StyledSpace height="p24" />
+          <StyledRow flex={1} flexWrap="wrap">
             {tags?.map(tag => (
               <StyledTouchableOpacity key={tag.tagId} marginBottom="p8" onPress={() => selectTag(tag.tagId)}>
                 <Tag text={tag.tagName} isActive={isActive(tag.tagId)} />
               </StyledTouchableOpacity>
             ))}
-          </Box>
+          </StyledRow>
         </StyledSafeAreaView>
-      </Box>
+      </StyledColumn>
     </BottomSheet>
   );
 };
