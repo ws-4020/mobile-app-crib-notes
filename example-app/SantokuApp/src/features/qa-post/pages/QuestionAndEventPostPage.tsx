@@ -6,7 +6,7 @@ import {Tab} from 'bases/ui/tab/Tab';
 import {TabBar} from 'bases/ui/tab/TabBar';
 import {EventPost} from 'features/qa-event/components/EventPost';
 import {QuestionPost} from 'features/qa-question/components/QuestionPost';
-import {TagsSheet} from 'features/qa-question/components/TagsSheet';
+import {TagsMultipleSelectionSheet} from 'features/qa-question/components/TagsMultipleSelectionSheet';
 import {QuestionFormValues, useQuestionForm} from 'features/qa-question/forms/useQuestionForm';
 import {useQuestionCommands} from 'features/qa-question/services/useQuestionCommands';
 import {useTags} from 'features/qa-question/services/useTags';
@@ -122,7 +122,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
           </Tab>
         </TabBar>
       </StyledSafeAreaView>
-      <TagsSheet
+      <TagsMultipleSelectionSheet
         tags={tags}
         isVisible={isVisibleTagSheet}
         initialSelectedTagIds={questionForm.values.tags}
