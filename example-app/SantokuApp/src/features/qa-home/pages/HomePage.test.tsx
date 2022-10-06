@@ -21,9 +21,16 @@ const Wrapper: React.FC = ({children}) => {
 
 describe('Home', () => {
   beforeEach(() => {
-    render(<HomePage navigateToQuestionDetail={() => {}} navigateToQuestionAndEventPost={() => {}} />, {
-      wrapper: Wrapper,
-    });
+    render(
+      <HomePage
+        navigateToQuestionDetail={() => {}}
+        navigateToQuestionAndEventPost={() => {}}
+        setNavigationOptions={() => {}}
+      />,
+      {
+        wrapper: Wrapper,
+      },
+    );
   });
 
   it('マウントされたときに正常にレンダリングされること', () => {

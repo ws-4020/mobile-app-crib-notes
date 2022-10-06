@@ -1,7 +1,5 @@
 import {createBox, createText} from '@shopify/restyle';
 import {
-  Image,
-  ImageProps,
   SafeAreaView,
   ScrollView,
   ScrollViewProps,
