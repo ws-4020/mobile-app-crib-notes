@@ -3,11 +3,11 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {TeamDetailPage} from 'features/team/pages/TeamDetailPage';
 import React, {useCallback} from 'react';
 
-import {RootStackParamList, TeamStackParamList} from '../../navigators/types';
+import {RootStackParamList, AccountStackParamList} from '../../navigators/types';
 
-export const TeamDetailScreen: React.FC<
+export const ProfileDetailScreen: React.FC<
   CompositeScreenProps<
-    NativeStackScreenProps<TeamStackParamList, 'TeamDetail'>,
+    NativeStackScreenProps<AccountStackParamList, 'ProfileDetail'>,
     NativeStackScreenProps<RootStackParamList, 'DemoStackNav'>
   >
 > = ({navigation}) => {

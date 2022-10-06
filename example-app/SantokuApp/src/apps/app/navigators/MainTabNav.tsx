@@ -7,8 +7,8 @@ import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {useMemo} from 'react';
 
 import {withInitialData} from '../components/withInitialData';
+import {AccountStackNav} from './AccountStackNav';
 import {HomeStackNav} from './HomeStackNav';
-import {TeamStackNav} from './TeamStackNav';
 import {MainTabParamList} from './types';
 
 const nav = createBottomTabNavigator<MainTabParamList>();
@@ -43,10 +43,10 @@ const Component: React.FC<Props> = ({initialData}) => {
       />
       <nav.Screen
         name="TeamStackNav"
-        component={TeamStackNav}
+        component={AccountStackNav}
         options={{
-          tabBarAccessibilityLabel: 'Team',
-          tabBarLabel: 'デモ',
+          tabBarAccessibilityLabel: 'User',
+          tabBarLabel: 'ユーザー',
           tabBarActiveTintColor: theme.colors.white,
           tabBarInactiveTintColor: theme.colors.grey2,
           headerShown: false,
