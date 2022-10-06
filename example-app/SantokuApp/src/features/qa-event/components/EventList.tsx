@@ -1,41 +1,40 @@
 import {useTheme} from '@shopify/restyle';
+import {m} from 'bases/message/Message';
 import {StyledScrollView, Text, Box, StyledTouchableOpacity} from 'bases/ui/common';
+import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import {Event} from 'features/backend/apis/model';
 import React from 'react';
-import {Dimensions} from 'react-native';
+import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
 import {EventListCard} from './EventListCard';
 
-const screenWidth = Dimensions.get('screen').width;
-
+const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 export type EventListProps = {
   data?: Event[];
 };
 
 export const EventList: React.VFC<EventListProps> = ({data}) => {
   const theme = useTheme<RestyleTheme>();
+  const {width: windowWidth} = useSafeAreaFrame();
   return (
-    <Box>
-      <Text variant="font20Bold" marginHorizontal="p24" marginTop="p32">
-        募集中のイベント
-      </Text>
-      <StyledScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled marginTop="p24">
-        {data?.map(item => (
-          <Box flexDirection="row" key={item.eventId}>
-            <Box px="p8" />
-            <EventListCard event={item} />
-            <Box px="p8" />
-          </Box>
-        ))}
-        <Box width={screenWidth - theme.spacing.p16 * 2} justifyContent="center" alignItems="center">
-          <StyledTouchableOpacity>
-            <Text variant="font14SemiBold" color="blue">
-              もっと見る
-            </Text>
-          </StyledTouchableOpacity>
+    <StyledScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled>
+      {data?.map(item => (
+        <Box flexDirection="row" key={item.eventId}>
+          <Box px="p12" />
+          <EventListCard event={item} />
+          <Box px="p12" />
         </Box>
-      </StyledScrollView>
-    </Box>
+      ))}
+      <Box px="p12" />
+      <Box width={windowWidth - theme.spacing.p24 * 2} justifyContent="center" alignItems="center">
+        <StyledTouchableOpacity onPress={showUnderDevelopment}>
+          <Text variant="font14Bold" lineHeight={20} letterSpacing={0.25} color="blue">
+            {m('もっと見る')}
+          </Text>
+        </StyledTouchableOpacity>
+      </Box>
+      <Box px="p12" />
+    </StyledScrollView>
   );
 };

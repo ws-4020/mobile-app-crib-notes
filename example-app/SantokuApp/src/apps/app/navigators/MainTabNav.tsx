@@ -1,6 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTheme} from '@shopify/restyle';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
+import {m} from 'bases/message/Message';
 import {HomeIllustration} from 'bases/ui/illustration/HomeIllustration';
 import {PeopleIllustration} from 'bases/ui/illustration/PeopleIllustration';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
@@ -34,7 +35,7 @@ const Component: React.FC<Props> = ({initialData}) => {
         component={HomeStackNav}
         options={{
           tabBarAccessibilityLabel: 'Home',
-          tabBarLabel: 'ホーム',
+          tabBarLabel: m('ホーム'),
           tabBarActiveTintColor: theme.colors.white,
           tabBarInactiveTintColor: theme.colors.grey2,
           headerShown: false,
@@ -46,7 +47,7 @@ const Component: React.FC<Props> = ({initialData}) => {
         component={AccountStackNav}
         options={{
           tabBarAccessibilityLabel: 'User',
-          tabBarLabel: 'ユーザー',
+          tabBarLabel: m('ユーザー'),
           tabBarActiveTintColor: theme.colors.white,
           tabBarInactiveTintColor: theme.colors.grey2,
           headerShown: false,

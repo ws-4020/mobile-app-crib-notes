@@ -7,6 +7,7 @@ import {Question} from 'features/backend/apis/model';
 import React, {FC, useCallback} from 'react';
 import {Pressable} from 'react-native';
 
+import {StyledImage} from '../../../bases/ui/common/StyledImage';
 import {AnswerWithCount} from './CommentsWithCount';
 import {DiffDaysOrHours} from './DiffDaysOrHours';
 import {LikeWithCount} from './LikeWithCount';
@@ -37,14 +38,19 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
       shadowOpacity={0.25}
       elevation={1}>
       <Box flexDirection="row" alignItems="center">
-        <PersonIllustration />
+        {profile?.avatarImageUrl ? (
+          // TODO: sizeだけを指定するAvator部品を作成した方がいいかも
+          <StyledImage source={{uri: profile.avatarImageUrl}} width={40} height={40} borderRadius="p20" />
+        ) : (
+          <PersonIllustration size="p40" />
+        )}
         <Box px="p8" />
         <Box flex={1} flexDirection="column">
           <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">
             {profile?.nickname}
           </Text>
           <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-            <Text variant="font14Regular" letterSpacing={0.25} color="black2">
+            <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
               {profile?.points}/{profile?.totalPoints}
             </Text>
           </Box>
@@ -56,8 +62,7 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
       <Box py="p12" />
       <Pressable onPress={toQuestionDetail}>
         <Text
-          fontSize={22}
-          fontWeight="700"
+          variant="font22Bold"
           textDecorationLine="underline"
           lineHeight={34}
           letterSpacing={0.18}
@@ -73,10 +78,10 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
         </Text>
       </Pressable>
       <Box py="p8" />
-      <Text fontSize={14} lineHeight={28} letterSpacing={0.25} numberOfLines={3} ellipsizeMode="tail">
+      <Text variant="font14Regular" lineHeight={28} letterSpacing={0.25} numberOfLines={3} ellipsizeMode="tail">
         {content}
       </Text>
-      <Box py="p4" />
+      <Box py="p8" />
       <Box flexDirection="row" alignItems="flex-end">
         <DiffDaysOrHours datetime={datetime} />
         <Box flex={1} />

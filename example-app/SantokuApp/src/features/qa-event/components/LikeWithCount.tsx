@@ -10,7 +10,7 @@ export const LikeWithCount: React.FC<LikeWithCountProps> = ({count}) => {
     <Box flexDirection="row" alignItems="center">
       <ThumbUpIllustration color="grey1" size="p24" />
       <Box px="p4" />
-      <Text fontSize={14} fontWeight="400" letterSpacing={0.25}>
+      <Text variant="font14Regular" lineHeight={20} letterSpacing={0.25}>
         {count}
       </Text>
     </Box>

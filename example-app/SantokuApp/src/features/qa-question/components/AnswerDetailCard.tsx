@@ -1,5 +1,6 @@
 import {useVisibility} from 'bases/core/utils/useVisibility';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {StyledImage} from 'bases/ui/common/StyledImage';
 import {MoreVertIllustration} from 'bases/ui/illustration/MoreVertIllustration';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
@@ -41,7 +42,12 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
       shadowOpacity={0.25}
       elevation={1}>
       <Box flexDirection="row" alignItems="center">
-        <PersonIllustration />
+        {profile?.avatarImageUrl ? (
+          // TODO: sizeだけを指定するAvator部品を作成した方がいいかも
+          <StyledImage source={{uri: profile.avatarImageUrl}} width={40} height={40} borderRadius="p20" />
+        ) : (
+          <PersonIllustration size="p40" />
+        )}
         <Box px="p8" />
         <Box flex={1} flexDirection="column">
           <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">

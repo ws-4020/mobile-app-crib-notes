@@ -11,6 +11,7 @@ import {useAccountQuestionCommands} from 'features/account/services/account/useA
 import {QuestionAndAnswerQuestion} from 'features/backend/apis/model';
 import React, {FC, useCallback, useMemo} from 'react';
 
+import {StyledImage} from '../../../bases/ui/common/StyledImage';
 import {useTags} from '../services/useTags';
 import {AddCommentButton} from './AddCommentButton';
 import {CommentCard} from './CommentCard';
@@ -72,17 +73,21 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
       shadowOpacity={0.25}
       elevation={1}>
       <Box flexDirection="row" alignItems="center">
-        <PersonIllustration />
+        {profile?.avatarImageUrl ? (
+          // TODO: sizeだけを指定するAvator部品を作成した方がいいかも
+          <StyledImage source={{uri: profile.avatarImageUrl}} width={40} height={40} borderRadius="p20" />
+        ) : (
+          <PersonIllustration size="p40" />
+        )}
         <Box px="p8" />
         <Box flex={1} flexDirection="column">
           <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">
             {profile?.nickname}
           </Text>
           <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-            <Text variant="font14Regular" letterSpacing={0.25} color="black2">
+            <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
               {profile?.points}/{profile?.totalPoints}
             </Text>
-            <Box py="p12" />
             {resolved && (
               <Box flexDirection="row" justifyContent="flex-end" alignItems="center" px="p8">
                 <DoneIllustration color="blue" />
@@ -99,7 +104,7 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
         </StyledTouchableOpacity>
       </Box>
       <Box py="p12" />
-      <Text fontSize={22} fontWeight="700" lineHeight={34} letterSpacing={0.18}>
+      <Text variant="font22Bold" lineHeight={34} letterSpacing={0.18}>
         {beginner && (
           <>
             <BeginnerMarkIllustration />
@@ -109,7 +114,7 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
         {title}
       </Text>
       <Box py="p8" />
-      <Text fontSize={14} lineHeight={28} letterSpacing={0.25}>
+      <Text variant="font14Regular" lineHeight={28} letterSpacing={0.25}>
         {content}
       </Text>
       <Box py="p4" />

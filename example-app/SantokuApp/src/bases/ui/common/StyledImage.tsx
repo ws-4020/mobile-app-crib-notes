@@ -14,9 +14,15 @@ const tintColor = createRestyleFunction({
   styleProperty: 'tintColor',
   themeKey: 'colors',
 });
-
 export type StyledImageProps = BoxProps<RestyleTheme> &
-  ImageProps & {tintColor?: ResponsiveValue<keyof RestyleTheme['colors'], RestyleTheme>};
+  Omit<
+    ImageProps,
+    | 'borderRadius'
+    | 'borderTopLeftRadius'
+    | 'borderTopRightRadius'
+    | 'borderBottomLeftRadius'
+    | 'borderBottomRightRadius'
+  > & {tintColor?: ResponsiveValue<keyof RestyleTheme['colors'], RestyleTheme>};
 export const StyledImage = createRestyleComponent<StyledImageProps, RestyleTheme>(
   [...boxRestyleFunctions, tintColor],
   Image,
