@@ -1,6 +1,8 @@
 import {useTheme} from '@shopify/restyle';
 import {m} from 'bases/message/Message';
 import {StyledScrollView, Text, Box, StyledTouchableOpacity} from 'bases/ui/common';
+import {StyledRow} from 'bases/ui/common/StyledRow';
+import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import {Event} from 'features/backend/apis/model';
@@ -20,13 +22,13 @@ export const EventList: React.VFC<EventListProps> = ({data}) => {
   return (
     <StyledScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled>
       {data?.map(item => (
-        <Box flexDirection="row" key={item.eventId}>
-          <Box px="p12" />
+        <StyledRow key={item.eventId}>
+          <StyledSpace width="p24" />
           <EventListCard event={item} />
-          <Box px="p12" />
-        </Box>
+          <StyledSpace width="p24" />
+        </StyledRow>
       ))}
-      <Box px="p12" />
+      <StyledSpace width="p24" />
       <Box width={windowWidth - theme.spacing.p24 * 2} justifyContent="center" alignItems="center">
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
           <Text variant="font14Bold" lineHeight={20} letterSpacing={0.25} color="blue">
@@ -34,7 +36,7 @@ export const EventList: React.VFC<EventListProps> = ({data}) => {
           </Text>
         </StyledTouchableOpacity>
       </Box>
-      <Box px="p12" />
+      <StyledSpace width="p24" />
     </StyledScrollView>
   );
 };

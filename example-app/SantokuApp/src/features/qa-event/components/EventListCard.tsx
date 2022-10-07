@@ -1,6 +1,8 @@
 import {useTheme} from '@shopify/restyle';
 import {Box, Text} from 'bases/ui/common';
 import {StyledImage} from 'bases/ui/common/StyledImage';
+import {StyledRow} from 'bases/ui/common/StyledRow';
+import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import {Event} from 'features/backend/apis/model';
@@ -21,7 +23,6 @@ export const EventListCard: FC<CardEventSmallProps> = ({event: {title, likes, pr
       px="p24"
       py="p16"
       my="p2"
-      flexDirection="column"
       justifyContent="space-between"
       borderRadius="p8"
       shadowColor="black"
@@ -39,10 +40,10 @@ export const EventListCard: FC<CardEventSmallProps> = ({event: {title, likes, pr
         color="black2">
         {title}
       </Text>
-      <Box flexDirection="row" justifyContent="space-between" alignItems="center" marginTop="p16">
+      <StyledRow justifyContent="space-between" alignItems="center" marginTop="p16">
         <LikeWithCount count={likes} />
-        <Box px="p16" />
-        <Box flex={1} flexDirection="column" alignItems="flex-end">
+        <StyledSpace width="p32" />
+        <Box flex={1} alignItems="flex-end">
           <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">
             {profile?.nickname}
           </Text>
@@ -52,14 +53,14 @@ export const EventListCard: FC<CardEventSmallProps> = ({event: {title, likes, pr
             </Text>
           </Box>
         </Box>
-        <Box px="p8" />
+        <StyledSpace width="p16" />
         {profile?.avatarImageUrl ? (
           // TODO: sizeだけを指定するAvator部品を作成した方がいいかも
           <StyledImage source={{uri: profile.avatarImageUrl}} width={40} height={40} borderRadius="p20" />
         ) : (
           <PersonIllustration size="p40" />
         )}
-      </Box>
+      </StyledRow>
     </Box>
   );
 };

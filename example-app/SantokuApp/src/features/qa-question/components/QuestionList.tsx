@@ -1,4 +1,4 @@
-import {Box} from 'bases/ui/common';
+import {StyledColumn} from 'bases/ui/common/StyledColumn';
 import {Question} from 'features/backend/apis/model';
 import React from 'react';
 
@@ -11,13 +11,10 @@ export type QuestionListProps = {
 
 export const QuestionList: React.VFC<QuestionListProps> = ({data, navigateToQuestionDetail}) => {
   return (
-    <Box>
+    <StyledColumn space="p16">
       {data?.map(item => (
-        <Box key={item.questionId}>
-          <QuestionListCard question={item} navigateToQuestionDetail={navigateToQuestionDetail} />
-          <Box py="p8" />
-        </Box>
+        <QuestionListCard key={item.questionId} question={item} navigateToQuestionDetail={navigateToQuestionDetail} />
       ))}
-    </Box>
+    </StyledColumn>
   );
 };

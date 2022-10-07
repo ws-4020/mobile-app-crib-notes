@@ -1,4 +1,7 @@
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {StyledImage} from 'bases/ui/common/StyledImage';
+import {StyledRow} from 'bases/ui/common/StyledRow';
+import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {BeginnerMarkIllustration} from 'bases/ui/illustration/BeginnerMarkIllustration';
 import {MoreVertIllustration} from 'bases/ui/illustration/MoreVertIllustration';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
@@ -7,7 +10,6 @@ import {Question} from 'features/backend/apis/model';
 import React, {FC, useCallback} from 'react';
 import {Pressable} from 'react-native';
 
-import {StyledImage} from '../../../bases/ui/common/StyledImage';
 import {AnswerWithCount} from './CommentsWithCount';
 import {DiffDaysOrHours} from './DiffDaysOrHours';
 import {LikeWithCount} from './LikeWithCount';
@@ -37,29 +39,29 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
       shadowColor="black"
       shadowOpacity={0.25}
       elevation={1}>
-      <Box flexDirection="row" alignItems="center">
+      <StyledRow alignItems="center">
         {profile?.avatarImageUrl ? (
           // TODO: sizeだけを指定するAvator部品を作成した方がいいかも
           <StyledImage source={{uri: profile.avatarImageUrl}} width={40} height={40} borderRadius="p20" />
         ) : (
           <PersonIllustration size="p40" />
         )}
-        <Box px="p8" />
-        <Box flex={1} flexDirection="column">
+        <StyledSpace width="p16" />
+        <Box flex={1}>
           <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">
             {profile?.nickname}
           </Text>
-          <Box flexDirection="row" alignItems="center" justifyContent="space-between">
+          <StyledRow alignItems="center" justifyContent="space-between">
             <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
               {profile?.points}/{profile?.totalPoints}
             </Text>
-          </Box>
+          </StyledRow>
         </Box>
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
           <MoreVertIllustration />
         </StyledTouchableOpacity>
-      </Box>
-      <Box py="p12" />
+      </StyledRow>
+      <StyledSpace height="p24" />
       <Pressable onPress={toQuestionDetail}>
         <Text
           variant="font22Bold"
@@ -71,26 +73,24 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
           {beginner && (
             <>
               <BeginnerMarkIllustration />
-              <Box px="p4" />
+              <StyledSpace width="p8" />
             </>
           )}
           {title}
         </Text>
       </Pressable>
-      <Box py="p8" />
+      <StyledSpace height="p16" />
       <Text variant="font14Regular" lineHeight={28} letterSpacing={0.25} numberOfLines={2} ellipsizeMode="tail">
         {content}
       </Text>
-      <Box py="p8" />
-      <Box flexDirection="row" alignItems="flex-end">
+      <StyledSpace height="p16" />
+      <StyledRow space="p16" alignItems="flex-end">
         <DiffDaysOrHours datetime={datetime} />
         <Box flex={1} />
         <ViewsWithCount count={views} />
-        <Box px="p8" />
         <LikeWithCount count={likes} />
-        <Box px="p8" />
         <AnswerWithCount count={views} />
-      </Box>
+      </StyledRow>
     </Box>
   );
 };

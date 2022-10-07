@@ -4,6 +4,8 @@ import {isRequestPushPermissionError} from 'bases/firebase/messaging/requestPush
 import {log} from 'bases/logging';
 import {m} from 'bases/message/Message';
 import {Box, StyledScrollView, StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {StyledActivityIndicator} from 'bases/ui/common/StyledActivityIndicator';
+import {StyledRow} from 'bases/ui/common/StyledRow';
 import {Fab} from 'bases/ui/fab/Fab';
 import {AddIllustration} from 'bases/ui/illustration/AddIllustration';
 import {ExpandLessIllustration} from 'bases/ui/illustration/ExpandLessIllustration';
@@ -25,7 +27,6 @@ import {useTags} from 'features/qa-question/services/useTags';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Platform, RefreshControl, ScrollView} from 'react-native';
 
-import {StyledActivityIndicator} from '../../../bases/ui/common/StyledActivityIndicator';
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
@@ -172,30 +173,28 @@ export const HomePage: React.VFC<HomePageProps> = ({
         refreshControl={
           <RefreshControl refreshing={isEventsAndQuestionsRefetching} onRefresh={invalidateEventsAndQuestions} />
         }>
-        <Box px="p24" py="p32" flexDirection="row" justifyContent="flex-start" alignItems="center">
+        <Box px="p24" py="p32">
           <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
             {m('募集中のイベント')}
           </Text>
         </Box>
         {isEventsLoading ? <StyledActivityIndicator /> : <EventList data={events} />}
-        <Box px="p24" py="p32" flexDirection="row" justifyContent="space-between" alignItems="center">
+        <StyledRow px="p24" py="p32" justifyContent="space-between" alignItems="center">
           <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
             {m('質問')}
           </Text>
-          <Box flexDirection="row" alignItems="center">
+          <StyledRow space="p32" alignItems="center">
             <StyledTouchableOpacity onPress={showSortSheet}>
               <SortIllustration color={sortIconColor} />
             </StyledTouchableOpacity>
-            <Box p="p16" />
             <StyledTouchableOpacity onPress={showUnderDevelopment}>
               <FilterAltIllustration />
             </StyledTouchableOpacity>
-            <Box p="p16" />
             <StyledTouchableOpacity onPress={showTagSheet}>
               <LocalOfferIllustration color={tagIconColor} />
             </StyledTouchableOpacity>
-          </Box>
-        </Box>
+          </StyledRow>
+        </StyledRow>
         {isQuestionsLoading ? (
           <StyledActivityIndicator />
         ) : (
