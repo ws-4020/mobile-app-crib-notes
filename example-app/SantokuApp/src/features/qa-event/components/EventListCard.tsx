@@ -55,7 +55,6 @@ export const EventListCard: FC<CardEventSmallProps> = ({event: {title, likes, pr
         </Box>
         <StyledSpace width="p16" />
         {profile?.avatarImageUrl ? (
-          // TODO: sizeだけを指定するAvator部品を作成した方がいいかも
           <StyledImage source={{uri: profile.avatarImageUrl}} width={40} height={40} borderRadius="p20" />
         ) : (
           <PersonIllustration size="p40" />
