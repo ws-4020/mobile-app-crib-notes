@@ -39,11 +39,7 @@ describe('Home', () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const HomePage = require('./HomePage').HomePage as React.FC<HomePageProps>;
     render(
-      <HomePage
-        navigateToQuestionDetail={() => {}}
-        navigateToQuestionAndEventPost={() => {}}
-        setNavigationOptions={() => {}}
-      />,
+      <HomePage navigateToQuestionDetail={() => {}} navigateToQuestionAndEventPost={() => {}} setHeader={() => {}} />,
       {
         wrapper: Wrapper,
       },

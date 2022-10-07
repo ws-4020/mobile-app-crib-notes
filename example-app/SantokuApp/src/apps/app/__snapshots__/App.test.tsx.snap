@@ -846,14 +846,6 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                             募集中のイベント
                                                           </Text>
                                                         </View>
-                                                        <ActivityIndicator
-                                                          color="#E0E0E0"
-                                                          style={
-                                                            Array [
-                                                              Object {},
-                                                            ]
-                                                          }
-                                                        />
                                                         <View
                                                           style={
                                                             Array [
@@ -1125,14 +1117,6 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                             </View>
                                                           </View>
                                                         </View>
-                                                        <ActivityIndicator
-                                                          color="#E0E0E0"
-                                                          style={
-                                                            Array [
-                                                              Object {},
-                                                            ]
-                                                          }
-                                                        />
                                                       </View>
                                                     </RCTScrollView>
                                                     <View
@@ -1262,6 +1246,26 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                           </RNSVGSvgView>
                                                         </View>
                                                       </View>
+                                                    </View>
+                                                    <View
+                                                      style={
+                                                        Array [
+                                                          Object {
+                                                            "position": "absolute",
+                                                            "right": 10,
+                                                            "top": 10,
+                                                          },
+                                                        ]
+                                                      }
+                                                    >
+                                                      <ActivityIndicator
+                                                        color="#E0E0E0"
+                                                        style={
+                                                          Array [
+                                                            Object {},
+                                                          ]
+                                                        }
+                                                      />
                                                     </View>
                                                   </View>
                                                 </View>

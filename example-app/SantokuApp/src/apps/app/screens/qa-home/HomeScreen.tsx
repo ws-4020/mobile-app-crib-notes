@@ -36,7 +36,7 @@ export const HomeScreen: React.FC<
     <HomePage
       navigateToQuestionAndEventPost={navigateToQuestionAndEventPost}
       navigateToQuestionDetail={navigateToQuestionDetail}
-      setNavigationOptions={setNavigationOptions}
+      setHeader={setNavigationOptions}
     />
   );
 };

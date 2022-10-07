@@ -18,15 +18,14 @@ import {SortIllustration} from 'bases/ui/illustration/SortIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {GetListQuestionsSort} from 'features/backend/apis/model';
 import {EventList} from 'features/qa-event/components/EventList';
-import {useEvents} from 'features/qa-event/services/useEvents';
 import {QuestionList} from 'features/qa-question/components/QuestionList';
 import {SingleSelectableSortSheet} from 'features/qa-question/components/SingleSelectableSortSheet';
 import {SingleSelectableTagSheet} from 'features/qa-question/components/SingleSelectableTagSheet';
-import {useQuestions} from 'features/qa-question/services/useQuestions';
 import {useTags} from 'features/qa-question/services/useTags';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Platform, RefreshControl, ScrollView} from 'react-native';
 
+import {useEventsAndQuestions} from '../services/useEventsAndQuestions';
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
@@ -58,13 +57,13 @@ const HeaderRight = () => (
 export type HomePageProps = {
   navigateToQuestionAndEventPost: () => void;
   navigateToQuestionDetail: (questionId: string) => void;
-  setNavigationOptions: (options: {headerLeft: () => React.ReactNode; headerRight: () => React.ReactNode}) => void;
+  setHeader: (options: {headerLeft: () => React.ReactNode; headerRight: () => React.ReactNode}) => void;
 };
 
 export const HomePage: React.VFC<HomePageProps> = ({
   navigateToQuestionAndEventPost,
   navigateToQuestionDetail,
-  setNavigationOptions,
+  setHeader,
 }) => {
   const {requestPermissionAndRegisterToken: callRequestPermissionAndRegisterToken} =
     useRequestPermissionAndRegisterToken();
@@ -96,39 +95,25 @@ export const HomePage: React.VFC<HomePageProps> = ({
   }, [requestPermissionAndRegisterToken]);
 
   React.useLayoutEffect(() => {
-    setNavigationOptions({
+    setHeader({
       headerLeft: () => <HeaderLeft />,
       headerRight: () => <HeaderRight />,
     });
-  }, [setNavigationOptions]);
+  }, [setHeader]);
 
   const {
-    data: events,
-    isLoading: isEventsLoading,
-    isRefetching: isEventsRefetching,
-    isPreviousData: isEventsPreviousData,
-    invalidate: invalidateEvents,
-  } = useEvents({target: 'active'});
-  const {
-    data: questions,
-    isLoading: isQuestionsLoading,
-    isRefetching: isQuestionsRefetching,
-    isPreviousData: isQuestionsPreviousData,
-    setListParams: setQuestionsParams,
-    invalidate: invalidateQuestions,
-  } = useQuestions();
-
-  const invalidateEventsAndQuestions = useCallback(() => {
-    Promise.all([invalidateEvents(), invalidateQuestions()]).catch(() => {
-      // 個別にエラーハンドリングは実施しない
-    });
-  }, [invalidateEvents, invalidateQuestions]);
-  const isEventsAndQuestionsRefetching = useMemo(
-    () => (isEventsRefetching || isQuestionsRefetching) && !(isEventsPreviousData || isQuestionsPreviousData),
-    [isEventsPreviousData, isEventsRefetching, isQuestionsPreviousData, isQuestionsRefetching],
-  );
-
-  useFocusEffect(invalidateEventsAndQuestions);
+    events,
+    questions,
+    refresh,
+    pullToRefresh,
+    setQuestionsParams,
+    isLoading,
+    isRefreshing,
+    isPullToRefreshing,
+    isEventsLoading,
+    isQuestionsLoading,
+  } = useEventsAndQuestions({eventsParams: {target: 'active'}});
+  useFocusEffect(refresh);
 
   const [selectedSort, setSelectedSort] = useState<GetListQuestionsSort>();
   const [isVisibleSortSheet, setIsVisibleSortSheet] = useState<boolean>(false);
@@ -170,15 +155,13 @@ export const HomePage: React.VFC<HomePageProps> = ({
         ref={scrollViewRef}
         showsVerticalScrollIndicator={false}
         testID="HomePage"
-        refreshControl={
-          <RefreshControl refreshing={isEventsAndQuestionsRefetching} onRefresh={invalidateEventsAndQuestions} />
-        }>
+        refreshControl={<RefreshControl refreshing={isPullToRefreshing} onRefresh={pullToRefresh} />}>
         <Box px="p24" py="p32">
           <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
             {m('募集中のイベント')}
           </Text>
         </Box>
-        {isEventsLoading ? <StyledActivityIndicator /> : <EventList data={events} />}
+        {!isEventsLoading && <EventList data={events} />}
         <StyledRow px="p24" py="p32" justifyContent="space-between" alignItems="center">
           <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
             {m('質問')}
@@ -195,11 +178,7 @@ export const HomePage: React.VFC<HomePageProps> = ({
             </StyledTouchableOpacity>
           </StyledRow>
         </StyledRow>
-        {isQuestionsLoading ? (
-          <StyledActivityIndicator />
-        ) : (
-          <QuestionList data={questions} navigateToQuestionDetail={navigateToQuestionDetail} />
-        )}
+        {!isQuestionsLoading && <QuestionList data={questions} navigateToQuestionDetail={navigateToQuestionDetail} />}
       </StyledScrollView>
       <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
         {Platform.OS === 'android' && (
@@ -222,6 +201,11 @@ export const HomePage: React.VFC<HomePageProps> = ({
         initialSelectedTagId={selectedTagId}
         select={selectTag}
       />
+      {(isRefreshing || isLoading) && (
+        <Box position="absolute" top={10} right={10}>
+          <StyledActivityIndicator />
+        </Box>
+      )}
     </Box>
   );
 };
