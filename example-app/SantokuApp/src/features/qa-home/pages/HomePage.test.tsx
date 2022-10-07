@@ -1,5 +1,4 @@
 import '@testing-library/jest-native/extend-expect';
-import {NavigationContainer} from '@react-navigation/native';
 import {render, screen} from '@testing-library/react-native';
 import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
 import {loadMessages} from 'bases/message/Message';
@@ -26,9 +25,7 @@ const Wrapper: React.FC = ({children}) => {
   return (
     <SafeAreaProvider>
       <AppThemeProvider>
-        <NavigationContainer>
-          <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-        </NavigationContainer>
+        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
         <TermsAgreementOverlay.Component />
         <Snackbar.Component />
       </AppThemeProvider>

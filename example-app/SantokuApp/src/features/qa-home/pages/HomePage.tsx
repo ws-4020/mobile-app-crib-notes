@@ -1,6 +1,6 @@
-import {useFocusEffect} from '@react-navigation/native';
 import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
 import {isRequestPushPermissionError} from 'bases/firebase/messaging/requestPushPermission';
+import {useFocusEffect} from 'bases/focus-manager/useFocusEffect';
 import {log} from 'bases/logging';
 import {m} from 'bases/message/Message';
 import {Box, StyledScrollView, StyledTouchableOpacity, Text} from 'bases/ui/common';
