@@ -3,17 +3,13 @@ import {getGetListQuestionsQueryKey, useGetListQuestions} from 'features/backend
 import {useCallback, useState} from 'react';
 import {useQueryClient} from 'react-query';
 
-export const useQuestions = (
-  initialParams?: GetListQuestionsParams,
-  initialQueryOptions: {keepPreviousData: boolean} = {keepPreviousData: true},
-) => {
+export const useQuestions = (initialParams?: GetListQuestionsParams) => {
   const queryClient = useQueryClient();
   const [listParams, setListParams] = useState(initialParams);
-  const [queryOption, setQueryOption] = useState(initialQueryOptions);
-  const query = useGetListQuestions(listParams, {query: queryOption});
+  const query = useGetListQuestions(listParams, {query: {keepPreviousData: true}});
   const invalidate = useCallback(
-    () => queryClient.invalidateQueries(getGetListQuestionsQueryKey(listParams)),
-    [listParams, queryClient],
+    () => queryClient.invalidateQueries(getGetListQuestionsQueryKey(), undefined, {throwOnError: true}),
+    [queryClient],
   );
-  return {...query, data: query.data?.data, listParams, setListParams, queryOption, setQueryOption, invalidate};
+  return {...query, data: query.data?.data, listParams, setListParams, invalidate};
 };

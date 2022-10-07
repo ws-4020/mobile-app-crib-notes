@@ -23,7 +23,7 @@ import {SingleSelectableTagSheet} from 'features/qa-question/components/SingleSe
 import {useQuestions} from 'features/qa-question/services/useQuestions';
 import {useTags} from 'features/qa-question/services/useTags';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Platform, ScrollView} from 'react-native';
+import {Platform, RefreshControl, ScrollView} from 'react-native';
 
 import {StyledActivityIndicator} from '../../../bases/ui/common/StyledActivityIndicator';
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
@@ -101,21 +101,33 @@ export const HomePage: React.VFC<HomePageProps> = ({
     });
   }, [setNavigationOptions]);
 
-  const {data: events, isLoading: isEventsLoading, invalidate: invalidateEvents} = useEvents({target: 'active'});
+  const {
+    data: events,
+    isLoading: isEventsLoading,
+    isRefetching: isEventsRefetching,
+    isPreviousData: isEventsPreviousData,
+    invalidate: invalidateEvents,
+  } = useEvents({target: 'active'});
   const {
     data: questions,
     isLoading: isQuestionsLoading,
+    isRefetching: isQuestionsRefetching,
+    isPreviousData: isQuestionsPreviousData,
     setListParams: setQuestionsParams,
     invalidate: invalidateQuestions,
   } = useQuestions();
 
-  useFocusEffect(
-    React.useCallback(() => {
-      Promise.all([invalidateEvents(), invalidateQuestions()]).catch(() => {
-        // 共通でエラーハンドリングを実施しているので、ここでは特に何もしない
-      });
-    }, [invalidateEvents, invalidateQuestions]),
+  const invalidateEventsAndQuestions = useCallback(() => {
+    Promise.all([invalidateEvents(), invalidateQuestions()]).catch(() => {
+      // 個別にエラーハンドリングは実施しない
+    });
+  }, [invalidateEvents, invalidateQuestions]);
+  const isEventsAndQuestionsRefetching = useMemo(
+    () => (isEventsRefetching || isQuestionsRefetching) && !(isEventsPreviousData || isQuestionsPreviousData),
+    [isEventsPreviousData, isEventsRefetching, isQuestionsPreviousData, isQuestionsRefetching],
   );
+
+  useFocusEffect(invalidateEventsAndQuestions);
 
   const [selectedSort, setSelectedSort] = useState<GetListQuestionsSort>();
   const [isVisibleSortSheet, setIsVisibleSortSheet] = useState<boolean>(false);
@@ -153,7 +165,13 @@ export const HomePage: React.VFC<HomePageProps> = ({
 
   return (
     <Box flex={1}>
-      <StyledScrollView ref={scrollViewRef} showsVerticalScrollIndicator={false} testID="HomePage">
+      <StyledScrollView
+        ref={scrollViewRef}
+        showsVerticalScrollIndicator={false}
+        testID="HomePage"
+        refreshControl={
+          <RefreshControl refreshing={isEventsAndQuestionsRefetching} onRefresh={invalidateEventsAndQuestions} />
+        }>
         <Box px="p24" py="p32" flexDirection="row" justifyContent="flex-start" alignItems="center">
           <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
             {m('募集中のイベント')}

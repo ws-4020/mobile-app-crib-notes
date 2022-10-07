@@ -8,7 +8,7 @@ export const useEvents = (initialParams: GetEventsParams) => {
   const [listParams, setListParams] = useState(initialParams);
   const query = useGetEvents(listParams);
   const invalidate = useCallback(
-    () => queryClient.invalidateQueries(getGetEventsQueryKey(listParams)),
+    () => queryClient.invalidateQueries(getGetEventsQueryKey(listParams), undefined, {throwOnError: true}),
     [listParams, queryClient],
   );
   return {...query, data: query.data?.data, listParams, setListParams, invalidate};

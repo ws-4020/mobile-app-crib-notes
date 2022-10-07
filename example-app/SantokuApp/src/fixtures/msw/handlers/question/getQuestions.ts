@@ -8,7 +8,6 @@ import {getLoggedInAccountId} from '../account/getLoggedInAccountId';
 
 export const getQuestions = rest.get(`${backendUrl}/questions`, (req, res, ctx) => {
   try {
-    console.log('getQuestions');
     const keyword = req.url.searchParams.get('keyword');
     const sort = req.url.searchParams.get('sort');
     const filter = req.url.searchParams.get('filter');
