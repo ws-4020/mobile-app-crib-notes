@@ -1,3 +1,4 @@
+import {useFocusEffect} from '@react-navigation/native';
 import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
 import {isRequestPushPermissionError} from 'bases/firebase/messaging/requestPushPermission';
 import {log} from 'bases/logging';
@@ -13,17 +14,18 @@ import {SearchIllustration} from 'bases/ui/illustration/SearchIllustration';
 import {SettingsIllustration} from 'bases/ui/illustration/SettingsIllustration';
 import {SortIllustration} from 'bases/ui/illustration/SortIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
+import {GetListQuestionsSort} from 'features/backend/apis/model';
 import {EventList} from 'features/qa-event/components/EventList';
-import {useListEvents} from 'features/qa-event/services/useListEvents';
+import {useEvents} from 'features/qa-event/services/useEvents';
 import {QuestionList} from 'features/qa-question/components/QuestionList';
-import {useListQuestions} from 'features/qa-question/services/useListQuestions';
+import {SingleSelectableSortSheet} from 'features/qa-question/components/SingleSelectableSortSheet';
+import {SingleSelectableTagSheet} from 'features/qa-question/components/SingleSelectableTagSheet';
+import {useQuestions} from 'features/qa-question/services/useQuestions';
 import {useTags} from 'features/qa-question/services/useTags';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Platform, ScrollView} from 'react-native';
 
-import {GetListQuestionsSort} from '../../backend/apis/model';
-import {SingleSelectableSortSheet} from '../../qa-question/components/SingleSelectableSortSheet';
-import {SingleSelectableTagSheet} from '../../qa-question/components/SingleSelectableTagSheet';
+import {StyledActivityIndicator} from '../../../bases/ui/common/StyledActivityIndicator';
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
@@ -99,15 +101,35 @@ export const HomePage: React.VFC<HomePageProps> = ({
     });
   }, [setNavigationOptions]);
 
+  const {data: events, isLoading: isEventsLoading, invalidate: invalidateEvents} = useEvents({target: 'active'});
+  const {
+    data: questions,
+    isLoading: isQuestionsLoading,
+    setListParams: setQuestionsParams,
+    invalidate: invalidateQuestions,
+  } = useQuestions();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      Promise.all([invalidateEvents(), invalidateQuestions()]).catch(() => {
+        // 共通でエラーハンドリングを実施しているので、ここでは特に何もしない
+      });
+    }, [invalidateEvents, invalidateQuestions]),
+  );
+
   const [selectedSort, setSelectedSort] = useState<GetListQuestionsSort>();
   const [isVisibleSortSheet, setIsVisibleSortSheet] = useState<boolean>(false);
   const showSortSheet = useCallback(() => {
     setIsVisibleSortSheet(true);
   }, []);
-  const selectSort = useCallback((sort?: GetListQuestionsSort) => {
-    setSelectedSort(sort);
-    setIsVisibleSortSheet(false);
-  }, []);
+  const selectSort = useCallback(
+    (sort?: GetListQuestionsSort) => {
+      setSelectedSort(sort);
+      setIsVisibleSortSheet(false);
+      setQuestionsParams(prevState => ({...prevState, sort}));
+    },
+    [setQuestionsParams],
+  );
   const sortIconColor = useMemo(() => (selectedSort ? 'blue' : 'black'), [selectedSort]);
 
   const {data: tags} = useTags();
@@ -116,17 +138,18 @@ export const HomePage: React.VFC<HomePageProps> = ({
   const showTagSheet = useCallback(() => {
     setIsVisibleTagSheet(true);
   }, []);
-  const selectTag = useCallback((tagId?: string) => {
-    setSelectedTagId(tagId);
-    setIsVisibleTagSheet(false);
-  }, []);
+  const selectTag = useCallback(
+    (tagId?: string) => {
+      setSelectedTagId(tagId);
+      setIsVisibleTagSheet(false);
+      setQuestionsParams(prevState => ({...prevState, tag: tagId}));
+    },
+    [setQuestionsParams],
+  );
   const tagIconColor = useMemo(() => (selectedTagId ? 'blue' : 'black'), [selectedTagId]);
 
   const scrollViewRef = useRef<ScrollView>();
   const scrollToTop = useCallback(() => scrollViewRef.current?.scrollTo({y: 0, animated: true}), []);
-
-  const {data: listEvents, isLoading: listEventsLoading} = useListEvents();
-  const {data: listQuestions, isLoading: listQuestionsLoading} = useListQuestions();
 
   return (
     <Box flex={1}>
@@ -136,7 +159,7 @@ export const HomePage: React.VFC<HomePageProps> = ({
             {m('募集中のイベント')}
           </Text>
         </Box>
-        {!listEventsLoading && <EventList data={listEvents} />}
+        {isEventsLoading ? <StyledActivityIndicator /> : <EventList data={events} />}
         <Box px="p24" py="p32" flexDirection="row" justifyContent="space-between" alignItems="center">
           <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
             {m('質問')}
@@ -155,8 +178,10 @@ export const HomePage: React.VFC<HomePageProps> = ({
             </StyledTouchableOpacity>
           </Box>
         </Box>
-        {!listQuestionsLoading && (
-          <QuestionList data={listQuestions} navigateToQuestionDetail={navigateToQuestionDetail} />
+        {isQuestionsLoading ? (
+          <StyledActivityIndicator />
+        ) : (
+          <QuestionList data={questions} navigateToQuestionDetail={navigateToQuestionDetail} />
         )}
       </StyledScrollView>
       <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">

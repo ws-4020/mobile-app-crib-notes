@@ -8,13 +8,14 @@ import {getLoggedInAccountId} from '../account/getLoggedInAccountId';
 
 export const getQuestions = rest.get(`${backendUrl}/questions`, (req, res, ctx) => {
   try {
+    console.log('getQuestions');
     const keyword = req.url.searchParams.get('keyword');
     const sort = req.url.searchParams.get('sort');
     const filter = req.url.searchParams.get('filter');
     const tag = req.url.searchParams.get('tag');
     const accountId = getLoggedInAccountId();
     const db = getDb(accountId);
-    let questions = db.question.getAll();
+    let questions = db.question.findMany({orderBy: {datetime: 'desc'}});
     if (keyword) {
       questions = questions.filter(q => q.title.includes(keyword) || q.content.includes(keyword));
     }
