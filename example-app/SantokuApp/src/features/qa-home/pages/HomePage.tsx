@@ -22,6 +22,7 @@ import {QuestionList} from 'features/qa-question/components/QuestionList';
 import {SingleSelectableSortSheet} from 'features/qa-question/components/SingleSelectableSortSheet';
 import {SingleSelectableTagSheet} from 'features/qa-question/components/SingleSelectableTagSheet';
 import {useTags} from 'features/qa-question/services/useTags';
+import {useShowTermsAgreementOverlay} from 'features/terms/use-cases/useShowTermsAgreementOverlay';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Platform, RefreshControl, ScrollView} from 'react-native';
 
@@ -93,6 +94,10 @@ export const HomePage: React.VFC<HomePageProps> = ({
       // requestPermissionAndRegisterTokenでエラーハンドリングを実施しているので、ここでは特に何もしない
     });
   }, [requestPermissionAndRegisterToken]);
+
+  // 利用規約に未同意の場合は、利用規約を表示します。
+  const showTermsAgreementOverlay = useShowTermsAgreementOverlay();
+  useFocusEffect(showTermsAgreementOverlay);
 
   React.useLayoutEffect(() => {
     setHeader({
