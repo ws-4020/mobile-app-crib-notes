@@ -118,6 +118,7 @@ export const HomePage: React.VFC<HomePageProps> = ({
     isEventsLoading,
     isQuestionsLoading,
   } = useEventsAndQuestions({eventsParams: {target: 'active'}});
+  // ボトムタブ切り替え時に、イベントと質問一覧を再取得します。
   useFocusEffect(refresh);
 
   const [selectedSort, setSelectedSort] = useState<GetListQuestionsSort>();
