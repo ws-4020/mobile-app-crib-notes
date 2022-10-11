@@ -1,5 +1,5 @@
 import '@testing-library/jest-native/extend-expect';
-import {render, screen, cleanup} from '@testing-library/react-native';
+import {render, screen, cleanup, waitFor} from '@testing-library/react-native';
 import {initialData} from 'fixtures/msw/datas';
 import {initialDb} from 'fixtures/msw/db';
 import {handlers} from 'fixtures/msw/handlers';
@@ -52,9 +52,15 @@ jest.mock('expo-secure-store', () => {
 });
 
 describe('App', () => {
-  it('マウントされたときに正常にレンダリングされること', () => {
+  it('マウントされたときに正常にレンダリングされること', async () => {
     render(<App />);
-    expect(screen.findByTestId('HomePage')).not.toBeNull();
-    expect(screen).toMatchSnapshot();
-  });
+    await waitFor(
+      () => {
+        screen.rerender(<App />);
+        expect(screen.queryByTestId('HomePage')).not.toBeNull();
+        expect(screen).toMatchSnapshot();
+      },
+      {timeout: 60000},
+    );
+  }, 60000);
 });
