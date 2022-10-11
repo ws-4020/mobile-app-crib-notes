@@ -123,14 +123,14 @@ jest.mock('expo-secure-store', () => {
 
 describe('App', () => {
   it('マウントされたときに正常にレンダリングされること', async () => {
-    const result = render(<App />);
+    render(<App />);
     await waitFor(
       () => {
-        result.rerender(<App />);
+        screen.rerender(<App />);
         expect(screen.queryByTestId('HomePage')).not.toBeNull();
         expect(screen).toMatchSnapshot();
       },
-      {timeout: 300000},
+      {timeout: 60000},
     );
-  }, 300000);
+  }, 60000);
 });
