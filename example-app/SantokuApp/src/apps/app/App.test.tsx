@@ -18,7 +18,10 @@ beforeAll(async () => {
   await initialData();
   server.listen();
 });
-afterAll(() => server.close());
+afterAll(() => {
+  server.close();
+  jest.clearAllMocks();
+});
 
 beforeEach(() => {
   // 画面遷移時のアニメーションが、コンポーネントのアンマウント後にステートを更新してしまうようで、
