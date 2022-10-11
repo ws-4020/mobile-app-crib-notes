@@ -62,7 +62,7 @@ export const useAppInitialize = () => {
   const initialize = useCallback(async () => {
     await initializeCoreFeatures();
     // CsrfTokenを取得し、AxiosInstanceのデフォルトヘッダに設定
-    await refreshCsrfToken();
+    // await refreshCsrfToken();
     // AxiosInstanceに401の時のリトライ処理を追加
     setRefreshSessionInterceptor();
 

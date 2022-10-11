@@ -156,11 +156,10 @@ export const HomePage: React.VFC<HomePageProps> = ({
   const scrollToTop = useCallback(() => scrollViewRef.current?.scrollTo({y: 0, animated: true}), []);
 
   return (
-    <Box flex={1}>
+    <Box flex={1} testID="HomePage">
       <StyledScrollView
         ref={scrollViewRef}
         showsVerticalScrollIndicator={false}
-        testID="HomePage"
         refreshControl={<RefreshControl refreshing={isPullToRefreshing} onRefresh={pullToRefresh} />}>
         <Box px="p24" py="p32">
           <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>

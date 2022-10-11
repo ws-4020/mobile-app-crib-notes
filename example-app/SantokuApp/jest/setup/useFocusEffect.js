@@ -1,5 +1,5 @@
 jest.mock('bases/focus-manager/useFocusEffect', () => {
   return {
-    useFocusEffect: effect => effect(),
+    useFocusEffect: effect => jest.fn(),
   };
 });

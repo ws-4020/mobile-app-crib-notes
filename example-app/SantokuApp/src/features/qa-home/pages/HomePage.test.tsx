@@ -6,7 +6,7 @@ import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {AppThemeProvider} from 'bases/ui/theme/AppThemeProvider';
 import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOverlay';
 import {handlers} from 'fixtures/msw/handlers';
-import {setupServer} from 'msw/native';
+import {setupServer} from 'msw/node';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
