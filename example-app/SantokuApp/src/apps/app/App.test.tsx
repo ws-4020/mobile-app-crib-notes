@@ -1,5 +1,5 @@
 import '@testing-library/jest-native/extend-expect';
-import {render, screen} from '@testing-library/react-native';
+import {render, screen, cleanup} from '@testing-library/react-native';
 import {initialData} from 'fixtures/msw/datas';
 import {initialDb} from 'fixtures/msw/db';
 import {handlers} from 'fixtures/msw/handlers';
@@ -20,7 +20,7 @@ beforeAll(async () => {
 });
 afterAll(() => {
   server.close();
-  jest.resetAllMocks();
+  cleanup();
 });
 
 beforeEach(() => {
