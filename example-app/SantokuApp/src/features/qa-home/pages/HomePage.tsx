@@ -124,17 +124,18 @@ export const HomePage: React.VFC<HomePageProps> = ({
   useFocusEffect(refresh);
 
   const [selectedSort, setSelectedSort] = useState<GetListQuestionsSort>();
-  const [isVisibleSortSheet, setIsVisibleSortSheet] = useState<boolean>(false);
-  const showSortSheet = useCallback(() => {
-    setIsVisibleSortSheet(true);
-  }, []);
+  const {
+    isVisible: isVisibleSortSheet,
+    setVisible: setIsVisibleSortSheet,
+    setInvisible: setInvisibleSortSheet,
+  } = useVisibility();
   const selectSort = useCallback(
     (sort?: GetListQuestionsSort) => {
       setSelectedSort(sort);
-      setIsVisibleSortSheet(false);
+      setInvisibleSortSheet();
       setQuestionsParams(prevState => ({...prevState, sort}));
     },
-    [setQuestionsParams],
+    [setInvisibleSortSheet, setQuestionsParams],
   );
   const sortIconColor = useMemo(() => (selectedSort ? 'blue' : 'black'), [selectedSort]);
 
@@ -182,7 +183,7 @@ export const HomePage: React.VFC<HomePageProps> = ({
                 {m('質問')}
               </Text>
               <StyledRow space="p32" alignItems="center">
-                <StyledTouchableOpacity onPress={showSortSheet}>
+                <StyledTouchableOpacity onPress={setIsVisibleSortSheet}>
                   <SortIllustration color={sortIconColor} />
                 </StyledTouchableOpacity>
                 <StyledTouchableOpacity onPress={showUnderDevelopment}>
@@ -213,6 +214,7 @@ export const HomePage: React.VFC<HomePageProps> = ({
         isVisible={isVisibleSortSheet}
         initialSelectedSort={selectedSort}
         select={selectSort}
+        close={setInvisibleSortSheet}
       />
       <SingleSelectableTagSheet
         tags={tags}

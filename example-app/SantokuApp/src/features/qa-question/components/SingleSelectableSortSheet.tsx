@@ -16,14 +16,16 @@ type SingleSelectableSortSheetProps = {
   isVisible: boolean;
   initialSelectedSort?: GetListQuestionsSort;
   select: (sort?: GetListQuestionsSort) => void;
+  close: () => void;
 };
 export const SingleSelectableSortSheet: React.FC<SingleSelectableSortSheetProps> = ({
   isVisible,
   initialSelectedSort,
   select,
+  close,
 }) => {
   return (
-    <BottomSheet isVisible={isVisible}>
+    <BottomSheet isVisible={isVisible} modalBackdropProps={{onPress: close}}>
       <Box py="p16" bg="white" borderTopLeftRadius="p16" borderTopRightRadius="p16">
         {sortConditions.map((condition, index) => {
           return (
