@@ -1,1 +1,0 @@
-(self.webpackChunkmobile_app_crib_notes=self.webpackChunkmobile_app_crib_notes||[]).push([[8612],{15101:()=>{},42116:()=>{},34904:()=>{},6918:()=>{},23197:()=>{},60996:()=>{}}]);
