@@ -126,7 +126,7 @@ export const HomePage: React.VFC<HomePageProps> = ({
   const [selectedSort, setSelectedSort] = useState<GetListQuestionsSort>();
   const {
     isVisible: isVisibleSortSheet,
-    setVisible: setIsVisibleSortSheet,
+    setVisible: setVisibleSortSheet,
     setInvisible: setInvisibleSortSheet,
   } = useVisibility();
   const selectSort = useCallback(
@@ -143,7 +143,7 @@ export const HomePage: React.VFC<HomePageProps> = ({
   const [selectedTagId, setSelectedTagId] = useState<string>();
   const {
     isVisible: isVisibleTagSheet,
-    setVisible: setIsVisibleTagSheet,
+    setVisible: setVisibleTagSheet,
     setInvisible: setInvisibleTagSheet,
   } = useVisibility();
   const selectTag = useCallback(
@@ -183,13 +183,13 @@ export const HomePage: React.VFC<HomePageProps> = ({
                 {m('質問')}
               </Text>
               <StyledRow space="p32" alignItems="center">
-                <StyledTouchableOpacity onPress={setIsVisibleSortSheet}>
+                <StyledTouchableOpacity onPress={setVisibleSortSheet}>
                   <SortIllustration color={sortIconColor} />
                 </StyledTouchableOpacity>
                 <StyledTouchableOpacity onPress={showUnderDevelopment}>
                   <FilterAltIllustration />
                 </StyledTouchableOpacity>
-                <StyledTouchableOpacity onPress={setIsVisibleTagSheet}>
+                <StyledTouchableOpacity onPress={setVisibleTagSheet}>
                   <LocalOfferIllustration color={tagIconColor} />
                 </StyledTouchableOpacity>
               </StyledRow>

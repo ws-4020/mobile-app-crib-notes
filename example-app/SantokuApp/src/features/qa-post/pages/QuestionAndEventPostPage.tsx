@@ -24,7 +24,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
   const {post: postQuestion, isPosting: isQuestionPosting} = useQuestionCommands();
   const {
     isVisible: isVisibleTagSheet,
-    setVisible: setIsVisibleTagSheet,
+    setVisible: setVisibleTagSheet,
     setInvisible: setInvisibleTagSheet,
   } = useVisibility();
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
@@ -91,7 +91,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
         return (
           <Box flexDirection="row" alignItems="center">
             {selectedTabIndex === 0 && (
-              <StyledTouchableOpacity onPress={setIsVisibleTagSheet} p="p8">
+              <StyledTouchableOpacity onPress={setVisibleTagSheet} p="p8">
                 <TagIllustration padding="p8" color="blue" />
               </StyledTouchableOpacity>
             )}
@@ -101,7 +101,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
         );
       },
     });
-  }, [isQuestionPosting, post, selectedTabIndex, setNavigationOptions, setIsVisibleTagSheet]);
+  }, [isQuestionPosting, post, selectedTabIndex, setNavigationOptions, setVisibleTagSheet]);
 
   return (
     <>
