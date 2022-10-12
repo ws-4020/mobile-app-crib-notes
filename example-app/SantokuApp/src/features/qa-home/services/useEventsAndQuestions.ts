@@ -8,13 +8,13 @@ export const useEventsAndQuestions = (initialParams: {
   questionsParams?: GetListQuestionsParams;
 }) => {
   const {
-    data: events,
+    events,
     isLoading: isEventsLoading,
     isRefetching: isEventsRefetching,
     refetch: refetchEvents,
   } = useEvents(initialParams.eventsParams);
   const {
-    data: questions,
+    questions,
     isLoading: isQuestionsLoading,
     isRefetching: isQuestionsRefetching,
     setListParams: setQuestionsParams,

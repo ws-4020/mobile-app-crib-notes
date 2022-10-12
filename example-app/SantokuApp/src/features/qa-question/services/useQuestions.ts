@@ -5,5 +5,5 @@ import {useState} from 'react';
 export const useQuestions = (initialParams?: GetListQuestionsParams) => {
   const [listParams, setListParams] = useState(initialParams);
   const query = useGetListQuestions(listParams, {query: {keepPreviousData: true}});
-  return {...query, data: query.data?.data, listParams, setListParams};
+  return {...query, questions: query.data?.data, listParams, setListParams};
 };

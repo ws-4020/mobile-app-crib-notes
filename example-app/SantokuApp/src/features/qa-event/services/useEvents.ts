@@ -5,5 +5,5 @@ import {useState} from 'react';
 export const useEvents = (initialParams: GetEventsParams) => {
   const [listParams, setListParams] = useState(initialParams);
   const query = useGetEvents(listParams);
-  return {...query, data: query.data?.data, listParams, setListParams};
+  return {...query, events: query.data?.data, listParams, setListParams};
 };
