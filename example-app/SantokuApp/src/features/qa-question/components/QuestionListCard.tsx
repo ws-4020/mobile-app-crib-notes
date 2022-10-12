@@ -12,7 +12,7 @@ import {Pressable} from 'react-native';
 
 import {AnswersWithCount} from './AnswersWithCount';
 import {DiffDaysOrHours} from './DiffDaysOrHours';
-import {LikeWithCount} from './LikeWithCount';
+import {LikesWithCount} from './LikesWithCount';
 import {ViewsWithCount} from './ViewsWithCount';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
@@ -87,7 +87,7 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
         <DiffDaysOrHours datetime={datetime} />
         <Box flex={1} />
         <ViewsWithCount count={views} />
-        <LikeWithCount count={likes} />
+        <LikesWithCount count={likes} />
         <AnswersWithCount count={views} />
       </StyledRow>
     </Box>

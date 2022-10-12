@@ -21,7 +21,7 @@ import {CommentCard} from './CommentCard';
 import {CommentDivider} from './CommentDivider';
 import {CommentsButtonWithCount} from './CommentsButtonWithCount';
 import {DiffDaysOrHours} from './DiffDaysOrHours';
-import {QuestionAndAnswerLikeButtonWithCount} from './QuestionAndAnswerLikeButtonWithCount';
+import {QuestionAndAnswerLikesButtonWithCount} from './QuestionAndAnswerLikesButtonWithCount';
 import {ViewsButtonWithCount} from './ViewsButtonWithCount';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
@@ -123,7 +123,7 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
         <DiffDaysOrHours datetime={datetime} />
       </Box>
       <StyledRow justifyContent="flex-start" alignItems="flex-end">
-        <QuestionAndAnswerLikeButtonWithCount onPress={toggleQuestionLike} count={likes} color={likeQuestionColor} />
+        <QuestionAndAnswerLikesButtonWithCount onPress={toggleQuestionLike} count={likes} color={likeQuestionColor} />
         <Box flex={1} />
         <StyledRow space="p16">
           <ViewsButtonWithCount onPress={showUnderDevelopment} count={views} />
