@@ -14,12 +14,13 @@ type TagSheetProps = {
   isVisible: boolean;
   clear: () => void;
   decide: () => void;
+  close: () => void;
   selectTag(tagId: string): void;
   isActive(tagId: string): boolean;
 };
-export const TagSheet: React.FC<TagSheetProps> = ({tags, isVisible, clear, decide, selectTag, isActive}) => {
+export const TagSheet: React.FC<TagSheetProps> = ({tags, isVisible, clear, decide, close, selectTag, isActive}) => {
   return (
-    <BottomSheet isVisible={isVisible}>
+    <BottomSheet isVisible={isVisible} modalBackdropProps={{onPress: close}}>
       <Box p="p16" bg="white" borderTopLeftRadius="p16" borderTopRightRadius="p16">
         <StyledRow justifyContent="space-between" alignItems="center">
           <TagIllustration />

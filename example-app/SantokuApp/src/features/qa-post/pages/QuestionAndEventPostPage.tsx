@@ -1,3 +1,4 @@
+import {useVisibility} from 'bases/core/utils/useVisibility';
 import {m} from 'bases/message/Message';
 import {Box, StyledSafeAreaView, StyledTouchableOpacity} from 'bases/ui/common';
 import {StyledButton} from 'bases/ui/common/StyledButton';
@@ -21,7 +22,11 @@ type QuestionAndEventPostPageProps = {
 export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> = ({setNavigationOptions, goBack}) => {
   const {data: tags} = useTags();
   const {post: postQuestion, isPosting: isQuestionPosting} = useQuestionCommands();
-  const [isVisibleTagSheet, setIsVisibleTagSheet] = useState<boolean>(false);
+  const {
+    isVisible: isVisibleTagSheet,
+    setVisible: setIsVisibleTagSheet,
+    setInvisible: setInvisibleTagSheet,
+  } = useVisibility();
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 
   const submitQuestion = useCallback(
@@ -41,16 +46,12 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
     clearContent: clearQuestionContent,
   } = useQuestionForm({onSubmit: submitQuestion});
 
-  const showTagSheet = useCallback(() => {
-    setIsVisibleTagSheet(true);
-  }, []);
-
   const selectTags = useCallback(
     async (tagIds: string[]) => {
       await setQuestionTags(tagIds);
-      setIsVisibleTagSheet(false);
+      setInvisibleTagSheet();
     },
-    [setQuestionTags],
+    [setInvisibleTagSheet, setQuestionTags],
   );
 
   const changeTab = useCallback(
@@ -90,7 +91,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
         return (
           <Box flexDirection="row" alignItems="center">
             {selectedTabIndex === 0 && (
-              <StyledTouchableOpacity onPress={showTagSheet} p="p8">
+              <StyledTouchableOpacity onPress={setIsVisibleTagSheet} p="p8">
                 <TagIllustration padding="p8" color="blue" />
               </StyledTouchableOpacity>
             )}
@@ -100,7 +101,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
         );
       },
     });
-  }, [isQuestionPosting, post, selectedTabIndex, setNavigationOptions, showTagSheet]);
+  }, [isQuestionPosting, post, selectedTabIndex, setNavigationOptions, setIsVisibleTagSheet]);
 
   return (
     <>
@@ -127,6 +128,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
         isVisible={isVisibleTagSheet}
         initialSelectedTagIds={questionForm.values.tags}
         select={selectTags}
+        close={setInvisibleTagSheet}
       />
     </>
   );

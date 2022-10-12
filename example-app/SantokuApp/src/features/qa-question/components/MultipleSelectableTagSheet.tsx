@@ -8,12 +8,14 @@ type MultipleSelectableTagSheetProps = {
   isVisible: boolean;
   initialSelectedTagIds: string[];
   select: (tagIds: string[]) => void;
+  close: () => void;
 };
 export const MultipleSelectableTagSheet: React.FC<MultipleSelectableTagSheetProps> = ({
   tags,
   isVisible,
   initialSelectedTagIds,
   select,
+  close,
 }) => {
   const [selectedTagIds, setSelectedTagIds] = useState(initialSelectedTagIds);
   const selectTag = useCallback(
@@ -40,6 +42,7 @@ export const MultipleSelectableTagSheet: React.FC<MultipleSelectableTagSheetProp
       decide={decide}
       selectTag={selectTag}
       isActive={isActive}
+      close={close}
     />
   );
 };

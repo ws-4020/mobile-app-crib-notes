@@ -1,4 +1,5 @@
 import {handleErrorWithSnackbar} from 'bases/core/errors/handleErrorWithSnackbar';
+import {useVisibility} from 'bases/core/utils/useVisibility';
 import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
 import {isRequestPushPermissionError} from 'bases/firebase/messaging/requestPushPermission';
 import {useFocusEffect} from 'bases/focus-manager/useFocusEffect';
@@ -139,17 +140,18 @@ export const HomePage: React.VFC<HomePageProps> = ({
 
   const {data: tags} = useTags();
   const [selectedTagId, setSelectedTagId] = useState<string>();
-  const [isVisibleTagSheet, setIsVisibleTagSheet] = useState<boolean>(false);
-  const showTagSheet = useCallback(() => {
-    setIsVisibleTagSheet(true);
-  }, []);
+  const {
+    isVisible: isVisibleTagSheet,
+    setVisible: setIsVisibleTagSheet,
+    setInvisible: setInvisibleTagSheet,
+  } = useVisibility();
   const selectTag = useCallback(
     (tagId?: string) => {
       setSelectedTagId(tagId);
-      setIsVisibleTagSheet(false);
+      setInvisibleTagSheet();
       setQuestionsParams(prevState => ({...prevState, tag: tagId}));
     },
-    [setQuestionsParams],
+    [setInvisibleTagSheet, setQuestionsParams],
   );
   const tagIconColor = useMemo(() => (selectedTagId ? 'blue' : 'black'), [selectedTagId]);
 
@@ -186,7 +188,7 @@ export const HomePage: React.VFC<HomePageProps> = ({
                 <StyledTouchableOpacity onPress={showUnderDevelopment}>
                   <FilterAltIllustration />
                 </StyledTouchableOpacity>
-                <StyledTouchableOpacity onPress={showTagSheet}>
+                <StyledTouchableOpacity onPress={setIsVisibleTagSheet}>
                   <LocalOfferIllustration color={tagIconColor} />
                 </StyledTouchableOpacity>
               </StyledRow>
@@ -217,6 +219,7 @@ export const HomePage: React.VFC<HomePageProps> = ({
         isVisible={isVisibleTagSheet}
         initialSelectedTagId={selectedTagId}
         select={selectTag}
+        close={setInvisibleTagSheet}
       />
       {(isRefreshing || isLoading) && (
         <Box position="absolute" top={10} right={10}>

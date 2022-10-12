@@ -8,6 +8,7 @@ type SingleSelectableTagSheetProps = {
   isVisible: boolean;
   initialSelectedTagId?: string;
   select: (tagId?: string) => void;
+  close: () => void;
 };
 
 export const SingleSelectableTagSheet: React.FC<SingleSelectableTagSheetProps> = ({
@@ -15,6 +16,7 @@ export const SingleSelectableTagSheet: React.FC<SingleSelectableTagSheetProps> =
   isVisible,
   initialSelectedTagId,
   select,
+  close,
 }) => {
   const [selectedTagId, setSelectedTagId] = useState(initialSelectedTagId);
 
@@ -34,6 +36,7 @@ export const SingleSelectableTagSheet: React.FC<SingleSelectableTagSheetProps> =
       decide={decide}
       selectTag={selectTag}
       isActive={isActive}
+      close={close}
     />
   );
 };
