@@ -3,13 +3,13 @@ import React, {useCallback, useState} from 'react';
 
 import {TagSheet} from './TagSheet';
 
-type TagSheetProps = {
+type MultipleSelectableTagSheetProps = {
   tags?: TagType[];
   isVisible: boolean;
   initialSelectedTagIds: string[];
   select: (tagIds: string[]) => void;
 };
-export const MultipleSelectableTagSheet: React.FC<TagSheetProps> = ({
+export const MultipleSelectableTagSheet: React.FC<MultipleSelectableTagSheetProps> = ({
   tags,
   isVisible,
   initialSelectedTagIds,
