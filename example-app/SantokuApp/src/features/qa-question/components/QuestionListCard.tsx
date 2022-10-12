@@ -10,7 +10,7 @@ import {Question} from 'features/backend/apis/model';
 import React, {FC, useCallback} from 'react';
 import {Pressable} from 'react-native';
 
-import {AnswerWithCount} from './CommentsWithCount';
+import {AnswersWithCount} from './AnswersWithCount';
 import {DiffDaysOrHours} from './DiffDaysOrHours';
 import {LikeWithCount} from './LikeWithCount';
 import {ViewsWithCount} from './ViewsWithCount';
@@ -88,7 +88,7 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
         <Box flex={1} />
         <ViewsWithCount count={views} />
         <LikeWithCount count={likes} />
-        <AnswerWithCount count={views} />
+        <AnswersWithCount count={views} />
       </StyledRow>
     </Box>
   );
