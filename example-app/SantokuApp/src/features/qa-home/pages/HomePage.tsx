@@ -24,7 +24,7 @@ import {SingleSelectableSortSheet} from 'features/qa-question/components/SingleS
 import {SingleSelectableTagSheet} from 'features/qa-question/components/SingleSelectableTagSheet';
 import {useTags} from 'features/qa-question/services/useTags';
 import {useShowTermsAgreementOverlay} from 'features/terms/use-cases/useShowTermsAgreementOverlay';
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
 import {FlatList, Platform, ScrollView} from 'react-native';
 
 import {useEventsAndQuestions} from '../services/useEventsAndQuestions';
@@ -101,7 +101,7 @@ export const HomePage: React.VFC<HomePageProps> = ({
   const showTermsAgreementOverlay = useShowTermsAgreementOverlay();
   useFocusEffect(showTermsAgreementOverlay);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     setHeader({
       headerLeft: () => <HeaderLeft />,
       headerRight: () => <HeaderRight />,
