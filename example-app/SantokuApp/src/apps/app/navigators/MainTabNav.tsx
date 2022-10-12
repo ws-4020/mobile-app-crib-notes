@@ -43,7 +43,7 @@ const Component: React.FC<Props> = ({initialData}) => {
         }}
       />
       <nav.Screen
-        name="TeamStackNav"
+        name="AccountStackNav"
         component={AccountStackNav}
         options={{
           tabBarAccessibilityLabel: 'User',
