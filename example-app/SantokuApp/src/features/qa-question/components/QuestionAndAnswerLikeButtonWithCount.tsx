@@ -9,7 +9,7 @@ type QuestionAndAnswerLikeButtonWithCountProps = {
   onPress: () => void;
   count: number;
 } & ColorProps<RestyleTheme>;
-export const QuestionAndAnswerLikesButtonWithCount: React.FC<QuestionAndAnswerLikeButtonWithCountProps> = ({
+export const QuestionAndAnswerLikeButtonWithCount: React.FC<QuestionAndAnswerLikeButtonWithCountProps> = ({
   onPress,
   count,
   color,
