@@ -12,12 +12,16 @@ const sortConditions: {value?: GetListQuestionsSort; label: string}[] = [
   {value: 'update', label: m('更新日順')},
 ];
 
-type TagSheetProps = {
+type SingleSelectableSortSheetProps = {
   isVisible: boolean;
   initialSelectedSort?: GetListQuestionsSort;
   select: (sort?: GetListQuestionsSort) => void;
 };
-export const SingleSelectableSortSheet: React.FC<TagSheetProps> = ({isVisible, initialSelectedSort, select}) => {
+export const SingleSelectableSortSheet: React.FC<SingleSelectableSortSheetProps> = ({
+  isVisible,
+  initialSelectedSort,
+  select,
+}) => {
   return (
     <BottomSheet isVisible={isVisible}>
       <Box py="p16" bg="white" borderTopLeftRadius="p16" borderTopRightRadius="p16">
