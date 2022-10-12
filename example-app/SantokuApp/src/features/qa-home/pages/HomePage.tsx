@@ -3,9 +3,10 @@ import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
 import {isRequestPushPermissionError} from 'bases/firebase/messaging/requestPushPermission';
 import {useFocusEffect} from 'bases/focus-manager/useFocusEffect';
 import {m} from 'bases/message/Message';
-import {Box, StyledScrollView, StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledActivityIndicator} from 'bases/ui/common/StyledActivityIndicator';
 import {StyledRow} from 'bases/ui/common/StyledRow';
+import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {Fab} from 'bases/ui/fab/Fab';
 import {AddIllustration} from 'bases/ui/illustration/AddIllustration';
 import {ExpandLessIllustration} from 'bases/ui/illustration/ExpandLessIllustration';
@@ -16,15 +17,15 @@ import {SearchIllustration} from 'bases/ui/illustration/SearchIllustration';
 import {SettingsIllustration} from 'bases/ui/illustration/SettingsIllustration';
 import {SortIllustration} from 'bases/ui/illustration/SortIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
-import {GetListQuestionsSort} from 'features/backend/apis/model';
+import {GetListQuestionsSort, Question} from 'features/backend/apis/model';
 import {EventList} from 'features/qa-event/components/EventList';
-import {QuestionList} from 'features/qa-question/components/QuestionList';
+import {QuestionListCard} from 'features/qa-question/components/QuestionListCard';
 import {SingleSelectableSortSheet} from 'features/qa-question/components/SingleSelectableSortSheet';
 import {SingleSelectableTagSheet} from 'features/qa-question/components/SingleSelectableTagSheet';
 import {useTags} from 'features/qa-question/services/useTags';
 import {useShowTermsAgreementOverlay} from 'features/terms/use-cases/useShowTermsAgreementOverlay';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Platform, RefreshControl, ScrollView} from 'react-native';
+import {FlatList, Platform, ScrollView} from 'react-native';
 
 import {useEventsAndQuestions} from '../services/useEventsAndQuestions';
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
@@ -54,6 +55,16 @@ const HeaderRight = () => (
     <Box py="p4" />
   </Box>
 );
+
+const addOnPressHandlerToQuestions =
+  (navigateToQuestionDetail: (questionId: string) => void) => (question: Question) => {
+    return {
+      question,
+      navigateToQuestionDetail: () => navigateToQuestionDetail(question.questionId),
+    };
+  };
+
+const ListSeparator = () => <StyledSpace height="p16" />;
 
 export type HomePageProps = {
   navigateToQuestionAndEventPost: () => void;
@@ -107,7 +118,6 @@ export const HomePage: React.VFC<HomePageProps> = ({
     isRefreshing,
     isPullToRefreshing,
     isEventsLoading,
-    isQuestionsLoading,
   } = useEventsAndQuestions({eventsParams: {target: 'active'}});
   // ボトムタブ切り替え時に、イベントと質問一覧を再取得します。
   useFocusEffect(refresh);
@@ -146,36 +156,47 @@ export const HomePage: React.VFC<HomePageProps> = ({
   const scrollViewRef = useRef<ScrollView>();
   const scrollToTop = useCallback(() => scrollViewRef.current?.scrollTo({y: 0, animated: true}), []);
 
+  const questionItems = useMemo(
+    () => questions?.map(addOnPressHandlerToQuestions(navigateToQuestionDetail)),
+    [questions, navigateToQuestionDetail],
+  );
+
   return (
     <Box flex={1} testID="HomePage">
-      <StyledScrollView
-        ref={scrollViewRef}
+      <FlatList
         showsVerticalScrollIndicator={false}
-        refreshControl={<RefreshControl refreshing={isPullToRefreshing} onRefresh={pullToRefresh} />}>
-        <Box px="p24" py="p32">
-          <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
-            {m('募集中のイベント')}
-          </Text>
-        </Box>
-        {!isEventsLoading && <EventList data={events} />}
-        <StyledRow px="p24" py="p32" justifyContent="space-between" alignItems="center">
-          <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
-            {m('質問')}
-          </Text>
-          <StyledRow space="p32" alignItems="center">
-            <StyledTouchableOpacity onPress={showSortSheet}>
-              <SortIllustration color={sortIconColor} />
-            </StyledTouchableOpacity>
-            <StyledTouchableOpacity onPress={showUnderDevelopment}>
-              <FilterAltIllustration />
-            </StyledTouchableOpacity>
-            <StyledTouchableOpacity onPress={showTagSheet}>
-              <LocalOfferIllustration color={tagIconColor} />
-            </StyledTouchableOpacity>
-          </StyledRow>
-        </StyledRow>
-        {!isQuestionsLoading && <QuestionList data={questions} navigateToQuestionDetail={navigateToQuestionDetail} />}
-      </StyledScrollView>
+        refreshing={isPullToRefreshing}
+        onRefresh={pullToRefresh}
+        ListHeaderComponent={
+          <>
+            <Box px="p24" py="p32">
+              <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
+                {m('募集中のイベント')}
+              </Text>
+            </Box>
+            {!isEventsLoading && <EventList data={events} />}
+            <StyledRow px="p24" py="p32" justifyContent="space-between" alignItems="center">
+              <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
+                {m('質問')}
+              </Text>
+              <StyledRow space="p32" alignItems="center">
+                <StyledTouchableOpacity onPress={showSortSheet}>
+                  <SortIllustration color={sortIconColor} />
+                </StyledTouchableOpacity>
+                <StyledTouchableOpacity onPress={showUnderDevelopment}>
+                  <FilterAltIllustration />
+                </StyledTouchableOpacity>
+                <StyledTouchableOpacity onPress={showTagSheet}>
+                  <LocalOfferIllustration color={tagIconColor} />
+                </StyledTouchableOpacity>
+              </StyledRow>
+            </StyledRow>
+          </>
+        }
+        data={questionItems}
+        renderItem={QuestionListCard}
+        ItemSeparatorComponent={ListSeparator}
+      />
       <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
         {Platform.OS === 'android' && (
           <Fab size="small" color="white" onPress={scrollToTop}>

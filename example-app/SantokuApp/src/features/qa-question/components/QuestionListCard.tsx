@@ -7,7 +7,7 @@ import {MoreVertIllustration} from 'bases/ui/illustration/MoreVertIllustration';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {Question} from 'features/backend/apis/model';
-import React, {FC, useCallback} from 'react';
+import React, {FC} from 'react';
 import {Pressable} from 'react-native';
 
 import {AnswerWithCount} from './AnswerWithCount';
@@ -18,17 +18,18 @@ import {ViewWithCount} from './ViewWithCount';
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
 export type QuestionListCardProps = {
-  question: Question;
-  navigateToQuestionDetail: (questionId: string) => void;
+  item: {
+    question: Question;
+    navigateToQuestionDetail: () => void;
+  };
 };
 
 export const QuestionListCard: FC<QuestionListCardProps> = ({
-  question: {questionId, title, content, likes, views, beginner, datetime, profile},
-  navigateToQuestionDetail,
+  item: {
+    question: {title, content, likes, views, beginner, datetime, profile},
+    navigateToQuestionDetail,
+  },
 }) => {
-  const toQuestionDetail = useCallback(() => {
-    navigateToQuestionDetail(questionId);
-  }, [navigateToQuestionDetail, questionId]);
   return (
     <Box
       backgroundColor="white"
@@ -61,7 +62,7 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
         </StyledTouchableOpacity>
       </StyledRow>
       <StyledSpace height="p24" />
-      <Pressable onPress={toQuestionDetail}>
+      <Pressable onPress={navigateToQuestionDetail}>
         <Text
           variant="font22Bold"
           textDecorationLine="underline"
