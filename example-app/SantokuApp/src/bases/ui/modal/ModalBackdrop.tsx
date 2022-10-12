@@ -10,7 +10,7 @@ export const DEFAULT_OPACITY = 0.4;
 export const DEFAULT_FADE_IN_DURATION = 300;
 export const DEFAULT_FADE_OUT_DURATION = 150;
 
-// React Native ReanimatedのLayout Animationsを使用すると↓の不具合が発生するため、指定できないようにしています。
+// React Native ReanimatedのLayout Animationsを使用すると↓の不具合が発生するため、'exiting'・'entering'の指定ができないようにしています。
 // https://github.com/software-mansion/react-native-reanimated/issues/2906
 export type ModalBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'exiting' | 'entering'> & {
   isVisible: boolean;
