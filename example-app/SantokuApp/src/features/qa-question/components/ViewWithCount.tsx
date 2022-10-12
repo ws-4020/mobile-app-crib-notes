@@ -2,10 +2,10 @@ import {Box, Text} from 'bases/ui/common';
 import {VisibilityIllustration} from 'bases/ui/illustration/VisibilityIllustration';
 import React from 'react';
 
-type ViewsWithCountProps = {
+type ViewWithCountProps = {
   count: number;
 };
-export const ViewsWithCount: React.FC<ViewsWithCountProps> = ({count}) => {
+export const ViewWithCount: React.FC<ViewWithCountProps> = ({count}) => {
   return (
     <Box flexDirection="row" alignItems="center">
       <VisibilityIllustration />

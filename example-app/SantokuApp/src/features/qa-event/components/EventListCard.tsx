@@ -11,9 +11,9 @@ import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
 import {LikeWithCount} from './LikeWithCount';
 
-export type CardEventSmallProps = {event: Event};
+export type EventListCardProps = {event: Event};
 
-export const EventListCard: FC<CardEventSmallProps> = ({event: {title, likes, profile}}) => {
+export const EventListCard: FC<EventListCardProps> = ({event: {title, likes, profile}}) => {
   const {width: windowWidth} = useSafeAreaFrame();
   const theme = useTheme<RestyleTheme>();
   return (

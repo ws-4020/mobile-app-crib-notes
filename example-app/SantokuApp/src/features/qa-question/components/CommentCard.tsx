@@ -5,7 +5,7 @@ import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {Comment} from 'features/backend/apis/model';
 import React, {FC, useMemo} from 'react';
 
-import {CommentsLikeButtonWithCount} from './CommentsLikeButtonWithCount';
+import {CommentLikeButtonWithCount} from './CommentLikeButtonWithCount';
 import {DiffDaysOrHours} from './DiffDaysOrHours';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
@@ -17,7 +17,7 @@ export const CommentCard: FC<CommentCardProps> = ({content, likes, profile, date
   return (
     <StyledRow flex={1} space="p16">
       <Box>
-        <CommentsLikeButtonWithCount onPress={showUnderDevelopment} count={likes} color={likeColor} />
+        <CommentLikeButtonWithCount onPress={showUnderDevelopment} count={likes} color={likeColor} />
       </Box>
       <StyledColumn flex={1} space="p16">
         <Text variant="font13Regular" lineHeight={19} letterSpacing={0.25}>

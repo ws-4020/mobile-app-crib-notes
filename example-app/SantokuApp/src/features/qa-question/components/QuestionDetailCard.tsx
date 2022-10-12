@@ -17,12 +17,12 @@ import React, {FC, useCallback, useMemo} from 'react';
 
 import {useTags} from '../services/useTags';
 import {AddCommentButton} from './AddCommentButton';
+import {CommentButtonWithCount} from './CommentButtonWithCount';
 import {CommentCard} from './CommentCard';
 import {CommentDivider} from './CommentDivider';
-import {CommentsButtonWithCount} from './CommentsButtonWithCount';
 import {DiffDaysOrHours} from './DiffDaysOrHours';
 import {QuestionAndAnswerLikesButtonWithCount} from './QuestionAndAnswerLikesButtonWithCount';
-import {ViewsButtonWithCount} from './ViewsButtonWithCount';
+import {ViewButtonWithCount} from './ViewButtonWithCount';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
@@ -126,12 +126,8 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
         <QuestionAndAnswerLikesButtonWithCount onPress={toggleQuestionLike} count={likes} color={likeQuestionColor} />
         <Box flex={1} />
         <StyledRow space="p16">
-          <ViewsButtonWithCount onPress={showUnderDevelopment} count={views} />
-          <CommentsButtonWithCount
-            onPress={toggleQuestionCommentsVisible}
-            count={comments}
-            color={commentButtonColor}
-          />
+          <ViewButtonWithCount onPress={showUnderDevelopment} count={views} />
+          <CommentButtonWithCount onPress={toggleQuestionCommentsVisible} count={comments} color={commentButtonColor} />
         </StyledRow>
       </StyledRow>
       <StyledSpace height="p32" />

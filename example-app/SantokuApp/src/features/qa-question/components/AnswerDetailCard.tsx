@@ -11,9 +11,9 @@ import {QuestionAndAnswerAnswerListItem} from 'features/backend/apis/model';
 import React, {FC, useMemo} from 'react';
 
 import {AddCommentButton} from './AddCommentButton';
+import {CommentButtonWithCount} from './CommentButtonWithCount';
 import {CommentCard} from './CommentCard';
 import {CommentDivider} from './CommentDivider';
-import {CommentsButtonWithCount} from './CommentsButtonWithCount';
 import {DiffDaysOrHours} from './DiffDaysOrHours';
 import {QuestionAndAnswerLikesButtonWithCount} from './QuestionAndAnswerLikesButtonWithCount';
 
@@ -75,7 +75,7 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
       <Box flexDirection="row" justifyContent="flex-start" alignItems="flex-end">
         <QuestionAndAnswerLikesButtonWithCount onPress={showUnderDevelopment} count={likes} color={likeAnswerColor} />
         <Box flex={1} />
-        <CommentsButtonWithCount onPress={toggleAnswerCommentsVisible} count={comments} color={commentButtonColor} />
+        <CommentButtonWithCount onPress={toggleAnswerCommentsVisible} count={comments} color={commentButtonColor} />
       </Box>
       <StyledSpace height="p16" />
       {isAnswerCommentsVisible && (

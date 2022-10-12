@@ -10,10 +10,10 @@ import {Question} from 'features/backend/apis/model';
 import React, {FC, useCallback} from 'react';
 import {Pressable} from 'react-native';
 
-import {AnswersWithCount} from './AnswersWithCount';
+import {AnswerWithCount} from './AnswerWithCount';
 import {DiffDaysOrHours} from './DiffDaysOrHours';
-import {LikesWithCount} from './LikesWithCount';
-import {ViewsWithCount} from './ViewsWithCount';
+import {LikeWithCount} from './LikeWithCount';
+import {ViewWithCount} from './ViewWithCount';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
@@ -86,9 +86,9 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
       <StyledRow space="p16" alignItems="flex-end">
         <DiffDaysOrHours datetime={datetime} />
         <Box flex={1} />
-        <ViewsWithCount count={views} />
-        <LikesWithCount count={likes} />
-        <AnswersWithCount count={views} />
+        <ViewWithCount count={views} />
+        <LikeWithCount count={likes} />
+        <AnswerWithCount count={views} />
       </StyledRow>
     </Box>
   );
