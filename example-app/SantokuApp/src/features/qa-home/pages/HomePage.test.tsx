@@ -28,6 +28,13 @@ afterAll(() => server.close());
 beforeEach(() => {
   jest.useFakeTimers();
 });
+jest.mock('bases/date/formatDiffInDaysOrHours', () => {
+  return {
+    formatDiffInDaysOrHours: jest.fn(() => {
+      return '1時間前';
+    }),
+  };
+});
 
 const Wrapper: React.FC = ({children}) => {
   const queryClient = new QueryClient();

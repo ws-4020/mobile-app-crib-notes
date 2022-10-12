@@ -50,6 +50,13 @@ jest.mock('expo-secure-store', () => {
     }),
   };
 });
+jest.mock('bases/date/formatDiffInDaysOrHours', () => {
+  return {
+    formatDiffInDaysOrHours: jest.fn(() => {
+      return '1時間前';
+    }),
+  };
+});
 
 describe('App', () => {
   it('マウントされたときに正常にレンダリングされること', async () => {
