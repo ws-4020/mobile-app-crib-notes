@@ -17,7 +17,7 @@ export type AuthenticatedStackParamList = {
 
 export type MainTabParamList = {
   HomeStackNav: NavigatorScreenParams<HomeStackParamList> | undefined;
-  TeamStackNav: NavigatorScreenParams<AccountStackParamList> | undefined;
+  AccountStackNav: NavigatorScreenParams<AccountStackParamList> | undefined;
 };
 
 export type HomeStackParamList = {
@@ -79,7 +79,7 @@ export type AppNavigatorOptions = {
   AuthenticatedStackNav?: DefaultRouterOptions<keyof AuthenticatedStackParamList>;
   MainTabNav?: DefaultRouterOptions<keyof MainTabParamList>;
   HomeStackNav?: DefaultRouterOptions<keyof HomeStackParamList>;
-  TeamStackNav?: DefaultRouterOptions<keyof AccountStackParamList>;
+  AccountStackNav?: DefaultRouterOptions<keyof AccountStackParamList>;
 };
 
 export type NavigationParameter<
