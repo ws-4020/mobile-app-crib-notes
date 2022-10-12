@@ -3,13 +3,19 @@ import React, {useCallback, useState} from 'react';
 
 import {TagSheet} from './TagSheet';
 
-type TagSheetProps = {
+type SingleSelectableTagSheetProps = {
   tags?: TagType[];
   isVisible: boolean;
   initialSelectedTagId?: string;
   select: (tagId?: string) => void;
 };
-export const SingleSelectableTagSheet: React.FC<TagSheetProps> = ({tags, isVisible, initialSelectedTagId, select}) => {
+
+export const SingleSelectableTagSheet: React.FC<SingleSelectableTagSheetProps> = ({
+  tags,
+  isVisible,
+  initialSelectedTagId,
+  select,
+}) => {
   const [selectedTagId, setSelectedTagId] = useState(initialSelectedTagId);
 
   const clear = useCallback(() => setSelectedTagId(undefined), []);
