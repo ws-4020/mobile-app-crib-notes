@@ -38,8 +38,7 @@ describe('ProfileRegistrationScreen', () => {
     // importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const Page = require('./ProfileRegistrationPage')
-      .ProfileRegistrationPage as React.VFC<ProfileRegistrationPageProps>;
+    const Page = require('./ProfileRegistrationPage').ProfileRegistrationPage as React.FC<ProfileRegistrationPageProps>;
     render(<Page termsAgreementStatus={{hasAgreed: true, agreedVersion: '1.0.0'}} />, {
       wrapper: Wrapper,
     });
