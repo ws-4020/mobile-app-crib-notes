@@ -7,9 +7,9 @@ import {useTodosPage} from '../services/todo/useTodosPage';
 
 // 次の不具合で型エラーがでるため暫定対処
 // https://stackoverflow.com/questions/68401996/typescript-error-when-using-searchbar-from-react-native-elements
-const SearchBar = DefaultSearchBar as unknown as React.FC<any>;
+const SearchBar = DefaultSearchBar as unknown as React.FC<React.PropsWithChildren<any>>;
 
-export const SearchBarTodoDemoPage: React.FC = () => {
+export const SearchBarTodoDemoPage: React.FC<React.PropsWithChildren<unknown>> = () => {
   const {isFetching, isError, todos, setPageParams} = useTodosPage();
   const [inputPage, inputPageDebounce, setInputPage] = useDebounceState('', 500);
   useEffect(() => {

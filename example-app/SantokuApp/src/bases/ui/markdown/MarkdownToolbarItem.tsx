@@ -7,7 +7,7 @@ export type MarkdownToolbarItemProps = {
   onPress?: () => void;
 };
 
-export const MarkdownToolbarItem: React.FC<MarkdownToolbarItemProps> = ({text, onPress}) => (
+export const MarkdownToolbarItem: React.FC<React.PropsWithChildren<MarkdownToolbarItemProps>> = ({text, onPress}) => (
   <StyledTouchableOpacity width={24} height={24} justifyContent="center" alignItems="center" onPress={onPress}>
     <Text>{text}</Text>
   </StyledTouchableOpacity>

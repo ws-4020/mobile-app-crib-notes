@@ -9,6 +9,6 @@ type ConfigTemplateProps = {
   testID?: string;
 };
 
-export const ConfigTemplate: React.FC<ConfigTemplateProps> = ({items, keyExtractor, testID}) => {
+export const ConfigTemplate: React.FC<React.PropsWithChildren<ConfigTemplateProps>> = ({items, keyExtractor, testID}) => {
   return <FlatList data={items} renderItem={ConfigListItem} keyExtractor={keyExtractor} testID={testID} />;
 };

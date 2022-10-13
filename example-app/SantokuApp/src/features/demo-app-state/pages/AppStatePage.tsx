@@ -7,7 +7,7 @@ import {StateChangedEventRecord} from '../types/StateChangedEventRecord';
 
 export const keyExtractor = (_: unknown, index: number) => index.toString();
 
-export const AppStatePage: React.FC = () => {
+export const AppStatePage: React.FC<React.PropsWithChildren<unknown>> = () => {
   const isMounted = useIsMounted();
   const [appStateHistory, setAppStateHistory] = useState<StateChangedEventRecord[]>([]);
   const saveEvent = useCallback(

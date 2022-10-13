@@ -9,7 +9,7 @@ export type ErrorCasePageProps = {
   navigateToErrorInNativeModule: () => void;
 };
 
-export const ErrorCasePage: React.FC<ErrorCasePageProps> = ({
+export const ErrorCasePage: React.FC<React.PropsWithChildren<ErrorCasePageProps>> = ({
   navigateToErrorInEventHandler,
   navigateToErrorInUseEffect,
   navigateToErrorInReactComponent,

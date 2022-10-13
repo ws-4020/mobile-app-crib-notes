@@ -9,7 +9,7 @@ type CommentButtonWithCountProps = {
   onPress: () => void;
   count: number;
 } & ColorProps<RestyleTheme>;
-export const CommentButtonWithCount: React.FC<CommentButtonWithCountProps> = ({onPress, count, color}) => {
+export const CommentButtonWithCount: React.FC<React.PropsWithChildren<CommentButtonWithCountProps>> = ({onPress, count, color}) => {
   return (
     <StyledRow space="p8" alignItems="center">
       <StyledTouchableOpacity onPress={onPress}>

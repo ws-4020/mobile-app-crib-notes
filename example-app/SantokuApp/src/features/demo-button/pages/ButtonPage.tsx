@@ -6,7 +6,7 @@ const handlePress = () => {
   Alert.alert('clicked');
 };
 
-export const ButtonPage: React.FC = () => {
+export const ButtonPage: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <View style={styles.container}>
       <Button title="Small" onPress={handlePress} />

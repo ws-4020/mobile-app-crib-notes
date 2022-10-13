@@ -3,7 +3,7 @@ import {DemoStackParamList} from 'apps/app/navigators/types';
 import {EditTodoDemoPage} from 'features/demo-react-query/pages/EditTodoDemoPage';
 import React, {useCallback} from 'react';
 
-export const EditTodoDemoScreen: React.FC<NativeStackScreenProps<DemoStackParamList, 'EditTodoDemo'>> = ({
+export const EditTodoDemoScreen: React.FC<React.PropsWithChildren<NativeStackScreenProps<DemoStackParamList, 'EditTodoDemo'>>> = ({
   navigation,
   route,
 }) => {

@@ -8,7 +8,7 @@ type AppStateHistoryListItemProps = {
   item: StateChangedEventRecord;
 };
 
-export const AppStateHistoryListItem: React.FC<AppStateHistoryListItemProps> = ({item}) => {
+export const AppStateHistoryListItem: React.FC<React.PropsWithChildren<AppStateHistoryListItemProps>> = ({item}) => {
   return (
     <ListItem bottomDivider>
       <View style={styles.record}>

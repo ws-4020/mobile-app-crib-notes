@@ -3,7 +3,7 @@ import React from 'react';
 import {ActivityIndicator, RefreshControl, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
-export const GetAccountsMeDemoPage: React.FC = () => {
+export const GetAccountsMeDemoPage: React.FC<React.PropsWithChildren<unknown>> = () => {
   const {isLoading, isRefetching, isError, accountData, refetch} = useAccountData();
   return (
     <SafeAreaView style={styles.container}>

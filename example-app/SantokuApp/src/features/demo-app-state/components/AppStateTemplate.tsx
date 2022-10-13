@@ -10,7 +10,7 @@ type AppStateTemplateProps = {
   testID?: string;
 };
 
-export const AppStateTemplate: React.FC<AppStateTemplateProps> = ({history, keyExtractor, testID}) => {
+export const AppStateTemplate: React.FC<React.PropsWithChildren<AppStateTemplateProps>> = ({history, keyExtractor, testID}) => {
   const listRef = useRef<FlatList<StateChangedEventRecord>>(null);
   return (
     <FlatList

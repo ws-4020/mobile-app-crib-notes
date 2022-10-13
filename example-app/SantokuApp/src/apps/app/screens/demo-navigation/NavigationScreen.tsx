@@ -8,7 +8,7 @@ type NavigationScreenProps = CompositeScreenProps<
   NativeStackScreenProps<DemoStackParamList, 'Navigation'>,
   NativeStackScreenProps<RootStackParamList>
 >;
-export const NavigationScreen: React.FC<NavigationScreenProps> = ({navigation}) => {
+export const NavigationScreen: React.FC<React.PropsWithChildren<NavigationScreenProps>> = ({navigation}) => {
   const navigateToSnackbarDemo = useCallback(() => navigation.navigate('Snackbar'), [navigation]);
   const navigateToHomeStack = useCallback(
     () => navigation.navigate('AuthenticatedStackNav', {screen: 'MainTabNav', params: {screen: 'HomeStackNav'}}),

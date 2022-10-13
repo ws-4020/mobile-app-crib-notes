@@ -24,7 +24,7 @@ export type AnswerDetailCardProps = QuestionAndAnswerAnswerListItem & {
   likedCommentIds?: string[];
 };
 
-export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
+export const AnswerDetailCard: FC<React.PropsWithChildren<AnswerDetailCardProps>> = ({
   answer: {content, likes, datetime, comments, profile},
   commentList,
   liked,

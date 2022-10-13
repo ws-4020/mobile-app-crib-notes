@@ -3,7 +3,7 @@ import {DemoStackParamList} from 'apps/app/navigators/types';
 import {ListTodoDemoPage} from 'features/demo-react-query/pages/ListTodoDemoPage';
 import React, {useCallback} from 'react';
 
-export const ListTodoDemoScreen: React.FC<NativeStackScreenProps<DemoStackParamList, 'ListTodoDemo'>> = ({
+export const ListTodoDemoScreen: React.FC<React.PropsWithChildren<NativeStackScreenProps<DemoStackParamList, 'ListTodoDemo'>>> = ({
   navigation,
 }) => {
   const navigateToCreateTodoDemo = useCallback(() => navigation.navigate('CreateTodoDemo'), [navigation]);

@@ -11,7 +11,7 @@ import {useTodoCommands} from '../services/todo/useTodoCommands';
 type Props = {
   replaceToEditTodoDemo: (todoId: number) => void;
 };
-export const CreateTodoDemoPage: React.FC<Props> = ({replaceToEditTodoDemo}) => {
+export const CreateTodoDemoPage: React.FC<React.PropsWithChildren<Props>> = ({replaceToEditTodoDemo}) => {
   const {create, isCreating} = useTodoCommands();
   const onSubmit = useCallback(
     (values: TodoEditFormValues) => {

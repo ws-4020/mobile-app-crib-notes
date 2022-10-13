@@ -12,7 +12,7 @@ const onAppStateChange = (newAppState: AppStateStatus) => {
   }
 };
 
-export const ReactQueryProvider: React.FC = ({children}) => {
+export const ReactQueryProvider: React.FC<React.PropsWithChildren<unknown>> = ({children}) => {
   const queryClient: QueryClient = useMemo(() => {
     return new QueryClient({
       queryCache: defaultQueryCache(queryClient),

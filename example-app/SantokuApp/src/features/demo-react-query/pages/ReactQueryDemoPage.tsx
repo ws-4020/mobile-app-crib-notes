@@ -13,7 +13,7 @@ type Props = {
   navigateToDisabledQueryDemo: () => void;
   navigateToDisableErrorHandlerDemo: () => void;
 };
-export const ReactQueryDemoPage: React.FC<Props> = ({
+export const ReactQueryDemoPage: React.FC<React.PropsWithChildren<Props>> = ({
   navigateToGetAccountsMeDemo,
   navigateToSearchFormTodoDemo,
   navigateToSearchBarTodoDemo,

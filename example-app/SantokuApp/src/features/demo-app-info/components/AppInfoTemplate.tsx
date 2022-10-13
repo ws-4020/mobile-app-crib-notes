@@ -9,6 +9,6 @@ type AppInfoTemplateProps = {
   testID?: string;
 };
 
-export const AppInfoTemplate: React.FC<AppInfoTemplateProps> = ({items, keyExtractor, testID}) => {
+export const AppInfoTemplate: React.FC<React.PropsWithChildren<AppInfoTemplateProps>> = ({items, keyExtractor, testID}) => {
   return <FlatList data={items} renderItem={AppInfoListItem} keyExtractor={keyExtractor} testID={testID} />;
 };

@@ -5,12 +5,10 @@ import React, {useCallback} from 'react';
 
 import {RootStackParamList, AccountStackParamList} from '../../navigators/types';
 
-export const ProfileDetailScreen: React.FC<
-  CompositeScreenProps<
-    NativeStackScreenProps<AccountStackParamList, 'ProfileDetail'>,
-    NativeStackScreenProps<RootStackParamList, 'DemoStackNav'>
-  >
-> = ({navigation}) => {
+export const ProfileDetailScreen: React.FC<React.PropsWithChildren<CompositeScreenProps<
+  NativeStackScreenProps<AccountStackParamList, 'ProfileDetail'>,
+  NativeStackScreenProps<RootStackParamList, 'DemoStackNav'>
+>>> = ({navigation}) => {
   const navigateToDemo = useCallback(() => navigation.navigate('DemoStackNav', {screen: 'DemoMenu'}), [navigation]);
   return <ProfileDetailPage navigateToDemo={navigateToDemo} />;
 };

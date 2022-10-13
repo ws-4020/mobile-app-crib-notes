@@ -14,7 +14,7 @@ type Props = {
   goBack: () => void;
   todoId: number;
 };
-export const EditTodoDemoPage: React.FC<Props> = ({goBack, todoId}) => {
+export const EditTodoDemoPage: React.FC<React.PropsWithChildren<Props>> = ({goBack, todoId}) => {
   const [isEdit, setIsEdit] = useState(false);
   const {save, isSaving, remove, isRemoving, isProcessing} = useTodoCommands();
   const {todo, isLoading, isSuccess} = useTodo(todoId);

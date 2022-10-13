@@ -11,7 +11,7 @@ type SingleSelectableTagSheetProps = {
   close: () => void;
 };
 
-export const SingleSelectableTagSheet: React.FC<SingleSelectableTagSheetProps> = ({
+export const SingleSelectableTagSheet: React.FC<React.PropsWithChildren<SingleSelectableTagSheetProps>> = ({
   tags,
   isVisible,
   initialSelectedTagId,

@@ -8,7 +8,7 @@ import React, {useMemo} from 'react';
 type DiffDaysOrHoursProps = {
   datetime: string;
 };
-export const DiffDaysOrHours: React.FC<DiffDaysOrHoursProps> = ({datetime}) => {
+export const DiffDaysOrHours: React.FC<React.PropsWithChildren<DiffDaysOrHoursProps>> = ({datetime}) => {
   const formattedDateOrHour = useMemo(() => {
     const now = new Date();
     const targetDatetime = new Date(datetime);

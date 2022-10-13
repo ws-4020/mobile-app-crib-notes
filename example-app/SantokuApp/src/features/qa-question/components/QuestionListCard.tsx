@@ -24,7 +24,7 @@ export type QuestionListCardProps = {
   };
 };
 
-export const QuestionListCard: FC<QuestionListCardProps> = ({
+export const QuestionListCard: FC<React.PropsWithChildren<QuestionListCardProps>> = ({
   item: {
     question: {title, content, likes, views, beginner, datetime, profile},
     navigateToQuestionDetail,

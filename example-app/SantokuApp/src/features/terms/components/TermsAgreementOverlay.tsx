@@ -16,7 +16,7 @@ type TermsAgreementOverlayType = {
 /**
  * 利用規約をOverlay表示するコンポーネント。
  */
-const Component: React.FC = ({children}) => {
+const Component: React.FC<React.PropsWithChildren<unknown>> = ({children}) => {
   const [state, setState] = useState<
     Omit<TermsAgreementOverlayProps, 'termsOfService'> & Partial<Pick<TermsAgreementOverlayProps, 'termsOfService'>>
   >({

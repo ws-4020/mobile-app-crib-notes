@@ -17,7 +17,7 @@ type Props = {
   navigateToCreateTodoDemo: () => void;
   navigateToEditTodoDemo: (todoId: number) => void;
 };
-export const ListTodoDemoPage: React.FC<Props> = ({navigateToCreateTodoDemo, navigateToEditTodoDemo}) => {
+export const ListTodoDemoPage: React.FC<React.PropsWithChildren<Props>> = ({navigateToCreateTodoDemo, navigateToEditTodoDemo}) => {
   const {
     todos,
     status,

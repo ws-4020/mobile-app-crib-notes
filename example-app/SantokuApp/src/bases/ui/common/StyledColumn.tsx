@@ -6,7 +6,7 @@ import {getSpacedChildren} from './getSpacedChildren';
 import {Box} from './index';
 import {StyledSpaceProps} from './types';
 
-export const StyledColumn: React.FC<Omit<BoxProps<RestyleTheme>, 'flexDirection'> & Partial<StyledSpaceProps>> = ({
+export const StyledColumn: React.FC<React.PropsWithChildren<Omit<BoxProps<RestyleTheme>, 'flexDirection'> & Partial<StyledSpaceProps>>> = ({
   space,
   children,
   ...rest

@@ -111,7 +111,7 @@ const addOnPressHandlerToItems = (navigation: NavigationProp<DemoStackParamList>
   };
 };
 
-export const DemoMenuScreen: React.FC<NativeStackScreenProps<DemoStackParamList, 'DemoMenu'>> = ({navigation}) => {
+export const DemoMenuScreen: React.FC<React.PropsWithChildren<NativeStackScreenProps<DemoStackParamList, 'DemoMenu'>>> = ({navigation}) => {
   const demoItems = useMemo(() => demoScreenList.map(addOnPressHandlerToItems(navigation)), [navigation]);
   return <DemoMenuPage items={demoItems} />;
 };

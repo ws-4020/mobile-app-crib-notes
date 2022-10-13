@@ -13,7 +13,7 @@ import {HomeStackParamList} from './types';
 // https://github.com/software-mansion/react-native-screens/issues/1251
 const nav = createStackNavigator<HomeStackParamList>();
 
-export const HomeStackNav: React.FC = () => {
+export const HomeStackNav: React.FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme<RestyleTheme>();
   return (
     <nav.Navigator

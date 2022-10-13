@@ -8,7 +8,7 @@ type SnackbarTemplateProps = {
   showSnackbarWithCloseButton: () => void;
 };
 
-export const SnackbarTemplate: React.FC<SnackbarTemplateProps> = ({
+export const SnackbarTemplate: React.FC<React.PropsWithChildren<SnackbarTemplateProps>> = ({
   showSnackbar,
   showSnackbarWithCloseButton,
   testID,

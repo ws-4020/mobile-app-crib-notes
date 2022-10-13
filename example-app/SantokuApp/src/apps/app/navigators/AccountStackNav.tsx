@@ -13,7 +13,7 @@ import {useLogoutButton} from './useLogoutButton';
 // https://github.com/software-mansion/react-native-screens/issues/1251
 const nav = createStackNavigator<AccountStackParamList>();
 
-export const AccountStackNav: React.FC = () => {
+export const AccountStackNav: React.FC<React.PropsWithChildren<unknown>> = () => {
   const {LogoutButton} = useLogoutButton();
   return (
     <nav.Navigator screenOptions={{headerRight: LogoutButton}}>

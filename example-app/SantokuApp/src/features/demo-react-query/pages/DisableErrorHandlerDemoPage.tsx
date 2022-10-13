@@ -11,7 +11,7 @@ const onError = () => {
   Alert.alert('カスタムエラー処理', 'エラーが発生しました');
 };
 
-export const DisableErrorHandlerDemoPage: React.FC = () => {
+export const DisableErrorHandlerDemoPage: React.FC<React.PropsWithChildren<unknown>> = () => {
   const query1 = useQuery('dummy1', queryErrorFn, {
     enabled: false,
   });

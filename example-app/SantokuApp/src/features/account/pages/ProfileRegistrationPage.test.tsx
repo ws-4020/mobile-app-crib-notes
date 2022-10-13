@@ -14,7 +14,7 @@ import {ProfileRegistrationPageProps} from './ProfileRegistrationPage';
 
 jest.mock('features/backend/apis/terms/terms');
 
-const Wrapper: React.FC = ({children}) => {
+const Wrapper: React.FC<React.PropsWithChildren<unknown>> = ({children}) => {
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>

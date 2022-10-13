@@ -8,7 +8,7 @@ export const RestyleActivityIndicator = createBox<RestyleTheme, ActivityIndicato
 export type StyledActivityIndicatorProps = BoxProps<RestyleTheme> &
   ColorProps<RestyleTheme> &
   Omit<ActivityIndicatorProps, 'color'>;
-export const StyledActivityIndicator: React.FC<StyledActivityIndicatorProps> = ({
+export const StyledActivityIndicator: React.FC<React.PropsWithChildren<StyledActivityIndicatorProps>> = ({
   color = 'activityIndicator',
   ...rest
 }) => {

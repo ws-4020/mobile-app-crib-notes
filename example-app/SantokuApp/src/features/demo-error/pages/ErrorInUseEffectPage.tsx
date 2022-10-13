@@ -7,7 +7,7 @@ export type ErrorCasePageProps = {
   navigateToErrorInUseEffectAsyncProcessPage: () => void;
 };
 
-export const ErrorInUseEffectPage: React.FC<ErrorCasePageProps> = ({
+export const ErrorInUseEffectPage: React.FC<React.PropsWithChildren<ErrorCasePageProps>> = ({
   navigateToErrorInUseEffectSyncProcess,
   navigateToErrorInUseEffectAsyncProcessPage,
 }) => {

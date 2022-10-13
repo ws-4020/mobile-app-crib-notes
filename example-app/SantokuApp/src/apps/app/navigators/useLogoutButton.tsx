@@ -11,7 +11,7 @@ type HeaderRightLogoutButtonProps = {
   isLoading: boolean;
 };
 
-const HeaderRightLogoutButton: React.FC<HeaderRightLogoutButtonProps> = ({onPress, isLoading}) => {
+const HeaderRightLogoutButton: React.FC<React.PropsWithChildren<HeaderRightLogoutButtonProps>> = ({onPress, isLoading}) => {
   return (
     <Button
       title={m('ログアウト')}
@@ -52,7 +52,7 @@ export const useLogoutButton = () => {
     }
   }, [logout]);
   // NativeStackNavigatorのheaderRightに合わせたコンポーネント。
-  const LogoutButton: React.FC<CloseThisNavigatorButtonProps> = () => (
+  const LogoutButton: React.FC<React.PropsWithChildren<CloseThisNavigatorButtonProps>> = () => (
     <HeaderRightLogoutButton onPress={onLogout} isLoading={isLoggingOut} />
   );
 

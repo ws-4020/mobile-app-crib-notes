@@ -4,7 +4,7 @@ import {LoginPage} from 'features/account/pages/LoginPage';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import React, {useCallback} from 'react';
 
-export const LoginScreen: React.FC<NativeStackScreenProps<RootStackParamList, 'Login'>> = ({
+export const LoginScreen: React.FC<React.PropsWithChildren<NativeStackScreenProps<RootStackParamList, 'Login'>>> = ({
   navigation: reactNavigation,
 }) => {
   const navigateToCreateAccount = useCallback(

@@ -43,7 +43,7 @@ import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
 
 const nav = createNativeStackNavigator<DemoStackParamList>();
 
-export const DemoStackNav: React.FC = () => {
+export const DemoStackNav: React.FC<React.PropsWithChildren<unknown>> = () => {
   const {CloseThisNavigatorButton} = useCloseThisNavigatorButton();
 
   return (

@@ -10,7 +10,7 @@ import {ReactQueryProvider} from './contexts/ReactQueryProvider';
 import {AppInitialData} from './types/AppInitialData';
 import {useAppInitialize} from './use-cases/useAppInitialize';
 
-export const AppWithInitialization: React.FC = () => {
+export const AppWithInitialization: React.FC<React.PropsWithChildren<unknown>> = () => {
   const {initialize, initializationResult} = useAppInitialize();
   const [initializationError, setInitializationError] = useState<unknown>();
 
@@ -38,10 +38,10 @@ export const AppWithInitialization: React.FC = () => {
     // アプリの初期化処理が完了した時点でrequireする。
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC<{initialData: AppInitialData}>;
+    const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC<React.PropsWithChildren<{initialData: AppInitialData}>>;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const FirebaseMessagingHandlers = require('./components/FirebaseMessagingHandlers')
-      .FirebaseMessagingHandlers as React.FC<{initialData: AppInitialData}>;
+      .FirebaseMessagingHandlers as React.FC<React.PropsWithChildren<{initialData: AppInitialData}>>;
 
     return (
       <NavigationContainer>

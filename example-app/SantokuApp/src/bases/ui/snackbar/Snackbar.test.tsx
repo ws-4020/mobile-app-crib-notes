@@ -15,7 +15,7 @@ jest.useFakeTimers();
 
 type UseSnackbarType = 'show' | 'showWithCloseButton' | 'hide';
 
-const ChildComponent: React.FC<{type: UseSnackbarType}> = ({type}) => {
+const ChildComponent: React.FC<React.PropsWithChildren<{type: UseSnackbarType}>> = ({type}) => {
   useEffect(() => {
     switch (type) {
       case 'show':

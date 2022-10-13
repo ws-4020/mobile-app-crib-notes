@@ -18,7 +18,7 @@ type TagSheetProps = {
   selectTag(tagId: string): void;
   isActive(tagId: string): boolean;
 };
-export const TagSheet: React.FC<TagSheetProps> = ({tags, isVisible, clear, decide, close, selectTag, isActive}) => {
+export const TagSheet: React.FC<React.PropsWithChildren<TagSheetProps>> = ({tags, isVisible, clear, decide, close, selectTag, isActive}) => {
   return (
     <BottomSheet isVisible={isVisible} modalBackdropProps={{onPress: close}}>
       <Box p="p16" bg="white" borderTopLeftRadius="p16" borderTopRightRadius="p16">

@@ -8,7 +8,7 @@ const infoLog = () => log.info('デモ用Infoログ');
 const warnLog = () => log.warn('デモ用Warnログ');
 const errorLog = () => log.error(new Error('デモ用Errorログ'), 'DemoErrorLog');
 
-export const LogPage: React.FC = () => {
+export const LogPage: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <LogTemplate
       testID="LogScreen"

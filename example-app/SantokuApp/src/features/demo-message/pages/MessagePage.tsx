@@ -5,6 +5,6 @@ import {messages} from '../constants/messages';
 
 export const keyExtractor = (_: unknown, index: number) => index.toString();
 
-export const MessagePage: React.FC = () => {
+export const MessagePage: React.FC<React.PropsWithChildren<unknown>> = () => {
   return <MessageTemplate testID="MessageScreen" items={messages} keyExtractor={keyExtractor} />;
 };

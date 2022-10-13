@@ -10,7 +10,7 @@ type MultipleSelectableTagSheetProps = {
   select: (tagIds: string[]) => void;
   close: () => void;
 };
-export const MultipleSelectableTagSheet: React.FC<MultipleSelectableTagSheetProps> = ({
+export const MultipleSelectableTagSheet: React.FC<React.PropsWithChildren<MultipleSelectableTagSheetProps>> = ({
   tags,
   isVisible,
   initialSelectedTagIds,

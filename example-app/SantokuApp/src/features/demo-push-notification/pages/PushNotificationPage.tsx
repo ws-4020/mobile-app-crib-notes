@@ -25,7 +25,7 @@ const channels = [
   {value: 'lowChannel', label: 'Low notification'},
 ];
 
-export const PushNotificationPage: React.FC = () => {
+export const PushNotificationPage: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [permissionAuthStatus, setPermissionAuthStatus] = useState<PermissionAuthStatusType>();
   const [token, setToken] = useState<string>();
 

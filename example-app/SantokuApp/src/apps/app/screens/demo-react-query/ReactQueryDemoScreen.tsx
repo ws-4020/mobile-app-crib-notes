@@ -3,7 +3,7 @@ import {DemoStackParamList} from 'apps/app/navigators/types';
 import {ReactQueryDemoPage} from 'features/demo-react-query/pages/ReactQueryDemoPage';
 import React, {useCallback} from 'react';
 
-export const ReactQueryDemoScreen: React.FC<NativeStackScreenProps<DemoStackParamList, 'ReactQueryDemo'>> = ({
+export const ReactQueryDemoScreen: React.FC<React.PropsWithChildren<NativeStackScreenProps<DemoStackParamList, 'ReactQueryDemo'>>> = ({
   navigation,
 }) => {
   const navigateToGetAccountsMeDemo = useCallback(() => navigation.navigate('GetAccountsMeDemo'), [navigation]);

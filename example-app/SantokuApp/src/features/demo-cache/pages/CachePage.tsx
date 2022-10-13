@@ -10,7 +10,7 @@ import {FileInfo} from '../components/FileInfo';
 import {clearCacheDir} from '../services/clearCacheDir';
 import {reloadCacheDirectoryItemsAsync} from '../services/reloadCacheDirectoryItemsAsync';
 
-export const CachePage: React.FC = () => {
+export const CachePage: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [topLevelFileInfos, setTopLevelFileInfos] = useState<FileSystem.FileInfo[]>([]);
 
   const clear = useCallback(async () => {

@@ -9,6 +9,6 @@ type MessageTemplateProps = {
   testID?: string;
 };
 
-export const MessageTemplate: React.FC<MessageTemplateProps> = ({items, keyExtractor, testID}) => {
+export const MessageTemplate: React.FC<React.PropsWithChildren<MessageTemplateProps>> = ({items, keyExtractor, testID}) => {
   return <FlatList data={items} renderItem={MessageListItem} keyExtractor={keyExtractor} testID={testID} />;
 };
