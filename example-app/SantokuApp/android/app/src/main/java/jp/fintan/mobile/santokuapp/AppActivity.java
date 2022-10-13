@@ -37,6 +37,7 @@ public class AppActivity extends ReactActivity {
   protected ReactActivityDelegate createReactActivityDelegate() {
     return new ReactActivityDelegateWrapper(this, BuildConfig.IS_NEW_ARCHITECTURE_ENABLED,
       new MainActivityDelegate(this, getMainComponentName())
+    );
   }
 
   /**
