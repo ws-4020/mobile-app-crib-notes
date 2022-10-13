@@ -11,7 +11,7 @@ export const useDateTimePickerIOS = (props: DateTimePickerIOSProps) => {
     setIsVisible(false);
   }, []);
   const onValueChange = useCallback(
-    (_, date?: Date) => {
+    (_: any, date?: Date) => {
       onSelectedItemChange?.(date);
     },
     [onSelectedItemChange],
