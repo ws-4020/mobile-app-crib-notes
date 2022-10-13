@@ -4,7 +4,7 @@ import {Button, Text} from 'react-native-elements';
 
 import {useItem} from '../services/item/useItem';
 
-export const DependentQueryDemo1Page: React.FC<React.PropsWithChildren<unknown>> = () => {
+export const DependentQueryDemo1Page: React.FC = () => {
   const {item, isIdle, isLoading, isRefetching, isSuccess, isError, refetch, reload} = useItem(1);
 
   return (

@@ -11,7 +11,7 @@ type HeaderRightLogoutButtonProps = {
   isLoading: boolean;
 };
 
-const HeaderRightLogoutButton: React.FC<React.PropsWithChildren<HeaderRightLogoutButtonProps>> = ({onPress, isLoading}) => {
+const HeaderRightLogoutButton: React.FC<HeaderRightLogoutButtonProps> = ({onPress, isLoading}) => {
   return (
     <Button
       title={m('ログアウト')}

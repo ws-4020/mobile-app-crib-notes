@@ -6,13 +6,13 @@ import {MarkdownToolbarItem} from './MarkdownToolbarItem';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
-const MarkdownToolbarDivider: React.FC<React.PropsWithChildren<unknown>> = () => (
+const MarkdownToolbarDivider: React.FC = () => (
   <Box marginLeft="p8" marginRight="p16" width={0.5} backgroundColor="divider" />
 );
 
-const Space: React.FC<React.PropsWithChildren<unknown>> = () => <Box width={8} />;
+const Space: React.FC = () => <Box width={8} />;
 
-export const MarkdownToolbar: React.FC<React.PropsWithChildren<unknown>> = () => (
+export const MarkdownToolbar: React.FC = () => (
   <Box backgroundColor="grey3" padding="p16" flexDirection="row">
     <MarkdownToolbarItem text="B" onPress={showUnderDevelopment} />
     <Space />

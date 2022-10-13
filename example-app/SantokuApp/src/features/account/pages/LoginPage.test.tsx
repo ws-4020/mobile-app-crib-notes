@@ -16,7 +16,7 @@ import {LoginPageProps} from './LoginPage';
 jest.mock('features/backend/apis/account/account');
 jest.mock('features/backend/apis/terms/terms');
 
-const Wrapper: React.FC<React.PropsWithChildren<unknown>> = ({children}) => {
+const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>

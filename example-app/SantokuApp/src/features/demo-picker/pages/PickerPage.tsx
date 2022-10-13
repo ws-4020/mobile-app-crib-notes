@@ -8,7 +8,7 @@ import {DemoDateTimePicker3} from '../components/DemoDateTimePicker3';
 import {DemoSelectPicker} from '../components/DemoSelectPicker';
 import {DemoYearMonthPicker} from '../components/DemoYearMonthPicker';
 
-export const PickerPage: React.FC<React.PropsWithChildren<unknown>> = () => {
+export const PickerPage: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text>■SelectPicker</Text>

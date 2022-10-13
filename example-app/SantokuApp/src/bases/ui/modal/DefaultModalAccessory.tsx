@@ -22,7 +22,7 @@ export type DefaultModalAccessoryProps = {
   doneTouchableContainerProps?: TouchableOpacityProps;
 };
 
-export const DefaultModalAccessory: React.FC<React.PropsWithChildren<DefaultModalAccessoryProps>> = ({
+export const DefaultModalAccessory: React.FC<DefaultModalAccessoryProps> = ({
   containerProps: {style, ...containerProps} = {},
   onDelete,
   deleteTextProps,

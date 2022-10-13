@@ -6,7 +6,7 @@ type TagClearProps = {
   onPress?: () => void;
 };
 
-export const TemplateClearChip: React.FC<React.PropsWithChildren<TagClearProps>> = ({onPress}) => (
+export const TemplateClearChip: React.FC<TagClearProps> = ({onPress}) => (
   <StyledTouchableOpacity px="p12" py="p4" onPress={onPress}>
     <Text fontSize={14} lineHeight={20}>
       {m('クリア')}

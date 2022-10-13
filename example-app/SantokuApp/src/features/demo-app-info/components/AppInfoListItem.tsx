@@ -11,7 +11,7 @@ type AppInfoListItemProps = {
   item: AppInfoItemData;
 };
 
-export const AppInfoListItem: React.FC<React.PropsWithChildren<AppInfoListItemProps>> = ({item}) => {
+export const AppInfoListItem: React.FC<AppInfoListItemProps> = ({item}) => {
   return !item.name ? null : (
     <ListItem bottomDivider>
       <ListItem.Content>

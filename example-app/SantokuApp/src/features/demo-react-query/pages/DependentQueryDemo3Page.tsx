@@ -4,7 +4,7 @@ import {Button, Text} from 'react-native-elements';
 
 import {useTodoDetails} from '../services/todo/useTodoDetails';
 
-export const DependentQueryDemo3Page: React.FC<React.PropsWithChildren<unknown>> = () => {
+export const DependentQueryDemo3Page: React.FC = () => {
   const {todoDetails, isIdle, isLoading, isRefetching, isSuccess, isError, refetch, reload} = useTodoDetails();
 
   return (

@@ -23,7 +23,7 @@ const RestyleTextInput = createRestyleComponent<TextInputProps, RestyleTheme>(
   [...textRestyleFunctions, ...boxRestyleFunctions],
   RNTextInput,
 );
-export const StyledTextInput: React.FC<React.PropsWithChildren<TextInputProps>> = ({
+export const StyledTextInput: React.FC<TextInputProps> = ({
   errorMessage,
   errorTextVariant = 'inputErrorText',
   ...rest

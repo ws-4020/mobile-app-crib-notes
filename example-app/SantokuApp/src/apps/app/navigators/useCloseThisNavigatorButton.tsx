@@ -8,7 +8,7 @@ type HeaderRightCloseButtonProps = {
   onPress: (event: GestureResponderEvent) => void;
 };
 
-const HeaderCloseButton: React.FC<React.PropsWithChildren<HeaderRightCloseButtonProps>> = ({onPress}) => {
+const HeaderCloseButton: React.FC<HeaderRightCloseButtonProps> = ({onPress}) => {
   return (
     <StyledTouchableOpacity onPress={onPress} p="p8">
       <CloseIllustration />
@@ -30,7 +30,7 @@ export const useCloseThisNavigatorButton = () => {
   const closeThisNavigator = useCallback(() => navigation.goBack(), [navigation]);
 
   // NativeStackNavigatorのheaderRightに合わせたコンポーネント。
-  const CloseThisNavigatorButton: React.FC<React.PropsWithChildren<CloseThisNavigatorButtonProps>> = ({tintColor}: {tintColor?: string}) => (
+  const CloseThisNavigatorButton: React.FC<CloseThisNavigatorButtonProps> = ({tintColor}: {tintColor?: string}) => (
     <HeaderCloseButton onPress={closeThisNavigator} />
   );
 

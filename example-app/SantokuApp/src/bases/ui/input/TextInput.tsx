@@ -13,7 +13,7 @@ export type TextInputProps = InputProps & {
   hintTextStyle?: StyleProp<TextStyle>;
 };
 
-export const TextInput: React.FC<React.PropsWithChildren<TextInputProps>> = React.forwardRef(
+export const TextInput: React.FC<TextInputProps> = React.forwardRef(
   (
     {
       showClearButton,

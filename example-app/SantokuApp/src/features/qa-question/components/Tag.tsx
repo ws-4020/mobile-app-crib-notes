@@ -6,7 +6,7 @@ type TagProps = {
   text: string;
 };
 
-export const Tag: React.FC<React.PropsWithChildren<TagProps>> = ({text, isActive}) => (
+export const Tag: React.FC<TagProps> = ({text, isActive}) => (
   <Box
     marginRight="p8"
     paddingHorizontal="p8"

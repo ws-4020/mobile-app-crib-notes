@@ -9,6 +9,6 @@ type DemoTemplateProps = {
   testID?: string;
 };
 
-export const DemoTemplate: React.FC<React.PropsWithChildren<DemoTemplateProps>> = ({items, keyExtractor, testID}) => {
+export const DemoTemplate: React.FC<DemoTemplateProps> = ({items, keyExtractor, testID}) => {
   return <FlatList testID={testID} data={items} renderItem={DemoLinkItem} keyExtractor={keyExtractor} />;
 };

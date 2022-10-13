@@ -33,7 +33,7 @@ export type TermsAgreementOverlayProps = TermsAgreementOverlayShowProps & {
   contentViewTestID?: string;
 };
 
-export const TermsAgreementOverlayComponent: React.FC<React.PropsWithChildren<TermsAgreementOverlayProps>> = ({
+export const TermsAgreementOverlayComponent: React.FC<TermsAgreementOverlayProps> = ({
   visible,
   close,
   termsOfService,

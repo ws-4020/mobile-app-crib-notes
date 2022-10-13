@@ -9,7 +9,7 @@ export type ModalAccessoryButtonProps = {
   touchableContainerProps?: Omit<TouchableOpacityProps, 'onPress'>;
   label: string;
 };
-const ModalAccessoryButtonComponent: React.FC<React.PropsWithChildren<ModalAccessoryButtonProps>> = ({
+const ModalAccessoryButtonComponent: React.FC<ModalAccessoryButtonProps> = ({
   onPress,
   defaultStyle,
   textProps: {style: textStyle, ...textProps} = {},

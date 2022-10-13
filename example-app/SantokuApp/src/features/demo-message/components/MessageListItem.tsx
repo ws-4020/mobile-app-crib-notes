@@ -11,7 +11,7 @@ type MessageListItemProps = {
   item: MessageItemData;
 };
 
-export const MessageListItem: React.FC<React.PropsWithChildren<MessageListItemProps>> = ({item}) => {
+export const MessageListItem: React.FC<MessageListItemProps> = ({item}) => {
   return !item.name ? null : (
     <ListItem bottomDivider>
       <ListItem.Content>

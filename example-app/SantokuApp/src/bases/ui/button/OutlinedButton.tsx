@@ -4,7 +4,7 @@ import {StyleSheet} from 'react-native';
 import {useAppTheme} from '../theme/useAppTheme';
 import {Button, ButtonProps} from './Button';
 
-export const OutlinedButton: React.FC<React.PropsWithChildren<ButtonProps>> = props => {
+export const OutlinedButton: React.FC<ButtonProps> = props => {
   const styles = useStyles();
   return (
     <Button

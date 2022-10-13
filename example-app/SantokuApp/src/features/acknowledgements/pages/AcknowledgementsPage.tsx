@@ -44,7 +44,7 @@ export const AcknowledgementsPage: React.VFC<AcknowledgementsPageProps> = ({navi
 };
 
 const renderItem: ListRenderItem<DependencyWithAction> = ({item}) => <ListItem {...item} />;
-const ListItem: React.FC<React.PropsWithChildren<DependencyWithAction>> = React.memo(({id, name, version, onPress}) => {
+const ListItem: React.FC<DependencyWithAction> = React.memo(({id, name, version, onPress}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.listItemTouchable}>
       <View style={styles.listItemContainer}>

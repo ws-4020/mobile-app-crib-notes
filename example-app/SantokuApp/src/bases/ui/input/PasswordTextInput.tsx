@@ -15,7 +15,7 @@ export type RightIconsProps = {
   passwordVisibilityButtonSize?: number;
 };
 
-const RightIcons: React.FC<React.PropsWithChildren<RightIconsProps>> = ({
+const RightIcons: React.FC<RightIconsProps> = ({
   color,
   showClearButton,
   onClearButtonPress,
@@ -59,7 +59,7 @@ export type PasswordTextInputProps = Omit<TextInputProps, 'iconSize'> & {
   passwordVisibilityButtonSize?: number;
 };
 
-export const PasswordTextInput: React.FC<React.PropsWithChildren<PasswordTextInputProps>> = React.forwardRef(
+export const PasswordTextInput: React.FC<PasswordTextInputProps> = React.forwardRef(
   ({showClearButton, onClearButtonPress, clearButtonSize, passwordVisibilityButtonSize, iconColor, ...props}, ref) => {
     const {isVisible: passwordVisible, toggleVisibility: togglePasswordVisibility} = useVisibility();
 

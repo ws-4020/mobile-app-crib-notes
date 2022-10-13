@@ -35,7 +35,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 declare const global: {HermesInternal: null | object};
-export const InstructionsPage: React.FC<React.PropsWithChildren<unknown>> = () => {
+export const InstructionsPage: React.FC = () => {
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
       <Header />

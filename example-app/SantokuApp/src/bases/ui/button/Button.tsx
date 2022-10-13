@@ -18,7 +18,7 @@ export type ButtonProps = RNEButtonProps & {
   size?: ButtonSizeType;
 };
 
-export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = props => {
+export const Button: React.FC<ButtonProps> = props => {
   const {size, ...buttonProps} = props;
   const widthStyle = {width: buttonWidthSizes[size ?? 'small']};
   const buttonStyle = StyleSheet.flatten([styles.button, widthStyle, buttonProps.buttonStyle]);

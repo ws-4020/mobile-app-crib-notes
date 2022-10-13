@@ -12,7 +12,7 @@ import {TermsAgreementOverlay} from './TermsAgreementOverlay';
 
 jest.useFakeTimers();
 
-const Wrapper: React.FC<React.PropsWithChildren<unknown>> = ({children}) => {
+const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>
@@ -26,7 +26,7 @@ beforeAll(async () => {
   await loadMessages(new BundledMessagesLoader());
 });
 
-const ChildComponent: React.FC<React.PropsWithChildren<unknown>> = () => {
+const ChildComponent: React.FC = () => {
   useEffect(() => {
     TermsAgreementOverlay.show({termsOfService: {version: '1.0.0', url: AppConfig.termsUrl}});
   }, []);

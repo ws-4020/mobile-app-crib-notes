@@ -11,7 +11,7 @@ type LogTemplateProps = {
   testID?: string;
 };
 
-export const LogTemplate: React.FC<React.PropsWithChildren<LogTemplateProps>> = ({traceLog, debugLog, infoLog, warnLog, errorLog, testID}) => {
+export const LogTemplate: React.FC<LogTemplateProps> = ({traceLog, debugLog, infoLog, warnLog, errorLog, testID}) => {
   return (
     <View style={styles.container} testID={testID}>
       <Button onPress={() => traceLog()} title="Traceログを出力" />

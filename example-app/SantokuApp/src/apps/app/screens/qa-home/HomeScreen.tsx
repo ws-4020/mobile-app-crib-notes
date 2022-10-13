@@ -5,10 +5,12 @@ import React, {useCallback} from 'react';
 
 import {AuthenticatedStackParamList, HomeStackParamList} from '../../navigators/types';
 
-export const HomeScreen: React.FC<React.PropsWithChildren<CompositeScreenProps<
-  NativeStackScreenProps<HomeStackParamList, 'Home'>,
-  NativeStackScreenProps<AuthenticatedStackParamList, 'QuestionAndEventStackNav'>
->>> = ({navigation}) => {
+export const HomeScreen: React.FC<
+  CompositeScreenProps<
+    NativeStackScreenProps<HomeStackParamList, 'Home'>,
+    NativeStackScreenProps<AuthenticatedStackParamList, 'QuestionAndEventStackNav'>
+  >
+> = ({navigation}) => {
   const navigateToQuestionDetail = useCallback(
     (questionId: string) => navigation.navigate('QuestionDetail', {questionId}),
     [navigation],

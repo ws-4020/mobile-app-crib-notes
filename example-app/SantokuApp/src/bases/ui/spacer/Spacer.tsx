@@ -7,7 +7,7 @@ export type SpacerProps = {
   heightRatio?: number;
 } & ViewProps;
 
-export const Spacer: React.FC<React.PropsWithChildren<SpacerProps>> = React.memo(({widthRatio = 0, heightRatio = 0, style, ...viewProps}) => {
+export const Spacer: React.FC<SpacerProps> = React.memo(({widthRatio = 0, heightRatio = 0, style, ...viewProps}) => {
   const rect = useSafeAreaFrame();
   const spacing = useMemo(() => spacingFactory(rect, widthRatio, heightRatio), [rect, heightRatio, widthRatio]);
   const composedStyle = StyleSheet.compose(spacing, style);

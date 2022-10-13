@@ -17,7 +17,7 @@ const getFileNameFromUri = (uri: string) => {
 
 const maxDepth = 10;
 
-const FileInfo: React.FC<React.PropsWithChildren<FileInfoProps>> = ({fileInfo, currentDepth}) => {
+const FileInfo: React.FC<FileInfoProps> = ({fileInfo, currentDepth}) => {
   const [childFileInfos, setChildFileInfos] = useState<FileSystem.FileInfo[]>([]);
 
   const isViewChildren = useMemo(() => {

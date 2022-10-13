@@ -81,7 +81,7 @@ const useRootStackNavigator = (initialData: AppInitialData) => {
   );
 };
 
-export const RootStackNav: React.FC<React.PropsWithChildren<{initialData: AppInitialData}>> = ({initialData}) => {
+export const RootStackNav: React.FC<{initialData: AppInitialData}> = ({initialData}) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   useEffect(() => {

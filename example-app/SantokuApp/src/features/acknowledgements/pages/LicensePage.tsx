@@ -53,14 +53,14 @@ export const LicensePage: React.VFC<LicensePageProps> = ({dependency}) => {
   );
 };
 
-const FileName: React.FC<React.PropsWithChildren<{fileName?: string}>> = ({fileName}) => {
+const FileName: React.FC<{fileName?: string}> = ({fileName}) => {
   return (
     <View style={styles.fileNameContainer}>
       <Text style={styles.fileNameText}>{fileName}</Text>
     </View>
   );
 };
-const FileContent: React.FC<React.PropsWithChildren<{isLoading: boolean; content?: string}>> = ({isLoading, content}) => {
+const FileContent: React.FC<{isLoading: boolean; content?: string}> = ({isLoading, content}) => {
   return (
     <View style={styles.fileContentContainer}>
       {isLoading ? (

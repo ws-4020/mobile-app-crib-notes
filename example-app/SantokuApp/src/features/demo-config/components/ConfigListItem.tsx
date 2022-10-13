@@ -11,7 +11,7 @@ type ConfigListItemProps = {
   item: ConfigItemData;
 };
 
-export const ConfigListItem: React.FC<React.PropsWithChildren<ConfigListItemProps>> = ({item}) => {
+export const ConfigListItem: React.FC<ConfigListItemProps> = ({item}) => {
   return !item.name ? null : (
     <ListItem bottomDivider>
       <ListItem.Content>

@@ -5,7 +5,7 @@ import React from 'react';
 type ViewWithCountProps = {
   count: number;
 };
-export const ViewWithCount: React.FC<React.PropsWithChildren<ViewWithCountProps>> = ({count}) => {
+export const ViewWithCount: React.FC<ViewWithCountProps> = ({count}) => {
   return (
     <Box flexDirection="row" alignItems="center">
       <VisibilityIllustration />

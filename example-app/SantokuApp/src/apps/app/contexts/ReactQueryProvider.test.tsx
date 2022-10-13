@@ -6,7 +6,7 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {ReactQueryProvider} from './ReactQueryProvider';
 
-const Wrapper: React.FC<React.PropsWithChildren<unknown>> = ({children}) => {
+const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   const queryClient = new QueryClient();
   return (
     <>

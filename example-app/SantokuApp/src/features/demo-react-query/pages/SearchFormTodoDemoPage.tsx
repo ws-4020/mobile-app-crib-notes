@@ -7,7 +7,7 @@ import {Button} from 'react-native-elements';
 import {useTodoSearchForm, TodoSearchFormValues} from '../forms/useTodoSearchForm';
 import {useTodosPage} from '../services/todo/useTodosPage';
 
-export const SearchFormTodoDemoPage: React.FC<React.PropsWithChildren<unknown>> = () => {
+export const SearchFormTodoDemoPage: React.FC = () => {
   const {isFetching, isError, todos, setPageParams} = useTodosPage();
   const onSubmit = useCallback(
     (values: TodoSearchFormValues) => setPageParams({page: Number(values.pageNo)}),

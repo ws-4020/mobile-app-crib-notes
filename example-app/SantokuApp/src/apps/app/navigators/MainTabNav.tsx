@@ -20,7 +20,7 @@ const getInitialRouteName = (initialData: AppInitialData): keyof MainTabParamLis
 type Props = {
   initialData: AppInitialData;
 };
-const Component: React.FC<React.PropsWithChildren<Props>> = ({initialData}) => {
+const Component: React.FC<Props> = ({initialData}) => {
   const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
   const theme = useTheme<RestyleTheme>();
 

@@ -9,7 +9,7 @@ export type PickerAccessoryButtonProps = {
   touchableContainerProps?: Omit<TouchableOpacityProps, 'onPress'>;
   label: string;
 };
-const PickerAccessoryButtonComponent: React.FC<React.PropsWithChildren<PickerAccessoryButtonProps>> = ({
+const PickerAccessoryButtonComponent: React.FC<PickerAccessoryButtonProps> = ({
   onPress,
   defaultStyle,
   textProps: {style: textStyle, ...textProps} = {},

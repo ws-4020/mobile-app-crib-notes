@@ -4,7 +4,7 @@ import {Button, Text} from 'react-native-elements';
 
 import {useTodos} from '../services/todo/useTodos';
 
-export const DisabledQueryDemoPage: React.FC<React.PropsWithChildren<unknown>> = () => {
+export const DisabledQueryDemoPage: React.FC = () => {
   const {todos, status, isIdle, isLoading, isSuccess, isError, refetch, reset, queryOption, setQueryOption} = useTodos(
     undefined,
     {enabled: false},

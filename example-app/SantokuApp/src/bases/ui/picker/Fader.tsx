@@ -30,7 +30,7 @@ export type FaderProps = {
 
 const DEFAULT_FADE_SIZE = 50;
 
-export const Fader: React.FC<React.PropsWithChildren<FaderProps>> = ({
+export const Fader: React.FC<FaderProps> = ({
   size = DEFAULT_FADE_SIZE,
   position = FaderPosition.TOP,
   visible = true,

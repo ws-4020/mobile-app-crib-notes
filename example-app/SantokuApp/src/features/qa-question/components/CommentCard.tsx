@@ -12,7 +12,7 @@ const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
 export type CommentCardProps = Comment & {liked?: boolean};
 
-export const CommentCard: FC<React.PropsWithChildren<CommentCardProps>> = ({content, likes, profile, datetime, liked}) => {
+export const CommentCard: FC<CommentCardProps> = ({content, likes, profile, datetime, liked}) => {
   const likeColor = useMemo(() => (liked ? 'blue' : 'grey1'), [liked]);
   return (
     <StyledRow flex={1} space="p16">

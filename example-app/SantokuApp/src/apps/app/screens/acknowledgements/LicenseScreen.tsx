@@ -3,6 +3,6 @@ import {DemoStackParamList} from 'apps/app/navigators/types';
 import {LicensePage} from 'features/acknowledgements/pages/LicensePage';
 import React from 'react';
 
-export const LicenseScreen: React.FC<React.PropsWithChildren<NativeStackScreenProps<DemoStackParamList, 'License'>>> = ({route}) => {
+export const LicenseScreen: React.FC<NativeStackScreenProps<DemoStackParamList, 'License'>> = ({route}) => {
   return <LicensePage dependency={route.params.dependency} />;
 };

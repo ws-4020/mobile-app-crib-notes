@@ -7,7 +7,7 @@ type ViewButtonWithCountProps = {
   onPress: () => void;
   count: number;
 };
-export const ViewButtonWithCount: React.FC<React.PropsWithChildren<ViewButtonWithCountProps>> = ({onPress, count}) => {
+export const ViewButtonWithCount: React.FC<ViewButtonWithCountProps> = ({onPress, count}) => {
   return (
     <StyledRow space="p8" alignItems="center">
       <StyledTouchableOpacity onPress={onPress}>

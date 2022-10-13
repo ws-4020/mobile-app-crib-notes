@@ -36,7 +36,7 @@ jest.mock('bases/date/formatDiffInDaysOrHours', () => {
   };
 });
 
-const Wrapper: React.FC<React.PropsWithChildren<unknown>> = ({children}) => {
+const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>

@@ -22,7 +22,7 @@ export type DefaultPickerAccessoryProps = {
   doneTouchableContainerProps?: TouchableOpacityProps;
 };
 
-export const DefaultPickerAccessory: React.FC<React.PropsWithChildren<DefaultPickerAccessoryProps>> = ({
+export const DefaultPickerAccessory: React.FC<DefaultPickerAccessoryProps> = ({
   containerProps: {style, ...containerProps} = {},
   onDelete,
   deleteTextProps,

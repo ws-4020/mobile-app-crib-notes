@@ -7,7 +7,7 @@ import React from 'react';
 type AddCommentButtonType = {
   onPress: () => void;
 };
-export const AddCommentButton: React.FC<React.PropsWithChildren<AddCommentButtonType>> = ({onPress}) => {
+export const AddCommentButton: React.FC<AddCommentButtonType> = ({onPress}) => {
   return (
     <StyledTouchableOpacity py="p16" onPress={onPress}>
       <StyledRow space="p8" justifyContent="center" alignItems="center">

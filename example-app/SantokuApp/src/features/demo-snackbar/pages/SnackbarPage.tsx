@@ -4,7 +4,7 @@ import React, {useCallback} from 'react';
 
 import {SnackbarTemplate} from '../components/SnackbarTemplate';
 
-export const SnackbarPage: React.FC<React.PropsWithChildren<unknown>> = () => {
+export const SnackbarPage: React.FC = () => {
   const showSnackbar = useCallback(() => {
     Snackbar.show(m('app.webview.onError'));
   }, []);

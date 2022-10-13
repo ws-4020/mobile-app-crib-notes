@@ -5,7 +5,7 @@ import React from 'react';
 type AnswerWithCountProps = {
   count: number;
 };
-export const AnswerWithCount: React.FC<React.PropsWithChildren<AnswerWithCountProps>> = ({count}) => {
+export const AnswerWithCount: React.FC<AnswerWithCountProps> = ({count}) => {
   return (
     <Box flexDirection="row" alignItems="center">
       <QuestionAnswerIllustration color="grey1" />

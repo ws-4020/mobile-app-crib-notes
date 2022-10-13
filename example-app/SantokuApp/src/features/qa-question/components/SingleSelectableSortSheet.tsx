@@ -18,7 +18,7 @@ type SingleSelectableSortSheetProps = {
   select: (sort?: GetListQuestionsSort) => void;
   close: () => void;
 };
-export const SingleSelectableSortSheet: React.FC<React.PropsWithChildren<SingleSelectableSortSheetProps>> = ({
+export const SingleSelectableSortSheet: React.FC<SingleSelectableSortSheetProps> = ({
   isVisible,
   initialSelectedSort,
   select,

@@ -8,7 +8,7 @@ export type NavigationPageProps = {
   navigateToAccountStack: () => void;
 };
 
-export const NavigationPage: React.FC<React.PropsWithChildren<NavigationPageProps>> = ({
+export const NavigationPage: React.FC<NavigationPageProps> = ({
   navigateToSnackbarDemo,
   navigateToHomeStack,
   navigateToAccountStack,

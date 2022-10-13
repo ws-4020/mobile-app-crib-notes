@@ -13,7 +13,7 @@ import {LikeWithCount} from './LikeWithCount';
 
 export type EventListCardProps = {event: Event};
 
-export const EventListCard: FC<React.PropsWithChildren<EventListCardProps>> = ({event: {title, likes, profile}}) => {
+export const EventListCard: FC<EventListCardProps> = ({event: {title, likes, profile}}) => {
   const {width: windowWidth} = useSafeAreaFrame();
   const theme = useTheme<RestyleTheme>();
   return (

@@ -12,7 +12,7 @@ export type DemoLinkItemData = {
   onPress: (event: GestureResponderEvent) => void;
 };
 
-export const DemoLinkItem: React.FC<React.PropsWithChildren<DemoLinkItemProps>> = ({item: {title, onPress}}) => (
+export const DemoLinkItem: React.FC<DemoLinkItemProps> = ({item: {title, onPress}}) => (
   <ListItem bottomDivider onPress={onPress}>
     <ListItem.Content>
       <ListItem.Title>{title}</ListItem.Title>

@@ -5,6 +5,6 @@ import {info} from '../constants/info';
 
 export const keyExtractor = (_: unknown, index: number) => index.toString();
 
-export const ConfigPage: React.FC<React.PropsWithChildren<unknown>> = () => {
+export const ConfigPage: React.FC = () => {
   return <ConfigTemplate testID="ConfigScreen" items={info} keyExtractor={keyExtractor} />;
 };

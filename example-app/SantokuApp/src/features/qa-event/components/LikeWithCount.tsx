@@ -5,7 +5,7 @@ import React from 'react';
 type LikeWithCountProps = {
   count: number;
 };
-export const LikeWithCount: React.FC<React.PropsWithChildren<LikeWithCountProps>> = ({count}) => {
+export const LikeWithCount: React.FC<LikeWithCountProps> = ({count}) => {
   return (
     <Box flexDirection="row" alignItems="center">
       <ThumbUpIllustration color="grey1" size="p24" />

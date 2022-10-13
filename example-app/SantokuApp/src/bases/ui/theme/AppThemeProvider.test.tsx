@@ -15,7 +15,7 @@ const wrapper = (value: AppTheme) => {
 };
 
 describe('AppThemeProvider', () => {
-  const ChildComponent: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const ChildComponent: React.FC = () => {
     return <Text testID="test">test</Text>;
   };
 

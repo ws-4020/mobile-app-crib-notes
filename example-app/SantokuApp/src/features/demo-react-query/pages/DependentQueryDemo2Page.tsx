@@ -4,7 +4,7 @@ import {Button, Text} from 'react-native-elements';
 
 import {useItemInfo} from '../services/item/useItemInfo';
 
-export const DependentQueryDemo2Page: React.FC<React.PropsWithChildren<unknown>> = () => {
+export const DependentQueryDemo2Page: React.FC = () => {
   const {data: itemInfo, isIdle, isLoading, isRefetching, isSuccess, isError, refetch, reload} = useItemInfo(1);
 
   return (

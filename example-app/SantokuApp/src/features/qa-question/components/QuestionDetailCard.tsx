@@ -31,7 +31,7 @@ export type QuestionDetailCardProps = QuestionAndAnswerQuestion & {
   likedCommentIds?: string[];
 };
 
-export const QuestionDetailCard: FC<React.PropsWithChildren<QuestionDetailCardProps>> = ({
+export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
   question: {
     questionId,
     title,
