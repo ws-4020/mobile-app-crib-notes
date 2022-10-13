@@ -1,4 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
+import {RuntimeError} from 'bases/core/errors/RuntimeError';
 import {AccountDataLoader} from 'features/account/components/AccountDataLoader';
 import {AutoLogin} from 'features/account/components/AutoLogin';
 import {AppUpdatesChecker} from 'features/app-updates/components/AppUpdatesChecker';
@@ -24,7 +25,7 @@ export const AppWithInitialization: React.FC = () => {
   useEffect(() => {
     // 初期化処理に失敗した場合はアプリをクラッシュ扱いで終了
     if (initializationError) {
-      throw initializationError;
+      throw new RuntimeError('Failed to initialize app.', initializationError);
     }
   }, [initializationError]);
 
