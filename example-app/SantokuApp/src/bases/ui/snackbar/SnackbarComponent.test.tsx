@@ -1,5 +1,4 @@
-import {act} from '@testing-library/react-hooks';
-import {render, screen, waitFor} from '@testing-library/react-native';
+import {render, screen, waitFor, act} from '@testing-library/react-native';
 import React from 'react';
 import {TextStyle, ViewStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';
@@ -19,7 +18,7 @@ const FORCE_FADE_OUT_DURATION = 300;
 const HIDE_FADE_OUT_DURATION = 300;
 
 describe('SnackbarComponent', () => {
-  it('SnackbarComponentが正常にrenderできることを確認', () => {
+  it('SnackbarComponentが正常にrenderできることを確認', async () => {
     render(<SnackbarComponent message="テストメッセージ" />);
 
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
@@ -27,13 +26,13 @@ describe('SnackbarComponent', () => {
     expect(getStyle<ViewStyle>(screen.getByTestId('snackbarAnimatedView')).opacity).toBe(0);
     expect(screen).toMatchSnapshot('render直後');
 
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(FADE_IN_DURATION);
     });
     expect(getStyle<ViewStyle>(screen.getByTestId('snackbarAnimatedView')).opacity).toBe(1);
     expect(screen).toMatchSnapshot('フェードイン後');
 
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(AUTO_HIDE_DURATION + FADE_OUT_DURATION);
     });
     expect(screen.queryByTestId('snackbarAnimatedView')).toBeNull();
@@ -73,7 +72,7 @@ describe('SnackbarComponent', () => {
     });
   });
 
-  it('SnackbarComponentの表示後に同一のpropsを指定した場合、SnackbarComponentが表示されないことを確認', () => {
+  it('SnackbarComponentの表示後に同一のpropsを指定した場合、SnackbarComponentが表示されないことを確認', async () => {
     const props = {
       message: 'テストメッセージ',
       messageTextStyle: {color: 'white'},
@@ -92,7 +91,7 @@ describe('SnackbarComponent', () => {
 
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(FADE_IN_DURATION + AUTO_HIDE_DURATION + FADE_OUT_DURATION);
     });
 
@@ -101,7 +100,7 @@ describe('SnackbarComponent', () => {
     expect(screen.queryByText('テストメッセージ')).toBeNull();
   });
 
-  it('SnackbarComponentの表示後にTimestamp以外同一のpropsを指定した場合、SnackbarComponentが表示されることを確認', () => {
+  it('SnackbarComponentの表示後にTimestamp以外同一のpropsを指定した場合、SnackbarComponentが表示されることを確認', async () => {
     const props = {
       message: 'テストメッセージ',
       messageTextStyle: {color: 'white'},
@@ -119,7 +118,7 @@ describe('SnackbarComponent', () => {
 
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(FADE_IN_DURATION + AUTO_HIDE_DURATION + FADE_OUT_DURATION);
     });
 

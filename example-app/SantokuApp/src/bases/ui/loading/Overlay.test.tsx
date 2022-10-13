@@ -1,5 +1,4 @@
-import {act} from '@testing-library/react-hooks';
-import {render, screen} from '@testing-library/react-native';
+import {render, screen, act} from '@testing-library/react-native';
 import React from 'react';
 import {Text, ViewStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';
@@ -19,7 +18,7 @@ const ChildComponent = () => {
 const FADE_DURATION = 200;
 
 describe('Overlay', () => {
-  it('Overlayが正常にrenderできることを確認', () => {
+  it('Overlayが正常にrenderできることを確認', async () => {
     render(
       <Overlay visible>
         <ChildComponent />
@@ -32,7 +31,7 @@ describe('Overlay', () => {
     expect(getStyle<ViewStyle>(screen.getByTestId('overlayAnimatedView')).opacity).toBe(0);
     expect(screen).toMatchSnapshot('render直後');
 
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(FADE_DURATION);
     });
 
@@ -45,7 +44,7 @@ describe('Overlay', () => {
       </Overlay>,
     );
 
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(FADE_DURATION);
     });
 
@@ -53,7 +52,7 @@ describe('Overlay', () => {
     expect(screen).toMatchSnapshot('フェードアウト後');
   });
 
-  it('Overlayに指定したpropsがrenderに反映されていることを確認', () => {
+  it('Overlayに指定したpropsがrenderに反映されていることを確認', async () => {
     const onHideEnd = jest.fn();
     // fadeDurationはテストコードでアニメーション時間を調整できないため検証対象外
     render(
@@ -62,7 +61,7 @@ describe('Overlay', () => {
       </Overlay>,
     );
 
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(FADE_DURATION);
     });
 
