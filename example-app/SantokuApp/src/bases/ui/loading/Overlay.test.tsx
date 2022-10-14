@@ -5,6 +5,11 @@ import {ReactTestInstance} from 'react-test-renderer';
 
 import {Overlay} from './Overlay';
 
+// If advancing a timer changes the state of a component, the timer must be run within an act.
+// However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+// For convenience, disable the relevant rule in this file.
+/* eslint-disable @typescript-eslint/no-floating-promises */
+
 jest.useFakeTimers();
 
 function getStyle<T>(instance: ReactTestInstance) {
@@ -18,7 +23,7 @@ const ChildComponent = () => {
 const FADE_DURATION = 200;
 
 describe('Overlay', () => {
-  it('Overlayが正常にrenderできることを確認', async () => {
+  it('Overlayが正常にrenderできることを確認', () => {
     render(
       <Overlay visible>
         <ChildComponent />
@@ -31,7 +36,7 @@ describe('Overlay', () => {
     expect(getStyle<ViewStyle>(screen.getByTestId('overlayAnimatedView')).opacity).toBe(0);
     expect(screen).toMatchSnapshot('render直後');
 
-    await act(() => {
+    act(() => {
       jest.advanceTimersByTime(FADE_DURATION);
     });
 
@@ -44,7 +49,7 @@ describe('Overlay', () => {
       </Overlay>,
     );
 
-    await act(() => {
+    act(() => {
       jest.advanceTimersByTime(FADE_DURATION);
     });
 
