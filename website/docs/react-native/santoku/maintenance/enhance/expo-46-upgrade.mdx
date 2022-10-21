@@ -118,7 +118,7 @@ EAS Updateが正式にリリースされています。Classic Updateより速�
 - `npm i -g expo-cli`を実行して、Expo CLI（旧Expo CLI）のバージョンを最新化
 - `expo-cli upgrade`を実行して、Expo SDKをアップグレード
 - [依存ライブラリのバージョン不整合を解消](#依存ライブラリのバージョン不整合を解消)
-- `package-lock.json`を削除して、`npm i`を実行
+- `node_modules`、`package-lock.json`を削除して、`npm i`を実行
 - [expo-template-bare-minimumの更新履歴を確認](#expo-template-bare-minimumの更新履歴を確認)
 - [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.68.2&to=0.69.5)を参照して、React Nativeの更新を確認
 - [Expoの更新履歴](https://github.com/expo/expo/blob/main/CHANGELOG.md#4600--2022-07-19)を確認
@@ -129,7 +129,7 @@ EAS Updateが正式にリリースされています。Classic Updateより速�
 - [TSCのエラー対応](#tscのエラー対応)
 - [React Native Firebase 15の対応](#react-native-firebase-15の対応)
 - [既存のパッチファイルの更新](#既存のパッチファイルの更新)
-- `npm run pod-install`を実行して`Podfile.lock`の最新化
+- `Pods`、`Podfile.lock`を削除して、`npm run pod-install`を実行
 - [開発・CIに使用しているツールのバージョンを更新](#開発ciに使用しているツールのバージョンを更新)
 
 アップグレードを実施したPull Requestは[こちら](https://github.com/ws-4020/mobile-app-crib-notes/pull/956)です。
