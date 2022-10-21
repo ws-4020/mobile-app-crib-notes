@@ -4,6 +4,8 @@ import {FlatList, FlatListProps} from 'react-native';
 
 import {RestyleTheme} from '../theme/restyleTheme';
 
+// createBoxでは、FLatListPropsのジェネリクスの型定義ができない
+// https://github.com/Shopify/restyle/issues/166
 export const BaseFlatList = createBox<RestyleTheme, FlatListProps<any>>(FlatList);
 
 type StyledFlatListProps<T> = BoxProps<RestyleTheme> & FlatListProps<T>;
