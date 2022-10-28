@@ -19,5 +19,5 @@ const StyledFlatListComponent = <T extends unknown>(
 );
 
 export const StyledFlatList = React.forwardRef(StyledFlatListComponent) as <T>(
-  props: BoxProps<RestyleTheme> & FlatListProps<T> & {ref?: React.ForwardedRef<FlatList>},
+  props: StyledFlatListProps<T> & {ref?: React.ForwardedRef<FlatList>},
 ) => ReturnType<typeof StyledFlatListComponent>;
