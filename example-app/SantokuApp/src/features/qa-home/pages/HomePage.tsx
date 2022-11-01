@@ -6,6 +6,7 @@ import {useFocusEffect} from 'bases/focus-manager/useFocusEffect';
 import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledActivityIndicator} from 'bases/ui/common/StyledActivityIndicator';
+import {StyledFlatList} from 'bases/ui/common/StyledFlatList';
 import {StyledRow} from 'bases/ui/common/StyledRow';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {Fab} from 'bases/ui/fab/Fab';
@@ -73,7 +74,7 @@ export type HomePageProps = {
   setHeader: (options: {headerLeft: () => React.ReactNode; headerRight: () => React.ReactNode}) => void;
 };
 
-export const HomePage: React.VFC<HomePageProps> = ({
+export const HomePage: React.FC<HomePageProps> = ({
   navigateToQuestionAndEventPost,
   navigateToQuestionDetail,
   setHeader,
@@ -166,8 +167,7 @@ export const HomePage: React.VFC<HomePageProps> = ({
 
   return (
     <Box flex={1} testID="HomePage">
-      <FlatList
-        ref={flatListRef}
+      <StyledFlatList
         showsVerticalScrollIndicator={false}
         refreshing={isPullToRefreshing}
         onRefresh={pullToRefresh}
