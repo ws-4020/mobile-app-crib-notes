@@ -6,6 +6,7 @@ import {useFocusEffect} from 'bases/focus-manager/useFocusEffect';
 import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledActivityIndicator} from 'bases/ui/common/StyledActivityIndicator';
+import {StyledFlatList} from 'bases/ui/common/StyledFlatList';
 import {StyledRow} from 'bases/ui/common/StyledRow';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {Fab} from 'bases/ui/fab/Fab';
@@ -26,7 +27,7 @@ import {SingleSelectableTagSheet} from 'features/qa-question/components/SingleSe
 import {useTags} from 'features/qa-question/services/useTags';
 import {useShowTermsAgreementOverlay} from 'features/terms/use-cases/useShowTermsAgreementOverlay';
 import React, {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
-import {FlatList, Platform, ScrollView} from 'react-native';
+import {FlatList, Platform} from 'react-native';
 
 import {useEventsAndQuestions} from '../services/useEventsAndQuestions';
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
@@ -73,7 +74,7 @@ export type HomePageProps = {
   setHeader: (options: {headerLeft: () => React.ReactNode; headerRight: () => React.ReactNode}) => void;
 };
 
-export const HomePage: React.VFC<HomePageProps> = ({
+export const HomePage: React.FC<HomePageProps> = ({
   navigateToQuestionAndEventPost,
   navigateToQuestionDetail,
   setHeader,
@@ -156,8 +157,8 @@ export const HomePage: React.VFC<HomePageProps> = ({
   );
   const tagIconColor = useMemo(() => (selectedTagId ? 'blue' : 'black'), [selectedTagId]);
 
-  const scrollViewRef = useRef<ScrollView>();
-  const scrollToTop = useCallback(() => scrollViewRef.current?.scrollTo({y: 0, animated: true}), []);
+  const flatListRef = useRef<FlatList>(null);
+  const scrollToTop = useCallback(() => flatListRef.current?.scrollToOffset({offset: 0, animated: true}), []);
 
   const questionItems = useMemo(
     () => questions?.map(addOnPressHandlerToQuestions(navigateToQuestionDetail)),
@@ -166,7 +167,7 @@ export const HomePage: React.VFC<HomePageProps> = ({
 
   return (
     <Box flex={1} testID="HomePage">
-      <FlatList
+      <StyledFlatList
         showsVerticalScrollIndicator={false}
         refreshing={isPullToRefreshing}
         onRefresh={pullToRefresh}
