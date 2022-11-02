@@ -73,7 +73,7 @@
         'com.android.tools.build:gradle',
         // expo-template-bare-minimum
         'de.undercouch:gradle-download-task',
-        // jest -> @testing-library/react-native
+        // @testing-library/react-native -> jest
         '@testing-library/react-native',
       ],
       matchPackagePrefixes: [
