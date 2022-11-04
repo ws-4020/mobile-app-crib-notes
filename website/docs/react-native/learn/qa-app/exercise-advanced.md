@@ -81,22 +81,3 @@ SantokuAppの`src/bases/ui/theme`を参考に、テーマを追加します。
 
 - 入力画面で、マークダウン書式での入力が可能なようにしてください。
 
----
-
-## 個別部品　応用編　【TODO】：当章以降は別ページとして切り出す
-
-## 複雑なアニメーション
-
-## ディープリンク
-
-[ディープリンク](/react-native/santoku/application-architecture/deep-link/overview)
-
-## プッシュ通知
-
-[プッシュ通知](/react-native/santoku/application-architecture/push-notification/overview)
-
-## カメラ
-
-## 位置情報
-
-## グラフ表示
