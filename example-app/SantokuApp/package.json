@@ -7,7 +7,7 @@
     "ios": "react-native run-ios --scheme DevSantokuApp --configuration Debug",
     "ios:debugAdvanced": "react-native run-ios --scheme DevSantokuApp --configuration DebugAdvanced",
     "web": "expo start --web",
-    "start": "react-native start",
+    "start": "expo start --dev-client",
     "test": "jest --detectOpenHandles --runInBand",
     "test:coverage": "jest --detectOpenHandles --runInBand --coverage",
     "test:report": "jest --detectOpenHandles --runInBand --reporters=default --reporters=jest-junit --coverage",
@@ -49,7 +49,7 @@
     "@react-navigation/stack": "~6.3.0",
     "@shopify/restyle": "^2.1.0",
     "axios": "^0.27.0",
-    "expo": "^46.0.0",
+    "expo": "~46.0.16",
     "expo-crypto": "~11.0.0",
     "expo-keep-awake": "~10.2.0",
     "expo-local-authentication": "~12.3.0",
@@ -60,7 +60,7 @@
     "msw": "^0.47.0",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "react-native": "0.69.5",
+    "react-native": "0.69.6",
     "react-native-config": "~1.4.0",
     "react-native-elements": "~3.4.0",
     "react-native-gesture-handler": "~2.5.0",
@@ -72,7 +72,8 @@
     "react-native-web": "~0.18.7",
     "react-native-webview": "11.23.0",
     "react-query": "^3.34.8",
-    "yup": "~0.32.11"
+    "yup": "~0.32.11",
+    "expo-status-bar": "~1.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
@@ -109,5 +110,6 @@
     "ancestorSeparator": " › ",
     "outputName": "jest-junit.xml"
   },
-  "private": true
+  "private": true,
+  "version": "1.0.0"
 }
