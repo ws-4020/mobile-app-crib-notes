@@ -30,5 +30,15 @@ module.exports = ({config}) => {
       softwareKeyboardLayoutMode: 'resize',
     },
     plugins: [['@react-native-firebase/app'], ['@react-native-firebase/crashlytics']],
+    extra: {
+      termsUrl: 'https://www.tis.co.jp/termsofuse/',
+      santokuAppBackendUrl: 'https://santoku-app-backend.azurewebsites.net',
+      requestTimeout: 60000,
+      appStoreAppUrl: 'itms-apps://itunes.apple.com/jp/app/{appleAppId}',
+      googlePlayAppUrl: 'https://play.google.com/store/apps/details?id={applicationId}',
+      mobileAppCribNotesWebsiteUrl: 'https://ws-4020.github.io/mobile-app-crib-notes',
+      mobileAppCribNotesRepositoryUrl: 'https://github.com/ws-4020/mobile-app-crib-notes',
+      mswEnabled: true,
+    },
   };
 };
