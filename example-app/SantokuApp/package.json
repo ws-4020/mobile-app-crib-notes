@@ -72,7 +72,8 @@
     "react-native-webview": "11.23.0",
     "react-query": "^3.34.8",
     "yup": "~0.32.11",
-    "expo-status-bar": "~1.4.0"
+    "expo-status-bar": "~1.4.0",
+    "expo-constants": "~13.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
