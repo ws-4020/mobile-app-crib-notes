@@ -49,7 +49,7 @@ QAアプリの実装（基本編）で作成したアプリに対して、以下
 
 ## ログイン/ログアウトの追加
 
-[認証方式](/react-native/santoku/application-architecture/auth/overview)を参考に、ログイン/ログアウトを実装します。SantokuAppから`src/framework/authentication`配下をコピーしてください。
+[認証方式](/react-native/santoku/application-architecture/auth/overview)を参考に、ログイン/ログアウトを実装します。SantokuAppから`src/features/account`配下をコピーしてください。
 
 - ログイン画面を追加してください。
 - サインアップ、ログイン、ログアウトの処理を実装してください。
