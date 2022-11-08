@@ -1,4 +1,4 @@
-package jp.fintan.mobile.SantokuApp.dev.newarchitecture.modules;
+package jp.fintan.mobile.SantokuApp.dev.debug.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

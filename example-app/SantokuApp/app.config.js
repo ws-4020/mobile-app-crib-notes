@@ -1,7 +1,32 @@
+import debugConfig from './app.config.debug.js';
+import debugAdvancedConfig from './app.config.debugAdvanced.js';
+import devDebugConfig from './app.config.dev.debug.js';
+import devDebugAdvancedConfig from './app.config.dev.debugAdvanced.js';
+import devHouseConfig from './app.config.dev.house.js';
+import devConfig from './app.config.dev.js';
+import houseConfig from './app.config.house.js';
+
+const buildVariantConfig = {
+  dev: devConfig,
+  'dev.debug': devDebugConfig,
+  'dev.debugAdvanced': devDebugAdvancedConfig,
+  'dev.house': devHouseConfig,
+  debug: debugConfig,
+  debugAdvanced: debugAdvancedConfig,
+  house: houseConfig,
+};
+/**
+ * ビルドタイプ：Release、プロダクトフレーバー：SantokuAppの設定を定義します。
+ * 上記ビルドバリアントと違う設定を定義する場合は、各ビルドバリアントごとの設定ファイル（app.config.xxx.json）で再定義してください。
+ *
+ * 環境変数「BUILD_VARIANT」を設定することで、指定のビルドバリアントの設定ファイルを読み込みます。
+ * ex) BUILD_VARIANT=dev.debug npx expo prebuild --clean
+ */
 module.exports = ({config}) => {
-  return {
+  const buildVariant = process.env.BUILD_VARIANT;
+  const releaseConfig = {
     ...config,
-    name: 'Dev SantokuApp',
+    name: 'SantokuApp',
     version: '0.1.0',
     orientation: 'portrait',
     jsEngine: 'jsc',
@@ -9,7 +34,7 @@ module.exports = ({config}) => {
       translucent: true,
     },
     android: {
-      package: 'jp.fintan.mobile.SantokuApp.dev',
+      package: 'jp.fintan.mobile.SantokuApp',
       versionCode: 4,
       adaptiveIcon: {
         foregroundImage: './assets/ic_launcher_foreground.png',
@@ -25,7 +50,7 @@ module.exports = ({config}) => {
         xxhdpi: './assets/splashscreen_xxhdpi.png',
         xxhmdpi: './assets/splashscreen_xxhdpi.png',
       },
-      googleServicesFile: './google-services-dummy.json',
+      googleServicesFile: './google-services.json',
       blockedPermissions: ['android.permission.READ_EXTERNAL_STORAGE'],
       softwareKeyboardLayoutMode: 'resize',
     },
@@ -36,9 +61,10 @@ module.exports = ({config}) => {
       requestTimeout: 60000,
       appStoreAppUrl: 'itms-apps://itunes.apple.com/jp/app/{appleAppId}',
       googlePlayAppUrl: 'https://play.google.com/store/apps/details?id={applicationId}',
-      mobileAppCribNotesWebsiteUrl: 'https://ws-4020.github.io/mobile-app-crib-notes',
-      mobileAppCribNotesRepositoryUrl: 'https://github.com/ws-4020/mobile-app-crib-notes',
+      mobileAppCribNotesWebsiteUrl: 'https://fintan-contents.github.io/mobile-app-crib-notes',
+      mobileAppCribNotesRepositoryUrl: 'https://github.com/Fintan-contents/mobile-app-crib-notes',
       mswEnabled: true,
     },
   };
+  return buildVariant ? {...releaseConfig, ...buildVariantConfig[buildVariant](releaseConfig)} : releaseConfig;
 };
