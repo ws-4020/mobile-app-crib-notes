@@ -1,4 +1,4 @@
-package jp.fintan.mobile.SantokuApp.dev;
+package jp.fintan.mobile.SantokuApp.dev.debug;
 
 import android.os.Build;
 import android.os.Bundle;
