@@ -41,6 +41,7 @@ QAアプリの実装（基本編）で作成したアプリに対して、以下
 
 - アプリ起動時にスプラッシュ画面が表示されるようにしてください。スプラッシュ画面のデザインは問いません。
 - アプリ起動時にバージョンチェックを行い、動作保証バージョンに満たない場合は強制バージョンアップを促すダイアログ表示とアプリストアを開くようにしてください。
+  - バージョンチェックはアプリ更新情報の取得API（/system/app-updates/{type}/{version}）を使用します。APIの仕様は[openapi.yaml](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/api-document/openapi.yaml)を参照してください。
 
 ## WebView表示
 
