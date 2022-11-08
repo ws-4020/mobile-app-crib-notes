@@ -79,6 +79,7 @@ module.exports = ({config}) => {
       ],
       ['@react-native-firebase/app'],
       ['@react-native-firebase/crashlytics'],
+      ['./app.plugin.js'],
     ],
     extra: {
       termsUrl: 'https://www.tis.co.jp/termsofuse/',
