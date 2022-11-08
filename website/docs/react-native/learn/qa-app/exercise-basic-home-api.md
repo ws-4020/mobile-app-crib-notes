@@ -8,6 +8,8 @@ hide_table_of_contents: true
 
 [プロジェクトの設定](/react-native/learn/qa-app/app-project-desc#%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A)が終わっていない場合は実施してください。
 
+[MSWの設定](/react-native/learn/qa-app/app-project-desc#msw%E3%81%AE%E8%A8%AD%E5%AE%9A)で設定した通り、MSWを使用してモックデータを返却するようにしています。
+
 API呼び出しの記述例はサンプルアプリのAPI呼び出し部分を参考にしてください。
 
 （参考例）
