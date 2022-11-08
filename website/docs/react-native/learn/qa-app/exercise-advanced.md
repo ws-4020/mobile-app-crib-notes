@@ -31,11 +31,14 @@ QAアプリの実装（基本編）で作成したアプリに対して、以下
 
 - [自動テスト](/react-native/santoku/test-planning/ut-planning#%E8%87%AA%E5%8B%95%E3%83%86%E3%82%B9%E3%83%88)と[SantokuApp](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp)の`src/bases/ui/button/Button.test.tsx`を参考に、作成したどれか1つの表示部品について自動テストを実装してください。
 
+## アプリアイコンの設定
+
+- アプリアイコンとして任意の画像を用意し、iOS/Androidのホーム画面でQAアプリのアプリアイコンが表示されるようにしてください。
+
 ## アプリ起動時の初期化処理の追加
 
 [アプリ起動後の初期化処理](/react-native/santoku/application-architecture/life-cycle-management/initialization)とSantokuAppの`src/apps/app/use-cases/useAppInitialize.ts`を参考に、アプリ起動時の初期化処理を追加します。
 
-- iOS/Androidのホーム画面でQAアプリのアプリアイコンが表示されるようにしてください。
 - アプリ起動時にスプラッシュ画面が表示されるようにしてください。スプラッシュ画面のデザインは問いません。
 - アプリ起動時にバージョンチェックを行い、動作保証バージョンに満たない場合は強制バージョンアップを促すダイアログ表示とアプリストアを開くようにしてください。
 
