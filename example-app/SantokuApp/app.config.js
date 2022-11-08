@@ -54,7 +54,32 @@ module.exports = ({config}) => {
       blockedPermissions: ['android.permission.READ_EXTERNAL_STORAGE'],
       softwareKeyboardLayoutMode: 'resize',
     },
-    plugins: [['@react-native-firebase/app'], ['@react-native-firebase/crashlytics']],
+    plugins: [
+      [
+        'expo-build-properties',
+        {
+          android: {
+            extraProguardRules: `
+# Firebase ConsoleでCrashlyticsのエラータイトルが表示されない問題に対応
+# https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?hl=ja&platform=android
+-keepattributes SourceFile,LineNumberTable        # Keep file names and line numbers.
+-keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
+
+# ExpoModulesPakage.ktから、自動生成されたクラスを参照するためにクラス名を利用しているので、クラス名が変わるとアプリが起動しなくなる。
+# https://github.com/expo/expo/blob/sdk-43/packages/expo/android/src/main/java/expo/modules/ExpoModulesPackage.kt#L22
+-keep class expo.modules.ExpoModulesPackageList { *; }
+`,
+            enableProguardInReleaseBuilds: true,
+          },
+          ios: {
+            deploymentTarget: '13.0',
+            useFrameworks: 'static',
+          },
+        },
+      ],
+      ['@react-native-firebase/app'],
+      ['@react-native-firebase/crashlytics'],
+    ],
     extra: {
       termsUrl: 'https://www.tis.co.jp/termsofuse/',
       santokuAppBackendUrl: 'https://santoku-app-backend.azurewebsites.net',

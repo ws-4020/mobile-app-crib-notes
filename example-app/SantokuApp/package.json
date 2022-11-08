@@ -49,12 +49,15 @@
     "@shopify/restyle": "^2.1.0",
     "axios": "^0.27.0",
     "expo": "~46.0.16",
+    "expo-build-properties": "~0.3.0",
+    "expo-constants": "~13.2.4",
     "expo-crypto": "~11.0.0",
     "expo-keep-awake": "~10.2.0",
     "expo-local-authentication": "~12.3.0",
     "expo-random": "~12.3.0",
     "expo-secure-store": "~11.3.0",
     "expo-splash-screen": "~0.16.2",
+    "expo-status-bar": "~1.4.0",
     "formik": "~2.2.9",
     "msw": "^0.47.0",
     "react": "18.0.0",
@@ -71,9 +74,7 @@
     "react-native-web": "~0.18.7",
     "react-native-webview": "11.23.0",
     "react-query": "^3.34.8",
-    "yup": "~0.32.11",
-    "expo-status-bar": "~1.4.0",
-    "expo-constants": "~13.2.4"
+    "yup": "~0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
