@@ -21,6 +21,8 @@ const buildVariantConfig = {
  *
  * 環境変数「BUILD_VARIANT」を設定することで、指定のビルドバリアントの設定ファイルを読み込みます。
  * ex) BUILD_VARIANT=dev.debug npx expo prebuild --clean
+ *
+ * @see https://docs.expo.dev/versions/latest/config/app/
  */
 module.exports = ({config}) => {
   const buildVariant = process.env.BUILD_VARIANT;
@@ -79,7 +81,11 @@ module.exports = ({config}) => {
       ],
       ['@react-native-firebase/app'],
       ['@react-native-firebase/crashlytics'],
-      ['./app.plugin.js'],
+      [
+        './plugin/build/android/withCopyAndRenameJavaPackage',
+        {srcPath: './plugin/template/android/app/src/main/java/com/helloworld', fileName: 'SplashActivity.java'},
+      ],
+      ['./plugin/build/android/withSplashActivityAndroidManifest'],
     ],
     extra: {
       termsUrl: 'https://www.tis.co.jp/termsofuse/',
@@ -90,6 +96,9 @@ module.exports = ({config}) => {
       mobileAppCribNotesWebsiteUrl: 'https://fintan-contents.github.io/mobile-app-crib-notes',
       mobileAppCribNotesRepositoryUrl: 'https://github.com/Fintan-contents/mobile-app-crib-notes',
       mswEnabled: true,
+    },
+    updates: {
+      enabled: false,
     },
   };
   return buildVariant ? {...releaseConfig, ...buildVariantConfig[buildVariant](releaseConfig)} : releaseConfig;
