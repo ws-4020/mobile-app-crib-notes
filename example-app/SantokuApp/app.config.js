@@ -53,7 +53,6 @@ module.exports = ({config}) => {
         xxhmdpi: './assets/splashscreen_xxhdpi.png',
       },
       googleServicesFile: './google-services.json',
-      blockedPermissions: ['android.permission.READ_EXTERNAL_STORAGE'],
       softwareKeyboardLayoutMode: 'resize',
     },
     plugins: [
