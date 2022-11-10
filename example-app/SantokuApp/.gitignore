@@ -62,10 +62,6 @@ jest-junit.xml
 # Local environmental variables
 ios/PersonalAccount.xcconfig
 
-# react-native-config
-.env
-ios/tmp.xcconfig
-
 # Firebase
 GoogleService-Info*.plist
 !ios/SantokuApp/Supporting/GoogleService-Info.Dummy.plist
