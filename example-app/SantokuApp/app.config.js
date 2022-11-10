@@ -8,9 +8,9 @@ import houseConfig from './app.config.house.js';
 
 const buildVariantConfig = {
   dev: devConfig,
-  'dev.debug': devDebugConfig,
-  'dev.debugAdvanced': devDebugAdvancedConfig,
-  'dev.house': devHouseConfig,
+  devDebug: devDebugConfig,
+  devDebugAdvanced: devDebugAdvancedConfig,
+  devHouse: devHouseConfig,
   debug: debugConfig,
   debugAdvanced: debugAdvancedConfig,
   house: houseConfig,
