@@ -86,6 +86,7 @@ module.exports = ({config}) => {
         {srcPath: './plugin/template/android/app/src/main/java/com/helloworld', fileName: 'SplashActivity.java'},
       ],
       ['./plugin/build/android/withSplashActivityAndroidManifest'],
+      ['./plugin/build/android/withReleaseSigningConfigBuildGradle'],
     ],
     extra: {
       termsUrl: 'https://www.tis.co.jp/termsofuse/',
