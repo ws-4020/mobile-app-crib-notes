@@ -55,6 +55,12 @@ module.exports = ({config}) => {
       },
       googleServicesFile: './google-services-dummy.json',
       softwareKeyboardLayoutMode: 'resize',
+      intentFilters: [
+        {
+          action: undefined,
+          category: undefined,
+        },
+      ],
     },
     plugins: [
       [
