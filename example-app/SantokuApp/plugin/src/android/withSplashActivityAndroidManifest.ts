@@ -25,12 +25,15 @@ const withSplashActivityAndroidManifest: ConfigPlugin = config => {
       ],
     };
 
+    const mainActivity = application.activity[0];
+
     // packageが変更されている状態のAndroidManifestではないため、自分でpackageを変更してます
     config.modResults = {
       manifest: {
         ...androidManifest.manifest,
         $: {...androidManifest.manifest.$, package: config.android?.package},
-        application: [{...application, activity: [splashActivity, ...application.activity]}],
+        // MainActivityのIntentFilterは削除する
+        application: [{...application, activity: [splashActivity, {$: mainActivity.$}]}],
       },
     };
     return config;
