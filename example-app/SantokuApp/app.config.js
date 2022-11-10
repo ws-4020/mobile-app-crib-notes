@@ -1,23 +1,25 @@
-import debugConfig from './app.config.debug.js';
-import debugAdvancedConfig from './app.config.debugAdvanced.js';
 import devDebugConfig from './app.config.dev.debug.js';
 import devDebugAdvancedConfig from './app.config.dev.debugAdvanced.js';
 import devHouseConfig from './app.config.dev.house.js';
-import devConfig from './app.config.dev.js';
-import houseConfig from './app.config.house.js';
+import devConfig from './app.config.dev.release.js';
+import prodDebugConfig from './app.config.prod.debug.js';
+import prodDebugAdvancedConfig from './app.config.prod.debugAdvanced.js';
+import prodHouseConfig from './app.config.prod.house.js';
+import prodReleaseConfig from './app.config.prod.release.js';
 
 const buildVariantConfig = {
-  dev: devConfig,
-  devDebug: devDebugConfig,
-  devDebugAdvanced: devDebugAdvancedConfig,
-  devHouse: devHouseConfig,
-  debug: debugConfig,
-  debugAdvanced: debugAdvancedConfig,
-  house: houseConfig,
+  'dev.debug': devDebugConfig,
+  'dev.debugAdvanced': devDebugAdvancedConfig,
+  'dev.house': devHouseConfig,
+  'dev.release': devConfig,
+  'prod.debug': prodDebugConfig,
+  'prod.debugAdvanced': prodDebugAdvancedConfig,
+  'prod.house': prodHouseConfig,
+  'prod.release': prodReleaseConfig,
 };
 /**
- * ビルドタイプ：Release、プロダクトフレーバー：SantokuAppの設定を定義します。
- * 上記ビルドバリアントと違う設定を定義する場合は、各ビルドバリアントごとの設定ファイル（app.config.xxx.json）で再定義してください。
+ * ビルドタイプ：Debug、プロダクトフレーバー：Devの設定を定義します。
+ * 上記ビルドバリアントと違う設定を定義する場合は、各ビルドバリアントごとの設定ファイル（app.config.xxx.yyy.json）で再定義してください。
  *
  * 環境変数「BUILD_VARIANT」を設定することで、指定のビルドバリアントの設定ファイルを読み込みます。
  * ex) BUILD_VARIANT=dev.debug npx expo prebuild --clean
@@ -28,7 +30,7 @@ module.exports = ({config}) => {
   const buildVariant = process.env.BUILD_VARIANT;
   const releaseConfig = {
     ...config,
-    name: 'SantokuApp',
+    name: 'Dev SantokuApp',
     version: '0.1.0',
     orientation: 'portrait',
     jsEngine: 'jsc',
@@ -36,23 +38,22 @@ module.exports = ({config}) => {
       translucent: true,
     },
     android: {
-      package: 'jp.fintan.mobile.SantokuApp',
+      package: 'jp.fintan.mobile.SantokuApp.dev.debug',
       versionCode: 4,
       adaptiveIcon: {
-        foregroundImage: './assets/ic_launcher_foreground.png',
+        foregroundImage: './assets/android/ic_launcher_foreground_debug.png',
         backgroundColor: '#393939',
       },
       splash: {
         resizeMode: 'native',
         backgroundColor: '#393939',
-        image: './assets/splashscreen.png',
-        mdpi: './assets/splashscreen_mdpi.png',
-        hdpi: './assets/splashscreen_hdpi.png',
-        xhdpi: './assets/splashscreen_xhdpi.png',
-        xxhdpi: './assets/splashscreen_xxhdpi.png',
-        xxhmdpi: './assets/splashscreen_xxhdpi.png',
+        mdpi: './assets/android/splashscreen_mdpi.png',
+        hdpi: './assets/android/splashscreen_hdpi.png',
+        xhdpi: './assets/android/splashscreen_xhdpi.png',
+        xxhdpi: './assets/android/splashscreen_xxhdpi.png',
+        xxhmdpi: './assets/android/splashscreen_xxhdpi.png',
       },
-      googleServicesFile: './google-services.json',
+      googleServicesFile: './google-services-dummy.json',
       softwareKeyboardLayoutMode: 'resize',
     },
     plugins: [
