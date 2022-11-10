@@ -3,7 +3,7 @@ import {Platform} from 'react-native';
 import {AppConfig} from './AppConfig';
 
 describe('AppConfig', function () {
-  it('react-native-configの値が取得されること', () => {
+  it('expo-constants extraの値が取得されること', () => {
     expect(AppConfig.termsUrl).toBe('https://www.tis.co.jp/termsofuse/');
     expect(AppConfig.santokuAppBackendUrl).toBe('http://localhost:9080');
     expect(AppConfig.requestTimeout).toBeUndefined();
