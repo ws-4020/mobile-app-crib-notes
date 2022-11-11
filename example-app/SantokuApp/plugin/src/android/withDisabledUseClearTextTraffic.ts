@@ -6,7 +6,7 @@ const withDisabledUseClearTextTraffic: ConfigPlugin = config => {
     const applications = androidManifest.manifest.application;
     const disabledClearTextTrafficApplications = applications?.map(a => ({
       ...a,
-      $: {...a.$, 'android:usesCleartextTraffic': 'false' as 'false'},
+      $: {...a.$, 'android:usesCleartextTraffic': undefined},
     }));
     config.modResults = {
       manifest: {

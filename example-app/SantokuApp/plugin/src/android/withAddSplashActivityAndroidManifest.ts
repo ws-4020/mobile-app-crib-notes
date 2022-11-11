@@ -1,6 +1,6 @@
 import {ConfigPlugin, withAndroidManifest} from '@expo/config-plugins';
 
-const withSplashActivityAndroidManifest: ConfigPlugin = config => {
+const withAddSplashActivityAndroidManifest: ConfigPlugin = config => {
   return withAndroidManifest(config, config => {
     const androidManifest = config.modResults;
     if (!androidManifest.manifest.application?.length) {
@@ -48,4 +48,4 @@ const withSplashActivityAndroidManifest: ConfigPlugin = config => {
   });
 };
 
-export default withSplashActivityAndroidManifest;
+export default withAddSplashActivityAndroidManifest;
