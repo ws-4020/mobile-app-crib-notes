@@ -1,83 +1,28 @@
 package jp.fintan.mobile.SantokuApp.dev.debug;
 
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.facebook.react.ReactActivity;
-import com.facebook.react.ReactActivityDelegate;
-import com.facebook.react.ReactRootView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-import expo.modules.ReactActivityDelegateWrapper;
-
-public class MainActivity extends ReactActivity {
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    // Set the theme to AppTheme BEFORE onCreate to support 
-    // coloring the background, status bar, and navigation bar.
-    // This is required for expo-splash-screen.
-    setTheme(R.style.AppTheme);
-    super.onCreate(null);
-  }
-
-  /**
-   * Returns the name of the main component registered from JavaScript.
-   * This is used to schedule rendering of the component.
-   */
-  @Override
-  protected String getMainComponentName() {
-    return "main";
-  }
-
-  /**
-   * Returns the instance of the {@link ReactActivityDelegate}. There the RootView is created and
-   * you can specify the renderer you wish to use - the new renderer (Fabric) or the old renderer
-   * (Paper).
-   */
-  @Override
-  protected ReactActivityDelegate createReactActivityDelegate() {
-    return new ReactActivityDelegateWrapper(this, BuildConfig.IS_NEW_ARCHITECTURE_ENABLED,
-      new MainActivityDelegate(this, getMainComponentName())
-    );
-  }
-
-  /**
-   * Align the back button behavior with Android S
-   * where moving root activities to background instead of finishing activities.
-   * @see <a href="https://developer.android.com/reference/android/app/Activity#onBackPressed()">onBackPressed</a>
-   */
-  @Override
-  public void invokeDefaultOnBackPressed() {
-    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
-      if (!moveTaskToBack(false)) {
-        // For non-root activities, use the default implementation to finish them.
-        super.invokeDefaultOnBackPressed();
-      }
-      return;
-    }
-
-    // Use the default back button implementation on Android S
-    // because it's doing more than {@link Activity#moveTaskToBack} in fact.
-    super.invokeDefaultOnBackPressed();
-  }
-
-  public static class MainActivityDelegate extends ReactActivityDelegate {
-    public MainActivityDelegate(ReactActivity activity, String mainComponentName) {
-      super(activity, mainComponentName);
-    }
-
+// Transition中にActivityのbackgroundが表示される問題があるため、Splash Screen用とReact Native用にActivityを分ける.
+// https://github.com/software-mansion/react-native-screens/issues/380
+public class MainActivity extends AppCompatActivity {
     @Override
-    protected ReactRootView createRootView() {
-      ReactRootView reactRootView = new ReactRootView(getContext());
-      // If you opted-in for the New Architecture, we enable the Fabric Renderer.
-      reactRootView.setIsFabric(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED);
-      return reactRootView;
-    }
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    @Override
-    protected boolean isConcurrentRootEnabled() {
-      // If you opted-in for the New Architecture, we enable Concurrent Root (i.e. React 18).
-      // More on this on https://reactjs.org/blog/2022/03/29/react-v18.html
-      return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
+        // Push通知で、onNotificationOpenedAppやgetInitialNotificationを使用してイベントを受け取れない事象の対応
+        // https://github.com/invertase/react-native-firebase/issues/3469#issuecomment-614990736
+        Intent intent = new Intent(this, AppActivity.class);
+
+        // Pass along FCM messages/notifications etc.
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            intent.putExtras(extras);
+        }
+        startActivity(intent);
+        finish();
     }
-  }
 }
