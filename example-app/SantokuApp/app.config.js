@@ -80,6 +80,7 @@ module.exports = ({config}) => {
       ],
       ['@react-native-firebase/app'],
       ['@react-native-firebase/crashlytics'],
+      ['./plugin/build/android/withDisabledUseClearTextTraffic'],
       [
         './plugin/build/android/withCopyAndRenameJavaPackage',
         {srcPath: './plugin/template/android/app/src/main/java/com/helloworld', fileName: 'SplashActivity.java'},
