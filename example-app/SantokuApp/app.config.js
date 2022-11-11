@@ -91,6 +91,7 @@ module.exports = ({config}) => {
       ],
       ['./plugin/build/android/withSplashActivityAndroidManifest'],
       ['./plugin/build/android/withReleaseSigningConfigBuildGradle'],
+      ['./plugin/build/android/withEnabledStatusBarTranslucent'],
     ],
     extra: {
       termsUrl: 'https://www.tis.co.jp/termsofuse/',
