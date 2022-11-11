@@ -34,9 +34,7 @@ module.exports = ({config}) => {
     version: '0.1.0',
     orientation: 'portrait',
     jsEngine: 'jsc',
-    androidStatusBar: {
-      translucent: true,
-    },
+    primaryColor: '#393939',
     android: {
       package: 'jp.fintan.mobile.SantokuApp.dev.debug',
       versionCode: 4,
