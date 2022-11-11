@@ -32,8 +32,16 @@ const withSplashActivityAndroidManifest: ConfigPlugin = config => {
       manifest: {
         ...androidManifest.manifest,
         $: {...androidManifest.manifest.$, package: config.android?.package},
-        // MainActivityのIntentFilterは削除する
-        application: [{...application, activity: [splashActivity, {$: mainActivity.$}]}],
+        // MainActivityのIntentFilterは削除
+        application: [
+          {
+            ...application,
+            activity: [
+              splashActivity,
+              {$: {...mainActivity.$, 'android:exported': 'false', 'android:theme': undefined}},
+            ],
+          },
+        ],
       },
     };
     return config;
