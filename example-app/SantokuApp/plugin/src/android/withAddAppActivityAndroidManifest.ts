@@ -1,6 +1,6 @@
 import {ConfigPlugin, withAndroidManifest} from '@expo/config-plugins';
 
-const withAddSplashActivityAndroidManifest: ConfigPlugin = config => {
+const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
   return withAndroidManifest(config, config => {
     const androidManifest = config.modResults;
     if (!androidManifest.manifest.application?.length) {
@@ -11,9 +11,10 @@ const withAddSplashActivityAndroidManifest: ConfigPlugin = config => {
     if (!mainApplication.activity) {
       throw new Error('Activity does not exist in AndroidManifest application.');
     }
-    const splashActivity = {
+    const originalMainActivity = mainApplication.activity[0];
+    const mainActivity = {
       $: {
-        'android:name': '.SplashActivity',
+        'android:name': '.MainActivity',
         'android:theme': '@style/Theme.App.SplashScreen',
         'android:exported': 'true' as 'true',
       },
@@ -25,8 +26,6 @@ const withAddSplashActivityAndroidManifest: ConfigPlugin = config => {
       ],
     };
 
-    const mainActivity = mainApplication.activity[0];
-
     // packageが変更されている状態のAndroidManifestではないため、自分でpackageを変更してます
     config.modResults = {
       manifest: {
@@ -37,8 +36,15 @@ const withAddSplashActivityAndroidManifest: ConfigPlugin = config => {
           {
             ...mainApplication,
             activity: [
-              splashActivity,
-              {$: {...mainActivity.$, 'android:exported': 'false', 'android:theme': undefined}},
+              mainActivity,
+              {
+                $: {
+                  ...originalMainActivity.$,
+                  'android:name': '.AppActivity',
+                  'android:exported': 'false',
+                  'android:theme': undefined,
+                },
+              },
             ],
           },
         ],
@@ -48,4 +54,4 @@ const withAddSplashActivityAndroidManifest: ConfigPlugin = config => {
   });
 };
 
-export default withAddSplashActivityAndroidManifest;
+export default withAddAppActivityAndroidManifest;
