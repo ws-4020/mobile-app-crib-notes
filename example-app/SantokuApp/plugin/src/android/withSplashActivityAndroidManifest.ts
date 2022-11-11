@@ -7,8 +7,8 @@ const withSplashActivityAndroidManifest: ConfigPlugin = config => {
       // applicationは必ず存在する想定
       throw new Error('Application does not exist in AndroidManifest.');
     }
-    const application = androidManifest.manifest.application[0];
-    if (!application.activity) {
+    const mainApplication = androidManifest.manifest.application[0];
+    if (!mainApplication.activity) {
       throw new Error('Activity does not exist in AndroidManifest application.');
     }
     const splashActivity = {
@@ -25,7 +25,8 @@ const withSplashActivityAndroidManifest: ConfigPlugin = config => {
       ],
     };
 
-    const mainActivity = application.activity[0];
+    const mainActivity = mainApplication.activity[0];
+    console.log(JSON.stringify(mainApplication, null, 2));
 
     // packageが変更されている状態のAndroidManifestではないため、自分でpackageを変更してます
     config.modResults = {
@@ -35,7 +36,8 @@ const withSplashActivityAndroidManifest: ConfigPlugin = config => {
         // MainActivityのIntentFilterは削除
         application: [
           {
-            ...application,
+            ...mainApplication,
+            $: {...mainApplication.$, 'android:usesCleartextTraffic': undefined},
             activity: [
               splashActivity,
               {$: {...mainActivity.$, 'android:exported': 'false', 'android:theme': undefined}},
