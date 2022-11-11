@@ -26,7 +26,6 @@ const withSplashActivityAndroidManifest: ConfigPlugin = config => {
     };
 
     const mainActivity = mainApplication.activity[0];
-    console.log(JSON.stringify(mainApplication, null, 2));
 
     // packageが変更されている状態のAndroidManifestではないため、自分でpackageを変更してます
     config.modResults = {
