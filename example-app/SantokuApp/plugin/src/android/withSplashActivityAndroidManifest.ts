@@ -36,7 +36,6 @@ const withSplashActivityAndroidManifest: ConfigPlugin = config => {
         application: [
           {
             ...mainApplication,
-            $: {...mainApplication.$, 'android:usesCleartextTraffic': undefined},
             activity: [
               splashActivity,
               {$: {...mainActivity.$, 'android:exported': 'false', 'android:theme': undefined}},
