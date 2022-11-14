@@ -76,6 +76,9 @@ module.exports = ({config}) => {
 # ExpoModulesPakage.ktから、自動生成されたクラスを参照するためにクラス名を利用しているので、クラス名が変わるとアプリが起動しなくなる。
 # https://github.com/expo/expo/blob/sdk-43/packages/expo/android/src/main/java/expo/modules/ExpoModulesPackage.kt#L22
 -keep class expo.modules.ExpoModulesPackageList { *; }
+
+# https://github.com/software-mansion/react-native-svg#problems-with-proguard
+-keep public class com.horcrux.svg.** {*;}
 `,
             enableProguardInReleaseBuilds: true,
           },
