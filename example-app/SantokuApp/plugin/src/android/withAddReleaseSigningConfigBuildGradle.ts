@@ -1,6 +1,6 @@
 import {ConfigPlugin, withAppBuildGradle} from '@expo/config-plugins';
 
-const withAddReleaseSigningConfigBuildGradle: ConfigPlugin = config => {
+export const withAddReleaseSigningConfigBuildGradle: ConfigPlugin = config => {
   return withAppBuildGradle(config, config => {
     if (config.modResults.language === 'groovy') {
       config.modResults.contents = applyReleaseSigningConfig(config.modResults.contents);
@@ -45,5 +45,3 @@ const setReleaseSigningConfig = (buildGradle: string): string => {
             signingConfig signingConfigs.release`,
   );
 };
-
-export default withAddReleaseSigningConfigBuildGradle;

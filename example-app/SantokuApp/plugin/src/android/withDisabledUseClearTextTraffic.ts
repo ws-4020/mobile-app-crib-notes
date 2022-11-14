@@ -1,6 +1,6 @@
 import {ConfigPlugin, withAndroidManifest} from '@expo/config-plugins';
 
-const withDisabledUseClearTextTraffic: ConfigPlugin = config => {
+export const withDisabledUseClearTextTraffic: ConfigPlugin = config => {
   return withAndroidManifest(config, config => {
     const androidManifest = config.modResults;
     const applications = androidManifest.manifest.application;
@@ -19,5 +19,3 @@ const withDisabledUseClearTextTraffic: ConfigPlugin = config => {
     return config;
   });
 };
-
-export default withDisabledUseClearTextTraffic;

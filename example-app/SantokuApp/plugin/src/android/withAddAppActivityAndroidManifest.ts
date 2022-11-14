@@ -1,6 +1,6 @@
 import {ConfigPlugin, withAndroidManifest} from '@expo/config-plugins';
 
-const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
+export const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
   return withAndroidManifest(config, config => {
     const androidManifest = config.modResults;
     if (!androidManifest.manifest.application?.length) {
@@ -53,5 +53,3 @@ const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
     return config;
   });
 };
-
-export default withAddAppActivityAndroidManifest;

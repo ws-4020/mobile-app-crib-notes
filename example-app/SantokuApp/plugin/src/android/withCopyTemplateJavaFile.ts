@@ -5,7 +5,10 @@ import path from 'path';
 import {copyFile} from '../utils/copyFile';
 import {getMainActivityDir} from './getMainActivityDir';
 
-const withCopyTemplateJavaFile: ConfigPlugin<{srcDir: string; fileName: string}> = (config, {srcDir, fileName}) => {
+export const withCopyTemplateJavaFile: ConfigPlugin<{srcDir: string; fileName: string}> = (
+  config,
+  {srcDir, fileName},
+) => {
   return withDangerousMod(config, [
     'android',
     async config => {
@@ -34,5 +37,3 @@ const renameJavaPackage = (filePath: string, fromPackageName: string, toPackageN
     throw new Error(`Cannot rename package of ${filePath} from ${fromPackageName} to ${toPackageName}. ${String(e)}.`);
   }
 };
-
-export default withCopyTemplateJavaFile;
