@@ -6,15 +6,21 @@ import {copyFile} from '../utils/copyFile';
 import {getMainActivityDir} from './getMainActivityDir';
 import {getMainActivityPath} from './getMainActivityPath';
 
-export const withRenameMainActivity: ConfigPlugin<{toClassName: string}> = (config, {toClassName}) => {
+/**
+ * MainActivity.javaをコピーして、指定のクラス名に変更します。
+ * @param config ExpoConfig
+ * @param toClassName コピー先のクラス名
+ */
+export const withCopyMainActivity: ConfigPlugin<{toClassName: string}> = (config, {toClassName}) => {
   return withDangerousMod(config, [
     'android',
     async config => {
       const projectRoot = config.modRequest.projectRoot;
       const mainActivityDir = await getMainActivityDir(projectRoot);
       const mainActivityPath = await getMainActivityPath(projectRoot);
-      renameClassName(mainActivityPath, toClassName);
-      await copyFile(mainActivityPath, path.resolve(mainActivityDir, `${toClassName}.java`));
+      const toPath = path.resolve(mainActivityDir, `${toClassName}.java`);
+      await copyFile(mainActivityPath, toPath);
+      renameClassName(toPath, toClassName);
       return config;
     },
   ]);

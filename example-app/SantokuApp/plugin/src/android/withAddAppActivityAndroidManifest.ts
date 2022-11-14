@@ -1,5 +1,9 @@
 import {ConfigPlugin, withAndroidManifest} from '@expo/config-plugins';
 
+/**
+ * AppActivityをAndroidManifest.xmlに追加します。
+ * @param config ExpoConfig
+ */
 export const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
   return withAndroidManifest(config, config => {
     const androidManifest = config.modResults;
@@ -8,10 +12,10 @@ export const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
       throw new Error('Application does not exist in AndroidManifest.');
     }
     const mainApplication = androidManifest.manifest.application[0];
-    if (!mainApplication.activity) {
-      throw new Error('Activity does not exist in AndroidManifest application.');
+    const originalMainActivity = mainApplication.activity?.find(a => a.$['android:name'] === '.MainActivity');
+    if (!originalMainActivity) {
+      throw new Error('MainActivity does not exist in AndroidManifest application.');
     }
-    const originalMainActivity = mainApplication.activity[0];
     const mainActivity = {
       $: {
         'android:name': '.MainActivity',
@@ -30,8 +34,6 @@ export const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
     config.modResults = {
       manifest: {
         ...androidManifest.manifest,
-        $: {...androidManifest.manifest.$, package: config.android?.package},
-        // MainActivityのIntentFilterは削除
         application: [
           {
             ...mainApplication,

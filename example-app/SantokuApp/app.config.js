@@ -11,7 +11,7 @@ import {
   withAddReleaseSigningConfigBuildGradle,
   withEnabledStatusBarTranslucent,
   withDisabledWindowDrawsSystemBarBackgrounds,
-  withDisabledUseClearTextTraffic,
+  withRemoveUseClearTextTraffic,
 } from './app.plugin.js';
 
 const buildVariantConfig = {
@@ -89,7 +89,7 @@ module.exports = ({config}) => {
       withAddAppActivity,
       withAddReleaseSigningConfigBuildGradle,
       withEnabledStatusBarTranslucent,
-      withDisabledUseClearTextTraffic,
+      withRemoveUseClearTextTraffic,
       withDisabledWindowDrawsSystemBarBackgrounds,
     ],
     extra: {
