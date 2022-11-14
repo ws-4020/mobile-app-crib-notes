@@ -8,11 +8,11 @@ import path from 'path';
 export const withMoveDevSettingsActivityToDebugAndroidManifest: ConfigPlugin = config => {
   return withAndroidManifest(config, async config => {
     const androidManifest = config.modResults;
-    if (!androidManifest.manifest.application?.length) {
-      // applicationは必ず存在する想定
-      throw new Error('Application does not exist in AndroidManifest.');
+    const mainApplication = androidManifest.manifest.application?.find(a => a.$['android:name'] === '.MainApplication');
+    if (!mainApplication) {
+      // MainApplicationは必ず存在する想定
+      throw new Error('MainApplication does not exist in AndroidManifest.');
     }
-    const mainApplication = androidManifest.manifest.application[0];
     const originalDevSettingsActivity = mainApplication.activity?.find(
       a => a.$['android:name'] === 'com.facebook.react.devsupport.DevSettingsActivity',
     );
@@ -25,6 +25,8 @@ export const withMoveDevSettingsActivityToDebugAndroidManifest: ConfigPlugin = c
       originalDevSettingsActivity,
     );
 
+    const restApplication =
+      androidManifest.manifest.application?.filter(a => a.$['android:name'] !== '.MainApplication') ?? [];
     const restActivity =
       mainApplication.activity?.filter(
         a => a.$['android:name'] !== 'com.facebook.react.devsupport.DevSettingsActivity',
@@ -38,6 +40,7 @@ export const withMoveDevSettingsActivityToDebugAndroidManifest: ConfigPlugin = c
             ...mainApplication,
             activity: restActivity,
           },
+          ...restApplication,
         ],
       },
     };
@@ -56,12 +59,12 @@ const addDevSettingsActivityToDebugAndroidManifest = async (
     // applicationは必ず存在する想定
     throw new Error('Application does not exist in debug/AndroidManifest.');
   }
-  const debugMainApplication = originalDebugAndroidManifest.manifest.application[0];
+  const debugApplication = originalDebugAndroidManifest.manifest.application[0];
 
   const debugAndroidManifest = {
     manifest: {
       ...originalDebugAndroidManifest.manifest,
-      application: [{...debugMainApplication, activity: [{...originalDevSettingsActivity}]}],
+      application: [{...debugApplication, activity: [{...originalDevSettingsActivity}]}],
     },
   };
   await writeAndroidManifestAsync(debugAndroidManifestPath, debugAndroidManifest);

@@ -7,16 +7,15 @@ import {ConfigPlugin, withAndroidManifest} from '@expo/config-plugins';
 export const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
   return withAndroidManifest(config, config => {
     const androidManifest = config.modResults;
-    if (!androidManifest.manifest.application?.length) {
-      // applicationは必ず存在する想定
-      throw new Error('Application does not exist in AndroidManifest.');
+    const mainApplication = androidManifest.manifest.application?.find(a => a.$['android:name'] === '.MainApplication');
+    if (!mainApplication) {
+      // MainApplicationは必ず存在する想定
+      throw new Error('MainApplication does not exist in AndroidManifest.');
     }
-    const mainApplication = androidManifest.manifest.application[0];
     const originalMainActivity = mainApplication.activity?.find(a => a.$['android:name'] === '.MainActivity');
     if (!originalMainActivity) {
       throw new Error('MainActivity does not exist in AndroidManifest application.');
     }
-    const restActivity = mainApplication.activity?.filter(a => a.$['android:name'] !== '.MainActivity') ?? [];
     const mainActivity = {
       $: {
         'android:name': '.MainActivity',
@@ -30,6 +29,9 @@ export const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
         },
       ],
     };
+    const restApplication =
+      androidManifest.manifest.application?.filter(a => a.$['android:name'] !== '.MainApplication') ?? [];
+    const restActivity = mainApplication.activity?.filter(a => a.$['android:name'] !== '.MainActivity') ?? [];
 
     config.modResults = {
       ...androidManifest,
@@ -51,6 +53,7 @@ export const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
               ...restActivity,
             ],
           },
+          ...restApplication,
         ],
       },
     };
