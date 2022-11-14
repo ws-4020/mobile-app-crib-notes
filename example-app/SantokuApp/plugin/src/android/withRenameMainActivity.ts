@@ -6,7 +6,7 @@ import {copyFile} from '../utils/copyFile';
 import {getMainActivityDir} from './getMainActivityDir';
 import {getMainActivityPath} from './getMainActivityPath';
 
-const withRenameMainActivity: ConfigPlugin<{toClassName: string}> = (config, {toClassName}) => {
+export const withRenameMainActivity: ConfigPlugin<{toClassName: string}> = (config, {toClassName}) => {
   return withDangerousMod(config, [
     'android',
     async config => {
@@ -31,5 +31,3 @@ const renameClassName = (mainActivityPath: string, toClassName: string) => {
     throw new Error(`Cannot rename class name of MainActivity.java to ${toClassName}. ${String(e)}.`);
   }
 };
-
-export default withRenameMainActivity;

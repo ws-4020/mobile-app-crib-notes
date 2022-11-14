@@ -6,6 +6,13 @@ import prodDebugConfig from './app.config.prod.debug.js';
 import prodDebugAdvancedConfig from './app.config.prod.debugAdvanced.js';
 import prodHouseConfig from './app.config.prod.house.js';
 import prodReleaseConfig from './app.config.prod.release.js';
+import {
+  withAddAppActivity,
+  withAddReleaseSigningConfigBuildGradle,
+  withEnabledStatusBarTranslucent,
+  withDisabledWindowDrawsSystemBarBackgrounds,
+  withDisabledUseClearTextTraffic,
+} from './app.plugin.js';
 
 const buildVariantConfig = {
   'dev.debug': devDebugConfig,
@@ -80,12 +87,11 @@ module.exports = ({config}) => {
       ],
       ['@react-native-firebase/app'],
       ['@react-native-firebase/crashlytics'],
-      './plugin/build/android/withDisabledUseClearTextTraffic',
-      './plugin/build/android/withAddAppActivity',
-      './plugin/build/android/withAddAppActivityAndroidManifest',
-      './plugin/build/android/withAddReleaseSigningConfigBuildGradle',
-      './plugin/build/android/withEnabledStatusBarTranslucent',
-      './plugin/build/android/withDisabledWindowDrawsSystemBarBackgrounds',
+      withAddAppActivity,
+      withAddReleaseSigningConfigBuildGradle,
+      withEnabledStatusBarTranslucent,
+      withDisabledUseClearTextTraffic,
+      withDisabledWindowDrawsSystemBarBackgrounds,
     ],
     extra: {
       termsUrl: 'https://www.tis.co.jp/termsofuse/',
