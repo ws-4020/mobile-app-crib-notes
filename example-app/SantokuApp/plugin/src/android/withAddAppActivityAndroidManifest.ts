@@ -16,6 +16,7 @@ export const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
     if (!originalMainActivity) {
       throw new Error('MainActivity does not exist in AndroidManifest application.');
     }
+    const restActivity = mainApplication.activity?.filter(a => a.$['android:name'] !== '.MainActivity') ?? [];
     const mainActivity = {
       $: {
         'android:name': '.MainActivity',
@@ -30,8 +31,8 @@ export const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
       ],
     };
 
-    // packageが変更されている状態のAndroidManifestではないため、自分でpackageを変更してます
     config.modResults = {
+      ...androidManifest,
       manifest: {
         ...androidManifest.manifest,
         application: [
@@ -47,6 +48,7 @@ export const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
                   'android:theme': undefined,
                 },
               },
+              ...restActivity,
             ],
           },
         ],

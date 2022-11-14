@@ -19,6 +19,7 @@ export const withRemoveUseClearTextTraffic: ConfigPlugin = config => {
       $: {...a.$, 'android:usesCleartextTraffic': undefined},
     }));
     config.modResults = {
+      ...androidManifest,
       manifest: {
         ...androidManifest.manifest,
         application: disabledClearTextTrafficApplications,
