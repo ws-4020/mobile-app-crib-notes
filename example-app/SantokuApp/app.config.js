@@ -11,7 +11,7 @@ import {
   withAddReleaseSigningConfigBuildGradle,
   withEnabledStatusBarTranslucent,
   withDisabledWindowDrawsSystemBarBackgrounds,
-  withRemoveUseClearTextTraffic,
+  withRemoveUsesClearTextTraffic,
   withMoveDevSettingsActivityToDebugAndroidManifest,
 } from './app.plugin.js';
 
@@ -90,7 +90,7 @@ module.exports = ({config}) => {
       withAddAppActivity,
       withAddReleaseSigningConfigBuildGradle,
       withEnabledStatusBarTranslucent,
-      withRemoveUseClearTextTraffic,
+      withRemoveUsesClearTextTraffic,
       withDisabledWindowDrawsSystemBarBackgrounds,
       withMoveDevSettingsActivityToDebugAndroidManifest,
     ],
