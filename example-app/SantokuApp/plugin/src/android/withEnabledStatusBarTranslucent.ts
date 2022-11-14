@@ -1,5 +1,9 @@
 import {ConfigPlugin, withStringsXml} from '@expo/config-plugins';
 
+/**
+ * Avoid image shifting occurs when the splash screen changes from theme background to ImageView shown by expo-splash-screen
+ * cf.) https://github.com/expo/expo/tree/master/packages/expo-splash-screen#-optional-customize-statusbar-1
+ */
 export const withEnabledStatusBarTranslucent: ConfigPlugin = config => {
   return withStringsXml(config, config => {
     const strings = config.modResults.resources.string ?? [];

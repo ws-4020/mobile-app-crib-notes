@@ -5,6 +5,12 @@ import path from 'path';
 import {copyFile} from '../utils/copyFile';
 import {getMainActivityDir} from './getMainActivityDir';
 
+/**
+ * テンプレートに存在するファイルを、「android/app/main/java/[パッケージ名]」配下にコピーします。
+ * @param config ExpoConfig
+ * @param srcDir テンプレートファイルが存在するディレクトリ
+ * @param fileName テンプレートファイル名
+ */
 export const withCopyTemplateJavaFile: ConfigPlugin<{srcDir: string; fileName: string}> = (
   config,
   {srcDir, fileName},

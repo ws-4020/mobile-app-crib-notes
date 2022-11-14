@@ -1,5 +1,16 @@
 import {ConfigPlugin, withAppBuildGradle} from '@expo/config-plugins';
 
+/**
+ * リリース用のSigningConfigを追加します。
+ * リリース用のSigningConfigは、以下のプロパティをgradle.propertiesに設定する必要があります。
+ *
+ * - SANTOKU_APP_UPLOAD_KEYSTORE_FILE
+ * - SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD
+ * - SANTOKU_APP_UPLOAD_KEY_ALIAS
+ * - SANTOKU_APP_UPLOAD_KEY_PASSWORD
+ *
+ * @param config ExpoConfig
+ */
 export const withAddReleaseSigningConfigBuildGradle: ConfigPlugin = config => {
   return withAppBuildGradle(config, config => {
     if (config.modResults.language === 'groovy') {
