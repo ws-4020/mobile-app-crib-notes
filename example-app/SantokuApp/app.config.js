@@ -12,6 +12,7 @@ import {
   withEnabledStatusBarTranslucent,
   withDisabledWindowDrawsSystemBarBackgrounds,
   withRemoveUseClearTextTraffic,
+  withMoveDevSettingsActivityToDebugAndroidManifest,
 } from './app.plugin.js';
 
 const buildVariantConfig = {
@@ -91,6 +92,7 @@ module.exports = ({config}) => {
       withEnabledStatusBarTranslucent,
       withRemoveUseClearTextTraffic,
       withDisabledWindowDrawsSystemBarBackgrounds,
+      withMoveDevSettingsActivityToDebugAndroidManifest,
     ],
     extra: {
       termsUrl: 'https://www.tis.co.jp/termsofuse/',
