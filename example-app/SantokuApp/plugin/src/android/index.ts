@@ -6,3 +6,4 @@ export * from './withRemoveUseClearTextTraffic';
 export * from './withDisabledWindowDrawsSystemBarBackgrounds';
 export * from './withEnabledStatusBarTranslucent';
 export * from './withCopyMainActivity';
+export * from './withMoveDevSettingsActivityToDebugAndroidManifest';
