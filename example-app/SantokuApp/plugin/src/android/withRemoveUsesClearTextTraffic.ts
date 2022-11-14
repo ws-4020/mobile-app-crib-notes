@@ -10,7 +10,7 @@ import {ConfigPlugin, withAndroidManifest} from '@expo/config-plugins';
  *
  * @param config ExpoConfig
  */
-export const withRemoveUseClearTextTraffic: ConfigPlugin = config => {
+export const withRemoveUsesClearTextTraffic: ConfigPlugin = config => {
   return withAndroidManifest(config, config => {
     const androidManifest = config.modResults;
     const applications = androidManifest.manifest.application;
