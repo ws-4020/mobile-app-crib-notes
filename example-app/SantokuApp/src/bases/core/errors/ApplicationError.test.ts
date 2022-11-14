@@ -21,41 +21,71 @@ describe.each([false, true])(
       }
     });
 
-    describe('given a message', () => {
-      it('should have name, message, cause and stack trace', () => {
-        const message = 'error message';
-        const sut = new ApplicationError(message);
+    it('given a message', () => {
+      const message = 'error message';
+      const sut = new ApplicationError(message);
 
-        expect(sut.name).toEqual('ApplicationError');
-        expect(sut.message).toEqual(message);
-        expect(sut.cause).toEqual(undefined);
-        expect(sut.stack).toMatch(/^ApplicationError: error message$/m);
-      });
+      expect(sut.name).toEqual('ApplicationError');
+      expect(sut.message).toEqual(message);
+      expect(sut.cause).toEqual(undefined);
+      expect(sut.stack).toMatch(/^ApplicationError: error message$/m);
+      expect(sut.errorCode).toEqual(undefined);
     });
 
-    describe('given an Error', () => {
-      it('should have name, message, cause and stack trace', () => {
-        const sut = new ApplicationError(cause);
+    it('given an Error', () => {
+      const sut = new ApplicationError(cause);
 
-        expect(sut.name).toEqual('ApplicationError');
-        expect(sut.message).toEqual('');
-        expect(sut.cause).toEqual(cause);
-        expect(sut.stack).toMatch(/^ApplicationError: $.+^ApplicationErrorSubClass: root cause/ms);
-      });
+      expect(sut.name).toEqual('ApplicationError');
+      expect(sut.message).toEqual('');
+      expect(sut.cause).toEqual(cause);
+      expect(sut.stack).toMatch(/^ApplicationError: $.+^ApplicationErrorSubClass: root cause/ms);
+      expect(sut.errorCode).toEqual(undefined);
     });
 
-    describe('given a message and Error', () => {
-      it('should have name, message, cause and stack trace', () => {
-        const message = 'when the error occurred';
-        const sut = new ApplicationError(message, cause);
+    it('given a message and errorCode', () => {
+      const message = 'error message';
+      const errorCode = 'error code';
+      const sut = new ApplicationError(message, errorCode);
 
-        expect(sut.name).toEqual('ApplicationError');
-        expect(sut.message).toEqual(message);
-        expect(sut.cause).toEqual(cause);
-        expect(sut.stack).toMatch(
-          /^ApplicationError: when the error occurred$.+^ApplicationErrorSubClass: root cause/ms,
-        );
-      });
+      expect(sut.name).toEqual('ApplicationError');
+      expect(sut.message).toEqual(message);
+      expect(sut.cause).toEqual(undefined);
+      expect(sut.stack).toMatch(/^ApplicationError: error message$/m);
+      expect(sut.errorCode).toEqual(errorCode);
+    });
+
+    it('given an Error and errorCode', () => {
+      const errorCode = 'error code';
+      const sut = new ApplicationError(cause, errorCode);
+
+      expect(sut.name).toEqual('ApplicationError');
+      expect(sut.message).toEqual('');
+      expect(sut.cause).toEqual(cause);
+      expect(sut.stack).toMatch(/^ApplicationError: $.+^ApplicationErrorSubClass: root cause/ms);
+      expect(sut.errorCode).toEqual(errorCode);
+    });
+
+    it('given a message and Error', () => {
+      const message = 'when the error occurred';
+      const sut = new ApplicationError(message, cause);
+
+      expect(sut.name).toEqual('ApplicationError');
+      expect(sut.message).toEqual(message);
+      expect(sut.cause).toEqual(cause);
+      expect(sut.stack).toMatch(/^ApplicationError: when the error occurred$.+^ApplicationErrorSubClass: root cause/ms);
+      expect(sut.errorCode).toEqual(undefined);
+    });
+
+    it('given a message and Error and errorCode', () => {
+      const message = 'when the error occurred';
+      const errorCode = 'error code';
+      const sut = new ApplicationError(message, cause, errorCode);
+
+      expect(sut.name).toEqual('ApplicationError');
+      expect(sut.message).toEqual(message);
+      expect(sut.cause).toEqual(cause);
+      expect(sut.stack).toMatch(/^ApplicationError: when the error occurred$.+^ApplicationErrorSubClass: root cause/ms);
+      expect(sut.errorCode).toEqual(errorCode);
     });
 
     it('given a message and nested Error', () => {
@@ -68,6 +98,7 @@ describe.each([false, true])(
       expect(sut.stack).toMatch(
         /^ApplicationError: when the error occurred.+^ApplicationErrorSubClass: nested cause.+^ApplicationErrorSubClass: root cause/ms,
       );
+      expect(sut.errorCode).toEqual(undefined);
     });
 
     it('given an argument other than message or cause', () => {
@@ -79,6 +110,7 @@ describe.each([false, true])(
         expect(sut.name).toEqual('ApplicationError');
         expect(sut.message).toEqual('');
         expect(sut.cause).toEqual(undefined);
+        expect(sut.errorCode).toEqual(undefined);
       } finally {
         mock.mockRestore();
       }
@@ -92,6 +124,7 @@ describe.each([false, true])(
 
       expect(sut.message).toEqual(message);
       expect(sut.cause).toEqual(undefined);
+      expect(sut.errorCode).toEqual(undefined);
     });
   },
 );

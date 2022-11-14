@@ -21,12 +21,12 @@ const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 type QuestionDetailPageProps = {
   questionId: string;
 };
-export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = ({questionId}) => {
+export const QuestionDetailPage: React.FC<QuestionDetailPageProps> = ({questionId}) => {
   const {data: question, isLoading: isQuestionLoading} = useQuestion(questionId);
   const {data: questionLikes} = useAccountQuestionLikes(questionId);
-  const ref = useRef<ScrollView>();
+  const scrollViewRef = useRef<ScrollView>();
 
-  const scrollToTop = useCallback(() => ref.current?.scrollTo({y: 0, animated: true}), []);
+  const scrollToTop = useCallback(() => scrollViewRef.current?.scrollTo({y: 0, animated: true}), []);
 
   if (isQuestionLoading) {
     return (
@@ -42,7 +42,7 @@ export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = ({question
 
   return (
     <StyledSafeAreaView flex={1}>
-      <StyledScrollView ref={ref} showsVerticalScrollIndicator={false}>
+      <StyledScrollView ref={scrollViewRef} showsVerticalScrollIndicator={false}>
         <QuestionDetailCard
           {...question.question}
           liked={questionLikes?.liked}
