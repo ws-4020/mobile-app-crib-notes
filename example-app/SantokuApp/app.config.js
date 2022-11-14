@@ -82,10 +82,6 @@ module.exports = ({config}) => {
 `,
             enableProguardInReleaseBuilds: true,
           },
-          ios: {
-            deploymentTarget: '13.0',
-            useFrameworks: 'static',
-          },
         },
       ],
       ['@react-native-firebase/app'],
