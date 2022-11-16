@@ -43,6 +43,10 @@ module.exports = ({config}) => {
     orientation: 'portrait',
     jsEngine: 'jsc',
     primaryColor: '#393939',
+    locales: {
+      ja: './l10n.ja.json',
+      en: './l10n.en.json',
+    },
     android: {
       package: 'jp.fintan.mobile.SantokuApp.dev.debug',
       versionCode: 4,
@@ -68,6 +72,9 @@ module.exports = ({config}) => {
       googleServicesFile: './GoogleService-Info.Dummy.plist',
       icon: './assets/ios/ic_debug.png',
       supportsTablet: true,
+      infoPlist: {
+        CFBundleAllowMixedLocalizations: true,
+      },
     },
     plugins: [
       [
