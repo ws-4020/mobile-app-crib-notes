@@ -75,6 +75,10 @@ module.exports = ({config}) => {
       infoPlist: {
         CFBundleAllowMixedLocalizations: true,
       },
+      splash: {
+        backgroundColor: '#393939',
+        image: './assets/ios/splashscreen.png',
+      },
     },
     plugins: [
       [
