@@ -88,7 +88,6 @@ module.exports = ({config}) => {
             enableProguardInReleaseBuilds: true,
           },
           ios: {
-            deploymentTarget: '12.4',
             useFrameworks: 'static',
           },
         },
