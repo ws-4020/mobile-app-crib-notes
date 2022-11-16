@@ -26,7 +26,7 @@ const buildVariantConfig = {
   'prod.release': prodReleaseConfig,
 };
 /**
- * ビルドタイプ：Debug、プロダクトフレーバー：Devの設定を定義します。
+ * ビルドタイプ：Release、プロダクトフレーバー：Prodの設定を定義します。
  * 上記ビルドバリアントと違う設定を定義する場合は、各ビルドバリアントごとの設定ファイル（app.config.xxx.yyy.json）で再定義してください。
  *
  * 環境変数「BUILD_VARIANT」を設定することで、指定のビルドバリアントの設定ファイルを読み込みます。
@@ -36,18 +36,18 @@ const buildVariantConfig = {
  */
 module.exports = ({config}) => {
   const buildVariant = process.env.BUILD_VARIANT;
-  const releaseConfig = {
+  const defaultAppConfig = {
     ...config,
-    name: 'Dev SantokuApp',
+    name: 'SantokuApp',
     version: '0.1.0',
     orientation: 'portrait',
     jsEngine: 'jsc',
     primaryColor: '#393939',
     android: {
-      package: 'jp.fintan.mobile.SantokuApp.dev.debug',
+      package: 'jp.fintan.mobile.SantokuApp',
       versionCode: 4,
       adaptiveIcon: {
-        foregroundImage: './assets/android/ic_launcher_foreground_debug.png',
+        foregroundImage: './assets/android/ic_launcher_foreground_release.png',
         backgroundColor: '#393939',
       },
       splash: {
@@ -59,7 +59,7 @@ module.exports = ({config}) => {
         xxhdpi: './assets/android/splashscreen_xxhdpi.png',
         xxhmdpi: './assets/android/splashscreen_xxhdpi.png',
       },
-      googleServicesFile: './google-services-dummy.json',
+      googleServicesFile: './google-services.json',
       softwareKeyboardLayoutMode: 'resize',
       allowBackup: false,
     },
@@ -108,5 +108,5 @@ module.exports = ({config}) => {
       enabled: false,
     },
   };
-  return buildVariant ? {...releaseConfig, ...buildVariantConfig[buildVariant](releaseConfig)} : releaseConfig;
+  return buildVariant ? {...defaultAppConfig, ...buildVariantConfig[buildVariant](defaultAppConfig)} : defaultAppConfig;
 };
