@@ -8,7 +8,7 @@
     "web": "expo start --web",
     "start": "expo start --dev-client",
     "test": "jest --detectOpenHandles --runInBand",
-    "build:plugin": "rimraf plugin/build && tsc --build plugin",
+    "build:plugin": "rimraf config/plugin/build && tsc --build config/plugin",
     "prebuild": "run-s build:plugin && BUILD_VARIANT=dev.debug expo prebuild --clean",
     "prebuild:devDebugAdvanced": "run-s build:plugin && BUILD_VARIANT=dev.debugAdvanced expo prebuild --clean",
     "prebuild:devHouse": "run-s build:plugin && BUILD_VARIANT=dev.house expo prebuild --clean",
