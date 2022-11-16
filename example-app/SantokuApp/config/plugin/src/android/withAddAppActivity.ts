@@ -4,7 +4,7 @@ import {withAddAppActivityAndroidManifest} from './withAddAppActivityAndroidMani
 import {withCopyMainActivity} from './withCopyMainActivity';
 import {withCopyTemplateJavaFile} from './withCopyTemplateJavaFile';
 
-const MAIN_ACTIVITY_TEMPLATE_DIR = './plugin/template/android/app/src/main/java/com/helloworld';
+const MAIN_ACTIVITY_TEMPLATE_DIR = './config/plugin/template/android/app/src/main/java/com/helloworld';
 const MAIN_ACTIVITY_FILE_NAME = 'MainActivity.java';
 const APP_ACTIVITY_CLASS_NAME = 'AppActivity';
 

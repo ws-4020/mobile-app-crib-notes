@@ -1,11 +1,11 @@
-import devDebugConfig from './app.config.dev.debug.js';
-import devDebugAdvancedConfig from './app.config.dev.debugAdvanced.js';
-import devHouseConfig from './app.config.dev.house.js';
-import devConfig from './app.config.dev.release.js';
-import prodDebugConfig from './app.config.prod.debug.js';
-import prodDebugAdvancedConfig from './app.config.prod.debugAdvanced.js';
-import prodHouseConfig from './app.config.prod.house.js';
-import prodReleaseConfig from './app.config.prod.release.js';
+import devDebugConfig from './config/app.config.dev.debug.js';
+import devDebugAdvancedConfig from './config/app.config.dev.debugAdvanced.js';
+import devHouseConfig from './config/app.config.dev.house.js';
+import devConfig from './config/app.config.dev.release.js';
+import prodDebugConfig from './config/app.config.prod.debug.js';
+import prodDebugAdvancedConfig from './config/app.config.prod.debugAdvanced.js';
+import prodHouseConfig from './config/app.config.prod.house.js';
+import prodReleaseConfig from './config/app.config.prod.release.js';
 import {
   withAddAppActivity,
   withAddReleaseSigningConfigBuildGradle,
@@ -13,7 +13,7 @@ import {
   withDisabledWindowDrawsSystemBarBackgrounds,
   withRemoveUsesClearTextTraffic,
   withMoveDevSettingsActivityToDebugAndroidManifest,
-} from './app.plugin.js';
+} from './config/app.plugin.js';
 
 const buildVariantConfig = {
   'dev.debug': devDebugConfig,
