@@ -63,8 +63,7 @@ jest-junit.xml
 ios/PersonalAccount.xcconfig
 
 # Firebase
-GoogleService-Info*.plist
-!ios/SantokuApp/Supporting/GoogleService-Info.Dummy.plist
+GoogleService-Info.plist
 google-services.json
 
 # generated

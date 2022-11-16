@@ -63,6 +63,10 @@ module.exports = ({config}) => {
       softwareKeyboardLayoutMode: 'resize',
       allowBackup: false,
     },
+    ios: {
+      bundleIdentifier: 'jp.fintan.mobile.SantokuApp.dev.debug',
+      googleServicesFile: './GoogleService-Info.Dummy.plist',
+    },
     plugins: [
       [
         'expo-build-properties',
@@ -82,6 +86,10 @@ module.exports = ({config}) => {
 -keep public class com.horcrux.svg.** {*;}
 `,
             enableProguardInReleaseBuilds: true,
+          },
+          ios: {
+            deploymentTarget: '12.4',
+            useFrameworks: 'static',
           },
         },
       ],
