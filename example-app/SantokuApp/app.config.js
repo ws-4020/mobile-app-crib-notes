@@ -66,6 +66,7 @@ module.exports = ({config}) => {
     ios: {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp.dev.debug',
       googleServicesFile: './GoogleService-Info.Dummy.plist',
+      icon: './assets/ios/ic_debug.png',
     },
     plugins: [
       [
