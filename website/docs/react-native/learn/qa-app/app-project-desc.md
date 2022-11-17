@@ -125,7 +125,7 @@ QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://rea
 
 併せて、[OpenAPI仕様（openapi.yaml）](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/api-document/openapi.yaml)もプロジェクト直下（orval.config.tsと同じ階層）にコピーしてください。
 
-次に、以下のファイルを修正します。
+そして、次のファイルを修正します。
 
 - `src/features/backend/utils/customInstance.ts`
 - `orval.config.ts`
