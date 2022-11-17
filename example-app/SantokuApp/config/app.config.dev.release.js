@@ -7,10 +7,6 @@ module.exports = config => {
     android: {
       ...config.android,
       package: 'jp.fintan.mobile.SantokuApp.dev',
-      adaptiveIcon: {
-        ...config.android.adaptiveIcon,
-        foregroundImage: './assets/android/ic_launcher_foreground_release.png',
-      },
     },
     ios: {
       ...config.ios,
