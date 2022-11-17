@@ -420,7 +420,7 @@ export const App = () => {
 | src/fixtures |
 | src/@types/image.d.ts |
 
-次に、以下のファイルを追加してください。
+そして、次のファイルを追加してください。
 
 | 追加ファイル |
 |--|
