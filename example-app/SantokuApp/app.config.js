@@ -1,11 +1,11 @@
-import devDebugConfig from './app.config.dev.debug.js';
-import devDebugAdvancedConfig from './app.config.dev.debugAdvanced.js';
-import devHouseConfig from './app.config.dev.house.js';
-import devConfig from './app.config.dev.release.js';
-import prodDebugConfig from './app.config.prod.debug.js';
-import prodDebugAdvancedConfig from './app.config.prod.debugAdvanced.js';
-import prodHouseConfig from './app.config.prod.house.js';
-import prodReleaseConfig from './app.config.prod.release.js';
+import devDebugConfig from './config/app.config.dev.debug.js';
+import devDebugAdvancedConfig from './config/app.config.dev.debugAdvanced.js';
+import devHouseConfig from './config/app.config.dev.house.js';
+import devConfig from './config/app.config.dev.release.js';
+import prodDebugConfig from './config/app.config.prod.debug.js';
+import prodDebugAdvancedConfig from './config/app.config.prod.debugAdvanced.js';
+import prodHouseConfig from './config/app.config.prod.house.js';
+import prodReleaseConfig from './config/app.config.prod.release.js';
 import {
   withAddAppActivity,
   withAddReleaseSigningConfigBuildGradle,
@@ -13,7 +13,7 @@ import {
   withDisabledWindowDrawsSystemBarBackgrounds,
   withRemoveUsesClearTextTraffic,
   withMoveDevSettingsActivityToDebugAndroidManifest,
-} from './app.plugin.js';
+} from './config/app.plugin.js';
 
 const buildVariantConfig = {
   'dev.debug': devDebugConfig,
@@ -26,7 +26,7 @@ const buildVariantConfig = {
   'prod.release': prodReleaseConfig,
 };
 /**
- * ビルドタイプ：Debug、プロダクトフレーバー：Devの設定を定義します。
+ * ビルドタイプ：Release、プロダクトフレーバー：Prodの設定を定義します。
  * 上記ビルドバリアントと違う設定を定義する場合は、各ビルドバリアントごとの設定ファイル（app.config.xxx.yyy.json）で再定義してください。
  *
  * 環境変数「BUILD_VARIANT」を設定することで、指定のビルドバリアントの設定ファイルを読み込みます。
@@ -36,9 +36,9 @@ const buildVariantConfig = {
  */
 module.exports = ({config}) => {
   const buildVariant = process.env.BUILD_VARIANT;
-  const releaseConfig = {
+  const defaultAppConfig = {
     ...config,
-    name: 'Dev SantokuApp',
+    name: 'SantokuApp',
     version: '0.1.0',
     orientation: 'portrait',
     jsEngine: 'jsc',
@@ -48,10 +48,10 @@ module.exports = ({config}) => {
       en: './l10n.en.json',
     },
     android: {
-      package: 'jp.fintan.mobile.SantokuApp.dev.debug',
+      package: 'jp.fintan.mobile.SantokuApp',
       versionCode: 4,
       adaptiveIcon: {
-        foregroundImage: './assets/android/ic_launcher_foreground_debug.png',
+        foregroundImage: './assets/android/ic_launcher_foreground_release.png',
         backgroundColor: '#393939',
       },
       splash: {
@@ -63,7 +63,7 @@ module.exports = ({config}) => {
         xxhdpi: './assets/android/splashscreen_xxhdpi.png',
         xxhmdpi: './assets/android/splashscreen_xxhdpi.png',
       },
-      googleServicesFile: './google-services-dummy.json',
+      googleServicesFile: './google-services.json',
       softwareKeyboardLayoutMode: 'resize',
       allowBackup: false,
     },
@@ -128,5 +128,5 @@ module.exports = ({config}) => {
       enabled: false,
     },
   };
-  return buildVariant ? {...releaseConfig, ...buildVariantConfig[buildVariant](releaseConfig)} : releaseConfig;
+  return buildVariant ? {...defaultAppConfig, ...buildVariantConfig[buildVariant](defaultAppConfig)} : defaultAppConfig;
 };
