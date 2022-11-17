@@ -233,7 +233,7 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 | src/apps/app/services/defaultOptions.ts |
 | src/bases/core/errors/ApplicationError.ts |
 
-次に、`src/apps/app/services/defaultGlobalErrorHandler.ts`を以下のように修正してください。
+次に、`src/apps/app/services/defaultGlobalErrorHandler.ts`を次のように修正してください。
 
 ```json title="src/apps/app/services/defaultGlobalErrorHandler.ts"
   /* ～省略～ */
