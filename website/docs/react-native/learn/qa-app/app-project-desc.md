@@ -263,7 +263,7 @@ QAアプリでは、メッセージのロード、Yupの初期設定のみ組み
 
 次に、`src/navigation/RootStackNav.tsx`を`src/apps/app/navigators/RootStackNav.tsx`に移動してください。
 
-次に、以下のファイルを追加してください。
+次のファイルを追加してください。
 
 | 追加ファイル |
 |--|
