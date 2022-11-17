@@ -215,7 +215,7 @@ QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://rea
 
 #### React Queryの設定
 
-HTTP API通信などの状態管理や、エラーのハンドリングとして[React Query](https://react-query-v3.tanstack.com/)を使用します。
+HTTP API通信の状態管理や、エラーのハンドリングに[React Query](https://react-query-v3.tanstack.com/)を使用します。
 React Queryのデフォルトオプションや、エラーハンドリングの設定処理を、サンプルアプリ（SantokuApp）からコピーします。
 
 設定内容の詳細は、以下のドキュメントを参照してください。
