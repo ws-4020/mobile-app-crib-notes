@@ -16,7 +16,7 @@ hide_table_of_contents: true
 
 ### ディレクトリ構成
 
-ディレクトリ構成はサンプルアプリ（SantokuApp）と同様の構成とします。サンプルアプリ（SantokuApp）ではアプリの責務配置を定義しており、ディレクトリはそれに準じた構成となっています。
+サンプルアプリ（SantokuApp）と同様、QAアプリはアプリの責務配置に準じたディレクトリ構成となっています。
 
 詳細は、[SantokuApp - アプリの責務配置](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/README.md#アプリの責務配置)を参照してください。
 
