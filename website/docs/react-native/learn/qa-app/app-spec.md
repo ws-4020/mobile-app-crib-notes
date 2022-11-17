@@ -30,4 +30,6 @@ hide_table_of_contents: true
 
 ### 画面遷移
 
+Q&Aアプリの画面遷移を次の図で示します。
+
 ![画面遷移](screen-transitions-qa.drawio.png)
