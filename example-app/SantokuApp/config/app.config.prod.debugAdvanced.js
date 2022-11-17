@@ -11,6 +11,11 @@ module.exports = config => {
         foregroundImage: './assets/android/ic_launcher_foreground_debugAdvanced.png',
       },
     },
+    ios: {
+      ...config.ios,
+      bundleIdentifier: 'jp.fintan.mobile.SantokuApp.debugAdvanced',
+      icon: './assets/ios/ic_debugAdvanced.png',
+    },
     plugins: [...config.plugins, [withEnabledATS, {enabled: false}]],
   };
 };

@@ -12,6 +12,10 @@ module.exports = config => {
         foregroundImage: './assets/android/ic_launcher_foreground_release.png',
       },
     },
+    ios: {
+      ...config.ios,
+      bundleIdentifier: 'jp.fintan.mobile.SantokuApp.dev',
+    },
     plugins: [...config.plugins, [withEnabledATS, {enabled: true}]],
     extra: {
       ...config.extra,

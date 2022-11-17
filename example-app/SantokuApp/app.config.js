@@ -70,9 +70,9 @@ module.exports = ({config}) => {
       allowBackup: false,
     },
     ios: {
-      bundleIdentifier: 'jp.fintan.mobile.SantokuApp.dev.debug',
-      googleServicesFile: './GoogleService-Info.Dummy.plist',
-      icon: './assets/ios/ic_debug.png',
+      bundleIdentifier: 'jp.fintan.mobile.SantokuApp',
+      googleServicesFile: './GoogleService-Info.plist',
+      icon: './assets/ios/ic_release.png',
       supportsTablet: true,
       infoPlist: {
         CFBundleAllowMixedLocalizations: true,
