@@ -387,7 +387,7 @@ export const AppWithInitialization: React.FC = () => {
 };
 ```
 
-最後に、`src/App.tsx`を`src/apps/app/App.tsx`に移動して、以下の内容に差し替えてください。
+最後に、`src/App.tsx`を`src/apps/app/App.tsx`に移動して、次の内容に差し替えてください。
 
 ```typescript jsx title="src/apps/app/App.tsx"
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
