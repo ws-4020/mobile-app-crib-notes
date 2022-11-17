@@ -255,7 +255,7 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 アプリ起動後に、アプリ内で使用するメッセージのロードや、入力画面のバリデーションで使用する[Yup](https://github.com/jquense/yup)の初期設定を実施します。
 
 サンプルアプリ（SantokuApp）では、[アプリ起動後の初期化処理](../../santoku/application-architecture/life-cycle-management/initialization.mdx)に記載されている処理を実施しています。
-QAアプリでは、メッセージのロード、Yupの初期設定のみを実施します。まずは、以下のファイルをコピーしてください。
+QAアプリでは、メッセージのロード、Yupの初期設定のみ組み込みます。まずは、次のファイルをコピーしてください。
 
 | コピーファイル |
 |--|
