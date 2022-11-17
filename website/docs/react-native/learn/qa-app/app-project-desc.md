@@ -67,7 +67,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 ### プロジェクトの設定
 
 初期プロジェクトの作成をした直後は、最低限のファイルしかありません。
-QAアプリの実装に必要な共通処理をサンプルアプリ（[SantokuApp](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp)）からコピーします。
+そこで、QAアプリの実装に必要な共通処理をサンプルアプリ（[SantokuApp](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp)）からコピーします。
 
 #### ログ出力
 
