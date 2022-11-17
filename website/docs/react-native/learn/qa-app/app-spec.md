@@ -26,7 +26,7 @@ hide_table_of_contents: true
 | [デザインシステム](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/website/docs/react-native/learn/qa-app/qa-app.fig) | デザインガイドラインやUIコンポーネントについて記載した資料です。Figmaで開いて参照してください。 |
 | [API仕様](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/api-document/openapi.yaml) | 使用するAPIの仕様です。OpenAPI Specificationで作成しています。必要に応じてStoplight Studioなどのツールを使用し、見やすい形式で参照してください。 |
 
-また、上記に記載されていない仕様については演習問題文中に補足として記載しています。
+上記資料に記載のない仕様は演習問題の中で補足しています。
 
 ### 画面遷移
 
