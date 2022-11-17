@@ -48,7 +48,7 @@ expo install <package-name>
 npm install -D <package-name>
 ```
 
-iOSの開発をする場合は、macOSで以下のコマンドを実行する必要があります。
+iOSアプリを開発をする場合は、macOSで次のコマンドを実行して必要なライブラリをインストールしてください。
 
 ```bash
 npx pod-install
