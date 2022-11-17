@@ -11,32 +11,32 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		9B9B0A2CBED64BD5A8D002D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CC4760BD1A24B5C9FF79470 /* InfoPlist.strings */; };
+		40707ED0613D976C6C9B9D12 /* Pods_DevSantokuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426A86F6E05715DF3BA5912E /* Pods_DevSantokuApp.framework */; };
+		43B50FBADEFF401191611141 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C35494F110EF4DA382FF10B8 /* InfoPlist.strings */; };
+		8A818A3637EA405E95FCAD8C /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3901122111457EBAC06F52 /* noop-file.swift */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		BCC1418FD6D1706AC521D411 /* Pods_DevSantokuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8225D4DD1DD9BB01381AA639 /* Pods_DevSantokuApp.framework */; };
-		DB97565E10154AF3A113DB59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC735A6DEC5949B6AB0F206E /* InfoPlist.strings */; };
-		E969E6A1CF2F405FBF6A938A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D80A91D2019F49A39E401700 /* GoogleService-Info.plist */; };
-		EF020ABB2D5B47F0A862EAA3 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BD3ADA73134F37A6BFCCF0 /* noop-file.swift */; };
+		BF7081319F4247B287C1BD7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 94FFD39BC2104D2BA0DC7959 /* InfoPlist.strings */; };
+		E1908AAD206F45CFB5B092A7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06F5EA4EFEE5494187808B28 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		06F5EA4EFEE5494187808B28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "DevSantokuApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* DevSantokuApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevSantokuApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = DevSantokuApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = DevSantokuApp/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DevSantokuApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = DevSantokuApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DevSantokuApp/main.m; sourceTree = "<group>"; };
-		3CC4760BD1A24B5C9FF79470 /* InfoPlist.strings */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1C3901122111457EBAC06F52 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "DevSantokuApp/noop-file.swift"; sourceTree = "<group>"; };
+		426A86F6E05715DF3BA5912E /* Pods_DevSantokuApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DevSantokuApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-DevSantokuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevSantokuApp.debug.xcconfig"; path = "Target Support Files/Pods-DevSantokuApp/Pods-DevSantokuApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-DevSantokuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevSantokuApp.release.xcconfig"; path = "Target Support Files/Pods-DevSantokuApp/Pods-DevSantokuApp.release.xcconfig"; sourceTree = "<group>"; };
-		8225D4DD1DD9BB01381AA639 /* Pods_DevSantokuApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DevSantokuApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		91BD3ADA73134F37A6BFCCF0 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "DevSantokuApp/noop-file.swift"; sourceTree = "<group>"; };
+		94FFD39BC2104D2BA0DC7959 /* InfoPlist.strings */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = DevSantokuApp/SplashScreen.storyboard; sourceTree = "<group>"; };
-		AC735A6DEC5949B6AB0F206E /* InfoPlist.strings */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		D80A91D2019F49A39E401700 /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "DevSantokuApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C35494F110EF4DA382FF10B8 /* InfoPlist.strings */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-DevSantokuApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -46,13 +46,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCC1418FD6D1706AC521D411 /* Pods_DevSantokuApp.framework in Frameworks */,
+				40707ED0613D976C6C9B9D12 /* Pods_DevSantokuApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		075B2A2B2F7B4CD9A714072A /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				94FFD39BC2104D2BA0DC7959 /* InfoPlist.strings */,
+			);
+			name = en.lproj;
+			path = "";
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* DevSantokuApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -64,8 +73,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				D80A91D2019F49A39E401700 /* GoogleService-Info.plist */,
-				91BD3ADA73134F37A6BFCCF0 /* noop-file.swift */,
+				06F5EA4EFEE5494187808B28 /* GoogleService-Info.plist */,
+				1C3901122111457EBAC06F52 /* noop-file.swift */,
 			);
 			name = DevSantokuApp;
 			sourceTree = "<group>";
@@ -74,9 +83,18 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				8225D4DD1DD9BB01381AA639 /* Pods_DevSantokuApp.framework */,
+				426A86F6E05715DF3BA5912E /* Pods_DevSantokuApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5B604E5743544D3F91FEFC40 /* ja.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				C35494F110EF4DA382FF10B8 /* InfoPlist.strings */,
+			);
+			name = ja.lproj;
+			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -121,8 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				BB2F792C24A3F905000567C9 /* Expo.plist */,
-				E78C4D6935904AB8ADC63E6E /* ja.lproj */,
-				DBA0685FA33C4304B3B46D4E /* en.lproj */,
+				5B604E5743544D3F91FEFC40 /* ja.lproj */,
+				075B2A2B2F7B4CD9A714072A /* en.lproj */,
 			);
 			name = Supporting;
 			path = DevSantokuApp/Supporting;
@@ -145,24 +163,6 @@
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
-		DBA0685FA33C4304B3B46D4E /* en.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				3CC4760BD1A24B5C9FF79470 /* InfoPlist.strings */,
-			);
-			name = en.lproj;
-			path = "";
-			sourceTree = "<group>";
-		};
-		E78C4D6935904AB8ADC63E6E /* ja.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				AC735A6DEC5949B6AB0F206E /* InfoPlist.strings */,
-			);
-			name = ja.lproj;
-			path = "";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -177,8 +177,8 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				C0D2FF949A84732612106383 /* [CP-User] [RNFB] Core Configuration */,
-				9ACFA37F337ACC4AC7DA4813 /* [CP-User] [RNFB] Crashlytics Configuration */,
+				E45AE9BDBCCFFA2B55F25556 /* [CP-User] [RNFB] Core Configuration */,
+				388B15DCCAC028AE9B054F35 /* [CP-User] [RNFB] Crashlytics Configuration */,
 			);
 			buildRules = (
 			);
@@ -228,9 +228,9 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				DB97565E10154AF3A113DB59 /* InfoPlist.strings in Resources */,
-				9B9B0A2CBED64BD5A8D002D1 /* InfoPlist.strings in Resources */,
-				E969E6A1CF2F405FBF6A938A /* GoogleService-Info.plist in Resources */,
+				43B50FBADEFF401191611141 /* InfoPlist.strings in Resources */,
+				BF7081319F4247B287C1BD7D /* InfoPlist.strings in Resources */,
+				E1908AAD206F45CFB5B092A7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +273,20 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		388B15DCCAC028AE9B054F35 /* [CP-User] [RNFB] Crashlytics Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "[CP-User] [RNFB] Crashlytics Configuration";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\nset -e\n\nif [[ ${PODS_ROOT} ]]; then\n  echo \"info: Exec FirebaseCrashlytics Run from Pods\"\n  \"${PODS_ROOT}/FirebaseCrashlytics/run\"\nelse\n  echo \"info: Exec FirebaseCrashlytics Run from framework\"\n  \"${PROJECT_DIR}/FirebaseCrashlytics.framework/run\"\nfi\n";
+		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -293,21 +307,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DevSantokuApp/Pods-DevSantokuApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9ACFA37F337ACC4AC7DA4813 /* [CP-User] [RNFB] Crashlytics Configuration */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			name = "[CP-User] [RNFB] Crashlytics Configuration";
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\nset -e\n\nif [[ ${PODS_ROOT} ]]; then\n  echo \"info: Exec FirebaseCrashlytics Run from Pods\"\n  \"${PODS_ROOT}/FirebaseCrashlytics/run\"\nelse\n  echo \"info: Exec FirebaseCrashlytics Run from framework\"\n  \"${PROJECT_DIR}/FirebaseCrashlytics.framework/run\"\nfi\n";
-		};
-		C0D2FF949A84732612106383 /* [CP-User] [RNFB] Core Configuration */ = {
+		E45AE9BDBCCFFA2B55F25556 /* [CP-User] [RNFB] Core Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -349,7 +349,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
-				EF020ABB2D5B47F0A862EAA3 /* noop-file.swift in Sources */,
+				8A818A3637EA405E95FCAD8C /* noop-file.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

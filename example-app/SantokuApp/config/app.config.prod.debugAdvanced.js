@@ -1,3 +1,5 @@
+const withEnabledATS = require('./app.plugin.js').withEnabledATS;
+
 module.exports = config => {
   return {
     ...config,
@@ -9,5 +11,6 @@ module.exports = config => {
         foregroundImage: './assets/android/ic_launcher_foreground_debugAdvanced.png',
       },
     },
+    plugins: [...config.plugins, [withEnabledATS, {enabled: false}]],
   };
 };

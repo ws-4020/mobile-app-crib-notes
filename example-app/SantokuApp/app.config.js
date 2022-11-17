@@ -13,6 +13,7 @@ import {
   withDisabledWindowDrawsSystemBarBackgrounds,
   withRemoveUsesClearTextTraffic,
   withMoveDevSettingsActivityToDebugAndroidManifest,
+  withRemoveCFBundleUrlTypes,
 } from './config/app.plugin.js';
 
 const buildVariantConfig = {
@@ -26,7 +27,8 @@ const buildVariantConfig = {
   'prod.release': prodReleaseConfig,
 };
 /**
- * ビルドタイプ：Release、プロダクトフレーバー：Prodの設定を定義します。
+ * アプリ全体のベースとなる設定です
+ * ビルドバリアント毎に違う設定値は、ビルドタイプ：Release、プロダクトフレーバー：Prodの設定を定義しています。
  * 上記ビルドバリアントと違う設定を定義する場合は、各ビルドバリアントごとの設定ファイル（app.config.xxx.yyy.json）で再定義してください。
  *
  * 環境変数「BUILD_VARIANT」を設定することで、指定のビルドバリアントの設定ファイルを読み込みます。
@@ -35,7 +37,7 @@ const buildVariantConfig = {
  * @see https://docs.expo.dev/versions/latest/config/app/
  */
 module.exports = ({config}) => {
-  const buildVariant = process.env.BUILD_VARIANT;
+  const buildVariant = process.env.BUILD_VARIANT ?? 'prod.release';
   const defaultAppConfig = {
     ...config,
     name: 'SantokuApp',
@@ -113,6 +115,9 @@ module.exports = ({config}) => {
       withRemoveUsesClearTextTraffic,
       withDisabledWindowDrawsSystemBarBackgrounds,
       withMoveDevSettingsActivityToDebugAndroidManifest,
+      withRemoveCFBundleUrlTypes,
+      // ATSの有効化・無効化プラグインはビルドバリアント毎の設定ファイルで定義します。
+      // withEnabledATS,
     ],
     extra: {
       termsUrl: 'https://www.tis.co.jp/termsofuse/',
@@ -128,5 +133,5 @@ module.exports = ({config}) => {
       enabled: false,
     },
   };
-  return buildVariant ? {...defaultAppConfig, ...buildVariantConfig[buildVariant](defaultAppConfig)} : defaultAppConfig;
+  return {...defaultAppConfig, ...buildVariantConfig[buildVariant](defaultAppConfig)};
 };

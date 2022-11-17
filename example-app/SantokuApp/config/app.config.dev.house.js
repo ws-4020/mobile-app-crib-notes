@@ -1,3 +1,5 @@
+const withEnabledATS = require('./app.plugin.js').withEnabledATS;
+
 module.exports = config => {
   return {
     ...config,
@@ -10,6 +12,7 @@ module.exports = config => {
         foregroundImage: './assets/android/ic_launcher_foreground_house.png',
       },
     },
+    plugins: [...config.plugins, [withEnabledATS, {enabled: true}]],
     extra: {
       ...config.extra,
       mobileAppCribNotesWebsiteUrl: 'https://ws-4020.github.io/mobile-app-crib-notes',

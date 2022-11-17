@@ -1,3 +1,5 @@
+const withEnabledATS = require('./app.plugin.js').withEnabledATS;
+
 module.exports = config => {
   return {
     ...config,
@@ -11,6 +13,7 @@ module.exports = config => {
       },
       googleServicesFile: './google-services-dummy.json',
     },
+    plugins: [...config.plugins, [withEnabledATS, {enabled: false}]],
     extra: {
       ...config.extra,
       mobileAppCribNotesWebsiteUrl: 'https://ws-4020.github.io/mobile-app-crib-notes',

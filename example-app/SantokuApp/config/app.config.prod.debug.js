@@ -1,3 +1,5 @@
+const withEnabledATS = require('./app.plugin.js').withEnabledATS;
+
 module.exports = config => {
   return {
     ...config,
@@ -10,5 +12,6 @@ module.exports = config => {
       },
       googleServicesFile: './google-services-dummy.json',
     },
+    plugins: [...config.plugins, [withEnabledATS, {enabled: false}]],
   };
 };
