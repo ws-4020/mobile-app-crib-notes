@@ -6,7 +6,7 @@ hide_table_of_contents: true
 
 [ToDoアプリの実装](/react-native/learn/todo-app)が完了した方向けのコンテンツです。ここでは、より実践的なアプリを作成します。
 
-React Native未経験者でToDoアプリの実装が未実施の場合は、ToDoアプリの実装を先に実施することをお勧めします。
+React Native未経験者でToDoアプリの実装が未実施の場合は、先にそちらの実施をお勧めします。
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
