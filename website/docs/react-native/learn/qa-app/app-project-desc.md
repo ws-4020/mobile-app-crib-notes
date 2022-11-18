@@ -114,7 +114,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 
 [Orval](https://orval.dev/)の設定を追加します。
 OrvalはOpenAPI仕様からクライアントコードを自動生成します。
-[Orval](https://orval.dev/)は、React Query、SWRなど、いくつかのHTTP API通信ライブラリをサポートしており、選択したライブラリに合わせたクライアントコードを生成できます。
+React Query、SWRなど、いくつかのHTTP API通信ライブラリをサポートしています。
 
 QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://react-query-v3.tanstack.com/)を使用します。
 
