@@ -1,4 +1,4 @@
-const withEnabledATS = require('./app.plugin.js').withEnabledATS;
+const withSetCredentials = require('./app.plugin.js').withSetCredentials;
 
 module.exports = config => {
   return {
@@ -14,10 +14,21 @@ module.exports = config => {
     },
     ios: {
       ...config.ios,
-      bundleIdentifier: 'jp.fintan.mobile.SantokuApp.debug',
+      // ExpoのデフォルトConfigPluginでは、「$」のような記号をBundleIdentifierに設定出来なかったため、このアプリで作成した「withSetCredentials」Pluginで設定しています。
+      // bundleIdentifier: 'personal.jp.fintan.mobile.SantokuApp.debug.${PERSONAL_IDENTIFIER}',
       googleServicesFile: './GoogleService-Info.Dummy.plist',
       icon: './assets/ios/ic_debug.png',
     },
-    plugins: [...config.plugins, [withEnabledATS, {enabled: false}]],
+    plugins: [
+      ...config.plugins,
+      [
+        withSetCredentials,
+        {
+          developmentTeam: 'D9MUZCM4X6',
+          codeSignStyle: 'Automatic',
+          bundleIdentifier: 'personal.jp.fintan.mobile.SantokuApp.debug.${PERSONAL_IDENTIFIER}',
+        },
+      ],
+    ],
   };
 };

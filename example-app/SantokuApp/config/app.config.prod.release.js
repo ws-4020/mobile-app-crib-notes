@@ -1,8 +1,18 @@
-const withEnabledATS = require('./app.plugin.js').withEnabledATS;
+const withSetCredentials = require('./app.plugin.js').withSetCredentials;
 
 module.exports = config => {
   return {
     ...config,
-    plugins: [...config.plugins, [withEnabledATS, {enabled: true}]],
+    plugins: [
+      ...config.plugins,
+      [
+        withSetCredentials,
+        {
+          developmentTeam: '7Y9M87SSC3',
+          codeSignStyle: 'Manual',
+          provisioningProfileSpecifier: 'SantokuApp AppStore Development',
+        },
+      ],
+    ],
   };
 };

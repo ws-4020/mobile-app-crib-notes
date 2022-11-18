@@ -1,4 +1,5 @@
-const withEnabledATS = require('./app.plugin.js').withEnabledATS;
+const withSetCredentials = require('./app.plugin.js').withSetCredentials;
+const withAddPersonalAccountConfig = require('./app.plugin.js').withAddPersonalAccountConfig;
 
 module.exports = config => {
   return {
@@ -15,11 +16,23 @@ module.exports = config => {
     },
     ios: {
       ...config.ios,
-      bundleIdentifier: 'jp.fintan.mobile.SantokuApp.dev.debug',
+      // ExpoのデフォルトConfigPluginでは、「$」のような記号をBundleIdentifierに設定出来なかったため、このアプリで作成した「withSetCredentials」Pluginで設定しています。
+      // bundleIdentifier: 'personal.jp.fintan.mobile.SantokuApp.dev.debug.${PERSONAL_IDENTIFIER}',
       googleServicesFile: './GoogleService-Info.Dummy.plist',
       icon: './assets/ios/ic_debug.png',
     },
-    plugins: [...config.plugins, [withEnabledATS, {enabled: false}]],
+    plugins: [
+      ...config.plugins,
+      [
+        withSetCredentials,
+        {
+          developmentTeam: '${DEVELOPMENT_TEAM}',
+          codeSignStyle: '${CODE_SIGN_STYLE}',
+          bundleIdentifier: 'personal.jp.fintan.mobile.SantokuApp.dev.debug.${PERSONAL_IDENTIFIER}',
+        },
+      ],
+      withAddPersonalAccountConfig,
+    ],
     extra: {
       ...config.extra,
       mobileAppCribNotesWebsiteUrl: 'https://ws-4020.github.io/mobile-app-crib-notes',

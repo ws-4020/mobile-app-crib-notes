@@ -7,36 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B27D101179E33B203AF1DCD /* Pods_DevSantokuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B14541E9F1D73171DE98520C /* Pods_DevSantokuApp.framework */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		36EE607007C18CDB57704A52 /* Pods_DevSantokuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09914010F74445C38E1C84F3 /* Pods_DevSantokuApp.framework */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		73068E06BD0F445BA12D3E6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D7DDC2B9B1CF4F569418C137 /* InfoPlist.strings */; };
-		92F3C7DD84624841B510A3C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7DD9129CF177407BA8D7D1B4 /* InfoPlist.strings */; };
+		51E51F02BADA49FC957D7426 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04C6CF00FC1140A0940B85E3 /* GoogleService-Info.plist */; };
+		83C1847F90344C72B8115106 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD15F0BA06A4998A34ABE30 /* noop-file.swift */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		D817DEE49E574429A3E55487 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D23C0E3BA9CF486FB11CAEF4 /* GoogleService-Info.plist */; };
-		F4F96B5EFA6047FD9CF65C3E /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C809310223441C5A7024A3E /* noop-file.swift */; };
+		D6D2B351E488443099997E91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BAE3BB0BEA84979A0C57CD9 /* InfoPlist.strings */; };
+		F8563C7C3BDD49B6ACBDD63E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3217E41EFAF242A6AF95BE5C /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		09914010F74445C38E1C84F3 /* Pods_DevSantokuApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DevSantokuApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		04C6CF00FC1140A0940B85E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "DevSantokuApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* DevSantokuApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevSantokuApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = DevSantokuApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = DevSantokuApp/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DevSantokuApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = DevSantokuApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DevSantokuApp/main.m; sourceTree = "<group>"; };
-		4C809310223441C5A7024A3E /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "DevSantokuApp/noop-file.swift"; sourceTree = "<group>"; };
+		1BAE3BB0BEA84979A0C57CD9 /* InfoPlist.strings */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3217E41EFAF242A6AF95BE5C /* InfoPlist.strings */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3AD15F0BA06A4998A34ABE30 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "DevSantokuApp/noop-file.swift"; sourceTree = "<group>"; };
 		6C2E3173556A471DD304B334 /* Pods-DevSantokuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevSantokuApp.debug.xcconfig"; path = "Target Support Files/Pods-DevSantokuApp/Pods-DevSantokuApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-DevSantokuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevSantokuApp.release.xcconfig"; path = "Target Support Files/Pods-DevSantokuApp/Pods-DevSantokuApp.release.xcconfig"; sourceTree = "<group>"; };
-		7DD9129CF177407BA8D7D1B4 /* InfoPlist.strings */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8487EE02A089409485722772 /* Debug.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = Debug.plist; path = "/Users/pinkikki/dev/src/github.com/ws-4020/mobile-app-crib-notes-ios-build-variants/example-app/SantokuApp/ios/DevSantokuApp/Debug.plist"; sourceTree = "<group>"; };
+		9871C75FA76746CBA52C5A22 /* PersonalAccount.xcconfig */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.xcconfig; name = PersonalAccount.xcconfig; path = DevSantokuApp/PersonalAccount.xcconfig; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = DevSantokuApp/SplashScreen.storyboard; sourceTree = "<group>"; };
+		B14541E9F1D73171DE98520C /* Pods_DevSantokuApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DevSantokuApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		D23C0E3BA9CF486FB11CAEF4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "DevSantokuApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		D7DDC2B9B1CF4F569418C137 /* InfoPlist.strings */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-DevSantokuApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -46,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36EE607007C18CDB57704A52 /* Pods_DevSantokuApp.framework in Frameworks */,
+				0B27D101179E33B203AF1DCD /* Pods_DevSantokuApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,8 +66,10 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				D23C0E3BA9CF486FB11CAEF4 /* GoogleService-Info.plist */,
-				4C809310223441C5A7024A3E /* noop-file.swift */,
+				04C6CF00FC1140A0940B85E3 /* GoogleService-Info.plist */,
+				3AD15F0BA06A4998A34ABE30 /* noop-file.swift */,
+				9871C75FA76746CBA52C5A22 /* PersonalAccount.xcconfig */,
+				8487EE02A089409485722772 /* Debug.plist */,
 			);
 			name = DevSantokuApp;
 			sourceTree = "<group>";
@@ -74,26 +78,17 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				09914010F74445C38E1C84F3 /* Pods_DevSantokuApp.framework */,
+				B14541E9F1D73171DE98520C /* Pods_DevSantokuApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		529685FD0C1A4DC2AD920F93 /* en.lproj */ = {
+		3CBB5229C84E42E8A2744E29 /* en.lproj */ = {
 			isa = PBXGroup;
 			children = (
-				7DD9129CF177407BA8D7D1B4 /* InfoPlist.strings */,
+				3217E41EFAF242A6AF95BE5C /* InfoPlist.strings */,
 			);
 			name = en.lproj;
-			path = "";
-			sourceTree = "<group>";
-		};
-		5A22F148A2374E9CBC0DE381 /* ja.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				D7DDC2B9B1CF4F569418C137 /* InfoPlist.strings */,
-			);
-			name = ja.lproj;
 			path = "";
 			sourceTree = "<group>";
 		};
@@ -135,12 +130,21 @@
 			name = DevSantokuApp;
 			sourceTree = "<group>";
 		};
+		AF7B8303BF9A49C69259623F /* ja.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				1BAE3BB0BEA84979A0C57CD9 /* InfoPlist.strings */,
+			);
+			name = ja.lproj;
+			path = "";
+			sourceTree = "<group>";
+		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
 				BB2F792C24A3F905000567C9 /* Expo.plist */,
-				5A22F148A2374E9CBC0DE381 /* ja.lproj */,
-				529685FD0C1A4DC2AD920F93 /* en.lproj */,
+				AF7B8303BF9A49C69259623F /* ja.lproj */,
+				3CBB5229C84E42E8A2744E29 /* en.lproj */,
 			);
 			name = Supporting;
 			path = DevSantokuApp/Supporting;
@@ -177,8 +181,8 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				198823AA5559FDD94457630F /* [CP-User] [RNFB] Core Configuration */,
-				0C25E4999871A52BF6B80FBF /* [CP-User] [RNFB] Crashlytics Configuration */,
+				2169225DFD8A6E64215C99D2 /* [CP-User] [RNFB] Core Configuration */,
+				84B29CCD36456049183D14E7 /* [CP-User] [RNFB] Crashlytics Configuration */,
 			);
 			buildRules = (
 			);
@@ -228,9 +232,9 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				73068E06BD0F445BA12D3E6F /* InfoPlist.strings in Resources */,
-				92F3C7DD84624841B510A3C1 /* InfoPlist.strings in Resources */,
-				D817DEE49E574429A3E55487 /* GoogleService-Info.plist in Resources */,
+				D6D2B351E488443099997E91 /* InfoPlist.strings in Resources */,
+				F8563C7C3BDD49B6ACBDD63E /* InfoPlist.strings in Resources */,
+				51E51F02BADA49FC957D7426 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,21 +277,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0C25E4999871A52BF6B80FBF /* [CP-User] [RNFB] Crashlytics Configuration */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			name = "[CP-User] [RNFB] Crashlytics Configuration";
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\nset -e\n\nif [[ ${PODS_ROOT} ]]; then\n  echo \"info: Exec FirebaseCrashlytics Run from Pods\"\n  \"${PODS_ROOT}/FirebaseCrashlytics/run\"\nelse\n  echo \"info: Exec FirebaseCrashlytics Run from framework\"\n  \"${PROJECT_DIR}/FirebaseCrashlytics.framework/run\"\nfi\n";
-		};
-		198823AA5559FDD94457630F /* [CP-User] [RNFB] Core Configuration */ = {
+		2169225DFD8A6E64215C99D2 /* [CP-User] [RNFB] Core Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -320,6 +310,20 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DevSantokuApp/Pods-DevSantokuApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		84B29CCD36456049183D14E7 /* [CP-User] [RNFB] Crashlytics Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "[CP-User] [RNFB] Crashlytics Configuration";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\nset -e\n\nif [[ ${PODS_ROOT} ]]; then\n  echo \"info: Exec FirebaseCrashlytics Run from Pods\"\n  \"${PODS_ROOT}/FirebaseCrashlytics/run\"\nelse\n  echo \"info: Exec FirebaseCrashlytics Run from framework\"\n  \"${PROJECT_DIR}/FirebaseCrashlytics.framework/run\"\nfi\n";
+		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -349,7 +353,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
-				F4F96B5EFA6047FD9CF65C3E /* noop-file.swift in Sources */,
+				83C1847F90344C72B8115106 /* noop-file.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,13 +367,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DevSantokuApp/DevSantokuApp.entitlements;
+				CODE_SIGN_STYLE = "${CODE_SIGN_STYLE}";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "${DEVELOPMENT_TEAM}";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
-				INFOPLIST_FILE = DevSantokuApp/Info.plist;
+				INFOPLIST_FILE = DevSantokuApp/Debug.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -378,7 +384,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.fintan.mobile.SantokuApp.dev.debug;
+				PRODUCT_BUNDLE_IDENTIFIER = "personal.jp.fintan.mobile.SantokuApp.dev.debug.${PERSONAL_IDENTIFIER}";
 				PRODUCT_NAME = DevSantokuApp;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -394,7 +400,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DevSantokuApp/DevSantokuApp.entitlements;
+				CODE_SIGN_STYLE = "${CODE_SIGN_STYLE}";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "${DEVELOPMENT_TEAM}";
 				INFOPLIST_FILE = DevSantokuApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -404,7 +412,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.fintan.mobile.SantokuApp.dev.debug;
+				PRODUCT_BUNDLE_IDENTIFIER = "personal.jp.fintan.mobile.SantokuApp.dev.debug.${PERSONAL_IDENTIFIER}";
 				PRODUCT_NAME = DevSantokuApp;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -414,6 +422,7 @@
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9871C75FA76746CBA52C5A22 /* PersonalAccount.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -472,6 +481,7 @@
 		};
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9871C75FA76746CBA52C5A22 /* PersonalAccount.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;

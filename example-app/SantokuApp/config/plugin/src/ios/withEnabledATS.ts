@@ -1,14 +1,12 @@
 import {ConfigPlugin, withInfoPlist} from '@expo/config-plugins';
 
 /**
- * ATS（App Transport Security）の有効化・無効化を設定します。
+ * ATS（App Transport Security）を有効化します。
  * @param config ExpoConfig
- * @param disabled
  */
-export const withEnabledATS: ConfigPlugin<{enabled: boolean}> = (config, {enabled = true}) => {
+export const withEnabledATS: ConfigPlugin = config => {
   return withInfoPlist(config, config => {
-    const ats = enabled ? undefined : {NSAllowsArbitraryLoads: true};
-    config.modResults = {...config.modResults, NSAppTransportSecurity: ats};
+    config.modResults = {...config.modResults, NSAppTransportSecurity: undefined};
     return config;
   });
 };

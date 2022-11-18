@@ -1,4 +1,4 @@
-const withEnabledATS = require('./app.plugin.js').withEnabledATS;
+const withSetCredentials = require('./app.plugin.js').withSetCredentials;
 
 module.exports = config => {
   return {
@@ -16,6 +16,16 @@ module.exports = config => {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp.debugAdvanced',
       icon: './assets/ios/ic_debugAdvanced.png',
     },
-    plugins: [...config.plugins, [withEnabledATS, {enabled: false}]],
+    plugins: [
+      ...config.plugins,
+      [
+        withSetCredentials,
+        {
+          developmentTeam: 'D9MUZCM4X6',
+          codeSignStyle: 'Manual',
+          provisioningProfileSpecifier: 'SantokuApp DebugAdvanced Development',
+        },
+      ],
+    ],
   };
 };

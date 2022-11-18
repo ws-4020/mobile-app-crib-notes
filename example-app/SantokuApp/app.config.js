@@ -14,6 +14,8 @@ import {
   withRemoveUsesClearTextTraffic,
   withMoveDevSettingsActivityToDebugAndroidManifest,
   withRemoveCFBundleUrlTypes,
+  withEnabledATS,
+  withDisabledATSOnlyDebug,
 } from './config/app.plugin.js';
 
 const buildVariantConfig = {
@@ -109,15 +111,21 @@ module.exports = ({config}) => {
       ],
       ['@react-native-firebase/app'],
       ['@react-native-firebase/crashlytics'],
+      // このアプリで用意しているAndroid用のプラグイン
       withAddAppActivity,
       withAddReleaseSigningConfigBuildGradle,
       withEnabledStatusBarTranslucent,
       withRemoveUsesClearTextTraffic,
       withDisabledWindowDrawsSystemBarBackgrounds,
       withMoveDevSettingsActivityToDebugAndroidManifest,
+      // このアプリで用意しているiOS用のプラグイン
       withRemoveCFBundleUrlTypes,
-      // ATSの有効化・無効化プラグインはビルドバリアント毎の設定ファイルで定義します。
-      // withEnabledATS,
+      withEnabledATS,
+      withDisabledATSOnlyDebug,
+      // iOSのクレデンシャルはビルドバリアント毎の設定ファイルで定義します。
+      // withSetCredentials,
+      // iOSのパーソナルアカウントはビルドバリアント毎の設定ファイルで定義します。
+      // withAddPersonalAccountConfig,
     ],
     extra: {
       termsUrl: 'https://www.tis.co.jp/termsofuse/',

@@ -60,7 +60,7 @@ jest-junit.xml
 /coverage
 
 # Local environmental variables
-ios/PersonalAccount.xcconfig
+PersonalAccount.xcconfig
 
 # Firebase
 GoogleService-Info.plist
