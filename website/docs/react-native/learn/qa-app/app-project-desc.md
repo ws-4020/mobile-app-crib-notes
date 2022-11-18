@@ -42,7 +42,7 @@ QAアプリの作成には、次のライブラリを使用します。他に使
 expo install <package-name>
 ```
 
-`devDependencies`に追加する場合は、以下のコマンドを実行してください。
+`devDependencies`に追加する場合は、`-D`または`--save-dev`オプションをつけてコマンドを実行してください。
 
 ```bash
 npm install -D <package-name>
