@@ -33,9 +33,9 @@ const overviews = [
     summary: <>React Nativeで簡単なToDoアプリを実装します。</>
   },
   {
-    title: 'QAアプリの実装',
+    title: 'Q&Aアプリの実装',
     to: '/react-native/learn/qa-app',
-    summary: <>React Nativeでより実践的なQAアプリを実装します。</>
+    summary: <>React Nativeでより実践的なQ&Aアプリを実装します。</>
   },
 ]
 

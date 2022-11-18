@@ -196,14 +196,14 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'QAアプリの実装',
+      label: 'Q&Aアプリの実装',
       items: [
         'react-native/learn/qa-app/qa-app',
         'react-native/learn/qa-app/app-spec',
         'react-native/learn/qa-app/app-project-desc',
         {
           type: 'category',
-          label: 'QAアプリの実装（基本編）',
+          label: 'Q&Aアプリの実装（基本編）',
           items: [
             {
               type: 'category',

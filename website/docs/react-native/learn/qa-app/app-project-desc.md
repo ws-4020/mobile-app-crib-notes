@@ -1,10 +1,10 @@
 ---
-title: QAアプリプロジェクトの説明
-sidebar_label: QAアプリプロジェクトの説明
+title: Q&Aアプリプロジェクトの説明
+sidebar_label: Q&Aアプリプロジェクトの説明
 hide_table_of_contents: true
 ---
 
-## QAアプリプロジェクトの準備
+## Q&Aアプリプロジェクトの準備
 
 ### 開発環境の構築
 
@@ -16,13 +16,13 @@ hide_table_of_contents: true
 
 ### ディレクトリ構成
 
-サンプルアプリ（SantokuApp）と同様、QAアプリはアプリの責務配置に準じたディレクトリ構成となっています。
+サンプルアプリ（SantokuApp）と同様、Q&Aアプリはアプリの責務配置に準じたディレクトリ構成となっています。
 
 詳細は、[SantokuApp - アプリの責務配置](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/README.md#アプリの責務配置)を参照してください。
 
 ### 使用ライブラリ
 
-QAアプリの作成には、次のライブラリを使用します。他に使用したいライブラリがあれば、適宜追加してください。
+Q&Aアプリの作成には、次のライブラリを使用します。他に使用したいライブラリがあれば、適宜追加してください。
 
 | ライブラリ名 |
 |--|
@@ -67,7 +67,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 ### プロジェクトの設定
 
 初期プロジェクトの作成をした直後は、最低限のファイルしかありません。
-そこで、QAアプリの実装に必要な共通処理をサンプルアプリ（[SantokuApp](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp)）からコピーします。
+そこで、Q&Aアプリの実装に必要な共通処理をサンプルアプリ（[SantokuApp](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp)）からコピーします。
 
 #### ログ出力
 
@@ -105,7 +105,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 
 #### UIコンポーネント
 
-共通で使用するUIコンポーネントも、QAアプリにコピーします。
+共通で使用するUIコンポーネントも、Q&Aアプリにコピーします。
 
 | コピーファイル |
 |--|
@@ -119,7 +119,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 OrvalはOpenAPI仕様からクライアントコードを自動生成します。
 React Query、SWRなど、いくつかのHTTP API通信ライブラリをサポートしています。
 
-QAアプリでは、[axios](https://axios-http.com/)と[React Query](https://react-query-v3.tanstack.com/)を使用します。
+Q&Aアプリでは、[axios](https://axios-http.com/)と[React Query](https://react-query-v3.tanstack.com/)を使用します。
 
 | コピーファイル |
 |--|
@@ -266,7 +266,7 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 - 入力画面のバリデーションで使用する[Yup](https://github.com/jquense/yup)の初期設定
 
 サンプルアプリ（SantokuApp）では、[アプリ起動後の初期化処理](../../santoku/application-architecture/life-cycle-management/initialization.mdx)に記載されている処理を実施しています。
-QAアプリでは、メッセージのロード、Yupの初期設定のみ組み込みます。まずは、次のファイルをコピーしてください。
+Q&Aアプリでは、メッセージのロード、Yupの初期設定のみ組み込みます。まずは、次のファイルをコピーしてください。
 
 | コピーファイル |
 |--|
@@ -420,9 +420,9 @@ export const App = () => {
 
 #### MSWの設定
 
-[MSW](https://mswjs.io/)は、HTTP API通信をインターセプトしてモックデータを返却するライブラリです。QAアプリの開発では、実際に動作するバックエンドがありません。そのため、MSWを使用してモックデータを返却するように設定します。
+[MSW](https://mswjs.io/)は、HTTP API通信をインターセプトしてモックデータを返却するライブラリです。Q&Aアプリの開発では、実際に動作するバックエンドがありません。そのため、MSWを使用してモックデータを返却するように設定します。
 
-サンプルアプリ（SantokuApp）には、QAアプリのOpenAPI仕様に準じたモックデータが既に用意されています。
+サンプルアプリ（SantokuApp）には、Q&AアプリのOpenAPI仕様に準じたモックデータが既に用意されています。
 
 まず、次のディレクトリ、ファイルをコピーしてください。
 

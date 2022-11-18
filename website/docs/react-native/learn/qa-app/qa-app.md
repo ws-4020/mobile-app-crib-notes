@@ -1,5 +1,5 @@
 ---
-title: QAアプリの実装
+title: Q&Aアプリの実装
 sidebar_label: 概要
 hide_table_of_contents: true
 ---
@@ -13,24 +13,24 @@ React Native未経験者でToDoアプリの実装が未実施の場合は、先�
 import {PageList} from '../../../../src/components';
 const overviews = [
   {
-    title: 'QAアプリの仕様',
+    title: 'Q&Aアプリの仕様',
     to: '/react-native/learn/qa-app/app-spec',
-    summary: <>これから実装するQAアプリの仕様を理解します。</>
+    summary: <>これから実装するQ&Aアプリの仕様を理解します。</>
   },
   {
-    title: 'QAアプリプロジェクトの説明',
+    title: 'Q&Aアプリプロジェクトの説明',
     to: '/react-native/learn/qa-app/app-project-desc',
-    summary: <>QAアプリの開発に利用するReact Nativeプロジェクトのディレクトリ構成などについて学びます。</>
+    summary: <>Q&Aアプリの開発に利用するReact Nativeプロジェクトのディレクトリ構成などについて学びます。</>
   },
   {
-    title: 'QAアプリの実装（基本編）',
+    title: 'Q&Aアプリの実装（基本編）',
     to: '/react-native/learn/qa-app/exercise-basic-home-components',
-    summary: <>QAアプリの各画面と画面遷移、API呼び出しを実装します。</>
+    summary: <>Q&Aアプリの各画面と画面遷移、API呼び出しを実装します。</>
   },
   {
-    title: 'QAアプリの実装（応用編）',
+    title: 'Q&Aアプリの実装（応用編）',
     to: '/react-native/learn/qa-app/exercise-advanced',
-    summary: <>QAアプリにより複雑な表示部品や動きを追加します。</>
+    summary: <>Q&Aアプリにより複雑な表示部品や動きを追加します。</>
   },
 ]
 

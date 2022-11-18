@@ -1,6 +1,6 @@
 ---
-title: QAアプリの仕様
-sidebar_label: QAアプリの仕様
+title: Q&Aアプリの仕様
+sidebar_label: Q&Aアプリの仕様
 hide_table_of_contents: true
 ---
 
