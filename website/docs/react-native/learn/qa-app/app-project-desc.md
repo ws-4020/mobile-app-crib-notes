@@ -92,6 +92,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 
 アプリの文言を統一するため、メッセージ管理機能を追加します。
 メッセージ管理は次の機能を備えています。
+
 - メッセージを集約的に管理する
 
 機能の詳細は、[メッセージ管理](../../santoku/application-architecture/message-configuration/overview.mdx)を参照してください。
