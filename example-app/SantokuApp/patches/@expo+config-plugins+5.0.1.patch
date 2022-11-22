@@ -1,8 +1,16 @@
 diff --git a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts
-index 403356f..214c6a7 100644
+index 403356f..6ed8298 100644
 --- a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts
 +++ b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts
-@@ -21,6 +21,8 @@ export declare function addResourceFileToGroup({ filepath, groupName, isBuildFil
+@@ -14,13 +14,15 @@ export declare function getHackyProjectName(projectRoot: string, config: ExpoCon
+  * Add a resource file (ex: `SplashScreen.storyboard`, `Images.xcassets`) to an Xcode project.
+  * This is akin to creating a new code file in Xcode with `⌘+n`.
+  */
+-export declare function addResourceFileToGroup({ filepath, groupName, isBuildFile, project, verbose, targetUuid, }: {
++export declare function addResourceFileToGroup({ filepath, groupName, isBuildFile, project, verbose, targetUuid, fileUuid, fileRef}: {
+     filepath: string;
+     groupName: string;
+     isBuildFile?: boolean;
      project: XcodeProject;
      verbose?: boolean;
      targetUuid?: string;
@@ -21,7 +29,7 @@ index 403356f..214c6a7 100644
  export declare function getApplicationNativeTarget({ project, projectName, }: {
      project: XcodeProject;
 diff --git a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.js b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.js
-index 840276a..ec7a95b 100644
+index 840276a..e205dba 100644
 --- a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.js
 +++ b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.js
 @@ -181,7 +181,9 @@ function addResourceFileToGroup({
