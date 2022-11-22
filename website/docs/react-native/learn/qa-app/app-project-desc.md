@@ -14,12 +14,6 @@ hide_table_of_contents: true
 
 [プロジェクトの作成](/react-native/learn/getting-started/create-project)を参照し、新たに初期プロジェクトを作成してください。
 
-### ディレクトリ構成
-
-サンプルアプリ（SantokuApp）と同様、Q&Aアプリはアプリの責務配置に準じたディレクトリ構成となっています。
-
-詳細は、[SantokuApp - アプリの責務配置](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/README.md#アプリの責務配置)を参照してください。
-
 ### 使用ライブラリ
 
 Q&Aアプリの作成には、次のライブラリを使用します。他に使用したいライブラリがあれば、適宜追加してください。
@@ -60,16 +54,18 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 一方で、`npm install <package-name>`でインストールするだけでは正しいバージョンでインストールされない可能性があるということに注意してください。
 :::
 
-### アプリの実行方法
+## Q&Aアプリプロジェクトのディレクトリ構成
 
-[アプリの実行](/react-native/learn/getting-started/launch-created-app)を参照してください。
+サンプルアプリ（SantokuApp）と同様、Q&Aアプリはアプリの責務配置に準じたディレクトリ構成となっています。
 
-### プロジェクトの設定
+詳細は、[SantokuApp - アプリの責務配置](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/README.md#アプリの責務配置)を参照してください。
+
+## Q&Aアプリプロジェクトのプロジェクトの設定
 
 初期プロジェクトの作成をした直後は、最低限のファイルしかありません。
 そこで、Q&Aアプリの実装に必要な共通処理をサンプルアプリ（[SantokuApp](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp)）からコピーします。
 
-#### ログ出力
+### ログ出力
 
 ログ出力機能を追加します。
 ログ出力は次の機能を備えています。
@@ -88,7 +84,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 | src/bases/logging/Transport.ts |
 | src/bases/logging/sendErrorLog.ts |
 
-#### メッセージ管理
+### メッセージ管理
 
 アプリの文言を統一するため、メッセージ管理機能を追加します。
 メッセージ管理は次の機能を備えています。
@@ -103,7 +99,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 | src/bases/message/BundledMessageLoader.ts |
 | src/bases/message/BundledMessages.ts |
 
-#### UIコンポーネント
+### UIコンポーネント
 
 共通で使用するUIコンポーネントも、Q&Aアプリにコピーします。
 
@@ -113,7 +109,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 | src/bases/ui/snackbar/SnackbarComponent.tsx |
 | src/bases/ui/overlay/FullWindowOverlay.tsx |
 
-#### HTTP API通信
+### HTTP API通信
 
 [Orval](https://orval.dev/)の設定を追加します。
 OrvalはOpenAPI仕様からクライアントコードを自動生成します。
@@ -217,7 +213,7 @@ Q&Aアプリでは、[axios](https://axios-http.com/)と[React Query](https://re
 
 最後に、`npm run orval`を実行して、クライアントコードを生成してください。
 
-#### React Queryの設定
+### React Queryの設定
 
 HTTP API通信の状態管理や、エラーのハンドリングに[React Query](https://react-query-v3.tanstack.com/)を使用します。
 React Queryのデフォルトオプションや、エラーハンドリングの設定処理を、サンプルアプリ（SantokuApp）からコピーします。
@@ -258,7 +254,7 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 
 ```
 
-#### アプリ起動後の初期化処理
+### アプリ起動後の初期化処理
 
 アプリ起動後の初期化処理を組み込みます。
 
@@ -418,7 +414,7 @@ export const App = () => {
 };
 ```
 
-#### MSWの設定
+### MSWの設定
 
 [MSW](https://mswjs.io/)は、HTTP API通信をインターセプトしてモックデータを返却するライブラリです。Q&Aアプリの開発では、実際に動作するバックエンドがありません。そのため、MSWを使用してモックデータを返却するように設定します。
 
@@ -524,3 +520,9 @@ export const loggedInAccountData = () => {
 - registerRootComponent(App);
 + registerRootComponent(AppWithMsw);
 ```
+
+## Q&Aアプリプロジェクトの実行
+
+### アプリの実行方法
+
+[アプリの実行](/react-native/learn/getting-started/launch-created-app)を参照してください。
