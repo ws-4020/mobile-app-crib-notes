@@ -1,5 +1,5 @@
 ---
-title: API呼び出し
+title: 質問詳細画面のAPI呼び出し
 sidebar_label: API呼び出し
 hide_table_of_contents: true
 ---
