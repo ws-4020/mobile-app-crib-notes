@@ -1,5 +1,5 @@
 ---
-title: API呼び出し
+title: イベント一覧画面のAPI呼び出し
 sidebar_label: API呼び出し
 hide_table_of_contents: true
 ---
