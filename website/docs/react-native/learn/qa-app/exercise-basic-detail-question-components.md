@@ -1,5 +1,5 @@
 ---
-title: 表示部品の作成
+title: 質問詳細画面の表示部品を作成
 sidebar_label: 表示部品の作成
 hide_table_of_contents: true
 ---
