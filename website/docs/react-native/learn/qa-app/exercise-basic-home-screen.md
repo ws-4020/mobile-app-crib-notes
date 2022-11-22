@@ -1,5 +1,5 @@
 ---
-title: 画面の実装
+title: 一覧画面（ホーム画面）の実装
 sidebar_label: 画面の実装
 hide_table_of_contents: true
 ---
