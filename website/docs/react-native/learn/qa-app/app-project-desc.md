@@ -14,7 +14,7 @@ hide_table_of_contents: true
 
 [プロジェクトの作成](/react-native/learn/getting-started/create-project)を参照し、新たに初期プロジェクトを作成してください。
 
-### 使用ライブラリ
+### 使用ライブラリのインストール
 
 Q&Aアプリの作成には、次のライブラリを使用します。他に使用したいライブラリがあれば、適宜追加してください。
 
