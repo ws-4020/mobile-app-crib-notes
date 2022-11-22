@@ -18,6 +18,10 @@ module.exports = config => {
       // bundleIdentifier: 'personal.jp.fintan.mobile.SantokuApp.debug.${PERSONAL_IDENTIFIER}',
       googleServicesFile: './GoogleService-Info.Dummy.plist',
       icon: './assets/ios/ic_debug.png',
+      infoPlist: {
+        ...config.ios.infoPlist,
+        UIBackgroundModes: undefined,
+      },
     },
     plugins: [
       ...config.plugins,

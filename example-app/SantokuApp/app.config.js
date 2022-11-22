@@ -78,6 +78,7 @@ module.exports = ({config}) => {
       supportsTablet: true,
       infoPlist: {
         CFBundleAllowMixedLocalizations: true,
+        UIBackgroundModes: ['fetch', 'remote-notification'],
       },
       splash: {
         backgroundColor: '#393939',
