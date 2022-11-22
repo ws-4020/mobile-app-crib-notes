@@ -1,5 +1,5 @@
 ---
-title: 表示部品の作成
+title: 一覧画面（ホーム画面）の表示部品を作成
 sidebar_label: 表示部品の作成
 hide_table_of_contents: true
 ---
