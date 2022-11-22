@@ -1,5 +1,5 @@
 diff --git a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts
-index 403356f..6ed8298 100644
+index 403356f..8048396 100644
 --- a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts
 +++ b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts
 @@ -14,13 +14,15 @@ export declare function getHackyProjectName(projectRoot: string, config: ExpoCon
@@ -7,7 +7,7 @@ index 403356f..6ed8298 100644
   * This is akin to creating a new code file in Xcode with `⌘+n`.
   */
 -export declare function addResourceFileToGroup({ filepath, groupName, isBuildFile, project, verbose, targetUuid, }: {
-+export declare function addResourceFileToGroup({ filepath, groupName, isBuildFile, project, verbose, targetUuid, fileUuid, fileRef}: {
++export declare function addResourceFileToGroup({ filepath, groupName, isBuildFile, project, verbose, targetUuid, fileUuid, fileRef, }: {
      filepath: string;
      groupName: string;
      isBuildFile?: boolean;
@@ -19,6 +19,15 @@ index 403356f..6ed8298 100644
  }): XcodeProject;
  /**
   * Add a build source file (ex: `AppDelegate.m`, `ViewController.swift`) to an Xcode project.
+@@ -33,7 +35,7 @@ export declare function addBuildSourceFileToGroup({ filepath, groupName, project
+     verbose?: boolean;
+     targetUuid?: string;
+ }): XcodeProject;
+-export declare function addFileToGroupAndLink({ filepath, groupName, project, verbose, addFileToProject, targetUuid, }: {
++export declare function addFileToGroupAndLink({ filepath, groupName, project, verbose, addFileToProject, targetUuid, fileUuid, fileRef, }: {
+     filepath: string;
+     groupName: string;
+     project: XcodeProject;
 @@ -43,6 +45,8 @@ export declare function addFileToGroupAndLink({ filepath, groupName, project, ve
          file: PBXFile;
          project: XcodeProject;
