@@ -20,7 +20,7 @@ const overviews = [
   {
     title: 'Q&Aアプリプロジェクトの説明',
     to: '/react-native/learn/qa-app/app-project-desc',
-    summary: <>Q&Aアプリの開発に利用するReact Nativeプロジェクトのディレクトリ構成などについて学びます。</>
+    summary: <>Q&Aアプリの開発に利用するReact Nativeプロジェクトを準備・設定します。</>
   },
   {
     title: 'Q&Aアプリの実装（基本編）',
