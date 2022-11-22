@@ -13,6 +13,9 @@ import {
   withDisabledWindowDrawsSystemBarBackgrounds,
   withRemoveUsesClearTextTraffic,
   withMoveDevSettingsActivityToDebugAndroidManifest,
+  withRemoveCFBundleUrlTypes,
+  withEnabledATS,
+  withDisabledATSOnlyDebug,
 } from './config/app.plugin.js';
 
 const buildVariantConfig = {
@@ -26,7 +29,8 @@ const buildVariantConfig = {
   'prod.release': prodReleaseConfig,
 };
 /**
- * ビルドタイプ：Release、プロダクトフレーバー：Prodの設定を定義します。
+ * アプリ全体のベースとなる設定です
+ * ビルドバリアント毎に違う設定値は、ビルドタイプ：Release、プロダクトフレーバー：Prodの設定を定義しています。
  * 上記ビルドバリアントと違う設定を定義する場合は、各ビルドバリアントごとの設定ファイル（app.config.xxx.yyy.json）で再定義してください。
  *
  * 環境変数「BUILD_VARIANT」を設定することで、指定のビルドバリアントの設定ファイルを読み込みます。
@@ -35,7 +39,7 @@ const buildVariantConfig = {
  * @see https://docs.expo.dev/versions/latest/config/app/
  */
 module.exports = ({config}) => {
-  const buildVariant = process.env.BUILD_VARIANT;
+  const buildVariant = process.env.BUILD_VARIANT ?? 'prod.release';
   const defaultAppConfig = {
     ...config,
     name: 'SantokuApp',
@@ -43,6 +47,10 @@ module.exports = ({config}) => {
     orientation: 'portrait',
     jsEngine: 'jsc',
     primaryColor: '#393939',
+    locales: {
+      ja: './l10n.ja.json',
+      en: './l10n.en.json',
+    },
     android: {
       package: 'jp.fintan.mobile.SantokuApp',
       versionCode: 4,
@@ -62,6 +70,20 @@ module.exports = ({config}) => {
       googleServicesFile: './google-services.json',
       softwareKeyboardLayoutMode: 'resize',
       allowBackup: false,
+    },
+    ios: {
+      bundleIdentifier: 'jp.fintan.mobile.SantokuApp',
+      googleServicesFile: './GoogleService-Info.plist',
+      icon: './assets/ios/ic_release.png',
+      supportsTablet: true,
+      infoPlist: {
+        CFBundleAllowMixedLocalizations: true,
+        UIBackgroundModes: ['fetch', 'remote-notification'],
+      },
+      splash: {
+        backgroundColor: '#393939',
+        image: './assets/ios/splashscreen.png',
+      },
     },
     plugins: [
       [
@@ -83,16 +105,28 @@ module.exports = ({config}) => {
 `,
             enableProguardInReleaseBuilds: true,
           },
+          ios: {
+            useFrameworks: 'static',
+          },
         },
       ],
       ['@react-native-firebase/app'],
       ['@react-native-firebase/crashlytics'],
+      // このアプリで用意しているAndroid用のプラグイン
       withAddAppActivity,
       withAddReleaseSigningConfigBuildGradle,
       withEnabledStatusBarTranslucent,
       withRemoveUsesClearTextTraffic,
       withDisabledWindowDrawsSystemBarBackgrounds,
       withMoveDevSettingsActivityToDebugAndroidManifest,
+      // このアプリで用意しているiOS用のプラグイン
+      withRemoveCFBundleUrlTypes,
+      withEnabledATS,
+      withDisabledATSOnlyDebug,
+      // iOSのクレデンシャルはビルドバリアント毎の設定ファイルで定義します。
+      // withSetCredentials,
+      // iOSのパーソナルアカウントはビルドバリアント毎の設定ファイルで定義します。
+      // withAddPersonalAccountConfig,
     ],
     extra: {
       termsUrl: 'https://www.tis.co.jp/termsofuse/',
@@ -108,5 +142,5 @@ module.exports = ({config}) => {
       enabled: false,
     },
   };
-  return buildVariant ? {...defaultAppConfig, ...buildVariantConfig[buildVariant](defaultAppConfig)} : defaultAppConfig;
+  return {...defaultAppConfig, ...buildVariantConfig[buildVariant](defaultAppConfig)};
 };

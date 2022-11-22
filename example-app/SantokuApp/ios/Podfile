@@ -1,5 +1,3 @@
-# https://rnfirebase.io/#altering-cocoapods-to-use-frameworks
-$RNFirebaseAsStaticFramework = true
 require File.join(File.dirname(`node --print "require.resolve('expo/package.json')"`), "scripts/autolinking")
 require File.join(File.dirname(`node --print "require.resolve('react-native/package.json')"`), "scripts/react_native_pods")
 require File.join(File.dirname(`node --print "require.resolve('@react-native-community/cli-platform-ios/package.json')"`), "native_modules")
@@ -11,12 +9,7 @@ platform :ios, podfile_properties['ios.deploymentTarget'] || '12.4'
 install! 'cocoapods',
   :deterministic_uuids => false
 
-project 'SantokuApp',
-  'Debug' => :debug,
-  'DebugAdvanced' => :debug,
-  'Release' => :release
-
-target 'SantokuApp' do
+target 'DevSantokuApp' do
   use_expo_modules!
   config = use_native_modules!
 
@@ -33,20 +26,12 @@ target 'SantokuApp' do
     :app_path => "#{Dir.pwd}/.."
   )
 
-  # Enables Flipper.
+  # Uncomment to opt-in to using Flipper
+  # Note that if you have use_frameworks! enabled, Flipper will not work
   #
-  # Note that if you have use_frameworks! enabled, Flipper will not work and
-  # you should disable the next line.
-  # https://rnfirebase.io/#altering-cocoapods-to-use-frameworks
-#   use_flipper!(configurations: ['Debug', 'DebugAdvanced'])
-
-  post_integrate do |installer|
-    begin
-      expo_patch_react_imports!(installer)
-    rescue => e
-      Pod::UI.warn e
-    end
-  end
+  # if !ENV['CI']
+  #   use_flipper!()
+  # end
 
   post_install do |installer|
     react_native_post_install(installer)
@@ -61,6 +46,14 @@ target 'SantokuApp' do
           config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
         end
       end
+    end
+  end
+
+  post_integrate do |installer|
+    begin
+      expo_patch_react_imports!(installer)
+    rescue => e
+      Pod::UI.warn e
     end
   end
 end
