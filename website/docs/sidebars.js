@@ -574,10 +574,6 @@ module.exports = {
       ],
     },
     {
-      type: 'doc',
-      id: 'react-native/santoku/glossary',
-    },
-    {
       type: 'category',
       label: 'Decision Records',
       items: [
