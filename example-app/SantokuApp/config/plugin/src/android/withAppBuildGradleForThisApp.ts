@@ -1,7 +1,8 @@
 import {ConfigPlugin, withAppBuildGradle} from '@expo/config-plugins';
 
 /**
- * リリース用のSigningConfigを追加します。
+ * このPluginでは、以下を実施しています。
+ * 【リリース用のSigningConfigを追加】
  * リリース用のSigningConfigは、以下のプロパティをgradle.propertiesに設定する必要があります。
  *
  * - SANTOKU_APP_UPLOAD_KEYSTORE_FILE
@@ -9,12 +10,16 @@ import {ConfigPlugin, withAppBuildGradle} from '@expo/config-plugins';
  * - SANTOKU_APP_UPLOAD_KEY_ALIAS
  * - SANTOKU_APP_UPLOAD_KEY_PASSWORD
  *
+ * 【NDKのクラッシュログ収集に関する設定を追加】
+ * リリースビルドの場合は、Native Development KitのクラッシュログをFirebase Crashlyticsに送信する設定を追加します。
+ *
  * @param config ExpoConfig
+ * @see https://rnfirebase.io/crashlytics/android-setup#4-optional-enable-crashlytics-ndk-reporting
  */
-export const withAddReleaseSigningConfigBuildGradle: ConfigPlugin = config => {
+export const withAppBuildGradleForThisApp: ConfigPlugin = config => {
   return withAppBuildGradle(config, config => {
     if (config.modResults.language === 'groovy') {
-      config.modResults.contents = applyReleaseSigningConfig(config.modResults.contents);
+      config.modResults.contents = apply(config.modResults.contents);
     } else {
       throw new Error('In this app, only groovy is supported as the language for build.gradle.');
     }
@@ -22,9 +27,9 @@ export const withAddReleaseSigningConfigBuildGradle: ConfigPlugin = config => {
   });
 };
 
-const applyReleaseSigningConfig = (buildGradle: string): string => {
+const apply = (buildGradle: string): string => {
   const added = addReleaseSigningConfig(buildGradle);
-  return setReleaseSigningConfig(added);
+  return setReleaseSigningConfigAndNdkCrashReporting(added);
 };
 
 const addReleaseSigningConfig = (buildGradle: string): string => {
@@ -43,7 +48,7 @@ const addReleaseSigningConfig = (buildGradle: string): string => {
   );
 };
 
-const setReleaseSigningConfig = (buildGradle: string): string => {
+const setReleaseSigningConfigAndNdkCrashReporting = (buildGradle: string): string => {
   return buildGradle.replace(
     /buildTypes[\s\S]*release[\s\S]*signingConfigs\.debug/,
     `buildTypes {
@@ -53,6 +58,12 @@ const setReleaseSigningConfig = (buildGradle: string): string => {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.release`,
+            signingConfig signingConfigs.release
+            // Crashlytics NDK reporting allows you to capture Native Development Kit crashes.
+            // see https://rnfirebase.io/crashlytics/android-setup#4-optional-enable-crashlytics-ndk-reporting
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+                unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
+            }`,
   );
 };

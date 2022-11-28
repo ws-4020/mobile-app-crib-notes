@@ -256,6 +256,12 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.release
+            // Crashlytics NDK reporting allows you to capture Native Development Kit crashes.
+            // see https://rnfirebase.io/crashlytics/android-setup#4-optional-enable-crashlytics-ndk-reporting
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+                unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
+            }
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
