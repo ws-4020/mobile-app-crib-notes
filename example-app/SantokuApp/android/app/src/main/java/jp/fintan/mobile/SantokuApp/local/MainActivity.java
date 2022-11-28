@@ -1,4 +1,4 @@
-package jp.fintan.mobile.SantokuApp.dev.debug;
+package jp.fintan.mobile.SantokuApp.local;
 
 import android.content.Intent;
 import android.os.Bundle;

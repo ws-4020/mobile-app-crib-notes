@@ -3,19 +3,19 @@ const withSetCredentials = require('./app.plugin.js').withSetCredentials;
 module.exports = config => {
   return {
     ...config,
-    name: 'Dev SantokuApp',
+    name: 'Stg SantokuApp',
     android: {
       ...config.android,
-      package: 'jp.fintan.mobile.SantokuApp.dev.debugAdvanced',
+      package: 'jp.fintan.mobile.SantokuApp.stg',
       adaptiveIcon: {
         ...config.android.adaptiveIcon,
-        foregroundImage: './assets/android/ic_launcher_foreground_debugAdvanced.png',
+        foregroundImage: './assets/android/ic_launcher_foreground_stg.png',
       },
     },
     ios: {
       ...config.ios,
-      bundleIdentifier: 'jp.fintan.mobile.SantokuApp.dev.debugAdvanced',
-      icon: './assets/ios/ic_debugAdvanced.png',
+      bundleIdentifier: 'jp.fintan.mobile.SantokuApp.stg',
+      icon: './assets/ios/ic_stg.png',
     },
     plugins: [
       ...config.plugins,
@@ -24,7 +24,7 @@ module.exports = config => {
         {
           developmentTeam: 'D9MUZCM4X6',
           codeSignStyle: 'Manual',
-          provisioningProfileSpecifier: 'SantokuApp DevDebugAdvanced Development',
+          provisioningProfileSpecifier: 'SantokuApp DevInHouse Development',
         },
       ],
     ],

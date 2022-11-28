@@ -13,7 +13,7 @@ class MainComponentsRegistry
  public:
   // Adapt it to the package you used for your Java class.
   constexpr static auto kJavaDescriptor =
-      "Ljp/fintan/mobile/SantokuApp/dev/debug/newarchitecture/components/MainComponentsRegistry;";
+      "Ljp/fintan/mobile/SantokuApp/local/newarchitecture/components/MainComponentsRegistry;";
 
   static void registerNatives();
 

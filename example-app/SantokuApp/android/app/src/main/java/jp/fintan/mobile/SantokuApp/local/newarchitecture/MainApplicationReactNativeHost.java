@@ -1,4 +1,4 @@
-package jp.fintan.mobile.SantokuApp.dev.debug.newarchitecture;
+package jp.fintan.mobile.SantokuApp.local.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -20,9 +20,9 @@ import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import jp.fintan.mobile.SantokuApp.dev.debug.BuildConfig;
-import jp.fintan.mobile.SantokuApp.dev.debug.newarchitecture.components.MainComponentsRegistry;
-import jp.fintan.mobile.SantokuApp.dev.debug.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import jp.fintan.mobile.SantokuApp.local.BuildConfig;
+import jp.fintan.mobile.SantokuApp.local.newarchitecture.components.MainComponentsRegistry;
+import jp.fintan.mobile.SantokuApp.local.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

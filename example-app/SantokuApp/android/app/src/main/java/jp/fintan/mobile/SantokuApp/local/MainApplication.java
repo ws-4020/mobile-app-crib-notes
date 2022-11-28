@@ -1,4 +1,4 @@
-package jp.fintan.mobile.SantokuApp.dev.debug;
+package jp.fintan.mobile.SantokuApp.local;
 
 import android.app.Application;
 import android.content.Context;
@@ -12,7 +12,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.soloader.SoLoader;
-import jp.fintan.mobile.SantokuApp.dev.debug.newarchitecture.MainApplicationReactNativeHost;
+import jp.fintan.mobile.SantokuApp.local.newarchitecture.MainApplicationReactNativeHost;
 
 import expo.modules.ApplicationLifecycleDispatcher;
 import expo.modules.ReactNativeHostWrapper;
@@ -88,7 +88,7 @@ public class MainApplication extends Application implements ReactApplication {
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
-        Class<?> aClass = Class.forName("jp.fintan.mobile.SantokuApp.dev.debug.ReactNativeFlipper");
+        Class<?> aClass = Class.forName("jp.fintan.mobile.SantokuApp.local.ReactNativeFlipper");
         aClass
             .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
             .invoke(null, context, reactInstanceManager);

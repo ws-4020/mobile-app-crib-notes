@@ -4,13 +4,13 @@ const withAddPersonalAccountConfig = require('./app.plugin.js').withAddPersonalA
 module.exports = config => {
   return {
     ...config,
-    name: 'Dev SantokuApp',
+    name: 'Local SantokuApp',
     android: {
       ...config.android,
-      package: 'jp.fintan.mobile.SantokuApp.dev.debug',
+      package: 'jp.fintan.mobile.SantokuApp.local',
       adaptiveIcon: {
         ...config.android.adaptiveIcon,
-        foregroundImage: './assets/android/ic_launcher_foreground_debug.png',
+        foregroundImage: './assets/android/ic_launcher_foreground_local.png',
       },
       googleServicesFile: './google-services-dummy.json',
     },
@@ -19,7 +19,7 @@ module.exports = config => {
       // ExpoのデフォルトConfigPluginでは、「$」のような記号をBundleIdentifierに設定出来なかったため、このアプリで作成した「withSetCredentials」Pluginで設定しています。
       // bundleIdentifier: 'personal.jp.fintan.mobile.SantokuApp.dev.debug.${PERSONAL_IDENTIFIER}',
       googleServicesFile: './GoogleService-Info.Dummy.plist',
-      icon: './assets/ios/ic_debug.png',
+      icon: './assets/ios/ic_local.png',
       infoPlist: {
         ...config.ios.infoPlist,
         UIBackgroundModes: undefined,
@@ -32,7 +32,7 @@ module.exports = config => {
         {
           developmentTeam: '${DEVELOPMENT_TEAM}',
           codeSignStyle: '${CODE_SIGN_STYLE}',
-          bundleIdentifier: 'personal.jp.fintan.mobile.SantokuApp.dev.debug.${PERSONAL_IDENTIFIER}',
+          bundleIdentifier: 'personal.jp.fintan.mobile.SantokuApp.local.${PERSONAL_IDENTIFIER}',
         },
       ],
       withAddPersonalAccountConfig,

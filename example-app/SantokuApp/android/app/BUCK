@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "jp.fintan.mobile.SantokuApp.dev.debug",
+    package = "jp.fintan.mobile.SantokuApp.local",
 )
 
 android_resource(
     name = "res",
-    package = "jp.fintan.mobile.SantokuApp.dev.debug",
+    package = "jp.fintan.mobile.SantokuApp.local",
     res = "src/main/res",
 )
 

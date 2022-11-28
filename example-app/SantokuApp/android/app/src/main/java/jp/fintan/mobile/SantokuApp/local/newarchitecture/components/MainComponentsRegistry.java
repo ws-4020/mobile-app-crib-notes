@@ -1,4 +1,4 @@
-package jp.fintan.mobile.SantokuApp.dev.debug.newarchitecture.components;
+package jp.fintan.mobile.SantokuApp.local.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

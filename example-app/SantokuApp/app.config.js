@@ -1,11 +1,6 @@
-import devDebugConfig from './config/app.config.dev.debug.js';
-import devDebugAdvancedConfig from './config/app.config.dev.debugAdvanced.js';
-import devHouseConfig from './config/app.config.dev.house.js';
-import devConfig from './config/app.config.dev.release.js';
-import prodDebugConfig from './config/app.config.prod.debug.js';
-import prodDebugAdvancedConfig from './config/app.config.prod.debugAdvanced.js';
-import prodHouseConfig from './config/app.config.prod.house.js';
-import prodReleaseConfig from './config/app.config.prod.release.js';
+import localConfig from './config/app.config.local.js';
+import prodConfig from './config/app.config.prod.js';
+import stgConfig from './config/app.config.stg.js';
 import {
   withAddAppActivity,
   withAppBuildGradleForThisApp,
@@ -18,28 +13,23 @@ import {
   withDisabledATSOnlyDebug,
 } from './config/app.plugin.js';
 
-const buildVariantConfig = {
-  'dev.debug': devDebugConfig,
-  'dev.debugAdvanced': devDebugAdvancedConfig,
-  'dev.house': devHouseConfig,
-  'dev.release': devConfig,
-  'prod.debug': prodDebugConfig,
-  'prod.debugAdvanced': prodDebugAdvancedConfig,
-  'prod.house': prodHouseConfig,
-  'prod.release': prodReleaseConfig,
+const environmentConfig = {
+  local: localConfig,
+  stg: stgConfig,
+  prod: prodConfig,
 };
 /**
  * アプリ全体のベースとなる設定です
- * ビルドバリアント毎に違う設定値は、ビルドタイプ：Release、プロダクトフレーバー：Prodの設定を定義しています。
- * 上記ビルドバリアントと違う設定を定義する場合は、各ビルドバリアントごとの設定ファイル（app.config.xxx.yyy.json）で再定義してください。
+ * 環境毎に違う設定値は、prodの設定を定義しています。
+ * 上記ビルドバリアントと違う設定を定義する場合は、各ビルドバリアントごとの設定ファイル（app.config.xxx.json）で再定義してください。
  *
- * 環境変数「BUILD_VARIANT」を設定することで、指定のビルドバリアントの設定ファイルを読み込みます。
- * ex) BUILD_VARIANT=dev.debug npx expo prebuild --clean
+ * 環境変数「ENVIRONMENT」を設定することで、指定の環境の設定ファイルを読み込みます。
+ * ex) ENVIRONMENT=local npx expo prebuild --clean
  *
  * @see https://docs.expo.dev/versions/latest/config/app/
  */
 module.exports = ({config}) => {
-  const buildVariant = process.env.BUILD_VARIANT ?? 'prod.release';
+  const environment = process.env.ENVIRONMENT ?? 'prod';
   const defaultAppConfig = {
     ...config,
     name: 'SantokuApp',
@@ -55,7 +45,7 @@ module.exports = ({config}) => {
       package: 'jp.fintan.mobile.SantokuApp',
       versionCode: 4,
       adaptiveIcon: {
-        foregroundImage: './assets/android/ic_launcher_foreground_release.png',
+        foregroundImage: './assets/android/ic_launcher_foreground_prod.png',
         backgroundColor: '#393939',
       },
       splash: {
@@ -74,7 +64,7 @@ module.exports = ({config}) => {
     ios: {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp',
       googleServicesFile: './GoogleService-Info.plist',
-      icon: './assets/ios/ic_release.png',
+      icon: './assets/ios/ic_prod.png',
       supportsTablet: true,
       infoPlist: {
         CFBundleAllowMixedLocalizations: true,
@@ -142,5 +132,5 @@ module.exports = ({config}) => {
       enabled: false,
     },
   };
-  return {...defaultAppConfig, ...buildVariantConfig[buildVariant](defaultAppConfig)};
+  return {...defaultAppConfig, ...environmentConfig[environment](defaultAppConfig)};
 };
