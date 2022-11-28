@@ -8,7 +8,7 @@ import prodHouseConfig from './config/app.config.prod.house.js';
 import prodReleaseConfig from './config/app.config.prod.release.js';
 import {
   withAddAppActivity,
-  withAddReleaseSigningConfigBuildGradle,
+  withAppBuildGradleForThisApp,
   withEnabledStatusBarTranslucent,
   withDisabledWindowDrawsSystemBarBackgrounds,
   withRemoveUsesClearTextTraffic,
@@ -114,7 +114,7 @@ module.exports = ({config}) => {
       ['@react-native-firebase/crashlytics'],
       // このアプリで用意しているAndroid用のプラグイン
       withAddAppActivity,
-      withAddReleaseSigningConfigBuildGradle,
+      withAppBuildGradleForThisApp,
       withEnabledStatusBarTranslucent,
       withRemoveUsesClearTextTraffic,
       withDisabledWindowDrawsSystemBarBackgrounds,

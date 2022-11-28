@@ -1,6 +1,6 @@
 export * from './withAddAppActivity';
 export * from './withAddAppActivityAndroidManifest';
-export * from './withAddReleaseSigningConfigBuildGradle';
+export * from './withAppBuildGradleForThisApp';
 export * from './withCopyTemplateJavaFile';
 export * from './withRemoveUsesClearTextTraffic';
 export * from './withDisabledWindowDrawsSystemBarBackgrounds';
