@@ -3,14 +3,10 @@ import prodConfig from './config/app.config.prod.js';
 import stgConfig from './config/app.config.stg.js';
 import {
   withAddAppActivity,
-  withAppBuildGradleForThisApp,
   withEnabledStatusBarTranslucent,
   withDisabledWindowDrawsSystemBarBackgrounds,
-  withRemoveUsesClearTextTraffic,
   withMoveDevSettingsActivityToDebugAndroidManifest,
   withRemoveCFBundleUrlTypes,
-  withEnabledATS,
-  withDisabledATSOnlyDebug,
 } from './config/app.plugin.js';
 
 const environmentConfig = {
@@ -20,7 +16,7 @@ const environmentConfig = {
 };
 /**
  * アプリ全体のベースとなる設定です
- * 環境毎に違う設定値は、prodの設定を定義しています。
+ * 環境毎に違う設定値は、prodの設定を定義しています。（一部のプラグインを除く）
  * 上記ビルドバリアントと違う設定を定義する場合は、各ビルドバリアントごとの設定ファイル（app.config.xxx.json）で再定義してください。
  *
  * 環境変数「ENVIRONMENT」を設定することで、指定の環境の設定ファイルを読み込みます。
@@ -104,18 +100,19 @@ module.exports = ({config}) => {
       ['@react-native-firebase/crashlytics'],
       // このアプリで用意しているAndroid用のプラグイン
       withAddAppActivity,
-      withAppBuildGradleForThisApp,
       withEnabledStatusBarTranslucent,
-      withRemoveUsesClearTextTraffic,
       withDisabledWindowDrawsSystemBarBackgrounds,
       withMoveDevSettingsActivityToDebugAndroidManifest,
+      // 以下のプラグインは、環境毎の設定ファイルで定義します。
+      // withAppBuildGradleForRelease,
+      // withRemoveUsesClearTextTrafficForRelease,
+
       // このアプリで用意しているiOS用のプラグイン
       withRemoveCFBundleUrlTypes,
-      withEnabledATS,
-      withDisabledATSOnlyDebug,
-      // iOSのクレデンシャルはビルドバリアント毎の設定ファイルで定義します。
+      // 以下のプラグインは、環境毎の設定ファイルで定義します。
+      // withEnabledATS,
+      // withDisabledATS
       // withSetCredentials,
-      // iOSのパーソナルアカウントはビルドバリアント毎の設定ファイルで定義します。
       // withAddPersonalAccountConfig,
     ],
     extra: {

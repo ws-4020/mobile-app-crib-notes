@@ -1,3 +1,6 @@
+const withAppBuildGradleForRelease = require('./app.plugin.js').withAppBuildGradleForRelease;
+const withRemoveUsesClearTextTrafficForRelease = require('./app.plugin.js').withRemoveUsesClearTextTrafficForRelease;
+const withEnabledATS = require('./app.plugin.js').withEnabledATS;
 const withSetCredentials = require('./app.plugin.js').withSetCredentials;
 
 module.exports = config => {
@@ -19,6 +22,12 @@ module.exports = config => {
     },
     plugins: [
       ...config.plugins,
+      // このアプリで用意しているAndroid用のプラグイン
+      withAppBuildGradleForRelease,
+      withRemoveUsesClearTextTrafficForRelease,
+
+      // このアプリで用意しているiOS用のプラグイン
+      withEnabledATS,
       [
         withSetCredentials,
         {

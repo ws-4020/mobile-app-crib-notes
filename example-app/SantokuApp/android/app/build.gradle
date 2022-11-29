@@ -1,6 +1,4 @@
 apply plugin: "com.android.application"
-apply plugin: "com.google.gms.google-services"
-apply plugin: "com.google.firebase.crashlytics"
 
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
@@ -234,15 +232,6 @@ android {
         }
     }
     signingConfigs {
-        release {
-            // You must set following properties in gradle.properties for release build
-            if (project.hasProperty('SANTOKU_APP_UPLOAD_KEYSTORE_FILE')) {
-                storeFile file(SANTOKU_APP_UPLOAD_KEYSTORE_FILE)
-                storePassword SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD
-                keyAlias SANTOKU_APP_UPLOAD_KEY_ALIAS
-                keyPassword SANTOKU_APP_UPLOAD_KEY_PASSWORD
-            }
-        }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
@@ -257,13 +246,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.release
-            // Crashlytics NDK reporting allows you to capture Native Development Kit crashes.
-            // see https://rnfirebase.io/crashlytics/android-setup#4-optional-enable-crashlytics-ndk-reporting
-            firebaseCrashlytics {
-                nativeSymbolUploadEnabled true
-                unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
-            }
+            signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -391,3 +374,6 @@ def isNewArchitectureEnabled() {
     // - Set an environment variable `ORG_GRADLE_PROJECT_newArchEnabled=true`
     return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
 }
+
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'

@@ -1,3 +1,4 @@
+const withDisabledATS = require('./app.plugin.js').withDisabledATS;
 const withSetCredentials = require('./app.plugin.js').withSetCredentials;
 const withAddPersonalAccountConfig = require('./app.plugin.js').withAddPersonalAccountConfig;
 
@@ -27,6 +28,8 @@ module.exports = config => {
     },
     plugins: [
       ...config.plugins,
+      // このアプリで用意しているiOS用のプラグイン
+      withDisabledATS,
       [
         withSetCredentials,
         {
