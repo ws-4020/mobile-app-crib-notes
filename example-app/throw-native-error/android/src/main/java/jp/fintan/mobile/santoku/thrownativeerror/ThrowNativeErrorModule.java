@@ -1,4 +1,4 @@
-package com.santoku.thrownativeerror;
+package jp.fintan.mobile.santoku.thrownativeerror;
 
 import androidx.annotation.NonNull;
 

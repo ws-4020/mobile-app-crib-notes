@@ -1,4 +1,4 @@
-package com.thrownativeerrorexample.newarchitecture.modules;
+package jp.fintan.mobile.santoku.thrownativeerrorexample.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

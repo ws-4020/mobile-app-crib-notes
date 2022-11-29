@@ -1,4 +1,4 @@
-package com.thrownativeerrorexample.newarchitecture;
+package jp.fintan.mobile.santoku.thrownativeerrorexample.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.thrownativeerrorexample.BuildConfig;
-import com.thrownativeerrorexample.newarchitecture.components.MainComponentsRegistry;
-import com.thrownativeerrorexample.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import jp.fintan.mobile.santoku.thrownativeerrorexample.BuildConfig;
+import jp.fintan.mobile.santoku.thrownativeerrorexample.newarchitecture.components.MainComponentsRegistry;
+import jp.fintan.mobile.santoku.thrownativeerrorexample.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

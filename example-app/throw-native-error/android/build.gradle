@@ -133,6 +133,6 @@ if (isNewArchitectureEnabled()) {
   react {
     jsRootDir = file("../src/")
     libraryName = "ThrowNativeError"
-    codegenJavaPackageName = "com.santoku.thrownativeerror"
+    codegenJavaPackageName = "jp.fintan.mobile.santoku.thrownativeerror"
   }
 }

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.thrownativeerrorexample">
+  package="jp.fintan.mobile.santoku.thrownativeerrorexample">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

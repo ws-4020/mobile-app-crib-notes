@@ -1,4 +1,4 @@
-package com.thrownativeerrorexample;
+package jp.fintan.mobile.santoku.thrownativeerrorexample;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

@@ -1,4 +1,4 @@
-package com.thrownativeerrorexample.newarchitecture.components;
+package jp.fintan.mobile.santoku.thrownativeerrorexample.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
