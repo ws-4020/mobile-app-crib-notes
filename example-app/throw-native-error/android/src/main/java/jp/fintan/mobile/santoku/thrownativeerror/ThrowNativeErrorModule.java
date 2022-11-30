@@ -7,6 +7,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
+import android.util.Log;
 
 @ReactModule(name = ThrowNativeErrorModule.NAME)
 public class ThrowNativeErrorModule extends ReactContextBaseJavaModule {
@@ -22,11 +23,17 @@ public class ThrowNativeErrorModule extends ReactContextBaseJavaModule {
     return NAME;
   }
 
-
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
   @ReactMethod
-  public void multiply(double a, double b, Promise promise) {
-    promise.resolve(a * b);
+  public void throwErrorSyncProcess() {
+    Log.d("ThrowNativeErrorModule", "Throw exception in synchronous process.");
+    throw new RuntimeException("Error has occurred in synchronous process.");
+  }
+
+  @ReactMethod
+  public void throwErrorAsyncProcess() {
+    Log.d("ThrowNativeErrorModule", "Throw exception in asynchronous process.");
+    new Thread(() -> {
+      throw new RuntimeException("Error has occurred in asynchronous process.");
+    }).start();
   }
 }

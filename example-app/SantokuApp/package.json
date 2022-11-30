@@ -49,6 +49,7 @@
     "@react-navigation/native": "~6.0.6",
     "@react-navigation/native-stack": "~6.9.0",
     "@react-navigation/stack": "~6.3.0",
+    "@santoku/throw-native-error": "file:../throw-native-error/santoku-throw-native-error-0.1.0.tgz",
     "@shopify/restyle": "^2.1.0",
     "axios": "^0.27.0",
     "expo": "~46.0.17",

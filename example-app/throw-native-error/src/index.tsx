@@ -17,6 +17,10 @@ const ThrowNativeError = NativeModules.ThrowNativeError
       },
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return ThrowNativeError.multiply(a, b);
+export function throwErrorSyncProcess(): Promise<void> {
+  return ThrowNativeError.throwErrorSyncProcess();
+}
+
+export function throwErrorAsyncProcess(): Promise<void> {
+  return ThrowNativeError.throwErrorAsyncProcess();
 }
