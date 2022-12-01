@@ -7,6 +7,7 @@ import {
   withDisabledWindowDrawsSystemBarBackgrounds,
   withMoveDevSettingsActivityToDebugAndroidManifest,
   withRemoveCFBundleUrlTypes,
+  withAddNativeModules,
 } from './config/app.plugin.js';
 
 const environmentConfig = {
@@ -98,6 +99,9 @@ module.exports = ({config}) => {
       ],
       ['@react-native-firebase/app'],
       ['@react-native-firebase/crashlytics'],
+      // このアプリで用意しているAndroid/iOS共通のプラグイン
+      withAddNativeModules,
+
       // このアプリで用意しているAndroid用のプラグイン
       withAddAppActivity,
       withEnabledStatusBarTranslucent,

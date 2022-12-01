@@ -1,14 +1,16 @@
-import {throwErrorAsyncProcess, throwErrorSyncProcess} from '@santoku/throw-native-error';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, NativeModules} from 'react-native';
 import {Button} from 'react-native-elements';
+const {ThrowErrorModule} = NativeModules;
 
 const throwNativeErrorInSyncProcess = async () => {
-  await throwErrorSyncProcess();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
+  await ThrowErrorModule.throwErrorSyncProcess();
 };
 
 const throwNativeErrorInAsyncProcess = async () => {
-  await throwErrorAsyncProcess();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
+  await ThrowErrorModule.throwErrorAsyncProcess();
 };
 
 export const ErrorInNativeModulePage = () => {
