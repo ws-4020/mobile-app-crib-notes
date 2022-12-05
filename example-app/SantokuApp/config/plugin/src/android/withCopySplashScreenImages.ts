@@ -1,0 +1,32 @@
+import {AndroidConfig, ConfigPlugin, withDangerousMod} from '@expo/config-plugins';
+import {copySync} from 'fs-extra';
+import path from 'path';
+
+export type CopySplashScreenImagesProps = {
+  ldpi?: string;
+  mdpi?: string;
+  hdpi?: string;
+  xhdpi?: string;
+  xxhdpi?: string;
+  xxxhdpi?: string;
+};
+
+/**
+ * スプラッシュスクリーン用の画像をコピーします。
+ * dpi毎に、画像が配置されているディレクトリを指定します。
+ * @param config ExpoConfig
+ * @param props CopySplashscreenImagesProps
+ */
+export const withCopySplashScreenImages: ConfigPlugin<CopySplashScreenImagesProps> = (config, props) => {
+  return withDangerousMod(config, [
+    'android',
+    async config => {
+      const resourceDir = await AndroidConfig.Paths.getResourceFolderAsync(config.modRequest.projectRoot);
+      Object.entries(props).forEach(([dpi, srcPath]) => {
+        srcPath &&
+          copySync(path.resolve(config.modRequest.projectRoot, srcPath), path.resolve(resourceDir, `drawable-${dpi}`));
+      });
+      return config;
+    },
+  ]);
+};

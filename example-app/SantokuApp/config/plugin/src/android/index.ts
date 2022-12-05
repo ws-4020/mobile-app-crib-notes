@@ -7,3 +7,6 @@ export * from './withDisabledWindowDrawsSystemBarBackgrounds';
 export * from './withEnabledStatusBarTranslucent';
 export * from './withCopyMainActivity';
 export * from './withMoveDevSettingsActivityToDebugAndroidManifest';
+export * from './withCopySplashScreenImages';
+export * from './withCopyTemplateSplashScreenXml';
+export * from './withFlexibleSplashScreen';

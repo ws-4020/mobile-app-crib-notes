@@ -8,6 +8,7 @@ import {
   withMoveDevSettingsActivityToDebugAndroidManifest,
   withRemoveCFBundleUrlTypes,
   withAddNativeModules,
+  withFlexibleSplashScreen,
 } from './config/app.plugin.js';
 
 const environmentConfig = {
@@ -48,11 +49,6 @@ module.exports = ({config}) => {
       splash: {
         resizeMode: 'native',
         backgroundColor: '#393939',
-        mdpi: './assets/android/splashscreen_mdpi.png',
-        hdpi: './assets/android/splashscreen_hdpi.png',
-        xhdpi: './assets/android/splashscreen_xhdpi.png',
-        xxhdpi: './assets/android/splashscreen_xxhdpi.png',
-        xxhmdpi: './assets/android/splashscreen_xxhdpi.png',
       },
       googleServicesFile: './google-services.json',
       softwareKeyboardLayoutMode: 'resize',
@@ -107,6 +103,17 @@ module.exports = ({config}) => {
       withEnabledStatusBarTranslucent,
       withDisabledWindowDrawsSystemBarBackgrounds,
       withMoveDevSettingsActivityToDebugAndroidManifest,
+      [
+        withFlexibleSplashScreen,
+        {
+          ldpi: './assets/android/splashscreen/ldpi',
+          mdpi: './assets/android/splashscreen/mdpi',
+          hdpi: 'assets/android/splashscreen/hdpi',
+          xhdpi: 'assets/android/splashscreen/xhdpi',
+          xxhdpi: 'assets/android/splashscreen/xxhdpi',
+          xxxhdpi: 'assets/android/splashscreen/xxxhdpi',
+        },
+      ],
       // 以下のプラグインは、環境毎の設定ファイルで定義します。
       // withAppBuildGradleForRelease,
       // withRemoveUsesClearTextTrafficForRelease,
