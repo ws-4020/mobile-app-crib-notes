@@ -56,7 +56,8 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 
 ## Q&Aアプリプロジェクトのディレクトリ構成
 
-Q&Aアプリは、サンプルアプリ（SantokuApp）と同様のアプリケーション構造に準じたディレクトリ構成となっています。
+Q&Aアプリは、サンプルアプリ（SantokuApp）と同様のアプリケーション構造です。
+ディレクトリもそれに準じた構成となっています。
 
 詳細は、[SantokuApp - アプリケーション構造](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/README.md#アプリケーション構造)を参照してください。
 
