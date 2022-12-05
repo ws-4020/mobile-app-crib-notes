@@ -9,6 +9,7 @@ import {
   withRemoveCFBundleUrlTypes,
   withAddNativeModules,
   withFlexibleSplashScreen,
+  withOverrideStoryboard,
 } from './config/app.plugin.js';
 
 const environmentConfig = {
@@ -63,10 +64,6 @@ module.exports = ({config}) => {
         CFBundleAllowMixedLocalizations: true,
         UIBackgroundModes: ['fetch', 'remote-notification'],
       },
-      splash: {
-        backgroundColor: '#393939',
-        image: './assets/ios/splashscreen.png',
-      },
     },
     plugins: [
       [
@@ -120,6 +117,7 @@ module.exports = ({config}) => {
 
       // このアプリで用意しているiOS用のプラグイン
       withRemoveCFBundleUrlTypes,
+      withOverrideStoryboard,
       // 以下のプラグインは、環境毎の設定ファイルで定義します。
       // withEnabledATS,
       // withDisabledATS
