@@ -4,7 +4,7 @@
 
 - [開発環境構築](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment)を参考に開発環境を構築してください。
 
-## 機能の責務配置
+## アプリケーション構造
 
 ### 機能レイヤー
 
