@@ -15,90 +15,42 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios release
+### ios prod
 
 ```sh
-[bundle exec] fastlane ios release
+[bundle exec] fastlane ios prod
 ```
 
-Build SantokuApp Release
+Build SantokuApp Production Release
 
-### ios release_in_house
+### ios stg
 
 ```sh
-[bundle exec] fastlane ios release_in_house
+[bundle exec] fastlane ios stg
 ```
 
-Build SantokuApp ReleaseInHouse
-
-### ios dev_release_in_house
-
-```sh
-[bundle exec] fastlane ios dev_release_in_house
-```
-
-Build DevSantokuApp ReleaseInHouse
-
-### ios debug_advanced
-
-```sh
-[bundle exec] fastlane ios debug_advanced
-```
-
-Build SantokuApp DebugAdvanced
-
-### ios dev_debug_advanced
-
-```sh
-[bundle exec] fastlane ios dev_debug_advanced
-```
-
-Build DevSantokuApp DebugAdvanced
+Build SantokuApp Staging Release
 
 ----
 
 
 ## Android
 
-### android release
+### android prod
 
 ```sh
-[bundle exec] fastlane android release
+[bundle exec] fastlane android prod
 ```
 
-Build SantokuApp Release
+Build SantokuApp Production Release
 
-### android release_in_house
+### android stg
 
 ```sh
-[bundle exec] fastlane android release_in_house
+[bundle exec] fastlane android stg
 ```
 
-Build SantokuApp ReleaseInHouse
-
-### android dev_release_in_house
-
-```sh
-[bundle exec] fastlane android dev_release_in_house
-```
-
-Build DevSantokuApp ReleaseInHouse
-
-### android debug_advanced
-
-```sh
-[bundle exec] fastlane android debug_advanced
-```
-
-Build SantokuApp DebugAdvanced
-
-### android dev_debug_advanced
-
-```sh
-[bundle exec] fastlane android dev_debug_advanced
-```
-
-Build DevSantokuApp DebugAdvanced
+Build SantokuApp Staging Release
 
 ----
 
