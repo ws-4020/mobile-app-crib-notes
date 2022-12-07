@@ -2,8 +2,8 @@ import {ConfigPlugin, withMainApplication} from '@expo/config-plugins';
 
 /**
  * アプリで作成したNative ModulesのReact Packageを追加します。
+ * @param config ExpoConfig
  */
-
 export const withAddNativeModulePackages: ConfigPlugin = config => {
   return withMainApplication(config, config => {
     if (config.modResults.language === 'java') {

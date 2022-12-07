@@ -25,7 +25,7 @@ export const withCopyTemplateJavaFile: ConfigPlugin<{srcDir: string; fileName: s
       const projectRoot = config.modRequest.projectRoot;
       const src = path.resolve(projectRoot, srcDir, fileName);
       const dest = path.resolve(await getMainActivityDir(projectRoot), fileName);
-      await copyFile(src, dest);
+      copyFile(src, dest);
       renameJavaPackage(dest, 'com.helloworld', config.android.package);
       return config;
     },

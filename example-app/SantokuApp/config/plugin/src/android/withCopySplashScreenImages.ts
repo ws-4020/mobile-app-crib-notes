@@ -1,6 +1,7 @@
 import {AndroidConfig, ConfigPlugin, withDangerousMod} from '@expo/config-plugins';
-import {copySync} from 'fs-extra';
 import path from 'path';
+
+import {copyDir} from '../utils/copyDir';
 
 export type CopySplashScreenImagesProps = {
   ldpi?: string;
@@ -24,7 +25,7 @@ export const withCopySplashScreenImages: ConfigPlugin<CopySplashScreenImagesProp
       const resourceDir = await AndroidConfig.Paths.getResourceFolderAsync(config.modRequest.projectRoot);
       Object.entries(props).forEach(([dpi, srcPath]) => {
         srcPath &&
-          copySync(path.resolve(config.modRequest.projectRoot, srcPath), path.resolve(resourceDir, `drawable-${dpi}`));
+          copyDir(path.resolve(config.modRequest.projectRoot, srcPath), path.resolve(resourceDir, `drawable-${dpi}`));
       });
       return config;
     },

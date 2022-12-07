@@ -9,6 +9,14 @@ type CredentialsProps = {
   bundleIdentifier?: string;
 };
 
+/**
+ * BundleIdentifierや署名に関する設定をします。
+ * @param config ExpoConfig
+ * @param developmentTeam
+ * @param codeSignStyle
+ * @param provisioningProfileSpecifier
+ * @param bundleIdentifier
+ */
 export const withSetCredentials: ConfigPlugin<CredentialsProps> = (
   config,
   {developmentTeam, codeSignStyle, provisioningProfileSpecifier, bundleIdentifier},

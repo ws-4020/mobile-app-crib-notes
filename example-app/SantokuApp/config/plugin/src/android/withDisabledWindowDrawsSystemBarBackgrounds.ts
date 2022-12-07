@@ -3,6 +3,7 @@ import {ConfigPlugin, withAndroidStyles} from '@expo/config-plugins';
 /**
  * Avoid image shifting occurs when the splash screen changes from theme background to ImageView shown by expo-splash-screen
  * cf.) https://github.com/crazycodeboy/react-native-splash-screen/issues/241
+ * @param config ExpoConfig
  */
 export const withDisabledWindowDrawsSystemBarBackgrounds: ConfigPlugin = config => {
   return withAndroidStyles(config, config => {

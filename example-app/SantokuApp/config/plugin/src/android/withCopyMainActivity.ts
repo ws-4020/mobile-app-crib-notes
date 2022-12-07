@@ -19,7 +19,7 @@ export const withCopyMainActivity: ConfigPlugin<{toClassName: string}> = (config
       const mainActivityDir = await getMainActivityDir(projectRoot);
       const mainActivityPath = await getMainActivityPath(projectRoot);
       const toPath = path.resolve(mainActivityDir, `${toClassName}.java`);
-      await copyFile(mainActivityPath, toPath);
+      copyFile(mainActivityPath, toPath);
       renameClassName(toPath, toClassName);
       return config;
     },

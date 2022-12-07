@@ -1,10 +1,10 @@
 import {ConfigPlugin, withPlugins} from '@expo/config-plugins';
 
+import {ANDROID} from '../constants';
 import {withAddAppActivityAndroidManifest} from './withAddAppActivityAndroidManifest';
 import {withCopyMainActivity} from './withCopyMainActivity';
 import {withCopyTemplateJavaFile} from './withCopyTemplateJavaFile';
 
-const MAIN_ACTIVITY_TEMPLATE_DIR = './config/plugin/template/android/app/src/main/java/com/helloworld';
 const MAIN_ACTIVITY_FILE_NAME = 'MainActivity.java';
 const APP_ACTIVITY_CLASS_NAME = 'AppActivity';
 
@@ -17,10 +17,11 @@ const APP_ACTIVITY_CLASS_NAME = 'AppActivity';
  * 3. AndroidManifest.xmlにAppActivityを追加
  *
  * 1でMainActivity.javaを単純にリネームしないでコピーしているのは、MainActivity.javaが存在しないとExpo prebuild中にエラーが発生するためです。
+ * @param config ExpoConfig
  */
 export const withAddAppActivity: ConfigPlugin = config => {
   return withPlugins(config, [
-    [withCopyTemplateJavaFile, {srcDir: MAIN_ACTIVITY_TEMPLATE_DIR, fileName: MAIN_ACTIVITY_FILE_NAME}],
+    [withCopyTemplateJavaFile, {srcDir: ANDROID.PLUGIN_TEMPLATE_MAIN_ACTIVITY_DIR, fileName: MAIN_ACTIVITY_FILE_NAME}],
     [withCopyMainActivity, {toClassName: APP_ACTIVITY_CLASS_NAME}],
     withAddAppActivityAndroidManifest,
   ]);

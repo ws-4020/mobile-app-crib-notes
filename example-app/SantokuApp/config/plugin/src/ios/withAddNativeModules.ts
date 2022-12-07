@@ -1,29 +1,40 @@
 import {ConfigPlugin, IOSConfig, withXcodeProject} from '@expo/config-plugins';
 import path from 'path';
 
+import {IOS} from '../constants';
 import {copyFile} from '../utils/copyFile';
 import {PbxProjectConfig} from './PbxProjectConfig';
 import {PbxProject} from './types/pbxproj';
 
+const THROW_ERROR_MODULE_HEADER_FILE_NAME = 'RCTThrowErrorModule.h';
+const THROW_ERROR_MODULE_FILE_NAME = 'RCTThrowErrorModule.m';
+
+/**
+ * アプリで独自に作成したNativeModulesを追加します。
+ * @param config ExpoConfig
+ */
 export const withAddNativeModules: ConfigPlugin = config => {
-  return withXcodeProject(config, async config => {
+  return withXcodeProject(config, config => {
     const pbxProject = PbxProjectConfig.getPbxProject(config);
     const projectRoot = config.modRequest.projectRoot;
-    const nativeModulesDir = 'config/plugin/template/ios';
 
-    await copyFile(
-      path.join(projectRoot, nativeModulesDir, 'RCTThrowErrorModule.h'),
-      path.join(IOSConfig.Paths.getSourceRoot(projectRoot), 'RCTThrowErrorModule.h'),
+    copyFile(
+      path.join(projectRoot, IOS.PLUGIN_TEMPLATE_SOURCE_DIR, THROW_ERROR_MODULE_HEADER_FILE_NAME),
+      path.join(IOSConfig.Paths.getSourceRoot(projectRoot), THROW_ERROR_MODULE_HEADER_FILE_NAME),
     );
-    await copyFile(
-      path.join(projectRoot, nativeModulesDir, 'RCTThrowErrorModule.m'),
-      path.join(IOSConfig.Paths.getSourceRoot(projectRoot), 'RCTThrowErrorModule.m'),
+    copyFile(
+      path.join(projectRoot, IOS.PLUGIN_TEMPLATE_SOURCE_DIR, THROW_ERROR_MODULE_FILE_NAME),
+      path.join(IOSConfig.Paths.getSourceRoot(projectRoot), THROW_ERROR_MODULE_FILE_NAME),
     );
 
     const projectName = IOSConfig.XcodeUtils.getProjectName(projectRoot);
 
-    const added = addNativeModuleToGroup(pbxProject, projectName, `${projectName}/RCTThrowErrorModule.h`);
-    config.modResults = addNativeModuleToGroup(added, projectName, `${projectName}/RCTThrowErrorModule.m`);
+    const added = addNativeModuleToGroup(
+      pbxProject,
+      projectName,
+      `${projectName}/${THROW_ERROR_MODULE_HEADER_FILE_NAME}`,
+    );
+    config.modResults = addNativeModuleToGroup(added, projectName, `${projectName}/${THROW_ERROR_MODULE_FILE_NAME}`);
     return config;
   });
 };
