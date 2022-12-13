@@ -1,0 +1,56 @@
+---
+title: Config Pluginsの適用
+---
+
+このアプリでは、Expoが標準で用意しているConfig Pluginsに加えて、サードパーティのライブラリが公開しているConfig Pluginsや、アプリで独自に作成したConfig Pluginsも適用しています。
+
+## サードバーティのConfig Plugins
+
+| プラグイン名 | OS | 環境 | 概要 |
+|:--|:--|:--|:--|
+| expo-build-properties | iOS/Android | all | `ios/Podfile.properties.json`と`android/gradle.properties`に定義している設定値を変更するプラグインです。 |
+| @react-native-firebase/app | iOS/Android |all | `@react-native-firebase/app`の初期設定を実施するプラグインです。 |
+| @react-native-firebase/crashlytics | iOS/Android | all | `@react-native-firebase/crashlytics`の初期設定を実施するプラグインです。 |
+
+### expo-build-properties
+
+Androidの`compileSdkVersion`や`targetSdkVersion`、iOSの`deploymentTarget`など、ネイティブのビルド設定値を変更するプラグインです。
+設定可能な項目については、[BuildProperties](https://docs.expo.dev/versions/latest/sdk/build-properties/)を参照してください。
+
+### @react-native-firebase/app
+
+### @react-native-firebase/crashlytics
+
+## アプリで独自に作成したConfig Plugins
+
+| プラグイン名 | OS | 環境 | 概要 |
+|:--|:--|:--|:--|
+| withAddNativeModules | Android/iOS | all | このアプリでは、サードパーティのライブラリが公開しているConfig Pluginsや、アプリで独自に作成したConfig Pluginsを適用しています。 |
+| withAddAppActivity | Android | all | |
+| withEnabledStatusBarTranslucent | Android | all | |
+| withDisabledWindowDrawsSystemBarBackgrounds | Android | all | |
+| withMoveDevSettingsActivityToDebugAndroidManifest | Android | all | |
+| withFlexibleSplashScreen | Android | all | |
+| withAppBuildGradleForRelease | Android | stg<br/>prod | |
+| withRemoveUsesClearTextTrafficForRelease | Android | stg<br/>prod | |
+| withRemoveCFBundleUrlTypes | iOS | all | |
+| withOverrideStoryboard | iOS | all | |
+| withSetCredentials | iOS | all | |
+| withDisabledATS | iOS | local | |
+| withAddPersonalAccountConfig | iOS | local | |
+| withEnabledATS | iOS | stg<br/>prod | |
+
+### withAddNativeModules
+### withAddAppActivity
+### withEnabledStatusBarTranslucent
+### withDisabledWindowDrawsSystemBarBackgrounds
+### withMoveDevSettingsActivityToDebugAndroidManifest
+### withFlexibleSplashScreen
+### withAppBuildGradleForRelease
+### withRemoveUsesClearTextTrafficForRelease
+### withRemoveCFBundleUrlTypes
+### withOverrideStoryboard
+### withSetCredentials
+### withDisabledATS
+### withAddPersonalAccountConfig
+### withEnabledATS

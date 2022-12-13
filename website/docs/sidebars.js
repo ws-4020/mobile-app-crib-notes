@@ -527,9 +527,10 @@ module.exports = {
           label: 'ビルド',
           items: [
             'react-native/santoku/development/build-configuration',
-            'react-native/santoku/development/build-configuration/build-variants',
-            'react-native/santoku/development/build-configuration/build-type-configurations',
-            'react-native/santoku/development/build-configuration/product-flavor-configurations',
+            'react-native/santoku/development/build-configuration/environments-configuration',
+            'react-native/santoku/development/build-configuration/apply-plugins',
+            'react-native/santoku/development/build-configuration/order-plugins',
+            'react-native/santoku/development/build-configuration/build-type',
           ],
         },
         {
