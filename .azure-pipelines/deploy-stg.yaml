@@ -17,7 +17,7 @@ extends:
   template: deploy.yaml
   parameters:
     environments:
-      - name: 'staging'
+      - name: 'stg'
         laneName: 'stg'
         androidAppPath: 'android/app/build/outputs/bundle/release/app-release.aab'
         iOSAppPath: 'ios/build/santoku-app-stg.ipa'
