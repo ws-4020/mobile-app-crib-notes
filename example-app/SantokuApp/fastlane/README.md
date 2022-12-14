@@ -15,18 +15,34 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios prod
+### ios prebuild_prod
 
 ```sh
-[bundle exec] fastlane ios prod
+[bundle exec] fastlane ios prebuild_prod
+```
+
+Prebuild SantokuApp Production Release
+
+### ios prebuild_stg
+
+```sh
+[bundle exec] fastlane ios prebuild_stg
+```
+
+Prebuild SantokuApp Staging Release
+
+### ios build_prod
+
+```sh
+[bundle exec] fastlane ios build_prod
 ```
 
 Build SantokuApp Production Release
 
-### ios stg
+### ios build_stg
 
 ```sh
-[bundle exec] fastlane ios stg
+[bundle exec] fastlane ios build_stg
 ```
 
 Build SantokuApp Staging Release
@@ -36,18 +52,34 @@ Build SantokuApp Staging Release
 
 ## Android
 
-### android prod
+### android prebuild_prod
 
 ```sh
-[bundle exec] fastlane android prod
+[bundle exec] fastlane android prebuild_prod
+```
+
+Prebuild SantokuApp Production Release
+
+### android prebuild_stg
+
+```sh
+[bundle exec] fastlane android prebuild_stg
+```
+
+Prebuild SantokuApp Staging Release
+
+### android build_prod
+
+```sh
+[bundle exec] fastlane android build_prod
 ```
 
 Build SantokuApp Production Release
 
-### android stg
+### android build_stg
 
 ```sh
-[bundle exec] fastlane android stg
+[bundle exec] fastlane android build_stg
 ```
 
 Build SantokuApp Staging Release
