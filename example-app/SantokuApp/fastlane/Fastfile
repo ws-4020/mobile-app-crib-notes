@@ -15,15 +15,23 @@ import "Fastfile.prebuild_santoku_app_android"
 
 platform :ios do
 
-  desc "Build SantokuApp Production Release"
+  desc "Prebuild SantokuApp Production Release"
   lane :prod do
     prebuild_santoku_app_ios(environment: "prod")
+  end
+
+  desc "Prebuild SantokuApp Staging Release"
+  lane :stg do
+    prebuild_santoku_app_ios(environment: "stg")
+  end
+
+  desc "Build SantokuApp Production Release"
+  lane :prod do
     build_santoku_app_ios(environment: "prod")
   end
 
   desc "Build SantokuApp Staging Release"
   lane :stg do
-    prebuild_santoku_app_ios(environment: "stg")
     build_santoku_app_ios(environment: "stg")
   end
 
