@@ -4,7 +4,7 @@ bundle_identifier_base = "jp.fintan.mobile.SantokuApp"
 
 provisioning_profiles = {
   "#{bundle_identifier_base}" => "SantokuApp AppStore Distribution",
-  "#{bundle_identifier_base}.stg" => "SantokuApp InHouse Distribution",
+  "#{bundle_identifier_base}.stg" => "SantokuApp Stg Distribution",
 }
 
 environment_options = {
