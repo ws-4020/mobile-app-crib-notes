@@ -11,8 +11,7 @@ variables:
 - group: android
 - group: apple
 - group: deployGate
-- group: staging
-- group: production
+- group: santokuAppStg
 - name: appDir
   value: '$(System.DefaultWorkingDirectory)/example-app/SantokuApp'
 - name: branchName
