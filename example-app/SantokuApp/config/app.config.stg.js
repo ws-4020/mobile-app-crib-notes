@@ -33,7 +33,7 @@ module.exports = config => {
         {
           developmentTeam: 'D9MUZCM4X6',
           codeSignStyle: 'Manual',
-          provisioningProfileSpecifier: 'SantokuApp DevInHouse Development',
+          provisioningProfileSpecifier: 'SantokuApp Stg Development',
         },
       ],
     ],
