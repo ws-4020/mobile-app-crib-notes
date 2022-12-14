@@ -64,21 +64,11 @@ stages:
         inputs:
           secureFile: $(android_ReleaseInHouseKeyStoreSecureFileName)
       - task: CopyFiles@2
-        displayName: 'Copy Keystore file to: $(appDir)/android/app'
+        displayName: 'Copy Keystore file to: $(appDir)'
         inputs:
           SourceFolder: '$(Agent.TempDirectory)'
           Contents: $(android_ReleaseInHouseKeyStoreSecureFileName)
           TargetFolder: '$(appDir)'
-      - task: CmdLine@2
-        displayName: 'Add gradle.properties settings for ReleaseInHouse'
-        inputs:
-          script: |
-            echo '# Keystore properties for ReleaseInHouse' >> gradle.properties
-            echo 'SANTOKU_APP_UPLOAD_KEYSTORE_FILE=$(appDir)/$(android_ReleaseInHouseKeyStoreSecureFileName)' >> gradle.properties
-            echo 'SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD=$(android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
-            echo 'SANTOKU_APP_UPLOAD_KEY_ALIAS=$(android_ReleaseInHouseKeyAlias)' >> gradle.properties
-            echo 'SANTOKU_APP_UPLOAD_KEY_PASSWORD=$(android_ReleaseInHouseKeyPassword)' >> gradle.properties
-          workingDirectory: '$(appDir)/android'
       - task: DownloadSecureFile@1
         name: googleServicesJson${{environment.name}}
         displayName: 'Download google-services.json file for ${{environment.name}}'
@@ -97,9 +87,24 @@ stages:
             /bin/mv $(${{environment.name}}_GoogleServicesJsonSecureFileName) google-services.json
           workingDirectory: '$(appDir)'
       - task: CmdLine@2
+        displayName: 'Prebuild Android app for ${{environment.name}}'
+        inputs:
+          script: 'fastlane android prebuild_${{environment.laneName}}'
+          workingDirectory: '$(appDir)'
+      - task: CmdLine@2
+        displayName: 'Add gradle.properties settings for ReleaseInHouse'
+        inputs:
+          script: |
+            echo '# Keystore properties for ReleaseInHouse' >> gradle.properties
+            echo 'SANTOKU_APP_UPLOAD_KEYSTORE_FILE=$(appDir)/$(android_ReleaseInHouseKeyStoreSecureFileName)' >> gradle.properties
+            echo 'SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD=$(android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
+            echo 'SANTOKU_APP_UPLOAD_KEY_ALIAS=$(android_ReleaseInHouseKeyAlias)' >> gradle.properties
+            echo 'SANTOKU_APP_UPLOAD_KEY_PASSWORD=$(android_ReleaseInHouseKeyPassword)' >> gradle.properties
+          workingDirectory: '$(appDir)/android'
+      - task: CmdLine@2
         displayName: 'Build Android app for ${{environment.name}}'
         inputs:
-          script: 'fastlane android ${{environment.laneName}}'
+          script: 'fastlane android build_${{environment.laneName}}'
           workingDirectory: '$(appDir)'
       - task: CmdLine@2
         displayName: 'Upload app to DeployGate'
@@ -184,9 +189,14 @@ stages:
           Contents: $(${{environment.name}}_GoogleServicesInfoPlistSecureFileName)
           TargetFolder: '$(appDir)'
       - task: CmdLine@2
+        displayName: 'Prebuild iOS app for ${{environment.name}}'
+        inputs:
+          script: 'fastlane ios prebuild_${{environment.laneName}}'
+          workingDirectory: '$(appDir)'
+      - task: CmdLine@2
         displayName: 'Build iOS app for ${{environment.name}}'
         inputs:
-          script: 'fastlane ios ${{environment.laneName}}'
+          script: 'fastlane ios build_${{environment.laneName}}'
           workingDirectory: '$(appDir)'
       - task: CmdLine@2
         displayName: 'Upload app to DeployGate'

@@ -31,15 +31,23 @@ end
 
 platform :android do
 
-  desc "Build SantokuApp Production Release"
-  lane :prod do
+  desc "Prebuild SantokuApp Production Release"
+  lane :prebuild_prod do
     prebuild_santoku_app_android(environment: "prod")
+  end
+
+  desc "Prebuild SantokuApp Staging Release"
+  lane :prebuild_stg do
+    prebuild_santoku_app_android(environment: "stg")
+  end
+
+  desc "Build SantokuApp Production Release"
+  lane :build_prod do
     build_android_app(task: "bundle", build_type: "Release", project_dir: "android")
   end
 
   desc "Build SantokuApp Staging Release"
-  lane :stg do
-    prebuild_santoku_app_android(environment: "stg")
+  lane :build_stg do
     build_android_app(task: "bundle", build_type: "Release", project_dir: "android")
   end
 
