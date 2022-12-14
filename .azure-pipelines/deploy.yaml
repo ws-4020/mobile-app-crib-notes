@@ -199,11 +199,6 @@ stages:
         inputs:
           script: 'fastlane ios prebuild_${{environment.laneName}}'
           workingDirectory: '$(appDir)'
-      - task: Cache@2
-        displayName: Cache Pods
-        inputs:
-          key: 'pods | "$(Agent.OS)" | $(appDir)/ios/Podfile.lock'
-          path: $(appDir)/ios/Pods
       - task: CmdLine@2
         displayName: 'Build iOS app for ${{environment.name}}'
         inputs:
