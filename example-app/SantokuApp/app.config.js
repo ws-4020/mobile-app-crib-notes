@@ -1,3 +1,5 @@
+import deepmerge from 'deepmerge';
+
 import localConfig from './config/app.config.local.js';
 import prodConfig from './config/app.config.prod.js';
 import stgConfig from './config/app.config.stg.js';
@@ -138,5 +140,5 @@ module.exports = ({config}) => {
       enabled: false,
     },
   };
-  return {...defaultAppConfig, ...environmentConfig[environment](defaultAppConfig)};
+  return deepmerge(defaultAppConfig, environmentConfig[environment](defaultAppConfig));
 };

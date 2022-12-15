@@ -5,9 +5,7 @@ const withSetCredentials = require('./app.plugin.js').withSetCredentials;
 
 module.exports = config => {
   return {
-    ...config,
     plugins: [
-      ...config.plugins,
       // このアプリで用意しているAndroid用のプラグイン
       withAppBuildGradleForRelease,
       withRemoveUsesClearTextTrafficForRelease,

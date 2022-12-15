@@ -14,12 +14,12 @@
 		96905EF65AED1B983A6B3ABC /* libPods-LocalSantokuApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-LocalSantokuApp.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		14A2E34A6A104699A2C79A6A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A14728ABEB364D57BB7AF911 /* InfoPlist.strings */; };
-		01FCBED773404FE1B08D2A85 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6D5BE3BD3FE42089A952E4D /* InfoPlist.strings */; };
-		9056576770C8483ABD58C57E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A68C01D3EC9C4B8D8CEEBB69 /* GoogleService-Info.plist */; };
-		1034ABD224A042438F932C7F /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DD18BC9AC248E6896BD04F /* noop-file.swift */; };
-		7C372F4CF5B94191AD0FE1A3 /* RCTThrowErrorModule.h in Resources */ = {isa = PBXBuildFile; fileRef = 7FB35A1E1F4C4DFA8AE8FCFC /* RCTThrowErrorModule.h */; };
-		63E31C9CB15E4B7AB9E548F6 /* RCTThrowErrorModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1BB8878BA0472C9A83E56F /* RCTThrowErrorModule.m */; };
+		27AF3EA9EFB74067B9B2E21F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1AE668928C1F41FE855EDD02 /* InfoPlist.strings */; };
+		3808080BA55442A1BBC1B563 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3A57587CE1A45DD8F6895EB /* InfoPlist.strings */; };
+		40B01F97B4BD422C8969B43B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D22DDA23B5444309AED083D9 /* GoogleService-Info.plist */; };
+		2FD91AAB3650404184586649 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B98D0233F104318A856598D /* noop-file.swift */; };
+		0506B2342B8143589BED1A2F /* RCTThrowErrorModule.h in Resources */ = {isa = PBXBuildFile; fileRef = 0FEFD25D4E5942B6BAC75F44 /* RCTThrowErrorModule.h */; };
+		7828E129BB4A442998C6BD5B /* RCTThrowErrorModule.m in Sources */ = {isa = PBXBuildFile; fileRef = E50CC34118A845528A7A706F /* RCTThrowErrorModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,13 +37,13 @@
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-LocalSantokuApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		A14728ABEB364D57BB7AF911 /* InfoPlist.strings */ = {isa = PBXFileReference; name = "InfoPlist.strings"; path = "ja.lproj/InfoPlist.strings"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.strings; explicitFileType = undefined; includeInIndex = 0; };
-		E6D5BE3BD3FE42089A952E4D /* InfoPlist.strings */ = {isa = PBXFileReference; name = "InfoPlist.strings"; path = "en.lproj/InfoPlist.strings"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.strings; explicitFileType = undefined; includeInIndex = 0; };
-		A68C01D3EC9C4B8D8CEEBB69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; name = "GoogleService-Info.plist"; path = "LocalSantokuApp/GoogleService-Info.plist"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.xml; explicitFileType = undefined; includeInIndex = 0; };
-		90DD18BC9AC248E6896BD04F /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "LocalSantokuApp/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
-		185ECB6F8DC44D4BA9B404DD /* PersonalAccount.xcconfig */ = {isa = PBXFileReference; name = "PersonalAccount.xcconfig"; path = "LocalSantokuApp/PersonalAccount.xcconfig"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.xcconfig; explicitFileType = undefined; includeInIndex = 0; };
-		7FB35A1E1F4C4DFA8AE8FCFC /* RCTThrowErrorModule.h */ = {isa = PBXFileReference; name = "RCTThrowErrorModule.h"; path = "LocalSantokuApp/RCTThrowErrorModule.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		4D1BB8878BA0472C9A83E56F /* RCTThrowErrorModule.m */ = {isa = PBXFileReference; name = "RCTThrowErrorModule.m"; path = "LocalSantokuApp/RCTThrowErrorModule.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		1AE668928C1F41FE855EDD02 /* InfoPlist.strings */ = {isa = PBXFileReference; name = "InfoPlist.strings"; path = "ja.lproj/InfoPlist.strings"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.strings; explicitFileType = undefined; includeInIndex = 0; };
+		D3A57587CE1A45DD8F6895EB /* InfoPlist.strings */ = {isa = PBXFileReference; name = "InfoPlist.strings"; path = "en.lproj/InfoPlist.strings"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.strings; explicitFileType = undefined; includeInIndex = 0; };
+		D22DDA23B5444309AED083D9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; name = "GoogleService-Info.plist"; path = "LocalSantokuApp/GoogleService-Info.plist"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.xml; explicitFileType = undefined; includeInIndex = 0; };
+		3B98D0233F104318A856598D /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "LocalSantokuApp/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		F4580ACE435A4CB683216B93 /* PersonalAccount.xcconfig */ = {isa = PBXFileReference; name = "PersonalAccount.xcconfig"; path = "LocalSantokuApp/PersonalAccount.xcconfig"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.xcconfig; explicitFileType = undefined; includeInIndex = 0; };
+		0FEFD25D4E5942B6BAC75F44 /* RCTThrowErrorModule.h */ = {isa = PBXFileReference; name = "RCTThrowErrorModule.h"; path = "LocalSantokuApp/RCTThrowErrorModule.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		E50CC34118A845528A7A706F /* RCTThrowErrorModule.m */ = {isa = PBXFileReference; name = "RCTThrowErrorModule.m"; path = "LocalSantokuApp/RCTThrowErrorModule.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,11 +69,11 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				A68C01D3EC9C4B8D8CEEBB69 /* GoogleService-Info.plist */,
-				90DD18BC9AC248E6896BD04F /* noop-file.swift */,
-				185ECB6F8DC44D4BA9B404DD /* PersonalAccount.xcconfig */,
-				7FB35A1E1F4C4DFA8AE8FCFC /* RCTThrowErrorModule.h */,
-				4D1BB8878BA0472C9A83E56F /* RCTThrowErrorModule.m */,
+				D22DDA23B5444309AED083D9 /* GoogleService-Info.plist */,
+				3B98D0233F104318A856598D /* noop-file.swift */,
+				F4580ACE435A4CB683216B93 /* PersonalAccount.xcconfig */,
+				0FEFD25D4E5942B6BAC75F44 /* RCTThrowErrorModule.h */,
+				E50CC34118A845528A7A706F /* RCTThrowErrorModule.m */,
 			);
 			name = LocalSantokuApp;
 			sourceTree = "<group>";
@@ -129,8 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				BB2F792C24A3F905000567C9 /* Expo.plist */,
-				0B1A3412150145C589230B19 /* ja.lproj */,
-				F6D5872674104789A5CAB106 /* en.lproj */,
+				16D097F0CC934EBA81A59FA5 /* ja.lproj */,
+				7A4F0ED5FDD1463699EF5F04 /* en.lproj */,
 			);
 			name = Supporting;
 			path = LocalSantokuApp/Supporting;
@@ -153,19 +153,19 @@
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
-		0B1A3412150145C589230B19 /* ja.lproj */ = {
+		16D097F0CC934EBA81A59FA5 /* ja.lproj */ = {
 			isa = "PBXGroup";
 			children = (
-				A14728ABEB364D57BB7AF911 /* InfoPlist.strings */,
+				1AE668928C1F41FE855EDD02 /* InfoPlist.strings */,
 			);
 			name = ja.lproj;
 			sourceTree = "<group>";
 			path = "";
 		};
-		F6D5872674104789A5CAB106 /* en.lproj */ = {
+		7A4F0ED5FDD1463699EF5F04 /* en.lproj */ = {
 			isa = "PBXGroup";
 			children = (
-				E6D5BE3BD3FE42089A952E4D /* InfoPlist.strings */,
+				D3A57587CE1A45DD8F6895EB /* InfoPlist.strings */,
 			);
 			name = en.lproj;
 			sourceTree = "<group>";
@@ -234,10 +234,10 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				14A2E34A6A104699A2C79A6A /* InfoPlist.strings in Resources */,
-				01FCBED773404FE1B08D2A85 /* InfoPlist.strings in Resources */,
-				9056576770C8483ABD58C57E /* GoogleService-Info.plist in Resources */,
-				DF59E132BE6C48ABA9A32E57 /* PersonalAccount.xcconfig in Resources */,
+				27AF3EA9EFB74067B9B2E21F /* InfoPlist.strings in Resources */,
+				3808080BA55442A1BBC1B563 /* InfoPlist.strings in Resources */,
+				40B01F97B4BD422C8969B43B /* GoogleService-Info.plist in Resources */,
+				DCBA28F378A24A6D900E44D9 /* PersonalAccount.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,9 +331,9 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
-				1034ABD224A042438F932C7F /* noop-file.swift in Sources */,
-				7C372F4CF5B94191AD0FE1A3 /* RCTThrowErrorModule.h in Resources */,
-				63E31C9CB15E4B7AB9E548F6 /* RCTThrowErrorModule.m in Sources */,
+				2FD91AAB3650404184586649 /* noop-file.swift in Sources */,
+				0506B2342B8143589BED1A2F /* RCTThrowErrorModule.h in Resources */,
+				7828E129BB4A442998C6BD5B /* RCTThrowErrorModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,7 +453,7 @@
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
-			baseConfigurationReference = 185ECB6F8DC44D4BA9B404DD;
+			baseConfigurationReference = F4580ACE435A4CB683216B93;
 		};
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -503,7 +503,7 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
-			baseConfigurationReference = 185ECB6F8DC44D4BA9B404DD;
+			baseConfigurationReference = F4580ACE435A4CB683216B93;
 		};
 /* End XCBuildConfiguration section */
 

@@ -5,23 +5,18 @@ const withSetCredentials = require('./app.plugin.js').withSetCredentials;
 
 module.exports = config => {
   return {
-    ...config,
     name: 'Stg SantokuApp',
     android: {
-      ...config.android,
       package: 'jp.fintan.mobile.SantokuApp.stg',
       adaptiveIcon: {
-        ...config.android.adaptiveIcon,
         foregroundImage: './assets/android/ic_launcher_foreground_stg.png',
       },
     },
     ios: {
-      ...config.ios,
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp.stg',
       icon: './assets/ios/ic_stg.png',
     },
     plugins: [
-      ...config.plugins,
       // このアプリで用意しているAndroid用のプラグイン
       withAppBuildGradleForRelease,
       withRemoveUsesClearTextTrafficForRelease,
@@ -38,7 +33,6 @@ module.exports = config => {
       ],
     ],
     extra: {
-      ...config.extra,
       mobileAppCribNotesWebsiteUrl: 'https://ws-4020.github.io/mobile-app-crib-notes',
       mobileAppCribNotesRepositoryUrl: 'https://github.com/ws-4020/mobile-app-crib-notes',
     },
