@@ -56,7 +56,7 @@ const addPersonalAccountConfigToGroup = (
   fileRef: string,
 ): PbxProject => {
   const projectName = IOSConfig.XcodeUtils.getProjectName(projectRoot);
-  const plistFilePath = path.resolve(projectName, PERSONAL_ACCOUNT_CONFIG_FILE_NAME);
+  const plistFilePath = path.join(projectName, PERSONAL_ACCOUNT_CONFIG_FILE_NAME);
   return IOSConfig.XcodeUtils.addResourceFileToGroup({
     filepath: plistFilePath,
     groupName: projectName,
