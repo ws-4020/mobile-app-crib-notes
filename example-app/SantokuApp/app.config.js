@@ -35,7 +35,6 @@ module.exports = ({config}) => {
     ...config,
     name: 'SantokuApp',
     version: '0.1.0',
-    orientation: 'portrait',
     jsEngine: 'jsc',
     primaryColor: '#393939',
     locales: {
