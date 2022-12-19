@@ -4,6 +4,8 @@ title: Config Pluginsの適用
 
 このアプリでは、Expoが標準で用意しているConfig Pluginsに加えて、サードパーティのライブラリが公開しているConfig Pluginsや、アプリで独自に作成したConfig Pluginsも適用しています。
 
+> TODO: サードパーティのPluginsにはリンクを追加（ドキュメントがあればドキュメント、なければリポジトリ）
+
 ## サードバーティのConfig Plugins
 
 | プラグイン名 | OS | 環境 | 概要 |
@@ -23,6 +25,10 @@ Androidの`compileSdkVersion`や`targetSdkVersion`、iOSの`deploymentTarget`な
 
 ## アプリで独自に作成したConfig Plugins
 
+> TODO: TSDocの一行目に記載していることが概要に書かれてればよい
+> 後は、ソースコードへのリンクを追加する（各プラグイン毎にリンクをつける）
+> 環境毎のソースコードをコピーする
+
 | プラグイン名 | OS | 環境 | 概要 |
 |:--|:--|:--|:--|
 | withAddNativeModules | Android/iOS | all | このアプリでは、サードパーティのライブラリが公開しているConfig Pluginsや、アプリで独自に作成したConfig Pluginsを適用しています。 |
@@ -39,18 +45,3 @@ Androidの`compileSdkVersion`や`targetSdkVersion`、iOSの`deploymentTarget`な
 | withDisabledATS | iOS | local | |
 | withAddPersonalAccountConfig | iOS | local | |
 | withEnabledATS | iOS | stg<br/>prod | |
-
-### withAddNativeModules
-### withAddAppActivity
-### withEnabledStatusBarTranslucent
-### withDisabledWindowDrawsSystemBarBackgrounds
-### withMoveDevSettingsActivityToDebugAndroidManifest
-### withFlexibleSplashScreen
-### withAppBuildGradleForRelease
-### withRemoveUsesClearTextTrafficForRelease
-### withRemoveCFBundleUrlTypes
-### withOverrideStoryboard
-### withSetCredentials
-### withDisabledATS
-### withAddPersonalAccountConfig
-### withEnabledATS

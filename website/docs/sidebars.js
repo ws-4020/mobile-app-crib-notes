@@ -518,7 +518,6 @@ module.exports = {
             'react-native/santoku/development/implement/logs-implementation',
             'react-native/santoku/development/implement/app-launch-with-build-variants',
             'react-native/santoku/development/implement/cautions-on-using-firebase',
-            'react-native/santoku/development/implement/configurations',
             'react-native/santoku/development/implement/http-api',
           ],
         },
@@ -531,6 +530,9 @@ module.exports = {
             'react-native/santoku/development/build-configuration/apply-plugins',
             'react-native/santoku/development/build-configuration/order-plugins',
             'react-native/santoku/development/build-configuration/build-type',
+            'react-native/santoku/development/build-configuration/app-constants',
+            'react-native/santoku/development/build-configuration/development-account-for-ios',
+            'react-native/santoku/development/build-configuration/native-project-management',
           ],
         },
         {

@@ -10,22 +10,24 @@ sidebar_label: 概要
 > TODO: 以下の内容については、以降も触れていない
 > どこに記載するべき、もしくは記載しなくても良いか要検討
 > - Prebuildを実施するべき条件（環境切り替え時、Expoアップグレードなどによってexpo-template-bare-minimumに変更があった場合）
-> - ネイティブモジュールの管理（現状は、localのネイティブモジュールをgit管理して、Expoアップグレード時などに差分を確認しやすくしている）
+> - ビルドバリアントごとのアプリ起動 -> ビルドの配下に持ってきても良いかも
+> - developmentの他のメニュー構成に合わせる
+> - Firebaseの設定ファイルについて記載
 
 ## Prebuild
 
-Expoには、プロジェクトのネイティブモジュール（`ios`、`android`ディレクトリ）を自動生成するPrebuildという機能があります。
+Expoには、アプリのネイティブプロジェクト（`ios`、`android`ディレクトリ）を自動生成するPrebuildという機能があります。
 
-`npx expo prebuild`を実行すると、[expo-template-bare-minimum](https://github.com/expo/expo/tree/main/templates/expo-template-bare-minimum)をベースにネイティブモジュールが生成されます。
+`npx expo prebuild`を実行すると、[expo-template-bare-minimum](https://github.com/expo/expo/tree/main/templates/expo-template-bare-minimum)をベースにネイティブプロジェクトが生成されます。
 アプリアイコンや、アプリケーションIDなど多くの設定値は、[Expo config（app.json, app.config.js）](https://docs.expo.dev/versions/latest/config/app/)に指定した値で変更することが可能です。
 
 
 ## Config Plugins
 
-前述したように、Prebuild時に生成するネイティブモジュールの設定は、Expo configに指定した値で変更することが可能です。
-Expo configに設定された値は、Expoが標準で用意しているConfig Pluginsによって、Prebuild時に生成されるネイティブモジュールに反映されます。
+前述したように、Prebuild時に生成するネイティブプロジェクトの設定は、Expo configに指定した値で変更することが可能です。
+Expo configに設定された値は、Expoが標準で用意しているConfig Pluginsによって、Prebuild時に生成されるネイティブプロジェクトに反映されます。
 
-しかし、プロジェクトによってはExpo configで指定可能な設定以外にも、変更したい設定値が存在するケースがあります。
+しかし、アプリによってはExpo configで指定可能な設定以外にも、変更したい設定値が存在するケースがあります。
 
 例えば、このアプリではステージング環境や本番環境などに応じてビルド時の署名設定を変更したいと考えています。
 しかし、Expo configでは署名設定を変更することができません。
