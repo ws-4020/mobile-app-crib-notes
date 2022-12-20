@@ -23,6 +23,12 @@ ExpoのPrebuildには、環境ごとにExpo configの設定を切り替える機
 ENVIRONMENT=stg npx expo prebuild
 ```
 
+:::note
+このアプリでは、環境変数の指定や`Prebuild`の実行をnpm scriptsに設定しています。
+
+そのため、環境の切り替えを実施するコマンドについては、[環境やビルドタイプに応じたアプリ起動](./app-launch-per-build-settings)を参照してください。
+:::
+
 Expo configでは、環境変数`ENVIRONMENT`の値によって使用する設定を切り替えます。
 
 > TODO: コメントを追記する。特に、defaultAppConfigと環境毎のConfigについて
