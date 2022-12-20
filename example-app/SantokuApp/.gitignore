@@ -69,6 +69,10 @@ google-services.json
 # generated
 /generated
 
+# Prebuild
+/android/
+/ios/
+
 ## Fastlane
 # fastlane specific
 **/fastlane/report.xml
