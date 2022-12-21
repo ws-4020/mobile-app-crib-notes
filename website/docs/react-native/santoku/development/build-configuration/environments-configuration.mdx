@@ -14,10 +14,10 @@ title: 環境の切り替え
 
 ## 環境の切り替え方法
 
-ExpoのPrebuildには、環境ごとにExpo configの設定を切り替える機能はありません。
-そのため、Prebuild時にビルドする環境を変数として渡し、その値によって使用する設定を切り替えるようにします。
+Expoの`Prebuild`には、環境ごとにExpo configの設定を切り替える機能はありません。
+そのため、`Prebuild`時にビルドする環境を変数として渡し、その値によって使用する設定を切り替えるようにします。
 
-例えば、ステージング環境のアプリをビルドする場合は、環境変数`ENVIRONMENT`に`stg`を指定してPrebuildを実行します。
+例えば、ステージング環境のアプリをビルドする場合は、環境変数`ENVIRONMENT`に`stg`を指定して`Prebuild`を実行します。
 
 ```bash
 ENVIRONMENT=stg npx expo prebuild
