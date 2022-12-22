@@ -22,7 +22,7 @@ const environmentConfig = {
 /**
  * アプリ全体のベースとなる設定です
  * 環境毎に違う設定値は、prodの設定を定義しています。（一部のプラグインを除く）
- * 上記ビルドバリアントと違う設定を定義する場合は、各ビルドバリアントごとの設定ファイル（app.config.xxx.json）で再定義してください。
+ * prodと違う設定を定義する場合などは、各ビルドバリアントごとの設定ファイル（app.config.xxx.json）で再定義してください。
  *
  * 環境変数「ENVIRONMENT」を設定することで、指定の環境の設定ファイルを読み込みます。
  * ex) ENVIRONMENT=local npx expo prebuild --clean
