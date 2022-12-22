@@ -2,7 +2,7 @@ import {ConfigPlugin, withAndroidManifest, AndroidConfig} from '@expo/config-plu
 import path from 'path';
 
 /**
- * DevSettingsActivityの設定を「debug/AndroidManifest.xml」から「debug/AndroidManifest.xml」に移動します。
+ * DevSettingsActivityの設定を「main/AndroidManifest.xml」から「debug/AndroidManifest.xml」に移動します。
  * @param config ExpoConfig
  */
 export const withMoveDevSettingsActivityToDebugAndroidManifest: ConfigPlugin = config => {
