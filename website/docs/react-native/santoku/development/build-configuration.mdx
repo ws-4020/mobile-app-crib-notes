@@ -12,17 +12,17 @@ sidebar_label: 概要
 Expoには、アプリのネイティブプロジェクト（`ios`、`android`ディレクトリ）を自動生成するPrebuildという機能があります。
 
 `npx expo prebuild`を実行すると、[expo-template-bare-minimum](https://github.com/expo/expo/tree/main/templates/expo-template-bare-minimum)をベースにネイティブプロジェクトが生成されます。
-アプリアイコンや、アプリケーションIDなど多くの設定値は、[Expo config（app.json, app.config.js）](https://docs.expo.dev/versions/latest/config/app/)に指定した値で変更することが可能です。
+アプリアイコンや、アプリケーションIDなど多くの設定値は、[Expo config（app.json, app.config.js）](https://docs.expo.dev/versions/latest/config/app/)に指定した値で変更できます。
 
 ## Config Plugins
 
-前述したように、`Prebuild`時に生成するネイティブプロジェクトの設定は、Expo configに指定した値で変更することが可能です。
-Expo configに設定された値は、Expoが標準で用意しているConfig Pluginsによって、`Prebuild`時に生成されるネイティブプロジェクトに反映されます。
+前述したように、`Prebuild`時に生成するネイティブプロジェクトの設定は、Expo configに指定した値で変更できます。
+Expo configに設定された値は、Expoが標準で用意しているConfig Pluginsによって、`Prebuild`で生成されるネイティブプロジェクトに反映されます。
 
-しかし、アプリによってはExpo configで指定可能な設定以外にも、変更したい設定値が存在するケースがあります。
+しかしアプリによっては、Expo configで指定可能な設定以外にも変更したい設定値が存在するケースもあります。
 
 例えば、このアプリではステージング環境や本番環境などに応じてビルド時の署名設定を変更したいと考えています。
-しかし、Expo configでは署名設定を変更することができません。
+しかし、Expo configでは署名設定を変更できません。
 
 それらのケースに対応するには、アプリ特有のConfig Pluginsを作成して`Prebuild`時に適用します。
 

@@ -49,6 +49,7 @@ export abstract class AppConfig {
 Expo configに設定した値は、Config Pluginの中でも取得できます。
 
 例えば、`extra`属性に設定した利用規約のURLを取得するには以下のように実装します。
+
 ```typescript
 export const withConsoleLogTermsUrl: ConfigPlugin = config => {
   const termsUrl = config.extra.termsUrl
@@ -56,4 +57,5 @@ export const withConsoleLogTermsUrl: ConfigPlugin = config => {
   return config;
 }
 ```
+
 :::

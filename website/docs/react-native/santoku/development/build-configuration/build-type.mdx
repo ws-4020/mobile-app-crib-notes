@@ -14,17 +14,17 @@ title: ビルドタイプ
 
 - React Nativeアプリケーションの定数`__DEV__`
 - ホットリロードや[LogBox](https://reactnative.dev/docs/debugging#logbox)などの開発機能
- 
-なお、適応するConfig Pluginsによっては、リリースビルドのみ、もしくはデバッグビルドのみに反映されるものもありますが、それらは[Config Pluginsの適用](./apply-plugins.mdx)を参照してください。
+
+なお、適用するConfig Pluginsによってはリリースビルドのみ、もしくはデバッグビルドのみに反映されるものもありますが、それらは[Config Pluginsの適用](./apply-plugins.mdx)を参照してください。
 
 ## アプリで使用するデフォルトのビルドタイプ
- 
-このアプリでは、アプリのビルド方法によってデフォルトのビルドタイプがが変わります。ビルド方法としては大きく以下2つを用意しています。
 
-* npm scripts（`npm run [ios/android]`）
-  * ローカル環境で開発する際に使用
-* fastlane
-  * DeployGateやApp StoreやGoogle Play Consoleからアプリを配信する際に使用
+このアプリでは、アプリのビルド方法によってデフォルトのビルドタイプが変わります。ビルド方法としては大きく以下2つを用意しています。
+
+- npm scripts（`npm run [ios/android]`）
+  - ローカル環境で開発する際に使用
+- fastlane
+  - DeployGateやApp StoreやGoogle Play Consoleからアプリを配信する際に使用
 
 | 環境 | ビルド方法 | ビルドタイプ |
 |:--|:--|:--|
