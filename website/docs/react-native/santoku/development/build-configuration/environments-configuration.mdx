@@ -47,7 +47,7 @@ const environmentConfig = {
 /**
  * アプリ全体のベースとなる設定です
  * 環境毎に違う設定値は、prodの設定を定義しています。（一部のプラグインを除く）
- * prodと違う設定を定義する場合などは、各ビルドバリアントごとの設定ファイル（app.config.xxx.json）で再定義してください。
+ * prodと違う設定を定義する場合などは、各環境ごとの設定ファイル（app.config.xxx.json）で再定義してください。
  */
 module.exports = ({config}) => {
   const environment = process.env.ENVIRONMENT ?? 'prod';
