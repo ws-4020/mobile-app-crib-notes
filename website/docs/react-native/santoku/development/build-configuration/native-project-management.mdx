@@ -42,5 +42,5 @@ iOSのプロジェクトでは、新規にファイルを追加する場合に�
 Config Pluginsでは、一意のIDを生成するためにUUIDを使用しており、`Prebuild`が実行されるたびにUUIDが変わってしまいます。
 そのため、`Prebuild`実行後は常に`project.pbxproj`の差分が発生してしまいます。
 
-ファイルのIDが変更しているだけで動作には影響しないため、`project.pbxproj`はRestoreしてください。
+ファイルのIDが変更しているだけで動作には影響しないため、`project.pbxproj`は`git-restore`してください。
 :::

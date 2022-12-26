@@ -2,9 +2,7 @@
 title: 環境やビルドタイプに応じたアプリ起動
 ---
 
-このアプリでは、ビルド設定に応じて接続先のホスト名、ビルドタイプ（リリースビルド、デバッグビルド）などを切り替えることができます。
-
-ビルド設定の詳細については、[ビルド](../build-configuration.mdx)を参照してください。
+このアプリでは、[ビルド環境](./environments-configuration)や[ビルドタイプ](./build-type)を切り替えてアプリをインストール、起動できます。
 
 ## 環境の切り替え
 
@@ -79,11 +77,6 @@ Expo CLIは、シミュレータの起動とアプリの起動を実施するの
 > CommandError: No development build (personal.jp.fintan.mobile.SantokuApp.local.${PERSONAL_IDENTIFIER}) for this project is installed. Please make and install a development build on the device first.
 
 この場合は、手動でシミュレータとアプリを立ち上げてください。
-
-:::
-
-:::warning
-既にアプリをインストール済みの場合は、`npm start`を実行してMetro Bundlerを立ち上げるだけでも問題ありません。
 :::
 
 ### リリースビルド
