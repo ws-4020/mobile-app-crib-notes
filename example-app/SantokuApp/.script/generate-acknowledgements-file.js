@@ -9,7 +9,7 @@ const rootDir = path.resolve(__dirname, '..');
 const DEPENDENCIES_OUTPUT_FILE = path.resolve(rootDir, 'src/features/acknowledgements/constants/ThirdPartyDependencies.ts');
 const LICENSE_FILE_OUTPUT_DIR = path.resolve(rootDir, 'src/assets/licenses');
 
-const listDependencies = () => new Promise((resolve, reject) => {
+const listNodeDependencies = () => new Promise((resolve, reject) => {
   // Options: https://github.com/davglass/license-checker#options
   licenseChecker.init({
     start: rootDir,
@@ -21,21 +21,23 @@ const listDependencies = () => new Promise((resolve, reject) => {
     // 個人名やメールアドレスは含めない。
     customFormat: {publisher: false, email: false, name: true, version: true},
   }, (err, packages) => {
-    if (err) {
-      reject(err);
+    if (err) reject(err);
+    else {
+      const list = Object.entries(packages).map(([id, info]) => {
+        return {...info, id}
+      });
+      resolve(list);
     }
-    // ハッシュ値の一致するLICENSEファイルとNOTICEファイルは一つしかアプリに含めないようにする。（サイズ圧縮のため）
-    // なので、ここで各ライセンスファイルのハッシュ値を計算しておく。
-    Promise.all(Object.entries(packages).map(async ([id, info]) => {
-        const licenseFileDigest = await getLicenseFileHashDigest(id, info.licenseFile);
-        const licenseFileAssetPath = getAssetPath(licenseFileDigest, 'license.txt');
-        const noticeFileDigest = await getFileHashDigest(id, info.noticeFile);
-        const noticeFileAssetPath = getAssetPath(noticeFileDigest, 'notice.txt');
-        return {...info, id, licenseFileDigest, licenseFileAssetPath, noticeFileDigest, noticeFileAssetPath}
-      })
-    ).then(dependencies => resolve(dependencies)).catch(e => reject(e));
-  })
-})
+  });
+});
+
+const listDependencies = () => {
+  return Promise.all([
+    listNodeDependencies(),
+  ]).then(lists => {
+    return lists.flat();
+  });
+};
 
 const getLicenseFileHashDigest = (id, filePath) => {
   if (!filePath) {
@@ -141,7 +143,18 @@ const buildFileNamePart = (dependency, fileNameKey, outputKey) => {
 }
 
 const main = async () => {
-  const dependencies = await listDependencies();
+  const dependencies = await listDependencies().then(dependencies => {
+    // ハッシュ値の一致するLICENSEファイルとNOTICEファイルは一つしかアプリに含めないようにする。（サイズ圧縮のため）
+    // なので、ここで各ライセンスファイルのハッシュ値を計算しておく。
+    const promises =  dependencies.map(async (info) => {
+      const licenseFileDigest = await getLicenseFileHashDigest(info.id, info.licenseFile);
+      const licenseFileAssetPath = getAssetPath(licenseFileDigest, 'license.txt');
+      const noticeFileDigest = await getFileHashDigest(info.id, info.noticeFile);
+      const noticeFileAssetPath = getAssetPath(noticeFileDigest, 'notice.txt');
+      return {...info, licenseFileDigest, licenseFileAssetPath, noticeFileDigest, noticeFileAssetPath}
+    });
+    return Promise.all(promises);
+  });
   await copyFilesToOutputDir(getFilesToCopy(dependencies, 'licenseFile'));
   await copyFilesToOutputDir(getFilesToCopy(dependencies, 'noticeFile'));
   const output = fs.createWriteStream(DEPENDENCIES_OUTPUT_FILE)
