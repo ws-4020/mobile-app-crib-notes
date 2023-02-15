@@ -585,6 +585,7 @@ module.exports = {
           items: [
             'react-native/santoku/development/build-configuration',
             'react-native/santoku/development/build-configuration/environments-configuration',
+            'react-native/santoku/development/build-configuration/about-plugins',
             'react-native/santoku/development/build-configuration/apply-plugins',
             'react-native/santoku/development/build-configuration/order-plugins',
             'react-native/santoku/development/build-configuration/build-type',

@@ -5,79 +5,86 @@ sidebar_label: 概要
 
 モバイルアプリの開発では、ステージング環境や本番環境などに応じて、接続先のサーバやアプリアイコンなどを変更したいケースが多くあります。
 
-それらのケースに対応するため、このアプリではExpoの[Prebuild](https://docs.expo.dev/workflow/prebuild/)や、[Config Plugins](https://docs.expo.dev/guides/config-plugins/)などの仕組みを利用して、柔軟にビルドを設定できるようにしています。
+それらのケースに対応するため、このアプリでは Expo の[Prebuild](https://docs.expo.dev/workflow/prebuild/)や、[Config Plugins](https://docs.expo.dev/guides/config-plugins/)などの仕組みを利用して、柔軟にビルドを設定できるようにしています。
 
 ## Prebuild
 
-Expoには、アプリのネイティブプロジェクト（`ios`、`android`ディレクトリ）を自動生成するPrebuildという機能があります。
+Expo には、アプリのネイティブプロジェクト（`ios`、`android`ディレクトリ）を自動生成する Prebuild という機能があります。
 
 `npx expo prebuild`を実行すると、[expo-template-bare-minimum](https://github.com/expo/expo/tree/main/templates/expo-template-bare-minimum)をベースにネイティブプロジェクトが生成されます。
-アプリアイコンや、アプリケーションIDなど多くの設定値は、[Expo config（app.json, app.config.js）](https://docs.expo.dev/versions/latest/config/app/)に指定した値で変更できます。
+アプリアイコンや、アプリケーション ID など多くの設定値は、[Expo config（app.json, app.config.js）](https://docs.expo.dev/versions/latest/config/app/)に指定した値で変更できます。
 
 ## Config Plugins
 
-前述したように、`Prebuild`時に生成するネイティブプロジェクトの設定は、Expo configに指定した値で変更できます。
-Expo configに設定された値は、Expoが標準で用意しているConfig Pluginsによって、`Prebuild`で生成されるネイティブプロジェクトに反映されます。
+前述したように、`Prebuild`時に生成するネイティブプロジェクトの設定は、Expo config に指定した値で変更できます。
+Expo config に設定された値は、Expo が標準で用意している Config Plugins によって、`Prebuild`で生成されるネイティブプロジェクトに反映されます。
 
-しかしアプリによっては、Expo configで指定可能な設定以外にも変更したい設定値が存在するケースもあります。
+しかしアプリによっては、Expo config で指定可能な設定以外にも変更したい設定値が存在するケースもあります。
 
 例えば、このアプリではステージング環境や本番環境などに応じてビルド時の署名設定を変更したいと考えています。
-しかし、Expo configでは署名設定を変更できません。
+しかし、Expo config では署名設定を変更できません。
 
-それらのケースに対応するには、アプリ特有のConfig Pluginsを作成して`Prebuild`時に適用します。
+それらのケースに対応するには、アプリ特有の Config Plugins を作成して`Prebuild`時に適用します。
 
-以降では、`Prebuild`とConfig Pluginsを利用した環境の切り替え方法や、適用するConfig Pluginsなどを説明していきます。
+以降では、`Prebuild`と Config Plugins を利用した環境の切り替え方法や、適用する Config Plugins などを説明していきます。
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 import {PageList} from '../../../../src/components';
 const overviews = [
-{
-title: '環境の切り替え',
-to: '/react-native/santoku/development/build-configuration/environments-configuration',
-summary: <>環境を切り替える方法について記載しています。</>
-},
-{
-title: 'Config Pluginsの適用',
-to: '/react-native/santoku/development/build-configuration/apply-plugins',
-summary: <>このアプリで適用するConfig Pluginsの一覧と概要、適用する環境を記載しています。</>
-},
-{
-title: 'Config Pluginsの実行順序',
-to: '/react-native/santoku/development/build-configuration/order-plugins',
-summary: <>各Config Pluginが実行される順序と注意点を記載しています。</>
-},
-{
-title: 'ビルドタイプ',
-to: '/react-native/santoku/development/build-configuration/build-type',
-summary: <>デバッグビルドとリリースビルドの違いについて記載しています。</>
-},
-{
-title: 'アプリ特有の設定値',
-to: '/react-native/santoku/development/build-configuration/app-constants',
-summary: <>バックエンドのURLなど、環境ごとに変更したいアプリ特有の設定値と取得方法について記載しています。</>
-},
-{
-title: '開発者アカウントの使用（iOS）',
-to: '/react-native/santoku/development/build-configuration/development-account-for-ios',
-summary: <>local環境でiOSの開発をする際に必要な開発者アカウントの設定方法について記載しています。</>
-},
-{
-title: 'Firebaseの設定ファイル',
-to: '/react-native/santoku/development/build-configuration/firebase-setting-file',
-summary: <>Firebaseの機能を利用する際に必要な設定ファイルの配置場所について記載しています。</>
-},
-{
-title: '環境やビルドタイプに応じたアプリ起動',
-to: '/react-native/santoku/development/build-configuration/app-launch-per-build-settings',
-summary: <>環境の切り替えや、ビルドタイプに応じたアプリのインストールや起動方法について詳細なコマンドを記載しています。</>
-},
-{
-title: 'ネイティブプロジェクトの管理',
-to: '/react-native/santoku/development/build-configuration/native-project-management',
-summary: <>Prebuild実行後のネイティブプロジェクトをどのように管理していくかについて記載しています。</>
-}
-]
+  {
+    title: '環境の切り替え',
+    to: '/react-native/santoku/development/build-configuration/environments-configuration',
+    summary: <>環境を切り替える方法について記載しています。</>,
+  },
+  {
+    title: 'Config Pluginsについて',
+    to: '/react-native/santoku/development/build-configuration/about-plugins',
+    summary: <>Config Pluginsの概要について記載しています。</>,
+  },
+  {
+    title: 'Config Pluginsの適用',
+    to: '/react-native/santoku/development/build-configuration/apply-plugins',
+    summary: <>このアプリで適用するConfig Pluginsの一覧と概要、適用する環境を記載しています。</>,
+  },
+  {
+    title: 'Config Pluginsの実行順序',
+    to: '/react-native/santoku/development/build-configuration/order-plugins',
+    summary: <>各Config Pluginが実行される順序と注意点を記載しています。</>,
+  },
+  {
+    title: 'ビルドタイプ',
+    to: '/react-native/santoku/development/build-configuration/build-type',
+    summary: <>デバッグビルドとリリースビルドの違いについて記載しています。</>,
+  },
+  {
+    title: 'アプリ特有の設定値',
+    to: '/react-native/santoku/development/build-configuration/app-constants',
+    summary: <>バックエンドのURLなど、環境ごとに変更したいアプリ特有の設定値と取得方法について記載しています。</>,
+  },
+  {
+    title: '開発者アカウントの使用（iOS）',
+    to: '/react-native/santoku/development/build-configuration/development-account-for-ios',
+    summary: <>local環境でiOSの開発をする際に必要な開発者アカウントの設定方法について記載しています。</>,
+  },
+  {
+    title: 'Firebaseの設定ファイル',
+    to: '/react-native/santoku/development/build-configuration/firebase-setting-file',
+    summary: <>Firebaseの機能を利用する際に必要な設定ファイルの配置場所について記載しています。</>,
+  },
+  {
+    title: '環境やビルドタイプに応じたアプリ起動',
+    to: '/react-native/santoku/development/build-configuration/app-launch-per-build-settings',
+    summary: (
+      <>環境の切り替えや、ビルドタイプに応じたアプリのインストールや起動方法について詳細なコマンドを記載しています。</>
+    ),
+  },
+  {
+    title: 'ネイティブプロジェクトの管理',
+    to: '/react-native/santoku/development/build-configuration/native-project-management',
+    summary: <>Prebuild実行後のネイティブプロジェクトをどのように管理していくかについて記載しています。</>,
+  },
+];
 
 <PageList overviews={overviews} colSize={12} />
 
