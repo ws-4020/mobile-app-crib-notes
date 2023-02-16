@@ -2,42 +2,12 @@ const path = require('path');
 const fs = require('fs');
 const fsPromises = require('fs/promises');
 const crypto = require('crypto');
-const licenseChecker = require("license-checker");
+const listDependencies = require("./list-dependencies");
 
 const rootDir = path.resolve(__dirname, '..');
 
 const DEPENDENCIES_OUTPUT_FILE = path.resolve(rootDir, 'src/features/acknowledgements/constants/ThirdPartyDependencies.ts');
 const LICENSE_FILE_OUTPUT_DIR = path.resolve(rootDir, 'src/assets/licenses');
-
-const listNodeDependencies = () => new Promise((resolve, reject) => {
-  // Options: https://github.com/davglass/license-checker#options
-  licenseChecker.init({
-    start: rootDir,
-    // devDependenciesは含めない。
-    production: true,
-    // privateなパッケージは含めない。
-    excludePrivatePackages: true,
-    // https://github.com/davglass/license-checker#custom-format
-    // 個人名やメールアドレスは含めない。
-    customFormat: {publisher: false, email: false, name: true, version: true},
-  }, (err, packages) => {
-    if (err) reject(err);
-    else {
-      const list = Object.entries(packages).map(([id, info]) => {
-        return {...info, id}
-      });
-      resolve(list);
-    }
-  });
-});
-
-const listDependencies = () => {
-  return Promise.all([
-    listNodeDependencies(),
-  ]).then(lists => {
-    return lists.flat();
-  });
-};
 
 const getLicenseFileHashDigest = (id, filePath) => {
   if (!filePath) {
