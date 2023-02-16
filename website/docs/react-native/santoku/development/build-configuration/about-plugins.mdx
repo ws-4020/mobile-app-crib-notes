@@ -2,7 +2,7 @@
 title: Config Pluginsについて
 ---
 
-ここでは、Config Plugins の概要について説明します。
+ここでは nConfig Plugins の概要について説明します。
 Config Plugins、Mod とは何か、何ができるのかをコード例と共に示します。
 更なる詳細情報は公式サイトの[Config Plugins](https://docs.expo.dev/guides/config-plugins/)を参照してください。
 
@@ -75,13 +75,13 @@ module.exports = ({config}) => {
 
 ## Mod
 
-Modifier（略して Mod） は、コード生成中にネイティブのプロジェクトのファイルを変更する機能です。
+Modifier（略して Mod） は、コード生成中にネイティブプロジェクトのファイルを変更する機能です。
 その実態は、config とデータを受け取り、両方を操作してオブジェクトで返す非同期関数です。
-Mod は`Expo config`の mods オブジェクトに追加します。
+Mod は Expo config の mods オブジェクトに追加します。
 Mod コンパイラが提供するデフォルトのベース Mod に処理を追加することで、ファイルを操作できます。
-例えば、`mods.android.strings`に Mod を指定することで`android/app/src/main/res/values/strings.xml`を操作できます。
+例えば、`mods.android.strings`に Mod を指定することで`android/app/src/main/res/values/strings.xml`ファイルを操作できます。
 
-次の例は、`android/app/src/main/res/values/strings.xml`に設定値（`A`）を追加する Mod を指定したものです。
+次の例は、`android/app/src/main/res/values/strings.xml`ファイルに設定値（`A`）を追加する Mod を指定したものです。
 
 ```javascript title=app.config.js
 const addAndroidStrings = (config, name, value) => {
@@ -104,7 +104,7 @@ module.exports = ({config}) => {
 };
 ```
 
-`Prebuild`を実行すると、`android/app/src/main/res/values/strings.xml`に次の設定値が追加されます。
+`Prebuild`を実行すると、`android/app/src/main/res/values/strings.xml`ファイルに次の設定値が追加されます。
 
 ```xml title=strings.xml
 <resources>
@@ -115,7 +115,7 @@ module.exports = ({config}) => {
 
 ## Mod plugins
 
-`expo/config-plugins` が提供する Plugin を利用して Mod を`Expo config`の mods オブジェクトに追加できます。
+`expo/config-plugins` が提供する Plugin を利用して Mod を Expo config の mods オブジェクトに追加できます。
 
 `withMod`を使用して、`mods.android.strings`に Mod を指定する例を次に示します。
 
@@ -137,7 +137,7 @@ module.exports = ({config}) => {
 ```
 
 `withMod`を使用すると、同じ Mod を指定しても処理が連携します。
-次の例は、`android/app/src/main/res/values/strings.xml`に複数の設定値（`A`、`B`、`C`）を追加します。
+次の例は、`android/app/src/main/res/values/strings.xml`ファイルに複数の設定値（`A`、`B`、`C`）を追加します。
 
 ```javascript title=app.config.js
 module.exports = ({config}) => {
@@ -152,7 +152,7 @@ module.exports = ({config}) => {
 };
 ```
 
-`Prebuild`を実行すると、`android/app/src/main/res/values/strings.xml`に次の設定値が追加されます。
+`Prebuild`を実行すると、`android/app/src/main/res/values/strings.xml`ファイルに次の設定値が追加されます。
 
 ```xml title=strings.xml
 <resources>
@@ -164,14 +164,14 @@ module.exports = ({config}) => {
 ```
 
 **Mod の実行順序に注意してください。**
-Mod は後から定義した順番で実行されます。
+Mod は後から指定した順番で実行されます。
 上記の結果から、`C`→`B`→`A`の順番で実行されていることが分かります。
 
 ## withDangerousMod
 
-Mod コンパイラが提供するデフォルトのベース Mod を用いずファイル操作するため、`withDangerousMod` が用意されています。
+Mod コンパイラが提供するデフォルトのベース Mod を用いずファイル操作するには、`withDangerousMod` を使用します。
 `withDangerousMod`を使用すると、mods オブジェクトの`dangerous`に Mod が追加されます 。
-この Mod は危険な操作なため、他のどの Mod よりも優先して実行されます、
+この Mod は危険な操作なため、他のどの Mod よりも優先して実行されます。
 
 :::warning
 `withDangerousMod` は実験的な機能で将来変更される可能性があります。
@@ -256,4 +256,4 @@ module.exports = ({config}) => {
 ```
 
 **_ベース Mod は、Mod を使用する他のすべてのプラグインの後に追加しなければなりません_**。
-これは、最後に処理の結果をディスクに書き込む必要があるためです。
+これは、ベース Mod が最後に処理の結果をディスクに書き込む必要があるためです。
