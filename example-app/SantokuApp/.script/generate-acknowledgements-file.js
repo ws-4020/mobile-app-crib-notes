@@ -3,11 +3,13 @@ const fs = require('fs');
 const fsPromises = require('fs/promises');
 const crypto = require('crypto');
 const listDependencies = require("./list-dependencies");
+const licenseTextCache = require('./license-text-cache');
 
 const rootDir = path.resolve(__dirname, '..');
 
 const DEPENDENCIES_OUTPUT_FILE = path.resolve(rootDir, 'src/features/acknowledgements/constants/ThirdPartyDependencies.ts');
 const LICENSE_FILE_OUTPUT_DIR = path.resolve(rootDir, 'src/assets/licenses');
+const LICENSE_FILE_TEMP_DIR = path.resolve(__dirname, 'licenseText/build');
 
 const getLicenseFileHashDigest = (id, filePath) => {
   if (!filePath) {
@@ -112,8 +114,28 @@ const buildFileNamePart = (dependency, fileNameKey, outputKey) => {
   return fileName ? `${JSON.stringify(outputKey)}: ${JSON.stringify(fileName)}` : '';
 }
 
+const saveLicenseFile = lib => {
+  if (lib.licenseFile) return lib;
+  const filePath = path.resolve(LICENSE_FILE_TEMP_DIR, encodeURIComponent(`${lib.id}.txt`))
+  return fsPromises.writeFile(filePath, lib.licenseText).then(() => {
+    lib.licenseFile = filePath;
+    return lib;
+  });
+};
+
 const main = async () => {
   const dependencies = await listDependencies().then(dependencies => {
+    const promises = dependencies.map(d => {
+      if (d.licenseFile) return d;
+      if (d.licenseText) return saveLicenseFile(d);
+      return licenseTextCache.fetch(d.licenseUrl).then(text => {
+        if (text.includes('<body')) console.warn('ライセンステキストにHTML("<body")が含まれています', d.licenseUrl, d.id)
+        d.licenseText = text;
+        return saveLicenseFile(d);
+      });
+    });
+    return Promise.all(promises);
+  }).then(dependencies => {
     // ハッシュ値の一致するLICENSEファイルとNOTICEファイルは一つしかアプリに含めないようにする。（サイズ圧縮のため）
     // なので、ここで各ライセンスファイルのハッシュ値を計算しておく。
     const promises =  dependencies.map(async (info) => {
