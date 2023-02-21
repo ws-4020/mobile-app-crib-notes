@@ -3,6 +3,7 @@ import {ThirdPartyDependency} from '../types/ThirdPartyDependency';
 const generateDummyDependency = (num: number) => {
   return [...Array(num)].map((_, index) => {
     return {
+      type: 'npm',
       id: `dummy-dependency-${index}@${index}`,
       name: `dummy-dependency-${index}`,
       version: `${index}.0.0`,

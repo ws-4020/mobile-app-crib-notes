@@ -1,4 +1,5 @@
 export type ThirdPartyDependency = {
+  type: string;
   id: string;
   name?: string;
   version?: string;

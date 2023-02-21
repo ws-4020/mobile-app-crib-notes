@@ -66,6 +66,7 @@ const copyFilesToOutputDir = async (files) => {
 
 const buildDependenciesSourceCode = (dependencies) => {
   return `export type ThirdPartyDependency = {
+  type: string;
   id: string;
   name?: string;
   version?: string;
@@ -76,11 +77,18 @@ const buildDependenciesSourceCode = (dependencies) => {
   noticeFileName?: string;
   noticeContentModuleId?: number;
 };
-export const ThirdPartyDependencies: ThirdPartyDependency[] = [${dependencies.map(buildAcknowledgement).join(',')}];`
+import {Platform} from 'react-native';
+const usingTypes = Platform.select({
+  ios: ['npm', 'cocoapods'],
+  android: ['npm', 'gradle'],
+});
+export const ThirdPartyDependencies: ThirdPartyDependency[] = [${dependencies.map(buildAcknowledgement).join(',')}].filter(d => {
+  return usingTypes?.includes(d.type);
+});`
 }
 
 const buildAcknowledgement = (dependency) => {
-  return `{${['id', 'name', 'version', 'licenses', 'repository'].map(key => {
+  return `{${['type', 'id', 'name', 'version', 'licenses', 'repository'].map(key => {
     return buildAcknowledgementInfo(dependency, key);
   }).concat(
     buildFileContentModuleIdPart(dependency, 'licenseFileAssetPath', 'licenseContentModuleId'),
