@@ -26,7 +26,7 @@ export const LicensePage: React.FC<LicensePageProps> = ({dependency}) => {
             <Text h4 h4Style={styles.dependencyName}>
               {dependency.name ?? dependency.id}
             </Text>
-            <Text style={styles.dependencyVersion}> ({dependency.version})</Text>
+            {dependency.version && <Text style={styles.dependencyVersion}> ({dependency.version})</Text>}
           </Text>
         </View>
         {dependency.repository?.startsWith('https://') && (
