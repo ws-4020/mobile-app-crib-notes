@@ -312,6 +312,14 @@ module.exports = function listDependencies() {
   }).then(list => {
     return licenseManager.adjust(list);
   }).then(list => {
+    const toSortByString = d => `${d.name} ${d.version}`;
+    list.sort((a, b) => {
+      return toSortByString(a).localeCompare(toSortByString(b), undefined, {
+        numeric: true, // version 文字列中の数字を数値として比較する
+      });
+    });
+    return list;
+  }).then(list => {
     return list.map(lib => {
       lib.id = `${lib.type}:${lib.libraryId}`;
       lib.licenseName = normalizeLicense(lib.licenseName);
