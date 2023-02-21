@@ -72,9 +72,7 @@ const buildDependenciesSourceCode = (dependencies) => {
   version?: string;
   repository?: string;
   licenses?: string | string[];
-  licenseFileName?: string;
   licenseContentModuleId?: number;
-  noticeFileName?: string;
   noticeContentModuleId?: number;
 };
 import {Platform} from 'react-native';
@@ -92,9 +90,7 @@ const buildAcknowledgement = (dependency) => {
     return buildAcknowledgementInfo(dependency, key);
   }).concat(
     buildFileContentModuleIdPart(dependency, 'licenseFileAssetPath', 'licenseContentModuleId'),
-    buildFileNamePart(dependency, 'licenseFile', 'licenseFileName'),
     buildFileContentModuleIdPart(dependency, 'noticeFileAssetPath', 'noticeContentModuleId'),
-    buildFileNamePart(dependency, 'noticeFile', 'noticeFileName'),
   ).filter(item => !!item).join(',')}}`
 }
 
@@ -115,11 +111,6 @@ const getRelativePathToRequire = (from, to) => {
     return `./${relativePath}`
   }
   return relativePath;
-}
-
-const buildFileNamePart = (dependency, fileNameKey, outputKey) => {
-  const fileName = dependency[fileNameKey] ? path.basename(dependency[fileNameKey]) : undefined;
-  return fileName ? `${JSON.stringify(outputKey)}: ${JSON.stringify(fileName)}` : '';
 }
 
 const saveLicenseFile = lib => {

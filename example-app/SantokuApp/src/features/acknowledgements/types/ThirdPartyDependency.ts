@@ -5,8 +5,6 @@ export type ThirdPartyDependency = {
   version?: string;
   repository?: string;
   licenses?: string | string[];
-  licenseFileName?: string;
   licenseContentModuleId?: number;
-  noticeFileName?: string;
   noticeContentModuleId?: number;
 };

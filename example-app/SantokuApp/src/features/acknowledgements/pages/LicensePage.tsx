@@ -38,13 +38,13 @@ export const LicensePage: React.FC<LicensePageProps> = ({dependency}) => {
       <ScrollView contentContainerStyle={styles.body}>
         {dependency.licenseContentModuleId && (
           <>
-            <FileName fileName={dependency.licenseFileName} />
+            <FileName fileName="LICENSE" />
             <FileContent isLoading={isLoadingLicenseContentText} content={licenseContentText} />
           </>
         )}
         {dependency.noticeContentModuleId && (
           <>
-            <FileName fileName={dependency.noticeFileName} />
+            <FileName fileName="NOTICE" />
             <FileContent isLoading={isLoadingNoticeContentText} content={noticeContentText} />
           </>
         )}
