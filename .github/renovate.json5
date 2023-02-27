@@ -95,9 +95,16 @@
       // React Native Firebaseの関連パッケージはまとめて更新するようにします
       groupName: 'React Native Firebase',
       matchPackagePrefixes: [
-        '@react-native-firebase/',
+        '@react-native-firebase/'
+      ],
+    },
+    {
+      // React Native FirebaseのConfig Pluginに依存するパッケージは、React Native Firebaseアップグレード後のPrebuildで更新するため対象外とします
+      groupName: 'Depends on Config Plugin of React Native Firebase',
+      enabled: false,
+      matchPackageNames: [
         'com.google.firebase:firebase-crashlytics-gradle',
-        'com.google.gms:google-services'
+        'com.google.gms:google-services',
       ],
     },
     {
