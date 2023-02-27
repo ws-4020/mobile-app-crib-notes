@@ -95,7 +95,9 @@
       // React Native Firebaseの関連パッケージはまとめて更新するようにします
       groupName: 'React Native Firebase',
       matchPackagePrefixes: [
-        '@react-native-firebase/'
+        '@react-native-firebase/',
+        'com.google.firebase:firebase-crashlytics-gradle',
+        'com.google.gms:google-services'
       ],
     },
     {
