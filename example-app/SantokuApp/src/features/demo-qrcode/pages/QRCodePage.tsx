@@ -6,6 +6,7 @@ import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {StyledTextInput} from 'bases/ui/common/StyledTextInput';
 import {Item, SelectPicker} from 'bases/ui/picker/SelectPicker';
 import {QRCode} from 'bases/ui/qrcode/QRCode';
+import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
 import React, {useCallback, useState} from 'react';
 
 type ErrorLevelType = 'L' | 'M' | 'Q' | 'H';
@@ -25,6 +26,7 @@ export const QRCodePage: React.FC = () => {
 
   return (
     <Box flex={1} p="p16">
+      <SpecAndSourceCodeLink feature="qrcode" />
       <Text>
         {`
 モデル2のQRコードを生成し、表示します。
