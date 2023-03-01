@@ -30,13 +30,13 @@ export const QRCodePage: React.FC = () => {
       <Text>
         {`
 モデル2のQRコードを生成し、表示します。
-エンコーディングやシンボルバージョン、マスキングパターンは入力した値や誤り訂正レベルに応じて自動計算します。
+エンコーディングモードやシンボルバージョン、マスキングパターンは設定するデータや誤り訂正レベルに応じて自動計算します。
         `}
       </Text>
-      <StyledSpace height="p48" />
+      <StyledSpace height="p32" />
       <StyledColumn space="p16">
         <StyledColumn space="p4">
-          <Text>QRコードに設定する値:</Text>
+          <Text>QRコードに設定するデータ:</Text>
           <StyledTextInput
             value={value}
             borderBottomWidth={1}
