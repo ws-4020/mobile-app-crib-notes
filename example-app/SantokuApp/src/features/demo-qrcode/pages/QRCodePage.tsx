@@ -1,6 +1,6 @@
 import {ApplicationError} from 'bases/core/errors/ApplicationError';
 import {log} from 'bases/logging';
-import {Box, Text} from 'bases/ui/common';
+import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
 import {StyledColumn} from 'bases/ui/common/StyledColumn';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {StyledTextInput} from 'bases/ui/common/StyledTextInput';
@@ -31,55 +31,66 @@ export const QRCodePage: React.FC = () => {
 
   return (
     <Box flex={1} p="p16">
-      <SpecAndSourceCodeLink feature="qrcode" />
-      <Text>
-        {`
+      <StyledScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        showsVerticalScrollIndicator={false}
+        alwaysBounceVertical={false}>
+        <StyledSafeAreaView>
+          <SpecAndSourceCodeLink feature="qrcode" />
+          <Text>
+            {`
 モデル2のQRコードを生成し、表示します。
 エンコーディングモードやシンボルバージョン、マスキングパターンは設定するデータや誤り訂正レベルに応じて自動計算します。
         `}
-      </Text>
-      <StyledSpace height="p32" />
-      <StyledColumn space="p16">
-        <StyledColumn space="p4">
-          <Text>QRコードに設定するデータ:</Text>
-          <StyledTextInput
-            value={value}
-            borderBottomWidth={1}
-            onChangeText={setValue}
-            placeholder="値を入力してください"
-          />
-        </StyledColumn>
-        <StyledColumn space="p4">
-          <Text>誤り訂正レベル:</Text>
-          <SelectPicker
-            selectedItemKey={errorCorrectionLevel}
-            items={errorCorrectionLevelItems}
-            onSelectedItemChange={onSelectedErrorCorrectionLevelChange}
-            textInputComponent={<StyledTextInput value={errorCorrectionLevel} borderBottomWidth={1} editable={false} />}
-          />
-        </StyledColumn>
-        <StyledColumn space="p4">
-          <Text>サイズ:</Text>
-          <StyledTextInput
-            value={size}
-            keyboardType="numeric"
-            borderBottomWidth={1}
-            onChangeText={setSize}
-            placeholder="サイズを入力してください"
-          />
-        </StyledColumn>
-      </StyledColumn>
-      <StyledSpace height="p48" />
-      {value && (
-        <Box alignSelf="center">
-          <QRCode
-            value={value}
-            ecl={errorCorrectionLevel}
-            size={sizeNum}
-            onError={(e: unknown) => log.error(new ApplicationError('Failed to generate qrcode.', e), 'QRCodeError')}
-          />
-        </Box>
-      )}
+          </Text>
+          <StyledSpace height="p32" />
+          <StyledColumn space="p16">
+            <StyledColumn space="p4">
+              <Text>QRコードに設定するデータ:</Text>
+              <StyledTextInput
+                value={value}
+                borderBottomWidth={1}
+                onChangeText={setValue}
+                placeholder="値を入力してください"
+              />
+            </StyledColumn>
+            <StyledColumn space="p4">
+              <Text>誤り訂正レベル:</Text>
+              <SelectPicker
+                selectedItemKey={errorCorrectionLevel}
+                items={errorCorrectionLevelItems}
+                onSelectedItemChange={onSelectedErrorCorrectionLevelChange}
+                textInputComponent={
+                  <StyledTextInput value={errorCorrectionLevel} borderBottomWidth={1} editable={false} />
+                }
+              />
+            </StyledColumn>
+            <StyledColumn space="p4">
+              <Text>サイズ:</Text>
+              <StyledTextInput
+                value={size}
+                keyboardType="numeric"
+                borderBottomWidth={1}
+                onChangeText={setSize}
+                placeholder="サイズを入力してください"
+              />
+            </StyledColumn>
+          </StyledColumn>
+          <StyledSpace height="p48" />
+          {value && (
+            <Box alignSelf="center">
+              <QRCode
+                value={value}
+                ecl={errorCorrectionLevel}
+                size={sizeNum}
+                onError={(e: unknown) =>
+                  log.error(new ApplicationError('Failed to generate qrcode.', e), 'QRCodeError')
+                }
+              />
+            </Box>
+          )}
+        </StyledSafeAreaView>
+      </StyledScrollView>
     </Box>
   );
 };
