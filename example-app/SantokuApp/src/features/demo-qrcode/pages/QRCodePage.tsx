@@ -25,7 +25,7 @@ export const QRCodePage: React.FC = () => {
     return isNaN(num) ? 0 : num;
   }, [size]);
 
-  const onSelectedErrorLevelChange = useCallback((selectedItem?: Item<ErrorCorrectionLevelType>) => {
+  const onSelectedErrorCorrectionLevelChange = useCallback((selectedItem?: Item<ErrorCorrectionLevelType>) => {
     setErrorCorrectionLevel(selectedItem?.value ?? 'M');
   }, []);
 
@@ -54,7 +54,7 @@ export const QRCodePage: React.FC = () => {
           <SelectPicker
             selectedItemKey={errorCorrectionLevel}
             items={errorCorrectionLevelItems}
-            onSelectedItemChange={onSelectedErrorLevelChange}
+            onSelectedItemChange={onSelectedErrorCorrectionLevelChange}
             textInputComponent={<StyledTextInput value={errorCorrectionLevel} borderBottomWidth={1} editable={false} />}
           />
         </StyledColumn>
