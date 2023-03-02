@@ -82,11 +82,12 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 `react-native-qrcode-svg`は、`peerDependencies`に`react-native-svg`を含んでいます。
 
 `react-native-svg`のバージョンはExpoで管理されており、Expo 46では`12.4.x`（`~12.4.0`）を使用します。
-`react-native-qrcode-svg`が`react-native-svg`の`12.4.x`をサポートするバージョンは、`6.1.1`のみです。
-そのため、`react-native-qrcode-svg`に関してはバージョンを`6.1.1`に固定します。
+`react-native-qrcode-svg`が`react-native-svg`の`12.4.x`をサポートするバージョンは、`6.1.1〜6.1.2`（`~6.1.1`）のみです。
+現時点で最新のバージョンである`6.2.0`や、`6.1.1`以前のバージョンでは`react-native-svg`の`12.4.x`をサポートしていません。
+そのため、`react-native-qrcode-svg`に関してはバージョンに`~6.1.1`を指定します。
 
 なお、Expo 47では`react-native-svg`の`13.4.0`を使用します。
-Expo 47にアップグレードする際は、動作確認の上`react-native-qrcode-svg`のバージョンを`~6.1.1`、もしくは`~6.2.0`に変更してください。
+Expo 47にアップグレードする際は、動作確認の上`react-native-qrcode-svg`のバージョンを`6.2.0`以降に変更してください。
 
 ## 依存パッケージのアップデート
 
