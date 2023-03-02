@@ -8,6 +8,7 @@ import {Item, SelectPicker} from 'bases/ui/picker/SelectPicker';
 import {QRCode} from 'bases/ui/qrcode/QRCode';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
 import React, {useCallback, useMemo, useState} from 'react';
+import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
 type ErrorCorrectionLevelType = 'L' | 'M' | 'Q' | 'H';
 const errorCorrectionLevelItems: Item<ErrorCorrectionLevelType>[] = [
@@ -17,13 +18,32 @@ const errorCorrectionLevelItems: Item<ErrorCorrectionLevelType>[] = [
   {value: 'H', label: 'H'},
 ];
 export const QRCodePage: React.FC = () => {
+  const frame = useSafeAreaFrame();
   const [value, setValue] = useState('0123456789');
   const [errorCorrectionLevel, setErrorCorrectionLevel] = useState<ErrorCorrectionLevelType>('M');
   const [size, setSize] = useState('200');
+  const [sizeError, setSizeError] = useState<string>();
+  const setSizeAndValidate = useCallback(
+    (size: string) => {
+      setSize(size);
+      const num = Number(size);
+      if (isNaN(num)) {
+        setSizeError('数値を入力してください');
+        return;
+      }
+      // 画面の横幅 - 左右の余白（16 * 2）
+      const maxSize = Math.trunc(frame.width) - 32;
+      if (maxSize < num) {
+        setSizeError(`サイズの最大値は${maxSize.toString()}です`);
+        return;
+      }
+      setSizeError(undefined);
+    },
+    [frame.width],
+  );
   const sizeNum = useMemo(() => {
-    const num = Number(size);
-    return isNaN(num) ? 0 : num;
-  }, [size]);
+    return sizeError ? 0 : Number(size);
+  }, [size, sizeError]);
 
   const onSelectedErrorCorrectionLevelChange = useCallback((selectedItem?: Item<ErrorCorrectionLevelType>) => {
     setErrorCorrectionLevel(selectedItem?.value ?? 'M');
@@ -71,7 +91,8 @@ export const QRCodePage: React.FC = () => {
                 value={size}
                 keyboardType="numeric"
                 borderBottomWidth={1}
-                onChangeText={setSize}
+                errorMessage={sizeError}
+                onChangeText={setSizeAndValidate}
                 placeholder="サイズを入力してください"
               />
             </StyledColumn>
