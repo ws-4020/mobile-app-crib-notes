@@ -7,7 +7,7 @@ import {StyledTextInput} from 'bases/ui/common/StyledTextInput';
 import {Item, SelectPicker} from 'bases/ui/picker/SelectPicker';
 import {QRCode} from 'bases/ui/qrcode/QRCode';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 
 type ErrorCorrectionLevelType = 'L' | 'M' | 'Q' | 'H';
 const errorCorrectionLevelItems: Item<ErrorCorrectionLevelType>[] = [
@@ -19,6 +19,11 @@ const errorCorrectionLevelItems: Item<ErrorCorrectionLevelType>[] = [
 export const QRCodePage: React.FC = () => {
   const [value, setValue] = useState('0123456789');
   const [errorCorrectionLevel, setErrorCorrectionLevel] = useState<ErrorCorrectionLevelType>('M');
+  const [size, setSize] = useState('200');
+  const sizeNum = useMemo(() => {
+    const num = Number(size);
+    return isNaN(num) ? 0 : num;
+  }, [size]);
 
   const onSelectedErrorLevelChange = useCallback((selectedItem?: Item<ErrorCorrectionLevelType>) => {
     setErrorCorrectionLevel(selectedItem?.value ?? 'M');
@@ -53,6 +58,16 @@ export const QRCodePage: React.FC = () => {
             textInputComponent={<StyledTextInput value={errorCorrectionLevel} borderBottomWidth={1} editable={false} />}
           />
         </StyledColumn>
+        <StyledColumn space="p4">
+          <Text>サイズ:</Text>
+          <StyledTextInput
+            value={size}
+            keyboardType="numeric"
+            borderBottomWidth={1}
+            onChangeText={setSize}
+            placeholder="サイズを入力してください"
+          />
+        </StyledColumn>
       </StyledColumn>
       <StyledSpace height="p48" />
       {value && (
@@ -60,6 +75,7 @@ export const QRCodePage: React.FC = () => {
           <QRCode
             value={value}
             ecl={errorCorrectionLevel}
+            size={sizeNum}
             onError={(e: unknown) => log.error(new ApplicationError('Failed to generate qrcode.', e), 'QRCodeError')}
           />
         </Box>
