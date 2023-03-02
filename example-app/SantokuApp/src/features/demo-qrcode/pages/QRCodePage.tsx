@@ -9,8 +9,8 @@ import {QRCode} from 'bases/ui/qrcode/QRCode';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
 import React, {useCallback, useState} from 'react';
 
-type ErrorLevelType = 'L' | 'M' | 'Q' | 'H';
-const errorLevelItems: Item<ErrorLevelType>[] = [
+type ErrorCorrectionLevelType = 'L' | 'M' | 'Q' | 'H';
+const errorCorrectionLevelItems: Item<ErrorCorrectionLevelType>[] = [
   {value: 'L', label: 'L'},
   {value: 'M', label: 'M'},
   {value: 'Q', label: 'Q'},
@@ -18,10 +18,10 @@ const errorLevelItems: Item<ErrorLevelType>[] = [
 ];
 export const QRCodePage: React.FC = () => {
   const [value, setValue] = useState('0123456789');
-  const [errorLevel, setErrorLevel] = useState<ErrorLevelType>('M');
+  const [errorCorrectionLevel, setErrorCorrectionLevel] = useState<ErrorCorrectionLevelType>('M');
 
-  const onSelectedErrorLevelChange = useCallback((selectedItem?: Item<ErrorLevelType>) => {
-    setErrorLevel(selectedItem?.value ?? 'M');
+  const onSelectedErrorLevelChange = useCallback((selectedItem?: Item<ErrorCorrectionLevelType>) => {
+    setErrorCorrectionLevel(selectedItem?.value ?? 'M');
   }, []);
 
   return (
@@ -47,10 +47,10 @@ export const QRCodePage: React.FC = () => {
         <StyledColumn space="p4">
           <Text>誤り訂正レベル:</Text>
           <SelectPicker
-            selectedItemKey={errorLevel}
-            items={errorLevelItems}
+            selectedItemKey={errorCorrectionLevel}
+            items={errorCorrectionLevelItems}
             onSelectedItemChange={onSelectedErrorLevelChange}
-            textInputComponent={<StyledTextInput value={errorLevel} borderBottomWidth={1} editable={false} />}
+            textInputComponent={<StyledTextInput value={errorCorrectionLevel} borderBottomWidth={1} editable={false} />}
           />
         </StyledColumn>
       </StyledColumn>
@@ -59,7 +59,7 @@ export const QRCodePage: React.FC = () => {
         <Box alignSelf="center">
           <QRCode
             value={value}
-            ecl={errorLevel}
+            ecl={errorCorrectionLevel}
             onError={(e: unknown) => log.error(new ApplicationError('Failed to generate qrcode.', e), 'QRCodeError')}
           />
         </Box>
