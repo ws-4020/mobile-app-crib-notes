@@ -113,6 +113,16 @@ const getRelativePathToRequire = (from, to) => {
   return relativePath;
 }
 
+const initLicenseFileTempDir = async () => {
+  await fsPromises.rm(LICENSE_FILE_TEMP_DIR, {
+    force: true, // ディレクトリが存在しない場合に失敗にしない
+    recursive: true, // 中のファイルも消す
+  });
+  await fsPromises.mkdir(LICENSE_FILE_TEMP_DIR, {
+    recursive: true,
+  });
+};
+
 const saveLicenseFile = lib => {
   if (lib.licenseFile) return lib;
   const filePath = path.resolve(LICENSE_FILE_TEMP_DIR, encodeURIComponent(`${lib.id}.txt`))
@@ -123,7 +133,8 @@ const saveLicenseFile = lib => {
 };
 
 const main = async () => {
-  const dependencies = await listDependencies().then(dependencies => {
+  const dependencies = await listDependencies().then(async dependencies => {
+    await initLicenseFileTempDir();
     const promises = dependencies.map(d => {
       if (d.licenseFile) return d;
       if (d.licenseText) return saveLicenseFile(d);
