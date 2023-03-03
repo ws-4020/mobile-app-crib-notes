@@ -58,6 +58,7 @@ export type DemoStackParamList = {
   Picker: undefined;
   PushNotification: undefined;
   Cache: undefined;
+  Barcode: undefined;
   ListTodoDemo: undefined;
   CreateTodoDemo: undefined;
   EditTodoDemo: {
