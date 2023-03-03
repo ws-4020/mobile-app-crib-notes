@@ -10,44 +10,52 @@ import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAn
 import React, {useCallback, useMemo, useState} from 'react';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
-type ErrorCorrectionLevelType = 'L' | 'M' | 'Q' | 'H';
+import {formInitialValues, useQRCodeForm} from '../forms/useQRCodeForm';
+import {ErrorCorrectionLevelType} from '../types/errorCorrectionLevel';
+
 const errorCorrectionLevelItems: Item<ErrorCorrectionLevelType>[] = [
   {value: 'L', label: 'L'},
   {value: 'M', label: 'M'},
   {value: 'Q', label: 'Q'},
   {value: 'H', label: 'H'},
 ];
+
+const initialSize = Number(formInitialValues.size);
 export const QRCodePage: React.FC = () => {
   const frame = useSafeAreaFrame();
-  const [value, setValue] = useState('0123456789');
-  const [errorCorrectionLevel, setErrorCorrectionLevel] = useState<ErrorCorrectionLevelType>('M');
-  const [size, setSize] = useState('200');
-  const [sizeError, setSizeError] = useState<string>();
-  const setSizeAndValidate = useCallback(
-    (size: string) => {
-      setSize(size);
-      const num = Number(size);
-      if (isNaN(num)) {
-        setSizeError('数値を入力してください');
-        return;
-      }
-      // 画面の横幅 - 左右の余白（16 * 2）
-      const maxSize = Math.trunc(frame.width) - 32;
-      if (maxSize < num) {
-        setSizeError(`サイズの最大値は${maxSize.toString()}です`);
-        return;
-      }
-      setSizeError(undefined);
-    },
-    [frame.width],
-  );
-  const sizeNum = useMemo(() => {
-    return sizeError ? 0 : Number(size);
-  }, [size, sizeError]);
+  const maxSize = useMemo(() => Math.trunc(frame.width) - 32, [frame.width]);
 
-  const onSelectedErrorCorrectionLevelChange = useCallback((selectedItem?: Item<ErrorCorrectionLevelType>) => {
-    setErrorCorrectionLevel(selectedItem?.value ?? 'M');
-  }, []);
+  const {form, setFormSize, validateForm} = useQRCodeForm(maxSize);
+
+  const [size, setSize] = useState(initialSize);
+
+  // form.handleChange('size')で実施すると、バリデーションに成功した場合のみQRCodeに入力サイズを設定することができない
+  // const size = useMemo(() => {
+  //   if (!form.isValidating && !form.errors.size) {
+  //     // バリデーション実施前に入力された値がformに保持されてしまうため、NaNやmaxSizeを超えた値が返却される場合がある
+  //     return Number(form.values.size);
+  //   } else {
+  //     // バリデーション前の値を返却
+  //   }
+  // }, [form.errors.size, form.isValidating, form.values.size]);
+  // そのため、自身でformの値の設定とバリデーションを実施して、バリデーションに成功した場合のみQRCodeに入力サイズを設定する
+  const setSizeAndValidate = useCallback(
+    async (value: string) => {
+      await setFormSize(value);
+      // validateFieldだとバリデーションの結果が返却されないので、validateFormを使う
+      const errors = await validateForm({size: value});
+      if (!errors.size) {
+        setSize(Number(value));
+      }
+    },
+    [setFormSize, validateForm],
+  );
+
+  const onSelectedErrorCorrectionLevelChange = useCallback(
+    (selectedItem?: Item<ErrorCorrectionLevelType>) =>
+      form.setFieldValue('errorCorrectionLevel', selectedItem?.value ?? formInitialValues.errorCorrectionLevel),
+    [form],
+  );
 
   return (
     <Box flex={1} p="p16">
@@ -68,42 +76,43 @@ export const QRCodePage: React.FC = () => {
             <StyledColumn space="p4">
               <Text>QRコードに設定するデータ:</Text>
               <StyledTextInput
-                value={value}
+                value={form.values.data}
                 borderBottomWidth={1}
-                onChangeText={setValue}
+                onChangeText={form.handleChange('data')}
+                errorMessage={form.errors.data}
                 placeholder="値を入力してください"
               />
             </StyledColumn>
             <StyledColumn space="p4">
               <Text>誤り訂正レベル:</Text>
               <SelectPicker
-                selectedItemKey={errorCorrectionLevel}
+                selectedItemKey={form.values.errorCorrectionLevel}
                 items={errorCorrectionLevelItems}
                 onSelectedItemChange={onSelectedErrorCorrectionLevelChange}
                 textInputComponent={
-                  <StyledTextInput value={errorCorrectionLevel} borderBottomWidth={1} editable={false} />
+                  <StyledTextInput value={form.values.errorCorrectionLevel} borderBottomWidth={1} editable={false} />
                 }
               />
             </StyledColumn>
             <StyledColumn space="p4">
               <Text>サイズ:</Text>
               <StyledTextInput
-                value={size}
+                value={form.values.size}
                 keyboardType="numeric"
                 borderBottomWidth={1}
-                errorMessage={sizeError}
                 onChangeText={setSizeAndValidate}
+                errorMessage={form.errors.size}
                 placeholder="サイズを入力してください"
               />
             </StyledColumn>
           </StyledColumn>
           <StyledSpace height="p48" />
-          {value && (
+          {form.values.data && (
             <Box alignSelf="center">
               <QRCode
-                value={value}
-                ecl={errorCorrectionLevel}
-                size={sizeNum}
+                value={form.values.data}
+                ecl={form.values.errorCorrectionLevel}
+                size={size}
                 onError={(e: unknown) =>
                   log.error(new ApplicationError('Failed to generate qrcode.', e), 'QRCodeError')
                 }
