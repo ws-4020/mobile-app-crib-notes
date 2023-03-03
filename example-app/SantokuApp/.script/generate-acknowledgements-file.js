@@ -9,7 +9,7 @@ const rootDir = path.resolve(__dirname, '..');
 
 const DEPENDENCIES_OUTPUT_FILE = path.resolve(rootDir, 'src/features/acknowledgements/constants/ThirdPartyDependencies.ts');
 const LICENSE_FILE_OUTPUT_DIR = path.resolve(rootDir, 'src/assets/licenses');
-const LICENSE_FILE_TEMP_DIR = path.resolve(__dirname, 'licenseText/build');
+const LICENSE_FILE_TEMP_DIR = path.resolve(__dirname, 'license-text/build');
 
 const getLicenseFileHashDigest = (id, filePath) => {
   if (!filePath) {

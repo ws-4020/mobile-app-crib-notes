@@ -86,7 +86,7 @@ module.exports = function () {
       'org.webkit:android-jsc:r250230': { // https://mvnrepository.com/artifact/org.webkit/android-jsc/r250230
         exclude: false, // jsEngine の指定で jsc(JavaScriptCore) を使わない場合 exclude 可能
         licenseName: 'LGPL-2.0', // https://web.archive.org/web/20091005200350/https://developer.apple.com/opensource/internet/webkit.html
-        licenseText: fs.readFileSync(`${__dirname}/licenseText/LGPL-apple.txt`, 'utf8'), // https://webkit.org/licensing-webkit/
+        licenseText: fs.readFileSync(`${__dirname}/license-text/LGPL-apple.txt`, 'utf8'), // https://webkit.org/licensing-webkit/
       },
       'com.parse.bolts:bolts-tasks:1.4.0': { // https://github.com/BoltsFramework/Bolts-Android
         licenseName: 'BSD-3-Clause', // 名称だけ厳密にする(元: BSD License: https://github.com/BoltsFramework/Bolts-Android/blob/1.4.0/LICENSE)
