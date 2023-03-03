@@ -15,6 +15,7 @@ const licenseWhitelist = [
   'Python-2.0',// ≒ BSD
   'BSL-1.0', // [パーミッシブ・ライセンス]
   'Zlib', // [パーミッシブ・ライセンス]
+  // 'LGPL-2.0', // TODO: check
   'Android Software Development Kit License', // TODO: check
 ];
 

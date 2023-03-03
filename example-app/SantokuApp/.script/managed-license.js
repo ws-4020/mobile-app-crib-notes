@@ -84,7 +84,7 @@ module.exports = function () {
         licenseUrl: 'https://github.com/facebookincubator/fbjni/blob/v0.2.2/LICENSE',
       },
       'org.webkit:android-jsc:r250230': { // https://mvnrepository.com/artifact/org.webkit/android-jsc/r250230
-        exclude: true, // react native 0.70- は Hermes が標準となっているため jsc(JavaScriptCore) を
+        exclude: false, // jsEngine の指定で jsc(JavaScriptCore) を使わない場合 exclude 可能
         licenseName: 'LGPL-2.0', // https://web.archive.org/web/20091005200350/https://developer.apple.com/opensource/internet/webkit.html
         licenseText: fs.readFileSync(`${__dirname}/licenseText/LGPL-apple.txt`, 'utf8'), // https://webkit.org/licensing-webkit/
       },
