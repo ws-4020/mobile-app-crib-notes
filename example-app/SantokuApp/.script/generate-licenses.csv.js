@@ -31,7 +31,9 @@ listDependencies().then(dependencies => {
   
   // licenses.forEach(s => console.log(s));
 
-  const csvPath = `${__dirname}/dist/licenses.csv`;
+  const outputDir = `${__dirname}/dist`;
+  fs.mkdirSync(outputDir, {recursive: true});
+  const csvPath = `${outputDir}/licenses.csv`;
   fs.writeFileSync(csvPath, licenses.join('\n'));
   console.info(`${csvPath} にCSVファイルを出力しました`)
 });
