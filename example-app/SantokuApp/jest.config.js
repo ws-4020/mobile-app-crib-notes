@@ -11,4 +11,10 @@ module.exports = {
     '<rootDir>/jest/setup/react-query.js',
     '<rootDir>/jest/setup/useFocusEffect.js',
   ],
+  moduleNameMapper: {
+    // Barcode.tsxでESMのコードを直接importしているため、以下のエラーが発生する
+    // SyntaxError: Cannot use import statement outside a module
+    // そのため、トランスパイルされたソースコードにマッピングする
+    '^jsbarcode/src/barcodes/CODE128': 'jsbarcode/bin/barcodes/CODE128',
+  },
 };

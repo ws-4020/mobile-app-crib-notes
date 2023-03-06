@@ -1,28 +1,37 @@
 import CODE128 from 'jsbarcode/src/barcodes/CODE128/CODE128';
 import CODE128AUTO from 'jsbarcode/src/barcodes/CODE128/CODE128_AUTO';
 import React, {useCallback, useMemo} from 'react';
-import {StyleSheet, Text, TextStyle, View, ViewStyle} from 'react-native';
+import {StyleSheet, Text, TextStyle, View, ViewProps} from 'react-native';
 import {Path, Svg} from 'react-native-svg';
 
 export type Format = 'CODE128' | 'CODE128AUTO';
+export const START_CHARACTER_SET = {
+  'CODE-A': String.fromCharCode(208),
+  'CODE-B': String.fromCharCode(209),
+  'CODE-C': String.fromCharCode(210),
+};
+
+export const CHARACTER_SET = {
+  'CODE-A': String.fromCharCode(204),
+  'CODE-B': String.fromCharCode(205),
+  'CODE-C': String.fromCharCode(206),
+};
 const ENCODERS = {
   CODE128,
   CODE128AUTO,
 };
 
-// TODO: コードセットの定数をexport
-// TODO: Textコンポーネントを指定できるようにする
 export type BarcodeProps = {
   value: string;
-  width?: number;
+  lineWidth?: number;
   maxWidth?: number;
   height?: number;
   format?: Format;
   lineColor?: string;
   background?: string;
-  text?: React.ReactNode;
+  text?: string;
   textStyle?: TextStyle;
-  style?: ViewStyle;
+  viewProps?: ViewProps;
   onError?: (err: any) => void;
 };
 
@@ -62,7 +71,7 @@ const drawSvgBarCode = (binary: string, width: number, height: number, barCodeWi
 
 export const Barcode: React.FC<BarcodeProps> = ({
   value = '',
-  width = 2,
+  lineWidth = 2,
   maxWidth,
   height = 100,
   format = 'CODE128',
@@ -70,12 +79,12 @@ export const Barcode: React.FC<BarcodeProps> = ({
   background = '#FFFFFF',
   text,
   textStyle,
-  style,
+  viewProps: {style, ...viewProps} = {},
   onError,
 }) => {
   const getEncoder = useCallback(() => {
     const encoder = new ENCODERS[format](value, {
-      width,
+      width: lineWidth,
       format,
       height,
       lineColor,
@@ -87,15 +96,15 @@ export const Barcode: React.FC<BarcodeProps> = ({
       }
     }
     return encoder;
-  }, [background, format, height, lineColor, onError, value, width]);
+  }, [background, format, height, lineColor, onError, value, lineWidth]);
 
   const {bars, barCodeWidth} = useMemo(() => {
     try {
       const encoder = getEncoder();
       const encoded = encoder.encode();
-      const barCodeWidth = encoded.data.length * width;
+      const barCodeWidth = encoded.data.length * lineWidth;
       return {
-        bars: drawSvgBarCode(encoded.data, width, height, barCodeWidth, maxWidth).join(' '),
+        bars: drawSvgBarCode(encoded.data, lineWidth, height, barCodeWidth, maxWidth).join(' '),
         barCodeWidth: maxWidth && barCodeWidth > maxWidth ? maxWidth : barCodeWidth,
       };
     } catch (error) {
@@ -104,10 +113,12 @@ export const Barcode: React.FC<BarcodeProps> = ({
       }
     }
     return initialBarcode;
-  }, [getEncoder, width, height, maxWidth, onError]);
+  }, [getEncoder, lineWidth, height, maxWidth, onError]);
 
   return (
-    <View style={StyleSheet.flatten([styles.container, {backgroundColor: background}, style])}>
+    <View
+      style={StyleSheet.flatten([styles.container, {backgroundColor: background, width: barCodeWidth}, style])}
+      {...viewProps}>
       <Svg height={height} width={barCodeWidth} fill={lineColor}>
         <Path d={bars} />
       </Svg>
