@@ -15,6 +15,7 @@ module.exports = {
     // Barcode.tsxでESMのコードを直接importしているため、以下のエラーが発生する
     // SyntaxError: Cannot use import statement outside a module
     // そのため、トランスパイルされたソースコードにマッピングする
-    '^jsbarcode/src/barcodes/CODE128': 'jsbarcode/bin/barcodes/CODE128',
+    '^jsbarcode/src/barcodes/CODE128/CODE128$': 'jsbarcode/bin/barcodes/CODE128/CODE128.js',
+    '^jsbarcode/src/barcodes/CODE128/CODE128_AUTO$': 'jsbarcode/bin/barcodes/CODE128/CODE128_AUTO.js',
   },
 };

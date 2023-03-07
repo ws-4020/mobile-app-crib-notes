@@ -1,7 +1,7 @@
 import CODE128 from 'jsbarcode/src/barcodes/CODE128/CODE128';
 import CODE128AUTO from 'jsbarcode/src/barcodes/CODE128/CODE128_AUTO';
 import React, {useCallback, useMemo} from 'react';
-import {StyleSheet, Text, TextStyle, View, ViewProps} from 'react-native';
+import {StyleSheet, Text, TextProps, View, ViewProps} from 'react-native';
 import {Path, Svg} from 'react-native-svg';
 
 export type Format = 'CODE128' | 'CODE128AUTO';
@@ -30,7 +30,7 @@ export type BarcodeProps = {
   lineColor?: string;
   background?: string;
   text?: string;
-  textStyle?: TextStyle;
+  textProps?: TextProps;
   viewProps?: ViewProps;
   onError?: (err: any) => void;
 };
@@ -78,7 +78,7 @@ export const Barcode: React.FC<BarcodeProps> = ({
   lineColor = '#000000',
   background = '#FFFFFF',
   text,
-  textStyle,
+  textProps: {style: textStyle, ...textProps} = {},
   viewProps: {style, ...viewProps} = {},
   onError,
 }) => {
@@ -91,12 +91,10 @@ export const Barcode: React.FC<BarcodeProps> = ({
       background,
     });
     if (!encoder.valid()) {
-      if (onError) {
-        throw new Error('Invalid barcode for selected format.');
-      }
+      throw new Error('Invalid barcode for selected format.');
     }
     return encoder;
-  }, [background, format, height, lineColor, onError, value, lineWidth]);
+  }, [background, format, height, lineColor, value, lineWidth]);
 
   const {bars, barCodeWidth} = useMemo(() => {
     try {
@@ -122,7 +120,11 @@ export const Barcode: React.FC<BarcodeProps> = ({
       <Svg height={height} width={barCodeWidth} fill={lineColor}>
         <Path d={bars} />
       </Svg>
-      {text && <Text style={StyleSheet.flatten([styles.textStyle, textStyle])}>{text}</Text>}
+      {text && (
+        <Text style={StyleSheet.flatten([styles.textStyle, textStyle])} {...textProps}>
+          {text}
+        </Text>
+      )}
     </View>
   );
 };
