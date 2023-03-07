@@ -30,16 +30,16 @@ import {StyleSheet, Text, TextProps, View, ViewProps} from 'react-native';
 import {Path, Svg} from 'react-native-svg';
 
 export type Format = 'CODE128' | 'CODE128AUTO';
-export const START_CHARACTER_SET = {
+export const START_CHARACTERS = {
   'CODE-A': String.fromCharCode(208),
   'CODE-B': String.fromCharCode(209),
   'CODE-C': String.fromCharCode(210),
 };
 
-export const CHARACTER_SET = {
-  'CODE-A': String.fromCharCode(204),
+export const CODE_SET_CHARACTERS = {
+  'CODE-A': String.fromCharCode(206),
   'CODE-B': String.fromCharCode(205),
-  'CODE-C': String.fromCharCode(206),
+  'CODE-C': String.fromCharCode(204),
 };
 const ENCODERS = {
   CODE128,
@@ -51,6 +51,7 @@ export type BarcodeProps = {
   lineWidth?: number;
   maxWidth?: number;
   height?: number;
+  quietZone?: number;
   format?: Format;
   lineColor?: string;
   background?: string;
@@ -99,6 +100,7 @@ export const Barcode: React.FC<BarcodeProps> = ({
   lineWidth = 2,
   maxWidth,
   height = 100,
+  quietZone = 0,
   format = 'CODE128',
   lineColor = '#000000',
   background = '#FFFFFF',
@@ -140,7 +142,7 @@ export const Barcode: React.FC<BarcodeProps> = ({
 
   return (
     <View
-      style={StyleSheet.flatten([styles.container, {backgroundColor: background, width: barCodeWidth}, style])}
+      style={StyleSheet.flatten([styles.container, {backgroundColor: background, paddingHorizontal: quietZone}, style])}
       {...viewProps}>
       <Svg height={height} width={barCodeWidth} fill={lineColor}>
         <Path d={bars} />

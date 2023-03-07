@@ -6,14 +6,14 @@ exports[`Barcode only with required props renders successfully only with require
     Object {
       "alignItems": "center",
       "backgroundColor": "#FFFFFF",
-      "width": 444,
+      "paddingHorizontal": 0,
     }
   }
   testID="Barcode"
 >
   <RNSVGSvgView
     bbHeight={100}
-    bbWidth={444}
+    bbWidth={378}
     fill="#000000"
     focusable={false}
     height={100}
@@ -26,11 +26,11 @@ exports[`Barcode only with required props renders successfully only with require
         Object {
           "flex": 0,
           "height": 100,
-          "width": 444,
+          "width": 378,
         },
       ]
     }
-    width={444}
+    width={378}
   >
     <RNSVGGroup
       fill={4278190080}
@@ -41,55 +41,7 @@ exports[`Barcode only with required props renders successfully only with require
       }
     >
       <RNSVGPath
-        d="M0,0h4v100h-4z M6,0h2v100h-2z M16,0h2v100h-2z M22,0h2v100h-2z M28,0h6v100h-6z M36,0h4v100h-4z M44,0h2v100h-2z M50,0h6v100h-6z M60,0h4v100h-4z M66,0h4v100h-4z M74,0h6v100h-6z M84,0h2v100h-2z M88,0h4v100h-4z M96,0h2v100h-2z M100,0h6v100h-6z M110,0h4v100h-4z M118,0h2v100h-2z M124,0h6v100h-6z M132,0h4v100h-4z M138,0h6v100h-6z M148,0h2v100h-2z M154,0h4v100h-4z M162,0h6v100h-6z M170,0h2v100h-2z M176,0h6v100h-6z M184,0h4v100h-4z M190,0h6v100h-6z M198,0h6v100h-6z M206,0h2v100h-2z M212,0h4v100h-4z M220,0h6v100h-6z M230,0h2v100h-2z M234,0h4v100h-4z M242,0h6v100h-6z M250,0h2v100h-2z M254,0h8v100h-8z M264,0h2v100h-2z M270,0h6v100h-6z M278,0h4v100h-4z M286,0h2v100h-2z M292,0h6v100h-6z M302,0h4v100h-4z M308,0h4v100h-4z M316,0h6v100h-6z M326,0h2v100h-2z M330,0h4v100h-4z M338,0h2v100h-2z M342,0h6v100h-6z M352,0h4v100h-4z M360,0h2v100h-2z M366,0h6v100h-6z M374,0h4v100h-4z M380,0h6v100h-6z M390,0h2v100h-2z M396,0h2v100h-2z M404,0h2v100h-2z M408,0h4v100h-4z M418,0h4v100h-4z M428,0h6v100h-6z M436,0h2v100h-2z M440,0h4v100h-4z"
-      />
-    </RNSVGGroup>
-  </RNSVGSvgView>
-</View>
-`;
-
-exports[`Barcode with CODE128AUTO renders successfully with CODE128AUTO 1`] = `
-<View
-  style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#FFFFFF",
-      "width": 180,
-    }
-  }
-  testID="Barcode"
->
-  <RNSVGSvgView
-    bbHeight={100}
-    bbWidth={180}
-    fill="#000000"
-    focusable={false}
-    height={100}
-    style={
-      Array [
-        Object {
-          "backgroundColor": "transparent",
-          "borderWidth": 0,
-        },
-        Object {
-          "flex": 0,
-          "height": 100,
-          "width": 180,
-        },
-      ]
-    }
-    width={180}
-  >
-    <RNSVGGroup
-      fill={4278190080}
-      propList={
-        Array [
-          "fill",
-        ]
-      }
-    >
-      <RNSVGPath
-        d="M0,0h4v100h-4z M6,0h2v100h-2z M12,0h6v100h-6z M22,0h4v100h-4z M30,0h4v100h-4z M36,0h4v100h-4z M44,0h6v100h-6z M52,0h4v100h-4z M58,0h6v100h-6z M66,0h2v100h-2z M70,0h6v100h-6z M78,0h4v100h-4z M88,0h2v100h-2z M98,0h2v100h-2z M102,0h4v100h-4z M110,0h4v100h-4z M116,0h4v100h-4z M122,0h8v100h-8z M132,0h2v100h-2z M142,0h4v100h-4z M148,0h2v100h-2z M154,0h4v100h-4z M164,0h6v100h-6z M172,0h2v100h-2z M176,0h4v100h-4z"
+        d="M0,0h4v100h-4z M6,0h2v100h-2z M16,0h2v100h-2z M22,0h2v100h-2z M28,0h6v100h-6z M36,0h4v100h-4z M44,0h2v100h-2z M50,0h6v100h-6z M60,0h4v100h-4z M66,0h4v100h-4z M74,0h6v100h-6z M84,0h2v100h-2z M88,0h4v100h-4z M96,0h2v100h-2z M100,0h6v100h-6z M110,0h4v100h-4z M118,0h2v100h-2z M124,0h6v100h-6z M132,0h4v100h-4z M138,0h6v100h-6z M148,0h2v100h-2z M154,0h4v100h-4z M162,0h6v100h-6z M170,0h2v100h-2z M176,0h6v100h-6z M184,0h4v100h-4z M190,0h6v100h-6z M198,0h6v100h-6z M206,0h2v100h-2z M212,0h4v100h-4z M220,0h6v100h-6z M230,0h2v100h-2z M234,0h4v100h-4z M242,0h2v100h-2z M246,0h6v100h-6z M254,0h8v100h-8z M264,0h4v100h-4z M272,0h4v100h-4z M278,0h4v100h-4z M286,0h6v100h-6z M294,0h4v100h-4z M300,0h6v100h-6z M308,0h2v100h-2z M312,0h6v100h-6z M320,0h4v100h-4z M330,0h2v100h-2z M338,0h6v100h-6z M346,0h4v100h-4z M352,0h4v100h-4z M362,0h6v100h-6z M370,0h2v100h-2z M374,0h4v100h-4z"
       />
     </RNSVGGroup>
   </RNSVGSvgView>
@@ -102,14 +54,14 @@ exports[`Barcode with all format renders successfully with CODE128 1`] = `
     Object {
       "alignItems": "center",
       "backgroundColor": "#FFFFFF",
-      "width": 444,
+      "paddingHorizontal": 0,
     }
   }
   testID="Barcode"
 >
   <RNSVGSvgView
     bbHeight={100}
-    bbWidth={444}
+    bbWidth={378}
     fill="#000000"
     focusable={false}
     height={100}
@@ -122,11 +74,11 @@ exports[`Barcode with all format renders successfully with CODE128 1`] = `
         Object {
           "flex": 0,
           "height": 100,
-          "width": 444,
+          "width": 378,
         },
       ]
     }
-    width={444}
+    width={378}
   >
     <RNSVGGroup
       fill={4278190080}
@@ -137,7 +89,7 @@ exports[`Barcode with all format renders successfully with CODE128 1`] = `
       }
     >
       <RNSVGPath
-        d="M0,0h4v100h-4z M6,0h2v100h-2z M16,0h2v100h-2z M22,0h2v100h-2z M28,0h6v100h-6z M36,0h4v100h-4z M44,0h2v100h-2z M50,0h6v100h-6z M60,0h4v100h-4z M66,0h4v100h-4z M74,0h6v100h-6z M84,0h2v100h-2z M88,0h4v100h-4z M96,0h2v100h-2z M100,0h6v100h-6z M110,0h4v100h-4z M118,0h2v100h-2z M124,0h6v100h-6z M132,0h4v100h-4z M138,0h6v100h-6z M148,0h2v100h-2z M154,0h4v100h-4z M162,0h6v100h-6z M170,0h2v100h-2z M176,0h6v100h-6z M184,0h4v100h-4z M190,0h6v100h-6z M198,0h6v100h-6z M206,0h2v100h-2z M212,0h4v100h-4z M220,0h6v100h-6z M230,0h2v100h-2z M234,0h4v100h-4z M242,0h6v100h-6z M250,0h2v100h-2z M254,0h8v100h-8z M264,0h2v100h-2z M270,0h6v100h-6z M278,0h4v100h-4z M286,0h2v100h-2z M292,0h6v100h-6z M302,0h4v100h-4z M308,0h4v100h-4z M316,0h6v100h-6z M326,0h2v100h-2z M330,0h4v100h-4z M338,0h2v100h-2z M342,0h6v100h-6z M352,0h4v100h-4z M360,0h2v100h-2z M366,0h6v100h-6z M374,0h4v100h-4z M380,0h6v100h-6z M390,0h2v100h-2z M396,0h2v100h-2z M404,0h2v100h-2z M408,0h4v100h-4z M418,0h4v100h-4z M428,0h6v100h-6z M436,0h2v100h-2z M440,0h4v100h-4z"
+        d="M0,0h4v100h-4z M6,0h2v100h-2z M16,0h2v100h-2z M22,0h2v100h-2z M28,0h6v100h-6z M36,0h4v100h-4z M44,0h2v100h-2z M50,0h6v100h-6z M60,0h4v100h-4z M66,0h4v100h-4z M74,0h6v100h-6z M84,0h2v100h-2z M88,0h4v100h-4z M96,0h2v100h-2z M100,0h6v100h-6z M110,0h4v100h-4z M118,0h2v100h-2z M124,0h6v100h-6z M132,0h4v100h-4z M138,0h6v100h-6z M148,0h2v100h-2z M154,0h4v100h-4z M162,0h6v100h-6z M170,0h2v100h-2z M176,0h6v100h-6z M184,0h4v100h-4z M190,0h6v100h-6z M198,0h6v100h-6z M206,0h2v100h-2z M212,0h4v100h-4z M220,0h6v100h-6z M230,0h2v100h-2z M234,0h4v100h-4z M242,0h2v100h-2z M246,0h6v100h-6z M254,0h8v100h-8z M264,0h4v100h-4z M272,0h4v100h-4z M278,0h4v100h-4z M286,0h6v100h-6z M294,0h4v100h-4z M300,0h6v100h-6z M308,0h2v100h-2z M312,0h6v100h-6z M320,0h4v100h-4z M330,0h2v100h-2z M338,0h6v100h-6z M346,0h4v100h-4z M352,0h4v100h-4z M362,0h6v100h-6z M370,0h2v100h-2z M374,0h4v100h-4z"
       />
     </RNSVGGroup>
   </RNSVGSvgView>
@@ -150,7 +102,7 @@ exports[`Barcode with all format renders successfully with CODE128AUTO 1`] = `
     Object {
       "alignItems": "center",
       "backgroundColor": "#FFFFFF",
-      "width": 180,
+      "paddingHorizontal": 0,
     }
   }
   testID="Barcode"
@@ -198,7 +150,7 @@ exports[`Barcode with all props should be applied properly 1`] = `
     Object {
       "alignItems": "flex-start",
       "backgroundColor": "blue",
-      "width": 300,
+      "paddingHorizontal": 5,
     }
   }
   testID="Barcode"

@@ -1,6 +1,6 @@
 import {ApplicationError} from 'bases/core/errors/ApplicationError';
 import {log} from 'bases/logging';
-import {Barcode, CHARACTER_SET, Format, START_CHARACTER_SET} from 'bases/ui/barcode/Barcode';
+import {Barcode, CODE_SET_CHARACTERS, Format, START_CHARACTERS} from 'bases/ui/barcode/Barcode';
 import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
 import {StyledColumn} from 'bases/ui/common/StyledColumn';
 import {StyledRow} from 'bases/ui/common/StyledRow';
@@ -9,11 +9,11 @@ import {StyledTextInput} from 'bases/ui/common/StyledTextInput';
 import {AddIllustration} from 'bases/ui/illustration/AddIllustration';
 import {RemoveIllustration} from 'bases/ui/illustration/RemoveIllustration';
 import {Item, SelectPicker} from 'bases/ui/picker/SelectPicker';
+import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
 import React, {useCallback, useMemo, useState} from 'react';
 import {Pressable} from 'react-native';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
-import {SpecAndSourceCodeLink} from '../../demo-github-link/components/SpecAndSourceCodeLink';
 import {formInitialValues, useBarcodeForm} from '../forms/useBarcodeForm';
 import {BarcodeCharacter} from '../types/barcodeCharacter';
 
@@ -31,7 +31,8 @@ const characterSet: Item<BarcodeCharacter>[] = [
 const initialLineWidth = Number(formInitialValues.lineWidth);
 export const BarcodePage: React.FC = () => {
   const frame = useSafeAreaFrame();
-  const maxSize = useMemo(() => Math.trunc(frame.width) - 32, [frame.width]);
+  // 画面幅 - Boxのpadding - バーコードに指定するquietZone * 2
+  const maxWidth = useMemo(() => Math.trunc(frame.width) - 32 - 10 * 2, [frame.width]);
   const {form, setFormLineWidth, validateForm} = useBarcodeForm();
   const [lineWidth, setLineWidth] = useState(initialLineWidth);
 
@@ -59,8 +60,10 @@ export const BarcodePage: React.FC = () => {
       return form.errors.code128Data
         ? undefined
         : form.values.code128Data
-            .map(
-              (d, index) => `${index === 0 ? START_CHARACTER_SET[d.character] : CHARACTER_SET[d.character]}${d.value}`,
+            .map((d, index) =>
+              d.value
+                ? `${index === 0 ? START_CHARACTERS[d.character] : CODE_SET_CHARACTERS[d.character]}${d.value}`
+                : undefined,
             )
             .join('');
     }
@@ -94,12 +97,7 @@ export const BarcodePage: React.FC = () => {
         alwaysBounceVertical={false}>
         <StyledSafeAreaView>
           <SpecAndSourceCodeLink feature="barcode" />
-          <Text>
-            {`
-バーコードを生成し、表示します。
-フォーマットは、CODE128、CODE128AUTOのいずれかを指定します。
-        `}
-          </Text>
+          <Text>CODE128のバーコードを生成し、表示します。</Text>
           <StyledSpace height="p32" />
           <StyledColumn space="p16">
             <StyledColumn space="p4">
@@ -138,7 +136,8 @@ export const BarcodePage: React.FC = () => {
                 text={text}
                 format={form.values.format}
                 lineWidth={lineWidth}
-                maxWidth={maxSize}
+                maxWidth={maxWidth}
+                quietZone={10}
                 onError={e =>
                   log.error(new ApplicationError('Failed to generate barcode.', e, 'BarcodeError'), 'BarcodeError')
                 }

@@ -4,7 +4,7 @@ import {TextProps, ViewProps} from 'react-native';
 import {PathProps} from 'react-native-svg';
 import {ReactTestInstance} from 'react-test-renderer';
 
-import {Barcode, CHARACTER_SET, START_CHARACTER_SET} from './Barcode';
+import {Barcode, CODE_SET_CHARACTERS, START_CHARACTERS} from './Barcode';
 
 const getSvgProps = (view: ReactTestInstance): SVGProps<any> => {
   const svgView = view.children[0] as ReactTestInstance;
@@ -22,7 +22,7 @@ describe('Barcode only with required props', () => {
   it('renders successfully only with required props', () => {
     render(
       <Barcode
-        value={`${START_CHARACTER_SET['CODE-A']}0123456789${CHARACTER_SET['CODE-C']}012345`}
+        value={`${START_CHARACTERS['CODE-A']}0123456789${CODE_SET_CHARACTERS['CODE-C']}012345`}
         viewProps={{testID: 'Barcode'}}
       />,
     );
@@ -36,7 +36,7 @@ describe('Barcode with all format', () => {
   it('renders successfully with CODE128', () => {
     render(
       <Barcode
-        value={`${START_CHARACTER_SET['CODE-A']}0123456789${CHARACTER_SET['CODE-C']}012345`}
+        value={`${START_CHARACTERS['CODE-A']}0123456789${CODE_SET_CHARACTERS['CODE-C']}012345`}
         format="CODE128"
         viewProps={{testID: 'Barcode'}}
       />,
@@ -45,7 +45,7 @@ describe('Barcode with all format', () => {
     const view = screen.getByTestId('Barcode');
     const svgPathProps = getSvgPathProps(view);
     expect(svgPathProps.d).toBe(
-      'M0,0h4v100h-4z M6,0h2v100h-2z M16,0h2v100h-2z M22,0h2v100h-2z M28,0h6v100h-6z M36,0h4v100h-4z M44,0h2v100h-2z M50,0h6v100h-6z M60,0h4v100h-4z M66,0h4v100h-4z M74,0h6v100h-6z M84,0h2v100h-2z M88,0h4v100h-4z M96,0h2v100h-2z M100,0h6v100h-6z M110,0h4v100h-4z M118,0h2v100h-2z M124,0h6v100h-6z M132,0h4v100h-4z M138,0h6v100h-6z M148,0h2v100h-2z M154,0h4v100h-4z M162,0h6v100h-6z M170,0h2v100h-2z M176,0h6v100h-6z M184,0h4v100h-4z M190,0h6v100h-6z M198,0h6v100h-6z M206,0h2v100h-2z M212,0h4v100h-4z M220,0h6v100h-6z M230,0h2v100h-2z M234,0h4v100h-4z M242,0h6v100h-6z M250,0h2v100h-2z M254,0h8v100h-8z M264,0h2v100h-2z M270,0h6v100h-6z M278,0h4v100h-4z M286,0h2v100h-2z M292,0h6v100h-6z M302,0h4v100h-4z M308,0h4v100h-4z M316,0h6v100h-6z M326,0h2v100h-2z M330,0h4v100h-4z M338,0h2v100h-2z M342,0h6v100h-6z M352,0h4v100h-4z M360,0h2v100h-2z M366,0h6v100h-6z M374,0h4v100h-4z M380,0h6v100h-6z M390,0h2v100h-2z M396,0h2v100h-2z M404,0h2v100h-2z M408,0h4v100h-4z M418,0h4v100h-4z M428,0h6v100h-6z M436,0h2v100h-2z M440,0h4v100h-4z',
+      'M0,0h4v100h-4z M6,0h2v100h-2z M16,0h2v100h-2z M22,0h2v100h-2z M28,0h6v100h-6z M36,0h4v100h-4z M44,0h2v100h-2z M50,0h6v100h-6z M60,0h4v100h-4z M66,0h4v100h-4z M74,0h6v100h-6z M84,0h2v100h-2z M88,0h4v100h-4z M96,0h2v100h-2z M100,0h6v100h-6z M110,0h4v100h-4z M118,0h2v100h-2z M124,0h6v100h-6z M132,0h4v100h-4z M138,0h6v100h-6z M148,0h2v100h-2z M154,0h4v100h-4z M162,0h6v100h-6z M170,0h2v100h-2z M176,0h6v100h-6z M184,0h4v100h-4z M190,0h6v100h-6z M198,0h6v100h-6z M206,0h2v100h-2z M212,0h4v100h-4z M220,0h6v100h-6z M230,0h2v100h-2z M234,0h4v100h-4z M242,0h2v100h-2z M246,0h6v100h-6z M254,0h8v100h-8z M264,0h4v100h-4z M272,0h4v100h-4z M278,0h4v100h-4z M286,0h6v100h-6z M294,0h4v100h-4z M300,0h6v100h-6z M308,0h2v100h-2z M312,0h6v100h-6z M320,0h4v100h-4z M330,0h2v100h-2z M338,0h6v100h-6z M346,0h4v100h-4z M352,0h4v100h-4z M362,0h6v100h-6z M370,0h2v100h-2z M374,0h4v100h-4z',
     );
   });
   it('renders successfully with CODE128AUTO', () => {
@@ -77,6 +77,7 @@ describe('Barcode with all props', () => {
         lineWidth={5}
         maxWidth={300}
         height={200}
+        quietZone={5}
         lineColor="red"
         background="blue"
         text="012345"
@@ -87,7 +88,11 @@ describe('Barcode with all props', () => {
     expect(screen).toMatchSnapshot();
     const view = screen.getByTestId('Barcode');
     const viewProps = view.props as ViewProps;
-    expect(viewProps.style).toEqual({backgroundColor: 'blue', alignItems: 'flex-start', width: 300});
+    expect(viewProps.style).toEqual({
+      backgroundColor: 'blue',
+      alignItems: 'flex-start',
+      paddingHorizontal: 5,
+    });
     getSvgProps(view);
     const svgProps = getSvgProps(view);
     const svgPathProps = getSvgPathProps(view);
