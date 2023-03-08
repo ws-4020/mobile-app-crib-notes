@@ -12,7 +12,7 @@ type FormValues = {
   lineWidth: string;
 };
 
-type CODE128DataSet = {
+export type CODE128DataSet = {
   character: BarcodeCharacter;
   value: string;
 };
@@ -86,17 +86,53 @@ export const useBarcodeForm = () => {
     onSubmit: nop,
   });
 
-  const setFormLineWidth = useCallback(async (value: string) => form.setFieldValue('lineWidth', value), [form]);
-  const validateForm = useCallback(
-    async (values: Partial<FormValues>) =>
-      form.validateForm({
-        format: values.format ?? form.values.format,
-        code128Data: values.code128Data ?? form.values.code128Data,
-        code128AutoData: values.code128AutoData ?? form.values.code128AutoData,
-        lineWidth: values.lineWidth ?? form.values.lineWidth,
-      }),
+  const setFormLineWidth = useCallback(async (value: string) => form.setFieldValue('lineWidth', value, true), [form]);
+  const setFormCode128Character = useCallback(
+    async (value: string, index: number) => form.setFieldValue(`code128Data[${index}].character`, value),
+    [form],
+  );
+  const setFormCode128Value = useCallback(
+    async (value: string, index: number) => {
+      const errors = await form.setFieldValue(`code128Data[${index}].value`, value, true);
+      await form.setFieldTouched(`code128Data[${index}].value`, true);
+      return errors;
+    },
+    [form],
+  );
+  const setFormCode128AutoData = useCallback(
+    async (value: string) => form.setFieldValue('code128AutoData', value, true),
+    [form],
+  );
+  const addCode128DataField = useCallback(async () => {
+    const code128Data = [
+      ...form.values.code128Data,
+      {
+        character: formInitialValues.code128Data[0].character,
+        value: '',
+      },
+    ];
+    await form.setFieldValue('code128Data', code128Data);
+    // フィールド追加時にバリデーションが実施されないように、touchedをfalseにする
+    await form.setFieldTouched(`code128Data[${form.values.code128Data.length}].value`, false);
+    return code128Data;
+  }, [form]);
+  const removeCode128DataField = useCallback(
+    async (index: number) => {
+      const code128Data = [...form.values.code128Data];
+      code128Data.splice(index, 1);
+      await form.setFieldValue('code128Data', code128Data);
+      return code128Data;
+    },
     [form],
   );
 
-  return {form, setFormLineWidth, validateForm};
+  return {
+    form,
+    setFormLineWidth,
+    setFormCode128Character,
+    setFormCode128Value,
+    setFormCode128AutoData,
+    addCode128DataField,
+    removeCode128DataField,
+  };
 };

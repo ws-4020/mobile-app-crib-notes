@@ -1,6 +1,6 @@
 import {ApplicationError} from 'bases/core/errors/ApplicationError';
 import {log} from 'bases/logging';
-import {Barcode, CODE_SET_CHARACTERS, Format, START_CHARACTERS} from 'bases/ui/barcode/Barcode';
+import {Barcode, BarcodeProps, CODE_SET_CHARACTERS, Format, START_CHARACTERS} from 'bases/ui/barcode/Barcode';
 import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
 import {StyledColumn} from 'bases/ui/common/StyledColumn';
 import {StyledRow} from 'bases/ui/common/StyledRow';
@@ -14,7 +14,7 @@ import React, {useCallback, useMemo, useState} from 'react';
 import {Pressable} from 'react-native';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
-import {formInitialValues, useBarcodeForm} from '../forms/useBarcodeForm';
+import {CODE128DataSet, formInitialValues, useBarcodeForm} from '../forms/useBarcodeForm';
 import {BarcodeCharacter} from '../types/barcodeCharacter';
 
 const formatItems: Item<Format>[] = [
@@ -29,12 +29,30 @@ const characterSet: Item<BarcodeCharacter>[] = [
 ];
 
 const initialLineWidth = Number(formInitialValues.lineWidth);
+const initialCode128Value = `${START_CHARACTERS[formInitialValues.code128Data[0].character]}${
+  formInitialValues.code128Data[0].value
+}`;
+const initialCode128Text = formInitialValues.code128Data[0].value;
+const initialCode128AutoValue = formInitialValues.code128AutoData;
+const initialCode128AutoText = formInitialValues.code128AutoData;
 export const BarcodePage: React.FC = () => {
   const frame = useSafeAreaFrame();
   // 画面幅 - Boxのpadding - バーコードに指定するquietZone * 2
   const maxWidth = useMemo(() => Math.trunc(frame.width) - 32 - 10 * 2, [frame.width]);
-  const {form, setFormLineWidth, validateForm} = useBarcodeForm();
+  const {
+    form,
+    setFormLineWidth,
+    setFormCode128Character,
+    setFormCode128Value,
+    setFormCode128AutoData,
+    addCode128DataField,
+    removeCode128DataField,
+  } = useBarcodeForm();
   const [lineWidth, setLineWidth] = useState(initialLineWidth);
+  const [code128Value, setCode128Value] = useState(initialCode128Value);
+  const [code128Text, setCode128Text] = useState(initialCode128Text);
+  const [code128AutoValue, setCode128AutoValue] = useState(initialCode128AutoValue);
+  const [code128AutoText, setCode128AutoText] = useState(initialCode128AutoText);
 
   const onSelectedFormatChange = useCallback(
     (selectedItem?: Item<Format>) => form.setFieldValue('format', selectedItem?.value),
@@ -43,51 +61,36 @@ export const BarcodePage: React.FC = () => {
 
   const setLineWidthAndValidate = useCallback(
     async (value: string) => {
-      await setFormLineWidth(value);
-      // validateFieldだとバリデーションの結果が返却されないので、validateFormを使う
-      const errors = await validateForm({lineWidth: value});
-      if (!errors.lineWidth) {
+      const errors = await setFormLineWidth(value);
+      if (!errors?.lineWidth) {
         setLineWidth(Number(value));
       }
     },
-    [setFormLineWidth, validateForm],
+    [setFormLineWidth],
   );
 
-  const data = useMemo(() => {
-    if (form.values.format === 'CODE128AUTO') {
-      return form.errors.code128AutoData ? undefined : form.values.code128AutoData;
-    } else {
-      return form.errors.code128Data
-        ? undefined
-        : form.values.code128Data
-            .map((d, index) =>
-              d.value
-                ? `${index === 0 ? START_CHARACTERS[d.character] : CODE_SET_CHARACTERS[d.character]}${d.value}`
-                : undefined,
-            )
-            .join('');
-    }
-  }, [
-    form.errors.code128AutoData,
-    form.errors.code128Data,
-    form.values.code128AutoData,
-    form.values.code128Data,
-    form.values.format,
-  ]);
+  const setCode128DataAndText = useCallback((code128Data: CODE128DataSet[]) => {
+    const data = code128Data
+      .map((d, index) =>
+        d.value
+          ? `${index === 0 ? START_CHARACTERS[d.character] : CODE_SET_CHARACTERS[d.character]}${d.value}`
+          : undefined,
+      )
+      .join('');
+    const text = code128Data.map(d => d.value).join('');
+    setCode128Value(data);
+    setCode128Text(text);
+  }, []);
 
-  const text = useMemo(() => {
-    if (form.values.format === 'CODE128AUTO') {
-      return form.errors.code128AutoData ? undefined : form.values.code128AutoData;
-    } else {
-      return form.errors.code128Data ? undefined : form.values.code128Data.map(d => d.value).join('');
-    }
-  }, [
-    form.errors.code128AutoData,
-    form.errors.code128Data,
-    form.values.code128AutoData,
-    form.values.code128Data,
-    form.values.format,
-  ]);
+  const setCode128AutoDataAndText = useCallback((code128AutoData: string) => {
+    setCode128AutoValue(code128AutoData);
+    setCode128AutoText(code128AutoData);
+  }, []);
+
+  const onError = useCallback(
+    (e: unknown) => log.error(new ApplicationError('Failed to generate barcode.', e, 'BarcodeError'), 'BarcodeError'),
+    [],
+  );
 
   return (
     <Box flex={1} p="p16">
@@ -113,7 +116,16 @@ export const BarcodePage: React.FC = () => {
             </StyledColumn>
             <StyledColumn space="p4">
               <Text>バーコードに設定するデータ:</Text>
-              <BarcodeDataInput form={form} />
+              <BarcodeDataInput
+                form={form}
+                setFormCode128Character={setFormCode128Character}
+                setFormCode128Value={setFormCode128Value}
+                setFormCode128AutoData={setFormCode128AutoData}
+                addCode128DataField={addCode128DataField}
+                removeCode128DataField={removeCode128DataField}
+                setCode128DataAndText={setCode128DataAndText}
+                setCode128AutoDataAndText={setCode128AutoDataAndText}
+              />
             </StyledColumn>
             <StyledColumn space="p4">
               <Text>{`ライン幅:
@@ -129,57 +141,89 @@ export const BarcodePage: React.FC = () => {
             </StyledColumn>
           </StyledColumn>
           <StyledSpace height="p48" />
-          {data && (
-            <Box alignSelf="center">
-              <Barcode
-                value={data}
-                text={text}
-                format={form.values.format}
-                lineWidth={lineWidth}
-                maxWidth={maxWidth}
-                quietZone={10}
-                onError={e =>
-                  log.error(new ApplicationError('Failed to generate barcode.', e, 'BarcodeError'), 'BarcodeError')
-                }
-              />
-            </Box>
-          )}
+          <Box alignSelf="center">
+            <Code128Barcode
+              value={form.values.format === 'CODE128' ? code128Value : code128AutoValue}
+              text={form.values.format === 'CODE128' ? code128Text : code128AutoText}
+              format={form.values.format}
+              lineWidth={lineWidth}
+              maxWidth={maxWidth}
+              quietZone={10}
+              onError={onError}
+            />
+          </Box>
         </StyledSafeAreaView>
       </StyledScrollView>
     </Box>
   );
 };
 
-const BarcodeDataInput: React.FC<Pick<ReturnType<typeof useBarcodeForm>, 'form'>> = ({form}) => {
-  const push = useCallback(async () => {
-    await form.setFieldValue('code128Data', [
-      ...form.values.code128Data,
-      {
-        character: formInitialValues.code128Data[0].character,
-        value: formInitialValues.code128Data[0].value,
-      },
-    ]);
-  }, [form]);
+const BarcodeDataInput: React.FC<
+  Omit<ReturnType<typeof useBarcodeForm>, 'setFormLineWidth'> & {
+    setCode128DataAndText: (value: CODE128DataSet[]) => void;
+    setCode128AutoDataAndText: (value: string) => void;
+  }
+> = props => {
+  return props.form.values.format === 'CODE128AUTO' ? (
+    <Code128AutoDataInput {...props} />
+  ) : (
+    <Code128DataInput {...props} />
+  );
+};
+const Code128AutoDataInput: React.FC<
+  Pick<ReturnType<typeof useBarcodeForm>, 'form' | 'setFormCode128AutoData'> & {
+    setCode128AutoDataAndText: (value: string) => void;
+  }
+> = ({form, setFormCode128AutoData, setCode128AutoDataAndText}) => {
+  const setCode128AutoDataAndValidate = useCallback(
+    async (value: string) => {
+      const errors = await setFormCode128AutoData(value);
+      if (!errors?.code128AutoData) {
+        setCode128AutoDataAndText(value);
+      }
+    },
+    [setCode128AutoDataAndText, setFormCode128AutoData],
+  );
 
-  return form.values.format === 'CODE128AUTO' ? (
+  return (
     <StyledTextInput
       value={form.values.code128AutoData}
       borderBottomWidth={1}
-      onChangeText={form.handleChange('code128AutoData')}
+      onChangeText={setCode128AutoDataAndValidate}
       errorMessage={form.errors.code128AutoData}
       placeholder="値を入力してください"
     />
-  ) : (
+  );
+};
+
+const Code128DataInput: React.FC<
+  Omit<ReturnType<typeof useBarcodeForm>, 'setFormLineWidth' | 'setFormCode128AutoData'> & {
+    setCode128DataAndText: (value: CODE128DataSet[]) => void;
+  }
+> = ({
+  form,
+  setFormCode128Value,
+  setFormCode128Character,
+  addCode128DataField,
+  removeCode128DataField,
+  setCode128DataAndText,
+}) => {
+  return (
     <StyledColumn space="p16">
       {form.values.code128Data.map((d, index) => {
         const onSelectedCharacterSetChange = (selectedItem?: Item<string>) =>
-          form.setFieldValue(
-            `code128Data[${index}].character`,
-            selectedItem?.value ?? formInitialValues.code128Data[0].character,
-          );
-        const remove = async () => {
-          form.values.code128Data.splice(index, 1);
-          await form.setFieldValue('code128Data', [...form.values.code128Data]);
+          setFormCode128Character(selectedItem?.value ?? formInitialValues.code128Data[0].character, index);
+
+        const setCode128ValueAndValidate = async (value: string) => {
+          const errors = await setFormCode128Value(value, index);
+          console.log(!errors?.code128Data);
+          if (!errors?.code128Data) {
+            const oldData = form.values.code128Data[index];
+            const newData = {character: oldData.character, value};
+            const code128Data = [...form.values.code128Data];
+            code128Data.splice(index, 1, newData);
+            setCode128DataAndText(code128Data);
+          }
         };
 
         return (
@@ -202,21 +246,29 @@ const BarcodeDataInput: React.FC<Pick<ReturnType<typeof useBarcodeForm>, 'form'>
               <StyledTextInput
                 value={form.values.code128Data[index].value}
                 borderBottomWidth={1}
-                onChangeText={form.handleChange(`code128Data[${index}].value`)}
-                errorMessage={form.getFieldMeta(`code128Data[${index}].value`).error}
+                onChangeText={setCode128ValueAndValidate}
+                errorMessage={
+                  form.getFieldMeta(`code128Data[${index}].value`).touched
+                    ? form.getFieldMeta(`code128Data[${index}].value`).error
+                    : undefined
+                }
                 placeholder="値を入力してください"
               />
             </Box>
             <StyledRow flex={1} space="p8">
-              {index !== 0 ? (
-                <Pressable onPress={remove}>
+              {form.values.code128Data.length > 1 ? (
+                <Pressable
+                  onPress={async () => {
+                    const removed = await removeCode128DataField(index);
+                    setCode128DataAndText(removed);
+                  }}>
                   <RemoveIllustration color="textRed" />
                 </Pressable>
               ) : (
                 <StyledSpace width="p24" />
               )}
               {index === form.values.code128Data.length - 1 ? (
-                <Pressable onPress={push}>
+                <Pressable onPress={addCode128DataField}>
                   <AddIllustration color="blue" />
                 </Pressable>
               ) : (
@@ -228,4 +280,8 @@ const BarcodeDataInput: React.FC<Pick<ReturnType<typeof useBarcodeForm>, 'form'>
       })}
     </StyledColumn>
   );
+};
+
+const Code128Barcode: React.FC<BarcodeProps> = props => {
+  return props.value ? <Barcode {...props} /> : null;
 };

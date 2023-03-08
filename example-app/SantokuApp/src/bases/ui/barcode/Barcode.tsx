@@ -47,17 +47,56 @@ const ENCODERS = {
 };
 
 export type BarcodeProps = {
+  /**
+   * バーコードに設定するデータ
+   */
   value: string;
+  /**
+   * バーの幅
+   */
   lineWidth?: number;
+  /**
+   * バーコードの最大幅（textで表示する領域は含まない）
+   */
   maxWidth?: number;
+  /**
+   * バーコードの高さ（textで表示する領域は含まない）
+   */
   height?: number;
+  /**
+   * バーコードの左右の余白
+   */
   quietZone?: number;
+  /**
+   * バーコードのフォーマット
+   * 以下のフォーマットを設定可能
+   * - CODE128: スタートキャラクタやコードセットキャラクタを自身で設定するフォーマット
+   * - CODE128AUTO: 指定されたデータに応じて自動でスタートキャラクタやコードセットキャラクタを設定するフォーマット
+   */
   format?: Format;
+  /**
+   * バーの色
+   */
   lineColor?: string;
+  /**
+   * 背景色
+   */
   background?: string;
+  /**
+   * バーコード下部に表示するテキスト
+   */
   text?: string;
+  /**
+   * バーコード下部に表示するテキストのProps
+   */
   textProps?: TextProps;
+  /**
+   * ViewProps
+   */
   viewProps?: ViewProps;
+  /**
+   * エラー発生時に呼び出されるコールバック関数
+   */
   onError?: (err: any) => void;
 };
 
@@ -95,6 +134,10 @@ const drawSvgBarCode = (binary: string, width: number, height: number, barCodeWi
   return rects;
 };
 
+/**
+ * バーコードを生成し、表示するコンポーネント
+ * CODE128のバーコードのみをサポートしている
+ */
 export const Barcode: React.FC<BarcodeProps> = ({
   value = '',
   lineWidth = 2,
@@ -133,9 +176,7 @@ export const Barcode: React.FC<BarcodeProps> = ({
         barCodeWidth: maxWidth && barCodeWidth > maxWidth ? maxWidth : barCodeWidth,
       };
     } catch (error) {
-      if (onError) {
-        onError(error);
-      }
+      onError?.(error);
     }
     return initialBarcode;
   }, [getEncoder, lineWidth, height, maxWidth, onError]);
