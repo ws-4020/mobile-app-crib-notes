@@ -69,8 +69,8 @@ export const BarcodePage: React.FC = () => {
     [setFormLineWidth],
   );
 
-  const setCode128DataAndText = useCallback((code128Data: CODE128DataSet[]) => {
-    const data = code128Data
+  const setCode128Data = useCallback((code128Data: CODE128DataSet[]) => {
+    const value = code128Data
       .map((d, index) =>
         d.value
           ? `${index === 0 ? START_CHARACTERS[d.character] : CODE_SET_CHARACTERS[d.character]}${d.value}`
@@ -78,11 +78,11 @@ export const BarcodePage: React.FC = () => {
       )
       .join('');
     const text = code128Data.map(d => d.value).join('');
-    setCode128Value(data);
+    setCode128Value(value);
     setCode128Text(text);
   }, []);
 
-  const setCode128AutoDataAndText = useCallback((code128AutoData: string) => {
+  const setCode128AutoData = useCallback((code128AutoData: string) => {
     setCode128AutoValue(code128AutoData);
     setCode128AutoText(code128AutoData);
   }, []);
@@ -123,8 +123,8 @@ export const BarcodePage: React.FC = () => {
                 setFormCode128AutoData={setFormCode128AutoData}
                 addCode128DataField={addCode128DataField}
                 removeCode128DataField={removeCode128DataField}
-                setCode128DataAndText={setCode128DataAndText}
-                setCode128AutoDataAndText={setCode128AutoDataAndText}
+                onValidCode128Data={setCode128Data}
+                onValidCode128AutoData={setCode128AutoData}
               />
             </StyledColumn>
             <StyledColumn space="p4">
@@ -160,8 +160,8 @@ export const BarcodePage: React.FC = () => {
 
 const BarcodeDataInput: React.FC<
   Omit<ReturnType<typeof useBarcodeForm>, 'setFormLineWidth'> & {
-    setCode128DataAndText: (value: CODE128DataSet[]) => void;
-    setCode128AutoDataAndText: (value: string) => void;
+    onValidCode128Data: (value: CODE128DataSet[]) => void;
+    onValidCode128AutoData: (value: string) => void;
   }
 > = props => {
   return props.form.values.format === 'CODE128AUTO' ? (
@@ -172,17 +172,17 @@ const BarcodeDataInput: React.FC<
 };
 const Code128AutoDataInput: React.FC<
   Pick<ReturnType<typeof useBarcodeForm>, 'form' | 'setFormCode128AutoData'> & {
-    setCode128AutoDataAndText: (value: string) => void;
+    onValidCode128AutoData: (value: string) => void;
   }
-> = ({form, setFormCode128AutoData, setCode128AutoDataAndText}) => {
+> = ({form, setFormCode128AutoData, onValidCode128AutoData}) => {
   const setCode128AutoDataAndValidate = useCallback(
     async (value: string) => {
       const errors = await setFormCode128AutoData(value);
       if (!errors?.code128AutoData) {
-        setCode128AutoDataAndText(value);
+        onValidCode128AutoData(value);
       }
     },
-    [setCode128AutoDataAndText, setFormCode128AutoData],
+    [onValidCode128AutoData, setFormCode128AutoData],
   );
 
   return (
@@ -198,7 +198,7 @@ const Code128AutoDataInput: React.FC<
 
 const Code128DataInput: React.FC<
   Omit<ReturnType<typeof useBarcodeForm>, 'setFormLineWidth' | 'setFormCode128AutoData'> & {
-    setCode128DataAndText: (value: CODE128DataSet[]) => void;
+    onValidCode128Data: (value: CODE128DataSet[]) => void;
   }
 > = ({
   form,
@@ -206,7 +206,7 @@ const Code128DataInput: React.FC<
   setFormCode128Character,
   addCode128DataField,
   removeCode128DataField,
-  setCode128DataAndText,
+  onValidCode128Data,
 }) => {
   return (
     <StyledColumn space="p16">
@@ -216,13 +216,12 @@ const Code128DataInput: React.FC<
 
         const setCode128ValueAndValidate = async (value: string) => {
           const errors = await setFormCode128Value(value, index);
-          console.log(!errors?.code128Data);
           if (!errors?.code128Data) {
             const oldData = form.values.code128Data[index];
             const newData = {character: oldData.character, value};
             const code128Data = [...form.values.code128Data];
             code128Data.splice(index, 1, newData);
-            setCode128DataAndText(code128Data);
+            onValidCode128Data(code128Data);
           }
         };
 
@@ -260,7 +259,7 @@ const Code128DataInput: React.FC<
                 <Pressable
                   onPress={async () => {
                     const removed = await removeCode128DataField(index);
-                    setCode128DataAndText(removed);
+                    onValidCode128Data(removed);
                   }}>
                   <RemoveIllustration color="textRed" />
                 </Pressable>
