@@ -34,16 +34,7 @@ export const useQRCodeForm = (maxSize: number) => {
     onSubmit: nop,
   });
 
-  const setFormSize = useCallback(async (value: string) => form.setFieldValue('size', value), [form]);
-  const validateForm = useCallback(
-    async (values: Partial<FormValues>) =>
-      form.validateForm({
-        data: values.data ?? form.values.data,
-        errorCorrectionLevel: values.errorCorrectionLevel ?? form.values.errorCorrectionLevel,
-        size: values.size ?? form.values.size,
-      }),
-    [form],
-  );
+  const setFormSize = useCallback(async (value: string) => form.setFieldValue('size', value, true), [form]);
 
-  return {form, setFormSize, validateForm};
+  return {form, setFormSize};
 };
