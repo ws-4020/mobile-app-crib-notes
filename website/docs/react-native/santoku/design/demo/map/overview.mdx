@@ -1,6 +1,7 @@
 # マップ表示
 
 ## 概要
+
 マップ表示を検証するデモページです。
 
 このページのソースコードはこちら（完成したらリンクを入れる）です。
@@ -8,6 +9,7 @@
 ## 検証できること
 
 ### 地図の表示領域の設定
+
 - 緯度（テキスト入力）
 - 経度（テキスト入力）
 - 緯度の表示幅（テキスト入力）
@@ -16,24 +18,24 @@
 - 建物の表示（トグルボタン）
 
 ### 地図操作で制限できる項目の確認
+
 - スワイプ操作による表示位置の移動（トグルボタン）
 - ピンチイン・ピンチアウト操作とダブルタップによる拡大縮小（トグルボタン）
 - 2本指スワイプによる回転（トグルボタン）
 
 ### マーカーの位置変更
+
 - 緯度（テキスト入力）
 - 経度（テキスト入力）
 
 
 ## 使用したマップSDK
+
 地図表示のためにreact-native-maps 0.30を使用します。
 react-native-mapsで使用できるマップSDKは、iOSが[MapKit](https://developer.apple.com/documentation/mapkit/)あるいは[Google Map](https://developers.google.com/maps/documentation/ios-sdk?hl=ja)、Androidは[Google Map](https://developers.google.com/maps/documentation/android-sdk?hl=ja)のみになります。
-本デモページではiOSではMapKit、Androidではgoogle mapを使用した地図表示を実装しています。
+本デモページではiOSはMapKit、Androidはgoogle mapを使用した地図表示を実装しています。
 
 Santokuアプリではuse_frameworkでライブラリを静的にリンクさせていますが、iOSでGoogleMapを使用するためのライブラリを正常にリンクさせることができませんでした。
-そのため以下のissueを参考に`Podfile`に変更が必要になりました。
+そのため以下のissueを参考に`Podfile`を変更する必要がありました。
 
 https://github.com/react-native-maps/react-native-maps/issues/3597
-
-
-
