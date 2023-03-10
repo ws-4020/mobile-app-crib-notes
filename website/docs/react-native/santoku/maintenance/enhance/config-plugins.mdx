@@ -1,0 +1,49 @@
+---
+title: Config Plugins対応
+---
+
+## Config Plugins対応の背景
+
+このアプリでは、柔軟にネイティブ機能の組み込みに対応するため、Bare workflowを採用しました。
+その結果、次の課題が生じました。
+
+- Expoのアップグレードに時間がかかる
+- ネイティブプロジェクトの変更が管理しづらい
+
+Expoのアップグレード対応には、ネイティブプロジェクトの設定やコードの変更が必要でした。
+この作業は線密な注意とネイティブ知識が必要で、対応できる人材が限られ非常に時間もかかりました。
+
+Bare workflowでは、アプリ独自の変更をExpoで用意されたネイティブプロジェクトのテンプレートに対して直接加えます。
+そのため、どこに何を何のために追加・修正したかの管理が困難でした。
+
+これらの課題を解決するため、Config Pluginsに対応しました。
+
+Config pluginsはAndroidやiOSプロジェクトのネイティブ設定やコードをカスタマイズできる機能です。
+ネイティブ設定やコードの変更をプラグインとして管理できるため、上記課題への解決策となります。
+Config pluginsの概要は[Config Pluginsについて](/react-native/santoku/development/build-configuration/about-plugins.mdx)を参照してください。
+
+## Config Plugins対応に伴う主な変更点
+
+### ビルドバリアント
+
+Config Plugins対応に伴い、ビルドバリアントの考え方を廃止しました。
+今後は環境とビルドタイプの組み合わせでビルドを管理します。
+詳しくは[ビルドタイプ](/react-native/santoku/development/build-configuration/build-type.mdx)を参照してください。
+
+### react-native-config
+
+react-native-configを導入することで、ネイティブとReactで同じ環境変数を使用できました。
+しかし、react-native-configの設定は難しく、新たな環境を追加する場合には技術力と時間を要しました。
+そこで、react-native-configを使用しないこととしました。
+環境変数はExpo Configでの管理となります。
+詳しくは[アプリ特有の設定値](/react-native/santoku/development/build-configuration/app-constants.mdx)を参照してください。
+
+## このアプリで実施したアップグレードの手順
+
+このアプリでは、以下の作業を上から順に実施してConfig Pluginsに対応しました。
+
+### assetsの移動
+### android、iosフォルダの削除
+### pluginの追加
+### configの追加
+### package.jsonの修正
