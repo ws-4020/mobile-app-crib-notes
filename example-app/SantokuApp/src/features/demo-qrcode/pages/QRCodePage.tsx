@@ -25,7 +25,7 @@ export const QRCodePage: React.FC = () => {
   const frame = useSafeAreaFrame();
   const maxSize = useMemo(() => Math.trunc(frame.width) - 32, [frame.width]);
 
-  const {form, setFormSize, validateForm} = useQRCodeForm(maxSize);
+  const {form, setFormSize} = useQRCodeForm(maxSize);
 
   const [size, setSize] = useState(initialSize);
 
@@ -41,14 +41,12 @@ export const QRCodePage: React.FC = () => {
   // そのため、自身でformの値の設定とバリデーションを実施して、バリデーションに成功した場合のみQRCodeに入力サイズを設定する
   const setSizeAndValidate = useCallback(
     async (value: string) => {
-      await setFormSize(value);
-      // validateFieldだとバリデーションの結果が返却されないので、validateFormを使う
-      const errors = await validateForm({size: value});
-      if (!errors.size) {
+      const errors = await setFormSize(value);
+      if (!errors?.size) {
         setSize(Number(value));
       }
     },
-    [setFormSize, validateForm],
+    [setFormSize],
   );
 
   const onSelectedErrorCorrectionLevelChange = useCallback(
