@@ -160,10 +160,10 @@ export const HomePage: React.FC<HomePageProps> = ({
   const flatListRef = useRef<FlatList>(null);
   const scrollToTop = useCallback(() => flatListRef.current?.scrollToOffset({offset: 0, animated: true}), []);
 
-  const questionItems = useMemo(
-    () => questions?.map(addOnPressHandlerToQuestions(navigateToQuestionDetail)),
-    [questions, navigateToQuestionDetail],
-  );
+  // 質問一覧先頭にラベルを表示するためにのダミーオブジェクトを挿入する
+  const questionItems = useMemo(() => {
+    return [...[{} as Question], ...(questions ?? [])].map(addOnPressHandlerToQuestions(navigateToQuestionDetail));
+  }, [questions, navigateToQuestionDetail]);
 
   return (
     <Box flex={1} testID="HomePage">
@@ -172,6 +172,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         showsVerticalScrollIndicator={false}
         refreshing={isPullToRefreshing}
         onRefresh={pullToRefresh}
+        stickyHeaderIndices={[1]}
         ListHeaderComponent={
           <>
             <Box px="p24" py="p32">
@@ -180,26 +181,32 @@ export const HomePage: React.FC<HomePageProps> = ({
               </Text>
             </Box>
             {!isEventsLoading && <EventList data={events} />}
-            <StyledRow px="p24" py="p32" justifyContent="space-between" alignItems="center">
-              <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
-                {m('質問')}
-              </Text>
-              <StyledRow space="p32" alignItems="center">
-                <StyledTouchableOpacity onPress={setVisibleSortSheet}>
-                  <SortIllustration color={sortIconColor} />
-                </StyledTouchableOpacity>
-                <StyledTouchableOpacity onPress={showUnderDevelopment}>
-                  <FilterAltIllustration />
-                </StyledTouchableOpacity>
-                <StyledTouchableOpacity onPress={setVisibleTagSheet}>
-                  <LocalOfferIllustration color={tagIconColor} />
-                </StyledTouchableOpacity>
-              </StyledRow>
-            </StyledRow>
           </>
         }
         data={questionItems}
-        renderItem={QuestionListCard}
+        renderItem={listRenderItemInfo => {
+          if (listRenderItemInfo.item === questionItems[0]) {
+            return (
+              <StyledRow px="p24" py="p32" justifyContent="space-between" alignItems="center" backgroundColor="orange2">
+                <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
+                  {m('質問')}
+                </Text>
+                <StyledRow space="p32" alignItems="center">
+                  <StyledTouchableOpacity onPress={setVisibleSortSheet}>
+                    <SortIllustration color={sortIconColor} />
+                  </StyledTouchableOpacity>
+                  <StyledTouchableOpacity onPress={showUnderDevelopment}>
+                    <FilterAltIllustration />
+                  </StyledTouchableOpacity>
+                  <StyledTouchableOpacity onPress={setVisibleTagSheet}>
+                    <LocalOfferIllustration color={tagIconColor} />
+                  </StyledTouchableOpacity>
+                </StyledRow>
+              </StyledRow>
+            );
+          }
+          return QuestionListCard(listRenderItemInfo);
+        }}
         ItemSeparatorComponent={ListSeparator}
       />
       <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
