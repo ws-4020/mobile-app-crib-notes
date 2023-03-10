@@ -187,7 +187,13 @@ export const HomePage: React.FC<HomePageProps> = ({
         renderItem={listRenderItemInfo => {
           if (listRenderItemInfo.item === questionItems[0]) {
             return (
-              <StyledRow px="p24" py="p32" justifyContent="space-between" alignItems="center" backgroundColor="orange2">
+              <StyledRow
+                px="p24"
+                pt="p32"
+                pb="p16"
+                justifyContent="space-between"
+                alignItems="center"
+                backgroundColor="orange2">
                 <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
                   {m('質問')}
                 </Text>
