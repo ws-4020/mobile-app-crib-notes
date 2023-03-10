@@ -72,6 +72,7 @@ export type DemoStackParamList = {
   GetAccountsMeDemo: undefined;
   SearchFormTodoDemo: undefined;
   SearchBarTodoDemo: undefined;
+  Map: undefined;
 };
 
 export type AppNavigatorOptions = {

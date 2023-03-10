@@ -40,6 +40,7 @@ import React from 'react';
 
 import {DemoStackParamList} from './types';
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
+import {MapScreen} from '../screens/demo-map/MapScreen';
 
 const nav = createNativeStackNavigator<DemoStackParamList>();
 
@@ -131,6 +132,7 @@ export const DemoStackNav: React.FC = () => {
       <nav.Screen name="SearchFormTodoDemo" component={SearchFormTodoDemoScreen} />
       <nav.Screen name="SearchBarTodoDemo" component={SearchBarTodoDemoScreen} />
       <nav.Screen name="Picker" component={PickerScreen} />
+      <nav.Screen name="Map" component={MapScreen} />
       <nav.Screen
         name="Acknowledgements"
         component={AcknowledgementsScreen}
