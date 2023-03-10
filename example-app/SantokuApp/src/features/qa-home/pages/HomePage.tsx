@@ -160,7 +160,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   const flatListRef = useRef<FlatList>(null);
   const scrollToTop = useCallback(() => flatListRef.current?.scrollToOffset({offset: 0, animated: true}), []);
 
-  // 質問一覧先頭にラベルを表示するためにのダミーオブジェクトを挿入する
+  // 質問一覧先頭にラベルを表示するためのダミーオブジェクトを挿入する
   const questionItems = useMemo(() => {
     return [...[{} as Question], ...(questions ?? [])].map(addOnPressHandlerToQuestions(navigateToQuestionDetail));
   }, [questions, navigateToQuestionDetail]);
