@@ -14,7 +14,7 @@ export const ViewButtonWithCount: React.FC<ViewButtonWithCountProps> = ({onPress
         <VisibilityIllustration />
       </StyledTouchableOpacity>
       <Text fontSize={14} lineHeight={20} letterSpacing={0.25}>
-        {count}
+        {count > 999 ? 999 : count}
       </Text>
     </StyledRow>
   );
