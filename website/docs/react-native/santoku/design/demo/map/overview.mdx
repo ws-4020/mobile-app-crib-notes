@@ -17,25 +17,57 @@
 - マップタイプの指定（ラジオボタンで道路地図、航空写真、航空写真に道路地図を重ねたものを選択させる）
 - 建物の表示（トグルボタン）
 
-### 地図操作で制限できる項目の確認
+### 地図操作と制限できる項目の確認
 
 - スワイプ操作による表示位置の移動（トグルボタン）
 - ピンチイン・ピンチアウト操作とダブルタップによる拡大縮小（トグルボタン）
 - 2本指スワイプによる回転（トグルボタン）
 
-### マーカーの位置変更
+### マーカーの操作
+
+- タップでコールアウトを表示
+- マーカーの長押しからドラックアンドドロップで位置変更
+
+## マーカーの追加
 
 - 緯度（テキスト入力）
 - 経度（テキスト入力）
+- タイトル（テキスト入力）
+- 説明（テキスト入力）
+- ドラックアンドドロップによる位置変更を許可するか（トグルボタン）
 
+タイトルと説明を両方入力しなかった場合、タップしてもコールアウトは表示されない。
 
 ## 使用したマップSDK
 
-地図表示のためにreact-native-maps 0.30を使用します。
+地図表示のためにreact-native-mapsを使用します。
 react-native-mapsで使用できるマップSDKは、iOSが[MapKit](https://developer.apple.com/documentation/mapkit/)あるいは[Google Map](https://developers.google.com/maps/documentation/ios-sdk?hl=ja)、Androidは[Google Map](https://developers.google.com/maps/documentation/android-sdk?hl=ja)のみになります。
-本デモページではiOSはMapKit、Androidはgoogle mapを使用した地図表示を実装しています。
+このページではiOSはMapKit、AndroidはGoogle Mapを使用した地図表示を実装しています。
 
-Santokuアプリではuse_frameworkでライブラリを静的にリンクさせていますが、iOSでGoogleMapを使用するためのライブラリを正常にリンクさせることができませんでした。
-そのため以下のissueを参考に`Podfile`を変更する必要がありました。
-
+Santokuアプリではfirebaseを使用しているため、useFrameworksで静的リンクを明示的に指定しています。
+https://rnfirebase.io/#altering-cocoapods-to-use-frameworks
+しかしreact-native-mapsの0.3系はuseFrameworksに対応していないため、iOSでGoogle Mapを使用する設定でビルドしたときに依存関係にあるファイルが見つからないというエラーが発生しました。
 https://github.com/react-native-maps/react-native-maps/issues/3597
+https://github.com/react-native-maps/react-native-maps/discussions/4389
+そのためissueを参考にPodfileに以下のような変更が必要になりました。
+
+```
+  # https://github.com/react-native-maps/react-native-maps/issues/3597
+  $static_framework = [
+    'react-native-maps',
+    'react-native-google-maps',
+    'Google-Maps-iOS-Utils',
+    'GoogleMaps',
+  ]
+
+  pre_install do |installer|
+    Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
+        installer.pod_targets.each do |pod|
+            if $static_framework.include?(pod.name)
+                def pod.build_type;
+                Pod::BuildType.static_library # >= 1.9
+            end
+        end
+    end
+  end
+```
