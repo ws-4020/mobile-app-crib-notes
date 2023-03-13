@@ -20,9 +20,10 @@ export function formatDiffInDateTime(dateLeft: Date, dateRight: Date, options?: 
     return `${diffDays}${options?.daysSuffix ?? ''}`;
   }
   const diffHours = diffInHours(dateLeft, dateRight);
-  if (diffHours < 1) {
-    const diffMinutes = diffInMinutes(dateLeft, dateRight);
-    return `${diffMinutes}${options?.minutesSuffix ?? ''}`;
+  if (diffHours > 0) {
+    return `${diffHours}${options?.hoursSuffix ?? ''}`;
   }
-  return `${diffHours}${options?.hoursSuffix ?? ''}`;
+
+  const diffMinutes = diffInMinutes(dateLeft, dateRight);
+  return `${diffMinutes}${options?.minutesSuffix ?? ''}`;
 }
