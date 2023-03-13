@@ -26,7 +26,7 @@ export type QuestionListCardProps = {
 
 export const QuestionListCard: FC<QuestionListCardProps> = ({
   item: {
-    question: {title, content, likes, views, beginner, datetime, profile},
+    question: {title, content, likes, views, beginner, datetime, profile, comments},
     navigateToQuestionDetail,
   },
 }) => {
@@ -89,7 +89,7 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
         <Box flex={1} />
         <ViewWithCount count={views} />
         <LikeWithCount count={likes} />
-        <AnswerWithCount count={views} />
+        <AnswerWithCount count={comments} />
       </StyledRow>
     </Box>
   );
