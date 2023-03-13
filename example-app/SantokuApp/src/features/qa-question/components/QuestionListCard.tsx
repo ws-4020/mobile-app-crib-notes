@@ -52,9 +52,11 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
             {profile?.nickname}
           </Text>
           <StyledRow alignItems="center" justifyContent="space-between">
-            <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
-              {profile?.points}/{profile?.totalPoints}
-            </Text>
+            {profile && (
+              <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
+                {profile.points > 999 ? 999 : profile.points}/{profile.totalPoints > 999 ? 999 : profile.totalPoints}
+              </Text>
+            )}
           </StyledRow>
         </Box>
         <StyledTouchableOpacity onPress={showUnderDevelopment}>

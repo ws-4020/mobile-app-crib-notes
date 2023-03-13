@@ -55,9 +55,11 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
           <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">
             {profile?.nickname}
           </Text>
-          <Text variant="font14Regular" letterSpacing={0.25} color="black2">
-            {profile?.points}/{profile?.totalPoints}
-          </Text>
+          {profile && (
+            <Text variant="font14Regular" letterSpacing={0.25} color="black2">
+              {profile.points > 999 ? 999 : profile.points}/{profile.totalPoints > 999 ? 999 : profile.totalPoints}
+            </Text>
+          )}
         </StyledColumn>
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
           <MoreVertIllustration />

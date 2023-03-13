@@ -48,9 +48,11 @@ export const EventListCard: FC<EventListCardProps> = ({event: {title, likes, pro
             {profile?.nickname}
           </Text>
           <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-            <Text variant="font14Regular" lineHeight={20} letterSpacing={0.25}>
-              {profile?.points}/{profile?.totalPoints}
-            </Text>
+            {profile && (
+              <Text variant="font14Regular" lineHeight={20} letterSpacing={0.25}>
+                {profile.points > 999 ? 999 : profile.points}/{profile.totalPoints > 999 ? 999 : profile.totalPoints}
+              </Text>
+            )}
           </Box>
         </Box>
         <StyledSpace width="p16" />
