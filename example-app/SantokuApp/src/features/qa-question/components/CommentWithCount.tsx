@@ -2,10 +2,10 @@ import {Box, Text} from 'bases/ui/common';
 import {QuestionAnswerIllustration} from 'bases/ui/illustration/QuestionAnswerIllustration';
 import React from 'react';
 
-type AnswerWithCountProps = {
+type CommentWithCountProps = {
   count: number;
 };
-export const AnswerWithCount: React.FC<AnswerWithCountProps> = ({count}) => {
+export const CommentWithCount: React.FC<CommentWithCountProps> = ({count}) => {
   return (
     <Box flexDirection="row" alignItems="center">
       <QuestionAnswerIllustration color="grey1" />
