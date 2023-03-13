@@ -11,7 +11,7 @@ export const ViewWithCount: React.FC<ViewWithCountProps> = ({count}) => {
       <VisibilityIllustration />
       <Box px="p4" />
       <Text fontSize={14} lineHeight={20} letterSpacing={0.25}>
-        {count}
+        {count > 999 ? 999 : count}
       </Text>
     </Box>
   );
