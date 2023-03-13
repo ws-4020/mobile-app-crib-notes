@@ -16,6 +16,7 @@ export const DiffInDateTime: React.FC<DiffInDateTimeProps> = ({datetime}) => {
       daysSuffix: m('日前'),
       hoursSuffix: m('時間前'),
       minutesSuffix: m('分前'),
+      yearsSuffix: m('年前'),
     });
   }, [datetime]);
   return (
