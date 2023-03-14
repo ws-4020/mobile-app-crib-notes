@@ -4,11 +4,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useTheme} from '@shopify/restyle';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
 import {m} from 'bases/message/Message';
+import {Text} from 'bases/ui/common';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {useMemo, useCallback} from 'react';
 import {Platform} from 'react-native';
-import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 
 import {useMainTabNav} from './MainTabNav';
 import {QuestionAndEventPostStackNav} from './QuestionAndEventPostStackNav';
@@ -54,7 +54,9 @@ const Component: React.FC<Props> = ({initialData}) => {
               <>
                 <Ionicons name="arrow-back" size={24} color={theme.colors.white} onPress={goBack} />
                 <StyledSpace width="p32" />
-                <Text color='white' fontSize={20} fontWeight="500">{m('質問詳細')}</Text>
+                <Text color="white" fontSize={20} fontWeight="500">
+                  {m('質問詳細')}
+                </Text>
               </>
             ),
           }}
