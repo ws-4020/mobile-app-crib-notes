@@ -7,13 +7,11 @@ title: Config Plugins対応
 ネイティブ機能を柔軟に組み込むため、このアプリではBare workflowを採用しました。
 その結果、次の課題が生じました。
 
-**Expo SDKのアップグレードに時間がかかる**
-
+**Expo SDKのアップグレードに時間がかかる。**
 Expo SDKのアップグレードに対応するには、ネイティブプロジェクトの設定やコードの変更が必要でした。
 この作業は線密な注意とネイティブ知識が必要で、対応できる人材が限られ非常に時間がかかりました。
 
-**ネイティブプロジェクトへの変更を管理しづらい**
-
+**ネイティブプロジェクトへの変更を管理しづらい。**
 Bare workflowでは、Expoで用意されたネイティブプロジェクトのテンプレートを管理します。
 アプリは必要に応じてアプリ独自の変更をネイティブプロジェクトに加えます。
 元から用意されたリソースと後から変更したリソースの区別が難しく、どこに何を何のために追加・修正したのかの管理が困難でした。
@@ -64,12 +62,11 @@ react-native-configを導入することで、ネイティブとReactで同じ�
 - [♻️: Corrected according to Config Plugin naming conventions best practices](https://github.com/ws-4020/mobile-app-crib-notes/pull/1028)
 - [♻️: Use Constants.expoConfig instead of Constants.manifest.](https://github.com/ws-4020/mobile-app-crib-notes/pull/1046)
 
-
 ### リソースをassetsへ移動
 
 次のリソースを`assets`フォルダへ移動しました。
 
-#### Android（アイコン）
+- Android（アイコン）
 
 |移動元([プロジェクトルート]/android/app/src/)|移動先([プロジェクトルート]/assets/android/)|
 |--|--|
@@ -77,7 +74,7 @@ react-native-configを導入することで、ネイティブとReactで同じ�
 |releaseInHouse/res/mipmap-xxxhdpi/ic_launcher_foreground.png|ic_launcher_foreground_stg.png|
 |main/res/mipmap-xxxhdpi/ic_launcher_foreground.png|ic_launcher_foreground_prod.png|
 
-#### Android（スプラッシュスクリーン）
+- Android（スプラッシュスクリーン）
 
 |移動元([プロジェクトルート]/android/app/src/)|移動先([プロジェクトルート]/assets/android/)|
 |--|--|
@@ -101,7 +98,7 @@ react-native-configを導入することで、ネイティブとReactで同じ�
 |main/res/drawable-xxxhdpi/splashscreen_footer_background.png|splashscreen/xxxhdpi/splashscreen_footer_background.png|
 |main/res/drawable-xxxhdpi/splashscreen_foreground.png|splashscreen/xxxhdpi/splashscreen_foreground.png|
 
-#### iOS（アイコン）
+- iOS（アイコン）
 
 |移動元([プロジェクトルート]/ios/SantokuApp/Images.xcassets/)|移動先([プロジェクトルート]/assets/ios/)|
 |--|--|
@@ -114,19 +111,21 @@ react-native-configを導入することで、ネイティブとReactで同じ�
 次のリソースを`template`フォルダへ移動しました。
 これらのリソースはアプリ独自に作成したConfig Pluginで利用します。
 
-#### Android（スプラッシュスクリーン）
+- Android（スプラッシュスクリーン）
+
 |移動元([プロジェクトルート]/android/app/src/)|移動先([プロジェクトルート]/config/plugin/template/android/app/src/)|
 |--|--|
 |main/res/drawable/splashscreen.xml|main/res/drawable/splashscreen.xml|
 
-#### Android（ソースコード）
+- Android（ソースコード）
+
 |移動元([プロジェクトルート]/android/app/src/)|移動先([プロジェクトルート]/config/plugin/template/android/app/src/)|
 |--|--|
 |main/java/jp/fintan/mobile/santokuapp/MainActivity.java|main/java/com/helloworld/MainActivity.java|
 |main/java/jp/fintan/mobile/santokuapp/demo/throwerror/ThrowErrorModule.java|main/java/com/helloworld/ThrowErrorModule.java|
 |main/java/jp/fintan/mobile/santokuapp/demo/throwerror/ThrowErrorPackage.java|main/java/com/helloworld/ThrowErrorPackage.java|
 
-#### iOS（スプラッシュスクリーン）
+- iOS（スプラッシュスクリーン）
 
 |移動元([プロジェクトルート]/ios/SantokuApp/Images.xcassets/)|移動先([プロジェクトルート]/config/plugin/template/ios/HelloWorld/Images.xcassets/)|
 |--|--|
@@ -145,20 +144,20 @@ react-native-configを導入することで、ネイティブとReactで同じ�
 ||SplashScreenForeground.imageset/splashscreen_foreground&#64;2x.png|
 ||SplashScreenForeground.imageset/splashscreen_foreground&#64;3x.png|
 
-#### iOS（ソースコード）
+- iOS（ソースコード）
 
 |移動元([プロジェクトルート]/ios/)|移動先([プロジェクトルート]/config/plugin/template/ios/)|
 |--|--|
 |Demo/RCTThrowErrorModule.h|HelloWorld/RCTThrowErrorModule.h|
 |Demo/RCTThrowErrorModule.m|HelloWorld/RCTThrowErrorModule.m|
 
-#### iOS（xcconfig）
+- iOS（xcconfig）
 
 |移動元([プロジェクトルート]/ios/)|移動先([プロジェクトルート]/config/plugin/template/ios/)|
 |--|--|
 |PersonalAccount.xcconfig.template|HelloWorld/PersonalAccount.xcconfig.template|
 
-#### iOS（Storyboard）
+- iOS（Storyboard）
 
 |移動元([プロジェクトルート]/ios/)|移動先([プロジェクトルート]/config/plugin/template/ios/)|
 |--|--|
@@ -189,7 +188,7 @@ react-native-configを導入することで、ネイティブとReactで同じ�
 ### patchesの追加
 
 `IOSConfig.XcodeUtils.addResourceFileToGroup`でファイルを追加した際に、追加したファイルのIDが取得できません。
-そのため、追加したファイルのIDを参照するような設定ができない事象が発生しました。
+そのため、追加したファイルのIDを参照するような設定をできない事象が発生しました。
 そこで、`IOSConfig.XcodeUtils.addResourceFileToGroup`にファイルのIDを指定できるパッチを当てました。
 
 ### ダミーのFirebase設定ファイルの追加
@@ -220,4 +219,3 @@ prebuildの際の`dependencies`フィールドの更新については、[Expo�
 
 環境変数の扱いを変更したことにより、`[プロジェクトルート]/src/bases/core/configs/AppConfig.ts`を修正しました。
 詳しくは[アプリ特有の設定値](/react-native/santoku/development/build-configuration/app-constants.mdx)を参照してください。
-
