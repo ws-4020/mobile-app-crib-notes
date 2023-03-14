@@ -8,6 +8,7 @@ import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {useMemo, useCallback} from 'react';
 import {Platform} from 'react-native';
+import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 
 import {useMainTabNav} from './MainTabNav';
 import {QuestionAndEventPostStackNav} from './QuestionAndEventPostStackNav';
@@ -45,16 +46,15 @@ const Component: React.FC<Props> = ({initialData}) => {
           component={QuestionDetailScreen}
           name="QuestionDetail"
           options={{
-            title: m('質問詳細'),
+            title: '',
             headerStyle: {backgroundColor: theme.colors.orange1},
             contentStyle: {backgroundColor: theme.colors.orange2},
-            headerTitleStyle: {fontSize: 20, fontWeight: '500'},
-            headerTintColor: theme.colors.white,
             headerBackTitleVisible: false,
             headerLeft: () => (
               <>
                 <Ionicons name="arrow-back" size={24} color={theme.colors.white} onPress={goBack} />
                 <StyledSpace width="p32" />
+                <Text color='white' fontSize={20} fontWeight="500">{m('質問詳細')}</Text>
               </>
             ),
           }}
