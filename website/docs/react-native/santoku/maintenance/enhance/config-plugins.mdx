@@ -201,16 +201,20 @@ local環境で使用するダミーの設定ファイルを用意しました。
 
 詳しくは[Firebaseの設定ファイル](/react-native/santoku/development/build-configuration/firebase-setting-file.mdx)を参照してください。
 
-### 依存ライブラリの追加
+### 依存ライブラリの追加・変更
 
-#### `expo`
+#### `expo`、`react-native`、`expo-status-bar`
 
-#### `react-native`
+prebuildの際に`expo`、`react-native`のバージョンが更新され、`expo-status-bar`への依存性が追加されました。
+prebuildの際の`dependencies`フィールドの更新については、[Expoの公式記事](https://docs.expo.dev/workflow/prebuild/#dependencies)を参照してください。
 
 #### `expo-build-properties`
 
-#### `expo-status-bar`
+アプリ独自のConfig Pluginで使用するため、`expo-build-properties`を依存ライブラリに追加しました。
 
+#### `react-native-config`
+
+react-native-configを使用しないことにしたので、依存ライブラリから削除しました。
 
 ### ソースコードの修正
 
