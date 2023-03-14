@@ -6,7 +6,7 @@ import {AppInitialData} from 'apps/app/types/AppInitialData';
 import {m} from 'bases/message/Message';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
-import React, {useMemo} from 'react';
+import React, {useMemo, useCallback} from 'react';
 import {Platform} from 'react-native';
 
 import {useMainTabNav} from './MainTabNav';
@@ -26,6 +26,7 @@ type Props = {
 };
 const Component: React.FC<Props> = ({initialData}) => {
   const navigation = useNavigation();
+  const goBack = useCallback(() => navigation.goBack(), [navigation]);
   const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
   const mainTabNav = useMainTabNav(initialData);
   const theme = useTheme<RestyleTheme>();
@@ -52,14 +53,7 @@ const Component: React.FC<Props> = ({initialData}) => {
             headerBackTitleVisible: false,
             headerLeft: () => (
               <>
-                <Ionicons
-                  name="arrow-back"
-                  size={24}
-                  color={theme.colors.white}
-                  onPress={() => {
-                    navigation.goBack();
-                  }}
-                />
+                <Ionicons name="arrow-back" size={24} color={theme.colors.white} onPress={goBack} />
                 <StyledSpace width="p32" />
               </>
             ),
