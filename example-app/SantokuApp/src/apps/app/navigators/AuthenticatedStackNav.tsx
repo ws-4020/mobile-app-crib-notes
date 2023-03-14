@@ -1,9 +1,13 @@
+import {Ionicons} from '@expo/vector-icons';
+import {useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useTheme} from '@shopify/restyle';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
 import {m} from 'bases/message/Message';
+import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {useMemo} from 'react';
+import {Platform} from 'react-native';
 
 import {useMainTabNav} from './MainTabNav';
 import {QuestionAndEventPostStackNav} from './QuestionAndEventPostStackNav';
@@ -21,6 +25,7 @@ type Props = {
   initialData: AppInitialData;
 };
 const Component: React.FC<Props> = ({initialData}) => {
+  const navigation = useNavigation();
   const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
   const mainTabNav = useMainTabNav(initialData);
   const theme = useTheme<RestyleTheme>();
@@ -34,18 +39,46 @@ const Component: React.FC<Props> = ({initialData}) => {
           headerShown: false,
         }}
       />
-      <nav.Screen
-        component={QuestionDetailScreen}
-        name="QuestionDetail"
-        options={{
-          title: m('質問詳細'),
-          headerStyle: {backgroundColor: theme.colors.orange1},
-          contentStyle: {backgroundColor: theme.colors.orange2},
-          headerTitleStyle: {fontSize: 20, fontWeight: '500'},
-          headerTintColor: theme.colors.white,
-          headerBackTitleVisible: false,
-        }}
-      />
+      {Platform.OS === 'ios' ? (
+        <nav.Screen
+          component={QuestionDetailScreen}
+          name="QuestionDetail"
+          options={{
+            title: m('質問詳細'),
+            headerStyle: {backgroundColor: theme.colors.orange1},
+            contentStyle: {backgroundColor: theme.colors.orange2},
+            headerTitleStyle: {fontSize: 20, fontWeight: '500'},
+            headerTintColor: theme.colors.white,
+            headerBackTitleVisible: false,
+            headerLeft: () => (
+              <>
+                <Ionicons
+                  name="arrow-back"
+                  size={24}
+                  color={theme.colors.white}
+                  onPress={() => {
+                    navigation.goBack();
+                  }}
+                />
+                <StyledSpace width="p32" />
+              </>
+            ),
+          }}
+        />
+      ) : (
+        <nav.Screen
+          component={QuestionDetailScreen}
+          name="QuestionDetail"
+          options={{
+            title: m('質問詳細'),
+            headerStyle: {backgroundColor: theme.colors.orange1},
+            contentStyle: {backgroundColor: theme.colors.orange2},
+            headerTitleStyle: {fontSize: 20, fontWeight: '500'},
+            headerTintColor: theme.colors.white,
+            headerBackTitleVisible: false,
+          }}
+        />
+      )}
       <nav.Screen
         name="QuestionAndEventStackNav"
         component={QuestionAndEventPostStackNav}
