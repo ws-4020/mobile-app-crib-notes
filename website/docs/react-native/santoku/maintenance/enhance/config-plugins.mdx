@@ -16,7 +16,7 @@ Expo SDKのアップグレードに対応するには、ネイティブプロジ
 
 Bare workflowでは、Expoで用意されたネイティブプロジェクトのテンプレートを管理します。
 アプリは必要に応じてアプリ独自の変更をネイティブプロジェクトに加えます。
-元から用意された箇所と後から変更した箇所の区別が難しく、どこに何を何のために追加・修正したのかの管理が困難でした。
+元から用意されたリソースと後から変更したリソースの区別が難しく、どこに何を何のために追加・修正したのかの管理が困難でした。
 
 これらの課題を解決するため、Config Pluginsに対応しました。
 
@@ -40,14 +40,14 @@ Config Plugins対応に伴い、ビルドバリアントの考え方を見直し
 ### react-native-config
 
 react-native-configを導入することで、ネイティブとReactで同じ環境変数を使用できました。
-しかし、react-native-configの設定は難しく、新たな環境を追加する場合には技術力と時間を要しました。
+しかし、react-native-configの設定は難しく、新たな環境を追加するには技術力と時間を要しました。
 そこで、react-native-configを使用しないことにしました。
 環境変数はExpo Configでの管理となります。
 詳しくは[アプリ特有の設定値](/react-native/santoku/development/build-configuration/app-constants.mdx)を参照してください。
 
 ## このアプリで実施したアップグレードの手順
 
-このアプリでは、以下の作業を上から順に実施してConfig Pluginsに対応しました。
+このアプリでは、次の作業を上から順に実施してConfig Pluginsに対応しました。
 
 - [リソースをassetsへ移動](#リソースをassetsへ移動)
 - [リソースをtemplateへ移動](#リソースをtemplateへ移動)
@@ -214,11 +214,10 @@ prebuildの際の`dependencies`フィールドの更新については、[Expo�
 
 #### `react-native-config`
 
-react-native-configを使用しないことにしたので、依存ライブラリから削除しました。
+`react-native-config`は使用しないことにしたので、依存ライブラリから削除しました。
 
 ### ソースコードの修正
 
 環境変数の扱いを変更したことにより、`[プロジェクトルート]/src/bases/core/configs/AppConfig.ts`を修正しました。
-
 詳しくは[アプリ特有の設定値](/react-native/santoku/development/build-configuration/app-constants.mdx)を参照してください。
 
