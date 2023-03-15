@@ -179,7 +179,14 @@ export const HomePage: React.FC<HomePageProps> = ({
                 {m('募集中のイベント')}
               </Text>
             </Box>
-            {!isEventsLoading && <EventList data={events} />}
+            {!isEventsLoading &&
+              (events?.length === 0 ? (
+                <Text textAlign="center" variant="font14Bold" lineHeight={20} letterSpacing={0.25} color="blue">
+                  {m('募集中のイベントはありません')}
+                </Text>
+              ) : (
+                <EventList data={events} />
+              ))}
             <StyledRow px="p24" py="p32" justifyContent="space-between" alignItems="center">
               <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
                 {m('質問')}
