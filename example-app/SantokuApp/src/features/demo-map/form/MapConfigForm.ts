@@ -30,17 +30,14 @@ export const useMapConfigForm = (
   const form = useFormik<MapConfigFormValues>({
     initialValues: params.initialValues,
     validationSchema: yup.object().shape({
-      // TODO 適切なエラーメッセージの追加
-      latitude: yup.number().label(m('ページ番号')).required().min(0).max(180),
-      longitude: yup.number().label(m('ページ番号')).required().min(0).max(180),
-      latitudeDelta: yup.number().label(m('ページ番号')).required().min(0).max(180),
-      longitudeDelta: yup.number().label(m('ページ番号')).required().min(0).max(180),
+      latitude: yup.number().label('緯度').required().min(0).max(180),
+      longitude: yup.number().label('経度').required().min(0).max(180),
+      latitudeDelta: yup.number().label('緯度範囲').required().min(0).max(180),
+      longitudeDelta: yup.number().label('経度範囲').required().min(0).max(180),
     }),
     validateOnChange: false,
     onSubmit: params.onSubmit,
   });
-
-  //   const clearPageNo = useCallback(() => form.setFieldValue('pageNo', ''), [form]);
 
   return {form};
 };
