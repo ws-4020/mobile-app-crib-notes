@@ -15,7 +15,7 @@ title: プロジェクトの作成
 
 おそらく次のPull Requestに関連する不具合と推測しております。
 
-- feat(cli): add proxy support（[http://github.com/expo/expo/pull/19592](http://github.com/expo/expo/pull/19592)）
+- feat(cli): add proxy support（[https://github.com/expo/expo/pull/19592](https://github.com/expo/expo/pull/19592)）
 
 このPull RequestはExpo SDK 47で取り込まれております。Expo SDK 47以降においては、プロキシ環境下でも動作することを確認出来ております。
 しかし、現時点での[RN Spoiler](https://github.com/ws-4020/rn-spoiler)のExpo SDK対応バージョンは46のため、プロキシ環境下に対応出来ていません。
