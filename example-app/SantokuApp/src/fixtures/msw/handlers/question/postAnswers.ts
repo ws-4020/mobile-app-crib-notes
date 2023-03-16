@@ -2,10 +2,10 @@ import {AnswerContent, AnswerRegistration} from 'features/backend/apis/model';
 import {rest} from 'msw';
 
 import {backendUrl} from '../../utils/backendUrl';
+import {accountId, getDb} from '../../utils/dbManager';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
 import {format2Iso8601} from '../../utils/format2Iso8601';
-import {accountId, getDb} from '../../utils/dbManager';
 
 export const postAnswers = rest.post(`${backendUrl}/questions/:questionId/answers`, async (req, res, ctx) => {
   try {

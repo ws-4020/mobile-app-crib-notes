@@ -1,9 +1,9 @@
 import {rest} from 'msw';
 
 import {backendUrl} from '../../utils/backendUrl';
+import {accountId, getDb} from '../../utils/dbManager';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
-import {accountId, getDb} from '../../utils/dbManager';
 
 export const deleteAccountsMeAnswerLikes = rest.delete(
   `${backendUrl}/accounts/me/likes/questions/:questionId/answers/:answerId`,

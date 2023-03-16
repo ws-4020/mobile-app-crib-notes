@@ -2,9 +2,9 @@ import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import {rest} from 'msw';
 
 import {backendUrl} from '../../utils/backendUrl';
+import {accountId, getDb} from '../../utils/dbManager';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
-import {accountId, getDb} from '../../utils/dbManager';
 
 export const postAccountsMeTerms = rest.post(`${backendUrl}/accounts/me/terms`, async (req, res, ctx) => {
   try {
