@@ -3,14 +3,12 @@ import {rest} from 'msw';
 import {backendUrl} from '../../utils/backendUrl';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
-import {getDb} from '../../utils/getDb';
-import {getLoggedInAccountId} from '../account/getLoggedInAccountId';
+import {getDb} from '../../utils/dbManager';
 
 export const getEvents = rest.get(`${backendUrl}/events`, (req, res, ctx) => {
   try {
     const target = req.url.searchParams.get('target');
-    const accountId = getLoggedInAccountId();
-    const db = getDb(accountId);
+    const db = getDb();
     const events = db.event.findMany({orderBy: {endDate: 'desc'}});
     if (target === 'active') {
       const now = new Date();

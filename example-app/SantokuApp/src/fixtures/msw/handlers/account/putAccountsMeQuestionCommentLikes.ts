@@ -1,19 +1,17 @@
 import {rest} from 'msw';
 
-import {getLoggedInAccountId} from './getLoggedInAccountId';
 import {backendUrl} from '../../utils/backendUrl';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
-import {getDb} from '../../utils/getDb';
+import {accountId, getDb} from '../../utils/dbManager';
 
 export const putAccountsMeQuestionCommentLikes = rest.put(
   `${backendUrl}/accounts/me/likes/questions/:questionId/comments/:commentId`,
   async (req, res, ctx) => {
     try {
-      const accountId = getLoggedInAccountId();
       const questionId = String(req.params.questionId);
       const commentId = String(req.params.commentId);
-      const db = getDb(accountId);
+      const db = getDb();
       const questionCommentLike = db.questionCommentLike.findFirst({
         where: {accountId: {equals: accountId}, questionId: {equals: questionId}, commentId: {equals: commentId}},
       });

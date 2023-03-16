@@ -1,17 +1,15 @@
 import {UpdateDeviceToken} from 'features/backend/apis/model';
 import {rest} from 'msw';
 
-import {getLoggedInAccountId} from './getLoggedInAccountId';
 import {backendUrl} from '../../utils/backendUrl';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
-import {getDb} from '../../utils/getDb';
+import {accountId, getDb} from '../../utils/dbManager';
 
 export const postAccountsMeDeviceToken = rest.post(`${backendUrl}/accounts/me/device-token`, async (req, res, ctx) => {
   try {
     const {oldDeviceToken, newDeviceToken} = await req.json<UpdateDeviceToken>();
-    const accountId = getLoggedInAccountId();
-    const db = getDb(accountId);
+    const db = getDb();
 
     const account = db.account.findFirst({where: {accountId: {equals: accountId}}});
     const savedDeviceTokens = account!.deviceTokens;

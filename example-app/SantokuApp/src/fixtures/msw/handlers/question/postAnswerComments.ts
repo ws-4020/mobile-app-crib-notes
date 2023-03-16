@@ -5,17 +5,15 @@ import {backendUrl} from '../../utils/backendUrl';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
 import {format2Iso8601} from '../../utils/format2Iso8601';
-import {getDb} from '../../utils/getDb';
-import {getLoggedInAccountId} from '../account/getLoggedInAccountId';
+import {accountId, getDb} from '../../utils/dbManager';
 
 export const postAnswerComments = rest.post(
   `${backendUrl}/questions/:questionId/answers/:answerId/comments`,
   async (req, res, ctx) => {
     try {
-      const accountId = getLoggedInAccountId();
       const answerId = String(req.params.answerId);
       const {content} = await req.json<CommentRegistration>();
-      const db = getDb(accountId);
+      const db = getDb();
       const account = db.account.findFirst({where: {accountId: {equals: accountId}}});
       if (!account) {
         return delayedResponse(ctx.status(401));
