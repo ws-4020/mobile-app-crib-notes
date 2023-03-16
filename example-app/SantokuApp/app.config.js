@@ -55,6 +55,11 @@ module.exports = ({config}) => {
       googleServicesFile: './google-services.json',
       softwareKeyboardLayoutMode: 'resize',
       allowBackup: false,
+      config: {
+        googleMaps: {
+          apiKey: 'dummyApiKey',
+        },
+      },
     },
     ios: {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp',
