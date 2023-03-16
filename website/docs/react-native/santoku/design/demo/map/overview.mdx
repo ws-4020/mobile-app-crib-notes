@@ -14,14 +14,14 @@
 
 以下の項目に数値を入力し表示領域を更新できます。
 
-- latitude 緯度
-- longitude 経度
-- latitudeDelta 緯度範囲
-- longitudeDelta 経度範囲
+- latitude: 緯度
+- longitude: 経度
+- latitudeDelta: 緯度範囲
+- longitudeDelta: 経度範囲
 
 ### 地図の種類
 
-以下の項目を設定し地図の見た目を変更することができます。
+以下の項目を設定し地図の見た目を変更できます。
 
 - MapType
   - standard: 道路地図
@@ -31,7 +31,7 @@
 
 ### 地図操作と制限できる項目の確認
 
-以下の項目の操作を制限することができます。
+以下の項目の操作を制限できます。
 
 - scrollEnable: スワイプ操作による表示位置の移動
 - zoomEnable: ピンチイン・ピンチアウト操作とダブルタップによる拡大縮小
@@ -58,14 +58,15 @@
 react-native-mapsで使用できるマップSDKは、iOSが[MapKit](https://developer.apple.com/documentation/mapkit/)あるいは[Google Map](https://developers.google.com/maps/documentation/ios-sdk?hl=ja)、Androidは[Google Map](https://developers.google.com/maps/documentation/android-sdk?hl=ja)のみになります。
 このページではiOSはMapKit、AndroidはGoogle Mapを使用した地図表示を実装しています。
 
-Santokuアプリではfirebaseを使用しているため、useFrameworksで静的リンクを明示的に指定しています。
-https://rnfirebase.io/#altering-cocoapods-to-use-frameworks
-しかしreact-native-mapsの0.3系はuseFrameworksに対応していないため、iOSでGoogle Mapを使用する設定でビルドしたときに依存関係にあるファイルが見つからないというエラーが発生しました。
-https://github.com/react-native-maps/react-native-maps/issues/3597
-https://github.com/react-native-maps/react-native-maps/discussions/4389
+Santokuアプリではfirebaseを使用しているため、useFrameworksで静的リンクを明示的に指定しています([Configure Firebase with iOS credentials](https://rnfirebase.io/#altering-cocoapods-to-use-frameworks))。
+しかしreact-native-mapsの0.3系はuseFrameworksに対応していないため、iOSでGoogle Mapを使用する設定でビルドしたとき依存関係にあるファイルが見つからないというエラーが発生しました。
+
+- ['RCTConvert+AirMap.h' file not found](https://github.com/react-native-maps/react-native-maps/issues/3597)
+- [use_frameworks! issues with react-native-maps RN 0.69.3](https://github.com/react-native-maps/react-native-maps/discussions/4389)
+
 そのためissueを参考にPodfileに以下のような変更が必要になりました。
 
-```
+```Ruby
   # https://github.com/react-native-maps/react-native-maps/issues/3597
   $static_framework = [
     'react-native-maps',
