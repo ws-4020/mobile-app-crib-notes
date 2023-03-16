@@ -1,21 +1,44 @@
 import '@testing-library/jest-native/extend-expect';
 import {render, screen} from '@testing-library/react-native';
-import {LatLng} from 'react-native-maps';
+import beginnerMarkImageSource from 'assets/images/beginner-mark.png';
 
-import {Marker} from './Marker';
-
-const latLng: LatLng = {latitude: 34.7024898, longitude: 135.494};
+import {Marker, MarkerProps} from './Marker';
 
 describe('Marker only with required props', () => {
+  // 必須のPropsでレンダリングをテストする
   it('renders successfully only with required props', () => {
-    render(<Marker coordinate={latLng} />);
-    const mapView = screen.queryByTestId('Marker');
-    expect(mapView).not.toBeNull();
+    render(<Marker coordinate={{latitude: 34.7024898, longitude: 135.494}} />);
+    const marker = screen.queryByTestId('Marker');
+    expect(marker).not.toBeNull();
     expect(screen).toMatchSnapshot();
   });
 });
 
-// 削除したPropsがなくなっているか
+describe('Marker with committed props', () => {
+  // コンポーネント実装で指定できるPropsを確認する
+  it('should be applied properly', () => {
+    const img = beginnerMarkImageSource as number;
+    render(<Marker coordinate={{latitude: 34.7024898, longitude: 135.494}} draggable stopPropagation image={img} />);
+    const marker = screen.getByTestId('Marker');
 
-// 共通部品としては削除せず値の指定もしなかったPropsに値を指定することができるか
-// 型違いで抽出しテストする
+    expect(marker).not.toBeNull();
+    expect(screen).toMatchSnapshot();
+
+    const markerProps = marker.props as MarkerProps;
+
+    // 元から存在するPropsが指定できるか確認（オブジェクト）
+    expect(markerProps.coordinate).toEqual({
+      latitude: 34.7024898,
+      longitude: 135.494,
+    });
+    // 元から存在するPropsが指定できるか確認（プリミティブ型）
+    expect(markerProps.draggable).toEqual(true);
+    // 元から存在するPropsが指定できるか確認（画像）
+    expect(markerProps.image).toEqual(img);
+    // 配列で指定するPropsはないためテストしない
+
+    // iOS限定のPropsが指定できているか確認
+    expect(markerProps.stopPropagation).toEqual(true);
+    // Android限定のPropsは存在しないのでテストしない
+  });
+});
