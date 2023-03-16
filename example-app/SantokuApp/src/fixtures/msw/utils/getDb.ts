@@ -1,7 +1,13 @@
 import {isAdminAccount, isPartnerAccount} from './accounts';
 import {db, maxDb, minDb} from '../db';
 
-export const getDb = (accountId: string) => {
+let accountId: string;
+
+export const setDbAccount = (accId: string) => {
+  accountId = accId;
+};
+
+export const getDb = () => {
   if (isAdminAccount(accountId)) {
     return maxDb;
   } else if (isPartnerAccount(accountId)) {

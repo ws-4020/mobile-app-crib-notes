@@ -5,11 +5,12 @@ import {db as generalDb} from '../../db';
 import {backendUrl} from '../../utils/backendUrl';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
-import {getDb} from '../../utils/getDb';
+import {getDb, setDbAccount} from '../../utils/getDb';
 
 export const postLogin = rest.post(`${backendUrl}/login`, async (req, res, ctx) => {
   try {
     const {accountId} = await req.json<AccountLogin>();
+    setDbAccount(accountId);
     const db = getDb(accountId);
     const account = db.account.findFirst({where: {accountId: {equals: accountId}}});
     if (!account) {
