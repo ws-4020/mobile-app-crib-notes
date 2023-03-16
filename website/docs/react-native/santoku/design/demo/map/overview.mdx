@@ -42,7 +42,7 @@
 - タップでコールアウトを表示
 - マーカーの長押しからドラックアンドドロップで位置変更
 
-## マーカーの追加（現時点で未実装）
+### マーカーの追加（現時点で未実装）
 
 - 緯度（テキスト入力）
 - 経度（テキスト入力）
@@ -58,13 +58,17 @@
 react-native-mapsで使用できるマップSDKは、iOSが[MapKit](https://developer.apple.com/documentation/mapkit/)あるいは[Google Map](https://developers.google.com/maps/documentation/ios-sdk?hl=ja)、Androidは[Google Map](https://developers.google.com/maps/documentation/android-sdk?hl=ja)のみになります。
 このページではiOSはMapKit、AndroidはGoogle Mapを使用した地図表示を実装しています。
 
-Santokuアプリではfirebaseを使用しているため、useFrameworksで静的リンクを明示的に指定しています([Configure Firebase with iOS credentials](https://rnfirebase.io/#altering-cocoapods-to-use-frameworks))。
-しかしreact-native-mapsの0.3系はuseFrameworksに対応していないため、iOSでGoogle Mapを使用する設定でビルドしたとき依存関係にあるファイルが見つからないというエラーが発生しました。
+Santokuアプリではfirebaseを使用しているため、useFrameworksで静的リンクを明示的に指定しています。
+
+- [Configure Firebase with iOS credentials](https://rnfirebase.io/#altering-cocoapods-to-use-frameworks)
+
+しかしreact-native-mapsの0.3系はuseFrameworksに対応していません。
+iOSでGoogle Mapを使用する設定でビルドしたとき依存関係にあるファイルが見つからないというエラーが発生しました。
 
 - ['RCTConvert+AirMap.h' file not found](https://github.com/react-native-maps/react-native-maps/issues/3597)
 - [use_frameworks! issues with react-native-maps RN 0.69.3](https://github.com/react-native-maps/react-native-maps/discussions/4389)
 
-そのためissueを参考にPodfileに以下のような変更が必要になりました。
+そのため['RCTConvert+AirMap.h' file not found](https://github.com/react-native-maps/react-native-maps/issues/3597)を参考にして、`Podfile`に以下を追記し動作確認を行いました。
 
 ```Ruby
   # https://github.com/react-native-maps/react-native-maps/issues/3597
