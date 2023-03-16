@@ -13,7 +13,6 @@ import {MapTypePicker} from '../components/MapTypePicker';
 import {ToggleButton} from '../components/ToggleButton';
 import {initialMarker} from '../constants/initialMarker';
 import {initialRegion} from '../constants/initialRegion';
-import {secondMarker} from '../constants/secondMarker';
 import {MapConfigFormValues, useMapConfigForm} from '../form/MapConfigForm';
 
 type DemoMapViewPageProps = object;
@@ -23,7 +22,7 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
 
   // 現時点でsetMarkerListを使っていないが、後でマーカーを画面から追加できるようにするためにマーカーの配列をstate管理する。
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [markerList, setMarkerList] = useState<MarkerProps[]>([initialMarker, secondMarker]);
+  const [markerList, setMarkerList] = useState<MarkerProps[]>([initialMarker]);
 
   const [region, setRegion] = useState<Region>(initialRegion);
   const [mapType, setMapType] = useState<MapTypes>('standard');
