@@ -11,15 +11,14 @@ title: プロジェクトの作成
 次のコマンドを実行して、新規プロジェクトを作成してください。（`<YourAppName>`の部分は、好みのプロジェクト名に変更してください。このプロジェクトは後ほど[ToDoアプリの実装](../todo-app.md)で使用します）
 
 :::danger
-**[RN Spoiler](https://github.com/ws-4020/rn-spoiler)で作成したプロジェクトの`Prebuild`は、プロキシ環境下で動作しません。**
-Config Pluginsに対応すると`Prebuild`の実行が必須となります。プロキシ環境下で開発を進めるプロジェクトはご注意ください。
+**この学習コンテンツはプロキシ環境下に対応していません。**
 
 おそらく次のPull Requestに関連する不具合と推測しております。
 
 - feat(cli): add proxy support（[http://github.com/expo/expo/pull/19592](http://github.com/expo/expo/pull/19592)）
 
-このPull RequestはExpo SDK 47で取り込まれております。Expo SDK 47以降においては、プロキシ環境下でも`Prebuild`が動作することを確認出来ております。
-しかし、現時点での[RN Spoiler](https://github.com/ws-4020/rn-spoiler)のExpo SDK対応バージョンは46のため、`Prebuild`はプロキシ環境下で動作しません。
+このPull RequestはExpo SDK 47で取り込まれております。Expo SDK 47以降においては、プロキシ環境下でも動作することを確認出来ております。
+しかし、現時点での[RN Spoiler](https://github.com/ws-4020/rn-spoiler)のExpo SDK対応バージョンは46のため、プロキシ環境下に対応出来ていません。
 :::
 
 :::note
