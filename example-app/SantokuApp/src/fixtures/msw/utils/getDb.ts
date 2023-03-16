@@ -3,7 +3,7 @@ import {db, maxDb, minDb} from '../db';
 
 export let dbUser: string;
 
-export const setDbName = (accountId: string) => {
+export const setDbUser = (accountId: string) => {
   dbUser = accountId;
 };
 
