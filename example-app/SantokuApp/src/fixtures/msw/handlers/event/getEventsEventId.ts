@@ -1,9 +1,9 @@
 import {rest} from 'msw';
 
 import {backendUrl} from '../../utils/backendUrl';
+import {getDb} from '../../utils/dbManager';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
-import {getDb} from '../../utils/dbManager';
 
 export const getEventsEventId = rest.get(`${backendUrl}/events/:eventId`, (req, res, ctx) => {
   try {
