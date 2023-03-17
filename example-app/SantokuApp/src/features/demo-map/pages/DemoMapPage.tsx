@@ -49,8 +49,9 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
 
   const [showsBuildings, setShowsBuildings] = useState<boolean>(true);
   const [scrollEnable, setScrollEnable] = useState<boolean>(true);
-  const [zoomEnable, setZoomEnable] = useState<boolean>(true);
-  const [rotateEnable, setRotateEnable] = useState<boolean>(true);
+  const [zoomEnabled, setZoomEnabled] = useState<boolean>(true);
+  const [rotateEnabled, setRotateEnabled] = useState<boolean>(true);
+  const [pitchEnabled, setPitchEnabled] = useState<boolean>(true);
 
   return (
     <KeyboardAvoidingView
@@ -147,7 +148,7 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
             <Spacer heightRatio={0.03} />
             <View style={styles.toggleConfigContainer}>
               <View>
-                <Text>scrollEnable</Text>
+                <Text>scrollEnabled</Text>
               </View>
               <View>
                 <ToggleButton isPressed={scrollEnable} setIsPressed={setScrollEnable} />
@@ -156,19 +157,28 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
             <Spacer heightRatio={0.02} />
             <View style={styles.toggleConfigContainer}>
               <View>
-                <Text>zoomEnable</Text>
+                <Text>zoomEnabled</Text>
               </View>
               <View>
-                <ToggleButton isPressed={zoomEnable} setIsPressed={setZoomEnable} />
+                <ToggleButton isPressed={zoomEnabled} setIsPressed={setZoomEnabled} />
               </View>
             </View>
             <Spacer heightRatio={0.02} />
             <View style={styles.toggleConfigContainer}>
               <View>
-                <Text>rotateEnable</Text>
+                <Text>rotateEnabled</Text>
               </View>
               <View>
-                <ToggleButton isPressed={rotateEnable} setIsPressed={setRotateEnable} />
+                <ToggleButton isPressed={rotateEnabled} setIsPressed={setRotateEnabled} />
+              </View>
+            </View>
+            <Spacer heightRatio={0.02} />
+            <View style={styles.toggleConfigContainer}>
+              <View>
+                <Text>pitchEnabled</Text>
+              </View>
+              <View>
+                <ToggleButton isPressed={pitchEnabled} setIsPressed={setPitchEnabled} />
               </View>
             </View>
             <Spacer heightRatio={0.05} />
@@ -179,10 +189,11 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
         <MapView
           region={region}
           scrollEnabled={scrollEnable}
-          zoomEnabled={zoomEnable}
-          rotateEnabled={rotateEnable}
+          zoomEnabled={zoomEnabled}
+          rotateEnabled={rotateEnabled}
           mapType={mapType}
           showsBuildings={showsBuildings}
+          pitchEnabled={pitchEnabled}
           style={styles.map}>
           {markerList.map((item, index) => (
             <Marker key={index} {...item} />
