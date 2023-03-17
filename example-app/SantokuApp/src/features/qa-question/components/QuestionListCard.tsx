@@ -54,7 +54,8 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
           <StyledRow alignItems="center" justifyContent="space-between">
             {profile && (
               <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
-                {profile.points > 999 ? 999 : profile.points}/{profile.totalPoints > 999 ? 999 : profile.totalPoints}
+                {profile.points > 999 ? '999+' : profile.points}/
+                {profile.totalPoints > 999 ? '999+' : profile.totalPoints}
               </Text>
             )}
           </StyledRow>

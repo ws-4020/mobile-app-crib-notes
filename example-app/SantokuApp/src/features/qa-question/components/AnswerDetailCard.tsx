@@ -57,7 +57,8 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
           </Text>
           {profile && (
             <Text variant="font14Regular" letterSpacing={0.25} color="black2">
-              {profile.points > 999 ? 999 : profile.points}/{profile.totalPoints > 999 ? 999 : profile.totalPoints}
+              {profile.points > 999 ? '999+' : profile.points}/
+              {profile.totalPoints > 999 ? '999+' : profile.totalPoints}
             </Text>
           )}
         </StyledColumn>

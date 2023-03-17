@@ -20,7 +20,7 @@ export const QuestionAndAnswerLikeButtonWithCount: React.FC<QuestionAndAnswerLik
         <ThumbUpIllustration color={color} />
       </StyledTouchableOpacity>
       <Text fontSize={40} fontWeight="400" letterSpacing={0.25}>
-        {count > 999 ? 999 : count}
+        {count > 999 ? '999+' : count}
       </Text>
     </StyledRow>
   );

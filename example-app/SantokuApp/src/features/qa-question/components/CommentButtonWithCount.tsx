@@ -16,7 +16,7 @@ export const CommentButtonWithCount: React.FC<CommentButtonWithCountProps> = ({o
         <ChatBubbleOutlineIllustration color={color} />
       </StyledTouchableOpacity>
       <Text fontSize={14} lineHeight={20} letterSpacing={0.25}>
-        {count > 999 ? 999 : count}
+        {count > 999 ? '999+' : count}
       </Text>
     </StyledRow>
   );

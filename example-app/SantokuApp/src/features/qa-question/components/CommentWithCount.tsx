@@ -11,7 +11,7 @@ export const CommentWithCount: React.FC<CommentWithCountProps> = ({count}) => {
       <QuestionAnswerIllustration color="grey1" />
       <Box px="p4" />
       <Text fontSize={14} lineHeight={20} letterSpacing={0.25}>
-        {count > 999 ? 999 : count}
+        {count > 999 ? '999+' : count}
       </Text>
     </Box>
   );

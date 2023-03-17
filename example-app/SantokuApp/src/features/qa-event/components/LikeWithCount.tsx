@@ -11,7 +11,7 @@ export const LikeWithCount: React.FC<LikeWithCountProps> = ({count}) => {
       <ThumbUpIllustration color="grey1" size="p24" />
       <Box px="p4" />
       <Text variant="font14Regular" lineHeight={20} letterSpacing={0.25}>
-        {count > 999 ? 999 : count}
+        {count > 999 ? '999+' : count}
       </Text>
     </Box>
   );
