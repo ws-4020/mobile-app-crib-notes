@@ -28,7 +28,7 @@ import {useTags} from 'features/qa-question/services/useTags';
 import {useShowTermsAgreementOverlay} from 'features/terms/use-cases/useShowTermsAgreementOverlay';
 import React, {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
 import {FlatList, Platform} from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {useEventsAndQuestions} from '../services/useEventsAndQuestions';
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
@@ -205,7 +205,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         renderItem={QuestionListCard}
         ItemSeparatorComponent={ListSeparator}
       />
-      <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
+      <Box position="absolute" right={8+safeAreaInsets.right} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
         {Platform.OS === 'android' && (
           <Fab size="small" color="white" onPress={scrollToTop}>
             <ExpandLessIllustration />
