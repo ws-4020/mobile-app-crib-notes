@@ -820,6 +820,9 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                             Object {
                                                               "flex": 1,
                                                             },
+                                                            Object {
+                                                              "marginHorizontal": 0,
+                                                            },
                                                           ]
                                                         }
                                                         testID="HomePage"
