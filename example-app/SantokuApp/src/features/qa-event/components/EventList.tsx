@@ -30,7 +30,10 @@ export const EventList: React.FC<EventListProps> = ({data}) => {
         </StyledRow>
       ))}
       <StyledSpace width="p24" />
-      <Box width={windowWidth - theme.spacing.p24 * 2 - safeAreaInsets.right * 2} justifyContent="center" alignItems="center">
+      <Box
+        width={windowWidth - theme.spacing.p24 * 2 - safeAreaInsets.right * 2}
+        justifyContent="center"
+        alignItems="center">
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
           <Text variant="font14Bold" lineHeight={20} letterSpacing={0.25} color="blue">
             {m('もっと見る')}

@@ -169,7 +169,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   const safeAreaInsets = useSafeAreaInsets();
 
   return (
-    <Box flex={1} testID="HomePage" style={{marginHorizontal:safeAreaInsets.right}}>
+    <Box flex={1} testID="HomePage" style={{marginHorizontal: safeAreaInsets.right}}>
       <StyledFlatList
         ref={flatListRef}
         showsVerticalScrollIndicator={false}
