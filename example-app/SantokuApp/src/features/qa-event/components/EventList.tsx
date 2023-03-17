@@ -7,7 +7,7 @@ import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import {Event} from 'features/backend/apis/model';
 import React from 'react';
-import {useSafeAreaFrame} from 'react-native-safe-area-context';
+import {useSafeAreaFrame, useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {EventListCard} from './EventListCard';
 
@@ -18,6 +18,7 @@ export type EventListProps = {
 
 export const EventList: React.FC<EventListProps> = ({data}) => {
   const theme = useTheme<RestyleTheme>();
+  const safeAreaInsets = useSafeAreaInsets();
   const {width: windowWidth} = useSafeAreaFrame();
   return (
     <StyledScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled>
@@ -29,7 +30,7 @@ export const EventList: React.FC<EventListProps> = ({data}) => {
         </StyledRow>
       ))}
       <StyledSpace width="p24" />
-      <Box width={windowWidth - theme.spacing.p24 * 2} justifyContent="center" alignItems="center">
+      <Box width={windowWidth - theme.spacing.p24 * 2 - safeAreaInsets.right * 2} justifyContent="center" alignItems="center">
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
           <Text variant="font14Bold" lineHeight={20} letterSpacing={0.25} color="blue">
             {m('もっと見る')}
