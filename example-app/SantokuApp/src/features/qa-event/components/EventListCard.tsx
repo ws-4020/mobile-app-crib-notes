@@ -7,7 +7,7 @@ import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import {Event} from 'features/backend/apis/model';
 import React, {FC} from 'react';
-import {useSafeAreaFrame} from 'react-native-safe-area-context';
+import {useSafeAreaFrame, useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {LikeWithCount} from './LikeWithCount';
 
@@ -15,11 +15,12 @@ export type EventListCardProps = {event: Event};
 
 export const EventListCard: FC<EventListCardProps> = ({event: {title, likes, profile}}) => {
   const {width: windowWidth} = useSafeAreaFrame();
+  const safeAreaInsets = useSafeAreaInsets();
   const theme = useTheme<RestyleTheme>();
   return (
     <Box
       backgroundColor="white"
-      width={windowWidth - theme.spacing.p24 * 2}
+      width={windowWidth - theme.spacing.p24 * 2 - safeAreaInsets.right * 2}
       px="p24"
       py="p16"
       my="p2"

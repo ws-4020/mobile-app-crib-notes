@@ -169,7 +169,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   const safeAreaInsets = useSafeAreaInsets();
 
   return (
-    <Box flex={1} testID="HomePage">
+    <Box flex={1} testID="HomePage" style={{marginHorizontal:safeAreaInsets.right}}>
       <StyledFlatList
         ref={flatListRef}
         showsVerticalScrollIndicator={false}
@@ -205,7 +205,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         renderItem={QuestionListCard}
         ItemSeparatorComponent={ListSeparator}
       />
-      <Box position="absolute" right={8+safeAreaInsets.right} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
+      <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
         {Platform.OS === 'android' && (
           <Fab size="small" color="white" onPress={scrollToTop}>
             <ExpandLessIllustration />
