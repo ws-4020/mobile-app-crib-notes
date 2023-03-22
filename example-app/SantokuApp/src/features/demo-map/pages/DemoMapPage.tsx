@@ -149,7 +149,7 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
               </View>
             </View>
             <Spacer heightRatio={0.05} />
-            <Text h4>操作の種類の制限</Text>
+            <Text h4>画面操作の制限</Text>
             <Spacer heightRatio={0.01} />
             <Text>以下のトグルスイッチをOFFにすると画面操作を制限することができます。</Text>
             <Spacer heightRatio={0.03} />
