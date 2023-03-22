@@ -3,6 +3,7 @@ import {TextInput} from 'bases/ui/input/TextInput';
 import {MapView} from 'bases/ui/map/MapView';
 import {Marker, MarkerProps} from 'bases/ui/map/Marker';
 import {Spacer} from 'bases/ui/spacer/Spacer';
+import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
 import React, {useCallback, useState} from 'react';
 import {View, StyleSheet, KeyboardAvoidingView, Platform} from 'react-native';
 import {Text} from 'react-native-elements';
@@ -13,7 +14,7 @@ import {MapTypePicker} from '../components/MapTypePicker';
 import {ToggleButton} from '../components/ToggleButton';
 import {initialMarker} from '../constants/initialMarker';
 import {initialRegion} from '../constants/initialRegion';
-import {MapConfigFormValues, useMapConfigForm} from '../form/MapConfigForm';
+import {RegionFormValues, useRegionForm} from '../form/RegionForm';
 
 type DemoMapViewPageProps = object;
 
@@ -25,10 +26,11 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
   const [markerList, setMarkerList] = useState<MarkerProps[]>([initialMarker]);
 
   const [region, setRegion] = useState<Region>(initialRegion);
+
   const [mapType, setMapType] = useState<MapTypes>('standard');
 
   const onSubmit = useCallback(
-    (values: MapConfigFormValues) =>
+    (values: RegionFormValues) =>
       setRegion({
         latitude: Number(values.latitude),
         longitude: Number(values.longitude),
@@ -37,7 +39,7 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
       }),
     [setRegion],
   );
-  const {form} = useMapConfigForm({
+  const {form} = useRegionForm({
     initialValues: {
       latitude: initialRegion.latitude.toString(),
       longitude: initialRegion.longitude.toString(),
@@ -60,10 +62,19 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
         android: 'height',
       } as const)}
       style={styles.container}>
-      <View style={styles.container}>
+      <View style={styles.flexContainer}>
         <ScrollView>
           <View style={styles.flexContainer}>
-            <Text h4>地図の表示領域</Text>
+            <SpecAndSourceCodeLink feature="map" />
+            <Text>
+              {`
+地図コンポーネントのオプションを変更し、表示や操作を確認できます。
+        `}
+            </Text>
+            <Spacer heightRatio={0.03} />
+            <Text h4>表示する領域の変更</Text>
+            <Spacer heightRatio={0.01} />
+            <Text>表示領域を変更できます。オプション変更時も設定した領域が表示されます。</Text>
             <Spacer heightRatio={0.03} />
             <View style={styles.rowContainer}>
               <View style={styles.flexContainer}>
@@ -119,16 +130,19 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
             </View>
             <Spacer heightRatio={0.03} />
             <View style={styles.search}>
-              <Button title="地図を更新" onPress={form.submitForm} size="middle" />
+              <Button title="更新する" onPress={form.submitForm} size="middle" />
             </View>
             <Spacer heightRatio={0.03} />
           </View>
           <View style={styles.flexContainer}>
-            <Text h4>地図の種類</Text>
+            <Text h4>地図の種類選択</Text>
+            <Spacer heightRatio={0.01} />
+            <Text>地図の見た目を変更できます。</Text>
             <Spacer heightRatio={0.03} />
             <View style={styles.rowContainer}>
               <View style={styles.flexContainer}>
                 <Text>MapType</Text>
+                <Text>マップタイプ</Text>
                 <Spacer heightRatio={0.03} />
               </View>
               <View style={styles.flexContainer}>
@@ -138,17 +152,21 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
             <View style={styles.toggleConfigContainer}>
               <View>
                 <Text>showsBuildings</Text>
+                <Text>建物の輪郭を表示</Text>
               </View>
               <View>
                 <ToggleButton isPressed={showsBuildings} setIsPressed={setShowsBuildings} />
               </View>
             </View>
             <Spacer heightRatio={0.05} />
-            <Text h4>操作の種類</Text>
+            <Text h4>操作の種類の制限</Text>
+            <Spacer heightRatio={0.01} />
+            <Text>以下のトグルスイッチをOFFにすると画面操作を制限することができます。</Text>
             <Spacer heightRatio={0.03} />
             <View style={styles.toggleConfigContainer}>
               <View>
                 <Text>scrollEnabled</Text>
+                <Text>スクロールを許可</Text>
               </View>
               <View>
                 <ToggleButton isPressed={scrollEnable} setIsPressed={setScrollEnable} />
@@ -158,6 +176,7 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
             <View style={styles.toggleConfigContainer}>
               <View>
                 <Text>zoomEnabled</Text>
+                <Text>拡大縮小を許可</Text>
               </View>
               <View>
                 <ToggleButton isPressed={zoomEnabled} setIsPressed={setZoomEnabled} />
@@ -167,6 +186,7 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
             <View style={styles.toggleConfigContainer}>
               <View>
                 <Text>rotateEnabled</Text>
+                <Text>回転を許可</Text>
               </View>
               <View>
                 <ToggleButton isPressed={rotateEnabled} setIsPressed={setRotateEnabled} />
@@ -176,6 +196,7 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
             <View style={styles.toggleConfigContainer}>
               <View>
                 <Text>pitchEnabled</Text>
+                <Text>俯瞰視点の角度変更を許可</Text>
               </View>
               <View>
                 <ToggleButton isPressed={pitchEnabled} setIsPressed={setPitchEnabled} />

@@ -1,16 +1,16 @@
 import {yup} from 'bases/validator';
 import {FormikHelpers, useFormik} from 'formik';
 
-export type MapConfigFormValues = {
+export type RegionFormValues = {
   latitude: string;
   longitude: string;
   latitudeDelta: string;
   longitudeDelta: string;
 };
 
-type MapConfigFormParams = {
-  initialValues: MapConfigFormValues;
-  onSubmit: (values: MapConfigFormValues, formikHelpers: FormikHelpers<MapConfigFormValues>) => void | Promise<any>;
+type RegionFormParams = {
+  initialValues: RegionFormValues;
+  onSubmit: (values: RegionFormValues, formikHelpers: FormikHelpers<RegionFormValues>) => void | Promise<any>;
 };
 
 const defaultRegion = {
@@ -20,17 +20,17 @@ const defaultRegion = {
   longitudeDelta: '0.002',
 };
 
-export const useMapConfigForm = (
-  params: MapConfigFormParams = {
+export const useRegionForm = (
+  params: RegionFormParams = {
     initialValues: defaultRegion,
     onSubmit: () => {},
   },
 ) => {
-  const form = useFormik<MapConfigFormValues>({
+  const form = useFormik<RegionFormValues>({
     initialValues: params.initialValues,
     validationSchema: yup.object().shape({
-      latitude: yup.number().label('緯度').required().min(0).max(180),
-      longitude: yup.number().label('経度').required().min(0).max(180),
+      latitude: yup.number().label('緯度').required().min(-90).max(90),
+      longitude: yup.number().label('経度').required().min(-180).max(180),
       latitudeDelta: yup.number().label('緯度範囲').required().min(0).max(180),
       longitudeDelta: yup.number().label('経度範囲').required().min(0).max(180),
     }),
