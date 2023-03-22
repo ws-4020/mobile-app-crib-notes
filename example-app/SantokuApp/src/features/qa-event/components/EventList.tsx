@@ -7,6 +7,7 @@ import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import {Event} from 'features/backend/apis/model';
 import React from 'react';
+import {Platform} from 'react-native';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
 import {EventListCard} from './EventListCard';
@@ -19,8 +20,14 @@ export type EventListProps = {
 export const EventList: React.FC<EventListProps> = ({data}) => {
   const theme = useTheme<RestyleTheme>();
   const {width: windowWidth} = useSafeAreaFrame();
+
   return (
-    <StyledScrollView horizontal showsHorizontalScrollIndicator={false} snapToAlignment="center" pagingEnabled>
+    <StyledScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      snapToInterval={Platform.select({ios: windowWidth - 32})}
+      snapToAlignment={Platform.select({android: 'center'})}
+      pagingEnabled>
       <StyledSpace width="p16" />
       {data?.map(item => (
         <StyledRow key={item.eventId}>
