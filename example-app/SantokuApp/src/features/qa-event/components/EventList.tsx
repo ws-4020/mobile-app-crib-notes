@@ -20,15 +20,16 @@ export const EventList: React.FC<EventListProps> = ({data}) => {
   const theme = useTheme<RestyleTheme>();
   const {width: windowWidth} = useSafeAreaFrame();
   return (
-    <StyledScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled>
+    <StyledScrollView horizontal showsHorizontalScrollIndicator={false} snapToAlignment="center" pagingEnabled>
+      <StyledSpace width="p16" />
       {data?.map(item => (
         <StyledRow key={item.eventId}>
-          <StyledSpace width="p24" />
+          <StyledSpace width="p8" />
           <EventListCard event={item} />
-          <StyledSpace width="p24" />
+          <StyledSpace width="p8" />
         </StyledRow>
       ))}
-      <StyledSpace width="p24" />
+      <StyledSpace width="p8" />
       <Box width={windowWidth - theme.spacing.p24 * 2} justifyContent="center" alignItems="center">
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
           <Text variant="font14Bold" lineHeight={20} letterSpacing={0.25} color="blue">
@@ -36,7 +37,7 @@ export const EventList: React.FC<EventListProps> = ({data}) => {
           </Text>
         </StyledTouchableOpacity>
       </Box>
-      <StyledSpace width="p24" />
+      <StyledSpace width="p8" />
     </StyledScrollView>
   );
 };
