@@ -1265,6 +1265,7 @@ React Native 0.66
                                                                 horizontal={true}
                                                                 pagingEnabled={true}
                                                                 showsHorizontalScrollIndicator={false}
+                                                                snapToAlignment="center"
                                                                 style={
                                                                   Array [
                                                                     Object {},
@@ -1272,6 +1273,15 @@ React Native 0.66
                                                                 }
                                                               >
                                                                 <View>
+                                                                  <View
+                                                                    style={
+                                                                      Array [
+                                                                        Object {
+                                                                          "paddingLeft": 16,
+                                                                        },
+                                                                      ]
+                                                                    }
+                                                                  />
                                                                   <View
                                                                     style={
                                                                       Array [
@@ -1285,7 +1295,7 @@ React Native 0.66
                                                                       style={
                                                                         Array [
                                                                           Object {
-                                                                            "paddingLeft": 24,
+                                                                            "paddingLeft": 8,
                                                                           },
                                                                         ]
                                                                       }
@@ -1566,7 +1576,7 @@ React Native 0.66
                                                                       style={
                                                                         Array [
                                                                           Object {
-                                                                            "paddingLeft": 24,
+                                                                            "paddingLeft": 8,
                                                                           },
                                                                         ]
                                                                       }
@@ -1585,7 +1595,7 @@ React Native 0.66
                                                                       style={
                                                                         Array [
                                                                           Object {
-                                                                            "paddingLeft": 24,
+                                                                            "paddingLeft": 8,
                                                                           },
                                                                         ]
                                                                       }
@@ -1866,7 +1876,7 @@ React Native 0.66
                                                                       style={
                                                                         Array [
                                                                           Object {
-                                                                            "paddingLeft": 24,
+                                                                            "paddingLeft": 8,
                                                                           },
                                                                         ]
                                                                       }
@@ -1876,7 +1886,7 @@ React Native 0.66
                                                                     style={
                                                                       Array [
                                                                         Object {
-                                                                          "paddingLeft": 24,
+                                                                          "paddingLeft": 8,
                                                                         },
                                                                       ]
                                                                     }
@@ -1930,7 +1940,7 @@ React Native 0.66
                                                                     style={
                                                                       Array [
                                                                         Object {
-                                                                          "paddingLeft": 24,
+                                                                          "paddingLeft": 8,
                                                                         },
                                                                       ]
                                                                     }
