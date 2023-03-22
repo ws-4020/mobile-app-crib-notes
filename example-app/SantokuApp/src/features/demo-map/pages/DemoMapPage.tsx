@@ -49,7 +49,6 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
     onSubmit,
   });
 
-  const [showsBuildings, setShowsBuildings] = useState<boolean>(true);
   const [scrollEnable, setScrollEnable] = useState<boolean>(true);
   const [zoomEnabled, setZoomEnabled] = useState<boolean>(true);
   const [rotateEnabled, setRotateEnabled] = useState<boolean>(true);
@@ -149,15 +148,6 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
                 <MapTypePicker mapType={mapType} setMapType={setMapType} />
               </View>
             </View>
-            <View style={styles.toggleConfigContainer}>
-              <View>
-                <Text>showsBuildings</Text>
-                <Text>建物の輪郭を表示</Text>
-              </View>
-              <View>
-                <ToggleButton isPressed={showsBuildings} setIsPressed={setShowsBuildings} />
-              </View>
-            </View>
             <Spacer heightRatio={0.05} />
             <Text h4>操作の種類の制限</Text>
             <Spacer heightRatio={0.01} />
@@ -213,7 +203,6 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
           zoomEnabled={zoomEnabled}
           rotateEnabled={rotateEnabled}
           mapType={mapType}
-          showsBuildings={showsBuildings}
           pitchEnabled={pitchEnabled}
           style={styles.map}>
           {markerList.map((item, index) => (
