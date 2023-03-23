@@ -24,7 +24,7 @@ export type QuestionListCardProps = {
   };
 };
 
-export const QuestionListCard: FC<QuestionListCardProps> = ({
+const QuestionListCardComponent: FC<QuestionListCardProps> = ({
   item: {
     question: {title, content, likes, views, beginner, datetime, profile},
     navigateToQuestionDetail,
@@ -94,3 +94,5 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
     </Box>
   );
 };
+
+export const QuestionListCard = React.memo(QuestionListCardComponent);
