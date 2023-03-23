@@ -1,13 +1,12 @@
 import {Ionicons} from '@expo/vector-icons';
-import {useNavigation} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createNativeStackNavigator, NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useTheme} from '@shopify/restyle';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
 import {m} from 'bases/message/Message';
 import {Text} from 'bases/ui/common';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
-import React, {useMemo, useCallback} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {Platform} from 'react-native';
 
 import {useMainTabNav} from './MainTabNav';
@@ -26,8 +25,10 @@ type Props = {
   initialData: AppInitialData;
 };
 const Component: React.FC<Props> = ({initialData}) => {
-  const navigation = useNavigation();
-  const goBack = useCallback(() => navigation.goBack(), [navigation]);
+  const goBack = useCallback(
+    (navigation: NativeStackNavigationProp<AuthenticatedStackParamList>) => navigation.goBack(),
+    [],
+  );
   const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
   const mainTabNav = useMainTabNav(initialData);
   const theme = useTheme<RestyleTheme>();
@@ -45,21 +46,21 @@ const Component: React.FC<Props> = ({initialData}) => {
         <nav.Screen
           component={QuestionDetailScreen}
           name="QuestionDetail"
-          options={{
+          options={({navigation}: {navigation: NativeStackNavigationProp<AuthenticatedStackParamList>}) => ({
             title: '',
             headerStyle: {backgroundColor: theme.colors.orange1},
             contentStyle: {backgroundColor: theme.colors.orange2},
             headerBackTitleVisible: false,
             headerLeft: () => (
               <>
-                <Ionicons name="arrow-back" size={24} color={theme.colors.white} onPress={goBack} />
+                <Ionicons name="arrow-back" size={24} color={theme.colors.white} onPress={() => goBack(navigation)} />
                 <StyledSpace width="p32" />
                 <Text color="white" fontSize={20} fontWeight="500">
                   {m('質問詳細')}
                 </Text>
               </>
             ),
-          }}
+          })}
         />
       ) : (
         <nav.Screen
