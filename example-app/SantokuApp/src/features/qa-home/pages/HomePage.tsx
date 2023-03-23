@@ -185,7 +185,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         }
         data={questionItems}
         renderItem={listRenderItemInfo => {
-          if (listRenderItemInfo.item === questionItems[0]) {
+          if (listRenderItemInfo.index === 0) {
             return (
               <StyledRow
                 px="p24"
