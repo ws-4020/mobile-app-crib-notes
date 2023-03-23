@@ -16,9 +16,7 @@ import {initialMarker} from '../constants/initialMarker';
 import {initialRegion} from '../constants/initialRegion';
 import {RegionFormValues, useRegionForm} from '../form/RegionForm';
 
-type DemoMapViewPageProps = object;
-
-export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
+export const DemoMapPage: React.FC = () => {
   // TODO [OptOut]マーカーを追加するフォーム（緯度、経度、タイトル、説明、dragable）
 
   // 現時点でsetMarkerListを使っていないが、後でマーカーを画面から追加できるようにするためにマーカーの配列をstate管理する。
