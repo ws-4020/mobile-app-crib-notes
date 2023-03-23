@@ -1,10 +1,11 @@
-import {Ionicons} from '@expo/vector-icons';
 import {createNativeStackNavigator, NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useTheme} from '@shopify/restyle';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
 import {m} from 'bases/message/Message';
-import {Text} from 'bases/ui/common';
+import {StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {StyledColumn} from 'bases/ui/common/StyledColumn';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
+import {GoBackIllustration} from 'bases/ui/illustration/GoBackIllustration';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {useCallback, useMemo} from 'react';
 import {Platform} from 'react-native';
@@ -53,7 +54,12 @@ const Component: React.FC<Props> = ({initialData}) => {
             headerBackTitleVisible: false,
             headerLeft: () => (
               <>
-                <Ionicons name="arrow-back" size={24} color={theme.colors.white} onPress={() => goBack(navigation)} />
+                <StyledColumn>
+                  <StyledSpace height="p4" />
+                  <StyledTouchableOpacity onPress={() => goBack(navigation)}>
+                    <GoBackIllustration />
+                  </StyledTouchableOpacity>
+                </StyledColumn>
                 <StyledSpace width="p32" />
                 <Text color="white" fontSize={20} fontWeight="500">
                   {m('質問詳細')}
