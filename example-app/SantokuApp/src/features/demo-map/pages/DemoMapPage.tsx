@@ -73,7 +73,7 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
             <Spacer heightRatio={0.03} />
             <Text h4>表示する領域の変更</Text>
             <Spacer heightRatio={0.01} />
-            <Text>表示領域を変更できます。オプション変更時も設定した領域が表示されます。</Text>
+            <Text>表示領域を変更できます。</Text>
             <Spacer heightRatio={0.03} />
             <View style={styles.rowContainer}>
               <View style={styles.flexContainer}>
