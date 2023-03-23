@@ -37,7 +37,7 @@
 - rotateEnabled: 2本指スワイプによる回転
 - pitchEnabled: 2本指縦方向スワイプによる俯瞰視点の角度変更
 
-### マーカーの追加
+### TODO マーカーの追加
 
 以下の項目に値を指定しマーカーを追加できます。
 
@@ -53,23 +53,44 @@
 
 地図表示のためにreact-native-mapsを使用します。
 react-native-mapsで使用できるマップSDKは、iOSが[MapKit](https://developer.apple.com/documentation/mapkit/)あるいは[Google Map](https://developers.google.com/maps/documentation/ios-sdk?hl=ja)、Androidは[Google Map](https://developers.google.com/maps/documentation/android-sdk?hl=ja)のみになります。
-このページではiOSはMapKit、AndroidはGoogle Mapを使用した地図表示を実装しています。
+マップ表示の共通部品ではiOSでGoogle Mapの使用を制限しています。
+そのため、このページではiOSはMapKit、AndroidはGoogle Mapを使用した地図表示を実装しています。
 
-### Google Mapを使用する場合に必要な設定
+### AndroidでGoogle Mapを使用する場合に必要な設定
 
 Google Maps APIが必要になります。
-公開しているソースコードではダミのAPIキーを`app.config.js`に設定しています。
+公開しているソースコードではダミーのAPIキーを`app.config.js`に設定しています。
+
 Google Mapを使用する場合は、以下を参考にAPIキーを取得してください。
 
 - [Google Map Platform API キーを使用する（Android）| Google Maps Platform](https://developers.google.com/maps/documentation/android-sdk/get-api-key?hl=ja)
-- [Google Map Platform API キーを使用する（iOS）| Google Maps Platform](https://developers.google.com/maps/documentation/ios-sdk/get-api-key?hl=ja)
 
-以下を参考に取得したAPIキーを`app.config.js`に追記してください。
+以下を参考に`app.config.js`のダミーのAPIキーを取得したキーに置き換えてください。
+
+```diff title="/app.config.js"
+module.exports = ({config}) => {
+  const environment = process.env.ENVIRONMENT ?? 'prod';
+  const defaultAppConfig = {
+    /* ～省略～ */
+    android: {
+      /* ～省略～ */
+      config: {
+        googleMaps: {
+-         apiKey: 'dummyApiKey',
++         apiKey: '<Your API Key>',
+        },
+      },
+    },
+/* ～省略～ */
+```
 
 - [Google Maps API key in app.json / app.config.js (Android) | Expo](https://docs.expo.dev/versions/latest/config/app/#googlemaps)
-- [Google Maps API key in app.json / app.config.js (iOS) | Expo](https://docs.expo.dev/versions/latest/config/app/#googlemapsapikey)
 
 ### iOSでGoogle Mapを使用するときの注意点
+
+マップ表示の共通部品ではiOSでGoogle mapを使うことはできない仕様になっています。
+iOSでgoogle mapを使用する場合は共通部品は使用せず、ライブラリから直接コンポーネントをインポートして利用してください。
+さらに、以下を参考に設定ファイルの変更が必要になります。
 
 Santokuアプリではfirebaseを使用しているため、useFrameworksで静的リンクを明示的に指定しています。
 
@@ -81,7 +102,7 @@ iOSでGoogle Mapを使用する設定でビルドしたとき依存関係にあ�
 - ['RCTConvert+AirMap.h' file not found | GitHub](https://github.com/react-native-maps/react-native-maps/issues/3597)
 - [use_frameworks! issues with react-native-maps RN 0.69.3 | GitHub](https://github.com/react-native-maps/react-native-maps/discussions/4389)
 
-そのため['RCTConvert+AirMap.h' file not found | GitHub](https://github.com/react-native-maps/react-native-maps/issues/3597)を参考にして、`Podfile`に以下を追記し動作確認を行いました。
+そのため['RCTConvert+AirMap.h' file not found | GitHub](https://github.com/react-native-maps/react-native-maps/issues/3597)を参考にして、`Podfile`に以下を追記してください。
 
 ```Ruby
   # https://github.com/react-native-maps/react-native-maps/issues/3597
