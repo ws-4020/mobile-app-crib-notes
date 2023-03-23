@@ -204,6 +204,7 @@ export const DemoMapPage: React.FC<DemoMapViewPageProps> = () => {
           rotateEnabled={rotateEnabled}
           mapType={mapType}
           pitchEnabled={pitchEnabled}
+          onRegionChangeComplete={setRegion}
           style={styles.map}>
           {markerList.map((item, index) => (
             <Marker key={index} {...item} />
