@@ -1,3 +1,4 @@
+import {tryAddPlus} from 'bases/core/utils/tryAddPlus';
 import {useVisibility} from 'bases/core/utils/useVisibility';
 import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
@@ -69,8 +70,7 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
           <StyledRow space="p24" alignItems="center" justifyContent="space-between">
             {profile && (
               <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
-                {profile.points > 999 ? '999+' : profile.points}/
-                {profile.totalPoints > 999 ? '999+' : profile.totalPoints}
+                {tryAddPlus(profile.points, 999)}/{tryAddPlus(profile.totalPoints, 999)}
               </Text>
             )}
             {resolved && (

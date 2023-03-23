@@ -1,4 +1,5 @@
 import {ColorProps} from '@shopify/restyle';
+import {tryAddPlus} from 'bases/core/utils/tryAddPlus';
 import {StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledRow} from 'bases/ui/common/StyledRow';
 import {ChatBubbleOutlineIllustration} from 'bases/ui/illustration/ChatBubbleOutlineIllustration';
@@ -16,7 +17,7 @@ export const CommentButtonWithCount: React.FC<CommentButtonWithCountProps> = ({o
         <ChatBubbleOutlineIllustration color={color} />
       </StyledTouchableOpacity>
       <Text fontSize={14} lineHeight={20} letterSpacing={0.25}>
-        {count > 999 ? '999+' : count}
+        {tryAddPlus(count, 999)}
       </Text>
     </StyledRow>
   );
