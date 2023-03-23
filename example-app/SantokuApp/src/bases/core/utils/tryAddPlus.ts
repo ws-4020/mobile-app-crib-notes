@@ -7,7 +7,7 @@
  */
 
 export function tryAddPlus(value: number, maxValue: number): string {
-  if (value < maxValue) {
+  if (value <= maxValue) {
     return value.toString();
   }
   return maxValue.toString() + '+';
