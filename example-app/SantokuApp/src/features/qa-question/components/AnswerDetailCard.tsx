@@ -1,4 +1,4 @@
-import {tryAddPlus} from 'bases/core/utils/tryAddPlus';
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {useVisibility} from 'bases/core/utils/useVisibility';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledColumn} from 'bases/ui/common/StyledColumn';
@@ -58,7 +58,7 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
           </Text>
           {profile && (
             <Text variant="font14Regular" letterSpacing={0.25} color="black2">
-              {tryAddPlus(profile.points, 999)}/{tryAddPlus(profile.totalPoints, 999)}
+              {formatLargeNumber(profile.points, 999)}/{formatLargeNumber(profile.totalPoints, 999)}
             </Text>
           )}
         </StyledColumn>

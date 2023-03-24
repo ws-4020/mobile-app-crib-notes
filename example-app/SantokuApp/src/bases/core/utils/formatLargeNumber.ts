@@ -6,7 +6,7 @@
  * @returns 整形後の値
  */
 
-export function tryAddPlus(value: number, maxValue: number): string {
+export function formatLargeNumber(value: number, maxValue: number): string {
   if (value <= maxValue) {
     return value.toString();
   }

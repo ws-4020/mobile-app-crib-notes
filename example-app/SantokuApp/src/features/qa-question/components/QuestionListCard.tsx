@@ -1,4 +1,4 @@
-import {tryAddPlus} from 'bases/core/utils/tryAddPlus';
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledImage} from 'bases/ui/common/StyledImage';
 import {StyledRow} from 'bases/ui/common/StyledRow';
@@ -55,7 +55,7 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
           <StyledRow alignItems="center" justifyContent="space-between">
             {profile && (
               <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
-                {tryAddPlus(profile.points, 999)}/{tryAddPlus(profile.totalPoints, 999)}
+                {formatLargeNumber(profile.points, 999)}/{formatLargeNumber(profile.totalPoints, 999)}
               </Text>
             )}
           </StyledRow>

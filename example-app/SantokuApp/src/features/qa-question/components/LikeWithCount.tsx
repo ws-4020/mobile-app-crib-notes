@@ -1,4 +1,4 @@
-import {tryAddPlus} from 'bases/core/utils/tryAddPlus';
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {Box, Text} from 'bases/ui/common';
 import {ThumbUpIllustration} from 'bases/ui/illustration/ThumbUpIllustration';
 import React from 'react';
@@ -12,7 +12,7 @@ export const LikeWithCount: React.FC<LikeWithCountProps> = ({count}) => {
       <ThumbUpIllustration color="grey1" size="p24" />
       <Box px="p4" />
       <Text fontSize={14} fontWeight="400" letterSpacing={0.25}>
-        {tryAddPlus(count, 999)}
+        {formatLargeNumber(count, 999)}
       </Text>
     </Box>
   );

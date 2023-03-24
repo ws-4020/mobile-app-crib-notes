@@ -1,4 +1,4 @@
-import {tryAddPlus} from 'bases/core/utils/tryAddPlus';
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {Box, Text} from 'bases/ui/common';
 import {QuestionAnswerIllustration} from 'bases/ui/illustration/QuestionAnswerIllustration';
 import React from 'react';
@@ -12,7 +12,7 @@ export const AnswerWithCount: React.FC<AnswerWithCountProps> = ({count}) => {
       <QuestionAnswerIllustration color="grey1" />
       <Box px="p4" />
       <Text fontSize={14} lineHeight={20} letterSpacing={0.25}>
-        {tryAddPlus(count, 999)}
+        {formatLargeNumber(count, 999)}
       </Text>
     </Box>
   );

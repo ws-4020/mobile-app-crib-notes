@@ -1,5 +1,5 @@
 import {ColorProps} from '@shopify/restyle';
-import {tryAddPlus} from 'bases/core/utils/tryAddPlus';
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledRow} from 'bases/ui/common/StyledRow';
 import {ThumbUpIllustration} from 'bases/ui/illustration/ThumbUpIllustration';
@@ -21,7 +21,7 @@ export const QuestionAndAnswerLikeButtonWithCount: React.FC<QuestionAndAnswerLik
         <ThumbUpIllustration color={color} />
       </StyledTouchableOpacity>
       <Text fontSize={40} fontWeight="400" letterSpacing={0.25}>
-        {tryAddPlus(count, 999)}
+        {formatLargeNumber(count, 999)}
       </Text>
     </StyledRow>
   );
