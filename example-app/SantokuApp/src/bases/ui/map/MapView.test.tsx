@@ -1,6 +1,7 @@
 import '@testing-library/jest-native/extend-expect';
 import {render, screen} from '@testing-library/react-native';
-import {MapViewProps as RNMMapViewProps} from 'react-native-maps';
+import {createRef} from 'react';
+import RNMMapView, {MapViewProps as RNMMapViewProps} from 'react-native-maps';
 
 import {MapView, MapViewProps} from './MapView';
 
@@ -544,5 +545,24 @@ describe('MapView with committed props', () => {
     expect(mapViewProps.userInterfaceStyle).toEqual('dark');
     // Android限定のPropsが指定できているか確認
     expect(mapViewProps.liteMode).toEqual(true);
+  });
+});
+
+describe('MapView with ref', () => {
+  // refが定義されているか確認する
+  it('should be defined', () => {
+    const mapViewRef = createRef<RNMMapView>();
+    render(
+      <MapView
+        region={{
+          latitude: 35,
+          longitude: 134,
+          latitudeDelta: 0.005,
+          longitudeDelta: 0.002,
+        }}
+        ref={mapViewRef}
+      />,
+    );
+    expect(mapViewRef.current).toBeDefined();
   });
 });
