@@ -39,45 +39,30 @@ const Component: React.FC<Props> = ({initialData}) => {
           headerShown: false,
         }}
       />
-      {Platform.OS === 'ios' ? (
-        <nav.Screen
-          component={QuestionDetailScreen}
-          name="QuestionDetail"
-          options={({navigation}: {navigation: NativeStackNavigationProp<AuthenticatedStackParamList>}) => ({
-            title: '',
-            headerStyle: {backgroundColor: theme.colors.orange1},
-            contentStyle: {backgroundColor: theme.colors.orange2},
-            headerBackTitleVisible: false,
-            headerLeft: () => (
-              <>
-                <StyledColumn>
-                  <StyledSpace height="p4" />
-                  <StyledTouchableOpacity onPress={navigation.goBack}>
-                    <GoBackIllustration />
-                  </StyledTouchableOpacity>
-                </StyledColumn>
-                <StyledSpace width="p32" />
-                <Text color="white" fontSize={20} fontWeight="500">
-                  {m('質問詳細')}
-                </Text>
-              </>
-            ),
-          })}
-        />
-      ) : (
-        <nav.Screen
-          component={QuestionDetailScreen}
-          name="QuestionDetail"
-          options={{
-            title: m('質問詳細'),
-            headerStyle: {backgroundColor: theme.colors.orange1},
-            contentStyle: {backgroundColor: theme.colors.orange2},
-            headerTitleStyle: {fontSize: 20, fontWeight: '500'},
-            headerTintColor: theme.colors.white,
-            headerBackTitleVisible: false,
-          }}
-        />
-      )}
+      <nav.Screen
+        component={QuestionDetailScreen}
+        name="QuestionDetail"
+        options={({navigation}: {navigation: NativeStackNavigationProp<AuthenticatedStackParamList>}) => ({
+          title: '',
+          headerStyle: {backgroundColor: theme.colors.orange1},
+          contentStyle: {backgroundColor: theme.colors.orange2},
+          headerBackTitleVisible: false,
+          headerLeft: () => (
+            <>
+              <StyledColumn>
+                <StyledSpace height="p4" />
+                <StyledTouchableOpacity onPress={navigation.goBack}>
+                  <GoBackIllustration />
+                </StyledTouchableOpacity>
+              </StyledColumn>
+              <StyledSpace width="p32" />
+              <Text color="white" fontSize={20} fontWeight="500">
+                {m('質問詳細')}
+              </Text>
+            </>
+          ),
+        })}
+      />
       <nav.Screen
         name="QuestionAndEventStackNav"
         component={QuestionAndEventPostStackNav}
