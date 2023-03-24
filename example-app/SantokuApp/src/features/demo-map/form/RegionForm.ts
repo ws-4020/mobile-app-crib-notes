@@ -31,8 +31,8 @@ export const useRegionForm = (
     validationSchema: yup.object().shape({
       latitude: yup.number().label('緯度').required().min(-90).max(90),
       longitude: yup.number().label('経度').required().min(-180).max(180),
-      latitudeDelta: yup.number().label('緯度範囲').required().min(0).max(180),
-      longitudeDelta: yup.number().label('経度範囲').required().min(0).max(180),
+      latitudeDelta: yup.number().label('緯度範囲').required().moreThan(0).max(180),
+      longitudeDelta: yup.number().label('経度範囲').required().moreThan(0).max(180),
     }),
     validateOnChange: false,
     onSubmit: params.onSubmit,
