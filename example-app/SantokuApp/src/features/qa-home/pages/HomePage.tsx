@@ -165,13 +165,16 @@ export const HomePage: React.FC<HomePageProps> = ({
     [questions, navigateToQuestionDetail],
   );
 
+  const [containerWidth, setContainerWidth] = useState(0);
+
   return (
-    <StyledSafeAreaView flex={1} testID="HomePage">
+    <StyledSafeAreaView flex={1} testID="HomePage" backgroundColor="blue">
       <StyledFlatList
         ref={flatListRef}
         showsVerticalScrollIndicator={false}
         refreshing={isPullToRefreshing}
         onRefresh={pullToRefresh}
+        onLayout={event => setContainerWidth(event.nativeEvent.layout.width)}
         ListHeaderComponent={
           <>
             <Box px="p24" py="p32">
@@ -179,7 +182,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 {m('募集中のイベント')}
               </Text>
             </Box>
-            {!isEventsLoading && <EventList data={events} />}
+            {!isEventsLoading && <EventList data={events} containerWidth={containerWidth} />}
             <StyledRow px="p24" py="p32" justifyContent="space-between" alignItems="center">
               <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
                 {m('質問')}
