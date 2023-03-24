@@ -1,6 +1,6 @@
 import {Button} from 'bases/ui/button/Button';
 import {TextInput} from 'bases/ui/input/TextInput';
-import {MapView} from 'bases/ui/map/MapView';
+import {MapView, MapViewRef} from 'bases/ui/map/MapView';
 import {Marker, MarkerProps} from 'bases/ui/map/Marker';
 import {Spacer} from 'bases/ui/spacer/Spacer';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
@@ -8,7 +8,7 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {View, StyleSheet, KeyboardAvoidingView, Platform} from 'react-native';
 import {Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
-import RNMMapView, {Region, MapTypes} from 'react-native-maps';
+import {Region, MapTypes} from 'react-native-maps';
 
 import {MapTypePicker} from '../components/MapTypePicker';
 import {ToggleButton} from '../components/ToggleButton';
@@ -52,9 +52,8 @@ export const DemoMapPage: React.FC = () => {
   const [rotateEnabled, setRotateEnabled] = useState<boolean>(true);
   const [pitchEnabled, setPitchEnabled] = useState<boolean>(true);
 
-  const mapViewRef = useRef<RNMMapView>(null);
+  const mapViewRef = useRef<MapViewRef>(null);
   const animateToRegion = useCallback(() => mapViewRef.current?.animateToRegion(region), [region]);
-  // mapViewRef.current?.props.provider = "google";
 
   useEffect(() => {
     animateToRegion();
