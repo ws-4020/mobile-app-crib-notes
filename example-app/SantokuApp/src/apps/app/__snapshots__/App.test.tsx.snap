@@ -1262,8 +1262,8 @@ React Native 0.66
                                                                 </Text>
                                                               </View>
                                                               <RCTScrollView
+                                                                decelerationRate="fast"
                                                                 horizontal={true}
-                                                                pagingEnabled={true}
                                                                 showsHorizontalScrollIndicator={false}
                                                                 snapToInterval={288}
                                                                 style={
