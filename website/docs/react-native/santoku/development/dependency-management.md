@@ -75,19 +75,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
   * ▶ `@types/jest`はメジャーバージョンが25なら問題ないとして、`"@types/jest": "<26.0.0"`と指定する
 * 例： `react-test-renderer`
   * ▶ `jest-expo`では、`react-test-renderer`のバージョンを`~16.11.0`と指定している（`expo 41.0.0`時点）
-  * ▶ `@types/react-test-renderer` はパッチバージョンが25なら問題ないとして、 `"@types/react-test-renderer": "<16.12.0"` と指定する
-
-### `react-native-qrcode-svg`のバージョンについて
-
-`react-native-qrcode-svg`は、`peerDependencies`に`react-native-svg`を含んでいます。
-
-`react-native-svg`のバージョンはExpoで管理されており、Expo 46では`12.4.x`（`~12.4.0`）を使用します。
-`react-native-qrcode-svg`が`react-native-svg`の`12.4.x`をサポートするバージョンは、`6.1.1〜6.1.2`（`~6.1.1`）のみです。
-現時点で最新のバージョンである`6.2.0`や、`6.1.1`以前のバージョンでは`react-native-svg`の`12.4.x`をサポートしていません。
-そのため、`react-native-qrcode-svg`に関してはバージョンに`~6.1.1`を指定します。
-
-なお、Expo 47では`react-native-svg`の`13.4.0`を使用します。
-Expo 47にアップグレードする際は、動作確認の上`react-native-qrcode-svg`のバージョンを`6.2.0`以降に変更してください。
+  * ▶ `@types/react-test-renderer` はマイナーバージョンが11なら問題ないとして、 `"@types/react-test-renderer": "<16.12.0"` と指定する
 
 ## 依存パッケージのアップデート
 

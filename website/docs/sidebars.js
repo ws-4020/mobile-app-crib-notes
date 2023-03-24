@@ -536,7 +536,6 @@ module.exports = {
           items: [
             'react-native/santoku/design/demo/overview',
             'react-native/santoku/design/demo/push-notification/overview',
-            'react-native/santoku/design/demo/qrcode/overview',
           ],
         },
       ],
@@ -632,6 +631,7 @@ module.exports = {
           label: 'エンハンス',
           items: [
             'react-native/santoku/maintenance/enhance',
+            'react-native/santoku/maintenance/enhance/config-plugins',
             'react-native/santoku/maintenance/enhance/expo-46-upgrade',
           ],
         },
