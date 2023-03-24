@@ -168,7 +168,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   const [containerWidth, setContainerWidth] = useState(0);
 
   return (
-    <StyledSafeAreaView flex={1} testID="HomePage" backgroundColor="blue">
+    <StyledSafeAreaView flex={1} testID="HomePage">
       <StyledFlatList
         ref={flatListRef}
         showsVerticalScrollIndicator={false}
