@@ -1,6 +1,6 @@
 import {diffInYears} from './diffInYears';
 
-describe('diffInDays', () => {
+describe('diffInYears', () => {
   describe.each([
     //month of dateRight < month of dateLeft
     ['2023/4/12 12:12:00', '2021/3/12 12:12:00', 2],
