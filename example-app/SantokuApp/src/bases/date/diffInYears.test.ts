@@ -5,14 +5,14 @@ describe('diffInYears', () => {
     //month of dateRight < month of dateLeft
     ['2023/4/12 12:12:00', '2021/3/12 12:12:00', 2],
     // month of dateRight = month of dateLeft
-    // date of dateRight < date of dateLeft
+    // day of dateRight < day of dateLeft
     ['2023/4/12 12:12:00', '2021/4/11 12:12:00', 2],
     // month of dateRight = month of dateLeft
-    // date of dateRight = date of dateLeft
+    // day of dateRight = day of dateLeft
     // hours of dateRight < hours of dateLeft
     ['2023/4/12 12:12:00', '2021/4/12 11:12:00', 2],
     // month of dateRight = month of dateLeft
-    // date of dateRight = date of dateLeft
+    // day of dateRight = day of dateLeft
     // hours of dateRight = hours of dateLeft
     // minutes of dateRight < minutes of dateLeft
     ['2023/4/12 12:12:00', '2021/4/12 12:11:00', 2],
@@ -30,14 +30,14 @@ describe('diffInYears', () => {
     // month of dateRight > month of dateLeft
     ['2023/4/12 12:12:00', '2021/5/12 12:12:00', 1],
     // month of dateRight = month of dateLeft
-    // date of dateRight > date of dateLeft
+    // day of dateRight > day of dateLeft
     ['2023/4/12 12:12:00', '2021/4/13 12:12:00', 1],
     // month of dateRight = month of dateLeft
-    // date of dateRight = date of dateLeft
+    // day of dateRight = day of dateLeft
     // hours of dateRight > hours of dateLeft
     ['2023/4/12 12:12:00', '2021/4/12 13:12:00', 1],
     // month of dateRight = month of dateLeft
-    // date of dateRight = date of dateLeft
+    // day of dateRight = day of dateLeft
     // hours of dateRight = hours of dateLeft
     // minutes of dateRight > minutes of dateLeft
     ['2023/4/12 12:12:00', '2021/4/12 12:13:00', 1],
