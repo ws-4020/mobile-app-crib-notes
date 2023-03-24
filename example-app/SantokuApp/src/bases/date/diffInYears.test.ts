@@ -44,7 +44,7 @@ describe('diffInYears', () => {
   ])(
     '異なる二つのDateオブジェクトの年の差 = Dateオブジェクトの年部分の差-1 となるケース',
     (dateLeft, dateRight, expected) => {
-      test(`diffInDaysの検証`, () => {
+      test(`diffInYearsの検証`, () => {
         const diff = diffInYears(new Date(dateLeft), new Date(dateRight));
         expect(diff).toEqual(expected);
       });
