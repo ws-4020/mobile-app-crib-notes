@@ -27,7 +27,8 @@ export const EventList: React.FC<EventListProps> = ({data}) => {
       showsHorizontalScrollIndicator={false}
       snapToInterval={Platform.select({ios: windowWidth - 32})}
       snapToAlignment={Platform.select({android: 'center'})}
-      pagingEnabled>
+      pagingEnabled
+      decelerationRate="fast">
       <StyledSpace width="p16" />
       {data?.map(item => (
         <StyledRow key={item.eventId}>
