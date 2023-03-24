@@ -26,10 +26,6 @@ type Props = {
   initialData: AppInitialData;
 };
 const Component: React.FC<Props> = ({initialData}) => {
-  const goBack = useCallback(
-    (navigation: NativeStackNavigationProp<AuthenticatedStackParamList>) => navigation.goBack(),
-    [],
-  );
   const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
   const mainTabNav = useMainTabNav(initialData);
   const theme = useTheme<RestyleTheme>();
@@ -56,7 +52,7 @@ const Component: React.FC<Props> = ({initialData}) => {
               <>
                 <StyledColumn>
                   <StyledSpace height="p4" />
-                  <StyledTouchableOpacity onPress={() => goBack(navigation)}>
+                  <StyledTouchableOpacity onPress={navigation.goBack}>
                     <GoBackIllustration />
                   </StyledTouchableOpacity>
                 </StyledColumn>
