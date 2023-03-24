@@ -1,7 +1,6 @@
 import {AccountLogin, AccountLoginResponse} from 'features/backend/apis/model';
 import {rest} from 'msw';
 
-import {db as generalDb} from '../../db';
 import {backendUrl} from '../../utils/backendUrl';
 import {getDb, setAccountId} from '../../utils/dbManager';
 import {delayedResponse} from '../../utils/delayedResponse';
@@ -16,10 +15,6 @@ export const postLogin = rest.post(`${backendUrl}/login`, async (req, res, ctx) 
     if (!account) {
       return delayedResponse(ctx.status(401), ctx.delay(100));
     }
-
-    generalDb.loggedInAccount.delete({where: {accountId: {equals: accountId}}});
-    generalDb.loggedInAccount.create({accountId});
-
     return delayedResponse(ctx.json<AccountLoginResponse>({status: 'COMPLETE'}), ctx.delay(100));
   } catch (e) {
     return errorResponse(e, ctx);
