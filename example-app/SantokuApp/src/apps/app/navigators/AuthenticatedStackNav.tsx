@@ -8,7 +8,6 @@ import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {GoBackIllustration} from 'bases/ui/illustration/GoBackIllustration';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {useMemo} from 'react';
-import {Platform} from 'react-native';
 
 import {useMainTabNav} from './MainTabNav';
 import {QuestionAndEventPostStackNav} from './QuestionAndEventPostStackNav';
