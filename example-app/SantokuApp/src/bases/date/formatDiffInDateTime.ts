@@ -12,7 +12,6 @@ type Options = {
 export function formatDiffInDateTime(dateLeft: Date, dateRight: Date, options?: Options) {
   const diffYears = diffInYears(dateLeft, dateRight);
   if (diffYears > 0) {
-    const diffYears = diffInYears(dateLeft, dateRight);
     return `${diffYears}${options?.yearsSuffix ?? ''}`;
   }
   const diffDays = diffInDays(dateLeft, dateRight);
