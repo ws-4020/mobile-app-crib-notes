@@ -74,41 +74,108 @@
 src
 ├── @types（※１）
 ├── apps
-│   └── app（※２）
-│       ├── components
-│       ├── contexts
-│       ├── errors
-│       ├── navigators
-│       ├── screens
-│       ├── services
-│       ├── types
-│       └── use-cases
-├── assets（※３）
+│   └── app
+│       ├── components
+│       ├── contexts
+│       ├── errors
+│       ├── navigators
+│       ├── screens
+│       ├── services
+│       ├── types
+│       └── use-cases
+├── assets（※２）
+│   ├── dummy
+│   └── images
 ├── bases
-│   ├── core
-│   ├── crypto
-│   ├── firebase
-│   ├── local-authentication
-│   ├── logging
-│   ├── message
-│   ├── react-query
-│   ├── ui
-│   └── validator
-│── features
-│   ├── account
-│   ├── acknowledgements
-│   ├── app-updates
-│   ├── backend
-│   ├── demo-**
-│   ├── sandbox
-│   ├── secure-storage 
-│   └── terms
+│   ├── core
+│   │   ├── configs
+│   │   ├── contexts
+│   │   ├── errors
+│   │   └── utils
+│   ├── crypto
+│   ├── date
+│   ├── firebase
+│   │   └── messaging
+│   ├── focus-manager
+│   ├── local-authentication
+│   ├── logging
+│   ├── message
+│   ├── react-query
+│   ├── ui
+│   │   ├── bottom-sheet
+│   │   ├── button
+│   │   ├── common
+│   │   ├── fab
+│   │   ├── illustration
+│   │   ├── input
+│   │   ├── loading
+│   │   ├── markdown
+│   │   ├── modal
+│   │   ├── overlay
+│   │   ├── picker
+│   │   ├── snackbar
+│   │   ├── spacer
+│   │   ├── tab
+│   │   ├── theme
+│   │   └── webview
+│   └── validator
+├── features
+│   ├── account
+│   │   ├── client-states
+│   │   ├── components
+│   │   ├── errors
+│   │   ├── forms
+│   │   ├── pages
+│   │   ├── services
+│   │   └── types
+│   ├── acknowledgements
+│   │   ├── constants
+│   │   ├── pages
+│   │   ├── services
+│   │   ├── types
+│   │   └── utils
+│   ├── app-updates
+│   │   ├── components
+│   │   ├── services
+│   │   └── use-cases
+│   ├── backend
+│   │   ├── apis
+│   │   ├── errors
+│   │   └── utils
+│   ├── demo-**（※３）
+│   ├── qa-event
+│   │   ├── components
+│   │   └── services
+│   ├── qa-home
+│   │   ├── pages
+│   │   └── services
+│   ├── qa-post
+│   │   └── pages
+│   ├── qa-question
+│   │   ├── components
+│   │   ├── forms
+│   │   ├── pages
+│   │   └── services
+│   ├── sandbox
+│   │   └── apis
+│   ├── secure-storage
+│   │   ├── constants
+│   │   └── services
+│   └── terms
+│       ├── components
+│       ├── services
+│       └── use-cases
 └── fixtures（※４）
+    └── msw
+        ├── datas
+        ├── handlers
+        ├── models
+        └── utils
 ```
 
 （※１）使用しているライブラリで不足している型定義や、自身で作成したNative Modulesの型定義など<br>
-（※２）`app`のみステレオタイプまでディレクトリを記載
-（※３）アプリで使用する画像ファイルやフォントファイルなど
+（※２）アプリで使用する画像ファイルやフォントファイルなど
+（※３）デモ機能は数が多いため割愛
 （※４）API通信のモックデータなど
 
 ## tools
