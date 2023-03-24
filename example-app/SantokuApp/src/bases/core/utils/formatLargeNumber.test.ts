@@ -1,6 +1,6 @@
 import {formatLargeNumber} from './formatLargeNumber';
 
-describe('tryAddPlus', () => {
+describe('formatLargeNumber', () => {
   test('整形された値が取得できるかの検証', () => {
     const maxValue = 999;
     const value = formatLargeNumber(999, maxValue);
