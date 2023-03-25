@@ -41,16 +41,17 @@
 - Config Plugin対応
   - メンテナンス
     - [Config Plugins対応](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/maintenance/enhance/config-plugins)
-  - ビルド
-    - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration)
-    - [環境の切り替え](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/environments-configuration)
-    - [Config Pluginsについて](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/about-plugins)
-    - [Config Pluginsの適用](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/apply-plugins)
-    - [ビルドタイプ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/build-type)
-    - [アプリ特有の設定値](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/app-constants)
-    - [Firebaseの設定ファイル](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/firebase-setting-file)
-    - [ネイティブプロジェクトの管理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/native-project-management)
-    - [環境やビルドタイプに応じたアプリ起動](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/app-launch-per-build-settings)
+  - 開発ガイド
+    - ビルド
+      - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration)
+      - [環境の切り替え](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/environments-configuration)
+      - [Config Pluginsについて](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/about-plugins)
+      - [Config Pluginsの適用](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/apply-plugins)
+      - [ビルドタイプ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/build-type)
+      - [アプリ特有の設定値](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/app-constants)
+      - [Firebaseの設定ファイル](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/firebase-setting-file)
+      - [ネイティブプロジェクトの管理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/native-project-management)
+      - [環境やビルドタイプに応じたアプリ起動](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/app-launch-per-build-settings)
 
 
 #### 🌿 更新コンテンツ（2023/03/31）
@@ -58,7 +59,7 @@
 - Config Plugin対応
   - アプリケーション方式
     - [システム構成](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/system-configuration/overview)
-  - 開発
+  - 開発ガイド
     - 開発環境
       - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment)
       - [基本的なセットアップ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/basic-setup)
