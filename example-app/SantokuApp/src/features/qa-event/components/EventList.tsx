@@ -49,7 +49,7 @@ export const EventList: React.FC<EventListProps> = ({data, containerWidth}) => {
           </Text>
         </StyledTouchableOpacity>
       </Box>
-      <StyledSpace width="p8" />
+      <StyledSpace width="p24" />
     </StyledScrollView>
   );
 };
