@@ -21,13 +21,25 @@ export const EventList: React.FC<EventListProps> = ({data, containerWidth}) => {
   const eventListCardWidth = useMemo(() => containerWidth - theme.spacing.p24 * 2, [containerWidth, theme.spacing.p24]);
   return (
     <StyledScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled>
-      {data?.map(item => (
-        <StyledRow key={item.eventId}>
+      {data?.length === 0 ? (
+        <StyledRow>
           <StyledSpace width="p24" />
-          <EventListCard event={item} containerWidth={eventListCardWidth} />
+          <Box width={eventListCardWidth}>
+            <Text textAlign="center" variant="font14Bold" lineHeight={20} letterSpacing={0.25} color="blue">
+              {m('募集中のイベントはありません')}
+            </Text>
+          </Box>
           <StyledSpace width="p24" />
         </StyledRow>
-      ))}
+      ) : (
+        data?.map(item => (
+          <StyledRow key={item.eventId}>
+            <StyledSpace width="p24" />
+            <EventListCard event={item} containerWidth={eventListCardWidth} />
+            <StyledSpace width="p24" />
+          </StyledRow>
+        ))
+      )}
       <StyledSpace width="p24" />
       <Box width={eventListCardWidth} justifyContent="center" alignItems="center">
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
