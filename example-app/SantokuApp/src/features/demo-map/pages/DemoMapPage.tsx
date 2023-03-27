@@ -47,6 +47,11 @@ export const DemoMapPage: React.FC = () => {
     onSubmit,
   });
 
+  const keyboardType = Platform.select({
+    ios: 'numbers-and-punctuation',
+    android: 'number-pad',
+  } as const);
+
   const [scrollEnable, setScrollEnable] = useState<boolean>(true);
   const [zoomEnabled, setZoomEnabled] = useState<boolean>(true);
   const [rotateEnabled, setRotateEnabled] = useState<boolean>(true);
@@ -90,7 +95,7 @@ export const DemoMapPage: React.FC = () => {
                   value={form.values.latitude}
                   onChangeText={form.handleChange('latitude')}
                   errorMessage={form.errors.latitude}
-                  keyboardType="number-pad"
+                  keyboardType={keyboardType}
                 />
               </View>
             </View>
@@ -104,7 +109,7 @@ export const DemoMapPage: React.FC = () => {
                   value={form.values.longitude}
                   onChangeText={form.handleChange('longitude')}
                   errorMessage={form.errors.longitude}
-                  keyboardType="number-pad"
+                  keyboardType={keyboardType}
                 />
               </View>
             </View>
@@ -118,7 +123,7 @@ export const DemoMapPage: React.FC = () => {
                   value={form.values.latitudeDelta}
                   onChangeText={form.handleChange('latitudeDelta')}
                   errorMessage={form.errors.latitudeDelta}
-                  keyboardType="number-pad"
+                  keyboardType={keyboardType}
                 />
               </View>
             </View>
@@ -132,7 +137,7 @@ export const DemoMapPage: React.FC = () => {
                   value={form.values.longitudeDelta}
                   onChangeText={form.handleChange('longitudeDelta')}
                   errorMessage={form.errors.longitudeDelta}
-                  keyboardType="number-pad"
+                  keyboardType={keyboardType}
                 />
               </View>
             </View>
