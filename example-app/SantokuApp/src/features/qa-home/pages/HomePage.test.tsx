@@ -8,6 +8,7 @@ import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOve
 import {initialData} from 'fixtures/msw/datas';
 import {db, initialDb} from 'fixtures/msw/db';
 import {handlers} from 'fixtures/msw/handlers';
+import {setLoggedInAccountId} from 'fixtures/msw/handlers/account/getLoggedInAccountId';
 import {setupServer} from 'msw/node';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -21,6 +22,7 @@ beforeAll(async () => {
   initialDb();
   await initialData();
   db.loggedInAccount.create({accountId: 'santoku'});
+  setLoggedInAccountId('santoku');
   server.listen();
 });
 afterAll(() => server.close());
