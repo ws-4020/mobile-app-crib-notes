@@ -1,6 +1,6 @@
 import {rest} from 'msw';
 
-import {setLoggedInAccountId} from './getLoggedInAccountId';
+import {setLoggedInAccountId} from './setLoggedInAccountId';
 import {backendUrl} from '../../utils/backendUrl';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';

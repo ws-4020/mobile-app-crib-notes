@@ -1,3 +1,5 @@
+import {accountId} from './setLoggedInAccountId';
+
 export const getLoggedInAccountId = () => {
   if (!accountId) {
     throw new LoggedInAccountIdNotFound('Logged in account not found.');
@@ -10,9 +12,3 @@ export class LoggedInAccountIdNotFound extends Error {}
 export function isLoggedInAccountIdNotFound(error: unknown): error is LoggedInAccountIdNotFound {
   return error instanceof LoggedInAccountIdNotFound;
 }
-
-let accountId: string;
-
-export const setLoggedInAccountId = (id: string) => {
-  accountId = id;
-};
