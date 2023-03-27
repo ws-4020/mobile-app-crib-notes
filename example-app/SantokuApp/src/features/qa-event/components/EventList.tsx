@@ -21,7 +21,7 @@ export const EventList: React.FC<EventListProps> = ({data, containerWidth}) => {
   const eventListCardWidth = useMemo(() => containerWidth - theme.spacing.p24 * 2, [containerWidth, theme.spacing.p24]);
   return (
     <StyledScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled>
-      {data?.length === 0 ? (
+      {!data?.length ? (
         <StyledRow>
           <StyledSpace width="p24" />
           <Box width={eventListCardWidth}>
