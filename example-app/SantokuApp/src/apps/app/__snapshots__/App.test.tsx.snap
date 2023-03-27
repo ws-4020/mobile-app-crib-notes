@@ -842,6 +842,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                                 </ForwardRef>
                                                               </ForwardRef>
                                                               <EventList
+                                                                containerWidth={0}
                                                                 data={
                                                                   Array [
                                                                     Object {
@@ -1279,7 +1280,7 @@ React Native 0.66
                                                                             },
                                                                             "shadowOpacity": 0.1,
                                                                             "shadowRadius": 0,
-                                                                            "width": 272,
+                                                                            "width": -48,
                                                                           },
                                                                         ]
                                                                       }
@@ -1579,7 +1580,7 @@ React Native 0.66
                                                                             },
                                                                             "shadowOpacity": 0.1,
                                                                             "shadowRadius": 0,
-                                                                            "width": 272,
+                                                                            "width": -48,
                                                                           },
                                                                         ]
                                                                       }
@@ -1858,7 +1859,7 @@ React Native 0.66
                                                                         Object {
                                                                           "alignItems": "center",
                                                                           "justifyContent": "center",
-                                                                          "width": 272,
+                                                                          "width": -48,
                                                                         },
                                                                       ]
                                                                     }
