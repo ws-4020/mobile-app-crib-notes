@@ -38,7 +38,7 @@
 
 #### 🌱 新規コンテンツ（2023/03/31）
 
-- Config Plugin対応
+- Config Plugins対応
   - メンテナンス
     - [Config Plugins対応](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/maintenance/enhance/config-plugins)
   - 開発ガイド
