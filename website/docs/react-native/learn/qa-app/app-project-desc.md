@@ -477,11 +477,13 @@ export const AppWithMsw = () => {
 ```
 
 ```typescript title="src/fixtures/msw/datas/loggedInAccountData.ts"
-import {db} from "../db";
+import {db} from '../db';
+import {setLoggedInAccountId} from '../handlers/account/getLoggedInAccountId';
 
 export const loggedInAccountData = () => {
   db.loggedInAccount.create({accountId: 'santoku'});
-}
+  setLoggedInAccountId('santoku');
+};
 ```
 
 次に、以下のファイルを修正します。
