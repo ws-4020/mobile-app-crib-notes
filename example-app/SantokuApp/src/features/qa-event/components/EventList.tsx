@@ -24,7 +24,7 @@ export const EventList: React.FC<EventListProps> = ({data, containerWidth}) => {
       {!data?.length ? (
         <StyledRow>
           <StyledSpace width="p24" />
-          <Box width={eventListCardWidth}>
+          <Box width={eventListCardWidth} py="p24">
             <Text textAlign="center" variant="font14Bold" lineHeight={20} letterSpacing={0.25} color="blue">
               {m('募集中のイベントはありません')}
             </Text>
