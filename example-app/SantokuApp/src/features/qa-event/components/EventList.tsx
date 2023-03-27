@@ -8,7 +8,6 @@ import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import {Event} from 'features/backend/apis/model';
 import React, {useMemo} from 'react';
 import {Platform} from 'react-native';
-import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
 import {EventListCard} from './EventListCard';
 
@@ -20,13 +19,12 @@ export type EventListProps = {
 
 export const EventList: React.FC<EventListProps> = ({data, containerWidth}) => {
   const theme = useTheme<RestyleTheme>();
-  const {width: windowWidth} = useSafeAreaFrame();
   const eventListCardWidth = useMemo(() => containerWidth - theme.spacing.p24 * 2, [containerWidth, theme.spacing.p24]);
   return (
     <StyledScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      snapToInterval={Platform.select({ios: windowWidth - 32})}
+      snapToInterval={Platform.select({ios: containerWidth - 32})}
       snapToAlignment={Platform.select({android: 'center'})}
       pagingEnabled={Platform.select({android: true})}
       decelerationRate="fast">
