@@ -72,7 +72,7 @@ export const DemoMapPage: React.FC = () => {
             <SpecAndSourceCodeLink feature="map" />
             <Text>
               {`
-地図コンポーネントのオプションを変更し、表示や操作を確認できます。
+地図を表示します。オプションを変更し、表示や操作を確認できます。
         `}
             </Text>
             <Spacer heightRatio={0.03} />
@@ -195,7 +195,7 @@ export const DemoMapPage: React.FC = () => {
             <View style={styles.toggleConfigContainer}>
               <View>
                 <Text>pitchEnabled</Text>
-                <Text>俯瞰視点の角度変更を許可</Text>
+                <Text>視点の角度変更を許可</Text>
               </View>
               <View>
                 <ToggleButton isPressed={pitchEnabled} setIsPressed={setPitchEnabled} />
