@@ -56,7 +56,7 @@
 
 - テストエンジニアとの協業
   - テスト計画
-    - [テストエンジニアとの協業](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/test-planning/collaboration-with-test-engineers)
+    - [QA専門ベンダーとの協業](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/test-planning/collaboration-with-qa-vendors)
 
 #### 🌿 更新コンテンツ（2023/03/31）
 
