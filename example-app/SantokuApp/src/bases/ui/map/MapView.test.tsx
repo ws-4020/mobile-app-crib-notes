@@ -8,7 +8,7 @@ import {MapView, MapViewProps} from './MapView';
 describe('MapView without props', () => {
   // 必須のPropsはないためPropsなしでレンダリングをテストする
   it('renders successfully without props', () => {
-    render(<MapView />);
+    render(<MapView testID="MapView" />);
     const mapView = screen.queryByTestId('MapView');
     expect(mapView).not.toBeNull();
     expect(screen).toMatchSnapshot();
@@ -18,7 +18,7 @@ describe('MapView without props', () => {
 describe('MapView with required props for display', () => {
   // 画面上に地図を表示できる最低限のPropsでレンダリングをテストする
   it('renders successfully with props for display', () => {
-    render(<MapView style={{height: 300, width: 300}} />);
+    render(<MapView style={{height: 300, width: 300}} testID="MapView" />);
     const mapView = screen.queryByTestId('MapView');
     expect(mapView).not.toBeNull();
     expect(screen).toMatchSnapshot();
@@ -29,7 +29,7 @@ describe('MapView with fixed props', () => {
   // 共通部品として値を指定したPropsを確認する
   it('should be fixed properly', () => {
     // PROVIDERがnullになっているか確認
-    render(<MapView style={{height: 300, width: 300}} />);
+    render(<MapView style={{height: 300, width: 300}} testID="MapView" />);
     const mapView = screen.getByTestId('MapView');
     const mapViewProps = mapView.props as RNMMapViewProps;
     expect(mapViewProps.provider).toEqual(null);
@@ -288,6 +288,7 @@ describe('MapView with committed props', () => {
             ],
           },
         ]}
+        testID="MapView"
       />,
     );
     const mapView = screen.getByTestId('MapView');

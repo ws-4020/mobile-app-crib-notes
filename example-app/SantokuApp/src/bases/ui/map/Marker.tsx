@@ -5,5 +5,5 @@ import {Marker as RNMMarker, MarkerProps as RNMMarkerProps} from 'react-native-m
 export type MarkerProps = Omit<RNMMarkerProps, 'tappable' | 'tracksInfoWindowChanges'>;
 
 export const Marker: React.FC<MarkerProps> = (props: MarkerProps) => {
-  return <RNMMarker {...props} testID="Marker" />;
+  return <RNMMarker {...props} />;
 };
