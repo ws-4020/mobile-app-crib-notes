@@ -11,7 +11,7 @@ export function isLoggedInAccountIdNotFound(error: unknown): error is LoggedInAc
   return error instanceof LoggedInAccountIdNotFound;
 }
 
-export let accountId: string;
+let accountId: string;
 
 export const setLoggedInAccountId = (id: string) => {
   accountId = id;
