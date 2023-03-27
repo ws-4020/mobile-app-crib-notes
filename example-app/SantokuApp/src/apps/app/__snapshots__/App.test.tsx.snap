@@ -1237,7 +1237,7 @@ React Native 0.66
                                                                 decelerationRate="fast"
                                                                 horizontal={true}
                                                                 showsHorizontalScrollIndicator={false}
-                                                                snapToInterval={288}
+                                                                snapToInterval={-32}
                                                                 style={
                                                                   Array [
                                                                     Object {},
