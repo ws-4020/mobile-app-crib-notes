@@ -63,7 +63,7 @@ GoogleマップAPIを使用するためのAPIキーが必要になります
 
 Googleマップを使用する場合は、以下を参考にAPIキーを取得してください。
 
-- [Google Map Platform API キーを使用する（Android）| Google Maps Platform](https://developers.google.com/maps/documentation/android-sdk/get-api-key?hl=ja)
+- [APIキーを使用する | Map SDK for Android | Google Developers](https://developers.google.com/maps/documentation/android-sdk/get-api-key?hl=ja)
 
 `app.config.js`のダミーのAPIキーを取得したキーに置き換えてください。
 
@@ -84,12 +84,12 @@ module.exports = ({config}) => {
 /* ～省略～ */
 ```
 
-- [Google Maps API key in app.json / app.config.js (Android) | Expo](https://docs.expo.dev/versions/latest/config/app/#googlemaps)
+- [app.json / app.config.js - Expo Documentation](https://docs.expo.dev/versions/latest/config/app/#googlemaps)
 
 ### iOSでGoogleマップを使用するときの注意点
 
 地図表示の共通部品ではiOSでGoogleマップを使うことはできない仕様になっています。
-iOSでGoogleマップを使用する場合、共通部品は使用せずライブラリから直接コンポーネントをインポートしてください。
+iOSでGoogleマップを使用する場合、共通部品は使用せずライブラリからコンポーネントをインポートしてください。
 さらに、設定ファイルの変更が必要になります。
 
 Santokuアプリではfirebaseを使用しているため、useFrameworksで静的リンクを明示的に指定しています。
@@ -99,10 +99,10 @@ Santokuアプリではfirebaseを使用しているため、useFrameworksで静�
 しかしreact-native-mapsの0.3系はuseFrameworksに対応していません。
 iOSでGoogleマップを使用する設定でビルドしたとき依存関係にあるファイルが見つからないというエラーが発生します。
 
-- ['RCTConvert+AirMap.h' file not found | GitHub](https://github.com/react-native-maps/react-native-maps/issues/3597)
+- ['RCTConvert+AirMap.h' file not found・Issues #3597 | GitHub](https://github.com/react-native-maps/react-native-maps/issues/3597)
 - [use_frameworks! issues with react-native-maps RN 0.69.3 | GitHub](https://github.com/react-native-maps/react-native-maps/discussions/4389)
 
-そのため['RCTConvert+AirMap.h' file not found | GitHub](https://github.com/react-native-maps/react-native-maps/issues/3597)を参考にして、`Podfile`に以下を追記してください。
+そのため['RCTConvert+AirMap.h' file not found・Issues #3597 | GitHub](https://github.com/react-native-maps/react-native-maps/issues/3597)を参考にして、`Podfile`に以下を追記してください。
 
 ```Ruby
   # https://github.com/react-native-maps/react-native-maps/issues/3597
