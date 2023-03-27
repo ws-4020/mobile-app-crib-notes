@@ -450,6 +450,7 @@ export const App = () => {
 | 追加ファイル |
 |--|
 | src/apps/app/AppWithMsw.tsx |
+| src/fixtures/msw/datas/loggedInAccountData.ts |
 
 ```typescript jsx title="src/apps/app/AppWithMsw.tsx"
 import {initialMsw} from 'fixtures/msw';
@@ -475,6 +476,14 @@ export const AppWithMsw = () => {
 };
 ```
 
+```typescript title="src/fixtures/msw/datas/loggedInAccountData.ts"
+import {db} from "../db";
+
+export const loggedInAccountData = () => {
+  db.loggedInAccount.create({accountId: 'santoku'});
+}
+```
+
 次に、以下のファイルを修正します。
 
 - `src/fixtures/msw/utils/backendUrl.ts`
@@ -497,6 +506,23 @@ export const AppWithMsw = () => {
 -   db.terms.create({id: '1', url: AppConfig.termsUrl, version: '0.1.0'});
 +   db.terms.create({id: '1', url: 'http://localhost:9090/terms', version: '0.1.0'});
   };
+```
+
+```typescript title="src/fixtures/msw/datas/index.ts"
+  /* ～省略～ */
+  import {eventLikeMaxData} from './eventLikeMaxData';
+  import {eventMaxData} from './eventMaxData';
++ import {loggedInAccountData} from './loggedInAccountData';
+  import {notificationData} from './notificationData';
+  import {notificationMaxData} from './notificationMaxData';
+  /* ～省略～ */
+
+  export const initialData = async () => {
++   loggedInAccountData();
+    accountData();
+    accountMaxData();
+    accountMinData();
+  /* ～省略～ */  
 ```
 
 最後に、`index.js`を以下のように修正してください。

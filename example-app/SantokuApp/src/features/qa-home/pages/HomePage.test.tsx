@@ -6,7 +6,7 @@ import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {AppThemeProvider} from 'bases/ui/theme/AppThemeProvider';
 import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOverlay';
 import {initialData} from 'fixtures/msw/datas';
-import {initialDb} from 'fixtures/msw/db';
+import {db, initialDb} from 'fixtures/msw/db';
 import {handlers} from 'fixtures/msw/handlers';
 import {setupServer} from 'msw/node';
 import React from 'react';
@@ -20,6 +20,7 @@ beforeAll(async () => {
   await loadMessages(new BundledMessagesLoader());
   initialDb();
   await initialData();
+  db.loggedInAccount.create({accountId: 'santoku'});
   server.listen();
 });
 afterAll(() => server.close());

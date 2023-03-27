@@ -1,9 +1,10 @@
 import {rest} from 'msw';
 
 import {backendUrl} from '../../utils/backendUrl';
-import {getDb} from '../../utils/dbManager';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
+import {getDb} from '../../utils/getDb';
+import {getLoggedInAccountId} from '../account/getLoggedInAccountId';
 
 export const getQuestions = rest.get(`${backendUrl}/questions`, (req, res, ctx) => {
   try {
@@ -11,7 +12,8 @@ export const getQuestions = rest.get(`${backendUrl}/questions`, (req, res, ctx) 
     const sort = req.url.searchParams.get('sort');
     const filter = req.url.searchParams.get('filter');
     const tag = req.url.searchParams.get('tag');
-    const db = getDb();
+    const accountId = getLoggedInAccountId();
+    const db = getDb(accountId);
     let questions = db.question.findMany({orderBy: {datetime: 'desc'}});
     const tags = db.tag.getAll();
     if (keyword) {

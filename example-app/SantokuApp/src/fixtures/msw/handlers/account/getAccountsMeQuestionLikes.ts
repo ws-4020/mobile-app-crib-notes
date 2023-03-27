@@ -1,17 +1,19 @@
 import {LikedQuestionResponse} from 'features/backend/apis/model';
 import {rest} from 'msw';
 
+import {getLoggedInAccountId} from './getLoggedInAccountId';
 import {backendUrl} from '../../utils/backendUrl';
-import {accountId, getDb} from '../../utils/dbManager';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
+import {getDb} from '../../utils/getDb';
 
 export const getAccountsMeQuestionLikes = rest.get(
   `${backendUrl}/accounts/me/likes/questions/:questionId`,
   (req, res, ctx) => {
     try {
+      const accountId = getLoggedInAccountId();
       const questionId = String(req.params.questionId);
-      const db = getDb();
+      const db = getDb(accountId);
 
       const questionLike = db.questionLike.findFirst({
         where: {accountId: {equals: accountId}, questionId: {equals: questionId}},

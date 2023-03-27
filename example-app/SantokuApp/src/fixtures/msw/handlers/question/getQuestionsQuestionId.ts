@@ -1,14 +1,16 @@
 import {rest} from 'msw';
 
 import {backendUrl} from '../../utils/backendUrl';
-import {getDb} from '../../utils/dbManager';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
+import {getDb} from '../../utils/getDb';
+import {getLoggedInAccountId} from '../account/getLoggedInAccountId';
 
 export const getQuestionsQuestionId = rest.get(`${backendUrl}/questions/:questionId`, (req, res, ctx) => {
   try {
+    const accountId = getLoggedInAccountId();
     const questionId = String(req.params.questionId);
-    const db = getDb();
+    const db = getDb(accountId);
     const question = db.question.findFirst({where: {questionId: {equals: questionId}}});
     const commentList = db.questionComment.findMany({where: {questionId: {equals: questionId}}});
     const tags = db.tag.getAll();

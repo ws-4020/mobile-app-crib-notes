@@ -2,14 +2,16 @@ import {EventContent, EventRegistration} from 'features/backend/apis/model';
 import {rest} from 'msw';
 
 import {backendUrl} from '../../utils/backendUrl';
-import {accountId, getDb} from '../../utils/dbManager';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
+import {getDb} from '../../utils/getDb';
+import {getLoggedInAccountId} from '../account/getLoggedInAccountId';
 
 export const postEvents = rest.post(`${backendUrl}/events`, async (req, res, ctx) => {
   try {
+    const accountId = getLoggedInAccountId();
     const {title, content, endDate} = await req.json<EventRegistration>();
-    const db = getDb();
+    const db = getDb(accountId);
     const account = db.account.findFirst({where: {accountId: {equals: accountId}}});
     if (!account) {
       return delayedResponse(ctx.status(401));
