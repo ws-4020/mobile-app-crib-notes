@@ -1,3 +1,4 @@
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {Box, Text} from 'bases/ui/common';
 import {StyledImage} from 'bases/ui/common/StyledImage';
 import {StyledRow} from 'bases/ui/common/StyledRow';
@@ -43,9 +44,11 @@ export const EventListCard: FC<EventListCardProps> = ({event: {title, likes, pro
             {profile?.nickname}
           </Text>
           <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-            <Text variant="font14Regular" lineHeight={20} letterSpacing={0.25}>
-              {profile?.points}/{profile?.totalPoints}
-            </Text>
+            {profile && (
+              <Text variant="font14Regular" lineHeight={20} letterSpacing={0.25}>
+                {formatLargeNumber(profile.points, 999)}/{formatLargeNumber(profile.totalPoints, 999)}
+              </Text>
+            )}
           </Box>
         </Box>
         <StyledSpace width="p16" />
