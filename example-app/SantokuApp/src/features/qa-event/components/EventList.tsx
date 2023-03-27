@@ -19,7 +19,12 @@ export type EventListProps = {
 
 export const EventList: React.FC<EventListProps> = ({data, containerWidth}) => {
   const theme = useTheme<RestyleTheme>();
-  const eventListCardWidth = useMemo(() => containerWidth - theme.spacing.p24 * 2, [containerWidth, theme.spacing.p24]);
+  const eventListCardWidth = useMemo(() => {
+    // カード幅は、画面幅からカードのはみ出し部分とカード間の余白を引いた値である。
+    // カードのはみ出し部は8px、カード間の余白は16pxであり、それぞれカードの左右に存在することを考慮すると
+    // カード幅の算出式は以下のようになる。
+    return containerWidth - (theme.spacing.p8 + theme.spacing.p16) * 2;
+  }, [containerWidth, theme.spacing.p16, theme.spacing.p8]);
   return (
     <StyledScrollView
       horizontal
