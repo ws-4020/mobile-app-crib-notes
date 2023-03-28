@@ -9,6 +9,7 @@ exports[`MapView with required props for display renders successfully with props
   onMarkerPress={[Function]}
   provider={null}
   region={null}
+  showsUserLocation={false}
   style={
     Object {
       "height": 300,
@@ -28,6 +29,7 @@ exports[`MapView without props renders successfully without props 1`] = `
   onMarkerPress={[Function]}
   provider={null}
   region={null}
+  showsUserLocation={false}
   testID="MapView"
 />
 `;
