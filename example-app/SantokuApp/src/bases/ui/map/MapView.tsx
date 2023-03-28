@@ -11,5 +11,5 @@ export type MapViewProps = Omit<RNMMapViewProps, 'provider' | 'paddingAdjustment
 export interface MapViewRef extends RNMMapView {}
 
 export const MapView = forwardRef<RNMMapView, MapViewProps>(function MapView(props, ref) {
-  return <RNMMapView provider={provider} {...props} ref={ref}  />;
+  return <RNMMapView provider={provider} {...props} ref={ref} />;
 });
