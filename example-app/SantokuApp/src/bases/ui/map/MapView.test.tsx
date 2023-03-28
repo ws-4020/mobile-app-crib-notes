@@ -37,7 +37,7 @@ describe('MapView with fixed props', () => {
 });
 
 describe('MapView with committed props', () => {
-  // コンポーネント実装で指定できるPropsを確認する
+  // 共通部品作成でOmitしなかったPropsから型違いでピックアップし確認する
   it('should be applied properly', () => {
     render(
       <MapView
@@ -294,16 +294,16 @@ describe('MapView with committed props', () => {
     const mapView = screen.getByTestId('MapView');
     const mapViewProps = mapView.props as MapViewProps;
 
-    // 元から存在するPropsが指定できるか確認（オブジェクト）
+    // Propsが指定できるか確認（オブジェクト）
     expect(mapViewProps.region).toEqual({
       latitude: 34.7024898,
       longitude: 135.494,
       latitudeDelta: 0.005,
       longitudeDelta: 0.002,
     });
-    // 元から存在するPropsが指定できるか確認（プリミティブ型）
+    // Propsが指定できるか確認（プリミティブ型）
     expect(mapViewProps.scrollEnabled).toEqual(false);
-    // 元から存在するPropsが指定できるか確認（配列）
+    // Propsが指定できるか確認（配列）
     expect(mapViewProps.customMapStyle).toEqual([
       {
         elementType: 'geometry',
