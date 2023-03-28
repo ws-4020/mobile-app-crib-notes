@@ -34,7 +34,15 @@ export const EventList: React.FC<EventListProps> = ({data, containerWidth}) => {
       pagingEnabled={Platform.select({android: true})}
       decelerationRate="fast">
       <StyledSpace width="p16" />
-      {!data?.length ? (
+      {data?.length ? (
+        data?.map(item => (
+          <StyledRow key={item.eventId}>
+            <StyledSpace width="p8" />
+            <EventListCard event={item} containerWidth={eventListCardWidth} />
+            <StyledSpace width="p8" />
+          </StyledRow>
+        ))
+      ) : (
         <StyledRow>
           <StyledSpace width="p8" />
           <Box width={eventListCardWidth} py="p24">
@@ -44,14 +52,6 @@ export const EventList: React.FC<EventListProps> = ({data, containerWidth}) => {
           </Box>
           <StyledSpace width="p8" />
         </StyledRow>
-      ) : (
-        data?.map(item => (
-          <StyledRow key={item.eventId}>
-            <StyledSpace width="p8" />
-            <EventListCard event={item} containerWidth={eventListCardWidth} />
-            <StyledSpace width="p8" />
-          </StyledRow>
-        ))
       )}
       <StyledSpace width="p8" />
       <Box width={eventListCardWidth} justifyContent="center" alignItems="center">
