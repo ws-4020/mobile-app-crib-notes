@@ -5,16 +5,6 @@ title: 開発環境の構築
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-:::danger
-`react-native-cli`がインストールされている場合は、**必ずアンインストールしてください**。`react-native-cli`は不要になっていますが、古い記事を参照してインストールしてしまい、このコンテンツをすすめる中でトラブルを引き起こすケースがしばしば見られます。
-
-`npm run ios`や`npm run android`でエラーが出るときは、まず`react-native-cli`がインストールされて**いない**ことを確認してください。
-
-* コマンドラインで`react-native --version`を実行して、コマンドが見つからないというエラーが発生することを確認する。
-* コマンドが実行できてしまう場合は、`npm uninstall -g react-native-cli`を実行し、`react-native-cli`をアンインストールする。
-* 最終的に、コマンドラインで`react-native --version`を実行して、コマンドが見つからないというエラーが発生するようになったことを確認する。
-:::
-
 ## インストールするツール
 
 以下のツールは、React Nativeでのアプリ開発に必要となるので、必ずインストールしてください。XcodeとAndroid Studio以外のツールは、[Homebrew (macOS)](https://brew.sh/)や[Scoop (Windows)](https://scoop.sh/)などを利用してインストールすることをおすすめします。
