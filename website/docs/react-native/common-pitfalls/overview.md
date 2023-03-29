@@ -18,10 +18,6 @@ const overviews = [
     to: '/react-native/common-pitfalls/debug-keystore-not-found',
   },
   {
-    title: 'react-native-cliについて',
-    to: '/react-native/common-pitfalls/react-native-cli-uninstall',
-  },
-  {
     title: 'Xcodeでビルドが失敗する',
     to: '/react-native/common-pitfalls/cant-build-in-xcode',
   }
