@@ -17,7 +17,7 @@ import {initialRegion} from '../constants/initialRegion';
 import {RegionFormValues, useRegionForm} from '../form/RegionForm';
 
 export const DemoMapPage: React.FC = () => {
-  // TODO [OptOut]マーカーを追加するフォーム（緯度、経度、タイトル、説明、dragable）
+  // TODO マーカーを追加するフォーム（緯度、経度、タイトル、説明、dragableを入力させる）
 
   // 現時点でsetMarkerListを使っていないが、後でマーカーを画面から追加できるようにするためにマーカーの配列をstate管理する。
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -81,7 +81,7 @@ export const DemoMapPage: React.FC = () => {
         `}
             </Text>
             <Spacer heightRatio={0.03} />
-            <Text h4>表示する領域の変更</Text>
+            <Text h4>表示領域の変更</Text>
             <Spacer heightRatio={0.01} />
             <Text>表示領域を変更できます。</Text>
             <Spacer heightRatio={0.03} />
