@@ -15,7 +15,7 @@ describe('Marker only with required props', () => {
 });
 
 describe('Marker with committed props', () => {
-  // コンポーネント実装で指定できるPropsを確認する
+  // 共通部品作成でOmitしなかったPropsから型違いでピックアップし確認する
   it('should be applied properly', () => {
     const img = beginnerMarkImageSource as number;
     render(
@@ -34,14 +34,14 @@ describe('Marker with committed props', () => {
 
     const markerProps = marker.props as MarkerProps;
 
-    // 元から存在するPropsが指定できるか確認（オブジェクト）
+    // Propsが指定できるか確認（オブジェクト）
     expect(markerProps.coordinate).toEqual({
       latitude: 34.7024898,
       longitude: 135.494,
     });
-    // 元から存在するPropsが指定できるか確認（プリミティブ型）
+    // Propsが指定できるか確認（プリミティブ型）
     expect(markerProps.draggable).toEqual(true);
-    // 元から存在するPropsが指定できるか確認（画像）
+    // Propsが指定できるか確認（画像）
     expect(markerProps.image).toEqual(img);
     // 配列で指定するPropsはないためテストしない
 
