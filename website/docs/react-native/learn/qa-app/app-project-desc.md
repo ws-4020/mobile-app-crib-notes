@@ -47,7 +47,7 @@ expo install <package-name>
 `devDependencies`に追加する場合は、`-D`または`--save-dev`オプションをつけてコマンドを実行してください。
 
 ```bash
-npm install -D <package-name>
+npx expo install <package-name> -- --D
 ```
 
 iOSアプリを開発をする場合は、macOSで次のコマンドを実行して必要なライブラリをインストールしてください。
