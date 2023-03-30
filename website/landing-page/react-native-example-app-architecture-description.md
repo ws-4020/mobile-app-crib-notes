@@ -60,7 +60,7 @@
 
 #### 🌿 更新コンテンツ（2023/03/31）
 
-- Config Plugin対応
+- Config Plugins対応
   - アプリケーション方式
     - [システム構成](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/system-configuration/overview)
   - 開発ガイド
