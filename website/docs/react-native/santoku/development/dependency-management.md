@@ -24,7 +24,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 一方で、`npm install <package-name>`でインストールするだけでは正しいバージョンでインストールされない可能性があるということに注意してください。
 
 依存パッケージを`dependencies`に追加する場合は、必ず`npx expo install`でインストールしてください。
-依存パッケージを`npx expo install`で`devDependencies`に追加しようとすると、`devDependencies`ではなく`dependencies`に追加されてしまいます。
+依存パッケージを`npx expo install`で`devDependencies`に追加しようとすると、`dependencies`に追加されてしまいます。
 そのため、依存パッケージを`devDependencies`に追加する場合のみ`npm install -D`でインストールする必要があります。
 
 ### Renovateの設定を追加
