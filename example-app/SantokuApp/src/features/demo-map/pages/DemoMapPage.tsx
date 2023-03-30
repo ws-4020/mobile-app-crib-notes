@@ -26,6 +26,7 @@ export const DemoMapPage: React.FC = () => {
   const [region, setRegion] = useState<Region>(initialRegion);
 
   const [mapType, setMapType] = useState<MapTypes>('standard');
+  const [showBuildings, setShowBuildings] = useState<boolean>(true);
 
   const onSubmit = useCallback(
     (values: RegionFormValues) =>
@@ -162,6 +163,16 @@ export const DemoMapPage: React.FC = () => {
                 <MapTypePicker mapType={mapType} setMapType={setMapType} />
               </View>
             </View>
+            <Spacer heightRatio={0.02} />
+            <View style={styles.toggleConfigContainer}>
+              <View>
+                <Text>showBuilding</Text>
+                <Text>建物の輪郭を表示</Text>
+              </View>
+              <View>
+                <ToggleButton isPressed={showBuildings} setIsPressed={setShowBuildings} />
+              </View>
+            </View>
             <Spacer heightRatio={0.05} />
             <Text h4>画面操作の制限</Text>
             <Spacer heightRatio={0.01} />
@@ -214,10 +225,14 @@ export const DemoMapPage: React.FC = () => {
         <MapView
           ref={mapViewRef}
           initialRegion={initialRegion}
+          // initialRegionは初期レンダリングのみ参照されるので
+          // デモ画面から他のPropsを変更しても地図に表示される場所が変わらない。
+          // 一方でregionに位置情報を渡しておくとレンダリングのたびに参照される。
+          mapType={mapType}
+          showsBuildings={showBuildings}
           scrollEnabled={scrollEnable}
           zoomEnabled={zoomEnabled}
           rotateEnabled={rotateEnabled}
-          mapType={mapType}
           pitchEnabled={pitchEnabled}
           style={styles.map}>
           {markerList.map((item, index) => (
@@ -256,4 +271,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  notice: {color: 'red'},
 });
