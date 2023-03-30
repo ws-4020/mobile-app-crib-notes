@@ -8,8 +8,9 @@ title: 依存パッケージの管理
 
 次の2つのコマンドをセットで実行してください。
 
-* `expo install <package-name>`
-  * `devDependencies`に追加する場合は、`npm install -D <package-name>`
+* `npx expo install <package-name>`
+  * 依存パッケージを`devDependencies`に追加する場合は、`npm install -D`
+  * 依存パッケージ以外を`devDependencies`に追加する場合は、`npx expo install <package-name> -- --D`
 * `npm run pod-install`
 
 :::info
@@ -18,11 +19,13 @@ macOSでないと`pod-install`は実行できないので、依存ライブラ�
 ただし、Podを利用していないとわかっているライブラリを追加するのであれば、macOSでなくても問題ありません。
 :::
 
-ExpoはReactなど一部の依存パッケージについて、利用できるバージョンを管理しています。そういったライブラリについては、個別に自分たちで依存ライブラリのバージョンを管理する必要はありません。`expo install`でインストールすれば、適切なバージョンがインストールされます。
+ExpoはReactなど一部の依存パッケージについて、利用できるバージョンを管理しています。そういったライブラリについては、個別に自分たちで依存ライブラリのバージョンを管理する必要はありません。`npx expo install`でインストールすれば、適切なバージョンがインストールされます。
 
 一方で、`npm install <package-name>`でインストールするだけでは正しいバージョンでインストールされない可能性があるということに注意してください。
 
-依存パッケージを`dependencies`に追加する場合は、**必ず`expo install`で**インストールしてください。`devDependencies`に追加する場合は、`npm install -D`でインストールする必要があります。
+依存パッケージを`dependencies`に追加する場合は、必ず`npx expo install`でインストールしてください。
+依存パッケージを`npx expo install <package-name> -- --D`で`devDependencies`に追加しようとすると、`devDependencies`ではなく`dependencies`に追加されてしまいます。
+そのため、依存パッケージに関しては`npm install -D`でインストールする必要があります。
 
 ### Renovateの設定を追加
 
