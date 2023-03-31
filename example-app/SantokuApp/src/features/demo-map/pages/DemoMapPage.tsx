@@ -173,6 +173,8 @@ export const DemoMapPage: React.FC = () => {
                 <ToggleButton isPressed={showBuildings} setIsPressed={setShowBuildings} />
               </View>
             </View>
+            <Spacer heightRatio={0.02} />
+            <Text style={styles.notice}>建物の輪郭表示の切り替えが確認できたのは、iOSのバージョン15以下だけです。</Text>
             <Spacer heightRatio={0.05} />
             <Text h4>画面操作の制限</Text>
             <Spacer heightRatio={0.01} />
