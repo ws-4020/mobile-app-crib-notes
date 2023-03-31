@@ -9,7 +9,7 @@ title: 依存パッケージの管理
 次の2つのコマンドをセットで実行してください。
 
 * `npx expo install <package-name>`
-  * `devDependencies`に追加する場合は、`npx expo install <package-name> -- --D`
+  * `devDependencies`に追加する場合は、`npx expo install <package-name> -- -D`
   * 上の方法で`dependencies`に追加されてしまった場合は、該当パッケージを`package.json`の`dependencies`から`devDependencies`へ移動する。その後、`npm install`
 * `npm run pod-install`
 
