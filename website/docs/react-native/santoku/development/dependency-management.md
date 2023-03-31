@@ -10,7 +10,7 @@ title: 依存パッケージの管理
 
 * `npx expo install <package-name>`
   * `devDependencies`に追加する場合は、`npx expo install <package-name> -- --D`
-  * 上の方法で`dependencies`に追加される場合は、`npm install -D <package-name>`
+  * 上の方法で`dependencies`に追加されてしまった場合は、該当パッケージを`package.json`の`dependencies`から`devDependencies`へ移動する。その後、`npm install`
 * `npm run pod-install`
 
 :::info
@@ -24,8 +24,8 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 一方で、`npm install <package-name>`でインストールするだけでは正しいバージョンでインストールされない可能性があるということに注意してください。
 
 依存パッケージを`dependencies`に追加する場合は、必ず`npx expo install`でインストールしてください。
-`npx expo install`でExpo SDKと互換性のある依存パッケージを`devDependencies`に追加しようとすると、`dependencies`に追加されてしまいます。
-そういったライブラリを`devDependencies`に追加する場合のみ`npm install -D`でインストールする必要があります。
+ただし、Expo SDKと互換性のある依存パッケージを`devDependencies`に追加しようとすると、`dependencies`に追加されてしまいます。
+その場合、依存パッケージを`package.json`の`dependencies`から`devDependencies`へ移動してください。その後、`npm install`で`package-lock.json`を更新する必要があります。
 
 ### Renovateの設定を追加
 
