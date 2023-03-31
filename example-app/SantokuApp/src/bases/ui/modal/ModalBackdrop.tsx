@@ -61,7 +61,7 @@ export const ModalBackdrop: React.FC<React.PropsWithChildren<ModalBackdropProps>
       visible
       statusBarTranslucent
       animationType="fade"
-      supportedOrientations={["portrait","landscape"]}
+      supportedOrientations={['portrait', 'landscape']}
       transparent
       // 戻るボタンが押されたとき（onRequestClose）は、背景がタップされたときと同じ振る舞いになるようにしておく。
       onRequestClose={onPress}
