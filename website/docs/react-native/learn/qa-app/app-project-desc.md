@@ -45,6 +45,7 @@ expo install <package-name>
 ```
 
 `devDependencies`に追加する場合は、`-D`または`--save-dev`オプションをつけてコマンドを実行してください。
+今回使用するライブラリで該当するものはありませんが、Expo SDKと互換性のある依存パッケージを`devDependencies`に追加しようとすると、`dependencies`に追加されてしまいます。詳細は、[依存パッケージの追加](/react-native/santoku/development/dependency-management#依存パッケージの追加)を参考にしてください。
 
 ```bash
 npx expo install <package-name> -- --D
