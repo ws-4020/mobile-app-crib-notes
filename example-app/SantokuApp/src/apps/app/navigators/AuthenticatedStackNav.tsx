@@ -67,7 +67,7 @@ const Component: React.FC<Props> = ({initialData}) => {
         component={QuestionAndEventPostStackNav}
         /*
          presentationに「modal」「transparentModal」「containedModal」「containedTransparentModal」「formSheet」を指定した場合は、
-         端末の向きを変更（横画面⇔縦画面）しても画面の向きは変わりません。
+         端末の向きを変更（横画面⇔縦画面）しても画面の向きが変わらない場合があります。
          【発生環境】
            OS: iOS13〜15
            ※ iOS16では端末の向き変更に画面が追従することを確認しています
