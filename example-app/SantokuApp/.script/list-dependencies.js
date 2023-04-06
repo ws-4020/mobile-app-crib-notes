@@ -53,6 +53,8 @@ const normalizeLicense = (() => {
     // Deprecated
     'GPL-2.0': [ // 警告対策, 採用することはない, 現在存在するのはデュアルライセンスの片方
     ],
+    'LGPL-2.0': [ // org.webkit:android-jsc が 'LGPL-2.0' なのは判明しているが、 'LGPL-2.0-only' と 'LGPL-2.0-or-later' のどちらなのかが未調査, TODO: check
+    ],
     // Not included in SPDX
     'Android Software Development Kit License':[
     ],
