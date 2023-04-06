@@ -33,6 +33,14 @@ const includeLicenses = (target, licenseList) => {
   }
 };
 
+const compact = dependency => {
+  const limit = 100;
+  if ((typeof dependency.licenseText === 'string') && (dependency.licenseText.length > limit)) {
+    dependency.licenseText = dependency.licenseText.slice(0, limit) + '...';
+  }
+  return dependency;
+};
+
 listDependencies().then(dependencies => {
   const errors = [];
 
@@ -58,21 +66,21 @@ listDependencies().then(dependencies => {
   if (licenseNameNotFoundList.length) {
     const message = 'License Name NotFound!!!!';
     errors.push(message);
-    console.warn(message, licenseNameNotFoundList);
+    console.warn(message, licenseNameNotFoundList.map(compact));
   }
 
   const ngLicenseList = dependencies.filter(d => !includeLicenses(d.licenseName, licenseWhitelist));
   if (ngLicenseList.length) {
     const message = 'License unsafe!!!!';
     errors.push(message);
-    console.warn(message, ngLicenseList);
+    console.warn(message, ngLicenseList.map(compact));
   }
 
   const licenseTextNotFoundList = dependencies.filter(d => !(d.licenseFile || d.licenseText || d.licenseUrl));
   if (licenseTextNotFoundList.length) {
     const message = 'License Text or Url NotFound!!!!';
     errors.push(message);
-    console.warn(message, licenseTextNotFoundList);
+    console.warn(message, licenseTextNotFoundList.map(compact));
   }
 
   if (errors.length) throw new Error(errors.join('\n'));
