@@ -29,9 +29,6 @@ module.exports = function () {
         licenseName: 'MIT',
         licenseUrl: 'https://github.com/ogt/valid-url/blob/v1.0.9/LICENSE',
       },
-      '@graphql-typed-document-node/core@3.1.1': { // https://github.com/dotansimha/graphql-typed-document-node
-        licenseUrl: 'https://github.com/dotansimha/graphql-typed-document-node/blob/core%40v3.1.1/LICENSE',
-      },
       '@react-native/assets@1.0.0': { // https://github.com/facebook/react-native/blob/v0.70.5/packages/assets/package.json
         licenseUrl: 'https://github.com/facebook/react-native/blob/v0.70.5/LICENSE',
       },
@@ -106,10 +103,10 @@ module.exports = function () {
       'glog@0.3.5': { // https://github.com/google/glog
         licenseName: 'BSD-3-Clause', // https://code.google.com/archive/p/google-glog/ (元: "Google" https://github.com/facebook/react-native/blob/v0.70.5/third-party-podspecs/glog.podspec#L9)
       },
-      'GoogleDataTransport@9.2.1': {
+      'GoogleDataTransport@9.2.2': {
         licenseName: 'Apache-2.0', // 名称だけ SPDX 形式に変更する (元: Apache)
       },
-      'GoogleUtilities@c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f': {
+      'GoogleUtilities@9aa0ad5a7bc171f8bae016300bfcfa3fb8425749': {
         licenseName: 'Apache-2.0', // 名称だけ SPDX 形式に変更する (元: Apache)
       },
     },
