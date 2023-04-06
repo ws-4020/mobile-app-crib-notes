@@ -154,9 +154,9 @@ stages:
         inputs:
           provProfileSecureFile: $(${{environment.name}}_AppleDistributionProvisioningProfileSecureFileName)
       - task: CmdLine@2
-        displayName: 'Use Xcode 14.0.1'
+        displayName: 'Use Xcode 14.2'
         inputs:
-          script: 'sudo xcode-select --switch /Applications/Xcode_14.0.1.app'
+          script: 'sudo xcode-select --switch /Applications/Xcode_14.2.app'
       - task: NodeTool@0
         displayName: 'Use Node.js 18.15.0'
         inputs:
