@@ -34,11 +34,15 @@ const includeLicenses = (target, licenseList) => {
 };
 
 const compact = dependency => {
-  const limit = 100;
-  if ((typeof dependency.licenseText === 'string') && (dependency.licenseText.length > limit)) {
-    dependency.licenseText = dependency.licenseText.slice(0, limit) + '...';
-  }
-  return dependency;
+  // `util.inspect` の `maxStringLength` で制限すると file path が壊れる場合があるので文字列の行数で制限するようにした
+  const limitLines = 3;
+  const entries = Object.entries(dependency).map(([k, v]) => {
+    if ((typeof v === 'string') && (v.split(/\n/).length > limitLines)) {
+      v = v.split(/\n/).slice(0, limitLines).join('\n') + '\n...';
+    }
+    return [k, v];
+  });
+  return Object.fromEntries(entries);
 };
 
 listDependencies().then(dependencies => {
