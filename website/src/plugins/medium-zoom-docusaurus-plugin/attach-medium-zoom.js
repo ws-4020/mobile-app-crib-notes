@@ -8,19 +8,8 @@ export default (function () {
   let zoomObject;
   const selector = '.markdown img';
 
-  setTimeout(() => {
-    if (zoomObject) {
-      zoomObject.detach();
-    }
-    zoomObject = mediumZoom(selector);
-  }, 100);
-
   return {
-    onRouteUpdate({location}) {
-      if (location && location.hash && location.hash.length) {
-        return;
-      }
-
+    onRouteUpdate() {
       setTimeout(() => {
         if (zoomObject) {
           zoomObject.detach();
