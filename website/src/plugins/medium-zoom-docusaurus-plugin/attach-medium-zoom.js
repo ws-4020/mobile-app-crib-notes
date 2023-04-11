@@ -5,10 +5,14 @@ export default (function () {
     return null;
   }
 
+  let zoomObject;
   const selector = '.markdown img';
 
   setTimeout(() => {
-    mediumZoom(selector);
+    if (zoomObject) {
+      zoomObject.detach();
+    }
+    zoomObject = mediumZoom(selector);
   }, 100);
 
   return {
@@ -18,7 +22,10 @@ export default (function () {
       }
 
       setTimeout(() => {
-        mediumZoom(selector);
+        if (zoomObject) {
+          zoomObject.detach();
+        }
+        zoomObject = mediumZoom(selector);
       }, 100);
     },
   };
