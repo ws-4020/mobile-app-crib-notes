@@ -227,7 +227,7 @@ src/bases/ui/picker/DateTimePicker.ios.test.tsx:158:29
 ```
 <!-- textlint-enable ja-technical-writing/no-unmatched-pair -->
 
-`react-native-datetimepicker/datetimepicker`では、選択された値を取得するために[onChange](https://github.com/react-native-datetimepicker/datetimepicker/tree/v6.5.2#onchange-optional)を利用します。
+`@react-native-datetimepicker/datetimepicker`では、選択された値を取得するために[onChange](https://github.com/react-native-datetimepicker/datetimepicker/tree/v6.5.2#onchange-optional)を利用します。
 そのため、直接`date`を参照する必要はないのですが、このアプリでは自動テスト時に`date`を参照して選択した値を検証していました。
 
 `date`は外部に非公開となりましたが、`react-native-datetimepicker/datetimepicker`の内部では、[`date`をネイティブモジュールに渡しています](https://github.com/react-native-datetimepicker/datetimepicker/blob/v6.5.2/src/datetimepicker.ios.js#L97)。
