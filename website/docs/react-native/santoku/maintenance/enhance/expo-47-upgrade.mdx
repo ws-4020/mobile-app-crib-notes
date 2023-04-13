@@ -2,6 +2,16 @@
 title: Expo SDK 47アップグレード
 ---
 
+:::info 参考
+以下の記事を参考にして、このアプリのExpo SDKを47にアップグレードしました。
+主な変更点とこのアプリで実施したアップグレード手順を紹介します。
+
+- [Expo SDK 47](https://blog.expo.dev/expo-sdk-47-a0f6f5c038af)
+- [Announcing React Native 0.70](https://reactnative.dev/blog/2022/09/05/version-070)
+
+なお、このアプリでは使用していないため、EASやClassic Buildに関する内容は記載しません。
+:::
+
 ## Expo SDK 47の主な変更
 
 ### React Native 0.70.8 and React 18.1.0
@@ -248,8 +258,3 @@ expect(pickerItemsProps.date).toBe(selectedValue.getTime());
 その中で、ライセンス情報が不足していたり、開発時のみ使用するため除外したいライブラリとバージョンを[managed-license.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/managed-license.js)で管理しています。
 
 今回のExpo SDKアップグレードでは、`managed-license.js`で管理している[Metro](https://github.com/facebook/metro/tree/v0.72.3)のパッケージが更新されたため、アップグレード後のバージョンに併せてライセンス情報を更新しました。
-
-## 参考記事
-
-- [Expo SDK 47](https://blog.expo.dev/expo-sdk-47-a0f6f5c038af)
-- [Announcing React Native 0.70](https://reactnative.dev/blog/2022/09/05/version-070)
