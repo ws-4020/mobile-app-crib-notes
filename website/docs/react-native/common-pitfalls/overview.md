@@ -1,7 +1,7 @@
 ---
 title: アプリを実行できない
-pagination_label: アプリを実行できない - 目次
 sidebar_label: 目次
+pagination_label: アプリを実行できない - 目次
 ---
 
 アプリを実行できないそれぞれの事象と対応をまとめています。
