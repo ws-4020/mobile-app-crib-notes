@@ -1,7 +1,7 @@
 ---
 title: ToDoアプリの実装
 sidebar_label: 概要
-pagination_label: ToDoアプリの実装 - 概要
+pagination_label: ToDoアプリの実装
 hide_table_of_contents: true
 ---
 
