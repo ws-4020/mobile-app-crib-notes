@@ -1,5 +1,6 @@
 ---
 title: アプリを実行できない
+pagination_label: アプリを実行できない - 目次
 sidebar_label: 目次
 ---
 
