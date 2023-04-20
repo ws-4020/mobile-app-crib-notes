@@ -39,7 +39,6 @@
         'expo-crypto',
         'expo-keep-awake',
         'expo-local-authentication',
-        'expo-random',
         'expo-secure-store',
         'expo-splash-screen',
         'jest',
