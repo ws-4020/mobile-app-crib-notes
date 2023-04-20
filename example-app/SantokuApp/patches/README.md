@@ -20,3 +20,15 @@ React Native Elementsの3系では上記の変更に追従できていなかっ�
 そのため、追加したファイルのIDを参照するような設定ができない事象が発生しました。
 
 そこで、`IOSConfig.XcodeUtils.addResourceFileToGroup`にファイルのIDを指定できるパッチを当てています。
+
+## FlatListでデータが0件の場合に`scrollToEnd`を呼び出すとエラーが発生する問題に対処するパッチ
+
+FlatListでデータが0件の場合に`scrollToEnd`を呼び出すと以下のエラーが発生します。
+
+> ERROR  Invariant Violation: Tried to get frame for out of range index -1, js engine: hermes
+
+この問題に対するissueとPull Requestは以下になります。
+* https://github.com/facebook/react-native/issues/36066
+* https://github.com/facebook/react-native/pull/36067
+
+Pull Requestは既にクローズされ`main`ブランチにはマージされていますが、このアプリで使用している`react-native`のバージョンにはまだ入っていないため、パッチを当てています。
