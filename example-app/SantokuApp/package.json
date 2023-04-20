@@ -6,7 +6,7 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "start": "expo start --dev-client",
-    "test": "jest --runInBand",
+    "test": "jest --runInBand --forceExit",
     "prebuild": "run-s build:plugin && cross-env ENVIRONMENT=local expo prebuild --clean --no-install",
     "prebuild:stg": "run-s build:plugin && cross-env ENVIRONMENT=stg expo prebuild --clean --no-install",
     "prebuild:prod": "run-s build:plugin && cross-env ENVIRONMENT=prod expo prebuild --clean --no-install",
