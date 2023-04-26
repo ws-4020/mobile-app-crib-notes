@@ -1,0 +1,576 @@
+---
+title: Expo SDK 48アップグレード
+---
+
+:::info参考
+以下の記事を参考にして、このアプリのExpo SDKを48にアップグレードしました。
+主な変更点とこのアプリで実施したアップグレード手順を紹介します。
+
+- [Expo SDK 48](https://blog.expo.dev/expo-sdk-48-ccb8302e231)
+- [React Native 0.71: TypeScript by Default, Flexbox Gap, and more...](https://reactnative.dev/blog/2023/01/12/version-071)
+
+なお、このアプリでは使用していないため、EASやClassic Updatesに関する内容は記載しません。
+:::
+
+## Expo SDK 48の主な変更
+
+### React Native 0.71.6 and React 18.2.0
+
+React NativeのレイアウトエンジンがFlexboxプロパティの[gap](https://developer.mozilla.org/en-US/docs/Web/CSS/gap)、[rowGap](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap)、[columnGap](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)をサポートするようになりました（詳細は[こちら](https://reactnative.dev/blog/2023/01/12/version-071#simplifying-layouts-with-flexbox-gap)）。
+その他、アクセシビリティやスタイル、イベントに関してWebにインスパイアされたプロパティも追加されています（詳細は[こちら](https://reactnative.dev/blog/2023/01/12/version-071#web-inspired-props-for-accessibility-styles-and-events)）。
+
+Hermesは`JSON.parse`のパフォーマンスが改善されました。
+
+TypeScriptを使用している場合は、`react-native`に型定義が含まれるようになったため、`@types/react-native`を削除する必要があります。
+
+詳細は、以下のリンク先を参照してください。
+
+- [React Native 0.71: TypeScript by Default, Flexbox Gap, and more...](https://reactnative.dev/blog/2023/01/12/version-071)
+- [React Native CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0716)
+- [React CHANGELOG](https://github.com/facebook/react/blob/main/CHANGELOG.md#1820-june-14-2022)
+
+### JavaScriptのデフォルトエンジンをHermesに変更
+
+HermesがJavaScriptのデフォルトエンジンになりました。
+
+Hermesでは、アプリ起動後にユーザがアプリを使用できるまでの時間（TTI: Time to Interactive）が短縮されます。メモリ使用料も削減されるなど、パフォーマンの大きな改善が期待できます。
+
+また、デバッグ機能もJavaScriptCore（JSC）に比べると大幅に改善されています。
+
+詳細は、[Hermes as the Default](https://reactnative.dev/blog/2022/07/08/hermes-as-the-default)を参照してください。
+
+### 全てのExpoモジュールでAPIレベルに33を設定
+
+Androidの`compileSdkVersion`と`targetSdkVersion`は、すべてのExpoモジュールでAPIレベル33に設定されました。
+
+これは、2023/08/31以降に適用される（2023/11/01まで期限延長をリクエスト可能）[Google Playアプリの対象APIレベル要件](https://support.google.com/googleplay/android-developer/answer/11926878)を満たしています。
+
+### Expo GoでRTL言語のサポート
+
+<!-- バージョンごとのドキュメントが見当たらない -->
+Expo GoでRTL言語がサポートされました。`app.json`や`app.config.js`で有効化する方法は、[Enabling RTL Support](https://docs.expo.dev/guides/localization/#enabling-rtl-support)を参照してください。
+
+### New Architecture/Fabricのサポート
+
+`expo-dev-client`を除く全てのExpoモジュールで、New Architecture/Fabricがサポートされました。
+
+ただし、New Architectureをサポートしていないサードパーティのモジュールが多いため、New Architectureの有効化はまだ推奨されていないようです。
+また、Expo GoはNew Architectureをサポートしていません。
+
+### Expoがサポートするライブラリや機能
+
+#### ライブラリの更新
+
+Expoが管理しているライブラリの内、メジャーバージョンアップなど大きなリリースがあったものを記載します。
+
+- [Expo Image v1.0](https://docs.expo.dev/versions/v48.0.0/sdk/image/)
+  - React Nativeの[Image](https://reactnative.dev/docs/image)コンポーネントの後継として、または[react-native-fast-image](https://github.com/DylanVann/react-native-fast-image)の代替えを意図して作成されたライブラリ
+  - [モダンな画像フォーマット](https://docs.expo.dev/versions/v48.0.0/sdk/image/#supported-image-formats)をサポート
+  - スピードが重視された設計
+  - [placeholders](https://docs.expo.dev/versions/v48.0.0/sdk/image/#placeholder)や[transitions](https://docs.expo.dev/versions/v48.0.0/sdk/image/#transition)、[blurhash](https://docs.expo.dev/versions/v48.0.0/sdk/image/#imagesource)など、既存のライブラリでは追加実装を必要とする場合があった機能などもサポート
+- [Expo Router v1.0](https://expo.github.io/router/docs/)
+  - ファイルシステムベースでルーティング可能なナビゲーションライブラリ
+
+#### 非推奨となるライブラリ
+
+以下のライブラリが非推奨となりました。
+
+- [expo-random](https://docs.expo.dev/versions/v48.0.0/sdk/random/)
+  - expo-randomは、[expo-crypto](https://docs.expo.dev/versions/v48.0.0/sdk/crypto/)に統合されました
+
+#### Expo Module APIの改善
+
+`async`/`await`関数で、Swift Concurrencyがサポートされました。
+
+また、`TypedArray`のサポートも進められており、`expo-crypto`の`getRandomValues`や`digest`で使用されています。
+
+#### `app.json`の非推奨となっていた項目の削除
+
+`entryPoint`が`app.json`から削除されました。代わりに、`package.json`の[main](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#main)を使用してください。
+
+#### expo-auth-session
+
+[expo-auth-session](https://docs.expo.dev/versions/v48.0.0/sdk/auth-session/)の`useProxy`が非推奨になりました。
+
+#### expo-keep-awake
+
+[expo-keep-awake](https://docs.expo.dev/versions/v48.0.0/sdk/keep-awake/)の`activateKeepAwake`が非推奨になりました。代わりに、`activateKeepAwakeAsync`を使用してください。
+
+#### @react-native-community/datetimepicker
+
+[@react-native-community/datetimepicker](https://github.com/react-native-datetimepicker/datetimepicker/tree/v6.7.3)の以下の項目が非推奨になりました。
+
+- positiveButtonLabel
+- negativeButtonLabel
+- neutralButtonLabel
+
+代わりに、以下の項目が追加されています。
+
+- positiveButton
+- negativeButton
+- neutralButton
+
+### Expo SDK 45のサポート終了
+
+Expo SDK 45がサポート対象外になりました。Expo SDK 45を使用している場合は、Expo SDK 46以降にアップグレードする必要があります。
+
+なお、次のリリースではExpo SDK46と47のサポートが終了する見込みのようです。
+
+## このアプリで実施したアップグレードの手順
+
+このアプリでは、以下の作業を上から順に実施してExpo SDK 48にアップグレードしました。
+
+- `npm install expo@^48.0.0`を実行して、Expo SDKをアップグレード
+- `npx expo install --fix`を実行して、Expoが管理するライブラリのアップグレード
+- [`@expo/config-plugins`を`devDependencies`に追加](#expoconfig-pluginsをdevdependenciesに追加)
+- [`jest-expo`のアップグレード](#jest-expoのアップグレード)
+- [既存のパッチファイルの更新](#既存のパッチファイルの更新)
+- [Expoが管理するライブラリに依存するライブラリの更新](#expoが管理するライブラリに依存するライブラリの更新)
+- `node_modules`、`package-lock.json`を削除して、`npm i`を実行
+- [Expoの更新履歴を確認](#expoの更新履歴を確認)
+- [React Nativeの更新履歴を確認](#react-nativeの更新履歴を確認)
+- [expo-template-blank-typescriptの更新履歴を確認](#expo-template-blank-typescriptの更新履歴を確認)
+- [expo-template-bare-minimumの更新履歴を確認](#expo-template-bare-minimumの更新履歴を確認)
+- [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.69.6&to=0.70.8)を参照して、React Nativeの更新を確認
+  - このアプリで必要な対応は、[expo-template-bare-minimumの更新](https://github.com/expo/expo/commits/sdk-48/templates/expo-template-bare-minimum)で対応されていました
+- [JavaScriptのエンジンをHermesに変更](#javascriptのエンジンをhermesに変更)
+- `npm run prebuild`を実行してネイティブプロジェクトの再生成
+- [`FlatList`でデータが0件の場合に`scrollToEnd`を実行するとエラーが発生する問題の対応](#flatlistでデータが0件の場合にscrolltoendを実行するとエラーが発生する問題の対応)
+- [Jestのアップグレード対応](#jestのアップグレード対応)
+- [`npm run android`でアプリが起動しない問題の対応](#npm-run-androidでアプリが起動しない問題の対応)
+- [手動管理しているライセンスの更新](#手動管理しているライセンスの更新)
+
+アップグレードを実施したPull Requestは[こちら](https://github.com/ws-4020/mobile-app-crib-notes/pull/1118)です。
+
+### `@expo/config-plugins`を`devDependencies`に追加
+
+このアプリの依存ライブラリである`expo`や`@react-native-firebase/app`などは、`@expo/config-plugins`を`dependencies`に設定しています。
+これらのライブラリが設定している`@expo/config-plugins`のバージョンは様々です。
+
+- `expo`: `6.0.1`
+- `@react-native-firebase/app`: `^5.0.4`
+
+複数のバージョンが混在している場合、`deduped`が発生し`node_modules`配下は以下のようになります（必要な箇所以外は省略しています）。
+
+```console
+node_modules/
+├── @expo
+│   ├── cli
+│   │   ├── node_modules
+│   │   │   ├── @expo
+│   │   │   │   ├── config-plugins(6.0.1)
+│   ├── config-plugins(5.0.4)
+├── @react-native-firebase
+│   ├── app
+```
+
+このアプリでは、`@expo/cli`が使用する`@expo/config-plugins`に以下のパッチを適用しますが、`deduped`が発生するかどうかによってパッチを適用するべきパスが変わってしまいます。
+
+- [Expo Config Pluginsで、iOS用に追加したファイルのIDを取得できない問題に対処するパッチ](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/patches/README.md#expo-config-pluginsでios用に追加したファイルのidを取得できない問題に対処するパッチ)
+
+そのため、`@expo/cli`が使用する`@expo/config-plugins`と同じバージョンを`devDependencies`に追加して、`node_modules`配下の構成を以下のようにしました。
+
+```console
+node_modules/
+├── @expo
+│   ├── cli
+│   ├── config-plugins(6.0.1)
+├── @react-native-firebase
+│   ├── app
+│   │   ├── node_modules
+│   │   │   │   ├── config-plugins(5.0.4)
+```
+
+この対応により、パッチを適用するパスは常に`node_modules/@expo/config-plugins`になります。
+
+### `jest-expo`のアップグレード
+
+以前は、`expo-cli upgrade`を使用してExpo SDKのアップグレードを実施していました。しかし、[Expo SDK 48 - Upgrading your app](https://blog.expo.dev/expo-sdk-48-ccb8302e231#b801)を確認すると、アップグレード手順が変更されていました。
+
+```bash
+# Expo SDK 47へのアップグレード手順
+expo-cli upgrade
+
+# Expo SDK 48へのアップグレード手順
+npm install expo@^48.0.0
+npx expo install --fix
+```
+
+上記コマンドを実行すると、`expo-cli upgrade`では自動更新されていた`jest-expo`が更新されませんでした。そのため、`jest-expo`に関しては手動で`^48.0.0`に更新しました。
+
+なお、上記事象に関してはExpoのForumsに質問を投稿しています。
+
+- [Why is jest-expo not updated when I run npx expo install –fix?](https://forums.expo.dev/t/why-is-jest-expo-not-updated-when-i-run-npx-expo-install-fix/70965)
+
+### 既存のパッチファイルの更新
+
+このアプリでは、[patch-package](https://github.com/ds300/patch-package)を使用して、以下のライブラリにパッチファイルを適用していました。パッチ内容の詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/patches/README.md)を参照してください。
+
+- @expo/config-plugins
+- expo-splash-screen
+- react-native-elements
+
+`@expo/config-plugins`の以下のコミットによる変更で、パッチファイルが適用できなくなっていたため、パッチファイルを再作成しました。
+変更は改行の増減のみで、機能的な更新はありませんでした。
+
+- [\[config-plugins\] Rebuild JS files](https://github.com/expo/expo/commit/ee2169270f3207bb4883a3bd9fe1221ef8b94dc2)
+
+`expo-splash-screen`は、Expo SDKのアップグレードに伴いバージョンが上がりました。しかし、適用していたパッチファイルはまだ必要な対応だったため、パッチファイルは削除せずに各ライブラリのバージョンに合わせてファイル名をリネームしました。
+
+上記以外のライブラリに関しては、バージョンが変わらなかったため変更はありません。
+
+### Expoが管理するライブラリに依存するライブラリの更新
+
+Expoが管理するライブラリの更新に伴い、以下のライブラリのバージョンを更新しました。
+
+| ライブラリ名                          | 更新前       | 更新後       |
+|:--------------------------------|:----------|:----------|
+| `@testing-library/react-native` | `18.1.0`  | `18.2.0`  |
+| `@types/jest`                   | `<27.0.0` | `<30.0.0` |
+
+### Expoの更新履歴を確認
+
+Expoの[CHANGELOG](https://github.com/expo/expo/blob/main/CHANGELOG.md#4800--2023-02-09)を参照して、Expo SDKとExpoが管理するライブラリの更新内容を確認しました。
+
+#### `expo-random`から`expo-crypto`への移行
+
+[Expo SDK 48の主な変更 - Expoがサポートするライブラリや機能 - 非推奨となるライブラリ](#非推奨となるライブラリ)に記載した通り、`expo-random`は、`expo-crypto`に統合されました。
+そのため、依存ライブラリから`expo-random`を削除しています。
+
+また、`expo-random`を使用していた箇所は、`expo-crypto`を使用するように変更しています。
+
+```typescript
+// 修正前
+import * as Random from 'expo-random';
+// 修正後
+import * as Crypto from 'expo-crypto';
+```
+
+#### `expo-keep-awake`の`activateKeepAwake`が非推奨になりました
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+[Expo SDK 48の主な変更 - Expoがサポートするライブラリや機能 - expo-keep-awake](#expo-keep-awake)に記載した通り、`expo-keep-awake`の`activateKeepAwake`が非推奨になりました。そのため、`activateKeepAwakeAsync`を使用するように変更しています。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+```typescript
+// 修正前
+await activateKeepAwake();
+// 修正後
+await activateKeepAwakeAsync();
+```
+
+#### `@react-native-community/datetimepicker`の一部の項目が非推奨になりました
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+[Expo SDK 48の主な変更 - Expoがサポートするライブラリや機能 - @react-native-community/datetimepicker](#react-native-communitydatetimepicker)に記載した通り、`@react-native-community/datetimepicker`の一部の項目が非推奨になっています。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+このアプリでは`neutralButtonLabel`を使用していたため、以下のように変更しています。
+
+```typescript jsx
+// 修正前
+pickerItemsProps={{neutralButtonLabel: m('消去')}}
+// 修正後
+pickerItemsProps={{neutralButton: {label: m('消去')}}}
+```
+
+### React Nativeの更新履歴を確認
+
+React Nativeの[CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0716)を参照して、React Nativeの更新内容を確認しました。
+
+#### `@types/react-native`を依存ライブラリから削除
+
+[Expo SDK 48の主な変更 - React Native 0.71.6 and React 18.2.0](#react-native-0716-and-react-1820)に記載した通り、`react-native`に型定義が含まれるようになりました。
+そのため、依存ライブラリから`@types/react-native`を削除しています。
+
+上記対応をしたところ、[OverlayBackdrop.tsx](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.03/example-app/SantokuApp/src/bases/ui/overlay/OverlayBackdrop.tsx#L3)で以下の型エラーが発生しました。
+
+> TS2305: Module '"react-native"' has no exported member 'Omit'
+
+`Omit`を`typescript`からではなく、`react-native`からimportしていたためです。
+これは、以下のように`react-native`からのimportを削除して、`typescript`で定義されている型定義を参照するように修正しました。
+
+```typescript title=OverlayBackdrop.tsx
+// 修正前
+import {Omit, Pressable, PressableProps, StyleSheet, View, ViewProps} from 'react-native';
+// 修正後
+import {Pressable, PressableProps, StyleSheet, View, ViewProps} from 'react-native';
+```
+
+### expo-template-blank-typescriptの更新履歴を確認
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+[expo-template-blank-typescriptの更新履歴](https://github.com/expo/expo/commits/sdk-48/templates/expo-template-blank-typescript)を確認しました。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+`npm install expo@^48.0.0`、`npx expo install --fix`で更新される依存ライブラリのアップグレードが主な変更でした。そのため、このアプリで特別な対応は必要ありませんでした。
+
+### expo-template-bare-minimumの更新履歴を確認
+
+[expo-template-bare-minimumの更新履歴](https://github.com/expo/expo/commits/sdk-48/templates/expo-template-bare-minimum)を確認しました。
+
+このアプリでは[Config Pluginsに対応](./config-plugins.mdx)しているので、`expo-template-bare-minimum`の更新に伴う個別の対応は基本的に必要ありません。
+ただし、以下の場合は個別に対応する必要があります。
+
+- このアプリで作成しているConfig Pluginsによる変更と、`expo-template-bare-minimum`の更新に伴う変更が競合した場合
+- [Prebuild](../../development/build-configuration#prebuild)時に生成されないファイル
+
+上記内容を観点に`expo-template-bare-minimum`の更新履歴を確認し、`.buckconfig`の削除と`.gitignore`の更新をこのアプリに取り込みました。
+
+`expo-template-bare-minimum`の該当のコミットは以下になります。
+
+- [upgrade react-native 0.71](https://github.com/expo/expo/commit/84f418d73be6d8683992cefbe4fc26d1f40eaaa4)
+
+このアプリで修正した`.gitignore`のdiffは以下になります。
+
+```diff title=.gitignore
+ local.properties
+ *.iml
+ *.hprof
++*.keystore
++!debug.keystore
+
+ # node.js
+ #
+@@ -37,12 +39,6 @@ node_modules/
+ npm-debug.log
+ yarn-error.log
+
+-# BUCK
+-buck-out/
+-\.buckd/
+-*.keystore
+-!debug.keystore
+-
+ # Bundle artifacts
+ *.jsbundle
+
+@@ -50,6 +46,9 @@ buck-out/
+ /.bundle/vendor
+ /ios/Pods/
+
++# Temporary files created by Metro to check the health of the file watcher
++.metro-health-check*
++
+ # Expo
+ .expo/
+ web-build/
+```
+
+### JavaScriptのエンジンをHermesに変更
+
+<!-- textlint-disable ja-technical-writing/sentence-length, ja-technical-writing/no-doubled-joshi -->
+[Expo SDK 48の主な変更 - JavaScriptのデフォルトエンジンをHermesに変更](#javascriptのデフォルトエンジンをhermesに変更)に記載した通り、Expo SDK 48からは`Hermes`がデフォルトのJavaScriptエンジンになりました。
+<!-- textlint-enable ja-technical-writing/sentence-length, ja-technical-writing/no-doubled-joshi -->
+
+そのため、このアプリもJavaScriptのエンジンを`Hermes`に変更しています。
+
+```javascript title=app.config.js
+// 修正前
+jsEngine: 'jsc'
+// 修正後
+jsEngine: 'hermes'
+```
+
+なお、デフォルトが`Hermes`なのであえて`jsEngine`を指定する必要はありません。このアプリでは使用しているJavaScriptエンジンを明示するために、`jsEngine`を設定しています。
+
+### `FlatList`でデータが0件の場合に`scrollToEnd`を実行するとエラーが発生する問題の対応
+
+`react-native`のアップグレードに伴い、FlatListでデータが0件の場合に`scrollToEnd`を実行すると以下のエラーが発生しました。
+
+> ERROR  Invariant Violation: Tried to get frame for out of range index -1, js engine: hermes
+
+この問題に対するissueとPull Requestは以下になります。
+
+- [scrollToEnd fails on empty FlatList jest](https://github.com/facebook/react-native/issues/36066)
+- [fix: fix virtualizedList scrollToEnd for 0 items](https://github.com/facebook/react-native/pull/36067)
+
+Pull Requestは既にクローズされ`main`ブランチにはマージされていますが、`react-native`の`0.71.6`には含まれていません。
+そのため、[patch-package](https://github.com/ds300/patch-package)を使用して、Pull Requestで対応されている内容を含んだパッチファイルを作成しました。
+
+### Jestのアップグレード対応
+
+Jestは26系から29系にアップグレードされ、メジャーバージョンが3つも上がりました。
+デフォルトのテストランナーが[jest-jasmine2](https://github.com/jestjs/jest/tree/main/packages/jest-jasmine2)から[jest-circus](https://github.com/jestjs/jest/tree/main/packages/jest-circus)に変更されるなど、更新内容は多岐にわたります。
+
+更新内容の詳細は以下を参照してください。
+
+- [CHANGELOG](https://github.com/jestjs/jest/blob/main/CHANGELOG.md#2950)
+
+このアプリでは、いくつかの自動テストが失敗するなど修正を必要とする箇所がありました。
+
+#### `jest/__mocks__`配下のモックファイルで実施している`beforeEach`でエラー
+
+一部のテストを実行したところ以下のエラーが発生しました。`jest/__mocks__`配下のモックファイルで実行している`beforeEach`でエラーが発生しています。
+
+> Error: Hooks cannot be defined inside tests. Hook of type "beforeEach" is nested within
+
+`jest/__mocks__`配下のモックファイルは、モックしているライブラリなどが`import`、`require`されたときに読み込まれます。
+このアプリの一部のテストでは、テスト対象のコンポーネントの内部で、条件によって`require`するライブラリを切り替えています。
+それが原因でこのエラーが発生したと考えられます。
+
+対応としては、以下を実施しました。
+
+- `jest/__mocks__`配下のモックファイルで実行している`beforeEach`を削除
+- 削除した`beforeEach`内の処理を、各テストファイルの`beforeEach`に定義
+
+> TODO: 修正内容の例を記載
+
+#### `@react-native-community/netinfo`を使用しているコンポーネントのテストでエラー
+
+`@react-native-community/netinfo`を使用しているコンポーネントのテストで以下のエラーが発生しました。
+
+```console
+Cannot read properties of undefined (reading 'isInternetReachable')
+TypeError: Cannot read properties of undefined (reading 'isInternetReachable')
+at InternetReachability.isInternetReachable [as update] (~/dev/src/github.com/ws-4020/mobile-app-crib-notes-expo-48/example-app/SantokuApp/node_modules/@react-native-community/netinfo/lib/commonjs/internal/internetReachability.ts:148:20)
+at State.update (~/dev/src/github.com/ws-4020/mobile-app-crib-notes-expo-48/example-app/SantokuApp/node_modules/@react-native-community/netinfo/lib/commonjs/internal/state.ts:74:32)
+at Generator.next (<anonymous>)
+at asyncGeneratorStep (~/dev/src/github.com/ws-4020/mobile-app-crib-notes-expo-48/example-app/SantokuApp/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:24)
+at _next (~/dev/src/github.com/ws-4020/mobile-app-crib-notes-expo-48/example-app/SantokuApp/node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:9)
+```
+
+対応としては`@react-native-community/netinfo`をモック化するJestのセットアップファイルを作成し、それを`jest.config.js`に設定しました。
+
+```javascript title="jest/setup/netinfo.js"
+import mockRNCNetInfo from '@react-native-community/netinfo/jest/netinfo-mock.js';
+
+jest.mock('@react-native-community/netinfo', () => mockRNCNetInfo);
+```
+
+```javascript title="jest.config.js"
+/* ～省略～ */
+  setupFiles: [
+    '<rootDir>/jest/setup/global.js',
+    '<rootDir>/jest/setup/netinfo.js', // <- 追加
+/* ～省略～ */
+```
+
+#### doneコールバックを使用しているテストは非同期関数にできない
+
+Jest27以降では、`done`コールバックを使用しているテストで`async`/`await`を使用した非同期関数を使用できません。
+
+```typescript
+// <- doneコールバックを使用する場合は、asyncを付けれない
+it('200ms経ってからスプラッシュスクリーンが閉じられること', async done => {})
+```
+
+一部のテストでは、`async`/`await`とdoneコールバックを併用していたため、そのテストでは`done`コールバックを使用しないように修正しました。
+
+#### Fake Timersのデフォルトが`modern`に変更
+
+Jest27以降では、Fake Timersのデフォルトが`modern`に変更されました。併せて、`jest.useFakeTimers`の引数に`modern`を設定できなくなりました。
+
+そのため、`modern`なFake Timersを使用していた箇所を以下のように修正しています。
+
+```typescript
+// 修正前
+jest.useFakeTimers('modern');
+// 修正後
+jest.useFakeTimers();
+```
+
+なお、`legacy`なFake Timersを使用したい場合は`jest.useFakeTimers({legacyFakeTimers: true})`のようにします。
+
+#### Jest実行時のオプションの変更
+
+`@mswjs/data`を使用しているコンポーネントのテストで以下のエラーが発生しました。
+
+```console
+Jest has detected the following 3 open handles potentially keeping Jest from exiting:
+
+  ●  MESSAGEPORT
+
+       9 |
+      10 | export const initialDb = () => {
+    > 11 |   db = factory(models);
+         |               ^
+      12 |   maxDb = factory(models);
+      13 |   minDb = factory(models);
+      14 | };
+
+      at Object.sync (node_modules/@mswjs/data/lib/extensions/sync.js:74:19)
+      at factory (node_modules/@mswjs/data/lib/factory.js:50:12)
+      at initialDb (src/fixtures/msw/db.ts:11:15)
+      at Object.<anonymous> (src/apps/app/App.test.tsx:17:12)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:24)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:27:7
+      at Object.<anonymous> (node_modules/@babel/runtime/helpers/asyncToGenerator.js:19:12)
+```
+
+調査して見ると、`@mswjs/data`の内部で使用している[BroadcastChannel](https://developer.mozilla.org/ja/docs/Web/API/Broadcast_Channel_API)がクローズされていないことが原因でした。
+該当箇所は[こちら](https://github.com/mswjs/data/blob/v0.11.2/src/extensions/sync.ts#L72)です。
+
+これは、Jest実行時のオプションとして[--detectOpenHandles](https://jestjs.io/ja/docs/cli#--detectopenhandles)を指定することで検出できる問題です。`--detectOpenHandles`は、クローズされていないリソースを検出してコンソールに出力するオプションです。
+
+Jestのドキュメントには`--detectOpenHandles`の説明として以下も記載されています。
+
+> このオプションには重大なパフォーマンスの低下があり、デバッグにのみ使用する必要があります。
+
+そのため、CI環境や`npm run test`実行時には`--detectOpenHandles`を指定しない方が良いという意見が挙がりました。また、モバイルアプリにおいては、以下の理由によりリソースのクローズ漏れがサーバサイド程クリティカルな問題にはならないという意見もありました。
+
+- モバイルアプリは使用者の端末で動作するため、リソースのクローズ漏れによる影響がサーバサイドと比較して小さい
+- モバイルアプリは停止、または再起動が比較的頻繁に行われるので、リソースのクローズ漏れが長時間継続することは少ない
+
+上記理由により、このアプリでは`--detectOpenHandles`を指定しないことにしました。
+
+また、Jestはリソースがクローズされていない場合にプロセスが終了しません。そのため、[--forceExit](https://jestjs.io/ja/docs/cli#--forceexit)を指定して、Jestを強制終了するようにしています。
+
+```json title=package.json
+{
+  /* ～省略～ */
+  "scripts": {
+    /* ～省略～ */
+    "test": "jest --runInBand --forceExit",
+    "test:coverage": "jest --runInBand --forceExit --coverage",
+    "test:report": "jest --runInBand --forceExit --reporters=default --reporters=jest-junit --coverage",
+    /* ～省略～ */
+  }
+}
+```
+
+なお、今回の検討をする原因となった`@mswjs/data`のクローズ漏れについては、`@mswjs/data`をプロダクションで使用する可能性がほとんどないことから、特に対象はしていません。
+
+### `npm run android`でアプリが起動しない問題の対応
+
+Expo SDK 48にアップグレード後、`npm run android`を実行すると以下のエラーが発生してアプリが起動しませんでした。
+AndroidのAPIレベルが33の場合に発生する問題のようです（APIレベルが32のエミュレータで確認したところ、問題なく起動できました）。
+
+```console
+› Opening jp.fintan.mobile.SantokuApp.local/.MainActivity on Pixel_3a_API_33
+CommandError: Couldn't open Android app with activity "jp.fintan.mobile.SantokuApp.local/.MainActivity" on device "Pixel_3a_API_33".
+The app might not be installed, try installing it with: npx expo run:android -d Pixel_3a_API_33
+Activity class {jp.fintan.mobile.SantokuApp.local/jp.fintan.mobile.SantokuApp.local.MainActivity} does not exist.
+```
+
+アプリのビルドは成功し、エミュレータにはインストールされているので、このアプリでは以下の運用で回避することにしました。
+
+- エミュレータにインストールされたアプリを手動で起動
+- `npm start`を実行してMetroを起動
+
+なお、この問題は以下のissueでExpoに報告しています。
+
+- [\[Android13\] Couldn't open Android app with app created using expo-template-bare-minimum](https://github.com/expo/expo/issues/22210)
+
+### 手動管理しているライセンスの更新
+
+このアプリでは、使用しているライブラリのライセンス一覧を出力するスクリプトを用意しています。詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/README.md)を参照してください。
+
+#### managed-license.jsの更新
+
+ライセンス情報が不足していたり、開発時のみ使用するため除外したいライブラリとバージョンを[managed-license.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/managed-license.js)で管理しています。
+
+ライセンス情報が不足しているライブラリなどは、以下のコマンドを実行することで確認できます。
+
+- `node .script/check-licenses.js`
+
+実行した結果、いくつかのライブラリのライセンス情報を更新する必要がありました。
+また、JavaScriptのエンジンを`Hermes`に変えたことで、明示的に除外していたAndroid JSCのライセンス設定も不要になったので、`managed-license.js`から削除しました。
+
+#### ライセンスの表記ゆれに対応
+
+このアプリでは、アプリに表示するライセンス名を[SPDX](https://spdx.org/licenses/)に合わせています。
+
+今回のExpo SDKアップグレードでは、一部のライセンスでSPDXに定義されていないライセンス名を使用しているライブラリがありました。
+そのライセンス名（`BSD 3-Clause`）を[list-dependencies.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/list-dependencies.js)に追加しています。
