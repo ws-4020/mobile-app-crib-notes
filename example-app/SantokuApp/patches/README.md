@@ -21,7 +21,7 @@ React Native Elementsの3系では上記の変更に追従できていなかっ�
 
 そこで、`IOSConfig.XcodeUtils.addResourceFileToGroup`にファイルのIDを指定できるパッチを当てています。
 
-## FlatListでデータが0件の場合に`scrollToEnd`を呼び出すとエラーが発生する問題に対処するパッチ
+## [react-native] FlatListでデータが0件の場合に`scrollToEnd`を呼び出すとエラーが発生する問題に対処するパッチ
 
 FlatListでデータが0件の場合に`scrollToEnd`を呼び出すと以下のエラーが発生します。
 
