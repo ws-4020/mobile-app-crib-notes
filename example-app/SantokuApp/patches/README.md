@@ -34,10 +34,13 @@ node_modules/
 │   ├── cli
 │   │   ├── node_modules
 │   │   │   ├── @expo
-│   │   │   │   ├── config-plugins(deduped)
-│   ├── config-plugins
+│   │   │   │   ├── config-plugins(6.0.1)
+│   ├── config-plugins(5.0.4)
 ├── @react-native-firebase
 │   ├── app
+
+※ 必要な箇所以外は省略しています。
+※ 括弧内に記載しているバージョンは例です。
 ```
 
 このアプリでは、`@expo/cli`が使用する`@expo/config-plugins`にこのパッチを適用しますが、`deduped`が発生するかどうかによってパッチを適用するべきパスが変わってしまいます。
@@ -48,11 +51,14 @@ node_modules/
 node_modules/
 ├── @expo
 │   ├── cli
-│   ├── config-plugins
+│   ├── config-plugins(6.0.1)
 ├── @react-native-firebase
 │   ├── app
 │   │   ├── node_modules
-│   │   │   │   ├── config-plugins(deduped)
+│   │   │   │   ├── config-plugins(5.0.4)
+
+※ 必要な箇所以外は省略しています。
+※ 括弧内に記載しているバージョンは例です。
 ```
 
 この対応により、パッチを適用するパスは常に`node_modules/@expo/config-plugins`になります。
