@@ -127,10 +127,10 @@ Expo SDK 45がサポート対象外になりました。Expo SDK 45を使用し�
 - [既存のパッチファイルの更新](#既存のパッチファイルの更新)
 - [Expoが管理するライブラリに依存するライブラリの更新](#expoが管理するライブラリに依存するライブラリの更新)
 - `node_modules`、`package-lock.json`を削除して、`npm i`を実行
-- [Expoの更新履歴を確認](#expoの更新履歴を確認)
-- [React Nativeの更新履歴を確認](#react-nativeの更新履歴を確認)
-- [expo-template-blank-typescriptの更新履歴を確認](#expo-template-blank-typescriptの更新履歴を確認)
-- [expo-template-bare-minimumの更新履歴を確認](#expo-template-bare-minimumの更新履歴を確認)
+- [Expoの更新履歴の確認と対応](#expoの更新履歴の確認と対応)
+- [React Nativeの更新履歴の確認と対応](#react-nativeの更新履歴の確認と対応)
+- [expo-template-blank-typescriptの更新履歴の確認と対応](#expo-template-blank-typescriptの更新履歴の確認と対応)
+- [expo-template-bare-minimumの更新履歴の確認と対応](#expo-template-bare-minimumの更新履歴の確認と対応)
 - [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.69.6&to=0.70.8)を参照して、React Nativeの更新を確認
   - このアプリで必要な対応は、[expo-template-bare-minimumの更新](https://github.com/expo/expo/commits/sdk-48/templates/expo-template-bare-minimum)で対応されていました
 - [JavaScriptのエンジンをHermesに変更](#javascriptのエンジンをhermesに変更)
@@ -228,7 +228,7 @@ Expoが管理するライブラリの更新に伴い、以下のライブラリ�
 | `@testing-library/react-native` | `18.1.0`  | `18.2.0`  |
 | `@types/jest`                   | `<27.0.0` | `<30.0.0` |
 
-### Expoの更新履歴を確認
+### Expoの更新履歴の確認と対応
 
 Expoの[CHANGELOG](https://github.com/expo/expo/blob/main/CHANGELOG.md#4800--2023-02-09)を参照して、Expo SDKとExpoが管理するライブラリの更新内容を確認しました。
 
@@ -274,7 +274,7 @@ pickerItemsProps={{neutralButtonLabel: m('消去')}}
 pickerItemsProps={{neutralButton: {label: m('消去')}}}
 ```
 
-### React Nativeの更新履歴を確認
+### React Nativeの更新履歴の確認と対応
 
 React Nativeの[CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0716)を参照して、React Nativeの更新内容を確認しました。
 
@@ -297,7 +297,7 @@ import {Omit, Pressable, PressableProps, StyleSheet, View, ViewProps} from 'reac
 import {Pressable, PressableProps, StyleSheet, View, ViewProps} from 'react-native';
 ```
 
-### expo-template-blank-typescriptの更新履歴を確認
+### expo-template-blank-typescriptの更新履歴の確認と対応
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 [expo-template-blank-typescriptの更新履歴](https://github.com/expo/expo/commits/sdk-48/templates/expo-template-blank-typescript)を確認しました。
@@ -305,7 +305,7 @@ import {Pressable, PressableProps, StyleSheet, View, ViewProps} from 'react-nati
 
 `npm install expo@^48.0.0`、`npx expo install --fix`で更新される依存ライブラリのアップグレードが主な変更でした。そのため、このアプリで特別な対応は必要ありませんでした。
 
-### expo-template-bare-minimumの更新履歴を確認
+### expo-template-bare-minimumの更新履歴の確認と対応
 
 [expo-template-bare-minimumの更新履歴](https://github.com/expo/expo/commits/sdk-48/templates/expo-template-bare-minimum)を確認しました。
 
