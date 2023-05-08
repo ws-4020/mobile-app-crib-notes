@@ -128,17 +128,29 @@ Expo SDK 45がサポート対象外になりました。Expo SDK 45を使用し�
 - [Expoが管理するライブラリに依存するライブラリの更新](#expoが管理するライブラリに依存するライブラリの更新)
 - `node_modules`、`package-lock.json`を削除して、`npm i`を実行
 - [Expoの更新履歴の確認と対応](#expoの更新履歴の確認と対応)
+  - [`expo-random`から`expo-crypto`への移行](#expo-randomからexpo-cryptoへの移行)
+  - [`expo-keep-awake`の`activateKeepAwake`が非推奨になったことへの対応](#expo-keep-awakeのactivatekeepawakeが非推奨になったことへの対応)
+  - [`@react-native-community/datetimepicker`の一部の項目が非推奨になったことへの対応](#react-native-communitydatetimepickerの一部の項目が非推奨になったことへの対応)
 - [React Nativeの更新履歴の確認と対応](#react-nativeの更新履歴の確認と対応)
+  - [`@types/react-native`を依存ライブラリから削除](#typesreact-nativeを依存ライブラリから削除)
 - [expo-template-blank-typescriptの更新履歴の確認と対応](#expo-template-blank-typescriptの更新履歴の確認と対応)
 - [expo-template-bare-minimumの更新履歴の確認と対応](#expo-template-bare-minimumの更新履歴の確認と対応)
+  - [`.buckconfig`の削除と`.gitignore`の更新](#buckconfigの削除とgitignoreの更新)
 - [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.69.6&to=0.70.8)を参照して、React Nativeの更新を確認
   - このアプリで必要な対応は、[expo-template-bare-minimumの更新](https://github.com/expo/expo/commits/sdk-48/templates/expo-template-bare-minimum)で対応されていました
 - [JavaScriptのエンジンをHermesに変更](#javascriptのエンジンをhermesに変更)
 - `npm run prebuild`を実行してネイティブプロジェクトの再生成
 - [`FlatList`でデータが0件の場合に`scrollToEnd`を実行するとエラーが発生する問題の対応](#flatlistでデータが0件の場合にscrolltoendを実行するとエラーが発生する問題の対応)
 - [Jestのアップグレード対応](#jestのアップグレード対応)
+  - [`jest/__mocks__`配下のモックファイルで実施している`beforeEach`でエラー](#jest__mocks__配下のモックファイルで実施しているbeforeeachでエラー)
+  - [`@react-native-community/netinfo`を使用しているコンポーネントのテストでエラー](#react-native-communitynetinfoを使用しているコンポーネントのテストでエラー)
+  - [doneコールバックを使用しているテストは非同期関数にできない](#doneコールバックを使用しているテストは非同期関数にできない)
+  - [Fake Timersのデフォルトが`modern`に変更](#fake-timersのデフォルトがmodernに変更)
+  - [Jest実行時のオプションの変更](#jest実行時のオプションの変更)
 - [`npm run android`でアプリが起動しない問題の対応](#npm-run-androidでアプリが起動しない問題の対応)
 - [手動管理しているライセンスの更新](#手動管理しているライセンスの更新)
+  - [managed-license.jsの更新](#managed-licensejsの更新)
+  - [ライセンスの表記ゆれに対応](#ライセンスの表記ゆれに対応)
 
 アップグレードを実施したPull Requestは[こちら](https://github.com/ws-4020/mobile-app-crib-notes/pull/1118)です。
 
@@ -246,7 +258,7 @@ import * as Random from 'expo-random';
 import * as Crypto from 'expo-crypto';
 ```
 
-#### `expo-keep-awake`の`activateKeepAwake`が非推奨になりました
+#### `expo-keep-awake`の`activateKeepAwake`が非推奨になったことへの対応
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 [Expo SDK 48の主な変更 - Expoがサポートするライブラリや機能 - expo-keep-awake](#expo-keep-awake)に記載した通り、`expo-keep-awake`の`activateKeepAwake`が非推奨になりました。そのため、`activateKeepAwakeAsync`を使用するように変更しています。
@@ -259,7 +271,7 @@ await activateKeepAwake();
 await activateKeepAwakeAsync();
 ```
 
-#### `@react-native-community/datetimepicker`の一部の項目が非推奨になりました
+#### `@react-native-community/datetimepicker`の一部の項目が非推奨になったことへの対応
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 [Expo SDK 48の主な変更 - Expoがサポートするライブラリや機能 - @react-native-community/datetimepicker](#react-native-communitydatetimepicker)に記載した通り、`@react-native-community/datetimepicker`の一部の項目が非推奨になっています。
@@ -315,9 +327,11 @@ import {Pressable, PressableProps, StyleSheet, View, ViewProps} from 'react-nati
 - このアプリで作成しているConfig Pluginsによる変更と、`expo-template-bare-minimum`の更新に伴う変更が競合した場合
 - [Prebuild](../../development/build-configuration#prebuild)時に生成されないファイル
 
-上記内容を観点に`expo-template-bare-minimum`の更新履歴を確認し、`.buckconfig`の削除と`.gitignore`の更新をこのアプリに取り込みました。
+上記内容を観点に`expo-template-bare-minimum`の更新履歴を確認しました。
 
-`expo-template-bare-minimum`の該当のコミットは以下になります。
+#### `.buckconfig`の削除と`.gitignore`の更新
+
+`expo-template-bare-minimum`の以下のコミットで、`.buckconfig`が削除され、`.gitignore`が更新されていました。
 
 - [upgrade react-native 0.71](https://github.com/expo/expo/commit/84f418d73be6d8683992cefbe4fc26d1f40eaaa4)
 
