@@ -21,6 +21,18 @@
   ],
   packageRules: [
     {
+      // 開発ツールはexpo upgrade時に更新するためRenovateの対象外とします
+      groupName: 'Development tools',
+      enabled: false,
+      matchPackageNames: [
+        'node',
+        'java',
+        'ruby',
+        'cocoapods',
+        'fastlane',
+      ],
+    },
+    {
       // expo upgradeで更新されるパッケージはRenovateの対象外とします
       groupName: 'Expo upgrade',
       enabled: false,
@@ -73,8 +85,6 @@
         'de.undercouch:gradle-download-task',
         // @testing-library/react-native -> jest
         '@testing-library/react-native',
-        'ruby',
-        'cocoapods',
       ],
       matchPackagePrefixes: [
         'com.facebook.flipper',
