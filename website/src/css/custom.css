@@ -33,7 +33,7 @@
   --footer-flex-direction: row;
 }
 
-@media (max-width: 996px) {
+@media (width <= 996px) {
   :root {
     --footer-flex-direction: column;
   }
