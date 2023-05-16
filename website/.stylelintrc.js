@@ -2,5 +2,6 @@ module.exports = {
   "extends": "stylelint-config-standard",
   "rules": {
     "selector-class-pattern": null,
+    "media-feature-range-notation": null,
   }
 }
