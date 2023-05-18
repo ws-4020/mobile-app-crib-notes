@@ -4,6 +4,7 @@ import localConfig from './config/app.config.local.js';
 import prodConfig from './config/app.config.prod.js';
 import stgConfig from './config/app.config.stg.js';
 import {
+  withAndroidAddLicensePlugin,
   withAndroidAddAppActivity,
   withAndroidEnabledStatusBarTranslucent,
   withAndroidDisabledWindowDrawsSystemBarBackgrounds,
@@ -35,7 +36,7 @@ module.exports = ({config}) => {
     ...config,
     name: 'SantokuApp',
     version: '0.1.0',
-    jsEngine: 'jsc',
+    jsEngine: 'hermes',
     primaryColor: '#393939',
     locales: {
       ja: './l10n.ja.json',
@@ -97,6 +98,7 @@ module.exports = ({config}) => {
       withAddNativeModules,
 
       // このアプリで用意しているAndroid用のプラグイン
+      withAndroidAddLicensePlugin,
       withAndroidAddAppActivity,
       withAndroidEnabledStatusBarTranslucent,
       withAndroidDisabledWindowDrawsSystemBarBackgrounds,

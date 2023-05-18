@@ -1,7 +1,11 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createNativeStackNavigator, NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useTheme} from '@shopify/restyle';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
 import {m} from 'bases/message/Message';
+import {StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {StyledColumn} from 'bases/ui/common/StyledColumn';
+import {StyledSpace} from 'bases/ui/common/StyledSpace';
+import {GoBackIllustration} from 'bases/ui/illustration/GoBackIllustration';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {useMemo} from 'react';
 
@@ -37,18 +41,43 @@ const Component: React.FC<Props> = ({initialData}) => {
       <nav.Screen
         component={QuestionDetailScreen}
         name="QuestionDetail"
-        options={{
-          title: m('質問詳細'),
+        options={({navigation}: {navigation: NativeStackNavigationProp<AuthenticatedStackParamList>}) => ({
+          title: '',
           headerStyle: {backgroundColor: theme.colors.orange1},
           contentStyle: {backgroundColor: theme.colors.orange2},
-          headerTitleStyle: {fontSize: 20, fontWeight: '500'},
-          headerTintColor: theme.colors.white,
           headerBackTitleVisible: false,
-        }}
+          headerLeft: () => (
+            <>
+              <StyledColumn>
+                <StyledSpace height="p4" />
+                <StyledTouchableOpacity onPress={navigation.goBack}>
+                  <GoBackIllustration />
+                </StyledTouchableOpacity>
+              </StyledColumn>
+              <StyledSpace width="p32" />
+              <Text color="white" fontSize={20} fontWeight="500">
+                {m('質問詳細')}
+              </Text>
+            </>
+          ),
+        })}
       />
       <nav.Screen
         name="QuestionAndEventStackNav"
         component={QuestionAndEventPostStackNav}
+        /*
+         presentationに「modal」「transparentModal」「containedModal」「containedTransparentModal」「formSheet」を指定した場合は、
+         端末の向きを変更（横画面⇔縦画面）しても画面の向きが変わらない場合があります。
+         【発生環境】
+           OS: iOS13〜15
+           ※ iOS16では端末の向き変更に画面が追従することを確認しています
+           ※ iOS13未満は動作検証していません
+         【回避方法１】
+            presentationに「card」「fullScreenModal」を指定した場合は、端末の向きを変更すると画面の向きも変わります。（ただし、画面レイアウトも変わります）
+         【回避方法２】
+           Native StackではなくStackのcardStyleInterpolatorにCardStyleInterpolator.forModalPresentationIOSを使用することで、
+           Native Stackのmodalと同様のレイアウトで端末の向き変更にも対応したナビゲーションを実現可能です。
+        */
         options={{presentation: 'modal', headerShown: false}}
       />
     </nav.Navigator>

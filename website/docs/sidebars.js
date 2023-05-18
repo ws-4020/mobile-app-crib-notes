@@ -334,6 +334,14 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'アプリのアップデート',
+          items: [
+            'react-native/santoku/application-architecture/app-updates/overview',
+            'react-native/santoku/application-architecture/app-updates/forced-app-updates',
+          ],
+        },
+        {
+          type: 'category',
           label: '認証',
           items: [
             'react-native/santoku/application-architecture/auth/overview',
@@ -447,6 +455,10 @@ module.exports = {
         {
           type: 'doc',
           id: 'react-native/santoku/test-planning/test-variation',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/collaboration-with-qa-vendors',
         },
       ],
     },
@@ -632,6 +644,9 @@ module.exports = {
           label: 'エンハンス',
           items: [
             'react-native/santoku/maintenance/enhance',
+            'react-native/santoku/maintenance/enhance/expo-48-upgrade',
+            'react-native/santoku/maintenance/enhance/expo-47-upgrade',
+            'react-native/santoku/maintenance/enhance/config-plugins',
             'react-native/santoku/maintenance/enhance/expo-46-upgrade',
           ],
         },
@@ -657,6 +672,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-013-react-query',
         'react-native/santoku/decisions/adr-014-ui-libraries',
         'react-native/santoku/decisions/adr-015-android-head-up-notification',
+        'react-native/santoku/decisions/adr-016-forced-app-updates',
       ],
     },
   ],
