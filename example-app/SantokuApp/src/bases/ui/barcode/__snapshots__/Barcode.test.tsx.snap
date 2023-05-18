@@ -3,7 +3,7 @@
 exports[`Barcode only with required props renders successfully only with required props 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#FFFFFF",
       "paddingHorizontal": 0,
@@ -12,18 +12,18 @@ exports[`Barcode only with required props renders successfully only with require
   testID="Barcode"
 >
   <RNSVGSvgView
-    bbHeight={100}
-    bbWidth={378}
+    bbHeight="100"
+    bbWidth="378"
     fill="#000000"
     focusable={false}
     height={100}
     style={
-      Array [
-        Object {
+      [
+        {
           "backgroundColor": "transparent",
           "borderWidth": 0,
         },
-        Object {
+        {
           "flex": 0,
           "height": 100,
           "width": 378,
@@ -33,9 +33,14 @@ exports[`Barcode only with required props renders successfully only with require
     width={378}
   >
     <RNSVGGroup
-      fill={4278190080}
+      fill={
+        {
+          "payload": 4278190080,
+          "type": 0,
+        }
+      }
       propList={
-        Array [
+        [
           "fill",
         ]
       }
@@ -51,7 +56,7 @@ exports[`Barcode only with required props renders successfully only with require
 exports[`Barcode with all format renders successfully with CODE128 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#FFFFFF",
       "paddingHorizontal": 0,
@@ -60,18 +65,18 @@ exports[`Barcode with all format renders successfully with CODE128 1`] = `
   testID="Barcode"
 >
   <RNSVGSvgView
-    bbHeight={100}
-    bbWidth={378}
+    bbHeight="100"
+    bbWidth="378"
     fill="#000000"
     focusable={false}
     height={100}
     style={
-      Array [
-        Object {
+      [
+        {
           "backgroundColor": "transparent",
           "borderWidth": 0,
         },
-        Object {
+        {
           "flex": 0,
           "height": 100,
           "width": 378,
@@ -81,9 +86,14 @@ exports[`Barcode with all format renders successfully with CODE128 1`] = `
     width={378}
   >
     <RNSVGGroup
-      fill={4278190080}
+      fill={
+        {
+          "payload": 4278190080,
+          "type": 0,
+        }
+      }
       propList={
-        Array [
+        [
           "fill",
         ]
       }
@@ -99,7 +109,7 @@ exports[`Barcode with all format renders successfully with CODE128 1`] = `
 exports[`Barcode with all format renders successfully with CODE128AUTO 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#FFFFFF",
       "paddingHorizontal": 0,
@@ -108,18 +118,18 @@ exports[`Barcode with all format renders successfully with CODE128AUTO 1`] = `
   testID="Barcode"
 >
   <RNSVGSvgView
-    bbHeight={100}
-    bbWidth={180}
+    bbHeight="100"
+    bbWidth="180"
     fill="#000000"
     focusable={false}
     height={100}
     style={
-      Array [
-        Object {
+      [
+        {
           "backgroundColor": "transparent",
           "borderWidth": 0,
         },
-        Object {
+        {
           "flex": 0,
           "height": 100,
           "width": 180,
@@ -129,9 +139,14 @@ exports[`Barcode with all format renders successfully with CODE128AUTO 1`] = `
     width={180}
   >
     <RNSVGGroup
-      fill={4278190080}
+      fill={
+        {
+          "payload": 4278190080,
+          "type": 0,
+        }
+      }
       propList={
-        Array [
+        [
           "fill",
         ]
       }
@@ -147,7 +162,7 @@ exports[`Barcode with all format renders successfully with CODE128AUTO 1`] = `
 exports[`Barcode with all props should be applied properly 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "backgroundColor": "blue",
       "paddingHorizontal": 5,
@@ -156,18 +171,18 @@ exports[`Barcode with all props should be applied properly 1`] = `
   testID="Barcode"
 >
   <RNSVGSvgView
-    bbHeight={200}
-    bbWidth={300}
+    bbHeight="200"
+    bbWidth="300"
     fill="red"
     focusable={false}
     height={200}
     style={
-      Array [
-        Object {
+      [
+        {
           "backgroundColor": "transparent",
           "borderWidth": 0,
         },
-        Object {
+        {
           "flex": 0,
           "height": 200,
           "width": 300,
@@ -177,9 +192,14 @@ exports[`Barcode with all props should be applied properly 1`] = `
     width={300}
   >
     <RNSVGGroup
-      fill={4294901760}
+      fill={
+        {
+          "payload": 4294901760,
+          "type": 0,
+        }
+      }
       propList={
-        Array [
+        [
           "fill",
         ]
       }
@@ -191,7 +211,7 @@ exports[`Barcode with all props should be applied properly 1`] = `
   </RNSVGSvgView>
   <Text
     style={
-      Object {
+      {
         "color": "yellow",
         "textAlign": "left",
       }
