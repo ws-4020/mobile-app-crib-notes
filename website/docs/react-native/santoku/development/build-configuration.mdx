@@ -1,6 +1,7 @@
 ---
 title: ビルド
 sidebar_label: 概要
+pagination_label: ビルド
 ---
 
 モバイルアプリの開発では、ステージング環境や本番環境などに応じて、接続先のサーバやアプリアイコンなどを変更したいケースが多くあります。
@@ -13,6 +14,17 @@ Expoには、アプリのネイティブプロジェクト（`ios`、`android`�
 
 `npx expo prebuild`を実行すると、[expo-template-bare-minimum](https://github.com/expo/expo/tree/main/templates/expo-template-bare-minimum)をベースにネイティブプロジェクトが生成されます。
 アプリアイコンや、アプリケーションIDなど多くの設定値は、[Expo config（app.json, app.config.js）](https://docs.expo.dev/versions/latest/config/app/)に指定した値で変更できます。
+
+:::danger
+**Expo SDK 46以下の`Prebuild`はプロキシ環境下で動作しません。**
+Config Pluginsに対応すると`Prebuild`の実行が必須となります。プロキシ環境下で開発を進めるプロジェクトはご注意ください。
+
+おそらく次のPull Requestに関連する不具合と推測しております。
+
+- feat(cli): add proxy support（[https://github.com/expo/expo/pull/19592](https://github.com/expo/expo/pull/19592)）
+
+このPull RequestはExpo SDK 47で取り込まれております。Expo SDK 47以降においては、プロキシ環境下でも`Prebuild`が動作することを確認出来ております。
+:::
 
 ## Config Plugins
 
