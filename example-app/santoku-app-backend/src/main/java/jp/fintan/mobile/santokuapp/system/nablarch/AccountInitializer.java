@@ -56,9 +56,17 @@ public class AccountInitializer implements Initializable {
             // h2のpostgresqlモードでは、on conflict句は使用できない
             // https://github.com/h2database/h2database/issues/3557
             // そのため、merge into句を使用する
-            PreparedStatement accountStatement = connection.prepareStatement("merge into account as a using (values (?, ?)) as i(account_id, nickname) on a.account_id = i.account_id when matched then update set nickname = i.nickname when not matched then insert (account_id, nickname) values (i.account_id, i.nickname)");
-            PreparedStatement passwordStatement = connection.prepareStatement("merge into password as p using (values (?, ?)) as i(account_id, password) on p.account_id = i.account_id when matched then update set password = i.password when not matched then insert (account_id, password) values (i.account_id, i.password)");
-            ) {
+            PreparedStatement accountStatement = connection.prepareStatement(
+                "merge into account as a using (values (?, ?)) as i(account_id, nickname) on a.account_id = i.account_id "
+                    + "when matched then update set nickname = i.nickname "
+                    + "when not matched then insert (account_id, nickname) values (i.account_id, i.nickname)"
+            );
+            PreparedStatement passwordStatement = connection.prepareStatement(
+                "merge into password as p using (values (?, ?)) as i(account_id, password) on p.account_id = i.account_id "
+                    + "when matched then update set password = i.password "
+                    + "when not matched then insert (account_id, password) values (i.account_id, i.password)"
+            )
+          ) {
           accountStatement.setString(1, account.accountId().value());
           accountStatement.setString(2, account.nickname().value());
           passwordStatement.setString(1, account.accountId().value());
