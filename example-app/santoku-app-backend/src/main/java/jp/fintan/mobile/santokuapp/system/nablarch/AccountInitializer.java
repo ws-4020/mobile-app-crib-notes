@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
+import jp.fintan.mobile.santokuapp.domain.model.account.Account;
+import jp.fintan.mobile.santokuapp.domain.model.account.AccountId;
+import jp.fintan.mobile.santokuapp.domain.model.account.Nickname;
 import jp.fintan.mobile.santokuapp.domain.model.account.RawPassword;
 import jp.fintan.mobile.santokuapp.infrastructure.service.PBKDF2PasswordHashingProcessor;
 import nablarch.core.log.Logger;
@@ -32,11 +35,13 @@ public class AccountInitializer implements Initializable {
   public void setAccountPassword(String accountPassword) {
     this.accountPassword = accountPassword;
   }
+  private static final Account SANTOKU_ACCOUNT = new Account(new AccountId("santoku"), new Nickname("santoku"));
+  private static final Account ADMIN_ACCOUNT = new Account(new AccountId("admin"), new Nickname("santoku.administrator.techlead.1234567890123456789"));
+  private static final Account PARTNER_ACCOUNT = new Account(new AccountId("partner"), new Nickname("p"));
+  private static final List<Account> ACCOUNTS = List.of(SANTOKU_ACCOUNT, ADMIN_ACCOUNT, PARTNER_ACCOUNT);
 
   @Override
   public void initialize() {
-    List<String> accounts = List.of("santoku", "admin", "partner");
-
     if (StringUtil.isNullOrEmpty(accountPassword)) {
       LOGGER.logWarn("Initial account data could not be registered because no password was set in environment variable or system properties.");
       return;
@@ -46,7 +51,7 @@ public class AccountInitializer implements Initializable {
     try(
         Connection connection = dataSource.getConnection();
         ) {
-      for (String account : accounts) {
+      for (Account account : ACCOUNTS) {
         try(
             // h2のpostgresqlモードでは、on conflict句は使用できない
             // https://github.com/h2database/h2database/issues/3557
@@ -54,9 +59,9 @@ public class AccountInitializer implements Initializable {
             PreparedStatement accountStatement = connection.prepareStatement("merge into account as a using (values (?, ?)) as i(account_id, nickname) on a.account_id = i.account_id when matched then update set nickname = i.nickname when not matched then insert (account_id, nickname) values (i.account_id, i.nickname)");
             PreparedStatement passwordStatement = connection.prepareStatement("merge into password as p using (values (?, ?)) as i(account_id, password) on p.account_id = i.account_id when matched then update set password = i.password when not matched then insert (account_id, password) values (i.account_id, i.password)");
             ) {
-          accountStatement.setString(1, account);
-          accountStatement.setString(2, account);
-          passwordStatement.setString(1, account);
+          accountStatement.setString(1, account.accountId().value());
+          accountStatement.setString(2, account.nickname().value());
+          passwordStatement.setString(1, account.accountId().value());
           passwordStatement.setString(2, hashedPassword);
           accountStatement.execute();
           passwordStatement.execute();
