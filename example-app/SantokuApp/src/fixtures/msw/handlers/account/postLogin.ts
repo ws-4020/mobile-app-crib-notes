@@ -6,8 +6,15 @@ import {backendUrl} from '../../utils/backendUrl';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
 import {getDb} from '../../utils/getDb';
+import {passthrough} from '../../utils/passthrough';
 
 export const postLogin = rest.post(`${backendUrl}/login`, async (req, res, ctx) => {
+  try {
+    // バックエンドのAPIを呼び出す
+    await passthrough('postLogin', req, ctx);
+  } catch {
+    // passthroughでエラーハンドリングしているのでここでは何もしない
+  }
   try {
     const {accountId} = await req.json<AccountLogin>();
     const db = getDb(accountId);

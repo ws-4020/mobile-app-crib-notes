@@ -2,6 +2,7 @@ import {accountHandlers} from './account';
 import {eventHandlers} from './event';
 import {notificationHandlers} from './notification';
 import {questionHandlers} from './question';
+import {sandboxHandlers} from './sandbox';
 import {systemHandlers} from './system';
 import {tagHandlers} from './tag';
 import {templateHandlers} from './template';
@@ -16,4 +17,5 @@ export const handlers = [
   ...templateHandlers,
   ...eventHandlers,
   ...questionHandlers,
+  ...sandboxHandlers,
 ];

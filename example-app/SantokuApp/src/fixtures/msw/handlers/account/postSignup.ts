@@ -6,8 +6,15 @@ import {db} from '../../db';
 import {backendUrl} from '../../utils/backendUrl';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
+import {passthrough} from '../../utils/passthrough';
 
 export const postSignup = rest.post(`${backendUrl}/signup`, async (req, res, ctx) => {
+  try {
+    // バックエンドのAPIを呼び出す
+    await passthrough('postSignup', req, ctx);
+  } catch {
+    // passthroughでエラーハンドリングしているのでここでは何もしない
+  }
   try {
     const {nickname} = await req.json<AccountRegistration>();
 
