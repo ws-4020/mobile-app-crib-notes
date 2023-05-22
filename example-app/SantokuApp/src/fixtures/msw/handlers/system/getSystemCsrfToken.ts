@@ -20,8 +20,8 @@ export const getSystemCsrfToken = rest.get(`${backendUrl}/system/csrf-token`, as
     ctx.json<CsrfTokenResponse>({
       // CSRFトークンはバックエンドのAPIから取得した値をクライアント側から送信する必要があるため、正常に終了した場合はバックエンドのAPIの返却値をそのまま返す
       csrfTokenValue: json ? json.csrfTokenValue : generateToken(32),
-      csrfTokenParameterName: 'X-CSRF-TOKEN',
-      csrfTokenHeaderName: 'csrf-token',
+      csrfTokenHeaderName: 'X-CSRF-TOKEN',
+      csrfTokenParameterName: 'csrf-token',
     }),
     ctx.delay(100),
   );
