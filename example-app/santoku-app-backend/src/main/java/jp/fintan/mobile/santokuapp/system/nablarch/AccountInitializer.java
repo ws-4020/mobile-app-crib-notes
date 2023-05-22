@@ -15,6 +15,25 @@ import nablarch.core.log.LoggerManager;
 import nablarch.core.repository.initialization.Initializable;
 import nablarch.core.util.StringUtil;
 
+/**
+ * 以下のアカウントを初期データとして登録します。
+ * <ul>
+ *   <li>santoku</li>
+ *   <li>admin</li>
+ *   <li>partner</li>
+ * </ul>
+ * <p>
+ * 既にアカウントが登録されている場合は、初期データを更新します。
+ * <p>
+ * パスワードは、環境設定ファイル（env.config）、または環境変数で設定可能です。
+ * <ul>
+ *   <li>環境設定ファイル: 「account.password」に設定</li>
+ *   <li>環境変数: 「ACCOUNT_PASSWORD」に設定</li>
+ * </ul>
+ *
+ * @see <a href="https://nablarch.github.io/docs/5u20/doc/application_framework/application_framework/setting_guide/ManagingEnvironmentalConfiguration/index.html">処理方式、環境に依存する設定の管理方法</a>
+ * @see <a href="https://nablarch.github.io/docs/5u20/doc/application_framework/application_framework/libraries/repository.html#os">OS環境変数を使って環境依存値を上書きする</a>
+ */
 public class AccountInitializer implements Initializable {
 
   private static final Logger LOGGER = LoggerManager.get(AccountInitializer.class);
