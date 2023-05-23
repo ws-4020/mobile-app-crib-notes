@@ -13,7 +13,6 @@ import jp.fintan.mobile.santokuapp.infrastructure.service.PBKDF2PasswordHashingP
 import nablarch.core.log.Logger;
 import nablarch.core.log.LoggerManager;
 import nablarch.core.repository.initialization.Initializable;
-import nablarch.core.util.StringUtil;
 
 /**
  * 以下のアカウントを初期データとして登録します。
@@ -61,11 +60,15 @@ public class AccountInitializer implements Initializable {
 
   @Override
   public void initialize() {
-    if (StringUtil.isNullOrEmpty(accountPassword)) {
-      LOGGER.logWarn("Initial account data could not be registered because no password was set in environment variable or system properties.");
+    RawPassword rawPassword;
+    try {
+      rawPassword = new RawPassword(accountPassword);
+    } catch (IllegalArgumentException e) {
+      LOGGER.logWarn("Initial account data could not be registered because password was invalid.", e);
       return;
     }
-    String hashedPassword = new PBKDF2PasswordHashingProcessor().hash(new RawPassword(accountPassword)).value();
+
+    String hashedPassword = new PBKDF2PasswordHashingProcessor().hash(rawPassword).value();
 
     try(
         Connection connection = dataSource.getConnection();
