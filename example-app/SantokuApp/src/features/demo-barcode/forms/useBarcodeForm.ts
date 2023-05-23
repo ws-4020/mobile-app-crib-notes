@@ -67,7 +67,7 @@ const formValidationSchema = yup.object().shape({
     // ASCII value ranges 0-127, 200-211
     // https://github.com/lindell/JsBarcode/blob/master/src/barcodes/CODE128/CODE128_AUTO.js#L7
     .matches(/^[\x00-\x7F\xC8-\xD3]+$/, 'CODE128では使用できない文字が含まれています'),
-  lineWidth: yup.number().label('ライン幅').required().max(100).typeError('${path}は数値を入力してください。'),
+  lineWidth: yup.number().label('ライン幅').required().min(1).max(100).typeError('${path}は数値を入力してください。'),
 });
 
 export const formInitialValues: FormValues = {
