@@ -96,10 +96,12 @@ public class AccountInitializer implements Initializable {
           accountStatement.execute();
           passwordStatement.execute();
         } catch (SQLException e) {
+          // 例外をthrowするとエラーログが出力されるが、アプリは起動する
           throw new RuntimeException(e);
         }
       }
     } catch (SQLException e) {
+      // 例外をthrowするとエラーログが出力されるが、アプリは起動する
       throw new RuntimeException(e);
     }
   }
