@@ -37,18 +37,12 @@ public class AccountInitializer implements Initializable {
 
   private static final Logger LOGGER = LoggerManager.get(AccountInitializer.class);
   private DataSource dataSource;
-  public DataSource getDataSource() {
-    return dataSource;
-  }
 
   public void setDataSource(DataSource dataSource) {
     this.dataSource = dataSource;
   }
 
   private String accountPassword;
-  public String getAccountPassword() {
-    return accountPassword;
-  }
 
   public void setAccountPassword(String accountPassword) {
     this.accountPassword = accountPassword;
