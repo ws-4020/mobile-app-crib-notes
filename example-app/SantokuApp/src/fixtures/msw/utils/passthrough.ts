@@ -3,16 +3,18 @@ import {MockedRequest, RestContext} from 'msw';
 import {ApplicationError} from '../../../bases/core/errors/ApplicationError';
 
 type passthroughApis = 'postSignup' | 'postLogin' | 'postLogout' | 'postAccountsMeDeviceToken' | 'getSystemCsrfToken';
-export const passthroughApiErrors: {[key in passthroughApis]: unknown[]} = {
+
+const initialPassthroughApiErrors = {
   postSignup: [],
   postLogin: [],
   postLogout: [],
   postAccountsMeDeviceToken: [],
   getSystemCsrfToken: [],
 };
+export let passthroughApiErrors: {[key in passthroughApis]: unknown[]} = {...initialPassthroughApiErrors};
 
 export const initializePassthroughApiErrors = () => {
-  Object.values(passthroughApiErrors).forEach(errors => errors.splice(0));
+  passthroughApiErrors = {...initialPassthroughApiErrors};
 };
 
 /**
