@@ -118,10 +118,22 @@ export const useBarcodeForm = () => {
   }, [form]);
   const removeCode128DataField = useCallback(
     async (index: number) => {
-      const code128Data = [...form.values.code128Data];
-      code128Data.splice(index, 1);
-      await form.setFieldValue('code128Data', code128Data);
-      return code128Data;
+      const values = [...form.values.code128Data];
+      values.splice(index, 1);
+      await form.setFieldValue('code128Data', values);
+
+      if (form.touched.code128Data) {
+        const touched = form.touched.code128Data;
+        touched.splice(index, 1);
+        await form.setTouched({...form.touched, code128Data: touched}, false);
+      }
+      if (Array.isArray(form.errors.code128Data)) {
+        const errors = form.errors.code128Data;
+        errors.splice(index, 1);
+        form.setErrors({...form.errors, code128Data: errors});
+      }
+
+      return values;
     },
     [form],
   );
