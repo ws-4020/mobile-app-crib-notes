@@ -2,13 +2,15 @@ import type {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import messaging from '@react-native-firebase/messaging';
 import axios, {AxiosError} from 'axios';
 import {log} from 'bases/logging';
-import {Item, SelectPicker} from 'bases/ui/picker/SelectPicker';
-import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
+import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
+import {Item} from 'bases/ui/picker/SelectPicker';
 import {ErrorResponse} from 'features/sandbox/apis/model';
 import React, {useCallback, useEffect, useState} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
-import {Button, Divider, Text} from 'react-native-elements';
+import {StyleSheet} from 'react-native';
 
+import {StyledButton} from '../../../bases/ui/common/StyledButton';
+import {StyledColumn} from '../../../bases/ui/common/StyledColumn';
+import {StyledRow} from '../../../bases/ui/common/StyledRow';
 import {getFcmToken} from '../services/getFcmToken';
 import {notifyMessageToAll as callNotifyMessageToAll} from '../services/notifyMessageToAll';
 import {notifyMessageToMe as callNotifyMessageToMe} from '../services/notifyMessageToMe';
@@ -25,7 +27,7 @@ const channels = [
   {value: 'lowChannel', label: 'Low notification'},
 ];
 
-export const PushNotificationPage: React.FC = () => {
+export const PushNotificationStatusPage: React.FC = () => {
   const [permissionAuthStatus, setPermissionAuthStatus] = useState<PermissionAuthStatusType>();
   const [token, setToken] = useState<string>();
 
@@ -116,56 +118,34 @@ export const PushNotificationPage: React.FC = () => {
   }, [getPermissionAuthStatus, getToken]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <SpecAndSourceCodeLink feature="push-notification" />
-        <Divider orientation="vertical" style={styles.divider} />
-        <View>
-          <Text>【現在のPermissionのステータス】</Text>
-          <Text>{permissionAuthStatus ?? 'Permissionのステータスが表示されます'}</Text>
-        </View>
-        <View style={styles.elementContainer}>
-          <Button onPress={requestUserPermissionWithoutOptions} title="Permissionの許可" />
-        </View>
-        <Text>
-          一度でも許可ダイアログで許可もしくは拒否すると、それ以降はステータスを`PROVISIONAL`に変更できなくなります
-        </Text>
-        <View style={styles.elementContainer}>
-          <Button onPress={requestUserPermissionWithProvisional} title="Permissionの仮許可" />
-        </View>
-        <Divider orientation="vertical" style={styles.divider} />
-        <View>
+    <StyledSafeAreaView style={styles.container}>
+      <StyledScrollView contentInsetAdjustmentBehavior="automatic">
+        <Box flex={1} p="p12">
+          <Text>【Permission】</Text>
+          <StyledColumn p="p24" space="p12">
+            <Text>現在のステータス：{permissionAuthStatus ?? 'Permissionのステータスが表示されます'}</Text>
+            <StyledRow justifyContent="center" space="p16">
+              <StyledButton onPress={requestUserPermissionWithoutOptions} title="許可" />
+              <StyledButton onPress={requestUserPermissionWithProvisional} title="仮許可" />
+            </StyledRow>
+            <Text>
+              一度でも許可ダイアログで許可もしくは拒否すると、それ以降はステータスを`PROVISIONAL`に変更できなくなります
+            </Text>
+          </StyledColumn>
           <Text>【FCM登録トークン】</Text>
-          <Text selectable>{token ?? ''}</Text>
-        </View>
-        <Divider orientation="vertical" style={styles.divider} />
-        <View>
-          <Text>【通知メッセージ】</Text>
-          <View style={styles.elementContainer}>
-            <SelectPicker
-              items={channels}
-              selectedItemKey={channelKey}
-              onSelectedItemChange={onSelectedChannelChange}
-              placeholder="チャンネルを選択してください"
-              textInputProps={{style: {borderBottomWidth: 1, borderBottomColor: 'gray'}}}
-            />
-          </View>
-          <View style={styles.elementContainer}>
-            <Button onPress={notifyMessageToAll} title="Pushメッセージ一斉送信" />
-          </View>
-          <View style={styles.elementContainer}>
-            <Button onPress={notifyMessageToMe} title="Pushメッセージを自分に送信" />
-          </View>
-        </View>
-        <View>
+          <StyledColumn p="p24">
+            <Text selectable>{token ?? 'FCM登録トークンは発行されていません'}</Text>
+          </StyledColumn>
           <Text>【通知設定】</Text>
-          <Text>OSのアプリ設定画面に遷移します</Text>
-          <View style={styles.elementContainer}>
-            <Button onPress={openSettings} title="アプリの設定画面を開く" />
-          </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+          <StyledColumn p="p24" space="p12">
+            <Text>OSのアプリ設定画面に遷移します</Text>
+            <StyledRow justifyContent="center">
+              <StyledButton onPress={openSettings} title="アプリの設定画面を開く" />
+            </StyledRow>
+          </StyledColumn>
+        </Box>
+      </StyledScrollView>
+    </StyledSafeAreaView>
   );
 };
 
