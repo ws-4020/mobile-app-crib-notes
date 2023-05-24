@@ -213,12 +213,10 @@ const Code128DataInput: React.FC<
       {form.values.code128Data.map((d, index) => {
         const onSelectedCharacterSetChange = (selectedItem?: Item<string>) =>
           setFormCode128Character(selectedItem?.value ?? formInitialValues.code128Data[0].character, index);
-
         const setCode128ValueAndValidate = async (value: string) => {
           const errors = await setFormCode128Value(value, index);
           if (!errors?.code128Data) {
-            const oldData = form.values.code128Data[index];
-            const newData = {character: oldData.character, value};
+            const newData = {character: d.character, value};
             const code128Data = [...form.values.code128Data];
             code128Data.splice(index, 1, newData);
             onValidCode128Data(code128Data);
@@ -229,21 +227,15 @@ const Code128DataInput: React.FC<
           <StyledRow key={`barcode-data-${index}`} space="p8">
             <Box flex={1}>
               <SelectPicker
-                selectedItemKey={form.values.code128Data[index].character}
+                selectedItemKey={d.character}
                 items={characterSet}
                 onSelectedItemChange={onSelectedCharacterSetChange}
-                textInputComponent={
-                  <StyledTextInput
-                    value={form.values.code128Data[index].character}
-                    borderBottomWidth={1}
-                    editable={false}
-                  />
-                }
+                textInputComponent={<StyledTextInput value={d.character} borderBottomWidth={1} editable={false} />}
               />
             </Box>
             <Box flex={3}>
               <StyledTextInput
-                value={form.values.code128Data[index].value}
+                value={d.value}
                 borderBottomWidth={1}
                 onChangeText={setCode128ValueAndValidate}
                 errorMessage={
