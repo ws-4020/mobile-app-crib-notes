@@ -211,8 +211,16 @@ const Code128DataInput: React.FC<
   return (
     <StyledColumn space="p16">
       {form.values.code128Data.map((d, index) => {
-        const onSelectedCharacterSetChange = (selectedItem?: Item<string>) =>
-          setFormCode128Character(selectedItem?.value ?? formInitialValues.code128Data[0].character, index);
+        const onSelectedCharacterSetChange = async (selectedItem?: Item<BarcodeCharacter>) => {
+          const character = selectedItem?.value ?? formInitialValues.code128Data[0].character;
+          const errors = await setFormCode128Character(character, index);
+          if (!errors?.code128Data) {
+            const newData = {character, value: d.value};
+            const code128Data = [...form.values.code128Data];
+            code128Data.splice(index, 1, newData);
+            onValidCode128Data(code128Data);
+          }
+        };
         const setCode128ValueAndValidate = async (value: string) => {
           const errors = await setFormCode128Value(value, index);
           if (!errors?.code128Data) {
