@@ -10,11 +10,12 @@ import {StyledTextInput} from 'bases/ui/common/StyledTextInput';
 import {AddIllustration} from 'bases/ui/illustration/AddIllustration';
 import {RemoveIllustration} from 'bases/ui/illustration/RemoveIllustration';
 import {Item, SelectPicker} from 'bases/ui/picker/SelectPicker';
+import {useAccountData} from 'features/account/services/account/useAccountData';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
-import React, {useCallback, useEffect, useState} from 'react';
+import {ErrorResponse} from 'features/sandbox/apis/model';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {Pressable, Switch} from 'react-native';
 
-import {ErrorResponse} from '../../sandbox/apis/model';
 import {usePushNotificationSenderForm} from '../forms/usePushNotificationSenderForm';
 import {getFcmToken} from '../services/getFcmToken';
 import {notifyMessageToAll as callNotifyMessageToAll, PushNotificationParams} from '../services/notifyMessageToAll';
@@ -48,30 +49,6 @@ const interruptionLevels = [
 export type PushNotificationSenderPageProps = {
   navigateToPushNotificationStatus: () => void;
 };
-
-const isAllowedPermission = async () => {
-  try {
-    const permissionAuthStatus = await messaging().hasPermission();
-    return (
-      permissionAuthStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      permissionAuthStatus === messaging.AuthorizationStatus.PROVISIONAL
-    );
-  } catch (e) {
-    log.trace(`Failed to get permission status. cause=[${String(e)}]`);
-    throw e;
-  }
-};
-const canGetFcmToken = async () => {
-  try {
-    const fcmToken = await getFcmToken();
-    return !!fcmToken;
-  } catch (e) {
-    log.trace(`Failed to get token. cause=[${String(e)}]`);
-    throw e;
-  }
-};
-
-const isReceivablePushNotification = async () => (await isAllowedPermission()) && (await canGetFcmToken());
 export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProps> = ({
   navigateToPushNotificationStatus,
 }) => {
@@ -85,6 +62,8 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     addDataField,
     removeDataField,
   } = usePushNotificationSenderForm();
+
+  const {data: accountData} = useAccountData();
 
   const onSelectedPriorityChange = useCallback(
     (selectedItem?: Item<string | undefined>) => {
@@ -105,6 +84,42 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
       return setFormChannel(selectedItem?.value);
     },
     [setFormChannel],
+  );
+
+  const [isAllowedPermission, setIsAllowedPermission] = useState(false);
+  const [fcmToken, setFcmToken] = useState<string>();
+  useEffect(() => {
+    messaging()
+      .hasPermission()
+      .then(status => {
+        if (
+          status === messaging.AuthorizationStatus.AUTHORIZED ||
+          status === messaging.AuthorizationStatus.PROVISIONAL
+        ) {
+          setIsAllowedPermission(true);
+        }
+      })
+      .catch(e => {
+        log.trace(`Failed to get permission status. cause=[${String(e)}]`);
+      });
+    getFcmToken()
+      .then(fcmToken => setFcmToken(fcmToken))
+      .catch(e => {
+        log.trace(`Failed to get token. cause=[${String(e)}]`);
+      });
+  }, []);
+
+  const hasFcmToken = useMemo(() => {
+    return !!fcmToken;
+  }, [fcmToken]);
+
+  const isRegisteredDeviceToken = useMemo(() => {
+    return fcmToken ? accountData?.account.deviceTokens.includes(fcmToken) : false;
+  }, [accountData?.account.deviceTokens, fcmToken]);
+
+  const isReceivableOnThisDevice = useMemo(
+    () => isAllowedPermission && hasFcmToken && isRegisteredDeviceToken,
+    [hasFcmToken, isAllowedPermission, isRegisteredDeviceToken],
   );
 
   const notifyMessageToAll = useCallback(async () => {
@@ -137,8 +152,8 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
   }, [form.isValid, form.values]);
 
   const notifyMessageToMe = useCallback(async () => {
-    const fcmToken = await getFcmToken();
     if (fcmToken) {
+      // FCMトークンが取得できていない場合は、自分に送信ボタンが活性化しないため、必ず存在する想定
       try {
         await callNotifyMessageToMe(fcmToken, form.values.channel);
       } catch (e) {
@@ -151,22 +166,8 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
           alert(e);
         }
       }
-      return;
     }
-    alert('FCM登録トークンを取得してください');
-  }, [form.values.channel]);
-
-  const [isReceivableOnThisDevice, setIsReceivableOnThisDevice] = useState(false);
-  useEffect(() => {
-    isReceivablePushNotification()
-      .then(result => {
-        setIsReceivableOnThisDevice(result);
-      })
-      .catch(() => {
-        setIsReceivableOnThisDevice(false);
-        // エラー時のログは呼び出し先で出力しているのでここでは出力しない
-      });
-  }, []);
+  }, [fcmToken, form.values.channel]);
 
   return (
     <StyledSafeAreaView flex={1}>
@@ -179,15 +180,22 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
           {isReceivableOnThisDevice ? (
             <Text>このデバイスでプッシュ通知を受信可能です。</Text>
           ) : (
-            <Text color="textRed" fontWeight="bold">
-              このデバイスではプッシュ通知を受信できません。
-              <StyledRow>
-                <StyledTouchableOpacity onPress={navigateToPushNotificationStatus}>
-                  <Text color="blue">設定を確認</Text>
-                </StyledTouchableOpacity>
-                <Text>してください。</Text>
-              </StyledRow>
-            </Text>
+            <StyledColumn gap="p2">
+              <Text color="textRed" fontWeight="bold">
+                このデバイスではプッシュ通知を受信できません。
+              </Text>
+              {!(isAllowedPermission && hasFcmToken) && (
+                <StyledRow>
+                  <StyledTouchableOpacity onPress={navigateToPushNotificationStatus}>
+                    <Text color="blue">・設定を確認</Text>
+                  </StyledTouchableOpacity>
+                  <Text>してください。</Text>
+                </StyledRow>
+              )}
+              {!isRegisteredDeviceToken && (
+                <Text>・バックエンドAPIに存在しているアカウントで再ログインしてください。</Text>
+              )}
+            </StyledColumn>
           )}
         </Box>
         <Box flex={1} height={1} px="p16" backgroundColor="grey1" />
