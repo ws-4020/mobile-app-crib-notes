@@ -2,11 +2,11 @@ import type {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import messaging from '@react-native-firebase/messaging';
 import {log} from 'bases/logging';
 import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
+import {StyledButton} from 'bases/ui/common/StyledButton';
+import {StyledColumn} from 'bases/ui/common/StyledColumn';
+import {StyledRow} from 'bases/ui/common/StyledRow';
 import React, {useCallback, useEffect, useState} from 'react';
 
-import {StyledButton} from '../../../bases/ui/common/StyledButton';
-import {StyledColumn} from '../../../bases/ui/common/StyledColumn';
-import {StyledRow} from '../../../bases/ui/common/StyledRow';
 import {getFcmToken} from '../services/getFcmToken';
 import {openSettings} from '../services/openSettings';
 import {requestUserPermission as requestUserPermissionService} from '../services/requestUserPermission';
