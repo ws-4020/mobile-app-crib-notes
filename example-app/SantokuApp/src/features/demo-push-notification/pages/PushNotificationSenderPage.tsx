@@ -103,14 +103,14 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     [setFormChannel],
   );
 
-  const [isReceivable, setIsReceivable] = useState(false);
+  const [isReceivableOnThisDevice, setIsReceivableOnThisDevice] = useState(false);
   useEffect(() => {
     isReceivablePushNotification()
       .then(result => {
-        setIsReceivable(result);
+        setIsReceivableOnThisDevice(result);
       })
       .catch(() => {
-        setIsReceivable(false);
+        setIsReceivableOnThisDevice(false);
         // エラー時のログは呼び出し先で出力しているのでここでは出力しない
       });
   }, []);
@@ -123,7 +123,7 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
         <StyledSpace height="p12" />
         <Text>【このデバイスのプッシュ通知受信可否】</Text>
         <Box p="p16">
-          {isReceivable ? (
+          {isReceivableOnThisDevice ? (
             <Text>このデバイスでプッシュ通知を受信可能です。</Text>
           ) : (
             <Text color="textRed" fontWeight="bold">
