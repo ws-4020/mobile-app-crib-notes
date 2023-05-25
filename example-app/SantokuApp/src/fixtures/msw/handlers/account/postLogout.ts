@@ -9,6 +9,7 @@ import {errorResponse} from '../../utils/errorResponse';
 export const postLogout = rest.post(`${backendUrl}/logout`, async (req, res, ctx) => {
   try {
     // バックエンドのAPIを呼び出す
+    // セッションCookieを削除して、ログアウト後に認証が必要なAPI通信をできないようにする
     await passthrough(req, ctx);
   } catch {
     // passthroughでエラーハンドリングしているのでここでは何もしない
