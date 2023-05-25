@@ -81,6 +81,8 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
       <StyledScrollView contentInsetAdjustmentBehavior="automatic">
         <Box flex={1} p="p12">
           <SpecAndSourceCodeLink feature="push-notification" />
+          <Box flex={1} height={1} px="p16" backgroundColor="grey1" />
+          <StyledSpace height="p12" />
           <Text>【このデバイスのプッシュ通知受信可否】</Text>
           <Box p="p16">
             <Text color="textRed" fontWeight="bold">
@@ -93,6 +95,10 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
               </StyledRow>
             </Text>
           </Box>
+          <Box flex={1} height={1} px="p16" backgroundColor="grey1" />
+          <StyledSpace height="p12" />
+          <Text>プッシュ通知として送るパラメータを入力してください。</Text>
+          <Text>未入力の項目は、バックエンドに送信されません。</Text>
           <StyledSpace height="p12" />
           <Text>【共通設定】</Text>
           <StyledColumn p="p24" gap="p12">
@@ -130,6 +136,8 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
                 <AddIllustration color="blue" />
               </Pressable>
             </StyledRow>
+            <Text>{`Keyが未入力の項目は、バックエンドに送信されません。
+Keyが入力されており、Valueが未入力の場合は送信されます。`}</Text>
             <StyledColumn>
               {form.values.data.map((d, index) => {
                 return (
