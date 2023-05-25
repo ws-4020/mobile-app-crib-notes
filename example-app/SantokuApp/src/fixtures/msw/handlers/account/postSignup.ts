@@ -13,7 +13,8 @@ export const postSignup = rest.post(`${backendUrl}/signup`, async (req, res, ctx
     // バックエンドのAPIを呼び出す
     await passthrough(req, ctx);
   } catch {
-    // passthroughでエラーハンドリングしているのでここでは何もしない
+    // passthroughでエラーハンドリング（ログ出力）しているのでここでは何もしない
+    // デバイストークン登録API以外は、バックエンドのAPI通信時にエラーが発生しても正常終了とする
   }
   try {
     const {nickname} = await req.json<AccountRegistration>();

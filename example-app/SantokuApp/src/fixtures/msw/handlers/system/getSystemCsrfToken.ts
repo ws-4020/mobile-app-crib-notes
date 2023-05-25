@@ -12,7 +12,8 @@ export const getSystemCsrfToken = rest.get(`${backendUrl}/system/csrf-token`, as
     // バックエンドのAPIを呼び出す
     response = await passthrough(req, ctx);
   } catch {
-    // passthroughでエラーハンドリングしているのでここでは何もしない
+    // passthroughでエラーハンドリング（ログ出力）しているのでここでは何もしない
+    // デバイストークン登録API以外は、バックエンドのAPI通信時にエラーが発生しても正常終了とする
   }
   // FetchAPIのjson()はany型で返却されるので、CsrfTokenResponseに型変換
   const json = (await response?.json()) as CsrfTokenResponse | undefined;
