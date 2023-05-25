@@ -13,7 +13,6 @@ import {StyledColumn} from '../../../bases/ui/common/StyledColumn';
 import {StyledRow} from '../../../bases/ui/common/StyledRow';
 import {getFcmToken} from '../services/getFcmToken';
 import {notifyMessageToAll as callNotifyMessageToAll} from '../services/notifyMessageToAll';
-import {notifyMessageToMe as callNotifyMessageToMe} from '../services/notifyMessageToMe';
 import {openSettings} from '../services/openSettings';
 import {requestUserPermission as requestUserPermissionService} from '../services/requestUserPermission';
 
@@ -92,25 +91,6 @@ export const PushNotificationStatusPage: React.FC = () => {
       }
     }
   }, [channelKey]);
-
-  const notifyMessageToMe = useCallback(async () => {
-    if (token) {
-      try {
-        await callNotifyMessageToMe(token, channelKey);
-      } catch (e) {
-        if (axios.isAxiosError(e)) {
-          const axiosError = e as AxiosError<ErrorResponse>;
-          if (axiosError.response) {
-            alert(axiosError.response.data.message);
-            return;
-          }
-          alert(e);
-        }
-      }
-      return;
-    }
-    alert('FCM登録トークンを取得してください');
-  }, [channelKey, token]);
 
   useEffect(() => {
     getPermissionAuthStatus().catch(e => log.trace(`Failed to get permission status. cause=[${String(e)}]`));

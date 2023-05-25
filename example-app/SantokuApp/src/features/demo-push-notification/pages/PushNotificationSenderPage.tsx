@@ -1,4 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
+import axios, {AxiosError} from 'axios';
 import {log} from 'bases/logging';
 import {Box, StyledSafeAreaView, StyledScrollView, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledButton} from 'bases/ui/common/StyledButton';
@@ -13,8 +14,10 @@ import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAn
 import React, {useCallback, useEffect, useState} from 'react';
 import {Pressable, Switch} from 'react-native';
 
+import {ErrorResponse} from '../../sandbox/apis/model';
 import {usePushNotificationSenderForm} from '../forms/usePushNotificationSenderForm';
 import {getFcmToken} from '../services/getFcmToken';
+import {notifyMessageToMe as callNotifyMessageToMe} from '../services/notifyMessageToMe';
 
 const channels = [
   {value: undefined, label: 'No channel'},
@@ -102,6 +105,26 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     },
     [setFormChannel],
   );
+
+  const notifyMessageToMe = useCallback(async () => {
+    const fcmToken = await getFcmToken();
+    if (fcmToken) {
+      try {
+        await callNotifyMessageToMe(fcmToken, form.values.channel);
+      } catch (e) {
+        if (axios.isAxiosError(e)) {
+          const axiosError = e as AxiosError<ErrorResponse>;
+          if (axiosError.response) {
+            alert(axiosError.response.data.message);
+            return;
+          }
+          alert(e);
+        }
+      }
+      return;
+    }
+    alert('FCM登録トークンを取得してください');
+  }, [form.values.channel]);
 
   const [isReceivableOnThisDevice, setIsReceivableOnThisDevice] = useState(false);
   useEffect(() => {
@@ -270,6 +293,7 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
           title="自分に送信"
           opacity={isReceivableOnThisDevice ? 1 : 0.5}
           disabled={!isReceivableOnThisDevice}
+          onPress={notifyMessageToMe}
         />
       </StyledRow>
     </StyledSafeAreaView>
