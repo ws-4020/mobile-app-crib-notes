@@ -102,34 +102,38 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
           <StyledSpace height="p12" />
           <Text>【共通設定】</Text>
           <StyledColumn p="p24" gap="p12">
-            <StyledTextInput
-              value={form.values.notificationTitle}
-              onChangeText={form.handleChange('notificationTitle')}
-              borderBottomWidth={1}
-              multiline
-              placeholder="通知タイトルを入力してください"
-            />
-            <StyledTextInput
-              value={form.values.notificationBody}
-              onChangeText={form.handleChange('notificationBody')}
-              borderBottomWidth={1}
-              multiline
-              placeholder="通知ボディを入力してください"
-            />
-            <StyledTextInput
-              value={form.values.badgeCount}
-              onChangeText={form.handleChange('badgeCount')}
-              keyboardType="numeric"
-              borderBottomWidth={1}
-              errorMessage={form.errors.badgeCount}
-              placeholder="バッチ数を入力してください"
-            />
-            <StyledTextInput
-              value={form.values.collapseKey}
-              onChangeText={form.handleChange('collapseKey')}
-              borderBottomWidth={1}
-              placeholder="CollapseKeyを入力してください"
-            />
+            <WithLabel label="通知タイトル">
+              <StyledTextInput
+                value={form.values.notificationTitle}
+                onChangeText={form.handleChange('notificationTitle')}
+                borderBottomWidth={1}
+                multiline
+              />
+            </WithLabel>
+            <WithLabel label="通知ボディ">
+              <StyledTextInput
+                value={form.values.notificationBody}
+                onChangeText={form.handleChange('notificationBody')}
+                borderBottomWidth={1}
+                multiline
+              />
+            </WithLabel>
+            <WithLabel label="バッジ数">
+              <StyledTextInput
+                value={form.values.badgeCount}
+                onChangeText={form.handleChange('badgeCount')}
+                keyboardType="numeric"
+                borderBottomWidth={1}
+                errorMessage={form.errors.badgeCount}
+              />
+            </WithLabel>
+            <WithLabel label="CollapseKey">
+              <StyledTextInput
+                value={form.values.collapseKey}
+                onChangeText={form.handleChange('collapseKey')}
+                borderBottomWidth={1}
+              />
+            </WithLabel>
             <StyledRow space="p8" alignItems="center">
               <Text>データ属性の追加</Text>
               <Pressable onPress={addDataField}>
@@ -174,56 +178,48 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
               <Text>content-available</Text>
               <Switch value={form.values.contentAvailable} onValueChange={setFormContentAvailable} />
             </StyledRow>
-            <SelectPicker
-              items={priorities}
-              selectedItemKey={form.values.priority}
-              onSelectedItemChange={onSelectedPriorityChange}
-              textInputProps={{style: {borderBottomWidth: 1, borderBottomColor: 'gray'}}}
-              textInputComponent={
-                <StyledTextInput
-                  value={form.values.priority}
-                  borderBottomWidth={1}
-                  editable={false}
-                  placeholder="Priorityを選択してください"
-                />
-              }
-            />
-            <SelectPicker
-              items={interruptionLevels}
-              selectedItemKey={form.values.interruptionLevel}
-              onSelectedItemChange={onSelectedInterruptionLevelsKeyChange}
-              textInputComponent={
-                <StyledTextInput
-                  value={form.values.interruptionLevel}
-                  borderBottomWidth={1}
-                  editable={false}
-                  placeholder="InterruptionLevelを選択してください"
-                />
-              }
-            />
-            <StyledTextInput
-              value={form.values.relevanceScore}
-              onChangeText={form.handleChange('relevanceScore')}
-              borderBottomWidth={1}
-              errorMessage={form.errors.relevanceScore}
-              placeholder="RelevanceScoreを入力してください"
-            />
+            <WithLabel label="Priority">
+              <SelectPicker
+                items={priorities}
+                selectedItemKey={form.values.priority}
+                onSelectedItemChange={onSelectedPriorityChange}
+                textInputProps={{style: {borderBottomWidth: 1, borderBottomColor: 'gray'}}}
+                textInputComponent={
+                  <StyledTextInput value={form.values.priority} borderBottomWidth={1} editable={false} />
+                }
+              />
+            </WithLabel>
+            <WithLabel label="InterruptionLevel">
+              <SelectPicker
+                items={interruptionLevels}
+                selectedItemKey={form.values.interruptionLevel}
+                onSelectedItemChange={onSelectedInterruptionLevelsKeyChange}
+                textInputComponent={
+                  <StyledTextInput value={form.values.interruptionLevel} borderBottomWidth={1} editable={false} />
+                }
+              />
+            </WithLabel>
+            <WithLabel label="RelevanceScore">
+              <StyledTextInput
+                value={form.values.relevanceScore}
+                onChangeText={form.handleChange('relevanceScore')}
+                borderBottomWidth={1}
+                errorMessage={form.errors.relevanceScore}
+              />
+            </WithLabel>
           </StyledColumn>
           <Text>【Android設定】</Text>
           <StyledColumn p="p24" gap="p12">
-            <SelectPicker
-              items={channels}
-              selectedItemKey={form.values.channel}
-              onSelectedItemChange={onSelectedChannelChange}
-              textInputComponent={
-                <StyledTextInput
-                  value={form.values.channel}
-                  borderBottomWidth={1}
-                  editable={false}
-                  placeholder="チャンネルを選択してください"
-                />
-              }
-            />
+            <WithLabel label="チャンネル">
+              <SelectPicker
+                items={channels}
+                selectedItemKey={form.values.channel}
+                onSelectedItemChange={onSelectedChannelChange}
+                textInputComponent={
+                  <StyledTextInput value={form.values.channel} borderBottomWidth={1} editable={false} />
+                }
+              />
+            </WithLabel>
           </StyledColumn>
           <StyledRow justifyContent="center" gap="p16">
             <StyledButton title="一斉送信" />
@@ -232,5 +228,17 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
         </Box>
       </StyledScrollView>
     </StyledSafeAreaView>
+  );
+};
+
+const WithLabel: React.FC<React.PropsWithChildren<{label: string}>> = ({label, children}) => {
+  return (
+    <StyledColumn>
+      <Text>{label}</Text>
+      <StyledRow>
+        <StyledSpace width="p8" />
+        <Box flex={1}>{children}</Box>
+      </StyledRow>
+    </StyledColumn>
   );
 };
