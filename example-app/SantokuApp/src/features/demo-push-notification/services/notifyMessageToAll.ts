@@ -13,7 +13,7 @@ export type PushNotificationParams = {
   priority?: string;
   interruptionLevel?: string;
   relevanceScore?: string;
-  channel?: string;
+  channelId?: string;
 };
 export const notifyMessageToAll = (params: PushNotificationParams) =>
   axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/all`, params);

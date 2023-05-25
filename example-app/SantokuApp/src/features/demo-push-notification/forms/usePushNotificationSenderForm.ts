@@ -14,7 +14,7 @@ export type FormValues = {
   priority?: string;
   interruptionLevel?: string;
   relevanceScore: string;
-  channel?: string;
+  channelId?: string;
 };
 
 const formValidationSchema = yup.object().shape({

@@ -155,7 +155,7 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     if (fcmToken) {
       // FCMトークンが取得できていない場合は、自分に送信ボタンが活性化しないため、必ず存在する想定
       try {
-        await callNotifyMessageToMe(fcmToken, form.values.channel);
+        await callNotifyMessageToMe(fcmToken, form.values.channelId);
       } catch (e) {
         if (axios.isAxiosError(e)) {
           const axiosError = e as AxiosError<ErrorResponse>;
@@ -167,7 +167,7 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
         }
       }
     }
-  }, [fcmToken, form.values.channel]);
+  }, [fcmToken, form.values.channelId]);
 
   return (
     <StyledSafeAreaView flex={1}>
@@ -316,10 +316,10 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
           <WithLabel label="チャンネル">
             <SelectPicker
               items={channels}
-              selectedItemKey={form.values.channel}
+              selectedItemKey={form.values.channelId}
               onSelectedItemChange={onSelectedChannelChange}
               textInputComponent={
-                <StyledTextInput value={form.values.channel} borderBottomWidth={1} editable={false} />
+                <StyledTextInput value={form.values.channelId} borderBottomWidth={1} editable={false} />
               }
             />
           </WithLabel>
