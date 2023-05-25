@@ -1,39 +1,21 @@
 import type {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import messaging from '@react-native-firebase/messaging';
-import axios, {AxiosError} from 'axios';
 import {log} from 'bases/logging';
 import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
-import {Item} from 'bases/ui/picker/SelectPicker';
-import {ErrorResponse} from 'features/sandbox/apis/model';
 import React, {useCallback, useEffect, useState} from 'react';
-import {StyleSheet} from 'react-native';
 
 import {StyledButton} from '../../../bases/ui/common/StyledButton';
 import {StyledColumn} from '../../../bases/ui/common/StyledColumn';
 import {StyledRow} from '../../../bases/ui/common/StyledRow';
 import {getFcmToken} from '../services/getFcmToken';
-import {notifyMessageToAll as callNotifyMessageToAll} from '../services/notifyMessageToAll';
 import {openSettings} from '../services/openSettings';
 import {requestUserPermission as requestUserPermissionService} from '../services/requestUserPermission';
 
 type PermissionAuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
 
-const channels = [
-  {value: undefined, label: 'No channel'},
-  {value: 'emergencyChannel', label: 'Emergency notification'},
-  {value: 'highChannel', label: 'High notification'},
-  {value: 'middleChannel', label: 'Middle notification'},
-  {value: 'lowChannel', label: 'Low notification'},
-];
-
 export const PushNotificationStatusPage: React.FC = () => {
   const [permissionAuthStatus, setPermissionAuthStatus] = useState<PermissionAuthStatusType>();
   const [token, setToken] = useState<string>();
-
-  const [channelKey, setChannelKey] = useState<string>();
-  const onSelectedChannelChange = useCallback((selectedItem?: Item<string | undefined>) => {
-    setChannelKey(selectedItem?.value);
-  }, []);
 
   const getPermissionAuthStatusForDisplay = useCallback(
     (permissionAuthStatus: FirebaseMessagingTypes.AuthorizationStatus) => {
@@ -77,28 +59,13 @@ export const PushNotificationStatusPage: React.FC = () => {
     setToken(fcmToken);
   }, []);
 
-  const notifyMessageToAll = useCallback(async () => {
-    try {
-      await callNotifyMessageToAll(channelKey);
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        const axiosError = e as AxiosError<ErrorResponse>;
-        if (axiosError.response) {
-          alert(axiosError.response.data.message);
-          return;
-        }
-        alert(e);
-      }
-    }
-  }, [channelKey]);
-
   useEffect(() => {
     getPermissionAuthStatus().catch(e => log.trace(`Failed to get permission status. cause=[${String(e)}]`));
     getToken().catch(e => log.trace(`Failed to get token. cause=[${String(e)}]`));
   }, [getPermissionAuthStatus, getToken]);
 
   return (
-    <StyledSafeAreaView style={styles.container}>
+    <StyledSafeAreaView>
       <StyledScrollView contentInsetAdjustmentBehavior="automatic">
         <Box flex={1} p="p12">
           <Text>【Permission】</Text>
@@ -132,17 +99,3 @@ Firebaseの設定ファイルが正しくない可能性があります。`}
     </StyledSafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-  },
-  notificationMessageContainer: {},
-  divider: {
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  elementContainer: {
-    padding: 20,
-  },
-});
