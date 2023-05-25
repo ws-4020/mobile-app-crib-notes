@@ -18,7 +18,7 @@ import {Pressable, Switch} from 'react-native';
 
 import {usePushNotificationSenderForm} from '../forms/usePushNotificationSenderForm';
 import {getFcmToken} from '../services/getFcmToken';
-import {notifyMessageToAll as callNotifyMessageToAll, PushNotificationParams} from '../services/notifyMessageToAll';
+import {notifyMessageToAll as callNotifyMessageToAll} from '../services/notifyMessageToAll';
 import {notifyMessageToMe as callNotifyMessageToMe} from '../services/notifyMessageToMe';
 
 const channels = [
@@ -45,6 +45,17 @@ const interruptionLevels = [
   {value: 'time-sensitive', label: 'time-sensitive'},
   {value: 'critical', label: 'critical'},
 ];
+
+const handleApiError = (e: unknown) => {
+  if (axios.isAxiosError(e)) {
+    const axiosError = e as AxiosError<ErrorResponse>;
+    if (axiosError.response) {
+      alert(axiosError.response.data.message);
+      return;
+    }
+    alert(e);
+  }
+};
 
 export type PushNotificationSenderPageProps = {
   navigateToPushNotificationStatus: () => void;
@@ -122,52 +133,43 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     [hasFcmToken, isAllowedPermission, isRegisteredDeviceToken],
   );
 
+  const generatePushNotificationParams = useCallback(() => {
+    // string型の入力項目は、空文字の場合は送信しないため除外する
+    const filteredStringField = Object.entries(form.values)
+      .filter(([_, value]) => {
+        return typeof value === 'string' ? value : true;
+      })
+      .reduce((acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      }, {} as {[key: string]: any});
+    // Data属性は、Keyが入力されていないものは送信しないため除外する
+    const filteredData = form.values.data.filter(f => f.key);
+    return {...filteredStringField, data: filteredData};
+  }, [form.values]);
+
   const notifyMessageToAll = useCallback(async () => {
     try {
       if (form.isValid) {
-        // string型の入力項目は、空文字の場合は送信しないため除外する
-        const filteredStringField = Object.entries(form.values)
-          .filter(([_, value]) => {
-            return typeof value === 'string' ? value : true;
-          })
-          .reduce((acc, [key, value]) => {
-            acc[key] = value;
-            return acc;
-          }, {} as {[key: string]: any});
-        // Data属性は、Keyが入力されていないものは送信しないため除外する
-        const filteredData = form.values.data.filter(f => f.key);
-        const params: PushNotificationParams = {...filteredStringField, data: filteredData};
-        await callNotifyMessageToAll(params);
+        await callNotifyMessageToAll(generatePushNotificationParams());
       }
     } catch (e) {
-      if (axios.isAxiosError(e)) {
-        const axiosError = e as AxiosError<ErrorResponse>;
-        if (axiosError.response) {
-          alert(axiosError.response.data.message);
-          return;
-        }
-        alert(e);
-      }
+      handleApiError(e);
     }
-  }, [form.isValid, form.values]);
+  }, [form.isValid, generatePushNotificationParams]);
 
   const notifyMessageToMe = useCallback(async () => {
     if (fcmToken) {
       // FCMトークンが取得できていない場合は、自分に送信ボタンが活性化しないため、必ず存在する想定
       try {
-        await callNotifyMessageToMe(fcmToken, form.values.channelId);
-      } catch (e) {
-        if (axios.isAxiosError(e)) {
-          const axiosError = e as AxiosError<ErrorResponse>;
-          if (axiosError.response) {
-            alert(axiosError.response.data.message);
-            return;
-          }
-          alert(e);
+        if (form.isValid) {
+          await callNotifyMessageToMe(fcmToken, generatePushNotificationParams());
         }
+      } catch (e) {
+        handleApiError(e);
       }
     }
-  }, [fcmToken, form.values.channelId]);
+  }, [fcmToken, form.isValid, generatePushNotificationParams]);
 
   return (
     <StyledSafeAreaView flex={1}>
