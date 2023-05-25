@@ -266,7 +266,11 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
       </StyledScrollView>
       <StyledRow justifyContent="center" gap="p16">
         <StyledButton title="一斉送信" />
-        <StyledButton title="自分に送信" />
+        <StyledButton
+          title="自分に送信"
+          opacity={isReceivableOnThisDevice ? 1 : 0.5}
+          disabled={!isReceivableOnThisDevice}
+        />
       </StyledRow>
     </StyledSafeAreaView>
   );
