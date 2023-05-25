@@ -21,11 +21,6 @@ export type DataType = {
 };
 
 const formValidationSchema = yup.object().shape({
-  data: yup.array().of(
-    yup.object().shape({
-      key: yup.string().label('キー').required(),
-    }),
-  ),
   badgeCount: yup.number().label('バッチ数'),
   relevanceScore: yup.number().label('RelevanceScore').min(0).max(1),
 });
@@ -35,7 +30,7 @@ export const formInitialValues: FormValues = {
   notificationBody: '',
   badgeCount: '',
   collapseKey: '',
-  data: [],
+  data: [{key: '', value: ''}],
   contentAvailable: false,
   relevanceScore: '',
 };
@@ -51,9 +46,7 @@ export const usePushNotificationSenderForm = () => {
 
   const setFormDataKey = useCallback(
     async (value: string, index: number) => {
-      await form.setFieldValue(`data[${index}].key`, value, true);
-      // 入力があった場合はtouchedにして、バリデーションエラーメッセージを表示をする
-      await form.setFieldTouched(`data[${index}].key`, true);
+      await form.setFieldValue(`data[${index}].key`, value);
     },
     [form],
   );
@@ -95,27 +88,14 @@ export const usePushNotificationSenderForm = () => {
         value: '',
       },
     ];
-    await form.setFieldValue('data', data, false);
-    // フィールド追加時にバリデーションエラーメッセージが表示されないように、touchedをfalseにする
-    await form.setFieldTouched(`data[${data.length - 1}].key`, false, false);
+    await form.setFieldValue('data', data);
   }, [form]);
 
   const removeDataField = useCallback(
     async (index: number) => {
       const values = [...form.values.data];
       values.splice(index, 1);
-      await form.setFieldValue('data', values, false);
-
-      if (form.touched.data) {
-        const touched = form.touched.data;
-        touched.splice(index, 1);
-        await form.setTouched({...form.touched, data: touched}, false);
-      }
-      if (Array.isArray(form.errors.data)) {
-        const errors = form.errors.data;
-        errors.splice(index, 1);
-        form.setErrors({...form.errors, data: errors});
-      }
+      await form.setFieldValue('data', values);
     },
     [form],
   );

@@ -138,12 +138,6 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
                       <StyledTextInput
                         value={d.key}
                         onChangeText={text => setFormDataKey(text, index)}
-                        errorMessage={
-                          // 一度でも入力があった場合はtouchedにになる
-                          form.getFieldMeta(`data[${index}].key`).touched
-                            ? form.getFieldMeta(`data[${index}].key`).error
-                            : undefined
-                        }
                         borderBottomWidth={1}
                         placeholder="Key"
                       />
@@ -223,7 +217,6 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
               }
             />
           </StyledColumn>
-
           <StyledRow justifyContent="center" gap="p16">
             <StyledButton title="一斉送信" />
             <StyledButton title="自分に送信" />
