@@ -81,14 +81,18 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
       <StyledScrollView contentInsetAdjustmentBehavior="automatic">
         <Box flex={1} p="p12">
           <SpecAndSourceCodeLink feature="push-notification" />
-          <StyledRow>
-            <Text>【プッシュ通知受信ステータス】：</Text>
-            <StyledTouchableOpacity onPress={navigateToPushNotificationStatus}>
-              <Text color="blue" fontWeight="bold">
-                ○
-              </Text>
-            </StyledTouchableOpacity>
-          </StyledRow>
+          <Text>【このデバイスのプッシュ通知受信可否】</Text>
+          <Box p="p16">
+            <Text color="textRed" fontWeight="bold">
+              このデバイスではプッシュ通知を受信できません。
+              <StyledRow>
+                <StyledTouchableOpacity onPress={navigateToPushNotificationStatus}>
+                  <Text color="blue">設定を確認</Text>
+                </StyledTouchableOpacity>
+                <Text>してください。</Text>
+              </StyledRow>
+            </Text>
+          </Box>
           <StyledSpace height="p12" />
           <Text>【共通設定】</Text>
           <StyledColumn p="p24" gap="p12">
@@ -219,6 +223,7 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
               }
             />
           </StyledColumn>
+
           <StyledRow justifyContent="center" gap="p16">
             <StyledButton title="一斉送信" />
             <StyledButton title="自分に送信" />
