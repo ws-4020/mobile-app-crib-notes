@@ -17,6 +17,7 @@ import {Pressable, Switch} from 'react-native';
 import {ErrorResponse} from '../../sandbox/apis/model';
 import {usePushNotificationSenderForm} from '../forms/usePushNotificationSenderForm';
 import {getFcmToken} from '../services/getFcmToken';
+import {notifyMessageToAll as callNotifyMessageToAll, PushNotificationParams} from '../services/notifyMessageToAll';
 import {notifyMessageToMe as callNotifyMessageToMe} from '../services/notifyMessageToMe';
 
 const channels = [
@@ -105,6 +106,35 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     },
     [setFormChannel],
   );
+
+  const notifyMessageToAll = useCallback(async () => {
+    try {
+      if (form.isValid) {
+        // string型の入力項目は、空文字の場合は送信しないため除外する
+        const filteredStringField = Object.entries(form.values)
+          .filter(([_, value]) => {
+            return typeof value === 'string' ? value : true;
+          })
+          .reduce((acc, [key, value]) => {
+            acc[key] = value;
+            return acc;
+          }, {} as {[key: string]: any});
+        // Data属性は、Keyが入力されていないものは送信しないため除外する
+        const filteredData = form.values.data.filter(f => f.key);
+        const params: PushNotificationParams = {...filteredStringField, data: filteredData};
+        await callNotifyMessageToAll(params);
+      }
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        const axiosError = e as AxiosError<ErrorResponse>;
+        if (axiosError.response) {
+          alert(axiosError.response.data.message);
+          return;
+        }
+        alert(e);
+      }
+    }
+  }, [form.isValid, form.values]);
 
   const notifyMessageToMe = useCallback(async () => {
     const fcmToken = await getFcmToken();
@@ -288,7 +318,7 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
         </StyledColumn>
       </StyledScrollView>
       <StyledRow justifyContent="center" gap="p16">
-        <StyledButton title="一斉送信" />
+        <StyledButton title="一斉送信" onPress={notifyMessageToAll} />
         <StyledButton
           title="自分に送信"
           opacity={isReceivableOnThisDevice ? 1 : 0.5}

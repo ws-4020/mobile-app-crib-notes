@@ -2,7 +2,9 @@ import {yup} from 'bases/validator';
 import {useFormik} from 'formik';
 import {useCallback} from 'react';
 
-type FormValues = {
+import {DataType} from '../types/DataType';
+
+export type FormValues = {
   notificationTitle: string;
   notificationBody: string;
   badgeCount: string;
@@ -13,11 +15,6 @@ type FormValues = {
   interruptionLevel?: string;
   relevanceScore: string;
   channel?: string;
-};
-
-export type DataType = {
-  key: string;
-  value: string;
 };
 
 const formValidationSchema = yup.object().shape({
