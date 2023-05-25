@@ -134,7 +134,11 @@ export const PushNotificationStatusPage: React.FC = () => {
           </StyledColumn>
           <Text>【FCM登録トークン】</Text>
           <StyledColumn p="p24">
-            <Text selectable>{token ?? 'FCM登録トークンは発行されていません'}</Text>
+            <Text selectable>
+              {token ??
+                `FCM登録トークンは発行されていません。
+Firebaseの設定ファイルが正しくない可能性があります。`}
+            </Text>
           </StyledColumn>
           <Text>【通知設定】</Text>
           <StyledColumn p="p24" space="p12">
