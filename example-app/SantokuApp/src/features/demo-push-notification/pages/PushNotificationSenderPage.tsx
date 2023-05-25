@@ -1,3 +1,5 @@
+import messaging from '@react-native-firebase/messaging';
+import {log} from 'bases/logging';
 import {Box, StyledSafeAreaView, StyledScrollView, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledButton} from 'bases/ui/common/StyledButton';
 import {StyledColumn} from 'bases/ui/common/StyledColumn';
@@ -8,10 +10,11 @@ import {AddIllustration} from 'bases/ui/illustration/AddIllustration';
 import {RemoveIllustration} from 'bases/ui/illustration/RemoveIllustration';
 import {Item, SelectPicker} from 'bases/ui/picker/SelectPicker';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Pressable, Switch} from 'react-native';
 
 import {usePushNotificationSenderForm} from '../forms/usePushNotificationSenderForm';
+import {getFcmToken} from '../services/getFcmToken';
 
 const channels = [
   {value: undefined, label: 'No channel'},
@@ -41,6 +44,30 @@ const interruptionLevels = [
 export type PushNotificationSenderPageProps = {
   navigateToPushNotificationStatus: () => void;
 };
+
+const isAllowedPermission = async () => {
+  try {
+    const permissionAuthStatus = await messaging().hasPermission();
+    return (
+      permissionAuthStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      permissionAuthStatus === messaging.AuthorizationStatus.PROVISIONAL
+    );
+  } catch (e) {
+    log.trace(`Failed to get permission status. cause=[${String(e)}]`);
+    throw e;
+  }
+};
+const canGetFcmToken = async () => {
+  try {
+    const fcmToken = await getFcmToken();
+    return !!fcmToken;
+  } catch (e) {
+    log.trace(`Failed to get token. cause=[${String(e)}]`);
+    throw e;
+  }
+};
+
+const isReceivablePushNotification = async () => (await isAllowedPermission()) && (await canGetFcmToken());
 export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProps> = ({
   navigateToPushNotificationStatus,
 }) => {
@@ -76,6 +103,18 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     [setFormChannel],
   );
 
+  const [isReceivable, setIsReceivable] = useState(false);
+  useEffect(() => {
+    isReceivablePushNotification()
+      .then(result => {
+        setIsReceivable(result);
+      })
+      .catch(() => {
+        setIsReceivable(false);
+        // エラー時のログは呼び出し先で出力しているのでここでは出力しない
+      });
+  }, []);
+
   return (
     <StyledSafeAreaView>
       <StyledScrollView contentInsetAdjustmentBehavior="automatic">
@@ -85,15 +124,19 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
           <StyledSpace height="p12" />
           <Text>【このデバイスのプッシュ通知受信可否】</Text>
           <Box p="p16">
-            <Text color="textRed" fontWeight="bold">
-              このデバイスではプッシュ通知を受信できません。
-              <StyledRow>
-                <StyledTouchableOpacity onPress={navigateToPushNotificationStatus}>
-                  <Text color="blue">設定を確認</Text>
-                </StyledTouchableOpacity>
-                <Text>してください。</Text>
-              </StyledRow>
-            </Text>
+            {isReceivable ? (
+              <Text>このデバイスでプッシュ通知を受信可能です。</Text>
+            ) : (
+              <Text color="textRed" fontWeight="bold">
+                このデバイスではプッシュ通知を受信できません。
+                <StyledRow>
+                  <StyledTouchableOpacity onPress={navigateToPushNotificationStatus}>
+                    <Text color="blue">設定を確認</Text>
+                  </StyledTouchableOpacity>
+                  <Text>してください。</Text>
+                </StyledRow>
+              </Text>
+            )}
           </Box>
           <Box flex={1} height={1} px="p16" backgroundColor="grey1" />
           <StyledSpace height="p12" />
