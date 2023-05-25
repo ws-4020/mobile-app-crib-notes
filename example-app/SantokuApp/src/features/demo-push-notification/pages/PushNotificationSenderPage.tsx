@@ -134,7 +134,7 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
                 borderBottomWidth={1}
               />
             </WithLabel>
-            <StyledRow space="p8" alignItems="center">
+            <StyledRow gap="p8" alignItems="center">
               <Text>データ属性の追加</Text>
               <Pressable onPress={addDataField}>
                 <AddIllustration color="blue" />
@@ -145,7 +145,7 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
             <StyledColumn>
               {form.values.data.map((d, index) => {
                 return (
-                  <StyledRow key={`data-${index}`} space="p24">
+                  <StyledRow key={`data-${index}`} gap="p24">
                     <Box flex={2}>
                       <StyledTextInput
                         value={d.key}
