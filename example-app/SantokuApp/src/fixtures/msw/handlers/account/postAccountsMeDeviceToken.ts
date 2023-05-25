@@ -11,7 +11,7 @@ import {passthrough} from '../../utils/passthrough';
 export const postAccountsMeDeviceToken = rest.post(`${backendUrl}/accounts/me/device-token`, async (req, res, ctx) => {
   try {
     // バックエンドのAPIを呼び出す
-    await passthrough('postAccountsMeDeviceToken', req, ctx);
+    await passthrough(req, ctx);
   } catch {
     /**
      デバイストークンの登録に関しては、バックエンドにデバイストークンが登録されない可能性がある。

@@ -11,7 +11,7 @@ import {passthrough} from '../../utils/passthrough';
 export const postLogin = rest.post(`${backendUrl}/login`, async (req, res, ctx) => {
   try {
     // バックエンドのAPIを呼び出す
-    await passthrough('postLogin', req, ctx);
+    await passthrough(req, ctx);
   } catch {
     // passthroughでエラーハンドリングしているのでここでは何もしない
   }

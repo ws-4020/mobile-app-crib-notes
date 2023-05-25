@@ -1,4 +1,4 @@
-import {initializePassthroughServiceErrors, passthrough} from 'fixtures/msw/utils/passthrough';
+import {passthrough} from 'fixtures/msw/utils/passthrough';
 import {rest} from 'msw';
 
 import {setLoggedInAccountId} from './setLoggedInAccountId';
@@ -9,12 +9,10 @@ import {errorResponse} from '../../utils/errorResponse';
 export const postLogout = rest.post(`${backendUrl}/logout`, async (req, res, ctx) => {
   try {
     // バックエンドのAPIを呼び出す
-    await passthrough('postLogout', req, ctx);
+    await passthrough(req, ctx);
   } catch {
     // passthroughでエラーハンドリングしているのでここでは何もしない
   }
-  // ログアウト後は、passthroughしたAPIのエラーをクリアする
-  initializePassthroughServiceErrors();
   try {
     setLoggedInAccountId('');
 

@@ -10,7 +10,7 @@ export const getSystemCsrfToken = rest.get(`${backendUrl}/system/csrf-token`, as
   let response: Response | undefined;
   try {
     // バックエンドのAPIを呼び出す
-    response = await passthrough('getSystemCsrfToken', req, ctx);
+    response = await passthrough(req, ctx);
   } catch {
     // passthroughでエラーハンドリングしているのでここでは何もしない
   }
