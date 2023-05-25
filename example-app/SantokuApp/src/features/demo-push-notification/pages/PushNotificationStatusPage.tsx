@@ -123,13 +123,13 @@ export const PushNotificationStatusPage: React.FC = () => {
         <Box flex={1} p="p12">
           <Text>【Permission】</Text>
           <StyledColumn p="p24" space="p12">
-            <Text>現在のステータス：{permissionAuthStatus ?? 'Permissionのステータスが表示されます'}</Text>
+            <Text>現在のステータス：{permissionAuthStatus ?? 'Permissionのステータスが表示されます。'}</Text>
             <StyledRow justifyContent="center" space="p16">
               <StyledButton onPress={requestUserPermissionWithoutOptions} title="許可" />
               <StyledButton onPress={requestUserPermissionWithProvisional} title="仮許可" />
             </StyledRow>
             <Text>
-              一度でも許可ダイアログで許可もしくは拒否すると、それ以降はステータスを`PROVISIONAL`に変更できなくなります
+              一度でも許可ダイアログで許可もしくは拒否すると、それ以降はステータスを`PROVISIONAL`に変更できなくなります。
             </Text>
           </StyledColumn>
           <Text>【FCM登録トークン】</Text>
@@ -142,7 +142,7 @@ Firebaseの設定ファイルが正しくない可能性があります。`}
           </StyledColumn>
           <Text>【通知設定】</Text>
           <StyledColumn p="p24" space="p12">
-            <Text>OSのアプリ設定画面に遷移します</Text>
+            <Text>OSのアプリ設定画面に遷移します。</Text>
             <StyledRow justifyContent="center">
               <StyledButton onPress={openSettings} title="アプリの設定画面を開く" />
             </StyledRow>
