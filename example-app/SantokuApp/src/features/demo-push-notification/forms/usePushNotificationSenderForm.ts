@@ -72,7 +72,7 @@ export const usePushNotificationSenderForm = () => {
 
   const setFormChannel = useCallback(
     async (value?: string) => {
-      await form.setFieldValue('channel', value);
+      await form.setFieldValue('channelId', value);
     },
     [form],
   );
