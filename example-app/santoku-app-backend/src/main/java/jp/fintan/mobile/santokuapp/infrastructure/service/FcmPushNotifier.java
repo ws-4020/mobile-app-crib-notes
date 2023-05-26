@@ -216,14 +216,21 @@ public class FcmPushNotifier implements PushNotifier {
   private AndroidConfig createAndroidConfig(PushNotification pushNotification) {
 
     AndroidConfig.Builder androidConfigBuilder = AndroidConfig.builder();
+    if (pushNotification.collapseKey() != null) {
+      androidConfigBuilder.setCollapseKey(pushNotification.collapseKey().value());
+    }
     if (pushNotification.ttl() != null) {
       androidConfigBuilder.setTtl(pushNotification.ttl().value());
     }
-    if (pushNotification.channelId() != null) {
-      AndroidNotification.Builder androidNotificationBuilder = AndroidNotification.builder();
-      androidNotificationBuilder.setChannelId(pushNotification.channelId().value());
-      androidConfigBuilder.setNotification(androidNotificationBuilder.build());
+
+    AndroidNotification.Builder androidNotificationBuilder = AndroidNotification.builder();
+    if (pushNotification.badge() != null) {
+      androidNotificationBuilder.setNotificationCount(pushNotification.badge().value());
     }
+    if (pushNotification.channelId() != null) {
+      androidNotificationBuilder.setChannelId(pushNotification.channelId().value());
+    }
+    androidConfigBuilder.setNotification(androidNotificationBuilder.build());
     return androidConfigBuilder.build();
   }
 }
