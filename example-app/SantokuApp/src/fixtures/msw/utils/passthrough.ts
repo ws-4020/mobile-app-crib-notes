@@ -17,7 +17,7 @@ export const passthrough = async (req: MockedRequest, ctx: RestContext) => {
     response = await ctx.fetch(req);
   } catch (e) {
     // ネットワークエラーなど、レスポンスが返却されない場合
-    handleError(req.url, e, String(e));
+    handleError(req.url, String(e));
     throw e;
   }
   // ステータスコードが200番台の場合は、処理成功とする（300番台は現状使用していないのと、今後もMSWでpassthroughする想定はない）
@@ -25,11 +25,11 @@ export const passthrough = async (req: MockedRequest, ctx: RestContext) => {
   if (response.ok) {
     return response;
   } else {
-    handleError(req.url, response, JSON.stringify(response, null, 2));
+    handleError(req.url, JSON.stringify(response, null, 2));
     throw new ApplicationError(response);
   }
 };
 
-const handleError = (url: URL, cause: unknown, causeString: string) => {
+const handleError = (url: URL, causeString: string) => {
   console.warn(`Failed to passthrough to original request. url = ${url.toString()}. cause = ${causeString}`);
 };
