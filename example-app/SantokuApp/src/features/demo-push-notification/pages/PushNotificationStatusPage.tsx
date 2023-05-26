@@ -69,9 +69,9 @@ export const PushNotificationStatusPage: React.FC = () => {
       <StyledScrollView contentInsetAdjustmentBehavior="automatic">
         <Box flex={1} p="p12">
           <Text>【Permission】</Text>
-          <StyledColumn p="p24" space="p12">
+          <StyledColumn p="p24" gap="p12">
             <Text>現在のステータス：{permissionAuthStatus ?? 'Permissionのステータスが表示されます。'}</Text>
-            <StyledRow justifyContent="center" space="p16">
+            <StyledRow justifyContent="center" gap="p16">
               <StyledButton onPress={requestUserPermissionWithoutOptions} title="許可" />
               <StyledButton onPress={requestUserPermissionWithProvisional} title="仮許可" />
             </StyledRow>
@@ -88,7 +88,7 @@ Firebaseの設定ファイルが正しくない可能性があります。`}
             </Text>
           </StyledColumn>
           <Text>【通知設定】</Text>
-          <StyledColumn p="p24" space="p12">
+          <StyledColumn p="p24" gap="p12">
             <Text>OSのアプリ設定画面に遷移します。</Text>
             <StyledRow justifyContent="center">
               <StyledButton onPress={openSettings} title="アプリの設定画面を開く" />
