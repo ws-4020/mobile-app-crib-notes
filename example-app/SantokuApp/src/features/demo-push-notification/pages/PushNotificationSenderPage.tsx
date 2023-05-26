@@ -145,7 +145,7 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
       }, {} as {[key: string]: any});
     // Data属性は、Keyが入力されていないものは送信しないため除外する
     const filteredData = form.values.data.filter(f => f.key);
-    return {...filteredStringField, data: filteredData};
+    return {...filteredStringField, data: filteredData.length ? filteredData : undefined};
   }, [form.values]);
 
   const notifyMessageToAll = useCallback(async () => {
