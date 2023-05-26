@@ -205,8 +205,7 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
         <Text>プッシュ通知として送るパラメータを入力してください。</Text>
         <Text>未入力の項目は、バックエンドに送信されません。</Text>
         <StyledSpace height="p12" />
-        <Text>【共通設定】</Text>
-        <StyledColumn p="p24" gap="p12">
+        <SettingBox title="【共通設定】">
           <WithLabel label="通知タイトル">
             <StyledTextInput
               value={form.values.notificationTitle}
@@ -276,9 +275,8 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
               );
             })}
           </StyledColumn>
-        </StyledColumn>
-        <Text>【iOS設定】</Text>
-        <StyledColumn p="p24" gap="p12">
+        </SettingBox>
+        <SettingBox title="【iOS設定】">
           <StyledRow alignItems="center" justifyContent="space-between" gap="p4">
             <Text>content-available</Text>
             <Switch value={form.values.contentAvailable} onValueChange={setFormContentAvailable} />
@@ -312,9 +310,8 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
               errorMessage={form.errors.relevanceScore}
             />
           </WithLabel>
-        </StyledColumn>
-        <Text>【Android設定】</Text>
-        <StyledColumn p="p24" gap="p12">
+        </SettingBox>
+        <SettingBox title="【Android設定】">
           <WithLabel label="チャンネル">
             <SelectPicker
               items={channels}
@@ -325,7 +322,7 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
               }
             />
           </WithLabel>
-        </StyledColumn>
+        </SettingBox>
       </StyledScrollView>
       <StyledRow justifyContent="center" gap="p16">
         <StyledButton title="一斉送信" onPress={notifyMessageToAll} />
@@ -340,6 +337,16 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
   );
 };
 
+const SettingBox: React.FC<React.PropsWithChildren<{title: string}>> = ({title, children}) => {
+  return (
+    <Box>
+      <Text>{title}</Text>
+      <StyledColumn p="p24" gap="p12">
+        {children}
+      </StyledColumn>
+    </Box>
+  );
+};
 const WithLabel: React.FC<React.PropsWithChildren<{label: string}>> = ({label, children}) => {
   return (
     <StyledColumn>
