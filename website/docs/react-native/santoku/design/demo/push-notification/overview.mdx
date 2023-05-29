@@ -59,6 +59,23 @@ iOS12以降の場合は、上述した許可ダイアログでユーザが許可
 バックエンドのAPIを実行してプッシュ通知を送信します。
 プッシュ通知を送信するバックエンドのソースコードは[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/santoku-app-backend/src/main/java/jp/fintan/mobile/santokuapp/infrastructure/service/FcmPushNotifier.java)です。
 
+プッシュ通知を送信するパラメータとして、以下の項目を画面から指定できます。
+
+- [通知タイトル](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Notification.FIELDS.title)
+- [通知ボディ](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Notification.FIELDS.body)
+- バッジ数
+  - [badge（iOS）](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification)
+  - [notification_count（Android）](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#AndroidNotification.FIELDS.notification_count)
+- CollapseKey
+  - [apns-collapse-id（iOS）](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns#2947607)
+  - [collapse_key（Android）](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#AndroidConfig.FIELDS.collapse_key)
+- [データ属性（複数可）](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Message.FIELDS.data)
+- [content-available（iOS）](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification#2943360)
+- [Priority（iOS）](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns#2947607)
+- [InterruptionLevel（iOS）](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification#2943360)
+- [RelevanceScore（iOS）](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification#2943360)
+- [チャンネル（Android）](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#AndroidNotification.FIELDS.channel_id)
+
 アプリがフォアグラウンドにある場合は、アプリが用意しているスナックバーに通知内容を表示します。
 アプリがバックグラウンドにある場合、もしくはアプリを起動していない場合は、OSによって挙動が変わります。
 
@@ -73,7 +90,13 @@ Androidの場合は、チャンネルの重要度によって挙動が変わり�
 | middleChannel | 中 | 音が鳴りません。 |
 | lowChannel | 低 | 音が鳴らず、ステータスバーにも表示されません。 |
 
-なお、チャンネルを指定しないでプッシュ通知を送信した場合は、`emergencyChannel`に通知されます。
+チャンネルを指定しないでプッシュ通知を送信した場合は、`emergencyChannel`に通知されます。
+
+プッシュ通知送信時のパラメータの詳細に関しては、以下のドキュメントを参考にしてください。
+
+- [Firebase - FCM REST API](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages)
+- [Apple - Generating a remote notification](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification)
+- [Apple - Sending notification requests to APNs](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns)
 
 ### 受信時のイメージ
 
