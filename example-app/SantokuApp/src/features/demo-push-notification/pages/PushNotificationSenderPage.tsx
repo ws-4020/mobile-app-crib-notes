@@ -133,7 +133,7 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     [hasFcmToken, isAllowedPermission, isRegisteredDeviceToken],
   );
 
-  const generatePushNotificationParams = useCallback(() => {
+  const buildPushNotificationParams = useCallback(() => {
     // string型の入力項目は、空文字の場合は送信しないため除外する
     const filteredStringField = Object.entries(form.values)
       .filter(([_, value]) => {
@@ -151,25 +151,25 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
   const notifyMessageToAll = useCallback(async () => {
     try {
       if (form.isValid) {
-        await callNotifyMessageToAll(generatePushNotificationParams());
+        await callNotifyMessageToAll(buildPushNotificationParams());
       }
     } catch (e) {
       handleApiError(e);
     }
-  }, [form.isValid, generatePushNotificationParams]);
+  }, [form.isValid, buildPushNotificationParams]);
 
   const notifyMessageToMe = useCallback(async () => {
     if (fcmToken) {
       // FCMトークンが取得できていない場合は、自分に送信ボタンが活性化しないため、必ず存在する想定
       try {
         if (form.isValid) {
-          await callNotifyMessageToMe(fcmToken, generatePushNotificationParams());
+          await callNotifyMessageToMe(fcmToken, buildPushNotificationParams());
         }
       } catch (e) {
         handleApiError(e);
       }
     }
-  }, [fcmToken, form.isValid, generatePushNotificationParams]);
+  }, [fcmToken, form.isValid, buildPushNotificationParams]);
 
   return (
     <StyledSafeAreaView flex={1}>
