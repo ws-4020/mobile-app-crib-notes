@@ -109,10 +109,10 @@ const drawRect = (x: number, y: number, width: number, height: number) => {
   return `M${x},${y}h${width}v${height}h-${width}z`;
 };
 
-const drawSvgBarCode = (binary: string, width: number, height: number, barCodeWidth: number, maxWidth?: number) => {
+const drawSvgBarCode = (binary: string, height: number, barCodeWidth: number) => {
   const rects = [];
 
-  const singleBarWidth = maxWidth && barCodeWidth > maxWidth ? maxWidth / binary.length : width;
+  const singleBarWidth = barCodeWidth / binary.length;
   let barWidth = 0;
   let x = 0;
   const yFrom = 0;
@@ -141,7 +141,7 @@ const drawSvgBarCode = (binary: string, width: number, height: number, barCodeWi
 export const Barcode: React.FC<BarcodeProps> = ({
   value = '',
   lineWidth = 2,
-  maxWidth,
+  maxWidth = Infinity,
   height = 100,
   quietZone = 0,
   format = 'CODE128',
@@ -164,10 +164,10 @@ export const Barcode: React.FC<BarcodeProps> = ({
     try {
       const encoder = getEncoder();
       const encoded = encoder.encode();
-      const barCodeWidth = encoded.data.length * lineWidth;
+      const barCodeWidth = Math.min(maxWidth, encoded.data.length * lineWidth);
       return {
-        bars: drawSvgBarCode(encoded.data, lineWidth, height, barCodeWidth, maxWidth).join(' '),
-        barCodeWidth: maxWidth && barCodeWidth > maxWidth ? maxWidth : barCodeWidth,
+        bars: drawSvgBarCode(encoded.data, height, barCodeWidth).join(' '),
+        barCodeWidth,
       };
     } catch (error) {
       onError?.(error);
