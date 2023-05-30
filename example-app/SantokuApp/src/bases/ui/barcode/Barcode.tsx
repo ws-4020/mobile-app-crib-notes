@@ -31,15 +31,15 @@ import {Path, Svg} from 'react-native-svg';
 
 export type Format = 'CODE128' | 'CODE128AUTO';
 export const START_CHARACTERS = {
-  'CODE-A': String.fromCharCode(208),
-  'CODE-B': String.fromCharCode(209),
-  'CODE-C': String.fromCharCode(210),
+  'CODE-A': String.fromCharCode(105 + 103),
+  'CODE-B': String.fromCharCode(105 + 104),
+  'CODE-C': String.fromCharCode(105 + 105),
 };
 
 export const CODE_SET_CHARACTERS = {
-  'CODE-A': String.fromCharCode(206),
-  'CODE-B': String.fromCharCode(205),
-  'CODE-C': String.fromCharCode(204),
+  'CODE-A': String.fromCharCode(105 + 101),
+  'CODE-B': String.fromCharCode(105 + 100),
+  'CODE-C': String.fromCharCode(105 + 99),
 };
 const ENCODERS = {
   CODE128,
