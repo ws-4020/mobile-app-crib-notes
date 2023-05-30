@@ -153,18 +153,12 @@ export const Barcode: React.FC<BarcodeProps> = ({
   onError,
 }) => {
   const getEncoder = useCallback(() => {
-    const encoder = new ENCODERS[format](value, {
-      width: lineWidth,
-      format,
-      height,
-      lineColor,
-      background,
-    });
+    const encoder = new ENCODERS[format](value, {});
     if (!encoder.valid()) {
       throw new Error('Invalid barcode for selected format.');
     }
     return encoder;
-  }, [background, format, height, lineColor, value, lineWidth]);
+  }, [format, value]);
 
   const {bars, barCodeWidth} = useMemo(() => {
     try {
