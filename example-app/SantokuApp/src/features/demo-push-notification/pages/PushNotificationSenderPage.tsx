@@ -74,7 +74,7 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     removeDataField,
   } = usePushNotificationSenderForm();
 
-  const {data: accountData} = useAccountData();
+  const {data: accountData, isFetching: isFetchingAccountData} = useAccountData();
 
   const onSelectedPriorityChange = useCallback(
     (selectedItem?: Item<string | undefined>) => {
@@ -179,7 +179,9 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
         <StyledSpace height="p12" />
         <Text>【このデバイスのプッシュ通知受信可否】</Text>
         <Box p="p16">
-          {isReceivableOnThisDevice ? (
+          {isFetchingAccountData ? (
+            <Text>プッシュ通知受信可否を判定中...</Text>
+          ) : isReceivableOnThisDevice ? (
             <Text>このデバイスでプッシュ通知を受信可能です。</Text>
           ) : (
             <StyledColumn gap="p2">
