@@ -9,7 +9,7 @@ import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {StyledTextInput} from 'bases/ui/common/StyledTextInput';
 import {AddIllustration} from 'bases/ui/illustration/AddIllustration';
 import {RemoveIllustration} from 'bases/ui/illustration/RemoveIllustration';
-import {Item, SelectPicker} from 'bases/ui/picker/SelectPicker';
+import {SelectPicker} from 'bases/ui/picker/SelectPicker';
 import {useAccountData} from 'features/account/services/account/useAccountData';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
 import {ErrorResponse} from 'features/sandbox/apis/model';
@@ -20,31 +20,7 @@ import {usePushNotificationSenderForm} from '../forms/usePushNotificationSenderF
 import {getFcmToken} from '../services/getFcmToken';
 import {notifyMessageToAll as callNotifyMessageToAll} from '../services/notifyMessageToAll';
 import {notifyMessageToMe as callNotifyMessageToMe} from '../services/notifyMessageToMe';
-
-const channels = [
-  {value: undefined, label: 'No channel'},
-  {value: 'emergencyChannel', label: 'Emergency notification'},
-  {value: 'highChannel', label: 'High notification'},
-  {value: 'middleChannel', label: 'Middle notification'},
-  {value: 'lowChannel', label: 'Low notification'},
-];
-
-const priorities = [
-  // https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns
-  {value: undefined, label: '選択しない'},
-  {value: '1', label: 'Low'},
-  {value: '5', label: 'Normal'},
-  {value: '10', label: 'High'},
-];
-
-const interruptionLevels = [
-  // https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification
-  {value: undefined, label: '選択しない'},
-  {value: 'passive', label: 'passive'},
-  {value: 'active', label: 'active'},
-  {value: 'time-sensitive', label: 'time-sensitive'},
-  {value: 'critical', label: 'critical'},
-];
+import {usePushNotificationSelectPicker} from '../use-cases/usePushNotificationSelectPicker';
 
 const handleApiError = (e: unknown) => {
   if (axios.isAxiosError(e)) {
@@ -73,29 +49,16 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     addDataField,
     removeDataField,
   } = usePushNotificationSenderForm();
+  const {
+    priorities,
+    onSelectedPriorityChange,
+    interruptionLevels,
+    onSelectedInterruptionLevelsKeyChange,
+    channels,
+    onSelectedChannelChange,
+  } = usePushNotificationSelectPicker({setFormPriority, setFormInterruptionLevel, setFormChannel});
 
   const {data: accountData, isFetching: isFetchingAccountData} = useAccountData();
-
-  const onSelectedPriorityChange = useCallback(
-    (selectedItem?: Item<string | undefined>) => {
-      return setFormPriority(selectedItem?.value);
-    },
-    [setFormPriority],
-  );
-
-  const onSelectedInterruptionLevelsKeyChange = useCallback(
-    (selectedItem?: Item<string | undefined>) => {
-      return setFormInterruptionLevel(selectedItem?.value);
-    },
-    [setFormInterruptionLevel],
-  );
-
-  const onSelectedChannelChange = useCallback(
-    (selectedItem?: Item<string | undefined>) => {
-      return setFormChannel(selectedItem?.value);
-    },
-    [setFormChannel],
-  );
 
   const [isAllowedPermission, setIsAllowedPermission] = useState(false);
   const [fcmToken, setFcmToken] = useState<string>();
