@@ -5,9 +5,9 @@ import {Path} from 'react-native-svg';
 import {StyledSvgIconBase, StyledSvgIconBaseProps} from '../common/StyledSvgIconBase';
 import {RestyleTheme} from '../theme/restyleTheme';
 
-export type DeleteIllustrationProps = StyledSvgIconBaseProps & ColorProps<RestyleTheme>;
+export type RemoveIllustrationProps = StyledSvgIconBaseProps & ColorProps<RestyleTheme>;
 
-export const RemoveIllustration = ({color = 'white', size = 'p24', ...rest}: DeleteIllustrationProps) => {
+export const RemoveIllustration = ({color = 'white', size = 'p24', ...rest}: RemoveIllustrationProps) => {
   const theme = useTheme<RestyleTheme>();
   const responsiveColor = useResponsiveProp(color);
   const fillColor = theme.colors[responsiveColor ?? 'white'];
