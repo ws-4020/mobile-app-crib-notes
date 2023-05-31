@@ -22,7 +22,7 @@ export const useQRCodeForm = (maxSize: number) => {
     () =>
       yup.object().shape({
         data: yup.string().label('データ').required(),
-        size: yup.number().label('サイズ').required().max(maxSize).typeError('${path}は数値を入力してください。'),
+        size: yup.number().label('サイズ').required().max(maxSize).typeError('${label}は数値を入力してください。'),
       }),
     [maxSize],
   );
