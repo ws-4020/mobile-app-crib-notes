@@ -11,7 +11,7 @@ import React, {useCallback, useMemo, useState} from 'react';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
 import {formInitialValues, useQRCodeForm} from '../forms/useQRCodeForm';
-import {ErrorCorrectionLevelType} from '../types/errorCorrectionLevel';
+import {ErrorCorrectionLevelType} from '../types/ErrorCorrectionLevel';
 
 const errorCorrectionLevelItems: Item<ErrorCorrectionLevelType>[] = [
   {value: 'L', label: 'L'},

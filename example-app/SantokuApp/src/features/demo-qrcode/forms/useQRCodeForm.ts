@@ -2,7 +2,7 @@ import {yup} from 'bases/validator';
 import {useFormik} from 'formik';
 import {useCallback, useMemo} from 'react';
 
-import {ErrorCorrectionLevelType} from '../types/errorCorrectionLevel';
+import {ErrorCorrectionLevelType} from '../types/ErrorCorrectionLevel';
 
 type FormValues = {
   data: string;
