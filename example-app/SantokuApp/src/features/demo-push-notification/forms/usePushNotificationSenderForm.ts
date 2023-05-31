@@ -18,8 +18,8 @@ export type FormValues = {
 };
 
 const formValidationSchema = yup.object().shape({
-  badgeCount: yup.number().label('バッチ数'),
-  relevanceScore: yup.number().label('RelevanceScore').min(0).max(1),
+  badgeCount: yup.number().label('バッチ数').min(0).integer().typeError('${label}は数値を入力してください。'),
+  relevanceScore: yup.number().label('RelevanceScore').min(0).max(1).typeError('${label}は数値を入力してください。'),
 });
 
 export const formInitialValues: FormValues = {
