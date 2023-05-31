@@ -13,13 +13,13 @@ import {SelectPicker} from 'bases/ui/picker/SelectPicker';
 import {useAccountData} from 'features/account/services/account/useAccountData';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
 import {ErrorResponse} from 'features/sandbox/apis/model';
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {Pressable, Switch} from 'react-native';
 
 import {usePushNotificationSenderForm} from '../forms/usePushNotificationSenderForm';
-import {getFcmToken} from '../services/getFcmToken';
-import {notifyMessageToAll as callNotifyMessageToAll} from '../services/notifyMessageToAll';
-import {notifyMessageToMe as callNotifyMessageToMe} from '../services/notifyMessageToMe';
+import {useGetFcmToken} from '../services/useGetFcmToken';
+import {useHasPermission} from '../services/useHasPermission';
+import {usePushNotificationSendCommands} from '../services/usePushNotificationSendCommands';
 import {usePushNotificationSelectPicker} from '../use-cases/usePushNotificationSelectPicker';
 
 const handleApiError = (e: unknown) => {
@@ -57,31 +57,31 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     channels,
     onSelectedChannelChange,
   } = usePushNotificationSelectPicker({setFormPriority, setFormInterruptionLevel, setFormChannel});
+  const {fcmToken, error: fcmTokenError} = useGetFcmToken();
+  const {permission, error: permissionError} = useHasPermission();
+  const {
+    sendToMe: callSendToMe,
+    isSendingToMe,
+    sendToAll: callSendToAll,
+    isSendingToAll,
+  } = usePushNotificationSendCommands();
+
+  if (fcmTokenError) {
+    log.trace(`Failed to get token. cause=[${String(fcmTokenError)}]`);
+  }
+  if (permissionError) {
+    log.trace(`Failed to get permission status. cause=[${String(permissionError)}]`);
+  }
 
   const {data: accountData, isFetching: isFetchingAccountData} = useAccountData();
 
-  const [isAllowedPermission, setIsAllowedPermission] = useState(false);
-  const [fcmToken, setFcmToken] = useState<string>();
-  useEffect(() => {
-    messaging()
-      .hasPermission()
-      .then(status => {
-        if (
-          status === messaging.AuthorizationStatus.AUTHORIZED ||
-          status === messaging.AuthorizationStatus.PROVISIONAL
-        ) {
-          setIsAllowedPermission(true);
-        }
-      })
-      .catch(e => {
-        log.trace(`Failed to get permission status. cause=[${String(e)}]`);
-      });
-    getFcmToken()
-      .then(fcmToken => setFcmToken(fcmToken))
-      .catch(e => {
-        log.trace(`Failed to get token. cause=[${String(e)}]`);
-      });
-  }, []);
+  const isAllowedPermission = useMemo(
+    () =>
+      permission === messaging.AuthorizationStatus.AUTHORIZED ||
+      permission === messaging.AuthorizationStatus.PROVISIONAL,
+
+    [permission],
+  );
 
   const hasFcmToken = useMemo(() => {
     return !!fcmToken;
@@ -111,28 +111,28 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     return {...filteredStringField, data: filteredData.length ? filteredData : undefined};
   }, [form.values]);
 
-  const notifyMessageToAll = useCallback(async () => {
+  const sendToAll = useCallback(async () => {
     try {
       if (form.isValid) {
-        await callNotifyMessageToAll(buildPushNotificationParams());
+        await callSendToAll({params: buildPushNotificationParams()});
       }
     } catch (e) {
       handleApiError(e);
     }
-  }, [form.isValid, buildPushNotificationParams]);
+  }, [form.isValid, callSendToAll, buildPushNotificationParams]);
 
-  const notifyMessageToMe = useCallback(async () => {
+  const sendToMe = useCallback(async () => {
     if (fcmToken) {
       // FCMトークンが取得できていない場合は、自分に送信ボタンが活性化しないため、必ず存在する想定
       try {
         if (form.isValid) {
-          await callNotifyMessageToMe(fcmToken, buildPushNotificationParams());
+          await callSendToMe({token: fcmToken, params: buildPushNotificationParams()});
         }
       } catch (e) {
         handleApiError(e);
       }
     }
-  }, [fcmToken, form.isValid, buildPushNotificationParams]);
+  }, [fcmToken, form.isValid, callSendToMe, buildPushNotificationParams]);
 
   return (
     <StyledSafeAreaView flex={1}>
@@ -290,12 +290,13 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
         </SettingBox>
       </StyledScrollView>
       <StyledRow justifyContent="center" gap="p16">
-        <StyledButton title="一斉送信" onPress={notifyMessageToAll} />
+        <StyledButton title="一斉送信" onPress={sendToAll} isLoading={isSendingToAll} />
         <StyledButton
           title="自分に送信"
           opacity={isReceivableOnThisDevice ? 1 : 0.5}
           disabled={!isReceivableOnThisDevice}
-          onPress={notifyMessageToMe}
+          onPress={sendToMe}
+          isLoading={isSendingToMe}
         />
       </StyledRow>
     </StyledSafeAreaView>
