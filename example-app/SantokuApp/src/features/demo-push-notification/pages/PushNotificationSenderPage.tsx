@@ -187,15 +187,6 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
               multiline
             />
           </WithLabel>
-          <WithLabel label="バッジ数">
-            <StyledTextInput
-              value={form.values.badgeCount}
-              onChangeText={form.handleChange('badgeCount')}
-              keyboardType="numeric"
-              borderBottomWidth={1}
-              errorMessage={form.errors.badgeCount}
-            />
-          </WithLabel>
           <WithLabel label="CollapseKey">
             <StyledTextInput
               value={form.values.collapseKey}
@@ -246,6 +237,15 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
             <Text>content-available</Text>
             <Switch value={form.values.contentAvailable} onValueChange={setFormContentAvailable} />
           </StyledRow>
+          <WithLabel label="バッジ">
+            <StyledTextInput
+              value={form.values.badge}
+              onChangeText={form.handleChange('badge')}
+              keyboardType="numeric"
+              borderBottomWidth={1}
+              errorMessage={form.errors.badge}
+            />
+          </WithLabel>
           <WithLabel label="Priority">
             <SelectPicker
               items={priorities}
@@ -277,6 +277,15 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
           </WithLabel>
         </SettingBox>
         <SettingBox title="【Android設定】">
+          <WithLabel label="通知数">
+            <StyledTextInput
+              value={form.values.notificationCount}
+              onChangeText={form.handleChange('notificationCount')}
+              keyboardType="numeric"
+              borderBottomWidth={1}
+              errorMessage={form.errors.notificationCount}
+            />
+          </WithLabel>
           <WithLabel label="チャンネル">
             <SelectPicker
               items={channels}

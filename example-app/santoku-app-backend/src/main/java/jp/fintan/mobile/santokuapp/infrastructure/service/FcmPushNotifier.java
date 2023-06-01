@@ -224,8 +224,8 @@ public class FcmPushNotifier implements PushNotifier {
     }
 
     AndroidNotification.Builder androidNotificationBuilder = AndroidNotification.builder();
-    if (pushNotification.badge() != null) {
-      androidNotificationBuilder.setNotificationCount(pushNotification.badge().value());
+    if (pushNotification.notificationCount() != null) {
+      androidNotificationBuilder.setNotificationCount(pushNotification.notificationCount().value());
     }
     if (pushNotification.channelId() != null) {
       androidNotificationBuilder.setChannelId(pushNotification.channelId().value());

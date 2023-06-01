@@ -6,11 +6,11 @@ public class PushNotification {
 
   private final NotificationBody body;
 
-  private final PushNotificationBadge badge;
-
   private final PushNotificationCollapseKey collapseKey;
 
   private final PushNotificationData data;
+
+  private final PushNotificationBadge badge;
 
   private final PushNotificationContentAvailable contentAvailable;
 
@@ -20,6 +20,8 @@ public class PushNotification {
 
   private final PushNotificationRelevanceScore relevanceScore;
 
+  private final PushNotificationNotificationCount notificationCount;
+
   private final PushNotificationChannelId channelId;
 
   private final PushNotificationTtl ttl;
@@ -27,24 +29,26 @@ public class PushNotification {
   public PushNotification(
       NotificationTitle title,
       NotificationBody body,
-      PushNotificationBadge badge,
       PushNotificationCollapseKey collapseKey,
       PushNotificationData data,
+      PushNotificationBadge badge,
       PushNotificationContentAvailable contentAvailable,
       PushNotificationPriority priority,
       PushNotificationInterruptionLevel interruptionLevel,
       PushNotificationRelevanceScore relevanceScore,
+      PushNotificationNotificationCount notificationCount,
       PushNotificationChannelId channelId,
       PushNotificationTtl ttl) {
     this.title = title;
     this.body = body;
-    this.badge = badge;
     this.collapseKey = collapseKey;
     this.data = data;
+    this.badge = badge;
     this.contentAvailable = contentAvailable;
     this.priority = priority;
     this.interruptionLevel = interruptionLevel;
     this.relevanceScore = relevanceScore;
+    this.notificationCount = notificationCount;
     this.channelId = channelId;
     this.ttl = ttl;
   }
@@ -57,12 +61,12 @@ public class PushNotification {
     return body;
   }
 
-  public PushNotificationBadge badge() {
-    return badge;
-  }
-
   public PushNotificationCollapseKey collapseKey() {
     return collapseKey;
+  }
+
+  public PushNotificationBadge badge() {
+    return badge;
   }
 
   public PushNotificationData data() {
@@ -83,6 +87,10 @@ public class PushNotification {
 
   public PushNotificationRelevanceScore relevanceScore() {
     return relevanceScore;
+  }
+
+  public PushNotificationNotificationCount notificationCount() {
+    return notificationCount;
   }
 
   public PushNotificationChannelId channelId() {

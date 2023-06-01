@@ -7,29 +7,32 @@ import {DataType} from '../types/DataType';
 export type FormValues = {
   notificationTitle: string;
   notificationBody: string;
-  badgeCount: string;
   collapseKey: string;
   data: DataType[];
+  badge: string;
   contentAvailable: boolean;
   priority?: string;
   interruptionLevel?: string;
   relevanceScore: string;
+  notificationCount: string;
   channelId?: string;
 };
 
 const formValidationSchema = yup.object().shape({
-  badgeCount: yup.number().label('バッチ数').min(0).integer().typeError('${label}は数値を入力してください。'),
+  badge: yup.number().label('バッチ').min(0).integer().typeError('${label}は数値を入力してください。'),
   relevanceScore: yup.number().label('RelevanceScore').min(0).max(1).typeError('${label}は数値を入力してください。'),
+  notificationCount: yup.number().label('通知数').min(0).integer().typeError('${label}は数値を入力してください。'),
 });
 
 export const formInitialValues: FormValues = {
   notificationTitle: '',
   notificationBody: '',
-  badgeCount: '',
   collapseKey: '',
   data: [{key: '', value: ''}],
+  badge: '',
   contentAvailable: false,
   relevanceScore: '',
+  notificationCount: '',
 };
 
 const nop = () => {};

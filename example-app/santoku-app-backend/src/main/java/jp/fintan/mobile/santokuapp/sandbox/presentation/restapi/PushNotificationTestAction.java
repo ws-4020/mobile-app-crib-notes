@@ -18,6 +18,7 @@ import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationCol
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationContentAvailable;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationData;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationInterruptionLevel;
+import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationNotificationCount;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationPriority;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationRelevanceScore;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationResult;
@@ -82,12 +83,12 @@ public class PushNotificationTestAction {
     return new PushNotification(
         request.notificationTitle == null ? null : new NotificationTitle(request.notificationTitle),
         request.notificationBody == null ? null : new NotificationBody(request.notificationBody),
-        request.badgeCount == null ? null : new PushNotificationBadge(request.badgeCount),
         request.collapseKey == null ? null : new PushNotificationCollapseKey(request.collapseKey),
         request.data == null
             ? null
             : new PushNotificationData(
                 request.data.stream().collect(Collectors.toMap(d -> d.key, d -> d.value))),
+        request.badge == null ? null : new PushNotificationBadge(request.badge),
         request.contentAvailable == null
             ? null
             : new PushNotificationContentAvailable(request.contentAvailable),
@@ -98,6 +99,9 @@ public class PushNotificationTestAction {
         request.relevanceScore == null
             ? null
             : new PushNotificationRelevanceScore(request.relevanceScore),
+        request.notificationCount == null
+            ? null
+            : new PushNotificationNotificationCount(request.notificationCount),
         request.channelId == null ? null : new PushNotificationChannelId(request.channelId),
         new PushNotificationTtl(43200L));
   }
@@ -121,13 +125,14 @@ public class PushNotificationTestAction {
   static class PushNotificationRequest {
     public String notificationTitle;
     public String notificationBody;
-    public Integer badgeCount;
     public String collapseKey;
     public List<PushNotificationDataRequest> data;
+    public Integer badge;
     public Boolean contentAvailable;
     public Integer priority;
     public String interruptionLevel;
     public Double relevanceScore;
+    public Integer notificationCount;
     public String channelId;
   }
 
