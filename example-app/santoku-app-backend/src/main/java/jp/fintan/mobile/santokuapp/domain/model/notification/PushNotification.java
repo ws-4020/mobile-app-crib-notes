@@ -65,12 +65,12 @@ public class PushNotification {
     return collapseKey;
   }
 
-  public PushNotificationBadge badge() {
-    return badge;
-  }
-
   public PushNotificationData data() {
     return data;
+  }
+
+  public PushNotificationBadge badge() {
+    return badge;
   }
 
   public PushNotificationContentAvailable contentAvailable() {
