@@ -267,8 +267,10 @@ const Code128DataInput: React.FC<
               {form.values.code128Data.length > 1 ? (
                 <Pressable
                   onPress={async () => {
-                    const removed = await removeCode128DataField(index);
-                    onValidCode128Data(removed);
+                    const {values, errors} = await removeCode128DataField(index);
+                    if (!errors?.code128Data) {
+                      onValidCode128Data(values);
+                    }
                   }}>
                   <RemoveIllustration color="textRed" />
                 </Pressable>

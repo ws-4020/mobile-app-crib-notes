@@ -141,15 +141,8 @@ export const useBarcodeForm = () => {
     async (index: number) => {
       const values = [...form.values.code128Data];
       values.splice(index, 1);
-      await form.setFieldValue('code128Data', values);
-
-      if (Array.isArray(form.errors.code128Data)) {
-        const errors = form.errors.code128Data;
-        errors.splice(index, 1);
-        form.setErrors({...form.errors, code128Data: errors});
-      }
-
-      return values;
+      const errors = await form.setFieldValue('code128Data', values);
+      return {values, errors};
     },
     [form],
   );
