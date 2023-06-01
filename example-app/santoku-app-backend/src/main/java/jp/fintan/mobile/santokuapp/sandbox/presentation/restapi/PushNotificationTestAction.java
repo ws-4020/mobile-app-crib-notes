@@ -14,6 +14,7 @@ import jp.fintan.mobile.santokuapp.domain.model.notification.NotificationTitle;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotification;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationBadge;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationChannelId;
+import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationCollapseId;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationCollapseKey;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationContentAvailable;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationData;
@@ -83,12 +84,12 @@ public class PushNotificationTestAction {
     return new PushNotification(
         request.notificationTitle == null ? null : new NotificationTitle(request.notificationTitle),
         request.notificationBody == null ? null : new NotificationBody(request.notificationBody),
-        request.collapseKey == null ? null : new PushNotificationCollapseKey(request.collapseKey),
         request.data == null
             ? null
             : new PushNotificationData(
                 request.data.stream().collect(Collectors.toMap(d -> d.key, d -> d.value))),
         request.badge == null ? null : new PushNotificationBadge(request.badge),
+        request.collapseId == null ? null : new PushNotificationCollapseId(request.collapseId),
         request.contentAvailable == null
             ? null
             : new PushNotificationContentAvailable(request.contentAvailable),
@@ -102,6 +103,7 @@ public class PushNotificationTestAction {
         request.notificationCount == null
             ? null
             : new PushNotificationNotificationCount(request.notificationCount),
+        request.collapseKey == null ? null : new PushNotificationCollapseKey(request.collapseKey),
         request.channelId == null ? null : new PushNotificationChannelId(request.channelId),
         new PushNotificationTtl(43200L));
   }
@@ -125,7 +127,7 @@ public class PushNotificationTestAction {
   static class PushNotificationRequest {
     public String notificationTitle;
     public String notificationBody;
-    public String collapseKey;
+    public String collapseId;
     public List<PushNotificationDataRequest> data;
     public Integer badge;
     public Boolean contentAvailable;
@@ -133,6 +135,7 @@ public class PushNotificationTestAction {
     public String interruptionLevel;
     public Double relevanceScore;
     public Integer notificationCount;
+    public String collapseKey;
     public String channelId;
   }
 

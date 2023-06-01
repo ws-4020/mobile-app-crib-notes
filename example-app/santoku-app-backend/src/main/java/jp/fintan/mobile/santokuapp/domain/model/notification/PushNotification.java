@@ -6,11 +6,11 @@ public class PushNotification {
 
   private final NotificationBody body;
 
-  private final PushNotificationCollapseKey collapseKey;
-
   private final PushNotificationData data;
 
   private final PushNotificationBadge badge;
+
+  private final PushNotificationCollapseId collapseId;
 
   private final PushNotificationContentAvailable contentAvailable;
 
@@ -22,6 +22,8 @@ public class PushNotification {
 
   private final PushNotificationNotificationCount notificationCount;
 
+  private final PushNotificationCollapseKey collapseKey;
+
   private final PushNotificationChannelId channelId;
 
   private final PushNotificationTtl ttl;
@@ -29,26 +31,28 @@ public class PushNotification {
   public PushNotification(
       NotificationTitle title,
       NotificationBody body,
-      PushNotificationCollapseKey collapseKey,
       PushNotificationData data,
       PushNotificationBadge badge,
+      PushNotificationCollapseId collapseId,
       PushNotificationContentAvailable contentAvailable,
       PushNotificationPriority priority,
       PushNotificationInterruptionLevel interruptionLevel,
       PushNotificationRelevanceScore relevanceScore,
       PushNotificationNotificationCount notificationCount,
+      PushNotificationCollapseKey collapseKey,
       PushNotificationChannelId channelId,
       PushNotificationTtl ttl) {
     this.title = title;
     this.body = body;
-    this.collapseKey = collapseKey;
     this.data = data;
     this.badge = badge;
+    this.collapseId = collapseId;
     this.contentAvailable = contentAvailable;
     this.priority = priority;
     this.interruptionLevel = interruptionLevel;
     this.relevanceScore = relevanceScore;
     this.notificationCount = notificationCount;
+    this.collapseKey = collapseKey;
     this.channelId = channelId;
     this.ttl = ttl;
   }
@@ -61,16 +65,16 @@ public class PushNotification {
     return body;
   }
 
-  public PushNotificationCollapseKey collapseKey() {
-    return collapseKey;
-  }
-
   public PushNotificationData data() {
     return data;
   }
 
   public PushNotificationBadge badge() {
     return badge;
+  }
+
+  public PushNotificationCollapseId collapseId() {
+    return collapseId;
   }
 
   public PushNotificationContentAvailable contentAvailable() {
@@ -91,6 +95,10 @@ public class PushNotification {
 
   public PushNotificationNotificationCount notificationCount() {
     return notificationCount;
+  }
+
+  public PushNotificationCollapseKey collapseKey() {
+    return collapseKey;
   }
 
   public PushNotificationChannelId channelId() {

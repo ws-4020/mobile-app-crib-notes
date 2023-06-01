@@ -187,13 +187,6 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
               multiline
             />
           </WithLabel>
-          <WithLabel label="CollapseKey">
-            <StyledTextInput
-              value={form.values.collapseKey}
-              onChangeText={form.handleChange('collapseKey')}
-              borderBottomWidth={1}
-            />
-          </WithLabel>
           <StyledRow gap="p8" alignItems="center">
             <Text>データ属性の追加</Text>
             <Pressable onPress={addDataField}>
@@ -246,6 +239,13 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
               errorMessage={form.errors.badge}
             />
           </WithLabel>
+          <WithLabel label="collapse-id">
+            <StyledTextInput
+              value={form.values.collapseId}
+              onChangeText={form.handleChange('collapseId')}
+              borderBottomWidth={1}
+            />
+          </WithLabel>
           <WithLabel label="Priority">
             <SelectPicker
               items={priorities}
@@ -284,6 +284,13 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
               keyboardType="numeric"
               borderBottomWidth={1}
               errorMessage={form.errors.notificationCount}
+            />
+          </WithLabel>
+          <WithLabel label="collapse_key">
+            <StyledTextInput
+              value={form.values.collapseKey}
+              onChangeText={form.handleChange('collapseKey')}
+              borderBottomWidth={1}
             />
           </WithLabel>
           <WithLabel label="チャンネル">

@@ -184,8 +184,8 @@ public class FcmPushNotifier implements PushNotifier {
     if (pushNotification.priority() != null) {
       headers.put(APNS_HEADER_KEY_APNS_PRIORITY, pushNotification.priority().value().toString());
     }
-    if (pushNotification.collapseKey() != null) {
-      headers.put(APNS_HEADER_KEY_APNS_COLLAPSE_ID, pushNotification.collapseKey().value());
+    if (pushNotification.collapseId() != null) {
+      headers.put(APNS_HEADER_KEY_APNS_COLLAPSE_ID, pushNotification.collapseId().value());
     }
 
     Map<String, Object> customData = new HashMap<>();

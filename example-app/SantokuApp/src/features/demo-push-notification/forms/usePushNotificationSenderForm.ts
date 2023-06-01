@@ -7,14 +7,15 @@ import {DataType} from '../types/DataType';
 export type FormValues = {
   notificationTitle: string;
   notificationBody: string;
-  collapseKey: string;
   data: DataType[];
   badge: string;
+  collapseId: string;
   contentAvailable: boolean;
   priority?: string;
   interruptionLevel?: string;
   relevanceScore: string;
   notificationCount: string;
+  collapseKey: string;
   channelId?: string;
 };
 
@@ -27,12 +28,13 @@ const formValidationSchema = yup.object().shape({
 export const formInitialValues: FormValues = {
   notificationTitle: '',
   notificationBody: '',
-  collapseKey: '',
   data: [{key: '', value: ''}],
   badge: '',
+  collapseId: '',
   contentAvailable: false,
   relevanceScore: '',
   notificationCount: '',
+  collapseKey: '',
 };
 
 const nop = () => {};
