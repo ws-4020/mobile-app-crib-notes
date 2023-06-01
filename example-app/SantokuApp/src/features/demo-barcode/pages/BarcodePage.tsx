@@ -231,29 +231,40 @@ const Code128DataInput: React.FC<
           }
         };
 
+        const code128DataError = [
+          form.getFieldMeta(`code128Data[${index}].character`).error,
+          form.getFieldMeta(`code128Data[${index}].value`).touched
+            ? form.getFieldMeta(`code128Data[${index}].value`).error
+            : undefined,
+        ];
+
         return (
           <StyledRow key={`barcode-data-${index}`} space="p8">
-            <Box flex={1}>
-              <SelectPicker
-                selectedItemKey={d.character}
-                items={characterSet}
-                onSelectedItemChange={onSelectedCharacterSetChange}
-                textInputComponent={<StyledTextInput value={d.character} borderBottomWidth={1} editable={false} />}
-              />
-            </Box>
-            <Box flex={3}>
-              <StyledTextInput
-                value={d.value}
-                borderBottomWidth={1}
-                onChangeText={setCode128ValueAndValidate}
-                errorMessage={
-                  form.getFieldMeta(`code128Data[${index}].value`).touched
-                    ? form.getFieldMeta(`code128Data[${index}].value`).error
-                    : undefined
-                }
-                placeholder="値を入力してください"
-              />
-            </Box>
+            <StyledColumn flex={4}>
+              <StyledRow space="p8">
+                <Box>
+                  <SelectPicker
+                    selectedItemKey={d.character}
+                    items={characterSet}
+                    onSelectedItemChange={onSelectedCharacterSetChange}
+                    textInputComponent={<StyledTextInput value={d.character} borderBottomWidth={1} editable={false} />}
+                  />
+                </Box>
+                <Box flex={1}>
+                  <StyledTextInput
+                    value={d.value}
+                    borderBottomWidth={1}
+                    onChangeText={setCode128ValueAndValidate}
+                    placeholder="値を入力してください"
+                  />
+                </Box>
+              </StyledRow>
+              {code128DataError.filter(Boolean).map((error, index) => (
+                <Text key={`code128-data-error-${index}`} color="textRed">
+                  ・{error}
+                </Text>
+              ))}
+            </StyledColumn>
             <StyledRow flex={1} space="p8">
               {form.values.code128Data.length > 1 ? (
                 <Pressable
