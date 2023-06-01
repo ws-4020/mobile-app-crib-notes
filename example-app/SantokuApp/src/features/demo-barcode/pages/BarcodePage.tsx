@@ -233,9 +233,7 @@ const Code128DataInput: React.FC<
 
         const code128DataError = [
           form.getFieldMeta(`code128Data[${index}].character`).error,
-          form.getFieldMeta(`code128Data[${index}].value`).touched
-            ? form.getFieldMeta(`code128Data[${index}].value`).error
-            : undefined,
+          form.getFieldMeta(`code128Data[${index}].value`).error,
         ];
 
         return (

@@ -118,9 +118,7 @@ export const useBarcodeForm = () => {
   );
   const setFormCode128Value = useCallback(
     async (value: string, index: number) => {
-      const errors = await form.setFieldValue(`code128Data[${index}].value`, value, true);
-      await form.setFieldTouched(`code128Data[${index}].value`, true);
-      return errors;
+      return await form.setFieldValue(`code128Data[${index}].value`, value, true);
     },
     [form],
   );
@@ -137,8 +135,6 @@ export const useBarcodeForm = () => {
       },
     ];
     await form.setFieldValue('code128Data', code128Data);
-    // フィールド追加時にバリデーションが実施されないように、touchedをfalseにする
-    await form.setFieldTouched(`code128Data[${form.values.code128Data.length}].value`, false);
     return code128Data;
   }, [form]);
   const removeCode128DataField = useCallback(
@@ -147,11 +143,6 @@ export const useBarcodeForm = () => {
       values.splice(index, 1);
       await form.setFieldValue('code128Data', values);
 
-      if (form.touched.code128Data) {
-        const touched = form.touched.code128Data;
-        touched.splice(index, 1);
-        await form.setTouched({...form.touched, code128Data: touched}, false);
-      }
       if (Array.isArray(form.errors.code128Data)) {
         const errors = form.errors.code128Data;
         errors.splice(index, 1);
