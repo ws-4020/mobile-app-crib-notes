@@ -123,6 +123,10 @@ export const BarcodePage: React.FC = () => {
                 setFormCode128AutoData={setFormCode128AutoData}
                 addCode128DataField={addCode128DataField}
                 removeCode128DataField={removeCode128DataField}
+                // onValidCode128Data, onValidCode128AutoData: Formik のバリデーションが非同期であり、 form.values, form.errors を使ってのバーコード更新ができないため、以下のmethodの返り値からバリデーション結果を使って更新している。
+                // 対象method: setFormCode128Character, setFormCode128Value, setFormCode128AutoData, removeCode128DataField
+                // ※ form.isValidating は非同期バリデーションに対応しておらず、不正な値が入力されている状態でも form.isValidating: false, form.errors[key]: undefined の瞬間が存在するので使用できない
+                // 関連 Issue: https://github.com/jaredpalmer/formik/issues/2405
                 onValidCode128Data={setCode128Data}
                 onValidCode128AutoData={setCode128AutoData}
               />
