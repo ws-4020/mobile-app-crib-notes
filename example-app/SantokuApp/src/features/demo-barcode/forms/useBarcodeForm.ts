@@ -111,19 +111,19 @@ export const useBarcodeForm = () => {
     onSubmit: nop,
   });
 
-  const setFormLineWidth = useCallback(async (value: string) => form.setFieldValue('lineWidth', value, true), [form]);
+  const setFormLineWidth = useCallback(async (value: string) => form.setFieldValue('lineWidth', value), [form]);
   const setFormCode128Character = useCallback(
-    async (value: string, index: number) => form.setFieldValue(`code128Data[${index}].character`, value, true),
+    async (value: string, index: number) => form.setFieldValue(`code128Data[${index}].character`, value),
     [form],
   );
   const setFormCode128Value = useCallback(
     async (value: string, index: number) => {
-      return await form.setFieldValue(`code128Data[${index}].value`, value, true);
+      return await form.setFieldValue(`code128Data[${index}].value`, value);
     },
     [form],
   );
   const setFormCode128AutoData = useCallback(
-    async (value: string) => form.setFieldValue('code128AutoData', value, true),
+    async (value: string) => form.setFieldValue('code128AutoData', value),
     [form],
   );
   const addCode128DataField = useCallback(async () => {
@@ -134,14 +134,14 @@ export const useBarcodeForm = () => {
         value: '',
       },
     ];
-    await form.setFieldValue('code128Data', code128Data, true);
+    await form.setFieldValue('code128Data', code128Data);
     return code128Data;
   }, [form]);
   const removeCode128DataField = useCallback(
     async (index: number) => {
       const values = [...form.values.code128Data];
       values.splice(index, 1);
-      const errors = await form.setFieldValue('code128Data', values, true);
+      const errors = await form.setFieldValue('code128Data', values);
       return {values, errors};
     },
     [form],
