@@ -44,7 +44,17 @@ export const withAndroidAddManifestPlaceholders: ConfigPlugin<ManifestPlaceholde
 
 const apply = (buildGradle: string, params: ManifestPlaceholderParams[]): string => {
   const manifestPlaceholders = params
-    .filter(data => data.propertyKey ?? data.fixedValue != null)
+    .filter(data => {
+      if (data.propertyKey || data.fixedValue != null) {
+        // fixedValueは空文字も許容する
+        return true;
+      } else {
+        console.warn(
+          `[withAndroidAddManifestPlaceholders] propertyKey or fixedValue must be specified. placeholderKey=${data.placeholderKey}`,
+        );
+        return false;
+      }
+    })
     .map(data => {
       if (data.propertyKey) {
         return `if (project.hasProperty('${data.propertyKey}')) {
