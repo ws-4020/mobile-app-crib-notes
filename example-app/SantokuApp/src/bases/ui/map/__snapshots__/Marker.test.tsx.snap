@@ -3,16 +3,15 @@
 exports[`Marker only with required props renders successfully only with required props 1`] = `
 <AIRMapMarker
   coordinate={
-    Object {
+    {
       "latitude": 34.7024898,
       "longitude": 135.494,
     }
   }
   onPress={[Function]}
-  stopPropagation={false}
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "transparent",
         "position": "absolute",
       },
@@ -26,7 +25,7 @@ exports[`Marker only with required props renders successfully only with required
 exports[`Marker with committed props should be applied properly 1`] = `
 <AIRMapMarker
   coordinate={
-    Object {
+    {
       "latitude": 34.7024898,
       "longitude": 135.494,
     }
@@ -36,8 +35,8 @@ exports[`Marker with committed props should be applied properly 1`] = `
   onPress={[Function]}
   stopPropagation={true}
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "transparent",
         "position": "absolute",
       },
