@@ -2,10 +2,10 @@ import {m} from 'bases/message/Message';
 import {Item, SelectPicker} from 'bases/ui/picker/SelectPicker';
 import React, {useCallback, useMemo, useRef} from 'react';
 import {Input} from 'react-native-elements';
-import {MapTypes} from 'react-native-maps';
+import {MapType} from 'react-native-maps';
 
 type PickerItemType = {
-  mapType: MapTypes;
+  mapType: MapType;
 };
 
 const pickerItems: Item<PickerItemType>[] = [
@@ -15,8 +15,8 @@ const pickerItems: Item<PickerItemType>[] = [
 ];
 
 type MapTypePickerProps = {
-  mapType: MapTypes;
-  setMapType: (mapType: MapTypes) => void;
+  mapType: MapType;
+  setMapType: (mapType: MapType) => void;
 };
 export const MapTypePicker: React.FC<MapTypePickerProps> = ({mapType, setMapType}) => {
   const itemsKey = pickerItems.find(item => item.value.mapType === mapType)?.key ?? 'standard';

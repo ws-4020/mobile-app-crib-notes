@@ -8,7 +8,7 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {View, StyleSheet, KeyboardAvoidingView, Platform} from 'react-native';
 import {Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Region, MapTypes} from 'react-native-maps';
+import {Region, MapType} from 'react-native-maps';
 
 import {MapTypePicker} from '../components/MapTypePicker';
 import {ToggleButton} from '../components/ToggleButton';
@@ -25,7 +25,7 @@ export const DemoMapPage: React.FC = () => {
 
   const [region, setRegion] = useState<Region>(initialRegion);
 
-  const [mapType, setMapType] = useState<MapTypes>('standard');
+  const [mapType, setMapType] = useState<MapType>('standard');
   const [showBuildings, setShowBuildings] = useState<boolean>(true);
 
   const onSubmit = useCallback(
