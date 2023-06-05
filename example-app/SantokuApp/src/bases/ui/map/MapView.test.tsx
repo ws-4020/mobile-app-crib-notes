@@ -32,7 +32,7 @@ describe('MapView with fixed props', () => {
     render(<MapView style={{height: 300, width: 300}} testID="MapView" />);
     const mapView = screen.getByTestId('MapView');
     const mapViewProps = mapView.props as RNMMapViewProps;
-    expect(mapViewProps.provider).toEqual(null);
+    expect(mapViewProps.provider).toBeUndefined();
     // showsUserLocationがfalseになっているか確認
     expect(mapViewProps.showsUserLocation).toEqual(false);
   });
