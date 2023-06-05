@@ -673,6 +673,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-014-ui-libraries',
         'react-native/santoku/decisions/adr-015-android-head-up-notification',
         'react-native/santoku/decisions/adr-016-forced-app-updates',
+        'react-native/santoku/decisions/adr-017-map-view-library',
       ],
     },
   ],
