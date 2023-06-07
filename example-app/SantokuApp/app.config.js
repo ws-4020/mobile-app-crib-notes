@@ -6,6 +6,7 @@ import stgConfig from './config/app.config.stg.js';
 import {
   withAndroidAddLicensePlugin,
   withAndroidAddAppActivity,
+  withAndroidAddManifestPlaceholders,
   withAndroidEnabledStatusBarTranslucent,
   withAndroidDisabledWindowDrawsSystemBarBackgrounds,
   withAndroidMoveDevSettingsActivityToDebugAndroidManifest,
@@ -58,7 +59,7 @@ module.exports = ({config}) => {
       allowBackup: false,
       config: {
         googleMaps: {
-          apiKey: 'dummyApiKey',
+          apiKey: '${googleMapApiKey}',
         },
       },
     },
@@ -118,6 +119,10 @@ module.exports = ({config}) => {
           xxhdpi: 'assets/android/splashscreen/xxhdpi',
           xxxhdpi: 'assets/android/splashscreen/xxxhdpi',
         },
+      ],
+      [
+        withAndroidAddManifestPlaceholders,
+        [{placeholderKey: 'googleMapApiKey', propertyKey: 'SANTOKU_APP_GOOGLE_MAP_API_KEY'}],
       ],
       // 以下のプラグインは、環境毎の設定ファイルで定義します。
       // withAndroidAppBuildGradleForRelease,
