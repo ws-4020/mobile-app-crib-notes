@@ -345,7 +345,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   mapContainer: {
-    height: '50%',
+    height: '30%',
   },
   map: {
     height: '100%',
