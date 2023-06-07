@@ -28,7 +28,7 @@ describe('MapView with required props for display', () => {
 describe('MapView with fixed props', () => {
   // 共通部品として値を指定したPropsを確認する
   it('should be fixed properly', () => {
-    // PROVIDERがnullになっているか確認
+    // PROVIDERがundefinedになっているか確認
     render(<MapView style={{height: 300, width: 300}} testID="MapView" />);
     const mapView = screen.getByTestId('MapView');
     const mapViewProps = mapView.props as RNMMapViewProps;
