@@ -36,7 +36,7 @@ export const useRegionForm = (
   const form = useFormik<RegionFormValues>({
     initialValues: params.initialValues,
     validationSchema: regionFormValidationSchema,
-    validateOnChange: false,
+    validateOnChange: true,
     onSubmit: params.onSubmit,
   });
 
