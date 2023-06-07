@@ -152,7 +152,7 @@ export const DemoMapPage: React.FC = () => {
             <View style={styles.rowContainer}>
               <View style={styles.flexContainer}>
                 <Text>longitudeDelta</Text>
-                <Text>緯度範囲（横幅）</Text>
+                <Text>経度範囲（横幅）</Text>
               </View>
               <View style={styles.flexContainer}>
                 <TextInput
