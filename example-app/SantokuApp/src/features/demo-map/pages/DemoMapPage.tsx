@@ -14,8 +14,8 @@ import {MapTypePicker} from '../components/MapTypePicker';
 import {ToggleButton} from '../components/ToggleButton';
 import {initialMarker} from '../constants/initialMarker';
 import {initialRegion} from '../constants/initialRegion';
-import {RegionFormValues, useRegionForm} from '../form/RegionForm';
 import {MarkerFormValues, useMarkerForm} from '../form/useMarkerForm';
+import {RegionFormValues, useRegionForm} from '../form/useRegionForm';
 
 export const DemoMapPage: React.FC = () => {
   const [defaultMarker, setDefaultMarker] = useState<MarkerProps>(initialMarker);
