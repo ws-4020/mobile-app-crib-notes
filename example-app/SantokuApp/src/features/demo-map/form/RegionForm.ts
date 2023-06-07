@@ -20,6 +20,13 @@ const defaultRegion = {
   longitudeDelta: '0.002',
 };
 
+const regionFormValidationSchema = yup.object().shape({
+  latitude: yup.number().label('緯度').min(-90).max(90),
+  longitude: yup.number().label('経度').min(-180).max(180),
+  latitudeDelta: yup.number().label('緯度範囲').min(0).max(180),
+  longitudeDelta: yup.number().label('経度範囲').min(0).max(360),
+});
+
 export const useRegionForm = (
   params: RegionFormParams = {
     initialValues: defaultRegion,
@@ -28,12 +35,7 @@ export const useRegionForm = (
 ) => {
   const form = useFormik<RegionFormValues>({
     initialValues: params.initialValues,
-    validationSchema: yup.object().shape({
-      latitude: yup.number().label('緯度').min(-90).max(90),
-      longitude: yup.number().label('経度').min(-180).max(180),
-      latitudeDelta: yup.number().label('緯度範囲').min(0).max(180),
-      longitudeDelta: yup.number().label('経度範囲').min(0).max(360),
-    }),
+    validationSchema: regionFormValidationSchema,
     validateOnChange: false,
     onSubmit: params.onSubmit,
   });
