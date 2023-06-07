@@ -74,7 +74,7 @@ export const DemoMapPage: React.FC = () => {
     android: 'number-pad',
   } as const);
 
-  const [scrollEnable, setScrollEnable] = useState<boolean>(true);
+  const [scrollEnabled, setScrollEnabled] = useState<boolean>(true);
   const [zoomEnabled, setZoomEnabled] = useState<boolean>(true);
   const [rotateEnabled, setRotateEnabled] = useState<boolean>(true);
   const [pitchEnabled, setPitchEnabled] = useState<boolean>(true);
@@ -279,7 +279,7 @@ export const DemoMapPage: React.FC = () => {
                 <Text>スクロールを許可</Text>
               </View>
               <View>
-                <ToggleButton isPressed={scrollEnable} setIsPressed={setScrollEnable} />
+                <ToggleButton isPressed={scrollEnabled} setIsPressed={setScrollEnabled} />
               </View>
             </View>
             <Spacer heightRatio={0.02} />
@@ -325,7 +325,7 @@ export const DemoMapPage: React.FC = () => {
           // 一方でregionに位置情報を渡しておくとレンダリングのたびに参照される。
           mapType={mapType}
           showsBuildings={showBuildings}
-          scrollEnabled={scrollEnable}
+          scrollEnabled={scrollEnabled}
           zoomEnabled={zoomEnabled}
           rotateEnabled={rotateEnabled}
           pitchEnabled={pitchEnabled}
