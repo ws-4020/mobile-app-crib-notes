@@ -2,7 +2,7 @@ import {yup} from 'bases/validator';
 import {FormikHelpers, useFormik} from 'formik';
 import {useCallback} from 'react';
 
-export type MarkersFormValues = {
+export type MarkerFormValues = {
   latitude: string;
   longitude: string;
   title: string;
@@ -18,8 +18,8 @@ const markerFormInitialValues = {
   draggable: false,
 };
 
-type MarkersFormParams = {
-  onSubmit: (values: MarkersFormValues, formikHelpers: FormikHelpers<MarkersFormValues>) => void | Promise<any>;
+type MarkerFormParams = {
+  onSubmit: (values: MarkerFormValues, formikHelpers: FormikHelpers<MarkerFormValues>) => void | Promise<any>;
 };
 
 const markerFormValidationSchema = yup.object().shape({
@@ -27,22 +27,22 @@ const markerFormValidationSchema = yup.object().shape({
   longitude: yup.number().label('経度').min(-180).max(180),
 });
 
-export const useMarkersForm = (
-  params: MarkersFormParams = {
+export const useMarkerForm = (
+  params: MarkerFormParams = {
     onSubmit: () => {},
   },
 ) => {
-  const form = useFormik<MarkersFormValues>({
+  const form = useFormik<MarkerFormValues>({
     initialValues: markerFormInitialValues,
     validationSchema: markerFormValidationSchema,
     validateOnChange: true,
     onSubmit: params.onSubmit,
   });
 
-  const setMarkersFormDraggable = useCallback((value: boolean) => form.setFieldValue('draggable', value), [form]);
+  const setMarkerFormDraggable = useCallback((value: boolean) => form.setFieldValue('draggable', value), [form]);
 
   return {
     form,
-    setMarkersFormDraggable,
+    setMarkerFormDraggable,
   };
 };

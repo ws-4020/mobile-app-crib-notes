@@ -15,7 +15,7 @@ import {ToggleButton} from '../components/ToggleButton';
 import {initialMarker} from '../constants/initialMarker';
 import {initialRegion} from '../constants/initialRegion';
 import {RegionFormValues, useRegionForm} from '../form/RegionForm';
-import {MarkersFormValues, useMarkersForm} from '../form/useMarkersForm';
+import {MarkerFormValues, useMarkerForm} from '../form/useMarkerForm';
 
 export const DemoMapPage: React.FC = () => {
   const [defaultMarker, setDefaultMarker] = useState<MarkerProps>(initialMarker);
@@ -50,7 +50,7 @@ export const DemoMapPage: React.FC = () => {
     },
     onSubmit,
   });
-  const onMarkerFormSubmit = useCallback((values: MarkersFormValues) => {
+  const onMarkerFormSubmit = useCallback((values: MarkerFormValues) => {
     // 緯度と経度が入力されていた場合のみマーカーを設定し、そうでない場合はマーカーをクリアする
     if (values.latitude && values.longitude) {
       const marker = {
@@ -67,7 +67,7 @@ export const DemoMapPage: React.FC = () => {
       setFormSubmittedMarker(undefined);
     }
   }, []);
-  const {form: markersForm, setMarkersFormDraggable} = useMarkersForm({onSubmit: onMarkerFormSubmit});
+  const {form: markerForm, setMarkerFormDraggable} = useMarkerForm({onSubmit: onMarkerFormSubmit});
 
   const keyboardType = Platform.select({
     ios: 'numbers-and-punctuation',
@@ -182,9 +182,9 @@ export const DemoMapPage: React.FC = () => {
                 </View>
                 <View style={styles.flexContainer}>
                   <TextInput
-                    value={markersForm.values.latitude}
-                    onChangeText={markersForm.handleChange('latitude')}
-                    errorMessage={markersForm.errors.latitude}
+                    value={markerForm.values.latitude}
+                    onChangeText={markerForm.handleChange('latitude')}
+                    errorMessage={markerForm.errors.latitude}
                     keyboardType={keyboardType}
                   />
                 </View>
@@ -196,9 +196,9 @@ export const DemoMapPage: React.FC = () => {
                 </View>
                 <View style={styles.flexContainer}>
                   <TextInput
-                    value={markersForm.values.longitude}
-                    onChangeText={markersForm.handleChange('longitude')}
-                    errorMessage={markersForm.errors.longitude}
+                    value={markerForm.values.longitude}
+                    onChangeText={markerForm.handleChange('longitude')}
+                    errorMessage={markerForm.errors.longitude}
                     keyboardType={keyboardType}
                   />
                 </View>
@@ -209,7 +209,7 @@ export const DemoMapPage: React.FC = () => {
                   <Text>タイトル</Text>
                 </View>
                 <View style={styles.flexContainer}>
-                  <TextInput value={markersForm.values.title} onChangeText={markersForm.handleChange('title')} />
+                  <TextInput value={markerForm.values.title} onChangeText={markerForm.handleChange('title')} />
                 </View>
               </View>
               <View style={styles.rowContainer}>
@@ -219,8 +219,8 @@ export const DemoMapPage: React.FC = () => {
                 </View>
                 <View style={styles.flexContainer}>
                   <TextInput
-                    value={markersForm.values.description}
-                    onChangeText={markersForm.handleChange('description')}
+                    value={markerForm.values.description}
+                    onChangeText={markerForm.handleChange('description')}
                   />
                 </View>
               </View>
@@ -231,13 +231,13 @@ export const DemoMapPage: React.FC = () => {
                   <Text>ドラッグを許可</Text>
                 </View>
                 <View style={styles.toggleConfigContainer}>
-                  <ToggleButton isPressed={markersForm.values.draggable} setIsPressed={setMarkersFormDraggable} />
+                  <ToggleButton isPressed={markerForm.values.draggable} setIsPressed={setMarkerFormDraggable} />
                 </View>
               </View>
             </View>
             <Spacer heightRatio={0.03} />
             <View style={styles.search}>
-              <Button title="更新する" onPress={markersForm.submitForm} size="middle" />
+              <Button title="更新する" onPress={markerForm.submitForm} size="middle" />
             </View>
             <Spacer heightRatio={0.03} />
           </View>
