@@ -4,38 +4,41 @@ import {MapView, MapViewRef} from 'bases/ui/map/MapView';
 import {Marker, MarkerProps} from 'bases/ui/map/Marker';
 import {Spacer} from 'bases/ui/spacer/Spacer';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {View, StyleSheet, KeyboardAvoidingView, Platform} from 'react-native';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Region, MapType} from 'react-native-maps';
+import {MapType, Region} from 'react-native-maps';
 
 import {MapTypePicker} from '../components/MapTypePicker';
 import {ToggleButton} from '../components/ToggleButton';
 import {initialMarker} from '../constants/initialMarker';
 import {initialRegion} from '../constants/initialRegion';
 import {RegionFormValues, useRegionForm} from '../form/RegionForm';
+import {MarkersFormValues, useMarkersForm} from '../form/useMarkersForm';
 
 export const DemoMapPage: React.FC = () => {
-  // TODO マーカーを追加するフォーム（緯度、経度、タイトル、説明、dragableを入力させる）
-
-  // 現時点でsetMarkerListを使っていないが、後でマーカーを画面から追加できるようにするためにマーカーの配列をstate管理する。
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [markerList, setMarkerList] = useState<MarkerProps[]>([initialMarker]);
+  const [defaultMarker, setDefaultMarker] = useState<MarkerProps>(initialMarker);
+  const [formSubmittedMarker, setFormSubmittedMarker] = useState<MarkerProps>();
 
   const [region, setRegion] = useState<Region>(initialRegion);
 
   const [mapType, setMapType] = useState<MapType>('standard');
   const [showBuildings, setShowBuildings] = useState<boolean>(true);
+  const markerList = useMemo(
+    () => (formSubmittedMarker ? [defaultMarker, formSubmittedMarker] : [defaultMarker]),
+    [defaultMarker, formSubmittedMarker],
+  );
 
   const onSubmit = useCallback(
-    (values: RegionFormValues) =>
-      setRegion({
-        latitude: Number(values.latitude),
-        longitude: Number(values.longitude),
-        latitudeDelta: Number(values.latitudeDelta),
-        longitudeDelta: Number(values.longitudeDelta),
-      }),
+    (values: RegionFormValues) => {
+      const latitude = Number(values.latitude);
+      const longitude = Number(values.longitude);
+      const latitudeDelta = Number(values.latitudeDelta);
+      const longitudeDelta = Number(values.longitudeDelta);
+      setRegion({latitude, longitude, latitudeDelta, longitudeDelta});
+      setDefaultMarker({coordinate: {latitude, longitude}});
+    },
     [setRegion],
   );
   const {form} = useRegionForm({
@@ -47,6 +50,24 @@ export const DemoMapPage: React.FC = () => {
     },
     onSubmit,
   });
+  const onMarkerFormSubmit = useCallback((values: MarkersFormValues) => {
+    // 緯度と経度が入力されていた場合のみマーカーを設定し、そうでない場合はマーカーをクリアする
+    if (values.latitude && values.longitude) {
+      const marker = {
+        coordinate: {
+          latitude: Number(values.latitude),
+          longitude: Number(values.longitude),
+        },
+        title: values.title,
+        description: values.description,
+        draggable: values.draggable,
+      };
+      setFormSubmittedMarker(marker);
+    } else {
+      setFormSubmittedMarker(undefined);
+    }
+  }, []);
+  const {form: markersForm, setMarkersFormDraggable} = useMarkersForm({onSubmit: onMarkerFormSubmit});
 
   const keyboardType = Platform.select({
     ios: 'numbers-and-punctuation',
@@ -145,6 +166,78 @@ export const DemoMapPage: React.FC = () => {
             <Spacer heightRatio={0.03} />
             <View style={styles.search}>
               <Button title="更新する" onPress={form.submitForm} size="middle" />
+            </View>
+            <Spacer heightRatio={0.03} />
+          </View>
+          <View style={styles.flexContainer}>
+            <Text h4>マーカーの設定</Text>
+            <Spacer heightRatio={0.01} />
+            <Text>マーカーを設定できます。</Text>
+            <Spacer heightRatio={0.03} />
+            <View>
+              <View style={styles.rowContainer}>
+                <View style={styles.flexContainer}>
+                  <Text>latitude</Text>
+                  <Text>緯度</Text>
+                </View>
+                <View style={styles.flexContainer}>
+                  <TextInput
+                    value={markersForm.values.latitude}
+                    onChangeText={markersForm.handleChange('latitude')}
+                    errorMessage={markersForm.errors.latitude}
+                    keyboardType={keyboardType}
+                  />
+                </View>
+              </View>
+              <View style={styles.rowContainer}>
+                <View style={styles.flexContainer}>
+                  <Text>longitude</Text>
+                  <Text>経度</Text>
+                </View>
+                <View style={styles.flexContainer}>
+                  <TextInput
+                    value={markersForm.values.longitude}
+                    onChangeText={markersForm.handleChange('longitude')}
+                    errorMessage={markersForm.errors.longitude}
+                    keyboardType={keyboardType}
+                  />
+                </View>
+              </View>
+              <View style={styles.rowContainer}>
+                <View style={styles.flexContainer}>
+                  <Text>title</Text>
+                  <Text>タイトル</Text>
+                </View>
+                <View style={styles.flexContainer}>
+                  <TextInput value={markersForm.values.title} onChangeText={markersForm.handleChange('title')} />
+                </View>
+              </View>
+              <View style={styles.rowContainer}>
+                <View style={styles.flexContainer}>
+                  <Text>description</Text>
+                  <Text>説明</Text>
+                </View>
+                <View style={styles.flexContainer}>
+                  <TextInput
+                    value={markersForm.values.description}
+                    onChangeText={markersForm.handleChange('description')}
+                  />
+                </View>
+              </View>
+              <Spacer heightRatio={0.01} />
+              <View style={styles.rowContainer}>
+                <View style={styles.flexContainer}>
+                  <Text>draggable</Text>
+                  <Text>ドラッグを許可</Text>
+                </View>
+                <View style={styles.toggleConfigContainer}>
+                  <ToggleButton isPressed={markersForm.values.draggable} setIsPressed={setMarkersFormDraggable} />
+                </View>
+              </View>
+            </View>
+            <Spacer heightRatio={0.03} />
+            <View style={styles.search}>
+              <Button title="更新する" onPress={markersForm.submitForm} size="middle" />
             </View>
             <Spacer heightRatio={0.03} />
           </View>

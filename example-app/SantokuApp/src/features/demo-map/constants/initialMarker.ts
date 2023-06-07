@@ -1,7 +1,3 @@
-import {MapMarkerProps} from 'react-native-maps';
+import {initialRegion} from './initialRegion';
 
-export const initialMarker: MapMarkerProps = {
-  coordinate: {latitude: 34.7024898, longitude: 135.4937566},
-  title: '大阪駅',
-  description: '大阪府大阪市北区梅田３丁目１−１',
-};
+export const initialMarker = {coordinate: {latitude: initialRegion.latitude, longitude: initialRegion.longitude}};
