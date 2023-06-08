@@ -80,11 +80,10 @@ export const DemoMapPage: React.FC = () => {
   const [pitchEnabled, setPitchEnabled] = useState<boolean>(true);
 
   const mapViewRef = useRef<MapViewRef>(null);
-  const animateToRegion = useCallback(() => mapViewRef.current?.animateToRegion(region), [region]);
 
   useEffect(() => {
-    animateToRegion();
-  }, [animateToRegion, region]);
+    mapViewRef.current?.animateToRegion(region);
+  }, [region]);
 
   return (
     <KeyboardAvoidingView
