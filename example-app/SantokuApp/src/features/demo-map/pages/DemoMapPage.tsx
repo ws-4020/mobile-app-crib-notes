@@ -2,10 +2,9 @@ import {Button} from 'bases/ui/button/Button';
 import {TextInput} from 'bases/ui/input/TextInput';
 import {MapView, MapViewRef} from 'bases/ui/map/MapView';
 import {Marker, MarkerProps} from 'bases/ui/map/Marker';
-import {Spacer} from 'bases/ui/spacer/Spacer';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
+import React, {PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {KeyboardAvoidingView, Platform, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import {MapType, Region} from 'react-native-maps';
@@ -101,218 +100,102 @@ export const DemoMapPage: React.FC = () => {
 地図を表示します。オプションを変更し、表示や操作を確認できます。
         `}
             </Text>
-            <Spacer heightRatio={0.03} />
-            <Text h4>表示領域の変更</Text>
-            <Spacer heightRatio={0.01} />
-            <Text>表示領域を変更できます。</Text>
-            <Spacer heightRatio={0.03} />
-            <View style={styles.rowContainer}>
-              <View style={styles.flexContainer}>
-                <Text>latitude</Text>
-                <Text>緯度</Text>
-              </View>
-              <View style={styles.flexContainer}>
+            <SectionBox title="表示領域の変更" description="表示領域を変更できます。">
+              <FieldBox title="latitude" description="緯度">
                 <TextInput
                   value={form.values.latitude}
                   onChangeText={form.handleChange('latitude')}
                   errorMessage={form.errors.latitude}
                   keyboardType={keyboardType}
                 />
-              </View>
-            </View>
-            <View style={styles.rowContainer}>
-              <View style={styles.flexContainer}>
-                <Text>longitude</Text>
-                <Text>経度</Text>
-              </View>
-              <View style={styles.flexContainer}>
+              </FieldBox>
+              <FieldBox title="longitude" description="経度">
                 <TextInput
                   value={form.values.longitude}
                   onChangeText={form.handleChange('longitude')}
                   errorMessage={form.errors.longitude}
                   keyboardType={keyboardType}
                 />
-              </View>
-            </View>
-            <View style={styles.rowContainer}>
-              <View style={styles.flexContainer}>
-                <Text>latitudeDelta</Text>
-                <Text>緯度範囲（縦幅）</Text>
-              </View>
-              <View style={styles.flexContainer}>
+              </FieldBox>
+              <FieldBox title="latitudeDelta" description="緯度範囲（縦幅）">
                 <TextInput
                   value={form.values.latitudeDelta}
                   onChangeText={form.handleChange('latitudeDelta')}
                   errorMessage={form.errors.latitudeDelta}
                   keyboardType={keyboardType}
                 />
-              </View>
-            </View>
-            <View style={styles.rowContainer}>
-              <View style={styles.flexContainer}>
-                <Text>longitudeDelta</Text>
-                <Text>経度範囲（横幅）</Text>
-              </View>
-              <View style={styles.flexContainer}>
+              </FieldBox>
+              <FieldBox title="longitudeDelta" description="経度範囲（横幅）">
                 <TextInput
                   value={form.values.longitudeDelta}
                   onChangeText={form.handleChange('longitudeDelta')}
                   errorMessage={form.errors.longitudeDelta}
                   keyboardType={keyboardType}
                 />
-              </View>
-            </View>
-            <Spacer heightRatio={0.03} />
+              </FieldBox>
+            </SectionBox>
             <View style={styles.search}>
               <Button title="更新する" onPress={form.submitForm} size="middle" />
             </View>
-            <Spacer heightRatio={0.03} />
           </View>
-          <View style={styles.flexContainer}>
-            <Text h4>地図の種類選択</Text>
-            <Spacer heightRatio={0.01} />
-            <Text>地図の見た目を変更できます。</Text>
-            <Spacer heightRatio={0.03} />
-            <View style={styles.rowContainer}>
-              <View style={styles.flexContainer}>
-                <Text>MapType</Text>
-                <Text>マップタイプ</Text>
-                <Spacer heightRatio={0.03} />
-              </View>
-              <View style={styles.flexContainer}>
-                <MapTypePicker mapType={mapType} setMapType={setMapType} />
-              </View>
-            </View>
-            <Spacer heightRatio={0.02} />
-            <View style={styles.toggleConfigContainer}>
-              <View>
-                <Text>showBuilding</Text>
-                <Text>建物の輪郭を表示</Text>
-              </View>
-              <View>
-                <ToggleButton isPressed={showBuildings} setIsPressed={setShowBuildings} />
-              </View>
-            </View>
-            <Spacer heightRatio={0.02} />
+          <SectionBox title="地図の種類選択" description="地図の見た目を変更できます。">
+            <FieldBox title="MapType" description="マップタイプ">
+              <MapTypePicker mapType={mapType} setMapType={setMapType} />
+            </FieldBox>
+            <FieldBox title="showBuilding" description="建物の輪郭を表示" fieldStyles={styles.toggleConfigContainer}>
+              <ToggleButton isPressed={showBuildings} setIsPressed={setShowBuildings} />
+            </FieldBox>
             <Text style={styles.notice}>建物の輪郭表示の切り替えが確認できたのは、iOSのバージョン15以下だけです。</Text>
-            <Spacer heightRatio={0.05} />
-            <Text h4>画面操作の制限</Text>
-            <Spacer heightRatio={0.01} />
-            <Text>以下のトグルスイッチをOFFにすると画面操作を制限することができます。</Text>
-            <Spacer heightRatio={0.03} />
-            <View style={styles.toggleConfigContainer}>
-              <View>
-                <Text>scrollEnabled</Text>
-                <Text>スクロールを許可</Text>
-              </View>
-              <View>
-                <ToggleButton isPressed={scrollEnabled} setIsPressed={setScrollEnabled} />
-              </View>
-            </View>
-            <Spacer heightRatio={0.02} />
-            <View style={styles.toggleConfigContainer}>
-              <View>
-                <Text>zoomEnabled</Text>
-                <Text>拡大縮小を許可</Text>
-              </View>
-              <View>
-                <ToggleButton isPressed={zoomEnabled} setIsPressed={setZoomEnabled} />
-              </View>
-            </View>
-            <Spacer heightRatio={0.02} />
-            <View style={styles.toggleConfigContainer}>
-              <View>
-                <Text>rotateEnabled</Text>
-                <Text>回転を許可</Text>
-              </View>
-              <View>
-                <ToggleButton isPressed={rotateEnabled} setIsPressed={setRotateEnabled} />
-              </View>
-            </View>
-            <Spacer heightRatio={0.02} />
-            <View style={styles.toggleConfigContainer}>
-              <View>
-                <Text>pitchEnabled</Text>
-                <Text>視点の角度変更を許可</Text>
-              </View>
-              <View>
-                <ToggleButton isPressed={pitchEnabled} setIsPressed={setPitchEnabled} />
-              </View>
-            </View>
-            <Spacer heightRatio={0.05} />
-          </View>
-          <View style={styles.flexContainer}>
-            <Text h4>マーカーの追加</Text>
-            <Spacer heightRatio={0.01} />
-            <Text>マーカーを追加できます。</Text>
-            <Spacer heightRatio={0.03} />
-            <View>
-              <View style={styles.rowContainer}>
-                <View style={styles.flexContainer}>
-                  <Text>latitude</Text>
-                  <Text>緯度</Text>
-                </View>
-                <View style={styles.flexContainer}>
-                  <TextInput
-                    value={markerForm.values.latitude}
-                    onChangeText={markerForm.handleChange('latitude')}
-                    errorMessage={markerForm.errors.latitude}
-                    keyboardType={keyboardType}
-                  />
-                </View>
-              </View>
-              <View style={styles.rowContainer}>
-                <View style={styles.flexContainer}>
-                  <Text>longitude</Text>
-                  <Text>経度</Text>
-                </View>
-                <View style={styles.flexContainer}>
-                  <TextInput
-                    value={markerForm.values.longitude}
-                    onChangeText={markerForm.handleChange('longitude')}
-                    errorMessage={markerForm.errors.longitude}
-                    keyboardType={keyboardType}
-                  />
-                </View>
-              </View>
-              <View style={styles.rowContainer}>
-                <View style={styles.flexContainer}>
-                  <Text>title</Text>
-                  <Text>タイトル</Text>
-                </View>
-                <View style={styles.flexContainer}>
-                  <TextInput value={markerForm.values.title} onChangeText={markerForm.handleChange('title')} />
-                </View>
-              </View>
-              <View style={styles.rowContainer}>
-                <View style={styles.flexContainer}>
-                  <Text>description</Text>
-                  <Text>説明</Text>
-                </View>
-                <View style={styles.flexContainer}>
-                  <TextInput
-                    value={markerForm.values.description}
-                    onChangeText={markerForm.handleChange('description')}
-                  />
-                </View>
-              </View>
-              <Spacer heightRatio={0.01} />
-              <View style={styles.rowContainer}>
-                <View style={styles.flexContainer}>
-                  <Text>draggable</Text>
-                  <Text>ドラッグを許可</Text>
-                </View>
-                <View style={styles.toggleConfigContainer}>
-                  <ToggleButton isPressed={markerForm.values.draggable} setIsPressed={setMarkerFormDraggable} />
-                </View>
-              </View>
-            </View>
-            <Spacer heightRatio={0.03} />
+          </SectionBox>
+          <SectionBox
+            title="画面操作の制限"
+            description="以下のトグルスイッチをOFFにすると画面操作を制限することができます。">
+            <FieldBox title="scrollEnabled" description="スクロールを許可" fieldStyles={styles.toggleConfigContainer}>
+              <ToggleButton isPressed={scrollEnabled} setIsPressed={setScrollEnabled} />
+            </FieldBox>
+            <FieldBox title="zoomEnabled" description="拡大縮小を許可" fieldStyles={styles.toggleConfigContainer}>
+              <ToggleButton isPressed={zoomEnabled} setIsPressed={setZoomEnabled} />
+            </FieldBox>
+            <FieldBox title="rotateEnabled" description="回転を許可" fieldStyles={styles.toggleConfigContainer}>
+              <ToggleButton isPressed={rotateEnabled} setIsPressed={setRotateEnabled} />
+            </FieldBox>
+            <FieldBox
+              title="pitchEnabled"
+              description="視点の角度変更を許可"
+              fieldStyles={styles.toggleConfigContainer}>
+              <ToggleButton isPressed={pitchEnabled} setIsPressed={setPitchEnabled} />
+            </FieldBox>
+          </SectionBox>
+          <SectionBox title="マーカーの追加" description="マーカーを追加できます。">
+            <FieldBox title="latitude" description="緯度">
+              <TextInput
+                value={markerForm.values.latitude}
+                onChangeText={markerForm.handleChange('latitude')}
+                errorMessage={markerForm.errors.latitude}
+                keyboardType={keyboardType}
+              />
+            </FieldBox>
+            <FieldBox title="longitude" description="経度">
+              <TextInput
+                value={markerForm.values.longitude}
+                onChangeText={markerForm.handleChange('longitude')}
+                errorMessage={markerForm.errors.longitude}
+                keyboardType={keyboardType}
+              />
+            </FieldBox>
+            <FieldBox title="title" description="タイトル">
+              <TextInput value={markerForm.values.title} onChangeText={markerForm.handleChange('title')} />
+            </FieldBox>
+            <FieldBox title="description" description="説明">
+              <TextInput value={markerForm.values.description} onChangeText={markerForm.handleChange('description')} />
+            </FieldBox>
+            <FieldBox title="draggable" description="ドラッグを許可" fieldStyles={styles.toggleConfigContainer}>
+              <ToggleButton isPressed={markerForm.values.draggable} setIsPressed={setMarkerFormDraggable} />
+            </FieldBox>
             <View style={styles.search}>
               <Button title="更新する" onPress={markerForm.submitForm} size="middle" />
             </View>
-            <Spacer heightRatio={0.03} />
-          </View>
+          </SectionBox>
         </ScrollView>
       </View>
       <View style={styles.mapContainer}>
@@ -338,6 +221,34 @@ export const DemoMapPage: React.FC = () => {
   );
 };
 
+const SectionBox: React.FC<PropsWithChildren<{title: string; description: string}>> = ({
+  title,
+  description,
+  children,
+}) => {
+  return (
+    <View style={styles.sectionContainer}>
+      <Text h4>{title}</Text>
+      <Text>{description}</Text>
+      <View>{children}</View>
+    </View>
+  );
+};
+
+const FieldBox: React.FC<
+  PropsWithChildren<{title: string; description: string; fieldStyles?: StyleProp<ViewStyle>}>
+> = ({title, description, fieldStyles, children}) => {
+  return (
+    <View style={styles.rowContainer}>
+      <View style={styles.flexContainer}>
+        <Text>{title}</Text>
+        <Text>{description}</Text>
+      </View>
+      <View style={StyleSheet.flatten([styles.flexContainer, fieldStyles])}>{children}</View>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -353,6 +264,7 @@ const styles = StyleSheet.create({
   search: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    paddingVertical: 20,
   },
   rowContainer: {
     flexDirection: 'row',
@@ -361,9 +273,16 @@ const styles = StyleSheet.create({
   flexContainer: {
     flex: 1,
   },
+  sectionContainer: {
+    flex: 1,
+    columnGap: 10,
+    rowGap: 10,
+    paddingVertical: 20,
+  },
   toggleConfigContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flex: 1,
+    alignItems: 'flex-end',
+    paddingVertical: 10,
   },
   notice: {color: 'red'},
 });
