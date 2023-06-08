@@ -51,7 +51,7 @@ export const DemoMapPage: React.FC = () => {
     onSubmit,
   });
   const onMarkerFormSubmit = useCallback((values: MarkerFormValues) => {
-    // 緯度と経度が入力されていた場合のみマーカーを設定し、そうでない場合はマーカーをクリアする
+    // 緯度と経度が入力されていた場合のみマーカーを追加し、そうでない場合はマーカーをクリアする
     if (values.latitude && values.longitude) {
       const marker = {
         coordinate: {
@@ -170,9 +170,9 @@ export const DemoMapPage: React.FC = () => {
             <Spacer heightRatio={0.03} />
           </View>
           <View style={styles.flexContainer}>
-            <Text h4>マーカーの設定</Text>
+            <Text h4>マーカーの追加</Text>
             <Spacer heightRatio={0.01} />
-            <Text>マーカーを設定できます。</Text>
+            <Text>マーカーを追加できます。</Text>
             <Spacer heightRatio={0.03} />
             <View>
               <View style={styles.rowContainer}>
