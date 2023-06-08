@@ -1,55 +1,49 @@
 import {m} from 'bases/message/Message';
 import {Item, SelectPicker} from 'bases/ui/picker/SelectPicker';
-import React, {useCallback, useMemo, useRef} from 'react';
+import React, {useCallback, useRef} from 'react';
 import {Input} from 'react-native-elements';
 import {MapType} from 'react-native-maps';
 
-type PickerItemType = {
-  mapType: PickerMapType;
-};
-
 type PickerMapType = Extract<MapType, 'standard' | 'satellite' | 'hybrid'>;
 
-const pickerItems: Item<PickerItemType>[] = [
-  {value: {mapType: 'standard'}, label: 'standard', key: 'standard', inputLabel: 'standard'},
-  {value: {mapType: 'satellite'}, label: 'satellite', key: 'satellite', inputLabel: 'satellite'},
-  {value: {mapType: 'hybrid'}, label: 'hybrid', key: 'hybrid', inputLabel: 'hybrid'},
+const pickerItems: Item<PickerMapType>[] = [
+  {value: 'standard', label: 'standard', inputLabel: 'standard'},
+  {value: 'satellite', label: 'satellite', inputLabel: 'satellite'},
+  {value: 'hybrid', label: 'hybrid', inputLabel: 'hybrid'},
 ];
 
 type MapTypePickerProps = {
   mapType: MapType;
   setMapType: (mapType: MapType) => void;
 };
+
+const defaultItem = pickerItems[0];
 export const MapTypePicker: React.FC<MapTypePickerProps> = ({mapType, setMapType}) => {
-  const itemsKey = pickerItems.find(item => item.value.mapType === mapType)?.key ?? 'standard';
-  const canceledKey = useRef<React.Key>();
+  const selectedItem = pickerItems.find(item => item.value === mapType) ?? defaultItem;
+  const canceledKey = useRef<PickerMapType>();
   const onSelectedItemChange = useCallback(
-    (selectedItem?: Item<PickerItemType>) => {
-      setMapType(selectedItem?.value.mapType ?? 'standard');
+    (selectedItem?: Item<PickerMapType>) => {
+      setMapType((selectedItem ?? defaultItem).value);
     },
     [setMapType],
   );
-  const inputValue = useMemo(
-    () => pickerItems.find(item => item.key === itemsKey)?.inputLabel ?? 'standard',
-    [itemsKey],
-  );
   const onCancel = useCallback(() => {
-    setMapType(pickerItems.find(item => item.key === canceledKey.current)?.value.mapType ?? 'standard');
+    setMapType((pickerItems.find(item => item.value === canceledKey.current) ?? defaultItem).value);
   }, [setMapType]);
-  const acceptCurrentSelection = useCallback((selectedItem?: Item<PickerItemType>) => {
-    canceledKey.current = selectedItem?.key;
+  const acceptCurrentSelection = useCallback((selectedItem?: Item<PickerMapType>) => {
+    canceledKey.current = selectedItem?.value;
   }, []);
 
   return (
     <SelectPicker
-      selectedItemKey={itemsKey}
+      selectedItemKey={selectedItem.value}
       onSelectedItemChange={onSelectedItemChange}
       items={pickerItems}
       onDismiss={acceptCurrentSelection}
       onCancel={onCancel}
       onDone={acceptCurrentSelection}
       pickerAccessoryProps={{cancelLabel: m('キャンセル'), doneLabel: m('完了')}}
-      textInputComponent={<Input value={inputValue} editable={false} />}
+      textInputComponent={<Input value={selectedItem.inputLabel} editable={false} />}
     />
   );
 };
