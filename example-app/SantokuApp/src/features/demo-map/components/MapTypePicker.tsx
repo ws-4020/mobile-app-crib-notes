@@ -31,24 +31,21 @@ export const MapTypePicker: React.FC<MapTypePickerProps> = ({mapType, setMapType
     () => pickerItems.find(item => item.key === itemsKey)?.inputLabel ?? 'standard',
     [itemsKey],
   );
-  const onDismiss = useCallback((selectedItem?: Item<PickerItemType>) => {
-    canceledKey.current = selectedItem?.key;
-  }, []);
-
   const onCancel = useCallback(() => {
     setMapType(pickerItems.find(item => item.key === canceledKey.current)?.value.mapType ?? 'standard');
   }, [setMapType]);
-  const onDone = useCallback((selectedItem?: Item<PickerItemType>) => {
+  const acceptCurrentSelection = useCallback((selectedItem?: Item<PickerItemType>) => {
     canceledKey.current = selectedItem?.key;
   }, []);
+
   return (
     <SelectPicker
       selectedItemKey={itemsKey}
       onSelectedItemChange={onSelectedItemChange}
       items={pickerItems}
-      onDismiss={onDismiss}
+      onDismiss={acceptCurrentSelection}
       onCancel={onCancel}
-      onDone={onDone}
+      onDone={acceptCurrentSelection}
       pickerAccessoryProps={{cancelLabel: m('キャンセル'), doneLabel: m('完了')}}
       textInputComponent={<Input value={inputValue} editable={false} />}
     />
