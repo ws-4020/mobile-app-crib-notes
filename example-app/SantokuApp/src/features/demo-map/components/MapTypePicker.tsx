@@ -5,8 +5,10 @@ import {Input} from 'react-native-elements';
 import {MapType} from 'react-native-maps';
 
 type PickerItemType = {
-  mapType: MapType;
+  mapType: PickerMapType;
 };
+
+type PickerMapType = Extract<MapType, 'standard' | 'satellite' | 'hybrid'>;
 
 const pickerItems: Item<PickerItemType>[] = [
   {value: {mapType: 'standard'}, label: 'standard', key: 'standard', inputLabel: 'standard'},
