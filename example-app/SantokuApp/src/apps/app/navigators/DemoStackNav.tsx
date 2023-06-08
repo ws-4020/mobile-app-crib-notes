@@ -18,6 +18,7 @@ import {AppInfoScreen} from 'apps/app/screens/demo-info/AppInfoScreen';
 import {InstructionsScreen} from 'apps/app/screens/demo-instructions/InstructionsScreen';
 import {LocalAuthenticationScreen} from 'apps/app/screens/demo-local-authn/LocalAuthenticationScreen';
 import {LogScreen} from 'apps/app/screens/demo-log/LogScreen';
+import {MapScreen} from 'apps/app/screens/demo-map/MapScreen';
 import {DemoMenuScreen} from 'apps/app/screens/demo-menu/DemoMenuScreen';
 import {MessageScreen} from 'apps/app/screens/demo-message/MessageScreen';
 import {NavigationScreen} from 'apps/app/screens/demo-navigation/NavigationScreen';
@@ -41,7 +42,6 @@ import React from 'react';
 
 import {DemoStackParamList} from './types';
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
-import {MapScreen} from '../screens/demo-map/MapScreen';
 
 const nav = createNativeStackNavigator<DemoStackParamList>();
 
