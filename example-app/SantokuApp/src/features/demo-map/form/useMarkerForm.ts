@@ -10,6 +10,8 @@ export type MarkerFormValues = {
   draggable: boolean;
 };
 
+export type MarkerFormKeys = keyof MarkerFormValues;
+
 const markerFormInitialValues = {
   latitude: '',
   longitude: '',

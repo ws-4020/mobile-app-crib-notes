@@ -8,6 +8,8 @@ export type RegionFormValues = {
   longitudeDelta: string;
 };
 
+export type RegionFormKeys = keyof RegionFormValues;
+
 type RegionFormParams = {
   initialValues: RegionFormValues;
   onSubmit: (values: RegionFormValues, formikHelpers: FormikHelpers<RegionFormValues>) => void | Promise<any>;

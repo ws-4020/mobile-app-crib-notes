@@ -13,8 +13,20 @@ import {MapTypePicker} from '../components/MapTypePicker';
 import {ToggleButton} from '../components/ToggleButton';
 import {initialMarker} from '../constants/initialMarker';
 import {initialRegion} from '../constants/initialRegion';
-import {MarkerFormValues, useMarkerForm} from '../form/useMarkerForm';
-import {RegionFormValues, useRegionForm} from '../form/useRegionForm';
+import {MarkerFormKeys, MarkerFormValues, useMarkerForm} from '../form/useMarkerForm';
+import {RegionFormKeys, RegionFormValues, useRegionForm} from '../form/useRegionForm';
+
+const regionFormFields: {formKey: RegionFormKeys; description: string}[] = [
+  {formKey: 'latitude', description: '緯度'},
+  {formKey: 'longitude', description: '経度'},
+  {formKey: 'latitudeDelta', description: '緯度範囲（縦幅）'},
+  {formKey: 'longitudeDelta', description: '経度範囲（横幅）'},
+];
+
+const markerFormCoordinate: {formKey: Extract<MarkerFormKeys, 'latitude' | 'longitude'>; description: string}[] = [
+  {formKey: 'latitude', description: '緯度'},
+  {formKey: 'longitude', description: '経度'},
+];
 
 export const DemoMapPage: React.FC = () => {
   const [defaultMarker, setDefaultMarker] = useState<MarkerProps>(initialMarker);
@@ -101,38 +113,16 @@ export const DemoMapPage: React.FC = () => {
         `}
             </Text>
             <SectionBox title="表示領域の変更" description="表示領域を変更できます。">
-              <FieldBox title="latitude" description="緯度">
-                <TextInput
-                  value={form.values.latitude}
-                  onChangeText={form.handleChange('latitude')}
-                  errorMessage={form.errors.latitude}
-                  keyboardType={keyboardType}
-                />
-              </FieldBox>
-              <FieldBox title="longitude" description="経度">
-                <TextInput
-                  value={form.values.longitude}
-                  onChangeText={form.handleChange('longitude')}
-                  errorMessage={form.errors.longitude}
-                  keyboardType={keyboardType}
-                />
-              </FieldBox>
-              <FieldBox title="latitudeDelta" description="緯度範囲（縦幅）">
-                <TextInput
-                  value={form.values.latitudeDelta}
-                  onChangeText={form.handleChange('latitudeDelta')}
-                  errorMessage={form.errors.latitudeDelta}
-                  keyboardType={keyboardType}
-                />
-              </FieldBox>
-              <FieldBox title="longitudeDelta" description="経度範囲（横幅）">
-                <TextInput
-                  value={form.values.longitudeDelta}
-                  onChangeText={form.handleChange('longitudeDelta')}
-                  errorMessage={form.errors.longitudeDelta}
-                  keyboardType={keyboardType}
-                />
-              </FieldBox>
+              {regionFormFields.map(({formKey, description}, index) => (
+                <FieldBox key={`region-field-${index}`} title={formKey} description={description}>
+                  <TextInput
+                    value={form.values[formKey]}
+                    onChangeText={form.handleChange(formKey)}
+                    errorMessage={form.errors[formKey]}
+                    keyboardType={keyboardType}
+                  />
+                </FieldBox>
+              ))}
             </SectionBox>
             <View style={styles.search}>
               <Button title="更新する" onPress={form.submitForm} size="middle" />
@@ -167,22 +157,16 @@ export const DemoMapPage: React.FC = () => {
             </FieldBox>
           </SectionBox>
           <SectionBox title="マーカーの追加" description="マーカーを追加できます。">
-            <FieldBox title="latitude" description="緯度">
-              <TextInput
-                value={markerForm.values.latitude}
-                onChangeText={markerForm.handleChange('latitude')}
-                errorMessage={markerForm.errors.latitude}
-                keyboardType={keyboardType}
-              />
-            </FieldBox>
-            <FieldBox title="longitude" description="経度">
-              <TextInput
-                value={markerForm.values.longitude}
-                onChangeText={markerForm.handleChange('longitude')}
-                errorMessage={markerForm.errors.longitude}
-                keyboardType={keyboardType}
-              />
-            </FieldBox>
+            {markerFormCoordinate.map(({formKey, description}, index) => (
+              <FieldBox key={`marker-coordinate-field-${index}`} title={formKey} description={description}>
+                <TextInput
+                  value={markerForm.values[formKey]}
+                  onChangeText={markerForm.handleChange(formKey)}
+                  errorMessage={markerForm.errors[formKey]}
+                  keyboardType={keyboardType}
+                />
+              </FieldBox>
+            ))}
             <FieldBox title="title" description="タイトル">
               <TextInput value={markerForm.values.title} onChangeText={markerForm.handleChange('title')} />
             </FieldBox>
