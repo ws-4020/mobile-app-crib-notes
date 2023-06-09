@@ -279,7 +279,7 @@ const FormToggleButton: React.FC<FormToggleButtonProps> = ({title, description, 
 type FormButtonProps = Pick<ButtonProps, 'title' | 'onPress'>;
 const FormButton: React.FC<FormButtonProps> = ({title, onPress}) => {
   return (
-    <View style={styles.search}>
+    <View style={styles.button}>
       <Button title={title} onPress={onPress} size="middle" />
     </View>
   );
@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-  search: {
+  button: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingVertical: 20,
