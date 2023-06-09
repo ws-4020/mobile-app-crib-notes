@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch} from 'react-native';
 
-type ToggleButtonProps = {
+export type ToggleButtonProps = {
   isPressed: boolean;
   setIsPressed: (isPressed: boolean) => void;
 };

@@ -1,5 +1,5 @@
-import {Button} from 'bases/ui/button/Button';
-import {TextInput} from 'bases/ui/input/TextInput';
+import {Button, ButtonProps} from 'bases/ui/button/Button';
+import {TextInput, TextInputProps} from 'bases/ui/input/TextInput';
 import {MapView, MapViewRef} from 'bases/ui/map/MapView';
 import {Marker, MarkerProps} from 'bases/ui/map/Marker';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
@@ -10,7 +10,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {MapType, Region} from 'react-native-maps';
 
 import {MapTypePicker} from '../components/MapTypePicker';
-import {ToggleButton} from '../components/ToggleButton';
+import {ToggleButton, ToggleButtonProps} from '../components/ToggleButton';
 import {initialMarker} from '../constants/initialMarker';
 import {initialRegion} from '../constants/initialRegion';
 import {MarkerFormKeys, MarkerFormValues, useMarkerForm} from '../form/useMarkerForm';
@@ -109,71 +109,90 @@ export const DemoMapPage: React.FC = () => {
             </Text>
             <SectionBox title="表示領域の変更" description="表示領域を変更できます。">
               {regionFormFields.map(({formKey, description}, index) => (
-                <FieldBox key={`region-field-${index}`} title={formKey} description={description}>
-                  <TextInput
-                    value={form.values[formKey]}
-                    onChangeText={form.handleChange(formKey)}
-                    errorMessage={form.errors[formKey]}
-                    keyboardType={keyboardType}
-                  />
-                </FieldBox>
+                <FormTextInput
+                  key={`region-field-${index}`}
+                  title={formKey}
+                  description={description}
+                  value={form.values[formKey]}
+                  onChangeText={form.handleChange(formKey)}
+                  errorMessage={form.errors[formKey]}
+                  keyboardType={keyboardType}
+                />
               ))}
             </SectionBox>
-            <View style={styles.search}>
-              <Button title="更新する" onPress={form.submitForm} size="middle" />
-            </View>
+            <FormButton title="更新する" onPress={form.submitForm} />
           </View>
           <SectionBox title="地図の種類選択" description="地図の見た目を変更できます。">
             <FieldBox title="MapType" description="マップタイプ">
               <MapTypePicker mapType={mapType} setMapType={setMapType} />
             </FieldBox>
-            <FieldBox title="showBuilding" description="建物の輪郭を表示" fieldStyles={styles.toggleConfigContainer}>
-              <ToggleButton isPressed={showBuildings} setIsPressed={setShowBuildings} />
-            </FieldBox>
+            <FormToggleButton
+              title="showBuilding"
+              description="建物の輪郭を表示"
+              isPressed={showBuildings}
+              setIsPressed={setShowBuildings}
+            />
             <Text style={styles.notice}>建物の輪郭表示の切り替えが確認できたのは、iOSのバージョン15以下だけです。</Text>
           </SectionBox>
           <SectionBox
             title="画面操作の制限"
             description="以下のトグルスイッチをOFFにすると画面操作を制限することができます。">
-            <FieldBox title="scrollEnabled" description="スクロールを許可" fieldStyles={styles.toggleConfigContainer}>
-              <ToggleButton isPressed={scrollEnabled} setIsPressed={setScrollEnabled} />
-            </FieldBox>
-            <FieldBox title="zoomEnabled" description="拡大縮小を許可" fieldStyles={styles.toggleConfigContainer}>
-              <ToggleButton isPressed={zoomEnabled} setIsPressed={setZoomEnabled} />
-            </FieldBox>
-            <FieldBox title="rotateEnabled" description="回転を許可" fieldStyles={styles.toggleConfigContainer}>
-              <ToggleButton isPressed={rotateEnabled} setIsPressed={setRotateEnabled} />
-            </FieldBox>
-            <FieldBox
+            <FormToggleButton
+              title="scrollEnabled"
+              description="スクロールを許可"
+              isPressed={scrollEnabled}
+              setIsPressed={setScrollEnabled}
+            />
+            <FormToggleButton
+              title="zoomEnabled"
+              description="拡大縮小を許可"
+              isPressed={zoomEnabled}
+              setIsPressed={setZoomEnabled}
+            />
+            <FormToggleButton
+              title="rotateEnabled"
+              description="回転を許可"
+              isPressed={rotateEnabled}
+              setIsPressed={setRotateEnabled}
+            />
+            <FormToggleButton
               title="pitchEnabled"
               description="視点の角度変更を許可"
-              fieldStyles={styles.toggleConfigContainer}>
-              <ToggleButton isPressed={pitchEnabled} setIsPressed={setPitchEnabled} />
-            </FieldBox>
+              isPressed={pitchEnabled}
+              setIsPressed={setPitchEnabled}
+            />
           </SectionBox>
           <SectionBox title="マーカーの追加" description="マーカーを追加できます。">
             {markerFormCoordinate.map(({formKey, description}, index) => (
-              <FieldBox key={`marker-coordinate-field-${index}`} title={formKey} description={description}>
-                <TextInput
-                  value={markerForm.values[formKey]}
-                  onChangeText={markerForm.handleChange(formKey)}
-                  errorMessage={markerForm.errors[formKey]}
-                  keyboardType={keyboardType}
-                />
-              </FieldBox>
+              <FormTextInput
+                key={`marker-coordinate-field-${index}`}
+                title={formKey}
+                description={description}
+                value={markerForm.values[formKey]}
+                onChangeText={markerForm.handleChange(formKey)}
+                errorMessage={markerForm.errors[formKey]}
+                keyboardType={keyboardType}
+              />
             ))}
-            <FieldBox title="title" description="タイトル">
-              <TextInput value={markerForm.values.title} onChangeText={markerForm.handleChange('title')} />
-            </FieldBox>
-            <FieldBox title="description" description="説明">
-              <TextInput value={markerForm.values.description} onChangeText={markerForm.handleChange('description')} />
-            </FieldBox>
-            <FieldBox title="draggable" description="ドラッグを許可" fieldStyles={styles.toggleConfigContainer}>
-              <ToggleButton isPressed={markerForm.values.draggable} setIsPressed={setMarkerFormDraggable} />
-            </FieldBox>
-            <View style={styles.search}>
-              <Button title="更新する" onPress={markerForm.submitForm} size="middle" />
-            </View>
+            <FormTextInput
+              title="title"
+              description="タイトル"
+              value={markerForm.values.title}
+              onChangeText={markerForm.handleChange('title')}
+            />
+            <FormTextInput
+              title="description"
+              description="説明"
+              value={markerForm.values.description}
+              onChangeText={markerForm.handleChange('description')}
+            />
+            <FormToggleButton
+              title="draggable"
+              description="ドラッグを許可"
+              isPressed={markerForm.values.draggable}
+              setIsPressed={setMarkerFormDraggable}
+            />
+            <FormButton title="更新する" onPress={markerForm.submitForm} />
           </SectionBox>
         </ScrollView>
       </View>
@@ -200,11 +219,11 @@ export const DemoMapPage: React.FC = () => {
   );
 };
 
-const SectionBox: React.FC<PropsWithChildren<{title: string; description: string}>> = ({
-  title,
-  description,
-  children,
-}) => {
+type SectionBoxProps = {
+  title: string;
+  description: string;
+};
+const SectionBox: React.FC<PropsWithChildren<SectionBoxProps>> = ({title, description, children}) => {
   return (
     <View style={styles.sectionContainer}>
       <Text h4>{title}</Text>
@@ -214,9 +233,12 @@ const SectionBox: React.FC<PropsWithChildren<{title: string; description: string
   );
 };
 
-const FieldBox: React.FC<
-  PropsWithChildren<{title: string; description: string; fieldStyles?: StyleProp<ViewStyle>}>
-> = ({title, description, fieldStyles, children}) => {
+type FieldBoxProps = {
+  title: string;
+  description: string;
+  fieldStyles?: StyleProp<ViewStyle>;
+};
+const FieldBox: React.FC<PropsWithChildren<FieldBoxProps>> = ({title, description, fieldStyles, children}) => {
   return (
     <View style={styles.rowContainer}>
       <View style={styles.flexContainer}>
@@ -224,6 +246,41 @@ const FieldBox: React.FC<
         <Text>{description}</Text>
       </View>
       <View style={StyleSheet.flatten([styles.flexContainer, fieldStyles])}>{children}</View>
+    </View>
+  );
+};
+
+type FormTextInputProps = Omit<FieldBoxProps, 'fieldStyles'> &
+  Pick<TextInputProps, 'value' | 'onChangeText' | 'errorMessage' | 'keyboardType'>;
+const FormTextInput: React.FC<FormTextInputProps> = ({
+  title,
+  description,
+  value,
+  onChangeText,
+  errorMessage,
+  keyboardType,
+}) => {
+  return (
+    <FieldBox title={title} description={description}>
+      <TextInput value={value} onChangeText={onChangeText} errorMessage={errorMessage} keyboardType={keyboardType} />
+    </FieldBox>
+  );
+};
+
+type FormToggleButtonProps = Omit<FieldBoxProps, 'fieldStyles'> & ToggleButtonProps;
+const FormToggleButton: React.FC<FormToggleButtonProps> = ({title, description, isPressed, setIsPressed}) => {
+  return (
+    <FieldBox title={title} description={description} fieldStyles={styles.toggleConfigContainer}>
+      <ToggleButton isPressed={isPressed} setIsPressed={setIsPressed} />
+    </FieldBox>
+  );
+};
+
+type FormButtonProps = Pick<ButtonProps, 'title' | 'onPress'>;
+const FormButton: React.FC<FormButtonProps> = ({title, onPress}) => {
+  return (
+    <View style={styles.search}>
+      <Button title={title} onPress={onPress} size="middle" />
     </View>
   );
 };
