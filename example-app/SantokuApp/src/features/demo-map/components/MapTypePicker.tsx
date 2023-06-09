@@ -17,18 +17,18 @@ type MapTypePickerProps = {
   setMapType: (mapType: MapType) => void;
 };
 
-const defaultItem = pickerItems[0];
+export const defaultMapTypeItem = pickerItems[0];
 export const MapTypePicker: React.FC<MapTypePickerProps> = ({mapType, setMapType}) => {
-  const selectedItem = pickerItems.find(item => item.value === mapType) ?? defaultItem;
+  const selectedItem = pickerItems.find(item => item.value === mapType) ?? defaultMapTypeItem;
   const canceledKey = useRef<PickerMapType>();
   const onSelectedItemChange = useCallback(
     (selectedItem?: Item<PickerMapType>) => {
-      setMapType((selectedItem ?? defaultItem).value);
+      setMapType((selectedItem ?? defaultMapTypeItem).value);
     },
     [setMapType],
   );
   const onCancel = useCallback(() => {
-    setMapType((pickerItems.find(item => item.value === canceledKey.current) ?? defaultItem).value);
+    setMapType((pickerItems.find(item => item.value === canceledKey.current) ?? defaultMapTypeItem).value);
   }, [setMapType]);
   const acceptCurrentSelection = useCallback((selectedItem?: Item<PickerMapType>) => {
     canceledKey.current = selectedItem?.value;
