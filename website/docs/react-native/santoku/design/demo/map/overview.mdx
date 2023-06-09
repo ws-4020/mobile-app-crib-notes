@@ -116,8 +116,8 @@ module.exports = ({config}) => {
 
 ### iOSでGoogleマップを使用するときの注意点
 
-地図表示の共通部品ではiOSでGoogleマップを使うことはできない仕様になっています。
-iOSでGoogleマップを使用する場合、共通部品は使用せずライブラリからコンポーネントをインポートしてください。
+このアプリで作成している地図表示の共通部品（[MapView](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/src/bases/ui/map/MapView.tsx)）ではiOSでGoogleマップを使うことはできない仕様になっています。
+iOSでGoogleマップを使用する場合、共通部品は使用せず`react-native-maps`からコンポーネントをインポートしてください。
 さらに、設定ファイルの変更が必要になります。
 
 以下を参考にAPIキーを取得してください。
