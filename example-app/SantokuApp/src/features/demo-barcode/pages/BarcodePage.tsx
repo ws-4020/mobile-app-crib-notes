@@ -35,6 +35,8 @@ const initialCode128Value = `${START_CHARACTERS[formInitialValues.code128Data[0]
 const initialCode128Text = formInitialValues.code128Data[0].value;
 const initialCode128AutoValue = formInitialValues.code128AutoData;
 const initialCode128AutoText = formInitialValues.code128AutoData;
+
+const onError = (e: unknown) => log.error(new ApplicationError('Failed to generate barcode.', e, 'BarcodeError'));
 export const BarcodePage: React.FC = () => {
   const frame = useSafeAreaFrame();
   // 画面幅 - Boxのpadding - バーコードに指定するquietZone * 2
@@ -86,11 +88,6 @@ export const BarcodePage: React.FC = () => {
     setCode128AutoValue(code128AutoData);
     setCode128AutoText(code128AutoData);
   }, []);
-
-  const onError = useCallback(
-    (e: unknown) => log.error(new ApplicationError('Failed to generate barcode.', e, 'BarcodeError'), 'BarcodeError'),
-    [],
-  );
 
   return (
     <Box flex={1} p="p16">
