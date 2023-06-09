@@ -115,8 +115,8 @@ export const DemoMapPage: React.FC = () => {
                   keyboardType={keyboardType}
                 />
               ))}
+              <FormButton title="更新する" onPress={form.submitForm} />
             </SectionBox>
-            <FormButton title="更新する" onPress={form.submitForm} />
           </View>
           <SectionBox title="地図の種類選択" description="地図の見た目を変更できます。">
             <FieldBox title="MapType" description="マップタイプ">
