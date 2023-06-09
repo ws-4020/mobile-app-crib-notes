@@ -28,6 +28,11 @@ const markerFormCoordinate: {formKey: Extract<MarkerFormKeys, 'latitude' | 'long
   {formKey: 'longitude', description: '経度'},
 ];
 
+const numberKeyboard = Platform.select({
+  ios: 'numbers-and-punctuation',
+  android: 'number-pad',
+} as const);
+
 export const DemoMapPage: React.FC = () => {
   const [defaultMarker, setDefaultMarker] = useState<MarkerProps>(initialMarker);
   const [formSubmittedMarker, setFormSubmittedMarker] = useState<MarkerProps>();
@@ -79,11 +84,6 @@ export const DemoMapPage: React.FC = () => {
     }
   }, []);
   const {form: markerForm, setMarkerFormDraggable} = useMarkerForm({onSubmit: onMarkerFormSubmit});
-
-  const numberKeyboard = Platform.select({
-    ios: 'numbers-and-punctuation',
-    android: 'number-pad',
-  } as const);
 
   const [scrollEnabled, setScrollEnabled] = useState<boolean>(true);
   const [zoomEnabled, setZoomEnabled] = useState<boolean>(true);
