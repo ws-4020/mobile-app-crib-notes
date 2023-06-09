@@ -93,7 +93,6 @@ describe('Barcode with all props', () => {
       alignItems: 'flex-start',
       paddingHorizontal: 5,
     });
-    getSvgProps(view);
     const svgProps = getSvgProps(view);
     const svgPathProps = getSvgPathProps(view);
     expect(svgProps.fill).toBe('red');
