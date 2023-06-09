@@ -80,7 +80,7 @@ export const DemoMapPage: React.FC = () => {
   }, []);
   const {form: markerForm, setMarkerFormDraggable} = useMarkerForm({onSubmit: onMarkerFormSubmit});
 
-  const keyboardType = Platform.select({
+  const numberKeyboard = Platform.select({
     ios: 'numbers-and-punctuation',
     android: 'number-pad',
   } as const);
@@ -112,7 +112,7 @@ export const DemoMapPage: React.FC = () => {
                   value={form.values[formKey]}
                   onChangeText={form.handleChange(formKey)}
                   errorMessage={form.errors[formKey]}
-                  keyboardType={keyboardType}
+                  keyboardType={numberKeyboard}
                 />
               ))}
               <FormButton title="更新する" onPress={form.submitForm} />
@@ -167,7 +167,7 @@ export const DemoMapPage: React.FC = () => {
                 value={markerForm.values[formKey]}
                 onChangeText={markerForm.handleChange(formKey)}
                 errorMessage={markerForm.errors[formKey]}
-                keyboardType={keyboardType}
+                keyboardType={numberKeyboard}
               />
             ))}
             <FormTextInput
