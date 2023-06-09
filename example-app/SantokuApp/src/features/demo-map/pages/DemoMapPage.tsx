@@ -102,11 +102,7 @@ export const DemoMapPage: React.FC = () => {
         <ScrollView>
           <View style={styles.flexContainer}>
             <SpecAndSourceCodeLink feature="map" />
-            <Text>
-              {`
-地図を表示します。オプションを変更し、表示や操作を確認できます。
-        `}
-            </Text>
+            <Text>地図を表示します。オプションを変更し、表示や操作を確認できます。</Text>
             <SectionBox title="表示領域の変更" description="表示領域を変更できます。">
               {regionFormFields.map(({formKey, description}, index) => (
                 <FormTextInput
