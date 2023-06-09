@@ -3,7 +3,7 @@ import {yup} from 'bases/validator';
 import {useFormik} from 'formik';
 import {useCallback} from 'react';
 
-import {BarcodeCharacter} from '../types/barcodeCharacter';
+import {BarcodeCharacter} from '../types/BarcodeCharacter';
 
 type FormValues = {
   format: Format;

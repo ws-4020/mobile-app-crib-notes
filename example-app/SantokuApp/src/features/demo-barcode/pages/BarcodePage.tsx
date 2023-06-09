@@ -15,7 +15,7 @@ import {Pressable} from 'react-native';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
 import {CODE128DataSet, formInitialValues, useBarcodeForm} from '../forms/useBarcodeForm';
-import {BarcodeCharacter} from '../types/barcodeCharacter';
+import {BarcodeCharacter} from '../types/BarcodeCharacter';
 
 const formatItems: Item<Format>[] = [
   {value: 'CODE128', label: 'CODE128'},
