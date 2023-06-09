@@ -4,7 +4,7 @@ import {MapView, MapViewRef} from 'bases/ui/map/MapView';
 import {Marker, MarkerProps} from 'bases/ui/map/Marker';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
 import React, {PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {KeyboardAvoidingView, Platform, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import {Platform, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import {MapType, Region} from 'react-native-maps';
@@ -97,12 +97,7 @@ export const DemoMapPage: React.FC = () => {
   }, [region]);
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.select({
-        ios: undefined,
-        android: 'height',
-      } as const)}
-      style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.flexContainer}>
         <ScrollView>
           <View style={styles.flexContainer}>
@@ -201,7 +196,7 @@ export const DemoMapPage: React.FC = () => {
           ))}
         </MapView>
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
