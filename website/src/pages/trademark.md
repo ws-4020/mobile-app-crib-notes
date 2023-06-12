@@ -13,7 +13,9 @@ title: 商標について
 - 「Apple」「Appleのロゴ」「iCloud」「Safari」「Keychain」「iOS」「iPad」「iPadOS」「iPhone」「Mac」「macOS」「watchOS」「tvOS」「Xcode」「App Store」「Instruments」「Objective-C」「Swift」「Dynamic Island」は、米国およびその他の国で登録された Apple Inc. の商標です。<!-- textlint-enable -->
   ※iPhone商標は、アイホン株式会社のライセンスに基づき使用されています。  
   ※iOS商標は、 Cisco Systems, Inc. のライセンスに基づき使用されています。
-- 「Google Chrome」「Android」「Flutter」「Firebase」「Google Play」「Pixel」は、 Google LLCの登録商標です。
+<!-- textlint-disable ja-technical-writing/sentence-length-->
+- 「Google Chrome」「Google Maps」「Android」「fastlane」「Flutter」「Firebase」「Firestore」「Google Play」「Pixel」は、 Google LLCの登録商標です。
+<!-- textlint-enable ja-technical-writing/sentence-length-->
 - Androidロボットは、Googleが作成および提供している作品から複製または変更したものであり、[クリエイティブ・コモンズ表示](https://creativecommons.org/licenses/by/3.0/) 3.0ライセンスに記載された条件に従って使用しています。
 - 「Amazon Cognito」「Amazon Pinpoint」は、米国および/またはその他の諸国における、Amazon.com, Inc. またはその関連会社の商標です。
 <!-- textlint-disable ja-technical-writing/sentence-length-->
