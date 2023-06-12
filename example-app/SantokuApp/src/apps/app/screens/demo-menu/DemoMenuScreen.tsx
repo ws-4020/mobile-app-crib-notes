@@ -103,6 +103,10 @@ const demoScreenList: ScreenList[] = [
     to: 'QRCode',
   },
   {
+    title: 'Barcode',
+    to: 'Barcode',
+  },
+  {
     title: 'Map',
     to: 'Map',
   },
