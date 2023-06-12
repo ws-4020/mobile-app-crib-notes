@@ -231,9 +231,9 @@ iOSの場合は、[`date`が削除](https://github.com/react-native-datetimepick
 
 <!-- textlint-disable ja-technical-writing/no-unmatched-pair -->
 ```console
-src/bases/ui/picker/DateTimePicker.ios.test.tsx:158:29
+src/bases/ui/picker/DateTimePicker.ios.test.tsx:155:29
 - error TS2339: Property 'date' does not exist on type 'Readonly<Readonly<ViewProps & BaseOptions & { maximumDate?: Date | undefined; minimumDate?: Date | undefined; }> & { locale?: string | undefined; ... 7 more ...; disabled?: boolean | undefined; }>'.
-158     expect(pickerItemsProps.date).toBe(selectedValue.getTime());
+155     expect(pickerItemsProps.date).toBe(selectedValue.getTime());
 ```
 <!-- textlint-enable ja-technical-writing/no-unmatched-pair -->
 
