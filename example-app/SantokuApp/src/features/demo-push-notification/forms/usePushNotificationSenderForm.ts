@@ -46,13 +46,6 @@ export const usePushNotificationSenderForm = () => {
     onSubmit: nop,
   });
 
-  const setFormDataKey = useCallback(
-    async (value: string, index: number) => {
-      await form.setFieldValue(`data[${index}].key`, value);
-    },
-    [form],
-  );
-
   const setFormContentAvailable = useCallback(
     async (value: boolean) => {
       // form.handleChangeだとstring型の更新しかできないので、setFieldValueを使用する
@@ -104,7 +97,6 @@ export const usePushNotificationSenderForm = () => {
 
   return {
     form,
-    setFormDataKey,
     setFormContentAvailable,
     setFormPriority,
     setFormInterruptionLevel,

@@ -41,7 +41,6 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
 }) => {
   const {
     form,
-    setFormDataKey,
     setFormContentAvailable,
     setFormPriority,
     setFormInterruptionLevel,
@@ -202,7 +201,7 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
                   <Box flex={2}>
                     <StyledTextInput
                       value={d.key}
-                      onChangeText={text => setFormDataKey(text, index)}
+                      onChangeText={form.handleChange(`data[${index}.key]`)}
                       borderBottomWidth={1}
                       placeholder="Key"
                     />
