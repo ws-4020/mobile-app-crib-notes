@@ -122,7 +122,13 @@ module.exports = ({config}) => {
       ],
       [
         withAndroidAddManifestPlaceholders,
-        [{placeholderKey: 'googleMapApiKey', propertyKey: 'SANTOKU_APP_GOOGLE_MAP_API_KEY'}],
+        [
+          {
+            placeholderKey: 'googleMapApiKey',
+            propertyKey: 'SANTOKU_APP_GOOGLE_MAP_API_KEY',
+            propertyDefaultValue: 'dummyGoogleMapApiKey',
+          },
+        ],
       ],
       // 以下のプラグインは、環境毎の設定ファイルで定義します。
       // withAndroidAppBuildGradleForRelease,
