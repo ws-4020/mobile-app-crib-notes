@@ -2,12 +2,12 @@ import {yup} from 'bases/validator';
 import {useFormik} from 'formik';
 import {useCallback} from 'react';
 
-import {DataType} from '../types/DataType';
+import {Data} from '../types/Data';
 
 export type FormValues = {
   notificationTitle: string;
   notificationBody: string;
-  data: DataType[];
+  data: Data[];
   badge: string;
   collapseId: string;
   contentAvailable: boolean;

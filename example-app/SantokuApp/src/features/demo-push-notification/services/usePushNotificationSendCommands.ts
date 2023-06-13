@@ -2,16 +2,16 @@ import axios from 'axios';
 import {AppConfig} from 'bases/core/configs/AppConfig';
 import {useMutation} from 'react-query';
 
-import {PushNotificationParamsType} from '../types/PushNotificationParamsType';
+import {PushNotificationParams} from '../types/PushNotificationParams';
 
 export const usePushNotificationSendCommands = () => {
   const {mutateAsync: sendToMe, isLoading: isSendingToMe} = useMutation(
-    ({token, params}: {token: string; params: PushNotificationParamsType}) =>
+    ({token, params}: {token: string; params: PushNotificationParams}) =>
       axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/single/${token}`, params),
   );
 
   const {mutateAsync: sendToAll, isLoading: isSendingToAll} = useMutation(
-    ({params}: {params: PushNotificationParamsType}) =>
+    ({params}: {params: PushNotificationParams}) =>
       axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/all`, params),
   );
 

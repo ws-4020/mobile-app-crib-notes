@@ -1,9 +1,9 @@
-import {DataType} from './DataType';
+import {Data} from './Data';
 
-export type PushNotificationParamsType = {
+export type PushNotificationParams = {
   notificationTitle?: string;
   notificationBody?: string;
-  data?: DataType[];
+  data?: Data[];
   badge?: string;
   collapseId?: string;
   contentAvailable?: boolean;

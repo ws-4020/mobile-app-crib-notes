@@ -1,4 +1,4 @@
-export type DataType = {
+export type Data = {
   key: string;
   value: string;
 };

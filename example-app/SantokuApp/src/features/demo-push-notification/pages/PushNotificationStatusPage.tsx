@@ -10,11 +10,10 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {getFcmToken} from '../services/getFcmToken';
 import {openSettings} from '../services/openSettings';
 import {requestUserPermission as requestUserPermissionService} from '../services/requestUserPermission';
-
-type PermissionAuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
+import {PermissionAuthStatus} from '../types/PermissionAuthStatus';
 
 export const PushNotificationStatusPage: React.FC = () => {
-  const [permissionAuthStatus, setPermissionAuthStatus] = useState<PermissionAuthStatusType>();
+  const [permissionAuthStatus, setPermissionAuthStatus] = useState<PermissionAuthStatus>();
   const [token, setToken] = useState<string>();
 
   const getPermissionAuthStatusForDisplay = useCallback(
