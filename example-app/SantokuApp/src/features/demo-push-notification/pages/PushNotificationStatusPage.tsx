@@ -5,44 +5,48 @@ import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
 import {StyledButton} from 'bases/ui/common/StyledButton';
 import {StyledColumn} from 'bases/ui/common/StyledColumn';
 import {StyledRow} from 'bases/ui/common/StyledRow';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useMemo} from 'react';
 
-import {getFcmToken} from '../services/getFcmToken';
 import {openSettings} from '../services/openSettings';
 import {requestUserPermission as requestUserPermissionService} from '../services/requestUserPermission';
-import {PermissionAuthStatus} from '../types/PermissionAuthStatus';
+import {useGetFcmToken} from '../services/useGetFcmToken';
+import {useHasPermission} from '../services/useHasPermission';
+
+const getPermissionAuthStatusForDisplay = (permissionAuthStatus: FirebaseMessagingTypes.AuthorizationStatus) => {
+  switch (permissionAuthStatus) {
+    case messaging.AuthorizationStatus.NOT_DETERMINED:
+      return 'NOT_DETERMINED';
+    case messaging.AuthorizationStatus.DENIED:
+      return 'DENIED';
+    case messaging.AuthorizationStatus.AUTHORIZED:
+      return 'AUTHORIZED';
+    case messaging.AuthorizationStatus.PROVISIONAL:
+      return 'PROVISIONAL';
+  }
+};
 
 export const PushNotificationStatusPage: React.FC = () => {
-  const [permissionAuthStatus, setPermissionAuthStatus] = useState<PermissionAuthStatus>();
-  const [token, setToken] = useState<string>();
+  const {fcmToken, error: fcmTokenError, refetch: refetchFcmToken} = useGetFcmToken();
+  const {permission, error: permissionError, refetch: refetchPermission} = useHasPermission();
 
-  const getPermissionAuthStatusForDisplay = useCallback(
-    (permissionAuthStatus: FirebaseMessagingTypes.AuthorizationStatus) => {
-      switch (permissionAuthStatus) {
-        case messaging.AuthorizationStatus.NOT_DETERMINED:
-          return 'NOT_DETERMINED';
-        case messaging.AuthorizationStatus.DENIED:
-          return 'DENIED';
-        case messaging.AuthorizationStatus.AUTHORIZED:
-          return 'AUTHORIZED';
-        case messaging.AuthorizationStatus.PROVISIONAL:
-          return 'PROVISIONAL';
-      }
-    },
-    [],
-  );
+  if (fcmTokenError) {
+    log.trace(`Failed to get token. cause=[${String(fcmTokenError)}]`);
+  }
+  if (permissionError) {
+    log.trace(`Failed to get permission status. cause=[${String(permissionError)}]`);
+  }
 
-  const getPermissionAuthStatus = useCallback(async () => {
-    const permissionAuthStatus = await messaging().hasPermission();
-    setPermissionAuthStatus(getPermissionAuthStatusForDisplay(permissionAuthStatus));
-  }, [getPermissionAuthStatusForDisplay]);
+  const permissionAuthStatus = useMemo(() => {
+    return permission == null ? undefined : getPermissionAuthStatusForDisplay(permission);
+  }, [permission]);
 
   const requestUserPermission = useCallback(
     async (options?: FirebaseMessagingTypes.IOSPermissions) => {
-      const permissionAuthStatus = await requestUserPermissionService(options);
-      setPermissionAuthStatus(getPermissionAuthStatusForDisplay(permissionAuthStatus));
+      await requestUserPermissionService(options);
+      await refetchFcmToken();
+      await refetchPermission();
     },
-    [getPermissionAuthStatusForDisplay],
+    [refetchFcmToken, refetchPermission],
   );
 
   const requestUserPermissionWithoutOptions = useCallback(async () => {
@@ -52,16 +56,6 @@ export const PushNotificationStatusPage: React.FC = () => {
   const requestUserPermissionWithProvisional = useCallback(async () => {
     await requestUserPermission({provisional: true});
   }, [requestUserPermission]);
-
-  const getToken = useCallback(async () => {
-    const fcmToken = await getFcmToken();
-    setToken(fcmToken);
-  }, []);
-
-  useEffect(() => {
-    getPermissionAuthStatus().catch(e => log.trace(`Failed to get permission status. cause=[${String(e)}]`));
-    getToken().catch(e => log.trace(`Failed to get token. cause=[${String(e)}]`));
-  }, [getPermissionAuthStatus, getToken]);
 
   return (
     <StyledSafeAreaView>
@@ -81,7 +75,7 @@ export const PushNotificationStatusPage: React.FC = () => {
           <Text>【FCM登録トークン】</Text>
           <StyledColumn p="p24">
             <Text selectable>
-              {token ??
+              {fcmToken ??
                 `FCM登録トークンは発行されていません。
 Firebaseの設定ファイルが正しくない可能性があります。`}
             </Text>
