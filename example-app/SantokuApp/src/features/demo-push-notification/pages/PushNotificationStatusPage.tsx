@@ -1,6 +1,5 @@
 import type {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import messaging from '@react-native-firebase/messaging';
-import {log} from 'bases/logging';
 import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
 import {StyledButton} from 'bases/ui/common/StyledButton';
 import {StyledColumn} from 'bases/ui/common/StyledColumn';
@@ -26,15 +25,8 @@ const getPermissionAuthStatusForDisplay = (permissionAuthStatus: FirebaseMessagi
 };
 
 export const PushNotificationStatusPage: React.FC = () => {
-  const {fcmToken, error: fcmTokenError, refetch: refetchFcmToken} = useGetFcmToken();
-  const {permission, error: permissionError, refetch: refetchPermission} = useHasPermission();
-
-  if (fcmTokenError) {
-    log.trace(`Failed to get token. cause=[${String(fcmTokenError)}]`);
-  }
-  if (permissionError) {
-    log.trace(`Failed to get permission status. cause=[${String(permissionError)}]`);
-  }
+  const {fcmToken, refetch: refetchFcmToken} = useGetFcmToken();
+  const {permission, refetch: refetchPermission} = useHasPermission();
 
   const permissionAuthStatus = useMemo(() => {
     return permission == null ? undefined : getPermissionAuthStatusForDisplay(permission);

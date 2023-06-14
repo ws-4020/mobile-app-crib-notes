@@ -1,6 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
 import axios, {AxiosError} from 'axios';
-import {log} from 'bases/logging';
 import {Box, StyledSafeAreaView, StyledScrollView, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledButton} from 'bases/ui/common/StyledButton';
 import {StyledColumn} from 'bases/ui/common/StyledColumn';
@@ -56,21 +55,14 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
     channels,
     onSelectedChannelChange,
   } = usePushNotificationSelectPicker({setFormPriority, setFormInterruptionLevel, setFormChannel});
-  const {fcmToken, error: fcmTokenError} = useGetFcmToken();
-  const {permission, error: permissionError} = useHasPermission();
+  const {fcmToken} = useGetFcmToken();
+  const {permission} = useHasPermission();
   const {
     sendToMe: callSendToMe,
     isSendingToMe,
     sendToAll: callSendToAll,
     isSendingToAll,
   } = usePushNotificationSendCommands();
-
-  if (fcmTokenError) {
-    log.trace(`Failed to get token. cause=[${String(fcmTokenError)}]`);
-  }
-  if (permissionError) {
-    log.trace(`Failed to get permission status. cause=[${String(permissionError)}]`);
-  }
 
   const {data: accountData, isFetching: isFetchingAccountData} = useAccountData();
 
