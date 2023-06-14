@@ -4,7 +4,7 @@ import {MapView, MapViewRef} from 'bases/ui/map/MapView';
 import {Marker, MarkerProps} from 'bases/ui/map/Marker';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
 import React, {PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Platform, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import {Dimensions, Platform, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import {MapType, Region} from 'react-native-maps';
@@ -99,10 +99,33 @@ export const DemoMapPage: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.flexContainer}>
-        <ScrollView>
+        <Text>地図を表示します。オプションを変更し、表示や操作を確認できます。</Text>
+        <View style={styles.mapContainer}>
+          <MapView
+            ref={mapViewRef}
+            initialRegion={initialRegion}
+            // initialRegionは初期レンダリングのみ参照されるので
+            // デモ画面から他のPropsを変更しても地図に表示される場所が変わらない。
+            // 一方でregionに位置情報を渡しておくとレンダリングのたびに参照される。
+            mapType={mapType}
+            showsBuildings={showBuildings}
+            scrollEnabled={scrollEnabled}
+            zoomEnabled={zoomEnabled}
+            rotateEnabled={rotateEnabled}
+            pitchEnabled={pitchEnabled}
+            style={styles.map}>
+            {markerList.map((item, index) => (
+              <Marker key={index} {...item} />
+            ))}
+          </MapView>
+        </View>
+        <ScrollView
+          scrollToOverflowEnabled={false}
+          alwaysBounceVertical={false}
+          automaticallyAdjustsScrollIndicatorInsets={false}
+          automaticallyAdjustContentInsets={false}>
           <View style={styles.flexContainer}>
             <SpecAndSourceCodeLink feature="map" />
-            <Text>地図を表示します。オプションを変更し、表示や操作を確認できます。</Text>
             <SectionBox title="表示領域の変更" description="表示領域を変更できます。">
               {regionFormFields.map(({formKey, description}, index) => (
                 <FormTextInput
@@ -192,25 +215,6 @@ export const DemoMapPage: React.FC = () => {
           </SectionBox>
         </ScrollView>
       </View>
-      <View style={styles.mapContainer}>
-        <MapView
-          ref={mapViewRef}
-          initialRegion={initialRegion}
-          // initialRegionは初期レンダリングのみ参照されるので
-          // デモ画面から他のPropsを変更しても地図に表示される場所が変わらない。
-          // 一方でregionに位置情報を渡しておくとレンダリングのたびに参照される。
-          mapType={mapType}
-          showsBuildings={showBuildings}
-          scrollEnabled={scrollEnabled}
-          zoomEnabled={zoomEnabled}
-          rotateEnabled={rotateEnabled}
-          pitchEnabled={pitchEnabled}
-          style={styles.map}>
-          {markerList.map((item, index) => (
-            <Marker key={index} {...item} />
-          ))}
-        </MapView>
-      </View>
     </View>
   );
 };
@@ -287,7 +291,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   mapContainer: {
-    height: '30%',
+    height: Dimensions.get('screen').height * 0.25,
+    paddingVertical: 10,
   },
   map: {
     height: '100%',
