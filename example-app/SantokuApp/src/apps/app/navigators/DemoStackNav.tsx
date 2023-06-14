@@ -23,6 +23,7 @@ import {MessageScreen} from 'apps/app/screens/demo-message/MessageScreen';
 import {NavigationScreen} from 'apps/app/screens/demo-navigation/NavigationScreen';
 import {PickerScreen} from 'apps/app/screens/demo-picker/PickerScreen';
 import {PushNotificationSenderScreen} from 'apps/app/screens/demo-push-notification/PushNotificationSenderScreen';
+import {PushNotificationStatusScreen} from 'apps/app/screens/demo-push-notification/PushNotificationStatusScreen';
 import {CreateTodoDemoScreen} from 'apps/app/screens/demo-react-query/CreateTodoDemoScreen';
 import {DependentQueryDemo1Screen} from 'apps/app/screens/demo-react-query/DependentQueryDemo1Screen';
 import {DependentQueryDemo2Screen} from 'apps/app/screens/demo-react-query/DependentQueryDemo2Screen';
@@ -40,7 +41,6 @@ import React from 'react';
 
 import {DemoStackParamList} from './types';
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
-import {PushNotificationStatusScreen} from '../screens/demo-push-notification/PushNotificationStatusScreen';
 
 const nav = createNativeStackNavigator<DemoStackParamList>();
 
