@@ -35,6 +35,7 @@ title: 商標について
 - 「QRコード」は、株式会社デンソーウェーブの商標または登録商標です。
 - 「1Password」は、米国およびその他の諸国における、AgileBits, Inc. の商標または登録商標です。
 <!-- textlint-disable jtf-style/1.2.1.句点(。)と読点(、)-->
+- 「Mapbox」は、Mapbox Inc.の米国およびその他の国における商標または登録商標です。
 - 「Figma」は、FIGMA, INC.の商標です。
 <!-- textlint-enable jtf-style/1.2.1.句点(。)と読点(、)-->
 
