@@ -1,4 +1,5 @@
 import {Item} from 'bases/ui/picker/SelectPicker';
+import {messagingChannels} from 'features/push-notification/constants/messagingChannels';
 import {useCallback} from 'react';
 
 const priorities = [
@@ -20,10 +21,7 @@ const interruptionLevels = [
 
 const channels = [
   {value: undefined, label: 'No channel'},
-  {value: 'emergencyChannel', label: 'Emergency notification'},
-  {value: 'highChannel', label: 'High notification'},
-  {value: 'middleChannel', label: 'Middle notification'},
-  {value: 'lowChannel', label: 'Low notification'},
+  ...messagingChannels.map(channel => ({value: channel.id, label: channel.name})),
 ];
 
 type Props = {
