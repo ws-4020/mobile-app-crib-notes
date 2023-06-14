@@ -127,9 +127,9 @@ public class PushNotificationTestAction {
   static class PushNotificationRequest {
     public String notificationTitle;
     public String notificationBody;
-    public String collapseId;
     public List<PushNotificationDataRequest> data;
     public Integer badge;
+    public String collapseId;
     public Boolean contentAvailable;
     public Integer priority;
     public String interruptionLevel;
