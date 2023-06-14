@@ -97,14 +97,9 @@ export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProp
 
   const buildPushNotificationParams = useCallback(() => {
     // string型の入力項目は、空文字の場合は送信しないため除外する
-    const filteredStringField = Object.entries(form.values)
-      .filter(([_, value]) => {
-        return typeof value === 'string' ? value : true;
-      })
-      .reduce((acc, [key, value]) => {
-        acc[key] = value;
-        return acc;
-      }, {} as {[key: string]: any});
+    const filteredStringField = Object.fromEntries(
+      Object.entries(form.values).filter(([_, value]) => (typeof value === 'string' ? value : true)),
+    );
     // Data属性は、Keyが入力されていないものは送信しないため除外する
     const filteredData = form.values.data.filter(f => f.key);
     return {...filteredStringField, data: filteredData.length ? filteredData : undefined};
