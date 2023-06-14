@@ -2,7 +2,22 @@ import axios from 'axios';
 import {AppConfig} from 'bases/core/configs/AppConfig';
 import {useMutation} from 'react-query';
 
-import {PushNotificationParams} from '../types/PushNotificationParams';
+import {Data} from '../types/Data';
+
+type PushNotificationParams = {
+  notificationTitle?: string;
+  notificationBody?: string;
+  data?: Data[];
+  badge?: string;
+  collapseId?: string;
+  contentAvailable?: boolean;
+  priority?: string;
+  interruptionLevel?: string;
+  relevanceScore?: string;
+  notificationCount?: string;
+  collapseKey?: string;
+  channelId?: string;
+};
 
 export const usePushNotificationSendCommands = () => {
   const {mutateAsync: sendToMe, isLoading: isSendingToMe} = useMutation(
