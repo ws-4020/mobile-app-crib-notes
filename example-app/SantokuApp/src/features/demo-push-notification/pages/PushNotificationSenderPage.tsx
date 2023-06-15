@@ -192,7 +192,7 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
                   <Box flex={2}>
                     <StyledTextInput
                       value={d.key}
-                      onChangeText={form.handleChange(`data[${index}.key]`)}
+                      onChangeText={form.handleChange(`data[${index}].key`)}
                       borderBottomWidth={1}
                       placeholder="Key"
                     />
@@ -200,7 +200,7 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
                   <Box flex={2}>
                     <StyledTextInput
                       value={d.value}
-                      onChangeText={form.handleChange(`data[${index}.value]`)}
+                      onChangeText={form.handleChange(`data[${index}].value`)}
                       borderBottomWidth={1}
                       placeholder="Value"
                     />
