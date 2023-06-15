@@ -19,16 +19,16 @@ type PushNotificationParams = {
   channelId?: string;
 };
 
-export const usePushNotificationSendCommands = () => {
-  const {mutateAsync: sendToMe, isLoading: isSendingToMe} = useMutation(
-    ({token, params}: {token: string; params: PushNotificationParams}) =>
-      axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/single/${token}`, params),
-  );
+const putToSingle = ({token, params}: {token: string; params: PushNotificationParams}) =>
+  axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/single/${token}`, params);
 
-  const {mutateAsync: sendToAll, isLoading: isSendingToAll} = useMutation(
-    ({params}: {params: PushNotificationParams}) =>
-      axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/all`, params),
-  );
+const putToAll = ({params}: {params: PushNotificationParams}) =>
+  axios.put(`${AppConfig.santokuAppBackendUrl}/api/sandbox/push-notification/all`, params);
+
+export const usePushNotificationSendCommands = () => {
+  const {mutateAsync: sendToMe, isLoading: isSendingToMe} = useMutation(putToSingle);
+
+  const {mutateAsync: sendToAll, isLoading: isSendingToAll} = useMutation(putToAll);
 
   return {
     sendToMe,
