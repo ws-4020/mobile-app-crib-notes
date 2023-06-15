@@ -548,6 +548,9 @@ module.exports = {
           items: [
             'react-native/santoku/design/demo/overview',
             'react-native/santoku/design/demo/push-notification/overview',
+            'react-native/santoku/design/demo/qrcode/overview',
+            'react-native/santoku/design/demo/barcode/overview',
+            'react-native/santoku/design/demo/map/overview',
           ],
         },
       ],
@@ -672,6 +675,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-014-ui-libraries',
         'react-native/santoku/decisions/adr-015-android-head-up-notification',
         'react-native/santoku/decisions/adr-016-forced-app-updates',
+        'react-native/santoku/decisions/adr-017-map-view-library',
       ],
     },
   ],
