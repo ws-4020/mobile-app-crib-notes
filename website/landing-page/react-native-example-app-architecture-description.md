@@ -40,7 +40,7 @@
 
 - アプリのアップデート
   - アプリケーション方式
-    - [アプリのアップデート](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/app-updates/overview)
+    - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/app-updates/overview)
     - [強制アプリアップデート](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/app-updates/forced-app-updates)
   - Decision Records
     - [強制アプリアップデート](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-016-forced-app-updates)
