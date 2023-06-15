@@ -1,4 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
+import {useTheme} from '@shopify/restyle';
 import axios, {AxiosError} from 'axios';
 import {Box, StyledSafeAreaView, StyledScrollView, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledButton} from 'bases/ui/common/StyledButton';
@@ -9,6 +10,7 @@ import {StyledTextInput} from 'bases/ui/common/StyledTextInput';
 import {AddIllustration} from 'bases/ui/illustration/AddIllustration';
 import {RemoveIllustration} from 'bases/ui/illustration/RemoveIllustration';
 import {SelectPicker} from 'bases/ui/picker/SelectPicker';
+import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import {useAccountData} from 'features/account/services/account/useAccountData';
 import {SpecAndSourceCodeLink} from 'features/demo-github-link/components/SpecAndSourceCodeLink';
 import {ErrorResponse} from 'features/sandbox/apis/model';
@@ -38,6 +40,8 @@ export type PushNotificationSenderPageProps = {
 export const PushNotificationSenderPage: React.FC<PushNotificationSenderPageProps> = ({
   navigateToPushNotificationStatus,
 }) => {
+  const theme = useTheme<RestyleTheme>();
+  const pickerTextInputProps = {style: {color: theme.textVariants.defaults.color, borderBottomWidth: 1}};
   const {
     form,
     setFormContentAvailable,
@@ -237,10 +241,7 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
               items={priorities}
               selectedItemKey={form.values.priority}
               onSelectedItemChange={onSelectedPriorityChange}
-              textInputProps={{style: {borderBottomWidth: 1, borderBottomColor: 'gray'}}}
-              textInputComponent={
-                <StyledTextInput value={form.values.priority} borderBottomWidth={1} editable={false} />
-              }
+              textInputProps={pickerTextInputProps}
             />
           </WithLabel>
           <WithLabel label="InterruptionLevel">
@@ -248,9 +249,7 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
               items={interruptionLevels}
               selectedItemKey={form.values.interruptionLevel}
               onSelectedItemChange={onSelectedInterruptionLevelsKeyChange}
-              textInputComponent={
-                <StyledTextInput value={form.values.interruptionLevel} borderBottomWidth={1} editable={false} />
-              }
+              textInputProps={pickerTextInputProps}
             />
           </WithLabel>
           <WithLabel label="RelevanceScore">
@@ -284,9 +283,7 @@ Keyが入力されており、Valueが未入力の場合は送信されます。
               items={channels}
               selectedItemKey={form.values.channelId}
               onSelectedItemChange={onSelectedChannelChange}
-              textInputComponent={
-                <StyledTextInput value={form.values.channelId} borderBottomWidth={1} editable={false} />
-              }
+              textInputProps={pickerTextInputProps}
             />
           </WithLabel>
         </SettingBox>
