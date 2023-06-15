@@ -464,7 +464,7 @@ jest.mock('@react-native-community/netinfo', () => mockRNCNetInfo);
 Jest27以降では、`done`コールバックを使用しているテストで`async`/`await`を使用した非同期関数を使用できません。
 
 ```typescript
-// <- doneコールバックを使用する場合は、asyncを付けれない
+// <- doneコールバックを使用する場合は、asyncを付けられない
 it('200ms経ってからスプラッシュスクリーンが閉じられること', async done => {})
 ```
 
