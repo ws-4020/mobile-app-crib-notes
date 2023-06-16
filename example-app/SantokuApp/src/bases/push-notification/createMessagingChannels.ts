@@ -1,4 +1,4 @@
-import {AndroidImportance} from '@notifee/react-native';
+import notifee, {AndroidImportance} from '@notifee/react-native';
 
 export const messagingChannels = [
   {
@@ -26,3 +26,7 @@ export const messagingChannels = [
     importance: AndroidImportance.MIN,
   },
 ];
+
+export const createMessagingChannels = async () => {
+  await notifee.createChannels(messagingChannels);
+};

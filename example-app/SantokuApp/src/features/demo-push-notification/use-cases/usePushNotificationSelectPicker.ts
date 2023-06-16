@@ -1,5 +1,5 @@
+import {messagingChannels} from 'bases/push-notification/createMessagingChannels';
 import {Item} from 'bases/ui/picker/SelectPicker';
-import {messagingChannels} from 'features/push-notification/constants/messagingChannels';
 import {useCallback} from 'react';
 
 const labelWithValue = ({value, label}: {value: string | undefined; label: string}) => ({
