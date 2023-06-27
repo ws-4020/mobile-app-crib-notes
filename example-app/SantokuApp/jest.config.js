@@ -18,9 +18,9 @@ module.exports = {
     '<rootDir>/src/features/backend/apis',
     '<rootDir>/src/features/sandbox/apis',
     '<rootDir>/src/apps/app/screens/demo-',
-    '<rootDir>/src/features/demo-',
+    '<rootDir>/src/features/demo-[^/]+/pages/',
     '<rootDir>/src/apps/app/screens/qa-',
-    '<rootDir>/src/features/qa-',
+    '<rootDir>/src/features/qa-[^/]+/pages/',
   ],
   moduleNameMapper: {
     // Barcode.tsxでESMのコードを直接importしているため、以下のエラーが発生する
