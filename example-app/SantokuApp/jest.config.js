@@ -15,8 +15,8 @@ module.exports = {
   // https://jestjs.io/ja/docs/configuration#clearmocks-boolean
   clearMocks: true,
   coveragePathIgnorePatterns: [
-    '<rootDir>/src/features/backend/apis',
-    '<rootDir>/src/features/sandbox/apis',
+    '<rootDir>/src/features/backend/apis/',
+    '<rootDir>/src/features/sandbox/apis/',
     '<rootDir>/src/apps/app/screens/',
     '<rootDir>/src/features/[^/]+/pages/',
   ],
