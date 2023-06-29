@@ -17,8 +17,7 @@ module.exports = {
   coveragePathIgnorePatterns: [
     '<rootDir>/src/features/backend/apis',
     '<rootDir>/src/features/sandbox/apis',
-    '<rootDir>/src/apps/app/screens/demo-',
-    '<rootDir>/src/apps/app/screens/qa-',
+    '<rootDir>/src/apps/app/screens/',
     '<rootDir>/src/features/[^/]+/pages/',
   ],
   moduleNameMapper: {
