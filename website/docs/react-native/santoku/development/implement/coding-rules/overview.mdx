@@ -1,0 +1,77 @@
+---
+title: コーディングルール
+sidebar_label: 概要
+pagination_label: コーディングルール
+---
+
+アプリ開発では、コーディングルールを定めることでコードの品質を保つことができます。
+
+このアプリでは、必ず守るべきルールと推奨するルールの2つを定めています。
+
+## 自動でチェック可能なルール
+
+ESLintやPrettier、TypeScriptなどの静的解析ツールを導入します。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+> TODO: summaryの修正
+
+import {PageList} from '../../../../../../src/components';
+const requiredRules = [
+  {
+    title: 'ESLint',
+    to: '/react-native/santoku/development/implement/coding-rules/eslint',
+    summary: <>ESLintについて記載しています。</>,
+  },
+  {
+    title: 'Prettier',
+    to: '/react-native/santoku/development/implement/coding-rules/prettier',
+    summary: <>Prettierについて記載しています。</>,
+  },
+  {
+    title: 'TypeScript',
+    to: '/react-native/santoku/development/implement/coding-rules/typescript',
+    summary: <>TypeScriptについて記載しています。</>,
+  },
+  {
+    title: '静的解析チェックツールの運用',
+    to: '/react-native/santoku/development/implement/coding-rules/lint-ops',
+    summary: <>静的解析チェックツールの運用について記載しています。</>,
+  },
+  {
+    title: 'コードフォーマッタ',
+    to: '/react-native/santoku/development/implement/coding-rules/code-formatter',
+    summary: <>コードフォーマッタについて記載しています。</>,
+  },
+];
+
+<PageList overviews={requiredRules} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+## 自動でチェックできないルール
+
+> TODO: 説明修正
+
+自動チェックできないルールについて記載しています。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+> TODO: summaryの修正
+
+export const recommendedRules = [
+  {
+    title: '命名ルール',
+    to: '/react-native/santoku/development/implement/coding-rules/naming-conversion',
+    summary: <>命名ルールについて記載しています。</>,
+  },
+  {
+    title: 'JavaScript/TypeScriptのコーディングルール',
+    to: '/react-native/santoku/development/implement/coding-rules/recommended-rules',
+    summary: <>推奨するルールについて記載しています。</>,
+  },
+];
+
+<PageList overviews={recommendedRules} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->

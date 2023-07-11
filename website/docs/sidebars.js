@@ -592,6 +592,22 @@ module.exports = {
             'react-native/santoku/development/implement/logs-implementation',
             'react-native/santoku/development/implement/cautions-on-using-firebase',
             'react-native/santoku/development/implement/http-api',
+            {
+              type: 'category',
+              label: 'コーディングルール',
+              items: [
+                'react-native/santoku/development/implement/coding-rules/overview',
+                'react-native/santoku/development/implement/coding-rules/eslint',
+                'react-native/santoku/development/implement/coding-rules/prettier',
+                'react-native/santoku/development/implement/coding-rules/typescript',
+                'react-native/santoku/development/implement/coding-rules/editorconfig',
+                'react-native/santoku/development/implement/coding-rules/naming-conversion',
+                'react-native/santoku/development/implement/coding-rules/js-ts-coding-rules',
+                'react-native/santoku/development/implement/coding-rules/lint-ops',
+                'react-native/santoku/development/implement/coding-rules/code-formatter',
+                'react-native/santoku/development/implement/coding-rules/nablarch-santoku-mapping',
+              ],
+            },
           ],
         },
         {

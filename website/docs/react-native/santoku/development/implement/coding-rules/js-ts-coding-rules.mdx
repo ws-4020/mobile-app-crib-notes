@@ -1,0 +1,139 @@
+---
+title: JavaScript/TypeScriptのコーディングルール
+---
+
+> TODO: コーディンルールの簡単な説明
+
+> TODO: 全体的に規約説明の見直し
+
+## コードスタイルに関する規約
+
+### 命名規約
+
+本節では、プログラム中の各識別子の命名規則について説明する。
+
+#### 変数 ★
+
+変数の名前は、その変数に格納する内容を端的に表す 名詞 とし、必要に応じて前後に 形容詞 、 形容詞句 を付加する。
+また、誤読の心配が無い限り 冠詞 は省略する。
+先頭文字は小文字とし、 各単語はキャメル記法に従って連結する。
+
+特に、変数の内容がリストやハッシュテーブルのようなコレクションとして使用される場合は、
+変数名は要素を表す名詞の複数形か、そのコレクション自体を表す名詞とする。
+
+以下は本規約に従った命名例である。
+
+```javascript
+let nextNode = null;       // (形容詞) + (名詞)
+let prevNode = null;       // (形容詞) + (名詞)
+let totalNumOfNodes = 0;  // (形容詞) + (名詞) + (形容詞句)
+```
+
+#### 定数 ★
+
+定数は必ずconstを使用して定義する。
+変数名は全て大文字かつ単語間の区切りにアンダースコア("_")を用いる。
+
+以下は本規約に従った命名例である。
+
+```javascript
+const PI                      = 3.1416;
+const MAX_THRESHOLD_FREQUENCY = 40000;
+```
+
+#### ループ変数 ★
+for文等のループ構文において、カウンタとして使用される変数の名称には、
+慣用的に使用される変数名 (i, j, k ...) を使用できる。
+
+#### 変数(真偽値) ★
+真偽値を格納する変数の名前は、形容詞、もしくは 節 とする。
+節の時制は、基本的に状態動詞の場合は現在形、動作動詞の場合は過去形とし、主語が明確である場合は省略する。
+
+以下は本規約に従った命名例である。
+
+```javascript
+let isValid = false;          // (現在形状態動詞:主語省略)
+let needsDefault = true;      // (現在形状態動詞:主語省略)
+let loadingFinished = false;  // (過去形動作動詞)
+let available = true;         // (形容詞)
+let inProgress = false;       // (形容詞句)
+```
+
+#### 変数(関数名) ★
+JavaScriptでは関数も単なるオブジェクトであるため、関数名は単に関数オブジェクトを格納する変数の名前である。
+関数オブジェクトを格納する変数の名前は、その処理の内容を端的に表す 原型の動作動詞 とする。
+関数が引数をとる場合は、その引数の内容を目的語とする 前置詞 を追加し、(動詞 + 前置詞) としてもよい。
+
+なお、その関数が、内部状態を変更しない単純な問い合わせ処理(いわゆるアクセサ)である場合は、その関数の戻り値の内容を端的に表す 名詞 としてもよい。
+また、関数オブジェクトをスコープの外部で実行することを意図して、引数や戻り値を通じて受け渡す場合も、その目的を表す 名詞 としてよい。
+
+以下は本規約に従った命名例である。
+
+```javascript
+function initialize() {           // (原形動作動詞)
+// ...
+}
+function appendTo(parentNode) {   // (原形動作動詞) + (前置詞)
+// ...
+};
+function price() {                // (名詞)
+// ...
+return this.attributes.price;
+}
+
+function lastRecordOf(resultSet) { // (名詞) + (前置詞)
+// ...
+return resultSet[resultSet.length];
+}
+
+let callback = function() {        // (名詞)
+// ....
+  return callback;
+};
+```
+
+### リテラルの記述
+
+#### 正規表現リテラルの記述 ★
+
+正規表現を使用する場合は、可能であれば、文字列引数ではなく、正規表現リテラルを使用すること。
+ただし、正規表現の内容が動的に変わる場合や、正規表現の内容が複雑でコメントが必要となる場合は、RegExp()コンストラクタを使用すること。
+
+## プログラムの堅牢性に関する規約
+
+### JavaScript一般
+
+#### オブジェクトのループにはObject.keysを利用する。★
+for-in ループでは、プロトタイプチェイン上のプロパティも走査するため、本来、予期しない要素が処理対象となってしまう場合がある。
+これを避けるため、Object.keys() を使ってループを記述すること。
+
+```javascript title="記述例"
+let record = getRecord();
+
+Object.keys(record).forEach(function(key) {
+console.log(record[key]);
+});
+```
+
+#### グローバル変数の定義を行なわない。 ★
+グローバル変数(windowオブジェクトのプロパティ) を新たに定義することを禁止する。
+
+#### プロトタイプの拡張を行わない。 ★
+既存のコンストラクタ関数に対するプロトタイプオブジェクトの変更を原則として禁じる。
+ただし、jQueryプラグインを作成する場合に限り、jQueryオブジェクトのプロトタイプ定義(jQuery.fn)の拡張を認める。
+
+## Moduleに関する規約
+
+### ファイルの単位
+
+> TODO: [Meteor Cloud Code Style](https://guide.meteor.com/code-style.html#files-and-exports)を参考にする
+TypeScript/TSXは、1ファイルに付き1exportとする。
+
+```typescript title="formatDateYYYYMMDD.ts（良い例）"
+export const formatDateYYYYMMDD = (value: Date) => {};
+```
+
+```typescript title="formatDate.ts（悪い例）"
+export const formatDateYYYYMMDD = (value: Date) => {};
+export const formatDateYYYYMMDDHHMMSS = (value: Date) => {};
+```

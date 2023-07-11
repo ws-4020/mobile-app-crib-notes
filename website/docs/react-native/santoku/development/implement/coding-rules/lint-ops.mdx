@@ -1,0 +1,26 @@
+---
+title: 静的解析チェックツールの運用
+---
+
+> TODO: 概要
+
+> TODO: Nablarchの[Checkstyle運用ガイド](https://github.com/Fintan-contents/nablarch-system-development-guide/blob/master/%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E9%96%8B%E7%99%BA%E3%82%AC%E3%82%A4%E3%83%89/PGUT%E5%B7%A5%E7%A8%8B/proman-style-guide/java/staticanalysis/checkstyle/docs/Ops-Rule.md)に記載されているのと大体同じ内容を記載する
+
+## 基本的な考え方
+
+### 原則1: 静的解析チェック違反は全て解決します
+
+### 原則2: 静的解析チェック違反を解消するために品質を下げてはいけません
+
+### 原則3: 正当な理由があって静的解析チェック違反となる場合、チェック対象から外します
+
+## チェック対象外にする方法
+
+> TODO: ESLint、TSCエラーのみが対象となることを説明
+
+> TODO: ESLintは、eslint-disable-next-line/eslint-disable-lineを使用する
+
+> TODO: TSCは、ts-ignore/ts-expect-errorを使用する
+ 
+> [ts-ignore or ts-expect-error?](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#ts-ignore-or-ts-expect-error)
+> [ban-ts-comment](https://typescript-eslint.io/rules/ban-ts-comment/)

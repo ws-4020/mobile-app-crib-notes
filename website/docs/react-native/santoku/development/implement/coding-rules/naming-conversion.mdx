@@ -1,0 +1,89 @@
+---
+title: 命名ルール
+---
+
+> TODO: 命名ルールの簡単な説明
+ 
+> TODO: ↓みたいなレベル感のルールにする想定
+
+## ディレクトリ名
+
+ディレクトリ名は、ケバブケースとします。
+
+```console title="例"
+src
+├── features
+│   ├── qa-home
+```
+
+## asset
+
+画像ファイルなどのassetは、ケバブケースとします。
+
+```console title="例"
+beginner-mark.png
+```
+
+## TypeScript/TSX
+
+> TODO: 推奨ルールへのリンク
+ 
+TypeScript/TSXは、推奨ルールに定義している通り1ファイルに付き1exportとしています。
+
+そのため、ファイル名はexportするものと同じ名前になります。
+
+### クラス
+
+クラスはパスカルケースとします。
+
+```typescript title="例"
+class ConsoleTransport {};
+```
+
+### インターフェース
+
+インターフェースはパスカルケースとします。
+
+```typescript title="例"
+interface Transport {};
+```
+
+### 型定義
+
+型定義はパスカルケースとします。
+
+```typescript title="例"
+type Account = {
+  id: string;
+};
+```
+
+### コンポーネント
+
+コンポーネントはパスカルケースとします。
+
+```tsx title="例"
+const HomePage: React.FC = () => {};
+```
+
+### 関数
+
+関数はキャメルケースとします。
+
+```typescript title="例"
+const formatDate = (value: Date, format: string) => {};
+```
+
+React Hooksの場合は、プレフィックスに`use`を付けます。
+
+```typescript title="例"
+const useVisibility = () => {};
+```
+
+### 変数
+
+変数はキャメルケースとします。
+
+```typescript title="例"
+const postCount = 5;
+```
