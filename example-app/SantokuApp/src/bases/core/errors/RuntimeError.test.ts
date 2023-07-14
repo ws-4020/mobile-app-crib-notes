@@ -4,7 +4,7 @@ class RuntimeErrorSubClass extends RuntimeError {}
 const cause = new RuntimeErrorSubClass('root cause');
 const nested = new RuntimeErrorSubClass('nested cause', cause);
 
-// eslint-disable-next-line jest/unbound-method
+// eslint-disable-next-line jest/unbound-method -- captureStackTrace取得のため
 const captureStackTrace = Error.captureStackTrace;
 describe.each([false, true])(
   'new RuntimeError() when captureStackTrace availability is %p',
