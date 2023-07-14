@@ -5,7 +5,7 @@ module.exports = {
   plugins: ['strict-dependencies'],
   root: true,
   // universe/native: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
-  extends: ['universe/native', 'plugin:react-hooks/recommended'],
+  extends: ['universe/native', 'plugin:react-hooks/recommended', 'plugin:eslint-comments/recommended'],
   overrides: [
     {
       files: ['*.ts', '*.tsx', '*.d.ts'],
@@ -92,5 +92,8 @@ module.exports = {
         },
       ],
     ],
+    'eslint-comments/no-unused-disable': 'error',
+    'eslint-comments/no-use': ['error', {allow: ['eslint-disable-line', 'eslint-disable-next-line']}],
+    'eslint-comments/require-description': 'error',
   },
 };
