@@ -5,11 +5,6 @@ import Reanimated from 'react-native-reanimated';
 
 import {DEFAULT_SLIDE_IN_DURATION, DEFAULT_SLIDE_OUT_DURATION, PickerContainer} from './PickerContainer';
 
-// If advancing a timer changes the state of a component, the timer must be run within an act.
-// However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
-// For convenience, disable the relevant rule in this file.
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 jest.useFakeTimers();
 
 // TODO: Jest v27にアップデートできたら、withReanimatedTimerでテストを実装できるか検証する。
@@ -49,9 +44,21 @@ describe('PickerContainer only with required props', () => {
     expect(sut).toMatchSnapshot('Before animation started');
     expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 1000}]});
 
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     startAnimation();
 
     // アニメーション中は`transform`が変化すること
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(DEFAULT_SLIDE_IN_DURATION / 2);
     });
@@ -59,6 +66,12 @@ describe('PickerContainer only with required props', () => {
     expect(sut).toMatchSnapshot('Animating (slide in)');
 
     // アニメーションが完了すると`transform`が設定値に到達していること
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(DEFAULT_SLIDE_IN_DURATION / 2);
     });
@@ -66,6 +79,12 @@ describe('PickerContainer only with required props', () => {
     expect(sut).toMatchSnapshot('Just After slide in animation completed');
 
     // アニメーションが完了したあとは変化しないこと
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(10);
     });
@@ -78,9 +97,21 @@ describe('PickerContainer only with required props', () => {
     sut.update(<PickerContainer isVisible={false} />);
     //////////////////////////////////////////////////////////////////////////////////
 
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     startAnimation();
 
     // アニメーション中は`transform`が変化すること
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(DEFAULT_SLIDE_OUT_DURATION / 2);
     });
@@ -88,6 +119,12 @@ describe('PickerContainer only with required props', () => {
     expect(sut).toMatchSnapshot('Animating (slide out)');
 
     // アニメーションが完了するとコンポーネントが消えること
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(DEFAULT_SLIDE_OUT_DURATION / 2);
     });
@@ -95,6 +132,12 @@ describe('PickerContainer only with required props', () => {
     expect(sut).toMatchSnapshot('Just After slide out animation completed');
 
     // アニメーションが完了した後も少し時間を進めて、何も変わらないことを確認する
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(10);
     });
@@ -131,11 +174,23 @@ describe('PickerContainer with all props', () => {
     expect(animatedViewProps.style).toEqual({backgroundColor: 'green', transform: [{translateY: 1000}]});
 
     // slideInDurationで指定した時間の1msc前ではafterSlideInは実行されない
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(199);
     });
     expect(afterSlideIn).not.toHaveBeenCalled();
     // slideInDurationで指定した時間経過後は、afterSlideInが実行される
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(1);
     });
@@ -147,13 +202,31 @@ describe('PickerContainer with all props', () => {
     const afterSlideOut = jest.fn();
     sut.update(<PickerContainer isVisible={false} afterSlideOut={afterSlideOut} slideOutDuration={100} />);
 
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     startAnimation();
     // slideOutDurationで指定した時間の1msc前ではafterSlideOutは実行されない
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(99);
     });
     expect(afterSlideOut).not.toHaveBeenCalled();
     // slideOutDurationで指定した時間経過後は、afterSlideOutが実行される
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(1);
     });

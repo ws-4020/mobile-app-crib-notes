@@ -5,11 +5,6 @@ import {ReactTestInstance} from 'react-test-renderer';
 
 import {SnackbarComponent} from './SnackbarComponent';
 
-// If advancing a timer changes the state of a component, the timer must be run within an act.
-// However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
-// For convenience, disable the relevant rule in this file.
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 jest.useFakeTimers();
 
 function getStyle<T>(instance: ReactTestInstance) {
@@ -31,12 +26,24 @@ describe('SnackbarComponent', () => {
     expect(getStyle<ViewStyle>(screen.getByTestId('snackbarAnimatedView')).opacity).toBe(0);
     expect(screen).toMatchSnapshot('render直後');
 
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(FADE_IN_DURATION);
     });
     expect(getStyle<ViewStyle>(screen.getByTestId('snackbarAnimatedView')).opacity).toBe(1);
     expect(screen).toMatchSnapshot('フェードイン後');
 
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(AUTO_HIDE_DURATION + FADE_OUT_DURATION);
     });
@@ -53,6 +60,12 @@ describe('SnackbarComponent', () => {
 
     expect(screen.queryByText('初回')).not.toBeNull();
 
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(FORCE_FADE_OUT_DURATION);
     });
@@ -70,6 +83,12 @@ describe('SnackbarComponent', () => {
 
     screen.update(<SnackbarComponent message="３回目" />);
 
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(FORCE_FADE_OUT_DURATION);
     });
@@ -96,6 +115,12 @@ describe('SnackbarComponent', () => {
 
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(FADE_IN_DURATION + AUTO_HIDE_DURATION + FADE_OUT_DURATION);
     });
@@ -123,6 +148,12 @@ describe('SnackbarComponent', () => {
 
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(FADE_IN_DURATION + AUTO_HIDE_DURATION + FADE_OUT_DURATION);
     });
@@ -140,6 +171,12 @@ describe('SnackbarComponent', () => {
 
     screen.update(<SnackbarComponent message="テストメッセージ" hide />);
 
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(HIDE_FADE_OUT_DURATION);
     });

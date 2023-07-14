@@ -7,11 +7,6 @@ import {ReactTestInstance} from 'react-test-renderer';
 
 import {Snackbar} from './Snackbar';
 
-// If advancing a timer changes the state of a component, the timer must be run within an act.
-// However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
-// For convenience, disable the relevant rule in this file.
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 function getStyle<T>(instance: ReactTestInstance) {
   return instance.props.style as T;
 }
@@ -84,6 +79,12 @@ describe('Snackbar', () => {
     );
 
     const HIDE_FADE_OUT_DURATION = 300;
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(HIDE_FADE_OUT_DURATION);
     });

@@ -4,11 +4,6 @@ import {ModalProps, PressableProps} from 'react-native';
 
 import {DEFAULT_FADE_OUT_DURATION, PickerBackdrop} from './PickerBackdrop';
 
-// If advancing a timer changes the state of a component, the timer must be run within an act.
-// However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
-// For convenience, disable the relevant rule in this file.
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 jest.useFakeTimers();
 
 // TODO: Jest v27にアップデートできたら、withReanimatedTimerでテストを実装できるか検証する。
@@ -35,6 +30,12 @@ describe('PickerBackdrop only with required props', () => {
     // 非表示にする
     //////////////////////////////////////////////////////////////////////////////////
     screen.update(<PickerBackdrop isVisible={false} pressableProps={{testID: 'pressable'}} />);
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(DEFAULT_FADE_OUT_DURATION);
     });
@@ -113,11 +114,23 @@ describe('PickerBackdrop with all props', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
 
     // fadeInDurationで指定した時間の1msc前ではafterFadeInは実行されない
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(199);
     });
     expect(afterFadeIn).not.toHaveBeenCalled();
     // fadeInDurationで指定した時間経過後は、afterFadeInが実行される
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(1);
     });
@@ -147,11 +160,23 @@ describe('PickerBackdrop with all props', () => {
     screen.update(<PickerBackdrop isVisible={false} afterFadeOut={afterFadeOut} fadeOutDuration={100} />);
 
     // fadeOutDurationで指定した時間の1msc前ではafterFadeOutは実行されない
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(99);
     });
     expect(afterFadeOut).not.toHaveBeenCalled();
     // fadeOutDurationで指定した時間経過後は、afterFadeOutが実行される
+    /*
+      eslint-disable-next-line @typescript-eslint/no-floating-promises --
+      If advancing a timer changes the state of a component, the timer must be run within an act.
+      However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+      For convenience, disable the relevant rule in this file.
+     */
     act(() => {
       jest.advanceTimersByTime(1);
     });
