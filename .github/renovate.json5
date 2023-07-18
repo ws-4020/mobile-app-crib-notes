@@ -74,6 +74,8 @@
       groupName: 'Depends on Expo version',
       enabled: false,
       matchPackageNames: [
+        // expo -> @expo/cli
+        '@expo/config-plugins',
         // jest-expo -> jest
         '@types/jest',
         // react, jest-expo -> react-test-renderer
