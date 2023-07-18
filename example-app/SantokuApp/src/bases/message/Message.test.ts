@@ -27,7 +27,6 @@ describe('Message message', () => {
           resolve({
             // @ts-expect-error テスト用にMessageKeyには存在しないキーを指定しているため
             'validation.required': '{0}を入力してください。',
-            // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
             'validation.max': '{0}が長すぎます。{0}は{1}桁以内で入力してください。',
           });
         });
