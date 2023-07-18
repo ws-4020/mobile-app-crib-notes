@@ -57,4 +57,5 @@ if (!__mocks.notifee) {
   Object.defineProperty(__mocks, 'notifee', {value: mock});
 }
 
+// eslint-disable-next-line import/no-default-export -- @notifee/react-nativeがdefault exportなのでそれに合わせる
 export default mock;

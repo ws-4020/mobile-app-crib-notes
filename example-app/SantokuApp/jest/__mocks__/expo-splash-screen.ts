@@ -14,4 +14,5 @@ const mock: jest.Mocked<typeof SplashScreen> = {
 
 Object.defineProperty(__mocks, 'expoSplashScreen', {value: mock});
 
+// eslint-disable-next-line import/no-default-export -- expo-splash-screenがdefault exportなのでそれに合わせる
 export default mock;

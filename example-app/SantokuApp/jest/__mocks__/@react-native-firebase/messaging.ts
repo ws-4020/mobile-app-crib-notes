@@ -35,4 +35,5 @@ const mock: Omit<
   setDeliveryMetricsExportToBigQuery: jest.fn(),
 };
 
+// eslint-disable-next-line import/no-default-export -- @react-native-firebase/messagingがdefault exportなのでそれに合わせる
 export default () => mock;

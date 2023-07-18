@@ -27,4 +27,5 @@ if (!__mocks.crashlytics) {
   Object.defineProperty(__mocks, 'crashlytics', {value: mock});
 }
 
+// eslint-disable-next-line import/no-default-export -- @react-native-firebase/crashlyticsがdefault exportなのでそれに合わせる
 export default () => mock;
