@@ -38,6 +38,15 @@ module.exports = {
       },
     },
     {
+      files: ['*.ts', '*.tsx'],
+      excludedFiles: ['*.d.ts'],
+      rules: {
+        // Prohibit default exports.
+        // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-default-export.md
+        'import/no-default-export': 'error',
+      },
+    },
+    {
       files: ['*.tsx'],
       rules: {
         // It is too strict to prohibit passing async functions to `onPress`, so disable the rule in JSX.
