@@ -52,6 +52,7 @@
         'expo-local-authentication',
         'expo-secure-store',
         'expo-splash-screen',
+        'expo-status-bar',
         'jest',
         'react',
         'react-dom',
