@@ -87,6 +87,8 @@
         'de.undercouch:gradle-download-task',
         // @testing-library/react-native -> jest
         '@testing-library/react-native',
+        // prebuild
+        'androidx.swiperefreshlayout:swiperefreshlayout',
       ],
       matchPackagePrefixes: [
         'com.facebook.flipper',
