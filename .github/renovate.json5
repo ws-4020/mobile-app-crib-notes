@@ -54,6 +54,7 @@
         'expo-splash-screen',
         'expo-status-bar',
         'jest',
+        'jest-expo',
         'react',
         'react-dom',
         'react-native',
