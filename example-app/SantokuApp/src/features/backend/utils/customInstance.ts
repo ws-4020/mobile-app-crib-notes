@@ -45,7 +45,9 @@ const customInstance = <T>(
     };
     const promise = axiosInstance(requestConfig);
 
-    // @ts-ignore
+    // @ts-expect-error -- cancelは型定義にはないが存在する
+    // ただし、AbortSignalへの移行を検討した方が良さそう
+    // https://tanstack.com/query/v3/docs/react/guides/query-cancellation#old-cancel-function
     promise.cancel = () => {
       source.cancel('Query was cancelled by React Query');
     };

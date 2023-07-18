@@ -11,7 +11,7 @@ describe.each([false, true])(
   captureStackTraceAvailable => {
     beforeAll(() => {
       if (!captureStackTraceAvailable) {
-        // @ts-ignore
+        // @ts-expect-error -- 検証のためにcaptureStackTraceを削除したいため
         delete Error.captureStackTrace;
       }
     });
