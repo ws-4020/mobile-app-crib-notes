@@ -49,6 +49,7 @@ describe('PickerContainer only with required props', () => {
       If advancing a timer changes the state of a component, the timer must be run within an act.
       However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
       For convenience, disable the relevant rule in this file.
+      （startAnimationの中でactを使用している）
      */
     startAnimation();
 
@@ -102,6 +103,7 @@ describe('PickerContainer only with required props', () => {
       If advancing a timer changes the state of a component, the timer must be run within an act.
       However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
       For convenience, disable the relevant rule in this file.
+      （startAnimationの中でactを使用している）
      */
     startAnimation();
 
@@ -207,6 +209,7 @@ describe('PickerContainer with all props', () => {
       If advancing a timer changes the state of a component, the timer must be run within an act.
       However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
       For convenience, disable the relevant rule in this file.
+      （startAnimationの中でactを使用している）
      */
     startAnimation();
     // slideOutDurationで指定した時間の1msc前ではafterSlideOutは実行されない
