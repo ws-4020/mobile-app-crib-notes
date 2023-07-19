@@ -5,6 +5,7 @@ module.exports = {
   plugins: ['strict-dependencies'],
   root: true,
   // universe/native: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
+  // eslint-comments/recommended: https://github.com/mysticatea/eslint-plugin-eslint-comments
   extends: ['universe/native', 'plugin:react-hooks/recommended', 'plugin:eslint-comments/recommended'],
   overrides: [
     {
@@ -92,8 +93,11 @@ module.exports = {
         },
       ],
     ],
+    // https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-disable.html
     'eslint-comments/no-unused-disable': 'error',
+    // https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-use.html
     'eslint-comments/no-use': ['error', {allow: ['eslint-disable-line', 'eslint-disable-next-line']}],
+    // https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/require-description.html
     'eslint-comments/require-description': 'error',
   },
 };
