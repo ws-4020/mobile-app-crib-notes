@@ -5,7 +5,7 @@ module.exports = {
   plugins: ['strict-dependencies'],
   root: true,
   // universe/native: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
-  // eslint-comments/recommended: https://github.com/mysticatea/eslint-plugin-eslint-comments
+  // eslint-comments/recommended: https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/
   extends: ['universe/native', 'plugin:react-hooks/recommended', 'plugin:eslint-comments/recommended'],
   overrides: [
     {
