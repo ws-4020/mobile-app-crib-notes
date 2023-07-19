@@ -5,7 +5,7 @@ export const isAvailableAsync = jest.fn();
 
 /*
   eslint-disable-next-line @typescript-eslint/no-unsafe-assignment --
-  @react-navigation/nativeのすべてのNamed Exportを列挙するのは大変なので、
+  expo-secure-storeのすべてのNamed Exportを列挙するのは大変なので、
   ES6のexport/import形式ではなく、module.exportsを使ってexportする。
  */
 module.exports = {
