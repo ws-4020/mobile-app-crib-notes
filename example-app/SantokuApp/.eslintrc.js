@@ -92,5 +92,7 @@ module.exports = {
         },
       ],
     ],
+    // https://eslint.org/docs/latest/rules/curly
+    curly: ['error', 'all'],
   },
 };
