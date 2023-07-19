@@ -4,9 +4,13 @@
 module.exports = {
   plugins: ['strict-dependencies'],
   root: true,
-  // universe/native: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
-  // eslint-comments/recommended: https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/
-  extends: ['universe/native', 'plugin:react-hooks/recommended', 'plugin:eslint-comments/recommended'],
+  extends: [
+    // universe/native: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
+    'universe/native',
+    'plugin:react-hooks/recommended',
+    // eslint-comments/recommended: https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/
+    'plugin:eslint-comments/recommended',
+  ],
   overrides: [
     {
       files: ['*.ts', '*.tsx', '*.d.ts'],
