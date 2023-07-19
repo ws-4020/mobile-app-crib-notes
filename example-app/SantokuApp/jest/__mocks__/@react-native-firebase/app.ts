@@ -14,7 +14,6 @@ const mock = (name?: string): ReturnType<typeof firebase.app> => {
   };
 };
 
-// eslint-disable-next-line import/no-default-export -- @react-native-firebase/appがdefault exportなのでそれに合わせる
 export default {
   app: mock,
 };

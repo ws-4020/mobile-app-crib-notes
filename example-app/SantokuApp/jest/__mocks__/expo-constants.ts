@@ -18,5 +18,4 @@ export const Constants: typeof ExpoConstants = {
   },
 };
 
-// eslint-disable-next-line import/no-default-export -- expo-constantsがdefault exportなのでそれに合わせる
 export default Constants;

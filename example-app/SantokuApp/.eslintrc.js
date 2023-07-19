@@ -39,7 +39,7 @@ module.exports = {
     },
     {
       files: ['*.ts', '*.tsx'],
-      excludedFiles: ['*.d.ts'],
+      excludedFiles: ['*.d.ts', 'jest/__mocks__/**'],
       rules: {
         // Prohibit default exports.
         // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-default-export.md
