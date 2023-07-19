@@ -1,47 +1,46 @@
 ---
-title: コーディングルール
+title: コーディング規約
 sidebar_label: 概要
-pagination_label: コーディングルール
+pagination_label: コーディング規約
 ---
 
-アプリ開発では、コーディングルールを定めることでコードの品質を保つことができます。
+アプリ開発では、コーディング規約を定めることで一貫性を保ち、一定の品質を保証できます。
 
-このアプリでは、必ず守るべきルールと推奨するルールの2つを定めています。
+このアプリでは、ESLintなどの静的解析ツールによる自動チェックと、目視でチェックする規約を定めています。
 
-## 自動でチェック可能なルール
+## 静的解析ツール
 
 ESLintやPrettier、TypeScriptなどの静的解析ツールを導入します。
 
-<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+以下のページでは、これらのツールの設定内容や運用方法について記載します。
 
-> TODO: summaryの修正
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 import {PageList} from '../../../../../../src/components';
 const requiredRules = [
   {
     title: 'ESLint',
     to: '/react-native/santoku/development/implement/coding-rules/eslint',
-    summary: <>ESLintについて記載しています。</>,
-  },
-  {
-    title: 'Prettier',
-    to: '/react-native/santoku/development/implement/coding-rules/prettier',
-    summary: <>Prettierについて記載しています。</>,
   },
   {
     title: 'TypeScript',
     to: '/react-native/santoku/development/implement/coding-rules/typescript',
-    summary: <>TypeScriptについて記載しています。</>,
   },
   {
-    title: '静的解析チェックツールの運用',
+    title: 'Prettier',
+    to: '/react-native/santoku/development/implement/coding-rules/prettier',
+  },
+  {
+    title: 'EditorConfig',
+    to: '/react-native/santoku/development/implement/coding-rules/editorconfig',
+  },
+  {
+    title: '静的解析ツールの運用',
     to: '/react-native/santoku/development/implement/coding-rules/lint-ops',
-    summary: <>静的解析チェックツールの運用について記載しています。</>,
   },
   {
     title: 'コードフォーマッタ',
     to: '/react-native/santoku/development/implement/coding-rules/code-formatter',
-    summary: <>コードフォーマッタについて記載しています。</>,
   },
 ];
 
@@ -49,26 +48,20 @@ const requiredRules = [
 
 <!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-## 自動でチェックできないルール
+## 自動でチェックできない規約
 
-> TODO: 説明修正
-
-自動チェックできないルールについて記載しています。
+静的解析ツールではチェックできない規約について記載しています。
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-> TODO: summaryの修正
-
 export const recommendedRules = [
   {
-    title: '命名ルール',
+    title: 'コーディングに関する命名規約',
     to: '/react-native/santoku/development/implement/coding-rules/naming-conversion',
-    summary: <>命名ルールについて記載しています。</>,
   },
   {
-    title: 'JavaScript/TypeScriptのコーディングルール',
-    to: '/react-native/santoku/development/implement/coding-rules/recommended-rules',
-    summary: <>推奨するルールについて記載しています。</>,
+    title: 'JavaScript/TypeScriptのコーディング規約',
+    to: '/react-native/santoku/development/implement/coding-rules/js-ts-coding-rules',
   },
 ];
 
