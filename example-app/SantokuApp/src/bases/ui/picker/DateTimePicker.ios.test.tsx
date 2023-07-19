@@ -159,7 +159,7 @@ describe('DateTimePicker with all props', () => {
     expect(pickerItemsProps.maximumDate).toBe(maximumDate.getTime());
     expect(pickerItemsProps.minimumDate).toBe(minimumDate.getTime());
     expect(pickerItemsProps.mode).toBe('date');
-    // @ts-expect-error displayはdisplayIOSというPropでレンダリングされます
+    // @ts-expect-error -- displayはdisplayIOSというPropでレンダリングされます
     expect(pickerItemsProps.displayIOS).toBe('spinner');
     const pickerItemsStyle = pickerItemsProps.style as ViewStyle;
     const flattenPickerItemsStyle = StyleSheet.flatten(pickerItemsStyle);
