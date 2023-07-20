@@ -2,38 +2,72 @@
 title: Prettier
 ---
 
-> TODO: Prettierの簡単な説明
+[Prettier](https://prettier.io/)はJavaScriptやTypeScriptなど、様々な言語をサポートするコードフォーマッタです。
+
+多くのエディタやIDEにも対応しており、コーディング中に自動でフォーマットしてくれます。
+
+## Prettierの実行方法
+
+### CLI
+
+以下のコマンドを実行することで、ESLintがPrettierを実行します。
+
+```bash
+npm run lint:es
+```
+
+### エディタ、IDE
+
+エディタやIDEにプラグインなどを設定することで、コーディング中に自動でフォーマットしてくれます。
+
+Visual Studio CodeでPrettierを有効にする方法については、[Visual Studio Code - Lint、フォーマッタ](../../tools/vscode.md#lintフォーマッタ)を参照してください。
+
+その他のエディタやIDEについては、Prettierの公式ページにある[Editor Integration](https://prettier.io/docs/en/editors.html)を参照してください。
+
+## ESLintとの連携
+
+[eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier)を導入して、ESLintの実行時にPrettierを実行します。
+Prettierのルールに準拠していないコードは、ESLintの警告として表示されるようになります。
+
+また、Prettierのいくつかのルールは、ESLintのルールと競合する場合があります。
+
+競合を解決するために、[eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)を導入します。`eslint-config-prettier`は、Prettierと競合するESLintのルールを無効化するためのESLintプラグインです。
+
+## EditorConfigとの連携
+
+Prettierのいくつかのルールは、EditorConfigのルールと同じものがあります。
+
+同じルールに対して、PrettierとEditorConfigの両方に設定をした場合はPrettierの設定が優先されます。
+EditorConfigにしか設定をしていない場合は、EditorConfigの設定をPrettierが使用します。
 
 ## 適用しているルール一覧
 
-> TODO: ルール一覧（デフォルト値含めて記載する）
+このアプリでは、Prettierのルールを[.prettierrc.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/.prettierrc.js)に定義しています。
 
-> TODO: ルール一覧（EditorConfigの設定値へのリンク）
+適用している全てのルールは以下のとおりです。
 
-> TODO: EditorConfigに同様の設定項目がある場合は、その値が使用されることの説明
-
-| オプション | 設定値              |
-|:------|:-----------------|
-| [Print Width](https://prettier.io/docs/en/options.html#print-width)  | EditorConfigの設定値 |
-| [Tab Width](https://prettier.io/docs/en/options.html#print-width)  |                  |
-| [Tabs](https://prettier.io/docs/en/options.html#tabs)  |                  |
-| [Semicolons](https://prettier.io/docs/en/options.html#semicolons)  |                  |
-| [Quotes](https://prettier.io/docs/en/options.html#quotes)  | true             |
-| [Quote Props](https://prettier.io/docs/en/options.html#quote-props)  |                  |
-| [JSX Quotes](https://prettier.io/docs/en/options.html#jsx-quotes)  |                  |
-| [Trailing Commas](https://prettier.io/docs/en/options.html#trailing-commas)  | all              |
-| [Bracket Spacing](https://prettier.io/docs/en/options.html#bracket-spacing)  | false            |
-| [Bracket Line](https://prettier.io/docs/en/options.html#bracket-line)  | true             |
-| [[Deprecated] JSX Brackets](https://prettier.io/docs/en/options.html#deprecated-jsx-brackets)  | true             |
-| [Arrow Function Parentheses](https://prettier.io/docs/en/options.html#arrow-function-parentheses)  | avoid            |
-| [Range](https://prettier.io/docs/en/options.html#range)  |                  |
-| [Parser](https://prettier.io/docs/en/options.html#parser)  |                  |
-| [File Path](https://prettier.io/docs/en/options.html#file-path)  |                  |
-| [Require Pragma](https://prettier.io/docs/en/options.html#require-pragma)  |                  |
-| [Insert Pragma](https://prettier.io/docs/en/options.html#insert-pragma)  |                  |
-| [Prose Wrap](https://prettier.io/docs/en/options.html#prose-wrap)  |                  |
-| [HTML Whitespace Sensitivity](https://prettier.io/docs/en/options.html#html-whitespace-sensitivity)  |                  |
-| [Vue files script and style tags indentation](https://prettier.io/docs/en/options.html#vue-files-script-and-style-tags-indentation)  |                  |
-| [End of Line](https://prettier.io/docs/en/options.html#end-of-line)  |                  |
-| [Embedded Language Formatting](https://prettier.io/docs/en/options.html#embedded-language-formatting)  |                  |
-| [Single Attribute Per Line](https://prettier.io/docs/en/options.html#single-attribute-per-line)  |                  |
+| オプション                                                                                                                               | 設定値                                                                   |
+|:------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------|
+| [Print Width](https://prettier.io/docs/en/options.html#print-width)                                                                 | [EditorConfig](./editorconfig.mdx#適用しているルール一覧)（`max_line_length`）の設定値 |
+| [Tab Width](https://prettier.io/docs/en/options.html#tab-width)                                                                     | [EditorConfig](./editorconfig.mdx#適用しているルール一覧)（`indent_size`）の設定値     |
+| [Tabs](https://prettier.io/docs/en/options.html#tabs)                                                                               | [EditorConfig](./editorconfig.mdx#適用しているルール一覧)（`indent_style`）の設定値    |
+| [Semicolons](https://prettier.io/docs/en/options.html#semicolons)                                                                   | true                                                                  |
+| [Quotes](https://prettier.io/docs/en/options.html#quotes)                                                                           | true                                                                  |
+| [Quote Props](https://prettier.io/docs/en/options.html#quote-props)                                                                 | as-needed                                                             |
+| [JSX Quotes](https://prettier.io/docs/en/options.html#jsx-quotes)                                                                   | false                                                                 |
+| [Trailing Commas](https://prettier.io/docs/en/options.html#trailing-commas)                                                         | all                                                                   |
+| [Bracket Spacing](https://prettier.io/docs/en/options.html#bracket-spacing)                                                         | false                                                                 |
+| [Bracket Line](https://prettier.io/docs/en/options.html#bracket-line)                                                               | true                                                                  |
+| [\[Deprecated\] JSX Brackets](https://prettier.io/docs/en/options.html#deprecated-jsx-brackets)                                     | true                                                                  |
+| [Arrow Function Parentheses](https://prettier.io/docs/en/options.html#arrow-function-parentheses)                                   | avoid                                                                 |
+| [Range](https://prettier.io/docs/en/options.html#range)                                                                             | 0                                                                     |
+| [Parser](https://prettier.io/docs/en/options.html#parser)                                                                           | None                                                                  |
+| [File Path](https://prettier.io/docs/en/options.html#file-path)                                                                     | None                                                                  |
+| [Require Pragma](https://prettier.io/docs/en/options.html#require-pragma)                                                           | false                                                                 |
+| [Insert Pragma](https://prettier.io/docs/en/options.html#insert-pragma)                                                             | false                                                                 |
+| [Prose Wrap](https://prettier.io/docs/en/options.html#prose-wrap)                                                                   | preserve                                                              |
+| [HTML Whitespace Sensitivity](https://prettier.io/docs/en/options.html#html-whitespace-sensitivity)                                 | css                                                                   |
+| [Vue files script and style tags indentation](https://prettier.io/docs/en/options.html#vue-files-script-and-style-tags-indentation) | false                                                                 |
+| [End of Line](https://prettier.io/docs/en/options.html#end-of-line)                                                                 | [EditorConfig](./editorconfig.mdx#適用しているルール一覧)（`end_of_line`）の設定値     |
+| [Embedded Language Formatting](https://prettier.io/docs/en/options.html#embedded-language-formatting)                               | auto                                                                  |
+| [Single Attribute Per Line](https://prettier.io/docs/en/options.html#single-attribute-per-line)                                     | false                                                                 |
