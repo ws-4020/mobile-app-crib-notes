@@ -245,6 +245,7 @@ module.exports = {
       },
     ],
     './src/plugins/medium-zoom-docusaurus-plugin',
+    './src/plugins/fix-footnote-order-plugin',
   ],
   scripts: [
     // Add plausible script only when built on GitHub Actions.
