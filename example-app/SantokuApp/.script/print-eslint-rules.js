@@ -167,7 +167,7 @@ const print = json => {
       rules.sort((a, b) => a.rule.localeCompare(b.rule)); // ルール名でsort
       const h3 = transformToH3({pluginName, pluginUrl});
       const rows = rules.map(transformToTableRow);
-      return `${h3}\n${tableHeader}\n${rows.join('\n')}`;
+      return `${h3}\n\n${tableHeader}\n${rows.join('\n')}`;
     });
 
   // プラグインとそのルール一覧を標準出力
