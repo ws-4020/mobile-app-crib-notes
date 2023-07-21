@@ -1,5 +1,5 @@
 const lodash = require('lodash');
-const path = require('path');
+const urlJoin = require('url-join');
 const {exec} = require('node:child_process');
 
 const eslint = {
@@ -103,7 +103,7 @@ const isDisabled = level => {
 const generateRuleUrl = ({prefix, url, rulesRootPath, extension = '', hasPagePerRule, rule}) => {
   if (hasPagePerRule) {
     const rulePagePath = rule.replace(prefix, '') + extension;
-    return path.join(url, rulesRootPath, rulePagePath);
+    return urlJoin(url, rulesRootPath, rulePagePath);
   }
   return url;
 };
