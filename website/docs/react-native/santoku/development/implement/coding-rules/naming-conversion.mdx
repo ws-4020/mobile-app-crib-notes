@@ -1,89 +1,72 @@
 ---
-title: 命名ルール
+title: コーディングに関する命名規約
 ---
-
-> TODO: 命名ルールの簡単な説明
- 
-> TODO: ↓みたいなレベル感のルールにする想定
 
 ## ディレクトリ名
 
-ディレクトリ名は、ケバブケースとします。
+ディレクトリ名は、ケバブケース記法とします。
 
-```console title="例"
+以下は本規約に従った命名例です。
+
+```console
 src
 ├── features
 │   ├── qa-home
 ```
 
-## asset
+## assetファイル名
 
-画像ファイルなどのassetは、ケバブケースとします。
+画像などのassetファイルは、ケバブケース記法とします。
 
-```console title="例"
+以下は本規約に従った命名例です。
+
+```console
 beginner-mark.png
 ```
 
-## TypeScript/TSX
+## JavaScript/TypeScript
 
-> TODO: 推奨ルールへのリンク
- 
-TypeScript/TSXは、推奨ルールに定義している通り1ファイルに付き1exportとしています。
+### ファイル名
 
-そのため、ファイル名はexportするものと同じ名前になります。
+JavaScript/TypeScriptのファイル名は、`export`しているものと同じ名前にしてください。
 
-### クラス
+[JavaScript/TypeScriptのコーディング規約 - Moduleの単位](./js-ts-coding-rules.mdx#moduleの単位)に記載の通り、基本的に`Module`は1つの`export`を持ちます。
+例外的に複数の`export`がある場合は、その`Module`を表す代表的な`export`対象の名前をファイル名にしてください。
 
-クラスはパスカルケースとします。
+また、`Barrel`に関しては、`index.[js/ts]`というファイル名にしてください。
 
-```typescript title="例"
-class ConsoleTransport {};
-```
+### その他の命名規約
 
-### インターフェース
+<!-- TODO: ステレオタイプのドキュメントができたら、そのドキュメントへのリンクも追加する -->
+その他の命名規約に関しては、[JavaScript/TypeScriptのコーディング規約 - 命名規約](./js-ts-coding-rules.mdx#命名規約)を参照してください。
 
-インターフェースはパスカルケースとします。
+## JSX/TSX
 
-```typescript title="例"
-interface Transport {};
-```
+<!-- markdownlint-disable MD024 -->
 
-### 型定義
+### ファイル名
 
-型定義はパスカルケースとします。
+<!-- markdownlint-enable MD024 -->
 
-```typescript title="例"
-type Account = {
-  id: string;
+JSX/TSXのファイル名は、`export`しているコンポーネントと同じ名前にしてください。
+
+JSX/TSXも[JavaScript/TypeScriptのコーディング規約 - Moduleの単位](./js-ts-coding-rules.mdx#moduleの単位)と同様に、基本的に`Module`は1つの`export`を持ちます。
+例外的に複数の`export`がある場合でも、`export`するコンポーネントは1つとし、そのコンポーネント名をファイル名にしてください。
+
+### コンポーネント名
+
+コンポーネント名は、[JavaScript/TypeScriptのコーディング規約 - 変数](./js-ts-coding-rules.mdx#変数-)に準拠します。ただし、先頭文字は大文字としてください。
+
+以下は本規約に従った命名例です。
+
+```tsx
+const HomePage: React.FC = () => { // (名詞)
+// ...
 };
-```
-
-### コンポーネント
-
-コンポーネントはパスカルケースとします。
-
-```tsx title="例"
-const HomePage: React.FC = () => {};
-```
-
-### 関数
-
-関数はキャメルケースとします。
-
-```typescript title="例"
-const formatDate = (value: Date, format: string) => {};
-```
-
-React Hooksの場合は、プレフィックスに`use`を付けます。
-
-```typescript title="例"
-const useVisibility = () => {};
-```
-
-### 変数
-
-変数はキャメルケースとします。
-
-```typescript title="例"
-const postCount = 5;
+const SelectableSheet: React.FC = () => { // (形容詞) + (名詞)
+// ...
+};
+const TotalNumOfEvent: React.FC = () => { // (形容詞) + (名詞) + (形容詞句)
+// ...
+};
 ```
