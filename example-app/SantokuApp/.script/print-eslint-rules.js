@@ -36,7 +36,7 @@ const plugins = [
   },
   {
     name: 'eslint-plugin-eslint-comments',
-    prefix: 'import',
+    prefix: 'eslint-comments',
     url: 'https://mysticatea.github.io/eslint-plugin-eslint-comments',
     rulesRootPath: 'rules',
     extension: '.html',
