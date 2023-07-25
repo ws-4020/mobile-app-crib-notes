@@ -43,6 +43,22 @@ module.exports = {
       },
     },
     {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        // Disallow @ts-<directive> comments or require descriptions after directives.
+        // https://typescript-eslint.io/rules/ban-ts-comment/
+        '@typescript-eslint/ban-ts-comment': [
+          'error',
+          {
+            'ts-expect-error': 'allow-with-description',
+            'ts-ignore': true,
+            'ts-nocheck': true,
+            'ts-check': false,
+          },
+        ],
+      },
+    },
+    {
       files: ['*.tsx'],
       rules: {
         // It is too strict to prohibit passing async functions to `onPress`, so disable the rule in JSX.
@@ -97,6 +113,8 @@ module.exports = {
         },
       ],
     ],
+    // https://eslint.org/docs/latest/rules/curly
+    curly: ['error', 'all'],
     // https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-disable.html
     'eslint-comments/no-unused-disable': 'error',
     // https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-use.html
