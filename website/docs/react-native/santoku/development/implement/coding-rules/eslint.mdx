@@ -35,7 +35,6 @@ Visual Studio CodeでESLintを有効にする方法については、[Visual Stu
 このアプリでは、ESLintのルールを[.eslintrc.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/.eslintrc.js)に定義しています。
 
 適用している全てのルールは以下のとおりです。
-> TODO: ルール一覧最新化
 
 :::note
 ESLintのCLIで[--print-config](https://eslint.org/docs/latest/use/command-line-interface#--print-config)オプションを指定すると、適用されているルールを確認できます。
@@ -54,6 +53,7 @@ npx eslint --print-config src/apps/app/App.tsx
 |:--|:--|
 |[@typescript-eslint/array-type](https://typescript-eslint.io/rules/array-type)|warn|
 |[@typescript-eslint/await-thenable](https://typescript-eslint.io/rules/await-thenable)|error|
+|[@typescript-eslint/ban-ts-comment](https://typescript-eslint.io/rules/ban-ts-comment)|error|
 |[@typescript-eslint/ban-types](https://typescript-eslint.io/rules/ban-types)|error|
 |[@typescript-eslint/consistent-type-assertions](https://typescript-eslint.io/rules/consistent-type-assertions)|warn|
 |[@typescript-eslint/no-dupe-class-members](https://typescript-eslint.io/rules/no-dupe-class-members)|warn|
@@ -83,6 +83,7 @@ npx eslint --print-config src/apps/app/App.tsx
 
 |ルール|レベル|
 |:--|:--|
+|[curly](https://eslint.org/docs/latest/rules/curly)|error|
 |[eqeqeq](https://eslint.org/docs/latest/rules/eqeqeq)|warn|
 |[no-array-constructor](https://eslint.org/docs/latest/rules/no-array-constructor)|warn|
 |[no-caller](https://eslint.org/docs/latest/rules/no-caller)|warn|
@@ -150,6 +151,19 @@ npx eslint --print-config src/apps/app/App.tsx
 |:--|:--|
 |[deprecation/deprecation](https://github.com/gund/eslint-plugin-deprecation)|error|
 
+### [eslint-plugin-eslint-comments](https://mysticatea.github.io/eslint-plugin-eslint-comments)
+
+|ルール|レベル|
+|:--|:--|
+|[eslint-comments/disable-enable-pair](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/disable-enable-pair.html)|error|
+|[eslint-comments/no-aggregating-enable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-aggregating-enable.html)|error|
+|[eslint-comments/no-duplicate-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-duplicate-disable.html)|error|
+|[eslint-comments/no-unlimited-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unlimited-disable.html)|error|
+|[eslint-comments/no-unused-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-disable.html)|error|
+|[eslint-comments/no-unused-enable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-enable.html)|error|
+|[eslint-comments/no-use](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-use.html)|error|
+|[eslint-comments/require-description](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/require-description.html)|error|
+
 ### [eslint-plugin-import](https://github.com/import-js/eslint-plugin-import)
 
 |ルール|レベル|
@@ -157,6 +171,7 @@ npx eslint --print-config src/apps/app/App.tsx
 |[import/export](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/export.md)|error|
 |[import/first](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/first.md)|warn|
 |[import/namespace](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/namespace.md)|error|
+|[import/no-default-export](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-default-export.md)|error|
 |[import/no-duplicates](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md)|error|
 |[import/order](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md)|warn|
 
