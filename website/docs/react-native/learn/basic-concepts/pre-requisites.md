@@ -29,9 +29,13 @@ TypeScriptは、JavaScriptに静的型付けを追加したプログラミング
 
 Reactを学ぶには[React公式サイト](https://ja.react.dev/learn)が一番お勧めです。
 
-Reactを利用したことがない人は「クイックスタート」からはじめてください。「LEARN REACT」の内容まで理解できていれば、最低限のReactの知識が身に付いています。わからない箇所があれば学習してください。また、「APIリファレンス」もありますので適宜参照してください。
+Reactを利用したことがない人は「クイックスタート」からはじめてください。「LEARN REACT」の内容まで理解できていれば、最低限のReactの知識が身に付いています。わからない箇所があれば学習してください。
+
+また、「APIリファレンス」もありますので適宜参照してください（`useCallback`や`useMemo`など使用頻度が高いものは、あらかじめ読んでおくと良いかもしれません）。
 
 - [クイックスタート](https://ja.react.dev/learn)
 - [インストール](https://ja.react.dev/learn/installation)
 - [LEARN REACT](https://ja.react.dev/learn/describing-the-ui)
 - [APIリファレンス](https://ja.react.dev/reference)
+  - [useCallback](https://ja.react.dev/reference/react/useCallback)
+  - [useMemo](https://ja.react.dev/reference/react/useMemo)
