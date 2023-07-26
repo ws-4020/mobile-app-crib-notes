@@ -27,7 +27,7 @@ TypeScriptは、JavaScriptに静的型付けを追加したプログラミング
 
 ### React公式サイト
 
-Reactを学ぶには[React公式サイト](https://ja.react.dev/learn)が一番お勧めです。
+Reactを学ぶには[React公式サイト](https://ja.react.dev/)が一番お勧めです。
 
 Reactを利用したことがない人は「クイックスタート」からはじめてください。「LEARN REACT」の内容まで理解できていれば、最低限のReactの知識が身に付いています。わからない箇所があれば学習してください。
 
