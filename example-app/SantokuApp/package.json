@@ -123,6 +123,18 @@
     "react-test-renderer": "18.2.0",
     "typescript": "^4.6.3"
   },
+  "expo": {
+    "autolinking": {
+      "__comment-1": "プロキシ環境下でdev-clientが有効だとアプリ起動が遅いため、npm run android, npm run iosでは無効をデフォルトとする。",
+      "__comment-2": "iPhone実機用にdev-clientを有効化してbuildする場合は、以下の'expo-dev-'で始まるmoduleを一時的に削除する。",
+      "exclude": [
+        "expo-dev-client",
+        "expo-dev-launcher",
+        "expo-dev-menu",
+        "expo-dev-menu-interface"
+      ]
+    }
+  },
   "jest-junit": {
     "suiteNameTemplate": "{filepath}",
     "classNameTemplate": "{classname}",
