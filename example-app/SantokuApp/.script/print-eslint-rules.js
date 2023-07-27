@@ -120,6 +120,7 @@ const transformToH3 = ({pluginName, pluginUrl}) => `### [${pluginName}](${plugin
  *
  * e.g.
  * ### [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin)
+ 
  * |ルール|レベル|
  * |:--|:--|
  * |[@typescript-eslint/array-type](https:/github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules/array-type.md)|warn|
