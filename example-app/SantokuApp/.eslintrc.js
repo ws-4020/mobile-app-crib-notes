@@ -29,6 +29,7 @@ module.exports = {
       extends: ['universe/shared/typescript-analysis', 'plugin:@typescript-eslint/recommended-requiring-type-checking'],
       rules: {
         // no-restricted-syntaxでfor-in文を禁止しているので、@typescript-eslint/no-for-in-arrayを無効化する
+        // （no-restricted-syntaxはObjectのfor-in文も禁止にできる）
         '@typescript-eslint/no-for-in-array': 'off',
       },
       parserOptions: {
