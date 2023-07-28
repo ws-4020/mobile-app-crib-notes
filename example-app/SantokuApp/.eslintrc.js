@@ -27,6 +27,10 @@ module.exports = {
       // universe/shared/typescript-analysis: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
       // recommended-requiring-type-checking: https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules
       extends: ['universe/shared/typescript-analysis', 'plugin:@typescript-eslint/recommended-requiring-type-checking'],
+      rules: {
+        // no-restricted-syntaxでfor-in文を禁止しているので、@typescript-eslint/no-for-in-arrayを無効化する
+        '@typescript-eslint/no-for-in-array': 'off',
+      },
       parserOptions: {
         project: './tsconfig.json',
       },
