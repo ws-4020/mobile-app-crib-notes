@@ -594,7 +594,7 @@ module.exports = {
             'react-native/santoku/development/implement/http-api',
             {
               type: 'category',
-              label: 'コーディング規約',
+              label: 'スタイルガイド',
               items: [
                 'react-native/santoku/development/implement/style-guide/overview',
                 'react-native/santoku/development/implement/style-guide/eslint',
