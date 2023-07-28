@@ -124,6 +124,15 @@ module.exports = {
     ],
     // https://eslint.org/docs/latest/rules/curly
     curly: ['error', 'all'],
+    // https://eslint.org/docs/latest/rules/no-restricted-syntax
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: 'ForInStatement',
+        message:
+          'for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.',
+      },
+    ],
     // https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-disable.html
     'eslint-comments/no-unused-disable': 'error',
     // https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-use.html
