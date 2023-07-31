@@ -205,11 +205,11 @@ public collectNames(items: Item[]) {
   for (const item of items) {
       this.collectName(itemNames, item);
   }
-  return this.itemNames.join(',');
+  return itemNames.join(',');
 }
 
 private collectName(itemNames: string[], item: Item) {
-  this.itemNames.push(item.name);
+  itemNames.push(item.name);
 }
 ```
 
