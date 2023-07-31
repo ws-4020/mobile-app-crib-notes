@@ -510,8 +510,8 @@ function findUnreadNotifications() {
 
   //未読から既読へ更新している
   for (const notification of notifications) {
-    const readNotification = {...notification, status: Status.ALREADY_READ};
-    service.update(readNotification);
+    const alreadyReadNotification = {...notification, status: Status.ALREADY_READ};
+    service.update(alreadyReadNotification);
   }
 
   return notifications;
