@@ -446,7 +446,7 @@ class ItemList {
   }
 
   public getTotalPrice() {
-    return this.items.map(item => item.price).reduce((price1, price2) => price1 + price2);
+    return this.items.map(item => item.price).reduce((price1, price2) => price1 + price2, 0);
   }
 }
 ```
