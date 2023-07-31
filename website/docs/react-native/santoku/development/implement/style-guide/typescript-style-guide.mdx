@@ -775,7 +775,7 @@ const sum = programmers
   // 年齢を抽出
   .map(emp => emp.age)
   // 集計する
-  .reduce((sum, age) => sum + age);
+  .reduce((sum, age) => sum + age, 0);
 // 平均を算出
 const average = sum / programmers.length;
 ```
