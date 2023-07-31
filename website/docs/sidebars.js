@@ -588,10 +588,6 @@ module.exports = {
           label: '実装',
           items: [
             'react-native/santoku/development/implement',
-            'react-native/santoku/development/implement/message-configuration',
-            'react-native/santoku/development/implement/logs-implementation',
-            'react-native/santoku/development/implement/cautions-on-using-firebase',
-            'react-native/santoku/development/implement/http-api',
             {
               type: 'category',
               label: 'スタイルガイド',
@@ -608,6 +604,10 @@ module.exports = {
                 'react-native/santoku/development/implement/style-guide/nablarch-java-santoku-mapping',
               ],
             },
+            'react-native/santoku/development/implement/message-configuration',
+            'react-native/santoku/development/implement/logs-implementation',
+            'react-native/santoku/development/implement/cautions-on-using-firebase',
+            'react-native/santoku/development/implement/http-api',
           ],
         },
         {
