@@ -28,6 +28,15 @@ Prettierのルールに準拠していないコードは、ESLintの警告とし
 
 競合を解決するために、[eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)を導入します。`eslint-config-prettier`は、Prettierと競合するESLintのルールを無効化するためのESLintプラグインです。
 
+:::note
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+`eslint-plugin-prettier`や`eslint-config-prettier`の設定は、[eslint-config-universe](https://github.com/expo/expo/tree/master/packages/eslint-config-universe)の`universe/native`で実施されます。
+
+このアプリでは、`universe/native`を`extends`しているため、`eslint-plugin-prettier`や`eslint-config-prettier`の設定を個別に記載する必要はありません。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+:::
+
 ## EditorConfigとの連携
 
 Prettierのいくつかのルールは、[EditorConfig](./editorconfig.mdx)のルールと同じものがあります。
