@@ -38,12 +38,12 @@ app-updates#requestAppUpdates
 
 ## ローカルストレージに格納するキー
 
-`Keychain`や`UserDefaults`、`SharedPreferences`のようなローカルストレージに格納するキーは、格納する項目を端的に表す名詞にしてください。
+`Keychain`や`UserDefaults`、`SharedPreferences`のようなローカルストレージに格納するキーは、`機能モジュール名_項目名`としてください。
 
 以下は本規約に従った命名例です。
 
 ```console
-activeAccountId
+account_activeAccountId
 ```
 
 キーを動的に生成する場合は、キーに秘匿情報が入らないように注意してください。
