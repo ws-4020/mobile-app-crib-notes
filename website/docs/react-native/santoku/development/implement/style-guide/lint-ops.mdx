@@ -53,14 +53,14 @@ ESLintをチェック対象外にする方法は、公式ページの[Disabling 
 以下に、チェック対象外にする例を記載します。
 
 ```typescript
-new Person(); // eslint-disable-line no-new -- コンストラクタの検証のみをテストするため、作成したインスタンスを使用しない
+new Person(); // eslint-disable-line no-new -- 作成したインスタンスを以降の処理で使用しないため
 
-// eslint-disable-next-line no-new -- コンストラクタの検証のみをテストするため、作成したインスタンスを使用しない
+// eslint-disable-next-line no-new -- 作成したインスタンスを以降の処理で使用しないため
 new Person();
 
 /*
   eslint-disable-next-line no-new
-  コンストラクタの検証のみをテストするため、作成したインスタンスを使用しない
+  作成したインスタンスを以降の処理で使用しないため
  */
 new Person();
 ```
