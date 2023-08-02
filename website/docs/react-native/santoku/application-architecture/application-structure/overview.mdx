@@ -48,7 +48,12 @@ title: アプリケーション構造
 
 ![stereotype.drawio.png](stereotype.drawio.png)
 
-> Note: React Navigationの複雑性を画面から分離する目的で、ScreenとPageを試験的に分けてます。
+:::warning warn
+このアプリでは、React Navigationの複雑性を画面から分離する目的で、ScreenとPageを試験的に分けてます。
+
+ただし、プロジェクトによっては、ScreenとPageを分けることにより画面の構成が複雑に感じることもあるでしょう。
+その場合は、ScreenとPageを統合して、NavigatorをFeaturesレイヤーに配置するなど、適宜調整してください。
+:::
 
 ## ディレクトリ構成
 
