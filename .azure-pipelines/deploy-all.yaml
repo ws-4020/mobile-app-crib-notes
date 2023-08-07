@@ -10,18 +10,7 @@ trigger:
     exclude:
       - 'example-app/SantokuApp/README.md'
 
-pr:
-  branches:
-    include:
-      - '*'
-  paths:
-    include:
-      - '.tool-versions'
-      - '.azure-pipelines/**'
-      - 'example-app/SantokuApp'
-    exclude:
-      - 'example-app/SantokuApp/README.md'
-  drafts: false
+pr: none
 
 name: $(date:yyyyMMdd)$(rev:.rr)
 
