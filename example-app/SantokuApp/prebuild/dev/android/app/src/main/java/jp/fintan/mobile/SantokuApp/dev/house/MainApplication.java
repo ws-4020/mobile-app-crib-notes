@@ -1,4 +1,4 @@
-package jp.fintan.mobile.SantokuApp.dev;
+package jp.fintan.mobile.SantokuApp.dev.house;
 
 import android.app.Application;
 import android.content.res.Configuration;

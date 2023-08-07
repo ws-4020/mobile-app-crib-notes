@@ -116,10 +116,10 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'jp.fintan.mobile.SantokuApp.dev'
+    namespace 'jp.fintan.mobile.SantokuApp.dev.house'
     defaultConfig {
         manifestPlaceholders.googleMapApiKey = findProperty('SANTOKU_APP_GOOGLE_MAP_API_KEY') ?: 'dummyGoogleMapApiKey'
-        applicationId 'jp.fintan.mobile.SantokuApp.dev'
+        applicationId 'jp.fintan.mobile.SantokuApp.dev.house'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 4

@@ -81,7 +81,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:012345678901:android:9e48867b8af62f8549079b",
         "android_client_info": {
-          "package_name": "jp.fintan.mobile.SantokuApp.dev"
+          "package_name": "jp.fintan.mobile.SantokuApp.dev.house"
         }
       },
       "oauth_client": [
@@ -106,7 +106,7 @@
               "client_id": "012345678901-sidw5laqvzk01kzyoudm1ng80cqceo1m.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "jp.fintan.mobile.SantokuApp.dev"
+                "bundle_id": "jp.fintan.mobile.SantokuApp.dev.house"
               }
             }
           ]

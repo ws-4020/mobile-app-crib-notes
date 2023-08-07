@@ -358,7 +358,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp.dev";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp.dev.house";
 				PRODUCT_NAME = "DevSantokuApp";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -366,7 +366,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				DEVELOPMENT_TEAM = "D9MUZCM4X6";
 				CODE_SIGN_STYLE = "Manual";
-				PROVISIONING_PROFILE_SPECIFIER = "SantokuApp Dev Development";
+				PROVISIONING_PROFILE_SPECIFIER = "SantokuApp Dev-house Development";
 				CODE_SIGN_ENTITLEMENTS = DevSantokuApp/DevSantokuApp.entitlements;
 			};
 			name = Debug;
@@ -387,14 +387,14 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp.dev";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp.dev.house";
 				PRODUCT_NAME = "DevSantokuApp";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				DEVELOPMENT_TEAM = "D9MUZCM4X6";
 				CODE_SIGN_STYLE = "Manual";
-				PROVISIONING_PROFILE_SPECIFIER = "SantokuApp Dev Development";
+				PROVISIONING_PROFILE_SPECIFIER = "SantokuApp Dev-house Development";
 				CODE_SIGN_ENTITLEMENTS = DevSantokuApp/DevSantokuApp.entitlements;
 			};
 			name = Release;
