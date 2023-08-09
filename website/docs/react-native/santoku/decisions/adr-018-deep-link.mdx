@@ -41,13 +41,7 @@ Superseded: 廃止
 
 カスタムURLスキームは、複数のアプリが同じスキームを設定できるため、OSはURLリンクの対象とするアプリを一意に特定できません。その結果、正規アプリのスキームを偽装した不正アプリによってURLリンクを乗っ取られる可能性があります。
 
-[Appleのドキュメント](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)にも、カスタムURLスキームの使用に関する警告があります。
-
-> Warning
->
-> URL schemes offer a potential attack vector into your app, so make sure to validate all URL parameters and discard any malformed URLs. In addition, limit the available actions to those that don’t risk the user’s data. For example, don’t allow other apps to directly delete content or access sensitive information about the user. When testing your URL-handling code, make sure your test cases include improperly formatted URLs.
-
-また、 カスタムURLスキームではなくUniversal Linksを推奨する記載もあります。
+[Appleのドキュメント](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)にも、カスタムURLスキームではなくUniversal Linksを推奨する記載があります。
 
 > While custom URL schemes are an acceptable form of deep linking, universal links are strongly recommended. For more information on universal links, see Allowing apps and websites to link to your content.
 
