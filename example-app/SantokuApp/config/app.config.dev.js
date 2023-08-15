@@ -5,14 +5,14 @@ module.exports = config => {
   return {
     name: 'Dev SantokuApp',
     android: {
-      package: 'jp.fintan.mobile.SantokuApp.dev.house',
+      package: 'jp.fintan.mobile.SantokuApp.dev',
       adaptiveIcon: {
         foregroundImage: './assets/android/ic_launcher_foreground_dev.png',
       },
       googleServicesFile: './google-services-dummy.json',
     },
     ios: {
-      bundleIdentifier: 'jp.fintan.mobile.SantokuApp.dev.house',
+      bundleIdentifier: 'jp.fintan.mobile.SantokuApp.dev',
       googleServicesFile: './GoogleService-Info.Dummy.plist',
       icon: './assets/ios/ic_dev.png',
       infoPlist: {
@@ -27,7 +27,7 @@ module.exports = config => {
         {
           developmentTeam: 'D9MUZCM4X6',
           codeSignStyle: 'Manual',
-          provisioningProfileSpecifier: 'SantokuApp Dev-house Development',
+          provisioningProfileSpecifier: 'SantokuApp Dev Development',
         },
       ],
     ],

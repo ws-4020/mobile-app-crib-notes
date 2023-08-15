@@ -1,4 +1,4 @@
-package jp.fintan.mobile.SantokuApp.dev.house;
+package jp.fintan.mobile.SantokuApp.dev;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
