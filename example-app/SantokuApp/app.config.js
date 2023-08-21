@@ -97,6 +97,7 @@ module.exports = ({config}) => {
         CFBundleAllowMixedLocalizations: true,
         UIBackgroundModes: ['fetch', 'remote-notification'],
       },
+      associatedDomains: ['applinks:reactnativesandbox.z11.web.core.windows.net'],
     },
     plugins: [
       [
