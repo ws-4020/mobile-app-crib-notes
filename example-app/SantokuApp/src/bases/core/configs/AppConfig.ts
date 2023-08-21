@@ -45,6 +45,10 @@ export abstract class AppConfig {
     return Constants.expoConfig?.extra?.mobileAppCribNotesRepositoryUrl as string;
   }
 
+  static get deepLinkPrefixes(): string[] {
+    return Constants.expoConfig?.extra?.deepLinkPrefixes as string[];
+  }
+
   static get mswEnabled(): boolean {
     return Constants.expoConfig?.extra?.mswEnabled as boolean;
   }
