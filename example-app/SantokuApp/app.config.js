@@ -23,6 +23,10 @@ const environmentConfig = {
   stg: stgConfig,
   prod: prodConfig,
 };
+
+export const deepLinkScheme = 'https';
+export const deepLinkDomain = 'reactnativesandbox.z11.web.core.windows.net';
+
 /**
  * アプリ全体のベースとなる設定です。
  * 環境毎に違う設定値は、prodの設定を定義しています。（一部のプラグインを除く）
@@ -64,6 +68,25 @@ module.exports = ({config}) => {
           apiKey: '${googleMapApiKey}',
         },
       },
+      intentFilters: [
+        {
+          autoVerify: true,
+          action: 'VIEW',
+          data: [
+            {
+              scheme: deepLinkScheme,
+              host: deepLinkDomain,
+              pathPattern: `/question/.*`,
+            },
+            {
+              scheme: deepLinkScheme,
+              host: deepLinkDomain,
+              pathPattern: `/demo/app-info.*`,
+            },
+          ],
+          category: ['BROWSABLE', 'DEFAULT'],
+        },
+      ],
     },
     ios: {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp',
@@ -153,6 +176,7 @@ module.exports = ({config}) => {
       googlePlayAppUrl: 'https://play.google.com/store/apps/details?id={applicationId}',
       mobileAppCribNotesWebsiteUrl: 'https://fintan-contents.github.io/mobile-app-crib-notes',
       mobileAppCribNotesRepositoryUrl: 'https://github.com/Fintan-contents/mobile-app-crib-notes',
+      deepLinkPrefixes: [`${deepLinkScheme}://${deepLinkDomain}`],
       mswEnabled: true,
     },
     updates: {

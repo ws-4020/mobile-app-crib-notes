@@ -2,6 +2,10 @@ const withIosDisabledATS = require('./app.plugin.js').withIosDisabledATS;
 const withIosSetCredentials = require('./app.plugin.js').withIosSetCredentials;
 const withIosAddPersonalAccountConfig = require('./app.plugin.js').withIosAddPersonalAccountConfig;
 
+const deepLinkScheme = 'https';
+const deepLinkDomain = 'reactnativesandbox.z11.web.core.windows.net';
+const deepLinkEnv = 'local';
+
 module.exports = config => {
   return {
     name: 'Local SantokuApp',
@@ -11,6 +15,25 @@ module.exports = config => {
         foregroundImage: './assets/android/ic_launcher_foreground_local.png',
       },
       googleServicesFile: './google-services-dummy.json',
+      intentFilters: [
+        {
+          autoVerify: true,
+          action: 'VIEW',
+          data: [
+            {
+              scheme: deepLinkScheme,
+              host: deepLinkDomain,
+              pathPattern: `/${deepLinkEnv}/question/.*`,
+            },
+            {
+              scheme: deepLinkScheme,
+              host: deepLinkDomain,
+              pathPattern: `/${deepLinkEnv}/demo/app-info.*`,
+            },
+          ],
+          category: ['BROWSABLE', 'DEFAULT'],
+        },
+      ],
     },
     ios: {
       // ExpoのデフォルトConfigPluginでは、「$」のような記号をBundleIdentifierに設定出来なかったため、このアプリで作成した「withSetCredentials」Pluginで設定しています。
@@ -37,6 +60,7 @@ module.exports = config => {
     extra: {
       mobileAppCribNotesWebsiteUrl: 'https://ws-4020.github.io/mobile-app-crib-notes',
       mobileAppCribNotesRepositoryUrl: 'https://github.com/ws-4020/mobile-app-crib-notes',
+      deepLinkPrefixes: [`${deepLinkScheme}://${deepLinkDomain}/${deepLinkEnv}`],
     },
   };
 };

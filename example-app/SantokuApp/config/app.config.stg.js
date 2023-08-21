@@ -4,6 +4,10 @@ const withAndroidRemoveUsesClearTextTrafficForRelease =
 const withIosEnabledATS = require('./app.plugin.js').withIosEnabledATS;
 const withIosSetCredentials = require('./app.plugin.js').withIosSetCredentials;
 
+const deepLinkScheme = 'https';
+const deepLinkDomain = 'reactnativesandbox.z11.web.core.windows.net';
+const deepLinkEnv = 'stg';
+
 module.exports = config => {
   return {
     name: 'Stg SantokuApp',
@@ -12,6 +16,25 @@ module.exports = config => {
       adaptiveIcon: {
         foregroundImage: './assets/android/ic_launcher_foreground_stg.png',
       },
+      intentFilters: [
+        {
+          autoVerify: true,
+          action: 'VIEW',
+          data: [
+            {
+              scheme: deepLinkScheme,
+              host: deepLinkDomain,
+              pathPattern: `/${deepLinkEnv}/question/.*`,
+            },
+            {
+              scheme: deepLinkScheme,
+              host: deepLinkDomain,
+              pathPattern: `/${deepLinkEnv}/demo/app-info.*`,
+            },
+          ],
+          category: ['BROWSABLE', 'DEFAULT'],
+        },
+      ],
     },
     ios: {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp.stg',
@@ -36,6 +59,7 @@ module.exports = config => {
     extra: {
       mobileAppCribNotesWebsiteUrl: 'https://ws-4020.github.io/mobile-app-crib-notes',
       mobileAppCribNotesRepositoryUrl: 'https://github.com/ws-4020/mobile-app-crib-notes',
+      deepLinkPrefixes: [`${deepLinkScheme}://${deepLinkDomain}/${deepLinkEnv}`],
     },
   };
 };
