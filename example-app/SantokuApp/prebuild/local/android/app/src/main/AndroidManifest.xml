@@ -25,6 +25,26 @@
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <data android:scheme="jp.fintan.mobile.SantokuApp.local"/>
+      </intent-filter>
+      <intent-filter android:autoVerify="true" data-generated="true">
+        <action android:name="android.intent.action.VIEW"/>
+        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:pathPattern="/question/.*"/>
+        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:pathPattern="/demo/app-info.*"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+      <intent-filter android:autoVerify="true" data-generated="true">
+        <action android:name="android.intent.action.VIEW"/>
+        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:pathPattern="/local/question/.*"/>
+        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:pathPattern="/local/demo/app-info.*"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
     </activity>
     <activity android:name=".AppActivity" android:label="@string/app_name" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:exported="false"/>
     <uses-library android:name="org.apache.http.legacy" android:required="false"/>
