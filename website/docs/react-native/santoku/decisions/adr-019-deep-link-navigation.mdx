@@ -167,6 +167,7 @@ const config = isLoggedIn ? {
 
 <details>
 <summary>ディープリンクをタップする前に表示していた画面に戻れない例１</summary>
+
 ユーザは、アプリで`ScreenC`を表示しています。
 
 ```markdown title=ナビゲーションスタック（ディープリンクタップ前）
@@ -176,7 +177,7 @@ const config = isLoggedIn ? {
   - ScreenC <- この画面が表示されている
 ```
 
-ユーザがScreenBに遷移するディープリンクをタップすると、スタック内に既に存在する`ScreenB`まで戻ります。
+ユーザが`ScreenB`に遷移するディープリンクをタップすると、スタック内に既に存在する`ScreenB`まで戻ります。
 
 ```markdown title=ナビゲーションスタック（ディープリンクタップ後）
 - StackNavigatorA
@@ -184,11 +185,12 @@ const config = isLoggedIn ? {
   - ScreenB <- この画面が表示されている
 ```
 
-この場合、ScreenBから`navigation.goBack`を実行した場合、`ScreenA`に戻ってしまいます。
+この場合、`ScreenB`から`navigation.goBack`を実行した場合、`ScreenA`に戻ってしまいます。
 </details>
 
 <details>
 <summary>ディープリンクをタップする前に表示していた画面に戻れない例２</summary>
+
 ユーザは、アプリで`StackNavigatorB`内の`ScreenF`を表示しています。
 
 ```markdown title=ナビゲーションスタック（ディープリンクタップ前）
@@ -202,7 +204,7 @@ const config = isLoggedIn ? {
   - ScreenF <- この画面が表示されている
 ```
 
-ユーザがScreenBに遷移するディープリンクをタップすると、まず`StackNavigatorA`まで戻ります。その後、`StackNavigatorA`のスタック内に存在する`ScreenB`まで戻ります。
+ユーザが`ScreenB`に遷移するディープリンクをタップすると、まず`StackNavigatorA`まで戻ります。その後、`StackNavigatorA`のスタック内に存在する`ScreenB`まで戻ります。
 
 ```markdown title=ナビゲーションスタック（ディープリンクタップ後）
 - StackNavigatorA
@@ -210,7 +212,7 @@ const config = isLoggedIn ? {
   - ScreenB <- この画面が表示されている
 ```
 
-この場合、ScreenBから`navigation.goBack`を実行した場合、`ScreenA`に戻ってしまいます。
+この場合、`ScreenB`から`navigation.goBack`を実行した場合、`ScreenA`に戻ってしまいます。
 </details>
 
 これらを解決する手段の1つとして、ディープリンクの遷移先画面を、別のナビゲーターで管理する方法が考えられます。
@@ -267,6 +269,7 @@ const DeepLinkStackNavigator: React.FC = () => {
 
 <details>
 <summary>ディープリンク用のナビゲータを定義した場合のナビゲーションスタック例１</summary>
+
 ユーザは、アプリで`ScreenC`を表示しています。
 
 ```markdown title=ナビゲーションスタック（ディープリンクタップ前）
@@ -276,7 +279,7 @@ const DeepLinkStackNavigator: React.FC = () => {
   - ScreenC <- この画面が表示されている
 ```
 
-ユーザがScreenBに遷移するディープリンクをタップすると、`DeepLinkStackNavigator`と`ScreenB`がスタックに追加されます。
+ユーザが`ScreenB`に遷移するディープリンクをタップすると、`DeepLinkStackNavigator`と`ScreenB`がスタックに追加されます。
 
 ```markdown title=ナビゲーションスタック（ディープリンクタップ後）
 - StackNavigatorA
@@ -287,11 +290,12 @@ const DeepLinkStackNavigator: React.FC = () => {
   - ScreenB <- この画面が表示されている
 ```
 
-この場合、ScreenBから`navigation.goBack`を実行すると、`ScreenC`に戻る事が可能です。
+この場合、`ScreenB`から`navigation.goBack`を実行すると、`ScreenC`に戻る事が可能です。
 </details>
 
 <details>
 <summary>ディープリンク用のナビゲータを定義した場合のナビゲーションスタック例２</summary>
+
 ユーザは、アプリで`StackNavigatorB`内の`ScreenF`を表示しています。
 
 ```markdown title=ナビゲーションスタック（ディープリンクタップ前）
@@ -305,7 +309,7 @@ const DeepLinkStackNavigator: React.FC = () => {
   - ScreenF <- この画面が表示されている
 ```
 
-ユーザがScreenBに遷移するディープリンクをタップすると、`DeepLinkStackNavigator`と`ScreenB`がスタックに追加されます。
+ユーザが`ScreenB`に遷移するディープリンクをタップすると、`DeepLinkStackNavigator`と`ScreenB`がスタックに追加されます。
 
 ```markdown title=ナビゲーションスタック（ディープリンクタップ後）
 - StackNavigatorA
@@ -320,7 +324,7 @@ const DeepLinkStackNavigator: React.FC = () => {
   - ScreenB <- この画面が表示されている
 ```
 
-この場合、ScreenBから`navigation.goBack`を実行すると、`ScreenF`に戻る事が可能です。
+この場合、`ScreenB`から`navigation.goBack`を実行すると、`ScreenF`に戻る事が可能です。
 </details>
 
 しかし、この方法はディープリンク用のナビゲーターがスタックに残ってしまう状況が発生する場合には対応できません。
