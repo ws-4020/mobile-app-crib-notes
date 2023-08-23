@@ -24,9 +24,6 @@ const environmentConfig = {
   prod: prodConfig,
 };
 
-export const deepLinkScheme = 'https';
-export const deepLinkDomain = 'reactnativesandbox.z11.web.core.windows.net';
-
 /**
  * アプリ全体のベースとなる設定です。
  * 環境毎に違う設定値は、prodの設定を定義しています。（一部のプラグインを除く）
@@ -68,25 +65,10 @@ module.exports = ({config}) => {
           apiKey: '${googleMapApiKey}',
         },
       },
-      intentFilters: [
-        {
-          autoVerify: true,
-          action: 'VIEW',
-          data: [
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              pathPattern: `/question/.*`,
-            },
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              pathPattern: `/demo/app-info.*`,
-            },
-          ],
-          category: ['BROWSABLE', 'DEFAULT'],
-        },
-      ],
+      // 環境毎の設定値をマージするために使用しているdeepmergeは、配列は上書きされない。
+      // intentFiltersをここに定義してしまうと、環境毎の設定で上書きできないため、app.config.prod.jsで定義する。
+      // https://www.npmjs.com/package/deepmerge
+      // intentFilters: [...],
     },
     ios: {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp',
@@ -177,7 +159,9 @@ module.exports = ({config}) => {
       googlePlayAppUrl: 'https://play.google.com/store/apps/details?id={applicationId}',
       mobileAppCribNotesWebsiteUrl: 'https://fintan-contents.github.io/mobile-app-crib-notes',
       mobileAppCribNotesRepositoryUrl: 'https://github.com/Fintan-contents/mobile-app-crib-notes',
-      deepLinkPrefixes: [`${deepLinkScheme}://${deepLinkDomain}`],
+      // ディープリンクに関する設定（intentFilters）は、app.config.prod.jsで指定している。
+      // 同じファイルにまとめた方がわかりやすいと思うので、deepLinkPrefixesもapp.config.prod.jsで定義する。
+      // deepLinkPrefixes: [`${deepLinkScheme}://${deepLinkDomain}`],
       mswEnabled: true,
     },
     updates: {
