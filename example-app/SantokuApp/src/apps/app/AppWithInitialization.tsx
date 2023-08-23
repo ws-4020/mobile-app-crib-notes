@@ -1,4 +1,3 @@
-import {NavigationContainer} from '@react-navigation/native';
 import {RuntimeError} from 'bases/core/errors/RuntimeError';
 import {AccountDataLoader} from 'features/account/components/AccountDataLoader';
 import {AutoLogin} from 'features/account/components/AutoLogin';
@@ -8,6 +7,7 @@ import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
 import {ReactQueryProvider} from './contexts/ReactQueryProvider';
+import {ReactNavigationContainer} from './navigators/ReactNavigationContainer';
 import {AppInitialData} from './types/AppInitialData';
 import {useAppInitialize} from './use-cases/useAppInitialize';
 
@@ -54,20 +54,20 @@ export const AppWithInitialization: React.FC = () => {
       .FirebaseMessagingHandlers as React.FC<React.PropsWithChildren<{initialData: AppInitialData}>>;
 
     return (
-      <NavigationContainer>
-        <ReactQueryProvider>
-          <AppUpdatesChecker>
-            <AutoLogin>
-              <AccountDataLoader>
+      <ReactQueryProvider>
+        <AppUpdatesChecker>
+          <AutoLogin>
+            <AccountDataLoader>
+              <ReactNavigationContainer initialData={initializationResult.data.initialData}>
                 <FirebaseMessagingHandlers initialData={initializationResult.data.initialData}>
                   <RootStackNav initialData={initializationResult.data.initialData} />
                 </FirebaseMessagingHandlers>
-                <TermsAgreementOverlay.Component />
-              </AccountDataLoader>
-            </AutoLogin>
-          </AppUpdatesChecker>
-        </ReactQueryProvider>
-      </NavigationContainer>
+              </ReactNavigationContainer>
+              <TermsAgreementOverlay.Component />
+            </AccountDataLoader>
+          </AutoLogin>
+        </AppUpdatesChecker>
+      </ReactQueryProvider>
     );
   }
 };

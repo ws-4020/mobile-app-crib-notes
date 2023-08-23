@@ -10,6 +10,8 @@ import {useTerms} from 'features/terms/services/useTerms';
 import React, {useCallback} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 
+import {useDeepLinkUrl} from '../../deep-link/client-states/useDeepLinkUrl';
+import {useRedirectDeepLink} from '../../deep-link/client-states/useRedirectDeepLink';
 import {isUnauthorizedError} from '../errors/UnauthorizedError';
 import {LoginFormValues, useLoginForm} from '../forms/useLoginForm';
 import {useAuthCommands} from '../services/auth/useAuthCommands';
@@ -20,17 +22,22 @@ export type LoginPageProps = {
 
 export const LoginPage: React.FC<LoginPageProps> = ({navigateToCreateAccount}) => {
   const {login, isLoggingIn} = useAuthCommands();
+  const [, setRedirectDeepLink] = useRedirectDeepLink();
+  const [deepLinkUrl] = useDeepLinkUrl();
   const onSubmit = useCallback(
     async (values: LoginFormValues) => {
       try {
         await login({accountId: values.accountId, password: values.password});
+        // TODO: サインアップ画面でも実施しないとだめ
+        // TODO: ログアウト後にsetDeepLink、setRedirectDeepLinkの両方をクリアしないとだめ（もしかすると、全てのステートをクリアしてるかも）
+        setRedirectDeepLink(deepLinkUrl ?? 'jp.fintan.mobile.santokuapp:///home');
       } catch (e) {
         if (isUnauthorizedError(e)) {
           Alert.alert(m('ログイン失敗'), m('アカウントIDまたはパスワードに\n間違いがあります。'));
         }
       }
     },
-    [login],
+    [deepLinkUrl, login, setRedirectDeepLink],
   );
   const {form, clearAccountId, clearPassword} = useLoginForm({
     onSubmit,
