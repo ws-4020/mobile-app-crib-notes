@@ -1,4 +1,4 @@
-import {NavigationContainer, getActionFromState as getOriginalActionFromState} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {AppConfig} from 'bases/core/configs/AppConfig';
 import {useIsLoggedIn} from 'features/account/client-states/useIsLoggedIn';
 import React, {useCallback, useMemo} from 'react';
@@ -30,11 +30,6 @@ export const ReactNavigationContainer: React.FC<React.PropsWithChildren<Props>> 
       // Clean up the event listeners
       linkingSubscription.remove();
     };
-  }, []);
-
-  const getActionFromState: typeof getOriginalActionFromState = useCallback((state, options) => {
-    const action = getOriginalActionFromState(state, options);
-    return {...action, type: 'PUSH'};
   }, []);
 
   const config = useMemo(
@@ -76,7 +71,6 @@ export const ReactNavigationContainer: React.FC<React.PropsWithChildren<Props>> 
     config,
     getInitialURL,
     subscribe,
-    getActionFromState,
   };
 
   return <NavigationContainer linking={linking}>{children}</NavigationContainer>;

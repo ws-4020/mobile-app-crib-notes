@@ -53,6 +53,7 @@ const Component: React.FC<Props> = ({initialData}) => {
       <nav.Screen
         component={QuestionDetailScreen}
         name="QuestionDetail"
+        getId={({params}) => (params.linking ? String(Date.now()) : undefined)}
         options={({navigation}: {navigation: NativeStackNavigationProp<AuthenticatedStackParamList>}) => ({
           title: '',
           headerStyle: {backgroundColor: theme.colors.orange1},

@@ -48,13 +48,29 @@ const useRootStackNavigator = (initialData: AppInitialData) => {
             <nav.Screen
               name="AuthenticatedStackNav"
               component={authenticatedStackNav}
+              getId={({params}) => {
+                if (params?.screen === 'QuestionDetail') {
+                  return params.params?.linking ? String(Date.now()) : undefined;
+                }
+                return undefined;
+              }}
               options={{
                 headerShown: false,
               }}
             />
           </nav.Group>
           <nav.Group screenOptions={invisibleHeaderOptions}>
-            <nav.Screen {...DemoStackNav} name="DemoStackNav" component={DemoStackNav} />
+            <nav.Screen
+              {...DemoStackNav}
+              name="DemoStackNav"
+              component={DemoStackNav}
+              getId={({params}) => {
+                if (params?.screen === 'AppInfo') {
+                  return params.params?.linking ? String(Date.now()) : undefined;
+                }
+                return undefined;
+              }}
+            />
           </nav.Group>
         </>
       ) : (

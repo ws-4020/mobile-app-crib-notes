@@ -11,7 +11,7 @@ export type RootStackParamList = {
 
 export type AuthenticatedStackParamList = {
   MainTabNav: NavigatorScreenParams<MainTabParamList> | undefined;
-  QuestionDetail: {questionId: string};
+  QuestionDetail: {questionId: string; linking: boolean | undefined};
   QuestionAndEventStackNav: NavigatorScreenParams<QuestionAndEventPostStackParamList> | undefined;
 };
 
@@ -34,7 +34,7 @@ export type AccountStackParamList = {
 
 export type DemoStackParamList = {
   Acknowledgements: undefined;
-  AppInfo: undefined;
+  AppInfo: {linking: boolean | undefined};
   AppState: undefined;
   Config: undefined;
   DemoMenu: undefined;
