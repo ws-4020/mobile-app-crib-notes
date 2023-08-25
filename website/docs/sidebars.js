@@ -325,6 +325,10 @@ module.exports = {
           id: 'react-native/santoku/application-architecture/system-configuration/overview',
         },
         {
+          type: 'doc',
+          id: 'react-native/santoku/application-architecture/application-structure/overview',
+        },
+        {
           type: 'category',
           label: 'アプリのライフサイクル管理',
           items: [
@@ -588,6 +592,20 @@ module.exports = {
           label: '実装',
           items: [
             'react-native/santoku/development/implement',
+            {
+              type: 'category',
+              label: 'スタイルガイド',
+              items: [
+                'react-native/santoku/development/implement/style-guide/overview',
+                'react-native/santoku/development/implement/style-guide/eslint',
+                'react-native/santoku/development/implement/style-guide/typescript',
+                'react-native/santoku/development/implement/style-guide/editorconfig',
+                'react-native/santoku/development/implement/style-guide/prettier',
+                'react-native/santoku/development/implement/style-guide/lint-ops',
+                'react-native/santoku/development/implement/style-guide/typescript-style-guide',
+                'react-native/santoku/development/implement/style-guide/naming-conversion',
+              ],
+            },
             'react-native/santoku/development/implement/message-configuration',
             'react-native/santoku/development/implement/logs-implementation',
             'react-native/santoku/development/implement/cautions-on-using-firebase',
@@ -676,6 +694,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-015-android-head-up-notification',
         'react-native/santoku/decisions/adr-016-forced-app-updates',
         'react-native/santoku/decisions/adr-017-map-view-library',
+        'react-native/santoku/decisions/adr-018-deep-link',
         'react-native/santoku/decisions/adr-019-deep-link-navigation',
       ],
     },
