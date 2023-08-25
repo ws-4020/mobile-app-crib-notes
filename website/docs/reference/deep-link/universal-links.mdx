@@ -48,9 +48,13 @@ Associated Domains Entitlementは、以下の手順で追加します。
 
 なお、Xcodeの`Signing & Capabilities`で`Automatically manage signing`を設定していない場合は、追加で以下の手順が必要になります。
 
+<!-- textlint-disable jtf-style/4.3.7.山かっこ<> -->
 - Apple Developer Programの[Certificates, Identifiers & Profiles > Identifiers](https://developer.apple.com/account/resources/identifiers/list)でアプリのApp IDを選択
+<!-- textlint-enable jtf-style/4.3.7.山かっこ<> -->
 - Capabilitiesに`Associated Domains`を追加
+<!-- textlint-disable jtf-style/4.3.7.山かっこ<> -->
 - Apple Developer Programの[Certificates, Identifiers & Profiles > Profiles](https://developer.apple.com/account/resources/profiles/list)でProvisioning Profileを更新
+<!-- textlint-enable jtf-style/4.3.7.山かっこ<> -->
 - 更新したProvisioning Profileをダウンロードして、XcodeのProvisioning Profileに設定
 
 :::note
