@@ -4,31 +4,30 @@ sidebar_label: 概要
 pagination_label: ディープリンク
 ---
 
-ディープリンクとは、AndroidやiOSでURLのリンクを開くとアプリが起動する仕組みのことです。ディープリンクから起動されたとき、アプリではそのURLを取得できます。
+ディープリンクとは、iOSやAndroidでURLのリンクを開くとアプリが起動する仕組みのことです。ディープリンクから起動されたとき、アプリではそのURLを取得できます。
 
-ディープリンクからアプリを起動したときに、そのURLに応じた画面を表示したり、URLパラメータに従った初期値を設定するなど、幅広く活用できます。このようにディープリンクを利用することで、ユーザが簡単に目的を達成できるようになります。
+ディープリンクからアプリを起動したときに、そのURLに応じた画面を表示したり、URLパラメータに従った初期値を設定するなど、幅広く活用できます。
 
 ## ディープリンクの実現方法
 
-ディープリンクを実現する方法として、OSの標準機能では以下の選択肢があります。
-
-- カスタムURLスキーム
-- [Universal Links](https://developer.apple.com/ios/universal-links/)（iOS）
-- [Android App Links](https://developer.android.com/training/app-links)（Android）
-
-ディープリンクの3つの実現方式のうち、カスタムURLスキームにはアプリに設定したスキームが他のアプリに乗っ取られるリスクがあります。
-
-一方で、Universal Links、Android App Linksは、アプリとウェブサイトのドメインを関連付けることにより、安全にディープリンクを実現できます。
-
-そのため、このアプリではUniversal LinksとAndroid App Linksを使用してディープリンクを実現します。
+このアプリでは、ディープリンクを実現する方法として、OSの標準機能である[Universal Links](https://developer.apple.com/ios/universal-links/)と[Android App Links](https://developer.android.com/training/app-links)を使用します。
 
 :::warning
+ディープリンクを実現する方法としては、カスタムURLスキームもあります。
+
 カスタムURLスキームは、複数のアプリが同じスキームを設定できるため、OSはURLリンクの対象とするアプリを一意に特定できません。その結果、正規アプリのスキームを偽装した不正アプリによってURLリンクを乗っ取られる可能性があります。
 
 [Appleのドキュメント](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)にも、カスタムURLスキームではなくUniversal Linksを推奨する記載があります。
 
-> While custom URL schemes are an acceptable form of deep linking, universal links are strongly recommended. For more information on universal links, see Allowing apps and websites to link to your content.
+> While custom URL schemes are an acceptable form of deep linking, universal links are strongly recommended.
+
+そのため、このアプリではカスタムURLスキームを使用しません。
 :::
+
+Universal LinksとAndroid App Linksの仕組みや設定方法については、以下を参照してください。
+
+- [リファレンス - ディープリンク - Universal Links](../../../../reference/deep-link/universal-links.mdx)
+- [リファレンス - ディープリンク - Android App Links](../../../../reference/deep-link/android-app-links.mdx)
 
 ## 関連する決定事項
 
