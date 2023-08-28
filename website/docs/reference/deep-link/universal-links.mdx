@@ -99,6 +99,28 @@ Xcodeの`Signing & Capabilities`で`Automatically manage signing`を設定して
 }
 ```
 
+:::note
+1つの`associated domain file`を複数のアプリと関連付けるには、[details](https://developer.apple.com/documentation/bundleresources/applinks/details)に複数のアプリを設定します。
+
+```json
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [ "ABCDE12345.com.example.app1"],
+        "components": [{ "/": "/app1/users"}]
+      },
+      {
+        "appIDs": [ "ABCDE12345.com.example.app2"],
+        "components": [{ "/": "/app2/books"}]
+      }
+    ]
+  }
+}
+```
+
+:::
+
 作成した`associated domain file`は、ウェブサイトの`.well-known`ディレクトリに配置します。
 
 ```console
