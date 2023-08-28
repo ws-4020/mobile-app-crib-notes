@@ -75,11 +75,11 @@ const getActionFromState: typeof getOriginalActionFromState = useCallback((state
   const action = getOriginalActionFromState(state, options);
   // 画面に応じてNavigation actionを設定
   if (ScreenAの場合) {
-    return {...action, type: 'NAVIGATE'};
-  } else if (ScreenBの場合) {
-    return {...action, type: 'RESET'};
-  } else {
     return {...action, type: 'PUSH'};
+  } else if (ScreenBの場合) {
+    return {...action, type: 'NAVIGATE'};
+  } else {
+    return {...action, type: 'RESET'};
   }
 }, []);
 
