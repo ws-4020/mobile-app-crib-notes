@@ -18,7 +18,7 @@ title: React Navigationのlinkingの動作確認
 ユーザは、アプリで`ScreenC`を表示しています。
 
 ```markdown title=ナビゲーションスタック（ディープリンクタップ前）
-- StackNavigatorA
+- StackNavigator1
   - ScreenA
   - ScreenB
   - ScreenC <- この画面が表示されている
@@ -27,7 +27,7 @@ title: React Navigationのlinkingの動作確認
 ユーザが`ScreenB`に遷移するディープリンクをタップすると、スタック内に既に存在する`ScreenB`まで戻ります。
 
 ```markdown title=ナビゲーションスタック（ディープリンクタップ後）
-- StackNavigatorA
+- StackNavigator1
   - ScreenA
   - ScreenB <- この画面が表示されている
 ```
@@ -36,23 +36,23 @@ title: React Navigationのlinkingの動作確認
 
 もう1つ例を記載します。
 
-ユーザは、アプリで`StackNavigatorB`内の`ScreenF`を表示しています。
+ユーザは、アプリで`StackNavigator2`内の`ScreenF`を表示しています。
 
 ```markdown title=ナビゲーションスタック（ディープリンクタップ前）
-- StackNavigatorA
+- StackNavigator1
   - ScreenA
   - ScreenB
   - ScreenC
-- StackNavigatorB
+- StackNavigator2
   - ScreenD
   - ScreenE
   - ScreenF <- この画面が表示されている
 ```
 
-ユーザが`ScreenB`に遷移するディープリンクをタップすると、まず`StackNavigatorA`まで戻ります。その後、`StackNavigatorA`のスタック内に存在する`ScreenB`まで戻ります。
+ユーザが`ScreenB`に遷移するディープリンクをタップすると、まず`StackNavigator1`まで戻ります。その後、`StackNavigator1`のスタック内に存在する`ScreenB`まで戻ります。
 
 ```markdown title=ナビゲーションスタック（ディープリンクタップ後）
-- StackNavigatorA
+- StackNavigator1
   - ScreenA
   - ScreenB <- この画面が表示されている
 ```
@@ -117,8 +117,8 @@ export const RootStackNavigator: React.FC = () => {
   return (
     <nav.Navigator>
       <nav.Screen
-        name="StackNavigatorA"
-        component={StackNavigatorA}
+        name="StackNavigator1"
+        component={StackNavigator1}
         getId={({params}) => {
           if (params?.screen === 'ScreenB') {
             return params.params?.linking ? String(Date.now()) : undefined;
@@ -130,7 +130,7 @@ export const RootStackNavigator: React.FC = () => {
   );
 };
 
-const StackNavigatorA: React.FC = () => {
+const StackNavigator1: React.FC = () => {
   return (
     <nav.Navigator>
       <nav.Screen name="ScreenA" component={ScreenA} />

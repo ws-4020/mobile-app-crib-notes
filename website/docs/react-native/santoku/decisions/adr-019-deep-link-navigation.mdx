@@ -216,16 +216,16 @@ export const DeepLinkHandlers: React.FC<Props> = ({navigation}) => {
       const parsedURL = Linking.parse(event.url);
 
       if (parsedURL.path?.startsWith('screen-a')) {
-        navigation.dispatch(StackActions.push('StackNavigatorA', {screen: 'ScreenA'}));
+        navigation.dispatch(StackActions.push('StackNavigator1', {screen: 'ScreenA'}));
       } else if (parsedURL.path?.startsWith('screen-b')) {
-        navigation.navigate('StackNavigatorA', {screen: 'ScreenB'});
+        navigation.navigate('StackNavigator1', {screen: 'ScreenB'});
       } else if (parsedURL.path?.startsWith('screen-d')) {
         navigation.dispatch(
           CommonActions.reset({
             index: 0,
             routes: [
               {
-                name: 'TabNavigatorB',
+                name: 'TabNavigator2',
                 state: {
                   index: 0,
                   routes: [{name: 'ScreenD'}],
