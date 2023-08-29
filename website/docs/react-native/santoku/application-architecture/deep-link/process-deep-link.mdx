@@ -38,7 +38,9 @@ React Nativeアプリでは、コールドスタートとウォームスター�
 
 画面遷移時の[Navigation action](https://reactnavigation.org/docs/navigation-actions)は、基本的に`PUSH`を使用します。画面遷移に`PUSH`を利用することにより、戻るボタンをタップした場合にユーザが表示していた画面に戻ることができます。
 
-ただし、ボトムタブで表示している画面に関しては、前の画面に戻ることができないように`RESET`を使用します。
+ただし、ボトムタブを表示しているナビゲーター（[Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/)）に遷移する場合は、前の画面に戻ることができないように`NAVIGATE`を使用します。
+
+このアプリでは、`Bottom Tabs Navigator`をログイン（自動ログイン含む）後の初期画面としてNavigation Stackの最初に必ず設定しています。そのため、`NAVIGATE`で画面遷移することによりNavigation Stackの最初まで戻り、前の画面には戻れなくなります。
 
 ### 認証状態の考慮
 
