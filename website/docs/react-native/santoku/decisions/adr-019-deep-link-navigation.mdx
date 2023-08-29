@@ -17,7 +17,7 @@ Superseded: 廃止
   - 未認証時にディープリンクを受け取った場合は、ユーザが認証後、ディープリンクに対応した画面へ遷移させる
   - ディープリンクの遷移先画面で戻るボタンをタップ場合は、ディープリンクをタップする前に表示していた画面に戻す
     - ただし、ボトムタブを表示しているナビゲーターなど、通常のユーザ操作では前の画面に戻れないナビゲーターなどに遷移している場合は、前の画面に戻さない
-- ディープリンクを受信した際の処理に、React Navigationの`linking`を使用しない
+- ディープリンクを受信した際の処理に、React Navigationの`linking`を使用せず、独自実装による画面遷移を採用する
 
 ## コンテキスト
 
@@ -59,7 +59,7 @@ Superseded: 廃止
 - React Navigationの`linking`を使用した画面遷移
   - [Deep linking](https://reactnavigation.org/docs/deep-linking/)
   - [Configuring links](https://reactnavigation.org/docs/configuring-links/)
-- React Navigationの`linking`を使用しない画面遷移
+- React Navigationの`linking`を使用しない画面遷移（独自実装）
 
 以下は、それぞれの方法における良い点と注意事項をまとめた表になります。
 
@@ -83,4 +83,4 @@ Superseded: 廃止
   - 未認証時にディープリンクを受け取った場合は、ユーザが認証後、ディープリンクに対応した画面へ遷移させる
   - ディープリンクの遷移先画面で戻るボタンをタップ場合は、ディープリンクをタップする前に表示していた画面に戻す
     - ただし、ボトムタブを表示しているナビゲーターなど、通常のユーザ操作では前の画面に戻れないナビゲーターなどに遷移している場合は、前の画面に戻さない
-- ディープリンクを受信した際の処理に、React Navigationの`linking`を使用しない
+- ディープリンクを受信した際の処理に、React Navigationの`linking`を使用せず、独自実装による画面遷移を採用する
