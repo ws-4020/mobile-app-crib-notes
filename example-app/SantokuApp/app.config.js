@@ -94,6 +94,10 @@ module.exports = ({config}) => {
 -keep public class com.horcrux.svg.** {*;}
 `,
             enableProguardInReleaseBuilds: true,
+            extraMavenRepos: [
+              // notifee Expo49対応: https://github.com/invertase/notifee/issues/808
+              '$rootDir/../../../node_modules/@notifee/react-native/android/libs',
+            ],
           },
           ios: {
             useFrameworks: 'static',
