@@ -2,8 +2,6 @@
 title: React Navigationのlinkingを使用した画面遷移の検討
 ---
 
-## React Navigationのlinking
-
 React Navigationは、ディープリンクを受信した際、URLに応じた画面へ遷移する`linking`という機能を提供しています。
 
 - [Deep linking](https://reactnavigation.org/docs/deep-linking/)
@@ -72,13 +70,13 @@ const config = {
 
 一方で、認証状態を考慮した画面表示などいくつか検討が必要な点もあったため、以降ではそれらについて記載します。
 
-### 認証状態による画面表示の制御
+## 認証状態による画面表示の制御
 
 React Navigationには、[認証フロー](https://reactnavigation.org/docs/auth-flow)に関するドキュメントがあります。しかし、`linking`と認証フローを組み合わせた場合のドキュメントはなく、以下のissueで議論されています。
 
 - [Deep linking with Authentication Flow](https://github.com/react-navigation/react-navigation.github.io/issues/97)
 
-#### 受け取ったディープリンクに応じた画面が、未認証で表示してはいけない場合の考慮
+### 受け取ったディープリンクに応じた画面が、未認証で表示してはいけない場合の考慮
 
 認証済の場合は、ディープリンクURLに応じて画面遷移するように、URLと遷移先画面のマッピングを定義します。
 
@@ -100,7 +98,7 @@ const config = isLoggedIn ? {
 } : undefined;
 ```
 
-#### 未認証時に受け取ったディープリンクの遷移先画面を、認証後に表示する方法
+### 未認証時に受け取ったディープリンクの遷移先画面を、認証後に表示する方法
 
 この仕様を実現するための機能がReact Navigationには存在しません。そのため、以下の方法でこの機能を実現します。
 
@@ -110,9 +108,9 @@ const config = isLoggedIn ? {
 - 認証後にStateからディープリンクを取得し、[Linking.openURL](https://reactnative.dev/docs/linking#openurl)を使用してそのディープリンクを開く
   - `Linking.openURL`を使用してアプリ内からディープリンクを開くことにより、`linking`に設定したURLと遷移先画面のマッピングに従って画面遷移が行われる
 
-### ディープリンクの遷移先画面で戻るボタンをタップした場合の動作
+## ディープリンクの遷移先画面で戻るボタンをタップした場合の動作
 
-#### `linking`のデフォルト動作の確認
+### `linking`のデフォルト動作の確認
 
 `linking`を使用して画面遷移する場合、`navigation.navigate`を使用した場合と同様の動作になります。
 
@@ -174,7 +172,7 @@ const config = isLoggedIn ? {
 - `linking.getActionFromState`を使用して、Navigation actionを設定する
 - 遷移先画面の`Screen.getId`で、ディープリンク受信時は常にユニークなIDを返却する
 
-#### `linking.getActionFromState`を使用して、Navigation actionを設定する
+### `linking.getActionFromState`を使用して、Navigation actionを設定する
 
 `linking.getActionFromState`は、[Navigation action](https://reactnavigation.org/docs/navigation-actions)を設定するための関数です。引数で、[Navigation state](https://reactnavigation.org/docs/navigation-state/)を受け取るため、画面に応じてNavigation actionを設定できます。
 
@@ -213,7 +211,7 @@ return <NavigationContainer linking={linking}>{children}</NavigationContainer>;
 しかし、これらの実装は非常に複雑な処理になることが予想されます。URLの解析やNavigation stateの生成を自身で実装することは、`linking`を使うことで得られる多くのメリットを失います。
 :::
 
-#### 遷移先画面の`Screen.getId`で、ディープリンク受信時は常にユニークなIDを返却する
+### 遷移先画面の`Screen.getId`で、ディープリンク受信時は常にユニークなIDを返却する
 
 `navigation.navigate`は、[Screen.name](https://reactnavigation.org/docs/screen/#name)と[Screen.getId](https://reactnavigation.org/docs/screen/#getid)の返却値によって、画面遷移の挙動が変わります。
 
