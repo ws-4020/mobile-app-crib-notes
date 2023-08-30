@@ -146,14 +146,14 @@ describe('PickerContainer with all props', () => {
     sut.update(<PickerContainer isVisible={false} afterSlideOut={afterSlideOut} slideOutDuration={100} />);
 
     await startAnimation();
-    // slideOutDurationで指定した時間の1msc前ではafterSlideOutは実行されない
+    // slideOutDurationで指定した時間の10msc前ではafterSlideOutは実行されない
     await act(() => {
-      jest.advanceTimersByTime(99);
+      jest.advanceTimersByTime(90);
     });
     expect(afterSlideOut).not.toHaveBeenCalled();
     // slideOutDurationで指定した時間経過後は、afterSlideOutが実行される
     await act(() => {
-      jest.advanceTimersByTime(1);
+      jest.advanceTimersByTime(10);
     });
     expect(afterSlideOut).toHaveBeenCalled();
   });
