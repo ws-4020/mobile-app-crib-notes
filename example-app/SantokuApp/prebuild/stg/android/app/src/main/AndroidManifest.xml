@@ -34,7 +34,7 @@
       <intent-filter android:autoVerify="true" data-generated="true">
         <action android:name="android.intent.action.VIEW"/>
         <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:pathPattern="/stg/question/.*"/>
-        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:pathPattern="/stg/demo/app-info.*"/>
+        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:path="/stg/demo/app-info"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <category android:name="android.intent.category.DEFAULT"/>
       </intent-filter>
