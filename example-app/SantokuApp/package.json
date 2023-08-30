@@ -2,8 +2,8 @@
   "name": "santoku-app",
   "main": "index.js",
   "scripts": {
-    "android": "expo run:android",
-    "ios": "expo run:ios",
+    "android": "cross-env ENVIRONMENT=local expo run:android",
+    "ios": "cross-env ENVIRONMENT=local expo run:ios",
     "web": "expo start --web",
     "start": "expo start",
     "test": "jest --runInBand --forceExit",
