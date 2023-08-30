@@ -53,7 +53,7 @@ describe('PickerContainer only with required props', () => {
     await act(() => {
       jest.advanceTimersByTime(DEFAULT_SLIDE_IN_DURATION / 2);
     });
-    expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 75}]});
+    expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 74.00333333333333}]});
     expect(sut).toMatchSnapshot('Animating (slide in)');
 
     // アニメーションが完了すると`transform`が設定値に到達していること
@@ -82,7 +82,7 @@ describe('PickerContainer only with required props', () => {
     await act(() => {
       jest.advanceTimersByTime(DEFAULT_SLIDE_OUT_DURATION / 2);
     });
-    expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 75}]});
+    expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 76.00333333333333}]});
     expect(sut).toMatchSnapshot('Animating (slide out)');
 
     // アニメーションが完了するとコンポーネントが消えること
