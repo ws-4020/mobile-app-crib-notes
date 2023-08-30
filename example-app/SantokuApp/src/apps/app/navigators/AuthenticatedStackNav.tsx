@@ -1,4 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator, NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useTheme} from '@shopify/restyle';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
@@ -8,9 +7,7 @@ import {StyledColumn} from 'bases/ui/common/StyledColumn';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {GoBackIllustration} from 'bases/ui/illustration/GoBackIllustration';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
-import {useRedirectDeepLink} from 'features/deep-link/client-states/useRedirectDeepLink';
-import React, {useEffect, useMemo} from 'react';
-import {Linking} from 'react-native';
+import React, {useMemo} from 'react';
 
 import {useMainTabNav} from './MainTabNav';
 import {QuestionAndEventPostStackNav} from './QuestionAndEventPostStackNav';
@@ -31,15 +28,6 @@ const Component: React.FC<Props> = ({initialData}) => {
   const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
   const mainTabNav = useMainTabNav(initialData);
   const theme = useTheme<RestyleTheme>();
-  const [redirectDeepLinkUrl, setRedirectDeepLinkUrl] = useRedirectDeepLink();
-
-  const navigation = useNavigation();
-  useEffect(() => {
-    if (redirectDeepLinkUrl) {
-      Linking.openURL(redirectDeepLinkUrl).catch(e => console.error(e));
-      setRedirectDeepLinkUrl('');
-    }
-  }, [navigation, redirectDeepLinkUrl, setRedirectDeepLinkUrl]);
 
   return (
     <nav.Navigator initialRouteName={initialRouteName}>
@@ -53,7 +41,6 @@ const Component: React.FC<Props> = ({initialData}) => {
       <nav.Screen
         component={QuestionDetailScreen}
         name="QuestionDetail"
-        getId={({params}) => (params.linking ? String(Date.now()) : undefined)}
         options={({navigation}: {navigation: NativeStackNavigationProp<AuthenticatedStackParamList>}) => ({
           title: '',
           headerStyle: {backgroundColor: theme.colors.orange1},

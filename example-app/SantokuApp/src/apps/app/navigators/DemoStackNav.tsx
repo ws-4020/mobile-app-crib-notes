@@ -59,7 +59,6 @@ export const DemoStackNav: React.FC = () => {
       <nav.Screen
         name="AppInfo"
         component={AppInfoScreen}
-        getId={({params}) => (params.linking ? String(Date.now()) : undefined)}
         options={{
           title: 'Application Information',
         }}

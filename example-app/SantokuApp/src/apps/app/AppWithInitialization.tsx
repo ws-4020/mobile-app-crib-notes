@@ -1,3 +1,4 @@
+import {NavigationContainer, useNavigationContainerRef} from '@react-navigation/native';
 import {RuntimeError} from 'bases/core/errors/RuntimeError';
 import {AccountDataLoader} from 'features/account/components/AccountDataLoader';
 import {AutoLogin} from 'features/account/components/AutoLogin';
@@ -6,14 +7,16 @@ import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOve
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
+import {DeepLinkHandler} from './components/DeepLinkHandler';
 import {ReactQueryProvider} from './contexts/ReactQueryProvider';
-import {ReactNavigationContainer} from './navigators/ReactNavigationContainer';
+import {RootStackParamList} from './navigators/types';
 import {AppInitialData} from './types/AppInitialData';
 import {useAppInitialize} from './use-cases/useAppInitialize';
 
 export const AppWithInitialization: React.FC = () => {
   const {initialize, initializationResult} = useAppInitialize();
   const [initializationError, setInitializationError] = useState<unknown>();
+  const navigationRef = useNavigationContainerRef<RootStackParamList>();
 
   useEffect(() => {
     // 初期化処理が1回だけ実行されるようにする。
@@ -58,12 +61,14 @@ export const AppWithInitialization: React.FC = () => {
         <AppUpdatesChecker>
           <AutoLogin>
             <AccountDataLoader>
-              <ReactNavigationContainer initialData={initializationResult.data.initialData}>
-                <FirebaseMessagingHandlers initialData={initializationResult.data.initialData}>
-                  <RootStackNav initialData={initializationResult.data.initialData} />
-                </FirebaseMessagingHandlers>
-              </ReactNavigationContainer>
-              <TermsAgreementOverlay.Component />
+              <DeepLinkHandler initialData={initializationResult.data.initialData} navigationRef={navigationRef}>
+                <NavigationContainer ref={navigationRef}>
+                  <FirebaseMessagingHandlers initialData={initializationResult.data.initialData}>
+                    <RootStackNav initialData={initializationResult.data.initialData} />
+                  </FirebaseMessagingHandlers>
+                  <TermsAgreementOverlay.Component />
+                </NavigationContainer>
+              </DeepLinkHandler>
             </AccountDataLoader>
           </AutoLogin>
         </AppUpdatesChecker>
