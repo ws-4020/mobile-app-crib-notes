@@ -23,7 +23,7 @@ module.exports = config => {
             {
               scheme: deepLinkScheme,
               host: deepLinkDomain,
-              pathPattern: `/demo/app-info.*`,
+              path: `/demo/app-info`,
             },
           ],
           category: ['BROWSABLE', 'DEFAULT'],
@@ -47,7 +47,7 @@ module.exports = config => {
       ],
     ],
     extra: {
-      deepLinkPrefixes: [`${deepLinkScheme}://${deepLinkDomain}`],
+      deepLinkPathPrefix: '',
     },
   };
 };

@@ -6,7 +6,7 @@ const withIosSetCredentials = require('./app.plugin.js').withIosSetCredentials;
 
 const deepLinkScheme = 'https';
 const deepLinkDomain = 'reactnativesandbox.z11.web.core.windows.net';
-const deepLinkEnv = 'stg';
+const deepLinkPathPrefix = 'stg';
 
 module.exports = config => {
   return {
@@ -24,12 +24,12 @@ module.exports = config => {
             {
               scheme: deepLinkScheme,
               host: deepLinkDomain,
-              pathPattern: `/${deepLinkEnv}/question/.*`,
+              pathPattern: `/${deepLinkPathPrefix}/question/.*`,
             },
             {
               scheme: deepLinkScheme,
               host: deepLinkDomain,
-              pathPattern: `/${deepLinkEnv}/demo/app-info.*`,
+              path: `/${deepLinkPathPrefix}/demo/app-info`,
             },
           ],
           category: ['BROWSABLE', 'DEFAULT'],
@@ -59,7 +59,7 @@ module.exports = config => {
     extra: {
       mobileAppCribNotesWebsiteUrl: 'https://ws-4020.github.io/mobile-app-crib-notes',
       mobileAppCribNotesRepositoryUrl: 'https://github.com/ws-4020/mobile-app-crib-notes',
-      deepLinkPrefixes: [`${deepLinkScheme}://${deepLinkDomain}/${deepLinkEnv}`],
+      deepLinkPathPrefix,
     },
   };
 };
