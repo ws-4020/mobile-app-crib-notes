@@ -30,10 +30,13 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="jp.fintan.mobile.SantokuApp.local"/>
+        <data android:scheme="exp+santoku-app"/>
       </intent-filter>
       <intent-filter android:autoVerify="true" data-generated="true">
         <action android:name="android.intent.action.VIEW"/>
-        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:pathPattern="/local/question/.*"/>
+        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:path="/local"/>
+        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:path="/local/home"/>
+        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:pathPattern="/local/questions/.*"/>
         <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:path="/local/demo/app-info"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <category android:name="android.intent.category.DEFAULT"/>
