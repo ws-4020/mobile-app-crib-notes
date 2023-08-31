@@ -18,7 +18,17 @@ module.exports = config => {
             {
               scheme: deepLinkScheme,
               host: deepLinkDomain,
-              pathPattern: `/question/.*`,
+              path: `/`,
+            },
+            {
+              scheme: deepLinkScheme,
+              host: deepLinkDomain,
+              path: `/home`,
+            },
+            {
+              scheme: deepLinkScheme,
+              host: deepLinkDomain,
+              pathPattern: `/questions/.*`,
             },
             {
               scheme: deepLinkScheme,

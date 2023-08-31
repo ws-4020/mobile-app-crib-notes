@@ -8,7 +8,7 @@ import type {ParsedURL} from 'expo-linking';
 import type {DeepLink} from './deepLinks';
 import type {MainTabParamList, RootStackParamList} from '../../navigators/types';
 
-const matchedPath = AppConfig.deepLinkPathPrefix ? `${AppConfig.deepLinkPathPrefix}/question/` : 'question/';
+const matchedPath = AppConfig.deepLinkPathPrefix ? `${AppConfig.deepLinkPathPrefix}/questions/` : 'questions/';
 const matchPath = (parsedUrl: ParsedURL) => parsedUrl.path?.startsWith(matchedPath);
 
 const validationScheme = yup.object().shape({
