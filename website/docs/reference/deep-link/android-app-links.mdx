@@ -124,5 +124,5 @@ https://[ドメイン]/.well-known/assetlinks.json
 - `Content-Type`が`application/json`である
 - HTTPS接続でアクセスできる
 - リダイレクトなしでアクセスできる（`301`リダイレクトや`302`リダイレクトがない）
-- `bot`がアクセスできる（`robots.txt`で`/.well-known/assetlinks.json`のクロールを許可している必要がある）
+- `bot`がアクセスできる（`robots.txt`で`/.well-known/assetlinks.json`のクロールが禁止されていない）
 - 複数のホストドメインをサポートしている場合、各ドメインでDigital Asset Linksファイルを公開する必要がある（詳細は、[複数のホスト用のアプリリンク機能をサポートする](https://developer.android.com/training/app-links/verify-android-applinks?hl=ja#multi-host)を参照）
