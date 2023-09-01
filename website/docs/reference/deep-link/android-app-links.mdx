@@ -40,7 +40,7 @@ Android App Linksは、アプリとドメインを関連付けることでディ
 
 Android App Linksの検証を有効にするには、`AndroidManifest.xml`の`intent-filter`に`android:autoVerify="true"`を定義します。
 
-`intent-filter`内に、以下の要素が存在する場合、OSはアプリインストール時に指定されたドメインのDigital Asset Linksファイルを確認し、アプリとドメインの検証をします。
+`intent-filter`内に、以下の要素が存在する場合、OSはアプリインストール時に指定されたドメインのDigital Asset Linksファイルを確認し、アプリとドメインの関連付けを検証します。
 
 - action: `android.intent.action.VIEW`
 - category: `android.intent.category.BROWSABLE`
