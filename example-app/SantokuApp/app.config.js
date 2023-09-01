@@ -138,7 +138,6 @@ module.exports = ({config}) => {
       ],
       // 以下のプラグインは、環境毎の設定ファイルで定義します。
       // withAndroidAppBuildGradleForRelease,
-      // withAndroidRemoveUsesClearTextTrafficForRelease,
 
       // このアプリで用意しているiOS用のプラグイン
       withIosRemoveCFBundleUrlTypes,
