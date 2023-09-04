@@ -1,7 +1,6 @@
 import {m} from 'bases/message/Message';
-import React, {useCallback, useEffect, useState, ComponentProps} from 'react';
-import {ActivityIndicator, NativeSyntheticEvent, StyleSheet} from 'react-native';
-import {DirectEventHandler} from 'react-native/Libraries/Types/CodegenTypes';
+import React, {useCallback, useEffect, useState} from 'react';
+import {ActivityIndicator, StyleSheet} from 'react-native';
 import {WebView as RNWebView, WebViewProps} from 'react-native-webview';
 import {
   WebViewErrorEvent,
@@ -31,11 +30,6 @@ type Props = WebViewProps & {
    */
   onScrollEndOnce?: () => void;
 };
-
-type GetDirectEventHandlerGenericsType<T> = T extends DirectEventHandler<infer E> ? E : never;
-type onScrollType = ComponentProps<typeof RNWebView>['onScroll'];
-type ScrollEvent = GetDirectEventHandlerGenericsType<onScrollType>;
-type WebViewScrollEvent = NativeSyntheticEvent<ScrollEvent>;
 
 const isUriSource = (source?: WebViewSource): source is WebViewSourceUri => {
   return source !== undefined && 'uri' in source;
@@ -94,8 +88,8 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
     [onLoadStart],
   );
 
-  const handleScroll = useCallback(
-    async (event: WebViewScrollEvent) => {
+  const handleScroll = useCallback<Exclude<WebViewProps['onScroll'], undefined>>(
+    async event => {
       if (isUriChanged && event.nativeEvent.contentOffset.y > 0) {
         // URLが変わった直後の、オフセットが0ではないスクロールイベントでは、onScrollEndは発生させない。
         setIsUriChanged(false);
