@@ -46,8 +46,7 @@ export abstract class AppConfig {
   }
 
   static get deepLinkPathPrefix(): string {
-    return 'stg';
-    // return Constants.expoConfig?.extra?.deepLinkPathPrefix as string;
+    return Constants.expoConfig?.extra?.deepLinkPathPrefix as string;
   }
 
   static get mswEnabled(): boolean {
