@@ -34,13 +34,14 @@ React Nativeアプリでは、コールドスタートとウォームスター�
 
 ## ディープリンクに応じた画面遷移
 
-このアプリでは、ディープリンクに応じた画面を表示します。
+このアプリでは、ディープリンクに応じた画面を表示します。その画面から戻るボタンをタップした場合は、以下の仕様とします。
 
-画面遷移時の[Navigation action](https://reactnavigation.org/docs/navigation-actions)は、基本的に`PUSH`を使用します。画面遷移に`PUSH`を利用することにより、戻るボタンをタップした場合にユーザが表示していた画面に戻ることができます。
+- 基本的には、ディープリンクをタップする前に表示していた画面に戻す
+- 遷移先画面がボトムタブを表示しているナビゲーター（[Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/)）の場合は、前の画面へ戻れないようにする
 
-ただし、ボトムタブを表示しているナビゲーター（[Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/)）に遷移する場合は、前の画面に戻ることができないように`NAVIGATE`を使用します。
+ディープリンクをタップする前に表示していた画面に戻すためには、画面遷移時の[Navigation action](https://reactnavigation.org/docs/navigation-actions)として`PUSH`を使用します。
 
-このアプリでは、`Bottom Tabs Navigator`をログイン（自動ログイン含む）後の初期画面としてNavigation Stackの最初に必ず設定しています。そのため、`NAVIGATE`で画面遷移することによりNavigation Stackの最初まで戻り、前の画面には戻れなくなります。
+`Bottom Tabs Navigator`に遷移する場合は、`NAVIGATE`を使用します。このアプリでは、`Bottom Tabs Navigator`をログイン（自動ログイン含む）後の初期画面としてNavigation Stackの最初に必ず設定しています。そのため、`NAVIGATE`で画面遷移することによりNavigation Stackの最初まで戻り、前の画面に戻れなくなります。
 
 ### 認証状態の考慮
 
