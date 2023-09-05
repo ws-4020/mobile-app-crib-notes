@@ -25,12 +25,32 @@ title: ディープリンクの処理
 ホットスタートの場合、Expo Linkingの[addEventListener](https://docs.expo.dev/versions/latest/sdk/linking/#linkingaddeventlistenertype-handler)に設定した処理が呼ばれます。
 この中でURLに応じた処理（画面遷移など）を行います。
 
-### コールドスタートまたはウォームスタートの場合
+### コールドスタートの場合
 
 ![ディープリンクタップ時(Quit)の処理フロー](tap-deep-link-when-quit.drawio.png)
 
-React Nativeアプリでは、コールドスタートとウォームスタートはほぼ同等です。
-コールドスタートまたはウォームスタートの場合、Expo Linkingの[getInitialURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkinggetinitialurl)で取得したURLに応じた処理（画面遷移など）を行います。
+コールドスタートの場合、Expo Linkingの[getInitialURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkinggetinitialurl)で取得したURLに応じた処理（画面遷移など）を行います。
+
+### ウォームスタートの場合
+
+#### iOS
+
+コールドスタートの場合と同様の処理フローになります。Expo Linkingの[getInitialURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkinggetinitialurl)で取得したURLに応じた処理（画面遷移など）を行います。
+
+#### Android
+
+![ディープリンクタップ時(Kill)の処理フロー](tap-deep-link-when-kill.drawio.png)
+
+Androidのウォームスタートの場合、Expo Linkingの[addEventListener](https://docs.expo.dev/versions/latest/sdk/linking/#linkingaddeventlistenertype-handler)に設定した処理が呼ばれます。
+この中でURLに応じた処理（画面遷移など）を行います。
+
+:::note
+Androidは、[android:launchMode](https://developer.android.com/guide/topics/manifest/activity-element?hl=ja#lmode)によってActivityの起動方法が変わります。
+
+このアプリでは、`android:launchMode`に`singleTask`を設定しているため、ウォームスタート時にActivityのインスタンスが作成されません。この場合、ディープリンクのURLはExpo Linkingの`addEventListener`で取得できます。
+
+一方、`android:launchMode`の`standard`などは、ウォームスタート時にActivityのインスタンスが作成されます。この場合、ディープリンクのURLはExpo Linkingの`getInitialURL`で取得できます。
+:::
 
 ## ディープリンクに応じた画面遷移
 
