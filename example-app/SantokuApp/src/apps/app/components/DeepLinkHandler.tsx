@@ -3,7 +3,6 @@ import {useIsLoggedIn} from 'features/account/client-states/useIsLoggedIn';
 import React, {PropsWithChildren, useEffect} from 'react';
 
 import {useRedirectDeepLinkUrl} from '../client-states/useRedirectDeepLinkUrl';
-import {useSetRedirectDeepLinkUrl} from '../client-states/useSetRedirectDeepLinkUrl';
 import {RootStackParamList} from '../navigators/types';
 import {addDeepLinkListener} from '../services/deep-link/addDeepLinkListener';
 import {AppInitialData} from '../types/AppInitialData';
@@ -19,9 +18,8 @@ import {handleDeepLink} from '../use-cases/deep-link/handleDeepLink';
 export const DeepLinkHandler: React.FC<
   PropsWithChildren<{initialData: AppInitialData; navigationRef: NavigationContainerRef<RootStackParamList>}>
 > = ({initialData, navigationRef, children}) => {
-  const [redirectDeepLinkUrl] = useRedirectDeepLinkUrl(initialData.deepLinkUrl);
+  const [redirectDeepLinkUrl, setRedirectDeepLinkUrl] = useRedirectDeepLinkUrl(initialData.deepLinkUrl);
   const [isLoggedIn] = useIsLoggedIn();
-  const setRedirectDeepLinkUrl = useSetRedirectDeepLinkUrl();
 
   // コールド・ウォームスタート、ログイン後のリダイレクト用
   useEffect(() => {
