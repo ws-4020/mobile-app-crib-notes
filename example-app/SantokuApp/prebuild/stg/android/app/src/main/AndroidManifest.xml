@@ -34,10 +34,10 @@
       </intent-filter>
       <intent-filter android:autoVerify="true" data-generated="true">
         <action android:name="android.intent.action.VIEW"/>
-        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:path="/stg"/>
-        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:path="/stg/home"/>
-        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:pathPattern="/stg/questions/.*"/>
-        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:path="/stg/demo/app-info"/>
+        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:path="/" android:pathPrefix="/stg"/>
+        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:path="/home" android:pathPrefix="/stg"/>
+        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:pathPattern="/questions/.*" android:pathPrefix="/stg"/>
+        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:path="/demo/app-info" android:pathPrefix="/stg"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <category android:name="android.intent.category.DEFAULT"/>
       </intent-filter>
