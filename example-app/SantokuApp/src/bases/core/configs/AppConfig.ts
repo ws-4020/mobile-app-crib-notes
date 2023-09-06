@@ -45,9 +45,9 @@ export abstract class AppConfig {
     return Constants.expoConfig?.extra?.mobileAppCribNotesRepositoryUrl as string;
   }
 
-  static get deepLinkPathPrefix(): string {
+  static get deepLinkPathPrefix(): string | undefined {
     return 'stg';
-    // return Constants.expoConfig?.extra?.deepLinkPathPrefix as string;
+    // return Constants.expoConfig?.extra?.deepLinkPathPrefix as string | undefined;
   }
 
   static get mswEnabled(): boolean {

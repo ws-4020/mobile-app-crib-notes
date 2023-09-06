@@ -28,8 +28,5 @@ module.exports = config => {
         },
       ],
     ],
-    extra: {
-      deepLinkPathPrefix: '',
-    },
   };
 };
