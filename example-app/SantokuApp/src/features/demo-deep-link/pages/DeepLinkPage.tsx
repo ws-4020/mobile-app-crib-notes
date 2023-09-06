@@ -29,7 +29,10 @@ export const DeepLinkPage: React.FC = () => {
         <SpecAndSourceCodeLink feature="deep-link" />
         <View style={styles.contentsContainer}>
           <Text>【ディープリンク受信ログ】</Text>
-          <Text>この画面がアンマウントされると、ログもクリアされます。</Text>
+          <Text>
+            ・addEventListenerで受信したディープリンクのログは、この画面がマウントされた以降に受信したログです。
+          </Text>
+          <Text>・この画面がアンマウントされると、ログもクリアされます。</Text>
           {receivedLinkLogs.length ? (
             receivedLinkLogs.map((log, index) => (
               <View key={index} style={styles.logItemContainer}>
