@@ -3,10 +3,10 @@ const withAndroidRemoveUsesClearTextTrafficForRelease =
   require('./app.plugin.js').withAndroidRemoveUsesClearTextTrafficForRelease;
 const withIosEnabledATS = require('./app.plugin.js').withIosEnabledATS;
 const withIosSetCredentials = require('./app.plugin.js').withIosSetCredentials;
+const generateDeepLinkIntentFilter = require('./utils/generateDeepLinkIntentFilter');
 
-const deepLinkScheme = 'https';
-const deepLinkDomain = 'reactnativesandbox.z11.web.core.windows.net';
 const deepLinkPathPrefix = 'stg';
+const deepLinkIntentFilter = generateDeepLinkIntentFilter(deepLinkPathPrefix);
 
 module.exports = config => {
   return {
@@ -16,39 +16,7 @@ module.exports = config => {
       adaptiveIcon: {
         foregroundImage: './assets/android/ic_launcher_foreground_stg.png',
       },
-      intentFilters: [
-        {
-          autoVerify: true,
-          action: 'VIEW',
-          data: [
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              pathPrefix: `/${deepLinkPathPrefix}`,
-              path: `/`,
-            },
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              pathPrefix: `/${deepLinkPathPrefix}`,
-              path: `/home`,
-            },
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              pathPrefix: `/${deepLinkPathPrefix}`,
-              pathPattern: `/questions/.*`,
-            },
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              pathPrefix: `/${deepLinkPathPrefix}`,
-              path: `/demo/app-info`,
-            },
-          ],
-          category: ['BROWSABLE', 'DEFAULT'],
-        },
-      ],
+      intentFilters: [deepLinkIntentFilter],
     },
     ios: {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp.stg',

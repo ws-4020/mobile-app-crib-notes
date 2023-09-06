@@ -16,6 +16,7 @@ import {
   withAndroidFlexibleSplashScreen,
   withIosOverrideStoryboard,
 } from './config/app.plugin.js';
+import {DEEP_LINK_DOMAIN} from './config/constants/deepLink';
 
 const environmentConfig = {
   local: localConfig,
@@ -79,7 +80,7 @@ module.exports = ({config}) => {
         CFBundleAllowMixedLocalizations: true,
         UIBackgroundModes: ['fetch', 'remote-notification'],
       },
-      associatedDomains: ['applinks:reactnativesandbox.z11.web.core.windows.net'],
+      associatedDomains: [`applinks:${DEEP_LINK_DOMAIN}`],
     },
     plugins: [
       [

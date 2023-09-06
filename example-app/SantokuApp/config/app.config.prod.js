@@ -3,42 +3,14 @@ const withAndroidRemoveUsesClearTextTrafficForRelease =
   require('./app.plugin.js').withAndroidRemoveUsesClearTextTrafficForRelease;
 const withIosEnabledATS = require('./app.plugin.js').withIosEnabledATS;
 const withIosSetCredentials = require('./app.plugin.js').withIosSetCredentials;
+const generateDeepLinkIntentFilter = require('./utils/generateDeepLinkIntentFilter');
 
-const deepLinkScheme = 'https';
-const deepLinkDomain = 'reactnativesandbox.z11.web.core.windows.net';
+const deepLinkIntentFilter = generateDeepLinkIntentFilter();
 
 module.exports = config => {
   return {
     android: {
-      intentFilters: [
-        {
-          autoVerify: true,
-          action: 'VIEW',
-          data: [
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              path: `/`,
-            },
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              path: `/home`,
-            },
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              pathPattern: `/questions/.*`,
-            },
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              path: `/demo/app-info`,
-            },
-          ],
-          category: ['BROWSABLE', 'DEFAULT'],
-        },
-      ],
+      intentFilters: [deepLinkIntentFilter],
     },
     plugins: [
       // このアプリで用意しているAndroid用のプラグイン

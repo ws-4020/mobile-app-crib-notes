@@ -1,10 +1,10 @@
 const withIosDisabledATS = require('./app.plugin.js').withIosDisabledATS;
 const withIosSetCredentials = require('./app.plugin.js').withIosSetCredentials;
 const withIosAddPersonalAccountConfig = require('./app.plugin.js').withIosAddPersonalAccountConfig;
+const generateDeepLinkIntentFilter = require('./utils/generateDeepLinkIntentFilter');
 
-const deepLinkScheme = 'https';
-const deepLinkDomain = 'reactnativesandbox.z11.web.core.windows.net';
 const deepLinkPathPrefix = 'local';
+const deepLinkIntentFilter = generateDeepLinkIntentFilter(deepLinkPathPrefix);
 
 module.exports = config => {
   return {
@@ -15,39 +15,7 @@ module.exports = config => {
         foregroundImage: './assets/android/ic_launcher_foreground_local.png',
       },
       googleServicesFile: './google-services-dummy.json',
-      intentFilters: [
-        {
-          autoVerify: true,
-          action: 'VIEW',
-          data: [
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              pathPrefix: `/${deepLinkPathPrefix}`,
-              path: `/`,
-            },
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              pathPrefix: `/${deepLinkPathPrefix}`,
-              path: `/home`,
-            },
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              pathPrefix: `/${deepLinkPathPrefix}`,
-              pathPattern: `/questions/.*`,
-            },
-            {
-              scheme: deepLinkScheme,
-              host: deepLinkDomain,
-              pathPrefix: `/${deepLinkPathPrefix}`,
-              path: `/demo/app-info`,
-            },
-          ],
-          category: ['BROWSABLE', 'DEFAULT'],
-        },
-      ],
+      intentFilters: [deepLinkIntentFilter],
     },
     ios: {
       // ExpoのデフォルトConfigPluginでは、「$」のような記号をBundleIdentifierに設定出来なかったため、このアプリで作成した「withSetCredentials」Pluginで設定しています。
