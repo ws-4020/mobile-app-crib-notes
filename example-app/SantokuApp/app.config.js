@@ -160,9 +160,6 @@ module.exports = ({config}) => {
       googlePlayAppUrl: 'https://play.google.com/store/apps/details?id={applicationId}',
       mobileAppCribNotesWebsiteUrl: 'https://fintan-contents.github.io/mobile-app-crib-notes',
       mobileAppCribNotesRepositoryUrl: 'https://github.com/Fintan-contents/mobile-app-crib-notes',
-      // ディープリンクに関する設定（intentFilters）は、app.config.prod.jsで指定している。
-      // 同じファイルにまとめた方がわかりやすいと思うので、deepLinkPrefixesもapp.config.prod.jsで定義する。
-      // deepLinkPrefixes: [`${deepLinkScheme}://${deepLinkDomain}`],
       mswEnabled: true,
     },
     updates: {
