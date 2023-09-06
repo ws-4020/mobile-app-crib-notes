@@ -1,14 +1,14 @@
 import {StackActions} from '@react-navigation/core';
 import {NavigationContainerRef} from '@react-navigation/native';
-import {AppConfig} from 'bases/core/configs/AppConfig';
 import {ApplicationError} from 'bases/core/errors/ApplicationError';
 import {yup} from 'bases/validator';
 import type {ParsedURL} from 'expo-linking';
 
 import type {DeepLink} from './deepLinks';
+import {pathWithPrefix} from './pathWithPrefix';
 import type {MainTabParamList, RootStackParamList} from '../../navigators/types';
 
-const matchedPath = AppConfig.deepLinkPathPrefix ? `${AppConfig.deepLinkPathPrefix}/questions/` : 'questions/';
+const matchedPath = pathWithPrefix('questions/');
 const matchPath = (parsedUrl: ParsedURL) => parsedUrl.path?.startsWith(matchedPath);
 
 const validationScheme = yup.object().shape({
