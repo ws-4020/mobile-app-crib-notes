@@ -5,6 +5,7 @@ import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 import {SpecAndSourceCodeLink} from '../../demo-github-link/components/SpecAndSourceCodeLink';
 
+const logText = (url: string, funcName: string) => `[${funcName}] ${new Date().toISOString()}\n${url}`;
 export const DeepLinkPage: React.FC = () => {
   const [receivedLinkLogs, setReceivedLinkLogs] = useState<string[]>([]);
 
@@ -12,12 +13,12 @@ export const DeepLinkPage: React.FC = () => {
     Linking.getInitialURL()
       .then(url => {
         if (url) {
-          setReceivedLinkLogs(prev => [`[getInitialUrl] ${new Date().toISOString()}\n${url}`, ...prev]);
+          setReceivedLinkLogs(prev => [logText(url, 'getInitialUrl'), ...prev]);
         }
       })
       .catch(e => handleError(e));
     const subscription = Linking.addEventListener('url', ({url}) =>
-      setReceivedLinkLogs(prev => [`[addEventListener] ${new Date().toISOString()}\n${url}`, ...prev]),
+      setReceivedLinkLogs(prev => [logText(url, 'addEventListener'), ...prev]),
     );
     return () => subscription.remove();
   }, []);
