@@ -3,7 +3,6 @@ package com.helloworld;
 import android.net.Uri;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
