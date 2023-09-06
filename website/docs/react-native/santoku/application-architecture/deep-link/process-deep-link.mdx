@@ -41,7 +41,7 @@ title: ディープリンクの処理
 
 ![ディープリンクタップ時(Kill)の処理フロー](tap-deep-link-when-kill.drawio.png)
 
-Androidのウォームスタートの場合、Expo Linkingの[addEventListener](https://docs.expo.dev/versions/latest/sdk/linking/#linkingaddeventlistenertype-handler)に設定した処理が呼ばれます。
+Androidのウォームスタートの場合、前回起動時にExpo Linkingの[addEventListener](https://docs.expo.dev/versions/latest/sdk/linking/#linkingaddeventlistenertype-handler)に設定した処理が呼ばれます。
 この中でURLに応じた処理（画面遷移など）を行います。
 
 :::note
@@ -50,6 +50,14 @@ Androidは、[android:launchMode](https://developer.android.com/guide/topics/man
 このアプリでは、`android:launchMode`に`singleTask`を設定しているため、ウォームスタート時にActivityのインスタンスが作成されません。この場合、ディープリンクのURLはExpo Linkingの`addEventListener`で取得できます。
 
 一方、`android:launchMode`の`standard`などは、ウォームスタート時にActivityのインスタンスが作成されます。この場合、ディープリンクのURLはExpo Linkingの`getInitialURL`で取得できます。
+:::
+
+:::note
+ウォームスタート時は、全てのコンポーネントが再マウントされます。`App.tsx`のtop levelなどで実行した処理は、ウォームスタート時に再実行されることはありません。
+
+そのため、このアプリでは`addEventListener`の実行を、`App.tsx`のtop levelで実行しています。
+
+詳細は、[App.tsx](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/src/apps/app/App.tsx)を参照してください。
 :::
 
 ## ディープリンクに応じた画面遷移
