@@ -59,7 +59,7 @@ Androidは、[android:launchMode](https://developer.android.com/guide/topics/man
 :::
 
 :::note
-ウォームスタート時は、全てのコンポーネントが再マウントされます。`App.tsx`のtop levelなどで実行した処理は、ウォームスタート時に再実行されることはありません。
+ウォームスタート時は、コンポーネントが再マウントされますが、モジュールの再読み込みはされません。`App.tsx`のtop levelなどで実行した処理は、ウォームスタート時に再実行されることはありません。
 
 そのため、このアプリでは`addEventListener`の実行を、`App.tsx`のtop levelで実行しています。
 
