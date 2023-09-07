@@ -47,9 +47,15 @@ Androidのウォームスタートの場合、前回起動時にExpo Linkingの[
 :::note
 Androidは、[android:launchMode](https://developer.android.com/guide/topics/manifest/activity-element?hl=ja#lmode)によってActivityの起動方法が変わります。
 
-このアプリでは、`android:launchMode`に`singleTask`を設定しているため、ウォームスタート時にActivityのインスタンスが作成されません。この場合、ディープリンクのURLはExpo Linkingの`addEventListener`で取得できます。
+`android:launchMode`の`singleTask`は、ウォームスタート時にActivityのインスタンスが作成されません。この場合、ディープリンクのURLはExpo Linkingの`addEventListener`で取得できます。
 
 一方、`android:launchMode`の`standard`などは、ウォームスタート時にActivityのインスタンスが作成されます。この場合、ディープリンクのURLはExpo Linkingの`getInitialURL`で取得できます。
+
+このアプリでは、Expoの[expo-template-bare-minimum](https://github.com/expo/expo/blob/main/templates/expo-template-bare-minimum/android/app/src/main/AndroidManifest.xml#L24)に合わせて、`android:launchMode`を`singleTask`に設定しています。
+`android:launchMode`を`standard`変更することで、コールドスタートやiOSのウォームスタートと挙動を合わせることもできます。
+しかし、Activityの起動変更がアプリに及ぼす影響を完全に把握できていません。
+
+そのため、`android:launchMode`は`singleTask`にして、Expo Linkingの`addEventListener`で取得する方法としています。
 :::
 
 :::note
