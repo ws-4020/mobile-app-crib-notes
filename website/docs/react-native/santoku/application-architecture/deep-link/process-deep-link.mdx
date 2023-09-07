@@ -77,6 +77,12 @@ Androidは、[android:launchMode](https://developer.android.com/guide/topics/man
 
 `Bottom Tabs Navigator`に遷移する場合は、`NAVIGATE`を使用します。このアプリでは、`Bottom Tabs Navigator`をログイン（自動ログイン含む）後の初期画面としてNavigation Stackの最初に必ず設定しています。そのため、`NAVIGATE`で画面遷移することによりNavigation Stackの最初まで戻り、前の画面に戻れなくなります。
 
+:::note
+画面遷移に関しては、以下のDecision Recordに詳細な検証結果を記載しているので、こちらも参照してください。
+
+- [ディープリンク受信時の画面遷移](../../decisions/adr-019-deep-link-navigation.mdx)
+:::
+
 ### 認証状態の考慮
 
 未認証時にディープリンクを受け取った場合は、ディープリンクを無視して通常通り起動するようにします。
