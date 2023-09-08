@@ -81,7 +81,7 @@ package.jsonの`expo.install.exclude`のキーがサポートされるように�
 
 #### scheme (app config)
 
-以前は、追加のschemeを設定するにはconfig pluginを使用する必要がありました。
+以前は、追加のschemeを設定するにはConfig Pluginsを使用する必要がありました。
 文字列の配列または文字列を使用できるようになりました。
 
 ```js title="app.config.js"
@@ -167,7 +167,7 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
   - [`app.notifee:core`を見つけられない問題対応](#appnotifeecoreを見つけられない問題対応)
 - renovate除外設定更新
   - 使用しなくなった`androidx.swiperefreshlayout:swiperefreshlayout`を削除
-- [不要になったconfig plugin`withAndroidRemoveUsesClearTextTrafficForRelease`を削除](#不要になったconfig-pluginwithandroidremoveusescleartexttrafficforreleaseを削除)
+- [不要になったConfig Plugins`withAndroidRemoveUsesClearTextTrafficForRelease`を削除](#不要になったconfig-pluginswithandroidremoveusescleartexttrafficforreleaseを削除)
 - [Expoの更新履歴の確認と対応](#expoの更新履歴の確認と対応)
 - [React Nativeの更新履歴の確認と対応](#react-nativeの更新履歴の確認と対応)
 - [expo-template-blank-typescriptの更新履歴の確認と対応](#expo-template-blank-typescriptの更新履歴の確認と対応)
@@ -608,14 +608,14 @@ npm update @typescript-eslint/eslint-plugin @typescript-eslint/parser
 
 - [Expo SDK 49 compatibility issue · Issue #808 · invertase/notifee](https://github.com/invertase/notifee/issues/808)
 
-### 不要になったconfig plugin`withAndroidRemoveUsesClearTextTrafficForRelease`を削除
+### 不要になったConfig Plugins`withAndroidRemoveUsesClearTextTrafficForRelease`を削除
 
-今までは暗号化してないhttp通信を禁止するために、`android:usesCleartextTraffic`を削除するconfig pluginを作成し使用していました。
+今までは暗号化してないhttp通信を禁止するために、`android:usesCleartextTraffic`を削除するConfig Pluginsを作成し使用していました。
 
 - [config/plugin/src/android/withAndroidRemoveUsesClearTextTrafficForRelease.ts](https://github.com/ws-4020/mobile-app-crib-notes/blob/v2023.07/example-app/SantokuApp/config/plugin/src/android/withAndroidRemoveUsesClearTextTrafficForRelease.ts)
 
 しかし、[Expo SDK 49の主な変更 - Expoがサポートするライブラリや機能 - android:usesCleartextTraffic](#androidusescleartexttraffic)に記載した通り、Expo側で対応されました。
-そのため、不要となったconfig pluginを削除しました。
+そのため、不要となったConfig Pluginsを削除しました。
 
 ### Expoの更新履歴の確認と対応
 
