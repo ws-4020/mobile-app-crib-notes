@@ -10,21 +10,22 @@ pagination_label: ディープリンク
 
 ## ディープリンクの実現方法
 
-このアプリでは、ディープリンクを実現する方法として、OSの標準機能である[Universal Links](https://developer.apple.com/ios/universal-links/)と[Android App Links](https://developer.android.com/training/app-links)を使用します。
+ディープリンクを実現する方法として、OSの標準機能では以下の選択肢があります。
+
+- カスタムURLスキーム
+- [Universal Links](https://developer.apple.com/ios/universal-links/)（iOS）
+- [Android App Links](https://developer.android.com/training/app-links)（Android）
+
+ディープリンクの3つの実現方式のうち、カスタムURLスキームにはアプリに設定したスキームが他のアプリに乗っ取られるリスクがあります。
+
+一方で、Universal Links、Android App Linksは、アプリとウェブサイトのドメインを関連付けることにより、安全にディープリンクを実現できます。
+
+そのため、ディープリンクの実現方法としては、Universal LinksとAndroid App Linksが推奨されます。
 
 :::warning
-ディープリンクを実現する方法としては、カスタムURLスキームもあります。
-
 カスタムURLスキームは、複数のアプリが同じスキームを設定できるため、OSはURLリンクの対象とするアプリを一意に特定できません。その結果、正規アプリのスキームを偽装した不正アプリによってURLリンクを乗っ取られる可能性があります。
 
 [Appleのドキュメント](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)にも、カスタムURLスキームではなくUniversal Linksを推奨する記載があります。
 
 > While custom URL schemes are an acceptable form of deep linking, universal links are strongly recommended.
-
-そのため、このアプリではカスタムURLスキームを使用しません。
 :::
-
-## 関連する決定事項
-
-- [ディープリンクの実現方式](../../decisions/adr-018-deep-link.mdx)
-- [ディープリンク受信時の画面遷移](../../decisions/adr-019-deep-link-navigation.mdx)

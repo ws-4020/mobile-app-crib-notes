@@ -33,6 +33,15 @@ module.exports = {
         'reference/notification/client',
       ],
     },
+    {
+      type: 'category',
+      label: 'ディープリンク',
+      items: [
+        'reference/deep-link/overview',
+        'reference/deep-link/universal-links',
+        'reference/deep-link/android-app-links',
+      ],
+    },
   ],
   distribution: [
     {
@@ -386,9 +395,9 @@ module.exports = {
           label: 'ディープリンク',
           items: [
             'react-native/santoku/application-architecture/deep-link/overview',
+            'react-native/santoku/application-architecture/deep-link/universal-links',
+            'react-native/santoku/application-architecture/deep-link/android-app-links',
             'react-native/santoku/application-architecture/deep-link/process-deep-link',
-            'react-native/santoku/application-architecture/deep-link/create-deep-link',
-            'react-native/santoku/application-architecture/deep-link/react-native-firebase',
           ],
         },
         {
@@ -696,6 +705,15 @@ module.exports = {
         'react-native/santoku/decisions/adr-016-forced-app-updates',
         'react-native/santoku/decisions/adr-017-map-view-library',
         'react-native/santoku/decisions/adr-018-deep-link',
+        {
+          type: 'category',
+          label: 'ディープリンク受信時の画面遷移',
+          items: [
+            'react-native/santoku/decisions/adr-019-deep-link-navigation',
+            'react-native/santoku/decisions/linking-feasibility',
+            'react-native/santoku/decisions/non-linking-feasibility',
+          ],
+        },
       ],
     },
   ],
