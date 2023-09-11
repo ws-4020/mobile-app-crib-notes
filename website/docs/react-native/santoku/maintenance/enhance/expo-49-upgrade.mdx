@@ -105,7 +105,7 @@ Appleシリコン上でネイティブ実行の詳細は、以下のリンク先
 
 `Bundle React Native code and images`ビルドフェーズの`@react-native-community/cli`バンドルコマンドが置き換わりました。
 これにより、カスタムエントリポイントのサポートを追加できるようになりました。
-package.jsonの`main`を変更して、任意のソースファイルを指すようにできます。
+`package.json`の`main`を変更して、任意のソースファイルを指すようにできます。
 Expo Routerを使用していない場合は、新しいエントリファイルで[registerRootComponent](https://docs.expo.dev/versions/latest/sdk/register-root-component/)を使用する必要があります。
 
 #### Expo CLIのMetroの環境変数のサポート
@@ -124,7 +124,7 @@ SDK 49では、`EXPO_PUBLIC_`プレフィックスを付けて[`.env`や`.env.lo
 
 環境によっては、Expoが推奨するバージョンとは異なるパッケージのバージョンを使用したい場合があります。
 
-package.jsonの`expo.install.exclude`のキーがサポートされるようになり、`expo start`などで行われる検証から除外するパッケージを指定できるようになります。
+`package.json`の`expo.install.exclude`のキーがサポートされるようになり、`expo start`などで行われる検証から除外するパッケージを指定できるようになります。
 
 詳細は、以下のリンク先を参照してください。
 
@@ -253,7 +253,7 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
 1. [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.71.8&to=0.72.3)を参照して、React Nativeの更新を確認
    - このアプリで必要な対応は、[`expo-template-bare-minimum`の更新](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-bare-minimum)で対応されていました
 1. [手動管理しているライセンスの更新](#手動管理しているライセンスの更新)
-   - [managed-license.jsの更新](#managed-licensejsの更新)
+   - [`managed-license.js`の更新](#managed-licensejsの更新)
    - [新規ライセンスに対応](#新規ライセンスに対応)
 
 アップグレードを実施したPull Requestは[ws-4020/mobile-app-crib-notes#1221](https://github.com/ws-4020/mobile-app-crib-notes/pull/1221)です。
@@ -938,7 +938,7 @@ Android, Xcode関連ファイルは `android/`, `ios/` の `.gitignore` に記�
 
 このアプリでは、使用しているライブラリのライセンス一覧を出力するスクリプトを用意しています。詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.07/example-app/SantokuApp/.script/README.md)を参照してください。
 
-#### managed-license.jsの更新
+#### `managed-license.js`の更新
 
 ライセンス情報が不足しており補完したい、あるいは、開発時のみ使用するため除外したいライブラリとバージョンを[managed-license.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.07/example-app/SantokuApp/.script/managed-license.js)で管理しています。
 
