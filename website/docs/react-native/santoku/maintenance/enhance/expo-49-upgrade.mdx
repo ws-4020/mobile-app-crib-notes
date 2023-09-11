@@ -143,12 +143,13 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
 
 ## このアプリで実施したアップグレードの手順
 
-このアプリでは、以下の作業を上から順に実施してExpo SDK 49にアップグレードしました。
+このアプリでは、[Expo SDK 48 から 49 にアップグレードする方法](https://blog.expo.dev/expo-sdk-49-c6d398cdf740#a25b)を参考に、以下の作業を上から順に実施してExpo SDK 49にアップグレードしました。
 
 - `npm install expo@^49.0.0`を実行して、Expo SDKをアップグレード
 - `npx expo install --fix`を実行して、Expoが管理するライブラリのアップグレード
 - [既存のパッチファイルの更新](#既存のパッチファイルの更新)
 - [`jest-expo`のアップグレード](#jest-expoのアップグレード)
+- [`npx expo-doctor@latest`を実行してプロジェクトの依存関係に問題がないか確認](#npx-expo-doctorlatestを実行してプロジェクトの依存関係に問題がないか確認)
 - [tscチェック](#tscチェック)
   - [DimensionValueの厳密化](#dimensionvalueの厳密化)
   - [WebView.onScroll](#webviewonscroll)
@@ -208,6 +209,57 @@ react-nativeに適用していたパッチは、以下のPRで修正されたた
 `jest-expo`だけは`npx expo install --fix`でバージョンが上がらなかったので、手動で`^49.0.0`に変更しました。
 
 参考： [Expo SDK 48アップグレード #jest-expoのアップグレード](./expo-48-upgrade.mdx#jest-expoのアップグレード)
+
+### `npx expo-doctor@latest`を実行してプロジェクトの依存関係に問題がないか確認
+
+以下の実行結果のように`@expo/config-plugins`バージョンの問題が検知されました。
+
+```text title="npx expo-doctor@latestの実行結果"
+✔ Check Expo config for common issues
+✖ Check package.json for common issues
+✔ Check dependencies for packages that should not be installed directly
+✔ Check npm/ yarn versions
+✔ Check for common project setup issues
+✔ Check Expo config (app.json/ app.config.js) schema
+✔ Check for legacy global CLI installed locally
+✔ Check that packages match versions required by installed Expo SDK
+✔ Check that native modules do not use incompatible support packages
+✖ Check that native modules use compatible support package versions for installed Expo SDK
+
+Detailed check results:
+
+Expected package @expo/config-plugins@~7.2.2
+Found invalid:
+  @expo/config-plugins@5.0.4
+  @expo/config-plugins@5.0.4
+  (for more info, run: npm why @expo/config-plugins)
+Advice: Upgrade dependencies that are using the invalid package versions.
+
+The following scripts in package.json conflict with the contents of node_modules/.bin: orval.
+
+One or more checks failed, indicating possible issues with the project
+```
+
+しかし、前回（Expo48への更新時）と同様・`@react-native-firebase`の更新が必要であるため保留としました。
+
+```text title="@expo/config-pluginsのバージョン"
+$ npm ls @expo/config-plugins
+santoku-app@1.0.0 /path/to/mobile-app-crib-notes/example-app/SantokuApp
+├── @expo/config-plugins@7.2.5
+├─┬ @react-native-firebase/app@16.4.6
+│ └── @expo/config-plugins@5.0.4
+├─┬ @react-native-firebase/crashlytics@16.4.6
+│ └── @expo/config-plugins@5.0.4
+├─┬ expo-splash-screen@0.20.5
+│ └─┬ @expo/prebuild-config@6.2.6
+│   └── @expo/config-plugins@7.2.5 deduped
+└─┬ expo@49.0.8
+  ├─┬ @expo/cli@0.10.11
+  │ └── @expo/config-plugins@7.2.5 deduped
+  ├── @expo/config-plugins@7.2.5 deduped
+  └─┬ @expo/config@8.1.2
+    └── @expo/config-plugins@7.2.5 deduped
+```
 
 ### tscチェック
 
