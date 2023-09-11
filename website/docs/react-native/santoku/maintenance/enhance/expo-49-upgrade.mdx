@@ -143,46 +143,46 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
 
 ## このアプリで実施したアップグレードの手順
 
-このアプリでは、[Expo SDK 48 から 49 にアップグレードする方法](https://blog.expo.dev/expo-sdk-49-c6d398cdf740#a25b)を参考に、以下の作業を上から順に実施してExpo SDK 49にアップグレードしました。
+このアプリでは、[Expo SDK 48 から 49 にアップグレードする方法](https://blog.expo.dev/expo-sdk-49-c6d398cdf740#a25b)を参考に、以下の作業を実施してExpo SDK 49にアップグレードしました。
 
-- `npm install expo@^49.0.0`を実行して、Expo SDKをアップグレード
-- `npx expo install --fix`を実行して、Expoが管理するライブラリのアップグレード
-- [既存のパッチファイルの更新](#既存のパッチファイルの更新)
-- [`jest-expo`のアップグレード](#jest-expoのアップグレード)
-- [`npx expo-doctor@latest`を実行してプロジェクトの依存関係に問題がないか確認](#npx-expo-doctorlatestを実行してプロジェクトの依存関係に問題がないか確認)
-- [tscチェック](#tscチェック)
-  - [DimensionValueの厳密化](#dimensionvalueの厳密化)
-  - [WebView.onScroll](#webviewonscroll)
-  - [FunctionComponent](#functioncomponent)
-- [test修正](#test修正)
-  - [`react-native-reanimated` v3対応](#react-native-reanimated-v3対応)
-  - [`react-native`のDimensionsのmock失敗の対応](#react-nativeのdimensionsのmock失敗の対応)
-  - [`jest.advanceTimersByTime`を`act`でwrap](#jestadvancetimersbytimeをactでwrap)
-  - [`jest-mock`での`expo-constants`のdeprecated warn対応](#jest-mockでのexpo-constantsのdeprecated-warn対応)
-  - [アニメーション中のAnimatedStyleの僅かな変化に対応](#アニメーション中のanimatedstyleの僅かな変化に対応)
-  - [slideOutDurationテストの時間指定が厳密すぎるとテストが落ちる問題修正](#slideoutdurationテストの時間指定が厳密すぎるとテストが落ちる問題修正)
-  - [keyExtractorの呼び出しが増えて落ちるようになったテスト修正](#keyextractorの呼び出しが増えて落ちるようになったテスト修正)
-  - snapshot更新
-- [warn対応](#warn対応)
-  - [TypeScriptバージョンに対応しているtypescript-eslintに更新](#typescriptバージョンに対応しているtypescript-eslintに更新)
-  - [deprecated対応（JSX.Element → React.JSX.Element）](#deprecated対応jsxelement--reactjsxelement)
-  - [initialScrollIndexの範囲外警告に対応](#initialscrollindexの範囲外警告に対応)
-- `npm run prebuild`を実行してネイティブプロジェクトの再生成
-- [buildエラー修正](#buildエラー修正)
-  - [`app.notifee:core`を見つけられない問題対応](#appnotifeecoreを見つけられない問題対応)
-- renovate除外設定更新
-  - 使用しなくなった`androidx.swiperefreshlayout:swiperefreshlayout`を削除
-- [不要になったConfig Plugins`withAndroidRemoveUsesClearTextTrafficForRelease`を削除](#不要になったconfig-pluginswithandroidremoveusescleartexttrafficforreleaseを削除)
-- [Expoの更新履歴の確認と対応](#expoの更新履歴の確認と対応)
-- [React Nativeの更新履歴の確認と対応](#react-nativeの更新履歴の確認と対応)
-- [expo-template-blank-typescriptの更新履歴の確認と対応](#expo-template-blank-typescriptの更新履歴の確認と対応)
-- [expo-template-bare-minimumの更新履歴の確認と対応](#expo-template-bare-minimumの更新履歴の確認と対応)
-  - [`.gitignore`の更新](#gitignoreの更新)
-- [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.71.8&to=0.72.3)を参照して、React Nativeの更新を確認
-  - このアプリで必要な対応は、[expo-template-bare-minimumの更新](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-bare-minimum)で対応されていました
-- [手動管理しているライセンスの更新](#手動管理しているライセンスの更新)
-  - [managed-license.jsの更新](#managed-licensejsの更新)
-  - [新規ライセンスに対応](#新規ライセンスに対応)
+1. `npm install expo@^49.0.0`を実行して、Expo SDKをアップグレード
+1. `npx expo install --fix`を実行して、Expoが管理するライブラリのアップグレード
+1. [既存のパッチファイルの更新](#既存のパッチファイルの更新)
+1. [`jest-expo`のアップグレード](#jest-expoのアップグレード)
+1. [`npx expo-doctor@latest`を実行してプロジェクトの依存関係に問題がないか確認](#npx-expo-doctorlatestを実行してプロジェクトの依存関係に問題がないか確認)
+1. [tscチェック](#tscチェック)
+   - [DimensionValueの厳密化](#dimensionvalueの厳密化)
+   - [WebView.onScroll](#webviewonscroll)
+   - [FunctionComponent](#functioncomponent)
+1. [test修正](#test修正)
+   - [`react-native-reanimated` v3対応](#react-native-reanimated-v3対応)
+   - [`react-native`のDimensionsのmock失敗の対応](#react-nativeのdimensionsのmock失敗の対応)
+   - [`jest.advanceTimersByTime`を`act`でwrap](#jestadvancetimersbytimeをactでwrap)
+   - [`jest-mock`での`expo-constants`のdeprecated warn対応](#jest-mockでのexpo-constantsのdeprecated-warn対応)
+   - [アニメーション中のAnimatedStyleの僅かな変化に対応](#アニメーション中のanimatedstyleの僅かな変化に対応)
+   - [slideOutDurationテストの時間指定が厳密すぎるとテストが落ちる問題修正](#slideoutdurationテストの時間指定が厳密すぎるとテストが落ちる問題修正)
+   - [keyExtractorの呼び出しが増えて落ちるようになったテスト修正](#keyextractorの呼び出しが増えて落ちるようになったテスト修正)
+   - snapshot更新
+1. [warn対応](#warn対応)
+   - [TypeScriptバージョンに対応しているtypescript-eslintに更新](#typescriptバージョンに対応しているtypescript-eslintに更新)
+   - [deprecated対応（JSX.Element → React.JSX.Element）](#deprecated対応jsxelement--reactjsxelement)
+   - [initialScrollIndexの範囲外警告に対応](#initialscrollindexの範囲外警告に対応)
+1. `npm run prebuild`を実行してネイティブプロジェクトの再生成
+1. [buildエラー修正](#buildエラー修正)
+   - [`app.notifee:core`を見つけられない問題対応](#appnotifeecoreを見つけられない問題対応)
+1. renovate除外設定更新
+   - 使用しなくなった`androidx.swiperefreshlayout:swiperefreshlayout`を削除
+1. [不要になったConfig Plugins`withAndroidRemoveUsesClearTextTrafficForRelease`を削除](#不要になったconfig-pluginswithandroidremoveusescleartexttrafficforreleaseを削除)
+1. [Expoの更新履歴の確認と対応](#expoの更新履歴の確認と対応)
+1. [React Nativeの更新履歴の確認と対応](#react-nativeの更新履歴の確認と対応)
+1. [expo-template-blank-typescriptの更新履歴の確認と対応](#expo-template-blank-typescriptの更新履歴の確認と対応)
+1. [expo-template-bare-minimumの更新履歴の確認と対応](#expo-template-bare-minimumの更新履歴の確認と対応)
+   - [`.gitignore`の更新](#gitignoreの更新)
+1. [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.71.8&to=0.72.3)を参照して、React Nativeの更新を確認
+   - このアプリで必要な対応は、[expo-template-bare-minimumの更新](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-bare-minimum)で対応されていました
+1. [手動管理しているライセンスの更新](#手動管理しているライセンスの更新)
+   - [managed-license.jsの更新](#managed-licensejsの更新)
+   - [新規ライセンスに対応](#新規ライセンスに対応)
 
 アップグレードを実施したPull Requestは[ws-4020/mobile-app-crib-notes#1221](https://github.com/ws-4020/mobile-app-crib-notes/pull/1221)です。
 
