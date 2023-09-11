@@ -29,7 +29,7 @@ Reactのバージョンは変更されておらず、依然として`v18.2.0`で
 
 #### ネットワーク デバッグが JS デバッガーで利用できるようになりました
 
-このデバッガーには、アプリがexpo-dev-clientまたはExpo Goで実行されるときのネットワーク リクエストのサポートも含まれるようになりました。
+このデバッガーには、アプリが`expo-dev-client`またはExpo Goで実行されるときのネットワーク リクエストのサポートも含まれるようになりました。
 
 #### React devtools が Expo CLI に組み込まれるようになりました
 
@@ -96,7 +96,7 @@ Appleシリコン上でネイティブ実行の詳細は、以下のリンク先
 
 `npx expo start --dev-client`の`--dev-client`フラグは必要なくなりました。
 
-expo-dev-clientパッケージがプロジェクトにインストールされている場合、デフォルトで開発ビルドをターゲットにします。
+`expo-dev-client`パッケージがプロジェクトにインストールされている場合、デフォルトで開発ビルドをターゲットにします。
 
 キーボードショートカット`s`（switch）を使用して、開発ビルドとExpo Goターゲットを切り替えることができます。
 これにより、QRコードが指すURLと、キーボードショートカット`a`（Android）と`i`（iOS）で起動するURLが変更されます。
@@ -143,10 +143,10 @@ scheme: 'myapp',
 
 #### New Architecture/Fabricのサポート
 
-expo-dev-clientでFabricが実験的にサポートされました。
+`expo-dev-client`でFabricが実験的にサポートされました。
 `npx create-expo-app@latest -e with-new-arch` で試すことができます。
 
-新しいアーキテクチャをまだサポートしていない唯一のモジュールはexpo-updatesです。
+新しいアーキテクチャをまだサポートしていない唯一のモジュールは`expo-updates`です。
 
 #### Android Expo Modules
 
@@ -160,7 +160,7 @@ Gradle 8を使うようになりました。
 
 すべてのプロジェクトでデフォルトのポート19000ではなく8081を使用するようになりました。
 
-#### JSCのリモートデバッグ無効化(Expo Goおよびexpo-dev-client)
+#### JSCのリモートデバッグ無効化(Expo Goおよび`expo-dev-client`)
 
 JSCリモートデバッグは、Hermesによるデバッグに比べて特にうまく機能することはなく、時間の経過とともに信頼性が低くなってしまいました。
 
@@ -177,7 +177,7 @@ JSCリモートデバッグは、Hermesによるデバッグに比べて特に�
 
 - [fyi/why-constants-expoconfig.md at main · expo/fyi](https://github.com/expo/fyi/blob/main/why-constants-expoconfig.md)
 
-#### expo-auth-session
+#### `expo-auth-session`
 
 [expo-auth-session](https://docs.expo.dev/versions/v49.0.0/sdk/auth-session/)の`useProxy`と`AuthSession.startAsync`が削除されました。
 
@@ -192,7 +192,7 @@ JSCリモートデバッグは、Hermesによるデバッグに比べて特に�
 
 セキュリティで保護されていないエンドポイントへのネットワークリクエストが存在する場合は、[expo-build-properties](https://docs.expo.dev/versions/v49.0.0/sdk/build-properties/)を使って`true`にする必要があります。
 
-#### react-native-reanimated `v3`
+#### `react-native-reanimated` `v3`
 
 Reanimated API `v1`のサポートが削除されました。
 `v2`とは互換性があります。
@@ -247,11 +247,11 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
 1. [不要になったConfig Plugins`withAndroidRemoveUsesClearTextTrafficForRelease`を削除](#不要になったconfig-pluginswithandroidremoveusescleartexttrafficforreleaseを削除)
 1. [Expoの更新履歴の確認と対応](#expoの更新履歴の確認と対応)
 1. [React Nativeの更新履歴の確認と対応](#react-nativeの更新履歴の確認と対応)
-1. [expo-template-blank-typescriptの更新履歴の確認と対応](#expo-template-blank-typescriptの更新履歴の確認と対応)
-1. [expo-template-bare-minimumの更新履歴の確認と対応](#expo-template-bare-minimumの更新履歴の確認と対応)
+1. [`expo-template-blank-typescript`の更新履歴の確認と対応](#expo-template-blank-typescriptの更新履歴の確認と対応)
+1. [`expo-template-bare-minimum`の更新履歴の確認と対応](#expo-template-bare-minimumの更新履歴の確認と対応)
    - [`.gitignore`の更新](#gitignoreの更新)
 1. [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.71.8&to=0.72.3)を参照して、React Nativeの更新を確認
-   - このアプリで必要な対応は、[expo-template-bare-minimumの更新](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-bare-minimum)で対応されていました
+   - このアプリで必要な対応は、[`expo-template-bare-minimum`の更新](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-bare-minimum)で対応されていました
 1. [手動管理しているライセンスの更新](#手動管理しているライセンスの更新)
    - [managed-license.jsの更新](#managed-licensejsの更新)
    - [新規ライセンスに対応](#新規ライセンスに対応)
@@ -263,12 +263,12 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
 このアプリでは、[patch-package](https://github.com/ds300/patch-package)を使用して、以下のライブラリにパッチファイルを適用していました。
 パッチ内容の詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.07/example-app/SantokuApp/patches/README.md)を参照してください。
 
-- react-native
-- @expo/config-plugins
-- expo-splash-screen
-- react-native-elements
+- `react-native`
+- `@expo/config-plugins`
+- `expo-splash-screen`
+- `react-native-elements`
 
-react-nativeに適用していたパッチは、以下のPRで修正されたためパッチフィルを削除しました。
+`react-native`に適用していたパッチは、以下のPRで修正されたためパッチフィルを削除しました。
 
 - [fix: fix virtualizedList scrollToEnd for 0 items by Andarius · Pull Request #36067 · facebook/react-native](https://github.com/facebook/react-native/pull/36067)
 
@@ -757,15 +757,15 @@ React Nativeの[CHANGELOG](https://github.com/facebook/react-native/blob/main/CH
 
 ここまでの対応以外に追加で必要なものはありませんでした。
 
-### expo-template-blank-typescriptの更新履歴の確認と対応
+### `expo-template-blank-typescript`の更新履歴の確認と対応
 
-[expo-template-blank-typescriptの更新履歴](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-blank-typescript)を確認しました。
+[`expo-template-blank-typescript`の更新履歴](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-blank-typescript)を確認しました。
 
 `npm install expo@^49.0.0`、`npx expo install --fix`で更新される依存ライブラリのアップグレードが主な変更でした。そのため、このアプリで特別な対応は必要ありませんでした。
 
-### expo-template-bare-minimumの更新履歴の確認と対応
+### `expo-template-bare-minimum`の更新履歴の確認と対応
 
-[expo-template-bare-minimumの更新履歴](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-bare-minimum)を確認しました。
+[`expo-template-bare-minimum`の更新履歴](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-bare-minimum)を確認しました。
 
 このアプリでは[Config Pluginsに対応](./config-plugins.mdx)しているので、`expo-template-bare-minimum`の更新に伴う個別の対応は基本的に必要ありません。
 ただし、以下の場合は個別に対応する必要があります。
