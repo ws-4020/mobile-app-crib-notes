@@ -9,7 +9,7 @@ title: Expo SDK 49アップグレード
 - [Expo SDK 49. Today we’re announcing the release of… | by Brent Vatne | Exposition](https://blog.expo.dev/expo-sdk-49-c6d398cdf740)
 - [React Native 0.72 - Symlink Support, Better Errors, and more · React Native](https://reactnative.dev/blog/2023/06/21/0.72-metro-package-exports-symlinks)
 
-なお、このアプリでは使用していないもの（EAS BuildやEAS Updateなど）に関する内容は記載しません。
+なお、使用される可能性の低いEASとReact Native Webに関する内容は記載しません。
 :::
 
 ## Expo SDK 49の主な変更
@@ -22,6 +22,8 @@ title: Expo SDK 49アップグレード
 - [React Native CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0724)
 
 Reactのバージョンは変更されておらず、依然として18.2.0です。
+
+非推奨となっていた`ProgressBarAndroid`コンポーネントと`ProgressViewIOS`コンポーネントは、React Native 0.72.0で削除されたことに注意してください。
 
 ### デバッグ機能の改善
 
@@ -52,10 +54,23 @@ TypeScript `^5`の詳細は、以下のリンク先を参照してください�
 
 Expoが管理しているライブラリの内、メジャーバージョンアップなど大きなリリースがあったものを記載します。
 
-- [Expo Router v2.0](https://expo.github.io/router/docs/)
+- [Expo Router v2.0](https://docs.expo.dev/routing/introduction/)
   - ファイルシステムベースでルーティング可能なナビゲーションライブラリ
+  - 参考：[Announcing Expo Router v2. Expo Router v1 has been an incredible… | by Evan Bacon | Exposition](https://blog.expo.dev/introducing-expo-router-v2-3850fd5c3ca1)
 - [sentry-expo v7.0](https://docs.expo.dev/guides/using-sentry/)
   - クラッシュ レポート プラットフォームSentryと統合するライブラリ
+  - 参考：[Migration for React Native | Sentry Documentation](https://docs.sentry.io/platforms/react-native/migration/#from-4x-to-5x)
+
+#### Expo SDK モジュールのさまざまな改善
+
+例えば、以下の改善があります。
+
+- `expo-screen-orientation`は、長年にわたる多くの問題に対処するため大部分が再構築されました
+- `expo-blur`がAndroidをサポートするようになりました
+  - :warning: これは、特にローエンド デバイスでパフォーマンスに大きな影響を与える可能性があります
+- `expo-clipboard`は`UIPasteControl`ボタンをエクスポートするようになりました
+
+改善点の完全なリストは、[expo/CHANGELOG.md](https://github.com/expo/expo/blob/main/CHANGELOG.md#4900--2023-06-27)を参照してください。
 
 #### Expo Module APIの改善
 
@@ -67,17 +82,53 @@ Expoが管理しているライブラリの内、メジャーバージョンア�
 
 詳細は、[JavaScript values](https://docs.expo.dev/modules/module-api/#javascript-values)を参照してください。
 
+#### Expo GoのAppleシリコン上でのネイティブ実行
+
+iOSシミュレータのExpo GoがAppleシリコン上でネイティブ実行できるようになりました。
+TestFlightビルドを使用して、シミュレーターを使用せずにAppleシリコンMac上でExpo Goを直接実行もできます。
+ただし、UIの問題がいくつかあり、修正中です。
+
+Appleシリコン上でネイティブ実行の詳細は、以下のリンク先を参照してください。
+
+- [iPhone and iPad apps on Apple silicon Macs - Apple Developer](https://developer.apple.com/macos/iphone-and-ipad-apps/)
+
 #### 開発ビルドのフラグ(`--dev-client`)の削除
 
 `npx expo start --dev-client`の`--dev-client`フラグは必要なくなりました。
 
 expo-dev-clientパッケージがプロジェクトにインストールされている場合、デフォルトで開発ビルドをターゲットにします。
 
+キーボードショートカット`s`（switch）を使用して、開発ビルドとExpo Goターゲットを切り替えることができます。
+これにより、QRコードが指すURLと、キーボードショートカット`a`（Android）と`i`（iOS）で起動するURLが変更されます。
+
+#### `expo export:embed`
+
+`Bundle React Native code and images`ビルドフェーズの`@react-native-community/cli`バンドルコマンドが置き換わりました。
+これにより、カスタムエントリポイントのサポートを追加できるようになりました。
+package.jsonの`main`を変更して、任意のソースファイルを指すようにできます。
+Expo Routerを使用していない場合は、新しいエントリファイルで[registerRootComponent](https://docs.expo.dev/versions/latest/sdk/register-root-component/)を使用する必要があります。
+
+#### Expo CLIのMetroの環境変数のサポート
+
+React Nativeエコシステムの既存のアプローチには、変数を更新するためにBabelキャッシュをクリアする必要があるなどの問題がありました。
+
+新しいアプローチは、プロセスをExpo Metro構成に統合し、JavaScriptエコシステムで一般的な規則に従って環境変数名の接頭辞に`PUBLIC`を含めることで、これらの問題を解決します。
+
+SDK 49では、`EXPO_PUBLIC_`プレフィックスを付けて[`.env`や`.env.local`などのファイル](https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use)で変数を定義でき、それらが使用される場合はアプリのJavaScriptに組み込まれます。
+
+詳細は、以下のリンク先を参照してください。
+
+- [metro.config.js - Expo Documentation](https://docs.expo.dev/versions/v49.0.0/config/metro/#client-environment-variables)
+
 #### パッケージのバージョン検証の選択的オプトアウト
 
 環境によっては、Expoが推奨するバージョンとは異なるパッケージのバージョンを使用したい場合があります。
 
 package.jsonの`expo.install.exclude`のキーがサポートされるようになり、`expo start`などで行われる検証から除外するパッケージを指定できるようになります。
+
+詳細は、以下のリンク先を参照してください。
+
+- [Expo CLI - Expo Documentation](https://docs.expo.dev/more/expo-cli/#configuring-dependency-validation)
 
 #### scheme (app config)
 
@@ -109,13 +160,28 @@ Gradle 8を使うようになりました。
 
 すべてのプロジェクトでデフォルトのポート19000ではなく8081を使用するようになりました。
 
+#### JSCのリモートデバッグ無効化(Expo Goおよびexpo-dev-client)
+
+JSCリモートデバッグは、Hermesによるデバッグに比べて特にうまく機能することはなく、時間の経過とともに信頼性が低くなってしまいました。
+
+詳細については、以下のReact Nativeへのプル リクエストを参照してください。
+これは次のReact Nativeリリースに含まれる予定です。
+
+- [Remove remote debugging from dev menu by gabrieldonadel · Pull Request #36754 · facebook/react-native](https://github.com/facebook/react-native/pull/36754#pullrequestreview-1400288340)
+
 #### Expo Constants
 
 `Constants.manifest`が非推奨です。代わりに、`Constants.expoConfig`を使用してください。
 
+詳細は、以下のリンク先を参照してください。
+
+- [fyi/why-constants-expoconfig.md at main · expo/fyi](https://github.com/expo/fyi/blob/main/why-constants-expoconfig.md)
+
 #### expo-auth-session
 
 [expo-auth-session](https://docs.expo.dev/versions/v49.0.0/sdk/auth-session/)の`useProxy`と`AuthSession.startAsync`が削除されました。
+
+認証プロバイダーがカスタムschemeにリダイレクトしない問題を回避するために認証プロキシを使用していた場合は、[Expo Goから開発ビルドに切り替え](https://docs.expo.dev/workflow/customizing/)、ネイティブSDKの使用が推奨されています。
 
 #### android:usesCleartextTraffic
 
@@ -124,7 +190,7 @@ Gradle 8を使うようになりました。
 デバッグ ビルドでは明示的に`true`が設定されますが、他のビルドタイプ（例：リリースビルド）では指定されていません。
 つまり、API 27以下ではデフォルトで`true`、API 28以降ではデフォルトで`false`になります。
 
-セキュリティで保護されていないエンドポイントへのネットワークリクエストが存在する場合は、expo-build-propertiesを使って`true`にする必要があります。
+セキュリティで保護されていないエンドポイントへのネットワークリクエストが存在する場合は、[expo-build-properties](https://docs.expo.dev/versions/v49.0.0/sdk/build-properties/)を使って`true`にする必要があります。
 
 #### react-native-reanimated v3
 
@@ -133,7 +199,13 @@ v2とは互換性があります。
 
 詳細は、以下のリンク先を参照してください。
 
-[Announcing Reanimated 3. Reanimated 3 release candidate is out… | by Krzysztof Magiera | Software Mansion](https://blog.swmansion.com/announcing-reanimated-3-16167428c5f7)
+- [Announcing Reanimated 3. Reanimated 3 release candidate is out… | by Krzysztof Magiera | Software Mansion](https://blog.swmansion.com/announcing-reanimated-3-16167428c5f7)
+
+#### Expo Goでの`expo-face-detector`のサポート削除
+
+この変更は、[Expo GoのAppleシリコン上でのネイティブ実行](#expo-goのappleシリコン上でのネイティブ実行)のために必要でした。
+
+これまでと同様に、Expo Goの外部でライブラリを引き続き使用できます。
 
 ### Expo SDK 46のサポート終了
 
