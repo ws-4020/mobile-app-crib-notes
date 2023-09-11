@@ -14,16 +14,16 @@ title: Expo SDK 49アップグレード
 
 ## Expo SDK 49の主な変更
 
-### React Native 0.72.4
+### React Native `v0.72.4`
 
 詳細は、以下のリンク先を参照してください。
 
 - [React Native 0.72 - Symlink Support, Better Errors, and more · React Native](https://reactnative.dev/blog/2023/06/21/0.72-metro-package-exports-symlinks)
 - [React Native CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0724)
 
-Reactのバージョンは変更されておらず、依然として18.2.0です。
+Reactのバージョンは変更されておらず、依然として`v18.2.0`です。
 
-非推奨となっていた`ProgressBarAndroid`コンポーネントと`ProgressViewIOS`コンポーネントは、React Native 0.72.0で削除されたことに注意してください。
+非推奨となっていた`ProgressBarAndroid`コンポーネントと`ProgressViewIOS`コンポーネントは、React Native `v0.72.0`で削除されたことに注意してください。
 
 ### デバッグ機能の改善
 
@@ -192,10 +192,10 @@ JSCリモートデバッグは、Hermesによるデバッグに比べて特に�
 
 セキュリティで保護されていないエンドポイントへのネットワークリクエストが存在する場合は、[expo-build-properties](https://docs.expo.dev/versions/v49.0.0/sdk/build-properties/)を使って`true`にする必要があります。
 
-#### react-native-reanimated v3
+#### react-native-reanimated `v3`
 
-Reanimated API v1のサポートが削除されました。
-v2とは互換性があります。
+Reanimated API `v1`のサポートが削除されました。
+`v2`とは互換性があります。
 
 詳細は、以下のリンク先を参照してください。
 
@@ -227,7 +227,7 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
    - [WebView.onScroll](#webviewonscroll)
    - [FunctionComponent](#functioncomponent)
 1. [test修正](#test修正)
-   - [`react-native-reanimated` v3対応](#react-native-reanimated-v3対応)
+   - [`react-native-reanimated` `v3`対応](#react-native-reanimated-v3対応)
    - [`react-native`のDimensionsのmock失敗の対応](#react-nativeのdimensionsのmock失敗の対応)
    - [`jest.advanceTimersByTime`を`act`でwrap](#jestadvancetimersbytimeをactでwrap)
    - [`jest-mock`での`expo-constants`のdeprecated warn対応](#jest-mockでのexpo-constantsのdeprecated-warn対応)
@@ -450,9 +450,9 @@ export type ListRenderItem<ItemT> = (
 
 ### test修正
 
-#### `react-native-reanimated` v3対応
+#### `react-native-reanimated` `v3`対応
 
-`react-native-reanimated` v3でディレクトリ構造が変わりました。
+`react-native-reanimated` `v3`でディレクトリ構造が変わりました。
 それに合わせてimportや型定義ファイルを変更しました。
 
 ```diff
@@ -688,7 +688,7 @@ npm update @typescript-eslint/eslint-plugin @typescript-eslint/parser
 
 #### initialScrollIndexの範囲外警告に対応
 
-`react-native` v0.72.0から`FlatList`（`VirtualizedList`）の`initialScrollIndex`に`-1`（負の値）を指定するとwarnログがでるようになりました。
+`react-native` `v0.72.0`から`FlatList`（`VirtualizedList`）の`initialScrollIndex`に`-1`（負の値）を指定するとwarnログがでるようになりました。
 
 > initialScrollIndex "-1" is not valid (list has 0 items)
 
