@@ -21,7 +21,28 @@ const handle = (navigation: NavigationContainerRef<RootStackParamList>, parsedUr
   if (!validationScheme.isValidSync({questionId})) {
     throw new ApplicationError(`Invalid questionId. parsedUrl=${JSON.stringify(parsedUrl)}`);
   }
-  navigation.dispatch(StackActions.push('AuthenticatedStackNav', {screen: 'QuestionDetail', params: {questionId}}));
+  /**
+   * CurrentRootがAuthenticatedStackNavの場合は、AuthenticatedStackNav配下のナビゲーションスタックにPushします。
+   * AuthenticatedStackNavからPushしてしまうと、例えば以下の順でディープリンクをタップした場合に、Home画面からQuestionDetail画面に戻る遷移できてしまいます。
+   *
+   * 1. Home画面に遷移するディープリンクをタップしてアプリをコールドスタート（AuthenticatedStackNavがルートスタックに追加される）
+   * 2. QuestionDetail画面に遷移するディープリンクをタップしてアプリをホットスタート（AuthenticatedStackNavがルートスタックに追加される）
+   * 3. Home画面に遷移するディープリンクをタップしてアプリをホットスタート（2で追加されたAuthenticatedStackNav内のスタックにHome画面が追加される）
+   *
+   * そのため、QuestionDetailのみをナビゲーションスタックにPushすることで、Home画面からQuestionDetail画面に戻る遷移を防ぎます。
+   *
+   * 1. Home画面に遷移するディープリンクをタップしてアプリをコールドスタート（AuthenticatedStackNavがルートスタックに追加される）
+   * 2. QuestionDetail画面に遷移するディープリンクをタップしてアプリをホットスタート（1で追加されたAuthenticatedStackNav内のスタックにQuestionDetail画面追加される）
+   * 3. Home画面に遷移するディープリンクをタップしてアプリをホットスタート（1で追加されたAuthenticatedStackNav内のHome画面まで戻る）
+   *
+   */
+  const rootState = navigation.getRootState();
+  const rootStateIndex = navigation.getRootState().index;
+  if (rootState.routes[rootStateIndex].name === 'AuthenticatedStackNav') {
+    navigation.dispatch(StackActions.push('QuestionDetail', {questionId}));
+  } else {
+    navigation.dispatch(StackActions.push('AuthenticatedStackNav', {screen: 'QuestionDetail', params: {questionId}}));
+  }
 };
 const mainTabNavInitialRouteName: keyof MainTabParamList = 'HomeStackNav';
 export const questionDetailDeepLink: DeepLink = {
