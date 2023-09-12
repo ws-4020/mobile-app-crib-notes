@@ -781,14 +781,10 @@ React Nativeの[CHANGELOG](https://github.com/facebook/react-native/blob/main/CH
 
 - [update template gitignores (#22650) · expo/expo@5636a05](https://github.com/expo/expo/commit/5636a057028afc308bc011bf4ae71589a456c534)
 
-このアプリで修正した`.gitignore`のdiffは以下になります。
+大きな変更は、重複の削除でした。
+つまり、Android, Xcode関連ファイルは `android/`, `ios/` の `.gitignore` に記載されているため削除されました。
 
 ```diff title=.gitignore
-@@ -1,43 +1,9 @@
--# OSX
--#
--.DS_Store
--
 -# Xcode
 -#
 -build/
@@ -817,64 +813,9 @@ React Nativeの[CHANGELOG](https://github.com/facebook/react-native/blob/main/CH
 -local.properties
 -*.iml
 -*.hprof
-+# Android
- *.keystore
- !debug.keystore
- 
--# node.js
--#
-+# dependencies
- node_modules/
--npm-debug.log
--yarn-error.log
- 
- # Bundle artifacts
- *.jsbundle
-@@ -46,13 +12,36 @@
- /.bundle/vendor
- /ios/Pods/
- 
--# Temporary files created by Metro to check the health of the file watcher
--.metro-health-check*
--
- # Expo
- .expo/
--web-build/
- dist/
-+web-build/
-+
-+# Native
-+*.orig.*
-+*.jks
-+*.p8
-+*.p12
-+*.key
-+*.mobileprovision
-+
-+# Metro
-+.metro-health-check*
-+
-+# debug
-+npm-debug.*
-+yarn-debug.*
-+yarn-error.*
-+
-+# macOS
-+.DS_Store
-+*.pem
-+
-+# local env files
-+.env*.local
-+
-+# typescript
-+*.tsbuildinfo
- 
- # Jest
- jest-junit.xml
 ```
 
-Android, Xcode関連ファイルは `android/`, `ios/` の `.gitignore` に記載されているため削除されました。
-ただし、prebuild時のファイルコピー処理に不具合があり、`prebuild/`フォルダの一部ファイルがignoreできなくなりました。
+ただし、このアプリでは、prebuild時のファイルコピー処理に不具合があり、`prebuild/`フォルダの一部ファイルがignoreできなくなりました。
 その対策として、一時的に`prebuild/.gitignore`を追加しています。
 
 ```diff title="prebuild/.gitignore"
