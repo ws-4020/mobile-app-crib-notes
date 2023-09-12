@@ -1,16 +1,9 @@
-# Android
-*.keystore
-!debug.keystore
 
 # dependencies
 node_modules/
 
-# Bundle artifacts
-*.jsbundle
-
-# Bundler / CocoaPods
+# Bundler
 /.bundle/vendor
-/ios/Pods/
 
 # Expo
 .expo/
