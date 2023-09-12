@@ -37,8 +37,7 @@ const handle = (navigation: NavigationContainerRef<RootStackParamList>, parsedUr
    *
    */
   const rootState = navigation.getRootState();
-  const rootStateIndex = navigation.getRootState().index;
-  if (rootState.routes[rootStateIndex].name === 'AuthenticatedStackNav') {
+  if (rootState.routes[rootState.index].name === 'AuthenticatedStackNav') {
     navigation.dispatch(StackActions.push('QuestionDetail', {questionId}));
   } else {
     navigation.dispatch(StackActions.push('AuthenticatedStackNav', {screen: 'QuestionDetail', params: {questionId}}));
