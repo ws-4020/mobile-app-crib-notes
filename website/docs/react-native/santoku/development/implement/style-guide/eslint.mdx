@@ -35,6 +35,11 @@ Visual Studio CodeでESLintを有効にする方法については、[Visual Stu
 
 このアプリでは、ESLintのルールを[.eslintrc.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/.eslintrc.js)に定義しています。
 
+基本的には、Expoが提供している[eslint-config-universe](https://github.com/expo/expo/tree/master/packages/eslint-config-universe)の設定をベースとしています。
+その他、[eslint-plugin-react-hooks](https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks)など、推奨ルールを提供しているプラグインの設定も取り込んでいます。
+
+ただし、一部のルールについては、推奨設定から変更しています。変更したルールについては、以降に記載するルール一覧の該当箇所に理由を記載しているので、そちらを参照してください。
+
 適用している全てのルールは以下のとおりです。
 
 :::note
