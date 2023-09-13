@@ -215,6 +215,14 @@ Reanimated API `v1`のサポートが削除されました。
 
 これまでと同様に、Expo Goの外部でライブラリを引き続き使用できます。
 
+#### iOS用アイコンの簡素化
+
+Xcode 14以降では自動的にサイズ変更される単一の`1024x1024`画像を使用してアプリアイコンを簡素化できます。
+そのため、Expoではprebuild時に`1024x1024`画像のみを生成するようになりました。
+
+- [Xcode 14 Release Notes | Apple Developer Documentation](https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes#Asset-Catalogs)
+- [feat(prebuild): Generate universal 1024x1024 iOS icon only. by EvanBacon · Pull Request #22833 · expo/expo](https://github.com/expo/expo/pull/22833)
+
 ### Expo SDK 46のサポート終了
 
 Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用している場合は、Expo SDK 47以降にアップグレードする必要があります。
