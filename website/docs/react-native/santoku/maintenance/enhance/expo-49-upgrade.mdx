@@ -35,15 +35,15 @@ Reactのバージョンは変更されておらず、依然として`v18.2.0`で
 
 ### デバッグ機能の改善
 
-#### ネットワーク デバッグが JS デバッガーで利用できるようになりました
+#### ネットワークデバッグ
 
-アプリが`expo-dev-client`またはExpo Goで実行されるときのネットワークリクエストをデバッガーで確認できるようになりました。
+アプリが`expo-dev-client`またはExpo Goで実行されるときのネットワークリクエストをJSデバッガーで確認できるようになりました。
 
-#### React devtools が Expo CLI に組み込まれるようになりました
+#### React devtoolsとExpo CLIの連携
 
-shift+mを押して「Start React devtools」を選択することで起動できます。
+`Shift`+`m`を押して「Start React devtools」を選択することで起動できるようになりました。
 
-#### Expo Tools 拡張機能を使用して VS Code でデバッグする
+#### VS Codeでのデバッグ
 
 [Expo Tools Extension](https://marketplace.visualstudio.com/items?itemName=expo.vscode-expo-tools)を使用して、VS CodeからアプリのJavaScriptコードを直接デバッグするための実験的なサポートが追加されました。
 
@@ -85,7 +85,7 @@ Expoが管理しているライブラリの内、メジャーバージョンア�
 
 #### Expo Module APIの改善
 
-ローカル モジュールを導入しました。
+ローカル モジュールが導入されました。
 これにより、ライブラリを作成したり、アプリのネイティブ プロジェクトを管理したりせずに、アプリ内でネイティブ コードを作成できるようになります。
 SDK 49のプロジェクトで以下のコマンドを実行することで試すことができます。
 
@@ -98,9 +98,8 @@ npx create-expo-module --local
 
 詳細は、[JavaScript values](https://docs.expo.dev/modules/module-api/#javascript-values)を参照してください。
 
-#### Expo GoのAppleシリコン上でのネイティブ実行
+#### (iOSシミュレータ)Expo GoのAppleシリコン上でのネイティブ実行サポート
 
-iOSシミュレータのExpo GoがAppleシリコン上でネイティブ実行できるようになりました。
 TestFlightビルドを使用して、シミュレーターを使用せずにAppleシリコンMac上でExpo Goを直接実行もできます。
 ただし、UIの問題がいくつかあり、修正中です。
 
@@ -112,7 +111,7 @@ Appleシリコン上でネイティブ実行の詳細は、以下のリンク先
 
 `npx expo start --dev-client`の`--dev-client`フラグは必要なくなりました。
 
-`expo-dev-client`パッケージがプロジェクトにインストールされている場合、デフォルトで開発ビルドをターゲットにします。
+`expo-dev-client`パッケージがプロジェクトにインストールされている場合、デフォルトで開発ビルドをターゲットになります。
 
 キーボードショートカット`s`（switch）を使用して、開発ビルドとExpo Goターゲットを切り替えることができます。
 これにより、QRコードが指すURLと、キーボードショートカット`a`（Android）と`i`（iOS）で起動するURLが変更されます。
@@ -128,7 +127,7 @@ Expo Routerを使用していない場合は、新しいエントリファイル
 
 React Nativeエコシステムの既存のアプローチには、変数を更新するためにBabelキャッシュをクリアする必要があるなどの問題がありました。
 
-新しいアプローチは、プロセスをExpo Metro構成に統合し、JavaScriptエコシステムで一般的な規則に従って環境変数名の接頭辞に`PUBLIC`を含めることで、これらの問題を解決します。
+新しいアプローチでは、プロセスをExpo Metro構成に統合し、JavaScriptエコシステムで一般的な規則に従って環境変数名の接頭辞に`PUBLIC`を含めて、これらの問題が解決されます。
 
 SDK 49では、`EXPO_PUBLIC_`プレフィックスを付けて[`.env`や`.env.local`などのファイル](https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use)で変数を定義でき、それらが使用される場合はアプリのJavaScriptに組み込まれます。
 
