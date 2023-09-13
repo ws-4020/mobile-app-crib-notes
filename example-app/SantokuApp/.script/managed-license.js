@@ -30,19 +30,19 @@ module.exports = function () {
         licenseUrl: 'https://github.com/ogt/valid-url/blob/v1.0.9/LICENSE',
       },
       '@react-native/assets-registry@0.72.0': { // https://github.com/facebook/react-native/blob/v0.72.0/packages/assets/package.json
-        licenseUrl: 'https://github.com/facebook/react-native/blob/v0.72.0/packages/react-native/LICENSE', // react-native package以外のLICENSEファイルが存在しないがMITなのは一緒なので流用する
+        licenseUrl: 'https://github.com/facebook/react-native/blob/v0.72.0/packages/react-native/LICENSE', // ライセンスファイルが同梱されていないため、同じMITライセンスのpackages/react-nativeのライセンスファイルを流用する
       },
       '@react-native/normalize-color@2.1.0': { // https://github.com/facebook/react-native/blob/v0.71.0/packages/normalize-color/package.json
         licenseUrl: 'https://github.com/facebook/react-native/blob/v0.71.0/LICENSE',
       },
       '@react-native/normalize-colors@0.72.0': { // https://github.com/facebook/react-native/blob/v0.72.0/packages/normalize-color/package.json
-        licenseUrl: 'https://github.com/facebook/react-native/blob/v0.72.0/packages/react-native/LICENSE', // react-native package以外のLICENSEファイルが存在しないがMITなのは一緒なので流用する
+        licenseUrl: 'https://github.com/facebook/react-native/blob/v0.72.0/packages/react-native/LICENSE', // ライセンスファイルが同梱されていないため、同じMITライセンスのpackages/react-nativeのライセンスファイルを流用する
       },
       '@react-native/js-polyfills@0.72.1': { // https://github.com/facebook/react-native/blob/v0.72.1/packages/polyfills/package.json
-        licenseUrl: 'https://github.com/facebook/react-native/blob/v0.72.1/packages/react-native/LICENSE', // react-native package以外のLICENSEファイルが存在しないがMITなのは一緒なので流用する
+        licenseUrl: 'https://github.com/facebook/react-native/blob/v0.72.1/packages/react-native/LICENSE', // ライセンスファイルが同梱されていないため、同じMITライセンスのpackages/react-nativeのライセンスファイルを流用する
       },
       '@react-native/virtualized-lists@0.72.8': { // https://github.com/facebook/react-native/blob/v0.72.4/packages/virtualized-lists/package.json
-        licenseUrl: 'https://github.com/facebook/react-native/blob/v0.72.4/packages/react-native/LICENSE', // react-native package以外のLICENSEファイルが存在しないがMITなのは一緒なので流用する
+        licenseUrl: 'https://github.com/facebook/react-native/blob/v0.72.4/packages/react-native/LICENSE', // ライセンスファイルが同梱されていないため、同じMITライセンスのpackages/react-nativeのライセンスファイルを流用する
       },
       'metro-babel-transformer@0.76.7': { // https://github.com/facebook/metro/blob/v0.76.7/packages/metro-babel-transformer/package.json
         licenseUrl: 'https://github.com/facebook/metro/blob/v0.76.7/LICENSE',
