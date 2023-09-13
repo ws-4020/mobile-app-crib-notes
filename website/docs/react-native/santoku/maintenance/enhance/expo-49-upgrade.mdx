@@ -380,19 +380,11 @@ style定義の型推論で`${number}%`ではなく`string`として認識され�
 +onScroll?: ComponentProps<typeof NativeWebViewComponent>['onScroll'];
 ```
 
-```ts
-export type WebViewScrollEvent = NativeSyntheticEvent<NativeScrollEvent>;
-```
+これは整理すると以下になります。
 
-```ts title="NativeWebViewComponent"
-onScroll?: DirectEventHandler<ScrollEvent>;
-```
-
-```ts
-export type DirectEventHandler<
-  T,
-  PaperName extends string | never = never,
-> = (event: NativeSyntheticEvent<T>) => void | Promise<void>;
+```diff
+-onScroll?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
++onScroll?: (event: NativeSyntheticEvent<ScrollEvent>) => void | Promise<void>;
 ```
 
 `onScroll`の型不一致エラーになったので、以下のように対応しました。
