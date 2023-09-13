@@ -66,11 +66,22 @@ Expoが管理しているライブラリの内、メジャーバージョンア�
   - 参考：[Announcing Expo Router v2. Expo Router v1 has been an incredible… | by Evan Bacon | Exposition](https://blog.expo.dev/introducing-expo-router-v2-3850fd5c3ca1)
 - [sentry-expo](https://docs.expo.dev/guides/using-sentry/) `v7.0`
   - 参考：[Migration for React Native | Sentry Documentation](https://docs.sentry.io/platforms/react-native/migration/#from-4x-to-5x)
+- [@react-native-community/datetimepicker](https://www.npmjs.com/package/@react-native-community/datetimepicker?activeTab=readme) `v7`
+  - [破壊的変更は無いですがNew Architectureがサポートされました](https://github.com/react-native-datetimepicker/datetimepicker/releases/tag/v7.0.0)
 - [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/) `v3`
   - Reanimated API `v1`のサポートが削除されました。`v2`とは互換性があります
   - 参考：[Announcing Reanimated 3. Reanimated 3 release candidate is out…](https://blog.swmansion.com/announcing-reanimated-3-16167428c5f7)
+- [expo-blur](https://docs.expo.dev/versions/latest/sdk/blur-view/)
+  - デフォルトで静的レンダリング時にぼかしが有効になりました
 - [expo-face-detector](https://docs.expo.dev/versions/latest/sdk/facedetector/)
   - Expo Goでの`expo-face-detector`のサポート削除されましたが、これまでと同様に、Expo Goの外部でライブラリを引き続き使用できます
+- [expo-gl](https://docs.expo.dev/versions/latest/sdk/gl-view/)
+  - ReanimatedワークレットからGLViewを使用するには、明示的なプロパティ`enableExperimentalWorkletSupport`が必要になりました
+  - 参考：[Pull Request #22613 · expo/expo](https://github.com/expo/expo/pull/22613)
+
+詳細やその他の変更は、以下のリンク先を参照してください。
+
+- [expo/CHANGELOG.md at main · expo/expo](https://github.com/expo/expo/blob/main/CHANGELOG.md#4900--2023-06-27)
 
 #### Expo Module APIの改善
 
