@@ -61,14 +61,14 @@ TypeScriptに特化したルールを提供するプラグインです。
 |:--|:--|:--|
 |[@typescript-eslint/array-type](https://typescript-eslint.io/rules/array-type)|warn|-|
 |[@typescript-eslint/await-thenable](https://typescript-eslint.io/rules/await-thenable)|error|-|
-|[@typescript-eslint/ban-ts-comment](https://typescript-eslint.io/rules/ban-ts-comment)|error|-|
+|[@typescript-eslint/ban-ts-comment](https://typescript-eslint.io/rules/ban-ts-comment)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、このアプリでは`ts-check`と`ts-expect-error`だけを使用できるようにこのルールを設定しています。`ts-ignore`を除外している理由は、[チェック対象外にする方法 - TypeScript](./lint-ops.mdx#typescript)を参照してください。|
 |[@typescript-eslint/ban-types](https://typescript-eslint.io/rules/ban-types)|error|-|
 |[@typescript-eslint/consistent-type-assertions](https://typescript-eslint.io/rules/consistent-type-assertions)|warn|-|
 |[@typescript-eslint/no-dupe-class-members](https://typescript-eslint.io/rules/no-dupe-class-members)|warn|-|
 |[@typescript-eslint/no-extra-non-null-assertion](https://typescript-eslint.io/rules/no-extra-non-null-assertion)|warn|-|
 |[@typescript-eslint/no-floating-promises](https://typescript-eslint.io/rules/no-floating-promises)|error|-|
 |[@typescript-eslint/no-implied-eval](https://typescript-eslint.io/rules/no-implied-eval)|error|-|
-|[@typescript-eslint/no-misused-promises](https://typescript-eslint.io/rules/no-misused-promises)|error|-|
+|[@typescript-eslint/no-misused-promises](https://typescript-eslint.io/rules/no-misused-promises)|error|推奨設定でもこのルールはerrorレベルで設定されています。<br/><br/>ただし、このアプリではJSXの場合だけオプションの[checksVoidReturn: attributes](https://typescript-eslint.io/rules/no-misused-promises/#checksvoidreturn)を`false`に設定しています。JSX内でコンポーネントのイベントハンドラなどに渡す関数は、`Promise`を返却することが多々あります。そのため、JSX内でコンポーネントの属性に渡す関数に関しては、戻り値が`void`かをチェックしないように変更しています。|
 |[@typescript-eslint/no-redeclare](https://typescript-eslint.io/rules/no-redeclare)|warn|-|
 |[@typescript-eslint/no-throw-literal](https://typescript-eslint.io/rules/no-throw-literal)|warn|-|
 |[@typescript-eslint/no-unnecessary-type-assertion](https://typescript-eslint.io/rules/no-unnecessary-type-assertion)|error|-|
@@ -92,7 +92,7 @@ ESLintが提供するルールです。
 
 |ルール|レベル|推奨設定からの変更|
 |:--|:--|:--|
-|[curly](https://eslint.org/docs/latest/rules/curly)|error|-|
+|[curly](https://eslint.org/docs/latest/rules/curly)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、制御構文中（`if`文など）の括弧を必ず明示することで、コードが統一され可読性が高まると考え、errorレベルに変更しています。|
 |[eqeqeq](https://eslint.org/docs/latest/rules/eqeqeq)|warn|-|
 |[no-array-constructor](https://eslint.org/docs/latest/rules/no-array-constructor)|warn|-|
 |[no-caller](https://eslint.org/docs/latest/rules/no-caller)|warn|-|
@@ -126,7 +126,7 @@ ESLintが提供するルールです。
 |[no-octal](https://eslint.org/docs/latest/rules/no-octal)|warn|-|
 |[no-octal-escape](https://eslint.org/docs/latest/rules/no-octal-escape)|warn|-|
 |[no-proto](https://eslint.org/docs/latest/rules/no-proto)|warn|-|
-|[no-restricted-syntax](https://eslint.org/docs/latest/rules/no-restricted-syntax)|error|-|
+|[no-restricted-syntax](https://eslint.org/docs/latest/rules/no-restricted-syntax)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、`prototype`も取得してループする`for...in`文を禁止したいため、このルールを設定しています。<br/><br/>なお、同様の機能を持つルールとして`@typescript-eslint/no-for-in-array`もあります。<br/>しかし、`no-restricted-syntax`はオブジェクトの`for...in`文も禁止できるため、こちらのルールを設定して`@typescript-eslint/no-for-in-array`をoffにしています。|
 |[no-return-assign](https://eslint.org/docs/latest/rules/no-return-assign)|warn|-|
 |[no-script-url](https://eslint.org/docs/latest/rules/no-script-url)|warn|-|
 |[no-self-assign](https://eslint.org/docs/latest/rules/no-self-assign)|warn|-|
@@ -161,7 +161,7 @@ ESLintが提供するルールです。
 
 |ルール|レベル|推奨設定からの変更|
 |:--|:--|:--|
-|[deprecation/deprecation](https://github.com/gund/eslint-plugin-deprecation)|error|-|
+|[deprecation/deprecation](https://github.com/gund/eslint-plugin-deprecation)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、非推奨コードの使用は自動的に検知したいためこのルールを設定しています。|
 
 ### [eslint-plugin-eslint-comments](https://mysticatea.github.io/eslint-plugin-eslint-comments)
 
@@ -173,10 +173,10 @@ ESLintが提供するルールです。
 |[eslint-comments/no-aggregating-enable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-aggregating-enable.html)|error|-|
 |[eslint-comments/no-duplicate-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-duplicate-disable.html)|error|-|
 |[eslint-comments/no-unlimited-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unlimited-disable.html)|error|-|
-|[eslint-comments/no-unused-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-disable.html)|error|-|
+|[eslint-comments/no-unused-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-disable.html)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、不要にESLintがチェック対象外になっていないかを検知したいため、このルールを設定しています。|
 |[eslint-comments/no-unused-enable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-enable.html)|error|-|
-|[eslint-comments/no-use](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-use.html)|error|-|
-|[eslint-comments/require-description](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/require-description.html)|error|-|
+|[eslint-comments/no-use](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-use.html)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、`eslint-disable`などを使用してしまうとファイル単位でESLintのチェック対象外となってしまいます。そのため、`eslint-disable-next-line`、`eslint-disable-line`のみを許可して、チェック対象外にするスコープを限定するようにしています。|
+|[eslint-comments/require-description](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/require-description.html)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、ESLintのチェック対象外とした理由を必ず記載する運用にするため、このルールを設定しています。|
 
 ### [eslint-plugin-import](https://github.com/import-js/eslint-plugin-import)
 
@@ -187,7 +187,7 @@ ES moduleの`import`/`export`構文に関するルールを提供するプラグ
 |[import/export](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/export.md)|error|-|
 |[import/first](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/first.md)|warn|-|
 |[import/namespace](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/namespace.md)|error|-|
-|[import/no-default-export](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-default-export.md)|error|-|
+|[import/no-default-export](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-default-export.md)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、このアプリでは[TypeScriptのコーディング規約](./typescript-style-guide.mdx#1つのファイルにつき1つの-export-にしてください)でnamed exportを推奨しています。そのため、このルールを設定しています。|
 |[import/no-duplicates](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md)|error|-|
 |[import/order](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md)|warn|-|
 
@@ -212,7 +212,7 @@ Jestに関するルールを提供するプラグインです。
 |[jest/no-mocks-import](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-mocks-import.md)|error|-|
 |[jest/no-standalone-expect](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-standalone-expect.md)|error|-|
 |[jest/no-test-prefixes](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-test-prefixes.md)|error|-|
-|[jest/unbound-method](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/unbound-method.md)|error|-|
+|[jest/unbound-method](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/unbound-method.md)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、同様の機能を持つ`@typescript-eslint/unbound-method`をerrorレベルで設定しています。それをJest用に拡張したこのルールも設定すべきと考え、このルールを設定しています。<br/><br/>なお、対象がテストファイル（`*.test.ts`、`*.test.tsx`）の場合は`@typescript-eslint/unbound-method`をoffにして、このルールのみ適用するようにしています。|
 |[jest/valid-describe-callback](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/valid-describe-callback.md)|error|-|
 |[jest/valid-expect](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/valid-expect.md)|error|-|
 |[jest/valid-expect-in-promise](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/valid-expect-in-promise.md)|error|-|
@@ -275,4 +275,4 @@ React Hooksに関するルールを提供するプラグインです。
 
 |ルール|レベル|推奨設定からの変更|
 |:--|:--|:--|
-|[strict-dependencies/strict-dependencies](https://github.com/knowledge-work/eslint-plugin-strict-dependencies)|error|-|
+|[strict-dependencies/strict-dependencies](https://github.com/knowledge-work/eslint-plugin-strict-dependencies)|error|推奨設定ではこのルールはoffになっています。<br/><br/>このアプリでは、[機能レイヤーの依存関係](../../../application-architecture/application-structure/overview.mdx#機能レイヤーの依存関係)に準拠した設定をしています。|
