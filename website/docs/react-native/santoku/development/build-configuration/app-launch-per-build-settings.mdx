@@ -71,16 +71,12 @@ npm run pod-install
 
 ### デバッグビルド
 
-| OS      | 環境    | コマンド                   |
-|:--------|:------|:-----------------------|
-| Android | local | `npm run android`      |
-|         | dev   | `npm run android:dev`  |
-|         | stg   | `npm run android:stg`  |
-|         | prod  | `npm run android:prod` |
-| iOS     | local | `npm run ios`          |
-|         | dev   | `npm run ios:dev`      |
-|         | stg   | `npm run ios:stg`      |
-|         | prod  | `npm run ios:prod`     |
+| 環境    | Android                | iOS                |
+|:------|:-----------------------|:-------------------|
+| local | `npm run android`      | `npm run ios`      |
+| dev   | `npm run android:dev`  | `npm run ios:dev`  |
+| stg   | `npm run android:stg`  | `npm run ios:stg`  |
+| prod  | `npm run android:prod` | `npm run ios:prod` |
 
 :::note
 既にアプリをインストール済みの場合は、以下のコマンドを実行してMetro Bundlerを立ち上げるだけでも問題ありません。
@@ -104,13 +100,9 @@ Expo CLIは、シミュレータの起動とアプリの起動を実施するの
 
 ### リリースビルド
 
-| OS      | 環境    | コマンド                                          |
-|:--------|:------|:----------------------------------------------|
-| Android | local | `npm run android -- --variant release`        |
-|         | dev   | `npm run android:dev -- --variant release`    |
-|         | stg   | `npm run android:stg -- --variant release`    |
-|         | prod  | `npm run android:prod -- --variant release`   |
-| iOS     | local | `npm run ios -- --configuration Release`      |
-|         | dev   | `npm run ios:dev -- --configuration Release`  |
-|         | stg   | `npm run ios:stg -- --configuration Release`  |
-|         | prod  | `npm run ios:prod -- --configuration Release` |
+| 環境    | Android                                     | iOS                                           |
+|:------|:--------------------------------------------|:----------------------------------------------|
+| local | `npm run android -- --variant release`      | `npm run ios -- --configuration Release`      |
+| dev   | `npm run android:dev -- --variant release`  | `npm run ios:dev -- --configuration Release`  |
+| stg   | `npm run android:stg -- --variant release`  | `npm run ios:stg -- --configuration Release`  |
+| prod  | `npm run android:prod -- --variant release` | `npm run ios:prod -- --configuration Release` |
