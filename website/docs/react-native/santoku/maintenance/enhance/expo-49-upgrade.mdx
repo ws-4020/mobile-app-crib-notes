@@ -68,6 +68,9 @@ Expoが管理しているライブラリの内、メジャーバージョンア�
 - [sentry-expo v7.0](https://docs.expo.dev/guides/using-sentry/)
   - クラッシュ レポート プラットフォームSentryと統合するライブラリ
   - 参考：[Migration for React Native | Sentry Documentation](https://docs.sentry.io/platforms/react-native/migration/#from-4x-to-5x)
+- [react-native-reanimated v3](https://docs.swmansion.com/react-native-reanimated/)
+  - Reanimated API `v1`のサポートが削除されました。`v2`とは互換性があります
+  - 参考：[Announcing Reanimated 3. Reanimated 3 release candidate is out…](https://blog.swmansion.com/announcing-reanimated-3-16167428c5f7)
 
 #### Expo Module APIの改善
 
@@ -193,15 +196,6 @@ JSCリモートデバッグは、Hermesによるデバッグに比べて特に�
 つまり、API 27以下ではデフォルトで`true`、API 28以降ではデフォルトで`false`になります。
 
 セキュリティで保護されていないエンドポイントへのネットワークリクエストが存在する場合は、[expo-build-properties](https://docs.expo.dev/versions/v49.0.0/sdk/build-properties/)を使って`true`にする必要があります。
-
-#### `react-native-reanimated` `v3`
-
-Reanimated API `v1`のサポートが削除されました。
-`v2`とは互換性があります。
-
-詳細は、以下のリンク先を参照してください。
-
-- [Announcing Reanimated 3. Reanimated 3 release candidate is out… | by Krzysztof Magiera | Software Mansion](https://blog.swmansion.com/announcing-reanimated-3-16167428c5f7)
 
 #### Expo Goでの`expo-face-detector`のサポート削除
 
