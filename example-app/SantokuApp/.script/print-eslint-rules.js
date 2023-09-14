@@ -119,8 +119,8 @@ const generateRuleUrl = ({prefix, url, rulesRootPath, extension = '', hasPagePer
   return url;
 };
 
-const tableHeader = `|ルール|レベル|\n|:--|:--|`;
-const transformToTableRow = ({rule, ruleUrl, level}) => `|[${rule}](${ruleUrl})|${level}|`;
+const tableHeader = `|ルール|レベル|推奨設定からの変更|\n|:--|:--|:--|`;
+const transformToTableRow = ({rule, ruleUrl, level}) => `|[${rule}](${ruleUrl})|${level}|-|`;
 const transformToH3 = ({pluginName, pluginUrl}) => `### [${pluginName}](${pluginUrl})`;
 
 /**
@@ -128,17 +128,20 @@ const transformToH3 = ({pluginName, pluginUrl}) => `### [${pluginName}](${plugin
  * 出力形式は以下とします。
  * H3: プラグイン名
  * プラグイン概要
- * Table: ルール名とレベルの一覧
+ * Table: 以下のカラムを表示します。
+ *   - ルール名
+ *   - レベル
+ *   - 推奨設定からの変更（このツールでは、全て「-」を設定）
  *
  * e.g.
  * ### [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin)
  *
  * TypeScriptに特化したルールを提供するプラグインです。
- *
- * |ルール|レベル|
- * |:--|:--|
- * |[@typescript-eslint/array-type](https:/github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules/array-type.md)|warn|
- * |[@typescript-eslint/await-thenable](https:/github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules/await-thenable.md)|error|
+
+ * |ルール|レベル|推奨設定からの変更|
+ * |:--|:--|:--|
+ * |[@typescript-eslint/array-type](https:/github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules/array-type.md)|warn|-|
+ * |[@typescript-eslint/await-thenable](https:/github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules/await-thenable.md)|error|-|
  */
 const print = json => {
   const jsonObject = JSON.parse(json);
