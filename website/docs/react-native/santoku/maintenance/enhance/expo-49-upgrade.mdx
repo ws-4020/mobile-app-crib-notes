@@ -253,6 +253,8 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
 1. renovate除外設定更新
    - 使用しなくなった`androidx.swiperefreshlayout:swiperefreshlayout`を削除
 1. [不要になったConfig Plugins`withAndroidRemoveUsesClearTextTrafficForRelease`を削除](#不要になったconfig-pluginswithandroidremoveusescleartexttrafficforreleaseを削除)
+1. [Proguardルールの更新](#proguardルールの更新)
+   - [`react-native-svg`用ルールの削除](#react-native-svg用ルールの削除)
 1. [Expoの更新履歴の確認と対応](#expoの更新履歴の確認と対応)
 1. [React Nativeの更新履歴の確認と対応](#react-nativeの更新履歴の確認と対応)
 1. [`expo-template-blank-typescript`の更新履歴の確認と対応](#expo-template-blank-typescriptの更新履歴の確認と対応)
@@ -744,6 +746,27 @@ npm update @typescript-eslint/eslint-plugin @typescript-eslint/parser
 
 しかし、[Expo SDK 49の主な変更 - Expoがサポートするライブラリや機能 - android:usesCleartextTraffic](#androidusescleartexttraffic)に記載した通り、Expo側で対応されました。
 そのため、不要となったConfig Pluginsを削除しました。
+
+### Proguardルールの更新
+
+各ルールが現在も必要か、コメントのリンク先の更新などが無いかを確認しました。
+
+#### `react-native-svg`用ルールの削除
+
+`react-native-svg` `v13.7.0`からライブラリ側で自動的にルールを含めるようになりました。
+
+- [Include proguard config (#1842) · software-mansion/react-native-svg@1637580](https://github.com/software-mansion/react-native-svg/commit/16375807327ec8e94cde91a7cbee771c48bf0c69)
+
+そのため、`app.config.js`で`expo-build-properties`プラグインの`android.extraProguardRules`でルールを追加する必要はなくなりました。
+
+```diff title="app.config.js"
+ -keep class expo.modules.ExpoModulesPackageList { *; }
+-
+-# https://github.com/software-mansion/react-native-svg#problems-with-proguard
+--keep public class com.horcrux.svg.** {*;}
+ `,
+             enableProguardInReleaseBuilds: true,
+```
 
 ### Expoの更新履歴の確認と対応
 
