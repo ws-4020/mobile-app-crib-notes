@@ -35,10 +35,18 @@ setHandleErrorWithSnackbar(handleErrorWithSnackbar);
 setHandleErrorWithAlert(handleErrorWithAlert);
 
 /**
- * AndroidのActivityのlaunchModeがsingleTaskの場合は、ウォームスタート時にActivityが再生成されず、既存のActivityインスタンスが利用されます。
- * 既存のActivityインスタンスが利用される場合、ディープリンクはActivity#onNewIntentで取得できます。
- * Activity#onNewIntentで受け取ったディープリンクは、React NativeのLinking#addEventListenerに通知されるため、
- * ここではLinking#getInitialURLではなく、Linking#addEventListenerを使用してディープリンクを取得しています。
+ *
+ * Androidは、android:launchModeによってActivityの起動方法が変わります。
+ * android:launchModeのsingleTaskは、ウォームスタート時にActivityのインスタンスが作成されません。
+ * この場合、ディープリンクのURLはExpo LinkingのaddEventListenerで取得できます。
+ *
+ * 一方、android:launchModeのstandardなどは、ウォームスタート時にActivityのインスタンスが作成されます。
+ * この場合、ディープリンクのURLはExpo LinkingのgetInitialURLで取得できます。
+ *
+ * このアプリでは、Expoのexpo-template-bare-minimumに合わせて、android:launchModeをsingleTaskに設定しています。
+ * android:launchModeをstandard変更することで、コールドスタートやiOSのウォームスタートと挙動を合わせることもできます。
+ * しかし、Activityの起動変更がアプリに及ぼす影響を完全に把握できていません。
+ * そのため、android:launchModeはsingleTaskにして、Expo LinkingのaddEventListenerで取得する方法としています。
  *
  * また、ウォームスタート時は、Appコンポーネントは再マウントされます。
  * Appコンポーネント内で以下のように実装すると、アンマウントされた時にsubscription.removeが呼ばれ、ディープリンクのリスナーが削除されます。
