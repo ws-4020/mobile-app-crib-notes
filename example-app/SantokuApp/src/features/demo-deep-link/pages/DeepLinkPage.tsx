@@ -5,7 +5,7 @@ import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 import {SpecAndSourceCodeLink} from '../../demo-github-link/components/SpecAndSourceCodeLink';
 
-const logText = (url: string, funcName: string) => `[${funcName}] ${new Date().toISOString()}\n${url}`;
+const logText = (url: string, funcName: string) => `[${funcName}] ${new Date().toLocaleString()}\n${url}`;
 export const DeepLinkPage: React.FC = () => {
   const [receivedLinkLogs, setReceivedLinkLogs] = useState<string[]>([]);
 
