@@ -6,7 +6,7 @@ import type {DeepLink} from './deepLinks';
 import {pathWithPrefix} from './pathWithPrefix';
 import type {MainTabParamList, RootStackParamList} from '../../navigators/types';
 
-const matchUrl = (parsedUrl: ParsedURL) => parsedUrl.path?.startsWith(pathWithPrefix('demo/app-info'));
+const matchUrl = (parsedUrl: ParsedURL) => parsedUrl.path === pathWithPrefix('demo/app-info');
 const handle = (navigation: NavigationContainerRef<RootStackParamList>) => {
   navigation.dispatch(StackActions.push('DemoStackNav', {screen: 'AppInfo'}));
 };

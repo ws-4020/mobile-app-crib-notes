@@ -5,7 +5,7 @@ import type {DeepLink} from './deepLinks';
 import {pathWithPrefix} from './pathWithPrefix';
 import type {MainTabParamList, RootStackParamList} from '../../navigators/types';
 
-const matchUrl = (parsedUrl: ParsedURL) => parsedUrl.path?.startsWith(pathWithPrefix('home'));
+const matchUrl = (parsedUrl: ParsedURL) => parsedUrl.path === pathWithPrefix('home');
 const handle = (navigation: NavigationContainerRef<RootStackParamList>) => {
   navigation.navigate('AuthenticatedStackNav', {
     screen: 'MainTabNav',
