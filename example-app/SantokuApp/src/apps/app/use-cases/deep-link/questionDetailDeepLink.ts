@@ -9,7 +9,7 @@ import {pathWithPrefix} from './pathWithPrefix';
 import type {MainTabParamList, RootStackParamList} from '../../navigators/types';
 
 const matchedPath = pathWithPrefix('questions/');
-const matchPath = (parsedUrl: ParsedURL) => parsedUrl.path?.startsWith(matchedPath);
+const matchUrl = (parsedUrl: ParsedURL) => parsedUrl.path?.startsWith(matchedPath);
 
 const validationScheme = yup.object().shape({
   questionId: yup.number().required(),
@@ -45,7 +45,7 @@ const handle = (navigation: NavigationContainerRef<RootStackParamList>, parsedUr
 };
 const mainTabNavInitialRouteName: keyof MainTabParamList = 'HomeStackNav';
 export const questionDetailDeepLink: DeepLink = {
-  matchPath,
+  matchUrl,
   handle,
   mainTabNavInitialRouteName,
 };

@@ -27,7 +27,7 @@ const getInitialRouteName = (
     if (!parsedUrl) {
       return 'HomeStackNav';
     }
-    const found = deepLinks.find(deepLink => deepLink.matchPath(parsedUrl));
+    const found = deepLinks.find(deepLink => deepLink.matchUrl(parsedUrl));
     return found?.mainTabNavInitialRouteName ?? 'HomeStackNav';
   }
   return 'HomeStackNav';

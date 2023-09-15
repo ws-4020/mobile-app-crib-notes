@@ -12,7 +12,7 @@ export const handleDeepLink = (url: string, navigationRef: NavigationContainerRe
     return;
   }
   for (const deepLink of deepLinks) {
-    if (deepLink.matchPath(parsedURL)) {
+    if (deepLink.matchUrl(parsedURL)) {
       try {
         deepLink.handle(navigationRef, parsedURL);
       } catch (e) {

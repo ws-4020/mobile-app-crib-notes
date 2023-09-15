@@ -7,7 +7,7 @@ import {questionDetailDeepLink} from './questionDetailDeepLink';
 import {MainTabParamList, RootStackParamList} from '../../navigators/types';
 
 export type DeepLink = {
-  matchPath: (parsedUrl: ParsedURL) => boolean | undefined;
+  matchUrl: (parsedUrl: ParsedURL) => boolean | undefined;
   handle: (navigation: NavigationContainerRef<RootStackParamList>, parsedUrl: ParsedURL) => void;
   mainTabNavInitialRouteName: keyof MainTabParamList;
 };
