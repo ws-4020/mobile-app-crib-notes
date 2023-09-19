@@ -21,7 +21,7 @@ title: 商標について
 <!-- textlint-disable ja-technical-writing/sentence-length-->
 - 「Azure」「Windows」は、 Microsoft Corporationの米国およびその他の国におけるMicrosoft Corporationおよび/またはその関連会社の登録商標または商標です。
 <!-- textlint-enable ja-technical-writing/sentence-length-->
-- 「Java」は、Oracle Corporationおよびその子会社、関連会社の米国およびその他の国における登録商標または商標です。
+- 「Java」「JavaScript」は、Oracle Corporationおよびその子会社、関連会社の米国およびその他の国における登録商標または商標です。
 <!-- textlint-disable ja-technical-writing/sentence-length-->
 - 「ESLint」は、OpenJS Foundationの米国および/またはその他の国における登録商標です。
 - Postgres,PostgreSQL,Slonikロゴは、PostgreSQL Community Association of Canadaの商標または登録商標であり、その許可を得て使用しています。
