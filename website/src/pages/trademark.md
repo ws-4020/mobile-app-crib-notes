@@ -40,6 +40,7 @@ title: 商標について
 - 「Adjust」は、ADJUST GMBHの登録商標です。
 - 「AppsFlyer」は、AppsFlyer Ltd.の登録商標です。
 - 「Bitly」は、Bitly, Inc.の登録商標です。
+- 「Kochava」は、KOCHAVA, INC.の登録商標です。
 <!-- textlint-enable jtf-style/1.2.1.句点(。)と読点(、)-->
 
 ※ その他、本サイトに記載されている会社名、商品・サービス名は、各社の商標または登録商標です。
