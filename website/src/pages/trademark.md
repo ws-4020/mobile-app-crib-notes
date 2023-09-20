@@ -43,6 +43,7 @@ title: 商標について
 - 「Kochava」は、KOCHAVA, INC.の登録商標です。
 - 「JetBrains」「IntelliJ」「WebStorm」は、JetBrains s.r.oの登録商標です。
 - 「Sentry」は、Functional Software, Inc.の登録商標です。
+- 「Gradle」は、Gradle, Inc.の登録商標です。
 <!-- textlint-enable jtf-style/1.2.1.句点(。)と読点(、)-->
 
 ※ その他、本サイトに記載されている会社名、商品・サービス名は、各社の商標または登録商標です。
