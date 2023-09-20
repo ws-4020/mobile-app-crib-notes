@@ -40,7 +40,7 @@
 
 - アプリケーション構造
   - アプリケーション方式
-    - [アプリケーション構造](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/application-structure/overview)
+    - [アプリケーション構造](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/application-structure/overview)（サンプルアプリケーションの[README](https://github.com/ws-4020/mobile-app-crib-notes/blob/master/example-app/SantokuApp/README.md)から移動）
 - スタイルガイド
   - 開発ガイド
     - 実装
@@ -74,9 +74,6 @@
 
 #### 🌿 更新コンテンツ（2023/09/29）
 
-- アプリケーション構造
-  - README
-    - [アプリケーション構造](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp#アプリケーション構造)
 - ディープリンク
   - アプリケーション方式
     - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/deep-link/overview)
