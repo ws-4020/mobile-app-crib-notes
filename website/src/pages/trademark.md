@@ -40,7 +40,7 @@ title: 商標について
 - 「Adjust」は、Adjust GmbHの登録商標です。
 - 「AppsFlyer」は、AppsFlyer Ltd.の登録商標です。
 - 「Bitly」は、Bitly, Inc.の登録商標です。
-- 「Kochava」は、KOCHAVA, INC.の登録商標です。
+- 「Kochava」は、Kochava, Inc.の登録商標です。
 - 「JetBrains」「IntelliJ」「WebStorm」は、JetBrains s.r.oの登録商標です。
 - 「Sentry」は、Functional Software, Inc.の登録商標です。
 - 「Gradle」は、Gradle, Inc.の登録商標です。
