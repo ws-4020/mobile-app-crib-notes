@@ -82,6 +82,10 @@ module.exports = ({config}) => {
       },
       associatedDomains: [`applinks:${DEEP_LINK_DOMAIN}`],
     },
+    disabledPlugins: [
+      // default plugin を無効化するために patch-package を使用して機能拡張している
+      'withScheme', // カスタムスキーマ 削除
+    ],
     plugins: [
       [
         'expo-build-properties',
@@ -94,13 +98,14 @@ module.exports = ({config}) => {
 -keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
 
 # ExpoModulesPakage.ktから、自動生成されたクラスを参照するためにクラス名を利用しているので、クラス名が変わるとアプリが起動しなくなる。
-# https://github.com/expo/expo/blob/sdk-43/packages/expo/android/src/main/java/expo/modules/ExpoModulesPackage.kt#L22
+# https://github.com/expo/expo/blob/sdk-49/packages/expo/android/src/main/java/expo/modules/ExpoModulesPackage.kt#L23
 -keep class expo.modules.ExpoModulesPackageList { *; }
-
-# https://github.com/software-mansion/react-native-svg#problems-with-proguard
--keep public class com.horcrux.svg.** {*;}
 `,
             enableProguardInReleaseBuilds: true,
+            extraMavenRepos: [
+              // notifee Expo49対応: https://github.com/invertase/notifee/issues/808
+              '$rootDir/../../../node_modules/@notifee/react-native/android/libs',
+            ],
           },
           ios: {
             useFrameworks: 'static',
@@ -141,7 +146,6 @@ module.exports = ({config}) => {
       ],
       // 以下のプラグインは、環境毎の設定ファイルで定義します。
       // withAndroidAppBuildGradleForRelease,
-      // withAndroidRemoveUsesClearTextTrafficForRelease,
 
       // このアプリで用意しているiOS用のプラグイン
       withIosRemoveCFBundleUrlTypes,

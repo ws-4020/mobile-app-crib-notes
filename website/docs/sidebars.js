@@ -395,9 +395,9 @@ module.exports = {
           label: 'ディープリンク',
           items: [
             'react-native/santoku/application-architecture/deep-link/overview',
+            'react-native/santoku/application-architecture/deep-link/universal-links',
+            'react-native/santoku/application-architecture/deep-link/android-app-links',
             'react-native/santoku/application-architecture/deep-link/process-deep-link',
-            'react-native/santoku/application-architecture/deep-link/create-deep-link',
-            'react-native/santoku/application-architecture/deep-link/react-native-firebase',
           ],
         },
         {
@@ -674,6 +674,7 @@ module.exports = {
           label: 'エンハンス',
           items: [
             'react-native/santoku/maintenance/enhance',
+            'react-native/santoku/maintenance/enhance/expo-49-upgrade',
             'react-native/santoku/maintenance/enhance/expo-48-upgrade',
             'react-native/santoku/maintenance/enhance/expo-47-upgrade',
             'react-native/santoku/maintenance/enhance/config-plugins',
