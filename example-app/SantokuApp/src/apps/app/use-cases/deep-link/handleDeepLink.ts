@@ -20,7 +20,6 @@ export const handleDeepLink = (url: string, navigationRef: NavigationContainerRe
         const error = new ApplicationError('Failed to handle deep link.', e);
         log.warn(`${error.message} cause=${String(error.stack)}`);
       }
-      return;
     }
   }
 };
