@@ -11,8 +11,9 @@ export const handleDeepLink = (url: string, navigationRef: NavigationContainerRe
   if (!parsedURL) {
     return;
   }
-  for (const deepLink of deepLinks) {
-    if (deepLink.matchUrl(parsedURL)) {
+  deepLinks
+    .filter(deepLink => deepLink.matchUrl(parsedURL))
+    .forEach(deepLink => {
       try {
         deepLink.handle(navigationRef, parsedURL);
       } catch (e) {
@@ -20,6 +21,5 @@ export const handleDeepLink = (url: string, navigationRef: NavigationContainerRe
         const error = new ApplicationError('Failed to handle deep link.', e);
         log.warn(`${error.message} cause=${String(error.stack)}`);
       }
-    }
-  }
+    });
 };
