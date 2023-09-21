@@ -80,6 +80,5 @@ export const DeepLinkHandlers: React.FC<
 - ディープリンクを受け取った時点で、そのディープリンクをStateに保持
   - コールド、ウォームスタートの場合は、[Linking.getInitialURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkinggetinitialurl)内でStateに設定
   - ホットスタートの場合は、[Linking.addEventListener](https://docs.expo.dev/versions/latest/sdk/linking/#linkingaddeventlistenertype-handler)内でStateに設定
-- 認証後にStateからディープリンクを取得し、[Linking.openURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkingopenurlurl)を使用してそのディープリンクを開く
-  - `Linking.openURL`を使用してアプリ内からディープリンクを開くことにより、`Linking.addEventListener`でディープリンクを再度受信する
-    :::
+- 認証後にStateからディープリンクを取得し、ディープリンクに応じた画面へ遷移
+:::
