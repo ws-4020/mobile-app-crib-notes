@@ -52,7 +52,7 @@ const loadData = async () => {
   const notification = (await messaging().getInitialNotification()) ?? undefined;
 
   const warmStartDeepLink = getOnceWarmStartDeepLink();
-  const deepLinkUrl = warmStartDeepLink ? warmStartDeepLink : await getInitialDeepLinkUrl();
+  const deepLinkUrl = warmStartDeepLink ?? (await getInitialDeepLinkUrl());
 
   // TODO: キャッシュの削除
   const initialData = {notification, deepLinkUrl};
