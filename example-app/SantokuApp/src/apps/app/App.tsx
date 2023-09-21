@@ -64,6 +64,8 @@ setHandleErrorWithAlert(handleErrorWithAlert);
 if (Platform.OS === 'android') {
   addDeepLinkListener(url => {
     // Appのマウントが完了する前までをウォームスタートとしています。
+    // ホットスタート時のディープリンクは、DeepLinkHandler.tsx内でナビゲーション定義が完了した後に受け取るようにしています。
+    //（ここでディープリンクを受け取っても、画面遷移に必要なナビゲーション定義などが完了していない可能性があるため。）
     if (!isHotStart) {
       // ここで設定したディープリンクURLは、アプリの初期化処理（useAppInitialize.ts）で取得されます。
       // 取得された後はundefinedが設定され、再度ディープリンクタップによるウォームスタートが発生するまで、undefinedのままです。
