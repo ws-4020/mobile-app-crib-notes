@@ -46,7 +46,7 @@ const handleDeepLink = (url: string, navigation: NavigationContainerRef<RootStac
  * このコンポーネントのuseEffectが処理されます。
  * useEffect内では、NavigationContainerのnavigationRefを使用して、ディープリンクURLに応じた画面遷移を行います。
  */
-export const DeepLinkHandlers: React.FC<
+export const DeepLinkHandler: React.FC<
   PropsWithChildren<{navigation: NavigationContainerRef<RootStackParamList>}>
 > = ({navigation, children}) => {
   // コールド・ウォームスタート
