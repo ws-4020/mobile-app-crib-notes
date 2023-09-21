@@ -49,6 +49,7 @@
         'expo-build-properties',
         'expo-crypto',
         'expo-keep-awake',
+        'expo-linking',
         'expo-local-authentication',
         'expo-secure-store',
         'expo-splash-screen',
@@ -90,8 +91,6 @@
         'de.undercouch:gradle-download-task',
         // @testing-library/react-native -> jest
         '@testing-library/react-native',
-        // prebuild
-        'androidx.swiperefreshlayout:swiperefreshlayout',
       ],
       matchPackagePrefixes: [
         'com.facebook.flipper',
