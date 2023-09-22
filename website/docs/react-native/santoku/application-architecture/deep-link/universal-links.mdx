@@ -72,9 +72,3 @@ iOSの`local`環境は、Bundle Identifierが開発者によって異なりま�
 
 開発者ごとのBundle Identifierを`apple-app-site-association`に設定するのは管理が大変であるため、`local`環境ではUniversal Linksを使用しません。
 :::
-
-## URL発行時の注意点
-
-Universal Linksの設定に従ったURLをユーザに連携することで、ユーザはそのURLからアプリを起動できます。
-
-しかし、連携するURLには認証後にしか参照できないような情報を含めないように注意する必要があります。認証後に参照可能な情報は、URLタップ後に起動したアプリ内で必ず取得するようにします。
