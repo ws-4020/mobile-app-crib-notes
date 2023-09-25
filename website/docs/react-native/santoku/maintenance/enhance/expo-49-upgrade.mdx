@@ -735,7 +735,7 @@ npm update @typescript-eslint/eslint-plugin @typescript-eslint/parser
 
 > Could not find any matches for app.notifee:core:+ as no versions of app.notifee:core are available.
 
-`expo-build-properties`プラグインの`android.extraMavenRepos[]`を追加する必要がありました。
+ワークアラウンドとして、`expo-build-properties`プラグインの`android.extraMavenRepos[]`を追加する必要がありました。
 
 ```diff title="app.config.js"
 @@ -94,6 +94,10 @@
@@ -750,7 +750,7 @@ npm update @typescript-eslint/eslint-plugin @typescript-eslint/parser
            ios: {
 ```
 
-参考Issueは以下です。
+参考Issueは以下です（2023/09時点で未解決）。
 
 - [Expo SDK 49 compatibility issue · Issue #808 · invertase/notifee](https://github.com/invertase/notifee/issues/808)
 
