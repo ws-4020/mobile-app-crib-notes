@@ -254,12 +254,12 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
    - [`react-native-reanimated` `v3`対応](#react-native-reanimated-v3対応)
    - [`react-native` Dimensionsのmock失敗に対応](#react-native-dimensionsのmock失敗に対応)
    - [`jest.advanceTimersByTime`を`act`でwrap](#jestadvancetimersbytimeをactでwrap)
-   - [`jest-mock`における`expo-constants`のdeprecated warnに対応](#jest-mockにおけるexpo-constantsのdeprecated-warnに対応)
+   - [`jest-mock`における`expo-constants`のdeprecated警告に対応](#jest-mockにおけるexpo-constantsのdeprecated警告に対応)
    - [アニメーション中のAnimatedStyleの僅かな変化に対応](#アニメーション中のanimatedstyleの僅かな変化に対応)
    - [slideOutDurationテストの時間指定が厳密すぎるとテストが失敗する問題の修正](#slideoutdurationテストの時間指定が厳密すぎるとテストが失敗する問題の修正)
    - [keyExtractorの呼び出しが増えたことによって失敗するようになったテストの修正](#keyextractorの呼び出しが増えたことによって失敗するようになったテストの修正)
    - snapshot更新
-1. [warn対応](#warn対応)
+1. [警告ログへの対応](#警告ログへの対応)
    - [TypeScriptバージョンに対応しているtypescript-eslintに更新](#typescriptバージョンに対応しているtypescript-eslintに更新)
    - [JSX namespaceが非推奨になったことへの対応](#jsx-namespaceが非推奨になったことへの対応)
    - [initialScrollIndexの範囲外警告に対応](#initialscrollindexの範囲外警告に対応)
@@ -542,10 +542,10 @@ export type ListRenderItem<ItemT> = (
      expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 ```
 
-#### `jest-mock`における`expo-constants`のdeprecated warnに対応
+#### `jest-mock`における`expo-constants`のdeprecated警告に対応
 
 [Expo SDK 49の主な変更 - Expoがサポートするライブラリや機能 - Expo Constants](#expo-constants)に記載した通り、Constants.manifestが非推奨になりました。
-mockする際に[スプレッド構文](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax)を使用してアクセスすると`warn`ログが出力されるようになっています。
+mockする際に[スプレッド構文](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax)を使用してアクセスすると警告ログが出力されるようになっています。
 そのため、スプレッド構文ではなく[Proxy](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Proxy)を使用して上書きするようにしています。
 
 ```diff title="jest/__mocks__/expo-constants.ts"
@@ -573,7 +573,7 @@ function hasOwnProperty<T, K extends PropertyKey>(obj: T, propertyKey: K): obj i
 }
 
 /**
- * `{...original, [key]: value}`だとgetterにdeprecated warn logが存在する場合warnログが出てしまう問題対策
+ * `{...original, [key]: value}`だとgetterにdeprecated警告ログが存在する場合警告ログが出てしまう問題対策
  */
 export function wrapProperty<T extends object>(original: T, propertyObj: object): T {
   return new Proxy(original, {
@@ -662,7 +662,7 @@ export function wrapProperty<T extends object>(original: T, propertyObj: object)
      );
 ```
 
-### warn対応
+### 警告ログへの対応
 
 #### TypeScriptバージョンに対応しているtypescript-eslintに更新
 
@@ -671,7 +671,7 @@ export function wrapProperty<T extends object>(original: T, propertyObj: object)
 - @typescript-eslint/eslint-plugin
 - @typescript-eslint/parser
 
-```text title="発生していたWARNログ"
+```text title="発生していた警告ログ"
 WARNING: You are currently running a version of TypeScript which is not officially supported by @typescript-eslint/typescript-estree.
 
 You may find that it works just fine, or you may not.
@@ -706,7 +706,7 @@ npm update @typescript-eslint/eslint-plugin @typescript-eslint/parser
 
 #### initialScrollIndexの範囲外警告に対応
 
-`react-native` `v0.72.0`から`FlatList`（`VirtualizedList`）の`initialScrollIndex`に`-1`（負の値）を指定するとwarnログがでるようになりました。
+`react-native` `v0.72.0`から`FlatList`（`VirtualizedList`）の`initialScrollIndex`に`-1`（負の値）を指定すると警告ログがでるようになりました。
 
 > initialScrollIndex "-1" is not valid (list has 0 items)
 
