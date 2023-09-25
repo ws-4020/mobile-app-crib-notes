@@ -113,7 +113,7 @@ npx create-expo-module --local
 
 詳細は、[JavaScript values](https://docs.expo.dev/modules/module-api/#javascript-values)を参照してください。
 
-#### (iOSシミュレータ)Expo GoのAppleシリコン上でのネイティブ実行サポート
+#### (iOSシミュレータ)AppleシリコンによるExpo Goのネイティブ実行サポート
 
 TestFlightビルドを使用して、シミュレータを使用せずにAppleシリコンMac上でExpo Goを直接実行もできます。
 ただし、UIの問題がいくつかあり、修正中です。
@@ -122,7 +122,7 @@ Appleシリコン上でネイティブ実行の詳細は、以下のリンク先
 
 - [iPhone and iPad apps on Apple silicon Macs - Apple Developer](https://developer.apple.com/macos/iphone-and-ipad-apps/)
 
-#### 開発ビルドのフラグ(`--dev-client`)の削除
+#### 開発ビルドフラグ(`--dev-client`)の削除
 
 `npx expo start --dev-client`の`--dev-client`フラグは必要なくなりました。
 
@@ -138,7 +138,7 @@ Appleシリコン上でネイティブ実行の詳細は、以下のリンク先
 `package.json`の`main`を変更して、任意のソースファイルを指すようにできます。
 Expo Routerを使用していない場合は、新しいエントリファイルで[registerRootComponent](https://docs.expo.dev/versions/latest/sdk/register-root-component/)を使用する必要があります。
 
-#### Expo CLIのMetroの環境変数のサポート
+#### Expo CLIによるMetro環境変数のサポート
 
 React Nativeエコシステムの既存のアプローチには、変数を更新するためにBabelキャッシュをクリアする必要があるなどの問題がありました。
 
@@ -150,7 +150,7 @@ SDK 49では、`EXPO_PUBLIC_`プレフィックスを付けて[`.env`や`.env.lo
 
 - [metro.config.js - Expo Documentation](https://docs.expo.dev/versions/v49.0.0/config/metro/#client-environment-variables)
 
-#### パッケージのバージョン検証の選択的オプトアウト
+#### パッケージバージョン検証の選択的オプトアウト
 
 環境によっては、Expoが推奨するバージョンとは異なるパッケージのバージョンを使用したい場合があります。
 
@@ -243,7 +243,7 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
 1. `npm install expo@^49.0.0`を実行して、Expo SDKをアップグレード
 1. `npx expo install --fix`を実行して、Expoが管理するライブラリのアップグレード
    - TypeScript `v5.2.x`ではなく`v5.1.x`を使用するため`npm install typescript@~5.1.3`を追加で実行（[参考](#typescript-バージョン-513)）
-1. [既存のパッチファイルの更新](#既存のパッチファイルの更新)
+1. [既存パッチファイルの更新](#既存パッチファイルの更新)
 1. [`jest-expo`のアップグレード](#jest-expoのアップグレード)
 1. [`npx expo-doctor@latest`を実行してプロジェクトの依存関係に問題がないか確認](#npx-expo-doctorlatestを実行してプロジェクトの依存関係に問題がないか確認)
 1. [tscチェック](#tscチェック)
@@ -252,9 +252,9 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
    - [FunctionComponent](#functioncomponent)
 1. [test修正](#test修正)
    - [`react-native-reanimated` `v3`対応](#react-native-reanimated-v3対応)
-   - [`react-native`のDimensionsのmock失敗の対応](#react-nativeのdimensionsのmock失敗の対応)
+   - [`react-native` Dimensionsのmock失敗対応](#react-native-dimensionsのmock失敗対応)
    - [`jest.advanceTimersByTime`を`act`でwrap](#jestadvancetimersbytimeをactでwrap)
-   - [`jest-mock`での`expo-constants`のdeprecated warn対応](#jest-mockでのexpo-constantsのdeprecated-warn対応)
+   - [`jest-mock`における`expo-constants`のdeprecated warn対応](#jest-mockにおけるexpo-constantsのdeprecated-warn対応)
    - [アニメーション中のAnimatedStyleの僅かな変化に対応](#アニメーション中のanimatedstyleの僅かな変化に対応)
    - [slideOutDurationテストの時間指定が厳密すぎるとテストが落ちる問題修正](#slideoutdurationテストの時間指定が厳密すぎるとテストが落ちる問題修正)
    - [keyExtractorの呼び出しが増えて落ちるようになったテスト修正](#keyextractorの呼び出しが増えて落ちるようになったテスト修正)
@@ -271,10 +271,10 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
 1. [不要になったConfig Plugins`withAndroidRemoveUsesClearTextTrafficForRelease`を削除](#不要になったconfig-pluginswithandroidremoveusescleartexttrafficforreleaseを削除)
 1. [Proguardルールの更新](#proguardルールの更新)
    - [`react-native-svg`用ルールの削除](#react-native-svg用ルールの削除)
-1. [Expoの更新履歴の確認と対応](#expoの更新履歴の確認と対応)
-1. [React Nativeの更新履歴の確認と対応](#react-nativeの更新履歴の確認と対応)
-1. [`expo-template-blank-typescript`の更新履歴の確認と対応](#expo-template-blank-typescriptの更新履歴の確認と対応)
-1. [`expo-template-bare-minimum`の更新履歴の確認と対応](#expo-template-bare-minimumの更新履歴の確認と対応)
+1. [Expoの更新履歴確認と対応](#expoの更新履歴確認と対応)
+1. [React Nativeの更新履歴確認と対応](#react-nativeの更新履歴確認と対応)
+1. [`expo-template-blank-typescript`の更新履歴確認と対応](#expo-template-blank-typescriptの更新履歴確認と対応)
+1. [`expo-template-bare-minimum`の更新履歴確認と対応](#expo-template-bare-minimumの更新履歴確認と対応)
    - [`.gitignore`の更新](#gitignoreの更新)
 1. [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.71.8&to=0.72.3)を参照して、React Nativeの更新を確認
    - このアプリで必要な対応は、[`expo-template-bare-minimum`の更新](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-bare-minimum)で対応されていました
@@ -284,7 +284,7 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
 
 アップグレードを実施したPull Requestは[ws-4020/mobile-app-crib-notes#1221](https://github.com/ws-4020/mobile-app-crib-notes/pull/1221)です。
 
-### 既存のパッチファイルの更新
+### 既存パッチファイルの更新
 
 このアプリでは、[patch-package](https://github.com/ds300/patch-package)を使用して、以下のライブラリにパッチファイルを適用していました。
 パッチ内容の詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.07/example-app/SantokuApp/patches/README.md)を参照してください。
@@ -488,7 +488,7 @@ export type ListRenderItem<ItemT> = (
 +require('react-native-reanimated').setUpTests();
 ```
 
-#### `react-native`のDimensionsのmock失敗の対応
+#### `react-native` Dimensionsのmock失敗対応
 
 `Dimensions`がES moduleに変更されました。
 
@@ -542,7 +542,7 @@ export type ListRenderItem<ItemT> = (
      expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 ```
 
-#### `jest-mock`での`expo-constants`のdeprecated warn対応
+#### `jest-mock`における`expo-constants`のdeprecated warn対応
 
 [Expo SDK 49の主な変更 - Expoがサポートするライブラリや機能 - Expo Constants](#expo-constants)に記載した通り、Constants.manifestが非推奨になりました。
 mockする際に[スプレッド構文](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax)を使ってアクセスすると`warn`ログが出力されるようになっています。
@@ -784,25 +784,25 @@ npm update @typescript-eslint/eslint-plugin @typescript-eslint/parser
              enableProguardInReleaseBuilds: true,
 ```
 
-### Expoの更新履歴の確認と対応
+### Expoの更新履歴確認と対応
 
 Expoの[CHANGELOG](https://github.com/expo/expo/blob/sdk-49/CHANGELOG.md#4900--2023-06-27)を参照して、Expo SDKとExpoが管理するライブラリの更新内容を確認しました。
 
 ここまでの対応以外に追加で必要なものはありませんでした。
 
-### React Nativeの更新履歴の確認と対応
+### React Nativeの更新履歴確認と対応
 
 React Nativeの[CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0724)を参照して、React Nativeの更新内容を確認しました。
 
 ここまでの対応以外に追加で必要なものはありませんでした。
 
-### `expo-template-blank-typescript`の更新履歴の確認と対応
+### `expo-template-blank-typescript`の更新履歴確認と対応
 
 [`expo-template-blank-typescript`の更新履歴](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-blank-typescript)を確認しました。
 
 `npm install expo@^49.0.0`、`npx expo install --fix`で更新される依存ライブラリのアップグレードが主な変更でした。そのため、このアプリで特別な対応は必要ありませんでした。
 
-### `expo-template-bare-minimum`の更新履歴の確認と対応
+### `expo-template-bare-minimum`の更新履歴確認と対応
 
 [`expo-template-bare-minimum`の更新履歴](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-bare-minimum)を確認しました。
 
