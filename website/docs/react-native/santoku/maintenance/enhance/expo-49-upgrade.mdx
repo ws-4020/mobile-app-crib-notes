@@ -246,22 +246,22 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
 1. [既存パッチファイルの更新](#既存パッチファイルの更新)
 1. [`jest-expo`のアップグレード](#jest-expoのアップグレード)
 1. [`npx expo-doctor@latest`を実行してプロジェクトの依存関係に問題がないか確認](#npx-expo-doctorlatestを実行してプロジェクトの依存関係に問題がないか確認)
-1. [tscチェック](#tscチェック)
+1. [TSCエラーへの対応](#tscエラーへの対応)
    - [DimensionValueの厳密化](#dimensionvalueの厳密化)
-   - [WebView.onScroll](#webviewonscroll)
-   - [FunctionComponent](#functioncomponent)
-1. [test修正](#test修正)
+   - [WebView.onScrollの型定義変更](#webviewonscrollの型定義変更)
+   - [FunctionComponentの返り値の範囲拡大](#functioncomponentの返り値の範囲拡大)
+1. [テストコードの修正](#テストコードの修正)
    - [`react-native-reanimated` `v3`対応](#react-native-reanimated-v3対応)
-   - [`react-native` Dimensionsのmock失敗対応](#react-native-dimensionsのmock失敗対応)
+   - [`react-native` Dimensionsのmock失敗に対応](#react-native-dimensionsのmock失敗に対応)
    - [`jest.advanceTimersByTime`を`act`でwrap](#jestadvancetimersbytimeをactでwrap)
-   - [`jest-mock`における`expo-constants`のdeprecated warn対応](#jest-mockにおけるexpo-constantsのdeprecated-warn対応)
+   - [`jest-mock`における`expo-constants`のdeprecated warnに対応](#jest-mockにおけるexpo-constantsのdeprecated-warnに対応)
    - [アニメーション中のAnimatedStyleの僅かな変化に対応](#アニメーション中のanimatedstyleの僅かな変化に対応)
-   - [slideOutDurationテストの時間指定が厳密すぎるとテストが失敗する問題修正](#slideoutdurationテストの時間指定が厳密すぎるとテストが失敗する問題修正)
-   - [keyExtractorの呼び出しが増えて失敗するようになったテスト修正](#keyextractorの呼び出しが増えて失敗するようになったテスト修正)
+   - [slideOutDurationテストの時間指定が厳密すぎるとテストが失敗する問題の修正](#slideoutdurationテストの時間指定が厳密すぎるとテストが失敗する問題の修正)
+   - [keyExtractorの呼び出しが増えたことによって失敗するようになったテストの修正](#keyextractorの呼び出しが増えたことによって失敗するようになったテストの修正)
    - snapshot更新
 1. [warn対応](#warn対応)
    - [TypeScriptバージョンに対応しているtypescript-eslintに更新](#typescriptバージョンに対応しているtypescript-eslintに更新)
-   - [deprecated対応（JSX.Element → React.JSX.Element）](#deprecated対応jsxelement--reactjsxelement)
+   - [JSX namespaceが非推奨になったことへの対応](#jsx-namespaceが非推奨になったことへの対応)
    - [initialScrollIndexの範囲外警告に対応](#initialscrollindexの範囲外警告に対応)
 1. `npm run prebuild`を実行してネイティブプロジェクトの再生成
 1. [ビルドエラーの修正](#ビルドエラーの修正)
@@ -359,7 +359,7 @@ santoku-app@1.0.0 /path/to/mobile-app-crib-notes/example-app/SantokuApp
     └── @expo/config-plugins@7.2.5 deduped
 ```
 
-### tscチェック
+### TSCエラーへの対応
 
 `npm run lint:tsc`でTypeScriptの型をチェックしました。
 
@@ -395,7 +395,7 @@ style定義の型推論で`${number}%`ではなく`string`として認識され�
          };
 ```
 
-#### WebView.onScroll
+#### WebView.onScrollの型定義変更
 
 `react-native-webview`のFabric対応で`onScroll`の型定義が変更されました。
 
@@ -423,7 +423,7 @@ style定義の型推論で`${number}%`ではなく`string`として認識され�
        if (isUriChanged && event.nativeEvent.contentOffset.y > 0) {
 ```
 
-#### FunctionComponent
+#### FunctionComponentの返り値の範囲拡大
 
 `React.FC`(`FunctionComponent`)の返り値の型定義が`ReactElement`から`ReactNode`に変更されました。
 
@@ -466,7 +466,7 @@ export type ListRenderItem<ItemT> = (
 +export const AppInfoListItem = ({item}: AppInfoListItemProps) => {
 ```
 
-### test修正
+### テストコードの修正
 
 #### `react-native-reanimated` `v3`対応
 
@@ -488,7 +488,7 @@ export type ListRenderItem<ItemT> = (
 +require('react-native-reanimated').setUpTests();
 ```
 
-#### `react-native` Dimensionsのmock失敗対応
+#### `react-native` Dimensionsのmock失敗に対応
 
 `Dimensions`がES moduleに変更されました。
 
@@ -542,7 +542,7 @@ export type ListRenderItem<ItemT> = (
      expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 ```
 
-#### `jest-mock`における`expo-constants`のdeprecated warn対応
+#### `jest-mock`における`expo-constants`のdeprecated warnに対応
 
 [Expo SDK 49の主な変更 - Expoがサポートするライブラリや機能 - Expo Constants](#expo-constants)に記載した通り、Constants.manifestが非推奨になりました。
 mockする際に[スプレッド構文](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax)を使用してアクセスすると`warn`ログが出力されるようになっています。
@@ -613,7 +613,7 @@ export function wrapProperty<T extends object>(original: T, propertyObj: object)
      // アニメーションが完了するとコンポーネントが消えること
 ```
 
-#### slideOutDurationテストの時間指定が厳密すぎるとテストが失敗する問題修正
+#### slideOutDurationテストの時間指定が厳密すぎるとテストが失敗する問題の修正
 
 今まではアニメーション終了1ms前のタイミングでアニメーション終了のcallbackが呼ばれないことを期待したテストをしていましたが、callbackが呼ばれるようになっていました。
 1msは小さすぎ、誤差の影響と考えられるため10msに変更しました。
@@ -639,7 +639,7 @@ export function wrapProperty<T extends object>(original: T, propertyObj: object)
    });
 ```
 
-#### keyExtractorの呼び出しが増えて失敗するようになったテスト修正
+#### keyExtractorの呼び出しが増えたことによって失敗するようになったテストの修正
 
 `react-native`の`FlatList`の`keyExtractor`の呼び出しが増えていました。
 2回目にindex=1が呼ばれるのは内部実装に依存していたため、`toHaveBeenNthCalledWith`の替わりに`toHaveBeenCalledWith`を使用するようにしました。
@@ -687,7 +687,7 @@ Please only submit bug reports when using the officially supported version.
 npm update @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-#### deprecated対応（JSX.Element → React.JSX.Element）
+#### JSX namespaceが非推奨になったことへの対応
 
 以下のcommitで`JSX`namespaceが`React`namespaceの下に移動され、`JSX`は非推奨となりました。
 
