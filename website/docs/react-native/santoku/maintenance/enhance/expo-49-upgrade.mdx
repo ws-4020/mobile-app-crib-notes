@@ -254,7 +254,7 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
    - [`react-native-reanimated` `v3`対応](#react-native-reanimated-v3対応)
    - [`react-native` Dimensionsのmock失敗への対応](#react-native-dimensionsのmock失敗への対応)
    - [`jest.advanceTimersByTime`を`act`でラップ](#jestadvancetimersbytimeをactでラップ)
-   - [`jest-mock`における`expo-constants`のdeprecated警告への対応](#jest-mockにおけるexpo-constantsのdeprecated警告への対応)
+   - [`Constants.manifest`がdeprecatedになったことへの対応](#constantsmanifestがdeprecatedになったことへの対応)
    - [アニメーション中のAnimatedStyleの僅かな変化への対応](#アニメーション中のanimatedstyleの僅かな変化への対応)
    - [slideOutDurationテストの時間指定が厳密すぎるとテストが失敗する問題の修正](#slideoutdurationテストの時間指定が厳密すぎるとテストが失敗する問題の修正)
    - [keyExtractorの呼び出しが増えたことによって失敗するようになったテストの修正](#keyextractorの呼び出しが増えたことによって失敗するようになったテストの修正)
@@ -542,10 +542,10 @@ export type ListRenderItem<ItemT> = (
      expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 ```
 
-#### `jest-mock`における`expo-constants`のdeprecated警告への対応
+#### `Constants.manifest`がdeprecatedになったことへの対応
 
-[Expo SDK 49の主な変更 - Expoがサポートするライブラリや機能 - Expo Constants](#expo-constants)に記載した通り、Constants.manifestが非推奨になりました。
-mockする際に[スプレッド構文](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax)を使用してアクセスすると警告ログが出力されるようになっています。
+[Expo SDK 49の主な変更 - Expoがサポートするライブラリや機能 - Expo Constants](#expo-constants)に記載した通り、`Constants.manifest`が非推奨になりました。
+`jest-mock`でもmockする際に[スプレッド構文](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax)を使用してアクセスすると警告ログが出力されるようになっています。
 そのため、スプレッド構文ではなく[Proxy](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Proxy)を使用して上書きするようにしています。
 
 ```diff title="jest/__mocks__/expo-constants.ts"
