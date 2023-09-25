@@ -253,7 +253,7 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
 1. [テストコードの修正](#テストコードの修正)
    - [`react-native-reanimated` `v3`対応](#react-native-reanimated-v3対応)
    - [`react-native` Dimensionsのmock失敗への対応](#react-native-dimensionsのmock失敗への対応)
-   - [`jest.advanceTimersByTime`を`act`でwrap](#jestadvancetimersbytimeをactでwrap)
+   - [`jest.advanceTimersByTime`を`act`でラップ](#jestadvancetimersbytimeをactでラップ)
    - [`jest-mock`における`expo-constants`のdeprecated警告への対応](#jest-mockにおけるexpo-constantsのdeprecated警告への対応)
    - [アニメーション中のAnimatedStyleの僅かな変化への対応](#アニメーション中のanimatedstyleの僅かな変化への対応)
    - [slideOutDurationテストの時間指定が厳密すぎるとテストが失敗する問題の修正](#slideoutdurationテストの時間指定が厳密すぎるとテストが失敗する問題の修正)
@@ -524,9 +524,9 @@ export type ListRenderItem<ItemT> = (
  }));
 ```
 
-#### `jest.advanceTimersByTime`を`act`でwrap
+#### `jest.advanceTimersByTime`を`act`でラップ
 
-以下の警告が出るようになっていたため、`act`でwrapするように変更しました。
+以下の警告が出るようになっていたため、`act`でラップするように変更しました。
 
 - Warning: An update to ForwardRef inside a test was not wrapped in act(...).
 - When testing, code that causes React state updates should be wrapped into act(...):
