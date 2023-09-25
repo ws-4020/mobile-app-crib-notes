@@ -808,7 +808,8 @@ React Nativeの[CHANGELOG](https://github.com/facebook/react-native/blob/main/CH
 ただし、以下の場合は個別に対応する必要があるため、この観点に絞って[`expo-template-bare-minimum`の更新履歴](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-bare-minimum)を確認しました。
 
 - このアプリで作成しているConfig Pluginsによる変更と、`expo-template-bare-minimum`の更新に伴う変更が競合した場合
-- [Prebuild](../../development/build-configuration.mdx#prebuild)時に生成されないファイル
+- [Prebuild](../../development/build-configuration.mdx#prebuild)時に生成・更新されないファイル
+  - `android/`, `ios/`以外のファイル（`.gitignore`など）の変更を取り込む必要のある場合があります
 
 #### `.gitignore`の更新
 
