@@ -773,7 +773,7 @@ npm update @typescript-eslint/eslint-plugin @typescript-eslint/parser
 
 - [Include proguard config (#1842) · software-mansion/react-native-svg@1637580](https://github.com/software-mansion/react-native-svg/commit/16375807327ec8e94cde91a7cbee771c48bf0c69)
 
-そのため、`app.config.js`で`expo-build-properties`プラグインの`android.extraProguardRules`でルールを追加する必要はなくなりました。
+そのため、`app.config.js`で`expo-build-properties`プラグインの`android.extraProguardRules`でルールを追加する必要はなくなったので削除しました。
 
 ```diff title="app.config.js"
  -keep class expo.modules.ExpoModulesPackageList { *; }
