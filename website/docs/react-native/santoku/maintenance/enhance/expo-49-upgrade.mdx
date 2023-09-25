@@ -256,8 +256,8 @@ Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用し�
    - [`jest.advanceTimersByTime`を`act`でwrap](#jestadvancetimersbytimeをactでwrap)
    - [`jest-mock`における`expo-constants`のdeprecated warn対応](#jest-mockにおけるexpo-constantsのdeprecated-warn対応)
    - [アニメーション中のAnimatedStyleの僅かな変化に対応](#アニメーション中のanimatedstyleの僅かな変化に対応)
-   - [slideOutDurationテストの時間指定が厳密すぎるとテストが落ちる問題修正](#slideoutdurationテストの時間指定が厳密すぎるとテストが落ちる問題修正)
-   - [keyExtractorの呼び出しが増えて落ちるようになったテスト修正](#keyextractorの呼び出しが増えて落ちるようになったテスト修正)
+   - [slideOutDurationテストの時間指定が厳密すぎるとテストが失敗する問題修正](#slideoutdurationテストの時間指定が厳密すぎるとテストが失敗する問題修正)
+   - [keyExtractorの呼び出しが増えて失敗するようになったテスト修正](#keyextractorの呼び出しが増えて失敗するようになったテスト修正)
    - snapshot更新
 1. [warn対応](#warn対応)
    - [TypeScriptバージョンに対応しているtypescript-eslintに更新](#typescriptバージョンに対応しているtypescript-eslintに更新)
@@ -613,7 +613,7 @@ export function wrapProperty<T extends object>(original: T, propertyObj: object)
      // アニメーションが完了するとコンポーネントが消えること
 ```
 
-#### slideOutDurationテストの時間指定が厳密すぎるとテストが落ちる問題修正
+#### slideOutDurationテストの時間指定が厳密すぎるとテストが失敗する問題修正
 
 今まではアニメーション終了1ms前のタイミングでアニメーション終了のcallbackが呼ばれないことを期待したテストをしていましたが、callbackが呼ばれるようになっていました。
 1msは小さすぎ、誤差の影響と考えられるため10msに変更しました。
@@ -639,7 +639,7 @@ export function wrapProperty<T extends object>(original: T, propertyObj: object)
    });
 ```
 
-#### keyExtractorの呼び出しが増えて落ちるようになったテスト修正
+#### keyExtractorの呼び出しが増えて失敗するようになったテスト修正
 
 `react-native`の`FlatList`の`keyExtractor`の呼び出しが増えていました。
 2回目にindex=1が呼ばれるのは内部実装に依存していたため、`toHaveBeenNthCalledWith`の替わりに`toHaveBeenCalledWith`を使用するようにしました。
