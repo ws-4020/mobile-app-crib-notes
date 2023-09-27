@@ -33,6 +33,8 @@ const mock: Omit<
   getDidOpenSettingsForNotification: jest.fn(),
   setOpenSettingsForNotificationsHandler: jest.fn(),
   setDeliveryMetricsExportToBigQuery: jest.fn(),
+  isSupported: jest.fn().mockResolvedValue(true),
+  experimentalSetDeliveryMetricsExportedToBigQueryEnabled: jest.fn(),
 };
 
 export default () => mock;
