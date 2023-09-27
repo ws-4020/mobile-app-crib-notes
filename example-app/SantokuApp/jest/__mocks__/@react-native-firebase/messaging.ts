@@ -35,6 +35,7 @@ const mock: Omit<
   setDeliveryMetricsExportToBigQuery: jest.fn(),
   isSupported: jest.fn().mockResolvedValue(true),
   experimentalSetDeliveryMetricsExportedToBigQueryEnabled: jest.fn(),
+  setAPNSToken: jest.fn(),
 };
 
 export default () => mock;
