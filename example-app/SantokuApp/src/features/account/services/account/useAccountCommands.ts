@@ -1,7 +1,7 @@
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {AccountData} from 'features/account/types/AccountData';
 import {postAccountsMeDeviceToken, postAccountsMeTerms} from 'features/backend/apis/account/account';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
-import {useMutation, useQueryClient} from 'react-query';
 
 import {getAccountData} from './getAccountData';
 

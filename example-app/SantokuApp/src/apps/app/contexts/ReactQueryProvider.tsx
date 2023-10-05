@@ -1,7 +1,7 @@
 import NetInfo from '@react-native-community/netinfo';
+import {focusManager, onlineManager, QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React, {useEffect, useMemo} from 'react';
 import {AppState, AppStateStatus, Platform} from 'react-native';
-import {focusManager, onlineManager, QueryClient, QueryClientProvider} from 'react-query';
 
 import {defaultMutationCache, defaultQueryCache} from '../services/defaultCache';
 import {defaultOptions} from '../services/defaultOptions';

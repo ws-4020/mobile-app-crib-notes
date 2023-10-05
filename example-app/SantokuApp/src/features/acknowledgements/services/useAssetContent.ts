@@ -1,6 +1,6 @@
+import {useQuery} from '@tanstack/react-query';
 import {Asset} from 'expo-asset';
 import * as FileSystem from 'expo-file-system';
-import {useQuery} from 'react-query';
 
 const loadAssetContent = async (moduleId: number | undefined) => {
   if (moduleId == null) {

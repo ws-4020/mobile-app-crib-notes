@@ -1,4 +1,4 @@
-import {Query, useMutation, useQueryClient, hashQueryKey} from 'react-query';
+import {Query, useMutation, useQueryClient, hashQueryKey} from '@tanstack/react-query';
 import {QueryFilters} from 'react-query/types/core/utils';
 
 import {autoLogin} from './autoLogin';

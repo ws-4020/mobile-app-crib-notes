@@ -1,5 +1,5 @@
+import {useQuery} from '@tanstack/react-query';
 import {useCallback} from 'react';
-import {useQuery} from 'react-query';
 
 // 商品
 type Item = {

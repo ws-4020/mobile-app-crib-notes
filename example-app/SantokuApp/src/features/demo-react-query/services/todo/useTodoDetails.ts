@@ -1,7 +1,7 @@
+import {useQuery} from '@tanstack/react-query';
 import {getTodo, listTodo} from 'features/sandbox/apis/api';
 import {ListTodoParams} from 'features/sandbox/apis/model/listTodoParams';
 import {useCallback} from 'react';
-import {useQuery} from 'react-query';
 
 const listTodoDetails = async (params?: ListTodoParams) => {
   const response = await listTodo(params);

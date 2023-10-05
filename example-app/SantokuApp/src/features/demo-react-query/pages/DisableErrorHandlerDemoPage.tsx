@@ -1,7 +1,7 @@
+import {useQuery} from '@tanstack/react-query';
 import React, {useCallback} from 'react';
 import {Alert, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
-import {useQuery} from 'react-query';
 
 const queryErrorFn = () => {
   throw new Error('リクエストエラー');

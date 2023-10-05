@@ -1,6 +1,6 @@
+import type {QueryKey} from '@tanstack/react-query';
+import {hashQueryKey, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useCallback, useMemo, useRef} from 'react';
-import type {QueryKey} from 'react-query';
-import {hashQueryKey, useQuery, useQueryClient} from 'react-query';
 export type ClientStateKey = string | number | QueryKey;
 export type InitialClientState<S> = S | (() => S);
 export type SetClientStateFunction<S> = (prevState: S | undefined) => S;

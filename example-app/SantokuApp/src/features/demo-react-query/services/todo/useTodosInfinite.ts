@@ -1,8 +1,8 @@
+import {InfiniteData, useQueryClient} from '@tanstack/react-query';
 import {AxiosResponse} from 'axios';
 import {useListTodoByCursorInfinite} from 'features/sandbox/apis/api';
 import {ListTodoByCursorParams, ListTodoInfiniteResponse} from 'features/sandbox/apis/model';
 import {useCallback, useState} from 'react';
-import {InfiniteData, useQueryClient} from 'react-query';
 
 const translateTodos = (data?: InfiniteData<AxiosResponse<ListTodoInfiniteResponse, any>>) => {
   if (data) {
