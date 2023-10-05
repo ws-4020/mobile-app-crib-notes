@@ -26,11 +26,11 @@ export const useTodosInfinite = (initialInfiniteListParams?: ListTodoByCursorPar
     },
   });
   const reset = useCallback(async () => {
-    await queryClient.resetQueries(`/todos/infinite`);
+    await queryClient.resetQueries([`/todos/infinite`]);
   }, [queryClient]);
 
   const invalidate = useCallback(async () => {
-    await queryClient.invalidateQueries(`/todos/infinite`);
+    await queryClient.invalidateQueries([`/todos/infinite`]);
   }, [queryClient]);
 
   const next = useCallback(() => {
