@@ -8,6 +8,7 @@ import {LoadingOverlay} from 'bases/ui/loading/LoadingOverlay';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {AppThemeProvider} from 'bases/ui/theme/AppThemeProvider';
 import 'expo-dev-client'; // エラー処理の改善: https://docs.expo.dev/develop/development-builds/use-development-builds/
+import {StatusBar} from 'expo-status-bar';
 import React, {useEffect} from 'react';
 import {Platform, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
@@ -94,6 +95,7 @@ export const App = ({isHeadless}: AppProperties) => {
 
   return (
     <GestureHandlerRootView style={StyleSheet.absoluteFill}>
+      <StatusBar style="dark" />
       <SafeAreaProvider>
         <AppThemeProvider>
           <AppWithInitialization />
