@@ -4,7 +4,8 @@ import * as FileSystem from 'expo-file-system';
 
 const loadAssetContent = async (moduleId: number | undefined) => {
   if (moduleId == null) {
-    return;
+    // useQueryのqueryFnからundefinedを返却するとエラーがthrowされてしまうため、nullを返却する
+    return null;
   }
   return Asset.loadAsync(moduleId).then(assets => {
     if (assets?.length && assets[0].localUri) {
