@@ -8,7 +8,7 @@ import {getAccountData} from './getAccountData';
 export const useAccountCommands = () => {
   const queryClient = useQueryClient();
 
-  const loadAccountDataMutation = useMutation(getAccountData, {
+  const loadAccountDataMutation = useMutation(() => getAccountData(), {
     onSuccess: accountData => {
       queryClient.setQueryData<AccountData>(['account', 'accountData'], accountData);
     },
