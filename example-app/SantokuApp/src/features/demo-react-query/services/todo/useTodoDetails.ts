@@ -21,5 +21,5 @@ export const useTodoDetails = (params?: ListTodoParams, options?: {enabled: bool
     query.remove();
     await query.refetch();
   }, [query]);
-  return {...query, todoDetails: query.data, reload};
+  return {...query, todoDetails: query.data, reload, isIdle: query.fetchStatus === 'idle'};
 };

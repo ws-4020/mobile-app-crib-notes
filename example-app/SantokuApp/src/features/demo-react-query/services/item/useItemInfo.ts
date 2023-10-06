@@ -9,5 +9,5 @@ export const useItemInfo = (id: number) => {
     query.remove();
     query.refetch().catch(() => {});
   }, [query]);
-  return {...query, reload};
+  return {...query, reload, isIdle: query.fetchStatus === 'idle'};
 };
