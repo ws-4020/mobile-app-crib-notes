@@ -1,8 +1,9 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {StatusBar, setStatusBarStyle} from 'expo-status-bar';
+import {setStatusBarStyle} from 'expo-status-bar';
 import {ProfileDetailPage} from 'features/account/pages/ProfileDetailPage';
 import React, {useCallback, useEffect} from 'react';
+import {Platform} from 'react-native';
 
 import {RootStackParamList, AccountStackParamList} from '../../navigators/types';
 
@@ -14,15 +15,9 @@ export const ProfileDetailScreen: React.FC<
 > = ({navigation}) => {
   const navigateToDemo = useCallback(() => navigation.navigate('DemoStackNav', {screen: 'DemoMenu'}), [navigation]);
   useEffect(() => {
-    const listener = navigation.addListener('focus', () => {
-      setStatusBarStyle('dark');
+    navigation.addListener('focus', () => {
+      setStatusBarStyle(Platform.OS === 'ios' ? 'dark' : 'light');
     });
-    return listener;
   }, [navigation]);
-  return (
-    <>
-      <StatusBar style="dark" />
-      <ProfileDetailPage navigateToDemo={navigateToDemo} />
-    </>
-  );
+  return <ProfileDetailPage navigateToDemo={navigateToDemo} />;
 };
