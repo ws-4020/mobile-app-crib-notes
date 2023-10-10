@@ -28,7 +28,7 @@ export const HomeScreen: React.FC<
   );
 
   useEffect(() => {
-    navigation.addListener('focus', () => {
+    return navigation.addListener('focus', () => {
       setStatusBarStyle('light');
     });
   }, [navigation]);

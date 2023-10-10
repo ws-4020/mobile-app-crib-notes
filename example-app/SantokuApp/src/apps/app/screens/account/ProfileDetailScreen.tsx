@@ -15,7 +15,7 @@ export const ProfileDetailScreen: React.FC<
 > = ({navigation}) => {
   const navigateToDemo = useCallback(() => navigation.navigate('DemoStackNav', {screen: 'DemoMenu'}), [navigation]);
   useEffect(() => {
-    navigation.addListener('focus', () => {
+    return navigation.addListener('focus', () => {
       setStatusBarStyle(Platform.OS === 'ios' ? 'dark' : 'light');
     });
   }, [navigation]);
