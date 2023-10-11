@@ -31,35 +31,87 @@ const getDefaultAxiosConfig = () => {
   } as AxiosRequestConfig;
 };
 
+const nop = () => {};
+
+/**
+ * 指定されたsignalを組み合わせて、一つのsignalを返却します。
+ *
+ * ＜参考＞
+ * MDNには、AbortSignal.anyというメソッドが存在していますが、React Nativeではまだ実装されていないようです。
+ * https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout_static
+ * https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L480
+ */
+const combineSignals = (s1: AbortSignal, s2: AbortSignal) => {
+  const signals = [s1, s2];
+  const controller = new AbortController();
+  const signal = controller.signal;
+  const removeListeners: (() => void)[] = [];
+  for (const s of signals) {
+    if (s.aborted) {
+      // 既にabortされている場合は、新しいsignalをabortします
+      controller.abort();
+      break;
+    }
+    s.addEventListener('abort', () => {
+      controller.abort();
+    });
+    removeListeners.push(() => s.removeEventListener('abort', nop));
+  }
+  // React NativeはaddEventListenerのOptionとしてsignalがサポートされていないため、abortした場合に自動でListenerを削除できません
+  // https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L495
+  // https://developer.mozilla.org/ja/docs/Web/API/EventTarget/addEventListener
+  // そのため、cleanup関数を返却して、呼び出し元でListenerを削除できるようにします
+  const cleanup = () => removeListeners.forEach(r => r());
+  return {signal, cleanup};
+};
+
 const customInstance = <T>(
   axiosInstance: AxiosInstance,
 ): ((config: AxiosRequestConfig) => Promise<AxiosResponse<T>>) => {
   const defaultAxiosConfig = getDefaultAxiosConfig();
   return (config: AxiosRequestConfig) => {
-    // TODO: React Native / Expo のバージョンアップ時にJestを27以降にバージョンアップできたらCancelTokenからAbortControllerへ移行する
-    const source = Axios.CancelToken.source();
+    const timeoutAbortController = new AbortController();
+    const timeoutSignal = timeoutAbortController.signal;
+    // axiosのRequestConfigに含まれるsignalは、GenericAbortSignalという型で定義されています。
+    // GenericAbortSignalは、機能が最小限に抑えられており、React NativeのAbortSignalと互換性がありません。
+    // https://github.com/axios/axios/blob/v1.5.1/index.d.ts#L232
+    // https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L480
+    // このアプリで生成するAbortSignalは、React Nativeの型定義に従った機能が提供されているはずなので、GenericAbortSignalをAbortSignalに型変換します。
+    const combinedSignal = config.signal
+      ? combineSignals(timeoutSignal, config.signal as AbortSignal)
+      : {signal: timeoutAbortController.signal, cleanup: undefined};
+
     const requestConfig = {
       ...defaultAxiosConfig,
       ...config,
-      cancelToken: source.token,
+      signal: combinedSignal.signal,
     };
+
     const promise = axiosInstance(requestConfig);
 
+    // MDNには、AbortSignal.timeoutが存在しますが、React Nativeではまだ実装されていないようです。
+    // https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout_static
+    // https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L480
+    // そのため、setTimeoutを使用して、timeoutを実現します。
     let timeoutId: NodeJS.Timeout | null;
     if (REQUEST_TIMEOUT) {
       timeoutId = setTimeout(() => {
         timeoutId = null;
-        source.cancel('Query was cancelled by Request Timeout');
+        // MDNには、AbortController.abortの引数としてreasonを受け取れるように記載されていますが、React Nativeでは実装されていないようです。
+        // https://developer.mozilla.org/ja/docs/Web/API/AbortSignal/abort_static
+        // https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L527
+        timeoutAbortController.abort();
       }, REQUEST_TIMEOUT);
     }
 
     return promise
       .catch(error => {
-        // TODO: AbortControllerへの移行時に処理を見直す
-        // AbortControllerでabortした場合はErrorにはならず、responseがundefinedになる
         if (Axios.isCancel(error)) {
-          const cancelError = error as {message: string};
-          if (cancelError.message === 'Query was cancelled by Request Timeout') {
+          if (timeoutSignal.aborted) {
+            // MDNには、AbortSignal.reasonが存在しますが、React Nativeでは実装されていないようです。
+            // https://developer.mozilla.org/ja/docs/Web/API/AbortSignal/reason
+            // https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L480
+            // そのため、AbortSignalのreasonをthrowしないで、RequestTimeoutErrorを直接throwしています。
             throw new RequestTimeoutError('Request Timeout');
           }
         }
@@ -69,6 +121,7 @@ const customInstance = <T>(
         if (timeoutId) {
           clearTimeout(timeoutId);
         }
+        combinedSignal.cleanup?.();
       });
   };
 };
