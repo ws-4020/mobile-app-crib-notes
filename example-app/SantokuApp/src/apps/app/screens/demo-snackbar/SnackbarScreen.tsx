@@ -13,12 +13,5 @@ export const SnackbarScreen: React.FC = () => {
       }
     });
   }, [navigation]);
-  useEffect(() => {
-    return navigation.addListener('beforeRemove', () => {
-      if (Platform.OS === 'ios') {
-        setStatusBarStyle('dark');
-      }
-    });
-  }, [navigation]);
   return <SnackbarPage />;
 };

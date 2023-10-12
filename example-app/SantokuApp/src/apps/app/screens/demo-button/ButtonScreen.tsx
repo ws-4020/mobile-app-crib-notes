@@ -13,12 +13,5 @@ export const ButtonScreen: React.FC = () => {
       }
     });
   }, [navigation]);
-  useEffect(() => {
-    return navigation.addListener('beforeRemove', () => {
-      if (Platform.OS === 'ios') {
-        setStatusBarStyle('dark');
-      }
-    });
-  }, [navigation]);
   return <ButtonPage />;
 };
