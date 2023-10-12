@@ -1,7 +1,6 @@
 import {Button} from 'bases/ui/button/Button';
-import {StatusBar} from 'expo-status-bar';
 import React from 'react';
-import {Alert, StyleSheet, View, Platform} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 
 const handlePress = () => {
   Alert.alert('clicked');
@@ -10,7 +9,6 @@ const handlePress = () => {
 export const ButtonPage: React.FC = () => {
   return (
     <View style={styles.container}>
-      {Platform.OS === 'ios' && <StatusBar style="light" />}
       <Button title="Small" onPress={handlePress} />
       <Button title="Middle" size="middle" />
       <Button title="Large" size="large" />
