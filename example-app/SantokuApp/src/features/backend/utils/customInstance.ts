@@ -57,11 +57,11 @@ const combineSignals = (s1: AbortSignal, s2: AbortSignal) => {
     s.addEventListener('abort', handleChildSignalAbort);
     removeListeners.push(() => s.removeEventListener('abort', handleChildSignalAbort));
   }
+  const cleanup = () => removeListeners.forEach(r => r());
   // React NativeはaddEventListenerのOptionとしてsignalがサポートされていないため、abortした場合に自動でListenerを削除できません
   // https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L495
   // https://developer.mozilla.org/ja/docs/Web/API/EventTarget/addEventListener
-  // そのため、cleanup関数を返却して、呼び出し元でListenerを削除できるようにします
-  const cleanup = () => removeListeners.forEach(r => r());
+  signal.onabort = cleanup;
   return {signal, cleanup};
 };
 
