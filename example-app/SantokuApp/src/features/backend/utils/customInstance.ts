@@ -39,8 +39,7 @@ const getDefaultAxiosConfig = () => {
  * https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout_static
  * https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L480
  */
-const combineSignals = (s1: AbortSignal, s2: AbortSignal) => {
-  const signals = [s1, s2];
+const combineSignals = (...signals: AbortSignal[]) => {
   const controller = new AbortController();
   const signal = controller.signal;
   const removeListeners: (() => void)[] = [];
