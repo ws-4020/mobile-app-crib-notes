@@ -14,6 +14,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {AppWithInitialization} from './AppWithInitialization';
+import {FirebaseCrashlyticsWorkaround} from './components/FirebaseCrashlyticsWorkaround';
 import {handleError} from './errors/handleError';
 import {handleErrorWithAlert} from './errors/handleErrorWithAlert';
 import {handleErrorWithSnackbar} from './errors/handleErrorWithSnackbar';
@@ -93,14 +94,16 @@ export const App = ({isHeadless}: AppProperties) => {
   }
 
   return (
-    <GestureHandlerRootView style={StyleSheet.absoluteFill}>
-      <SafeAreaProvider>
-        <AppThemeProvider>
-          <AppWithInitialization />
-          <LoadingOverlay.Component />
-          <Snackbar.Component />
-        </AppThemeProvider>
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+    <FirebaseCrashlyticsWorkaround>
+      <GestureHandlerRootView style={StyleSheet.absoluteFill}>
+        <SafeAreaProvider>
+          <AppThemeProvider>
+            <AppWithInitialization />
+            <LoadingOverlay.Component />
+            <Snackbar.Component />
+          </AppThemeProvider>
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
+    </FirebaseCrashlyticsWorkaround>
   );
 };
