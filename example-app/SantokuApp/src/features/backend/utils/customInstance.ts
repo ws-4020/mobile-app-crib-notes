@@ -31,8 +31,6 @@ const getDefaultAxiosConfig = () => {
   } as AxiosRequestConfig;
 };
 
-const nop = () => {};
-
 /**
  * 指定されたsignalを組み合わせて、一つのsignalを返却します。
  *
@@ -46,16 +44,18 @@ const combineSignals = (s1: AbortSignal, s2: AbortSignal) => {
   const controller = new AbortController();
   const signal = controller.signal;
   const removeListeners: (() => void)[] = [];
+  const handleChildSignalAbort = () => {
+    controller.abort();
+  };
+
   for (const s of signals) {
     if (s.aborted) {
       // 既にabortされている場合は、新しいsignalをabortします
       controller.abort();
       break;
     }
-    s.addEventListener('abort', () => {
-      controller.abort();
-    });
-    removeListeners.push(() => s.removeEventListener('abort', nop));
+    s.addEventListener('abort', handleChildSignalAbort);
+    removeListeners.push(() => s.removeEventListener('abort', handleChildSignalAbort));
   }
   // React NativeはaddEventListenerのOptionとしてsignalがサポートされていないため、abortした場合に自動でListenerを削除できません
   // https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L495
