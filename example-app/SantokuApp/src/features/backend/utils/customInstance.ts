@@ -54,19 +54,20 @@ const combineSignals = (...signals: (AbortSignal | GenericAbortSignal)[]) => {
       controller.abort();
       break;
     }
-    if (s.addEventListener == null) {
-      log.warn('AbortSignal.addEventListener is undefined');
-    } else {
+    if (s.addEventListener) {
       s.addEventListener('abort', handleChildSignalAbort);
-    }
-    if (s.removeEventListener == null) {
-      log.warn('AbortSignal.removeEventListener is undefined');
     } else {
+      log.warn('AbortSignal.addEventListener is undefined');
+      continue;
+    }
+    if (s.removeEventListener) {
       /*
         eslint-disable-next-line @typescript-eslint/no-unsafe-return --
         removeEventListenerの戻り値は特に使用しないため、ESLintの警告を無視しています
        */
       removeListeners.push(() => s.removeEventListener?.('abort', handleChildSignalAbort));
+    } else {
+      log.warn('AbortSignal.removeEventListener is undefined');
     }
   }
   const cleanup = () => removeListeners.forEach(r => r());
