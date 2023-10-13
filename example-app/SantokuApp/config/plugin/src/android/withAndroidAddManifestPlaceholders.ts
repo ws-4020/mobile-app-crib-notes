@@ -48,7 +48,7 @@ export const withAndroidAddManifestPlaceholders: ConfigPlugin<ManifestPlaceholde
 const apply = (buildGradle: string, params: ManifestPlaceholderParams[]): string => {
   const manifestPlaceholders = params
     .filter(data => {
-      if (data.propertyKey || data.fixedValue != null) {
+      if (data.propertyKey ?? data.fixedValue != null) {
         // fixedValueは空文字も許容する
         return true;
       } else {
