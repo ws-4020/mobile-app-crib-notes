@@ -86,7 +86,7 @@ const customInstance = <T>(
     const timeoutSignal = timeoutAbortController.signal;
     const combinedSignal = config.signal
       ? combineSignals(timeoutSignal, config.signal)
-      : {signal: timeoutAbortController.signal, cleanup: undefined};
+      : {signal: timeoutSignal, cleanup: undefined};
 
     const requestConfig = {
       ...defaultAxiosConfig,
