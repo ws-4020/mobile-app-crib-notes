@@ -1,5 +1,6 @@
-import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, GenericAbortSignal} from 'axios';
 import {AppConfig} from 'bases/core/configs/AppConfig';
+import {log} from 'bases/logging';
 import {applicationName, nativeApplicationVersion} from 'expo-application';
 import {RequestTimeoutError} from 'features/backend/errors/RequestTimeoutError';
 import {Platform} from 'react-native';
@@ -39,7 +40,7 @@ const getDefaultAxiosConfig = () => {
  * https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout_static
  * https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L480
  */
-const combineSignals = (...signals: AbortSignal[]) => {
+const combineSignals = (...signals: (AbortSignal | GenericAbortSignal)[]) => {
   const controller = new AbortController();
   const signal = controller.signal;
   const removeListeners: (() => void)[] = [];
@@ -53,8 +54,20 @@ const combineSignals = (...signals: AbortSignal[]) => {
       controller.abort();
       break;
     }
-    s.addEventListener('abort', handleChildSignalAbort);
-    removeListeners.push(() => s.removeEventListener('abort', handleChildSignalAbort));
+    if (s.addEventListener == null) {
+      log.warn('AbortSignal.addEventListener is undefined');
+    } else {
+      s.addEventListener('abort', handleChildSignalAbort);
+    }
+    if (s.removeEventListener == null) {
+      log.warn('AbortSignal.removeEventListener is undefined');
+    } else {
+      /*
+        eslint-disable-next-line @typescript-eslint/no-unsafe-return --
+        removeEventListenerの戻り値は特に使用しないため、ESLintの警告を無視しています
+       */
+      removeListeners.push(() => s.removeEventListener?.('abort', handleChildSignalAbort));
+    }
   }
   const cleanup = () => removeListeners.forEach(r => r());
   // React NativeはaddEventListenerのOptionとしてsignalがサポートされていないため、abortした場合に自動でListenerを削除できません
@@ -71,13 +84,8 @@ const customInstance = <T>(
   return (config: AxiosRequestConfig) => {
     const timeoutAbortController = new AbortController();
     const timeoutSignal = timeoutAbortController.signal;
-    // axiosのRequestConfigに含まれるsignalは、GenericAbortSignalという型で定義されています。
-    // GenericAbortSignalは、機能が最小限に抑えられており、React NativeのAbortSignalと互換性がありません。
-    // https://github.com/axios/axios/blob/v1.5.1/index.d.ts#L232
-    // https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L480
-    // このアプリで生成するAbortSignalは、React Nativeの型定義に従った機能が提供されているはずなので、GenericAbortSignalをAbortSignalに型変換します。
     const combinedSignal = config.signal
-      ? combineSignals(timeoutSignal, config.signal as AbortSignal)
+      ? combineSignals(timeoutSignal, config.signal)
       : {signal: timeoutAbortController.signal, cleanup: undefined};
 
     const requestConfig = {
