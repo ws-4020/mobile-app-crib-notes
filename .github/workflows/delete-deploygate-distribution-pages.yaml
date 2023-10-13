@@ -12,7 +12,7 @@ on:
 jobs:
   delete-distribution-pages:
     name: Delete DeployGate distribution pages
-    # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md
+    # https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
     runs-on: ubuntu-22.04
     env:
       DEPLOYGATE_ORGANIZATION_NAME: ${{ secrets.DEPLOYGATE_ORGANIZATION_NAME }}
