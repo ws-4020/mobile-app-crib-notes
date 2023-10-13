@@ -6,6 +6,8 @@ import {db} from '../db';
 export const eventData = () => {
   const date = new Date();
   date.setDate(date.getDate() + 1);
+  const formatDate = date.toISOString().split('T')[0];
+
   db.event.create({
     eventId: '1',
     title: '【勉強会】今話題の技術を触ってみよう',
@@ -15,7 +17,7 @@ export const eventData = () => {
 ■参加資格
 制限なし
 `,
-    endDate: date.toString(),
+    endDate: formatDate,
     likes: 1,
     ...santokuAccount,
   });
@@ -31,7 +33,7 @@ export const eventData = () => {
 ■概要
 マスタリングTCP/IP 入門を読みながら、不明点などを議論していくスタイルです。
 `,
-    endDate: date.toString(),
+    endDate: formatDate,
     likes: 3,
     ...santokuAccount,
   });
@@ -48,7 +50,7 @@ export const eventData = () => {
 React NativeのNew Architectureは、さまざまな理由により導入に踏み切ってない方も多いかと思います。
 まだまだ少ない事例の中、実際にNew Architectureを導入した開発者に、導入して感じたことを話して頂きます。
 `,
-    endDate: date.toString(),
+    endDate: formatDate,
     likes: 10,
     ...adminAccount,
   });
@@ -64,7 +66,7 @@ React NativeのNew Architectureは、さまざまな理由により導入に踏�
 ■概要
 Keycloakを使用しながら、実際にOpen ID Connectの各種フローを追っていきます。
 `,
-    endDate: date.toString(),
+    endDate: formatDate,
     likes: 5,
     ...santokuAccount,
   });
@@ -80,7 +82,7 @@ Keycloakを使用しながら、実際にOpen ID Connectの各種フローを追
 ■概要
 ReactとFirebaseを使用してWebアプリケーションを構築した開発者が、そのメリットやデメリットなどを話します。
 `,
-    endDate: date.toString(),
+    endDate: formatDate,
     likes: 8,
     ...santokuAccount,
   });
@@ -94,7 +96,7 @@ ReactとFirebaseを使用してWebアプリケーションを構築した開発�
 ■参加資格
 XXRが全くわからない方
 `,
-    endDate: date.toString(),
+    endDate: formatDate,
     likes: 15,
     ...partnerAccount,
   });
@@ -111,7 +113,7 @@ XXRが全くわからない方
 不具合が発生した場合に、みなさんはどのようにログを追っていますか？
 今回のイベントは、Cloud Nativeのトレーサビリティに関する話を中心とした催しになります。
 `,
-    endDate: date.toString(),
+    endDate: formatDate,
     likes: 18,
     ...adminAccount,
   });
