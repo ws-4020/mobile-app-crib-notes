@@ -12,7 +12,7 @@ import {RestyleTheme} from '../theme/restyleTheme';
 export const BaseFlatList = createBox<RestyleTheme, FlatListProps<any>>(FlatList);
 
 type StyledFlatListProps<T> = BoxProps<RestyleTheme> & FlatListProps<T>;
-const StyledFlatListComponent = <T extends unknown>(
+const StyledFlatListComponent = <T,>(
   {children, ...rest}: StyledFlatListProps<T>,
   ref: React.ForwardedRef<FlatList>,
 ) => (

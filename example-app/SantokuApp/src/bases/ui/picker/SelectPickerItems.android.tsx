@@ -24,8 +24,7 @@ const FaderBottom = React.memo(({itemHeight}: {itemHeight: number}) => (
 
 const DECELERATION_RATE = 0.98;
 
-const defaultKeyExtractor = <ItemT extends unknown>(item: Item<ItemT>, index: number) =>
-  `${String(item.key ?? item.value)}.${index}`;
+const defaultKeyExtractor = <ItemT,>(item: Item<ItemT>, index: number) => `${String(item.key ?? item.value)}.${index}`;
 
 /*
   eslint-disable-next-line @typescript-eslint/no-explicit-any --
@@ -36,7 +35,7 @@ const AnimatedFlatList = Reanimated.createAnimatedComponent<FlatListProps<Item<a
 
 type SelectPickerItemsAndroid<ItemT> = Omit<SelectPickerItemsProps<ItemT>, 'style'>;
 
-export const SelectPickerItems = <ItemT extends unknown>({
+export const SelectPickerItems = <ItemT,>({
   selectedValue,
   onValueChange,
   items,

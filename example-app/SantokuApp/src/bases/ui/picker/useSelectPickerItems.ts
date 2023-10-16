@@ -14,7 +14,7 @@ type SelectPickerItemsTypes<ItemT> = {
   onValueChange?: (itemValue: ItemT, itemIndex: number) => void;
 };
 
-export const useSelectPickerItems = <ItemT extends unknown>({
+export const useSelectPickerItems = <ItemT>({
   selectedValue,
   items,
   itemHeight,
