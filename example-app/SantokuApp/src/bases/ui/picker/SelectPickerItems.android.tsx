@@ -27,6 +27,11 @@ const DECELERATION_RATE = 0.98;
 const defaultKeyExtractor = <ItemT extends unknown>(item: Item<ItemT>, index: number) =>
   `${String(item.key ?? item.value)}.${index}`;
 
+/*
+  eslint-disable-next-line @typescript-eslint/no-explicit-any --
+  Reanimated.createAnimatedComponentにはジェネリクス<ItemT>を渡す手段がない
+  Item<unknown>とかにすると、AnimatedFlatListのkeyExtractorやrenderItemで型エラーになるためanyで定義しておく
+ */
 const AnimatedFlatList = Reanimated.createAnimatedComponent<FlatListProps<Item<any>>>(FlatList);
 
 type SelectPickerItemsAndroid<ItemT> = Omit<SelectPickerItemsProps<ItemT>, 'style'>;
