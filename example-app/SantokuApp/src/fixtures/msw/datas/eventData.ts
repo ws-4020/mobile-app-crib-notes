@@ -5,7 +5,7 @@ import {db} from '../db';
 
 export const eventData = () => {
   const date = new Date();
-  // 日付を1年後に設定する
+  // 常に募集中のイベントを用意するため、日付を1年後に設定する
   date.setFullYear(date.getFullYear() + 1);
   const formattedDate = date.toISOString();
 
