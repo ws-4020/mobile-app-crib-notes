@@ -7,7 +7,7 @@ export const eventData = () => {
   const date = new Date();
   // 日付を1年後に設定する
   date.setFullYear(date.getFullYear() + 1);
-  const formattedDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
+  const formattedDate = date.toISOString();
 
   db.event.create({
     eventId: '1',
