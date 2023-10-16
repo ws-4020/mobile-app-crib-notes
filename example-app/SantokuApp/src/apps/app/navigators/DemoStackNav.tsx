@@ -1,4 +1,3 @@
-import {useRoute, getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AcknowledgementsScreen} from 'apps/app/screens/acknowledgements/AcknowledgementsScreen';
 import {LicenseScreen} from 'apps/app/screens/acknowledgements/LicenseScreen';
@@ -42,9 +41,7 @@ import {ReactQueryDemoScreen} from 'apps/app/screens/demo-react-query/ReactQuery
 import {SearchBarTodoDemoScreen} from 'apps/app/screens/demo-react-query/SearchBarTodoDemoScreen';
 import {SearchFormTodoDemoScreen} from 'apps/app/screens/demo-react-query/SearchFormTodoDemoScreen';
 import {SnackbarScreen} from 'apps/app/screens/demo-snackbar/SnackbarScreen';
-import {setStatusBarStyle} from 'expo-status-bar';
-import React, {useEffect} from 'react';
-import {Platform} from 'react-native';
+import React from 'react';
 
 import {DemoStackParamList} from './types';
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
@@ -53,15 +50,6 @@ const nav = createNativeStackNavigator<DemoStackParamList>();
 
 export const DemoStackNav: React.FC = () => {
   const {CloseThisNavigatorButton} = useCloseThisNavigatorButton();
-  const route = useRoute();
-  const routeName = getFocusedRouteNameFromRoute(route);
-  useEffect(() => {
-    if (Platform.OS === 'ios') {
-      if (routeName === 'DemoMenu') {
-        setStatusBarStyle('dark');
-      }
-    }
-  });
   return (
     <nav.Navigator
       initialRouteName="DemoMenu"
