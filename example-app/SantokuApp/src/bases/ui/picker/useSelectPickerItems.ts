@@ -110,7 +110,7 @@ export const useSelectPickerItems = <ItemT extends unknown>({
   const height = useMemo(() => itemHeight * numberOfLines, [itemHeight, numberOfLines]);
 
   const getItemLayout = useCallback(
-    (_data: any, index: number) => {
+    (_data: unknown, index: number) => {
       return {length: itemHeight, offset: itemHeight * index, index};
     },
     [itemHeight],
