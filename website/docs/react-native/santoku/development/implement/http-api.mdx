@@ -405,10 +405,10 @@ const SampleScreen: React.FC = () => {
 
 データ取得中のインジケータ表示の条件にisFetchingを使っていることに注意してください。
 検索条件が変わった場合、TanStack Queryはキャッシュがある場合はそのデータを返し、バックグラウンドでクエリを実行します。
-その場合、isLoadingではなくisFetchingで判断しないと、以前の検索結果が表示されます。
-isLoadingはまだキャッシュがないかつクエリ実行中にtrueとなります。
+その場合、isInitialLoadingではなくisFetchingで判断しないと、以前の検索結果が表示されます。
+isInitialLoadingはまだキャッシュがないかつクエリ実行中にtrueとなります。
 一方で、isFetchingはキャッシュの有無に関係なくクエリ実行中はtrueとなります。
-ページング表示する画面などにおいては、キャッシュがあれば表示し、なければインジケータを表示するためにisLoadingを用いた方がいいでしょう。
+ページング表示する画面などにおいては、キャッシュがあれば表示し、なければインジケータを表示するためにisInitialLoadingを用いた方がいいでしょう。
 画面の仕様に応じて、適宜使い分けてください。
 
 ### インクリメンタルサーチ（逐次検索）
@@ -525,8 +525,10 @@ const useDependentQueryDemo = () => {
 ```typescript
   // 並列で実行したクエリの総合的な結果をもとに画面描画を切り替える場合はそれぞれのクエリのstatusを統合する
   const queryResults = [itemQuery, itemType0Query, itemType1Query, amountQuery];
-  const isIdle = queryResults.every(query => query.isIdle);
+  const isIdle = queries.every(query => query.fetchStatus === 'idle');
+  const isFetching = queries.some(query => query.isFetching);
   const isLoading = queryResults.some(query => query.isLoading);
+  const isInitialLoading = queries.some(query => query.isInitialLoading);
   const isRefetching = queryResults.some(query => query.isRefetching);
   const isSuccess = queryResults.every(query => query.isSuccess);
   const isError = queryResults.some(query => query.isError);
