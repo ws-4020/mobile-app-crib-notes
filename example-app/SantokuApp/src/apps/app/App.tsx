@@ -2,6 +2,7 @@ import {setHandleError} from 'bases/core/errors/handleError';
 import {setHandleErrorWithAlert} from 'bases/core/errors/handleErrorWithAlert';
 import {setHandleErrorWithSnackbar} from 'bases/core/errors/handleErrorWithSnackbar';
 import {firebaseConfig} from 'bases/firebase/FirebaseConfig';
+import {FirebaseCrashlyticsWorkaround} from 'bases/firebase/crashlytics/FirebaseCrashlyticsWorkaround';
 import {createLogger, setLogger} from 'bases/logging';
 import {FirebaseCrashlyticsTransport} from 'bases/logging/FirebaseCrashlyticsTransport';
 import {LoadingOverlay} from 'bases/ui/loading/LoadingOverlay';
@@ -14,7 +15,6 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {AppWithInitialization} from './AppWithInitialization';
-import {FirebaseCrashlyticsWorkaround} from './components/FirebaseCrashlyticsWorkaround';
 import {handleError} from './errors/handleError';
 import {handleErrorWithAlert} from './errors/handleErrorWithAlert';
 import {handleErrorWithSnackbar} from './errors/handleErrorWithSnackbar';
