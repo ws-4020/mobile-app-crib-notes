@@ -138,7 +138,7 @@ Q&Aアプリは、サンプルアプリ（SantokuApp）と同様のアプリケ�
 OrvalはOpenAPI仕様からクライアントコードを自動生成します。
 TanStack Query、SWRなど、いくつかのHTTP API通信ライブラリをサポートしています。
 
-Q&Aアプリでは、[axios](https://axios-http.com/)と[TanStack Query](https://react-query-v3.tanstack.com/)を使用します。
+Q&Aアプリでは、[axios](https://axios-http.com/)と[TanStack Query](https://tanstack.com/query/v4)を使用します。
 
 | コピーファイル |
 |--|
@@ -238,7 +238,7 @@ Q&Aアプリでは、[axios](https://axios-http.com/)と[TanStack Query](https:/
 
 ### TanStack Queryの設定
 
-HTTP API通信の状態管理や、エラーのハンドリングに[TanStack Query](https://react-query-v3.tanstack.com/)を使用します。
+HTTP API通信の状態管理や、エラーのハンドリングに[TanStack Query](https://tanstack.com/query/v4)を使用します。
 TanStack Queryのデフォルトオプションや、エラーハンドリングの設定処理を、サンプルアプリ（SantokuApp）からコピーします。
 
 設定内容の詳細は、次のドキュメントを参照してください。

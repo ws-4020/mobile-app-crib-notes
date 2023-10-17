@@ -62,7 +62,7 @@ Orvalを実行すると、OpenAPI Specification内に記載した各APIに対し
 
 HTTPメソッドがGETのAPIに対しては、基本的にはuseQueryをベースとしたCustom Hookが自動生成されます。
 第一引数にはクエリパラメータ、第二引数にはオプションを設定できます。
-指定できるオプションや戻り値は、TanStack Queryの[useQuery](https://react-query.tanstack.com/reference/useQuery)とほぼ同様です。
+指定できるオプションや戻り値は、TanStack Queryの[useQuery](https://tanstack.com/query/v4/docs/react/reference/useQuery)とほぼ同様です。
 利用時のコード例は以下のようになります。
 
 ```typescript
@@ -104,7 +104,7 @@ const SampleScreen: React.FC = () => {
 
 OrvalのConfigファイル内でuseInfinite:trueに設定したAPIに対しては、useInfiniteQueryをベースとしたCustom Hookが自動生成されます。
 第一引数にはクエリパラメータ、第二引数にはオプションを設定できます。
-指定できるオプションや戻り値は、TanStack Queryの[useInfiniteQuery](https://react-query.tanstack.com/reference/useInfiniteQuery)とほぼ同様です。
+指定できるオプションや戻り値は、TanStack Queryの[useInfiniteQuery](https://tanstack.com/query/v4/docs/react/reference/useInfiniteQuery)とほぼ同様です。
 利用時のコード例は以下のようになります。
 
 ```typescript
@@ -163,7 +163,7 @@ const SampleScreen: React.FC = () => {
 #### データ更新・削除 (useMutation)
 
 HTTPメソッドがPOST, PUT, DELETEなどのAPIに対しては、useMutationをベースとしたCustom Hookが自動生成されます。
-基本的な使い方や指定できるオプションは、TanStack Queryの[useMutation](https://react-query.tanstack.com/reference/useMutation)とほぼ同様です。
+基本的な使い方や指定できるオプションは、TanStack Queryの[useMutation](https://tanstack.com/query/v4/docs/react/reference/useMutation)とほぼ同様です。
 
 ```typescript
 import axios from 'axios';
