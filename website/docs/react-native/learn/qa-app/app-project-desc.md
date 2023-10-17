@@ -136,9 +136,9 @@ Q&Aアプリは、サンプルアプリ（SantokuApp）と同様のアプリケ�
 
 [Orval](https://orval.dev/)の設定を追加します。
 OrvalはOpenAPI仕様からクライアントコードを自動生成します。
-React Query、SWRなど、いくつかのHTTP API通信ライブラリをサポートしています。
+TanStack Query、SWRなど、いくつかのHTTP API通信ライブラリをサポートしています。
 
-Q&Aアプリでは、[axios](https://axios-http.com/)と[React Query](https://react-query-v3.tanstack.com/)を使用します。
+Q&Aアプリでは、[axios](https://axios-http.com/)と[TanStack Query](https://react-query-v3.tanstack.com/)を使用します。
 
 | コピーファイル |
 |--|
@@ -236,14 +236,14 @@ Q&Aアプリでは、[axios](https://axios-http.com/)と[React Query](https://re
 
 最後に、`npm run orval`を実行して、クライアントコードを生成してください。
 
-### React Queryの設定
+### TanStack Queryの設定
 
-HTTP API通信の状態管理や、エラーのハンドリングに[React Query](https://react-query-v3.tanstack.com/)を使用します。
-React Queryのデフォルトオプションや、エラーハンドリングの設定処理を、サンプルアプリ（SantokuApp）からコピーします。
+HTTP API通信の状態管理や、エラーのハンドリングに[TanStack Query](https://react-query-v3.tanstack.com/)を使用します。
+TanStack Queryのデフォルトオプションや、エラーハンドリングの設定処理を、サンプルアプリ（SantokuApp）からコピーします。
 
 設定内容の詳細は、次のドキュメントを参照してください。
 
-- [React Queryを用いたHTTP API通信](../../santoku/application-architecture/http-api/overview.mdx)
+- [TanStack Queryを用いたHTTP API通信](../../santoku/application-architecture/http-api/overview.mdx)
 - [HTTP API通信で発生するエラーのハンドリング](../../santoku/application-architecture/http-api/http-api-error-handling.mdx)
 
 | コピーファイル |
