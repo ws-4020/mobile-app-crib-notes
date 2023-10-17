@@ -71,7 +71,7 @@ TanStack Queryを使用すると、エラーのハンドリングやローディ
 そこで、ここでは簡単にTanStack Queryの仕組みについて紹介します。
 以下の図は、TanStack Queryの代表的な機能である`useQuery`フックがどのように動作するかを表したものです。
 
-![TanStack Queryの仕組み](react-query.drawio.png)
+![TanStack Queryの仕組み](tanstack-query.drawio.png)
 
 `useQuery`フックを呼びだすと、`QueryObserver`が作成されます。`QueryObserver`は、コンポーネントの`state`として管理されます。
 `QueryObserver`は`QueryCache`から`Query`を取得します。`QueryCache`はクエリキーに対する`Query`がキャッシュにあればそれを返し、なければ生成します。
