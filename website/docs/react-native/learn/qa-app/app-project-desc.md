@@ -30,7 +30,7 @@ Q&Aアプリの作成には、次のライブラリを使用します。他に�
 |--|
 | @react-native-community/netinfo |
 | axios |
-| react-query |
+| @tanstack/react-query |
 | msw |
 | @mswjs/data |
 | react-native-url-polyfill |
