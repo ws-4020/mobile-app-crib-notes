@@ -12,7 +12,7 @@ import React, {PropsWithChildren} from 'react';
  *   - 上記以外のバージョンは未確認
  *   - Androidは本事象が発生しません
  *
- * [発生条件]
+ * [発生条件(AND条件)]
  * - JavaScriptエンジンにHermesを使用
  * - firebase.jsonの「crashlytics_is_error_generation_on_js_crash_enabled」をfalseに設定
  *
