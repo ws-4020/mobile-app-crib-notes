@@ -79,7 +79,7 @@ Windowsは`ユーザー環境変数`に設定してください。また、`%USE
 **`$ANDROID_SDK_ROOT/tools`が`PATH`に含まれている場合、`PATH`から削除してください。**古いバージョンのAndroid Studioをインストールしていた場合や、インストール方法を紹介した古い記事などを参照してインストールした場合に、特に注意してください。分かりづらいエラーが発生して解決できないというケースがしばしば見られます。
 :::
 
-macOSでの`~/.zshrc`への設定例は次のようになります。
+macOSでの`~/.zprofile`への設定例は次のようになります。
 
 ```bash
 # Android CLI environment variables
@@ -103,6 +103,23 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
   * 起動中のエミュレータや、USBで接続しているAndroid端末が表示されます。
 * `emulator -list-avds`
   * 作成済みの仮想デバイスが表示されます。
+
+:::note info
+* macOSで現在の起動中のシェルを確認する方法
+  * ターミナルを開き`echo $SHELL`を実行します。
+* macOSのバージョンごとのデフォルトのログインシェル
+  * macOS Catalina（10.15）以前: デフォルトのログインシェルはBashです。
+  * macOS Catalina（10.15）以降: デフォルトのログインシェルはZshです。
+* macOSでシェルに応じて環境設定ファイルを設定する方法
+  * ログインシェルがBashの場合
+    * 環境変数の設定は`~/.profile`ファイルで行います。
+    * 環境設定は`.bashrc`ファイルで行います。（'.bashrc'ファイルが存在しない場合、`touch ~/.bashrc`で生成できます。）
+  * ログインシェルがZshの場合
+    * 環境変数の設定は`~/.zprofile`ファイルで行います。
+    * 環境設定は`.zprofile`ファイルで行います。（'.zprofile'ファイルが存在しない場合、`touch ~/.zprofile`で生成できる）
+
+※ `ln -s ~/.profile ~/.zprofile`コマンドを使用して、BashとZsh両方同じ設定を共有することもできます。
+:::
 
 ### Ruby, CocoaPodsのインストール
 
