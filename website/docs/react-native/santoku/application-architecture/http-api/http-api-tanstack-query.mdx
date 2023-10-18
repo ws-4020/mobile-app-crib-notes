@@ -211,3 +211,31 @@ TanStack Queryの`useInfiniteQuery`フックは、読み込んだページのキ
 
 それぞれの項目は、無限スクロールを実現するすべてのAPIに用意する必要はありません。
 APIごとに必要な項目のみ取捨選択することとします。
+
+## クエリのキャンセル
+
+[Query Cancellation](https://tanstack.com/query/v4/docs/react/guides/query-cancellation)に記載されている通り、TanStack Queryはクエリ関数に[AbortSignal](https://developer.mozilla.org/ja/docs/Web/API/AbortSignal)を渡してくれます。
+そのAbortSignalを、axiosに渡すことでHTTP API通信のキャンセルが可能です。
+
+Orvalで自動生成されたコードは、クエリ関数でAbortSignalを受け取りaxiosへ渡すようになっています。
+
+Orvalで自動生成されたカスタムフックを使用しない場合は、AbortSignalを受け取るように自前で実装する必要があります。
+
+```typescript
+const query = useQuery(
+  ['app-updates', 'requestAppUpdates'],
+  ({signal}) => requestAppUpdates(params, signal),
+);
+```
+
+上記のように実装したクエリのキーを、`queryClient.cancelQueries`に渡すことで、HTTP API通信をキャンセルできます。
+
+```tsx
+const queryClient = useQueryClient();
+
+return (
+  <Pressable onPress={() => queryClient.cancelQueries(['app-updates', 'requestAppUpdates'])}>
+    <Text>Cancel</Text>
+  </Pressable>
+);
+```
