@@ -18,6 +18,16 @@ export const ReactQueryProvider: React.FC<React.PropsWithChildren> = ({children}
       queryCache: defaultQueryCache(queryClient),
       mutationCache: defaultMutationCache(queryClient),
       defaultOptions,
+      // no more errors on the console for tests
+      // https://tanstack.com/query/latest/docs/react/guides/testing#turn-off-network-error-logging
+      logger:
+        process.env.NODE_ENV === 'test'
+          ? {
+              log: () => {},
+              warn: () => {},
+              error: () => {},
+            }
+          : undefined,
     });
   }, []);
 
