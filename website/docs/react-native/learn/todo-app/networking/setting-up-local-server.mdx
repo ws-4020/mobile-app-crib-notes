@@ -110,9 +110,12 @@ APIサーバを起動しただけであれば、ToDoの一覧は空配列のJSON
 ### トラブルシュート
 
 Windows上のAndroidエミュレーターで、ブラウザに何も表示されない場合、下記の方法で解決できます。
+
 1. 「~/.android/advancedFeatures.ini」を作成し、以下を記載します。
+
 ```console
 Vulkan = off
 GLDirectMem = on
 ```
+
 2. エミュレーターを再起動します。
