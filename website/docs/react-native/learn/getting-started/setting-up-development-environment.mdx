@@ -80,6 +80,13 @@ Windowsは`ユーザー環境変数`に設定してください。また、`%USE
 **`$ANDROID_SDK_ROOT/tools`が`PATH`に含まれている場合、`PATH`から削除してください。**古いバージョンのAndroid Studioをインストールしていた場合や、インストール方法を紹介した古い記事などを参照してインストールした場合に、特に注意してください。分かりづらいエラーが発生して解決できないというケースがしばしば見られます。
 :::
 
+:::note info
+Java11を利用する場合はcmdline-toolsのlatestではなく10.0を利用してください。
+設定方法は下記の手順で実施してください。
+1. Android Studio > SDK Manager > SDK Tools > 「Show Package Details」にチェック > Android SDK Command-line Tools(latest) > Version 10.0にチェックを付けて「Apply」実施（cmdline-toolsがインストールされる）
+2. 環境変数は**``$ANDROID_SDK_ROOT/cmdline-tools/latest/bin``**から**`$ANDROID_SDK_ROOT/cmdline-tools/10.0/bin`**に修正
+:::
+
 macOSでの`~/.zprofile`への設定例は次のようになります。
 
 ```bash
