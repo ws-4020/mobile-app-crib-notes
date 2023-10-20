@@ -3,9 +3,7 @@ import {useEffect, useRef} from 'react';
 /**
  * This React hook provides the previous value. (To be precise, it returns the previous reference.)
  *
- * 基本は、usePreviousを使用しないパターンで実装するべき
- *
- * どうしてもRefを使う必要がある場面だけusePreviousを使用する
+ * 基本はusePreviousを使用しないパターンで実装して、どうしてもRefを使う必要がある場面だけusePreviousを使用してください。
  *
  * See [Hooks FAQ - How to get the previous props or state?](https://legacy.reactjs.org/docs/hooks-faq.html#how-to-get-the-previous-props-or-state).
  *
