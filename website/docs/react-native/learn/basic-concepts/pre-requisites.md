@@ -39,3 +39,6 @@ Reactを利用したことがない人は「クイックスタート」からは
 - [APIリファレンス](https://ja.react.dev/reference)
   - [useCallback](https://ja.react.dev/reference/react/useCallback)
   - [useMemo](https://ja.react.dev/reference/react/useMemo)
+  - [useEffect](https://ja.react.dev/reference/react/useEffect)
+  - [useState](https://ja.react.dev/reference/react/useState)
+  - [useRef](https://ja.react.dev/reference/react/useRef)
