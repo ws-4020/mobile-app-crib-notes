@@ -145,24 +145,9 @@ macOSには、デフォルトでRubyがインストールされているので�
 インストールおよび使い方については、[asdfのインストール](/react-native/learn/getting-started/setting-up-development-environment#asdfのインストール)を参考にしてください。
 
 :::danger warning
-<!-- textlint-disable ja-technical-writing/sentence-length -->
-Appleシリコン搭載のMacコンピュータでは、Rubyのバージョンが2.7.x未満の場合にCocoaPodsのインストールでエラーが発生した場合、下記を実行することでCocoaPodsをインストールできます。
-<!-- textlint-enable ja-technical-writing/sentence-length -->
+Appleシリコン搭載のMacコンピュータでは、Rubyのバージョンが2.7.x未満の場合にCocoaPodsのインストールでエラーが発生します。
 
-```bash
-arch -x86_64 sudo gem install cocoapods
-arch -x86_64 sudo gem install ffi
-arch -x86_64 pod install
-```
-
-上記の方法でも失敗した場合はHomebrewやasdf-vmなどのツールを利用して、**使用するRubyのバージョンを2.7.x以上にアップデートしてください。**
-
-<!-- textlint-disable ja-technical-writing/no-doubled-joshi -->
-Rubyのバージョンによって、Appleシリコン搭載のMacでCocoaPodsがインストールできない場合があります。
-Appleシリコン搭載のMacはARMアーキテクチャを採用しており、Rubyの一部のバージョンはARMに適切に対応していないため、CocoaPodsのインストールに問題が生じる可能性があります。
-この問題を解決する方法はx86_64アーキテクチャ向けにRubyをインストールし、それを使用してCocoaPodsをインストールすることです。
-また、Rosetta2を使用してARMバージョンのRubyでCocoaPodsを実行する方法もありますが、一部のバージョンでは問題が発生することがあります。
-<!-- textlint-enable ja-technical-writing/no-doubled-joshi -->
+Homebrewやasdf-vmなどのツールを利用して、**使用するRubyのバージョンを2.7.x以上にアップデートしてください。**
 :::
 
 ### asdfのインストール
