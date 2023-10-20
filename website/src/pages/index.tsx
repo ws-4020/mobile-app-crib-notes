@@ -32,7 +32,7 @@ const reactNativeOverview = [
     title: 'Trouble shooting',
     to: 'react-native/common-pitfalls',
     imageUrl: 'img/undraw_void_3ggu.svg',
-    summary: <>ハマりがちな落とし穴</>,
+    summary: <>トラブルシューティング</>,
   },
   {
     title: 'Example Application',
