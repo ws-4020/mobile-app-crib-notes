@@ -53,7 +53,7 @@ Android Studioをインストールした後、Android SDKに含まれる各種�
 
 Android StudioでSDK Managerを開き、SDK Toolsタブで以下のツールにチェックが付いていることを確認してください。チェックが付いていない場合は、チェックを付けて「Apply」もしくは「OK」を押してインストールしてください。
 
-* Android SDK Command-line Tools (latest)
+* Android SDK Command-line Tools (10.0)
 * Android SDK Platform-Tools
 * Android Emulator
 
@@ -73,21 +73,11 @@ Windowsは`ユーザー環境変数`に設定してください。また、`%USE
 | コマンドラインツール                                                                                    | 設定例（macOS）                                | 設定例（Windows）                              |
 |:----------------------------------------------------------------------------------------------------|:----------------------------------------------|:---------------------------------------------|
 | [Android SDK プラットフォーム ツール](https://developer.android.com/studio/command-line#tools-platform) | `$ANDROID_SDK_ROOT/platform-tools`            | `%ANDROID_SDK_ROOT%\platform-tools`          |
-| [Android SDK コマンドライン ツール](https://developer.android.com/studio/command-line#tools-sdk)        | `$ANDROID_SDK_ROOT/cmdline-tools/latest/bin` | `%ANDROID_SDK_ROOT%\cmdline-tools\latest\bin` |
+| [Android SDK コマンドライン ツール](https://developer.android.com/studio/command-line#tools-sdk)        | `$ANDROID_SDK_ROOT/cmdline-tools/10.0/bin` | `%ANDROID_SDK_ROOT%\cmdline-tools\10.0\bin` |
 | [Android エミュレータ](https://developer.android.com/studio/command-line#tools-emulator)              | `$ANDROID_SDK_ROOT/emulator`                  | `%ANDROID_SDK_ROOT%\emulator`                 |
 
 :::danger warning
 **`$ANDROID_SDK_ROOT/tools`が`PATH`に含まれている場合、`PATH`から削除してください。**古いバージョンのAndroid Studioをインストールしていた場合や、インストール方法を紹介した古い記事などを参照してインストールした場合に、特に注意してください。分かりづらいエラーが発生して解決できないというケースがしばしば見られます。
-:::
-
-:::note info
-Java11を利用する場合はcmdline-toolsのlatestではなく10.0を利用してください。
-設定方法は下記の手順で実施してください。
-
-<!-- textlint-disable ja-technical-writing/sentence-length-->
-1. Android Studio → SDK Manager → SDK Tools →「Show Package Details」にチェック → Android SDK Command-line Tools(latest) → Version 10.0にチェックを付けて「Apply」実施（cmdline-toolsがインストールされる）
-2. 環境変数は**``$ANDROID_SDK_ROOT/cmdline-tools/latest/bin``**から**`$ANDROID_SDK_ROOT/cmdline-tools/10.0/bin`**に修正
-<!-- textlint-enable ja-technical-writing/sentence-length-->
 :::
 
 :::info
