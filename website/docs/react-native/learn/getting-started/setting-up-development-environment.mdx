@@ -80,12 +80,16 @@ Windowsは`ユーザー環境変数`に設定してください。また、`%USE
 **`$ANDROID_SDK_ROOT/tools`が`PATH`に含まれている場合、`PATH`から削除してください。**古いバージョンのAndroid Studioをインストールしていた場合や、インストール方法を紹介した古い記事などを参照してインストールした場合に、特に注意してください。分かりづらいエラーが発生して解決できないというケースがしばしば見られます。
 :::
 
-:::info
+<!--
+現時点（2023年10月）ではまだReact NativeでJDK17をサポートしていないです。
+[公式ドキュメント](https://reactnative.dev/docs/environment-setup)のインストール手順でJDK11を推奨しています。
 Java17が推奨されるReact Nativeバージョンになり次第、下記を修正する必要があります。
+また、何が変わるかについて調査する必要があります。
 
 * [インストールするツール](/react-native/learn/getting-started/setting-up-development-environment#インストールするツール)のJavaバージョンを変更
 * [Expoアップグレードガイド](/react-native/santoku/maintenance/enhance)のJavaバージョン変更
-:::
+* [Android SDKのコマンドラインツールの設定](/react-native/learn/getting-started/setting-up-development-environment#android-sdkのコマンドラインツールの設定)の「Android SDK コマンドライン ツール」のパスに`latest`に変更
+-->
 
 macOSでの`~/.zprofile`への設定例は次のようになります。
 
