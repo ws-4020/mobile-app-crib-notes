@@ -45,5 +45,8 @@ npx expo start --clear
 ```
 
 :::note info
-キャッシュに関する詳細は[キャッシュの取り扱い](/react-native/santoku/application-architecture/cache-management/overview/)と[Expo CLI and npm](https://docs.expo.dev/troubleshooting/clear-cache-windows/#expo-cli-and-npm)を参照してください。
+OSごとのキャッシュに関する詳細は下記を参照してください。
+
+* [macOS](https://docs.expo.dev/troubleshooting/clear-cache-macos-linux/)
+* [Windows](https://docs.expo.dev/troubleshooting/clear-cache-windows/)
 :::
