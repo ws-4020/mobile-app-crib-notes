@@ -37,7 +37,7 @@ const getDefaultAxiosConfig = () => {
  *
  * ＜参考＞
  * MDNには、AbortSignal.anyというメソッドが存在していますが、React Nativeではまだ実装されていないようです。
- * https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout_static
+ * https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal#browser_compatibility
  * https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L480
  */
 const combineSignals = (...signals: (AbortSignal | GenericAbortSignal)[]) => {
