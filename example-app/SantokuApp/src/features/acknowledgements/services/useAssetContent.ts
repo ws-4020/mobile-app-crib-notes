@@ -11,6 +11,8 @@ const loadAssetContent = async (moduleId: number | undefined) => {
     if (assets?.length && assets[0].localUri) {
       return FileSystem.readAsStringAsync(assets[0].localUri, {encoding: 'utf8'});
     }
+    // useQueryのqueryFnからundefinedを返却するとエラーがthrowされてしまうため、nullを返却する
+    return null;
   });
 };
 
