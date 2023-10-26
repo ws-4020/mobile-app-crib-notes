@@ -101,6 +101,7 @@ module.exports = {
       label: 'Getting Started',
       items: [
         'react-native/learn/getting-started',
+        'react-native/learn/getting-started/pre-requisites',
         'react-native/learn/getting-started/setting-up-development-environment',
         'react-native/learn/getting-started/create-project',
         'react-native/learn/getting-started/launch-created-app',
@@ -111,7 +112,6 @@ module.exports = {
       label: 'アプリの実装前に',
       items: [
         'react-native/learn/basic-concepts',
-        'react-native/learn/basic-concepts/pre-requisites',
         {
           type: 'category',
           label: 'React Nativeの基本',

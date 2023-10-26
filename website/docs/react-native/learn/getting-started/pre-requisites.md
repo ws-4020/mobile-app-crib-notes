@@ -2,7 +2,17 @@
 title: 前提知識
 ---
 
-React Nativeを用いてアプリを実装するには、JavaScript、TypeScript、Reactの知識が必要です。
+React Nativeを用いてアプリを実装するには、JavaScript、TypeScript、React、OpenAPI Specificationの知識が必要です。使用する技術の概要は以下とおりです。
+
+1. Javascript
+   - ウェブ開発で広く使用されるスクリプト言語です。
+2. Typescript
+   - Javascriptベースのプログラミング言語です。
+   - 開発時のエラーを減らし、大規模プロジェクトでの可読性向上に役に立ちます。
+3. React
+   - コンポーネントベースのアプローチで、ウェブアプリ開発に用いるJavaScriptライブラリです。
+4. React Native
+   - Reactをベースにしたモバイルアプリのフレームワークです。
 
 ToDoアプリの実装例や解説を理解するために参考となるサイトを紹介します。
 用語やコード例でわからないことがあるときは参照してください。
@@ -43,3 +53,16 @@ Reactを利用したことがない人は「クイックスタート」からは
   - [useState](https://ja.react.dev/reference/react/useState)
   - [useRef](https://ja.react.dev/reference/react/useRef)
   - [useContext](https://ja.react.dev/reference/react/useContext)
+
+### OpenAPI Specification
+
+#### OpenAPI Specificationとは
+
+OpenAPI SpecificationはAPIの仕様を記述するための標準規格です。詳細は[公式ドキュメント(英語版)](https://www.openapis.org/what-is-openapi)を参考してください。
+
+#### OpenAPI Specificationの見方について
+
+[Swagger Editor](https://editor.swagger.io/)を使用することでAPIのリクエスト、レスポンスなどの詳細を確認できます。
+[API仕様](https://github.com/ws-4020/mobile-app-crib-notes/blob/master/example-app/api-document/openapi.yaml)の内容を[Swagger Editor](https://editor.swagger.io/)のエディターに貼るとプレビューにその内容が表示されます。
+
+その他のSwagger機能については[What Is Swagger?](https://swagger.io/docs/specification/about/)を参照してください。
