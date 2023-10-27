@@ -97,11 +97,14 @@ module.exports = {
       id: 'react-native/learn',
     },
     {
+      type: 'doc',
+      id: 'react-native/pre-requisites',
+    },
+    {
       type: 'category',
       label: 'Getting Started',
       items: [
         'react-native/learn/getting-started',
-        'react-native/learn/getting-started/pre-requisites',
         'react-native/learn/getting-started/setting-up-development-environment',
         'react-native/learn/getting-started/create-project',
         'react-native/learn/getting-started/launch-created-app',

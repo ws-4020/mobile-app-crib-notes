@@ -1,5 +1,6 @@
 ---
 title: 前提知識
+sidebar_label: 前提知識
 ---
 
 React Nativeを用いてアプリを実装するには、JavaScript、TypeScript、Reactの知識が必要です。使用する技術の概要は以下のとおりです。
