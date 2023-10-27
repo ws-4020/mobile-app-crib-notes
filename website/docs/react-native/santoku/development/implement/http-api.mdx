@@ -524,14 +524,14 @@ const useDependentQueryDemo = () => {
 
 ```typescript
   // 並列で実行したクエリの総合的な結果をもとに画面描画を切り替える場合はそれぞれのクエリのstatusを統合する
-  const queryResults = [itemQuery, itemType0Query, itemType1Query, amountQuery];
+  const queries = [itemQuery, itemType0Query, itemType1Query, amountQuery];
   const isIdle = queries.every(query => query.fetchStatus === 'idle');
   const isFetching = queries.some(query => query.isFetching);
-  const isLoading = queryResults.some(query => query.isLoading);
+  const isLoading = queries.some(query => query.isLoading);
   const isInitialLoading = queries.some(query => query.isInitialLoading);
-  const isRefetching = queryResults.some(query => query.isRefetching);
-  const isSuccess = queryResults.every(query => query.isSuccess);
-  const isError = queryResults.some(query => query.isError);
+  const isRefetching = queries.some(query => query.isRefetching);
+  const isSuccess = queries.every(query => query.isSuccess);
+  const isError = queries.some(query => query.isError);
 ```
 
 上記コードから分かる通り、TanStack Queryで複数のクエリを連結するのはやや複雑です。
