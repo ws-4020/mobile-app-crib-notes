@@ -2,7 +2,7 @@
 title: 前提知識
 ---
 
-React Nativeを用いてアプリを実装するには、JavaScript、TypeScript、React、OpenAPI Specificationの知識が必要です。使用する技術の概要は以下とおりです。
+React Nativeを用いてアプリを実装するには、JavaScript、TypeScript、Reactの知識が必要です。使用する技術の概要は以下のとおりです。
 
 1. Javascript
    - ウェブ開発で広く使用されるスクリプト言語です。
