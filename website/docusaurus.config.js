@@ -240,6 +240,10 @@ module.exports = {
             from: '/react-native/learn/advance/react-navigation-param', // string | string[]
             to: '/react-native/learn/basic-concepts/react-navigation-basics/param', // string
           },
+          {
+            from: '/react-native/learn/basic-concepts/pre-requisites', // string | string[]
+            to: '/react-native/pre-requisites', // string
+          },
         ],
       },
     ],
