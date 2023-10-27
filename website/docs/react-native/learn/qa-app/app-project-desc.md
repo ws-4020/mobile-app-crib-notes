@@ -139,6 +139,18 @@ React Query、SWRなど、いくつかのHTTP API通信ライブラリをサポ�
 
 Q&Aアプリでは、[axios](https://axios-http.com/)と[React Query](https://react-query-v3.tanstack.com/)を使用します。
 
+:::note info
+React Queryの詳細な使い方については以下の記事をご覧ください。
+
+1. [Practical React Query](https://tkdodo.eu/blog/practical-react-query)
+1. [React Query Data Transformations](https://tkdodo.eu/blog/react-query-data-transformations)
+1. [React Query Render Optimizations](https://tkdodo.eu/blog/react-query-render-optimizations)
+1. [Status Checks in React Query](https://tkdodo.eu/blog/status-checks-in-react-query)
+
+React Queryはプロジェクトに十分な知見を持った人がいない場合は導入を見送り、
+[MobX](https://mobx.js.org/README.html)、[Recoil](https://recoiljs.org/)、[Redux](https://redux.js.org/)、[SWR](https://swr.vercel.app/ja)などのライブラリの導入を検討してください。
+:::
+
 | コピーファイル |
 |--|
 | src/features/backend/utils/customInstance.ts |
