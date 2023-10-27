@@ -148,7 +148,7 @@ React Queryの詳細な使い方については以下の記事をご覧くださ
 1. [Status Checks in React Query](https://tkdodo.eu/blog/status-checks-in-react-query)
 
 React Queryはプロジェクトに十分な知見を持った人がいない場合は導入を見送り、
-[MobX](https://mobx.js.org/README.html)、[Recoil](https://recoiljs.org/)、[Redux](https://redux.js.org/)、[SWR](https://swr.vercel.app/ja)などのライブラリの導入を検討してください。
+[HTTP API通信実装に向けた技術選定](/react-native/santoku/decisions/adr-012-http-api#http-api通信実装に向けた技術選定)を参考し、他のライブラリを検討してください。
 :::
 
 | コピーファイル |
