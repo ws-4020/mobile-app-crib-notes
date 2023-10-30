@@ -154,8 +154,9 @@ Q&Aアプリでは、[axios](https://axios-http.com/)と[React Query](https://re
 - `.eslintrc.js`
 
 ```typescript title="src/features/backend/utils/customInstance.ts"
-  import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+  import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, GenericAbortSignal} from 'axios';
 - import {AppConfig} from 'bases/core/configs/AppConfig';
+  import {log} from 'bases/logging';
   import {applicationName, nativeApplicationVersion} from 'expo-application';
   import {RequestTimeoutError} from 'features/backend/errors/RequestTimeoutError';
   import {Platform} from 'react-native';
@@ -184,7 +185,7 @@ Q&Aアプリでは、[axios](https://axios-http.com/)と[React Query](https://re
 - };
 - 
 - const setAxiosResponseInterceptor: typeof Axios.interceptors.response.use = (onFulfilled, onRejected) => {
--   BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
+-   return BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
 - };
 - 
 - export {
