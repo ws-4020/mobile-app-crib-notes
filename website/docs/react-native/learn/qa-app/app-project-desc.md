@@ -320,7 +320,7 @@ import {enhanceValidator} from "bases/validator";
 import {activateKeepAwakeAsync} from "expo-keep-awake";
 import {useCallback, useMemo, useState} from "react";
 
-import { loadBundledMessagesAsync } from "../services/loadBundledMessagesAsync";
+import {loadBundledMessagesAsync} from "../services/loadBundledMessagesAsync";
 
 type Initializing = {
   code: 'Initializing';
