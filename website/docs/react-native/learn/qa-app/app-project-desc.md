@@ -140,7 +140,7 @@ TanStack Query、SWRなど、いくつかのHTTP API通信ライブラリをサ�
 Q&Aアプリでは、[axios](https://axios-http.com/)と[TanStack Query](https://tanstack.com/query/v4)を使用します。
 
 :::note info
-React Queryの詳細な使い方については以下の記事をご覧ください。
+TanStack Queryの作者のブログに公開されている以下のページでは、TanStack Queryの使用方法が分かりやすくまとめられています。公式のドキュメントと併せて参考にしてください。
 
 1. [Practical React Query](https://tkdodo.eu/blog/practical-react-query)
 1. [React Query Data Transformations](https://tkdodo.eu/blog/react-query-data-transformations)
