@@ -29,7 +29,7 @@ Q&Aアプリの作成には、次のライブラリを使用します。他に�
 |--|
 | @react-native-community/netinfo |
 | axios |
-| react-query |
+| @tanstack/react-query@v4 |
 | msw |
 | @mswjs/data |
 | react-native-url-polyfill |
@@ -53,7 +53,7 @@ npx expo install <package-name> -- -D
 iOSアプリを開発をする場合は、macOSで次のコマンドを実行して必要なライブラリをインストールしてください。
 
 ```bash
-npx pod-install
+npm run pod-install
 ```
 
 :::info
@@ -135,9 +135,9 @@ Q&Aアプリは、サンプルアプリ（SantokuApp）と同様のアプリケ�
 
 [Orval](https://orval.dev/)の設定を追加します。
 OrvalはOpenAPI仕様からクライアントコードを自動生成します。
-React Query、SWRなど、いくつかのHTTP API通信ライブラリをサポートしています。
+TanStack Query、SWRなど、いくつかのHTTP API通信ライブラリをサポートしています。
 
-Q&Aアプリでは、[axios](https://axios-http.com/)と[React Query](https://react-query-v3.tanstack.com/)を使用します。
+Q&Aアプリでは、[axios](https://axios-http.com/)と[TanStack Query](https://tanstack.com/query/v4)を使用します。
 
 | コピーファイル |
 |--|
@@ -154,8 +154,9 @@ Q&Aアプリでは、[axios](https://axios-http.com/)と[React Query](https://re
 - `.eslintrc.js`
 
 ```typescript title="src/features/backend/utils/customInstance.ts"
-  import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+  import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, GenericAbortSignal} from 'axios';
 - import {AppConfig} from 'bases/core/configs/AppConfig';
+  import {log} from 'bases/logging';
   import {applicationName, nativeApplicationVersion} from 'expo-application';
   import {RequestTimeoutError} from 'features/backend/errors/RequestTimeoutError';
   import {Platform} from 'react-native';
@@ -183,13 +184,8 @@ Q&Aアプリでは、[axios](https://axios-http.com/)と[React Query](https://re
 -   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
 - };
 - 
-- const setAxiosResponseInterceptor = (
--   onFulfilled: (
--     value: AxiosResponse<any, any>,
--   ) => (AxiosResponse<any, any> | Promise<AxiosResponse<any, any>>) | undefined,
--   onRejected: (error: any) => any | undefined,
-- ) => {
--   BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
+- const setAxiosResponseInterceptor: typeof Axios.interceptors.response.use = (onFulfilled, onRejected) => {
+-   return BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
 - };
 - 
 - export {
@@ -235,14 +231,14 @@ Q&Aアプリでは、[axios](https://axios-http.com/)と[React Query](https://re
 
 最後に、`npm run orval`を実行して、クライアントコードを生成してください。
 
-### React Queryの設定
+### TanStack Queryの設定
 
-HTTP API通信の状態管理や、エラーのハンドリングに[React Query](https://react-query-v3.tanstack.com/)を使用します。
-React Queryのデフォルトオプションや、エラーハンドリングの設定処理を、サンプルアプリ（SantokuApp）からコピーします。
+HTTP API通信の状態管理や、エラーのハンドリングに[TanStack Query](https://tanstack.com/query/v4)を使用します。
+TanStack Queryのデフォルトオプションや、エラーハンドリングの設定処理を、サンプルアプリ（SantokuApp）からコピーします。
 
 設定内容の詳細は、次のドキュメントを参照してください。
 
-- [React Queryを用いたHTTP API通信](../../santoku/application-architecture/http-api/overview.mdx)
+- [TanStack Queryを用いたHTTP API通信](../../santoku/application-architecture/http-api/overview.mdx)
 - [HTTP API通信で発生するエラーのハンドリング](../../santoku/application-architecture/http-api/http-api-error-handling.mdx)
 
 | コピーファイル |
@@ -265,7 +261,11 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 /* ～省略～ */
 
 - const showRequireLoginDialog = (queryClient: QueryClient) => {
--   clientLogout(queryClient).finally(() => {
+-   clientLogout(queryClient)
+-   .catch(() => {
+-     // clientLogoutの中で必要に応じてログ出力しているので、ここでは何もしない
+-   })
+-   .finally(() => {
 -     Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
 -   });
 - };
@@ -320,7 +320,7 @@ import {enhanceValidator} from "bases/validator";
 import {activateKeepAwakeAsync} from "expo-keep-awake";
 import {useCallback, useMemo, useState} from "react";
 
-import { loadBundledMessagesAsync } from "../services/loadBundledMessagesAsync";
+import {loadBundledMessagesAsync} from "../services/loadBundledMessagesAsync";
 
 type Initializing = {
   code: 'Initializing';
@@ -369,6 +369,7 @@ export const useAppInitialize = () => {
 
 ```typescript jsx title="src/apps/app/AppWithInitialization.tsx"
 import {NavigationContainer} from '@react-navigation/native';
+import {RuntimeError} from 'bases/core/errors/RuntimeError';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
@@ -389,7 +390,7 @@ export const AppWithInitialization: React.FC = () => {
   useEffect(() => {
     // 初期化処理に失敗した場合はアプリをクラッシュ扱いで終了
     if (initializationError) {
-      throw initializationError;
+      throw new RuntimeError('Failed to initialize app.', initializationError);
     }
   }, [initializationError]);
 
@@ -402,7 +403,7 @@ export const AppWithInitialization: React.FC = () => {
     // RootStackNav、WithFirebaseMessagingHandlersをimportしてしまうと、アプリの初期化処理が完了する前に各画面でimportしているモジュールも読み込まれてしまうため、
     // アプリの初期化処理が完了した時点でrequireする。
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-var-requires
     const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC;
     return (
       <NavigationContainer>
