@@ -11,7 +11,7 @@ React Nativeを用いてアプリを実装するには、JavaScript、TypeScript
 | TypeScript | JavaScriptに静的型付けを追加したプログラミング言語です。JavaScriptと上位互換性があり、静的型付けによりコード実行前にエラーを検出できます。その性質から、開発規模が大きくなるほどその効果を発揮します。 |
 | React | コンポーネントベースのアプローチで、ウェブアプリ開発に用いるJavaScriptライブラリです。 |
 | React Native | Reactをベースにしたモバイルアプリのフレームワークです。 |
-| OpenAPI Specification | APIの仕様を記述するための標準規格です。<br/> ※ 学習コンテンツの[HTTP API通信](/react-native/learn/qa-app/app-project-desc#http-api通信)時にOpenAPI Specificationの知識が必要となりますので、[OpenAPI Specification](/react-native/pre-requisites#openapi-specification)を参考してください。 |
+| OpenAPI Specification | APIの仕様を記述するための標準規格です。<br/> ※ ToDoアプリの[REST APIとの接続](./learn/todo-app/networking/setting-up-local-server.mdx)とQ&Aアプリの[HTTP API通信](./learn/qa-app/app-project-desc.md#http-api通信)時にOpenAPI Specificationの知識が必要となります。 |
 
 ToDoアプリの実装例や解説を理解するために参考となるサイトを紹介します。
 用語やコード例でわからないことがあるときは参照してください。
