@@ -149,10 +149,9 @@ TanStack Queryの作者のブログに公開されている以下のページで
 :::
 
 :::warning
-<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/no-doubled-joshi -->
-TanStack Queryは簡単なデータ管理、データの自動キャッシュ、非同期データ処理、TypeScriptのサポートなど、多くのメリットがありますのでQAアプリでは導入してます。
-ただし、高い学習コスト、カスタマイズの複雑性があるため、十分な知識がない人が使用する場合は逆にパフォーマンスが低下する可能性があるなど、デメリットがあります。そのため、プロジェクトで導入する場合は慎重に検討する必要があります。
-<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/no-doubled-joshi -->
+TanStack Queryは非同期処理の状態やキャッシュの管理、TypeScriptのサポートなど、開発する上で非常に便利な機能を提供しています。これらを有効活用することにより、開発効率の向上など多くのメリットがあるため、QAアプリではTanStack Queryを導入しています。
+
+ただし、学習コストやカスタマイズの難易度が高く、十分な知識が持たない人にとってはパフォーマンスが低下する一因となります。そのため、プロジェクトで導入する場合は慎重に検討してください。
 :::
 
 | コピーファイル |
