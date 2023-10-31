@@ -146,9 +146,13 @@ TanStack Queryの作者のブログに公開されている以下のページで
 1. [React Query Data Transformations](https://tkdodo.eu/blog/react-query-data-transformations)
 1. [React Query Render Optimizations](https://tkdodo.eu/blog/react-query-render-optimizations)
 1. [Status Checks in React Query](https://tkdodo.eu/blog/status-checks-in-react-query)
+:::
 
-React Queryはプロジェクトに十分な知見を持った人がいない場合は導入を見送り、
-[HTTP API通信実装に向けた技術選定](/react-native/santoku/decisions/adr-012-http-api#http-api通信実装に向けた技術選定)を参考し、他のライブラリを検討してください。
+:::warning
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/no-doubled-joshi -->
+TanStack Queryは簡単なデータ管理、データの自動キャッシュ、非同期データ処理、TypeScriptのサポートなど、多くのメリットがありますのでQAアプリでは導入してます。
+ただし、高い学習コスト、カスタマイズの複雑性があるため、十分な知識がない人が使用する場合は逆にパフォーマンスが低下する可能性があるなど、デメリットがあります。そのため、プロジェクトで導入する場合は慎重に検討する必要があります。
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/no-doubled-joshi -->
 :::
 
 | コピーファイル |
