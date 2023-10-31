@@ -87,3 +87,5 @@ npm ERR! to accept an incorrect (and potentially broken) dependency resolution.
 - ファイル保存時の自動フォーマット・自動修正
 
 インストールした拡張機能は違うプロジェクトでも引き継がれるので、この作業は初回のみで十分です。
+
+その他の有用な拡張機能については[開発に利用するツールの「Visual Studio Code」ページ](../../santoku/development/tools/vscode.md)を参照ください。
