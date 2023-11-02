@@ -18,6 +18,10 @@ ToDoアプリの実装例や解説を理解するために参考となるサイ�
 
 JavaScriptやReactの知識がない方はまず参考サイトで学習してからToDoアプリの実装を進めてください。
 
+:::info
+工数はJavaScript: 2〜3日、TypeScript: 2〜3日、React: 3〜4日のように想定していますが、各自のスキルや経験のスキルによって大きく変わります。
+:::
+
 ## 参考サイト
 
 ### JavaScript Primer
