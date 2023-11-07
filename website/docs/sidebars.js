@@ -253,6 +253,7 @@ module.exports = {
               items: [
                 'react-native/learn/qa-app/exercise-basic-detail-event-screen',
                 'react-native/learn/qa-app/exercise-basic-detail-event-api',
+                'react-native/learn/qa-app/exercise-basic-detail-event-test-case',
               ],
             },
             {
