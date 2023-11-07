@@ -225,6 +225,7 @@ module.exports = {
                 'react-native/learn/qa-app/exercise-basic-home-components',
                 'react-native/learn/qa-app/exercise-basic-home-screen',
                 'react-native/learn/qa-app/exercise-basic-home-api',
+                'react-native/learn/qa-app/exercise-basic-home-test-case',
               ],
             },
             {
