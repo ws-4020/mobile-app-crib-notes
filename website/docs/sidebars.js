@@ -244,6 +244,7 @@ module.exports = {
                 'react-native/learn/qa-app/exercise-basic-detail-question-components',
                 'react-native/learn/qa-app/exercise-basic-detail-question-screen',
                 'react-native/learn/qa-app/exercise-basic-detail-question-api',
+                'react-native/learn/qa-app/exercise-basic-detail-question-test-case',
               ],
             },
             {
