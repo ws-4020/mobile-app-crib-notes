@@ -222,6 +222,7 @@ module.exports = {
           items: [
             'react-native/learn/qa-app/app-basic-concepts',
             'react-native/learn/qa-app/about-implementation-selection',
+            'react-native/learn/qa-app/about-design-system',
           ],
         },
         {
