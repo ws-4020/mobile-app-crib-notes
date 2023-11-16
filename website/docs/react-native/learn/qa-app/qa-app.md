@@ -23,6 +23,11 @@ const overviews = [
     summary: <>Q&Aアプリの開発に利用するReact Nativeプロジェクトを準備・設定します。</>
   },
   {
+    title: 'Q&Aアプリの実装前に',
+    to: '/react-native/learn/qa-app/app-basic-concepts',
+    summary: <>Q&Aアプリの実装前に、実装方法の検討時の進め方やデザインシステムの概要について理解します。</>
+  },
+  {
     title: 'Q&Aアプリの実装（基本編）',
     to: '/react-native/learn/qa-app/exercise-basic-home-components',
     summary: <>Q&Aアプリの各画面と画面遷移、API呼び出しを実装します。</>
