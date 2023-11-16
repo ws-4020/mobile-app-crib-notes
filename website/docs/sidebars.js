@@ -219,7 +219,10 @@ module.exports = {
         {
           type: 'category',
           label: 'Q&Aアプリの実装前に',
-          items: ['react-native/learn/qa-app/app-basic-concepts'],
+          items: [
+            'react-native/learn/qa-app/app-basic-concepts',
+            'react-native/learn/qa-app/about-implementation-selection',
+          ],
         },
         {
           type: 'category',
