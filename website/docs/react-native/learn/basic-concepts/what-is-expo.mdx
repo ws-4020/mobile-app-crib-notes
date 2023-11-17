@@ -108,18 +108,15 @@ Bare workflowには存在したプラットフォームごとのディレクト�
 
 これらを回避するためには、`expo eject`コマンドを実行して、Managed workflowからBare workflowへ移行する必要がありました。
 
-しかし、Expo SDK 41からExpo EASが使用できるようになり、上記の制約がなくなりました。現在では、Managed workflowでもネイティブコードを自由に記述できるようになり、アプリのビルドもローカルPCで実施できます。
-
-併せて`expo eject`は非推奨になり、新たに[`npx expo prebuild`](https://docs.expo.dev/workflow/prebuild/)と[Config Plugins](https://docs.expo.dev/config-plugins/introduction/)が提供されました。
+しかし現在では、[Prebuild](https://docs.expo.dev/workflow/prebuild/)と[Config Plugins](https://docs.expo.dev/config-plugins/introduction/)という機能が用意されたので、Managed workflowでもExpo SDK以外のパッケージを利用できるようになりました。
+独自のネイティブコードをアプリに含めたり、アプリをローカルPCでビルドできます。なお、これらの機能の導入に伴って、`expo eject`は非推奨となっています。
 
 | 機能             | 概要                                                                                                                                                                                                             |
 |:---------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Prebuild       | アプリの依存ライブラリや設定ファイル（`app.json`）に基づいて、ネイティブプロジェクトを自動生成する機能です。ネイティブプロジェクトは、Expoが管理するテンプレート（[expo-template-bare-minimum](https://github.com/expo/expo/tree/main/templates/expo-template-bare-minimum)）をベースに生成されます。 |
-| Config Plugins | ネイティブプロジェクト内のリソースをカスタマイズする機能です。Expoが管理するテンプレートから変更したい箇所を自由に変更できます。                                                                                                                                             |
+| Config Plugins | ネイティブプロジェクト内のリソースをカスタマイズする機能です。Expoが管理するテンプレートから変更したい箇所を自由に変更できます。なお、カスタマイズする内容によっては独自のConfig Pluginを作成しなくてはいけないことがあります。                                                                                       |
 
-Expo EASの内部でも使われており、この仕組みを利用して以前では実現できなかったネイティブコードの自由な記述が可能となっています。
-
-Managed workflowでありながら、Prebuildを組み合わせることで、Bare workflowのようにアプリを開発できます。この学習コンテンツでも、Managed workflowとPrebuildを組み合わせてアプリを開発します。
+この学習コンテンツでも、Managed workflowとPrebuildを組み合わせてアプリを開発します。ネイティブプロジェクトの設定などには触れないので、独自のConfig Pluginは利用しません。
 
 ### Global Expo CLIとLocal Expo CLI
 
