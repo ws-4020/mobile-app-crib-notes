@@ -34,6 +34,6 @@ export const useAccountCommands = () => {
     agreeTerms: agreeTermsMutation.mutateAsync,
     isLoadingAccountData: loadAccountDataMutation.isLoading,
     isAgreeingTerms: agreeTermsMutation.isLoading,
-    isProcessing: agreeTermsMutation.isLoading || agreeTermsMutation.isLoading,
+    isProcessing: agreeTermsMutation.isLoading,
   };
 };
