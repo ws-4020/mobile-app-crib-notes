@@ -100,12 +100,14 @@ const Component = () => {
 ```typescript jsx title=await式を使用した場合のtry...catchの例
 const Component = () => {
   useEffect(() => {
-    try {
-      const result = await asyncFunction();
-      // 正常時の処理
-    } catch(e) {
-      // エラー処理
-    }
+    (async () => {
+      try {
+        const result = await asyncFunction();
+        // 正常時の処理
+      } catch(e) {
+        // エラー処理
+      }
+    })();
   }, [asyncFunction]);
 
   /* ～省略～ */
