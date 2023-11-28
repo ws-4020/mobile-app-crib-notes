@@ -76,7 +76,7 @@ export const useItem = (id: number) => {
       : undefined;
   const amountQueryParams = itemQuery.data && rate ? {price: itemQuery.data.price, rate} : undefined;
 
-  const amountQuery = useQuery(['amount', 'getAmount', amountQueryParams], () => getAmount(amountQueryParams!), {
+  const amountQuery = useQuery(['item', 'getAmount', amountQueryParams], () => getAmount(amountQueryParams!), {
     enabled: !!amountQueryParams,
   });
   const amount = amountQuery.data;
