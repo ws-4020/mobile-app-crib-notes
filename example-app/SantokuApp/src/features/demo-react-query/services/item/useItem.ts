@@ -53,7 +53,7 @@ export const useItem = (id: number) => {
   const item = itemQuery.data;
 
   const itemType0Query = useQuery<ItemRate>(
-    ['itemType0', 'getItemType0', itemQuery.data],
+    ['item', 'getItemType0', itemQuery.data],
     () => getItemType0(itemQuery.data!),
     {
       enabled: itemQuery.isSuccess && itemQuery.data.type === 0,
@@ -61,7 +61,7 @@ export const useItem = (id: number) => {
   );
 
   const itemType1Query = useQuery<ItemRate>(
-    ['itemType1', 'getItemType1', itemQuery.data],
+    ['item', 'getItemType1', itemQuery.data],
     () => getItemType1(itemQuery.data!),
     {
       enabled: itemQuery.isSuccess && itemQuery.data.type === 1,
