@@ -22,8 +22,8 @@ const aboutImplementationOptions = [
 ]
 const designSystem = [
   {
-    title: 'デザインシステムについて',
-    to: '/react-native/learn/qa-app/about-design-system',
+    title: 'コンポーネントの分割について',
+    to: '/react-native/learn/qa-app/about-component-units',
   },
 ]
 
@@ -31,8 +31,8 @@ const designSystem = [
 
 <PageList overviews={aboutImplementationOptions} colSize={12} />
 
-また、Q&Aアプリでは開発を進めるための資料として、デザインシステムというUIに関するガイドラインを提供しています。
+また、アプリ開発ではコンポーネントを適切に分割することも重要なポイントです。例えば、画面を1つのコンポーネント内に実装すると、コードが肥大化してしまいます。また、他の画面で同じような表示をする場合に再利用できません。
 
-次のページでは、デザインシステムの概要やエンジニアがデザインシステムに準拠したコンポーネントを作成する必要性について説明します。
+次のページでは、コンポーネントをどのような単位で分割していくべきかについて説明します。
 
 <PageList overviews={designSystem} colSize={12} />
