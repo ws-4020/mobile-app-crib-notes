@@ -24,7 +24,7 @@ const overviews = [
   },
   {
     title: 'Q&Aアプリの実装前に',
-    to: '/react-native/learn/qa-app/app-basic-concepts',
+    to: '/react-native/learn/qa-app/before-app-implementation',
     summary: <>Q&Aアプリの実装前に、実装方法の検討時の進め方やデザインシステムの概要について理解します。</>
   },
   {
