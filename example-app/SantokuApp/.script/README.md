@@ -125,3 +125,13 @@ ESLintプラグインやルールのURLなどの情報は、`print-eslint-rules.
 ```
 
 必要に応じて、`print-eslint-rules.js`にプラグイン情報を定義してください。
+
+## [add-license-comment.js](./add-license-comment.js)
+
+プロジェクトで使用しているファイル(`js`、`tsx`、`ts`)のヘッダーにライセンスコメントを作成します。
+
+`orval`で自動生成したファイルは対象外にし、既にライセンスコメントが作成されているファイルは処理をスキップします。
+
+```bash
+node .script/add-license-comment.js
+```
