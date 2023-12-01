@@ -128,10 +128,19 @@ ESLintプラグインやルールのURLなどの情報は、`print-eslint-rules.
 
 ## [add-license-comment.js](./add-license-comment.js)
 
-プロジェクトで使用しているファイル(`js`、`tsx`、`ts`)のヘッダーにライセンスコメントを作成します。
+プロジェクトで使用しているファイル(`js`、`tsx`、`ts`)の先頭にライセンスコメントを追加します。
 
-`orval`で自動生成したファイルは対象外にし、既にライセンスコメントが作成されているファイルは処理をスキップします。
+対象ファイルは、`src`ディレクトリ以下のファイルです。ただし、以下のファイルは対象外としています。
 
+- `orval`で自動生成されたファイル
+  - `src/features/backend/apis`配下のファイル
+  - `src/features/sandbox/apis`配下のファイル
+- OSSのソースコードを利用・改変しているファイル
+  - `src/features/demo-instructions/pages/InstructionsPage.tsx`
+  - `src/bases/ui/barcode/Barcode.tsx`
+  - `src/bases/core/errors/ErrorWrapper.ts`
+
+`add-license-comment.js` を実行する場合のコマンド例
 ```bash
 node .script/add-license-comment.js
 ```
