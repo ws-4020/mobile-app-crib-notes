@@ -60,4 +60,4 @@ const addLicenseToFiles = directory => {
   });
 };
 
-addLicenseToFiles(rootDir);
+addLicenseToFiles(`${rootDir}/src`);
