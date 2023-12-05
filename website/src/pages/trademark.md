@@ -44,6 +44,7 @@ title: 商標について
 - 「JetBrains」「IntelliJ」「WebStorm」は、JetBrains s.r.oの登録商標です。
 - 「Sentry」は、Functional Software, Inc.の登録商標です。
 - 「Gradle」は、Gradle, Inc.の登録商標です。
+- 「Git」は、Software Freedom Conservancy, Inc.の米国およびその他の国における商標または登録商標です。
 - 「GitHub」は、GitHub Inc.の商標または登録商標です。
 <!-- textlint-enable jtf-style/1.2.1.句点(。)と読点(、)-->
 
