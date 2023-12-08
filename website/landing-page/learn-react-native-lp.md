@@ -69,6 +69,10 @@ React Nativeを利用して開発を進める中で挙がったFAQ（[トラブ�
         - [単体テストの実施](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/exercise-basic-detail-event-test-case)
       - 入力画面
         - [単体テストの実施](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/exercise-basic-input-test-case)
+- キャッシュが残ってファイルが更新できない場合の対処方法を追加
+  - トラブルシューティング
+    - アプリを実行できない
+      - [キャッシュが残ってファイルの更新ができない](https://ws-4020.github.io/mobile-app-crib-notes/react-native/common-pitfalls/clear-cache)
 
 #### 🌿 更新コンテンツ（2023/12/25）
 
