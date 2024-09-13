@@ -102,15 +102,15 @@ export const useYearMonthPicker = ({
 
   const onValueChangeYear = useCallback(
     (value: React.Key) => {
-      const year = value as number;
-      onSelectedItemChange?.(getSelectedYearMonth({year, month: selectedMonth}));
+      // iOSではvalueが強制的にstringに変換されてしまうので、number型に変換する。
+      onSelectedItemChange?.(getSelectedYearMonth({year: Number(value), month: selectedMonth}));
     },
     [getSelectedYearMonth, onSelectedItemChange, selectedMonth],
   );
   const onValueChangeMonth = useCallback(
     (value: React.Key) => {
-      const month = value as number;
-      onSelectedItemChange?.(getSelectedYearMonth({year: selectedYear, month}));
+      // iOSではvalueが強制的にstringに変換されてしまうので、number型に変換する。
+      onSelectedItemChange?.(getSelectedYearMonth({year: selectedYear, month: Number(value)}));
     },
     [getSelectedYearMonth, onSelectedItemChange, selectedYear],
   );
