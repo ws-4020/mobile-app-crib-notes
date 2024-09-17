@@ -41,7 +41,7 @@ stages:
       steps:
       - task: UseRubyVersion@0
         inputs:
-          versionSpec: '3.1.6'
+          versionSpec: '3.1'
           addToPath: true
       - task: NodeTool@0
         displayName: 'Use Node.js 18.15.0'
@@ -139,7 +139,7 @@ stages:
       steps:
       - task: UseRubyVersion@0
         inputs:
-          versionSpec: '3.1.6'
+          versionSpec: '3.1'
           addToPath: true
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{environment.name}}'
