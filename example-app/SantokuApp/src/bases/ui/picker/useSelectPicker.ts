@@ -15,6 +15,7 @@
  */
 
 import React, {useCallback, useMemo, useState} from 'react';
+import {Platform} from 'react-native';
 
 import {SelectPickerProps} from './SelectPicker';
 
@@ -31,7 +32,15 @@ export const useSelectPicker = <ItemT>({
   const close = useCallback(() => setIsVisible(false), []);
   const getSelectedItem = useCallback(
     (key?: React.Key | ItemT) => {
-      return items.find(item => item.key === key || item.value === key);
+      return items.find(item => {
+        if (Platform.OS === 'ios') {
+          // @react-native-picker/pickerは、iOSではpickerに渡されたvalueを強制的に文字列化してしまいます。
+          // そのため、onValueChangeに渡されてくる値は文字列となり、valueが文字列でなかった場合は直接比較しても一致しません。
+          // ここでは、@react-native-picker/pickerの内部処理と同様に、双方を文字列化して比較することで、選択中の要素を取得します。
+          return String(item.key) === String(key) || String(item.value) === String(key);
+        }
+        return item.key === key || item.value === key;
+      });
     },
     [items],
   );
