@@ -47,6 +47,7 @@
         '@types/react',
         'babel-preset-expo',
         'expo',
+        'expo-application',
         'expo-build-properties',
         'expo-crypto',
         'expo-dev-client',
