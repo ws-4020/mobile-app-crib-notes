@@ -2,7 +2,7 @@ import {ConfigPlugin, withPlugins} from 'expo/config-plugins';
 
 import {withAndroidAddAppActivityAndroidManifest} from './withAndroidAddAppActivityAndroidManifest';
 import {withAndroidCopyMainActivity} from './withAndroidCopyMainActivity';
-import {withAndroidCopyTemplateJavaFile} from './withAndroidCopyTemplateJavaFile';
+import {withAndroidCopyTemplateSourceFile} from './withAndroidCopyTemplateSourceFile';
 import {ANDROID} from '../constants';
 
 const MAIN_ACTIVITY_FILE_NAME = 'MainActivity.kt';
@@ -22,7 +22,7 @@ const APP_ACTIVITY_CLASS_NAME = 'AppActivity';
 export const withAndroidAddAppActivity: ConfigPlugin = config => {
   return withPlugins(config, [
     [
-      withAndroidCopyTemplateJavaFile,
+      withAndroidCopyTemplateSourceFile,
       {srcDir: ANDROID.PLUGIN_TEMPLATE_MAIN_ACTIVITY_DIR, fileName: MAIN_ACTIVITY_FILE_NAME},
     ],
     [withAndroidCopyMainActivity, {toClassName: APP_ACTIVITY_CLASS_NAME}],
