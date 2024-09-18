@@ -27,10 +27,15 @@ export type Item<T> = {
   label: string;
   value: T;
   inputLabel?: string;
-  key?: React.Key;
   color?: string;
   fontFamily?: string;
-};
+} & (T extends string
+  ? {
+      key?: React.Key;
+    }
+  : {
+      key: React.Key;
+    });
 
 type TextInputProps = Omit<RNETextInputProps, 'value' | 'editable'>;
 export type SelectPickerProps<ItemT> = {

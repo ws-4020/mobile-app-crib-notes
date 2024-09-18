@@ -46,7 +46,7 @@ export const useYearMonthPicker = ({
     const minimumYear = minimumYearMonth.year;
     return [...Array<number>(maximumYear - minimumYear + 1)].map((_, index: number) => {
       const y = minimumYear + index;
-      return {value: y, label: String(y), color: itemColor, fontFamily: itemFontFamily};
+      return {value: y, label: String(y), key: String(y), color: itemColor, fontFamily: itemFontFamily};
     });
   }, [itemColor, itemFontFamily, maximumYearMonth.year, minimumYearMonth.year]);
 
@@ -58,12 +58,12 @@ export const useYearMonthPicker = ({
     if (maximumYear === minimumYear) {
       return [...Array<number>(maximumMonth - minimumMonth + 1)].map((_, index: number) => {
         const m = minimumMonth + index;
-        return {value: m, label: String(m), color: itemColor, fontFamily: itemFontFamily};
+        return {value: m, label: String(m), key: String(m), color: itemColor, fontFamily: itemFontFamily};
       });
     }
     return [...Array<number>(12)].map((_, index: number) => {
       const m = index + 1;
-      return {value: m, label: String(m), color: itemColor, fontFamily: itemFontFamily};
+      return {value: m, label: String(m), key: String(m), color: itemColor, fontFamily: itemFontFamily};
     });
   }, [
     itemColor,
