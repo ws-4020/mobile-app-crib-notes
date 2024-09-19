@@ -23,18 +23,19 @@ import {PickerContainer, PickerContainerProps} from './PickerContainer';
 import {SelectPickerItems, SelectPickerItemsProps} from './SelectPickerItems';
 import {useSelectPicker} from './useSelectPicker';
 
+export type RNPickerItemValue = string | number;
 export type Item<T> = {
   label: string;
   value: T;
   inputLabel?: string;
   color?: string;
   fontFamily?: string;
-} & (T extends string
+} & (T extends RNPickerItemValue
   ? {
-      key?: React.Key;
+      key?: RNPickerItemValue;
     }
   : {
-      key: React.Key;
+      key: RNPickerItemValue;
     });
 
 type TextInputProps = Omit<RNETextInputProps, 'value' | 'editable'>;
