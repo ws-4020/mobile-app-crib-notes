@@ -49,7 +49,7 @@ export type SelectPickerProps<ItemT> = {
   /**
    * 選択されたアイテムのKey
    */
-  selectedItemKey?: ItemSelectionKey;
+  selectedItemKey?: ItemSelectionKey | ItemT;
   /**
    * アイテムが選択された場合に呼び出される関数
    */
