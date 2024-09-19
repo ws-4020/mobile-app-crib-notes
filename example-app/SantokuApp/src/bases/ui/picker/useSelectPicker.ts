@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import React, {useCallback, useMemo, useState} from 'react';
+import {useCallback, useMemo, useState} from 'react';
 import {Platform} from 'react-native';
 
-import {SelectPickerProps} from './SelectPicker';
+import {ItemSelectionKey, SelectPickerProps} from './SelectPicker';
 
 export const useSelectPicker = <ItemT>({
   items,
@@ -31,7 +31,7 @@ export const useSelectPicker = <ItemT>({
   const [isVisible, setIsVisible] = useState(false);
   const close = useCallback(() => setIsVisible(false), []);
   const getSelectedItem = useCallback(
-    (key?: React.Key | ItemT) => {
+    (key?: ItemSelectionKey | ItemT) => {
       return items.find(item => {
         if (Platform.OS === 'ios') {
           // @react-native-picker/pickerは、iOSではpickerに渡されたvalueを強制的に文字列化してしまいます。
@@ -45,7 +45,7 @@ export const useSelectPicker = <ItemT>({
     [items],
   );
   const onValueChange = useCallback(
-    (key: React.Key | ItemT) => {
+    (key: ItemSelectionKey | ItemT) => {
       const selectedItem = getSelectedItem(key);
       onSelectedItemChange?.(selectedItem);
     },

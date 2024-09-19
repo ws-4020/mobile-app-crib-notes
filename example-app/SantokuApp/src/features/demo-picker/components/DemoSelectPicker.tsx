@@ -15,7 +15,7 @@
  */
 
 import {m} from 'bases/message/Message';
-import {Item, SelectPicker} from 'bases/ui/picker/SelectPicker';
+import {Item, ItemSelectionKey, SelectPicker} from 'bases/ui/picker/SelectPicker';
 import React, {useCallback, useMemo, useRef, useState} from 'react';
 import {Input} from 'react-native-elements';
 
@@ -39,9 +39,9 @@ const pickerItems: Item<PickerItemType>[] = [
 ];
 
 export const DemoSelectPicker: React.FC = () => {
-  const [itemsKey, setItemsKey] = useState<React.Key>();
+  const [itemsKey, setItemsKey] = useState<ItemSelectionKey>();
   // キャンセルをタップした時に、Pickerを開く前の値に戻せるようにRefで保持しておきます。
-  const canceledKey = useRef<React.Key>();
+  const canceledKey = useRef<ItemSelectionKey>();
   const onSelectedItemChange = useCallback((selectedItem?: Item<PickerItemType>) => {
     setItemsKey(selectedItem?.key);
   }, []);

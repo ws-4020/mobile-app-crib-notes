@@ -15,8 +15,9 @@
  */
 
 import {ApplicationError} from 'bases/core/errors/ApplicationError';
-import React, {useCallback, useMemo, useState} from 'react';
+import {useCallback, useMemo, useState} from 'react';
 
+import {ItemSelectionKey} from './SelectPicker';
 import {YearMonth} from './YearMonth';
 import {YearMonthPickerProps} from './YearMonthPicker';
 import {YearMonthUtil} from './YearMonthUtil';
@@ -101,14 +102,14 @@ export const useYearMonthPicker = ({
   );
 
   const onValueChangeYear = useCallback(
-    (value: React.Key) => {
+    (value: ItemSelectionKey) => {
       // iOSではvalueが強制的にstringに変換されてしまうので、number型に変換する。
       onSelectedItemChange?.(getSelectedYearMonth({year: Number(value), month: selectedMonth}));
     },
     [getSelectedYearMonth, onSelectedItemChange, selectedMonth],
   );
   const onValueChangeMonth = useCallback(
-    (value: React.Key) => {
+    (value: ItemSelectionKey) => {
       // iOSではvalueが強制的にstringに変換されてしまうので、number型に変換する。
       onSelectedItemChange?.(getSelectedYearMonth({year: selectedYear, month: Number(value)}));
     },

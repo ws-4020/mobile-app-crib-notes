@@ -23,19 +23,21 @@ import {PickerContainer, PickerContainerProps} from './PickerContainer';
 import {SelectPickerItems, SelectPickerItemsProps} from './SelectPickerItems';
 import {useSelectPicker} from './useSelectPicker';
 
-export type RNPickerItemValue = string | number;
+export type ItemSelectionKey = string | number;
 export type Item<T> = {
   label: string;
   value: T;
   inputLabel?: string;
   color?: string;
   fontFamily?: string;
-} & (T extends RNPickerItemValue
+} & (T extends ItemSelectionKey
   ? {
-      key?: RNPickerItemValue;
+      // valueがstringもしくはnumberの場合は、value自体をkeyの代わりに利用できるので任意としています。
+      key?: ItemSelectionKey;
     }
   : {
-      key: RNPickerItemValue;
+      // valueがstringでもnumberでもない場合は、valueをkeyとしては利用できないので、必須としています。
+      key: ItemSelectionKey;
     });
 
 type TextInputProps = Omit<RNETextInputProps, 'value' | 'editable'>;
@@ -47,7 +49,7 @@ export type SelectPickerProps<ItemT> = {
   /**
    * 選択されたアイテムのKey
    */
-  selectedItemKey?: React.Key | ItemT;
+  selectedItemKey?: ItemSelectionKey;
   /**
    * アイテムが選択された場合に呼び出される関数
    */

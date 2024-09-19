@@ -18,11 +18,11 @@ import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import {FlatList, NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
 import {useAnimatedRef, useAnimatedScrollHandler, useSharedValue} from 'react-native-reanimated';
 
-import {Item} from './SelectPicker';
+import {Item, ItemSelectionKey} from './SelectPicker';
 import {useListMiddleIndex} from './useListMiddleIndex';
 
 type SelectPickerItemsTypes<ItemT> = {
-  selectedValue?: React.Key | ItemT;
+  selectedValue?: ItemSelectionKey | ItemT;
   children?: React.JSX.Element | React.JSX.Element[];
   items: Item<ItemT>[];
   itemHeight: number;
