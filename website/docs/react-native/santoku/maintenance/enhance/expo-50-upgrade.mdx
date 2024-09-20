@@ -1,0 +1,313 @@
+---
+title: Expo SDK 50アップグレード
+---
+
+:::info参考
+以下の記事を参考にして、このアプリのExpo SDKを49にアップグレードしました。
+主な変更点とこのアプリで実施したアップグレード手順を紹介します。
+
+- [Expo SDK 50 - Expo Changelog](https://expo.dev/changelog/2024/01-18-sdk-50)
+- [React Native 0.73 - Debugging Improvements, Stable Symlink Support, and more · React Native](https://reactnative.dev/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks)
+
+なお、使用される可能性の低いEASとReact Native Webに関する内容は記載しません。
+:::
+
+## Expo SDK 50の主な変更
+
+### React Native `v0.73.6`
+
+詳細は、以下のリンク先を参照してください。
+
+- [React Native 0.73 - Debugging Improvements, Stable Symlink Support, and more · React Native](https://reactnative.dev/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks)
+- [React Native CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0736)
+
+Reactのバージョンは変更されておらず、依然として`v18.2.0`です。
+
+非推奨となっていた以下のコンポーネントは、React native `v0.73.0`で削除されました。以下に挙げるコミュニティライブラリなどへの移行が必要です。
+
+- [ProgressBarAndroid](https://reactnative.dev/docs/progressbarandroid)
+  - [@react-native-community/progress-bar-android](https://github.com/react-native-progress-view/progress-bar-android)
+  - [progressbar - React Native Directory](https://reactnative.directory/?search=progressbar)
+- [ProgressViewIOS](https://reactnative.dev/docs/progressviewios)
+  - [@react-native-community/progress-view](https://github.com/react-native-progress-view/progress-view)
+  - [progressview - React Native Directory](https://reactnative.directory/?search=progressview)
+
+### プラットフォームに関連する破壊的変更
+
+Android、iOSのプラットフォーム関連で以下のような変更がされています。
+
+- Androidの最低サポートバージョンが、**Android 6 (API 23)**に変更されました
+- iOSの最低サポートバージョンが、**13.4**に変更されました
+- Android Gradle Pluginのバージョンが8になり、**Java 17**が必須となりました
+  - Androidアプリをビルドする場合は、Java 17をインストールする必要があります
+- Node.jsのバージョンは**18**以上が必須となりました
+- React Nativeのテンプレートに含まれるAndroid用の`Main*`クラスがJavaからKotlinに変更されました
+  - `MainApplication.java` → `MainApplication.kt`
+  - `MainActivity.java` → `MainActivity.kt`
+
+
+### Dev toolsの改善
+
+デバッグに利用できる[Dev tools plugin](https://docs.expo.dev/debugging/devtools-plugins/)が導入されました。以下のようなライブラリでの開発を効率化するためのプラグインが公開されているようです。
+
+- [React Navigation](https://docs.expo.dev/debugging/devtools-plugins/#react-navigation)
+- [Apollo Client](https://docs.expo.dev/debugging/devtools-plugins/#apollo-client)
+- [React Query](https://docs.expo.dev/debugging/devtools-plugins/#react-query)
+- [Redux](https://docs.expo.dev/debugging/devtools-plugins/#redux)
+- [TinyBase](https://docs.expo.dev/debugging/devtools-plugins/#tinybase)
+
+サンプルアプリではまだ利用していませんが、これらのライブラリを利用している場合はDev toolsの利用を検討してみると良さそうです。
+
+### `@react-native-picker/picker`のiOSでの振る舞い変更
+
+`@react-native-picker/picker`が、iOSでは`value`を強制的に文字列化するように変更されました。そのため、以下のようなコードでも**iOSでは`setCount`に文字列が渡されます**。
+
+```tsx
+const CountPicker = () => {
+  const [count, setCount] = useState<number>();
+  return (
+    <Picker selectedValue={count} onValueChange={setCount}>
+      <Picker.Item label="Count 1" value={1} />
+      <Picker.Item label="Count 2" value={2} />
+    </Picker>
+  );
+};
+```
+
+この変更の影響に関して、以下のようなIssueが建てられています。`value`として文字列以外を渡している場合は注意してください。
+
+- [Picker 2.6+ transforms numeric values to strings](https://github.com/react-native-picker/picker/issues/538)
+- [Selected value jumps back to first value when "Done" is tapped - Picker library v2.6.1, iOS only](https://github.com/react-native-picker/picker/issues/540)
+
+例えば、以下のようにPickerを実装している場合、この変更によって項目を選択できなくなってしまうので注意してください。
+
+```tsx
+import {useCallback,useState} from "react";
+import {Picker} from "@react-native-picker/picker";
+
+type ItemType = {value: number};
+const ITEMS = [{value: 1}, {value: 2}, {value: 3}, {value: 4}];
+const DEFAULT = ITEMS[0];
+const CountPicker = () => {
+  const [selected, setSelected] = useState<ItemType>(DEFAULT);
+  const onValueChange = useCallback(
+    // iOSでは、選択された値（sel）として文字列化されたvalueが渡されてしまう。
+    // そのため、find内での比較で一致するものが見つからず、結果としてselectedが変更されない
+    (sel: number) => setSelected(ITEMS.find(item => item.value === sel) ?? DEFAULT),
+    [],
+  );
+  return (
+    <Picker selectedValue={selected?.value} onValueChange={onValueChange}>
+      {ITEMS.map(item => (
+        <Picker.Item label={String(item.value)} value={item.value} />
+      ))}
+    </Picker>
+  );
+};
+```
+
+なお、`@react-native-picker/piker`をラップしている`react-native-picker-select`では、数値を`value`として渡していると項目が選択できなくなってしまいます。
+
+- [Not able to select Number values since @react-native-picker/picker upgrade to 2.6.1](https://github.com/lawnstarter/react-native-picker-select/issues/530)
+
+### ネイティブプロジェクトの更新ヘルパー
+
+Config PluginやPrebuildを利用せずにネイティブプロジェクトを管理している場合に利用できる、[Native project upgrade helper](https://docs.expo.dev/bare/upgrade/)がExpoから提供されるようになりました。
+
+React Nativeコミュニティのプロジェクトテンプレート向けには、以前から[React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/)が提供されていましたが、そのExpoテンプレート版になります。
+
+たとえば、SDK 49からSDK 50への修正にあたって更新されたExpoテンプレートのネイティブプロジェクトファイルは、以下のURLで確認することができます。
+
+https://docs.expo.dev/bare/upgrade/?fromSdk=49&toSdk=50
+
+自分たちで管理しているネイティブプロジェクトファイルに対してこれらの修正を加えることで、テンプレートの状態をSDK 50のデフォルト状態に合わせることができます。
+
+このアプリのようにExpo prebuildを利用した[Continuous Native Generation (CNG)](https://docs.expo.dev/workflow/continuous-native-generation/)を採用している場合は、
+これらの変更はネイティブプロジェクトの生成時に自動的に反映されますが、具体的にどのような変更が加わったのかを把握するために活用することができます。
+
+### `URL`および`URLSearchParams`の組み込み
+
+React Nativeで`URL`や`URLSearchParam`の全機能を利用するためには、`react-native-url-polyfill`などのポリフィルを利用する必要がありました。
+
+Expo SDK 50ではこれらの標準APIがExpoのランタイムに組み込まれるようになったので、ポリフィルは不要になりました。
+
+詳細は[URL - Expo Documentation](https://docs.expo.dev/versions/v50.0.0/sdk/url/)を参照してください。
+
+### Expoがサポートするライブラリや機能
+
+以下に上げる変更点の詳細やその他の変更については、[ExpoのChangelog](https://github.com/expo/expo/blob/main/CHANGELOG.md#5000--2023-12-12)を参照してください。
+
+#### ライブラリの更新
+
+- [expo-router](https://docs.expo.dev/router/introduction/) `v3`
+  - 参考：[Expo Router v3: API Routes, bundle splitting, speed improvements, and more](https://expo.dev/changelog/2024/01-23-router-3)
+- [expo-font](https://docs.expo.dev/versions/v50.0.0/sdk/font/)
+  - Config Pluginを利用して、フォントをネイティブに追加することができるようになりました。詳細については、Expoの[Fontについてのガイド](https://docs.expo.dev/develop/user-interface/fonts/#use-a-custom-font)も参考にしてください。
+- [expo-secure-store](https://docs.expo.dev/versions/v50.0.0/sdk/securestore/)
+  - 同期的に処理する`getItem`と`setItem`が追加されました。
+  - キーが存在しない場合の振る舞いがiOSとAndroidで統一され、`null`を返すようになりました。修正前はAndroidでは例外が送出されていました。
+  - iOSで顔認証を利用する場合に必要となる`NSFaceIDUsageDescription`を、`app.config.js`で設定できるようになりました。詳細は[Expo SecureStore](https://docs.expo.dev/versions/v50.0.0/sdk/securestore/)を参照してください。
+- [@expo/metro-config](https://docs.expo.dev/guides/customizing-metro/)
+  - `tsconfig.json`で設定した`paths`が自動的に読み込まれるようになり、特に設定せずにpath aliasが正しく解決されるようになりました。
+  - ただし、Jestの実行時などには有効にはならないようです。
+- [babel-preset-expo](https://github.com/expo/expo/tree/main/packages/babel-preset-expo#readme)
+  - React Native ReanimatedのBabelプラグインが自動的に有効化されるようになりました。
+  - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)を[@expo/vector-icons](https://docs.expo.dev/guides/icons/)にエイリアスする設定がMetro Resolverに移動されました。
+    それに伴って、[babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver)が依存関係から取り除かれました。
+    - このアプリではJestなどでもpath aliasを扱えるようにbabel-preset-module-resolverを利用する必要があったので、`devDependencies`に明示的に追加して対応しました。
+
+#### ライブラリの新機能
+
+- [expo-sqlite/next](https://docs.expo.dev/versions/v50.0.0/sdk/sqlite-next/)
+  - 同期APIやPrepared Statement、Blobデータ型などが利用できるように完全に書き直されました。
+  - SDK 50では`expo-sqlite/next`として公開されていますが、SDK 51では`expo-sqlite`がこの新SDKに置き換えられています。
+- [expo-camera/next](https://docs.expo.dev/versions/v50.0.0/sdk/camera-next/)
+  - Androidでは、推奨されているCameraXを利用するように変更されています。
+  - iOS向けには、[DataScannerViewController](https://developer.apple.com/documentation/visionkit/datascannerviewcontroller)のサポートが追加されました。
+  - 顔検出機能など利用される頻度が低い機能は削除されました。frame processorを利用するなどの高度な用途向けには[react-native-vision-camera](https://github.com/mrousavy/react-native-vision-camera)の利用が推奨されています。
+  - SDK 50では`expo-camera/next`として公開されていますが、SDK 51では`expo-camera`がこの新SDKに置き換えられています。
+  - 参考：[expo-camera/next is ready for a close up](https://expo.dev/blog/expo-camera-next)
+
+#### ライブラリの廃止
+
+- [sentry-expo](https://github.com/expo/sentry-expo)
+  - Sentryの提供する公式ライブラリ[@sentry/react-native](https://docs.sentry.io/platforms/react-native/)がExpoをサポートするようになったため、sentry-expoは廃止予定となりました。
+  - 移行ガイドは[Migrating from sentry-expo to @sentry/react-native](https://github.com/expo/fyi/blob/main/sentry-expo-migration.md)を参照してください。
+  - @sentry/react-nativeの導入方法については[Use Sentry - Expo Documentation](https://docs.expo.dev/guides/using-sentry/)を参照してください。
+
+
+## このアプリで実施したアップグレードの手順
+
+このアプリでは、[Expo 50へのアップグレード方法](https://expo.dev/changelog/2024/01-18-sdk-50#%EF%B8%8F-upgrading-your-app)を参考に、以下の作業を実施してExpo SDK 50にアップグレードしました。
+
+アップグレードを実施したプルリクエストは[Pull Request #1321 · ws-4020/mobile-app-crib-notes](https://github.com/ws-4020/mobile-app-crib-notes/pull/1321)です。
+
+1. [Expoのアップグレード](#expoのアップグレード)
+1. [Expoが管理するライブラリのアップグレード](#expoが管理するライブラリのアップグレード)
+1. [バージョンの整合性が取れなくなったライブラリのアップグレード](#バージョンの整合性が取れなくなったライブラリのアップグレード)
+1. [依存ライブラリから除外されたライブラリのインストール](#依存ライブラリから除外されたライブラリのインストール)
+1. [不要となったライブラリのアンインストール](#不要となったライブラリのアンインストール)
+1. [React Navigationのバージョンを更新](#react-navigationのバージョンを更新)
+1. [`npx expo-doctor`でバージョン整合性を確認](#npx-expo-doctorでバージョン整合性を確認)
+1. [既存パッチファイルの更新](#既存パッチファイルの更新)
+1. [ビルドなどに利用するツールのバージョンを更新](#ビルドなどに利用するツールのバージョンを更新)
+1. [Config Pluginの修正](#config-pluginの修正)
+1. [静的解析エラーの修正](#静的解析エラーの修正)
+1. [自動テストの失敗を修正](#自動テストの失敗を修正)
+1. [`@react-native-picker/picker`の変更に伴う修正](#react-native-pickerpickerの変更に伴う修正)
+1. [ライセンス情報を更新](#ライセンス情報を更新)
+
+### Expoのアップグレード
+
+`npm install expo@^50.0.0`を実行して、Expo SDK 50の`expo`パッケージをインストールします。
+
+### Expoが管理するライブラリのアップグレード
+
+`npx expo install --fix`を実行して、Expoが管理するライブラリをアップグレードします。ただ、今回は一部のパッケージが更新されず、後で実行する`npx expo-doctor`で検知されました。
+
+それらのパッケージは手動で後ほどアップグレードします。
+
+### バージョンの整合性が取れなくなったライブラリのアップグレード
+
+Expoが管理するライブラリに依存しているライブラリの一部でバージョンの整合性が取れなくなってしまったため、整合性の取れるバージョンに更新しました。
+
+- [react-native-qrcode-svg](https://github.com/Expensify/react-native-qrcode-svg)
+  - このライブラリが依存しているreact-native-svgが14系に更新されたため、それに対応するバージョンに更新しました。
+  - `npm i react-native-qrcode-svg@~6.3.0`
+- [@expo/config-plugins](https://docs.expo.dev/config-plugins/introduction/)
+  - `npm i -D @expo/config-plugins@~7.9.2`
+
+### 依存ライブラリから除外されたライブラリのインストール
+
+リリースノートには記載がなかったのですが、SDK 49では`expo`の依存関係に含まれていた`expo-application`が、SDK 50では含まれなくなっていました。そのため、このアプリの依存関係に含めるように修正しました。
+
+- `npx expo install expo-application`
+
+また[ライブラリの更新](#ライブラリの更新)でも触れていますが、`babel-preset-expo`の更新で`babel-plugin-module-resolver`が依存関係に含まれなくなりました。このアプリではJest実行時などにもpath aliasを解決する必要があり`babel.config.js`での設定を削除できなかったため、依存関係に含めるように修正しました。
+
+- `npm i -D babel-plugin-module-resolver`
+
+### 不要となったライブラリのアンインストール
+
+`URL`と`URLSearchParam`がExpoに組み込まれるようになり`react-native-url-polyfill`は不要となったためアンインストールしました。
+
+- `npm uninstall react-native-url-polyfill`
+- SantokuAppルートディレクトリの`index.js`から`import 'react-native-url-polyfill/auto';`を削除
+
+### React Navigationのバージョンを更新
+
+今回のExpo SDKバージョンアップに必須ではありませんでしたが、リグレッションテストの効率などを考慮してあわせてアップグレードしました。
+
+- `npm i @react-navigation/bottom-tabs@~6.6.0 @react-navigation/drawer@~6.7.0 @react-navigation/native-stack@~6.11.0 @react-navigation/stack@~6.4.0`
+
+### `npx expo-doctor`でバージョン整合性を確認
+
+`npx expo-doctor`で確認したところ、いくつかのライブラリのバージョンについて警告が出力されました。
+
+```
+ ❯❯❯ npx expo-doctor
+...略...
+The following packages should be updated for best compatibility with the installed expo version:
+  @types/react@18.2.31 - expected version: ~18.2.45
+  babel-preset-expo@9.5.2 - expected version: ^10.0.0
+  jest-expo@49.0.0 - expected version: ~50.0.4
+  typescript@5.1.6 - expected version: ^5.3.0
+Your project may not work correctly until you install the correct versions of the packages.
+Found outdated dependencies
+Advice: Use 'npx expo install --check' to review and upgrade your dependencies.
+```
+
+アドバイス通り`npx expo install --check`を実行して正しいバージョンに修正できるのが望ましいのですが、TypeScriptだけは、他ライブラリ（`msw@1.3.2`）とバージョンが競合してしまったため`~5.1.3`のままとする必要がありました。
+そのため、以下のコマンドでバージョンを更新しました。
+
+- `npm i -D @types/react@~18.2.45 babel-preset-expo@^10.0.0 jest-expo@^50.0.4`
+
+### 既存パッチファイルの更新
+
+このアプリでは、[patch-package](https://github.com/ds300/patch-package)を使用して、以下のライブラリにパッチファイルを適用していました。
+パッチ内容の詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2024.10/example-app/SantokuApp/patches/README.md)を参照してください。
+
+- `@expo/config-plugins`
+- `expo-splash-screen`
+- `react-native-elements`
+
+`expo-splash-screen`は、Expo SDKのアップグレードに伴いバージョンが上がりました。しかし、適用していたパッチファイルはまだ必要な対応だったため、パッチファイルは削除せずに各ライブラリのバージョンに合わせてファイル名をリネームしました。
+
+`@expo/config-plugins`はまだ必要な対応だったのですが、バージョンの更新に起因してパッチに失敗するようになりました。修正内容には変更はなかったため、利用しているバージョンでのパッチに成功するようにパッチファイルを作成し直して対応しました。
+
+`react-native-elements`に関しては、バージョンが変わらなかったため変更はありません。
+
+### ビルドなどに利用するツールのバージョンを更新
+
+Expo SDK 50から、Javaなどの必要バージョンが変更されています。またこのアプリの使っているビルド環境にインストールされているRubyのバージョンも変更されていたため、Rubyについてもバージョンを変更しました。
+また、`npm run pod-install`を実行したところFirebase SDKのインストールにCocoaPods 1.12以上が必要というエラーが表示されたため、CocoaPodsのバージョンも更新しました。
+
+- Java: JDK 17
+- Ruby: 3.1.6
+- CocoaPods: 1.15.2
+
+### Config Pluginの修正
+
+このアプリでは、以下の変更のためにExpo config pluginでAndroidの`MainApplication.java`と`MainActivity.java`に修正を加えていました。
+
+- スプラッシュスクリーン表示用のアクティビティ追加
+- テスト用のネイティブモジュール追加
+
+今回のアップグレードでJavaファイルではなくKotlinファイルが利用されるようになったため、Config Pluginに修正を加えて対応しました。
+
+- テンプレートファイルの修正
+  - スプラッシュスクリーン表示用のアクティビティとして用意していたテンプレートファイル（`MainActivity.java`）をKotlin（`MainActivity.kt`）に変更
+  - テンプレートファイルのコピー処理の対象拡張子を`java`から`kt`に変更
+    - 関連ファイル：`config/plugin/src/android/withAndroidAppActivity.ts`, `config/plugin/src/android/withAndroidCopyMainActivity.ts`
+- ネイティブモジュール追加のコード片を修正
+  - `MainApplication.java`ではなく`MainApplication.kt`を対象に処理を実施するように修正
+  - 置換用のコード片がJava用になっていたので、Kotlin用のものを追加
+    - 関連ファイル：`config/plugin/src/android/withAndroidAddNativeModulePakcages.ts`
+
+### 静的解析エラーの修正
+
+### 自動テストの失敗を修正
+
+### `@react-native-picker/picker`の変更に伴う修正
+
+### ライセンス情報を更新
