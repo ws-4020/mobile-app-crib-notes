@@ -306,6 +306,66 @@ Expo SDK 50から、Javaなどの必要バージョンが変更されていま�
 
 ### 静的解析エラーの修正
 
+#### 削除されたAPIをモックから削除
+
+今回のアップグレードで、`expo-splash-screen`から`hide`と`preventAutoHide`というAPIが廃止されていました。
+
+Jestでのテスト用に`expo-splash-screen`のモックを用意しているのですが、そこで型エラーとなっていたのでモックしていた部分を削除して対応しました。
+```diff
+ import SplashScreen from 'expo-splash-screen';
+
+ export const preventAutoHideAsync = jest.fn(() => Promise.resolve(true));
+ export const hideAsync = jest.fn(() => Promise.resolve(true));
+-export const hide = jest.fn();
+-export const preventAutoHide = jest.fn();
+
+ const mock: jest.Mocked<typeof SplashScreen> = {
+   preventAutoHideAsync,
+   hideAsync,
+-  hide,
+-  preventAutoHide,
+ };
+
+ Object.defineProperty(__mocks, 'expoSplashScreen', {value: mock});
+
+ export default mock;
+```
+
+#### React Native Reanimatedで廃止予定となった型の修正
+
+React Native Reanimatedのv3.5.0で、`Reanimated.AnimateProps`が廃止予定とされました。
+
+デフォルトエクスポートから`AnimateProps`を利用するのではなく、名前付きエクスポートされた`AnimatedProps`（微妙に型名が変わっていることに注意）を利用するように修正しました。
+
+```diff title="AnimatedPropsを利用するように修正"
+ import {composePressableStyles} from 'bases/core/utils/composePressableStyles';
+ import React, {useMemo} from 'react';
+ import {Modal as RNModal, ModalProps, Pressable, PressableProps, StyleSheet, ViewProps} from 'react-native';
+-import Reanimated, {WithTimingConfig} from 'react-native-reanimated';
++import {AnimatedProps, WithTimingConfig} from 'react-native-reanimated';
+
+ import {useModalBackdrop} from './useModalBackdrop';
+
+ // 〜〜中略〜〜
+
+ // React Native ReanimatedのLayout Animationsを使用すると↓の不具合が発生するため、'exiting'・'entering'の指定ができないようにしています。
+ // https://github.com/software-mansion/react-native-reanimated/issues/2906
+-export type ModalBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'exiting' | 'entering'> & {
++export type ModalBackdropProps = Omit<AnimatedProps<ViewProps>, 'exiting' | 'entering'> & {
+   isVisible: boolean;
+   onPress?: () => unknown;
+   afterFadeIn?: (finished?: boolean) => unknown;
+```
+
+#### React Native Reanimatedで公開されている型の変更に対応
+
+React Native Reanimatedからはもともと`Keyframe`という型が公開されていたのですが、クラスが公開されるように変更されました。
+
+ただ、単純に`typeof Keyframe`と変更してもエラーが解消せず、公開されていない`ReanimatedKeyframe`を利用する必要がありました。
+
+
+このアプリではKeyframeの利用箇所がなかったことと、公開されていない型の利用は避けておきたかったので、今回は対応する型定義を削除して対応しました。
+
 ### 自動テストの失敗を修正
 
 ### `@react-native-picker/picker`の変更に伴う修正
