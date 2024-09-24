@@ -20,6 +20,8 @@ import {StyleSheet, View, ViewProps} from 'react-native';
 import Reanimated, {AnimatedProps, BaseAnimationBuilder, FadeIn, FadeOut} from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import {ReanimatedKeyframe} from './ReanimatedKeyframe';
+
 export type ModalContainerProps = Omit<AnimatedProps<ViewProps>, 'entering' | 'exiting'> & {
   isVisible: boolean;
   /**
@@ -32,12 +34,12 @@ export type ModalContainerProps = Omit<AnimatedProps<ViewProps>, 'entering' | 'e
    * enteringに指定したAnimationBuilderなどでwithCallbackを指定しても、本コンポーネント内で上書きしているため実行できません。
    * withCallbackで実行する関数は、enteringCallbackで指定してください。
    */
-  entering?: BaseAnimationBuilder;
+  entering?: BaseAnimationBuilder | ReanimatedKeyframe;
   /**
    * exitingに指定したAnimationBuilderなどでwithCallbackを指定しても、本コンポーネント内で上書きしているため実行できません。
    * withCallbackで実行する関数は、exitingCallbackで指定してください。
    */
-  exiting?: BaseAnimationBuilder;
+  exiting?: BaseAnimationBuilder | ReanimatedKeyframe;
 };
 
 export const MODAL_CONTAINER_DEFAULT_FADE_IN_DURATION = 300;
