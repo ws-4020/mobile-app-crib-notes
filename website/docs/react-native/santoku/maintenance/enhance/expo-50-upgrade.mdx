@@ -374,7 +374,7 @@ React Native Reanimatedからはもともと`Keyframe`という型が公開さ�
 
 ただ、単純に`typeof Keyframe`と変更してもエラーが解消せず、公開されていない`ReanimatedKeyframe`を利用する必要がありました。
 
-このアプリではKeyframeの利用箇所がなかったことと、公開されていない型の利用は避けておきたかったので、以下のような型を独自に定義して利用するように修正しました。
+公開されていない型の利用は避けておきたかったので、以下のような型を独自に定義して利用するように修正しました。
 
 ```typescript title="ReanimatedKeyframe.ts"
 import {ReduceMotion} from 'react-native-reanimated';
