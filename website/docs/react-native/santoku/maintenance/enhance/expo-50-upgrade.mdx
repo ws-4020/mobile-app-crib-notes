@@ -584,43 +584,6 @@ React Native Testing Libraryの`fireEvent`を利用している箇所だった�
 
 上記の差分に含まれてしまっていますが、もともと`key`は`React.Key`としていましたが`string`か`number`のみ設定できるように変更しています。
 
-```diff
--import React, {useCallback, useMemo, useState} from 'react';
-+import {useCallback, useMemo, useState} from 'react';
-+import {Platform} from 'react-native';
-
--import {SelectPickerProps} from './SelectPicker';
-+import {ItemSelectionKey, SelectPickerProps} from './SelectPicker';
-
- export const useSelectPicker = <ItemT>({
-   items,
-@@ -30,13 +31,21 @@
-   const [isVisible, setIsVisible] = useState(false);
-   const close = useCallback(() => setIsVisible(false), []);
-   const getSelectedItem = useCallback(
--    (key?: React.Key | ItemT) => {
--      return items.find(item => item.key === key || item.value === key);
-+    (key?: ItemSelectionKey | ItemT) => {
-+      return items.find(item => {
-+        if (Platform.OS === 'ios') {
-+          // @react-native-picker/pickerは、iOSではpickerに渡されたvalueを強制的に文字列化してしまいます。
-+          // そのため、onValueChangeに渡されてくる値は文字列となり、valueが文字列でなかった場合は直接比較しても一致しません。
-+          // ここでは、@react-native-picker/pickerの内部処理と同様に、双方を文字列化して比較することで、選択中の要素を取得します。
-+          return String(item.key) === String(key) || String(item.value) === String(key);
-+        }
-+        return item.key === key || item.value === key;
-+      });
-     },
-     [items],
-   );
-   const onValueChange = useCallback(
--    (key: React.Key | ItemT) => {
-+    (key: ItemSelectionKey | ItemT) => {
-       const selectedItem = getSelectedItem(key);
-       onSelectedItemChange?.(selectedItem);
-     },
-```
-
 #### iOSの場合のみ、選択中要素を取得する際に文字列化した値が一致することを条件とするように変更
 
 `SelectPicker`に渡された`items`から選択中の要素を抽出する処理において、iOSでのみ抽出に利用する値を文字列化して比較した値が一致することを条件とするよう修正しました。
