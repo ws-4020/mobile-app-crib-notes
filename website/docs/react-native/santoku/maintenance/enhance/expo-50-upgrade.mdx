@@ -23,7 +23,7 @@ title: Expo SDK 50アップグレード
 
 Reactのバージョンは変更されておらず、依然として`v18.2.0`です。
 
-非推奨となっていた以下のコンポーネントは、React native `v0.73.0`で削除されました。以下に挙げるコミュニティライブラリなどへの移行が必要です。
+非推奨となっていた以下のコンポーネントは、React Native `v0.73.0`で削除されました。以下に挙げるコミュニティライブラリなどへの移行が必要です。
 
 - [ProgressBarAndroid](https://reactnative.dev/docs/progressbarandroid)
   - [@react-native-community/progress-bar-android](https://github.com/react-native-progress-view/progress-bar-android)
@@ -655,6 +655,131 @@ iOS環境として実行された場合には文字列化されてしまうこ�
 +    expect(monthPickerProps.items).toEqual([{value: '4', label: '4'}]);
    });
 ```
+
+### Expoの更新履歴確認と対応
+
+Expoの[CHANGELOG](https://github.com/expo/expo/blob/sdk-50/CHANGELOG.md#5000--2023-12-12)を参照して、Expo SDKとExpoが管理するライブラリの更新内容を確認しました。
+
+ここまでの対応以外に追加で必要なものはありませんでした。
+
+### React Nativeの更新履歴確認と対応
+
+React Nativeの[CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0736)を参照して、React Nativeの更新内容を確認しました。
+
+#### Androidでの`ScrollView#onMomentumEnd`の不具合修正
+
+今回のアップグレード前は、AndroidでScrollViewのスクロール終了時処理（[onMomentumEnd](https://reactnative.dev/docs/scrollview#onmomentumscrollend)）が複数回呼び出されてしまうという不具合がありました。
+
+React Native 0.73.0でこの不具合が修正されました。
+
+- [(Android/ScrollView) Fix onMomentumScrollEnd being called multiple times](https://github.com/facebook/react-native/pull/32433)
+
+このアプリで実装しているPickerでは、Android向け部品の中でこの問題を回避するための処理を追加していました。今回のアップグレードで不要になっていることが確認できたので、対策していた部分を削除しました。
+
+```diff title="useSelectPickerItems.ts"
+   const scrollHandler = useAnimatedScrollHandler(e => {
+     offset.value = e.contentOffset.y;
+   });
+-  // // 1回のスクロールで、onMomentumScrollEndが複数回実行されてしまう事象に対応
+-  // https://github.com/facebook/react-native/issues/32696
+-  const canMomentum = useRef(false);
+-  const onMomentumScrollBegin = useCallback(() => (canMomentum.current = true), []);
+-
+   const middleIndex = useListMiddleIndex({itemHeight, listSize: items.length});
+
+   const selectedIndex = useMemo(() => {
+
+   // 〜〜〜中略〜〜〜
+
+   const handleValueChange = useCallback(
+     (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+-      if (canMomentum.current) {
+-        canMomentum.current = false;
+-        const {index, value} = getRowItemAtOffset(event.nativeEvent.contentOffset.y);
+-        _onChange(value, index);
+-      }
++      const {index, value} = getRowItemAtOffset(event.nativeEvent.contentOffset.y);
++      _onChange(value, index);
+     },
+     [_onChange, getRowItemAtOffset],
+   );
+
+   // 〜〜〜中略〜〜〜
+
+   return {
+     offset,
+     flatListRef,
+     handleValueChange,
+     scrollToPassedIndex,
+     scrollHandler,
+     selectedIndex,
+     height,
+     selectItem,
+     getItemLayout,
+-    onMomentumScrollBegin,
+   };
+ };
+```
+
+```diff title="SelectPickerItems.android.tsx"
+   const {
+     offset,
+     height,
+     handleValueChange,
+     scrollToPassedIndex,
+     selectedIndex,
+     selectItem,
+     getItemLayout,
+     flatListRef,
+     scrollHandler,
+-    onMomentumScrollBegin,
+   } = useSelectPickerItems<ItemT>({
+     selectedValue,
+     items,
+
+   // 〜〜〜中略〜〜〜
+
+       <Reanimated.FlatList
+         data={items}
+         keyExtractor={keyExtractor ?? defaultKeyExtractor}
+         style={StyleSheet.flatten([itemsHeightStyle, styles.items])}
+         onScroll={scrollHandler}
+         onMomentumScrollEnd={handleValueChange}
+-        onMomentumScrollBegin={onMomentumScrollBegin}
+         showsVerticalScrollIndicator={false}
+         onLayout={scrollToPassedIndex}
+         ref={flatListRef}
+```
+
+#### CocoaPodsのバージョン
+
+React Native v0.73.3時点ではCocoaPodsの最新版が`1.15.0`だったようなのですが、このバージョンに不具合があったようでv1.15系は利用しないように制限されていました。
+
+- [Avoid using Cocoapods 1.15 until it fixes an issue affection RN.](https://github.com/facebook/react-native/pull/42702)
+- [CocoaPods 1.15.0 : File exists @ syserr_fail2_in Error - Workaround available](https://github.com/facebook/react-native/issues/42698)
+
+しかし、このアプリでのアップデート時点ではこの不具合を修正した`1.15.2`が公開されており、React Nativeで利用するバージョンも修正されています。
+
+- [feat: remove upper limit for Cocoapods version (allow for 1.15.2)](https://github.com/facebook/react-native/pull/45099)
+
+ビルドエラーも発生していないことから、今回のアップグレードではCocoaPods `1.15.2`を利用するよう修正しました。
+
+### `expo-template-blank-typescript`の更新履歴確認と対応
+
+[`expo-template-blank-typescript`の更新履歴](https://github.com/expo/expo/commits/sdk-50/templates/expo-template-blank-typescript)を確認しました。
+
+`npm install expo@^50.0.0`、`npx expo install --fix`で更新される依存ライブラリのアップグレードが主な変更でした。そのため、このアプリで特別な対応は必要ありませんでした。
+
+### `expo-template-bare-minimum`の更新履歴確認と対応
+
+このアプリでは[Config Pluginsに対応](./config-plugins.mdx)しているので、`expo-template-bare-minimum`の更新に伴う個別の対応は基本的に必要ありません。
+ただし、以下の場合は個別に対応する必要があるため、この観点に絞って[`expo-template-bare-minimum`の更新履歴](https://github.com/expo/expo/commits/sdk-50/templates/expo-template-bare-minimum)を確認しました。
+
+- このアプリで作成しているConfig Pluginsによる変更と、`expo-template-bare-minimum`の更新に伴う変更が競合した場合
+- [Prebuild](../../development/build-configuration.mdx#prebuild)時に生成・更新されないファイル
+- `android/`, `ios/`以外のファイル（`.gitignore`など）
+
+ここまでの対応以外に追加で必要なものはありませんでした。
 
 ### ライセンス情報を更新
 
