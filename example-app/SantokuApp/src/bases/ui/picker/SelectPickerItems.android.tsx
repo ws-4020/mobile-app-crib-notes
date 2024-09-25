@@ -71,7 +71,6 @@ export const SelectPickerItems = <ItemT,>({
     getItemLayout,
     flatListRef,
     scrollHandler,
-    onMomentumScrollBegin,
   } = useSelectPickerItems<ItemT>({
     selectedValue,
     items,
@@ -124,7 +123,6 @@ export const SelectPickerItems = <ItemT,>({
         style={StyleSheet.flatten([itemsHeightStyle, styles.items])}
         onScroll={scrollHandler}
         onMomentumScrollEnd={handleValueChange}
-        onMomentumScrollBegin={onMomentumScrollBegin}
         showsVerticalScrollIndicator={false}
         onLayout={scrollToPassedIndex}
         ref={flatListRef}
