@@ -214,16 +214,20 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
             </Text>
           </View>
           <View
+            androidLayerType="software"
+            decelerationRate="normal"
             onError={[Function]}
             onHttpError={[Function]}
             onLoadProgress={[Function]}
             onLoadStart={[Function]}
             onScroll={[Function]}
+            renderLoading={[Function]}
             source={
               {
                 "uri": "https://www.tis.co.jp/termsofuse/",
               }
             }
+            startInLoadingState={true}
             style={
               {
                 "flex": 1,
