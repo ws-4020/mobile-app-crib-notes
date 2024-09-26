@@ -126,7 +126,7 @@ SDK 51からは、このサポート対象が最新版のみに変更されま�
 
 そのため実際のアプリ開発では、Expo Goではなく[development build](https://docs.expo.dev/develop/development-builds/introduction/)の利用が推奨されています。
 
-### CameraとSQLの新APIがデフォルトで利用されるように変更
+### CameraとSQLiteの新APIがデフォルトで利用されるように変更
 
 Expo 50で追加された`expo-camera/next`と`expo-sqlite/next`がデフォルトになり、[`expo-camera`](https://docs.expo.dev/versions/v51.0.0/sdk/camera/)および[`expo-sqlite`](https://docs.expo.dev/versions/v51.0.0/sdk/sqlite/)として公開されるよう変更されました。
 
@@ -159,13 +159,11 @@ Appleの[SF Symbols](https://developer.apple.com/jp/sf-symbols/)を利用でき�
   - Expoプロジェクトで`npx expo lint`を実行すると、ESLintの設定ファイルが存在しなければ`eslint-config-expo`を使う設定ファイルが作成されます
   - 詳細は[Use ESLint and Prettier - Expo Documentation](https://docs.expo.dev/guides/using-eslint/)を参照してください
 
-#### ライブラリの廃止
-
 ## このアプリで実施したアップグレードの手順
 
-このアプリでは、[Expo 50へのアップグレード方法](https://expo.dev/changelog/2024/01-18-sdk-50#%EF%B8%8F-upgrading-your-app)を参考に、以下の作業を実施してExpo SDK 50にアップグレードしました。
+このアプリでは、[Expo 51へのアップグレード方法](https://expo.dev/changelog/2024/05-07-sdk-51#%EF%B8%8F-upgrading-your-app)を参考に、以下の作業を実施してExpo SDK 50にアップグレードしました。
 
-アップグレードを実施したプルリクエストは[Pull Request #1321 · ws-4020/mobile-app-crib-notes](https://github.com/ws-4020/mobile-app-crib-notes/pull/1321)です。
+アップグレードを実施したプルリクエストは[Pull Request #1322 · ws-4020/mobile-app-crib-notes](https://github.com/ws-4020/mobile-app-crib-notes/pull/1322)です。
 
 1. [ExpoとExpoが管理するライブラリのアップグレード](#expoとexpoが管理するライブラリのアップグレード)
 1. [`npx expo-doctor`でバージョン整合性を確認](#npx-expo-doctorでバージョン整合性を確認)
@@ -239,7 +237,9 @@ Advice: Use 'npx expo install --check' to review and upgrade your dependencies.
 - `expo-splash-screen`
 - `react-native-elements`
 
-`expo-splash-screen`, `@expo/config-plugins`は、Expo SDKのアップグレードに伴いバージョンが上がりました。しかし、適用していたパッチファイルはまだ必要な対応だったため、パッチファイルは削除せずに各ライブラリのバージョンに合わせてファイル名をリネームしました。
+`expo-splash-screen`は、Expo SDKのアップグレードに伴いバージョンが上がりました。しかし、適用していたパッチファイルはまだ必要な対応だったため、パッチファイルは削除せずに各ライブラリのバージョンに合わせてファイル名をリネームしました。
+
+`@expo/config-plugins`はまだ必要な対応だったのですが、バージョンの更新に起因してパッチが失敗するようになりました。修正内容には変更はなかったため、利用しているバージョンでのパッチが成功するようにパッチファイルを作成し直して対応しました。
 
 `react-native-elements`に関しては、バージョンが変わらなかったため変更はありません。
 
