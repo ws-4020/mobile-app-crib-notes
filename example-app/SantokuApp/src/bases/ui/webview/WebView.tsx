@@ -165,6 +165,10 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(
   return (
     <RNWebView
       {...webViewProps}
+      androidLayerType={androidLayerType}
+      startInLoadingState={startInLoadingState}
+      decelerationRate={decelerationRate}
+      renderLoading={renderLoading}
       style={styles.container}
       onScroll={handleScroll}
       onLoadStart={handleLoadStart}
