@@ -142,7 +142,7 @@ Appleの[SF Symbols](https://developer.apple.com/jp/sf-symbols/)を利用でき�
 
 ### Expoがサポートするライブラリや機能
 
-以下に挙げる変更点の詳細やその他の変更については、[ExpoのChangelog](https://github.com/expo/expo/blob/main/CHANGELOG.md#5000--2023-12-12)を参照してください。
+以下に挙げる変更点の詳細やその他の変更については、[ExpoのChangelog](https://github.com/expo/expo/blob/main/CHANGELOG.md#5100--2024-05-07)を参照してください。
 
 #### ライブラリの更新
 
@@ -151,6 +151,11 @@ Appleの[SF Symbols](https://developer.apple.com/jp/sf-symbols/)を利用でき�
 - [expo-asset](https://docs.expo.dev/versions/latest/sdk/asset/)
   - `app.config.js`に設定するだけで、ネイティブリソースを追加できるようになりました
   - 参考：[Load an asset at build time with expo-asset config plugin](https://docs.expo.dev/develop/user-interface/assets/#load-an-asset-at-build-time-with-expo-asset-config-plugin)
+- [expo-local-authentication](https://docs.expo.dev/versions/latest/sdk/local-authentication/)
+  - Androidでのローカル認証時に、[Class 3 biometrics](https://source.android.com/docs/security/features/biometric?hl=ja)のみを利用可能とするかどうかを設定できるようになりました
+- [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore/)
+  - [`SecureStore.canUseBiometricAuthentication()`](https://docs.expo.dev/versions/latest/sdk/securestore/#securestorecanusebiometricauthentication)が追加されました
+  - この関数が`true`を帰す場合は、セキュアストアの値を取得するときに認証を必須にできます。（[`requireAuthentication`オプション](https://docs.expo.dev/versions/latest/sdk/securestore/#securestoreoptions)）
 
 #### ライブラリの新機能
 
@@ -161,7 +166,7 @@ Appleの[SF Symbols](https://developer.apple.com/jp/sf-symbols/)を利用でき�
 
 ## このアプリで実施したアップグレードの手順
 
-このアプリでは、[Expo 51へのアップグレード方法](https://expo.dev/changelog/2024/05-07-sdk-51#%EF%B8%8F-upgrading-your-app)を参考に、以下の作業を実施してExpo SDK 50にアップグレードしました。
+このアプリでは、[Expo 51へのアップグレード方法](https://expo.dev/changelog/2024/05-07-sdk-51#%EF%B8%8F-upgrading-your-app)を参考に、以下の作業を実施してExpo SDK 51にアップグレードしました。
 
 アップグレードを実施したプルリクエストは[Pull Request #1322 · ws-4020/mobile-app-crib-notes](https://github.com/ws-4020/mobile-app-crib-notes/pull/1322)です。
 
