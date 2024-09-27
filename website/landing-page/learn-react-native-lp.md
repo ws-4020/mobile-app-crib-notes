@@ -42,6 +42,20 @@ React Nativeを利用して開発を進める中で挙がったFAQ（[トラブ�
 
 ## 更新履歴
 
+### 2024/10/15
+
+- Node.jsのインストールコマンドを更新
+  - Getting Started
+    - [開発環境の構築](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/getting-started/setting-up-development-environment)
+- `@expo/vector-icons`でのアイコン名変更を反映
+  - アプリの実装前に
+    - React Navigationの基本
+      - [Tab](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts/react-navigation-basics/tab)
+    - ToDoアプリの実装
+      - 画面の実装
+        - [Tabナビゲーション](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/todo-app/screens/tab)
+        - [Modalスクリーン](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/todo-app/screens/modal)
+
 ### 2023/12/25
 
 #### 🌱 新規コンテンツ（2023/12/25）
