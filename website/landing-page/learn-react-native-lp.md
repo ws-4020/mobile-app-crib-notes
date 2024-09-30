@@ -49,6 +49,9 @@ React Nativeを利用して開発を進める中で挙がったFAQ（[トラブ�
 - Node.jsのインストールコマンドを更新
   - Getting Started
     - [開発環境の構築](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/getting-started/setting-up-development-environment)
+- React Native Elementsを使用する場合に表示されるエラーに関して注意書きを追加
+  - Getting Started
+    - [アプリの実行](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/getting-started/launch-created-app)
 - `@expo/vector-icons`でのアイコン名変更を反映
   - アプリの実装前に
     - React Navigationの基本
