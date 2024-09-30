@@ -36,6 +36,8 @@
 
 ### 2024/10/15
 
+#### 🌱 新規コンテンツ（2024/10/15）
+
 - Expoアップグレード
   - メンテナンス
     - [Expo SDK 50アップグレード](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/maintenance/enhance/expo-50-upgrade)

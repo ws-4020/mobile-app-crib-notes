@@ -44,6 +44,8 @@ React Nativeを利用して開発を進める中で挙がったFAQ（[トラブ�
 
 ### 2024/10/15
 
+#### 🌿 更新コンテンツ（2024/10/15）
+
 - Node.jsのインストールコマンドを更新
   - Getting Started
     - [開発環境の構築](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/getting-started/setting-up-development-environment)
