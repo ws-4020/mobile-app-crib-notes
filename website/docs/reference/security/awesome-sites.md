@@ -4,7 +4,7 @@ title: セキュリティ関連リンク
 
 ここでは、モバイルアプリケーション開発を始める上で参考になる、セキュリティ関連のガイドや記事を紹介します。
 
-## OWASP Mobile Top10
+## OWASP Mobile Top 10
 
 - [原文](https://owasp.org/www-project-mobile-top-10/)
 - [日本語訳](https://coky-t.gitbook.io/owasp-mobile-top10-ja)
@@ -36,7 +36,7 @@ MASVSに含まれるすべての検証観点を満たすことを要件とする
 
 [OWASP](https://owasp.org/www-chapter-japan/)が公開している、モバイルアプリケーションのセキュリティをテストするための包括的なマニュアルです。[OWASP MASVS](https://coky-t.gitbook.io/owasp-masvs-ja)に記載されている要件に対応するテストケースのリストが含まれています。
 
-[OWASP Mobile Top10](https://coky-t.gitbook.io/owasp-mobile-top10-ja)よりも、詳細に記載されているため分量は多いですが、案件の内容に合わせてピックアップして読むだけでも十分役に立ちます。例えば、[モバイルアプリの認証アーキテクチャ](https://coky-t.gitbook.io/owasp-mastg-ja/mobairuapuritesutogaido/0x04e-testing-authentication-and-session-management)を読むと、認証アーキテクチャや注意点などについて理解できるでしょう。
+[OWASP Mobile Top 10](https://coky-t.gitbook.io/owasp-mobile-top10-ja)よりも、詳細に記載されているため分量は多いですが、案件の内容に合わせてピックアップして読むだけでも十分役に立ちます。例えば、[モバイルアプリの認証アーキテクチャ](https://coky-t.gitbook.io/owasp-mastg-ja/mobairuapuritesutogaido/0x04e-testing-authentication-and-session-management)を読むと、認証アーキテクチャや注意点などについて理解できるでしょう。
 
 ## Mobile Application Security Weakness Enumeration (MASWE)
 
@@ -65,7 +65,7 @@ MASVSは2つのセキュリティ検証レベル（MASVS-L1およびMASVS-L2）�
 - [Androidアプリのセキュア設計・セキュアコーディングガイド](https://www.jssec.org/dl/android_securecoding/index.html)
 
 [一般社団法人日本スマートフォンセキュリティ協会（JSSEC）](https://www.jssec.org/)が公開しているガイドで、設計、実装を始める際に読むことをお勧めします。
-[OWASP Mobile Top 10](https://github.com/LAC-Japan/OWASP-Mobile-Top-10-2016)や[OWASP MASVS](https://github.com/coky-t/owasp-masvs-ja/tree/v1.3.1)、[OWASP MASTG](https://coky-t.gitbook.io/owasp-mastg-ja/)と重複する部分はありますが、他ドキュメントよりも実装レベルで詳細に記載されています。例えばAndroid特有のパーミッションの管理やモバイル特有の生体認証などについてです。
+[OWASP Mobile Top 10](https://coky-t.gitbook.io/owasp-mobile-top10-ja)や[OWASP MASVS](https://github.com/coky-t/owasp-masvs-ja/tree/v1.3.1)、[OWASP MASTG](https://coky-t.gitbook.io/owasp-mastg-ja/)と重複する部分はありますが、他ドキュメントよりも実装レベルで詳細に記載されています。例えばAndroid特有のパーミッションの管理やモバイル特有の生体認証などについてです。
 
 ボリュームは大きく、ソースコードは読み飛ばし「ルールブック」に注目すれば、1日で読むことができます。
 
