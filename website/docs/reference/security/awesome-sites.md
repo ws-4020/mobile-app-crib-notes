@@ -47,13 +47,12 @@ Profile、テスト観点とのマッピングはMASWEと、それぞれ独立�
 
 OWASP Mobile App Security (OWASP MAS)では、[MAS Testing Profiles](https://mas.owasp.org/news/2023/07/28/mas-testing-profiles-and-mastg-atomic-tests/#mas-testing-profiles) として、4つのプロファイルを定義しています。
 
-MASVSは2つのセキュリティ検証レベル（MASVS-L1およびMASVS-L2）とリバースエンジニアリング耐性要件（MASVS-R）を定義しています。
+- MAS-L1: 必要不可欠なセキュリティ
+- MAS-L2: 高度なセキュリティ
+- MAS-R:  追加の保護コントロール
+- MAS-P: プライバシーの保護
 
-- MASVS-L1: 一般的なセキュリティ要件であり、すべてのモバイルアプリに推奨される
-- MASVS-L2: 機密性の高いデータを扱うアプリに推奨される
-- MASVS-R:  追加の保護コントロール
-
-そして、MASVSで定義される検証項目のうち、どれを対象にするかがプロファイルごとにまとめられているのがMASWEです。
+そして、MASVSで定義される検証項目のうち、どれを対象にするかがプロファイルごとにまとめられているのが[MASWE](https://mas.owasp.org/MASWE/)です。
 
 まずは開発対象のアプリの特性からどのプロファイルを採用するかを決め、MASWEを参考にしてセキュリティ観点での検証項目を決める、という進め方が想定されています。
 
