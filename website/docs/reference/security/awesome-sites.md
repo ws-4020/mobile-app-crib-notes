@@ -29,6 +29,11 @@ title: セキュリティ関連リンク
 
 MASVSに含まれるすべての検証観点を満たすことを要件とするのではなく、後述のMAS Testing ProfilesとMASWEを参考にしてセキュリティ要件を設定します。
 
+:::info
+以前はセキュリティ検証レベルとテスト観点のマッピングがMASVSに含まれていました。2023年頃の構成変更でセキュリティ検証レベルはMAS Testing
+Profile、テスト観点とのマッピングはMASWEと、それぞれ独立したコンテンツに抽出されました。
+:::
+
 ## OWASP Mobile Application Security Testing Guide (OWASP MASTG)
 
 - [原文](https://mas.owasp.org/MASTG/)
