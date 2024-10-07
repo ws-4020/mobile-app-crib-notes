@@ -94,6 +94,7 @@ React Native 0.74では[`PushNotificationIOS`](https://reactnative.dev/docs/push
 - [App Storeへの提出におけるプライバシー要件のアップデート](https://developer.apple.com/jp/news/?id=3d8a9yyh)
 - [リマインダー：アプリ提出時のプライバシー要件が5月1日から適用されます](https://developer.apple.com/jp/news/?id=pvszzano)
 
+// TODO: 可能な限りAppleの表現をそのまま持ってくる。理由の明記が必要なAPIを自身のアプリ内で利用している場合にもマニフェストが必要。
 Appleの指定するSDKが利用されている場合、そのSDKが必要である理由を[プライバシーマニフェストファイル](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files)に記載する必要があります。
 
 ExpoのConfig Pluginを利用している場合、プライバシーマニフェストファイルに記載する内容を`app.config.js`で設定できるようになりました。設定方法の詳細については、[Privacy manifests - Expo Documentation](https://docs.expo.dev/guides/apple-privacy/)を参照してください。
@@ -122,7 +123,7 @@ Expo Goはこれまで複数バージョンのExpo SDKで実装されたアプ�
 
 SDK 51からは、このサポート対象が最新版のみに変更されました。そのため、Expo SDK 51がリリースされたあとのExpo GoではSDK 51のアプリのみ動作し、SDK 50のアプリは動作しなくなっています。
 
-[expo.dev/go](https://expo.dev/go)から対応するバージョンのExpo Goをダウンロードして利用することで、iOS実機以外では古いSDKのアプリをExpo Goで動かすことができます。しかし、iOSの実機では古いバージョンのExpo Goを動かすことはできません。
+[Expo Go - Expo](https://expo.dev/go)から対応するバージョンのExpo Goをダウンロードして利用することで、iOS実機以外では古いSDKのアプリをExpo Goで動かすことができます。しかし、iOSの実機では古いバージョンのExpo Goを動かすことはできません。
 
 そのため実際のアプリ開発では、Expo Goではなく[development build](https://docs.expo.dev/develop/development-builds/introduction/)の利用が推奨されています。
 
@@ -170,6 +171,7 @@ Appleの[SF Symbols](https://developer.apple.com/jp/sf-symbols/)を利用でき�
 
 アップグレードを実施したプルリクエストは[Pull Request #1322 · ws-4020/mobile-app-crib-notes](https://github.com/ws-4020/mobile-app-crib-notes/pull/1322)です。
 
+// TODO: 変更履歴の確認結果を追加。
 1. [ExpoとExpoが管理するライブラリのアップグレード](#expoとexpoが管理するライブラリのアップグレード)
 1. [`npx expo-doctor`でバージョン整合性を確認](#npx-expo-doctorでバージョン整合性を確認)
 1. [既存パッチファイルの更新](#既存パッチファイルの更新)
@@ -178,6 +180,10 @@ Appleの[SF Symbols](https://developer.apple.com/jp/sf-symbols/)を利用でき�
 1. [`defaultProps`の利用箇所を修正](#defaultpropsの利用箇所を修正)
 1. [静的解析エラーの修正](#静的解析エラーの修正)
 1. [自動テストの失敗を修正](#自動テストの失敗を修正)
+1. [Expoの更新履歴確認と対応](#expoの更新履歴確認と対応)
+1. [React Nativeの更新履歴確認と対応](#react-nativeの更新履歴確認と対応)
+1. [`expo-template-blank-typescript`の更新履歴確認と対応](#expo-template-blank-typescriptの更新履歴確認と対応)
+1. [`expo-template-bare-minimum`の更新履歴確認と対応](#expo-template-bare-minimumの更新履歴確認と対応)
 1. [ライセンス情報を更新](#ライセンス情報を更新)
 
 ### ExpoとExpoが管理するライブラリのアップグレード
@@ -378,6 +384,35 @@ TypeError: Cannot read properties of undefined (reading 'remove')
          slideInDuration={200}
          afterSlideIn={afterSlideIn}
 ```
+
+### Expoの更新履歴確認と対応
+
+Expoの[CHANGELOG](https://github.com/expo/expo/blob/sdk-51/CHANGELOG.md#5100--2024-05-07)を参照して、Expo SDKとExpoが管理するライブラリの更新内容を確認しました。
+
+ここまでの対応以外に追加で必要なものはありませんでした。
+
+### React Nativeの更新履歴確認と対応
+
+React Nativeの[CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0745)を参照して、React Nativeの更新内容を確認しました。
+
+ここまでの対応以外に追加で必要なものはありませんでした。
+
+### `expo-template-blank-typescript`の更新履歴確認と対応
+
+[`expo-template-blank-typescript`の更新履歴](https://github.com/expo/expo/commits/sdk-51/templates/expo-template-blank-typescript)を確認しました。
+
+`npx expo install expo@^51.0.0 --fix`で更新される依存ライブラリのアップグレードが主な変更でした。そのため、このアプリで特別な対応は必要ありませんでした。
+
+### `expo-template-bare-minimum`の更新履歴確認と対応
+
+このアプリでは[Config Pluginsに対応](./config-plugins.mdx)しているので、`expo-template-bare-minimum`の更新に伴う個別の対応は基本的に必要ありません。
+ただし、以下の場合は個別に対応する必要があるため、この観点に絞って[`expo-template-bare-minimum`の更新履歴](https://github.com/expo/expo/commits/sdk-51/templates/expo-template-bare-minimum)を確認しました。
+
+- このアプリで作成しているConfig Pluginsによる変更と、`expo-template-bare-minimum`の更新に伴う変更が競合した場合
+- [Prebuild](../../development/build-configuration.mdx#prebuild)時に生成・更新されないファイル
+- `android/`, `ios/`以外のファイル（`.gitignore`など）
+
+ここまでの対応以外に追加で必要なものはありませんでした。
 
 ### ライセンス情報を更新
 
