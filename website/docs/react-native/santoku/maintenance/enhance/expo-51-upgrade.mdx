@@ -89,12 +89,16 @@ React Native 0.74では[`PushNotificationIOS`](https://reactnative.dev/docs/push
 
 ### Apple Privacy Manifest対応の追加
 
-2024年5月1日から、App Storeにアプリを提出する際に[プライバシーマニフェスト](https://developer.apple.com/jp/support/third-party-SDK-requirements/)が必要となっています。
+2024年5月1日から、App Storeにアプリを提出する際に[プライバシーマニフェスト](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files)が必要となっています。
 
 - [App Storeへの提出におけるプライバシー要件のアップデート](https://developer.apple.com/jp/news/?id=3d8a9yyh)
 - [リマインダー：アプリ提出時のプライバシー要件が5月1日から適用されます](https://developer.apple.com/jp/news/?id=pvszzano)
 
-アプリのコードで該当のAPIを利用している場合もしくはAppleの指定するSDKが利用されている場合、それらの利用が承認される理由を[プライバシーマニフェストファイル](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files)に記載する必要があります。
+Appleの定義する[理由の宣言が求められるAPI](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api)をアプリのコードやSDKで利用している場合、それらの利用が承認される理由をプライバシーマニフェストファイルに記載する必要があります。
+
+また、[Appleの指定するサードパーティSDK](https://developer.apple.com/jp/support/third-party-SDK-requirements/)を利用している場合もプライバシーマニフェストを含める必要があります。なお、これらのサードパーティSDKに関しては、SDKにプライバシーマニフェストが含まれるバージョンへの更新でも対応可能です。
+
+プライバシーマニフェストが必要とされるにも関わらずApp Store Connectにアップロードしたアプリに含まれていない場合には、App Store Connect上で警告が表示されます。
 
 ExpoのConfig Pluginを利用している場合、プライバシーマニフェストファイルに記載する内容を`app.config.js`で設定できるようになりました。設定方法の詳細については、[Privacy manifests - Expo Documentation](https://docs.expo.dev/guides/apple-privacy/)を参照してください。
 
