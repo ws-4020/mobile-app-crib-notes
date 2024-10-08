@@ -94,8 +94,7 @@ React Native 0.74では[`PushNotificationIOS`](https://reactnative.dev/docs/push
 - [App Storeへの提出におけるプライバシー要件のアップデート](https://developer.apple.com/jp/news/?id=3d8a9yyh)
 - [リマインダー：アプリ提出時のプライバシー要件が5月1日から適用されます](https://developer.apple.com/jp/news/?id=pvszzano)
 
-// TODO: 可能な限りAppleの表現をそのまま持ってくる。理由の明記が必要なAPIを自身のアプリ内で利用している場合にもマニフェストが必要。
-Appleの指定するSDKが利用されている場合、そのSDKが必要である理由を[プライバシーマニフェストファイル](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files)に記載する必要があります。
+アプリのコードで該当のAPIを利用している場合もしくはAppleの指定するSDKが利用されている場合、それらの利用が承認される理由を[プライバシーマニフェストファイル](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files)に記載する必要があります。
 
 ExpoのConfig Pluginを利用している場合、プライバシーマニフェストファイルに記載する内容を`app.config.js`で設定できるようになりました。設定方法の詳細については、[Privacy manifests - Expo Documentation](https://docs.expo.dev/guides/apple-privacy/)を参照してください。
 
@@ -171,7 +170,6 @@ Appleの[SF Symbols](https://developer.apple.com/jp/sf-symbols/)を利用でき�
 
 アップグレードを実施したプルリクエストは[Pull Request #1322 · ws-4020/mobile-app-crib-notes](https://github.com/ws-4020/mobile-app-crib-notes/pull/1322)です。
 
-// TODO: 変更履歴の確認結果を追加。
 1. [ExpoとExpoが管理するライブラリのアップグレード](#expoとexpoが管理するライブラリのアップグレード)
 1. [`npx expo-doctor`でバージョン整合性を確認](#npx-expo-doctorでバージョン整合性を確認)
 1. [既存パッチファイルの更新](#既存パッチファイルの更新)
