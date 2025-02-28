@@ -145,6 +145,15 @@
     "ancestorSeparator": " › ",
     "outputName": "jest-junit.xml"
   },
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "enabled": true,
+        "exclude": ["@react-navigation/core","@mswjs/data", "jsbarcode", "msw", "react-native-elements", "yup"],
+        "listUnknownPackages": true
+      }
+    }
+  },
   "private": true,
   "version": "1.0.0"
 }
