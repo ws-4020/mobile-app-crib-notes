@@ -8,7 +8,7 @@ const serialFetch = (() => {
   let prevRequest = Promise.resolve();
   return (resource, options) => {
     prevRequest = prevRequest.then(() => {
-      // プロキシ環境下で実行する場合は、node-fetch-with-proxyをインストールしてそれを使用してフェッチしてください。
+      // プロキシ環境下で実行する場合は、node-fetch-with-proxyを使用してください。
       // const fetch = require('node-fetch-with-proxy');
       console.info(`request to ${resource}`);
       return fetch(resource, options);
