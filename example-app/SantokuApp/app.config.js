@@ -94,6 +94,7 @@ module.exports = ({config}) => {
         'expo-build-properties',
         {
           android: {
+            minSdkVersion: 29,
             extraProguardRules: `
 # Firebase ConsoleでCrashlyticsのエラータイトルが表示されない問題に対応
 # https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?hl=ja&platform=android
