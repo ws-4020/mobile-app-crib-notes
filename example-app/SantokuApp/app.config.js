@@ -94,7 +94,6 @@ module.exports = ({config}) => {
         'expo-build-properties',
         {
           android: {
-            minSdkVersion: 29,
             extraProguardRules: `
 # Firebase ConsoleでCrashlyticsのエラータイトルが表示されない問題に対応
 # https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?hl=ja&platform=android
@@ -110,6 +109,7 @@ module.exports = ({config}) => {
               // notifee Expo49対応: https://github.com/invertase/notifee/issues/808
               '$rootDir/../../../node_modules/@notifee/react-native/android/libs',
             ],
+            minSdkVersion: 29,
           },
           ios: {
             useFrameworks: 'static',
