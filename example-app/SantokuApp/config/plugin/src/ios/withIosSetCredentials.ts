@@ -39,6 +39,7 @@ export const withIosSetCredentials: ConfigPlugin<CredentialsProps> = (
               ...(codeSignStyle && {CODE_SIGN_STYLE: `"${codeSignStyle}"`}),
               ...(provisioningProfileSpecifier && {
                 PROVISIONING_PROFILE_SPECIFIER: `"${provisioningProfileSpecifier}"`,
+                ...(provisioningProfileSpecifier.includes('Dist') && {CODE_SIGN_IDENTITY: '"iPhone Distribution"'}),
               }),
             },
           },
