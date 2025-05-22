@@ -100,13 +100,12 @@ stages:
         displayName: 'Add gradle.properties settings for ReleaseInHouse'
         inputs:
           script: |
-            echo '# Keystore properties for ReleaseInHouse' >> gradle.properties
+            echo -e '\n# Keystore properties for ReleaseInHouse' >> gradle.properties
             echo 'SANTOKU_APP_UPLOAD_KEYSTORE_FILE=$(appDir)/$(android_ReleaseInHouseKeyStoreSecureFileName)' >> gradle.properties
             echo 'SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD=$(android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
             echo 'SANTOKU_APP_UPLOAD_KEY_ALIAS=$(android_ReleaseInHouseKeyAlias)' >> gradle.properties
             echo 'SANTOKU_APP_UPLOAD_KEY_PASSWORD=$(android_ReleaseInHouseKeyPassword)' >> gradle.properties
             echo 'SANTOKU_APP_GOOGLE_MAP_API_KEY=$(android_ReleaseInHouseGoogleMapApiKey)' >> gradle.properties
-            tail -n 50 gradle.properties
           workingDirectory: '$(appDir)/android'
       - task: CmdLine@2
         displayName: 'Build Android app for ${{environment.name}}'

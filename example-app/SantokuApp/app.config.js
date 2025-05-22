@@ -94,7 +94,21 @@ module.exports = ({config}) => {
         'expo-build-properties',
         {
           android: {
-            minSdkVersion: 29,
+            extraProguardRules: `
+# Firebase ConsoleでCrashlyticsのエラータイトルが表示されない問題に対応
+# https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?hl=ja&platform=android
+-keepattributes SourceFile,LineNumberTable        # Keep file names and line numbers.
+-keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
+
+# ExpoModulesPakage.ktから、自動生成されたクラスを参照するためにクラス名を利用しているので、クラス名が変わるとアプリが起動しなくなる。
+# https://github.com/expo/expo/blob/sdk-49/packages/expo/android/src/main/java/expo/modules/ExpoModulesPackage.kt#L23
+-keep class expo.modules.ExpoModulesPackageList { *; }
+`,
+            enableProguardInReleaseBuilds: true,
+            extraMavenRepos: [
+              // notifee Expo49対応: https://github.com/invertase/notifee/issues/808
+              '$rootDir/../../../node_modules/@notifee/react-native/android/libs',
+            ],
           },
           ios: {
             useFrameworks: 'static',
