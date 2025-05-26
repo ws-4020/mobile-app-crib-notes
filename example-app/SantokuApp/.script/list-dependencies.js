@@ -1,9 +1,9 @@
 const path = require('path');
-const {exec} = require('node:child_process');
+const { exec } = require('node:child_process');
 const fs = require('fs');
 const plist = require('plist');
 
-const licenseChecker = require('license-checker');
+const licenseChecker = require("license-checker");
 
 const rootDir = path.resolve(__dirname, '..');
 
@@ -14,7 +14,8 @@ const rootDir = path.resolve(__dirname, '..');
 const normalizeLicense = (() => {
   // https://spdx.org/licenses/
   const aliasList = {
-    '0BSD': [],
+    '0BSD': [
+    ],
     'Apache-2.0': [
       'The Apache Software License, Version 2.0',
       'The Apache License, Version 2.0',
@@ -24,46 +25,60 @@ const normalizeLicense = (() => {
       'Apache 2.0',
       'Apache-2',
     ],
-    'BlueOak-1.0.0': ['Blue Oak Model License'],
+    'BlueOak-1.0.0': [
+      'Blue Oak Model License',
+    ],
     'BSD-2-Clause': [
       'Simplified BSD License', // https://opensource.org/license/bsd-license-php/
     ],
-    'BSD-3-Clause': ['bsd_3_clauses', 'BSD 3-Clause'],
-    'BSL-1.0': ['Boost Software License'],
-    'CC-BY-4.0': [],
-    'CC0-1.0': [],
-    ISC: [],
-    MIT: ['MIT License'],
-    'Python-2.0': [],
-    Unlicense: [],
-    WTFPL: [],
-    Zlib: [],
-    'MPL-2.0': [],
+    'BSD-3-Clause': [
+      'bsd_3_clauses',
+      'BSD 3-Clause',
+    ],
+    'BSL-1.0': [
+      'Boost Software License'
+    ],
+    'CC-BY-4.0': [
+    ],
+    'CC0-1.0': [
+    ],
+    ISC: [
+    ],
+    MIT: [
+      'MIT License',
+    ],
+    'Python-2.0': [
+    ],
+    Unlicense: [
+    ],
+    WTFPL: [
+    ],
+    Zlib: [
+    ],
+    'MPL-2.0': [
+    ],
     // Deprecated
-    'GPL-2.0': [
-      // 警告対策, 採用することはない, 現在存在するのはデュアルライセンスの片方
+    'GPL-2.0': [ // 警告対策, 採用することはない, 現在存在するのはデュアルライセンスの片方
     ],
     // Not included in SPDX
-    'Android Software Development Kit License': [],
+    'Android Software Development Kit License':[
+    ],
   };
-  const aliasMap = Object.fromEntries(
-    Object.entries(aliasList).flatMap(([normalized, aliases]) => {
-      return aliases
-        .map(alias => {
-          return [alias, normalized];
-        })
-        .concat([[normalized, normalized]])
-        .map(([k, v]) => {
-          return [k.toLowerCase(), v];
-        });
-    }),
-  );
+  const aliasMap = Object.fromEntries(Object.entries(aliasList).flatMap(([normalized, aliases]) => {
+    return aliases.map(alias => {
+      return [alias, normalized]
+    }).concat([
+      [normalized, normalized],
+    ]).map(([k, v]) => {
+      return [k.toLowerCase(), v];
+    });
+  }));
 
   /**
    * @param {string} licenseName
    * @returns {string} normalizedLicenseName
    */
-  const normalizeLicense = licenseName => {
+  const normalizeLicense = (licenseName) => {
     if (!licenseName) return licenseName;
     if (licenseName.startsWith('(') && licenseName.endsWith(')')) {
       const list = licenseName.slice(1, -1).split(' OR ').map(normalizeLicense);
@@ -77,7 +92,7 @@ const normalizeLicense = (() => {
   return normalizeLicense;
 })();
 
-const licenseManager = new (class {
+const licenseManager = new class {
   constructor() {
     this._managedLicenseMap = require('./managed-license')();
   }
@@ -104,17 +119,15 @@ const licenseManager = new (class {
       }
       return [lib];
     });
-    const unusedList = Object.entries(this._managedLicenseMap)
-      .flatMap(([type, licenses]) => {
-        return Object.entries(licenses).map(([libraryId, license]) => {
-          return {
-            type,
-            libraryId,
-            used: license.used,
-          };
-        });
-      })
-      .filter(({used}) => !used);
+    const unusedList = Object.entries(this._managedLicenseMap).flatMap(([type, licenses]) => {
+      return Object.entries(licenses).map(([libraryId, license]) => {
+        return {
+          type,
+          libraryId,
+          used: license.used,
+        };
+      });
+    }).filter(({used}) => !used);
     if (unusedList.length) {
       const message = [
         '未使用ライブラリが存在します',
@@ -125,20 +138,22 @@ const licenseManager = new (class {
     }
     return adjusted;
   }
-})();
+};
 
 class PodfileParser {
   constructor() {
     const lockFileText = fs.readFileSync(`${rootDir}/ios/Podfile.lock`, 'utf8');
 
-    const versionList = [...lockFileText.matchAll(/^  - (.+) [(]((?:[0-9]+[.])*[0-9]+)[)]:?$/gm)].map(
-      ([_all, name, version]) => {
-        return [name, version];
-      },
-    );
+    const versionList = [
+      ...lockFileText.matchAll(/^  - (.+) [(]((?:[0-9]+[.])*[0-9]+)[)]:?$/mg),
+    ].map(([_all, name, version]) => {
+      return [name, version];
+    });
     this._versionMap = Object.fromEntries(versionList);
 
-    const checksumList = [...lockFileText.matchAll(/^  ([^:]+): ([a-z0-9]+)$/gm)].map(([_all, name, version]) => {
+    const checksumList = [
+      ...lockFileText.matchAll(/^  ([^:]+): ([a-z0-9]+)$/mg),
+    ].map(([_all, name, version]) => {
       return [name, version];
     });
     this._checksumMap = Object.fromEntries(checksumList);
@@ -205,46 +220,41 @@ const getProjectName = () => {
   return (/^target '([^']+)'/m.exec(podfileText) || [])[1] || null;
 };
 
-const preIos = () =>
-  Promise.resolve().then(() => {
-    return new Promise((resolve, reject) => {
-      console.log('start: npm run pod-install');
-      exec('npm run pod-install', err => {
-        if (err) reject(err);
-        else resolve();
-      });
+const preIos = () => Promise.resolve().then(() => {
+  return new Promise((resolve, reject) => {
+    console.log('start: npm run pod-install');
+    exec('npm run pod-install', (err) => {
+      if (err) reject(err);
+      else resolve();
     });
   });
+});
 
-const preAndroid = () =>
-  Promise.resolve().then(() => {
-    return new Promise((resolve, reject) => {
-      console.log('start: gradlew app:licenseReleaseReport');
-      exec(
-        './gradlew app:licenseReleaseReport',
-        {
-          cwd: './android/',
-        },
-        err => {
-          if (err) reject(err);
-          else resolve();
-        },
-      );
+const preAndroid = () => Promise.resolve().then(() => {
+  return new Promise((resolve, reject) => {
+    console.log('start: gradlew app:licenseReleaseReport');
+    exec('./gradlew app:licenseReleaseReport', {
+      cwd: './android/',
+    }, (err) => {
+      if (err) reject(err);
+      else resolve();
     });
   });
+});
 
 const listIosDependencies = () => {
   const projectName = getProjectName();
-  const xmlText = fs.readFileSync(
-    `${rootDir}/ios/Pods/Target Support Files/Pods-${projectName}/Pods-${projectName}-acknowledgements.plist`,
-    'utf8',
-  );
+  const xmlText = fs.readFileSync(`${rootDir}/ios/Pods/Target Support Files/Pods-${projectName}/Pods-${projectName}-acknowledgements.plist`, 'utf8');
   const xmlObj = plist.parse(xmlText);
   const podfileParser = new PodfileParser();
   const libraries = xmlObj.PreferenceSpecifiers.filter(obj => {
     return !(['Acknowledgements', ''].includes(obj.Title) && !obj.License);
   }).map(lib => {
-    const {Title: name, License: licenseName, FooterText: licenseText} = lib;
+    const {
+      Title: name,
+      License: licenseName,
+      FooterText: licenseText,
+    } = lib;
     const version = podfileParser.versionOfPods(name);
     const checksum = podfileParser.checksumOfPods(name);
     return {
@@ -263,7 +273,13 @@ const listIosDependencies = () => {
 const listAndroidDependencies = () => {
   const list = require(`${rootDir}/android/app/build/reports/licenses/licenseReleaseReport.json`);
   return list.map(lib => {
-    const {project: name, dependency: libraryId, licenses, version, url} = lib;
+    const {
+      project: name,
+      dependency: libraryId,
+      licenses,
+      version,
+      url,
+    } = lib;
     return {
       type: 'gradle',
       libraryId,
@@ -303,35 +319,23 @@ module.exports = function listDependencies() {
     listNodeDependencies(),
     (quickMode ? Promise.resolve() : preIos()).then(listIosDependencies),
     (quickMode ? Promise.resolve() : preAndroid()).then(listAndroidDependencies),
-  ])
-    .then(lists => {
-      return lists.flat();
-    })
-    .then(list => {
-      return licenseManager.adjust(list);
-    })
-    .then(list => {
-      // 各 name ごとの最大の version を持つ要素を残すための中間処理
-      const uniqueByName = list.reduce((acc, current) => {
-        const existing = acc.find(item => item.name === current.name);
-        if (!existing || existing.version.localeCompare(current.version, undefined, {numeric: true}) < 0) {
-          // acc に current を追加、または既存のものより version が大きければ置き換え
-          acc = acc.filter(item => item.name !== current.name); // 既存のものを削除
-          acc.push(current); // 新しい最大 version のものを追加
-        }
-        return acc;
-      }, []);
-
-      // ソート
-      uniqueByName.sort((a, b) => a.name.localeCompare(b.name));
-
-      return uniqueByName;
-    })
-    .then(list => {
-      return list.map(lib => {
-        lib.id = `${lib.type}:${lib.libraryId}`;
-        lib.licenseName = normalizeLicense(lib.licenseName);
-        return lib;
+  ]).then(lists => {
+    return lists.flat();
+  }).then(list => {
+    return licenseManager.adjust(list);
+  }).then(list => {
+    const toSortByString = d => `${d.name} ${d.version}`;
+    list.sort((a, b) => {
+      return toSortByString(a).localeCompare(toSortByString(b), undefined, {
+        numeric: true, // version 文字列中の数字を数値として比較する
       });
     });
+    return list;
+  }).then(list => {
+    return list.map(lib => {
+      lib.id = `${lib.type}:${lib.libraryId}`;
+      lib.licenseName = normalizeLicense(lib.licenseName);
+      return lib;
+    });
+  });
 };
