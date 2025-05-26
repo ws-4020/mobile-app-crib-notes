@@ -311,17 +311,21 @@ module.exports = function listDependencies() {
       return licenseManager.adjust(list);
     })
     .then(list => {
-      console.log('+++++++++++');
+      // 各 name ごとの最大の version を持つ要素を残すための中間処理
+      const uniqueByName = list.reduce((acc, current) => {
+        const existing = acc.find(item => item.name === current.name);
+        if (!existing || existing.version.localeCompare(current.version, undefined, {numeric: true}) < 0) {
+          // acc に current を追加、または既存のものより version が大きければ置き換え
+          acc = acc.filter(item => item.name !== current.name); // 既存のものを削除
+          acc.push(current); // 新しい最大 version のものを追加
+        }
+        return acc;
+      }, []);
 
-      console.log(list);
+      // ソート
+      uniqueByName.sort((a, b) => a.name.localeCompare(b.name));
 
-      const toSortByString = d => `${d.name} ${d.version}`;
-      list.sort((a, b) => {
-        return toSortByString(a).localeCompare(toSortByString(b), undefined, {
-          numeric: true, // version 文字列中の数字を数値として比較する
-        });
-      });
-      return list;
+      return uniqueByName;
     })
     .then(list => {
       return list.map(lib => {
