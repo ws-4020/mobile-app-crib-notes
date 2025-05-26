@@ -7,6 +7,7 @@ type CredentialsProps = {
   codeSignStyle?: string;
   provisioningProfileSpecifier?: string;
   bundleIdentifier?: string;
+  codeSignIdentity?: string;
 };
 
 /**
@@ -16,10 +17,11 @@ type CredentialsProps = {
  * @param codeSignStyle
  * @param provisioningProfileSpecifier
  * @param bundleIdentifier
+ * @param codeSignIdentity
  */
 export const withIosSetCredentials: ConfigPlugin<CredentialsProps> = (
   config,
-  {developmentTeam, codeSignStyle, provisioningProfileSpecifier, bundleIdentifier},
+  {developmentTeam, codeSignStyle, provisioningProfileSpecifier, bundleIdentifier, codeSignIdentity},
 ) => {
   return withXcodeProject(config, config => {
     const pbxProject = PbxProjectConfig.getPbxProject(config);
@@ -39,8 +41,8 @@ export const withIosSetCredentials: ConfigPlugin<CredentialsProps> = (
               ...(codeSignStyle && {CODE_SIGN_STYLE: `"${codeSignStyle}"`}),
               ...(provisioningProfileSpecifier && {
                 PROVISIONING_PROFILE_SPECIFIER: `"${provisioningProfileSpecifier}"`,
-                ...(provisioningProfileSpecifier.includes('Dist') && {CODE_SIGN_IDENTITY: '"iPhone Distribution"'}),
               }),
+              ...(codeSignIdentity && {CODE_SIGN_IDENTITY: `"${codeSignIdentity}"`}),
             },
           },
         };
