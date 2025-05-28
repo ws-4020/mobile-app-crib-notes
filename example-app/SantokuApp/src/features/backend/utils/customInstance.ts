@@ -44,6 +44,7 @@ const getDefaultAxiosConfig = () => {
     headers: {
       Accept: 'application/json',
       UserAgent: getUserAgent(),
+      'HCAP-Platform': Platform.OS,
     },
   } as AxiosRequestConfig;
 };

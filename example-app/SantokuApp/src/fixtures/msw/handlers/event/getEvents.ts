@@ -23,6 +23,7 @@ import {getDb} from '../../utils/getDb';
 import {getLoggedInAccountId} from '../account/getLoggedInAccountId';
 
 export const getEvents = rest.get(`${backendUrl}/events`, (req, res, ctx) => {
+  console.log(req.headers);
   try {
     const target = req.url.searchParams.get('target');
     const accountId = getLoggedInAccountId();
