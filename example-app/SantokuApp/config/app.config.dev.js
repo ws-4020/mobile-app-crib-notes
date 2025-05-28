@@ -33,7 +33,6 @@ module.exports = config => {
           developmentTeam: 'D9MUZCM4X6',
           codeSignStyle: 'Manual',
           provisioningProfileSpecifier: 'SantokuApp Dev Development',
-          codeSignIdentity: 'iPhone Distribution',
         },
       ],
     ],
