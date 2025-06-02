@@ -17,6 +17,7 @@ variables:
 - group: deployGate
 - group: santokuAppStg
 - group: santokuAppDev
+- group: temp-cert-test-2025-06-02
 - name: appDir
   value: '$(System.DefaultWorkingDirectory)/example-app/SantokuApp'
 - name: branchName
@@ -149,8 +150,8 @@ stages:
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{environment.name}}'
         inputs:
-          certSecureFile: $(apple_DistributionCertificateSecureFileName)
-          certPwd: $(apple_DistributionCertificatePassword)
+          certSecureFile: $(apple_DistributionCertificateSecureFileName_for_cert_test_2025_06_02)
+          certPwd: $(apple_DistributionCertificatePassword_for_cert_test_2025_06_02)
       - task: InstallAppleProvisioningProfile@1
         displayName: 'Install an Apple provisioning profile for ${{environment.name}}'
         inputs:
@@ -158,7 +159,7 @@ stages:
       - task: InstallAppleProvisioningProfile@1
         displayName: 'Install an Apple provisioning profile for ${{environment.name}}'
         inputs:
-          provProfileSecureFile: $(${{environment.name}}_AppleDistributionProvisioningProfileSecureFileName)
+          provProfileSecureFile: $(${{environment.name}}_AppleDistributionProvisioningProfileSecureFileName_for_cert_test_2025_06_02)
       - task: CmdLine@2
         displayName: 'Use Xcode 15.4'
         inputs:
