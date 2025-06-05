@@ -27,7 +27,7 @@ type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
  * @summary イベント一覧取得
  */
 export const getEvents = (params: GetEventsParams, signal?: AbortSignal) => {
-  return backendCustomInstance<Event[]>({url: `/events`, method: 'get', params, signal});
+  return backendCustomInstance<Event[]>({url: `/events`, method: 'get', params, signal, headers:{'additional':'additional'}});
 };
 
 export const getGetEventsQueryKey = (params: GetEventsParams) => [`/events`, ...(params ? [params] : [])] as const;

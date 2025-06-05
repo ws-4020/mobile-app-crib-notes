@@ -17,6 +17,7 @@
 import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, GenericAbortSignal} from 'axios';
 import {AppConfig} from 'bases/core/configs/AppConfig';
 import {log} from 'bases/logging';
+import deepmerge from 'deepmerge';
 import {applicationName, nativeApplicationVersion} from 'expo-application';
 import {RequestTimeoutError} from 'features/backend/errors/RequestTimeoutError';
 import {Platform} from 'react-native';
@@ -44,6 +45,7 @@ const getDefaultAxiosConfig = () => {
     headers: {
       Accept: 'application/json',
       UserAgent: getUserAgent(),
+      'HCAP-Platform': Platform.OS,
     },
   } as AxiosRequestConfig;
 };
@@ -105,9 +107,10 @@ const customInstance = <T>(
       ? combineSignals(timeoutSignal, config.signal)
       : {signal: timeoutSignal, cleanup: undefined};
 
+    const mergedConfig = deepmerge(defaultAxiosConfig, config);
+
     const requestConfig = {
-      ...defaultAxiosConfig,
-      ...config,
+      ...mergedConfig,
       signal: combinedSignal.signal,
     };
 
