@@ -35,7 +35,7 @@ module.exports = config => {
           developmentTeam: '${DEVELOPMENT_TEAM}',
           codeSignStyle: '${CODE_SIGN_STYLE}',
           bundleIdentifier: 'personal.jp.fintan.mobile.SantokuApp.local.${PERSONAL_IDENTIFIER}',
-          codeSignIdentity: 'iPhone Development',
+          codeSignIdentity: 'iPhone Developer',
         },
       ],
       withIosAddPersonalAccountConfig,
