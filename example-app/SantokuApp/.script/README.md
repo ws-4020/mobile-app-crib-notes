@@ -47,6 +47,9 @@ npm, Gradle(Android), CocoaPods(iOS) で使用しているライブラリを返�
 node .script/check-licenses.js quick
 ```
 
+### 注意事項
+プロキシ環境下では`license-text-cache.js`で行われるフェッチ処理を実行するために修正が必要です。
+`node-fetch-with-proxy`をインストールして`license-text-cache.js`のserialFetch内のfetch関数で使用するように修正してください。
 
 ## [check-licenses.js](./check-licenses.js)
 使用しているライブラリのライセンスについて以下の観点でチェックします。
