@@ -100,7 +100,7 @@ stages:
         displayName: 'Add gradle.properties settings for ReleaseInHouse'
         inputs:
           script: |
-            echo '# Keystore properties for ReleaseInHouse' >> gradle.properties
+            echo -e '\n# Keystore properties for ReleaseInHouse' >> gradle.properties
             echo 'SANTOKU_APP_UPLOAD_KEYSTORE_FILE=$(appDir)/$(android_ReleaseInHouseKeyStoreSecureFileName)' >> gradle.properties
             echo 'SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD=$(android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
             echo 'SANTOKU_APP_UPLOAD_KEY_ALIAS=$(android_ReleaseInHouseKeyAlias)' >> gradle.properties
