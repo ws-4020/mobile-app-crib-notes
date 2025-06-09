@@ -167,53 +167,48 @@ class PodfileParser {
   }
 }
 
-const listNodeDependencies = () =>
-  new Promise((resolve, reject) => {
-    // Options: https://github.com/davglass/license-checker#options
-    licenseChecker.init(
-      {
-        start: rootDir,
-        // devDependenciesは含めない。ただしlicense-checkerの不具合でdevDependenciesも取得されてしまうため後続処理で除外する。
-        production: true,
-        // privateなパッケージは含めない。
-        excludePrivatePackages: true,
-        // https://github.com/davglass/license-checker#custom-format
-        // 個人名やメールアドレスは含めない。
-        customFormat: {publisher: false, email: false, name: true, version: true},
-      },
-      (err, packages) => {
-        if (err) reject(err);
-        else {
-          // package.jsonからdependencies(devDependenciesを除外したもの)を取得する
-          const dependencies = require(`${rootDir}/package.json`).dependencies;
-
-          const list = [];
-          Object.entries(packages).map(([_id, info]) => {
-            const pkgName = info.name;
-            // dependenciesに含まれるパッケージのみ依存先として取得する（devDependenciesを除外する）
-            if (dependencies[pkgName]) {
-              const {name, version, licenses, repository: url, licenseFile, noticeFile} = info;
-              if (Array.isArray(licenses)) licenses = `(${licenses.join(' OR ')})`;
-              const isGuessed = licenses.includes('*');
-              const data = {
-                type: 'npm',
-                libraryId: `${name}@${version}`,
-                name,
-                version,
-                url,
-                licenseName: isGuessed ? null : licenses,
-                licenseFile,
-                noticeFile,
-              };
-              if (isGuessed) data._guessedLicenseName = licenses;
-              list.push(data);
-            }
-          });
-          resolve(list);
-        }
-      },
-    );
+const listNodeDependencies = () => new Promise((resolve, reject) => {
+  // Options: https://github.com/davglass/license-checker#options
+  licenseChecker.init({
+    start: rootDir,
+    // devDependenciesは含めない。
+    production: true,
+    // privateなパッケージは含めない。
+    excludePrivatePackages: true,
+    // https://github.com/davglass/license-checker#custom-format
+    // 個人名やメールアドレスは含めない。
+    customFormat: {publisher: false, email: false, name: true, version: true},
+  }, (err, packages) => {
+    if (err) reject(err);
+    else {
+      const list = Object.entries(packages).map(([_id, info]) => {
+        const {
+          name,
+          version,
+          licenses,
+          repository: url,
+          licenseFile,
+          noticeFile,
+        } = info;
+        if (Array.isArray(licenses)) licenses = `(${licenses.join(' OR ')})`;
+        const isGuessed = licenses.includes('*');
+        const data = {
+          type: 'npm',
+          libraryId: `${name}@${version}`,
+          name,
+          version,
+          url,
+          licenseName: isGuessed ? null : licenses,
+          licenseFile,
+          noticeFile,
+        };
+        if (isGuessed) data._guessedLicenseName = licenses;
+        return data;
+      });
+      resolve(list);
+    }
   });
+});
 
 const getProjectName = () => {
   const podfileText = fs.readFileSync(`${rootDir}/ios/Podfile`, 'utf8');
