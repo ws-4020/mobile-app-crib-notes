@@ -16,7 +16,7 @@ module.exports = function () {
     npm: {
       '@tootallnate/once@1.1.2': { // https://www.npmjs.com/package/@segment/loosely-validate-event
         /**
-         * ライセンスがないため除外する
+         * ライセンスがないため除外する。
          * v1.1.2にはライセンスなし、v2.0.0以降はMITライセンスとして配布している。
          */
         exclude: true,
