@@ -14,6 +14,13 @@ const fs = require('fs');
 module.exports = function () {
   return {
     npm: {
+      '@tootallnate/once@1.1.2': { // https://www.npmjs.com/package/@segment/loosely-validate-event
+        /**
+         * ライセンスがないため除外する
+         * v1.1.2にはライセンスなし、v2.0.0以降はMITライセンスとして配布している。
+         */
+        exclude: true,
+      },
       '@segment/loosely-validate-event@2.0.0': { // https://www.npmjs.com/package/@segment/loosely-validate-event
         licenseName: 'MIT',
       },
