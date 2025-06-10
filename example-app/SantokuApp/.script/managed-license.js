@@ -14,7 +14,7 @@ const fs = require('fs');
 module.exports = function () {
   return {
     npm: {
-      '@tootallnate/once@1.1.2': { // https://www.npmjs.com/package/@segment/loosely-validate-event
+      '@tootallnate/once@1.1.2': { // https://github.com/TooTallNate/once/tree/1.1.2
         /**
          * ライセンスがないため除外する。
          * v1.1.2にはライセンスなし、v2.0.0以降はMITライセンスとして配布している。
