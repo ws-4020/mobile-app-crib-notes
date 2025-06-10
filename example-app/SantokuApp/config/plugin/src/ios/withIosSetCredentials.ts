@@ -17,7 +17,7 @@ type CredentialsProps = {
  * @param codeSignStyle
  * @param provisioningProfileSpecifier
  * @param bundleIdentifier
- * @param codeSignIdentity
+ * @param codeSignIdentity ビルドで使用する証明書に合わせて設定する。例えば、開発用証明書の場合は"iPhone Developer"、配布用証明書の場合は"iPhone Distribution"を指定する。
  */
 export const withIosSetCredentials: ConfigPlugin<CredentialsProps> = (
   config,
