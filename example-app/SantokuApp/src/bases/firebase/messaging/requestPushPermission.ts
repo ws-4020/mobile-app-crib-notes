@@ -16,9 +16,14 @@
 
 import messaging from '@react-native-firebase/messaging';
 import {ApplicationError} from 'bases/core/errors/ApplicationError';
+// import {PermissionsAndroid, Platform} from 'react-native';
 
 export const requestPushPermission = async () => {
   try {
+    // if (Platform.OS === 'android') {
+    //   return PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+    // }
+
     return await messaging().requestPermission();
   } catch (e) {
     throw new RequestPushPermissionError('Failed to request push permission.', e, 'RequestPushPermissionError');
