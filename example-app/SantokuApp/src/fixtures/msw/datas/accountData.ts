@@ -32,5 +32,7 @@ export const santokuAccount: Account = {
     totalPoints: 3000,
     avatarImageUrl: `${FileSystem.documentDirectory!}santoku-avatar.png`,
   },
-  deviceTokens: [],
+  deviceTokens: [
+    'fYlPUTGjSIOkCCd9nE95-e:APA91bHTB0j32Qpaq5OTE8h_SQBlHI8_Ny_53vZRq1KtXL2T7ds3dJmON7S8vXD9X4YwAiz83pNnubCKZzDLbbJjrH88w0o3vAXXE6kQUVDizcBPHy9tXLE',
+  ],
 };
