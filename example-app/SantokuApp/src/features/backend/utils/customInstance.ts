@@ -45,8 +45,6 @@ const getDefaultAxiosConfig = () => {
     headers: {
       Accept: 'application/json',
       UserAgent: getUserAgent(),
-      sample1: 'sample1-default',
-      sample2: 'sample2-default',
     },
   } as AxiosRequestConfig;
 };
