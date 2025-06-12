@@ -32,6 +32,7 @@ module.exports = config => {
           developmentTeam: 'D9MUZCM4X6',
           codeSignStyle: 'Manual',
           provisioningProfileSpecifier: 'SantokuApp Stg Development',
+          codeSignIdentity: 'iPhone Developer', // 開発用証明書でビルドするため'iPhone Developer'を指定する
         },
       ],
     ],
