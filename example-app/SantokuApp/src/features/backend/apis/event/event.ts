@@ -32,7 +32,7 @@ export const getEvents = (params: GetEventsParams, signal?: AbortSignal) => {
     method: 'get',
     params,
     signal,
-    headers: {additional: 'additional'},
+    headers: {sample2: 'sample2-config', sample3: 'sample3-config'},
   });
 };
 
@@ -81,7 +81,7 @@ export const postEvents = (eventRegistration: EventRegistration) => {
   return backendCustomInstance<EventContent>({
     url: `/events`,
     method: 'post',
-    headers: {'Content-Type': 'application/json', sample2: 'sample2-config', sample3: 'sample3-config'},
+    headers: {'Content-Type': 'application/json'},
     data: eventRegistration,
   });
 };
