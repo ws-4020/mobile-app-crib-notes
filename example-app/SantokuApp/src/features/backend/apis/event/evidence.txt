@@ -1,34 +1,5 @@
-
-› Metro waiting on http://localhost:8081
-› Scan the QR code above to open the
-project in a development build. Learn
-more
-
-› Web is waiting on http://localhost:8081
-
-› Using development build
-› Press s │ switch to Expo Go
-
-› Press a │ open Android
-› Press i │ open iOS simulator
-› Press w │ open web
-
-› Press j │ open debugger
-› Press r │ reload app
-› Press m │ toggle menu
-› Press o │ open project code in your editor
-
-› Press ? │ show all commands
-
-Logs for your project will appear below. Press Ctrl+C to exit.
-› Opening on iOS...
-CommandError: No development build (personal.jp.fintan.mobile.SantokuApp.local.${PERSONAL_IDENTIFIER}) for this project is installed. Please make and install a development build on the device first.
-Learn more
-› Opening on iOS...
-CommandError: No development build (personal.jp.fintan.mobile.SantokuApp.local.${PERSONAL_IDENTIFIER}) for this project is installed. Please make and install a development build on the device first.
-Learn more
 › Reloading apps
-iOS Bundled 2012ms index.js (3076 modules)
+iOS Bundled 119ms index.js (1 module)
  WARN  Failed to passthrough to original request. url = https://santoku-app-backend.azurewebsites.net/api/login. cause = {
   "type": "default",
   "status": 401,
@@ -39,7 +10,7 @@ iOS Bundled 2012ms index.js (3076 modules)
       "access-control-allow-credentials": "true",
       "content-length": "75",
       "content-type": "application/json",
-      "date": "Thu, 29 May 2025 02:55:54 GMT"
+      "date": "Thu, 12 Jun 2025 07:02:54 GMT"
     }
   },
   "url": "https://santoku-app-backend.azurewebsites.net/api/login",
@@ -47,28 +18,4 @@ iOS Bundled 2012ms index.js (3076 modules)
   "_bodyInit": "{\"code\":\"authentication.failed\",\"message\":\"認証に失敗しました。\"}",
   "_bodyText": "{\"code\":\"authentication.failed\",\"message\":\"認証に失敗しました。\"}"
 }
- LOG  {Symbol(normalizedHeaders): {"accept": "application/json", "hcap-platform": "ios", "useragent": "Local SantokuApp/0.1.0 (ios/16.4)", "x-csrf-token": "d77f605e-1fbd-4d32-a732-a155529abb68"}, Symbol(rawHeaderNames): Map {"accept" => "accept", "hcap-platform" => "hcap-platform", "useragent" => "useragent", "x-csrf-token" => "x-csrf-token"}}
- LOG  {Symbol(normalizedHeaders): {"accept": "application/json", "hcap-platform": "ios", "useragent": "Local SantokuApp/0.1.0 (ios/16.4)", "x-csrf-token": "d77f605e-1fbd-4d32-a732-a155529abb68"}, Symbol(rawHeaderNames): Map {"accept" => "accept", "hcap-platform" => "hcap-platform", "useragent" => "useragent", "x-csrf-token" => "x-csrf-token"}}
- LOG  {Symbol(normalizedHeaders): {"accept": "application/json, text/plain, */*", "additional": "additional", "x-csrf-token": "d77f605e-1fbd-4d32-a732-a155529abb68"}, Symbol(rawHeaderNames): Map {"accept" => "accept", "additional" => "additional", "x-csrf-token" => "x-csrf-token"}}
-› Reloading apps
-iOS Bundled 124ms index.js (1 module)
- WARN  Failed to passthrough to original request. url = https://santoku-app-backend.azurewebsites.net/api/login. cause = {
-  "type": "default",
-  "status": 401,
-  "ok": false,
-  "statusText": "",
-  "headers": {
-    "map": {
-      "access-control-allow-credentials": "true",
-      "content-length": "75",
-      "content-type": "application/json",
-      "date": "Thu, 29 May 2025 03:04:05 GMT"
-    }
-  },
-  "url": "https://santoku-app-backend.azurewebsites.net/api/login",
-  "bodyUsed": false,
-  "_bodyInit": "{\"code\":\"authentication.failed\",\"message\":\"認証に失敗しました。\"}",
-  "_bodyText": "{\"code\":\"authentication.failed\",\"message\":\"認証に失敗しました。\"}"
-}
- LOG  {Symbol(normalizedHeaders): {"accept": "application/json, text/plain, */*", "additional": "additional", "x-csrf-token": "d77f605e-1fbd-4d32-a732-a155529abb68"}, Symbol(rawHeaderNames): Map {"accept" => "accept", "additional" => "additional", "x-csrf-token" => "x-csrf-token"}}
-› Stopped server
+ LOG  {"accept": "application/json", "sample1": "sample1-default", "sample2": "sample2-config", "sample3": "sample3-config", "useragent": "Local SantokuApp/0.1.0 (ios/17.2)", "x-csrf-token": "5912c278-0a5f-4dbc-a134-01fd964d9904"}
