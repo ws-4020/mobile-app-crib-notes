@@ -33,6 +33,7 @@ export const santokuAccount: Account = {
     avatarImageUrl: `${FileSystem.documentDirectory!}santoku-avatar.png`,
   },
   deviceTokens: [
-    'fYlPUTGjSIOkCCd9nE95-e:APA91bHTB0j32Qpaq5OTE8h_SQBlHI8_Ny_53vZRq1KtXL2T7ds3dJmON7S8vXD9X4YwAiz83pNnubCKZzDLbbJjrH88w0o3vAXXE6kQUVDizcBPHy9tXLE',
+    'f3ek6k5QQfmdc82W9h28F6:APA91bHcAjgNDnpN3o21ffr4tShV0zoWPkI6CgsdsGZhF8HNDGYF9ChTnBM7uR7Lk1xoP2kLyWTWKGSto0IbuGiPVuoaNB8z4qELqYavYYPDzgN7-xWYYKE',
+    'dBZrQSRmYEOhmoOsxbLBS_:APA91bGhfKxyBt-mjNROAs5adtNX9ygvYuDN4EKsRggiYq-F46FTZ7e-9cmd04l-E9UOviQ-OVya5cHDP2uzNZ8EQCoAuMV40oJObxnRr-hum9NM3uGEg_I',
   ],
 };
