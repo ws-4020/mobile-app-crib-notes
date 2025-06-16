@@ -32,9 +32,5 @@ export const santokuAccount: Account = {
     totalPoints: 3000,
     avatarImageUrl: `${FileSystem.documentDirectory!}santoku-avatar.png`,
   },
-  deviceTokens: [
-    'eF_2j9jkhEmUnGCXSpT0hv:APA91bGl64TE6Z2638Trinut8Lrw0Nbhir6iiuW_-pl0BoE-XmdBVv3B9cINTtfpVHcVG7YzrgjSq-013cbQqfNwjTuOzFe_l_ODlQbE04bbfs_NiuMeDgE',
-    'f3ek6k5QQfmdc82W9h28F6:APA91bHcAjgNDnpN3o21ffr4tShV0zoWPkI6CgsdsGZhF8HNDGYF9ChTnBM7uR7Lk1xoP2kLyWTWKGSto0IbuGiPVuoaNB8z4qELqYavYYPDzgN7-xWYYKE',
-    'dBZrQSRmYEOhmoOsxbLBS_:APA91bGhfKxyBt-mjNROAs5adtNX9ygvYuDN4EKsRggiYq-F46FTZ7e-9cmd04l-E9UOviQ-OVya5cHDP2uzNZ8EQCoAuMV40oJObxnRr-hum9NM3uGEg_I',
-  ],
+  deviceTokens: [],
 };
