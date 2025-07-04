@@ -57,7 +57,7 @@ platform :android do
     prebuild_santoku_app_android(environment: "prod")
   end
 
-  desc "Prebuild SantokuApp Staging Debug"
+  desc "Prebuild SantokuApp Staging Release"
   lane :prebuild_stg do
     prebuild_santoku_app_android(environment: "stg")
   end
@@ -73,10 +73,10 @@ platform :android do
     build_android_app(task: "bundle", build_type: "Release", project_dir: "android")
   end
 
-  desc "Build SantokuApp Staging Debug"
+  desc "Build SantokuApp Staging Release"
   lane :build_stg do
     ENV["ENVIRONMENT"] = "stg"
-    build_android_app(task: "bundle", build_type: "Debug", project_dir: "android")
+    build_android_app(task: "bundle", build_type: "Release", project_dir: "android")
   end
 
   desc "Build SantokuApp Dev-Client Debug"
