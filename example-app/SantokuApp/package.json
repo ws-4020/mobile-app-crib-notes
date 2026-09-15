@@ -87,7 +87,7 @@
     "expo-status-bar": "~1.12.1",
     "formik": "~2.4.0",
     "jsbarcode": "~3.11.5",
-    "msw": "^1.0.0",
+    "msw": "^2.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.5",
